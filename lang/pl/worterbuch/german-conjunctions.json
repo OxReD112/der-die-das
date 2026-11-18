@@ -6,7 +6,8 @@
   "notes_pl": [
    "Przed und zwykle nie stawia się przecinka.",
    "Tego samego podmiotu można nie powtarzać: Ich koche und esse."
-  ]
+  ],
+  "_src_reader": "f86e3f64"
  },
  "conjunction-002": {
   "_src": "2071f7af",
@@ -15,7 +16,8 @@
   "notes_pl": [
    "Przed oder zwykle nie stawia się przecinka.",
    "Para: entweder … oder."
-  ]
+  ],
+  "_src_reader": "8ad49d3a"
  },
  "conjunction-003": {
   "_src": "23945faf",
@@ -26,7 +28,8 @@
    "Po przeczeniu („nie …, tylko …”) — sondern.",
    "Wewnątrz zdania (po czasowniku, w zdaniu podrzędnym) — „jednak, ale”: Er klopfte, bekam aber keine Antwort. — Zapukał, jednak nie dostał odpowiedzi.",
    "Partykuła zdziwienia: Das ist aber schön!"
-  ]
+  ],
+  "_src_reader": "af724b2c"
  },
  "conjunction-004": {
   "_src": "de2ade27",
@@ -37,7 +40,8 @@
    "weil — to samo znaczenie, ale czasownik na końcu.",
    "Partykuła w pytaniu: Was ist denn los? — Co się stało?",
    "W narracji, w środku zdania — „a więc, no i”: So fingen sie denn an. — No i zaczęli."
-  ]
+  ],
+  "_src_reader": "c1031e6f"
  },
  "conjunction-005": {
   "_src": "0510dd17",
@@ -47,7 +51,8 @@
    "Tylko po przeczeniu (nicht, kein), gdy druga część poprawia pierwszą.",
    "Bez poprawiania — aber: Das Handy ist nicht neu, aber gut.",
    "Para: nicht nur … sondern auch."
-  ]
+  ],
+  "_src_reader": "55f56e1d"
  },
  "conjunction-006": {
   "_src": "2453c735",
@@ -57,7 +62,8 @@
    "Przysłówek spójnikowy: na początku — z inwersją (Jedoch war er müde.), częściej w środku (Er war jedoch müde.).",
    "Jako spójnik bez inwersji, podobnie jak aber: zwykle przed wyrażeniem — Er versuchte es, jedoch ohne Erfolg; przed całym zdaniem (Jedoch er kam nicht.) — rzadko, książkowo.",
    "Wyraz książkowy; w rozmowie — aber."
-  ]
+  ],
+  "_src_reader": "1cd43a85"
  },
  "conjunction-007": {
   "_src": "ee581a2e",
@@ -68,7 +74,8 @@
    "Pisze się przez ss.",
    "das — rodzajnik albo „który”: Das Buch, das ich lese.",
    "Test: da się zastąpić przez dieses / welches — pisze się das."
-  ]
+  ],
+  "_src_reader": "97f5e8bb"
  },
  "conjunction-008": {
   "_src": "35e221a0",
@@ -77,7 +84,8 @@
   "notes_pl": [
    "Odpowiada na pytanie warum?",
    "denn — to samo znaczenie bez zmiany szyku wyrazów."
-  ]
+  ],
+  "_src_reader": "a8b8fe23"
  },
  "conjunction-009": {
   "_src": "9b2a2a8b",
@@ -88,7 +96,8 @@
    "als — jeden raz w przeszłości.",
    "wann — pytanie „kiedy?”.",
    "„czy” — ob, nie wenn."
-  ]
+  ],
+  "_src_reader": "f33923d8"
  },
  "conjunction-010": {
   "_src": "d27dbd34",
@@ -98,7 +107,8 @@
    "Powtarzanie w przeszłości — wenn.",
    "größer als ich — większy niż ja (szyk wyrazów się nie zmienia).",
    "als Lehrerin — jako nauczycielka."
-  ]
+  ],
+  "_src_reader": "e0374a2e"
  },
  "conjunction-011": {
   "_src": "c44dd1b5",
@@ -107,7 +117,8 @@
   "notes_pl": [
    "Pytanie zależne typu „tak / nie”: Kommt er? → ob er kommt.",
    "Ang. if = „czy” → ob; if = „jeśli” → wenn."
-  ]
+  ],
+  "_src_reader": "5147fbd0"
  },
  "conjunction-012": {
   "_src": "dc29e186",
@@ -115,7 +126,8 @@
   "example_pl": "Idzie na spacer, chociaż pada deszcz.",
   "notes_pl": [
    "W zdaniu nadrzędnym — trotzdem: Es regnet, trotzdem geht er spazieren."
-  ]
+  ],
+  "_src_reader": "dfa910df"
  },
  "conjunction-013": {
   "_src": "a44eee00",
@@ -124,7 +136,8 @@
   "notes_pl": [
    "Jeden podmiot w obu częściach — zwykle um … zu.",
    "Przysłówek damit — „tym, z tym”: Was machst du damit?"
-  ]
+  ],
+  "_src_reader": "0c742522"
  },
  "conjunction-014": {
   "_src": "047f934d",
@@ -133,7 +146,8 @@
   "notes_pl": [
    "Tylko jeśli podmiot jest ten sam co w zdaniu nadrzędnym; inaczej — damit.",
    "Czasowniki rozdzielne: um früh aufzustehen."
-  ]
+  ],
+  "_src_reader": "ec766033"
  },
  "conjunction-015": {
   "_src": "cda7311b",
@@ -142,7 +156,8 @@
   "notes_pl": [
    "Przed rzeczownikiem — vor: vor der Arbeit.",
    "Przeciwieństwo — nachdem."
-  ]
+  ],
+  "_src_reader": "c109ac1c"
  },
  "conjunction-016": {
   "_src": "c0f261c8",
@@ -152,7 +167,8 @@
    "Zdanie nadrzędne w Präteritum / Perfekt → nachdem + Plusquamperfekt.",
    "Zdanie nadrzędne w Präsens → nachdem + Perfekt.",
    "Przed rzeczownikiem — nach: nach dem Essen."
-  ]
+  ],
+  "_src_reader": "974ca0b9"
  },
  "conjunction-017": {
   "_src": "e2e7331f",
@@ -160,7 +176,8 @@
   "example_pl": "Jeśli będzie padać, zostaniemy w domu.",
   "notes_pl": [
    "Jak wenn („jeśli”), ale podkreśla, że to może się nie zdarzyć."
-  ]
+  ],
+  "_src_reader": "7da80194"
  },
  "conjunction-018": {
   "_src": "eea4e2b0",
@@ -175,7 +192,8 @@
     "pl": "(przysł.) tymczasem, w tym czasie",
     "example_pl": "Tymczasem do piwnicy zszedł chłop."
    }
-  ]
+  ],
+  "_src_reader": "863f537d"
  },
  "conjunction-019": {
   "_src": "f92d7955",
@@ -185,7 +203,8 @@
    "Synonim seit.",
    "Czynność trwa nadal — czas teraźniejszy (wohne), nie Perfekt.",
    "Przysłówek: Seitdem fahre ich Rad. — Od tego czasu jeżdżę na rowerze."
-  ]
+  ],
+  "_src_reader": "d59fc6a2"
  },
  "conjunction-020": {
   "_src": "185f129e",
@@ -195,12 +214,14 @@
    "Synonim seitdem.",
    "Czynność trwa nadal — czas teraźniejszy.",
    "Przyimek z Dativem: seit einem Jahr — od roku."
-  ]
+  ],
+  "_src_reader": "be303895"
  },
  "conjunction-021": {
   "_src": "1d82f8b1",
   "translation_pl": "jak tylko",
-  "example_pl": "Zadzwonię do ciebie, jak tylko będę w domu."
+  "example_pl": "Zadzwonię do ciebie, jak tylko będę w domu.",
+  "_src_reader": "2c1d7eb2"
  },
  "conjunction-022": {
   "_src": "3a1f5650",
@@ -209,7 +230,8 @@
   "notes_pl": [
    "Obie czynności trwają tyle samo czasu.",
    "„Dopóki nie” (do jakiejś chwili) — bis."
-  ]
+  ],
+  "_src_reader": "db8a5509"
  },
  "conjunction-023": {
   "_src": "0dc1cf14",
@@ -220,7 +242,8 @@
    "Skutek, a nie cel (cel — damit).",
    "Można pisać rozdzielnie: so dass.",
    "Nie mylić: so stark, dass … — hasło so … dass."
-  ]
+  ],
+  "_src_reader": "c70a5b32"
  },
  "conjunction-024": {
   "_src": "6652b9ac",
@@ -229,7 +252,8 @@
   "notes_pl": [
    "Po polsku „dopóki nie”, w niemieckim bez przeczenia.",
    "Przyimek: bis Montag — do poniedziałku."
-  ]
+  ],
+  "_src_reader": "b4409263"
  },
  "conjunction-025": {
   "_src": "87dc2590",
@@ -238,7 +262,8 @@
   "notes_pl": [
    "Przeciwstawienie: Er ist ruhig, während sie viel redet.",
    "Przyimek z Genitivem: während des Urlaubs — podczas urlopu."
-  ]
+  ],
+  "_src_reader": "ece0575e"
  },
  "conjunction-026": {
   "_src": "5af5ceef",
@@ -247,7 +272,8 @@
   "notes_pl": [
    "Po entweder możliwy jest też zwykły szyk wyrazów: Entweder ich komme heute, oder …",
    "Często łączy po prostu pojedyncze wyrazy: entweder Tee oder Kaffee."
-  ]
+  ],
+  "_src_reader": "e324f387"
  },
  "conjunction-027": {
   "_src": "64d5ece1",
@@ -255,7 +281,8 @@
   "example_pl": "Nie piję ani kawy, ani herbaty.",
   "notes_pl": [
    "To już jest przeczenie — nicht i kein nie są potrzebne."
-  ]
+  ],
+  "_src_reader": "17ff4d85"
  },
  "conjunction-028": {
   "_src": "0dc5a93c",
@@ -263,7 +290,8 @@
   "example_pl": "Na imprezę przyjdą zarówno Anna, jak i Tom.",
   "notes_pl": [
    "Przy dwóch podmiotach czasownik zwykle w lm: Anna und Tom kommen."
-  ]
+  ],
+  "_src_reader": "3712b58c"
  },
  "conjunction-029": {
   "_src": "0049dc13",
@@ -271,7 +299,8 @@
   "example_pl": "Mówi nie tylko po angielsku, ale także po hiszpańsku.",
   "notes_pl": [
    "Przed sondern stawia się przecinek."
-  ]
+  ],
+  "_src_reader": "53e7efaa"
  },
  "conjunction-030": {
   "_src": "1245d7a0",
@@ -280,7 +309,8 @@
   "notes_pl": [
    "Zamiast desto — umso.",
    "Krótko: Je früher, desto besser."
-  ]
+  ],
+  "_src_reader": "53ff0361"
  },
  "conjunction-032": {
   "_src": "c7291c64",
@@ -290,7 +320,8 @@
    "Czasownik na końcu zdania podrzędnego.",
    "Zdanie podrzędne z da stoi zwykle na początku, przyczyna jest często już znana. Nową przyczynę częściej wprowadza się przez weil.",
    "Przysłówek da „tam, tu, wtedy” — osobne hasło (adverb-054)."
-  ]
+  ],
+  "_src_reader": "28563f72"
  },
  "conjunction-033": {
   "_src": "a0b856ef",
@@ -299,7 +330,8 @@
   "notes_pl": [
    "Tylko jeśli podmiot jest ten sam co w zdaniu nadrzędnym; inaczej — ohne dass.",
    "Przyimek ohne + Akkusativ — osobne hasło: ohne Geld."
-  ]
+  ],
+  "_src_reader": "aa4b8a3e"
  },
  "conjunction-034": {
   "_src": "a9db66c2",
@@ -309,7 +341,8 @@
    "anstatt … zu — to samo.",
    "Tylko jeśli podmiot jest ten sam co w zdaniu nadrzędnym; inaczej — anstatt dass (osobne hasło).",
    "Przyimek statt + Genitiv — osobne hasło: statt des Autos."
-  ]
+  ],
+  "_src_reader": "e3720d93"
  },
  "conjunction-035": {
   "_src": "930ecd64",
@@ -317,7 +350,8 @@
   "example_pl": "Jeśli pogoda dopisze, w sobotę urządzimy grilla.",
   "notes_pl": [
    "Jak falls / wenn, ale z odcieniem „pod warunkiem że”."
-  ]
+  ],
+  "_src_reader": "20fa2a61"
  },
  "conjunction-036": {
   "_src": "55454149",
@@ -326,7 +360,8 @@
   "notes_pl": [
    "Znaczenie „jak tylko” (= sobald) — czasownik na końcu: Sowie ich zu Hause bin, rufe ich dich an.",
    "Porównanie pisze się rozdzielnie: so groß wie."
-  ]
+  ],
+  "_src_reader": "15714356"
  },
  "conjunction-037": {
   "_src": "adb794df",
@@ -335,7 +370,8 @@
   "notes_pl": [
    "Przeciwstawia, jak während w znaczeniu „natomiast”.",
    "Część z wohingegen zawsze stoi na drugim miejscu."
-  ]
+  ],
+  "_src_reader": "3fb43399"
  },
  "conjunction-038": {
   "_src": "a13a393c",
@@ -343,7 +379,8 @@
   "example_pl": "Chociaż była zmęczona, pracowała dalej.",
   "notes_pl": [
    "To samo co obwohl."
-  ]
+  ],
+  "_src_reader": "7d29823b"
  },
  "conjunction-039": {
   "_src": "a6cbd22b",
@@ -353,7 +390,8 @@
    "Dodaje jeszcze jedną, szczególnie ważną przyczynę.",
    "Także zumal da, zumal wenn.",
    "Przysłówek zumal „zwłaszcza”: Ich esse gern Obst, zumal im Sommer — zwłaszcza latem."
-  ]
+  ],
+  "_src_reader": "c58a7ee8"
  },
  "conjunction-040": {
   "_src": "389d8f4a",
@@ -363,7 +401,8 @@
    "Często insofern als „o tyle, że”: Ich verstehe ihn, insofern als ich das Gleiche erlebt habe.",
    "W znaczeniu „jeśli” częściej mówi się sofern albo falls.",
    "Przysłówek insofern „pod tym względem” — osobne hasło."
-  ]
+  ],
+  "_src_reader": "7af51a40"
  },
  "conjunction-041": {
   "_src": "4dd1ba02",
@@ -373,7 +412,8 @@
    "Tylko po przeczeniu lub ograniczeniu.",
    "denn można pominąć: geschweige zum Backen.",
    "Może wprowadzać zdanie podrzędne: geschweige denn, dass …"
-  ]
+  ],
+  "_src_reader": "0fab7003"
  },
  "conjunction-042": {
   "_src": "b3a2255c",
@@ -382,7 +422,8 @@
   "notes_pl": [
    "Częściej w parze je … desto: Je mehr ich übe, desto besser spreche ich.",
    "To samo co umso (osobne hasło); samodzielnie częściej mówi się Umso besser!"
-  ]
+  ],
+  "_src_reader": "15cddcf1"
  },
  "conjunction-043": {
   "_src": "35312178",
@@ -393,7 +434,8 @@
    "Bez wenn — zwykły szyk wyrazów: …, außer du hast keine Zeit.",
    "Jako spójnik nie zmienia przypadku: Niemand außer ich selbst hat einen Schlüssel (częściej używa się przyimka: niemand außer mir).",
    "Przyimek außer + Dativ — osobne hasło."
-  ]
+  ],
+  "_src_reader": "2f1c573b"
  },
  "conjunction-044": {
   "_src": "c2d607a3",
@@ -403,7 +445,8 @@
    "Zamiast aber — doch albo jedoch; po jedoch zwykle od razu czasownik: …, jedoch gingen wir …",
    "zwar może stać także w środku: Es regnete zwar, aber …",
    "und zwar — a mianowicie (hasło przysłówka zwar)."
-  ]
+  ],
+  "_src_reader": "81c39fd8"
  },
  "conjunction-045": {
   "_src": "9c6208ab",
@@ -416,7 +459,8 @@
    "genauso … wie, ebenso … wie — to samo, ze wzmocnieniem („dokładnie taki sam”): Das Essen ist genauso gut wie früher.",
    "sowie (pisane łącznie) — inny spójnik: „a także”.",
    "Zob. też hasła so i wie."
-  ]
+  ],
+  "_src_reader": "18e1e801"
  },
  "conjunction-046": {
   "_src": "18ce3234",
@@ -427,7 +471,8 @@
    "Krócej: als + od razu czasownik: als würde er mich nicht kennen.",
    "als wenn — to samo.",
    "Wykrzyknienie: Als ob ich das nicht wüsste! — Jakbym tego nie wiedział / nie wiedziała!"
-  ]
+  ],
+  "_src_reader": "4d970f33"
  },
  "conjunction-047": {
   "_src": "5ab212ec",
@@ -437,7 +482,8 @@
    "Jeśli podmiot jest ten sam — częściej ohne … zu (osobne hasło): Sie ging, ohne sich umzudrehen.",
    "Często Konjunktiv II: …, ohne dass es jemand bemerkt hätte.",
    "Przyimek ohne + Akkusativ — osobne hasło."
-  ]
+  ],
+  "_src_reader": "098d4180"
  },
  "conjunction-048": {
   "_src": "e73121f8",
@@ -446,7 +492,8 @@
   "notes_pl": [
    "Przy tym samym podmiocie częściej (an)statt … zu: Anstatt zu helfen, sitzt er …",
    "statt dass — to samo, ale wychodzi z użycia."
-  ]
+  ],
+  "_src_reader": "5aaf90cd"
  },
  "conjunction-049": {
   "_src": "7a7161d5",
@@ -456,7 +503,8 @@
    "Przed dass — przecinek, część z dass stoi na drugim miejscu.",
    "sodass (albo so dass; przecinek przed so) — „tak że”, bez wzmocnienia: Es regnete, sodass wir zu Hause blieben.",
    "Także so viel / so sehr …, dass. Bez przymiotnika — „tak, że”: Er erklärte es so, dass sogar die Kinder es kapierten."
-  ]
+  ],
+  "_src_reader": "0b2ee860"
  },
  "conjunction-050": {
   "_src": "79eddc91",
@@ -466,7 +514,8 @@
    "To przysłówki: na początku części od razu czasownik; mogą stać też w środku.",
    "Warianty: anderseits, andrerseits.",
    "andererseits występuje też samodzielnie: „z drugiej strony” — zob. hasło przysłówka."
-  ]
+  ],
+  "_src_reader": "047c1ea8"
  },
  "conjunction-051": {
   "_src": "503d3b2e",
@@ -476,7 +525,8 @@
    "Także kaum …, da: Kaum hatte ich mich hingesetzt, da fuhr der Bus los (po da — od razu czasownik).",
    "kaum dass „ledwie tylko” — wychodzi z użycia.",
    "Nie mylić: kaum älter als ich — ledwie starszy ode mnie (przysłówek kaum, osobne hasło)."
-  ]
+  ],
+  "_src_reader": "9e45ad79"
  },
  "conjunction-052": {
   "_src": "e0c2b9dc",
@@ -486,7 +536,8 @@
    "mal — skrócona forma od einmal.",
    "mal so, mal so — raz tak, raz inaczej.",
    "Partykuła mal (Komm mal her!) — to inne słowo."
-  ]
+  ],
+  "_src_reader": "a2bce9f5"
  },
  "conjunction-053": {
   "_src": "e690fea7",
@@ -495,7 +546,8 @@
   "notes_pl": [
    "W rozmowie częściej mal … mal.",
    "Przysłówek bald „wkrótce” — osobne hasło."
-  ]
+  ],
+  "_src_reader": "6a3029ad"
  },
  "conjunction-054": {
   "_src": "e1356b8a",
@@ -504,7 +556,8 @@
   "notes_pl": [
    "Teils, teils! — I tak, i nie (tak sobie).",
    "samo teils — „częściowo”: teils schwer verletzt."
-  ]
+  ],
+  "_src_reader": "7246a1f1"
  },
  "conjunction-055": {
   "_src": "39452f83",
@@ -512,7 +565,8 @@
   "example_pl": "Im wcześniej wyjedziemy, tym lepiej.",
   "notes_pl": [
    "Para: je + stopień wyższy …, umso / desto + stopień wyższy. Po je czasownik na końcu: Je mehr ich lerne, umso mehr weiß ich."
-  ]
+  ],
+  "_src_reader": "e7305acb"
  },
  "conjunction-056": {
   "_src": "7207316d",
@@ -522,7 +576,8 @@
    "Najczęściej: soviel ich weiß — o ile wiem; soviel ich sehe — o ile widzę.",
    "Bez względu na to, ile: Soviel sie auch verdient, am Monatsende ist das Geld weg. — Bez względu na to, ile zarabia, pod koniec miesiąca pieniędzy już nie ma. Po takiej części szyk wyrazów w zdaniu nadrzędnym jest zwykły.",
    "W tekstach sprzed reformy z 1996 roku (np. u Grimmów) soviel znaczy także „tyle”: dreimal soviel — trzy razy więcej, soviel Geld — tyle pieniędzy. Dziś pisze się to rozdzielnie: so viel."
-  ]
+  ],
+  "_src_reader": "175a68d6"
  },
  "conjunction-057": {
   "_src": "731b5252",
@@ -532,7 +587,8 @@
    "Skrót — bzw. (w piśmie bardzo często). W znaczeniu „odpowiednio” — urzędowo.",
    "Odpowiednio: Kaffee und Tee kosten 3 bzw. 2 Euro. — Kawa i herbata kosztują odpowiednio 3 i 2 euro.",
    "Nie zmienia szyku wyrazów."
-  ]
+  ],
+  "_src_reader": "be839718"
  },
  "conjunction-058": {
   "_src": "b7407874",
@@ -542,7 +598,8 @@
    "Przed doch stawia się przecinek (albo kropkę: Doch …).",
    "Jako spójnik — szyk wyrazów jak po aber: …, doch er hatte keine Zeit. Jeśli zaraz po doch stoi czasownik (Doch wollte er nicht warten), doch jest przysłówkiem na pierwszym miejscu, znaczenie to samo: „jednak”.",
    "Jako partykuła — „-że, przecież” (Komm doch!); jako odpowiedź na pytanie przeczące — „ależ tak” (Doch!) — osobne hasło."
-  ]
+  ],
+  "_src_reader": "af724b2c"
  },
  "conjunction-059": {
   "_src": "1cedeb2f",
@@ -552,6 +609,7 @@
    "= bevor, ale bardziej książkowe. Czasownik na końcu: ehe er ging. noch ehe — jeszcze zanim: Noch ehe ich antworten konnte, war er weg.",
    "Z lieber — „prędzej … niż”: Ehe ich nachgebe, kündige ich lieber. — Prędzej rzucę pracę, niż ustąpię.",
    "Przestarzała krótka forma — eh: eh ich gehe — zanim pójdę. Nie mylić z die Ehe — małżeństwo."
-  ]
+  ],
+  "_src_reader": "08c5a488"
  }
 }

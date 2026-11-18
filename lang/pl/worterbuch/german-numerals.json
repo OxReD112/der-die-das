@@ -3,13 +3,15 @@
   "_src": "6e0709ab",
   "translation_pl": "zero",
   "example_pl": "Na dworze jest zero stopni.",
-  "usage_note_pl": "null Uhr — północ (00:00). Rzeczownik die Null (wielką literą) — cyfra „zero”."
+  "usage_note_pl": "null Uhr — północ (00:00). Rzeczownik die Null (wielką literą) — cyfra „zero”.",
+  "_src_reader": "953aca25"
  },
  "numeral-002": {
   "_src": "9b279786",
   "translation_pl": "jeden (przy liczeniu, w liczbach, o czasie)",
   "example_pl": "Autobus odjeżdża o pierwszej.",
-  "usage_note_pl": "Przed rzeczownikiem — nie eins, lecz ein/eine (ein Buch); zob. hasła rodzajnika i zaimka. Czas: um eins, ale um ein Uhr. W liczbach złożonych: einundzwanzig (21), hunderteins (101). Numer: Linie eins."
+  "usage_note_pl": "Przed rzeczownikiem — nie eins, lecz ein/eine (ein Buch); zob. hasła rodzajnika i zaimka. Czas: um eins, ale um ein Uhr. W liczbach złożonych: einundzwanzig (21), hunderteins (101). Numer: Linie eins.",
+  "_src_reader": "a3329467"
  },
  "numeral-003": {
   "_src": "35434217",
@@ -19,7 +21,8 @@
   "usage_note_pl": "Przez telefon i dla jasności często mówi się zwo, żeby nie pomylić z drei.",
   "collective": {
    "pl": "we dwoje"
-  }
+  },
+  "_src_reader": "23a79ee2"
  },
  "numeral-004": {
   "_src": "44feb75e",
@@ -29,7 +32,8 @@
   "usage_note_pl": "Liczby 13–19 tworzy się z -zehn, dziesiątki — z -zig: dreizehn (13), dreißig (30) — z ß.",
   "collective": {
    "pl": "we troje"
-  }
+  },
+  "_src_reader": "9e41d88a"
  },
  "numeral-005": {
   "_src": "4672be4e",
@@ -39,7 +43,8 @@
   "usage_note_pl": "Liczby 13–19 tworzy się z -zehn, dziesiątki — z -zig: vierzehn (14), vierzig (40).",
   "collective": {
    "pl": "we czworo"
-  }
+  },
+  "_src_reader": "8a6ed306"
  },
  "numeral-006": {
   "_src": "20a5fe97",
@@ -49,7 +54,8 @@
   "usage_note_pl": "Liczby 13–19 tworzy się z -zehn, dziesiątki — z -zig: fünfzehn (15), fünfzig (50).",
   "collective": {
    "pl": "w pięcioro"
-  }
+  },
+  "_src_reader": "602335a8"
  },
  "numeral-007": {
   "_src": "2f701a00",
@@ -59,7 +65,8 @@
   "usage_note_pl": "Liczby 13–19 tworzy się z -zehn, dziesiątki — z -zig: sechzehn (16), sechzig (60) — bez -s.",
   "collective": {
    "pl": "w sześcioro"
-  }
+  },
+  "_src_reader": "9193342a"
  },
  "numeral-008": {
   "_src": "f288f658",
@@ -69,7 +76,8 @@
   "usage_note_pl": "Liczby 13–19 tworzy się z -zehn, dziesiątki — z -zig: siebzehn (17), siebzig (70) — bez -en. Czasownik sieben („przesiewać”) — to inne słowo.",
   "collective": {
    "pl": "w siedmioro"
-  }
+  },
+  "_src_reader": "d2193dfe"
  },
  "numeral-009": {
   "_src": "5503a120",
@@ -79,7 +87,8 @@
   "usage_note_pl": "Liczby 13–19 tworzy się z -zehn, dziesiątki — z -zig: achtzehn (18), achtzig (80).",
   "collective": {
    "pl": "w ośmioro"
-  }
+  },
+  "_src_reader": "88e4a4d7"
  },
  "numeral-010": {
   "_src": "569292e3",
@@ -89,7 +98,8 @@
   "usage_note_pl": "Liczby 13–19 tworzy się z -zehn, dziesiątki — z -zig: neunzehn (19), neunzig (90).",
   "collective": {
    "pl": "w dziewięcioro"
-  }
+  },
+  "_src_reader": "75f8890b"
  },
  "numeral-011": {
   "_src": "7f6d7216",
@@ -99,7 +109,8 @@
   "usage_note_pl": "Liczby 13–19: jedności + zehn — dreizehn, vierzehn; ale sechzehn, siebzehn.",
   "collective": {
    "pl": "w dziesięcioro"
-  }
+  },
+  "_src_reader": "cae6e0c7"
  },
  "numeral-012": {
   "_src": "953e914f",
@@ -109,7 +120,8 @@
   "usage_note_pl": "elf i zwölf — szczególne słowa, jak eleven i twelve w angielskim; od 13 liczby tworzy się z -zehn.",
   "collective": {
    "pl": "w 11 osób"
-  }
+  },
+  "_src_reader": "2eaf514e"
  },
  "numeral-013": {
   "_src": "67c90b07",
@@ -119,75 +131,87 @@
   "usage_note_pl": "elf i zwölf — szczególne słowa, jak eleven i twelve w angielskim; od 13 liczby tworzy się z -zehn.",
   "collective": {
    "pl": "w 12 osób"
-  }
+  },
+  "_src_reader": "364ceee8"
  },
  "numeral-014": {
   "_src": "1c20b500",
   "translation_pl": "dwadzieścia",
   "example_pl": "Ma dwadzieścia lat.",
-  "usage_note_pl": "Jedności stoją przed dziesiątkami i pisze się je łącznie: einundzwanzig (21), zweiundzwanzig (22)."
+  "usage_note_pl": "Jedności stoją przed dziesiątkami i pisze się je łącznie: einundzwanzig (21), zweiundzwanzig (22).",
+  "_src_reader": "82ea5525"
  },
  "numeral-015": {
   "_src": "67050074",
   "translation_pl": "trzydzieści",
   "example_pl": "Czerwiec ma trzydzieści dni.",
-  "usage_note_pl": "Jedyna dziesiątka na -ßig, pozostałe na -zig: zwanzig, vierzig. 31 — einunddreißig."
+  "usage_note_pl": "Jedyna dziesiątka na -ßig, pozostałe na -zig: zwanzig, vierzig. 31 — einunddreißig.",
+  "_src_reader": "2ed442b0"
  },
  "numeral-016": {
   "_src": "a903a95f",
   "translation_pl": "sto",
   "example_pl": "Dom ma ponad sto lat.",
-  "usage_note_pl": "hundert lub einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Nieokreślone „setki” — Hunderte (można też hunderte), osobne hasło."
+  "usage_note_pl": "hundert lub einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Nieokreślone „setki” — Hunderte (można też hunderte), osobne hasło.",
+  "_src_reader": "73bfebe9"
  },
  "numeral-017": {
   "_src": "ccb13e98",
   "translation_pl": "tysiąc",
   "example_pl": "Wieś ma prawie tysiąc mieszkańców.",
-  "usage_note_pl": "tausend lub eintausend; 2026 — zweitausendsechsundzwanzig. Nieokreślone „tysiące” — Tausende (można też tausende), osobne hasło."
+  "usage_note_pl": "tausend lub eintausend; 2026 — zweitausendsechsundzwanzig. Nieokreślone „tysiące” — Tausende (można też tausende), osobne hasło.",
+  "_src_reader": "a6ae0b28"
  },
  "numeral-018": {
   "_src": "d1582d97",
   "translation_pl": "pierwszy",
   "example_pl": "To mój pierwszy dzień tutaj.",
   "forms_note_pl": "Odmienia się jak przymiotnik: erste, ersten, erster, erstes, erstem. Na piśmie często cyfrą z kropką: der 1. Mai.",
-  "usage_note_pl": "Daty: am ersten Mai — pierwszego maja. Pozostałe liczebniki porządkowe: do 19 dodaje się -te (vierte, fünfte; ale siebte, achte), od 20 — -ste (zwanzigste)."
+  "usage_note_pl": "Daty: am ersten Mai — pierwszego maja. Pozostałe liczebniki porządkowe: do 19 dodaje się -te (vierte, fünfte; ale siebte, achte), od 20 — -ste (zwanzigste).",
+  "_src_reader": "393906d8"
  },
  "numeral-019": {
   "_src": "425f9909",
   "translation_pl": "drugi",
   "example_pl": "To już moja druga kawa.",
   "forms_note_pl": "Odmienia się jak przymiotnik: zweite, zweiten, zweiter, zweites, zweitem. Na piśmie często cyfrą z kropką: der 2. Mai.",
-  "usage_note_pl": "zum zweiten Mal — po raz drugi. Pozostałe liczebniki porządkowe: do 19 dodaje się -te (vierte, fünfte; ale siebte, achte), od 20 — -ste (zwanzigste)."
+  "usage_note_pl": "zum zweiten Mal — po raz drugi. Pozostałe liczebniki porządkowe: do 19 dodaje się -te (vierte, fünfte; ale siebte, achte), od 20 — -ste (zwanzigste).",
+  "_src_reader": "d94d5944"
  },
  "numeral-020": {
   "_src": "f6d814db",
   "translation_pl": "trzeci",
   "example_pl": "Trzeciego dnia pogoda się poprawiła.",
   "forms_note_pl": "Odmienia się jak przymiotnik: dritte, dritten, dritter, drittes, drittem. Na piśmie często cyfrą z kropką: der 3. Mai.",
-  "usage_note_pl": "Forma nieregularna: dritte, a nie dreite. Pozostałe liczebniki porządkowe: do 19 dodaje się -te (vierte, fünfte; ale siebte, achte), od 20 — -ste (zwanzigste)."
+  "usage_note_pl": "Forma nieregularna: dritte, a nie dreite. Pozostałe liczebniki porządkowe: do 19 dodaje się -te (vierte, fünfte; ale siebte, achte), od 20 — -ste (zwanzigste).",
+  "_src_reader": "d2be5e42"
  },
  "numeral-021": {
   "_src": "01030daf",
   "translation_pl": "setki",
   "example_pl": "Setki ludzi czekały przed bramą.",
-  "usage_note_pl": "Nieokreślona, duża liczba, nie liczba 100. Pisze się wielką lub małą literą: viele Hunderte / hunderte drängten sich herbei. Dokładna liczba — hundert."
+  "usage_note_pl": "Nieokreślona, duża liczba, nie liczba 100. Pisze się wielką lub małą literą: viele Hunderte / hunderte drängten sich herbei. Dokładna liczba — hundert.",
+  "_src_reader": "526a2c0e"
  },
  "numeral-022": {
   "_src": "06598d60",
   "translation_pl": "tysiące",
   "example_pl": "Tysiące widzów były zachwycone.",
-  "usage_note_pl": "Nieokreślona, duża liczba, nie liczba 1000. Pisze się wielką lub małą literą: Tausende / tausende Zuschauer waren begeistert. Dokładna liczba — tausend."
+  "usage_note_pl": "Nieokreślona, duża liczba, nie liczba 1000. Pisze się wielką lub małą literą: Tausende / tausende Zuschauer waren begeistert. Dokładna liczba — tausend.",
+  "_src_reader": "0e522780"
  },
  "numeral-023": {
   "_src": "a9800b21",
   "translation_pl": "dziesiątki tysięcy",
   "example_pl": "Dziesiątki tysięcy ludzi demonstrowały w stolicy.",
-  "usage_note_pl": "Nieokreślona liczba, nie liczba 10 000; pisze się wielką lub małą literą: Zehntausende / zehntausende von Opfern. Dokładna liczba — zehntausend."
+  "usage_note_pl": "Nieokreślona liczba, nie liczba 10 000; pisze się wielką lub małą literą: Zehntausende / zehntausende von Opfern. Dokładna liczba — zehntausend.",
+  "_src_reader": "28616e94"
  },
  "numeral-024": {
   "_src": "f8421ebc",
   "translation_pl": "setki tysięcy",
   "example_pl": "Setki tysięcy ludzi straciły pracę.",
-  "usage_note_pl": "Nieokreślona liczba, nie liczba 100 000; pisze się wielką lub małą literą: Hunderttausende / hunderttausende Anhänger. Dokładna liczba — hunderttausend."
+  "usage_note_pl": "Nieokreślona liczba, nie liczba 100 000; pisze się wielką lub małą literą: Hunderttausende / hunderttausende Anhänger. Dokładna liczba — hunderttausend.",
+  "_src_reader": "a12b97f6"
  }
 }

@@ -7,7 +7,8 @@
    {
     "example_pl": "Napisz, proszę, swoje imię dużymi literami."
    }
-  ]
+  ],
+  "_src_reader": "bd988c87"
  },
  "adjective-041": {
   "_src": "4ca45ca1",
@@ -17,7 +18,8 @@
    {
     "example_pl": "Musimy napisać ten tekst od nowa."
    }
-  ]
+  ],
+  "_src_reader": "a925f755"
  },
  "adjective-076": {
   "_src": "05a6fe8a",
@@ -27,7 +29,8 @@
    {
     "example_pl": "To dobry pomysł."
    }
-  ]
+  ],
+  "_src_reader": "2a0e10eb"
  },
  "adjective-adverb-004": {
   "_src": "7261df48",
@@ -37,7 +40,8 @@
    {
     "example_pl": "Czytamy niemiecką gazetę."
    }
-  ]
+  ],
+  "_src_reader": "b3a0951b"
  },
  "adjective-004": {
   "_src": "836e2bab",
@@ -47,7 +51,8 @@
    {
     "example_pl": "Nie pisz, proszę, tak drobno."
    }
-  ]
+  ],
+  "_src_reader": "439178ec"
  },
  "adjective-adverb-006": {
   "_src": "ea9f257a",
@@ -57,7 +62,8 @@
    {
     "example_pl": "Ptak leci wysoko."
    }
-  ]
+  ],
+  "_src_reader": "e7446447"
  },
  "adjective-084": {
   "_src": "79b91b6d",
@@ -67,7 +73,8 @@
    {
     "example_pl": "Oboje reagują różnie."
    }
-  ]
+  ],
+  "_src_reader": "6e9188b5"
  },
  "adjective-005": {
   "_src": "5302db36",
@@ -78,7 +85,8 @@
     "example_pl": "Długo czekaliśmy."
    }
   ],
-  "usage_note_pl": "Wie lange? — Jak długo? W języku potocznym także lang: Wie lang dauert das?"
+  "usage_note_pl": "Wie lange? — Jak długo? W języku potocznym także lang: Wie lang dauert das?",
+  "_src_reader": "5aebe76f"
  },
  "adjective-093": {
   "_src": "c22e2477",
@@ -88,7 +96,8 @@
    {
     "example_pl": "Dziś wieje silny wiatr."
    }
-  ]
+  ],
+  "_src_reader": "e75c3ca5"
  },
  "adjective-adverb-010": {
   "_src": "27fc7fcf",
@@ -98,7 +107,8 @@
    {
     "example_pl": "Angażuje się politycznie."
    }
-  ]
+  ],
+  "_src_reader": "14eb52c1"
  },
  "adjective-066": {
   "_src": "f11aff36",
@@ -109,7 +119,8 @@
     "example_pl": "Szukamy pobliskiego parkingu."
    }
   ],
-  "usage_note_pl": "Formy nächste/nächsten/nächstem/nächster/nächstes znaczą też „następny”: das nächste Mal — następnym razem. W am nächsten znaczenie zależy od kontekstu: na przykład najbliżej."
+  "usage_note_pl": "Formy nächste/nächsten/nächstem/nächster/nächstes znaczą też „następny”: das nächste Mal — następnym razem. W am nächsten znaczenie zależy od kontekstu: na przykład najbliżej.",
+  "_src_reader": "4c722cac"
  },
  "adjective-adverb-012": {
   "_src": "f75b975d",
@@ -119,7 +130,8 @@
    {
     "example_pl": "Lubię francuski ser."
    }
-  ]
+  ],
+  "_src_reader": "1e7c54b3"
  },
  "adjective-006": {
   "_src": "ae9d51b1",
@@ -129,7 +141,8 @@
    {
     "example_pl": "Piszę krótką wiadomość."
    }
-  ]
+  ],
+  "_src_reader": "e77912a5"
  },
  "adjective-adverb-014": {
   "_src": "3acae8db",
@@ -139,7 +152,8 @@
    {
     "example_pl": "Firma działa na skalę międzynarodową."
    }
-  ]
+  ],
+  "_src_reader": "e8f1670b"
  },
  "adjective-adverb-015": {
   "_src": "847d8fe8",
@@ -149,7 +163,8 @@
    {
     "example_pl": "Goście przybyli licznie."
    }
-  ]
+  ],
+  "_src_reader": "cd6bc7c6"
  },
  "adjective-088": {
   "_src": "d3d1637d",
@@ -159,7 +174,8 @@
    {
     "example_pl": "Mamy wspólny cel."
    }
-  ]
+  ],
+  "_src_reader": "fa80b2b6"
  },
  "adjective-064": {
   "_src": "f57856a8",
@@ -169,7 +185,8 @@
    {
     "example_pl": "To szybki samochód."
    }
-  ]
+  ],
+  "_src_reader": "66da3e76"
  },
  "adjective-adverb-018": {
   "_src": "4b5e7159",
@@ -179,7 +196,8 @@
    {
     "example_pl": "Nie chciałbym / Nie chciałabym mówić o tym publicznie."
    }
-  ]
+  ],
+  "_src_reader": "f3865ff5"
  },
  "adjective-002": {
   "_src": "f43b9c08",
@@ -189,7 +207,8 @@
    {
     "example_pl": "Wyszła za mąż w młodym wieku."
    }
-  ]
+  ],
+  "_src_reader": "4bb1fe35"
  },
  "adjective-adverb-020": {
   "_src": "39cf2273",
@@ -199,7 +218,8 @@
    {
     "example_pl": "Musimy myśleć w skali europejskiej."
    }
-  ]
+  ],
+  "_src_reader": "5fe5892a"
  },
  "adjective-adverb-021": {
   "_src": "2d8a16d5",
@@ -209,7 +229,8 @@
    {
     "example_pl": "Tę walizkę trudno nieść."
    }
-  ]
+  ],
+  "_src_reader": "de7aff76"
  },
  "adjective-adverb-022": {
   "_src": "d388d242",
@@ -219,7 +240,8 @@
    {
     "example_pl": "Każdy pokój z osobna ma łazienkę."
    }
-  ]
+  ],
+  "_src_reader": "90c5a235"
  },
  "adjective-081": {
   "_src": "b2393b07",
@@ -233,7 +255,8 @@
     "example_pl": "Znasz się w ogóle z naszym nowym sąsiadem?"
    }
   ],
-  "usage_note_pl": "Częściej jako przydawka lub orzecznik. Stałe wyrażenia: mit jemandem bekannt sein — znać się z kimś; jemanden mit jemandem bekannt machen — zapoznawać kogoś z kimś; jemandem bekannt vorkommen — wydawać się komuś znajomym. bekanntlich — osobne słowo: „jak wiadomo”."
+  "usage_note_pl": "Częściej jako przydawka lub orzecznik. Stałe wyrażenia: mit jemandem bekannt sein — znać się z kimś; jemanden mit jemandem bekannt machen — zapoznawać kogoś z kimś; jemandem bekannt vorkommen — wydawać się komuś znajomym. bekanntlich — osobne słowo: „jak wiadomo”.",
+  "_src_reader": "675684d4"
  },
  "adjective-adverb-024": {
   "_src": "640493f2",
@@ -243,7 +266,8 @@
    {
     "example_pl": "Często chodzimy na spacery."
    }
-  ]
+  ],
+  "_src_reader": "895ca881"
  },
  "adjective-adverb-025": {
   "_src": "e6d90405",
@@ -253,7 +277,8 @@
    {
     "example_pl": "Jedziemy do północnej części miasta."
    }
-  ]
+  ],
+  "_src_reader": "5e0ecce9"
  },
  "adjective-adverb-026": {
   "_src": "2218161b",
@@ -263,7 +288,8 @@
    {
     "example_pl": "Zaznacz błąd na czerwono."
    }
-  ]
+  ],
+  "_src_reader": "0460a943"
  },
  "adjective-adverb-027": {
   "_src": "8567775e",
@@ -273,7 +299,8 @@
    {
     "example_pl": "Firma działa w sposób społecznie odpowiedzialny."
    }
-  ]
+  ],
+  "_src_reader": "ebb8cfe1"
  },
  "adjective-adverb-028": {
   "_src": "a4df63aa",
@@ -283,7 +310,8 @@
    {
     "example_pl": "Te dwa miasta są historycznie ściśle ze sobą związane."
    }
-  ]
+  ],
+  "_src_reader": "31c23d95"
  },
  "adjective-068": {
   "_src": "39bc6312",
@@ -293,7 +321,8 @@
    {
     "example_pl": "Tutaj dzieci mogą swobodnie się bawić."
    }
-  ]
+  ],
+  "_src_reader": "1f59a5a5"
  },
  "adjective-adverb-030": {
   "_src": "ccfdfb4c",
@@ -303,7 +332,8 @@
    {
     "example_pl": "Dodatkowo dostajemy rabat."
    }
-  ]
+  ],
+  "_src_reader": "8328e9b5"
  },
  "adjective-adverb-031": {
   "_src": "a09bbb10",
@@ -313,7 +343,8 @@
    {
     "example_pl": "To ewidentna różnica."
    }
-  ]
+  ],
+  "_src_reader": "389cfdff"
  },
  "adjective-adverb-032": {
   "_src": "0f4241eb",
@@ -323,7 +354,8 @@
    {
     "example_pl": "Drzwi łatwo się otwierają."
    }
-  ]
+  ],
+  "_src_reader": "aeb5020e"
  },
  "adjective-042": {
   "_src": "c29a700c",
@@ -333,7 +365,8 @@
    {
     "example_pl": "Mieszkanie jest nowocześnie urządzone."
    }
-  ]
+  ],
+  "_src_reader": "9a61ed35"
  },
  "adjective-012": {
   "_src": "4ee20f28",
@@ -343,7 +376,8 @@
    {
     "example_pl": "Uprzejmie nas przywitała."
    }
-  ]
+  ],
+  "_src_reader": "52bc17a7"
  },
  "adjective-077": {
   "_src": "88ee0cd2",
@@ -353,7 +387,8 @@
    {
     "example_pl": "To był zły pomysł."
    }
-  ]
+  ],
+  "_src_reader": "364347d5"
  },
  "adjective-adverb-036": {
   "_src": "8972abc2",
@@ -363,7 +398,8 @@
    {
     "example_pl": "Tego konfliktu nie da się rozwiązać militarnie."
    }
-  ]
+  ],
+  "_src_reader": "0be8771d"
  },
  "adjective-adverb-037": {
   "_src": "e6efe491",
@@ -373,7 +409,8 @@
    {
     "example_pl": "Przychodzę tylko ze względu na ciebie."
    }
-  ]
+  ],
+  "_src_reader": "9efb0b31"
  },
  "adverb-149": {
   "_src": "d71c4d07",
@@ -383,7 +420,8 @@
    {
     "example_pl": "Jednoczesne korzystanie jest możliwe."
    }
-  ]
+  ],
+  "_src_reader": "406fc0f5"
  },
  "adjective-adverb-039": {
   "_src": "dbb38243",
@@ -393,7 +431,8 @@
    {
     "example_pl": "Czekamy na oficjalną odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "fc684345"
  },
  "adjective-011": {
   "_src": "56f97353",
@@ -403,7 +442,8 @@
    {
     "example_pl": "Ma przyjazną twarz."
    }
-  ]
+  ],
+  "_src_reader": "054cff2a"
  },
  "adjective-078": {
   "_src": "095444a9",
@@ -413,7 +453,8 @@
    {
     "example_pl": "Policzyłeś prawidłowo."
    }
-  ]
+  ],
+  "_src_reader": "a31d7f36"
  },
  "adjective-adverb-042": {
   "_src": "90683cbc",
@@ -423,7 +464,8 @@
    {
     "example_pl": "To rzadka roślina."
    }
-  ]
+  ],
+  "_src_reader": "e3a22f65"
  },
  "adjective-adverb-043": {
   "_src": "b074f9a9",
@@ -433,7 +475,8 @@
    {
     "example_pl": "Działanie zostało zbadane naukowo."
    }
-  ]
+  ],
+  "_src_reader": "b6e452ee"
  },
  "adjective-adverb-044": {
   "_src": "c0ac9935",
@@ -443,7 +486,8 @@
    {
     "example_pl": "Ból jest tylko nieznacznie nasilony."
    }
-  ]
+  ],
+  "_src_reader": "4834689e"
  },
  "adjective-adverb-045": {
   "_src": "1484ac2d",
@@ -453,7 +497,8 @@
    {
     "example_pl": "Regularny ruch jest ważny."
    }
-  ]
+  ],
+  "_src_reader": "659d4e87"
  },
  "adjective-adverb-046": {
   "_src": "6e224481",
@@ -463,7 +508,8 @@
    {
     "example_pl": "To jest technicznie możliwe."
    }
-  ]
+  ],
+  "_src_reader": "b9d32365"
  },
  "adjective-adverb-047": {
   "_src": "69b4e4e5",
@@ -473,7 +519,8 @@
    {
     "example_pl": "Ten temat był szeroko omawiany."
    }
-  ]
+  ],
+  "_src_reader": "71eb4d22"
  },
  "adjective-adverb-048": {
   "_src": "1ced795e",
@@ -483,7 +530,8 @@
    {
     "example_pl": "To była udana rozmowa."
    }
-  ]
+  ],
+  "_src_reader": "9447a15d"
  },
  "adjective-058": {
   "_src": "fd855217",
@@ -493,7 +541,8 @@
    {
     "example_pl": "Potrzebujemy szczerej rozmowy."
    }
-  ]
+  ],
+  "_src_reader": "b294d5fa"
  },
  "adjective-adverb-050": {
   "_src": "5a695d0a",
@@ -503,7 +552,8 @@
    {
     "example_pl": "Dzieci uczą się w różnym tempie."
    }
-  ]
+  ],
+  "_src_reader": "6e9188b5"
  },
  "adjective-adverb-051": {
   "_src": "a95adde7",
@@ -513,7 +563,8 @@
    {
     "example_pl": "Zwiedzamy zachodnią dzielnicę miasta."
    }
-  ]
+  ],
+  "_src_reader": "466f8ebf"
  },
  "adjective-adverb-052": {
   "_src": "472d36d7",
@@ -523,7 +574,8 @@
    {
     "example_pl": "Potrzebujemy dokładnego adresu."
    }
-  ]
+  ],
+  "_src_reader": "14e9305d"
  },
  "adjective-adverb-053": {
   "_src": "79037fae",
@@ -533,7 +585,8 @@
    {
     "example_pl": "To osobiste pytanie."
    }
-  ]
+  ],
+  "_src_reader": "82b2245d"
  },
  "adjective-009": {
   "_src": "60901f4e",
@@ -543,7 +596,8 @@
    {
     "example_pl": "Pięknie śpiewa."
    }
-  ]
+  ],
+  "_src_reader": "98845f19"
  },
  "adjective-adverb-055": {
   "_src": "769cf928",
@@ -553,7 +607,8 @@
    {
     "example_pl": "Spotykamy się w centralnym miejscu."
    }
-  ]
+  ],
+  "_src_reader": "1aa9b2ad"
  },
  "adjective-adverb-056": {
   "_src": "692040ea",
@@ -563,7 +618,8 @@
    {
     "example_pl": "Firma działa ekonomicznie."
    }
-  ]
+  ],
+  "_src_reader": "a14add1f"
  },
  "adjective-adverb-057": {
   "_src": "2705a74e",
@@ -573,7 +629,8 @@
    {
     "example_pl": "Obowiązują ogólne zasady."
    }
-  ]
+  ],
+  "_src_reader": "2d404a7a"
  },
  "adjective-adverb-058": {
   "_src": "93e3ae68",
@@ -583,7 +640,8 @@
    {
     "example_pl": "Potrzebujemy kompletnej listy."
    }
-  ]
+  ],
+  "_src_reader": "2a535d95"
  },
  "adjective-adverb-059": {
   "_src": "bdb75c68",
@@ -593,7 +651,8 @@
    {
     "example_pl": "To problem ogólnoświatowy."
    }
-  ]
+  ],
+  "_src_reader": "74341ec3"
  },
  "adjective-adverb-060": {
   "_src": "84547090",
@@ -603,7 +662,8 @@
    {
     "example_pl": "To wąska ulica."
    }
-  ]
+  ],
+  "_src_reader": "567f9b27"
  },
  "adjective-adverb-061": {
   "_src": "d2e8e03a",
@@ -613,7 +673,8 @@
    {
     "example_pl": "Projekt jest dofinansowywany przez państwo."
    }
-  ]
+  ],
+  "_src_reader": "8100ec9c"
  },
  "adjective-adverb-062": {
   "_src": "3649a4c7",
@@ -623,7 +684,8 @@
    {
     "example_pl": "Podoba mi się bezpośrednie sąsiedztwo parku."
    }
-  ]
+  ],
+  "_src_reader": "6b81a7b1"
  },
  "adjective-086": {
   "_src": "99ab9585",
@@ -633,7 +695,8 @@
    {
     "example_pl": "Oboje myślą podobnie."
    }
-  ]
+  ],
+  "_src_reader": "4706830d"
  },
  "adjective-adverb-064": {
   "_src": "2b2af5a8",
@@ -643,7 +706,8 @@
    {
     "example_pl": "Ta żywność jest produkowana lokalnie."
    }
-  ]
+  ],
+  "_src_reader": "6f41ff81"
  },
  "adjective-adverb-065": {
   "_src": "e1f3d996",
@@ -653,7 +717,8 @@
    {
     "example_pl": "Tradycyjnie świętujemy Boże Narodzenie w domu."
    }
-  ]
+  ],
+  "_src_reader": "46dbb08d"
  },
  "adjective-adverb-066": {
   "_src": "a446329a",
@@ -663,7 +728,8 @@
    {
     "example_pl": "To danie ma typowo włoski smak."
    }
-  ]
+  ],
+  "_src_reader": "4fe22047"
  },
  "adjective-adverb-067": {
   "_src": "57332529",
@@ -673,7 +739,8 @@
    {
     "example_pl": "Potrzebujemy dowodu w postaci dokumentu."
    }
-  ]
+  ],
+  "_src_reader": "a5d6ae11"
  },
  "adjective-adverb-068": {
   "_src": "d9bc7973",
@@ -683,7 +750,8 @@
    {
     "example_pl": "Malujemy ścianę na biało."
    }
-  ]
+  ],
+  "_src_reader": "1b66d847"
  },
  "adjective-adverb-069": {
   "_src": "d7124d57",
@@ -693,7 +761,8 @@
    {
     "example_pl": "Potrzebujemy absolutnej ciszy."
    }
-  ]
+  ],
+  "_src_reader": "7f1cd5e9"
  },
  "adjective-adverb-070": {
   "_src": "f752c5a0",
@@ -703,7 +772,8 @@
    {
     "example_pl": "Kompetentnie odpowiedział na pytanie."
    }
-  ]
+  ],
+  "_src_reader": "ba7bbc25"
  },
  "adjective-adverb-071": {
   "_src": "f973fbdd",
@@ -713,7 +783,8 @@
    {
     "example_pl": "Pomieszczenie zostało artystycznie zaaranżowane."
    }
-  ]
+  ],
+  "_src_reader": "4a661af2"
  },
  "adjective-adverb-072": {
   "_src": "5c891305",
@@ -723,7 +794,8 @@
    {
     "example_pl": "To pozytywna wiadomość."
    }
-  ]
+  ],
+  "_src_reader": "38a21915"
  },
  "adjective-adverb-073": {
   "_src": "5d27f4a8",
@@ -733,7 +805,8 @@
    {
     "example_pl": "Znamy się też prywatnie."
    }
-  ]
+  ],
+  "_src_reader": "0f023d4f"
  },
  "adjective-adverb-074": {
   "_src": "336aa68d",
@@ -743,7 +816,8 @@
    {
     "example_pl": "To niezależna gazeta."
    }
-  ]
+  ],
+  "_src_reader": "e3373bab"
  },
  "adjective-adverb-075": {
   "_src": "0aed704f",
@@ -753,7 +827,8 @@
    {
     "example_pl": "Panuje całkowita cisza."
    }
-  ]
+  ],
+  "_src_reader": "2a535d95"
  },
  "adjective-adverb-076": {
   "_src": "302fa0c2",
@@ -763,7 +838,8 @@
    {
     "example_pl": "Państwo było rządzone zgodnie z zasadami komunizmu."
    }
-  ]
+  ],
+  "_src_reader": "f1bc9d8f"
  },
  "adverb-181": {
   "_src": "0c18e143",
@@ -773,7 +849,8 @@
    {
     "example_pl": "To względna korzyść."
    }
-  ]
+  ],
+  "_src_reader": "cd193745"
  },
  "adjective-adverb-078": {
   "_src": "77f01e08",
@@ -784,7 +861,8 @@
     "example_pl": "To była całkowita awaria."
    }
   ],
-  "usage_note_pl": "total jako wzmocnienie („bardzo, zupełnie”) jest typowe dla języka potocznego."
+  "usage_note_pl": "total jako wzmocnienie („bardzo, zupełnie”) jest typowe dla języka potocznego.",
+  "_src_reader": "ffcfb80c"
  },
  "adjective-adverb-079": {
   "_src": "331050e3",
@@ -794,7 +872,8 @@
    {
     "example_pl": "Obecnie nie ma wolnych pokoi."
    }
-  ]
+  ],
+  "_src_reader": "ba98802e"
  },
  "adjective-adverb-080": {
   "_src": "25eb28ab",
@@ -804,7 +883,8 @@
    {
     "example_pl": "Woda jest badana chemicznie."
    }
-  ]
+  ],
+  "_src_reader": "4a4b67e9"
  },
  "adjective-adverb-081": {
   "_src": "487b775a",
@@ -814,7 +894,8 @@
    {
     "example_pl": "Rodzice pomagają mi finansowo."
    }
-  ]
+  ],
+  "_src_reader": "1c9b7141"
  },
  "adjective-adverb-082": {
   "_src": "b7705b14",
@@ -824,7 +905,8 @@
    {
     "example_pl": "Ma wielki talent muzyczny."
    }
-  ]
+  ],
+  "_src_reader": "05ab212b"
  },
  "adjective-adverb-083": {
   "_src": "f0c10a1b",
@@ -834,7 +916,8 @@
    {
     "example_pl": "Świetnie zagrałeś."
    }
-  ]
+  ],
+  "_src_reader": "3c52b3c4"
  },
  "adjective-adverb-084": {
   "_src": "3f8ae6af",
@@ -844,7 +927,8 @@
    {
     "example_pl": "Ten samochód jeździ na prąd."
    }
-  ]
+  ],
+  "_src_reader": "d4a7dafa"
  },
  "adjective-adverb-085": {
   "_src": "89e23e15",
@@ -854,7 +938,8 @@
    {
     "example_pl": "Są znaczne różnice."
    }
-  ]
+  ],
+  "_src_reader": "a22b2dc8"
  },
  "adjective-adverb-086": {
   "_src": "336c67b8",
@@ -864,7 +949,8 @@
    {
     "example_pl": "Coroczna kontrola jest ważna."
    }
-  ]
+  ],
+  "_src_reader": "1d926fc5"
  },
  "adjective-065": {
   "_src": "aaed5567",
@@ -874,7 +960,8 @@
    {
     "example_pl": "To powolny pociąg."
    }
-  ]
+  ],
+  "_src_reader": "2ecd4021"
  },
  "adjective-adverb-088": {
   "_src": "12b6ac1b",
@@ -884,7 +971,8 @@
    {
     "example_pl": "Zwiedzamy wschodnią dzielnicę miasta."
    }
-  ]
+  ],
+  "_src_reader": "1515811f"
  },
  "adjective-adverb-089": {
   "_src": "092841f6",
@@ -894,7 +982,8 @@
    {
     "example_pl": "To projekt komercyjny."
    }
-  ]
+  ],
+  "_src_reader": "2630f771"
  },
  "adjective-adverb-090": {
   "_src": "f861123f",
@@ -904,7 +993,8 @@
    {
     "example_pl": "Gości ugoszczono po królewsku."
    }
-  ]
+  ],
+  "_src_reader": "c1beb3e1"
  },
  "adjective-adverb-091": {
   "_src": "43845d0e",
@@ -914,7 +1004,8 @@
    {
     "example_pl": "Temat został szczegółowo omówiony."
    }
-  ]
+  ],
+  "_src_reader": "9535c12d"
  },
  "adjective-adverb-092": {
   "_src": "a03767c7",
@@ -924,7 +1015,8 @@
    {
     "example_pl": "Aktywnie współpracujemy."
    }
-  ]
+  ],
+  "_src_reader": "7f0f41bd"
  },
  "adjective-adverb-093": {
   "_src": "268f92fb",
@@ -934,7 +1026,8 @@
    {
     "example_pl": "Ta kwestia została ostatecznie rozstrzygnięta."
    }
-  ]
+  ],
+  "_src_reader": "19891a66"
  },
  "adjective-adverb-094": {
   "_src": "120eabb7",
@@ -944,7 +1037,8 @@
    {
     "example_pl": "Malujemy drzwi na zielono."
    }
-  ]
+  ],
+  "_src_reader": "c7448027"
  },
  "adjective-adverb-095": {
   "_src": "340a5ade",
@@ -954,7 +1048,8 @@
    {
     "example_pl": "Pracuje na własny rachunek."
    }
-  ]
+  ],
+  "_src_reader": "63ce06be"
  },
  "adjective-adverb-096": {
   "_src": "a67b4bf6",
@@ -964,7 +1059,8 @@
    {
     "example_pl": "Drzwi pozostają na stałe zamknięte."
    }
-  ]
+  ],
+  "_src_reader": "604402d8"
  },
  "adjective-adverb-097": {
   "_src": "24a3b0c1",
@@ -974,7 +1070,8 @@
    {
     "example_pl": "To samodzielna praca."
    }
-  ]
+  ],
+  "_src_reader": "e3373bab"
  },
  "adjective-adverb-098": {
   "_src": "43fc48f0",
@@ -984,7 +1081,8 @@
    {
     "example_pl": "Mocno dociśnij wieczko do słoika."
    }
-  ]
+  ],
+  "_src_reader": "0e46deb5"
  },
  "adjective-adverb-099": {
   "_src": "ace3d663",
@@ -994,7 +1092,8 @@
    {
     "example_pl": "To kompletna lista."
    }
-  ]
+  ],
+  "_src_reader": "2a535d95"
  },
  "adjective-adverb-100": {
   "_src": "ef1063ca",
@@ -1004,7 +1103,8 @@
    {
     "example_pl": "Oba regiony są ściśle związane kulturowo."
    }
-  ]
+  ],
+  "_src_reader": "f03803dd"
  },
  "adjective-adverb-101": {
   "_src": "ce178114",
@@ -1014,7 +1114,8 @@
    {
     "example_pl": "Ten grunt jest użytkowany rolniczo."
    }
-  ]
+  ],
+  "_src_reader": "0b6c3b9d"
  },
  "adjective-adverb-102": {
   "_src": "c463eea5",
@@ -1024,7 +1125,8 @@
    {
     "example_pl": "Konieczna jest wielokrotna kontrola."
    }
-  ]
+  ],
+  "_src_reader": "9544dc26"
  },
  "adjective-adverb-103": {
   "_src": "3e97299e",
@@ -1034,7 +1136,8 @@
    {
     "example_pl": "Postąpił bardzo po ludzku."
    }
-  ]
+  ],
+  "_src_reader": "68366f31"
  },
  "adjective-adverb-104": {
   "_src": "1ac5a72f",
@@ -1044,7 +1147,8 @@
    {
     "example_pl": "Gazeta ukazuje się w regionie."
    }
-  ]
+  ],
+  "_src_reader": "69987395"
  },
  "adjective-adverb-105": {
   "_src": "6550d22d",
@@ -1055,7 +1159,8 @@
     "example_pl": "Rzekomego błędu nie znaleziono."
    }
   ],
-  "usage_note_pl": "Przekazuje cudze, niepotwierdzone twierdzenie; często wyraża wątpliwość."
+  "usage_note_pl": "Przekazuje cudze, niepotwierdzone twierdzenie; często wyraża wątpliwość.",
+  "_src_reader": "c891be06"
  },
  "adjective-adverb-106": {
   "_src": "8175bd51",
@@ -1065,7 +1170,8 @@
    {
     "example_pl": "To demokratyczna decyzja."
    }
-  ]
+  ],
+  "_src_reader": "c2cc059a"
  },
  "adjective-adverb-107": {
   "_src": "1f535821",
@@ -1075,7 +1181,8 @@
    {
     "example_pl": "Czekamy średnio dziesięć minut."
    }
-  ]
+  ],
+  "_src_reader": "3eafb151"
  },
  "adjective-adverb-108": {
   "_src": "bd7230b4",
@@ -1085,7 +1192,8 @@
    {
     "example_pl": "To była krytyczna uwaga."
    }
-  ]
+  ],
+  "_src_reader": "319425d1"
  },
  "adjective-adverb-109": {
   "_src": "c6d66d2f",
@@ -1095,7 +1203,8 @@
    {
     "example_pl": "Zabieg jest medycznie konieczny."
    }
-  ]
+  ],
+  "_src_reader": "323f18cd"
  },
  "adjective-adverb-110": {
   "_src": "55e745e5",
@@ -1105,7 +1214,8 @@
    {
     "example_pl": "Codzienny spacer dobrze mi robi."
    }
-  ]
+  ],
+  "_src_reader": "02b773ec"
  },
  "adjective-adverb-111": {
   "_src": "2bc6ed3c",
@@ -1115,7 +1225,8 @@
    {
     "example_pl": "Pomoc jest organizowana na miejscu."
    }
-  ]
+  ],
+  "_src_reader": "6f41ff81"
  },
  "adjective-adverb-112": {
   "_src": "53bb4651",
@@ -1125,7 +1236,8 @@
    {
     "example_pl": "To drzwi automatyczne."
    }
-  ]
+  ],
+  "_src_reader": "f4438b0e"
  },
  "adjective-adverb-113": {
   "_src": "ab8bd16a",
@@ -1135,7 +1247,8 @@
    {
     "example_pl": "To zasadnicze pytanie."
    }
-  ]
+  ],
+  "_src_reader": "d61b1f9a"
  },
  "adjective-adverb-114": {
   "_src": "ace5ad66",
@@ -1145,7 +1258,8 @@
    {
     "example_pl": "Potrzebujemy konkretnego planu."
    }
-  ]
+  ],
+  "_src_reader": "7c5baf8e"
  },
  "adjective-adverb-115": {
   "_src": "06991b67",
@@ -1155,7 +1269,8 @@
    {
     "example_pl": "To masywny stół."
    }
-  ]
+  ],
+  "_src_reader": "2f183d6f"
  },
  "adjective-adverb-116": {
   "_src": "3d70b800",
@@ -1165,7 +1280,8 @@
    {
     "example_pl": "Zareagowała negatywnie."
    }
-  ]
+  ],
+  "_src_reader": "4fdb6625"
  },
  "adjective-adverb-117": {
   "_src": "68f87404",
@@ -1176,7 +1292,8 @@
     "example_pl": "Mamy okrągły stół."
    }
   ],
-  "usage_note_pl": "Przed liczbą rund znaczy „około”."
+  "usage_note_pl": "Przed liczbą rund znaczy „około”.",
+  "_src_reader": "4d664987"
  },
  "adjective-adverb-118": {
   "_src": "7ea73afc",
@@ -1186,7 +1303,8 @@
    {
     "example_pl": "Zaznacz odpowiedź na niebiesko."
    }
-  ]
+  ],
+  "_src_reader": "1b148c6f"
  },
  "adjective-adverb-119": {
   "_src": "8c3dfea8",
@@ -1196,7 +1314,8 @@
    {
     "example_pl": "To ekstremalne temperatury."
    }
-  ]
+  ],
+  "_src_reader": "722ec7eb"
  },
  "adjective-adverb-120": {
   "_src": "658523b0",
@@ -1206,7 +1325,8 @@
    {
     "example_pl": "Jem pół pizzy."
    }
-  ]
+  ],
+  "_src_reader": "9859c831"
  },
  "adjective-adverb-121": {
   "_src": "505fff55",
@@ -1217,7 +1337,8 @@
     "example_pl": "To normalna reakcja."
    }
   ],
-  "usage_note_pl": "„Zwykle” w języku neutralnym to normalerweise; normal znaczy tu „w normalny sposób”."
+  "usage_note_pl": "„Zwykle” w języku neutralnym to normalerweise; normal znaczy tu „w normalny sposób”.",
+  "_src_reader": "c4982455"
  },
  "adjective-adverb-122": {
   "_src": "64b576ba",
@@ -1227,7 +1348,8 @@
    {
     "example_pl": "Ostro go skrytykowała."
    }
-  ]
+  ],
+  "_src_reader": "f2f28696"
  },
  "adjective-adverb-123": {
   "_src": "047b9807",
@@ -1237,7 +1359,8 @@
    {
     "example_pl": "Płaszcz jest wąsko skrojony."
    }
-  ]
+  ],
+  "_src_reader": "788e51a8"
  },
  "adjective-039": {
   "_src": "c498f2f0",
@@ -1248,7 +1371,8 @@
     "example_pl": "To bezpieczna droga."
    }
   ],
-  "usage_note_pl": "sicher fahren — jechać bezpiecznie/pewnie; Er kommt sicher — na pewno przyjdzie."
+  "usage_note_pl": "sicher fahren — jechać bezpiecznie/pewnie; Er kommt sicher — na pewno przyjdzie.",
+  "_src_reader": "98294168"
  },
  "adjective-adverb-125": {
   "_src": "0958a401",
@@ -1258,7 +1382,8 @@
    {
     "example_pl": "Ciągły hałas mi przeszkadza."
    }
-  ]
+  ],
+  "_src_reader": "423bcc5d"
  },
  "adjective-adverb-126": {
   "_src": "e54554d1",
@@ -1268,7 +1393,8 @@
    {
     "example_pl": "To była daremna próba."
    }
-  ]
+  ],
+  "_src_reader": "1f3220d0"
  },
  "adjective-adverb-127": {
   "_src": "ec60d69f",
@@ -1278,7 +1404,8 @@
    {
     "example_pl": "Powietrze przyjemnie pachnie."
    }
-  ]
+  ],
+  "_src_reader": "39c0d8b5"
  },
  "adjective-adverb-128": {
   "_src": "5c1ce08e",
@@ -1288,7 +1415,8 @@
    {
     "example_pl": "Potrzebujemy podpisu elektronicznego."
    }
-  ]
+  ],
+  "_src_reader": "8dcc7d52"
  },
  "adjective-adverb-129": {
   "_src": "69d7f5a8",
@@ -1298,7 +1426,8 @@
    {
     "example_pl": "Goście burzliwie dyskutują."
    }
-  ]
+  ],
+  "_src_reader": "989b8aba"
  },
  "adjective-080": {
   "_src": "bb0fb82e",
@@ -1308,7 +1437,8 @@
    {
     "example_pl": "To jasna odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "37c1ddfd"
  },
  "adjective-adverb-131": {
   "_src": "6f36d5e7",
@@ -1319,7 +1449,8 @@
     "example_pl": "To przeżycie trwale mnie ukształtowało."
    }
   ],
-  "usage_note_pl": "Może oznaczać zrównoważenie ekologiczne lub długotrwałe, silne oddziaływanie."
+  "usage_note_pl": "Może oznaczać zrównoważenie ekologiczne lub długotrwałe, silne oddziaływanie.",
+  "_src_reader": "7680d0ae"
  },
  "adjective-adverb-132": {
   "_src": "a8eb95c6",
@@ -1329,7 +1460,8 @@
    {
     "example_pl": "Pracuje profesjonalnie."
    }
-  ]
+  ],
+  "_src_reader": "3443b845"
  },
  "adjective-adverb-133": {
   "_src": "50ddaff7",
@@ -1339,7 +1471,8 @@
    {
     "example_pl": "Potrzebujemy porady prawnej."
    }
-  ]
+  ],
+  "_src_reader": "72318c0d"
  },
  "adjective-adverb-134": {
   "_src": "c9651ad4",
@@ -1349,7 +1482,8 @@
    {
     "example_pl": "Różnica jest statystycznie dostrzegalna."
    }
-  ]
+  ],
+  "_src_reader": "371d74c5"
  },
  "adjective-adverb-135": {
   "_src": "8305473a",
@@ -1359,7 +1493,8 @@
    {
     "example_pl": "Zwiedzamy południowo-zachodnią część wyspy."
    }
-  ]
+  ],
+  "_src_reader": "a08d9e47"
  },
  "adjective-adverb-136": {
   "_src": "baf090e4",
@@ -1369,7 +1504,8 @@
    {
     "example_pl": "Chcemy żyć ekologicznie."
    }
-  ]
+  ],
+  "_src_reader": "b964110e"
  },
  "adjective-adverb-137": {
   "_src": "6fac9468",
@@ -1379,7 +1515,8 @@
    {
     "example_pl": "Maszyna pracuje samodzielnie."
    }
-  ]
+  ],
+  "_src_reader": "08c1d475"
  },
  "adjective-adverb-138": {
   "_src": "2c362a60",
@@ -1389,7 +1526,8 @@
    {
     "example_pl": "To decyzja zawodowa."
    }
-  ]
+  ],
+  "_src_reader": "061be7de"
  },
  "adjective-adverb-139": {
   "_src": "ce897474",
@@ -1399,7 +1537,8 @@
    {
     "example_pl": "Zamawiam podwójne espresso."
    }
-  ]
+  ],
+  "_src_reader": "9ce5a7bd"
  },
  "adjective-057": {
   "_src": "cd032da2",
@@ -1409,7 +1548,8 @@
    {
     "example_pl": "Malujemy pokój na ciemno."
    }
-  ]
+  ],
+  "_src_reader": "186a708c"
  },
  "adjective-079": {
   "_src": "f98d0272",
@@ -1419,7 +1559,8 @@
    {
     "example_pl": "Źle policzyłeś."
    }
-  ]
+  ],
+  "_src_reader": "26394f49"
  },
  "adjective-adverb-142": {
   "_src": "1bbe75b8",
@@ -1429,7 +1570,8 @@
    {
     "example_pl": "To delikatna tkanina."
    }
-  ]
+  ],
+  "_src_reader": "3a520a99"
  },
  "adjective-075": {
   "_src": "927a3a23",
@@ -1439,7 +1581,8 @@
    {
     "example_pl": "Chleb jest świeżo upieczony."
    }
-  ]
+  ],
+  "_src_reader": "141efda7"
  },
  "adjective-045": {
   "_src": "06099f0f",
@@ -1449,7 +1592,8 @@
    {
     "example_pl": "To korzystna oferta."
    }
-  ]
+  ],
+  "_src_reader": "ebf6b2c6"
  },
  "adjective-adverb-145": {
   "_src": "daa62f4c",
@@ -1459,7 +1603,8 @@
    {
     "example_pl": "Szukamy indywidualnego rozwiązania."
    }
-  ]
+  ],
+  "_src_reader": "ef72330d"
  },
  "adjective-adverb-146": {
   "_src": "575070bf",
@@ -1469,7 +1614,8 @@
    {
     "example_pl": "Dziś odbywa się wydarzenie kościelne."
    }
-  ]
+  ],
+  "_src_reader": "f4eb785e"
  },
  "adjective-adverb-147": {
   "_src": "2d669f67",
@@ -1479,7 +1625,8 @@
    {
     "example_pl": "Dzieci pracują twórczo."
    }
-  ]
+  ],
+  "_src_reader": "c38b1d81"
  },
  "adjective-adverb-148": {
   "_src": "bcbc1a5f",
@@ -1489,7 +1636,8 @@
    {
     "example_pl": "Pomieszczenie jest oświetlane sztucznie."
    }
-  ]
+  ],
+  "_src_reader": "eff21609"
  },
  "adjective-adverb-149": {
   "_src": "42b6df5e",
@@ -1499,7 +1647,8 @@
    {
     "example_pl": "Zwiedzamy północno-zachodnią dzielnicę miasta."
    }
-  ]
+  ],
+  "_src_reader": "10d559af"
  },
  "adjective-099": {
   "_src": "a7bfab63",
@@ -1509,7 +1658,8 @@
    {
     "example_pl": "To niekoniecznie prowadzi do problemów."
    }
-  ]
+  ],
+  "_src_reader": "5b613f5d"
  },
  "adjective-adverb-151": {
   "_src": "5c7e89b1",
@@ -1520,7 +1670,8 @@
     "example_pl": "Mamy niezbędne dokumenty."
    }
   ],
-  "usage_note_pl": "etwas nötig haben — potrzebować czegoś."
+  "usage_note_pl": "etwas nötig haben — potrzebować czegoś.",
+  "_src_reader": "b52de1a0"
  },
  "adjective-adverb-152": {
   "_src": "69b1c106",
@@ -1530,7 +1681,8 @@
    {
     "example_pl": "Potrzebujemy szybkiej odpowiedzi."
    }
-  ]
+  ],
+  "_src_reader": "af2ea8b6"
  },
  "adjective-adverb-153": {
   "_src": "6e39b1c6",
@@ -1540,7 +1692,8 @@
    {
     "example_pl": "Przestrzeganie tej zasady jest ściśle kontrolowane."
    }
-  ]
+  ],
+  "_src_reader": "c6a26019"
  },
  "adjective-adverb-154": {
   "_src": "bfcb0cf0",
@@ -1550,7 +1703,8 @@
    {
     "example_pl": "Firma jest znana poza regionem."
    }
-  ]
+  ],
+  "_src_reader": "d50fa04e"
  },
  "adjective-adverb-155": {
   "_src": "04c4b18d",
@@ -1560,7 +1714,8 @@
    {
     "example_pl": "Miasto dynamicznie się rozwija."
    }
-  ]
+  ],
+  "_src_reader": "3134ef2a"
  },
  "adjective-adverb-156": {
   "_src": "66759cd4",
@@ -1570,7 +1725,8 @@
    {
     "example_pl": "Potrzebujemy dokładnej liczby."
    }
-  ]
+  ],
+  "_src_reader": "18e937ad"
  },
  "adjective-adverb-157": {
   "_src": "10200639",
@@ -1580,7 +1736,8 @@
    {
     "example_pl": "Jest dobrze przygotowana merytorycznie."
    }
-  ]
+  ],
+  "_src_reader": "8500557d"
  },
  "adjective-adverb-158": {
   "_src": "4d633605",
@@ -1590,7 +1747,8 @@
    {
     "example_pl": "Zaznacz to słowo na żółto."
    }
-  ]
+  ],
+  "_src_reader": "85de74fb"
  },
  "adjective-adverb-159": {
   "_src": "5c44f684",
@@ -1600,7 +1758,8 @@
    {
     "example_pl": "Sprawa jest badana z prawnego punktu widzenia."
    }
-  ]
+  ],
+  "_src_reader": "72318c0d"
  },
  "adjective-046": {
   "_src": "d3b4da14",
@@ -1610,7 +1769,8 @@
    {
     "example_pl": "Dostajemy bezpłatną poradę."
    }
-  ]
+  ],
+  "_src_reader": "f9e1bd9e"
  },
  "adjective-adverb-161": {
   "_src": "cc8a8d24",
@@ -1620,7 +1780,8 @@
    {
     "example_pl": "Wystąpiła krótkotrwała awaria."
    }
-  ]
+  ],
+  "_src_reader": "96ab003a"
  },
  "adjective-adverb-162": {
   "_src": "8a7be16a",
@@ -1630,7 +1791,8 @@
    {
     "example_pl": "Wniósł decydujący wkład w sukces."
    }
-  ]
+  ],
+  "_src_reader": "296d153e"
  },
  "adjective-095": {
   "_src": "d1b4aa7c",
@@ -1640,7 +1802,8 @@
    {
     "example_pl": "Stół jest obficie zastawiony."
    }
-  ]
+  ],
+  "_src_reader": "b88845f1"
  },
  "adjective-094": {
   "_src": "3bc90689",
@@ -1650,7 +1813,8 @@
    {
     "example_pl": "Lampa świeci tylko słabo."
    }
-  ]
+  ],
+  "_src_reader": "4eba96df"
  },
  "adjective-adverb-165": {
   "_src": "9e22b9c3",
@@ -1660,7 +1824,8 @@
    {
     "example_pl": "Stań, proszę, z boku, przy drzwiach."
    }
-  ]
+  ],
+  "_src_reader": "16236dba"
  },
  "adjective-adverb-166": {
   "_src": "81616466",
@@ -1670,7 +1835,8 @@
    {
     "example_pl": "To zachowanie jest charakterystyczne właśnie dla człowieka."
    }
-  ]
+  ],
+  "_src_reader": "1d70f138"
  },
  "adjective-adverb-167": {
   "_src": "0ef2526b",
@@ -1680,7 +1846,8 @@
    {
     "example_pl": "To była gwałtowna zmiana."
    }
-  ]
+  ],
+  "_src_reader": "b0183aaa"
  },
  "adjective-adverb-168": {
   "_src": "a410492f",
@@ -1690,7 +1857,8 @@
    {
     "example_pl": "Znak można wyraźnie rozpoznać."
    }
-  ]
+  ],
+  "_src_reader": "ab7269a9"
  },
  "adjective-adverb-169": {
   "_src": "449c31de",
@@ -1700,7 +1868,8 @@
    {
     "example_pl": "Ludność jest zróżnicowana etnicznie."
    }
-  ]
+  ],
+  "_src_reader": "ca91d36a"
  },
  "adjective-adverb-170": {
   "_src": "560f4e7d",
@@ -1710,7 +1879,8 @@
    {
     "example_pl": "Pozostaje aktywny umysłowo."
    }
-  ]
+  ],
+  "_src_reader": "5ead9a0a"
  },
  "adjective-adverb-171": {
   "_src": "30bd627e",
@@ -1720,7 +1890,8 @@
    {
     "example_pl": "Wzór jest zbudowany geometrycznie."
    }
-  ]
+  ],
+  "_src_reader": "a42681ba"
  },
  "adjective-adverb-172": {
   "_src": "67d5a03e",
@@ -1730,7 +1901,8 @@
    {
     "example_pl": "Potrzebujemy intensywnego treningu."
    }
-  ]
+  ],
+  "_src_reader": "a741c986"
  },
  "adjective-adverb-173": {
   "_src": "c5e68a09",
@@ -1741,7 +1913,8 @@
     "example_pl": "Zaczęła grać na pianinie w wieku ośmiu lat."
    }
   ],
-  "usage_note_pl": "Człon wyrazów złożonych z liczebnikiem: achtjährig / 8-jährig — ośmioletni. Oznacza wiek lub czas trwania."
+  "usage_note_pl": "Człon wyrazów złożonych z liczebnikiem: achtjährig / 8-jährig — ośmioletni. Oznacza wiek lub czas trwania.",
+  "_src_reader": "7bf5b0d0"
  },
  "adjective-adverb-174": {
   "_src": "9e933a38",
@@ -1751,7 +1924,8 @@
    {
     "example_pl": "Aktywność fizyczna jest ważna."
    }
-  ]
+  ],
+  "_src_reader": "cf1670bd"
  },
  "adjective-adverb-175": {
   "_src": "b850956b",
@@ -1761,7 +1935,8 @@
    {
     "example_pl": "Rodzina jest wspierana materialnie."
    }
-  ]
+  ],
+  "_src_reader": "f3d6f16c"
  },
  "adjective-adverb-176": {
   "_src": "8195cf22",
@@ -1771,7 +1946,8 @@
    {
     "example_pl": "Odpowiedz, proszę, pisemnie."
    }
-  ]
+  ],
+  "_src_reader": "1db2ac56"
  },
  "adjective-adverb-177": {
   "_src": "f69988ab",
@@ -1781,7 +1957,8 @@
    {
     "example_pl": "Miejsce zostało wybrane ze względów strategicznych."
    }
-  ]
+  ],
+  "_src_reader": "7ba68f80"
  },
  "adjective-adverb-178": {
   "_src": "44502706",
@@ -1791,7 +1968,8 @@
    {
     "example_pl": "Przepięknie śpiewa."
    }
-  ]
+  ],
+  "_src_reader": "f62996b1"
  },
  "adjective-adverb-179": {
   "_src": "ba3cb833",
@@ -1801,7 +1979,8 @@
    {
     "example_pl": "Podejmuje się nieodpłatnej pracy społecznej."
    }
-  ]
+  ],
+  "_src_reader": "84884085"
  },
  "adjective-adverb-180": {
   "_src": "1d6fd11e",
@@ -1811,7 +1990,8 @@
    {
     "example_pl": "Ta historia poruszyła mnie emocjonalnie."
    }
-  ]
+  ],
+  "_src_reader": "063e7e1b"
  },
  "adjective-adverb-181": {
   "_src": "c7611e26",
@@ -1821,7 +2001,8 @@
    {
     "example_pl": "To poważny problem."
    }
-  ]
+  ],
+  "_src_reader": "3b722a43"
  },
  "adjective-adverb-182": {
   "_src": "69fd2715",
@@ -1831,7 +2012,8 @@
    {
     "example_pl": "Ma nadzieję na wieczny pokój."
    }
-  ]
+  ],
+  "_src_reader": "5409e360"
  },
  "adjective-adverb-183": {
   "_src": "9f2d535d",
@@ -1841,7 +2023,8 @@
    {
     "example_pl": "Koszulę możesz prasować na wilgotno."
    }
-  ]
+  ],
+  "_src_reader": "6485c2f8"
  },
  "adjective-adverb-184": {
   "_src": "c5af04b2",
@@ -1851,7 +2034,8 @@
    {
     "example_pl": "Wzajemny szacunek jest ważny."
    }
-  ]
+  ],
+  "_src_reader": "3fc073a5"
  },
  "adjective-adverb-185": {
   "_src": "d7fadb80",
@@ -1861,7 +2045,8 @@
    {
     "example_pl": "To ogólna zasada."
    }
-  ]
+  ],
+  "_src_reader": "0730e8af"
  },
  "adjective-adverb-186": {
   "_src": "2ff31dc6",
@@ -1871,7 +2056,8 @@
    {
     "example_pl": "Te grupy różnią się ideologicznie."
    }
-  ]
+  ],
+  "_src_reader": "739eee6b"
  },
  "adjective-adverb-187": {
   "_src": "2c8646bf",
@@ -1881,7 +2067,8 @@
    {
     "example_pl": "To zakład przemysłowy."
    }
-  ]
+  ],
+  "_src_reader": "4b575f9d"
  },
  "adjective-054": {
   "_src": "40b4ff6f",
@@ -1891,7 +2078,8 @@
    {
     "example_pl": "Zupę możesz jeść też na zimno."
    }
-  ]
+  ],
+  "_src_reader": "ab66891f"
  },
  "adjective-019": {
   "_src": "6747f614",
@@ -1901,7 +2089,8 @@
    {
     "example_pl": "Przeszkadza mi głośny ruch uliczny."
    }
-  ]
+  ],
+  "_src_reader": "35dd2b09"
  },
  "adjective-adverb-190": {
   "_src": "dc5661a9",
@@ -1911,7 +2100,8 @@
    {
     "example_pl": "To smaczne danie."
    }
-  ]
+  ],
+  "_src_reader": "7006f7f6"
  },
  "adjective-adverb-191": {
   "_src": "4f434745",
@@ -1921,7 +2111,8 @@
    {
     "example_pl": "Pokój jest urządzony z miłością."
    }
-  ]
+  ],
+  "_src_reader": "8d4cfeed"
  },
  "adjective-adverb-192": {
   "_src": "5c4e3821",
@@ -1931,7 +2122,8 @@
    {
     "example_pl": "To nasz główny cel."
    }
-  ]
+  ],
+  "_src_reader": "29dde59b"
  },
  "adjective-adverb-193": {
   "_src": "83579249",
@@ -1942,7 +2134,8 @@
     "example_pl": "To był tylko pozorny sukces."
    }
   ],
-  "usage_note_pl": "Tylko tak się wydaje. Nie mylić z anscheinend — „najwyraźniej”; w języku potocznym scheinbar bywa używane także w tym znaczeniu."
+  "usage_note_pl": "Tylko tak się wydaje. Nie mylić z anscheinend — „najwyraźniej”; w języku potocznym scheinbar bywa używane także w tym znaczeniu.",
+  "_src_reader": "67e86982"
  },
  "adjective-adverb-194": {
   "_src": "5a8c7270",
@@ -1952,7 +2145,8 @@
    {
     "example_pl": "Ołówek zaostrzono w szpic."
    }
-  ]
+  ],
+  "_src_reader": "c658f7a0"
  },
  "adjective-adverb-195": {
   "_src": "70fa8013",
@@ -1962,7 +2156,8 @@
    {
     "example_pl": "Zwiedzamy południowo-wschodnią część wyspy."
    }
-  ]
+  ],
+  "_src_reader": "94e95a97"
  },
  "adjective-adverb-196": {
   "_src": "f77bbcb0",
@@ -1972,7 +2167,8 @@
    {
     "example_pl": "Umawiamy termin rozmowy telefonicznej."
    }
-  ]
+  ],
+  "_src_reader": "986d7619"
  },
  "adjective-adverb-197": {
   "_src": "68c01e68",
@@ -1982,7 +2178,8 @@
    {
     "example_pl": "Pracujemy w systemie naprzemiennych zmian."
    }
-  ]
+  ],
+  "_src_reader": "356f567c"
  },
  "adjective-adverb-198": {
   "_src": "c4498fbc",
@@ -1992,7 +2189,8 @@
    {
     "example_pl": "Zmiana została urzędowo potwierdzona."
    }
-  ]
+  ],
+  "_src_reader": "fc684345"
  },
  "adjective-adverb-199": {
   "_src": "0bc5e946",
@@ -2002,7 +2200,8 @@
    {
     "example_pl": "Pokój wyremontowano dużym kosztem."
    }
-  ]
+  ],
+  "_src_reader": "659f7288"
  },
  "adjective-adverb-200": {
   "_src": "df5ce03d",
@@ -2012,7 +2211,8 @@
    {
     "example_pl": "Potrzebujemy szczegółowego wyjaśnienia."
    }
-  ]
+  ],
+  "_src_reader": "04f80fc8"
  },
  "adjective-adverb-201": {
   "_src": "a11b3cb9",
@@ -2022,7 +2222,8 @@
    {
     "example_pl": "Wykazuje się nadzwyczajną cierpliwością."
    }
-  ]
+  ],
+  "_src_reader": "911f0b5f"
  },
  "adjective-adverb-202": {
   "_src": "397f2128",
@@ -2032,7 +2233,8 @@
    {
     "example_pl": "To była świadoma decyzja."
    }
-  ]
+  ],
+  "_src_reader": "817e58b3"
  },
  "adjective-adverb-203": {
   "_src": "b81d38e1",
@@ -2042,7 +2244,8 @@
    {
     "example_pl": "W dziale chronicznie brakuje pracowników."
    }
-  ]
+  ],
+  "_src_reader": "48dc34b4"
  },
  "adjective-adverb-204": {
   "_src": "2e0e09a5",
@@ -2052,7 +2255,8 @@
    {
     "example_pl": "To ogromna różnica."
    }
-  ]
+  ],
+  "_src_reader": "551b444d"
  },
  "adjective-adverb-205": {
   "_src": "6a4f1c4f",
@@ -2062,7 +2266,8 @@
    {
     "example_pl": "To zdumiewający wynik."
    }
-  ]
+  ],
+  "_src_reader": "9b10f958"
  },
  "adjective-adverb-206": {
   "_src": "0797f489",
@@ -2072,7 +2277,8 @@
    {
     "example_pl": "Oficjalnie przeprosił."
    }
-  ]
+  ],
+  "_src_reader": "8428cf98"
  },
  "adjective-adverb-207": {
   "_src": "99698d74",
@@ -2082,7 +2288,8 @@
    {
     "example_pl": "To dobrowolne zadanie."
    }
-  ]
+  ],
+  "_src_reader": "b7894bfb"
  },
  "adjective-060": {
   "_src": "7560999c",
@@ -2092,7 +2299,8 @@
    {
     "example_pl": "Siedzimy wygodnie na kanapie."
    }
-  ]
+  ],
+  "_src_reader": "4f6bb819"
  },
  "adjective-adverb-209": {
   "_src": "6dc18da3",
@@ -2102,7 +2310,8 @@
    {
     "example_pl": "Te miejsca są geograficznie daleko od siebie."
    }
-  ]
+  ],
+  "_src_reader": "0fb13d5d"
  },
  "adjective-adverb-210": {
   "_src": "095a7487",
@@ -2112,7 +2321,8 @@
    {
     "example_pl": "Te dwa miejsca są historycznie powiązane."
    }
-  ]
+  ],
+  "_src_reader": "31c23d95"
  },
  "adjective-adverb-211": {
   "_src": "86149e0b",
@@ -2122,7 +2332,8 @@
    {
     "example_pl": "To szorstka tkanina."
    }
-  ]
+  ],
+  "_src_reader": "00248d8f"
  },
  "adjective-adverb-212": {
   "_src": "ec6e64d9",
@@ -2132,7 +2343,8 @@
    {
     "example_pl": "Hojnie pomaga innym."
    }
-  ]
+  ],
+  "_src_reader": "e62088f1"
  },
  "adjective-adverb-213": {
   "_src": "12d15b89",
@@ -2142,7 +2354,8 @@
    {
     "example_pl": "To harmonijne kolory."
    }
-  ]
+  ],
+  "_src_reader": "281020dd"
  },
  "adjective-adverb-214": {
   "_src": "0c2b37fe",
@@ -2152,7 +2365,8 @@
    {
     "example_pl": "Naukowcy współpracują interdyscyplinarnie."
    }
-  ]
+  ],
+  "_src_reader": "270c6a17"
  },
  "adjective-adverb-215": {
   "_src": "d84a6cd8",
@@ -2162,7 +2376,8 @@
    {
     "example_pl": "To rozwiązanie krótkoterminowe."
    }
-  ]
+  ],
+  "_src_reader": "d956ddd8"
  },
  "adjective-adverb-216": {
   "_src": "bf592bda",
@@ -2173,7 +2388,8 @@
     "example_pl": "Luźną śrubę trzeba dokręcić."
    }
   ],
-  "usage_note_pl": "Nie mylić z los — „naprzód”, początek czynności."
+  "usage_note_pl": "Nie mylić z los — „naprzód”, początek czynności.",
+  "_src_reader": "9e780593"
  },
  "adjective-adverb-217": {
   "_src": "dd53387d",
@@ -2183,7 +2399,8 @@
    {
     "example_pl": "To ustawienie ręczne."
    }
-  ]
+  ],
+  "_src_reader": "a37317ed"
  },
  "adjective-adverb-218": {
   "_src": "db26c1bc",
@@ -2193,7 +2410,8 @@
    {
     "example_pl": "Drzwi są otwierane mechanicznie."
    }
-  ]
+  ],
+  "_src_reader": "2c2d79f5"
  },
  "adjective-adverb-219": {
   "_src": "f73eae0f",
@@ -2203,7 +2421,8 @@
    {
     "example_pl": "Potrzebujemy neutralnej opinii."
    }
-  ]
+  ],
+  "_src_reader": "bfe57d91"
  },
  "adjective-adverb-220": {
   "_src": "f91b4a59",
@@ -2213,7 +2432,8 @@
    {
     "example_pl": "Impreza jest dobrze przygotowana organizacyjnie."
    }
-  ]
+  ],
+  "_src_reader": "0f28d2ed"
  },
  "adjective-adverb-221": {
   "_src": "7d638ca3",
@@ -2223,7 +2443,8 @@
    {
     "example_pl": "Obrazowo opisuje tę scenę."
    }
-  ]
+  ],
+  "_src_reader": "dec3d8c2"
  },
  "adjective-adverb-222": {
   "_src": "aa8dab15",
@@ -2233,7 +2454,8 @@
    {
     "example_pl": "Ta sytuacja obciąża go psychicznie."
    }
-  ]
+  ],
+  "_src_reader": "82aa5676"
  },
  "adjective-adverb-223": {
   "_src": "88f65745",
@@ -2243,7 +2465,8 @@
    {
     "example_pl": "Zdrowie seksualne jest ważne."
    }
-  ]
+  ],
+  "_src_reader": "c1fc6a45"
  },
  "adjective-adverb-224": {
   "_src": "9e4ae34d",
@@ -2253,7 +2476,8 @@
    {
     "example_pl": "Region jest zagospodarowywany turystycznie."
    }
-  ]
+  ],
+  "_src_reader": "99a2e23e"
  },
  "adjective-adverb-225": {
   "_src": "a0ea995a",
@@ -2263,7 +2487,8 @@
    {
     "example_pl": "To niezwykłe pytanie."
    }
-  ]
+  ],
+  "_src_reader": "4303ebf1"
  },
  "adjective-adverb-226": {
   "_src": "410c77cc",
@@ -2273,7 +2498,8 @@
    {
     "example_pl": "To niewiarygodna historia."
    }
-  ]
+  ],
+  "_src_reader": "1d7dbed0"
  },
  "adjective-adverb-227": {
   "_src": "9ebd3d28",
@@ -2283,7 +2509,8 @@
    {
     "example_pl": "To wstępna decyzja."
    }
-  ]
+  ],
+  "_src_reader": "81e70b0c"
  },
  "adjective-adverb-228": {
   "_src": "5d5748da",
@@ -2293,7 +2520,8 @@
    {
     "example_pl": "Musimy pracować oszczędnie."
    }
-  ]
+  ],
+  "_src_reader": "a14add1f"
  },
  "adjective-adverb-229": {
   "_src": "f82ff9b1",
@@ -2303,7 +2531,8 @@
    {
     "example_pl": "W ogrodzie rosną bujne rośliny."
    }
-  ]
+  ],
+  "_src_reader": "7ecb6464"
  },
  "adjective-adverb-230": {
   "_src": "19ee231f",
@@ -2313,7 +2542,8 @@
    {
     "example_pl": "Rana jest leczona ambulatoryjnie."
    }
-  ]
+  ],
+  "_src_reader": "6054feaa"
  },
  "adjective-adverb-231": {
   "_src": "56ad48fd",
@@ -2323,7 +2553,8 @@
    {
     "example_pl": "Początkowy niepokój był bezpodstawny."
    }
-  ]
+  ],
+  "_src_reader": "52a6d8a3"
  },
  "adjective-adverb-232": {
   "_src": "c46af8f7",
@@ -2333,7 +2564,8 @@
    {
     "example_pl": "Budynek jest interesujący architektonicznie."
    }
-  ]
+  ],
+  "_src_reader": "677ac64d"
  },
  "adjective-adverb-233": {
   "_src": "9ebd552f",
@@ -2343,7 +2575,8 @@
    {
     "example_pl": "To była arogancka odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "a820c31d"
  },
  "adjective-adverb-234": {
   "_src": "4b8fa03c",
@@ -2353,7 +2586,8 @@
    {
     "example_pl": "Gorzko płacze."
    }
-  ]
+  ],
+  "_src_reader": "1dbed85d"
  },
  "adjective-adverb-235": {
   "_src": "a44f5c9f",
@@ -2363,7 +2597,8 @@
    {
     "example_pl": "Korzystamy z mapy cyfrowej."
    }
-  ]
+  ],
+  "_src_reader": "d143d527"
  },
  "adjective-008": {
   "_src": "954e4c5e",
@@ -2373,7 +2608,8 @@
    {
     "example_pl": "Pokrój chleb cienko."
    }
-  ]
+  ],
+  "_src_reader": "b02dde1f"
  },
  "adjective-adverb-237": {
   "_src": "2dd71122",
@@ -2383,7 +2619,8 @@
    {
     "example_pl": "Współpracujemy efektywnie."
    }
-  ]
+  ],
+  "_src_reader": "4021751c"
  },
  "adjective-adverb-238": {
   "_src": "8c0309b0",
@@ -2393,7 +2630,8 @@
    {
     "example_pl": "Dane są zbierane jednolicie."
    }
-  ]
+  ],
+  "_src_reader": "9735c684"
  },
  "adjective-adverb-239": {
   "_src": "e8b6e256",
@@ -2403,7 +2641,8 @@
    {
     "example_pl": "To był zaciekły spór."
    }
-  ]
+  ],
+  "_src_reader": "fe195721"
  },
  "adjective-adverb-240": {
   "_src": "26fa3a22",
@@ -2413,7 +2652,8 @@
    {
     "example_pl": "Obecna sytuacja jest trudna."
    }
-  ]
+  ],
+  "_src_reader": "b4e19d0f"
  },
  "adjective-adverb-241": {
   "_src": "4243bf27",
@@ -2423,7 +2663,8 @@
    {
     "example_pl": "To orzeczenie sądowe."
    }
-  ]
+  ],
+  "_src_reader": "702ed04f"
  },
  "adjective-adverb-242": {
   "_src": "e33abf93",
@@ -2433,7 +2674,8 @@
    {
     "example_pl": "Przestrzegamy przepisów ustawowych."
    }
-  ]
+  ],
+  "_src_reader": "16beec02"
  },
  "adjective-adverb-243": {
   "_src": "0da4fe43",
@@ -2443,7 +2685,8 @@
    {
     "example_pl": "Sala jest urządzona w stylu dworskim."
    }
-  ]
+  ],
+  "_src_reader": "7ac2e819"
  },
  "adjective-adverb-244": {
   "_src": "ce8ea364",
@@ -2453,7 +2696,8 @@
    {
     "example_pl": "Pomieszczenie idealnie się nadaje."
    }
-  ]
+  ],
+  "_src_reader": "a361ad35"
  },
  "adjective-adverb-245": {
   "_src": "fa58eba0",
@@ -2463,7 +2707,8 @@
    {
     "example_pl": "Po wieloletniej pracy książka jest gotowa."
    }
-  ]
+  ],
+  "_src_reader": "0b097014"
  },
  "adjective-adverb-246": {
   "_src": "f5deb940",
@@ -2473,7 +2718,8 @@
    {
     "example_pl": "Wyspa ma wydłużony kształt."
    }
-  ]
+  ],
+  "_src_reader": "696f9fed"
  },
  "adjective-adverb-247": {
   "_src": "c8ee114e",
@@ -2483,7 +2729,8 @@
    {
     "example_pl": "Zawiąż wstążkę luźno."
    }
-  ]
+  ],
+  "_src_reader": "d40e71e8"
  },
  "adjective-adverb-248": {
   "_src": "09128cd1",
@@ -2493,7 +2740,8 @@
    {
     "example_pl": "Wynik można udowodnić matematycznie."
    }
-  ]
+  ],
+  "_src_reader": "86e421c1"
  },
  "adjective-adverb-249": {
   "_src": "0dd2d1de",
@@ -2503,7 +2751,8 @@
    {
     "example_pl": "Sędzia wydaje łagodny wyrok."
    }
-  ]
+  ],
+  "_src_reader": "82dcfe98"
  },
  "adjective-adverb-250": {
   "_src": "0ed67afa",
@@ -2513,7 +2762,8 @@
    {
     "example_pl": "Spotykamy się co miesiąc."
    }
-  ]
+  ],
+  "_src_reader": "3d052e78"
  },
  "adjective-adverb-251": {
   "_src": "cd818872",
@@ -2523,7 +2773,8 @@
    {
     "example_pl": "Dziecko ma bose stopy."
    }
-  ]
+  ],
+  "_src_reader": "5efc0e32"
  },
  "adjective-adverb-252": {
   "_src": "ff10dcbb",
@@ -2533,7 +2784,8 @@
    {
     "example_pl": "Państwo było zorganizowane na wzór napoleoński."
    }
-  ]
+  ],
+  "_src_reader": "d0657e47"
  },
  "adjective-adverb-253": {
   "_src": "8cdb987e",
@@ -2543,7 +2795,8 @@
    {
     "example_pl": "Zwiedzamy północno-wschodnią część wyspy."
    }
-  ]
+  ],
+  "_src_reader": "7ee33896"
  },
  "adjective-adverb-254": {
   "_src": "40ca8271",
@@ -2553,7 +2806,8 @@
    {
     "example_pl": "To idealne rozwiązanie."
    }
-  ]
+  ],
+  "_src_reader": "609c4abd"
  },
  "adjective-adverb-255": {
   "_src": "c3f438f3",
@@ -2563,7 +2817,8 @@
    {
     "example_pl": "To zasadnicza różnica."
    }
-  ]
+  ],
+  "_src_reader": "96fa7a90"
  },
  "adjective-adverb-256": {
   "_src": "8350026f",
@@ -2573,7 +2828,8 @@
    {
     "example_pl": "Potrzebujemy racjonalnej decyzji."
    }
-  ]
+  ],
+  "_src_reader": "27f3bf79"
  },
  "adjective-adverb-257": {
   "_src": "d44796ff",
@@ -2583,7 +2839,8 @@
    {
     "example_pl": "Zagrożenie jest realne."
    }
-  ]
+  ],
+  "_src_reader": "96189789"
  },
  "adjective-adverb-258": {
   "_src": "08e8387f",
@@ -2593,7 +2850,8 @@
    {
     "example_pl": "Badamy rozkład przestrzenny."
    }
-  ]
+  ],
+  "_src_reader": "c84afddf"
  },
  "adjective-adverb-259": {
   "_src": "989e525e",
@@ -2603,7 +2861,8 @@
    {
     "example_pl": "Trzymaj pręt pionowo."
    }
-  ]
+  ],
+  "_src_reader": "8320ffc2"
  },
  "adjective-adverb-260": {
   "_src": "21100fc0",
@@ -2614,7 +2873,8 @@
     "example_pl": "Liczba znacznie wzrosła."
    }
   ],
-  "usage_note_pl": "W statystyce — istotny statystycznie; nie musi to oznaczać dużej zmiany."
+  "usage_note_pl": "W statystyce — istotny statystycznie; nie musi to oznaczać dużej zmiany.",
+  "_src_reader": "d4f5e40b"
  },
  "adjective-adverb-261": {
   "_src": "dc0dda5e",
@@ -2624,7 +2884,8 @@
    {
     "example_pl": "Potrzebujemy systematycznego badania."
    }
-  ]
+  ],
+  "_src_reader": "0c2f3f4e"
  },
  "adjective-adverb-262": {
   "_src": "ddd02f5e",
@@ -2634,7 +2895,8 @@
    {
     "example_pl": "To zbiór tematyczny."
    }
-  ]
+  ],
+  "_src_reader": "2d22f477"
  },
  "adjective-adverb-263": {
   "_src": "40a3aa36",
@@ -2644,7 +2906,8 @@
    {
     "example_pl": "Odwiedzamy rozrzucone wioski."
    }
-  ]
+  ],
+  "_src_reader": "63fc3c6f"
  },
  "adjective-adverb-264": {
   "_src": "e87a050b",
@@ -2654,7 +2917,8 @@
    {
     "example_pl": "Materiał można wykorzystywać na różne sposoby."
    }
-  ]
+  ],
+  "_src_reader": "37cf3641"
  },
  "adjective-adverb-265": {
   "_src": "0cc3c8bc",
@@ -2664,7 +2928,8 @@
    {
     "example_pl": "To były dwa jednoczesne wydarzenia."
    }
-  ]
+  ],
+  "_src_reader": "406fc0f5"
  },
  "adjective-adverb-266": {
   "_src": "3af77d3a",
@@ -2674,7 +2939,8 @@
    {
     "example_pl": "To było przypadkowe spotkanie."
    }
-  ]
+  ],
+  "_src_reader": "ce184ef5"
  },
  "adjective-adverb-267": {
   "_src": "3692eb7d",
@@ -2684,7 +2950,8 @@
    {
     "example_pl": "Postępujemy analogicznie jak w pierwszym przykładzie."
    }
-  ]
+  ],
+  "_src_reader": "7e555464"
  },
  "adjective-adverb-268": {
   "_src": "c18deb1a",
@@ -2694,7 +2961,8 @@
    {
     "example_pl": "To stosowna odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "261672ad"
  },
  "adjective-adverb-269": {
   "_src": "c477304e",
@@ -2704,7 +2972,8 @@
    {
     "example_pl": "Dom trzeba dostosować konstrukcyjnie."
    }
-  ]
+  ],
+  "_src_reader": "4e6a52db"
  },
  "adjective-adverb-270": {
   "_src": "cb24cf99",
@@ -2714,7 +2983,8 @@
    {
     "example_pl": "To ślepa plamka."
    }
-  ]
+  ],
+  "_src_reader": "52a3f271"
  },
  "adjective-adverb-271": {
   "_src": "53174431",
@@ -2724,7 +2994,8 @@
    {
     "example_pl": "Potraktowano go brutalnie."
    }
-  ]
+  ],
+  "_src_reader": "6f647609"
  },
  "adjective-adverb-272": {
   "_src": "7add8c10",
@@ -2734,7 +3005,8 @@
    {
     "example_pl": "Byłem tak zmęczony, że od razu zasnąłem."
    }
-  ]
+  ],
+  "_src_reader": "f3730020"
  },
  "adjective-adverb-273": {
   "_src": "f5704210",
@@ -2744,7 +3016,8 @@
    {
     "example_pl": "Kwestia z tym związana pozostaje otwarta."
    }
-  ]
+  ],
+  "_src_reader": "a6d0cbf3"
  },
  "adjective-adverb-274": {
   "_src": "333079db",
@@ -2754,7 +3027,8 @@
    {
     "example_pl": "Program przedstawia dane trójwymiarowo."
    }
-  ]
+  ],
+  "_src_reader": "d8459e76"
  },
  "adjective-adverb-275": {
   "_src": "442ddea6",
@@ -2764,7 +3038,8 @@
    {
     "example_pl": "Kwota jest wypłacana jednorazowo."
    }
-  ]
+  ],
+  "_src_reader": "54f16777"
  },
  "adjective-adverb-276": {
   "_src": "2d9141fd",
@@ -2774,7 +3049,8 @@
    {
     "example_pl": "To zachowanie jest etycznie problematyczne."
    }
-  ]
+  ],
+  "_src_reader": "ccf0663b"
  },
  "adjective-adverb-277": {
   "_src": "9df2613c",
@@ -2784,7 +3060,8 @@
    {
     "example_pl": "To metoda eksperymentalna."
    }
-  ]
+  ],
+  "_src_reader": "f2535819"
  },
  "adjective-adverb-278": {
   "_src": "57327599",
@@ -2795,7 +3072,8 @@
     "example_pl": "Mamy stałe koszty."
    }
   ],
-  "usage_note_pl": "fix = „szybko/szybki” — potocznie; fixe Kosten = koszty stałe."
+  "usage_note_pl": "fix = „szybko/szybki” — potocznie; fixe Kosten = koszty stałe.",
+  "_src_reader": "19ce6012"
  },
  "adjective-adverb-279": {
   "_src": "3bc8f159",
@@ -2805,7 +3083,8 @@
    {
     "example_pl": "Potrzebujemy elastycznego planu."
    }
-  ]
+  ],
+  "_src_reader": "bbaaa180"
  },
  "adjective-adverb-280": {
   "_src": "d74508ef",
@@ -2815,7 +3094,8 @@
    {
     "example_pl": "Konstytucja jest utrzymana w duchu wolności."
    }
-  ]
+  ],
+  "_src_reader": "d2c57676"
  },
  "adjective-adverb-281": {
   "_src": "3454e364",
@@ -2825,7 +3105,8 @@
    {
     "example_pl": "Woda mieni się żółtawo."
    }
-  ]
+  ],
+  "_src_reader": "5d3738a2"
  },
  "adjective-adverb-282": {
   "_src": "c2230ca7",
@@ -2835,7 +3116,8 @@
    {
     "example_pl": "Wspieramy działalność związkową."
    }
-  ]
+  ],
+  "_src_reader": "8bbc919f"
  },
  "adjective-adverb-283": {
   "_src": "7c06e039",
@@ -2845,7 +3127,8 @@
    {
     "example_pl": "Światło zapewnia równomierne oświetlenie."
    }
-  ]
+  ],
+  "_src_reader": "ec83206d"
  },
  "adjective-adverb-284": {
   "_src": "b1f1e261",
@@ -2855,7 +3138,8 @@
    {
     "example_pl": "Uśmiecha się ironicznie."
    }
-  ]
+  ],
+  "_src_reader": "dfb48462"
  },
  "adjective-adverb-285": {
   "_src": "2e7d21d0",
@@ -2865,7 +3149,8 @@
    {
     "example_pl": "Sala jest urządzona w stylu klasycyzmu."
    }
-  ]
+  ],
+  "_src_reader": "63f15bf1"
  },
  "adjective-adverb-286": {
   "_src": "7d99deb9",
@@ -2875,7 +3160,8 @@
    {
     "example_pl": "To kontrowersyjny temat."
    }
-  ]
+  ],
+  "_src_reader": "2f9e5676"
  },
  "adjective-adverb-287": {
   "_src": "c652784a",
@@ -2885,7 +3171,8 @@
    {
     "example_pl": "Instalacja jest eksploatowana tradycyjnie."
    }
-  ]
+  ],
+  "_src_reader": "7391f8dd"
  },
  "adjective-adverb-288": {
   "_src": "cdda179a",
@@ -2895,7 +3182,8 @@
    {
     "example_pl": "To poprawna odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "df6f980f"
  },
  "adjective-adverb-289": {
   "_src": "c3757bf4",
@@ -2905,7 +3193,8 @@
    {
     "example_pl": "Roślina rośnie jako zielna, bez zdrewniałej łodygi."
    }
-  ]
+  ],
+  "_src_reader": "a54dffaa"
  },
  "adjective-adverb-290": {
   "_src": "95789bde",
@@ -2915,7 +3204,8 @@
    {
     "example_pl": "Energicznie zamieszaj zupę."
    }
-  ]
+  ],
+  "_src_reader": "9bd6d44d"
  },
  "adjective-adverb-291": {
   "_src": "e2cb7d1f",
@@ -2925,7 +3215,8 @@
    {
     "example_pl": "W dłuższej perspektywie pozwala to oszczędzić pieniądze."
    }
-  ]
+  ],
+  "_src_reader": "4dad0f2f"
  },
  "adjective-092": {
   "_src": "fe4ea289",
@@ -2935,7 +3226,8 @@
    {
     "example_pl": "Na stole stoi pusta butelka."
    }
-  ]
+  ],
+  "_src_reader": "ae906012"
  },
  "adjective-adverb-293": {
   "_src": "4a4686fb",
@@ -2945,7 +3237,8 @@
    {
     "example_pl": "Otwór jest podłużny."
    }
-  ]
+  ],
+  "_src_reader": "b22fd29c"
  },
  "adjective-adverb-294": {
   "_src": "3a020f30",
@@ -2955,7 +3248,8 @@
    {
     "example_pl": "Analizuje historię z pozycji marksistowskich."
    }
-  ]
+  ],
+  "_src_reader": "305f686d"
  },
  "adjective-adverb-295": {
   "_src": "3bb932ed",
@@ -2965,7 +3259,8 @@
    {
     "example_pl": "Ptak śpiewa melodyjnie."
    }
-  ]
+  ],
+  "_src_reader": "0caf4f15"
  },
  "adjective-adverb-296": {
   "_src": "e6452bcc",
@@ -2975,7 +3270,8 @@
    {
     "example_pl": "To naziemny rurociąg."
    }
-  ]
+  ],
+  "_src_reader": "747dd914"
  },
  "adjective-adverb-297": {
   "_src": "c152f4fb",
@@ -2985,7 +3281,8 @@
    {
     "example_pl": "Potrzebujemy obiektywnej oceny."
    }
-  ]
+  ],
+  "_src_reader": "c35d78bd"
  },
  "adjective-adverb-298": {
   "_src": "cd4ab085",
@@ -2995,7 +3292,8 @@
    {
     "example_pl": "Pomieszczenie jest optymalnie wykorzystywane."
    }
-  ]
+  ],
+  "_src_reader": "6c2be51b"
  },
  "adjective-adverb-299": {
   "_src": "7bd526fe",
@@ -3005,7 +3303,8 @@
    {
     "example_pl": "To efekt optyczny."
    }
-  ]
+  ],
+  "_src_reader": "0d5018ca"
  },
  "adjective-adverb-300": {
   "_src": "5c5827cb",
@@ -3015,7 +3314,8 @@
    {
     "example_pl": "Planowy odjazd jest o ósmej."
    }
-  ]
+  ],
+  "_src_reader": "dd86bbca"
  },
  "adjective-adverb-301": {
   "_src": "ca0e6c62",
@@ -3026,7 +3326,8 @@
     "example_pl": "Produkty są jakościowo porównywalne."
    }
   ],
-  "usage_note_pl": "Odnosi się do jakości, ale nie musi oznaczać „dobrej jakości”; w tym drugim znaczeniu — hochwertig."
+  "usage_note_pl": "Odnosi się do jakości, ale nie musi oznaczać „dobrej jakości”; w tym drugim znaczeniu — hochwertig.",
+  "_src_reader": "44df9cd9"
  },
  "adjective-adverb-302": {
   "_src": "5352fd82",
@@ -3036,7 +3337,8 @@
    {
     "example_pl": "To była rzeczowa odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "157d61a3"
  },
  "adjective-adverb-303": {
   "_src": "90f72aa9",
@@ -3046,7 +3348,8 @@
    {
     "example_pl": "Wyraźnie jej ulżyło."
    }
-  ]
+  ],
+  "_src_reader": "1d1fe7f6"
  },
  "adjective-adverb-304": {
   "_src": "0d2a563e",
@@ -3056,7 +3359,8 @@
    {
     "example_pl": "Ścieżka stromo pnie się w górę."
    }
-  ]
+  ],
+  "_src_reader": "26bcc9c5"
  },
  "adjective-adverb-305": {
   "_src": "c41f22da",
@@ -3066,7 +3370,8 @@
    {
     "example_pl": "Obserwujemy stały wzrost."
    }
-  ]
+  ],
+  "_src_reader": "2211f395"
  },
  "adjective-adverb-306": {
   "_src": "58eba208",
@@ -3076,7 +3381,8 @@
    {
     "example_pl": "Systemy są strukturalnie podobne."
    }
-  ]
+  ],
+  "_src_reader": "aa52f8dd"
  },
  "adjective-adverb-307": {
   "_src": "49969626",
@@ -3086,7 +3392,8 @@
    {
     "example_pl": "Został śmiertelnie ranny."
    }
-  ]
+  ],
+  "_src_reader": "83c2b3f3"
  },
  "adjective-adverb-308": {
   "_src": "dc9273b6",
@@ -3096,7 +3403,8 @@
    {
     "example_pl": "Urządzenia pracują porównywalnie szybko."
    }
-  ]
+  ],
+  "_src_reader": "f588f474"
  },
  "adjective-adverb-309": {
   "_src": "364187f3",
@@ -3107,7 +3415,8 @@
     "example_pl": "Zadanie jest rzekomo proste."
    }
   ],
-  "usage_note_pl": "Zwykle oznacza coś, co błędnie uważa się za prawdziwe."
+  "usage_note_pl": "Zwykle oznacza coś, co błędnie uważa się za prawdziwe.",
+  "_src_reader": "85e08c92"
  },
  "adjective-adverb-310": {
   "_src": "f68265e6",
@@ -3117,7 +3426,8 @@
    {
     "example_pl": "Narzędzie można wszechstronnie wykorzystywać."
    }
-  ]
+  ],
+  "_src_reader": "4cde339b"
  },
  "adjective-adverb-311": {
   "_src": "974c48a2",
@@ -3127,7 +3437,8 @@
    {
     "example_pl": "To daje podwójną korzyść."
    }
-  ]
+  ],
+  "_src_reader": "1782c662"
  },
  "adjective-adverb-312": {
   "_src": "010c6164",
@@ -3137,7 +3448,8 @@
    {
     "example_pl": "To lista alfabetyczna."
    }
-  ]
+  ],
+  "_src_reader": "e8cdab79"
  },
  "adjective-adverb-313": {
   "_src": "12090fdd",
@@ -3147,7 +3459,8 @@
    {
     "example_pl": "To była szorstka odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "f94f7c4d"
  },
  "adjective-adverb-314": {
   "_src": "568b3662",
@@ -3157,7 +3470,8 @@
    {
     "example_pl": "Jest wytrwałą badaczką."
    }
-  ]
+  ],
+  "_src_reader": "54960fd5"
  },
  "adjective-051": {
   "_src": "628b88f5",
@@ -3167,7 +3481,8 @@
    {
     "example_pl": "Tutaj można wygodnie siedzieć."
    }
-  ]
+  ],
+  "_src_reader": "1ba2c70a"
  },
  "adjective-adverb-316": {
   "_src": "ab3224f2",
@@ -3177,7 +3492,8 @@
    {
     "example_pl": "To drastyczna zmiana."
    }
-  ]
+  ],
+  "_src_reader": "33bc9580"
  },
  "adjective-adverb-317": {
   "_src": "193ec174",
@@ -3187,7 +3503,8 @@
    {
     "example_pl": "To potrójne obciążenie."
    }
-  ]
+  ],
+  "_src_reader": "0c5f1b3e"
  },
  "adjective-adverb-318": {
   "_src": "3b205bf5",
@@ -3198,7 +3515,8 @@
     "example_pl": "To efektywna metoda."
    }
   ],
-  "usage_note_pl": "Chodzi o osiąganie wyniku bez zbędnych nakładów czasu, sił lub środków."
+  "usage_note_pl": "Chodzi o osiąganie wyniku bez zbędnych nakładów czasu, sił lub środków.",
+  "_src_reader": "14b5bf29"
  },
  "adjective-adverb-319": {
   "_src": "3bb8d557",
@@ -3208,7 +3526,8 @@
    {
     "example_pl": "Założenie zostało sprawdzone doświadczalnie."
    }
-  ]
+  ],
+  "_src_reader": "84ddf683"
  },
  "adjective-adverb-320": {
   "_src": "f45c729e",
@@ -3218,7 +3537,8 @@
    {
     "example_pl": "Budynek jest energetycznie zoptymalizowany."
    }
-  ]
+  ],
+  "_src_reader": "c538b413"
  },
  "adjective-adverb-321": {
   "_src": "549e34d7",
@@ -3228,7 +3548,8 @@
    {
     "example_pl": "To był zdecydowany protest."
    }
-  ]
+  ],
+  "_src_reader": "4d246667"
  },
  "adjective-adverb-322": {
   "_src": "903e20fc",
@@ -3238,7 +3559,8 @@
    {
     "example_pl": "To był jego pierwszy udział."
    }
-  ]
+  ],
+  "_src_reader": "2a633619"
  },
  "adjective-adverb-323": {
   "_src": "ffbd5299",
@@ -3249,7 +3571,8 @@
     "example_pl": "Zarabia całkiem znośnie."
    }
   ],
-  "usage_note_pl": "Przysłówkowe „znośnie” — użycie potoczne."
+  "usage_note_pl": "Przysłówkowe „znośnie” — użycie potoczne.",
+  "_src_reader": "ef093d81"
  },
  "adjective-adverb-324": {
   "_src": "84cdd45e",
@@ -3259,7 +3582,8 @@
    {
     "example_pl": "Te wyrazy są etymologicznie spokrewnione."
    }
-  ]
+  ],
+  "_src_reader": "9d2ed015"
  },
  "adjective-adverb-325": {
   "_src": "db14d686",
@@ -3269,7 +3593,8 @@
    {
     "example_pl": "Obserwujemy gwałtowny wzrost."
    }
-  ]
+  ],
+  "_src_reader": "705306b5"
  },
  "adjective-adverb-326": {
   "_src": "2006d2bb",
@@ -3279,7 +3604,8 @@
    {
     "example_pl": "To była uroczysta chwila."
    }
-  ]
+  ],
+  "_src_reader": "14f846e5"
  },
  "adjective-adverb-327": {
   "_src": "29539cf1",
@@ -3289,7 +3615,8 @@
    {
     "example_pl": "To warunek formalny."
    }
-  ]
+  ],
+  "_src_reader": "baeac3c5"
  },
  "adjective-adverb-328": {
   "_src": "b36a7a15",
@@ -3299,7 +3626,8 @@
    {
     "example_pl": "To zmiana genetyczna."
    }
-  ]
+  ],
+  "_src_reader": "22ddae1a"
  },
  "adjective-adverb-329": {
   "_src": "9077cadc",
@@ -3309,7 +3637,8 @@
    {
     "example_pl": "Region jest dobrze zbadany geologicznie."
    }
-  ]
+  ],
+  "_src_reader": "40a37f1d"
  },
  "adjective-adverb-330": {
   "_src": "e255b034",
@@ -3319,7 +3648,8 @@
    {
     "example_pl": "To przedstawienie graficzne."
    }
-  ]
+  ],
+  "_src_reader": "ce62ee4d"
  },
  "adjective-adverb-331": {
   "_src": "7046b8ea",
@@ -3329,7 +3659,8 @@
    {
     "example_pl": "Zdjęcie jest drukowane w dużym formacie."
    }
-  ]
+  ],
+  "_src_reader": "bb324337"
  },
  "adjective-055": {
   "_src": "1ed4e9c4",
@@ -3339,7 +3670,8 @@
    {
     "example_pl": "Na ten temat gorąco się dyskutuje."
    }
-  ]
+  ],
+  "_src_reader": "5fb4218d"
  },
  "adjective-015": {
   "_src": "0c3e9f9a",
@@ -3349,7 +3681,8 @@
    {
     "example_pl": "To była uprzejma odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "fbcb0791"
  },
  "adjective-adverb-334": {
   "_src": "f34828fb",
@@ -3359,7 +3692,8 @@
    {
     "example_pl": "To nielegalna transakcja."
    }
-  ]
+  ],
+  "_src_reader": "b569283b"
  },
  "adjective-adverb-335": {
   "_src": "863f58e6",
@@ -3369,7 +3703,8 @@
    {
     "example_pl": "To były poszukiwania trwające dziesięciolecia."
    }
-  ]
+  ],
+  "_src_reader": "4dd84b56"
  },
  "adjective-adverb-336": {
   "_src": "3735d3e9",
@@ -3379,7 +3714,8 @@
    {
     "example_pl": "Artystka jest Jugosłowianką."
    }
-  ]
+  ],
+  "_src_reader": "95e9da79"
  },
  "adjective-adverb-337": {
   "_src": "19135ba6",
@@ -3389,7 +3725,8 @@
    {
     "example_pl": "Postępuje rozsądnie."
    }
-  ]
+  ],
+  "_src_reader": "67b25d74"
  },
  "adjective-adverb-338": {
   "_src": "9d1c28c1",
@@ -3399,7 +3736,8 @@
    {
     "example_pl": "Współpracujemy konstruktywnie."
    }
-  ]
+  ],
+  "_src_reader": "7b9dbd51"
  },
  "adjective-adverb-339": {
   "_src": "f48ad5b5",
@@ -3409,7 +3747,8 @@
    {
     "example_pl": "Potrzebujemy ciągłych dostaw."
    }
-  ]
+  ],
+  "_src_reader": "ae01282d"
  },
  "adjective-adverb-340": {
   "_src": "967a4855",
@@ -3419,7 +3758,8 @@
    {
     "example_pl": "Programy różnią się koncepcyjnie."
    }
-  ]
+  ],
+  "_src_reader": "fa6f0211"
  },
  "adjective-adverb-341": {
   "_src": "95e5ce5f",
@@ -3429,7 +3769,8 @@
    {
     "example_pl": "To osobliwość krajobrazu."
    }
-  ]
+  ],
+  "_src_reader": "37b3d67f"
  },
  "adjective-adverb-342": {
   "_src": "66a9e04a",
@@ -3439,7 +3780,8 @@
    {
     "example_pl": "Przebieg wydarzeń został udokumentowany bez luk."
    }
-  ]
+  ],
+  "_src_reader": "29e3b0b3"
  },
  "adjective-adverb-343": {
   "_src": "36e8b105",
@@ -3449,7 +3791,8 @@
    {
     "example_pl": "Wartości różnią się tylko nieznacznie."
    }
-  ]
+  ],
+  "_src_reader": "f5ac906d"
  },
  "adjective-adverb-344": {
   "_src": "b481cb3f",
@@ -3459,7 +3802,8 @@
    {
     "example_pl": "To zauważalna poprawa."
    }
-  ]
+  ],
+  "_src_reader": "c9737c08"
  },
  "adjective-adverb-345": {
   "_src": "3f73f1d8",
@@ -3469,7 +3813,8 @@
    {
     "example_pl": "Pomieszczenie jest urządzone minimalistycznie."
    }
-  ]
+  ],
+  "_src_reader": "58664789"
  },
  "adjective-adverb-346": {
   "_src": "6c5909cb",
@@ -3479,7 +3824,8 @@
    {
     "example_pl": "Te wyrazy są morfologicznie podobne."
    }
-  ]
+  ],
+  "_src_reader": "d48a2a97"
  },
  "adjective-adverb-347": {
   "_src": "2c13d4f2",
@@ -3489,7 +3835,8 @@
    {
     "example_pl": "Zupa jest umiarkowanie posolona."
    }
-  ]
+  ],
+  "_src_reader": "b094a98a"
  },
  "adjective-adverb-348": {
   "_src": "ed330107",
@@ -3499,7 +3846,8 @@
    {
     "example_pl": "Omawiamy tę kwestię ustnie."
    }
-  ]
+  ],
+  "_src_reader": "cb8502d9"
  },
  "adjective-adverb-349": {
   "_src": "8548f128",
@@ -3510,7 +3858,8 @@
     "example_pl": "To udowodniony błąd."
    }
   ],
-  "usage_note_pl": "Coś już ustalonego; nachweisbar — to, co da się udowodnić."
+  "usage_note_pl": "Coś już ustalonego; nachweisbar — to, co da się udowodnić.",
+  "_src_reader": "6decc55e"
  },
  "adjective-adverb-350": {
   "_src": "afdb0bdb",
@@ -3520,7 +3869,8 @@
    {
     "example_pl": "Scena jest przedstawiona naturalistycznie."
    }
-  ]
+  ],
+  "_src_reader": "2fa269ba"
  },
  "adjective-adverb-351": {
   "_src": "2a1c6e75",
@@ -3531,7 +3881,8 @@
     "example_pl": "To oryginalny dokument."
    }
   ],
-  "usage_note_pl": "original — autentyczny / pierwotny; originell — niezwykły / pomysłowy."
+  "usage_note_pl": "original — autentyczny / pierwotny; originell — niezwykły / pomysłowy.",
+  "_src_reader": "6bc9fcaa"
  },
  "adjective-adverb-352": {
   "_src": "1493345a",
@@ -3541,7 +3892,8 @@
    {
     "example_pl": "Organizacja jest zbudowana na wzór wojskowy."
    }
-  ]
+  ],
+  "_src_reader": "e29a616d"
  },
  "adjective-adverb-353": {
   "_src": "36534a33",
@@ -3551,7 +3903,8 @@
    {
     "example_pl": "Sprawa jest badana przez policję."
    }
-  ]
+  ],
+  "_src_reader": "4b58cd68"
  },
  "adjective-adverb-354": {
   "_src": "6db4bd3c",
@@ -3562,7 +3915,8 @@
     "example_pl": "Stawka podatku rośnie progresywnie."
    }
   ],
-  "usage_note_pl": "O podatkach: stawka rośnie wraz ze wzrostem dochodu. Także „progresywny, postępowy”."
+  "usage_note_pl": "O podatkach: stawka rośnie wraz ze wzrostem dochodu. Także „progresywny, postępowy”.",
+  "_src_reader": "724ce169"
  },
  "adjective-adverb-355": {
   "_src": "6b4fddbc",
@@ -3572,7 +3926,8 @@
    {
     "example_pl": "Potrzebujemy precyzyjnej odpowiedzi."
    }
-  ]
+  ],
+  "_src_reader": "7c92b46d"
  },
  "adjective-adverb-356": {
   "_src": "721466e6",
@@ -3582,7 +3937,8 @@
    {
     "example_pl": "Angażuje się publicystycznie na rzecz tej idei."
    }
-  ]
+  ],
+  "_src_reader": "3d090d1c"
  },
  "adjective-adverb-357": {
   "_src": "2a2b039f",
@@ -3592,7 +3948,8 @@
    {
     "example_pl": "Ujmujemy różnice ilościowo."
    }
-  ]
+  ],
+  "_src_reader": "8a7e52ed"
  },
  "adjective-adverb-358": {
   "_src": "8e0c9628",
@@ -3602,7 +3959,8 @@
    {
     "example_pl": "Góry widać niewyraźnie."
    }
-  ]
+  ],
+  "_src_reader": "67073d5f"
  },
  "adjective-adverb-359": {
   "_src": "8065d93f",
@@ -3612,7 +3970,8 @@
    {
     "example_pl": "Oprzyj deskę ukośnie o ścianę."
    }
-  ]
+  ],
+  "_src_reader": "ed5b1869"
  },
  "adjective-adverb-360": {
   "_src": "1b55686a",
@@ -3622,7 +3981,8 @@
    {
     "example_pl": "To był pewny występ."
    }
-  ]
+  ],
+  "_src_reader": "ee797c91"
  },
  "adjective-adverb-361": {
   "_src": "c8949120",
@@ -3632,7 +3992,8 @@
    {
     "example_pl": "Spontanicznie nam pomaga."
    }
-  ]
+  ],
+  "_src_reader": "83ff21dd"
  },
  "adjective-adverb-362": {
   "_src": "b174b74d",
@@ -3642,7 +4003,8 @@
    {
     "example_pl": "Analizujemy tekst lingwistycznie."
    }
-  ]
+  ],
+  "_src_reader": "d158f67f"
  },
  "adjective-adverb-363": {
   "_src": "78baa9af",
@@ -3652,7 +4014,8 @@
    {
     "example_pl": "To był milczący protest."
    }
-  ]
+  ],
+  "_src_reader": "be5d7563"
  },
  "adjective-adverb-364": {
   "_src": "43cc4de1",
@@ -3663,7 +4026,8 @@
     "example_pl": "To znamienna oznaka."
    }
   ],
-  "usage_note_pl": "Leczenie łagodzi objawy, a nie usuwa przyczyny choroby."
+  "usage_note_pl": "Leczenie łagodzi objawy, a nie usuwa przyczyny choroby.",
+  "_src_reader": "f4b78d46"
  },
  "adjective-adverb-365": {
   "_src": "4089fd9b",
@@ -3673,7 +4037,8 @@
    {
     "example_pl": "Koszty są przedstawione przejrzyście."
    }
-  ]
+  ],
+  "_src_reader": "cf27c181"
  },
  "adjective-adverb-366": {
   "_src": "f0b823ab",
@@ -3683,7 +4048,8 @@
    {
     "example_pl": "Wartości odbiegają tylko nieznacznie."
    }
-  ]
+  ],
+  "_src_reader": "e72679e3"
  },
  "adjective-adverb-367": {
   "_src": "33bb7fdd",
@@ -3694,7 +4060,8 @@
     "example_pl": "Zadania są rozdzielone nierównomiernie."
    }
   ],
-  "usage_note_pl": "Przed stopniem wyższym — „o wiele”: ungleich besser / schlechter."
+  "usage_note_pl": "Przed stopniem wyższym — „o wiele”: ungleich besser / schlechter.",
+  "_src_reader": "7cacc8af"
  },
  "adjective-adverb-368": {
   "_src": "9ea67a05",
@@ -3704,7 +4071,8 @@
    {
     "example_pl": "Odpowiada tylko mgliście."
    }
-  ]
+  ],
+  "_src_reader": "059dd8c3"
  },
  "adjective-adverb-369": {
   "_src": "ca5e771a",
@@ -3714,7 +4082,8 @@
    {
     "example_pl": "Postępuje rozsądnie."
    }
-  ]
+  ],
+  "_src_reader": "d89cef48"
  },
  "adjective-adverb-370": {
   "_src": "5272ce3f",
@@ -3724,7 +4093,8 @@
    {
     "example_pl": "To zobowiązanie umowne."
    }
-  ]
+  ],
+  "_src_reader": "d8f1acd5"
  },
  "adjective-adverb-371": {
   "_src": "a1aebaf3",
@@ -3734,7 +4104,8 @@
    {
     "example_pl": "Zajmujemy się tym problemem w pierwszej kolejności."
    }
-  ]
+  ],
+  "_src_reader": "8308f6f5"
  },
  "adjective-adverb-372": {
   "_src": "4d9f462a",
@@ -3744,7 +4115,8 @@
    {
     "example_pl": "To skuteczny środek."
    }
-  ]
+  ],
+  "_src_reader": "a3013fc5"
  },
  "adjective-adverb-373": {
   "_src": "6a8047b4",
@@ -3754,7 +4126,8 @@
    {
     "example_pl": "Kwiaty cudownie pachną."
    }
-  ]
+  ],
+  "_src_reader": "7814ce33"
  },
  "adjective-adverb-374": {
   "_src": "b9f89370",
@@ -3764,7 +4137,8 @@
    {
     "example_pl": "Godnie reprezentuje kraj."
    }
-  ]
+  ],
+  "_src_reader": "aa415bc7"
  },
  "adjective-adverb-375": {
   "_src": "85a4e9a3",
@@ -3774,7 +4148,8 @@
    {
     "example_pl": "Planujemy wczesny wyjazd."
    }
-  ]
+  ],
+  "_src_reader": "26d73280"
  },
  "adjective-adverb-376": {
   "_src": "2aa1999b",
@@ -3784,7 +4159,8 @@
    {
     "example_pl": "Potrzebujemy ukierunkowanych poszukiwań."
    }
-  ]
+  ],
+  "_src_reader": "9a6a6f05"
  },
  "adjective-026": {
   "_src": "e2f71ae1",
@@ -3794,7 +4170,8 @@
    {
     "example_pl": "Mamy zadowolonych klientów."
    }
-  ]
+  ],
+  "_src_reader": "c4b8c983"
  },
  "adjective-adverb-378": {
   "_src": "95f101f0",
@@ -3804,7 +4181,8 @@
    {
     "example_pl": "Rzuca mi spojrzenie pełne powątpiewania."
    }
-  ]
+  ],
+  "_src_reader": "a9a23364"
  },
  "adjective-adverb-379": {
   "_src": "97278a8e",
@@ -3814,7 +4192,8 @@
    {
     "example_pl": "Prowadzimy poszukiwania dwutorowo."
    }
-  ]
+  ],
+  "_src_reader": "27dad1f4"
  },
  "adjective-adverb-380": {
   "_src": "1a85a6df",
@@ -3824,7 +4203,8 @@
    {
     "example_pl": "Śmieje się cynicznie."
    }
-  ]
+  ],
+  "_src_reader": "66b18f3d"
  },
  "adjective-adverb-381": {
   "_src": "d8ad3e0c",
@@ -3834,7 +4214,8 @@
    {
     "example_pl": "To kwestia estetyczna."
    }
-  ]
+  ],
+  "_src_reader": "ec3933f8"
  },
  "adjective-adverb-382": {
   "_src": "5014daea",
@@ -3844,7 +4225,8 @@
    {
     "example_pl": "Maszyna jest nadmiernie obciążana."
    }
-  ]
+  ],
+  "_src_reader": "26729171"
  },
  "adjective-067": {
   "_src": "97c54f4b",
@@ -3854,7 +4236,8 @@
    {
     "example_pl": "Wybieramy się w daleką podróż."
    }
-  ]
+  ],
+  "_src_reader": "83427f8c"
  },
  "adjective-062": {
   "_src": "f43d7f8a",
@@ -3865,7 +4248,8 @@
     "example_pl": "Pojedziemy późnym pociągiem."
    }
   ],
-  "usage_note_pl": "Wie spät ist es? — Która godzina? Stopień wyższy — später (zob. hasło später)."
+  "usage_note_pl": "Wie spät ist es? — Która godzina? Stopień wyższy — später (zob. hasło später).",
+  "_src_reader": "54ae0269"
  },
  "adjective-061": {
   "_src": "ae33f1e5",
@@ -3876,7 +4260,8 @@
     "example_pl": "Pojedziemy wczesnym pociągiem."
    }
   ],
-  "usage_note_pl": "Stopień wyższy früher znaczy też „w przeszłości, dawniej” (zob. hasło früher). Nie mylić z morgens / am Morgen — rano."
+  "usage_note_pl": "Stopień wyższy früher znaczy też „w przeszłości, dawniej” (zob. hasło früher). Nie mylić z morgens / am Morgen — rano.",
+  "_src_reader": "7f70207f"
  },
  "adjective-adverb-386": {
   "_src": "0c88d72c",
@@ -3886,7 +4271,8 @@
    {
     "example_pl": "To był nasz pierwotny plan."
    }
-  ]
+  ],
+  "_src_reader": "ffbb44b5"
  },
  "adverb-028": {
   "_src": "7f06de45",
@@ -3897,7 +4283,8 @@
     "example_pl": "Dyskusja, która nastąpiła potem, była krótka."
    }
   ],
-  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej."
+  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej.",
+  "_src_reader": "2de73034"
  },
  "adjective-adverb-388": {
   "_src": "f1c3ea2d",
@@ -3907,7 +4294,8 @@
    {
     "example_pl": "To bezpośrednie połączenie."
    }
-  ]
+  ],
+  "_src_reader": "74dd2ebd"
  },
  "adjective-adverb-389": {
   "_src": "f3430b8c",
@@ -3917,7 +4305,8 @@
    {
     "example_pl": "Świetnie to zrobiłeś."
    }
-  ]
+  ],
+  "_src_reader": "71cb7afc"
  },
  "adjective-adverb-390": {
   "_src": "e297414b",
@@ -3927,7 +4316,8 @@
    {
     "example_pl": "Nowa trasa jest znacznie krótsza."
    }
-  ]
+  ],
+  "_src_reader": "2e4df3c2"
  },
  "adjective-adverb-391": {
   "_src": "ecf73991",
@@ -3937,7 +4327,8 @@
    {
     "example_pl": "Zasady zostały zmienione i postępujemy odpowiednio."
    }
-  ]
+  ],
+  "_src_reader": "0f21f9fc"
  },
  "adverb-050": {
   "_src": "7aa89590",
@@ -3947,7 +4338,8 @@
    {
     "example_pl": "Widzimy rosnące zainteresowanie."
    }
-  ]
+  ],
+  "_src_reader": "1589988d"
  },
  "adjective-adverb-393": {
   "_src": "9928b7e5",
@@ -3958,7 +4350,8 @@
     "example_pl": "To naprawdę ciekawe."
    }
   ],
-  "usage_note_pl": "Przed przymiotnikiem w języku potocznym — „naprawdę, bardzo”."
+  "usage_note_pl": "Przed przymiotnikiem w języku potocznym — „naprawdę, bardzo”.",
+  "_src_reader": "3cefb594"
  },
  "adjective-091": {
   "_src": "f4fc172b",
@@ -3969,7 +4362,8 @@
     "example_pl": "To pełny sukces."
    }
   ],
-  "usage_note_pl": "W języku potocznym może wzmacniać przymiotnik: voll gut — bardzo dobrze."
+  "usage_note_pl": "W języku potocznym może wzmacniać przymiotnik: voll gut — bardzo dobrze.",
+  "_src_reader": "e5eff167"
  },
  "adjective-adverb-395": {
   "_src": "dafcbc2c",
@@ -3979,7 +4373,8 @@
    {
     "example_pl": "Leżące dziecko śpi."
    }
-  ]
+  ],
+  "_src_reader": "ad830e58"
  },
  "adjective-adverb-396": {
   "_src": "92854d84",
@@ -3989,7 +4384,8 @@
    {
     "example_pl": "Przeważająca część jest gotowa."
    }
-  ]
+  ],
+  "_src_reader": "e01b9c6d"
  },
  "adjective-038": {
   "_src": "3555e49c",
@@ -4000,7 +4396,8 @@
     "example_pl": "Po prostu powiedz mi prawdę."
    }
   ],
-  "usage_note_pl": "W prośbach często „po prostu”: przedstawia czynność jako oczywistą albo łagodzi prośbę."
+  "usage_note_pl": "W prośbach często „po prostu”: przedstawia czynność jako oczywistą albo łagodzi prośbę.",
+  "_src_reader": "713ad81b"
  },
  "adjective-adverb-398": {
   "_src": "0cd9a272",
@@ -4010,7 +4407,8 @@
    {
     "example_pl": "To daleko idąca zmiana."
    }
-  ]
+  ],
+  "_src_reader": "fb2b69d1"
  },
  "adjective-adverb-399": {
   "_src": "2102f179",
@@ -4020,7 +4418,8 @@
    {
     "example_pl": "Domy stoją blisko siebie."
    }
-  ]
+  ],
+  "_src_reader": "bd8a37db"
  },
  "adjective-adverb-400": {
   "_src": "16478c92",
@@ -4030,7 +4429,8 @@
    {
     "example_pl": "W decydującym stopniu przyczyniła się do sukcesu."
    }
-  ]
+  ],
+  "_src_reader": "5534eb05"
  },
  "adjective-adverb-401": {
   "_src": "9deebf99",
@@ -4040,7 +4440,8 @@
    {
     "example_pl": "To głębokie jezioro."
    }
-  ]
+  ],
+  "_src_reader": "14aebab9"
  },
  "adjective-adverb-402": {
   "_src": "e7d1d6fd",
@@ -4050,7 +4451,8 @@
    {
     "example_pl": "Informuje nas kompleksowo."
    }
-  ]
+  ],
+  "_src_reader": "94e6cb3f"
  },
  "adjective-adverb-403": {
   "_src": "b87a6474",
@@ -4060,7 +4462,8 @@
    {
     "example_pl": "Odwiedzamy odległą wieś."
    }
-  ]
+  ],
+  "_src_reader": "018eeae2"
  },
  "adjective-adverb-404": {
   "_src": "cf3ebcc8",
@@ -4070,7 +4473,8 @@
    {
     "example_pl": "To było wybitne osiągnięcie."
    }
-  ]
+  ],
+  "_src_reader": "98d61e9d"
  },
  "adjective-adverb-405": {
   "_src": "346e36cc",
@@ -4080,7 +4484,8 @@
    {
     "example_pl": "Omawiamy przyszły rozwój."
    }
-  ]
+  ],
+  "_src_reader": "0be7bf69"
  },
  "adjective-adverb-406": {
   "_src": "84853692",
@@ -4090,7 +4495,8 @@
    {
     "example_pl": "Przemawia w imieniu zespołu."
    }
-  ]
+  ],
+  "_src_reader": "31a6e4a9"
  },
  "adjective-adverb-407": {
   "_src": "cfdd59f8",
@@ -4100,7 +4506,8 @@
    {
     "example_pl": "Rozdzielamy pozostałe zadania."
    }
-  ]
+  ],
+  "_src_reader": "3f998af9"
  },
  "adjective-adverb-408": {
   "_src": "5a0eef1b",
@@ -4110,7 +4517,8 @@
    {
     "example_pl": "Budynek ma wzmocnione ściany."
    }
-  ]
+  ],
+  "_src_reader": "bc6ce8fe"
  },
  "adjective-adverb-409": {
   "_src": "c233bbc1",
@@ -4120,7 +4528,8 @@
    {
     "example_pl": "Obserwujemy stopniową poprawę."
    }
-  ]
+  ],
+  "_src_reader": "4b75da47"
  },
  "adjective-adverb-410": {
   "_src": "40dd3a94",
@@ -4130,7 +4539,8 @@
    {
     "example_pl": "W akwarium są żywe ryby."
    }
-  ]
+  ],
+  "_src_reader": "cb48a0f2"
  },
  "adjective-adverb-411": {
   "_src": "1d4e586b",
@@ -4140,7 +4550,8 @@
    {
     "example_pl": "To była nagła zmiana."
    }
-  ]
+  ],
+  "_src_reader": "8e3963bd"
  },
  "adjective-adverb-412": {
   "_src": "0bb537d5",
@@ -4151,7 +4562,8 @@
     "example_pl": "Do ogrodu przylega pole."
    }
   ],
-  "usage_note_pl": "angrenzend an + Akkusativ — przylegający do czegoś."
+  "usage_note_pl": "angrenzend an + Akkusativ — przylegający do czegoś.",
+  "_src_reader": "626e3b14"
  },
  "adjective-adverb-413": {
   "_src": "f3638a23",
@@ -4161,7 +4573,8 @@
    {
     "example_pl": "Mamy wystarczające zapasy."
    }
-  ]
+  ],
+  "_src_reader": "18542e25"
  },
  "adjective-adverb-414": {
   "_src": "214b5d8d",
@@ -4172,7 +4585,8 @@
     "example_pl": "Nadchodzący tydzień będzie spokojny."
    }
   ],
-  "usage_note_pl": "W znaczeniu „nadchodzący” zwykle jako przydawka przed rzeczownikiem; oba przykłady pokazują to użycie."
+  "usage_note_pl": "W znaczeniu „nadchodzący” zwykle jako przydawka przed rzeczownikiem; oba przykłady pokazują to użycie.",
+  "_src_reader": "ded75e73"
  },
  "adjective-adverb-415": {
   "_src": "76ffcaf9",
@@ -4182,7 +4596,8 @@
    {
     "example_pl": "Narysuj dwie równoległe linie."
    }
-  ]
+  ],
+  "_src_reader": "6e5b9021"
  },
  "adjective-adverb-416": {
   "_src": "e1b74060",
@@ -4192,7 +4607,8 @@
    {
     "example_pl": "To były powtarzające się próby."
    }
-  ]
+  ],
+  "_src_reader": "9d1235a5"
  },
  "adjective-adverb-417": {
   "_src": "e6af2a91",
@@ -4203,7 +4619,8 @@
     "example_pl": "Przeczytaj następujące wskazówki."
    }
   ],
-  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej."
+  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej.",
+  "_src_reader": "83b5590e"
  },
  "adjective-049": {
   "_src": "7119b2e5",
@@ -4213,7 +4630,8 @@
    {
     "example_pl": "To schludne miejsce pracy."
    }
-  ]
+  ],
+  "_src_reader": "c6f107a6"
  },
  "adjective-adverb-419": {
   "_src": "c1ae962b",
@@ -4223,7 +4641,8 @@
    {
     "example_pl": "Pracujemy bez przerwy w godzinach otwarcia."
    }
-  ]
+  ],
+  "_src_reader": "ae01282d"
  },
  "adjective-adverb-420": {
   "_src": "dd23a54a",
@@ -4234,7 +4653,8 @@
     "example_pl": "To uwaga końcowa."
    }
   ],
-  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej."
+  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej.",
+  "_src_reader": "4dd25698"
  },
  "adjective-adverb-421": {
   "_src": "f41b6461",
@@ -4244,7 +4664,8 @@
    {
     "example_pl": "To warunkowa zgoda."
    }
-  ]
+  ],
+  "_src_reader": "fed45a09"
  },
  "adjective-089": {
   "_src": "f5dc8367",
@@ -4254,7 +4675,8 @@
    {
     "example_pl": "Sprzedajemy gotowe meble."
    }
-  ]
+  ],
+  "_src_reader": "aece3b5f"
  },
  "adjective-adverb-423": {
   "_src": "dbb7f855",
@@ -4264,7 +4686,8 @@
    {
     "example_pl": "To konkretne pytanie."
    }
-  ]
+  ],
+  "_src_reader": "e59d3b99"
  },
  "adjective-adverb-424": {
   "_src": "21f18d7c",
@@ -4274,7 +4697,8 @@
    {
     "example_pl": "To fundamentalne pytanie."
    }
-  ]
+  ],
+  "_src_reader": "d3e893ed"
  },
  "adjective-adverb-425": {
   "_src": "44aeaef4",
@@ -4284,7 +4708,8 @@
    {
     "example_pl": "To była niespodziewana odpowiedź."
    }
-  ]
+  ],
+  "_src_reader": "aa2b866d"
  },
  "adjective-adverb-426": {
   "_src": "27fcb08d",
@@ -4294,7 +4719,8 @@
    {
     "example_pl": "Wypowiada się lekceważąco o tym pomyśle."
    }
-  ]
+  ],
+  "_src_reader": "5c0d698a"
  },
  "adjective-adverb-427": {
   "_src": "1b1c4f54",
@@ -4304,7 +4730,8 @@
    {
     "example_pl": "Pomieszczenie jest skromnie urządzone."
    }
-  ]
+  ],
+  "_src_reader": "cf2e4e78"
  },
  "adjective-adverb-428": {
   "_src": "6f58646b",
@@ -4314,7 +4741,8 @@
    {
     "example_pl": "To tymczasowe rozwiązanie."
    }
-  ]
+  ],
+  "_src_reader": "6cbd5785"
  },
  "adjective-adverb-429": {
   "_src": "f1a06ea7",
@@ -4324,7 +4752,8 @@
    {
     "example_pl": "Rozpatruje propozycję życzliwie."
    }
-  ]
+  ],
+  "_src_reader": "05357ef1"
  },
  "adjective-adverb-430": {
   "_src": "7dcec087",
@@ -4334,7 +4763,8 @@
    {
     "example_pl": "To zaskakujący wynik."
    }
-  ]
+  ],
+  "_src_reader": "2597e689"
  },
  "adjective-adverb-431": {
   "_src": "d28f055b",
@@ -4344,7 +4774,8 @@
    {
     "example_pl": "To możliwe tylko w ograniczonym stopniu."
    }
-  ]
+  ],
+  "_src_reader": "7668f018"
  },
  "adjective-adverb-432": {
   "_src": "d3ffff71",
@@ -4354,7 +4785,8 @@
    {
     "example_pl": "Jest stosownie ubrana na uroczystość."
    }
-  ]
+  ],
+  "_src_reader": "d1a6f5d1"
  },
  "adjective-adverb-433": {
   "_src": "dc0634bb",
@@ -4364,7 +4796,8 @@
    {
     "example_pl": "Dolegliwości nawracają."
    }
-  ]
+  ],
+  "_src_reader": "8a7c1133"
  },
  "adjective-adverb-434": {
   "_src": "de84e6d9",
@@ -4375,7 +4808,8 @@
     "example_pl": "W wodzie jest rozpuszczona sól."
    }
   ],
-  "usage_note_pl": "O substancji — rozpuszczony, o organizacji — rozwiązany, o człowieku — bardzo roztrzęsiony."
+  "usage_note_pl": "O substancji — rozpuszczony, o organizacji — rozwiązany, o człowieku — bardzo roztrzęsiony.",
+  "_src_reader": "5fb86397"
  },
  "adjective-adverb-435": {
   "_src": "ea592b81",
@@ -4385,7 +4819,8 @@
    {
     "example_pl": "Siedzi swobodnie w fotelu."
    }
-  ]
+  ],
+  "_src_reader": "66e74e6b"
  },
  "adjective-adverb-436": {
   "_src": "c7a11265",
@@ -4396,7 +4831,8 @@
     "example_pl": "W uzupełnieniu chciałbym coś wyjaśnić."
    }
   ],
-  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej."
+  "usage_note_pl": "Na początku zdania zaraz po tym słowie stoi czasownik w formie osobowej.",
+  "_src_reader": "5fc18b51"
  },
  "adjective-adverb-437": {
   "_src": "b3223fc0",
@@ -4406,7 +4842,8 @@
    {
     "example_pl": "To pożądana zmiana."
    }
-  ]
+  ],
+  "_src_reader": "09a68580"
  },
  "adjective-adverb-438": {
   "_src": "a90e976d",
@@ -4417,7 +4854,8 @@
     "example_pl": "Pracuje na własny rachunek."
    }
   ],
-  "usage_note_pl": "Zwykle o samodzielnej działalności artystycznej lub naukowej bez stałego zatrudnienia."
+  "usage_note_pl": "Zwykle o samodzielnej działalności artystycznej lub naukowej bez stałego zatrudnienia.",
+  "_src_reader": "a90b2e53"
  },
  "adjective-adverb-439": {
   "_src": "46ec1c3b",
@@ -4427,7 +4865,8 @@
    {
     "example_pl": "Koszty są naliczane osobno."
    }
-  ]
+  ],
+  "_src_reader": "ec020a85"
  },
  "adjective-adverb-440": {
   "_src": "6e8c52f5",
@@ -4437,7 +4876,8 @@
    {
     "example_pl": "Dokumenty są przechowywane oddzielnie."
    }
-  ]
+  ],
+  "_src_reader": "ec020a85"
  },
  "adjective-adverb-441": {
   "_src": "b4d42088",
@@ -4447,7 +4887,8 @@
    {
     "example_pl": "Gorąco broni tej idei."
    }
-  ]
+  ],
+  "_src_reader": "0513e3bb"
  },
  "adjective-adverb-442": {
   "_src": "d2c989e7",
@@ -4457,7 +4898,8 @@
    {
     "example_pl": "Śmieje się wyzywająco."
    }
-  ]
+  ],
+  "_src_reader": "1b34630b"
  },
  "adjective-adverb-443": {
   "_src": "e9f1bb8c",
@@ -4467,7 +4909,8 @@
    {
     "example_pl": "To czyn niedozwolony."
    }
-  ]
+  ],
+  "_src_reader": "1942f6ea"
  },
  "adjective-adverb-444": {
   "_src": "b4525261",
@@ -4477,7 +4920,8 @@
    {
     "example_pl": "Pomieszczenie jest niewystarczająco oświetlone."
    }
-  ]
+  ],
+  "_src_reader": "21f5623d"
  },
  "adjective-adverb-445": {
   "_src": "6a6acfcd",
@@ -4487,7 +4931,8 @@
    {
     "example_pl": "Odpowiada powściągliwie."
    }
-  ]
+  ],
+  "_src_reader": "7bf024c6"
  },
  "adjective-018": {
   "_src": "26f6a35b",
@@ -4498,7 +4943,8 @@
     "example_pl": "Odpowiedziała zupełnie spokojnie."
    }
   ],
-  "usage_note_pl": "Jako partykuła — „śmiało, spokojnie (można)”: Du kannst ruhig fragen. — Możesz śmiało zapytać."
+  "usage_note_pl": "Jako partykuła — „śmiało, spokojnie (można)”: Du kannst ruhig fragen. — Możesz śmiało zapytać.",
+  "_src_reader": "ea73ae52"
  },
  "adjective-025": {
   "_src": "ebad0537",
@@ -4508,7 +4954,8 @@
    {
     "example_pl": "Spojrzał na mnie smutno."
    }
-  ]
+  ],
+  "_src_reader": "c411a2f7"
  },
  "adjective-033": {
   "_src": "d3303083",
@@ -4518,7 +4965,8 @@
    {
     "example_pl": "Potrafi bardzo ciekawie opowiadać."
    }
-  ]
+  ],
+  "_src_reader": "0bca0ba1"
  },
  "adjective-087": {
   "_src": "4d9f3078",
@@ -4535,7 +4983,8 @@
     "pl": "jednak, ale",
     "example_pl": "Wczesnym rankiem wstała, rozpaliła ogień i nastawiła kocioł, jednak zamiast przędzy włożyła do niego kłąb pakuł."
    }
-  ]
+  ],
+  "_src_reader": "9b804b21"
  },
  "adjective-111": {
   "_src": "8736a2ec",
@@ -4546,7 +4995,8 @@
     "example_pl": "Zapłacił za samochód gotówką."
    }
   ],
-  "usage_note_pl": "Nie mylić z die Bar — bar. Zwykle: in bar bezahlen, das Bargeld. Książk.: barer Unsinn — czysty nonsens."
+  "usage_note_pl": "Nie mylić z die Bar — bar. Zwykle: in bar bezahlen, das Bargeld. Książk.: barer Unsinn — czysty nonsens.",
+  "_src_reader": "62f2eba9"
  },
  "adjective-113": {
   "_src": "93c2f083",
@@ -4557,7 +5007,8 @@
     "example_pl": "Spojrzał na mnie ze złością."
    }
   ],
-  "usage_note_pl": "jemandem böse sein — gniewać się na kogoś (Dativ)."
+  "usage_note_pl": "jemandem böse sein — gniewać się na kogoś (Dativ).",
+  "_src_reader": "adf2c373"
  },
  "adjective-121": {
   "_src": "b99cc87c",
@@ -4567,7 +5018,8 @@
    {
     "example_pl": "Ma cichy głos."
    }
-  ]
+  ],
+  "_src_reader": "600ed519"
  },
  "adjective-136": {
   "_src": "a29d7b48",
@@ -4577,7 +5029,8 @@
    {
     "example_pl": "To prawdziwy problem."
    }
-  ]
+  ],
+  "_src_reader": "92753cd0"
  },
  "adjective-142": {
   "_src": "d521741b",
@@ -4588,7 +5041,8 @@
     "example_pl": "Nieważne, kiedy przyjdziesz — zadzwoń do mnie wcześniej."
    }
   ],
-  "usage_note_pl": "Wyraz potoczny, nie odmienia się: Das ist mir egal. egal wann / wo / was — nieważne kiedy / gdzie / co."
+  "usage_note_pl": "Wyraz potoczny, nie odmienia się: Das ist mir egal. egal wann / wo / was — nieważne kiedy / gdzie / co.",
+  "_src_reader": "1a419fc5"
  },
  "adjective-146": {
   "_src": "b3f3f808",
@@ -4598,7 +5052,8 @@
    {
     "example_pl": "Pilnie uczy się do egzaminu."
    }
-  ]
+  ],
+  "_src_reader": "d7565fbd"
  },
  "adjective-147": {
   "_src": "fc0ede65",
@@ -4608,7 +5063,8 @@
    {
     "example_pl": "Strasznie mi przykro."
    }
-  ]
+  ],
+  "_src_reader": "9a716038"
  },
  "adjective-148": {
   "_src": "d0555e32",
@@ -4618,7 +5074,8 @@
    {
     "example_pl": "Przez cały rok ciężko pracowaliśmy."
    }
-  ]
+  ],
+  "_src_reader": "035112d0"
  },
  "adjective-160": {
   "_src": "2878aa92",
@@ -4628,7 +5085,8 @@
    {
     "example_pl": "Został ciężko ranny w wypadku."
    }
-  ]
+  ],
+  "_src_reader": "027f75b3"
  },
  "adjective-161": {
   "_src": "9fb87ec5",
@@ -4638,7 +5096,8 @@
    {
     "example_pl": "Jestem dziś okropnie zmęczony."
    }
-  ]
+  ],
+  "_src_reader": "28bd467e"
  },
  "adjective-167": {
   "_src": "ffb65347",
@@ -4648,7 +5107,8 @@
    {
     "example_pl": "Jest ostrożnym kierowcą."
    }
-  ]
+  ],
+  "_src_reader": "fcb0fc65"
  },
  "adjective-179": {
   "_src": "9b0ef281",
@@ -4659,7 +5119,8 @@
     "example_pl": "Doskonale mówi po niemiecku."
    }
   ],
-  "usage_note_pl": "Także imiesłów od auszeichnen — nagrodzić: Der Film wurde ausgezeichnet. — Film otrzymał nagrodę."
+  "usage_note_pl": "Także imiesłów od auszeichnen — nagrodzić: Der Film wurde ausgezeichnet. — Film otrzymał nagrodę.",
+  "_src_reader": "45e15def"
  },
  "adjective-180": {
   "_src": "d7266b0c",
@@ -4669,7 +5130,8 @@
    {
     "example_pl": "Firma ma wyłączne prawa do marki."
    }
-  ]
+  ],
+  "_src_reader": "9d396598"
  },
  "adjective-217": {
   "_src": "6fada263",
@@ -4679,7 +5141,8 @@
    {
     "example_pl": "Zjadliwie odpowiedziała na pytanie."
    }
-  ]
+  ],
+  "_src_reader": "30ae4c78"
  },
  "adjective-220": {
   "_src": "7429df0c",
@@ -4689,7 +5152,8 @@
    {
     "example_pl": "Mieszkanie wymaga dokładnego sprzątania."
    }
-  ]
+  ],
+  "_src_reader": "8b2c9215"
  },
  "adjective-238": {
   "_src": "19af5936",
@@ -4700,7 +5164,8 @@
     "example_pl": "Dziecko z ciekawością wyglądało przez okno."
    }
   ],
-  "usage_note_pl": "neugierig auf + Akkusativ — ciekawy czegoś, chcący się czegoś dowiedzieć / coś zobaczyć."
+  "usage_note_pl": "neugierig auf + Akkusativ — ciekawy czegoś, chcący się czegoś dowiedzieć / coś zobaczyć.",
+  "_src_reader": "2f88d397"
  },
  "adjective-242": {
   "_src": "5fa9091f",
@@ -4710,7 +5175,8 @@
    {
     "example_pl": "Na kursie tylko biernie słuchał."
    }
-  ]
+  ],
+  "_src_reader": "e182f82d"
  },
  "adjective-249": {
   "_src": "bbdbfaeb",
@@ -4720,7 +5186,8 @@
    {
     "example_pl": "Dziękuję za informację przekazaną na czas."
    }
-  ]
+  ],
+  "_src_reader": "55536e58"
  },
  "adjective-257": {
   "_src": "a918a61e",
@@ -4731,7 +5198,8 @@
     "example_pl": "Ma krzywe zęby."
    }
   ],
-  "usage_note_pl": "schiefgehen — pójść nie tak: Alles ist schiefgegangen. — Wszystko poszło nie tak."
+  "usage_note_pl": "schiefgehen — pójść nie tak: Alles ist schiefgegangen. — Wszystko poszło nie tak.",
+  "_src_reader": "a1432916"
  },
  "adjective-261": {
   "_src": "17a7a4f8",
@@ -4741,7 +5209,8 @@
    {
     "example_pl": "Dla niego punktualność jest czymś oczywistym."
    }
-  ]
+  ],
+  "_src_reader": "9239401f"
  },
  "adjective-262": {
   "_src": "b5395a84",
@@ -4751,7 +5220,8 @@
    {
     "example_pl": "Dziwnie się dziś zachowywał."
    }
-  ]
+  ],
+  "_src_reader": "f895d021"
  },
  "adjective-266": {
   "_src": "f3dff875",
@@ -4761,7 +5231,8 @@
    {
     "example_pl": "Musimy oszczędnie gospodarować wodą."
    }
-  ]
+  ],
+  "_src_reader": "a7c0ff7a"
  },
  "adjective-269": {
   "_src": "9db0171a",
@@ -4772,7 +5243,8 @@
     "example_pl": "Dzieci siedziały cicho przy stole."
    }
   ],
-  "usage_note_pl": "stilles Wasser — woda niegazowana."
+  "usage_note_pl": "stilles Wasser — woda niegazowana.",
+  "_src_reader": "812d59de"
  },
  "adjective-275": {
   "_src": "84dc8455",
@@ -4782,7 +5254,8 @@
    {
     "example_pl": "Egzamin teoretyczny jest jutro."
    }
-  ]
+  ],
+  "_src_reader": "f44e5568"
  },
  "adjective-278": {
   "_src": "257e1154",
@@ -4792,7 +5265,8 @@
    {
     "example_pl": "Proszę odczytać nazwiska w odwrotnej kolejności."
    }
-  ]
+  ],
+  "_src_reader": "75d1d06a"
  },
  "adjective-280": {
   "_src": "229e6fdf",
@@ -4802,7 +5276,8 @@
    {
     "example_pl": "Jest strasznie miła."
    }
-  ]
+  ],
+  "_src_reader": "f4c24efc"
  },
  "adjective-295": {
   "_src": "a2e85166",
@@ -4812,7 +5287,8 @@
    {
     "example_pl": "To szalony pomysł!"
    }
-  ]
+  ],
+  "_src_reader": "57257fbd"
  },
  "adjective-300": {
   "_src": "c06446d8",
@@ -4823,7 +5299,8 @@
     "example_pl": "We wściekłości trzasnęła drzwiami."
    }
   ],
-  "usage_note_pl": "wütend auf + Akkusativ — wściekły na kogoś, bardzo zły na kogoś."
+  "usage_note_pl": "wütend auf + Akkusativ — wściekły na kogoś, bardzo zły na kogoś.",
+  "_src_reader": "d51d09c1"
  },
  "adjective-302": {
   "_src": "cc20088a",
@@ -4833,7 +5310,8 @@
    {
     "example_pl": "W przyszłości będę pracować z domu dwa razy w tygodniu."
    }
-  ]
+  ],
+  "_src_reader": "0be7bf69"
  },
  "adjective-304": {
   "_src": "498b19e7",
@@ -4843,7 +5321,8 @@
    {
     "example_pl": "Program działa niezawodnie."
    }
-  ]
+  ],
+  "_src_reader": "ca036958"
  },
  "adjective-306": {
   "_src": "94ad3806",
@@ -4853,7 +5332,8 @@
    {
     "example_pl": "Zareagował gniewnie, kiedy się spóźniłem."
    }
-  ]
+  ],
+  "_src_reader": "1fe5e7d3"
  },
  "adjective-307": {
   "_src": "968ec006",
@@ -4863,7 +5343,8 @@
    {
     "example_pl": "Na zewnątrz wydaje się zupełnie spokojny."
    }
-  ]
+  ],
+  "_src_reader": "ae037807"
  },
  "adjective-316": {
   "_src": "0900916f",
@@ -4873,7 +5354,8 @@
    {
     "example_pl": "Uśmiechnęła się nieśmiało."
    }
-  ]
+  ],
+  "_src_reader": "d91a3883"
  },
  "adjective-329": {
   "_src": "a99b39f8",
@@ -4883,7 +5365,8 @@
    {
     "example_pl": "Nieszczęśliwie upadł na schodach."
    }
-  ]
+  ],
+  "_src_reader": "c70ab227"
  },
  "adjective-331": {
   "_src": "d3864318",
@@ -4893,7 +5376,8 @@
    {
     "example_pl": "Dziś w żaden sposób nie mogę przyjść."
    }
-  ]
+  ],
+  "_src_reader": "bd9b2d6b"
  },
  "adjective-343": {
   "_src": "8dc15d4c",
@@ -4903,7 +5387,8 @@
    {
     "example_pl": "Bank wycofał omyłkowy przelew."
    }
-  ]
+  ],
+  "_src_reader": "307baf80"
  },
  "adjective-369": {
   "_src": "7952d047",
@@ -4913,7 +5398,8 @@
    {
     "example_pl": "Moralnie to nie jest w porządku."
    }
-  ]
+  ],
+  "_src_reader": "b6e4a3e1"
  },
  "adjective-379": {
   "_src": "b9ee7955",
@@ -4923,7 +5409,8 @@
    {
     "example_pl": "Hotel jest wyjątkowo pięknie położony."
    }
-  ]
+  ],
+  "_src_reader": "ce6732be"
  },
  "adjective-383": {
   "_src": "7d5c1b1b",
@@ -4933,7 +5420,8 @@
    {
     "example_pl": "Po południu wystąpią sporadyczne przelotne opady."
    }
-  ]
+  ],
+  "_src_reader": "da3fdc7d"
  },
  "adjective-387": {
   "_src": "41964f93",
@@ -4943,7 +5431,8 @@
    {
     "example_pl": "Życzymy Państwu bezproblemowej podróży."
    }
-  ]
+  ],
+  "_src_reader": "ca030a51"
  },
  "adjective-396": {
   "_src": "18d4c415",
@@ -4953,7 +5442,8 @@
    {
     "example_pl": "Na rozmowie kwalifikacyjnej zachowywała się bardzo pewnie."
    }
-  ]
+  ],
+  "_src_reader": "21b98756"
  },
  "adverb-043": {
   "_src": "98050a9a",
@@ -4963,7 +5453,8 @@
    {
     "example_pl": "To był oczywisty błąd."
    }
-  ]
+  ],
+  "_src_reader": "77973676"
  },
  "adverb-047": {
   "_src": "faa9124f",
@@ -4973,7 +5464,8 @@
    {
     "example_pl": "Faktyczne koszty były znacznie wyższe."
    }
-  ]
+  ],
+  "_src_reader": "445787d7"
  },
  "adverb-048": {
   "_src": "f458190e",
@@ -4983,7 +5475,8 @@
    {
     "example_pl": "Dostaliśmy tylko częściowy zwrot."
    }
-  ]
+  ],
+  "_src_reader": "03f606a4"
  },
  "adverb-049": {
   "_src": "47a1d7a5",
@@ -4993,7 +5486,8 @@
    {
     "example_pl": "Przypuszczalną przyczyną było zwarcie."
    }
-  ]
+  ],
+  "_src_reader": "39b065b2"
  },
  "adverb-078": {
   "_src": "6046daaf",
@@ -5004,7 +5498,8 @@
     "example_pl": "Na imprezę przyszli tylko nieliczni."
    }
   ],
-  "usage_note_pl": "Z rzeczownikiem: wenig Geld (lp), wenige Leute (lm — z końcówką). ein wenig = ein bisschen — trochę."
+  "usage_note_pl": "Z rzeczownikiem: wenig Geld (lp), wenige Leute (lm — z końcówką). ein wenig = ein bisschen — trochę.",
+  "_src_reader": "1f1dd997"
  },
  "adverb-110": {
   "_src": "d7c329b8",
@@ -5015,7 +5510,8 @@
     "example_pl": "Przeszliśmy obok ratusza na targ."
    }
   ],
-  "usage_note_pl": "Często część czasownika: vorbeigehen (przechodzić obok), vorbeikommen (wpaść w odwiedziny): Komm doch mal vorbei!"
+  "usage_note_pl": "Często część czasownika: vorbeigehen (przechodzić obok), vorbeikommen (wpaść w odwiedziny): Komm doch mal vorbei!",
+  "_src_reader": "83481836"
  },
  "adverb-115": {
   "_src": "656bbbc0",
@@ -5025,7 +5521,8 @@
    {
     "example_pl": "Jaka jest prawdopodobna przyczyna?"
    }
-  ]
+  ],
+  "_src_reader": "581d1dc5"
  },
  "adverb-133": {
   "_src": "ceeed891",
@@ -5036,7 +5533,8 @@
     "example_pl": "Ciągły hałas działa mi na nerwy."
    }
   ],
-  "usage_note_pl": "Często z odcieniem niezadowolenia. Synonim — ständig."
+  "usage_note_pl": "Często z odcieniem niezadowolenia. Synonim — ständig.",
+  "_src_reader": "4cf5c6f3"
  },
  "adverb-137": {
   "_src": "d9f6e92e",
@@ -5047,7 +5545,8 @@
     "example_pl": "Po przeprowadzce jestem jeszcze całkiem zdezorientowany."
    }
   ],
-  "usage_note_pl": "Rzeczownik: das Durcheinander — nieład."
+  "usage_note_pl": "Rzeczownik: das Durcheinander — nieład.",
+  "_src_reader": "1410f166"
  },
  "adverb-144": {
   "_src": "b03c0ca5",
@@ -5058,7 +5557,8 @@
     "example_pl": "W razie ewentualnych pytań proszę do nas zadzwonić."
    }
   ],
-  "usage_note_pl": "Fałszywy przyjaciel: znaczy „być może”, a nie „w końcu” (= schließlich). Skrót: evtl."
+  "usage_note_pl": "Fałszywy przyjaciel: znaczy „być może”, a nie „w końcu” (= schließlich). Skrót: evtl.",
+  "_src_reader": "34cc7d1f"
  },
  "adverb-145": {
   "_src": "e7eaaadf",
@@ -5069,7 +5569,8 @@
     "example_pl": "Na bagaż jest osobny schowek."
    }
   ],
-  "usage_note_pl": "„Specjalnie”: Ich habe extra auf dich gewartet. — Specjalnie na ciebie czekałem. Nie odmienia się."
+  "usage_note_pl": "„Specjalnie”: Ich habe extra auf dich gewartet. — Specjalnie na ciebie czekałem. Nie odmienia się.",
+  "_src_reader": "6cbfb997"
  },
  "adverb-189": {
   "_src": "623f1de8",
@@ -5079,7 +5580,8 @@
    {
     "example_pl": "Mam o tym tylko przybliżone pojęcie."
    }
-  ]
+  ],
+  "_src_reader": "ecc2d05d"
  },
  "adverb-193": {
   "_src": "596deb4b",
@@ -5090,7 +5592,8 @@
     "example_pl": "Przewidywany czas przyjazdu to godzina 14."
    }
   ],
-  "usage_note_pl": "Wyraz urzędowy, częsty w komunikatach i prognozach."
+  "usage_note_pl": "Wyraz urzędowy, częsty w komunikatach i prognozach.",
+  "_src_reader": "83b2b7c1"
  },
  "adverb-109": {
   "_src": "b75c85ac",
@@ -5101,7 +5604,8 @@
     "example_pl": "Ma do niego bezwarunkowe zaufanie."
    }
   ],
-  "usage_note_pl": "nicht unbedingt — „niekoniecznie”: Das muss nicht unbedingt heute sein."
+  "usage_note_pl": "nicht unbedingt — „niekoniecznie”: Das muss nicht unbedingt heute sein.",
+  "_src_reader": "ec67eaf5"
  },
  "adverb-200": {
   "_src": "2ffb14df",
@@ -5111,7 +5615,8 @@
    {
     "example_pl": "To była spora niespodzianka."
    }
-  ]
+  ],
+  "_src_reader": "7e3d1300"
  },
  "adjective-adverb-446": {
   "_src": "84b4d5c2",
@@ -5122,7 +5627,8 @@
     "example_pl": "Kiedy ktoś pyta go o wiek, od razu reaguje alergicznie."
    }
   ],
-  "usage_note_pl": "allergisch gegen etwas sein — mieć alergię na coś; w przenośni — nie znosić czegoś."
+  "usage_note_pl": "allergisch gegen etwas sein — mieć alergię na coś; w przenośni — nie znosić czegoś.",
+  "_src_reader": "50003d26"
  },
  "adjective-adverb-447": {
   "_src": "3abe7eba",
@@ -5133,7 +5639,8 @@
     "example_pl": "Miała na sobie efektowny czerwony płaszcz."
    }
   ],
-  "usage_note_pl": "Nie mylić z formami czasownika auffallen: Das ist mir aufgefallen. — Zauważyłem to."
+  "usage_note_pl": "Nie mylić z formami czasownika auffallen: Das ist mir aufgefallen. — Zauważyłem to.",
+  "_src_reader": "9a11c5ca"
  },
  "adjective-adverb-448": {
   "_src": "6baeb5b7",
@@ -5144,7 +5651,8 @@
     "example_pl": "„No to nie” — powiedziała z urazą i wyszła."
    }
   ],
-  "usage_note_pl": "Także forma czasownika beleidigen: Er hat mich beleidigt. — Obraził mnie."
+  "usage_note_pl": "Także forma czasownika beleidigen: Er hat mich beleidigt. — Obraził mnie.",
+  "_src_reader": "9ec5a220"
  },
  "adjective-adverb-449": {
   "_src": "6532b899",
@@ -5154,7 +5662,8 @@
    {
     "example_pl": "Po ponownej próbie w końcu się udało."
    }
-  ]
+  ],
+  "_src_reader": "5609c654"
  },
  "adjective-adverb-450": {
   "_src": "de8bf5ca",
@@ -5165,7 +5674,8 @@
     "example_pl": "Wczoraj w nocy mieliśmy straszną burzę."
    }
   ],
-  "usage_note_pl": "Wyraz potoczny, z wyjątkiem znaczenia „okropny, straszny” w odniesieniu do klęski (ein fürchterliches Unglück). Jako wzmocnienie może stać także przy czymś przyjemnym: fürchterlich nett — strasznie miły."
+  "usage_note_pl": "Wyraz potoczny, z wyjątkiem znaczenia „okropny, straszny” w odniesieniu do klęski (ein fürchterliches Unglück). Jako wzmocnienie może stać także przy czymś przyjemnym: fürchterlich nett — strasznie miły.",
+  "_src_reader": "312b687b"
  },
  "adjective-adverb-451": {
   "_src": "e377670b",
@@ -5175,7 +5685,8 @@
    {
     "example_pl": "Główną przyczyną naszej przeprowadzki była nowa praca."
    }
-  ]
+  ],
+  "_src_reader": "fd8ed709"
  },
  "adjective-adverb-452": {
   "_src": "213c9186",
@@ -5185,7 +5696,8 @@
    {
     "example_pl": "Rozejrzała się bezradnie, bo nikt nie mówił po angielsku."
    }
-  ]
+  ],
+  "_src_reader": "c48096fd"
  },
  "adjective-adverb-453": {
   "_src": "0fea8ea0",
@@ -5196,7 +5708,8 @@
     "example_pl": "W salonie mamy tylko oświetlenie pośrednie."
    }
   ],
-  "usage_note_pl": "Gramatyka: indirekte Rede — mowa zależna."
+  "usage_note_pl": "Gramatyka: indirekte Rede — mowa zależna.",
+  "_src_reader": "4ac22f19"
  },
  "adjective-adverb-454": {
   "_src": "9839f050",
@@ -5207,7 +5720,8 @@
     "example_pl": "Już wcześniej nieoficjalnie się porozumieliśmy."
    }
   ],
-  "usage_note_pl": "Wyraz książkowy."
+  "usage_note_pl": "Wyraz książkowy.",
+  "_src_reader": "8a5001a0"
  },
  "adjective-adverb-455": {
   "_src": "62943fed",
@@ -5218,7 +5732,8 @@
     "example_pl": "Firma płaci swoim ludziom dość marnie."
    }
   ],
-  "usage_note_pl": "Wyraz potoczny; w znaczeniach „paskudny”, „podły” — pejoratywnie. sich mies fühlen — źle się czuć."
+  "usage_note_pl": "Wyraz potoczny; w znaczeniach „paskudny”, „podły” — pejoratywnie. sich mies fühlen — źle się czuć.",
+  "_src_reader": "76fbfc10"
  },
  "adjective-adverb-456": {
   "_src": "32c6ed6c",
@@ -5228,7 +5743,8 @@
    {
     "example_pl": "Po wielomiesięcznym sporze sąsiedzi w końcu się pogodzili."
    }
-  ]
+  ],
+  "_src_reader": "1c484157"
  },
  "adjective-adverb-457": {
   "_src": "e1477c23",
@@ -5238,7 +5754,8 @@
    {
     "example_pl": "Po wielogodzinnej dyskusji w końcu znaleźliśmy rozwiązanie."
    }
-  ]
+  ],
+  "_src_reader": "187cea27"
  },
  "adjective-adverb-458": {
   "_src": "fdb5dda7",
@@ -5248,7 +5765,8 @@
    {
     "example_pl": "Po wielodniowych poszukiwaniach policja znalazła psa, który uciekł."
    }
-  ]
+  ],
+  "_src_reader": "5b4a634b"
  },
  "adjective-adverb-459": {
   "_src": "560cb2f1",
@@ -5258,7 +5776,8 @@
    {
     "example_pl": "Po wielotygodniowym upale w końcu znowu spadł deszcz."
    }
-  ]
+  ],
+  "_src_reader": "12fb14fd"
  },
  "adjective-adverb-460": {
   "_src": "606719bd",
@@ -5269,7 +5788,8 @@
     "example_pl": "Jedzenie w stołówce pachnie dziś naprawdę obrzydliwie."
    }
   ],
-  "usage_note_pl": "W znaczeniu „okropnie, bardzo” — potocznie: abscheulich teuer."
+  "usage_note_pl": "W znaczeniu „okropnie, bardzo” — potocznie: abscheulich teuer.",
+  "_src_reader": "19c51d2f"
  },
  "adjective-adverb-461": {
   "_src": "c8c280a0",
@@ -5279,7 +5799,8 @@
    {
     "example_pl": "Sędzia od razu ukarał umyślny faul czerwoną kartką."
    }
-  ]
+  ],
+  "_src_reader": "73353299"
  },
  "adjective-adverb-462": {
   "_src": "d943e0ee",
@@ -5290,7 +5811,8 @@
     "example_pl": "Starannie złożyła serwetki i położyła je na stole."
    }
   ],
-  "usage_note_pl": "Regionalnie jako przysłówek — „właśnie, równo”: akkurat um acht Uhr — równo o ósmej."
+  "usage_note_pl": "Regionalnie jako przysłówek — „właśnie, równo”: akkurat um acht Uhr — równo o ósmej.",
+  "_src_reader": "bf8ceedd"
  },
  "adjective-adverb-463": {
   "_src": "721beb43",
@@ -5300,7 +5822,8 @@
    {
     "example_pl": "Kelner dość nachalnie próbował namówić nas na deser."
    }
-  ]
+  ],
+  "_src_reader": "74477e3c"
  },
  "adjective-adverb-464": {
   "_src": "475c52ec",
@@ -5311,7 +5834,8 @@
     "example_pl": "Mężczyzna podejrzanie wolno przeszedł obok naszego domu."
    }
   ],
-  "usage_note_pl": "W medycynie i pedagogice — „z odchyleniami (od normy)”: ein auffälliger Befund."
+  "usage_note_pl": "W medycynie i pedagogice — „z odchyleniami (od normy)”: ein auffälliger Befund.",
+  "_src_reader": "0883bf32"
  },
  "adjective-adverb-465": {
   "_src": "43216c3c",
@@ -5322,7 +5846,8 @@
     "example_pl": "Mimo oczywistego sukcesu zespół był niezadowolony."
    }
   ],
-  "usage_note_pl": "Wyraz podniosły. Jako przysłówek często wyraża wniosek na podstawie zewnętrznych oznak — „jak wszystko wskazuje”."
+  "usage_note_pl": "Wyraz podniosły. Jako przysłówek często wyraża wniosek na podstawie zewnętrznych oznak — „jak wszystko wskazuje”.",
+  "_src_reader": "9529f7e0"
  },
  "adjective-adverb-466": {
   "_src": "32479377",
@@ -5332,7 +5857,8 @@
    {
     "example_pl": "Zdjęcie opublikowano za wyraźną zgodą rodziców."
    }
-  ]
+  ],
+  "_src_reader": "8fcc05e8"
  },
  "adjective-adverb-467": {
   "_src": "5b942d6b",
@@ -5343,7 +5869,8 @@
     "example_pl": "Raport zawiera szczegółowy opis wszystkich uszkodzeń domu."
    }
   ],
-  "usage_note_pl": "W znaczeniu „przychodzący” (eingehende Anrufe, Post — przychodzące połączenia, przychodząca poczta) — wiąże się z czasownikiem eingehen."
+  "usage_note_pl": "W znaczeniu „przychodzący” (eingehende Anrufe, Post — przychodzące połączenia, przychodząca poczta) — wiąże się z czasownikiem eingehen.",
+  "_src_reader": "cd862157"
  },
  "adjective-adverb-468": {
   "_src": "9b4fe62c",
@@ -5354,7 +5881,8 @@
     "example_pl": "Nagranie wideo jednoznacznie pokazuje, kto spowodował wypadek."
    }
   ],
-  "usage_note_pl": "einwandfrei nachweisen, feststellen — niepodważalnie udowodnić, ustalić."
+  "usage_note_pl": "einwandfrei nachweisen, feststellen — niepodważalnie udowodnić, ustalić.",
+  "_src_reader": "0d57d368"
  },
  "adjective-adverb-469": {
   "_src": "e4b56dde",
@@ -5365,7 +5893,8 @@
     "example_pl": "Wystarczająca ilość snu w istotny sposób wpływa na nasze zdrowie."
    }
   ],
-  "usage_note_pl": "Także: essentiell. W znaczeniu „istotny” — książkowo. Nie mylić z im Wesentlichen — w gruncie rzeczy, zasadniczo."
+  "usage_note_pl": "Także: essentiell. W znaczeniu „istotny” — książkowo. Nie mylić z im Wesentlichen — w gruncie rzeczy, zasadniczo.",
+  "_src_reader": "b55f202a"
  },
  "adjective-adverb-470": {
   "_src": "2652840d",
@@ -5376,7 +5905,8 @@
     "example_pl": "Zamiast z nią porozmawiać, tchórzliwie zerwał z nią SMS-em."
    }
   ],
-  "usage_note_pl": "Wyraz pejoratywny. Także: feig. Nie mylić z die Feige — figa."
+  "usage_note_pl": "Wyraz pejoratywny. Także: feig. Nie mylić z die Feige — figa.",
+  "_src_reader": "413d1e4e"
  },
  "adjective-adverb-471": {
   "_src": "143f8c47",
@@ -5386,7 +5916,8 @@
    {
     "example_pl": "Czynsz wzrósł w tym roku tylko nieznacznie."
    }
-  ]
+  ],
+  "_src_reader": "83177e14"
  },
  "adjective-adverb-472": {
   "_src": "7d129889",
@@ -5396,7 +5927,8 @@
    {
     "example_pl": "Czy mieszkanie jest wystarczająco duże dla rodziny z dwójką dzieci?"
    }
-  ]
+  ],
+  "_src_reader": "85a1b6c8"
  },
  "adjective-adverb-473": {
   "_src": "45a8c3a9",
@@ -5406,7 +5938,8 @@
    {
     "example_pl": "Klub bezkompromisowo stawia na młodych zawodników z własnej szkółki."
    }
-  ]
+  ],
+  "_src_reader": "6f007ef1"
  },
  "adjective-adverb-474": {
   "_src": "51127c00",
@@ -5417,7 +5950,8 @@
     "example_pl": "Dwaj przyjaciele w każdy weekend gorąco spierają się o piłkę nożną."
    }
   ],
-  "usage_note_pl": "leidenschaftlich gern — bardzo lubić (coś robić): Sie kocht leidenschaftlich gern."
+  "usage_note_pl": "leidenschaftlich gern — bardzo lubić (coś robić): Sie kocht leidenschaftlich gern.",
+  "_src_reader": "c51b2a01"
  },
  "adjective-adverb-475": {
   "_src": "7635b5e1",
@@ -5428,7 +5962,8 @@
     "example_pl": "Nauczyciel wyjaśnił zadanie tak logicznie, że każdy je zrozumiał."
    }
   ],
-  "usage_note_pl": "W znaczeniu „oczywiście, jasne” — potocznie: Kommst du mit? — Logisch!"
+  "usage_note_pl": "W znaczeniu „oczywiście, jasne” — potocznie: Kommst du mit? — Logisch!",
+  "_src_reader": "c100b4fc"
  },
  "adjective-adverb-476": {
   "_src": "9bbd507e",
@@ -5438,7 +5973,8 @@
    {
     "example_pl": "Nasz nieufny pies szczeka na każdego gościa."
    }
-  ]
+  ],
+  "_src_reader": "7b6ed516"
  },
  "adjective-adverb-477": {
   "_src": "c05e1613",
@@ -5448,7 +5984,8 @@
    {
     "example_pl": "Godzina była podana w zaproszeniu tak niejasno, że połowa gości się spóźniła."
    }
-  ]
+  ],
+  "_src_reader": "f402c84a"
  },
  "adjective-adverb-478": {
   "_src": "407188b0",
@@ -5458,7 +5995,8 @@
    {
     "example_pl": "Koledzy zorganizowali mi spóźnione przyjęcie urodzinowe, bo byłam na urlopie."
    }
-  ]
+  ],
+  "_src_reader": "bc7f3891"
  },
  "adjective-adverb-479": {
   "_src": "bb8e020e",
@@ -5469,7 +6007,8 @@
     "example_pl": "Od zeszłego roku ceny nie zmieniły się znacząco."
    }
   ],
-  "usage_note_pl": "Często z przeczeniem: nichts Nennenswertes — nic istotnego, nic godnego wzmianki."
+  "usage_note_pl": "Często z przeczeniem: nichts Nennenswertes — nic istotnego, nic godnego wzmianki.",
+  "_src_reader": "dad2bbad"
  },
  "adjective-adverb-480": {
   "_src": "f0938dbc",
@@ -5480,7 +6019,8 @@
     "example_pl": "Sąsiedzi najwyraźniej wyjechali, ich skrzynka na listy jest już przepełniona."
    }
   ],
-  "usage_note_pl": "Jako wtrącenie często wyraża wniosek mówiącego — „najwyraźniej”."
+  "usage_note_pl": "Jako wtrącenie często wyraża wniosek mówiącego — „najwyraźniej”.",
+  "_src_reader": "7570eeb8"
  },
  "adjective-adverb-481": {
   "_src": "03e4e276",
@@ -5491,7 +6031,8 @@
     "example_pl": "Ten stary kabel jest potencjalnie niebezpieczny i należy go wymienić."
    }
   ],
-  "usage_note_pl": "Także: potentiell."
+  "usage_note_pl": "Także: potentiell.",
+  "_src_reader": "89d189bc"
  },
  "adjective-adverb-482": {
   "_src": "91d8da9f",
@@ -5501,7 +6042,8 @@
    {
     "example_pl": "Obraz jest pełen symbolicznych szczegółów, które rozumie się dopiero na drugi rzut oka."
    }
-  ]
+  ],
+  "_src_reader": "763b3dcc"
  },
  "adjective-adverb-483": {
   "_src": "5d1e300e",
@@ -5511,7 +6053,8 @@
    {
     "example_pl": "Mimo sporadycznych przelotnych opadów na festyn miejski przyszło wielu ludzi."
    }
-  ]
+  ],
+  "_src_reader": "a2a8c4c8"
  },
  "adjective-adverb-484": {
   "_src": "4d40a3f5",
@@ -5522,7 +6065,8 @@
     "example_pl": "Mój sąsiad chciał za stary rower tylko symboliczne jedno euro."
    }
   ],
-  "usage_note_pl": "Także o czysto umownej, bardzo małej kwocie: ein symbolischer Betrag — symboliczna kwota."
+  "usage_note_pl": "Także o czysto umownej, bardzo małej kwocie: ein symbolischer Betrag — symboliczna kwota.",
+  "_src_reader": "76c7ef42"
  },
  "adjective-adverb-485": {
   "_src": "7bcc6ce2",
@@ -5533,7 +6077,8 @@
     "example_pl": "Mleko już trochę nieprzyjemnie pachniało, więc je wylałem."
    }
   ],
-  "usage_note_pl": "Stałe wyrażenie: Es ist mir unangenehm, dass … — Jest mi niezręcznie, że …"
+  "usage_note_pl": "Stałe wyrażenie: Es ist mir unangenehm, dass … — Jest mi niezręcznie, że …",
+  "_src_reader": "b2c9320c"
  },
  "adjective-adverb-486": {
   "_src": "d508767a",
@@ -5543,7 +6088,8 @@
    {
     "example_pl": "Niecierpliwy kierowca za nami zatrąbił, gdy tylko zapaliło się zielone światło."
    }
-  ]
+  ],
+  "_src_reader": "0db1db5d"
  },
  "adjective-adverb-487": {
   "_src": "4a59e7b6",
@@ -5553,7 +6099,8 @@
    {
     "example_pl": "Kelner pogardliwie zmierzył wzrokiem nasze brudne buty turystyczne."
    }
-  ]
+  ],
+  "_src_reader": "73256017"
  },
  "adjective-adverb-488": {
   "_src": "480ddb48",
@@ -5564,7 +6111,8 @@
     "example_pl": "Na dworze jest dziś diabelnie zimno."
    }
   ],
-  "usage_note_pl": "Wyraz potoczny; w znaczeniu „cholerny” — także pejoratywnie. Wykrzyknienie: Verflixt (noch mal)! — Do diabła!"
+  "usage_note_pl": "Wyraz potoczny; w znaczeniu „cholerny” — także pejoratywnie. Wykrzyknienie: Verflixt (noch mal)! — Do diabła!",
+  "_src_reader": "6e9b1109"
  },
  "adjective-adverb-489": {
   "_src": "aae7a4d1",
@@ -5574,7 +6122,8 @@
    {
     "example_pl": "Nasz stary diesel niezawodnie zapala nawet w największe mrozy."
    }
-  ]
+  ],
+  "_src_reader": "3cddf57a"
  },
  "adjective-adverb-490": {
   "_src": "13a797c1",
@@ -5584,7 +6133,8 @@
    {
     "example_pl": "Już cały ranek rozpaczliwie szukam swojego paszportu."
    }
-  ]
+  ],
+  "_src_reader": "aa3ac62e"
  },
  "adjective-adverb-491": {
   "_src": "02bc7b9d",
@@ -5595,7 +6145,8 @@
     "example_pl": "W starej piwnicy wstrętnie śmierdziało pleśnią."
    }
   ],
-  "usage_note_pl": "Wyraz pejoratywny."
+  "usage_note_pl": "Wyraz pejoratywny.",
+  "_src_reader": "b166e6f8"
  },
  "adjective-adverb-492": {
   "_src": "792cec5e",
@@ -5605,7 +6156,8 @@
    {
     "example_pl": "Kotka czule otarła się o moją nogę."
    }
-  ]
+  ],
+  "_src_reader": "e481b5e8"
  },
  "adjective-adverb-493": {
   "_src": "df8bd4bc",
@@ -5615,7 +6167,8 @@
    {
     "example_pl": "Lekarz wypowiedział się ostrożnie na temat szans na wyleczenie."
    }
-  ]
+  ],
+  "_src_reader": "94f5a729"
  },
  "adjective-adverb-494": {
   "_src": "c34fb503",
@@ -5625,7 +6178,8 @@
    {
     "example_pl": "Do wjazdu koniecznie potrzebny jest ważny paszport."
    }
-  ]
+  ],
+  "_src_reader": "bcc2f673"
  },
  "adjective-adverb-495": {
   "_src": "885a1251",
@@ -5635,7 +6189,8 @@
    {
     "example_pl": "Miasto planuje stopniowe obniżenie cen biletów."
    }
-  ]
+  ],
+  "_src_reader": "6adfda3d"
  },
  "adjective-adverb-496": {
   "_src": "15433bd6",
@@ -5645,7 +6200,8 @@
    {
     "example_pl": "Ostateczną decyzję zarząd podejmie w grudniu."
    }
-  ]
+  ],
+  "_src_reader": "ec1c7045"
  },
  "adjective-adverb-497": {
   "_src": "7195f0cb",
@@ -5656,7 +6212,8 @@
     "example_pl": "Nasza nowa sąsiadka jest niezwykle uczynna i często opiekuje się naszą kotką."
    }
   ],
-  "usage_note_pl": "Przed końcówką i w stopniu wyższym wypada e z -euer: ungeheure Kosten, ungeheurer. Rzeczownik das Ungeheuer „potwór” — osobne hasło."
+  "usage_note_pl": "Przed końcówką i w stopniu wyższym wypada e z -euer: ungeheure Kosten, ungeheurer. Rzeczownik das Ungeheuer „potwór” — osobne hasło.",
+  "_src_reader": "b9cb66c4"
  },
  "adjective-adverb-498": {
   "_src": "57f6e14e",
@@ -5667,7 +6224,8 @@
     "example_pl": "W środku lata w jego mieszkaniu na poddaszu robi się szalenie gorąco."
    }
   ],
-  "usage_note_pl": "W znaczeniu „zboczony” o ludziach i ich skłonnościach — często obraźliwie. W znaczeniu „chory, nienormalny (o zachowaniu, sytuacji)” i jako wzmocnienie — potocznie: abartig teuer — szalenie drogo."
+  "usage_note_pl": "W znaczeniu „zboczony” o ludziach i ich skłonnościach — często obraźliwie. W znaczeniu „chory, nienormalny (o zachowaniu, sytuacji)” i jako wzmocnienie — potocznie: abartig teuer — szalenie drogo.",
+  "_src_reader": "25b4180d"
  },
  "adjective-adverb-499": {
   "_src": "cd37a190",
@@ -5678,7 +6236,8 @@
     "example_pl": "Po powodzi wiele rodzin w dosłownym tego słowa znaczeniu zostało z niczym."
    }
   ],
-  "usage_note_pl": "Główne użycie — przysłówek „dosłownie” (wzmacnia wypowiedź). W znaczeniu „dosłowny” występuje rzadko, zwykle mówi się wörtlich."
+  "usage_note_pl": "Główne użycie — przysłówek „dosłownie” (wzmacnia wypowiedź). W znaczeniu „dosłowny” występuje rzadko, zwykle mówi się wörtlich.",
+  "_src_reader": "25e15122"
  },
  "adjective-adverb-500": {
   "_src": "25d6666f",
@@ -5688,7 +6247,8 @@
    {
     "example_pl": "Kto odpowiada za wielu pracowników, ten dostaje też odpowiednie wynagrodzenie."
    }
-  ]
+  ],
+  "_src_reader": "c0ef8fb9"
  },
  "adjective-adverb-501": {
   "_src": "bdf46495",
@@ -5698,7 +6258,8 @@
    {
     "example_pl": "Obecna sytuacja na rynku mieszkaniowym martwi wiele rodzin."
    }
-  ]
+  ],
+  "_src_reader": "ad6c6097"
  },
  "adjective-adverb-502": {
   "_src": "93011431",
@@ -5708,7 +6269,8 @@
    {
     "example_pl": "Bez chętnej pomocy naszych sąsiadów nie dalibyśmy rady z przeprowadzką."
    }
-  ]
+  ],
+  "_src_reader": "ac4942f2"
  },
  "adjective-adverb-503": {
   "_src": "fe200866",
@@ -5719,7 +6281,8 @@
     "example_pl": "Pisarka jest znana ze swojego obrazowego języka."
    }
   ],
-  "usage_note_pl": "bildlich gesprochen — mówiąc obrazowo."
+  "usage_note_pl": "bildlich gesprochen — mówiąc obrazowo.",
+  "_src_reader": "6fad2860"
  },
  "adjective-adverb-504": {
   "_src": "2a12861a",
@@ -5729,7 +6292,8 @@
    {
     "example_pl": "Testament musi być opatrzony własnoręcznym podpisem."
    }
-  ]
+  ],
+  "_src_reader": "0ae1829a"
  },
  "adjective-adverb-505": {
   "_src": "32f7ef2f",
@@ -5740,7 +6304,8 @@
     "example_pl": "Po długiej nocnej zmianie byłam strasznie zmęczona."
    }
   ],
-  "usage_note_pl": "W znaczeniu „strasznie silny” (entsetzlicher Durst) i „okropnie, strasznie” (entsetzlich laut) — potocznie."
+  "usage_note_pl": "W znaczeniu „strasznie silny” (entsetzlicher Durst) i „okropnie, strasznie” (entsetzlich laut) — potocznie.",
+  "_src_reader": "6aefe933"
  },
  "adjective-adverb-506": {
   "_src": "c9654367",
@@ -5750,7 +6315,8 @@
    {
     "example_pl": "Słuchał w osłupieniu, jak lekarka wyjaśnia mu diagnozę."
    }
-  ]
+  ],
+  "_src_reader": "9c352a25"
  },
  "adjective-adverb-507": {
   "_src": "7f7cc6d2",
@@ -5760,7 +6326,8 @@
    {
     "example_pl": "Przy zderzeniu czołowym poduszki powietrzne ochroniły obu kierowców."
    }
-  ]
+  ],
+  "_src_reader": "fa024c6e"
  },
  "adjective-adverb-508": {
   "_src": "54e506f1",
@@ -5770,7 +6337,8 @@
    {
     "example_pl": "Lekarz zalecił jej całkowitą rezygnację z cukru."
    }
-  ]
+  ],
+  "_src_reader": "e1fe14cc"
  },
  "adjective-adverb-509": {
   "_src": "986cf652",
@@ -5781,7 +6349,8 @@
     "example_pl": "Nasza córka jest bardzo zręczna w pracach ręcznych i lubi robić meble."
    }
   ],
-  "usage_note_pl": "Nie mylić z formą czasownika schicken: Ich habe dir das Foto geschickt — Wysłałem ci zdjęcie."
+  "usage_note_pl": "Nie mylić z formą czasownika schicken: Ich habe dir das Foto geschickt — Wysłałem ci zdjęcie.",
+  "_src_reader": "22e019b9"
  },
  "adjective-adverb-510": {
   "_src": "032191d9",
@@ -5792,7 +6361,8 @@
     "example_pl": "Piosenkarz wczoraj wieczorem okropnie fałszował."
    }
   ],
-  "usage_note_pl": "W znaczeniu „bardzo zły” i jako wzmocnienie (grauenhaft laut) — potocznie."
+  "usage_note_pl": "W znaczeniu „bardzo zły” i jako wzmocnienie (grauenhaft laut) — potocznie.",
+  "_src_reader": "cd325552"
  },
  "adjective-adverb-511": {
   "_src": "651ffc75",
@@ -5803,7 +6373,8 @@
     "example_pl": "Muzyka u sąsiadów była wczoraj do północy potwornie głośna."
    }
   ],
-  "usage_note_pl": "W znaczeniu „okropnie, bardzo mocno” — potocznie."
+  "usage_note_pl": "W znaczeniu „okropnie, bardzo mocno” — potocznie.",
+  "_src_reader": "421df360"
  },
  "adjective-adverb-512": {
   "_src": "a45a49c3",
@@ -5814,7 +6385,8 @@
     "example_pl": "Koledzy z klasy okrutnie dokuczali chłopcu."
    }
   ],
-  "usage_note_pl": "W znaczeniu „strasznie, okropnie” — potocznie."
+  "usage_note_pl": "W znaczeniu „strasznie, okropnie” — potocznie.",
+  "_src_reader": "12def5a0"
  },
  "adjective-adverb-513": {
   "_src": "65fa50e3",
@@ -5825,7 +6397,8 @@
     "example_pl": "Dzieci wspaniale śpiewały na koncercie szkolnym."
    }
   ],
-  "usage_note_pl": "W trzecim znaczeniu — potocznie: Wir müssen nicht großartig planen — Nie musimy specjalnie planować."
+  "usage_note_pl": "W trzecim znaczeniu — potocznie: Wir müssen nicht großartig planen — Nie musimy specjalnie planować.",
+  "_src_reader": "6401c04d"
  },
  "adjective-adverb-514": {
   "_src": "a1b1fa26",
@@ -5836,7 +6409,8 @@
     "example_pl": "Młody pianista uchodzi za jeden z najbardziej obiecujących talentów w kraju."
    }
   ],
-  "usage_note_pl": "Nie mylić: hoffentlich — mam nadzieję, miejmy nadzieję."
+  "usage_note_pl": "Nie mylić: hoffentlich — mam nadzieję, miejmy nadzieję.",
+  "_src_reader": "9aee7389"
  },
  "adjective-adverb-515": {
   "_src": "be7bfe94",
@@ -5847,7 +6421,8 @@
     "example_pl": "Uwaga, rączka patelni podczas smażenia robi się piekielnie gorąca!"
    }
   ],
-  "usage_note_pl": "Jako wzmocnienie — potocznie: höllische Angst haben — strasznie się bać."
+  "usage_note_pl": "Jako wzmocnienie — potocznie: höllische Angst haben — strasznie się bać.",
+  "_src_reader": "af5868de"
  },
  "adjective-adverb-516": {
   "_src": "13d9ae03",
@@ -5858,7 +6433,8 @@
     "example_pl": "Działanie maści zostało już klinicznie udowodnione."
    }
   ],
-  "usage_note_pl": "Stałe wyrażenie: klinisch tot — w stanie śmierci klinicznej."
+  "usage_note_pl": "Stałe wyrażenie: klinisch tot — w stanie śmierci klinicznej.",
+  "_src_reader": "8594f1c0"
  },
  "adjective-adverb-517": {
   "_src": "2d8b5774",
@@ -5868,7 +6444,8 @@
    {
     "example_pl": "Mój młodszy brat był strasznie rozczarowany, kiedy odwołano koncert."
    }
-  ]
+  ],
+  "_src_reader": "5b404f32"
  },
  "adjective-adverb-518": {
   "_src": "4dea33f2",
@@ -5878,7 +6455,8 @@
    {
     "example_pl": "Mój telefon dzwoni dziś cały czas, nie mogę się do niczego zabrać."
    }
-  ]
+  ],
+  "_src_reader": "00411f37"
  },
  "adjective-adverb-519": {
   "_src": "7c3db488",
@@ -5889,7 +6467,8 @@
     "example_pl": "Lekki wiaterek poruszał liśćmi starej brzozy."
    }
   ],
-  "usage_note_pl": "Także: sachte. W znaczeniu „stopniowo” — potocznie. Sachte, sachte! — Powoli, nie śpiesz się! (pot.)"
+  "usage_note_pl": "Także: sachte. W znaczeniu „stopniowo” — potocznie. Sachte, sachte! — Powoli, nie śpiesz się! (pot.)",
+  "_src_reader": "5e411adb"
  },
  "adjective-adverb-520": {
   "_src": "04ef3302",
@@ -5900,7 +6479,8 @@
     "example_pl": "Za to oszustwo grożą mu poważne konsekwencje karne."
    }
   ],
-  "usage_note_pl": "Dotyczy prawa karnego; nie znaczy „przestępczy” (przestępczy — kriminell, verbrecherisch)."
+  "usage_note_pl": "Dotyczy prawa karnego; nie znaczy „przestępczy” (przestępczy — kriminell, verbrecherisch).",
+  "_src_reader": "bb67a0a3"
  },
  "adjective-adverb-521": {
   "_src": "3c9e7898",
@@ -5911,7 +6491,8 @@
     "example_pl": "Mój kolega z pracy podobno ma niezawodny sposób na przeziębienie."
    }
   ],
-  "usage_note_pl": "Wyraz potoczny."
+  "usage_note_pl": "Wyraz potoczny.",
+  "_src_reader": "97df0ad7"
  },
  "adjective-adverb-522": {
   "_src": "a09683a7",
@@ -5922,7 +6503,8 @@
     "example_pl": "Na krótką wycieczkę zabraliśmy przesadnie dużo prowiantu."
    }
   ],
-  "usage_note_pl": "Partizip II od übertreiben — przesadzać. Jako wzmocnienie (übertrieben viel, übertrieben teuer) zachowuje odcień „więcej, niż trzeba”."
+  "usage_note_pl": "Partizip II od übertreiben — przesadzać. Jako wzmocnienie (übertrieben viel, übertrieben teuer) zachowuje odcień „więcej, niż trzeba”.",
+  "_src_reader": "416b348b"
  },
  "adjective-adverb-523": {
   "_src": "fa088b67",
@@ -5932,7 +6514,8 @@
    {
     "example_pl": "Złodziej miał na sobie szarą kurtkę i zupełnie niepozorną czapkę."
    }
-  ]
+  ],
+  "_src_reader": "acc00c95"
  },
  "adjective-adverb-524": {
   "_src": "f9acd6f2",
@@ -5942,7 +6525,8 @@
    {
     "example_pl": "Babcia przez całą zimę niestrudzenie robiła na drutach skarpetki dla wnuków."
    }
-  ]
+  ],
+  "_src_reader": "69331068"
  },
  "adjective-adverb-525": {
   "_src": "7a0ee493",
@@ -5953,7 +6537,8 @@
     "example_pl": "Wydał wszystkie swoje oszczędności zupełnie bezsensownie."
    }
   ],
-  "usage_note_pl": "W znaczeniu „szalenie, strasznie” (unsinnig teuer) — potocznie."
+  "usage_note_pl": "W znaczeniu „szalenie, strasznie” (unsinnig teuer) — potocznie.",
+  "_src_reader": "a4c41069"
  },
  "adjective-adverb-526": {
   "_src": "0536b199",
@@ -5963,7 +6548,8 @@
    {
     "example_pl": "Nie podpisuj, proszę, umowy pochopnie, najpierw dokładnie ją przeczytaj."
    }
-  ]
+  ],
+  "_src_reader": "5d71399d"
  },
  "adjective-adverb-527": {
   "_src": "dcf799e9",
@@ -5973,7 +6559,8 @@
    {
     "example_pl": "Kierowca nieodpowiedzialnie szybko przejechał obok szkoły podstawowej."
    }
-  ]
+  ],
+  "_src_reader": "a3f6ab60"
  },
  "adjective-adverb-528": {
   "_src": "7c791505",
@@ -5983,7 +6570,8 @@
    {
     "example_pl": "Nieuchronnym skutkiem sporu o spadek był rozłam w rodzinie."
    }
-  ]
+  ],
+  "_src_reader": "73bacab1"
  },
  "adjective-adverb-529": {
   "_src": "abe39c3a",
@@ -5993,7 +6581,8 @@
    {
     "example_pl": "Podczas kontroli okazało się, że ciężarówka była niedopuszczalnie przeciążona."
    }
-  ]
+  ],
+  "_src_reader": "d723edde"
  },
  "adjective-adverb-530": {
   "_src": "4f0b92f2",
@@ -6003,7 +6592,8 @@
    {
     "example_pl": "Jej nagły wyjazd zbił nas wszystkich z tropu."
    }
-  ]
+  ],
+  "_src_reader": "e4e81e65"
  },
  "adjective-adverb-531": {
   "_src": "c3897d23",
@@ -6013,7 +6603,8 @@
    {
     "example_pl": "„Mnie przecież nikt nigdy nie pomógł” — powiedziała z goryczą."
    }
-  ]
+  ],
+  "_src_reader": "8e388cd2"
  },
  "adjective-adverb-532": {
   "_src": "89ac31e8",
@@ -6024,7 +6615,8 @@
     "example_pl": "Starszy pan długo patrzył jak urzeczony na morze."
    }
   ],
-  "usage_note_pl": "Stałe wyrażenie: in Gedanken versunken — pogrążony w myślach. W znaczeniu „zatopiony” — forma czasownika versinken."
+  "usage_note_pl": "Stałe wyrażenie: in Gedanken versunken — pogrążony w myślach. W znaczeniu „zatopiony” — forma czasownika versinken.",
+  "_src_reader": "ede18074"
  },
  "adjective-adverb-533": {
   "_src": "5af2e799",
@@ -6035,7 +6627,8 @@
     "example_pl": "Masz zupełną rację, całkiem o tym zapomniałem."
    }
   ],
-  "usage_note_pl": "Akcent zależy od znaczenia: vóllkommen — „całkowity, zupełny; zupełnie, całkowicie”; vollkómmen — „doskonały, idealny”."
+  "usage_note_pl": "Akcent zależy od znaczenia: vóllkommen — „całkowity, zupełny; zupełnie, całkowicie”; vollkómmen — „doskonały, idealny”.",
+  "_src_reader": "e3e74f77"
  },
  "adjective-adverb-534": {
   "_src": "d4aa61cb",
@@ -6045,7 +6638,8 @@
    {
     "example_pl": "Za przedterminową spłatę kredytu bank pobiera opłatę."
    }
-  ]
+  ],
+  "_src_reader": "c7aece6d"
  },
  "adjective-adverb-535": {
   "_src": "925cf4df",
@@ -6055,7 +6649,8 @@
    {
     "example_pl": "Na przyjęciu zachowywał się naprawdę wstrętnie."
    }
-  ]
+  ],
+  "_src_reader": "790b6b54"
  },
  "adjective-adverb-536": {
   "_src": "bc152383",
@@ -6065,7 +6660,8 @@
    {
     "example_pl": "Niechętnym skinieniem głowy zgodził się na plan."
    }
-  ]
+  ],
+  "_src_reader": "23af40a4"
  },
  "adjective-adverb-537": {
   "_src": "795d6bf4",
@@ -6075,7 +6671,8 @@
    {
     "example_pl": "Dosłowne znaczenie tego przysłowia jest zupełnie inne niż przenośne."
    }
-  ]
+  ],
+  "_src_reader": "f594c6de"
  },
  "adjective-adverb-538": {
   "_src": "2b6d6536",
@@ -6085,7 +6682,8 @@
    {
     "example_pl": "Film pokazuje bezlitosną walkę o przetrwanie na pustyni."
    }
-  ]
+  ],
+  "_src_reader": "928f4556"
  },
  "adjective-adverb-539": {
   "_src": "7696268d",
@@ -6095,7 +6693,8 @@
    {
     "example_pl": "Wynajmujący wyznaczył nam ultymatywny termin: zapłacić do piątku albo się wyprowadzić."
    }
-  ]
+  ],
+  "_src_reader": "17b023e2"
  },
  "adjective-adverb-540": {
   "_src": "dfd63296",
@@ -6105,7 +6704,8 @@
    {
     "example_pl": "Czas nieubłaganie biegnie dalej, czy tego chcemy, czy nie."
    }
-  ]
+  ],
+  "_src_reader": "85e8480b"
  },
  "adjective-adverb-541": {
   "_src": "96a2e0b9",
@@ -6115,7 +6715,8 @@
    {
     "example_pl": "Nieustanny deszcz zamienił ścieżki w błoto."
    }
-  ]
+  ],
+  "_src_reader": "bf504143"
  },
  "adjective-adverb-542": {
   "_src": "13924f56",
@@ -6125,7 +6726,8 @@
    {
     "example_pl": "Po rozmowie z lekarką znów była spokojna i pełna ufności."
    }
-  ]
+  ],
+  "_src_reader": "b5e1be72"
  },
  "adjective-adverb-543": {
   "_src": "a5e10bfc",
@@ -6136,6 +6738,7 @@
     "example_pl": "Słuchał z napięciem, żeby nie uronić ani słowa."
    }
   ],
-  "usage_note_pl": "O sytuacji, stosunkach, nerwach: Die Lage ist angespannt. — Sytuacja jest napięta. Przysłówek — z napięciem, uważnie: angespannt zuhören. Od anspannen — napinać (siły, mięśnie). Nie mylić z gespannt — z zaciekawieniem, w oczekiwaniu: gespannt zuhören — słuchać z zapartym tchem."
+  "usage_note_pl": "O sytuacji, stosunkach, nerwach: Die Lage ist angespannt. — Sytuacja jest napięta. Przysłówek — z napięciem, uważnie: angespannt zuhören. Od anspannen — napinać (siły, mięśnie). Nie mylić z gespannt — z zaciekawieniem, w oczekiwaniu: gespannt zuhören — słuchać z zapartym tchem.",
+  "_src_reader": "ff21cdd5"
  }
 }

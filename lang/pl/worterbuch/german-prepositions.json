@@ -8,7 +8,8 @@
    }
   ],
   "usage_note_pl": "Odpowiada na pytanie Woher?: aus Berlin, aus dem Haus. Materiał: aus Holz — z drewna. Przyczyna: aus Angst — ze strachu. Jeśli aus stoi na końcu zdania przy czasowniku (Er sieht müde aus), jest częścią czasownika aussehen, a nie przyimkiem.",
-  "_src": "35871fd4"
+  "_src": "35871fd4",
+  "_src_reader": "2fde1e41"
  },
  "preposition-002": {
   "translation_pl": "u, przy; koło; podczas",
@@ -20,7 +21,8 @@
   ],
   "forms_note_pl": "Forma ściągnięta: beim = bei dem.",
   "usage_note_pl": "U kogoś lub w instytucji: bei Oma, bei Siemens. W pobliżu miejsca: Potsdam liegt bei Berlin. W trakcie czynności: beim Essen — przy jedzeniu. Jeśli bei stoi na końcu zdania przy czasowniku (Sie bringt mir Deutsch bei), jest częścią czasownika beibringen, a nie przyimkiem.",
-  "_src": "ba3fb809"
+  "_src": "ba3fb809",
+  "_src_reader": "9c528fc2"
  },
  "preposition-003": {
   "translation_pl": "z; pociągiem, autobusem itp. (o transporcie); za pomocą",
@@ -31,7 +33,8 @@
    }
   ],
   "usage_note_pl": "Transport: mit dem Bus — autobusem. Narzędzie: mit dem Messer — nożem. Jeśli mit stoi na końcu zdania przy czasowniku (Kommst du mit?), jest częścią czasownika mitkommen, a nie przyimkiem.",
-  "_src": "650be4b7"
+  "_src": "650be4b7",
+  "_src_reader": "a6f15360"
  },
  "preposition-004": {
   "translation_pl": "do, na (kierunek: miasta, kraje bez rodzajnika); po; według, zgodnie z",
@@ -45,7 +48,8 @@
    }
   ],
   "usage_note_pl": "nach Hause — do domu (a zu Hause — w domu). Ale z krajami z rodzajnikiem — in (in die Schweiz), z osobami — zu (zum Arzt). Czas: nach dem Essen — po jedzeniu. Jeśli nach stoi na końcu zdania przy czasowniku (Ich denke darüber nach), jest częścią czasownika nachdenken, a nie przyimkiem.",
-  "_src": "8f70baa9"
+  "_src": "8f70baa9",
+  "_src_reader": "4625a475"
  },
  "preposition-005": {
   "translation_pl": "od (jakiegoś momentu); już (od jakiegoś czasu)",
@@ -56,7 +60,8 @@
    }
   ],
   "usage_note_pl": "Czynność zaczęła się w przeszłości i trwa nadal, dlatego czasownik zwykle stoi w czasie Präsens: Ich wohne seit 2020 hier. Spójnik seit „odkąd” wprowadza zdanie podrzędne — to osobne hasło Konjunktion.",
-  "_src": "e52de3b7"
+  "_src": "e52de3b7",
+  "_src_reader": "d6755c61"
  },
  "preposition-006": {
   "translation_pl": "od, z (skąd); przez kogoś (strona bierna, imiesłów); o (opowiadać o, słyszeć o); przynależność (zamiast Genitivu)",
@@ -68,7 +73,8 @@
   ],
   "forms_note_pl": "Forma ściągnięta: vom = von dem.",
   "usage_note_pl": "Skąd: von der Arbeit, vom Arzt. Czas: von 9 bis 17 Uhr. O czym: Er erzählt von seiner Reise. Przynależność, zwłaszcza w języku potocznym: das Auto von meinem Bruder = das Auto meines Bruders. Kto wykonuje czynność — w stronie biernej i przy imiesłowie: Das Buch wurde von Kafka geschrieben. — Książka została napisana przez Kafkę; die von ihr geleitete Schule — szkoła, którą ona kieruje.",
-  "_src": "c1421555"
+  "_src": "c1421555",
+  "_src_reader": "4e88a6bd"
  },
  "preposition-007": {
   "translation_pl": "do (kogoś); do, na (kierunek: do osoby, miejsca, na wydarzenie)",
@@ -80,7 +86,8 @@
   ],
   "forms_note_pl": "Formy ściągnięte: zum = zu dem, zur = zu der.",
   "usage_note_pl": "zu Hause — w domu (a nach Hause — do domu). zu Fuß — pieszo. Cel: zum Lernen — do nauki. zu przed bezokolicznikiem (Ich habe keine Zeit zu lesen) i zu „zbyt” (zu groß) — to nie przyimek, to osobne hasła. Jeśli zu stoi na końcu zdania przy czasowniku (Mach die Tür zu), jest częścią czasownika zumachen.",
-  "_src": "aca54db4"
+  "_src": "aca54db4",
+  "_src_reader": "3b63f683"
  },
  "preposition-008": {
   "translation_pl": "od, począwszy od (o czasie, miejscu)",
@@ -94,7 +101,8 @@
    }
   ],
   "usage_note_pl": "Często bez rodzajnika: ab Montag, ab 18 Jahren. Odjazd: ab Berlin — z Berlina. Jeśli ab stoi na końcu zdania przy czasowniku (Der Zug fährt um acht ab), jest częścią czasownika abfahren, a nie przyimkiem.",
-  "_src": "cf076b57"
+  "_src": "cf076b57",
+  "_src_reader": "371ed8a8"
  },
  "preposition-009": {
   "translation_pl": "naprzeciwko; wobec, w stosunku do; w porównaniu z",
@@ -111,7 +119,8 @@
    }
   ],
   "usage_note_pl": "W stosunku do: Er ist mir gegenüber sehr freundlich. Porównanie: gegenüber dem letzten Jahr — w porównaniu z zeszłym rokiem. Bez rzeczownika gegenüber jest przysłówkiem „naprzeciwko”: Sie wohnt gegenüber.",
-  "_src": "2450f8f6"
+  "_src": "2450f8f6",
+  "_src_reader": "e256278c"
  },
  "preposition-010": {
   "translation_pl": "przez; dzięki, poprzez (przyczyna, środek)",
@@ -123,7 +132,8 @@
   ],
   "forms_note_pl": "Potoczna forma ściągnięta: durchs = durch das.",
   "usage_note_pl": "Środek lub przyczyna: durch Zufall — przypadkiem. W stronie biernej czasem zamiast von: durch einen Sturm zerstört. Jeśli durch stoi na końcu zdania przy czasowniku (Halte durch!), jest częścią czasownika durchhalten, a nie przyimkiem.",
-  "_src": "0ecbc51c"
+  "_src": "0ecbc51c",
+  "_src_reader": "c24c21bf"
  },
  "preposition-011": {
   "translation_pl": "dla; za (zamiast, w zamian); na (okres)",
@@ -135,7 +145,8 @@
   ],
   "forms_note_pl": "Potoczna forma ściągnięta: fürs = für das.",
   "usage_note_pl": "Okres: für eine Woche — na tydzień. Cena: für 10 Euro — za 10 euro. Opinia: für mich — dla mnie, moim zdaniem. W pytaniu Was für ein …? („jaki?”) o przypadku decyduje nie für, lecz rola słowa w zdaniu.",
-  "_src": "af992690"
+  "_src": "af992690",
+  "_src_reader": "5ee3910f"
  },
  "preposition-012": {
   "translation_pl": "przeciwko; o, w (przy uderzeniu); około (o czasie)",
@@ -146,7 +157,8 @@
    }
   ],
   "usage_note_pl": "Uderzenie: gegen die Wand — o ścianę, w ścianę. Przybliżony czas: gegen acht Uhr — około ósmej. Środek na coś: ein Mittel gegen Kopfschmerzen.",
-  "_src": "dd24b6ae"
+  "_src": "dd24b6ae",
+  "_src_reader": "cc69861c"
  },
  "preposition-013": {
   "translation_pl": "bez",
@@ -157,7 +169,8 @@
    }
   ],
   "usage_note_pl": "Często bez rodzajnika: ohne Zucker, ohne Geld. ohne … zu + bezokolicznik (ohne zu fragen — nie pytając) — to spójnik, osobne hasło.",
-  "_src": "9750b316"
+  "_src": "9750b316",
+  "_src_reader": "f1b5ca4e"
  },
  "preposition-014": {
   "_src": "21e9031f",
@@ -169,7 +182,8 @@
    }
   ],
   "forms_note_pl": "Potoczna forma ściągnięta: ums = um das.",
-  "usage_note_pl": "Wokół: um den Tisch (herum). W przybliżeniu: um Weihnachten — około Bożego Narodzenia. O czym: Es geht um Geld — chodzi o pieniądze. um … zu + bezokolicznik („żeby”) — to spójnik, osobne hasło. Jeśli um stoi na końcu zdania przy czasowniku (Wir ziehen um), jest częścią czasownika umziehen, a nie przyimkiem. Różnica — o: Die Temperatur stieg um 5 Grad. — Temperatura wzrosła o 5 stopni; um einen Millimeter zu kurz — o milimetr za krótki."
+  "usage_note_pl": "Wokół: um den Tisch (herum). W przybliżeniu: um Weihnachten — około Bożego Narodzenia. O czym: Es geht um Geld — chodzi o pieniądze. um … zu + bezokolicznik („żeby”) — to spójnik, osobne hasło. Jeśli um stoi na końcu zdania przy czasowniku (Wir ziehen um), jest częścią czasownika umziehen, a nie przyimkiem. Różnica — o: Die Temperatur stieg um 5 Grad. — Temperatura wzrosła o 5 stopni; um einen Millimeter zu kurz — o milimetr za krótki.",
+  "_src_reader": "e7c2d36d"
  },
  "preposition-015": {
   "translation_pl": "do",
@@ -186,7 +200,8 @@
    }
   ],
   "usage_note_pl": "bis bald, bis morgen — do zobaczenia wkrótce, do jutra. bis auf + Akkusativ — „oprócz”: Alle bis auf einen waren da. Spójnik bis „dopóki nie, aż” wprowadza zdanie podrzędne — to osobne hasło Konjunktion.",
-  "_src": "10227e7f"
+  "_src": "10227e7f",
+  "_src_reader": "50738b21"
  },
  "preposition-016": {
   "translation_pl": "wzdłuż",
@@ -203,7 +218,8 @@
    }
   ],
   "usage_note_pl": "W am Fluss entlang o przypadku decyduje an (Dativ), a entlang jest przysłówkiem lub częścią czasownika entlanggehen. W Szwajcarii po rzeczowniku możliwy jest też Dativ.",
-  "_src": "b0ffc466"
+  "_src": "b0ffc466",
+  "_src_reader": "eb59231b"
  },
  "preposition-017": {
   "translation_pl": "na, przy, nad (powierzchnia pionowa, krawędź, woda); do (kierunek: an die Tür); w (dni, daty)",
@@ -218,7 +234,8 @@
   ],
   "forms_note_pl": "Formy ściągnięte: am = an dem, ans = an das.",
   "usage_note_pl": "Czas (kiedy?) — Dativ: am Montag, am Abend, am 3. Mai. Nad wodą, na skraju, przy drzwiach: am Meer, am Rand, an der Tür. Wiele czasowników wymaga an z określonym przypadkiem: denken an + Akkusativ, teilnehmen an + Dativ. Jeśli an stoi na końcu zdania przy czasowniku (Ich rufe dich an), jest częścią czasownika anrufen, a nie przyimkiem.",
-  "_src": "335b2619"
+  "_src": "335b2619",
+  "_src_reader": "05097fb0"
  },
  "preposition-018": {
   "translation_pl": "na (powierzchnia pozioma); na, w (wydarzenie, niektóre miejsca); po (niemiecku)",
@@ -233,7 +250,8 @@
   ],
   "forms_note_pl": "Forma ściągnięta: aufs = auf das.",
   "usage_note_pl": "Miejsca i wydarzenia: auf der Post, auf eine Party. Język: auf Deutsch — po niemiecku. Wiele czasowników wymaga auf + Akkusativ: warten auf, sich freuen auf. Jeśli auf stoi na końcu zdania przy czasowniku (Ich stehe um sieben auf), jest częścią czasownika aufstehen, a nie przyimkiem.",
-  "_src": "198e69cf"
+  "_src": "198e69cf",
+  "_src_reader": "11307161"
  },
  "preposition-019": {
   "translation_pl": "za, z tyłu",
@@ -248,7 +266,8 @@
   ],
   "forms_note_pl": "Potoczne formy ściągnięte: hinterm = hinter dem, hinters = hinter das.",
   "usage_note_pl": "W przenośni: Das liegt hinter uns. — To już za nami.",
-  "_src": "fe8389c4"
+  "_src": "fe8389c4",
+  "_src_reader": "86ee06c8"
  },
  "preposition-020": {
   "translation_pl": "w, do (wewnątrz, do środka); za (o czasie); w (o miesiącach, porach roku: im Mai)",
@@ -263,7 +282,8 @@
   ],
   "forms_note_pl": "Formy ściągnięte: im = in dem, ins = in das.",
   "usage_note_pl": "Czas (kiedy?) — Dativ: im Mai, im Sommer; in einer Woche — za tydzień. Kraje z rodzajnikiem: in der Schweiz (gdzie), in die Schweiz (dokąd).",
-  "_src": "afc0e115"
+  "_src": "afc0e115",
+  "_src_reader": "525a2870"
  },
  "preposition-021": {
   "translation_pl": "obok, koło; poza, oprócz",
@@ -277,7 +297,8 @@
    }
   ],
   "usage_note_pl": "Poza, oprócz — Dativ: Neben der Arbeit studiert sie. — Oprócz pracy studiuje.",
-  "_src": "7fd4abf6"
+  "_src": "7fd4abf6",
+  "_src_reader": "fb37f930"
  },
  "preposition-022": {
   "translation_pl": "nad; przez (w poprzek); o (temat); ponad, więcej niż",
@@ -292,7 +313,8 @@
   ],
   "forms_note_pl": "Potoczna forma ściągnięta: übers = über das.",
   "usage_note_pl": "Temat — zawsze Akkusativ: sprechen über das Wetter. Przez: über die Straße gehen. Trasa: über Köln nach Berlin — przez Kolonię. Ilość: über 100 Leute — ponad sto osób.",
-  "_src": "c3fd5dc6"
+  "_src": "c3fd5dc6",
+  "_src_reader": "287c6db3"
  },
  "preposition-023": {
   "translation_pl": "pod; wśród, między; poniżej, mniej niż",
@@ -307,7 +329,8 @@
   ],
   "forms_note_pl": "Potoczne formy ściągnięte: unterm = unter dem, unters = unter das.",
   "usage_note_pl": "Wśród — Dativ: unter Freunden — wśród przyjaciół. Mniej niż: unter 18 Jahren — poniżej 18 lat. Jeśli unter stoi na końcu zdania przy czasowniku (Die Sonne geht unter), jest częścią czasownika untergehen, a nie przyimkiem.",
-  "_src": "fd87df7e"
+  "_src": "fd87df7e",
+  "_src_reader": "a86b2a81"
  },
  "preposition-024": {
   "translation_pl": "przed; przed (o czasie); temu; z (przyczyna)",
@@ -322,7 +345,8 @@
   ],
   "forms_note_pl": "Potoczne formy ściągnięte: vorm = vor dem, vors = vor das.",
   "usage_note_pl": "Czas — zawsze Dativ: vor dem Essen — przed jedzeniem; vor zwei Jahren — dwa lata temu. Przyczyna — Dativ: vor Angst zittern — drżeć ze strachu. Jeśli vor stoi na końcu zdania przy czasowniku (Ich stelle mich vor), jest częścią czasownika sich vorstellen, a nie przyimkiem.",
-  "_src": "b5f2e612"
+  "_src": "b5f2e612",
+  "_src_reader": "4d9b1008"
  },
  "preposition-025": {
   "translation_pl": "między",
@@ -336,7 +360,8 @@
    }
   ],
   "usage_note_pl": "Czas — Dativ: zwischen 8 und 9 Uhr. Dokąd — Akkusativ: Er setzt sich zwischen seine Eltern.",
-  "_src": "c19e5f57"
+  "_src": "c19e5f57",
+  "_src_reader": "c8f4f7a7"
  },
  "preposition-026": {
   "translation_pl": "podczas, w ciągu",
@@ -350,7 +375,8 @@
    }
   ],
   "usage_note_pl": "Spójnik während „gdy, podczas gdy; natomiast” wprowadza zdanie podrzędne — to osobne hasło Konjunktion.",
-  "_src": "462d43d3"
+  "_src": "462d43d3",
+  "_src_reader": "a2bb6b7e"
  },
  "preposition-027": {
   "translation_pl": "z powodu",
@@ -367,7 +393,8 @@
    }
   ],
   "usage_note_pl": "W języku standardowym z zaimkami używa się słów meinetwegen, deinetwegen, seinetwegen. Rzeczownik bez rodzajnika często bez końcówki: wegen Umbau geschlossen.",
-  "_src": "2f36f978"
+  "_src": "2f36f978",
+  "_src_reader": "f54b8d51"
  },
  "preposition-028": {
   "translation_pl": "mimo",
@@ -381,7 +408,8 @@
    }
   ],
   "usage_note_pl": "trotz allem — mimo wszystko. Rzeczownik bez rodzajnika często bez końcówki: trotz Regen. Trotz wielką literą — rzeczownik „upór”.",
-  "_src": "910d2755"
+  "_src": "910d2755",
+  "_src_reader": "5508ba90"
  },
  "preposition-029": {
   "translation_pl": "zamiast",
@@ -395,7 +423,8 @@
    }
   ],
   "usage_note_pl": "anstatt znaczy to samo i łączy się z tymi samymi przypadkami. statt … zu + bezokolicznik (statt zu arbeiten — zamiast pracować) — to spójnik, osobne hasło.",
-  "_src": "60a545ba"
+  "_src": "60a545ba",
+  "_src_reader": "a7e5d211"
  },
  "preposition-030": {
   "translation_pl": "w ciągu (o czasie); wewnątrz, w obrębie",
@@ -409,7 +438,8 @@
    }
   ],
   "usage_note_pl": "Miejsce: innerhalb der Stadt — w granicach miasta.",
-  "_src": "f68eae44"
+  "_src": "f68eae44",
+  "_src_reader": "591ff6ed"
  },
  "preposition-031": {
   "translation_pl": "poza, na zewnątrz; za (miastem)",
@@ -423,7 +453,8 @@
    }
   ],
   "usage_note_pl": "Czas: außerhalb der Öffnungszeiten — poza godzinami otwarcia.",
-  "_src": "f50f1f32"
+  "_src": "f50f1f32",
+  "_src_reader": "14bc2276"
  },
  "preposition-032": {
   "translation_pl": "według, zgodnie z, jak podaje",
@@ -437,7 +468,8 @@
    }
   ],
   "usage_note_pl": "Rzeczownik bez rodzajnika zwykle bez końcówki: laut Gesetz. Przymiotnik laut — „głośny; głośno” — osobne hasło.",
-  "_src": "4db89310"
+  "_src": "4db89310",
+  "_src_reader": "6f2aa3c6"
  },
  "preposition-033": {
   "translation_pl": "dzięki",
@@ -451,7 +483,8 @@
    }
   ],
   "usage_note_pl": "Rzeczownik bez rodzajnika zwykle bez końcówki: dank Internet. Rzeczownik Dank (wielką literą) — „wdzięczność”, jak w Vielen Dank! — to osobne hasło.",
-  "_src": "4bc918a6"
+  "_src": "4bc918a6",
+  "_src_reader": "e69db638"
  },
  "preposition-034": {
   "translation_pl": "oprócz, z wyjątkiem; poza",
@@ -468,7 +501,8 @@
    }
   ],
   "usage_note_pl": "Poza: außer Betrieb — nieczynny, außer Atem — bez tchu, außer Dienst — w stanie spoczynku. außer sich sein — nie posiadać się (z gniewu, radości), außer sich geraten (mir / mich) — wyjść z siebie. Spójnik außer (außer wenn, außer dass) — osobne hasło.",
-  "_src": "bb5e8f5d"
+  "_src": "bb5e8f5d",
+  "_src_reader": "a47e6a99"
  },
  "preposition-035": {
   "translation_pl": "na, od (każdego); na (jednostkę czasu)",
@@ -482,7 +516,8 @@
    }
   ],
   "usage_note_pl": "Zwykle bez rodzajnika: pro Tag, pro Stunde, pro Stück. 100 km pro Stunde — 100 km na godzinę.",
-  "_src": "d4b99c30"
+  "_src": "d4b99c30",
+  "_src_reader": "f3e9663a"
  },
  "preposition-036": {
   "translation_pl": "przez, za pośrednictwem (o sposobie przekazania); na dzień, z dniem (o dacie, handl.)",
@@ -496,7 +531,8 @@
    }
   ],
   "usage_note_pl": "Zwykle bez rodzajnika: per Post, per Bahn, per Telefon. Język handlowy: per 1. Mai — na dzień 1 maja, per Stück — za sztukę (lepiej pro Stück). mit jemandem per du sein — być z kimś na ty.",
-  "_src": "a5df78f7"
+  "_src": "a5df78f7",
+  "_src_reader": "d03f3fc7"
  },
  "preposition-037": {
   "translation_pl": "włącznie z",
@@ -510,7 +546,8 @@
    }
   ],
   "usage_note_pl": "Rzeczownik bez rodzajnika w lp — bez końcówki: einschließlich Porto. Może stać także po rzeczowniku. Przysłówek: bis einschließlich Freitag — do piątku włącznie. Skrót: einschl.",
-  "_src": "b32f3fe4"
+  "_src": "b32f3fe4",
+  "_src_reader": "b83762e5"
  },
  "preposition-038": {
   "translation_pl": "włącznie z",
@@ -524,7 +561,8 @@
    }
   ],
   "usage_note_pl": "Zwłaszcza w języku handlowym. Rzeczownik bez rodzajnika w lp — bez końcówki: inklusive Frühstück. Może stać po rzeczowniku: Frühstück inklusive. Przysłówek: bis inklusive Montag. Skrót: inkl.",
-  "_src": "5f335b91"
+  "_src": "5f335b91",
+  "_src_reader": "b83762e5"
  },
  "preposition-039": {
   "translation_pl": "wobec, zważywszy na; na widok, w obliczu",
@@ -538,7 +576,8 @@
    }
   ],
   "usage_note_pl": "Wyraz książkowy.",
-  "_src": "219f887e"
+  "_src": "219f887e",
+  "_src_reader": "b6ef65ae"
  },
  "preposition-040": {
   "translation_pl": "po, na podstawie, za pomocą",
@@ -552,7 +591,8 @@
    }
   ],
   "usage_note_pl": "Pisze się tylko łącznie.",
-  "_src": "111ba469"
+  "_src": "111ba469",
+  "_src_reader": "b7a57f1d"
  },
  "preposition-041": {
   "translation_pl": "zamiast",
@@ -566,7 +606,8 @@
    }
   ],
   "usage_note_pl": "Pisze się też rozdzielnie: an Stelle (Duden zaleca anstelle). Ale: an die Stelle von … treten — zająć miejsce. To samo znaczenie — statt.",
-  "_src": "c0555e28"
+  "_src": "c0555e28",
+  "_src_reader": "1db04af9"
  },
  "preposition-042": {
   "translation_pl": "z powodu; na podstawie",
@@ -580,7 +621,8 @@
    }
   ],
   "usage_note_pl": "Pisze się też rozdzielnie: auf Grund (Duden zaleca aufgrund). aufgrund dessen — dlatego, z tego powodu. Brzmi bardziej oficjalnie niż wegen.",
-  "_src": "36c84f99"
+  "_src": "36c84f99",
+  "_src_reader": "c24dee0d"
  },
  "preposition-043": {
   "translation_pl": "odnośnie do, w sprawie",
@@ -594,7 +636,8 @@
    }
   ],
   "usage_note_pl": "Wyraz urzędowy: listy, dokumenty. Skrót: bez.",
-  "_src": "8bc5a599"
+  "_src": "8bc5a599",
+  "_src_reader": "1d3c0819"
  },
  "preposition-044": {
   "translation_pl": "według, zgodnie z",
@@ -611,7 +654,8 @@
    }
   ],
   "usage_note_pl": "Często w dokumentach i przepisach: gemäß § 5. Przymiotnik gemäß „odpowiedni” (eine dem Alter gemäße Aufgabe) — to nie to hasło.",
-  "_src": "25085a87"
+  "_src": "25085a87",
+  "_src_reader": "2459d49b"
  },
  "preposition-045": {
   "translation_pl": "w odniesieniu do, odnośnie do",
@@ -622,7 +666,8 @@
    }
   ],
   "usage_note_pl": "Wyraz urzędowy.",
-  "_src": "e7b7fd1a"
+  "_src": "e7b7fd1a",
+  "_src_reader": "a48c08e6"
  },
  "preposition-046": {
   "translation_pl": "za pomocą",
@@ -636,7 +681,8 @@
    }
   ],
   "usage_note_pl": "Pisze się też rozdzielnie: mit Hilfe (Duden zaleca mithilfe).",
-  "_src": "9ed370dc"
+  "_src": "9ed370dc",
+  "_src_reader": "70818a04"
  },
  "preposition-047": {
   "translation_pl": "wbrew; przeciwko",
@@ -647,7 +693,8 @@
    }
   ],
   "usage_note_pl": "Wyraz książkowy. Stałe wyrażenia: wider Willen — wbrew woli, wider Erwarten — wbrew oczekiwaniom, das Für und Wider — za i przeciw. Nie mylić z wieder (znowu).",
-  "_src": "037ceb25"
+  "_src": "037ceb25",
+  "_src_reader": "7802eb47"
  },
  "preposition-048": {
   "translation_pl": "dla (dobra), ze względu na",
@@ -658,7 +705,8 @@
    }
   ],
   "usage_note_pl": "Wykrzyknienia: Um Himmels willen! Um Gottes willen! — Na miłość boską! Z zaimkami łącznie: um meinetwillen, um deinetwillen.",
-  "_src": "303c9097"
+  "_src": "303c9097",
+  "_src_reader": "649a4b32"
  },
  "preposition-049": {
   "translation_pl": "po odliczeniu, minus",
@@ -672,7 +720,8 @@
    }
   ],
   "usage_note_pl": "Zwłaszcza w języku handlowym. Rzeczownik bez rodzajnika w lp — bez końcówki: abzüglich Rabatt. Przeciwieństwo — zuzüglich (plus).",
-  "_src": "2b4300e8"
+  "_src": "2b4300e8",
+  "_src_reader": "44990f66"
  },
  "preposition-050": {
   "translation_pl": "wskutek, z powodu",
@@ -686,7 +735,8 @@
    }
   ],
   "usage_note_pl": "Pisze się łącznie. Rozdzielnie in Folge — z rzędu: dreimal in Folge.",
-  "_src": "1cf3c6a3"
+  "_src": "1cf3c6a3",
+  "_src_reader": "fa0bb66a"
  },
  "preposition-051": {
   "translation_pl": "pośrodku, wśród",
@@ -700,7 +750,8 @@
    }
   ],
   "usage_note_pl": "Wyraz książkowy; w mowie — mitten in: mitten im Garten.",
-  "_src": "ee682d9e"
+  "_src": "ee682d9e",
+  "_src_reader": "865e5a6e"
  },
  "preposition-052": {
   "translation_pl": "razem z",
@@ -714,7 +765,8 @@
    }
   ],
   "usage_note_pl": "Wzmocniona forma samt: „razem ze wszystkim”.",
-  "_src": "b81770d6"
+  "_src": "b81770d6",
+  "_src_reader": "599cef6a"
  },
  "preposition-053": {
   "translation_pl": "ze strony",
@@ -725,7 +777,8 @@
    }
   ],
   "usage_note_pl": "Wyraz urzędowy; prościej: von der Stadt, vonseiten der Stadt.",
-  "_src": "ae7341eb"
+  "_src": "ae7341eb",
+  "_src_reader": "009cfa27"
  },
  "preposition-054": {
   "translation_pl": "mimo, bez względu na",
@@ -739,7 +792,8 @@
    }
   ],
   "usage_note_pl": "Wyraz książkowy; zwykle mówi się trotz. dessen ungeachtet — mimo to.",
-  "_src": "172a2f18"
+  "_src": "172a2f18",
+  "_src_reader": "405117a9"
  },
  "preposition-055": {
   "translation_pl": "na rzecz, na korzyść",
@@ -756,7 +810,8 @@
    }
   ],
   "usage_note_pl": "Pisze się też rozdzielnie: zu Gunsten (Duden zaleca zugunsten).",
-  "_src": "3c2414a6"
+  "_src": "3c2414a6",
+  "_src_reader": "28ae4625"
  },
  "preposition-056": {
   "translation_pl": "dla (kogoś / czegoś), przez wzgląd na (kogoś / coś)",
@@ -767,7 +822,8 @@
    }
   ],
   "usage_note_pl": "Stoi tylko po słowie: mir zuliebe — dla mnie. Wariant zulieb — zwłaszcza w Austrii.",
-  "_src": "ac8e4532"
+  "_src": "ac8e4532",
+  "_src_reader": "cd8d2210"
  },
  "preposition-057": {
   "translation_pl": "zgodnie z, według (słów, danych)",
@@ -781,7 +837,8 @@
    }
   ],
   "usage_note_pl": "Zwykle stoi po rzeczowniku. Podobne: laut, gemäß.",
-  "_src": "96586abf"
+  "_src": "96586abf",
+  "_src_reader": "8801d2ba"
  },
  "preposition-058": {
   "translation_pl": "plus, z doliczeniem",
@@ -795,7 +852,8 @@
    }
   ],
   "usage_note_pl": "Zwłaszcza w języku handlowym. Rzeczownik bez rodzajnika w lp — bez końcówki: zuzüglich Porto. Przeciwieństwo — abzüglich (minus). Skrót: zzgl.",
-  "_src": "ebcb1077"
+  "_src": "ebcb1077",
+  "_src_reader": "c7d9d059"
  },
  "preposition-059": {
   "translation_pl": "razem z, z",
@@ -809,7 +867,8 @@
    }
   ],
   "usage_note_pl": "Rzeczownik bez rodzajnika w lp — bez końcówki: samt Zubehör. samt und sonders — wszyscy bez wyjątku. Forma wzmocniona — mitsamt. Nie mylić z rzeczownikiem der Samt (aksamit).",
-  "_src": "516d44f0"
+  "_src": "516d44f0",
+  "_src_reader": "5e0895c2"
  },
  "preposition-060": {
   "translation_pl": "ku, w kierunku",
@@ -820,6 +879,7 @@
    }
   ],
   "usage_note_pl": "Wyraz wychodzący z użycia (w książkach, baśniach, czasem żartobliwie); zwykle z nazwami stron świata i Himmel: gen Himmel — ku niebu. Dziś zwykle nach lub zu: nach Süden, zum Himmel.",
-  "_src": "336d236a"
+  "_src": "336d236a",
+  "_src_reader": "f93eabfc"
  }
 }

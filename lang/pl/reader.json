@@ -1,0 +1,1086 @@
+{
+ "phrases": [
+  {
+   "en": "English: ",
+   "ru": "английский: ",
+   "pl": "angielski: "
+  },
+  {
+   "en": "dated",
+   "ru": "устар.",
+   "pl": "przestarz."
+  },
+  {
+   "en": "dated",
+   "ru": "устаревшее",
+   "pl": "przestarzałe"
+  },
+  {
+   "en": "dated",
+   "ru": "устаревающее",
+   "pl": "wychodzące z użycia"
+  },
+  {
+   "en": "formal",
+   "ru": "книжн.",
+   "pl": "książk."
+  },
+  {
+   "en": "formal",
+   "ru": "книжное",
+   "pl": "książkowe"
+  },
+  {
+   "en": "Superlative form",
+   "ru": "Форма превосходной степени",
+   "pl": "Forma stopnia najwyższego"
+  },
+  {
+   "en": "Grammatical form",
+   "ru": "Грамматическая форма",
+   "pl": "Forma gramatyczna"
+  },
+  {
+   "en": "Nom.",
+   "ru": "Ном.",
+   "pl": "Nom."
+  },
+  {
+   "en": "Acc.",
+   "ru": "Акк.",
+   "pl": "Akk."
+  },
+  {
+   "en": "Dative",
+   "ru": "Датив",
+   "pl": "Dativ"
+  },
+  {
+   "en": "Gen.",
+   "ru": "Ген.",
+   "pl": "Gen."
+  },
+  {
+   "en": "masculine",
+   "ru": "мужской род",
+   "pl": "rodzaj męski"
+  },
+  {
+   "en": "feminine",
+   "ru": "женский род",
+   "pl": "rodzaj żeński"
+  },
+  {
+   "en": "neuter",
+   "ru": "средний род",
+   "pl": "rodzaj nijaki"
+  },
+  {
+   "en": "singular or plural",
+   "ru": "единственное или множественное число",
+   "pl": "liczba pojedyncza lub mnoga"
+  },
+  {
+   "en": "plural",
+   "ru": "множественное число",
+   "pl": "liczba mnoga"
+  },
+  {
+   "en": " or ",
+   "ru": " или ",
+   "pl": " lub "
+  },
+  {
+   "en": "Base form",
+   "ru": "Начальная форма",
+   "pl": "Forma podstawowa"
+  },
+  {
+   "en": "I couldn’t find a translation. I even checked under the cover.",
+   "ru": "Перевода не нашёл. Даже под обложкой посмотрел.",
+   "pl": "Nie znalazłem tłumaczenia. Zajrzałem nawet pod okładkę."
+  },
+  {
+   "en": "Auxiliary verb · not translated separately",
+   "ru": "Вспомогательный глагол · отдельно не переводится",
+   "pl": "Czasownik posiłkowy · nie tłumaczy się osobno"
+  },
+  {
+   "en": "Passive auxiliary · be",
+   "ru": "Вспомогательный глагол пассива",
+   "pl": "Czasownik posiłkowy strony biernej"
+  },
+  {
+   "en": "Auxiliary verb · future or passive",
+   "ru": "Вспомогательный глагол · будущее время или пассив",
+   "pl": "Czasownik posiłkowy · czas przyszły lub strona bierna"
+  },
+  {
+   "en": "Conditional construction · would",
+   "ru": "Условная конструкция · бы / будущее в прошлом",
+   "pl": "Konstrukcja warunkowa · -by / przyszłość w przeszłości"
+  },
+  {
+   "en": "Auxiliary · would have",
+   "ru": "Вспомогательный глагол · бы (о прошлом)",
+   "pl": "Czasownik posiłkowy · -by (o przeszłości)"
+  },
+  {
+   "en": "Future perfect auxiliary · will",
+   "ru": "Вспомогательный глагол Futur II",
+   "pl": "Czasownik posiłkowy czasu Futur II"
+  },
+  {
+   "en": "Future perfect auxiliary · have",
+   "ru": "Вспомогательный глагол Futur II",
+   "pl": "Czasownik posiłkowy czasu Futur II"
+  },
+  {
+   "en": "Perfect auxiliary · have",
+   "ru": "Вспомогательный глагол Perfekt",
+   "pl": "Czasownik posiłkowy czasu Perfekt"
+  },
+  {
+   "en": "here: is said to",
+   "ru": "здесь: говорят, будто",
+   "pl": "tu: podobno, jakoby"
+  },
+  {
+   "en": "have to",
+   "ru": "нужно / должен",
+   "pl": "trzeba / musi"
+  },
+  {
+   "en": "Not translated separately",
+   "ru": "Отдельно не переводится",
+   "pl": "Nie tłumaczy się osobno"
+  },
+  {
+   "en": "here: can be done",
+   "ru": "здесь: можно (сделать)",
+   "pl": "tu: można (zrobić)"
+  },
+  {
+   "en": "here: can be done / let oneself be …",
+   "ru": "здесь: можно (сделать) / позволить (себя)",
+   "pl": "tu: można (zrobić) / dać się (…)"
+  },
+  {
+   "en": "here: let oneself (drop, sink); (fig.) to let go, to relax",
+   "ru": "здесь: сам (упал, опустился); (перен.) расслабиться, отпустить себя",
+   "pl": "tu: sam (upadł, opadł); (przen.) odprężyć się, rozluźnić się"
+  },
+  {
+   "en": "here: let’s",
+   "ru": "здесь: давай(те)",
+   "pl": "tu: chodźmy, zróbmy…"
+  },
+  {
+   "en": "here: seems to",
+   "ru": "здесь: кажется, по-видимому",
+   "pl": "tu: wydaje się, najwyraźniej"
+  },
+  {
+   "en": "here: need to",
+   "ru": "здесь: нужно",
+   "pl": "tu: trzeba"
+  },
+  {
+   "en": "here: know how to",
+   "ru": "здесь: уметь",
+   "pl": "tu: umieć"
+  },
+  {
+   "en": "here: usually, tends to",
+   "ru": "здесь: обычно, имеет обыкновение",
+   "pl": "tu: zwykle, ma w zwyczaju"
+  },
+  {
+   "en": "here: be able to",
+   "ru": "здесь: быть в состоянии",
+   "pl": "tu: być w stanie"
+  },
+  {
+   "en": "Auxiliary verb (perfect)",
+   "ru": "Вспомогательный глагол (Perfekt)",
+   "pl": "Czasownik posiłkowy (Perfekt)"
+  },
+  {
+   "en": "Auxiliary verb (passive / future)",
+   "ru": "Вспомогательный глагол (пассив / Futur)",
+   "pl": "Czasownik posiłkowy (strona bierna / Futur)"
+  },
+  {
+   "en": "state",
+   "ru": "состояние",
+   "pl": "stan"
+  },
+  {
+   "en": "verb of motion left out",
+   "ru": "глагол движения опущен",
+   "pl": "pominięty czasownik ruchu"
+  },
+  {
+   "en": "-frei: -free",
+   "ru": "-frei: без …",
+   "pl": "-frei: bez …"
+  },
+  {
+   "en": "-los: -less",
+   "ru": "-los: без …",
+   "pl": "-los: bez …"
+  },
+  {
+   "en": "-voll: -ful",
+   "ru": "-voll: полный …",
+   "pl": "-voll: pełen …"
+  },
+  {
+   "en": "-reich: rich in …",
+   "ru": "-reich: богатый …",
+   "pl": "-reich: bogaty w …"
+  },
+  {
+   "en": "-arm: low in …",
+   "ru": "-arm: бедный …",
+   "pl": "-arm: ubogi w …"
+  },
+  {
+   "en": "-artig: …-like",
+   "ru": "-artig: похожий на …",
+   "pl": "-artig: podobny do …"
+  },
+  {
+   "en": "-fähig: capable of …",
+   "ru": "-fähig: способный к …",
+   "pl": "-fähig: zdolny do …"
+  },
+  {
+   "en": "-er: inhabitant / adjective of the place",
+   "ru": "-er: житель / прилагательное от названия места",
+   "pl": "-er: mieszkaniec / przymiotnik od nazwy miejsca"
+  },
+  {
+   "en": "-ig: with …",
+   "ru": "-ig: с …",
+   "pl": "-ig: z …"
+  },
+  {
+   "en": "-erei: activity (often tiresome)",
+   "ru": "-erei: занятие (часто надоевшее)",
+   "pl": "-erei: zajęcie (często nużące)"
+  },
+  {
+   "en": "-erei: place for …",
+   "ru": "-erei: место для …",
+   "pl": "-erei: miejsce do …"
+  },
+  {
+   "en": "-ig: with … / like …",
+   "ru": "-ig: с … / похожий на …",
+   "pl": "-ig: z … / podobny do …"
+  },
+  {
+   "en": "-lich: with … / like …",
+   "ru": "-lich: с … / похожий на …",
+   "pl": "-lich: z … / podobny do …"
+  },
+  {
+   "en": "-bar: can be …",
+   "ru": "-bar: можно …",
+   "pl": "-bar: można …"
+  },
+  {
+   "en": "un-: not …",
+   "ru": "un-: не-",
+   "pl": "un-: nie-"
+  },
+  {
+   "en": "literally",
+   "ru": "буквально",
+   "pl": "dosłownie"
+  },
+  {
+   "en": "(diminutive)",
+   "ru": "(уменьш.)",
+   "pl": "(zdrobn.)"
+  },
+  {
+   "en": "Possibly from",
+   "ru": "Возможно, от",
+   "pl": "Być może od"
+  },
+  {
+   "en": "From {0} — {1}",
+   "ru": "От {0} — {1}",
+   "pl": "Od {0} — {1}"
+  },
+  {
+   "en": "reported speech",
+   "ru": "косвенная речь: так говорят или думают другие",
+   "pl": "mowa zależna: tak mówią lub myślą inni"
+  },
+  {
+   "en": "old spelling: {0} = {1}",
+   "ru": "старое написание: {0} = {1}",
+   "pl": "dawna pisownia: {0} = {1}"
+  },
+  {
+   "en": "colloquial: {0} = {1}",
+   "ru": "разг.: {0} = {1}",
+   "pl": "pot.: {0} = {1}"
+  },
+  {
+   "en": "here: lass uns … — “let’s …”",
+   "ru": "здесь: lass uns … — «давай(те) …»",
+   "pl": "tu: lass uns … — „chodźmy…, zróbmy…”"
+  },
+  {
+   "en": "here: then (often not translated)",
+   "ru": "здесь: то, тогда (часто не переводится)",
+   "pl": "tu: to, wtedy (często się nie tłumaczy)"
+  },
+  {
+   "en": "{0}- = {1}: the ending is from {2}",
+   "ru": "{0}- = {1}: конец слова взят из {2}",
+   "pl": "{0}- = {1}: koniec słowa wzięty z {2}"
+  },
+  {
+   "en": "here: to be done / can be done",
+   "ru": "здесь: (который) надо / можно",
+   "pl": "tu: (który) trzeba / można"
+  },
+  {
+   "en": "(without sich)",
+   "ru": "(без sich)",
+   "pl": "(bez sich)"
+  },
+  {
+   "en": "us",
+   "ru": "нас",
+   "pl": "nas"
+  },
+  {
+   "en": "two",
+   "ru": "два",
+   "pl": "dwa"
+  },
+  {
+   "en": "three",
+   "ru": "три",
+   "pl": "trzy"
+  },
+  {
+   "en": "four",
+   "ru": "четыре",
+   "pl": "cztery"
+  },
+  {
+   "en": "five",
+   "ru": "пять",
+   "pl": "pięć"
+  },
+  {
+   "en": "six",
+   "ru": "шесть",
+   "pl": "sześć"
+  },
+  {
+   "en": "seven",
+   "ru": "семь",
+   "pl": "siedem"
+  },
+  {
+   "en": "eight",
+   "ru": "восемь",
+   "pl": "osiem"
+  },
+  {
+   "en": "nine",
+   "ru": "девять",
+   "pl": "dziewięć"
+  },
+  {
+   "en": "ten",
+   "ru": "десять",
+   "pl": "dziesięć"
+  },
+  {
+   "en": "twelve",
+   "ru": "двенадцать",
+   "pl": "dwanaście"
+  },
+  {
+   "en": "twenty",
+   "ru": "двадцать",
+   "pl": "dwadzieścia"
+  },
+  {
+   "en": "thirty",
+   "ru": "тридцать",
+   "pl": "trzydzieści"
+  },
+  {
+   "en": "forty",
+   "ru": "сорок",
+   "pl": "czterdzieści"
+  },
+  {
+   "en": "fifty",
+   "ru": "пятьдесят",
+   "pl": "pięćdziesiąt"
+  },
+  {
+   "en": "sixty",
+   "ru": "шестьдесят",
+   "pl": "sześćdziesiąt"
+  },
+  {
+   "en": "seventy",
+   "ru": "семьдесят",
+   "pl": "siedemdziesiąt"
+  },
+  {
+   "en": "eighty",
+   "ru": "восемьдесят",
+   "pl": "osiemdziesiąt"
+  },
+  {
+   "en": "ninety",
+   "ru": "девяносто",
+   "pl": "dziewięćdziesiąt"
+  },
+  {
+   "en": "hundred",
+   "ru": "сто",
+   "pl": "sto"
+  },
+  {
+   "en": "thousand",
+   "ru": "тысяча",
+   "pl": "tysiąc"
+  },
+  {
+   "en": "second",
+   "ru": "второй",
+   "pl": "drugi"
+  },
+  {
+   "en": "third",
+   "ru": "третий",
+   "pl": "trzeci"
+  },
+  {
+   "en": "fourth",
+   "ru": "четвёртый",
+   "pl": "czwarty"
+  },
+  {
+   "en": "fifth",
+   "ru": "пятый",
+   "pl": "piąty"
+  },
+  {
+   "en": "sixth",
+   "ru": "шестой",
+   "pl": "szósty"
+  },
+  {
+   "en": "seventh",
+   "ru": "седьмой",
+   "pl": "siódmy"
+  },
+  {
+   "en": "ninth",
+   "ru": "девятый",
+   "pl": "dziewiąty"
+  },
+  {
+   "en": "tenth",
+   "ru": "десятый",
+   "pl": "dziesiąty"
+  },
+  {
+   "en": "two, team of two",
+   "ru": "двойка",
+   "pl": "dwójka"
+  },
+  {
+   "en": "three, team of three",
+   "ru": "тройка",
+   "pl": "trójka"
+  },
+  {
+   "en": "four, team of four",
+   "ru": "четвёрка",
+   "pl": "czwórka"
+  },
+  {
+   "en": "six",
+   "ru": "шестёрка",
+   "pl": "szóstka"
+  },
+  {
+   "en": "the twenties",
+   "ru": "двадцатые годы",
+   "pl": "lata dwudzieste"
+  },
+  {
+   "en": "the thirties",
+   "ru": "тридцатые годы",
+   "pl": "lata trzydzieste"
+  },
+  {
+   "en": "the forties",
+   "ru": "сороковые годы",
+   "pl": "lata czterdzieste"
+  },
+  {
+   "en": "the fifties",
+   "ru": "пятидесятые годы",
+   "pl": "lata pięćdziesiąte"
+  },
+  {
+   "en": "the sixties",
+   "ru": "шестидесятые годы",
+   "pl": "lata sześćdziesiąte"
+  },
+  {
+   "en": "the seventies",
+   "ru": "семидесятые годы",
+   "pl": "lata siedemdziesiąte"
+  },
+  {
+   "en": "the eighties",
+   "ru": "восьмидесятые годы",
+   "pl": "lata osiemdziesiąte"
+  },
+  {
+   "en": "the nineties",
+   "ru": "девяностые годы",
+   "pl": "lata dziewięćdziesiąte"
+  },
+  {
+   "en": "for the first time",
+   "ru": "впервые (в 1-й раз)",
+   "pl": "po raz pierwszy (po raz 1.)"
+  },
+  {
+   "en": "here: each other",
+   "ru": "здесь: друг друга",
+   "pl": "tu: się nawzajem"
+  },
+  {
+   "en": "Possible reflexive lassen group; selection required",
+   "ru": "Возможная возвратная группа с lassen; требуется выбор",
+   "pl": "Możliwa grupa zwrotna z lassen; trzeba wybrać"
+  },
+  {
+   "en": "Reflexive construction",
+   "ru": "Возвратная конструкция",
+   "pl": "Konstrukcja zwrotna"
+  },
+  {
+   "en": "reading (the act of reading)",
+   "ru": "чтение",
+   "pl": "czytanie"
+  },
+  {
+   "en": "writing (the act of writing)",
+   "ru": "написание; процесс письма",
+   "pl": "pisanie; proces pisania"
+  },
+  {
+   "en": "waiting (the act of waiting)",
+   "ru": "ожидание",
+   "pl": "czekanie"
+  },
+  {
+   "en": "calling (the act of making a phone call)",
+   "ru": "действие: звонить по телефону",
+   "pl": "czynność: telefonowanie"
+  },
+  {
+   "en": "something new",
+   "ru": "что-то новое",
+   "pl": "coś nowego"
+  },
+  {
+   "en": "nothing special",
+   "ru": "ничего особенного",
+   "pl": "nic szczególnego"
+  },
+  {
+   "en": "can / must be",
+   "ru": "можно / нужно",
+   "pl": "można / trzeba"
+  },
+  {
+   "en": "Perfekt · Passiv · zu + infinitive",
+   "ru": "Perfekt · Passiv · zu + инфинитив",
+   "pl": "Perfekt · Passiv · zu + bezokolicznik"
+  },
+  {
+   "en": "Perfekt · zu + infinitive",
+   "ru": "Perfekt · zu + инфинитив",
+   "pl": "Perfekt · zu + bezokolicznik"
+  },
+  {
+   "en": "state · zu + infinitive",
+   "ru": "состояние · zu + инфинитив",
+   "pl": "stan · zu + bezokolicznik"
+  },
+  {
+   "en": "Passiv · zu + infinitive",
+   "ru": "Passiv · zu + инфинитив",
+   "pl": "Passiv · zu + bezokolicznik"
+  },
+  {
+   "en": "modal + zu + infinitive",
+   "ru": "модальный + zu + инфинитив",
+   "pl": "modalny + zu + bezokolicznik"
+  },
+  {
+   "en": "zu + infinitive",
+   "ru": "zu + инфинитив",
+   "pl": "zu + bezokolicznik"
+  },
+  {
+   "en": "passive auxiliary",
+   "ru": "вспомогательный глагол пассива",
+   "pl": "czasownik posiłkowy strony biernej"
+  },
+  {
+   "en": "Future / inference",
+   "ru": "Будущее / предположение",
+   "pl": "Czas przyszły / przypuszczenie"
+  },
+  {
+   "en": "would",
+   "ru": "бы",
+   "pl": "-by"
+  },
+  {
+   "en": "will / probably",
+   "ru": "будет / вероятно",
+   "pl": "będzie / prawdopodobnie"
+  },
+  {
+   "en": "Futur I or passive",
+   "ru": "Futur I или пассив",
+   "pl": "Futur I lub strona bierna"
+  },
+  {
+   "en": "auxiliary: future or passive",
+   "ru": "вспомогательный глагол: будущее время или пассив",
+   "pl": "czasownik posiłkowy: czas przyszły lub strona bierna"
+  },
+  {
+   "en": "Inference",
+   "ru": "Предположение",
+   "pl": "Przypuszczenie"
+  },
+  {
+   "en": "probably",
+   "ru": "вероятно",
+   "pl": "prawdopodobnie"
+  },
+  {
+   "en": "Becoming",
+   "ru": "Становление",
+   "pl": "Stawanie się"
+  },
+  {
+   "en": "infinitive marker",
+   "ru": "частица инфинитива",
+   "pl": "partykuła bezokolicznika"
+  },
+  {
+   "en": "past Konjunktiv II · würde + perfect infinitive",
+   "ru": "Konjunktiv II прошедшего · würde + инфинитив перфекта",
+   "pl": "Konjunktiv II czasu przeszłego · würde + bezokolicznik Perfekt"
+  },
+  {
+   "en": "Konjunktiv II auxiliary",
+   "ru": "вспомогательный глагол Konjunktiv II",
+   "pl": "czasownik posiłkowy trybu Konjunktiv II"
+  },
+  {
+   "en": "Futur II · completed future action / inference about a completed event",
+   "ru": "Futur II · завершённое действие в будущем / предположение о завершённом действии",
+   "pl": "Futur II · czynność zakończona w przyszłości / przypuszczenie o zakończonej czynności"
+  },
+  {
+   "en": "Futur II auxiliary",
+   "ru": "вспомогательный глагол Futur II",
+   "pl": "czasownik posiłkowy czasu Futur II"
+  },
+  {
+   "en": "kommen + Partizip II · the manner of coming (kam angerannt — came running)",
+   "ru": "kommen + Partizip II · способ движения (kam angerannt — прибежал)",
+   "pl": "kommen + Partizip II · sposób ruchu (kam angerannt — przybiegł)"
+  },
+  {
+   "en": "modal without an infinitive · verb of motion left out",
+   "ru": "модальный без инфинитива · глагол движения опущен",
+   "pl": "modalny bez bezokolicznika · pominięty czasownik ruchu"
+  },
+  {
+   "en": "Superlative",
+   "ru": "Превосходная степень",
+   "pl": "Stopień najwyższy"
+  },
+  {
+   "en": "her (dative)",
+   "ru": "ей (дательный падеж)",
+   "pl": "jej (Dativ)"
+  },
+  {
+   "en": "here: after, for (Tag um Tag — day after day)",
+   "ru": "здесь: за (Tag um Tag — день за днём)",
+   "pl": "tu: za (Tag um Tag — dzień za dniem)"
+  },
+  {
+   "en": "here: ever (more and more)",
+   "ru": "здесь: всё (всё больше, всё глубже)",
+   "pl": "tu: coraz (coraz więcej, coraz głębiej)"
+  },
+  {
+   "en": "here: much, far",
+   "ru": "здесь: намного, гораздо",
+   "pl": "tu: o wiele, znacznie"
+  },
+  {
+   "en": "here: much, far (viel zu — far too)",
+   "ru": "здесь: намного, гораздо (viel zu — слишком уж)",
+   "pl": "tu: o wiele, znacznie (viel zu — o wiele za)"
+  },
+  {
+   "en": "here: all / every (alle zehn Minuten — every ten minutes)",
+   "ru": "здесь: все / каждые (alle zehn Minuten — каждые десять минут)",
+   "pl": "tu: wszystkie / co (alle zehn Minuten — co dziesięć minut)"
+  },
+  {
+   "en": "here: as if",
+   "ru": "здесь: как будто",
+   "pl": "tu: jak gdyby"
+  },
+  {
+   "en": "here: as",
+   "ru": "здесь: как",
+   "pl": "tu: jak"
+  },
+  {
+   "en": "here: than",
+   "ru": "здесь: чем",
+   "pl": "tu: niż"
+  },
+  {
+   "en": "here: after all, you know",
+   "ru": "здесь: ведь, же",
+   "pl": "tu: przecież, jak wiesz"
+  },
+  {
+   "en": "here: then, so (adds emphasis to a question)",
+   "ru": "здесь: ну, же (усиливает вопрос)",
+   "pl": "tu: a…? (wzmacnia pytanie)"
+  },
+  {
+   "en": "here: so, then",
+   "ru": "здесь: итак, вот и",
+   "pl": "tu: więc, tak oto"
+  },
+  {
+   "en": "here: come on, do (insisting)",
+   "ru": "здесь: же, ну (настойчиво)",
+   "pl": "tu: -że, ależ (z naciskiem)"
+  },
+  {
+   "en": "here: just (softens a request)",
+   "ru": "здесь: -ка (смягчает просьбу)",
+   "pl": "tu: no, sobie (łagodzi prośbę)"
+  },
+  {
+   "en": "here: just (softens a request; = mal)",
+   "ru": "здесь: -ка (смягчает просьбу; = mal)",
+   "pl": "tu: no, sobie (łagodzi prośbę; = mal)"
+  },
+  {
+   "en": "here: and yet",
+   "ru": "здесь: и всё-таки",
+   "pl": "tu: a jednak"
+  },
+  {
+   "en": "here: if only",
+   "ru": "здесь: хоть бы, если бы только",
+   "pl": "tu: gdyby tak"
+  },
+  {
+   "en": "here: then, again (in a question)",
+   "ru": "здесь: же, ну",
+   "pl": "tu: to (w pytaniu)"
+  },
+  {
+   "en": "here: first, for now",
+   "ru": "здесь: сначала, для начала",
+   "pl": "tu: najpierw, na początek"
+  },
+  {
+   "en": "here: once more",
+   "ru": "здесь: ещё раз",
+   "pl": "tu: jeszcze raz"
+  },
+  {
+   "en": "here: once, at one time (= einmal)",
+   "ru": "здесь: однажды, когда-то (= einmal)",
+   "pl": "tu: kiedyś, pewnego razu (= einmal)"
+  },
+  {
+   "en": "here: I wonder",
+   "ru": "здесь: интересно, …",
+   "pl": "tu: ciekawe, …"
+  },
+  {
+   "en": "here: perfectly well",
+   "ru": "здесь: прекрасно, вполне",
+   "pl": "tu: doskonale, jak najbardziej"
+  },
+  {
+   "en": "here: when",
+   "ru": "здесь: когда",
+   "pl": "tu: kiedy"
+  },
+  {
+   "en": "here: whoever, (the one) who",
+   "ru": "здесь: (тот,) кто",
+   "pl": "tu: (ten,) kto"
+  },
+  {
+   "en": "here: nothing but, pure",
+   "ru": "здесь: одни, сплошь, только",
+   "pl": "tu: sami / same, wyłącznie, tylko"
+  }
+ ],
+ "pronouns": [
+  {
+   "en": "I",
+   "ru": "я",
+   "pl": "ja"
+  },
+  {
+   "en": "me",
+   "ru": "меня",
+   "pl": "mnie"
+  },
+  {
+   "en": "me",
+   "ru": "мне",
+   "pl": "mi"
+  },
+  {
+   "en": "you",
+   "ru": "ты",
+   "pl": "ty"
+  },
+  {
+   "en": "you",
+   "ru": "тебя",
+   "pl": "cię"
+  },
+  {
+   "en": "you",
+   "ru": "тебе",
+   "pl": "ci"
+  },
+  {
+   "en": "he",
+   "ru": "он",
+   "pl": "on"
+  },
+  {
+   "en": "him",
+   "ru": "его",
+   "pl": "go"
+  },
+  {
+   "en": "him",
+   "ru": "ему",
+   "pl": "mu"
+  },
+  {
+   "en": "she / they / you",
+   "ru": "она / они / Вы",
+   "pl": "ona / oni, one / Pan, Pani"
+  },
+  {
+   "en": "it",
+   "ru": "оно",
+   "pl": "ono"
+  },
+  {
+   "en": "we",
+   "ru": "мы",
+   "pl": "my"
+  },
+  {
+   "en": "us",
+   "ru": "нас / нам",
+   "pl": "nas / nam"
+  },
+  {
+   "en": "us",
+   "ru": "нас",
+   "pl": "nas"
+  },
+  {
+   "en": "you / her",
+   "ru": "вы / ей",
+   "pl": "wy / jej"
+  },
+  {
+   "en": "you",
+   "ru": "вас / вам",
+   "pl": "was / wam"
+  },
+  {
+   "en": "you",
+   "ru": "вас",
+   "pl": "was"
+  },
+  {
+   "en": "them / you",
+   "ru": "им / Вам",
+   "pl": "im / Panu, Pani"
+  },
+  {
+   "en": "her / them / you",
+   "ru": "её / их / Вас",
+   "pl": "jej / ich / Pana, Pani"
+  },
+  {
+   "en": "impersonal it",
+   "ru": "безличное «это»",
+   "pl": "bezosobowe es (nie tłumaczy się)"
+  },
+  {
+   "en": "my",
+   "ru": "мой",
+   "pl": "mój"
+  },
+  {
+   "en": "your",
+   "ru": "твой",
+   "pl": "twój"
+  },
+  {
+   "en": "his / its / own",
+   "ru": "его / свой",
+   "pl": "jego / swój"
+  },
+  {
+   "en": "her",
+   "ru": "её",
+   "pl": "jej"
+  },
+  {
+   "en": "their",
+   "ru": "их",
+   "pl": "ich"
+  },
+  {
+   "en": "our",
+   "ru": "наш",
+   "pl": "nasz"
+  },
+  {
+   "en": "your",
+   "ru": "ваш",
+   "pl": "wasz"
+  },
+  {
+   "en": "your",
+   "ru": "Ваш",
+   "pl": "Pana, Pani"
+  },
+  {
+   "en": "myself",
+   "ru": "себя",
+   "pl": "się / siebie"
+  },
+  {
+   "en": "myself",
+   "ru": "себе",
+   "pl": "sobie"
+  },
+  {
+   "en": "yourself",
+   "ru": "себя",
+   "pl": "się / siebie"
+  },
+  {
+   "en": "yourself",
+   "ru": "себе",
+   "pl": "sobie"
+  },
+  {
+   "en": "ourselves",
+   "ru": "себя / себе",
+   "pl": "się / siebie / sobie"
+  },
+  {
+   "en": "yourselves",
+   "ru": "себя / себе",
+   "pl": "się / siebie / sobie"
+  },
+  {
+   "en": "oneself",
+   "ru": "себя / себе",
+   "pl": "się / siebie / sobie"
+  },
+  {
+   "en": "someone",
+   "ru": "кого-то",
+   "pl": "kogoś"
+  },
+  {
+   "en": "someone",
+   "ru": "кому-то",
+   "pl": "komuś"
+  },
+  {
+   "en": "nobody",
+   "ru": "никого",
+   "pl": "nikogo"
+  },
+  {
+   "en": "nobody",
+   "ru": "никому",
+   "pl": "nikomu"
+  },
+  {
+   "en": "whom",
+   "ru": "кого",
+   "pl": "kogo"
+  },
+  {
+   "en": "whom",
+   "ru": "кому",
+   "pl": "komu"
+  },
+  {
+   "en": "whose",
+   "ru": "чей / чья / чьё / чьи",
+   "pl": "czyj / czyja / czyje / czyi"
+  },
+  {
+   "en": "Pronoun",
+   "ru": "Местоимение",
+   "pl": "Zaimek"
+  },
+  {
+   "en": " + it",
+   "ru": " + это",
+   "pl": " + to"
+  }
+ ]
+}
