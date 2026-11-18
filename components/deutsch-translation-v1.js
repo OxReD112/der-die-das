@@ -241,7 +241,10 @@
     if(loaded[id] != null) return Promise.resolve(loaded[id]);
     if(pending[id]) return pending[id];
     if(code === "xx"){ loaded[id] = null; return Promise.resolve(null); }
-    pending[id] = fetch(packUrl(code, file)).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
+    /* through the site's data cache when the page has it (bibliothek/resolver/data-cache.js, speed chat 18.11.2026):
+       a downloaded pack is read from disk without the network; taken at the call — in the reader it is loaded later */
+    var dc = window.BibliothekDataCache, get = dc && dc.enabled && typeof dc.fetch === "function" ? dc.fetch : fetch;
+    pending[id] = get(packUrl(code, file)).then(function(r){ return r && r.ok ? r.json() : null; }).catch(function(){ return null; })
       .then(function(data){
         if(data == null){ delete pending[id]; return null; } // not kept: a later try asks again
         return store(code, file, data);
@@ -412,7 +415,7 @@
     return PACKS[code] && downloaded()[code] === PACKS[code].version ? "ready" : "none";
   }
   function packSize(code){ return PACKS[code] && PACKS[code].size || ""; }
-  /* download(code): reads the manifest and every file it lists (into the browser's cache and this page),
+  /* download(code): reads the manifest and every file it lists (into the site's data cache, when there is one, and this page),
      then remembers the version. Resolves true / false; the language itself is not switched here. */
   function download(code){
     if(!PACKS[code]) return Promise.resolve(false);
@@ -421,7 +424,20 @@
       var list = ["ui.json"];
       for(var f in (m.files || {})) if(list.indexOf(f) === -1 && !/^dictionary\//.test(f)) list.push(f);
       for(var n in (m.exercise_files || {})) list.push("exercises/" + n + ".json");
-      return Promise.all(list.map(function(f){ return loadFile(code, f); })).then(function(all){
+      /* 18.11.2026: the whole pack — reader parts and external dictionary aside — goes to the site's data cache on disk
+         (BibliothekDataCache.store), so pages read it without the network; asks the browser to keep it
+         (navigator.storage.persist). Without the cache (private mode, no Cache API): as before, the browser's own cache. */
+      var dc = window.BibliothekDataCache;
+      try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function(){}); }catch(e){}
+      var stored = dc && dc.enabled && typeof dc.store === "function"
+        ? dc.store(list.map(function(f){ return packUrl(code, f); }), { parallel: 2 }).then(function(r){
+            return !!r && (!r.enabled || ((!r.failed || !r.failed.length) && (!r.skipped || !r.skipped.length)));
+          }, function(){ return false; })
+        : Promise.resolve(true);
+      return stored.then(function(ok){
+        if(!ok) return [null];
+        return Promise.all(list.map(function(f){ return loadFile(code, f); }));
+      }).then(function(all){
         if(all.some(function(x){ return x == null; })) return false;
         try{ var d = downloaded(); d[code] = PACKS[code].version; localStorage.setItem(PACKS_KEY, JSON.stringify(d)); }catch(e){}
         return true;
