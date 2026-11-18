@@ -1503,7 +1503,7 @@
       // A variant is shown as it would read once chosen (reference, section 2).
       const altModel = window.BibliothekMeaningDisplay.card(resolution, candidate, {word, language:popupLanguage(), lookup:findEntry, confirmed:true});
       // (Ч4, advisor 17.11) an English row: «английский: » (ru), the pack's mark «English: » (a pack language) — as the card
-      const englishRow = language === "en" ? locale() === "ru" ? "английский: " : popupLanguage() !== locale() ? display.englishMark?.(popupLanguage()) || "" : "" : "";
+      const englishRow = language === "en" ? locale() === "ru" ? "английский: " : popupLanguage() !== locale() ? window.BibliothekMeaningDisplay?.englishMark?.(popupLanguage()) || "" : "" : "";   // (speed chat 18.11: no `display` here — the choice rows stopped with a ReferenceError)
       const marked = altModel.derived ? altModel.text : `${englishRow}${text}`;
       // G57 (user 24.10.2026): more meanings are only named here («ещё N значений», not a button): choosing the row opens its card,
       // and the number is the one that card shows (a card of parts: all its lines).
