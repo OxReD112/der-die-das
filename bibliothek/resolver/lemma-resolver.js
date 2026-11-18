@@ -18213,9 +18213,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const hard = partBreak, soft = () => false;
       const word = k => norm(tokens[k]?.[0] ?? "");
       for (const {entry, m} of constructionAnchors.get(word(j)) || []) {
-        // only conditions this check can test (form, not_next, not_after, clause_has); others — not here
+        // only conditions this check can test (form, not_next, not_after, clause_has, not_clause_has, not_next_number); others — not here
         if (entry.type !== "Ausdruck" || m.scope !== "adjacent" || m.parts.some(part => part.optional || part.reflexive || !part.form ||
-          Object.keys(part).some(key => !["form","not_next","not_after","clause_has"].includes(key)))) continue;
+          Object.keys(part).some(key => !["form","not_next","not_after","clause_has","not_clause_has","not_next_number"].includes(key)))) continue;
         const parts = m.parts.map(part => [].concat(part.form).map(f => String(f).trim().split(/\s+/u)));
         // every way to write the pattern word by word (one alternative per part)
         let spellings = [[]];
@@ -18230,12 +18230,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const first = m.parts[0], last = m.parts.at(-1), end = start + lastOf.at(-1);
             if (first.not_after && start > 0 && [].concat(first.not_after).map(norm).includes(word(start-1))) continue;
             if (last.not_next && end+1 < tokens.length && [].concat(last.not_next).map(norm).includes(word(end+1))) continue;
+            // not_next_number (17.11.2026, batch 144 bis auf): a number in digits right after the part — as in constructionAt, but only
+            // when a word follows the number (a number closing the sentence is not seen here; independent review 17.11: harmless — then
+            // the part is only not taken as a particle)
+            if (m.parts.some((part,n) => part.not_next_number && start + lastOf[n] + 1 < tokens.length &&
+              /^\s*\d/u.test(gap(start + lastOf[n], start + lastOf[n] + 1)))) continue;
             // clause_has (bei jemandem ein und aus gehen — a form of gehen in the same part, not schaltete … ein und aus)
             let from = start, to = end;
             while (from > 0 && !hard(from-1,from) && !soft(from-1,from)) from--;
             while (to < tokens.length-1 && !hard(to,to+1) && !soft(to,to+1)) to++;
             const inPart = new Set(tokens.slice(from, to+1).map(t => norm(t[0])));
             if (m.parts.some(part => part.clause_has && ![].concat(part.clause_has).map(norm).some(w => inPart.has(w)))) continue;
+            if (m.parts.some(part => part.not_clause_has && [].concat(part.not_clause_has).map(norm).some(w => inPart.has(w)))) continue;
             // E5: a finite verb right after the pattern and a verb before it whose particle is the first word — a new clause
             // follows (stand auf und davon wusste niemand): the first word stays the particle.
             const finiteAt = k => k < tokens.length && /^\p{Ll}/u.test(tokens[k][0]) && (verbAnalyses.get(word(k)) || []).some(a => a.kind === "finite") &&
@@ -18463,6 +18469,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (part.not_next_impersonal && tokens[last+1] && partList(part,"not_next_impersonal").includes(keys[last+1]) &&
               tokens.some((t,k) => clause[k] === clause[i] && (keys[k] === "es" || /['’]s$/u.test(keys[k]) || keys[k] === "s" && /['’]$/u.test(gap(k))))) continue;
             if (part.clause_has && !tokens.some((t,k) => clause[k] === clause[i] && keyIn(k, partList(part,"clause_has")))) continue;
+            // 17.11.2026 (batch 144, 348 jdm. ist nach etw. — not with zumute, that is jdm. ist nach etw. zumute): `not_clause_has` —
+            // the reverse of clause_has, none of these words in the part's clause.
+            if (part.not_clause_has && tokens.some((t,k) => clause[k] === clause[i] && keyIn(k, partList(part,"not_clause_has")))) continue;
             // (31.10.2026: a reflexive part agrees with the subject — CONSTRUCTION_REFLEXIVE_DATIVE above)
             if (part.reflexive) {
               const shared = await sentenceSubjectFacts(sentence,'constructionAt');

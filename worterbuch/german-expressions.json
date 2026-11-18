@@ -17728,7 +17728,10 @@
             "form": [
               "sei's",
               "sei’s",
-              "seis"
+              "seis",
+              "seiʼs",
+              "sei`s",
+              "sei´s"
             ]
           },
           {
@@ -39219,6 +39222,17 @@
             "form": [
               "was",
               "Was"
+            ],
+            "not_after": [
+              "das",
+              "alles",
+              "etwas",
+              "nichts",
+              "vieles",
+              "manches",
+              "dasselbe",
+              "Alles",
+              "Das"
             ]
           },
           {
@@ -39233,7 +39247,58 @@
               "weniger",
               "öfter",
               "häufiger",
-              "seltener"
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "was",
+              "Was"
+            ],
+            "not_after": [
+              "das",
+              "alles",
+              "etwas",
+              "nichts",
+              "vieles",
+              "manches",
+              "dasselbe",
+              "Alles",
+              "Das"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
             ]
           }
         ],
@@ -39246,11 +39311,14 @@
       "positive": [
         "Was auch immer passiert, ich bleibe bei dir.",
         "Er wollte das stehlen, was der Hund bewacht, was auch immer es ist.",
-        "Was auch immer der Hund bewacht, er will es haben."
+        "Was auch immer der Hund bewacht, er will es haben.",
+        "Was er auch immer sagt, glaub ihm nicht."
       ],
       "negative": [
         "Er sagte etwas, was auch immer wieder vorkommt.",
-        "Sie erzählt, was auch immer noch stimmt."
+        "Sie erzählt, was auch immer noch stimmt.",
+        "Er tut das, was er auch immer tut.",
+        "Was machst du auch immer für Sachen?"
       ]
     }
   },
@@ -42659,6 +42727,44 @@
         "order": "fixed",
         "scope": "clause",
         "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "auf",
+              "Auf"
+            ]
+          },
+          {
+            "form": [
+              "den",
+              "die",
+              "das",
+              "welchen",
+              "welche",
+              "welches"
+            ]
+          },
+          {
+            "form": "es"
+          },
+          {
+            "form": [
+              "ankommt",
+              "ankam",
+              "ankäme",
+              "ankomme",
+              "ankommen",
+              "ankamen",
+              "angekommen",
+              "anzukommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
       }
     ],
     "tests": {
@@ -42668,7 +42774,8 @@
         "Eine neue Studie zeigt, worauf es ankommt.",
         "Und wenn's auch ein Viertelpfund ist, kommt es mir nicht darauf an.",
         "Es kommt nur auf dich an.",
-        "Ob es klappt, hängt davon ab, wie sehr es darauf ankommt."
+        "Ob es klappt, hängt davon ab, wie sehr es darauf ankommt.",
+        "Das ist der Punkt, auf den es ankommt."
       ],
       "negative": [
         "Als Klein in Bukarest ankommt, regnet es.",
@@ -54539,6 +54646,4841 @@
         "Ich zeige dir, wie angegossen werden muss.",
         "Sie fragte, wie angegossen worden war.",
         "Wie angegossen wird, hängt von der Pflanze ab."
+      ]
+    }
+  },
+  {
+    "id": "expression-333",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "tief Luft holen",
+    "translation_ru": "глубоко вздохнуть, перевести дух",
+    "translation_en": "to take a deep breath",
+    "example_de": "Bevor er antwortete, holte er tief Luft.",
+    "example_ru": "Прежде чем ответить, он глубоко вздохнул.",
+    "example_en": "Before answering, he took a deep breath.",
+    "notes_ru": [
+      "Также tief Atem holen. Luft holen — вдохнуть, перевести дух: Ich musste erst einmal Luft holen. — Мне сначала нужно было перевести дух."
+    ],
+    "notes_en": [
+      "Also tief Atem holen. Luft holen — to breathe in, to catch one's breath: Ich musste erst einmal Luft holen. — I first had to catch my breath."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Luft",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "hole",
+              "hol",
+              "holst",
+              "holt",
+              "holen",
+              "holte",
+              "holtest",
+              "holten",
+              "holtet",
+              "geholt",
+              "zu holen"
+            ]
+          },
+          {
+            "form": "tief"
+          },
+          {
+            "form": [
+              "Luft",
+              "Atem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "tief"
+          },
+          {
+            "form": [
+              "Luft",
+              "Atem"
+            ]
+          },
+          {
+            "form": [
+              "hole",
+              "hol",
+              "holst",
+              "holt",
+              "holen",
+              "holte",
+              "holtest",
+              "holten",
+              "holtet",
+              "geholt",
+              "zu holen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Bevor er antwortete, holte er tief Luft.",
+        "Ich hole tief Luft und springe.",
+        "Sie hatte tief Luft geholt.",
+        "Du musst jetzt tief Luft holen."
+      ],
+      "negative": [
+        "Die Luft ist hier tief unten schlecht.",
+        "Er holte Luft aus der Flasche."
+      ]
+    }
+  },
+  {
+    "id": "expression-334",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "genau genommen",
+    "translation_ru": "строго говоря, собственно говоря",
+    "translation_en": "strictly speaking",
+    "example_de": "Genau genommen ist das gar kein Fehler.",
+    "example_ru": "Строго говоря, это вовсе не ошибка.",
+    "example_en": "Strictly speaking, that isn't a mistake at all.",
+    "notes_ru": [
+      "Также streng genommen — строго говоря. Не путать: Er hat es mit der Wahrheit nicht so genau genommen — он не очень-то придерживался правды (es genau nehmen)."
+    ],
+    "notes_en": [
+      "Also streng genommen — strictly speaking. Do not confuse: Er hat es mit der Wahrheit nicht so genau genommen — he wasn't too particular about the truth (es genau nehmen)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/genau",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "genau",
+              "Genau",
+              "streng",
+              "Streng"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "und",
+              "aber",
+              "doch",
+              "denn",
+              "oder",
+              "Und",
+              "Aber"
+            ]
+          },
+          {
+            "form": "genommen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Genau genommen ist das gar kein Fehler.",
+        "Das ist, genau genommen, ein anderes Problem.",
+        "Streng genommen hast du recht."
+      ],
+      "negative": [
+        "Er hat es mit der Wahrheit nicht so genau genommen.",
+        "Sie hat das sehr genau genommen.",
+        "Er hat die Regeln nie genau genommen.",
+        "Der Lehrer hat die Aufgabe streng genommen."
+      ]
+    }
+  },
+  {
+    "id": "expression-335",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zu sich nehmen",
+    "translation_ru": "съесть, выпить, принять (пищу); взять к себе (ребёнка)",
+    "translation_en": "to take (food, a drink); to take in (a child)",
+    "example_de": "Seit gestern hat er nichts mehr zu sich genommen.",
+    "example_ru": "Со вчерашнего дня он ничего не ел.",
+    "example_en": "He hasn't eaten anything since yesterday.",
+    "notes_ru": [
+      "Обычно о еде: etwas zu sich nehmen — поесть. О человеке: Die Großmutter nahm das Kind zu sich — бабушка взяла ребёнка к себе; Gott hat ihn zu sich genommen — (эвфем.) он умер."
+    ],
+    "notes_en": [
+      "Usually of food: etwas zu sich nehmen — to have something to eat. Of a person: Die Großmutter nahm das Kind zu sich — the grandmother took the child in; Gott hat ihn zu sich genommen — (euphemism) he died."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/nehmen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "nehme",
+              "nimm",
+              "nimmst",
+              "nimmt",
+              "nehmen",
+              "nehmt",
+              "nahm",
+              "nahmst",
+              "nahmen",
+              "nahmt",
+              "nähme",
+              "nähmen",
+              "genommen",
+              "zu nehmen"
+            ]
+          },
+          {
+            "form": "zu",
+            "not_after": [
+              "mit"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative",
+            "not_next": [
+              "nach",
+              "ins",
+              "in",
+              "heim",
+              "mit"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2,
+        "not_particle_at_end": [
+          "mit"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": "zu",
+            "not_after": [
+              "mit"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "nehme",
+              "nimm",
+              "nimmst",
+              "nimmt",
+              "nehmen",
+              "nehmt",
+              "nahm",
+              "nahmst",
+              "nahmen",
+              "nahmt",
+              "nähme",
+              "nähmen",
+              "genommen",
+              "zu nehmen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Seit gestern hat er nichts mehr zu sich genommen.",
+        "Ich nehme heute nur etwas Suppe zu mir.",
+        "Du solltest mehr Flüssigkeit zu dir nehmen."
+      ],
+      "negative": [
+        "Er nahm das Buch zu Hause.",
+        "Sie nahm das Geld, um zu ihm zu fahren.",
+        "Er nimmt sie mit zu sich nach Hause.",
+        "Er nahm sie mit zu sich."
+      ]
+    }
+  },
+  {
+    "id": "expression-336",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "davon ausgehen (, dass)",
+    "translation_ru": "исходить из того (, что); предполагать",
+    "translation_en": "to assume (that)",
+    "example_de": "Ich gehe davon aus, dass der Zug pünktlich ist.",
+    "example_ru": "Я исхожу из того, что поезд придёт вовремя.",
+    "example_en": "I assume the train will be on time.",
+    "notes_ru": [
+      "Также von etwas ausgehen — исходить из чего-либо: Wir gehen vom schlimmsten Fall aus. — Мы исходим из худшего."
+    ],
+    "notes_en": [
+      "Also von etwas ausgehen — to start from something: Wir gehen vom schlimmsten Fall aus. — We assume the worst case."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/ausgehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "gehe",
+              "geh",
+              "gehst",
+              "geht",
+              "gehen",
+              "ging",
+              "gingst",
+              "gingen",
+              "gingt",
+              "ginge",
+              "gingen"
+            ]
+          },
+          {
+            "form": [
+              "davon",
+              "Davon"
+            ]
+          },
+          {
+            "form": "aus",
+            "not_next": [
+              "dem",
+              "der",
+              "den",
+              "einem",
+              "einer",
+              "allen",
+              "aller"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "davon",
+              "Davon"
+            ]
+          },
+          {
+            "form": [
+              "ausgehen",
+              "ausgeht",
+              "ausging",
+              "ausgingen",
+              "ausginge",
+              "ausgegangen",
+              "auszugehen",
+              "ausgehe",
+              "ausgehst"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "Davon"
+          },
+          {
+            "form": [
+              "gehe",
+              "geh",
+              "gehst",
+              "geht",
+              "gehen",
+              "ging",
+              "gingst",
+              "gingen",
+              "gingt",
+              "ginge",
+              "gingen"
+            ],
+            "not_next": [
+              "ein",
+              "eine",
+              "kein",
+              "keine",
+              "die",
+              "der",
+              "das",
+              "große",
+              "viel",
+              "etwas",
+              "nichts",
+              "Gefahr"
+            ]
+          },
+          {
+            "form": "aus"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich gehe davon aus, dass der Zug pünktlich ist.",
+        "Wir können davon ausgehen, dass er kommt.",
+        "Davon gehe ich aus.",
+        "Sie war davon ausgegangen, dass alle Bescheid wissen."
+      ],
+      "negative": [
+        "Er ging davon, aus Angst vor dem Hund.",
+        "Das Licht geht aus.",
+        "Davon geht eine große Gefahr aus."
+      ]
+    }
+  },
+  {
+    "id": "expression-337",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "es darauf ankommen lassen",
+    "translation_ru": "рискнуть, попробовать (будь что будет)",
+    "translation_en": "to take one's chances, to risk it",
+    "example_de": "Ich weiß nicht, ob es klappt, aber ich lasse es darauf ankommen.",
+    "example_ru": "Не знаю, получится ли, но я рискну.",
+    "example_en": "I don't know if it'll work, but I'll take my chances.",
+    "notes_ru": [
+      "Также es auf etwas ankommen lassen — довести до (ссоры, суда): Sie ließ es auf einen Streit ankommen. Не путать: es kommt darauf an — это зависит (от чего-либо)."
+    ],
+    "notes_en": [
+      "Also es auf etwas ankommen lassen — to let it come to (a quarrel, court): Sie ließ es auf einen Streit ankommen. Do not confuse: es kommt darauf an — it depends."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/ankommen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "lasse",
+              "lass",
+              "laß",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließen",
+              "ließe",
+              "gelassen",
+              "zu lassen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "darauf",
+              "drauf"
+            ]
+          },
+          {
+            "form": "ankommen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "darauf",
+              "drauf"
+            ]
+          },
+          {
+            "form": "ankommen"
+          },
+          {
+            "form": [
+              "lasse",
+              "lass",
+              "laß",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließen",
+              "ließe",
+              "gelassen",
+              "zu lassen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "lasse",
+              "lass",
+              "laß",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließen",
+              "ließe",
+              "gelassen",
+              "zu lassen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": "auf"
+          },
+          {
+            "form": "ankommen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": "auf"
+          },
+          {
+            "form": "ankommen"
+          },
+          {
+            "form": [
+              "lasse",
+              "lass",
+              "laß",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließen",
+              "ließe",
+              "gelassen",
+              "zu lassen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Darauf",
+              "darauf",
+              "Drauf"
+            ]
+          },
+          {
+            "form": [
+              "lasse",
+              "lass",
+              "laß",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließen",
+              "ließe",
+              "gelassen",
+              "zu lassen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": "ankommen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich weiß nicht, ob es klappt, aber ich lasse es darauf ankommen.",
+        "Lassen wir es mal darauf ankommen.",
+        "Er wollte es nicht darauf ankommen lassen.",
+        "Sie ließ es auf einen Streit ankommen.",
+        "Darauf lasse ich es ankommen."
+      ],
+      "negative": [
+        "Es kommt darauf an, wie viel Zeit wir haben."
+      ]
+    }
+  },
+  {
+    "id": "expression-338",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "verdammt noch mal!",
+    "translation_ru": "чёрт возьми!, чёрт побери!",
+    "translation_en": "damn it!, for heaven's sake!",
+    "example_de": "Verdammt noch mal, jetzt geh doch endlich auf!",
+    "example_ru": "Чёрт возьми, да откройся же наконец!",
+    "example_en": "Damn it, just open already!",
+    "notes_ru": [
+      "Разг., грубовато. Также verdammt noch eins, verflixt noch mal. Одно verdammt! — чёрт!"
+    ],
+    "notes_en": [
+      "Colloquial, rather rude. Also verdammt noch eins, verflixt noch mal. Just verdammt! — damn!"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/verdammt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "verdammt",
+              "Verdammt",
+              "verflixt",
+              "Verflixt"
+            ]
+          },
+          {
+            "form": "noch"
+          },
+          {
+            "form": [
+              "mal",
+              "einmal",
+              "eins"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Verdammt noch mal, jetzt geh doch endlich auf!",
+        "Wo ist, verdammt noch mal, mein Schlüssel?"
+      ],
+      "negative": [
+        "Er wurde verdammt, noch mal zu kommen."
+      ]
+    }
+  },
+  {
+    "id": "expression-339",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "verdammt!",
+    "translation_ru": "чёрт!, проклятье!",
+    "translation_en": "damn!",
+    "example_de": "Verdammt! Ich habe den Bus verpasst.",
+    "example_ru": "Чёрт! Я опоздал на автобус.",
+    "example_en": "Damn! I've missed the bus.",
+    "notes_ru": [
+      "Разг. Перед прилагательным — чертовски: verdammt kalt — чертовски холодно (это не выражение)."
+    ],
+    "notes_en": [
+      "Colloquial. Before an adjective — damned: verdammt kalt — damned cold (not this expression)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/verdammt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "Verdammt",
+              "verdammt",
+              "Verflixt",
+              "verflixt"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "oh",
+              "Oh",
+              "ach",
+              "Ach",
+              "so",
+              "na",
+              "Na"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Verdammt! Ich habe den Bus verpasst.",
+        "Oh, verdammt!",
+        "Verdammt, das tut weh!"
+      ],
+      "negative": [
+        "Es ist verdammt kalt.",
+        "Er wurde zum Tode verdammt.",
+        "Verdammt sei der Tag!"
+      ]
+    }
+  },
+  {
+    "id": "expression-340",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "Mann! / o Mann!",
+    "translation_ru": "ну и ну!, вот это да!; ох, боже мой!",
+    "translation_en": "man!, oh man!, boy!",
+    "example_de": "O Mann, das war knapp!",
+    "example_ru": "Ох, было на волоске!",
+    "example_en": "Oh man, that was close!",
+    "notes_ru": [
+      "Разг., восклицание удивления, досады или восхищения. Также Mensch!: Mensch, ist das schön! Одно Mann, в начале фразы часто обращение («муж», «приятель»): Mann, steh auf! — не находится."
+    ],
+    "notes_en": [
+      "Colloquial, an exclamation of surprise, annoyance or admiration. Also Mensch!: Mensch, ist das schön! A bare Mann, at the start is often an address («husband», «mate»): Mann, steh auf! — not matched."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Mann",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "o",
+              "O",
+              "oh",
+              "Oh",
+              "Mann"
+            ]
+          },
+          {
+            "form": "Mann"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "aber",
+              "Aber",
+              "na",
+              "Na"
+            ]
+          },
+          {
+            "form": "Mann"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "O Mann, das war knapp!",
+        "Oh Mann, ist das kalt!",
+        "Aber Mann!"
+      ],
+      "negative": [
+        "Der Mann kam spät.",
+        "Ein alter Mann saß dort.",
+        "Sie sprach mit ihrem Mann.",
+        "Ach, Mann, steh auf!",
+        "Aus dem Weg, Mann!"
+      ]
+    }
+  },
+  {
+    "id": "expression-341",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "es ist an der Zeit",
+    "translation_ru": "пора, настало время",
+    "translation_en": "it is time",
+    "example_de": "Es ist an der Zeit, dass wir etwas ändern.",
+    "example_ru": "Пора нам что-то менять.",
+    "example_en": "It's time we changed something.",
+    "notes_ru": [
+      "Также es ist (höchste) Zeit — пора."
+    ],
+    "notes_en": [
+      "Also es ist (höchste) Zeit — it's (high) time."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Zeit",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "Es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "ist",
+              "war",
+              "wäre",
+              "sei",
+              "wird",
+              "wurde",
+              "würde"
+            ]
+          },
+          {
+            "form": [
+              "jetzt",
+              "nun",
+              "wohl",
+              "langsam",
+              "endlich",
+              "schon",
+              "doch",
+              "wirklich",
+              "allmählich",
+              "nicht"
+            ],
+            "optional": true
+          },
+          {
+            "form": "an"
+          },
+          {
+            "form": "der"
+          },
+          {
+            "form": "Zeit"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 5
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ist",
+              "war",
+              "wäre",
+              "sei",
+              "wird",
+              "wurde",
+              "würde",
+              "Ist",
+              "War",
+              "Wäre"
+            ]
+          },
+          {
+            "form": "es"
+          },
+          {
+            "form": [
+              "jetzt",
+              "nun",
+              "wohl",
+              "langsam",
+              "endlich",
+              "schon",
+              "doch",
+              "wirklich",
+              "allmählich",
+              "nicht"
+            ],
+            "optional": true
+          },
+          {
+            "form": "an"
+          },
+          {
+            "form": "der"
+          },
+          {
+            "form": "Zeit"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 5
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Es ist an der Zeit, dass wir etwas ändern.",
+        "Jetzt ist es an der Zeit, nach Hause zu gehen.",
+        "Es war an der Zeit, Abschied zu nehmen.",
+        "Es ist jetzt an der Zeit zu handeln.",
+        "Ist es nicht an der Zeit, aufzuhören?"
+      ],
+      "negative": [
+        "Er hielt sich an der Zeit fest.",
+        "Es liegt an der Zeit."
+      ]
+    }
+  },
+  {
+    "id": "expression-342",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "der Groschen fällt (bei jdm.)",
+    "translation_ru": "до кого-либо дошло, кто-либо наконец понял",
+    "translation_en": "the penny drops",
+    "example_de": "Nach einer Weile fiel bei ihm endlich der Groschen.",
+    "example_ru": "Через некоторое время до него наконец дошло.",
+    "example_en": "After a while the penny finally dropped.",
+    "notes_ru": [
+      "Разг. Der Groschen ist gefallen — (наконец) дошло. Der Groschen — старая мелкая монета."
+    ],
+    "notes_en": [
+      "Colloquial. Der Groschen ist gefallen — the penny has dropped. Der Groschen — an old small coin."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Groschen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "Groschen",
+            "not_after": [
+              "ein",
+              "einen",
+              "kein",
+              "keinen",
+              "einem",
+              "zwei",
+              "drei",
+              "zehn",
+              "letzten",
+              "einzigen"
+            ]
+          },
+          {
+            "form": [
+              "fällt",
+              "fiel",
+              "fielen",
+              "fiele",
+              "fallen",
+              "gefallen",
+              "zu fallen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "clause_rest": [
+          "bei",
+          "mir",
+          "dir",
+          "ihm",
+          "ihr",
+          "uns",
+          "euch",
+          "ihnen",
+          "endlich",
+          "jetzt",
+          "nun",
+          "langsam",
+          "allmählich",
+          "auch",
+          "dann",
+          "da",
+          "plötzlich",
+          "schließlich",
+          "gefallen",
+          "ist",
+          "war",
+          "bei mir",
+          "bei ihm",
+          "bei ihr",
+          "bei uns"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "fällt",
+              "fiel",
+              "fielen",
+              "fiele",
+              "fallen",
+              "gefallen",
+              "zu fallen"
+            ]
+          },
+          {
+            "form": "Groschen",
+            "not_after": [
+              "ein",
+              "einen",
+              "kein",
+              "keinen",
+              "einem",
+              "zwei",
+              "drei",
+              "zehn",
+              "letzten",
+              "einzigen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach einer Weile fiel bei ihm endlich der Groschen.",
+        "Langsam fällt der Groschen.",
+        "Bei mir ist der Groschen gefallen."
+      ],
+      "negative": [
+        "Er hatte keinen Groschen in der Tasche.",
+        "Für einen Groschen bekam man ein Brötchen.",
+        "Mir fiel ein Groschen aus der Tasche.",
+        "Der Groschen fiel auf den Boden."
+      ]
+    }
+  },
+  {
+    "id": "expression-343",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "in Fahrt kommen",
+    "translation_ru": "разойтись, войти в раж; завестись (разозлиться); набрать ход",
+    "translation_en": "to get going, to get into one's stride; to get worked up; to pick up speed",
+    "example_de": "Nach dem zweiten Glas kam er richtig in Fahrt.",
+    "example_ru": "После второго бокала он по-настоящему разошёлся.",
+    "example_en": "After the second glass he really got going.",
+    "notes_ru": [
+      "Разг. Также in Fahrt sein — быть в ударе; jdn. in Fahrt bringen — раззадорить кого-либо."
+    ],
+    "notes_en": [
+      "Colloquial. Also in Fahrt sein — to be in full swing; jdn. in Fahrt bringen — to get someone going."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Fahrt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "komm",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämen",
+              "gekommen",
+              "zu kommen"
+            ]
+          },
+          {
+            "form": "in"
+          },
+          {
+            "form": "Fahrt",
+            "not_after": [
+              "der",
+              "die",
+              "einer",
+              "seiner",
+              "ihrer",
+              "unserer",
+              "voller",
+              "schneller",
+              "langer",
+              "kurzer",
+              "dieser",
+              "jeder",
+              "eine"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "in"
+          },
+          {
+            "form": "Fahrt",
+            "not_after": [
+              "der",
+              "die",
+              "einer",
+              "seiner",
+              "ihrer",
+              "unserer",
+              "voller",
+              "schneller",
+              "langer",
+              "kurzer",
+              "dieser",
+              "jeder",
+              "eine"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "komm",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämen",
+              "gekommen",
+              "zu kommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem zweiten Glas kam er richtig in Fahrt.",
+        "Die Wirtschaft kommt langsam in Fahrt.",
+        "Als sie erst einmal in Fahrt gekommen war, redete sie stundenlang."
+      ],
+      "negative": [
+        "Wir kamen in der Fahrt nicht weiter.",
+        "Die Fahrt kommt teuer."
+      ]
+    }
+  },
+  {
+    "id": "expression-344",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "letzten Endes",
+    "translation_ru": "в конечном счёте, в конце концов",
+    "translation_en": "ultimately, in the end",
+    "example_de": "Letzten Endes musst du selbst entscheiden.",
+    "example_ru": "В конечном счёте решать тебе.",
+    "example_en": "Ultimately you have to decide yourself.",
+    "notes_ru": [
+      "Также letztendlich — в конечном счёте."
+    ],
+    "notes_en": [
+      "Also letztendlich — ultimately."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Ende",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "letzten",
+              "Letzten"
+            ]
+          },
+          {
+            "form": "Endes"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Letzten Endes musst du selbst entscheiden.",
+        "Das ist letzten Endes egal."
+      ],
+      "negative": [
+        "Am letzten Ende des Tisches saß er."
+      ]
+    }
+  },
+  {
+    "id": "expression-345",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "ganz zu schweigen von",
+    "translation_ru": "не говоря уже о",
+    "translation_en": "not to mention, let alone",
+    "example_de": "Er spricht kaum Englisch, ganz zu schweigen von Französisch.",
+    "example_ru": "Он едва говорит по-английски, не говоря уже о французском.",
+    "example_en": "He hardly speaks English, let alone French.",
+    "notes_ru": [
+      "Также в конце: von den Kosten ganz zu schweigen — не говоря уже о расходах."
+    ],
+    "notes_en": [
+      "Also at the end: von den Kosten ganz zu schweigen — not to mention the costs."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/schweigen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "ganz",
+              "Ganz"
+            ]
+          },
+          {
+            "form": "zu"
+          },
+          {
+            "form": "schweigen"
+          },
+          {
+            "form": [
+              "von",
+              "vom",
+              "davon"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "von",
+              "vom",
+              "Von",
+              "Vom",
+              "davon",
+              "Davon"
+            ]
+          },
+          {
+            "form": "ganz"
+          },
+          {
+            "form": "zu"
+          },
+          {
+            "form": "schweigen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er spricht kaum Englisch, ganz zu schweigen von Französisch.",
+        "Von den Kosten ganz zu schweigen."
+      ],
+      "negative": [
+        "Er hatte beschlossen zu schweigen.",
+        "Er bat sie, ganz zu schweigen.",
+        "Sie zog es vor, ganz zu schweigen."
+      ]
+    }
+  },
+  {
+    "id": "expression-346",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "es liegt daran, dass",
+    "translation_ru": "дело в том, что; это потому, что",
+    "translation_en": "it's because, the reason is that",
+    "example_de": "Es liegt daran, dass niemand zugehört hat.",
+    "example_ru": "Дело в том, что никто не слушал.",
+    "example_en": "It's because nobody was listening.",
+    "notes_ru": [
+      "Вопрос: Woran liegt das? — В чём причина? Также das liegt an … — это из-за …: Das liegt am Wetter."
+    ],
+    "notes_en": [
+      "Question: Woran liegt das? — What's the reason? Also das liegt an … — it's because of …: Das liegt am Wetter."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/liegen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "Es",
+              "das",
+              "Das"
+            ]
+          },
+          {
+            "form": [
+              "liegt",
+              "lag",
+              "läge",
+              "liege",
+              "liegen",
+              "lagen"
+            ],
+            "not_after": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Mir",
+              "Dir",
+              "Ihm",
+              "Ihr",
+              "Uns",
+              "Euch",
+              "Ihnen"
+            ]
+          },
+          {
+            "form": [
+              "einfach",
+              "wohl",
+              "nur",
+              "allein",
+              "auch",
+              "vielleicht",
+              "eben",
+              "nicht",
+              "eher",
+              "wahrscheinlich",
+              "vor allem"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "daran",
+              "dran"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "liegt",
+              "lag",
+              "läge",
+              "liege",
+              "liegen",
+              "lagen"
+            ],
+            "not_after": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Mir",
+              "Dir",
+              "Ihm",
+              "Ihr",
+              "Uns",
+              "Euch",
+              "Ihnen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "das"
+            ]
+          },
+          {
+            "form": [
+              "einfach",
+              "wohl",
+              "nur",
+              "allein",
+              "auch",
+              "vielleicht",
+              "eben",
+              "nicht",
+              "eher",
+              "wahrscheinlich",
+              "vor allem"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "daran",
+              "dran"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Daran",
+              "daran"
+            ]
+          },
+          {
+            "form": [
+              "liegt",
+              "lag",
+              "läge",
+              "liege",
+              "liegen",
+              "lagen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "das"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "clause_rest": [
+          "wohl",
+          "nicht",
+          "vielleicht",
+          "also",
+          "doch",
+          "eben",
+          "auch"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Es liegt daran, dass niemand zugehört hat.",
+        "Vielleicht liegt es daran, dass ich müde bin.",
+        "Das lag daran, dass der Zug Verspätung hatte.",
+        "Es liegt einfach daran, dass niemand Zeit hat.",
+        "Daran liegt es nicht."
+      ],
+      "negative": [
+        "Mir liegt viel daran.",
+        "Das Buch liegt dort.",
+        "Ihm lag es daran, zu gewinnen."
+      ]
+    }
+  },
+  {
+    "id": "expression-347",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Frieden schließen",
+    "translation_ru": "заключить мир; помириться",
+    "translation_en": "to make peace",
+    "example_de": "Nach dem langen Streit schlossen die Brüder endlich Frieden.",
+    "example_ru": "После долгой ссоры братья наконец помирились.",
+    "example_en": "After the long quarrel the brothers finally made peace.",
+    "notes_ru": [
+      "Mit jemandem / etwas Frieden schließen — помириться с кем-либо; смириться с чем-либо."
+    ],
+    "notes_en": [
+      "Mit jemandem / etwas Frieden schließen — to make peace with someone / something."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Frieden",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "schließe",
+              "schließ",
+              "schließt",
+              "schließen",
+              "schloss",
+              "schloß",
+              "schlossen",
+              "schlösse",
+              "geschlossen",
+              "zu schließen"
+            ]
+          },
+          {
+            "form": "Frieden"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "Frieden"
+          },
+          {
+            "form": [
+              "schließe",
+              "schließ",
+              "schließt",
+              "schließen",
+              "schloss",
+              "schloß",
+              "schlossen",
+              "schlösse",
+              "geschlossen",
+              "zu schließen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem langen Streit schlossen die Brüder endlich Frieden.",
+        "Die beiden Länder haben Frieden geschlossen.",
+        "Ich habe meinen Frieden mit der Sache geschlossen."
+      ],
+      "negative": [
+        "Lass mich in Frieden!"
+      ]
+    }
+  },
+  {
+    "id": "expression-348",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "jdm. ist (nicht) nach etw.",
+    "translation_ru": "кому-либо (не) хочется чего-либо, (не) до чего-либо",
+    "translation_en": "someone (doesn't) feel like something",
+    "example_de": "Mir ist heute nicht nach Feiern.",
+    "example_ru": "Мне сегодня не хочется веселиться.",
+    "example_en": "I don't feel like celebrating today.",
+    "notes_ru": [
+      "Разг. Mir ist nach Tanzen — мне хочется потанцевать. Не путать: Mir ist nach dem Essen schlecht — после еды мне плохо."
+    ],
+    "notes_en": [
+      "Colloquial. Mir ist nach Tanzen — I feel like dancing. Do not confuse: Mir ist nach dem Essen schlecht — I feel sick after eating."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/nach",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mir",
+              "Mir",
+              "dir",
+              "Dir",
+              "ihm",
+              "Ihm",
+              "ihr",
+              "Ihr",
+              "uns",
+              "Uns",
+              "euch",
+              "Euch",
+              "ihnen",
+              "Ihnen"
+            ],
+            "not_after": [
+              "unter",
+              "von",
+              "mit",
+              "bei",
+              "zu",
+              "aus",
+              "vor",
+              "nach",
+              "seit",
+              "neben",
+              "zwischen",
+              "hinter",
+              "über",
+              "an",
+              "in",
+              "auf",
+              "außer",
+              "gegenüber",
+              "für",
+              "gegen",
+              "ohne",
+              "durch",
+              "um",
+              "wegen",
+              "trotz",
+              "laut",
+              "dank",
+              "gemäß",
+              "samt",
+              "nebst",
+              "mitsamt",
+              "entgegen",
+              "ab",
+              "binnen",
+              "Unter",
+              "Von",
+              "Mit",
+              "Bei",
+              "Zu",
+              "Aus",
+              "Vor",
+              "Nach",
+              "Seit",
+              "Neben",
+              "Zwischen",
+              "Hinter",
+              "Über",
+              "An",
+              "In",
+              "Auf",
+              "Außer",
+              "Gegenüber",
+              "Für",
+              "Gegen",
+              "Ohne",
+              "Durch",
+              "Um",
+              "Wegen",
+              "Trotz",
+              "Laut",
+              "Dank",
+              "Gemäß",
+              "Samt",
+              "Nebst",
+              "Mitsamt",
+              "Entgegen",
+              "Ab",
+              "Binnen"
+            ]
+          },
+          {
+            "form": [
+              "ist",
+              "war",
+              "wäre"
+            ]
+          },
+          {
+            "form": [
+              "heute",
+              "jetzt",
+              "gerade",
+              "gar",
+              "überhaupt"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "nicht",
+              "heute",
+              "jetzt",
+              "gerade"
+            ],
+            "optional": true
+          },
+          {
+            "form": "nach",
+            "not_clause_has": [
+              "zumute",
+              "Zumute",
+              "Mute"
+            ],
+            "not_next": [
+              "dem",
+              "der",
+              "den",
+              "einer",
+              "einem",
+              "Hause",
+              "oben",
+              "unten",
+              "vorn",
+              "hinten",
+              "links",
+              "rechts",
+              "wie",
+              "kurzer",
+              "langer",
+              "drei",
+              "zwei",
+              "Mitternacht",
+              "Sport",
+              "Feierabend",
+              "Dienstschluss",
+              "eigenen",
+              "Angaben",
+              "Ansicht",
+              "Meinung",
+              "Berichten",
+              "Ende",
+              "Ablauf",
+              "Auskunft",
+              "Informationen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 4
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ist",
+              "war",
+              "wäre",
+              "Ist",
+              "War"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen"
+            ]
+          },
+          {
+            "form": [
+              "heute",
+              "jetzt",
+              "gerade",
+              "gar",
+              "überhaupt"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "nicht",
+              "heute",
+              "jetzt",
+              "gerade"
+            ],
+            "optional": true
+          },
+          {
+            "form": "nach",
+            "not_clause_has": [
+              "zumute",
+              "Zumute",
+              "Mute"
+            ],
+            "not_next": [
+              "dem",
+              "der",
+              "den",
+              "einer",
+              "einem",
+              "Hause",
+              "oben",
+              "unten",
+              "vorn",
+              "hinten",
+              "links",
+              "rechts",
+              "wie",
+              "kurzer",
+              "langer",
+              "drei",
+              "zwei",
+              "Mitternacht",
+              "Sport",
+              "Feierabend",
+              "Dienstschluss",
+              "eigenen",
+              "Angaben",
+              "Ansicht",
+              "Meinung",
+              "Berichten",
+              "Ende",
+              "Ablauf",
+              "Auskunft",
+              "Informationen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 4
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mir ist heute nicht nach Feiern.",
+        "Heute ist mir nicht nach Arbeit.",
+        "Uns ist heute nicht nach Feiern."
+      ],
+      "negative": [
+        "Mir ist nach dem Essen schlecht.",
+        "Ihm war nach einer Stunde langweilig.",
+        "Unter ihnen ist nach Informationen der Zeitung auch ein Minister.",
+        "Ihm ist nach eigenen Angaben nichts passiert.",
+        "Laut ihnen ist nach Ansicht der Ärzte alles gut."
+      ]
+    }
+  },
+  {
+    "id": "expression-349",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "es (kaum / nicht) erwarten können",
+    "translation_ru": "не терпится, не дождаться",
+    "translation_en": "can't wait",
+    "example_de": "Die Kinder können es kaum erwarten, ihre Geschenke auszupacken.",
+    "example_ru": "Детям не терпится распаковать подарки.",
+    "example_en": "The children can hardly wait to unwrap their presents.",
+    "notes_ru": [
+      "Ich kann es kaum erwarten — жду не дождусь."
+    ],
+    "notes_en": [
+      "Ich kann es kaum erwarten — I can't wait."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/erwarten",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "kann",
+              "kannst",
+              "können",
+              "könnt",
+              "konnte",
+              "konntest",
+              "konnten",
+              "konntet",
+              "könnte",
+              "könntest",
+              "könnten",
+              "gekonnt"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "kaum",
+              "nicht",
+              "gar nicht",
+              "einfach nicht",
+              "kaum noch"
+            ]
+          },
+          {
+            "form": [
+              "erwarten",
+              "abwarten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "kaum",
+              "nicht"
+            ]
+          },
+          {
+            "form": [
+              "erwarten",
+              "abwarten"
+            ]
+          },
+          {
+            "form": [
+              "kann",
+              "kannst",
+              "können",
+              "könnt",
+              "konnte",
+              "konntest",
+              "konnten",
+              "konntet",
+              "könnte",
+              "könntest",
+              "könnten",
+              "gekonnt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Kinder können es kaum erwarten, ihre Geschenke auszupacken.",
+        "Ich kann es nicht erwarten, dich wiederzusehen.",
+        "Er sagt, dass er es kaum erwarten kann."
+      ],
+      "negative": [
+        "Ich kann nicht erwarten, dass du alles weißt.",
+        "Das kann man nicht erwarten."
+      ]
+    }
+  },
+  {
+    "id": "expression-350",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "was es mit etw. auf sich hat",
+    "translation_ru": "в чём тут дело, что за этим кроется",
+    "translation_en": "what it's all about, what's behind it",
+    "example_de": "Niemand wusste, was es mit dem alten Turm auf sich hatte.",
+    "example_ru": "Никто не знал, что кроется за старой башней.",
+    "example_en": "Nobody knew what the story with the old tower was.",
+    "notes_ru": [
+      "Также Was hat es damit auf sich? — В чём тут дело?"
+    ],
+    "notes_en": [
+      "Also Was hat es damit auf sich? — What's it all about?"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/sich",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s"
+            ]
+          },
+          {
+            "form": "auf"
+          },
+          {
+            "form": "sich",
+            "not_next": [
+              "genommen",
+              "nehmen",
+              "gestellt",
+              "geladen",
+              "bezogen",
+              "beziehen",
+              "warten",
+              "zukommen"
+            ]
+          },
+          {
+            "form": [
+              "hat",
+              "hatte",
+              "habe",
+              "hätte"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "hat",
+              "hatte",
+              "habe",
+              "hätte",
+              "Hat",
+              "Hatte"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s"
+            ]
+          },
+          {
+            "form": "auf"
+          },
+          {
+            "form": "sich",
+            "not_next": [
+              "genommen",
+              "nehmen",
+              "gestellt",
+              "geladen",
+              "bezogen",
+              "beziehen",
+              "warten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Niemand wusste, was es mit dem alten Turm auf sich hatte.",
+        "Was hat es damit auf sich?",
+        "Ich frage mich, was es damit auf sich hat."
+      ],
+      "negative": [
+        "Er hat es auf sich genommen.",
+        "Sie hat es auf sich bezogen."
+      ]
+    }
+  },
+  {
+    "id": "expression-351",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich mit etw. vertraut machen",
+    "translation_ru": "ознакомиться (с чем-либо), освоиться",
+    "translation_en": "to familiarize oneself with something",
+    "example_de": "Vor der Prüfung muss ich mich mit den Regeln vertraut machen.",
+    "example_ru": "Перед экзаменом мне нужно ознакомиться с правилами.",
+    "example_en": "Before the exam I have to familiarize myself with the rules.",
+    "notes_ru": [
+      "Также mit etwas vertraut sein — хорошо знать, быть знакомым (с чем-либо); jdn. mit etw. vertraut machen — ознакомить кого-либо."
+    ],
+    "notes_en": [
+      "Also mit etwas vertraut sein — to be familiar with something; jdn. mit etw. vertraut machen — to familiarize someone with something."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/vertraut",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mich",
+              "dich",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": true
+          },
+          {
+            "form": [
+              "mit",
+              "damit"
+            ]
+          },
+          {
+            "form": "vertraut"
+          },
+          {
+            "form": [
+              "mache",
+              "mach",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "gemacht",
+              "zu machen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "mach",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "gemacht",
+              "zu machen"
+            ]
+          },
+          {
+            "form": [
+              "mich",
+              "dich",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": true
+          },
+          {
+            "form": [
+              "mit",
+              "damit"
+            ]
+          },
+          {
+            "form": "vertraut"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Vor der Prüfung muss ich mich mit den Regeln vertraut machen.",
+        "Er machte sich schnell mit der neuen Stadt vertraut.",
+        "Es dauerte, bis ich mich damit vertraut gemacht hatte."
+      ],
+      "negative": [
+        "Er ist mit der Stadt vertraut.",
+        "Das macht mich traurig, weil sie mir vertraut ist."
+      ]
+    }
+  },
+  {
+    "id": "expression-352",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "bis auf",
+    "translation_ru": "кроме, за исключением",
+    "translation_en": "except (for), apart from",
+    "example_de": "Alle waren da, bis auf meinen Bruder.",
+    "example_ru": "Все были, кроме моего брата.",
+    "example_en": "Everyone was there except my brother.",
+    "notes_ru": [
+      "Alle bis auf einen — все, кроме одного. С артиклем обычно «до»: bis auf den Boden — до самого пола; bis auf den letzten Platz — до последнего места (не это выражение)."
+    ],
+    "notes_en": [
+      "Alle bis auf einen — all except one. With an article usually “down to / up to”: bis auf den Boden — down to the floor; bis auf den letzten Platz — to the last seat (not this expression)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/bis",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": "auf",
+            "not_next": [
+              "Weiteres",
+              "weiteres",
+              "Wiedersehen",
+              "wiedersehen",
+              "bald",
+              "den",
+              "die",
+              "das",
+              "dem",
+              "der",
+              "des",
+              "diesen",
+              "diese",
+              "dieses",
+              "diesem",
+              "heute",
+              "morgen",
+              "jetzt",
+              "etwa",
+              "rund",
+              "ungefähr",
+              "knapp",
+              "über",
+              "unter",
+              "Rang",
+              "Platz",
+              "null",
+              "Null",
+              "minus"
+            ],
+            "not_next_number": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "alle",
+              "alles",
+              "Alle",
+              "Alles",
+              "keiner",
+              "niemand",
+              "nichts",
+              "beide",
+              "sämtliche",
+              "jeder",
+              "jede",
+              "jedes"
+            ]
+          },
+          {
+            "form": "bis"
+          },
+          {
+            "form": "auf",
+            "not_next": [
+              "Weiteres",
+              "weiteres",
+              "Wiedersehen",
+              "wiedersehen",
+              "bald",
+              "den",
+              "die",
+              "das",
+              "dem",
+              "der",
+              "des",
+              "diesen",
+              "diese",
+              "dieses",
+              "diesem",
+              "heute",
+              "morgen",
+              "jetzt",
+              "etwa",
+              "rund",
+              "ungefähr",
+              "knapp",
+              "über",
+              "unter",
+              "Rang",
+              "Platz",
+              "null",
+              "Null",
+              "minus"
+            ],
+            "not_next_number": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "bis",
+            "not_after": [
+              "sank",
+              "sinkt",
+              "sanken",
+              "fiel",
+              "fällt",
+              "fielen",
+              "stieg",
+              "steigt",
+              "stiegen",
+              "wuchs",
+              "wächst",
+              "ging",
+              "geht",
+              "reicht",
+              "reichte",
+              "reichten",
+              "sich",
+              "hoch",
+              "tief",
+              "weit",
+              "nur",
+              "noch",
+              "erst",
+              "zwar",
+              "Meter",
+              "Fuß",
+              "Grad",
+              "Prozent",
+              "Kilometer",
+              "Zentimeter",
+              "hinab",
+              "hinunter",
+              "herab",
+              "hinauf",
+              "herunter",
+              "abkühlen",
+              "sinken",
+              "steigen"
+            ]
+          },
+          {
+            "form": "auf",
+            "not_next": [
+              "Weiteres",
+              "weiteres",
+              "Wiedersehen",
+              "wiedersehen",
+              "bald",
+              "den",
+              "die",
+              "das",
+              "dem",
+              "der",
+              "des",
+              "diesen",
+              "diese",
+              "dieses",
+              "diesem",
+              "heute",
+              "morgen",
+              "jetzt",
+              "etwa",
+              "rund",
+              "ungefähr",
+              "knapp",
+              "über",
+              "unter",
+              "Rang",
+              "Platz",
+              "null",
+              "Null",
+              "minus",
+              "zwei",
+              "drei",
+              "vier",
+              "fünf",
+              "sechs",
+              "sieben",
+              "acht",
+              "neun",
+              "zehn",
+              "elf",
+              "zwölf",
+              "zwanzig",
+              "dreißig",
+              "vierzig",
+              "fünfzig",
+              "hundert",
+              "tausend",
+              "wenige",
+              "einige"
+            ],
+            "not_next_number": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Alle waren da, bis auf meinen Bruder.",
+        "Bis auf zwei Fehler war alles richtig.",
+        "Alle kamen, bis auf einen.",
+        "Alle bis auf einen waren da."
+      ],
+      "negative": [
+        "Bis auf Weiteres bleibt alles so.",
+        "Der Saal war bis auf den letzten Platz besetzt.",
+        "Er ging bis auf die Straße.",
+        "In den Alpen steigt es bis auf etwa 1500 Meter.",
+        "Der Wasserstand sank bis auf einen Meter.",
+        "Er kam bis auf hundert Meter heran.",
+        "Sie schwammen bis auf zwanzig Meter ans Ufer."
+      ]
+    }
+  },
+  {
+    "id": "expression-353",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "jdm. fällt es wie Schuppen von den Augen",
+    "translation_ru": "у кого-либо пелена спала с глаз, вдруг стало ясно",
+    "translation_en": "the scales fall from someone's eyes",
+    "example_de": "Plötzlich fiel es mir wie Schuppen von den Augen.",
+    "example_ru": "Вдруг у меня словно пелена спала с глаз.",
+    "example_en": "Suddenly the scales fell from my eyes.",
+    "notes_ru": [
+      "Книжн. Из Библии (Деяния 9:18)."
+    ],
+    "notes_en": [
+      "Literary. From the Bible (Acts 9:18)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Schuppe",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "wie"
+          },
+          {
+            "form": "Schuppen"
+          },
+          {
+            "form": "von"
+          },
+          {
+            "form": "den"
+          },
+          {
+            "form": "Augen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Plötzlich fiel es mir wie Schuppen von den Augen.",
+        "Da fiel es ihr wie Schuppen von den Augen."
+      ],
+      "negative": [
+        "Der Fisch hat Schuppen."
+      ]
+    }
+  },
+  {
+    "id": "expression-354",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "es sich gemütlich / bequem machen",
+    "translation_ru": "устроиться поудобнее",
+    "translation_en": "to make oneself comfortable",
+    "example_de": "Mach es dir gemütlich, ich koche uns einen Tee.",
+    "example_ru": "Устраивайся поудобнее, я заварю нам чаю.",
+    "example_en": "Make yourself comfortable, I'll make us some tea.",
+    "notes_ru": [
+      "Также es sich bequem machen."
+    ],
+    "notes_en": [
+      "Also es sich bequem machen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/gemuetlich",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "mach",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "gemacht",
+              "zu machen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "gemütlich",
+              "bequem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "gemütlich",
+              "bequem"
+            ]
+          },
+          {
+            "form": [
+              "mache",
+              "mach",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "gemacht",
+              "zu machen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "mach",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "gemacht",
+              "zu machen"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "es",
+              "'s"
+            ]
+          },
+          {
+            "form": [
+              "gemütlich",
+              "bequem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mach es dir gemütlich, ich koche uns einen Tee.",
+        "Sie hatten es sich auf dem Sofa gemütlich gemacht.",
+        "Wir machen es uns bequem."
+      ],
+      "negative": [
+        "Das Sofa ist gemütlich.",
+        "Er macht das Zimmer gemütlich."
+      ]
+    }
+  },
+  {
+    "id": "expression-355",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf sich (allein) gestellt sein",
+    "translation_ru": "быть предоставленным самому себе, рассчитывать только на себя",
+    "translation_en": "to be on one's own",
+    "example_de": "Nach dem Tod der Eltern war sie ganz auf sich gestellt.",
+    "example_ru": "После смерти родителей она осталась совсем одна.",
+    "example_en": "After her parents died she was completely on her own.",
+    "notes_ru": [
+      "Также auf sich allein gestellt."
+    ],
+    "notes_en": [
+      "Also auf sich allein gestellt."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/gestellt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "auf"
+          },
+          {
+            "form": [
+              "mich",
+              "dich",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": true
+          },
+          {
+            "form": [
+              "allein",
+              "selbst"
+            ],
+            "optional": true
+          },
+          {
+            "form": "gestellt"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem Tod der Eltern war sie ganz auf sich gestellt.",
+        "Hier bist du auf dich allein gestellt.",
+        "Wir waren völlig auf uns gestellt.",
+        "Sie war ganz auf sich selbst gestellt."
+      ],
+      "negative": [
+        "Er hat die Vase auf den Tisch gestellt."
+      ]
+    }
+  },
+  {
+    "id": "expression-356",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "auf Nummer sicher gehen",
+    "translation_ru": "действовать наверняка, перестраховаться",
+    "translation_en": "to play it safe",
+    "example_de": "Ich nehme einen Schirm mit, um auf Nummer sicher zu gehen.",
+    "example_ru": "Возьму зонт — на всякий случай.",
+    "example_en": "I'll take an umbrella to be on the safe side.",
+    "notes_ru": [
+      "Разг."
+    ],
+    "notes_en": [
+      "Colloquial."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Nummer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "auf"
+          },
+          {
+            "form": "Nummer"
+          },
+          {
+            "form": [
+              "sicher",
+              "Sicher"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich nehme einen Schirm mit, um auf Nummer sicher zu gehen.",
+        "Wir gehen lieber auf Nummer sicher."
+      ],
+      "negative": [
+        "Die Nummer ist sicher falsch."
+      ]
+    }
+  },
+  {
+    "id": "expression-357",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf einen Schlag",
+    "translation_ru": "разом, одним махом, сразу",
+    "translation_en": "all at once, at one go",
+    "example_de": "Plötzlich gingen alle Lichter auf einen Schlag aus.",
+    "example_ru": "Внезапно все огни разом погасли.",
+    "example_en": "Suddenly all the lights went out at once.",
+    "notes_ru": [
+      "Разг. Также mit einem Schlag — в одно мгновение."
+    ],
+    "notes_en": [
+      "Colloquial. Also mit einem Schlag — in an instant."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Schlag",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "auf",
+              "Auf"
+            ]
+          },
+          {
+            "form": "einen"
+          },
+          {
+            "form": "Schlag",
+            "not_next": [
+              "des",
+              "der",
+              "gegen",
+              "ins",
+              "auf",
+              "mit",
+              "von",
+              "vom"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mit",
+              "Mit"
+            ]
+          },
+          {
+            "form": "einem"
+          },
+          {
+            "form": "Schlag",
+            "not_next": [
+              "des",
+              "der",
+              "gegen",
+              "ins",
+              "auf",
+              "von",
+              "vom"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Plötzlich gingen alle Lichter auf einen Schlag aus.",
+        "Er hat das ganze Geld auf einen Schlag ausgegeben.",
+        "Mit einem Schlag war alles anders."
+      ],
+      "negative": [
+        "Der Schlag traf ihn hart.",
+        "Er wartete auf einen Schlag des Gongs.",
+        "Sie hofft auf einen Schlag gegen den Feind."
+      ]
+    }
+  },
+  {
+    "id": "expression-358",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "einen Witz reißen",
+    "translation_ru": "отпустить шутку",
+    "translation_en": "to crack a joke",
+    "example_de": "Selbst in schwierigen Momenten reißt er gern einen Witz.",
+    "example_ru": "Даже в трудные минуты он любит пошутить.",
+    "example_en": "Even in difficult moments he likes to crack a joke.",
+    "notes_ru": [
+      "Разг. Также Witze reißen — отпускать шуточки."
+    ],
+    "notes_en": [
+      "Colloquial. Also Witze reißen — to crack jokes."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Witz",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "reiße",
+              "reiß",
+              "reißt",
+              "reißen",
+              "riss",
+              "riß",
+              "rissen",
+              "rissest",
+              "gerissen",
+              "zu reißen"
+            ]
+          },
+          {
+            "form": [
+              "Witz",
+              "Witze",
+              "Witzchen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Witz",
+              "Witze",
+              "Witzchen"
+            ]
+          },
+          {
+            "form": [
+              "reiße",
+              "reiß",
+              "reißt",
+              "reißen",
+              "riss",
+              "riß",
+              "rissen",
+              "rissest",
+              "gerissen",
+              "zu reißen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Selbst in schwierigen Momenten reißt er gern einen Witz.",
+        "Hör auf, dumme Witze zu reißen!",
+        "Er hat wieder einen Witz gerissen."
+      ],
+      "negative": [
+        "Der Witz war gut.",
+        "Er riss die Tür auf."
+      ]
+    }
+  },
+  {
+    "id": "expression-359",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit den Achseln / Schultern zucken",
+    "translation_ru": "пожать плечами",
+    "translation_en": "to shrug (one's shoulders)",
+    "example_de": "Auf meine Frage zuckte er nur mit den Achseln.",
+    "example_ru": "На мой вопрос он лишь пожал плечами.",
+    "example_en": "He just shrugged at my question.",
+    "notes_ru": [
+      "Также achselzuckend — пожимая плечами."
+    ],
+    "notes_en": [
+      "Also achselzuckend — with a shrug."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Achsel",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "zucke",
+              "zuck",
+              "zuckst",
+              "zuckt",
+              "zucken",
+              "zuckte",
+              "zuckten",
+              "gezuckt",
+              "zu zucken",
+              "zuckend"
+            ]
+          },
+          {
+            "form": "mit"
+          },
+          {
+            "form": "den"
+          },
+          {
+            "form": [
+              "Achseln",
+              "Schultern"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": "mit"
+          },
+          {
+            "form": "den"
+          },
+          {
+            "form": [
+              "Achseln",
+              "Schultern"
+            ]
+          },
+          {
+            "form": [
+              "zucke",
+              "zuck",
+              "zuckst",
+              "zuckt",
+              "zucken",
+              "zuckte",
+              "zuckten",
+              "gezuckt",
+              "zu zucken",
+              "zuckend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zucke",
+              "zuck",
+              "zuckst",
+              "zuckt",
+              "zucken",
+              "zuckte",
+              "zuckten",
+              "gezuckt",
+              "zu zucken"
+            ]
+          },
+          {
+            "form": "die"
+          },
+          {
+            "form": [
+              "Achseln",
+              "Schultern"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Auf meine Frage zuckte er nur mit den Achseln.",
+        "Sie hat nur mit den Schultern gezuckt.",
+        "Sie zuckte die Achseln."
+      ],
+      "negative": [
+        "Er trug die Tasche mit den Schultern."
+      ]
+    }
+  },
+  {
+    "id": "expression-360",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdn. dazu bringen (, etw. zu tun)",
+    "translation_ru": "заставить, побудить, уговорить (кого-либо что-либо сделать)",
+    "translation_en": "to get someone to do something",
+    "example_de": "Wie hast du ihn dazu gebracht, mitzukommen?",
+    "example_ru": "Как ты уговорил его пойти с нами?",
+    "example_en": "How did you get him to come along?",
+    "notes_ru": [
+      "Также jdn. so weit bringen, dass … — довести до того, что …"
+    ],
+    "notes_en": [
+      "Also jdn. so weit bringen, dass … — to bring someone to the point where …"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/bringen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bringe",
+              "bring",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachtest",
+              "brachten",
+              "brachtet",
+              "brächte",
+              "gebracht",
+              "zu bringen"
+            ]
+          },
+          {
+            "form": "dazu",
+            "not_next": [
+              "noch",
+              "einen",
+              "eine",
+              "ein",
+              "etwas",
+              "auch",
+              "Kuchen",
+              "Wein"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "not_particle_at_end": [
+          "mit",
+          "her",
+          "hin",
+          "zurück"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": "dazu"
+          },
+          {
+            "form": [
+              "bringen",
+              "gebracht",
+              "zu bringen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "dazu"
+          },
+          {
+            "form": [
+              "bringe",
+              "bring",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachtest",
+              "brachten",
+              "brachtet",
+              "brächte",
+              "gebracht",
+              "zu bringen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wie hast du ihn dazu gebracht, mitzukommen?",
+        "Was bringt dich dazu, so etwas zu sagen?",
+        "Niemand konnte sie dazu bringen."
+      ],
+      "negative": [
+        "Er bringt dazu noch einen Kuchen mit.",
+        "Dazu bringt er Brot.",
+        "Dazu brachte er einen Kuchen."
+      ]
+    }
+  },
+  {
+    "id": "expression-361",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich (D) etw. leisten (können)",
+    "translation_ru": "позволить себе (по средствам; что-либо)",
+    "translation_en": "to (be able to) afford something",
+    "example_de": "So ein teures Auto kann ich mir nicht leisten.",
+    "example_ru": "Такую дорогую машину я не могу себе позволить.",
+    "example_en": "I can't afford such an expensive car.",
+    "notes_ru": [
+      "Также sich einen Fehler leisten — позволить себе (допустить) ошибку. Не путать: Hilfe leisten — оказать помощь."
+    ],
+    "notes_en": [
+      "Also sich einen Fehler leisten — to afford a mistake. Do not confuse: Hilfe leisten — to give help."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/leisten",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "leiste",
+              "leistest",
+              "leistet",
+              "leisten",
+              "leistete",
+              "leisteten",
+              "geleistet",
+              "zu leisten"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "leiste",
+              "leistest",
+              "leistet",
+              "leisten",
+              "leistete",
+              "leisteten",
+              "geleistet",
+              "zu leisten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "So ein teures Auto kann ich mir nicht leisten.",
+        "Wir leisten uns einmal im Jahr einen Urlaub.",
+        "Er weiß nicht, ob er sich das leisten kann."
+      ],
+      "negative": [
+        "Die Feuerwehr leistete schnelle Hilfe.",
+        "Er leistete mir Gesellschaft."
+      ]
+    }
+  },
+  {
+    "id": "expression-362",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "und ob!",
+    "translation_ru": "ещё бы!, ещё как!",
+    "translation_en": "you bet!, and how!",
+    "example_de": "„Hast du Hunger?“ – „Und ob!“",
+    "example_ru": "«Ты голоден?» — «Ещё бы!»",
+    "example_en": "\"Are you hungry?\" – \"You bet!\"",
+    "notes_ru": [
+      "Разг., в ответ. Также Und ob ich das weiß! — ещё бы мне не знать!"
+    ],
+    "notes_en": [
+      "Colloquial, as an answer. Also Und ob ich das weiß! — you bet I know!"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/ob",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "Und",
+              "und"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": "ob"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "„Hast du Hunger?“ – „Und ob!“",
+        "Und ob!"
+      ],
+      "negative": [
+        "Und ob er kommt, weiß ich nicht.",
+        "Er fragte, wann und ob er kommen darf."
+      ]
+    }
+  },
+  {
+    "id": "expression-363",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. auf die Sprünge helfen",
+    "translation_ru": "помочь, подтолкнуть (кого-либо); помочь вспомнить",
+    "translation_en": "to give someone a helping hand; to jog someone's memory",
+    "example_de": "Wenn du den Namen vergessen hast, helfe ich dir auf die Sprünge.",
+    "example_ru": "Если ты забыл имя, я тебе подскажу.",
+    "example_en": "If you've forgotten the name, I'll jog your memory.",
+    "notes_ru": [
+      "Разг. dem Gedächtnis auf die Sprünge helfen — освежить память."
+    ],
+    "notes_en": [
+      "Colloquial. dem Gedächtnis auf die Sprünge helfen — to jog one's memory."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Sprung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "helfe",
+              "hilf",
+              "hilfst",
+              "hilft",
+              "helfen",
+              "helft",
+              "half",
+              "halfen",
+              "hülfe",
+              "geholfen",
+              "zu helfen"
+            ]
+          },
+          {
+            "form": "auf"
+          },
+          {
+            "form": "die"
+          },
+          {
+            "form": "Sprünge"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": "auf"
+          },
+          {
+            "form": "die"
+          },
+          {
+            "form": "Sprünge"
+          },
+          {
+            "form": [
+              "helfe",
+              "hilf",
+              "hilfst",
+              "hilft",
+              "helfen",
+              "helft",
+              "half",
+              "halfen",
+              "hülfe",
+              "geholfen",
+              "zu helfen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wenn du den Namen vergessen hast, helfe ich dir auf die Sprünge.",
+        "Kannst du mir mal auf die Sprünge helfen?"
+      ],
+      "negative": [
+        "Die Sprünge des Pferdes waren hoch."
+      ]
+    }
+  },
+  {
+    "id": "expression-364",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "eine Schlussfolgerung / einen Schluss ziehen",
+    "translation_ru": "сделать вывод",
+    "translation_en": "to draw a conclusion",
+    "example_de": "Aus den Daten ziehen wir eine klare Schlussfolgerung.",
+    "example_ru": "Из данных мы делаем ясный вывод.",
+    "example_en": "We draw a clear conclusion from the data.",
+    "notes_ru": [
+      "Aus etwas Schlüsse ziehen — делать выводы из чего-либо."
+    ],
+    "notes_en": [
+      "Aus etwas Schlüsse ziehen — to draw conclusions from something."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Schlussfolgerung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "ziehe",
+              "zieh",
+              "ziehst",
+              "zieht",
+              "ziehen",
+              "zog",
+              "zogst",
+              "zogen",
+              "zöge",
+              "gezogen",
+              "zu ziehen"
+            ]
+          },
+          {
+            "form": [
+              "Schlussfolgerung",
+              "Schlussfolgerungen",
+              "Schluss",
+              "Schlüsse"
+            ],
+            "not_after": [
+              "zum",
+              "Zum",
+              "am",
+              "Am",
+              "zu",
+              "vor",
+              "Vor",
+              "nach",
+              "Nach",
+              "bis",
+              "Bis",
+              "ab",
+              "seit"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Schlussfolgerung",
+              "Schlussfolgerungen",
+              "Schluss",
+              "Schlüsse"
+            ],
+            "not_after": [
+              "zum",
+              "Zum",
+              "am",
+              "Am",
+              "zu",
+              "vor",
+              "Vor",
+              "nach",
+              "Nach",
+              "bis",
+              "Bis",
+              "ab",
+              "seit"
+            ]
+          },
+          {
+            "form": [
+              "ziehe",
+              "zieh",
+              "ziehst",
+              "zieht",
+              "ziehen",
+              "zog",
+              "zogst",
+              "zogen",
+              "zöge",
+              "gezogen",
+              "zu ziehen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Aus den Daten ziehen wir eine klare Schlussfolgerung.",
+        "Welche Schlüsse hast du daraus gezogen?",
+        "Daraus kann man keinen Schluss ziehen."
+      ],
+      "negative": [
+        "Zum Schluss zog er die Jacke an.",
+        "Am Schluss zogen alle nach Hause.",
+        "Die Trainer ziehen zwei Spieltage vor Schluss ein positives Fazit."
+      ]
+    }
+  },
+  {
+    "id": "expression-365",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "in die Geschichte eingehen",
+    "translation_ru": "войти в историю",
+    "translation_en": "to go down in history",
+    "example_de": "Dieser Tag wird in die Geschichte eingehen.",
+    "example_ru": "Этот день войдёт в историю.",
+    "example_en": "This day will go down in history.",
+    "notes_ru": [
+      "Также in die Annalen eingehen — войти в анналы."
+    ],
+    "notes_en": [
+      "Also in die Annalen eingehen — to go down in the annals."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/eingehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "in"
+          },
+          {
+            "form": "die"
+          },
+          {
+            "form": [
+              "Geschichte",
+              "Annalen"
+            ]
+          },
+          {
+            "form": [
+              "eingehen",
+              "eingegangen",
+              "einzugehen",
+              "eingeht",
+              "einging",
+              "eingingen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "geht",
+              "ging",
+              "gingen",
+              "gehen",
+              "ginge",
+              "gehe"
+            ]
+          },
+          {
+            "form": "in"
+          },
+          {
+            "form": "die"
+          },
+          {
+            "form": [
+              "Geschichte",
+              "Annalen"
+            ]
+          },
+          {
+            "form": "ein"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Dieser Tag wird in die Geschichte eingehen.",
+        "Er ging als Held in die Geschichte ein.",
+        "Das Spiel ist in die Geschichte eingegangen."
+      ],
+      "negative": [
+        "Er ging in die Geschichte seiner Familie.",
+        "Wir gingen in die Geschichtsstunde."
+      ]
+    }
+  },
+  {
+    "id": "expression-366",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "nicht lockerlassen",
+    "translation_ru": "не отступать, не сдаваться, стоять на своём",
+    "translation_en": "not to let up, not to give up",
+    "example_de": "Sie ließ nicht locker, bis sie die Antwort bekam.",
+    "example_ru": "Она не отставала, пока не получила ответ.",
+    "example_en": "She didn't let up until she got the answer.",
+    "notes_ru": [
+      "Разг."
+    ],
+    "notes_en": [
+      "Colloquial."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/lockerlassen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "lasse",
+              "lass",
+              "lässt",
+              "lassen",
+              "lasst",
+              "ließ",
+              "ließen",
+              "ließe"
+            ]
+          },
+          {
+            "form": [
+              "nicht",
+              "nie",
+              "niemals"
+            ]
+          },
+          {
+            "form": "locker"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2,
+        "clause_rest": []
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "nicht",
+              "nie",
+              "niemals"
+            ]
+          },
+          {
+            "form": [
+              "lockerlassen",
+              "lockerließ",
+              "lockergelassen",
+              "lockerzulassen",
+              "lockerlässt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "nicht",
+              "nie"
+            ]
+          },
+          {
+            "form": "locker"
+          },
+          {
+            "form": [
+              "lassen",
+              "gelassen",
+              "zu lassen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Sie ließ nicht locker, bis sie die Antwort bekam.",
+        "Er wird nicht lockerlassen.",
+        "Unser Trainer lässt einfach nie locker."
+      ],
+      "negative": [
+        "Die Schraube ist nicht locker.",
+        "Er lässt die Leine locker."
+      ]
+    }
+  },
+  {
+    "id": "expression-367",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "alle paar (Minuten / Tage …)",
+    "translation_ru": "каждые несколько (минут, дней …)",
+    "translation_en": "every few (minutes, days …)",
+    "example_de": "Der Bus kommt alle paar Minuten.",
+    "example_ru": "Автобус ходит каждые несколько минут.",
+    "example_en": "The bus comes every few minutes.",
+    "notes_ru": [
+      "Также alle zwei Tage — через день, alle drei Wochen — раз в три недели."
+    ],
+    "notes_en": [
+      "Also alle zwei Tage — every other day, alle drei Wochen — every three weeks."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/alle",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "alle",
+            "not_after": [
+              "haben",
+              "sind",
+              "waren",
+              "hatten",
+              "wir",
+              "sie",
+              "ihr"
+            ]
+          },
+          {
+            "form": "paar"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Bus kommt alle paar Minuten.",
+        "Er schaut alle paar Sekunden auf die Uhr."
+      ],
+      "negative": [
+        "Alle Paare tanzten.",
+        "Alle Gäste waren da."
+      ]
+    }
+  },
+  {
+    "id": "expression-368",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "es geht",
+    "translation_ru": "сойдёт, ничего, терпимо; можно, получается",
+    "translation_en": "it's all right, it'll do; it's possible, it works",
+    "example_de": "Der Stuhl wackelt ein bisschen, aber es geht.",
+    "example_ru": "Стул немного шатается, но ничего, сойдёт.",
+    "example_en": "The chair wobbles a bit, but it'll do.",
+    "notes_ru": [
+      "Разг. Es geht so — так себе. Не путать: es geht um … — речь о …; es geht ihm gut — у него всё хорошо; es geht los — начинается."
+    ],
+    "notes_en": [
+      "Colloquial. Es geht so — so-so. Do not confuse: es geht um … — it's about …; es geht ihm gut — he's fine; es geht los — it's starting."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/gehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "Es",
+              "'s"
+            ],
+            "not_after": [
+              "wie",
+              "Wie",
+              "worum",
+              "Worum",
+              "wohin",
+              "Wohin",
+              "wo",
+              "Wo",
+              "woher",
+              "Woher",
+              "wozu",
+              "Wozu",
+              "um",
+              "lange",
+              "weit",
+              "oft",
+              "viel",
+              "schnell",
+              "sehr",
+              "hoch",
+              "tief",
+              "spät",
+              "früh"
+            ]
+          },
+          {
+            "form": [
+              "geht",
+              "ginge"
+            ],
+            "not_next": [
+              "aber"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "nicht",
+          "schon",
+          "so",
+          "doch",
+          "gerade",
+          "noch",
+          "auch",
+          "ja",
+          "eben",
+          "wohl",
+          "halbwegs",
+          "einigermaßen",
+          "mehr",
+          "irgendwie",
+          "besser",
+          "wieder",
+          "jetzt"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Es",
+              "es"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": "ging",
+            "not_next": [
+              "aber"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "nicht",
+          "schon",
+          "so",
+          "doch",
+          "gerade",
+          "noch",
+          "auch",
+          "ja",
+          "eben",
+          "wohl",
+          "halbwegs",
+          "einigermaßen",
+          "mehr",
+          "irgendwie",
+          "besser",
+          "wieder"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Geht",
+              "Ginge",
+              "geht"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s",
+              "s"
+            ],
+            "not_next": [
+              "aber"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "clause_rest": [
+          "nicht",
+          "schon",
+          "so",
+          "doch",
+          "gerade",
+          "noch",
+          "auch",
+          "ja",
+          "eben",
+          "wohl",
+          "halbwegs",
+          "einigermaßen",
+          "mehr",
+          "irgendwie",
+          "besser",
+          "wieder"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "so",
+              "das",
+              "nun",
+              "jetzt",
+              "leider",
+              "heute",
+              "morgen",
+              "vielleicht",
+              "dann",
+              "hier",
+              "irgendwie",
+              "trotzdem",
+              "So",
+              "Das",
+              "Nun",
+              "Jetzt",
+              "Leider",
+              "Heute",
+              "Morgen",
+              "Vielleicht",
+              "Dann",
+              "Hier",
+              "Irgendwie",
+              "Trotzdem"
+            ]
+          },
+          {
+            "form": [
+              "geht",
+              "ginge",
+              "ging"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s",
+              "s"
+            ],
+            "not_next": [
+              "aber"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "nicht",
+          "schon",
+          "so",
+          "doch",
+          "gerade",
+          "noch",
+          "auch",
+          "ja",
+          "eben",
+          "wohl",
+          "halbwegs",
+          "einigermaßen",
+          "mehr",
+          "irgendwie",
+          "besser",
+          "wieder"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Stuhl wackelt ein bisschen, aber es geht.",
+        "Na, es geht schon.",
+        "Geht es?",
+        "So geht es nicht.",
+        "Es geht nicht mehr.",
+        "Es ging nicht mehr.",
+        "Leider geht es nicht.",
+        "Jetzt geht es wieder."
+      ],
+      "negative": [
+        "Es geht um Geld.",
+        "Wie geht es dir?",
+        "Es geht ihm gut.",
+        "Es geht los.",
+        "Es geht nach Hause.",
+        "Worum geht es?",
+        "Es ging aber ein leises Summen durch die Kirche.",
+        "So geht es aber den Hochmütigen.",
+        "Dem Hund unter dem Tisch geht es besser.",
+        "Los geht es!",
+        "Und weiter ging es.",
+        "Ich weiß nicht, worum es geht.",
+        "Ich weiß nicht, wie lange es geht.",
+        "Mal sehen, wie weit es geht.",
+        "Er fragte, wohin es geht.",
+        "Sie sah, in welches Haus es ging: aber es sprang davon.",
+        "So geht’s aber den Hochmütigen.",
+        "Los geht’s!",
+        "Und weiter ging’s.",
+        "Dem Hündlein unter dem Tisch geht’s besser."
+      ]
+    }
+  },
+  {
+    "id": "expression-369",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wie auch immer",
+    "translation_ru": "как бы ни; (в начале, перед запятой) как бы то ни было, так или иначе",
+    "translation_en": "however, no matter how; (at the start, before a comma) anyway, be that as it may",
+    "example_de": "Wie schwer es auch immer sein mag, wir schaffen das.",
+    "example_ru": "Как бы трудно ни было, мы справимся.",
+    "example_en": "However hard it may be, we'll manage.",
+    "notes_ru": [
+      "Wie auch immer, wir müssen weiter. — Как бы то ни было, нам надо идти дальше. Не путать: wie immer — как всегда."
+    ],
+    "notes_en": [
+      "Wie auch immer, wir müssen weiter. — Anyway, we have to move on. Do not confuse: wie immer — as always."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/immer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ],
+            "not_after": [
+              "so",
+              "genauso",
+              "ebenso",
+              "So"
+            ]
+          },
+          {
+            "form": "auch"
+          },
+          {
+            "form": "immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ],
+            "not_after": [
+              "so",
+              "genauso",
+              "ebenso",
+              "So"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ],
+            "not_after": [
+              "so",
+              "genauso",
+              "ebenso",
+              "So"
+            ]
+          },
+          {
+            "form": [
+              "viel",
+              "sehr",
+              "schwer",
+              "lange",
+              "oft",
+              "weit",
+              "groß",
+              "gut",
+              "schlecht",
+              "hoch",
+              "schnell",
+              "teuer",
+              "klein",
+              "spät",
+              "früh",
+              "dem"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ],
+            "optional": true
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wie schwer es auch immer sein mag, wir schaffen das.",
+        "Wie auch immer, wir müssen weiter.",
+        "Mach es, wie auch immer du willst."
+      ],
+      "negative": [
+        "Wie immer kam er zu spät.",
+        "Er ist auch immer noch da.",
+        "Das passiert auch immer wieder.",
+        "Wie geht es dir? – Wie immer.",
+        "Wie machst du das auch immer?",
+        "So wie du auch immer sagst."
+      ]
+    }
+  },
+  {
+    "id": "expression-370",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wer auch immer",
+    "translation_ru": "кто бы ни",
+    "translation_en": "whoever",
+    "example_de": "Wer auch immer das war, er hat Glück gehabt.",
+    "example_ru": "Кто бы это ни был, ему повезло.",
+    "example_en": "Whoever that was, he was lucky.",
+    "notes_ru": [
+      "Не путать: Wer ist auch immer so laut? — кто это вечно так шумит?"
+    ],
+    "notes_en": [
+      "Do not confuse: Wer ist auch immer so laut? — who is always so loud?"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/immer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wer",
+              "Wer"
+            ]
+          },
+          {
+            "form": "auch"
+          },
+          {
+            "form": "immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wer",
+              "Wer"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wer auch immer das war, er hat Glück gehabt.",
+        "Wer es auch immer gesagt hat, es stimmt nicht."
+      ],
+      "negative": [
+        "Wie immer kam er zu spät.",
+        "Er ist auch immer noch da.",
+        "Das passiert auch immer wieder.",
+        "Wer kommt auch immer zu spät?"
+      ]
+    }
+  },
+  {
+    "id": "expression-371",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wo auch immer",
+    "translation_ru": "где бы ни",
+    "translation_en": "wherever",
+    "example_de": "Wo auch immer du bist, ich denke an dich.",
+    "example_ru": "Где бы ты ни был, я думаю о тебе.",
+    "example_en": "Wherever you are, I think of you.",
+    "notes_ru": [
+      "Куда бы ни — wohin auch immer."
+    ],
+    "notes_en": [
+      "Wherever (direction) — wohin auch immer."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/immer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wo",
+              "Wo"
+            ]
+          },
+          {
+            "form": "auch"
+          },
+          {
+            "form": "immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wo",
+              "Wo"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wo auch immer du bist, ich denke an dich.",
+        "Wo er auch immer wohnt, er findet Freunde."
+      ],
+      "negative": [
+        "Wie immer kam er zu spät.",
+        "Er ist auch immer noch da.",
+        "Das passiert auch immer wieder.",
+        "Wo ist er auch immer noch?",
+        "Wo warst du auch immer?"
+      ]
+    }
+  },
+  {
+    "id": "expression-372",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wohin auch immer",
+    "translation_ru": "куда бы ни",
+    "translation_en": "wherever (direction)",
+    "example_de": "Wohin auch immer du gehst, ich komme mit.",
+    "example_ru": "Куда бы ты ни пошёл, я пойду с тобой.",
+    "example_en": "Wherever you go, I'll come with you.",
+    "notes_ru": [
+      "Где бы ни — wo auch immer."
+    ],
+    "notes_en": [
+      "Wherever (place) — wo auch immer."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/immer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wohin",
+              "Wohin"
+            ]
+          },
+          {
+            "form": "auch"
+          },
+          {
+            "form": "immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wohin",
+              "Wohin"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wohin auch immer du gehst, ich komme mit.",
+        "Wohin sie auch immer fahren, es regnet."
+      ],
+      "negative": [
+        "Wie immer kam er zu spät.",
+        "Er ist auch immer noch da.",
+        "Das passiert auch immer wieder."
+      ]
+    }
+  },
+  {
+    "id": "expression-373",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wann auch immer",
+    "translation_ru": "когда бы ни",
+    "translation_en": "whenever",
+    "example_de": "Wann auch immer du Hilfe brauchst, ruf mich an.",
+    "example_ru": "Когда бы тебе ни понадобилась помощь, звони мне.",
+    "example_en": "Whenever you need help, call me.",
+    "notes_ru": [
+      "Не путать: Wann kommst du auch immer nach Hause? — когда ты вечно приходишь домой?"
+    ],
+    "notes_en": [
+      "Do not confuse: Wann kommst du auch immer nach Hause? — when do you always come home?"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/immer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wann",
+              "Wann"
+            ]
+          },
+          {
+            "form": "auch"
+          },
+          {
+            "form": "immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wann",
+              "Wann"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wann auch immer du Hilfe brauchst, ruf mich an.",
+        "Wann er auch immer kommt, die Tür ist offen."
+      ],
+      "negative": [
+        "Wie immer kam er zu spät.",
+        "Er ist auch immer noch da.",
+        "Das passiert auch immer wieder."
+      ]
+    }
+  },
+  {
+    "id": "expression-374",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "welcher / welche / welches auch immer",
+    "translation_ru": "какой бы ни",
+    "translation_en": "whichever, whatever",
+    "example_de": "Welche auch immer du nimmst, sie sind alle gut.",
+    "example_ru": "Какую бы ты ни взял, все хорошие.",
+    "example_en": "Whichever you take, they are all good.",
+    "notes_ru": [
+      "Welch- согласуется с существительным: welcher Plan, welche Lösung, welches Buch auch immer (с существительным между welch- и auch immer пока не находится)."
+    ],
+    "notes_en": [
+      "Welch- agrees with the noun: welcher Plan, welche Lösung, welches Buch auch immer."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/immer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "welcher",
+              "Welcher",
+              "welche",
+              "Welche",
+              "welches",
+              "Welches",
+              "welchen",
+              "Welchen",
+              "welchem",
+              "Welchem"
+            ]
+          },
+          {
+            "form": "auch"
+          },
+          {
+            "form": "immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Welche auch immer du nimmst, sie sind alle gut.",
+        "Nimm, welches auch immer dir gefällt."
+      ],
+      "negative": [
+        "Wie immer kam er zu spät.",
+        "Er ist auch immer noch da.",
+        "Das passiert auch immer wieder.",
+        "Welche Bücher liest du auch immer?"
       ]
     }
   }
