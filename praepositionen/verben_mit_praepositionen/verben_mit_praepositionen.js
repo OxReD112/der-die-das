@@ -727,12 +727,26 @@ function caseRuleFor(prep) {
   if (!t) return "";
   return tipText(t.head) + " · " + tipText(TIP_TAG[t.tag]) + (t.preps[0] === "auf" ? " (" + tipText(t.note) + ")" : "");
 }
+/* 18.11.2026 (Alena): a tile whose head (icon · preposition · «+ Akk») does not fit in half the width takes the whole
+   row (.ptile-wide); the others stay compact — the case reads best next to the word. On a 375 / 390 phone that is
+   gegen only; on a 430 phone and on iPad everything fits. Checked again when the screen turns. */
+function widenTiles() {
+  const tiles = $("tipsModalBody").querySelectorAll(".ptile");
+  tiles.forEach(t => t.classList.remove("ptile-wide"));
+  tiles.forEach(t => {
+    const head = t.querySelector(".ptile-head");
+    if (head.scrollWidth > head.clientWidth + 0.5) t.classList.add("ptile-wide");
+  });
+}
+window.addEventListener("resize", () => { if (tipsOpen()) widenTiles(); });
+document.fonts?.ready.then(() => { if (tipsOpen()) widenTiles(); });
 const tipsOpen = () => DeutschWindow.isOpen($("tipsModal"));
 function openTips(round) {
   const prep = round && phase === "answer" && used ? used.preposition : null;
   if (round && !prep) return; // off until the answer
   $("tipsModalBody").innerHTML = tipsHtml(prep);
   DeutschWindow.open($("tipsModal")); // × / tap outside / Esc (other keys wait): components/deutsch-window-v1.js
+  widenTiles();
   const lit = $("tipsModalBody").querySelector(".lit");
   if (lit) lit.scrollIntoView({ block: "center" });
 }
