@@ -1081,6 +1081,76 @@
    "en": " + it",
    "ru": " + это",
    "pl": " + to"
+  },
+  {
+   "en": "Personal and possessive pronouns",
+   "ru": "Личные и притяжательные местоимения",
+   "pl": "Zaimki osobowe i dzierżawcze"
+  },
+  {
+   "en": "Reflexive pronouns",
+   "ru": "Возвратные местоимения",
+   "pl": "Zaimki zwrotne"
+  },
+  {
+   "en": "Demonstrative pronoun der/die/das",
+   "ru": "Указательное местоимение der/die/das",
+   "pl": "Zaimek wskazujący der/die/das"
+  },
+  {
+   "en": "Relative pronoun der/die/das",
+   "ru": "Относительное местоимение der/die/das",
+   "pl": "Zaimek względny der/die/das"
+  },
+  {
+   "en": "Impersonal es",
+   "ru": "Безличное es",
+   "pl": "Bezosobowe es"
+  },
+  {
+   "en": "Possessive pronoun = stem + ending: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren",
+   "ru": "Притяжательное местоимение = основа + окончание: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren",
+   "pl": "Zaimek dzierżawczy = temat + końcówka: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren"
+  },
+  {
+   "en": "Possessive endings",
+   "ru": "Притяжательные окончания",
+   "pl": "Końcówki zaimków dzierżawczych"
+  },
+  {
+   "en": "I wash myself.",
+   "ru": "Я моюсь.",
+   "pl": "Myję się."
+  },
+  {
+   "en": "I wash my hands.",
+   "ru": "Я мою себе руки.",
+   "pl": "Myję sobie ręce."
+  },
+  {
+   "en": "Impersonal es acts as a grammatical subject, for example in expressions about the weather. It does not refer to a particular thing.",
+   "ru": "Безличное es служит формальным подлежащим, например в предложениях о погоде. Оно не обозначает конкретный предмет.",
+   "pl": "Bezosobowe es pełni funkcję formalnego podmiotu, np. w zdaniach o pogodzie. Nie odnosi się do żadnej konkretnej rzeczy."
+  },
+  {
+   "en": "It is raining.",
+   "ru": "Идёт дождь.",
+   "pl": "Pada deszcz."
+  },
+  {
+   "en": "It is cold.",
+   "ru": "Холодно.",
+   "pl": "Jest zimno."
+  },
+  {
+   "en": "Which coat? — That one over there.",
+   "ru": "Какое пальто? — То, вон там.",
+   "pl": "Który płaszcz? — Tamten, o tam."
+  },
+  {
+   "en": "The man I helped.",
+   "ru": "Мужчина, которому я помог.",
+   "pl": "Mężczyzna, któremu pomogłem."
   }
  ]
 }
