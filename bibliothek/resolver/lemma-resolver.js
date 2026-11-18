@@ -18557,7 +18557,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const onlyConjunction = !(forms.get(keys[i]) || []).some(e => !["Konjunktion","Nomen"].includes(e.type));
             const partInOwnClause = () => m && m.parts.some(p => p !== part && partList(p,"alternatives").some(({words: ws}) =>
               tokens.some((t,k) => k > i && clause[k] === clause[i] && ws.every((w,h) => keyIs(k+h, w) && clause[k+h] === clause[i]))));
-            if (expression && words.length === 1 && i > 0 && clause[i-1] !== clause[i] && !opening[i] && (forms.get(keys[i]) || []).some(e => e.type === "Konjunktion") &&
+            // 18.11.2026 (expressions chat, TODO 42, advisor 18.11): `next_mark` — the text right after the part starts with one of these
+            // marks («?»: Das ist schön, oder? — the tag question «не так ли?»; not … oder ins Theater, not oder at a clause end before
+            // a comma). Digits and marks are not tokens, so the sentence text is read. A part with its mark is no conjunction (E3 below).
+            const markAfter = part.next_mark ? (() => {
+              const tail = sentence.slice(tokens[last].index + tokens[last][0].length).trimStart();
+              return [].concat(part.next_mark).some(mark => tail.startsWith(mark));
+            })() : null;
+            if (markAfter === false) continue;
+            if (!markAfter && expression && words.length === 1 && i > 0 && clause[i-1] !== clause[i] && !opening[i] && (forms.get(keys[i]) || []).some(e => e.type === "Konjunktion") &&
                 !(onlyConjunction && partInOwnClause()) &&
                 !(tokens[i+1] && clause[i+1] === clause[i] && finiteHere(i+1)) &&
                 !(adjacentExpressionAt(tokens, i, (a,b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index), (a,b) => clause[a] !== clause[b]) &&
@@ -18713,6 +18721,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // these separable verbs (stellte es vor sich hin — hinstellen, not the expression): the nearest finite / imperative verb
             // before the pattern in its clause, with the last part as particle, is in the list.
             if (m.not_separable_verb && separableTwin(m, flat)) return;
+            // 18.11.2026 (expressions chat, TODO 42, advisor 18.11): `no_finite_between: true` — no finite verb of the clause between the
+            // first and the last part (outside the parts): a concessive W … auch immer has its verb after the parts (Welche Bücher er auch
+            // immer liest, …), a question has it inside (Wo warst du auch immer?, Was machst du auch immer für Sachen?). Any lowercase form
+            // with a finite analysis counts, also one with a card of another kind (independent review 18.11: Was weiß ich auch immer! —
+            // weiß has an adjective card); wie + a degree word that is also a verb form (Wie lange es auch immer dauert) is a pattern of its own.
+            if (m.no_finite_between) for (let k = flat[0] + 1; k < flat.at(-1); k++) {
+              if (!flat.includes(k) && clause[k] === clause[flat[0]] && finiteHere(k)) return;
+            }
             // 26.10.2026: a haben / sein of the pattern is the auxiliary of a participle outside it (see auxiliaryOfOther above).
             if (entry.type === "Ausdruck" && flat.some(k => auxiliaryOfOther.has(k) && !flat.includes(auxiliaryOfOther.get(k)))) return;
             // G65 (24.10.2026, was für ein; corrected after the independent review): `before_frame_end: true` on a part — it does not

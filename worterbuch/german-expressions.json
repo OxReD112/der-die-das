@@ -39305,6 +39305,43 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "was",
+              "Was"
+            ],
+            "not_after": [
+              "das",
+              "alles",
+              "etwas",
+              "nichts",
+              "vieles",
+              "manches",
+              "dasselbe",
+              "Alles",
+              "Das"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "anchor": 1,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -58489,7 +58526,7 @@
       ],
       "negative": [
         "Die Schraube ist nicht locker.",
-        "Er lässt die Leine locker."
+        "Die Leine hängt ganz locker."
       ]
     }
   },
@@ -58988,6 +59025,38 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ],
+            "not_after": [
+              "so",
+              "genauso",
+              "ebenso",
+              "So"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "anchor": 1,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -59093,6 +59162,32 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wer",
+              "Wer"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "anchor": 1,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -59195,6 +59290,32 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wo",
+              "Wo"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "anchor": 1,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -59298,6 +59419,32 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wohin",
+              "Wohin"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "anchor": 1,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -59399,6 +59546,32 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wann",
+              "Wann"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "anchor": 1,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -59469,6 +59642,74 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "welcher",
+              "Welcher",
+              "welche",
+              "Welche",
+              "welches",
+              "Welches",
+              "welchen",
+              "Welchen",
+              "welchem",
+              "Welchem"
+            ],
+            "not_next": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie",
+              "der",
+              "die",
+              "das",
+              "den",
+              "dem",
+              "des",
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "eines",
+              "mein",
+              "meine",
+              "dein",
+              "deine",
+              "sein",
+              "seine",
+              "ihre",
+              "unser",
+              "unsere",
+              "euer",
+              "eure"
+            ]
+          },
+          {
+            "form": "auch immer",
+            "not_next": [
+              "wieder",
+              "noch",
+              "mehr",
+              "weniger",
+              "öfter",
+              "häufiger",
+              "seltener",
+              "so"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "anchor": 1,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -59481,6 +59722,69 @@
         "Er ist auch immer noch da.",
         "Das passiert auch immer wieder.",
         "Welche Bücher liest du auch immer?"
+      ]
+    }
+  },
+  {
+    "id": "expression-375",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "…, oder?",
+    "translation_ru": "не так ли?, правда? (в конце фразы)",
+    "translation_en": "…, right?; isn't it?, don't you?",
+    "example_de": "Das Konzert war super, oder?",
+    "example_ru": "Концерт был отличный, правда?",
+    "example_en": "The concert was great, wasn't it?",
+    "notes_ru": [
+      "Разг. Вопрос-хвост: говорящий просит подтвердить сказанное. Ср. nicht wahr? (нейтр.), ne? / gell? (разг., регион.). Не путать: Tee oder Kaffee? — союз «или»."
+    ],
+    "notes_en": [
+      "Colloquial. A tag question asking the listener to confirm. Cf. nicht wahr? (neutral), ne? / gell? (colloquial, regional). Do not confuse: Tee oder Kaffee? — the conjunction «or»."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/oder",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "oder",
+            "next_mark": [
+              "?"
+            ],
+            "not_after": [
+              "der",
+              "die",
+              "zur",
+              "an",
+              "über"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Das Konzert war super, oder?",
+        "Das ist schön, oder?",
+        "Du kommst doch mit, oder?!",
+        "Oder?",
+        "»Das stimmt, oder?«",
+        "„Du hast es gewusst, oder?“",
+        "(Das war doch klar, oder?)"
+      ],
+      "negative": [
+        "Wir gehen ins Kino oder ins Theater.",
+        "Willst du Tee oder Kaffee?",
+        "Ist das wahr oder nicht?",
+        "Bleibst du oder gehst du?",
+        "Kommst du heute oder morgen?",
+        "Entweder du kommst, oder du bleibst.",
+        "Wohnst du in Frankfurt an der Oder?",
+        "Fahrt ihr an die Oder?"
       ]
     }
   }
