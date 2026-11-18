@@ -2942,6 +2942,40 @@ function apostropheText(text) {
     // a capital word before the comma, members of up to two lowercase words + a capital word, closed by und / oder / sowie + a member;
     // no verb among the members; the rest of the part has no finite verb and closes on a particle (laden zum Wandern, Joggen und
     // Mountainbiken ein). The sync twin of the ENUMERATION check in separableScope, for parts cut at commas.
+    // (advisor 18.11, links chat + expressions chat, TODO 43) The owner of a reflexive pronoun at a coordination — one function for
+    // the links and for the expressions. tokens: the sentence's tokens; keys: their normalized words; p: the pronoun's index; end: the
+    // last index to look at (the part's end, or the verb in question); analyses (optional): per-token verb analyses (else verbAnalyses).
+    // Returns the owner's index or null.
+    //  'backward' — sich before «verb + und / oder» is that first verb's (kreiste, sich immer tiefer herabsenkte und endlich …
+    //    niederstieß): the verb right before the first und / oder after the pronoun (rule (5) sich far, advisor 15.11);
+    //  'forward' — sich right after und / oder (adverbs between allowed) is the verb's further on in the part: the verb closing the
+    //    part, or the verb before or after zu (um sich ein Zuhause leisten und sich versorgen zu können → versorgen), not the first
+    //    participle-like word (sich verdammt viel Mühe). Guard: und inside a subject — a capital word or a nominative personal pronoun
+    //    on either side of und (Anna und Max sich …, es Anna und Max sich gemütlich gemacht haben) → null.
+    function reflexiveOwnerAtCoordination(tokens,keys,p,{end,direction,analyses}={}) {
+      const kinds=k=>analyses?(analyses[k]||[]).map(r=>r.kind):(verbAnalyses.get(keys[k])||[]).map(r=>r.kind);
+      const verbLike=k=>k>=0&&k<tokens.length&&/^\p{Ll}/u.test(tokens[k][0])&&(kinds(k).some(x=>x==='finite'||x==='participle'||x==='infinitive')||
+        (forms.get(keys[k])||[]).some(e=>e.type==='Verb')||!(forms.get(keys[k])||[]).length&&/(?:te|ten|tet|t|en)$/u.test(keys[k]));
+      if(direction==='backward'){
+        for(let i=p+1;i<end;i++)if(['und','oder'].includes(keys[i])&&i-1>p&&verbLike(i-1))return i-1;
+        return null;
+      }
+      if(direction!=='forward')return null;
+      let c=p-1,skipped=0;
+      while(c>=0&&skipped<2&&/^\p{Ll}/u.test(tokens[c][0])&&!['und','oder'].includes(keys[c])&&(forms.get(keys[c])||[]).some(e=>e.type==='Adverb'||e.type==='Partikel')&&
+        !(forms.get(keys[c])||[]).some(e=>e.type==='Verb')){c--;skipped++;}
+      if(c<1||!['und','oder'].includes(keys[c]))return null;
+      const NOMINATIVE=new Set(['ich','du','er','sie','es','wir','ihr']);
+      const subjectSide=k=>k>=0&&k<tokens.length&&k!==p&&(/^\p{Lu}/u.test(tokens[k][0])&&!(k===0)||NOMINATIVE.has(keys[k])||tokens[k][0]==='Sie');
+      if(subjectSide(c-1)||subjectSide(c+1))return null;
+      const last=Math.min(end??tokens.length-1,tokens.length-1);
+      const verbOrZu=k=>keys[k]==='zu'||verbLike(k)&&!((forms.get(keys[k])||[]).some(e=>e.type!=='Verb')&&!(forms.get(keys[k])||[]).some(e=>e.type==='Verb'));
+      for(let k=p+1;k<=last;k++){
+        if(keys[k]==='zu')continue;
+        if(verbOrZu(k)&&Array.from({length:last-k},(_,d)=>k+1+d).every(verbOrZu))return k;
+      }
+      return null;
+    }
     function nounEnumerationSpans(sentence,tokens,analyses) {
       const out=[];
       const MEMBER=String.raw`(?:[\p{Ll}][\p{L}-]*\s+){0,2}\p{Lu}[\p{L}-]*`;
@@ -3566,9 +3600,8 @@ function apostropheText(text) {
             if(pronouns.length!==1)continue;
             // (advisor 15.11, (5) sich far: sich before «verb-like word + und / oder» belongs to that first verb, not to a verb after und —
             // kreiste, sich immer tiefer herabsenkte und endlich … niederstieß: sich is herabsenkte's even when no card knows it)
-            if(pronouns[0]<v&&words.slice(pronouns[0]+1,v).some((w,k)=>['und','oder'].includes(w)&&(()=>{const j=pronouns[0]+k;
-              return j>pronouns[0]&&/^\p{Ll}/u.test(tokens[j][0])&&(analyses[j].some(r=>r.kind==='finite'||r.kind==='participle'||r.kind==='infinitive')||
-                (forms.get(words[j])||[]).some(e=>e.type==='Verb')||!(forms.get(words[j])||[]).length&&/(?:te|ten|tet|t|en)$/u.test(words[j]));})()))continue;
+            // (advisor 18.11: the shared reflexiveOwnerAtCoordination, 'backward')
+            if(pronouns[0]<v&&reflexiveOwnerAtCoordination(tokens,words,pronouns[0],{end:v,direction:'backward',analyses})!==null)continue;
             if(attempt)attempt.stage='competing-predicate';
             const pronoun=pronouns[0];
             // G15d: sich directly before a present participle with an ending and
@@ -22794,6 +22827,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // 02.11.2026 (links chat, TODO item 17): the role of every damit of a sentence — adverb inside the part or the conjunction (tests)
       damitRole:async sentence=>{await prepareSeparable();const text=String(sentence||''),tokens=sharedTokens(text,'damitRole');
         return tokens.map((t,i)=>({i,t})).filter(x=>norm(x.t[0])==='damit').map(x=>({index:x.i,role:midClauseDoch(text,tokens,x.i)?'adverb':'conjunction'}));},
+      // 18.11.2026 (links chat, advisor 18.11): the owner of the n-th sich / mich … by reflexiveOwnerAtCoordination (tests); end — the
+      // part's end (the next comma, semicolon or sentence end) for 'forward', the given index for 'backward'
+      reflexiveCoordinationOwner:async (sentence,nth,direction,end)=>{await prepareSeparable();const text=String(sentence||''),tokens=sharedTokens(text,'reflexiveOwner');
+        const keys=tokens.map(t=>norm(t[0])),idx=keys.map((w,i)=>reflexivePronouns.has(w)?i:-1).filter(i=>i>=0),p=idx[nth||0];if(p===undefined)return null;
+        let e=end;if(e===undefined){e=p;while(e+1<tokens.length&&!/[,;:.!?]/u.test(text.slice(tokens[e].index+tokens[e][0].length,tokens[e+1].index)))e++;}
+        const k=reflexiveOwnerAtCoordination(tokens,keys,p,{end:e,direction});return k===null?null:tokens[k][0];},
       diagnoseReflexive:async sentence=>{await prepareSeparable();const diagnostic={};await analyseReflexiveSentence(sentence,diagnostic);return diagnostic;},
       reflexiveMorphology:async word => (await tokenAnalyses(word, undefined, 'resolve')).map(({entry,candidate,...a})=>({...a,lemma:entry?.word||candidate?.lemma})),
       // Read-only discovery diagnostics, including unsupported/missing data.
