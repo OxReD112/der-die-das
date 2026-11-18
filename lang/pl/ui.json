@@ -1545,6 +1545,251 @@
   "pl": "Ustawienia"
  },
  {
+  "en": "<p><strong>Which files work</strong> EPUB without copy protection (DRM) and TXT. Books bought in shops such as Kindle, Apple Books or Kobo are usually protected and won’t open. PDF isn’t supported.</p><p><strong>Where books are kept</strong> Only on this device. Browser storage can be cleared, so keep your original files as a backup.</p>",
+  "ru": "<p><strong>Какие файлы подходят</strong> EPUB без защиты от копирования (DRM) и TXT. Книги из магазинов — Kindle, Apple Books, Kobo — обычно защищены и не откроются. PDF не поддерживается.</p><p><strong>Где хранятся книги</strong> Только на этом устройстве. Хранилище браузера может очиститься, поэтому сохраняйте исходные файлы.</p>",
+  "pl": "<p><strong>Obsługiwane pliki</strong> EPUB bez zabezpieczenia przed kopiowaniem (DRM) i TXT. Książki ze sklepów — Kindle, Apple Books, Kobo — są zwykle zabezpieczone i nie dadzą się otworzyć. PDF nie jest obsługiwany.</p><p><strong>Gdzie są przechowywane książki</strong> Tylko na tym urządzeniu. Pamięć przeglądarki może zostać wyczyszczona, dlatego zachowaj oryginalne pliki.</p>"
+ },
+ {
+  "en": "Add a TXT or unencrypted EPUB file, or paste a German text to get started.",
+  "ru": "Добавьте файл TXT или EPUB без защиты или вставьте немецкий текст, чтобы начать.",
+  "pl": "Dodaj plik TXT lub EPUB bez zabezpieczeń albo wklej niemiecki tekst, żeby zacząć."
+ },
+ {
+  "en": "Reading position could not be saved.",
+  "ru": "Не удалось сохранить место чтения.",
+  "pl": "Nie udało się zapisać miejsca, w którym czytasz."
+ },
+ {
+  "en": "Meaning selected, but the correction could not be saved.",
+  "ru": "Значение выбрано, но сохранить выбор не удалось.",
+  "pl": "Wybrano znaczenie, ale nie udało się go zapisać."
+ },
+ {
+  "en": "The word form is unavailable. Please reload and try again.",
+  "ru": "Форма слова недоступна. Перезагрузите страницу и попробуйте ещё раз.",
+  "pl": "Okno dodawania słowa jest niedostępne. Odśwież stronę i spróbuj jeszcze raz."
+ },
+ {
+  "en": "Vocabulary could not be loaded. Try reopening this word.",
+  "ru": "Не удалось загрузить слова. Откройте это слово ещё раз.",
+  "pl": "Nie udało się wczytać zaznaczonych słów. Otwórz to słowo jeszcze raz."
+ },
+ {
+  "en": "The book could not be loaded. Check your internet connection.",
+  "ru": "Не удалось загрузить книгу. Проверьте подключение к интернету.",
+  "pl": "Nie udało się wczytać książki. Sprawdź połączenie z internetem."
+ },
+ {
+  "en": "Could not undo the mark. Please try again.",
+  "ru": "Не удалось отменить отметку. Попробуйте ещё раз.",
+  "pl": "Nie udało się cofnąć oznaczenia. Spróbuj jeszcze raz."
+ },
+ {
+  "en": "The mark could not be saved. Please try again.",
+  "ru": "Не удалось сохранить отметку. Попробуйте ещё раз.",
+  "pl": "Nie udało się zapisać oznaczenia. Spróbuj jeszcze raz."
+ },
+ {
+  "en": "The book could not be saved. Check available browser storage.",
+  "ru": "Не удалось сохранить книгу. Проверьте свободное место в браузере.",
+  "pl": "Nie udało się zapisać książki. Sprawdź, ile wolnej pamięci ma przeglądarka."
+ },
+ {
+  "en": "The text could not be saved. Check available browser storage.",
+  "ru": "Не удалось сохранить текст. Проверьте свободное место в браузере.",
+  "pl": "Nie udało się zapisać tekstu. Sprawdź, ile wolnej pamięci ma przeglądarka."
+ },
+ {
+  "en": "Local book storage is unavailable in this browser.",
+  "ru": "В этом браузере нельзя хранить книги.",
+  "pl": "W tej przeglądarce nie można przechowywać książek."
+ },
+ {
+  "en": "This text is empty.",
+  "ru": "Текст пустой.",
+  "pl": "Tekst jest pusty."
+ },
+ {
+  "en": "This file type is not supported. Choose a TXT or EPUB file.",
+  "ru": "Такой файл не подходит. Выберите TXT или EPUB.",
+  "pl": "Ten typ pliku nie jest obsługiwany. Wybierz plik TXT lub EPUB."
+ },
+ {
+  "en": "EPUB import is not available yet.",
+  "ru": "Загрузка EPUB пока недоступна.",
+  "pl": "Import plików EPUB nie jest jeszcze dostępny."
+ },
+ {
+  "en": "This file could not be read. Try selecting it again.",
+  "ru": "Не удалось прочитать файл. Выберите его ещё раз.",
+  "pl": "Nie udało się odczytać pliku. Wybierz go jeszcze raz."
+ },
+ {
+  "en": "This EPUB contains invalid XML or chapter markup.",
+  "ru": "В этом EPUB ошибка в разметке глав.",
+  "pl": "W tym pliku EPUB jest błąd w znacznikach rozdziałów."
+ },
+ {
+  "en": "This EPUB references an unsupported resource.",
+  "ru": "Этот EPUB ссылается на неподдерживаемый файл.",
+  "pl": "Ten plik EPUB odwołuje się do nieobsługiwanego pliku."
+ },
+ {
+  "en": "This EPUB contains an invalid resource path.",
+  "ru": "В этом EPUB неверный путь к файлу.",
+  "pl": "W tym pliku EPUB jest błędna ścieżka do pliku."
+ },
+ {
+  "en": "An EPUB chapter is missing its text body.",
+  "ru": "В одной из глав EPUB нет текста.",
+  "pl": "W jednym z rozdziałów pliku EPUB nie ma tekstu."
+ },
+ {
+  "en": "This EPUB is too large. Choose a file smaller than 50 MB.",
+  "ru": "Этот EPUB слишком большой. Выберите файл меньше 50 МБ.",
+  "pl": "Ten plik EPUB jest za duży. Wybierz plik mniejszy niż 50 MB."
+ },
+ {
+  "en": "This EPUB could not be opened. It may be damaged or password-protected.",
+  "ru": "Не удалось открыть этот EPUB. Возможно, он повреждён или защищён паролем.",
+  "pl": "Nie udało się otworzyć tego pliku EPUB. Możliwe, że jest uszkodzony lub zabezpieczony hasłem."
+ },
+ {
+  "en": "This EPUB is too large to import on this device.",
+  "ru": "Этот EPUB слишком большой для этого устройства.",
+  "pl": "Ten plik EPUB jest za duży na to urządzenie."
+ },
+ {
+  "en": "This EPUB is missing a required book file.",
+  "ru": "В этом EPUB не хватает нужного файла.",
+  "pl": "W tym pliku EPUB brakuje wymaganego pliku."
+ },
+ {
+  "en": "An EPUB chapter is too large to import.",
+  "ru": "Одна из глав EPUB слишком большая.",
+  "pl": "Jeden z rozdziałów pliku EPUB jest za duży."
+ },
+ {
+  "en": "This EPUB uses an unsupported or invalid text encoding.",
+  "ru": "В этом EPUB неподдерживаемая или неверная кодировка текста.",
+  "pl": "Ten plik EPUB ma nieobsługiwane lub błędne kodowanie tekstu."
+ },
+ {
+  "en": "This file is not a valid EPUB book.",
+  "ru": "Это не EPUB-книга.",
+  "pl": "To nie jest poprawny plik EPUB."
+ },
+ {
+  "en": "This EPUB is missing its chapter list.",
+  "ru": "В этом EPUB нет списка глав.",
+  "pl": "W tym pliku EPUB nie ma spisu treści."
+ },
+ {
+  "en": "This EPUB is DRM-protected. Choose a DRM-free book.",
+  "ru": "Этот EPUB защищён (DRM). Выберите книгу без защиты.",
+  "pl": "Ten plik EPUB jest zabezpieczony (DRM). Wybierz książkę bez zabezpieczeń."
+ },
+ {
+  "en": "This EPUB references a missing chapter.",
+  "ru": "В этом EPUB не хватает главы.",
+  "pl": "W tym pliku EPUB brakuje rozdziału."
+ },
+ {
+  "en": "This EPUB contains an unsupported chapter format.",
+  "ru": "В этом EPUB главы в неподдерживаемом формате.",
+  "pl": "W tym pliku EPUB rozdziały są w nieobsługiwanym formacie."
+ },
+ {
+  "en": "This EPUB contains no readable text.",
+  "ru": "В этом EPUB нет текста для чтения.",
+  "pl": "W tym pliku EPUB nie ma tekstu do czytania."
+ },
+ {
+  "en": "Nominalization · person",
+  "ru": "Субстантивация · обозначение человека",
+  "pl": "Substantywizacja · nazwa osoby"
+ },
+ {
+  "en": "Nominalized adjective",
+  "ru": "Субстантивированное прилагательное",
+  "pl": "Przymiotnik zsubstantywizowany"
+ },
+ {
+  "en": "Nominalized infinitive",
+  "ru": "Субстантивированный инфинитив",
+  "pl": "Bezokolicznik zsubstantywizowany"
+ },
+ {
+  "en": "plural",
+  "ru": "множественное число",
+  "pl": "liczba mnoga"
+ },
+ {
+  "en": "adjective",
+  "ru": "прилагательное",
+  "pl": "przymiotnik"
+ },
+ {
+  "en": "modifier of",
+  "ru": "определение к",
+  "pl": "przydawka do"
+ },
+ {
+  "en": "Looking up word",
+  "ru": "Ищем значение слова",
+  "pl": "Wyszukiwanie znaczenia słowa"
+ },
+ {
+  "en": "{0} more {0|meaning|meanings}",
+  "ru": "ещё {0} {0|значение|значения|значений}",
+  "pl": "jeszcze {0} {0|znaczenie|znaczenia|znaczeń}"
+ },
+ {
+  "en": "The dictionary could not be loaded. Please try again.",
+  "ru": "Не удалось загрузить словарь. Попробуйте ещё раз.",
+  "pl": "Nie udało się wczytać słownika. Spróbuj jeszcze raz."
+ },
+ {
+  "en": "collapse",
+  "ru": "свернуть",
+  "pl": "zwiń"
+ },
+ {
+  "en": "Other meanings",
+  "ru": "Другие значения",
+  "pl": "Inne znaczenia"
+ },
+ {
+  "en": "Linked verb",
+  "ru": "Связанный глагол",
+  "pl": "Powiązany czasownik"
+ },
+ {
+  "en": "Pronoun reference",
+  "ru": "Справка о местоимениях",
+  "pl": "Tabela zaimków"
+ },
+ {
+  "en": "Dictionary details",
+  "ru": "Словарная справка",
+  "pl": "Szczegóły ze słownika"
+ },
+ {
+  "en": "Previous part",
+  "ru": "Предыдущая часть",
+  "pl": "Poprzednia część"
+ },
+ {
+  "en": "Next part",
+  "ru": "Следующая часть",
+  "pl": "Następna część"
+ },
+ {
+  "en": "part {0} of {1}",
+  "ru": "часть {0} из {1}",
+  "pl": "część {0} z {1}"
+ },
+ {
   "en": "Your progress is saved only on this device. Deleting the app erases it. If your iPhone backup (iCloud) is on, your progress moves to a new iPhone along with everything else.",
   "ru": "Прогресс хранится только на этом устройстве. Если удалить приложение, прогресс пропадёт. При переезде на новый iPhone он вернётся вместе с резервной копией телефона (iCloud), если она включена.",
   "pl": "Postępy są zapisywane tylko na tym urządzeniu. Jeśli usuniesz aplikację, postępy znikną. Przy przejściu na nowego iPhone'a wrócą razem z kopią zapasową telefonu (iCloud), jeśli jest włączona."
