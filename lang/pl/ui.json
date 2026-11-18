@@ -1565,16 +1565,6 @@
   "pl": "Wybrano znaczenie, ale nie udało się go zapisać."
  },
  {
-  "en": "The word form is unavailable. Please reload and try again.",
-  "ru": "Форма слова недоступна. Перезагрузите страницу и попробуйте ещё раз.",
-  "pl": "Okno dodawania słowa jest niedostępne. Odśwież stronę i spróbuj jeszcze raz."
- },
- {
-  "en": "Vocabulary could not be loaded. Try reopening this word.",
-  "ru": "Не удалось загрузить слова. Откройте это слово ещё раз.",
-  "pl": "Nie udało się wczytać zaznaczonych słów. Otwórz to słowo jeszcze raz."
- },
- {
   "en": "The book could not be loaded. Check your internet connection.",
   "ru": "Не удалось загрузить книгу. Проверьте подключение к интернету.",
   "pl": "Nie udało się wczytać książki. Sprawdź połączenie z internetem."
@@ -1673,11 +1663,6 @@
   "en": "This EPUB uses an unsupported or invalid text encoding.",
   "ru": "В этом EPUB неподдерживаемая или неверная кодировка текста.",
   "pl": "Ten plik EPUB ma nieobsługiwane lub błędne kodowanie tekstu."
- },
- {
-  "en": "This file is not a valid EPUB book.",
-  "ru": "Это не EPUB-книга.",
-  "pl": "To nie jest poprawny plik EPUB."
  },
  {
   "en": "This EPUB is missing its chapter list.",
@@ -1798,5 +1783,20 @@
   "en": "To bring your progress to another device, like an iPad, make a backup. It's a small file you can open there with Wiederherstellen.",
   "ru": "Чтобы перенести прогресс на другое устройство, например на iPad, сделай бэкап. Это небольшой файл, его можно открыть там через Wiederherstellen.",
   "pl": "Aby przenieść postępy na inne urządzenie, na przykład na iPada, zrób kopię zapasową. To mały plik, który można tam otworzyć za pomocą Wiederherstellen."
+ },
+ {
+  "en": "Couldn't add the word. Please reload the page.",
+  "ru": "Не удалось добавить слово. Перезагрузите страницу.",
+  "pl": "Nie udało się dodać słowa. Odśwież stronę."
+ },
+ {
+  "en": "Couldn't load your marked words.",
+  "ru": "Не удалось загрузить отмеченные слова.",
+  "pl": "Nie udało się wczytać oznaczonych słów."
+ },
+ {
+  "en": "This file is not a valid EPUB book.",
+  "ru": "Файл повреждён или не является EPUB-книгой.",
+  "pl": "Plik jest uszkodzony lub nie jest książką w formacie EPUB."
  }
 ]

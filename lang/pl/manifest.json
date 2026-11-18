@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "1474bde2288e",
+ "version": "59aca125cb18",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -58,7 +58,7 @@
    ],
    "de": "поле ex ближайшей записи-предка; если нет — пусто",
    "pairs": 77,
-   "done": 78
+   "done": 77
   },
   "partizipII__verbs": {
    "source": "deutsch-home/verbformen/partizipII/verbs.js",
@@ -183,7 +183,7 @@
   },
   "exercises/vielseitige_verben__forms_table.json": {
    "items": 77,
-   "done": 78
+   "done": 77
   },
   "exercises/partizipII__verbs.json": {
    "items": 85,
@@ -265,7 +265,7 @@
   "worterbuch/german-expressions.json": {
    "items": 375,
    "texts": 1245,
-   "done": 374
+   "done": 375
   },
   "worterbuch/german-function-words.json": {
    "items": 50,

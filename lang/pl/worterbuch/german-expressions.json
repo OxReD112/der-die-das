@@ -3440,5 +3440,14 @@
    "Welch- uzgadnia się z rzeczownikiem: welcher Plan, welche Lösung, welches Buch auch immer."
   ],
   "_src_reader": "1721e04a"
+ },
+ "expression-375": {
+  "translation_pl": "nieprawdaż?, prawda? (na końcu zdania)",
+  "example_pl": "Koncert był super, prawda?",
+  "notes_pl": [
+   "Pot. Pytanie upewniające na końcu zdania: mówiący prosi o potwierdzenie tego, co powiedział. Por. nicht wahr? (neutralnie), ne? / gell? (pot., reg.). Nie mylić: Tee oder Kaffee? — spójnik „czy”, „albo”."
+  ],
+  "_src": "99a253c2",
+  "_src_reader": "f50ac384"
  }
 }
