@@ -10951,6 +10951,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const possessiveEnding = /^(?:mein|dein|sein|ihr|unser|eur|euer)(?:e|es|em|en|er)$/u.test(norm(tokens[index]?.[0] ?? ""));
       for (let i = next; i < tokens.length && i <= next + 2; i++) {
         if (!adjacent(i-1,i)) break;
+        // (tests chat + links chat 17–18.11) a possessive never stands before an article or another possessive — Ich meine meinen
+        // Bruder, Ich meine die Frau: meine is the verb there (only a form with a verb homograph; a repeated word — meine meine — is a
+        // slip of the text)
+        if (i === next && matches(index).some(e => e.type === "Verb") && norm(tokens[i][0]) !== norm(tokens[index][0]) &&
+            /^\p{Ll}/u.test(tokens[i][0]) && EXACT_DETERMINER.test(norm(tokens[i][0]))) break;
         // (not before the polite pronoun: Was meinen Sie? — meinen is the verb)
         if ((matches(i).some(e => e.type === "Nomen") || possessiveEnding && !/^(?:Sie|Ihnen|Ihr|Ihre|Ich|Er|Es|Wir|Du|Dich|Dir|Euch|Uns|Mich|Mir|Ihn|Ihm)$/u.test(tokens[i][0])) && /^[A-ZÄÖÜ]/u.test(tokens[i][0])) { nounPhrase = true; break; }
         if (!isAdjective(i) && !(possessiveEnding && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(tokens[i][0]))) break;
@@ -11058,6 +11063,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // declined form before its noun — der bei lebendigem Leib verbrannten Personen, seiner im Jahr 1873 erfolgten Zulassung. The ending
     // agrees with the determiner as an adjective's does; between the preposition and the form no verb form of its own, no punctuation.
     // Gives the determiner's index, else -1. Not touched: Die Kinder spielten im Hof (no determiner + preposition before the form).
+    // (18.11) a determiner by its exact forms (not diesbezüglich, Meinung)
+    const EXACT_DETERMINER = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|(?:kein|mein|dein|sein|ihr|unser|eur|euer|dies|jen|jed|welch)(?:e|er|es|em|en)?)$/u;
     const ATTRIBUTE_FRAME_DETERMINER = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|sein\p{L}*|ihr\p{L}*|unser\p{L}*|eur\p{L}*|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|dessen|deren)$/u;
     function attributeFrameEndings(det) {
       if (/^(?:dessen|deren)$/u.test(det)) return ["e","er","es","en","em"];
@@ -12024,12 +12031,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (advisor 17.11) words the group walk does not take before a declined attribute — adverbs, an undeclined comparative, a measure after a
     // figure (auf den etwa 4 km nordwestlich und strategisch besser gelegenen Burgberg, aus einem über 20 m langen Gang): the shared
     // attribute frame (attributeFrameDeterminer, the wide walk) decides that the determiner at det opens it; the group is then read from
-    // the attribute on (its noun, its agreement). Only a frame with a figure in it (a measure, a year: der im Jahr 2011 aktualisierten Liste).
+    // the attribute on (its noun, its agreement). Since 18.11 (advisor) also without a figure; first with a figure only (17.11).
+    // (advisor 18.11) the group walk stops at an adverb before a preposition too (den heute durch soziale Probleme bekannten Kiez)
+    const FRAME_REASONS = new Set(["modifier-unproven","adverb-without-modifier"]);
     async function framedNounGroup(sentence, tokens, det, consumer) {
       for (let j = det + 2; j < tokens.length - 1 && j <= det + 12; j++) {
         if (!/^\p{Ll}/u.test(tokens[j][0]) || !LOWERCASE_DECLINED_WORD.test(tokens[j][0]) || !/^\p{Lu}/u.test(tokens[j+1][0])) continue;
-        if (!/\d/u.test(sentence.slice(tokens[det].index, tokens[j].index))) return null;
-        if (attributeFrameDeterminer(tokens,j,det,sentence,true) !== det) return null;
+        // (advisor 18.11: frames without a figure too — den heute durch soziale Probleme bekannten Kiez)
+        // (an inner group of the frame — durch soziale Probleme, durch einen Unfall — does not end the search: its article is no attribute,
+        // and a noun followed by one more declined attribute is inner too: die durch astronomische Beobachtung gewonnene mittlere …)
+        if (ATTRIBUTE_FRAME_DETERMINER.test(norm(tokens[j][0]))) continue;
+        let k = j + 2;
+        while (tokens[k] && /^\p{Ll}/u.test(tokens[k][0]) && LOWERCASE_DECLINED_WORD.test(tokens[k][0]) && !ATTRIBUTE_FRAME_DETERMINER.test(norm(tokens[k][0])) &&
+               /^[ \t]+$/u.test(sentence.slice(tokens[k-1].index+tokens[k-1][0].length,tokens[k].index))) k++;
+        // (only a participle opens the outer attribute: gewonnene, ernannten, liegenden — not a genitive after the noun, Benachteiligung unehelicher
+        // Kinder, nor a verb, Massensprints wurden Robbie …)
+        if (k > j + 2 && /^(?:(?:\p{Ll}*ge|be|er|ver|ent|zer|emp|miss)\p{Ll}+(?:t|en)|\p{Ll}+end)(?:e|en|em|er|es)$/u.test(norm(tokens[j+2][0])) && tokens[k] &&
+            /^\p{Lu}/u.test(tokens[k][0]) && /^[ \t]+$/u.test(sentence.slice(tokens[k-1].index+tokens[k-1][0].length,tokens[k].index))) continue;
+        if (attributeFrameDeterminer(tokens,j,det,sentence,true) !== det) continue;
         const framed = await nounGroupAfter(sentence,tokens,j-1,{determiner:false,consumer});
         return framed?.readings ? framed : null;
       }
@@ -12152,7 +12171,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         !(index + 2 < tokens.length && /^\p{Lu}/u.test(tokens[index+2][0]) && /^\s*$/u.test(sentence.slice(tokens[index+1].index+tokens[index+1][0].length,tokens[index+2].index)));
       if (nextNumeral) return {candidate:articles[0],evidence:"article-before-numeral"};
       let group = await nounGroupAfter(sentence,tokens,index,{determiner:false,consumer:'articleInNounGroup'});
-      if (!group.readings && group.reason === "modifier-unproven") group = await framedNounGroup(sentence,tokens,index,'articleInNounGroup') || group;
+      if (!group.readings && FRAME_REASONS.has(group.reason)) group = await framedNounGroup(sentence,tokens,index,'articleInNounGroup') || group;
+      // (advisor 18.11) a preposition read as a modifier of the group (der aus anderen Orten herbeigeeilten Truppe → head Orten): the frame
+      else if (group.readings && (group.modifiers || []).some(m => prepositionCardsByForm.has(norm(tokens[m.index][0]))))
+        group = await framedNounGroup(sentence,tokens,index,'articleInNounGroup') || group;
       if (!group.readings) return definite ? articleBeforeNounByForm(sentence,tokens,index,articles[0]) : null;
       const governed = previous ? governedCases(previous) : null;
       const agreeing = agreeingFeatures(features,group,governed);
@@ -12838,7 +12860,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             /(?:^|[.!?:;»«„“”"–—…])\s*$/u.test(sentence.slice(0, tokens[index-1].index))) {
           const next = tokens[index+1], after = next ? gap(index,index+1) : "";
           const groupAfter = next && /^\s+$/u.test(after) && (/^\p{Lu}/u.test(next[0]) ||
-            /^\p{Ll}+(?:e|en)$/u.test(next[0]) && /^\p{Lu}/u.test(tokens[index+2]?.[0] || "") && /^\s+$/u.test(gap(index+1,index+2)) && !/^(?:das|es|nicht|ja|eben|halt|doch|wohl)$/u.test(norm(next[0])));
+            /^\p{Ll}+(?:e|en)$/u.test(next[0]) && /^\p{Lu}/u.test(tokens[index+2]?.[0] || "") && /^\s+$/u.test(gap(index+1,index+2)) && !/^(?:das|es|nicht|ja|eben|halt|doch|wohl)$/u.test(norm(next[0])) &&
+            // (tests chat + links chat 17–18.11) a determiner after meine opens a group of its own — Ich meine meinen Bruder, Ich meine die Frau
+            !EXACT_DETERMINER.test(norm(next[0])));
           if (!groupAfter) return {candidate:meinen,evidence:"ich-meine"};
         }
       }
@@ -13691,7 +13715,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       try { group = await nounGroupAfter(sentence,tokens,det,{determiner:false,consumer:'articleNounLink'}); } catch (_) { return null; }
       // (advisor 17.11) the same frame as articleInNounGroup: adverbs / a measure before the declined attribute
       let framed = false;
-      if (!group?.readings && group?.reason === "modifier-unproven") {
+      if (!group?.readings && FRAME_REASONS.has(group?.reason)) {
         try { const g = await framedNounGroup(sentence,tokens,det,'articleNounLink'); if (g) { group = g; framed = true; } } catch (_) { return null; }
       }
       if (!group?.readings) return null;
