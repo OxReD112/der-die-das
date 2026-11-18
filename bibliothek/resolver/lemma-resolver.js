@@ -18786,6 +18786,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (m.no_finite_between) for (let k = flat[0] + 1; k < flat.at(-1); k++) {
               if (!flat.includes(k) && clause[k] === clause[flat[0]] && finiteHere(k)) return;
             }
+            // 18.11.2026 (expressions chat, TODO 43, advisor 18.11): a reflexive part right after und / oder whose owner is a verb of its
+            // own further on in the clause (the shared reflexiveOwnerAtCoordination of the links chat, direction forward — it keeps a
+            // coordinated subject out: Anna und Max sich …, er und sie sich …) is not the pattern's when that verb is outside the pattern:
+            // um sich ein Zuhause leisten und sich versorgen zu können — the second sich is sich versorgen's, not sich etw. leisten's.
+            // (independent review 18.11 found the coordinated-subject trap; the shared function keeps it out, so the first limit «only a
+            // reflexive part that closes the pattern» is dropped — the count of 532 sentences is the same with and without it, advisor 18.11)
+            if (entry.type === "Ausdruck" && m.parts.some((part,p) => part.reflexive && chosen[p] && (() => {
+              const r = chosen[p][0];
+              let end = r;
+              while (end + 1 < tokens.length && clause[end+1] === clause[r]) end++;
+              const owner = reflexiveOwnerAtCoordination(tokens, keys, r, {end, direction: "forward"});
+              return owner !== null && owner !== undefined && !flat.includes(owner);
+            })())) return;
             // 26.10.2026: a haben / sein of the pattern is the auxiliary of a participle outside it (see auxiliaryOfOther above).
             if (entry.type === "Ausdruck" && flat.some(k => auxiliaryOfOther.has(k) && !flat.includes(auxiliaryOfOther.get(k)))) return;
             // G65 (24.10.2026, was für ein; corrected after the independent review): `before_frame_end: true` on a part — it does not
