@@ -80,8 +80,11 @@
   const packText = (c, language) => !!c && !provenSense(c) && !!(String(c.translation?.[language] || '').trim() ||
     c.reflexiveMarks?.[language] || String(c.packItem?.[language]?.reflexive?.[`translation_${language}`] || '').trim() || String(c.formTranslation?.[language] || '').trim());
   // the language a card is built in: a pack language only when this candidate has a text in it
+  // (18.11.2026) a word read by its parts (not a name) is built in the pack language: its lines say, part by part, which is in the
+  // pack and which is English (formationMeaning, particleVerbLines)
+  const byParts = candidate => !!candidate?.formation && typeof candidate.formation === 'object' && candidate.formation.kind !== 'name';
   const cardLanguage = (candidate, value) => { const language = textLanguage(value);
-    return isPack(language) && !packText(candidate, language) ? 'en' : language; };
+    return isPack(language) && !packText(candidate, language) && !byParts(candidate) ? 'en' : language; };
   // Phrases of the popup (Ч4, 17.11.2026): L(language, ru, en, …args) — ru / en exactly as written before (byte for byte); a pack
   // language: its line for this pair in lang/<code>/reader.json (pack-translations.js `phrase`), otherwise the English one. The pair
   // (with its places {0}, {1} … — the template, not the filled text) is the key; dev/lang/scan-reader.cjs lists the pairs.
@@ -711,6 +714,15 @@
     // (a «meaning» that is only a label — Arsch «вульг.» — is no meaning)
     const own = list(language === 'ru' ? p.ru : p.en).filter(m => !/Шаблон:|^:/u.test(m) && !onlyLabels(m)), en = list(p.en);
     const n = shownCount(Infinity);
+    // (18.11.2026, chat «languages in the reader», advisor: each part in the pack) a pack language: the part's text in the pack
+    // (p.pack[code], filled by pack-translations.js — its own card or the pack's dictionary), else its English with the pack's mark
+    // «English: » (none when the pack's phrases are not loaded — the English card as before). language: the line's language.
+    if (isPack(language)) {
+      // (the pack's text keeps its brackets — «troszczyć (się)», review B 17.11 / A 18.11; the English one as the English card shows it)
+      const mine = meaningParts(String(p.pack?.[language] || ''));
+      if (mine.length) return {text:(n === Infinity ? mine : mine.slice(0, 2)).join('; '), rest:Math.max(0, mine.length - 2), language};
+      return own.length ? {text:`${englishPrefix(language)}${(n === Infinity ? own : own.slice(0, 2)).join('; ')}`, rest:Math.max(0, own.length - 2), language:'en'} : {text:'', rest:0};
+    }
     if (own.length) {
       // (advisor 06.11) The two shown meanings are the first ones without a rude label; all meanings (ещё N значений) in their
       // order, a rude one with its label. A part whose every meaning is rude shows the first one with its label (never empty).
@@ -731,7 +743,7 @@
   // G68 (user 24.10.2026): a name read literally — one line «буквально: Weiß + Kopf — белый + голова», the first meaning of
   // each part (as for other names, no translation of the name itself).
   function nameLiteral(f, language) {
-    const first = p => { const m = formationMeaning(p, language).text; return m.split(/;\s*/u)[0].replace(/^(английский: )?([^,]*),.*$/u, '$1$2'); };
+    const first = p => { const m = formationMeaning(p, isPack(language) ? 'en' : language).text; return m.split(/;\s*/u)[0].replace(/^(английский: )?([^,]*),.*$/u, '$1$2'); };
     const label = (p, k) => `${k === 0 || p.pos === 'Nomen' ? p.text.charAt(0).toUpperCase() + p.text.slice(1) : p.text}${p.link ? `(${p.link})` : ''}`;
     const last = f.parts.length - 1;
     const names = f.parts.map((p, k) => k === last ? formationName(p) : label(p, k)).join(' + ');
@@ -745,8 +757,10 @@
     if (f.kind === 'name') return [{text:nameLiteral(f, language), more:0, entryId:null}];
     const gloss = (p, prefix = '') => { const m = formationMeaning(p, language);
       // (advisor 06.11) «ещё N значений» for every part, own or external: the external meanings are in the split whole.
-      return namedLine(`${prefix}${formationName(p)}`, m.text, m.rest, p.dictionaryId || null); };
-    const fixed = text => ({text, more:0, entryId:null});
+      const line = namedLine(`${prefix}${formationName(p)}`, m.text, m.rest, p.dictionaryId || null);
+      return m.language ? {...line, language:m.language} : line; };
+    // (a pack language: a fixed line is the pack's phrase or the English one — its language)
+    const fixed = (text, ru = null, en = null) => isPack(language) && en != null ? {text, more:0, entryId:null, language:packPhrase(language, en, ru) ? language : 'en'} : {text, more:0, entryId:null};
     // #21 (reference F12-G12e): a diminutive — the base's parts, the last one marked «(уменьш.)»: «Spatz — воробей (уменьш.)»,
     // «Rock — юбка · Tasche — карман (уменьш.)».
     // (advisor 09.11) a feminine in -in: the masculine word's parts and meaning («Kommissar — комиссар»)
@@ -756,12 +770,12 @@
     if (f.kind === 'compound') {
       const parts = f.half ? f.parts.slice(0, -1) : f.parts;
       // G79 (user 25.10): the lines follow the parts of the word, as the heading (eulenfrei = Eule(n) + frei: Eule — …, then -frei)
-      return [...parts.map(p => gloss(p)), ...(f.half ? [fixed(L(language, ...HALF_SUFFIX[f.half]))] : [])];
+      return [...parts.map(p => gloss(p)), ...(f.half ? [fixed(L(language, ...HALF_SUFFIX[f.half]), ...HALF_SUFFIX[f.half])] : [])];
     }
     const b = f.base;
-    if (f.prefix === 'un') return [fixed(L(language, ...FORMATION_TEXT.un)), gloss(b)];
-    if (f.suffix === 'erei') return [gloss(b), fixed(L(language, ...FORMATION_TEXT.erei[b.pos === 'Verb' ? 'Verb' : 'Nomen']))];
-    if (FORMATION_TEXT[f.suffix]) return [gloss(b), fixed(L(language, ...FORMATION_TEXT[f.suffix]))];
+    if (f.prefix === 'un') return [fixed(L(language, ...FORMATION_TEXT.un), ...FORMATION_TEXT.un), gloss(b)];
+    if (f.suffix === 'erei') { const t = FORMATION_TEXT.erei[b.pos === 'Verb' ? 'Verb' : 'Nomen']; return [gloss(b), fixed(L(language, ...t), ...t)]; }
+    if (FORMATION_TEXT[f.suffix]) return [gloss(b), fixed(L(language, ...FORMATION_TEXT[f.suffix]), ...FORMATION_TEXT[f.suffix])];
     return [gloss(b, `${L(language, 'Возможно, от', 'Possibly from')} `)];
   }
   // G47 (reference C4, 23.10.2026): a joined particle + verb that no dictionary has, explained by its parts as G48 does
@@ -777,6 +791,13 @@
     };
     // (advisor 08.11: a particle without a meaning of its own in the table — ab-, aus-, nach- — is shown bare: «ab- · fressen — to eat»)
     const particleMeaning = f.particle[language] || f.particle.en;
+    // (18.11.2026, advisor: each part in the pack) a pack language: the particle's own text (f.particle[code], pack-translations.js),
+    // else the English one with the pack's mark
+    if (isPack(language)) {
+      const own = f.particle[language] || packPhrase(language, f.particle.en, f.particle.ru), text = own || f.particle.en;
+      return [{text:text ? `${f.particle.form} — ${own ? '' : englishPrefix(language)}${text}` : `${f.particle.form}-`, more:0, entryId:null, ...(text ? {language:own ? language : 'en'} : {})},
+        ...(f.verbs || [f.verb]).map(v => { const l = line(v); return {...l, language:l.shown}; })];
+    }
     return [{text:particleMeaning ? `${f.particle.form} — ${particleMeaning}` : `${f.particle.form}-`, more:0, entryId:null}, ...(f.verbs || [f.verb]).map(line)];
   }
   // The card: heading «hinabrutschen = hinab + rutschen», the grammar of the verb form (Präteritum, Perfekt mit … and its
@@ -788,7 +809,7 @@
     const verb = {...f.verb, lemma:f.lemma, ...(candidate.construction ? {construction:candidate.construction} : {}),
       ...(candidate.formFeatures ? {formFeatures:candidate.formFeatures} : {})};
     const base = cardBase(resolution, verb, options);
-    const lines = particleVerbLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
+    const lines = particleVerbLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null, ...(l.language ? {language:l.language} : {})}));
     for (const l of lines) if (!l.helpEntry) l.more = 0;
     // G57 step 2 (user 24.10.2026): a particle with an own card (heraus, herab, hinein — Adverb) is a part of the details too.
     if (lines[0] && !lines[0].helpEntry) lines[0].helpEntry = lookup({word:f.particle.form, type:'Adverb'}) || null;
@@ -829,14 +850,16 @@
     } else if (f.kind === 'feminine') marks.push(`weibliche Form von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);
-    let lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
+    let lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null, ...(l.language ? {language:l.language} : {})}));
     // (advisor + user 10.11) a whole Russian record of the word (Fechtmeister «тренер по фехтованию», not «фехтовать · мастер»):
     // its meanings instead of the parts, in the Russian interface; the heading and the grammar stay those of the split
     if (language === 'ru' && candidate.wholeRu?.meanings?.length) { const m = fit(candidate.wholeRu.meanings.join('; ')); lines = [{text:m.text, more:m.rest, helpEntry:null}]; }
     // (advisor 09.11) a split with a place-name / surname head and no sign before it: «Name / Nomen · Kompositum» — both readings shown
     const grammar = (f.maybeName ? 'Name / ' : '') + [f.pos, ...marks].join(' · ');
-    // (a pack language: the parts' meanings are English — formationMeaning(); review C 17.11, the popup's lang attribute)
-    return {heading, grammar, text:lines.map(l => l.text).join(' · '), lines, textLanguage:isPack(language) ? 'en' : language, missing:false, derived:true,
+    // (a pack language: the card's language is the pack's when a line has the pack's text, else English; each line keeps its own —
+    // 18.11.2026, before: always English; review C 17.11, the popup's lang attribute)
+    const linesLanguage = isPack(language) ? lines.some(l => l.language === language) ? language : 'en' : language;
+    return {heading, grammar, text:lines.map(l => l.text).join(' · '), lines, textLanguage:linesLanguage, missing:false, derived:true,
       note:'', more:0, spans:null, helpEntry:null};
   }
   // (advisor + user 10.11) a word no reading found, with a whole Russian record: «Fangnetz · Nomen — рыболовная сеть …» (Russian only;
@@ -1306,7 +1329,9 @@
     // signed with its name, as a part line: «regen — шевелить, двигать»; «not found» only when the verb has none either)
     const meaning = meaningText(candidate, language);
     // (user 06.11: the mark «(без sich)» after the verb's name is required — without it the line reads as the meaning of «sich X»)
-    const lines = meaning ? [{...namedLine(`${lemma} ${L(language, '(без sich)', '(without sich)')}`, bare(meaning), meaning.more || 0), helpEntry:candidate.item || null}]
+    // (18.11.2026: a pack language keeps the mark «English: » of an English meaning — the line is the plain verb's, in English)
+    const lines = meaning ? [{...namedLine(`${lemma} ${L(language, '(без sich)', '(without sich)')}`, isPack(language) ? meaning.text : bare(meaning), meaning.more || 0), helpEntry:candidate.item || null,
+      ...(isPack(language) && meaning.language && meaning.language !== language ? {language:meaning.language} : {})}]
       : [{text:say(NO_TRANSLATION, language), more:0, helpEntry:null}];
     const {segments: _s, segmentPrefix: _p, ...rest} = result;
     return {...rest, heading:`sich ${lemma}`, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true, more:0};

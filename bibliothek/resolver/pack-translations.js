@@ -272,6 +272,51 @@
     if (!valid(code) || !en && !ru) return "";
     return phraseTables.get(code)?.get(`${section}${SEP}${en || ""}${SEP}${ru || ""}`) || "";
   }
+  // (18.11.2026, advisor: each part in the pack) a word read by its parts (candidate.formation: a compound, a diminutive, a derivation,
+  // a particle verb): every part's text in this language — an own card's pack text (its "_src_reader" of the English shown) or the pack
+  // dictionary's record of the part; none → nothing (meaning-display shows the English with the mark). The formation is copied, never
+  // changed in place (the resolver keeps it): part.pack[code] / verb.translation[code].
+  async function enrichParts(resolution, code, entryOf) {
+    const formed = resolution.candidates.filter(c => c && c.formation && typeof c.formation === "object" && c.formation.kind !== "name");
+    if (!formed.length) return;
+    // (the same deadline as the own cards — counted from the start of their load: the first tap never waits for all of them)
+    const load = ownTexts(code).catch(() => null), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
+    const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
+    const ownText = (id, english) => {
+      if (id == null || typeof entryOf !== "function" || !texts) return "";
+      let item = null; try { item = entryOf({id}); } catch (_) { item = null; }
+      const fields = item && typeof item.id === "string" ? texts.get(item.id) : null;
+      if (!fields || typeof fields._src_reader === "string" && outdated(fields._src_reader, item)) return "";
+      return same(english, item.translation_en) ? String(fields[`translation_${code}`] || "").trim() : "";
+    };
+    // (review C 18.11: a part's dictionary record under a deadline too — a stalled pack dictionary must not hold the popup; English then)
+    const partsUntil = Date.now() + OWN_WAIT_MS;
+    const dictionaryText = async (lemma, pos) => {
+      try {
+        const asked = lookup(lemma, pos, code).then(r => r ? r.meanings.join("; ") : "", () => "");
+        return typeof setTimeout === "function" ? await Promise.race([asked, new Promise(resolve => setTimeout(() => resolve(""), Math.max(0, partsUntil - Date.now())))]) : await asked;
+      } catch (_) { return ""; }
+    };
+    const partText = async p => !p || typeof p !== "object" ? "" :
+      ownText(p.dictionaryId, p.en) || (p.source !== "main" && p.lemma && p.pos ? await dictionaryText(p.lemma, p.pos) : "");
+    const withPack = async p => { if (!p || typeof p !== "object") return p; const t = await partText(p); return t ? {...p, pack:{...(p.pack || {}), [code]:t}} : p; };
+    await Promise.all(formed.map(async c => {
+      const f = c.formation;
+      if (f.kind === "particle-verb") {
+        // a verb line: its own card's pack text, else the pack dictionary's record (a text the resolver chose stays English)
+        const verb = async v => { if (!v || typeof v !== "object" || v.translation?.[code]) return v;
+          const t = ownText(v.dictionaryId ?? v.item?.id, v.translation?.en) || (v.source !== "main" && v.lemma ? await dictionaryText(v.lemma, "verb") : "");
+          return t ? {...v, translation:{...(v.translation || {}), [code]:t}} : v; };
+        // (the particle: its line of reader.json, looked up when the card is drawn — meaning-display.js particleVerbLines; review A/B:
+        // reader.json may arrive after this step)
+        const verbs = Array.isArray(f.verbs) ? await Promise.all(f.verbs.map(verb)) : null;
+        c.formation = {...f, ...(f.verb ? {verb:await verb(f.verb)} : {}), ...(verbs ? {verbs} : {})};
+        return;
+      }
+      const parts = Array.isArray(f.parts) ? await Promise.all(f.parts.map(withPack)) : null;
+      c.formation = {...f, ...(parts ? {parts} : {}), ...(f.base ? {base:await withPack(f.base)} : {})};
+    }));
+  }
   // entryOf (optional; not «lookup» — that is the external dictionary's function above): the reader's own card by id ({id} → card) — for the contractions above
   async function enrich(resolution, code, entryOf = null) {
     if (!valid(code) || !resolution || !Array.isArray(resolution.candidates)) return resolution;
@@ -313,6 +358,8 @@
       }
     }));
     await own;
+    // (the parts after the own cards: their texts are read; a part's dictionary record — as the external words above)
+    await enrichParts(resolution, code, entryOf).catch(() => { /* the parts stay English */ });
     // (the phrases under the same deadline as the card texts, counted from the start of their load: later — English phrases for this
     // tap, the next taps have them; review B Ч4)
     const phrasesLeft = (phraseStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();

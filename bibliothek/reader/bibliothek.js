@@ -1372,6 +1372,9 @@
       else if (model.lines) model.lines.forEach((line, index) => {
         const open = expandedLines.has(index) && full?.lines?.[index];
         const row = document.createElement("span"); row.className = "popover-formation-line"; row.textContent = open ? full.lines[index].text : line.text;
+        // (18.11.2026, a pack language: a part line in English among the pack's — its own lang)
+        const rowLanguage = (open ? full.lines[index] : line).language;
+        if (rowLanguage && rowLanguage !== model.textLanguage) row.lang = rowLanguage;
         if (open) row.append("\u00a0", toggleButton(line.more, true, false, () => { expandedLines.delete(index); expandAndKeepFocus(); }));
         else if (line.more > 0) row.append(" ", toggleButton(line.more, false, true, () => { expandedLines.add(index); expandAndKeepFocus(); }));
         content.append(row);
