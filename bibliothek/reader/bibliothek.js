@@ -107,6 +107,20 @@
   });
   const norm = value => String(value || "").normalize("NFC").trim().toLowerCase();
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
+  // (18.11.2026, Ч6а chat «languages in the reader», advisor: the page's texts in ui.json of the framework) a text of the reader page
+  // — its explanations, messages and the popup's frame: DeutschTranslation.t(en, ru, …args) — ru / en exactly as written, a pack
+  // language its line of lang/<code>/ui.json (the pair en + ru is the key; dev/lang/scan-ui.cjs lists them), no line → en; places
+  // {0} and plurals {0|one|other} (ru one|few|many). The texts of the resolver and meaning-display.js are in reader.json (Ч4).
+  const T = (en, ru, ...args) => {
+    const D = window.DeutschTranslation;
+    if (typeof D?.t === "function") return D.t(en, ru, ...args);
+    const text = locale() === "ru" ? ru : en;   // (without the core: {0}, and of {0|a|b…} the first form for 1, else the last)
+    return args.length ? String(text).replace(/\{(\d+)(\|[^{}]*)?\}/gu, (m, n, forms) => +n >= args.length ? m : !forms ? String(args[+n])
+      : (list => Number(args[+n]) === 1 ? list[0] : list[list.length - 1])(forms.slice(1).split("|"))) : text;
+  };
+  // the language a text of T is in (its lang attribute): a pack line → the pack language, else the interface language
+  const shownIn = (text, en) => { const shown = window.DeutschTranslation?.getDisplayLang?.();
+    return shown && shown !== "en" && shown !== "ru" && window.DeutschTranslation?.isPack?.(shown) && text !== en ? shown : locale() === "ru" ? "ru" : "en"; };
   // The language of the popup's card text (17.11.2026, chat «languages in the reader», Ч2): a pack language (lang/<code>/) when one is
   // chosen — its texts come from resolver/pack-translations.js, and a card without them is the English one (meaning-display.js);
   // otherwise the interface language (en / ru) as before. The other texts of the reader stay locale() (stage Ч6).
@@ -157,13 +171,13 @@
     "This EPUB contains an unsupported chapter format.": "В этом EPUB главы в неподдерживаемом формате.",
     "This EPUB contains no readable text.": "В этом EPUB нет текста для чтения."
   };
-  const say = message => locale() === "ru" && MESSAGES_RU[message] || message;
+  const say = message => T(message, MESSAGES_RU[message] || message);
   function applyLibraryTexts() {
-    const lang = locale() === "ru" ? "ru" : "en";
-    $("storage-note").innerHTML = LIBRARY_NOTE[lang];
-    $("storage-note").lang = lang;
-    $("empty-library-text").textContent = LIBRARY_EMPTY[lang];
-    $("empty-library-text").lang = lang;
+    const note = T(LIBRARY_NOTE.en, LIBRARY_NOTE.ru), empty = T(LIBRARY_EMPTY.en, LIBRARY_EMPTY.ru);
+    $("storage-note").innerHTML = note;
+    $("storage-note").lang = shownIn(note, LIBRARY_NOTE.en);
+    $("empty-library-text").textContent = empty;
+    $("empty-library-text").lang = shownIn(empty, LIBRARY_EMPTY.en);
   }
   const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || "";
 
@@ -417,7 +431,7 @@
     if(resume)return `Weiterlesen · ${resume.title}`;
     if(started)return 'Weiterlesen';
     const words=Number(book.wordCount||0);
-    if(book.placeholder)return LIBRARY_EMPTY[locale()==='ru'?'ru':'en'];
+    if(book.placeholder)return T(LIBRARY_EMPTY.en, LIBRARY_EMPTY.ru);
     return `${words.toLocaleString('de-DE')} ${words===1?'Wort':'Wörter'} · ${String(book.format||'txt').toUpperCase()}`;
   }
   // 16.11 (Alena): the empty book (shelf and list) opens the same menu as «+»; after this click has finished, so the
@@ -981,11 +995,11 @@
   let lemmaResolver = null, selectedResolution = null;
   const usageNote = candidate => candidate?.usage?.role === "nominalized"
     ? `${candidate.usage.kind === "person"
-      ? locale() === "ru" ? "Субстантивация · обозначение человека" : "Nominalization · person"
-      : candidate.usage.kind === "adjective" ? locale() === "ru" ? "Субстантивированное прилагательное" : "Nominalized adjective"
-      : locale() === "ru" ? "Субстантивированный инфинитив" : "Nominalized infinitive"} · ${candidate.usage.base}${candidate.usage.number === "plural" ? locale() === "ru" ? " · множественное число" : " · plural" : ""}`
+      ? T("Nominalization · person", "Субстантивация · обозначение человека")
+      : candidate.usage.kind === "adjective" ? T("Nominalized adjective", "Субстантивированное прилагательное")
+      : T("Nominalized infinitive", "Субстантивированный инфинитив")} · ${candidate.usage.base}${candidate.usage.number === "plural" ? ` · ${T("plural", "множественное число")}` : ""}`
     : candidate?.usage?.role === "attributive"
-    ? `${candidate.usage.form} · ${window.BibliothekMeaningDisplay.participleName(candidate.usage) || (locale() === "ru" ? "прилагательное" : "adjective")} (${candidate.usage.base}) · ${locale() === "ru" ? "определение к" : "modifier of"} ${candidate.usage.head}` : "";
+    ? `${candidate.usage.form} · ${window.BibliothekMeaningDisplay.participleName(candidate.usage) || T("adjective", "прилагательное")} (${candidate.usage.base}) · ${T("modifier of", "определение к")} ${candidate.usage.head}` : "";
   // Dictionary entry by id, or by word and reader type (help for am + Superlativ, contractions, "From …" lines).
   function findEntry({id, word, type} = {}) {
     if (!dictionary) return null;
@@ -1041,6 +1055,12 @@
   function updateReaderLanguage() {
       applyLibraryTexts();
       refreshPopupLanguage?.();
+      // (Ч6а) a pack language chosen while the page is open: its ui.json is read now — then the page's texts again
+      const D = window.DeutschTranslation, shown = D?.getDisplayLang?.();
+      if (shown && D?.isPack?.(shown) && typeof D.ready === "function" && !updateReaderLanguage.waiting) {
+        updateReaderLanguage.waiting = true;
+        try { D.ready(["ui.json"], () => { updateReaderLanguage.waiting = false; applyLibraryTexts(); refreshPopupLanguage?.(true); }); } catch (_) { updateReaderLanguage.waiting = false; }
+      }
   }
   function reflexiveAnchor(candidate, context) {
     const group = candidate?.construction;
@@ -1143,7 +1163,7 @@
     const loading = document.createElement("span");
     loading.className = "popover-loading";
     loading.setAttribute("role", "status");
-    const renderLoading = () => loading.setAttribute("aria-label", locale() === "ru" ? "Ищем значение слова" : "Looking up word");
+    const renderLoading = () => loading.setAttribute("aria-label", T("Looking up word", "Ищем значение слова"));
     renderLoading();
     refreshPopupLanguage = renderLoading;
     for (let i = 0; i < 3; i++) {
@@ -1218,10 +1238,8 @@
     // parts); a new word, another variant or another language starts short again.
     let expandedMain = false;
     const expandedLines = new Set(), expandedParts = new Set();
-    const moreLabel = (n, ru) => {
-      const forms = n % 10 === 1 && n % 100 !== 11 ? "значение" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "значения" : "значений";
-      return ru ? `ещё ${n} ${forms}` : `${n} more ${n === 1 ? "meaning" : "meanings"}`;
-    };
+    // («ещё N значений»: the plural of the framework — en one|other, ru one|few|many, a pack language its own forms)
+    const moreLabel = n => T("{0} more {0|meaning|meanings}", "ещё {0} {0|значение|значения|значений}", n);
     const expandAndKeepFocus = () => { renderSelection(); content.focus({preventScroll:true}); };
     const renderSelection = () => {
       const candidate = selectedResolution;
@@ -1282,7 +1300,7 @@
         model = {heading:word, grammar:"", spans:null, helpEntry:null, textLanguage:locale(),
           // G57 (user 24.10.2026): the choice window is the list of cards alone, without a «choose» line.
           text:resolution.candidates.length ? "" :
-            resolution.error ? ru ? "Не удалось загрузить словарь. Попробуйте ещё раз." : "The dictionary could not be loaded. Please try again." :
+            resolution.error ? T("The dictionary could not be loaded. Please try again.", "Не удалось загрузить словарь. Попробуйте ещё раз.") :
             resolution.unresolvedMeanings.length ? `${ru ? "английский: " : ""}${resolution.unresolvedMeanings.join("; ")}` : display.NO_TRANSLATION[locale()]};
       }
       selectedEntry = model.helpEntry || null;
@@ -1296,14 +1314,14 @@
       const shown = expandedMain && full && !model.lines ? full : model;
       const moreButton = (n, onClick) => {
         const more = document.createElement("button"); more.type = "button"; more.className = "popover-more-meanings";
-        more.append(moreLabel(n, ru), "\u00a0", sideChevron()); more.setAttribute("aria-expanded", "false");
+        more.append(moreLabel(n), "\u00a0", sideChevron()); more.setAttribute("aria-expanded", "false");
         more.addEventListener("click", onClick); return more;
       };
       // (user 07.11) a line of parts opens and closes with a chevron: down — «ещё N значений», up — collapse it again.
       // (design 08.11, Alena) «ещё N значений ›» — one sideways chevron, the shared .ui-chev; open — an up chevron (the word «свернуть» wrapped to its own line).
       const sideChevron = () => { const c = document.createElement("span"); c.className = "ui-chev"; c.setAttribute("aria-hidden", "true"); return c; };
       const collapseButton = onClick => { const b = document.createElement("button"); b.type = "button"; b.className = "popover-more-meanings popover-collapse";
-        const label = ru ? "свернуть" : "collapse"; b.setAttribute("aria-expanded", "true");
+        const label = T("collapse", "свернуть"); b.setAttribute("aria-expanded", "true");
         b.setAttribute("aria-label", label); b.title = label; b.append(chevron(true));
         b.addEventListener("click", onClick); return b; };
       const chevron = up => { const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -1313,7 +1331,7 @@
       const toggleButton = (n, open, text, onClick) => {
         if (open) return collapseButton(onClick);
         const button = document.createElement("button"); button.type = "button"; button.className = "popover-more-meanings";
-        const label = moreLabel(n, ru);
+        const label = moreLabel(n);
         if (text) button.append(label, "\u00a0"); else { button.setAttribute("aria-label", label); button.title = label; }
         button.append(sideChevron()); button.setAttribute("aria-expanded", "false");
         button.addEventListener("click", onClick); return button;
@@ -1355,14 +1373,14 @@
       }
       content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : popupLanguage();
       updateTranslationFade();
-      $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
+      $("popover-alternatives").querySelector("summary").textContent = T("Other meanings", "Другие значения");
       if (referencePronoun && linkedReflexive) {
         const link = document.createElement("button"); link.type = "button"; link.className = "lemma-choice reflexive-link";
-        link.textContent = `${ru ? "Связанный глагол" : "Linked verb"}: ${linkedReflexive.lemma}`;
+        link.textContent = `${T("Linked verb", "Связанный глагол")}: ${linkedReflexive.lemma}`;
         link.addEventListener("click",()=>chooseCandidate(linkedReflexive)); content.append(link);
       }
       $("popover-more").hidden = !selectedEntry && !partEntries.length;
-      $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : (ru ? "Словарная справка " : "Dictionary details ");
+      $("popover-more").firstChild.textContent=`${showPronounSummary ? T("Pronoun reference", "Справка о местоимениях") : T("Dictionary details", "Словарная справка")} `;
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" && !(locale() === "ru" && candidate.wholeRu) : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback") && !(locale() === "ru" && resolution.wholeRu);
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
       // (links chat, advisor 15.11: a window keeps the chain of its verb — modal / auxiliary group — lit; resolver windowChain)
@@ -1439,7 +1457,7 @@
       // G57 (user 24.10.2026): more meanings are only named here («ещё N значений», not a button): choosing the row opens its card,
       // and the number is the one that card shows (a card of parts: all its lines).
       const hidden = altModel.lines ? altModel.lines.reduce((sum, l) => sum + (l.more || 0), 0) : altModel.more || 0;
-      const moreText = hidden > 0 ? moreLabel(hidden, locale() === "ru") : "";
+      const moreText = hidden > 0 ? moreLabel(hidden) : "";
       for (const [cls, value] of [["lemma-choice-heading", altModel.heading], ["lemma-choice-grammar", altModel.grammar], ["lemma-choice-text", marked], ["lemma-choice-more", moreText]]) {
         if (!value) continue;
         // Separators stay in the text (screen readers, copy) but not on screen.
@@ -1454,9 +1472,12 @@
       });
     };
     let renderedLanguage = popupLanguage(), languageRevision = 0;
-    refreshPopupLanguage = async () => {
+    refreshPopupLanguage = async (pageTexts = false) => {
       const language = popupLanguage();
-      if (request !== lookupRequest || language === renderedLanguage) return;
+      // (Ч6а) pageTexts: the page's ui.json has just been read (updateReaderLanguage) — repaint the frame in the same language
+      if (request !== lookupRequest) return;
+      if (pageTexts && language === renderedLanguage) { renderSelection(); if (!$sheet.hidden && (selectedEntry || detailParts.length)) renderDictionaryDetails(); return; }
+      if (language === renderedLanguage) return;
       renderedLanguage = language;
       expandedMain = false; expandedLines.clear(); expandedParts.clear();
       const revision = ++languageRevision;
@@ -1536,7 +1557,7 @@
     const item = detailParts[detailIndex];
     renderDictionaryCard(item);
     if (detailParts.length < 2) return;
-    const ru = locale() === "ru", pager = document.createElement("div"); pager.className = "dictionary-pager";
+    const pager = document.createElement("div"); pager.className = "dictionary-pager";
     const step = (delta, label, symbol) => {
       const button = document.createElement("button"); button.type = "button"; button.className = "dictionary-pager-step";
       button.textContent = symbol; button.setAttribute("aria-label", label); button.dataset.step = delta < 0 ? "prev" : "next";
@@ -1548,7 +1569,7 @@
     const twin = detailParts.some((other, i) => i !== detailIndex && other.word === item.word);
     const meaning = twin ? String(translation(item) || "").split(";")[0].trim() : "";
     place.textContent = `${item.word}${meaning ? ` (${meaning})` : ""} · ${detailIndex + 1} / ${detailParts.length}`;
-    pager.append(step(-1, ru ? "Предыдущая часть" : "Previous part", "‹"), place, step(1, ru ? "Следующая часть" : "Next part", "›"));
+    pager.append(step(-1, T("Previous part", "Предыдущая часть"), "‹"), place, step(1, T("Next part", "Следующая часть"), "›"));
     $("dictionary-card").prepend(pager);
     // Focus stays on the arrow just used (the other one at the end); a rebuild (language) keeps it too.
     if (direction) (pager.querySelector(`[data-step="${direction}"]:not(:disabled)`) || pager.querySelector(".dictionary-pager-step:not(:disabled)"))?.focus({preventScroll:true});
@@ -1558,8 +1579,8 @@
     detailIndex = index; renderPartDetails(direction);
     $("dictionary-sheet").querySelector(".sheet-card").scrollTop = 0;
     // One live region for screen readers, kept in the sheet: «Bauchhöhe: часть 2 из 2 — Höhe».
-    const ru = locale() === "ru", status = $("dictionary-pager-status");
-    if (status) status.textContent = `${selectedWord}: ${ru ? `часть ${index + 1} из ${detailParts.length}` : `part ${index + 1} of ${detailParts.length}`} — ${detailParts[index].word}`;
+    const status = $("dictionary-pager-status");
+    if (status) status.textContent = `${selectedWord}: ${T("part {0} of {1}", "часть {0} из {1}", index + 1, detailParts.length)} — ${detailParts[index].word}`;
   }
   // 08.11 (Alena): Meine Wörter shows the same card on its second screen — `root` there, the word as it stood in the
   // book (its form is marked in the tables), no reading of the sentence and no «＋ Zum Wortschatz» (the list adds words).
