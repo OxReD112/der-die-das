@@ -12,6 +12,8 @@
  * of the cache → plain fetch. A network error stays a network error (no second request).
  * Our own dictionaries (worterbuch/german-*.json; since 08.11 worterbuch/reader/ — light copies + details parts): one copy per file — a later version (versions start with the date)
  * drops the older ones; an older version (an old page from the HTTP cache) is not stored.
+ * A language pack (lang/<code>/…, 17.11): its files that are not dictionary parts — one copy per file, the one just stored
+ * (the pack version is a hash, not a date); its dictionary parts — as all parts, under the limit.
  * A changed data file needs a new version in its address (dev/bibliothek/tools/data-versions.json, regression
  * data-cache-versions-qa.cjs); otherwise this cache keeps answering the old file.
  * The limit takes only parts (speed chat 07.11): on the iPhone our own data files stored 26.10 were the oldest entries, the
@@ -42,8 +44,19 @@
     // (…-details/NN.json, two digits) is not dropped by the limit (review 08.11: a dropped part means a card without its
     // examples when offline) — only an earlier version of it goes
     /^worterbuch\/reader\/german-[\w-]+(?:-details\/\d{2})?\.json$/,
+    // a language pack (17.11.2026, task of the main languages chat; pack-translations.js): the pack's manifest, its phrases
+    // (reader.json), the translations of our cards (worterbuch/german-*.json) and its dictionary (manifest + 1 024 parts)
+    /^lang\/[a-z]{2,3}\/(?:manifest|reader)\.json$/,
+    /^lang\/[a-z]{2,3}\/worterbuch\/german-[\w-]+\.json$/,
+    /^lang\/[a-z]{2,3}\/dictionary\/(?:parts\/\d{4}|manifest)\.json$/,
   ];
   const replacedOnUpdate = /^worterbuch\//;
+  // A pack file that is not a part: one copy per file too, but its version is a hash (lang/<code>/manifest.json «version»,
+  // 580d321910c6), not a date — it does not compare as text. The page always asks for the version of the pack it reads
+  // now, so the copy just stored is the current one and every other version of that address goes. (An old page in
+  // another tab may store the old version again; the next page then downloads the current one once more — a file, not a
+  // wrong answer: the version is in the address.) The dictionary parts stay under the limit, as all parts.
+  const replacedAlways = /^lang\/[a-z]{2,3}\/(?!dictionary\/parts\/)/;
   const host = typeof window !== "undefined" ? window : globalThis;
   const isRequest = input => typeof Request !== "undefined" && input instanceof Request;
   const WAIT_MS = 500;                      // a lookup that does not answer (WebKit stalls happen) counts as a miss (1.5 s before 07.11)
@@ -124,10 +137,12 @@
     // what may go, the oldest first: parts, and a copy of another file in an earlier version than its latest one (the
     // latest by version, not by order: an old page in another tab may store an old version after the new one; review 07.11)
     const rows = keys.map(key => { try { const url = new URL(key.url);
-      return {key, path: url.pathname, version: url.searchParams.get("v") || "", part: /\/\d{4,}\.json$/.test(url.pathname)}; }
-      catch (_) { return {key, path: "", version: "", part: false}; } });
+      return {key, path: url.pathname, version: url.searchParams.get("v") || "", part: /\/\d{4,}\.json$/.test(url.pathname),
+        pack: !!site && url.pathname.startsWith(site.pathname) && replacedAlways.test(pathOf(url))}; }
+      catch (_) { return {key, path: "", version: "", part: false, pack: false}; } });
     const latest = new Map();
-    for (const row of rows) if (!row.part && !(latest.get(row.path) > row.version)) latest.set(row.path, row.version);
+    // (a pack file: the copy stored last is the current one — its version is a hash, it does not compare as text)
+    for (const row of rows) if (!row.part && (row.pack || !(latest.get(row.path) > row.version))) latest.set(row.path, row.version);
     const removable = rows.filter(row => row.part || row.version !== latest.get(row.path));
     let removed = 0;
     const cleaning = clock();
@@ -137,7 +152,14 @@
   }
   const versionOf = url => url.searchParams.get("v") || "";
   async function store(cache, url, copy) {
-    if (replacedOnUpdate.test(pathOf(url))) {        // one copy per file of our own dictionaries
+    if (replacedAlways.test(pathOf(url))) {         // a pack file: the copy just asked for is the current one
+      const same = await cache.keys(url.origin + url.pathname, {ignoreSearch: true});
+      await cache.put(url.href, copy);
+      let gone = 0;
+      for (const key of same) if (key.url !== url.href && await cache.delete(key)) gone++;
+      if (same.some(key => key.url === url.href)) gone++;   // (the same address again: no new entry)
+      addCount(1 - gone);
+    } else if (replacedOnUpdate.test(pathOf(url))) {        // one copy per file of our own dictionaries
       const same = await cache.keys(url.origin + url.pathname, {ignoreSearch: true});
       if (same.some(key => versionOf(new URL(key.url)) > versionOf(url))) return;      // a later version is kept: not stored
       await cache.put(url.href, copy);
