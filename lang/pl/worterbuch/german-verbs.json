@@ -27617,24 +27617,31 @@
   "_src_reader": "d0187e79"
  },
  "verb-2802": {
-  "_src": "5c38556b",
   "translation_pl": "wzdrygnąć się, wzdrygać się (ze strachu, z bólu)",
   "usage_note_pl": "Rozdzielny, słaby: zuckt zusammen, zuckte zusammen, ist zusammengezuckt. vor Schreck zusammenzucken — wzdrygnąć się ze strachu; bei jedem Geräusch zusammenzucken — wzdrygać się na każdy dźwięk. Por. zucken — drgać.",
   "example_pl": "Kiedy drzwi nagle się zatrzasnęły, wzdrygnęła się.",
+  "_src": "5c38556b",
   "_src_reader": "56032152"
  },
  "verb-2803": {
-  "_src": "399cc40d",
   "translation_pl": "osłabiać (uścisk, wysiłki); (pot.) ustępować, odpuszczać",
   "usage_note_pl": "Zwykle z przeczeniem: nicht lockerlassen — nie odpuszczać, nie poddawać się, obstawać przy swoim. Odmiana jak lassen: lässt locker, ließ locker, hat lockergelassen. O linie, wodzach — rozdzielnie: das Seil locker lassen — nie napinać liny.",
   "example_pl": "Nie dawała za wygraną, dopóki nie powiedział jej prawdy.",
+  "_src": "399cc40d",
   "_src_reader": "6dc2798a"
  },
  "verb-2804": {
-  "_src": "6b543c25",
   "translation_pl": "zostawić (siedzącego); (pot.) rzucić (kogoś), zostawić na lodzie",
   "usage_note_pl": "Częściej rozdzielnie: sitzen lassen (łącznie — tylko w znaczeniu przenośnym). Perfekt: hat sitzen lassen (rzadziej sitzen gelassen). jemanden im Café sitzen lassen — nie przyjść na spotkanie, kazać czekać na próżno. etwas nicht auf sich sitzen lassen — nie zostawić (zarzutu, zniewagi) bez odpowiedzi. (pot., szk.) einen Schüler sitzen lassen — zostawić ucznia na drugi rok.",
   "example_pl": "Niedługo przed ślubem narzeczony ją rzucił.",
+  "_src": "6b543c25",
   "_src_reader": "ae35d192"
+ },
+ "verb-2805": {
+  "translation_pl": "ładować (towar); ładować (akumulator, broń); wczytywać (dane); zapraszać",
+  "usage_note_pl": "Czasownik mocny: lädt, lud, hat geladen. Das Laden dauert zwei Stunden. — Ładowanie trwa dwie godziny. Seite wird geladen … — Strona się wczytuje … „Zapraszać” — książkowo, zwykle einladen; vor Gericht laden — wzywać do sądu. (pot.) geladen sein — być wściekłym. Por. der Laden — sklep.",
+  "example_pl": "Załadowaliśmy meble do furgonetki.",
+  "_src": "632f50d1",
+  "_src_reader": "b5929650"
  }
 }

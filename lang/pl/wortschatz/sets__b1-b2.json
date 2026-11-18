@@ -2,351 +2,561 @@
  {
   "en": "200 words that take you from B1 to B2.",
   "ru": "200 слов, которые ведут с B1 на B2.",
-  "pl": "200 słów, które prowadzą od B1 do B2."
+  "pl": "200 słów, które prowadzą od B1 do B2.",
+  "at": [
+   "dec05010"
+  ]
  },
  {
   "en": "Please stay calm and leave the building by the stairs.",
   "ru": "Пожалуйста, сохраняйте спокойствие и покиньте здание по лестнице.",
-  "pl": "Proszę zachować spokój i opuścić budynek schodami."
+  "pl": "Proszę zachować spokój i opuścić budynek schodami.",
+  "at": [
+   "f685e3c3"
+  ]
  },
  {
   "en": "There has been a broad public debate on this topic for years.",
   "ru": "Об этой теме уже много лет ведётся широкая общественная дискуссия.",
-  "pl": "Od lat toczy się na ten temat szeroka debata społeczna."
+  "pl": "Od lat toczy się na ten temat szeroka debata społeczna.",
+  "at": [
+   "dcd2fb3a"
+  ]
  },
  {
   "en": "Please bring your ID as well as a copy of the rental contract.",
   "ru": "Пожалуйста, возьмите с собой удостоверение личности, а также копию договора аренды.",
-  "pl": "Proszę zabrać ze sobą dowód osobisty, a także kopię umowy najmu."
+  "pl": "Proszę zabrać ze sobą dowód osobisty, a także kopię umowy najmu.",
+  "at": [
+   "8e616db4"
+  ]
  },
  {
   "en": "The survey results allow for different interpretations.",
   "ru": "Результаты опроса допускают разные толкования.",
-  "pl": "Wyniki ankiety dopuszczają różne interpretacje."
+  "pl": "Wyniki ankiety dopuszczają różne interpretacje.",
+  "at": [
+   "77166088"
+  ]
  },
  {
   "en": "Please add the date and your signature to the form.",
   "ru": "Пожалуйста, поставьте на бланке дату и подпись.",
-  "pl": "Proszę opatrzyć formularz datą i podpisem."
+  "pl": "Proszę opatrzyć formularz datą i podpisem.",
+  "at": [
+   "0eca4b86"
+  ]
  },
  {
   "en": "Unfortunately we can't give you any information.",
   "ru": "К сожалению, мы не можем предоставить вам информацию.",
-  "pl": "Niestety nie możemy udzielić Panu informacji."
+  "pl": "Niestety nie możemy udzielić Panu informacji.",
+  "at": [
+   "c6a28eae"
+  ]
  },
  {
   "en": "Many residents perceive the noise as a heavy burden.",
   "ru": "Многие жители воспринимают шум как серьёзную нагрузку.",
-  "pl": "Wielu mieszkańców postrzega hałas jako poważne obciążenie."
+  "pl": "Wielu mieszkańców postrzega hałas jako poważne obciążenie.",
+  "at": [
+   "ac204948"
+  ]
  },
  {
   "en": "to perceive (as), to feel",
   "ru": "воспринимать (как), ощущать",
-  "pl": "postrzegać (jako), odczuwać"
+  "pl": "postrzegać (jako), odczuwać",
+  "at": [
+   "a4dc5557"
+  ]
  },
  {
   "en": "Despite obvious defects, the flat was rented out at the full price.",
   "ru": "Несмотря на очевидные недостатки, квартиру сдали по полной цене.",
-  "pl": "Mimo oczywistych wad mieszkanie wynajęto za pełną cenę."
+  "pl": "Mimo oczywistych wad mieszkanie wynajęto za pełną cenę.",
+  "at": [
+   "f5ac3bd1"
+  ]
  },
  {
   "en": "The factory runs around the clock in three shifts.",
   "ru": "На фабрике круглосуточно работают в три смены.",
-  "pl": "W fabryce pracuje się całą dobę na trzy zmiany."
+  "pl": "W fabryce pracuje się całą dobę na trzy zmiany.",
+  "at": [
+   "9f948643"
+  ]
  },
  {
   "en": "shift (at work); layer",
   "ru": "смена (на работе); слой",
-  "pl": "zmiana (w pracy); warstwa"
+  "pl": "zmiana (w pracy); warstwa",
+  "at": [
+   "f7ee6a40"
+  ]
  },
  {
   "en": "To a certain extent I can understand your criticism.",
   "ru": "До определённой степени я понимаю твою критику.",
-  "pl": "Do pewnego stopnia rozumiem twoją krytykę."
+  "pl": "Do pewnego stopnia rozumiem twoją krytykę.",
+  "at": [
+   "5c220e1f"
+  ]
  },
  {
   "en": "The constant rain spoiled the whole trip for us.",
   "ru": "Затяжной дождь испортил нам всю поездку.",
-  "pl": "Ciągły deszcz zepsuł nam całą wycieczkę."
+  "pl": "Ciągły deszcz zepsuł nam całą wycieczkę.",
+  "at": [
+   "bafb9c4e"
+  ]
  },
  {
   "en": "You can appeal against the decision within one month.",
   "ru": "Решение можно обжаловать в течение месяца.",
-  "pl": "Od decyzji można się odwołać w ciągu miesiąca."
+  "pl": "Od decyzji można się odwołać w ciągu miesiąca.",
+  "at": [
+   "0cacd535"
+  ]
  },
  {
   "en": "objection; contradiction; Widerspruch einlegen — to appeal",
   "ru": "возражение; противоречие; Widerspruch einlegen — обжаловать",
-  "pl": "sprzeciw; sprzeczność; Widerspruch einlegen — odwołać się"
+  "pl": "sprzeciw; sprzeczność; Widerspruch einlegen — odwołać się",
+  "at": [
+   "8467e9a2"
+  ]
  },
  {
   "en": "We're going hiking tomorrow, unless it rains.",
   "ru": "Завтра мы пойдём в поход, если только не будет дождя.",
-  "pl": "Jutro idziemy na pieszą wycieczkę, chyba że będzie padać."
+  "pl": "Jutro idziemy na pieszą wycieczkę, chyba że będzie padać.",
+  "at": [
+   "bce465e9"
+  ]
  },
  {
   "en": "unless",
   "ru": "если только не; разве что",
-  "pl": "o ile nie; chyba że"
+  "pl": "o ile nie; chyba że",
+  "at": [
+   "6ad6bff6"
+  ]
  },
  {
   "en": "I am of the opinion that the city needs more cycle paths.",
   "ru": "Я придерживаюсь мнения, что городу нужно больше велодорожек.",
-  "pl": "Jestem zdania, że miasto potrzebuje więcej ścieżek rowerowych."
+  "pl": "Jestem zdania, że miasto potrzebuje więcej ścieżek rowerowych.",
+  "at": [
+   "8111d375"
+  ]
  },
  {
   "en": "I am referring to your advertisement of 3 May.",
   "ru": "Я ссылаюсь на ваше объявление от 3 мая.",
-  "pl": "Nawiązuję do Państwa ogłoszenia z 3 maja."
+  "pl": "Nawiązuję do Państwa ogłoszenia z 3 maja.",
+  "at": [
+   "5418f512"
+  ]
  },
  {
   "en": "to refer to (sich beziehen auf); to move into",
   "ru": "ссылаться на (sich beziehen auf); въезжать (в квартиру)",
-  "pl": "powoływać się na (sich beziehen auf); wprowadzać się (do mieszkania)"
+  "pl": "powoływać się na (sich beziehen auf); wprowadzać się (do mieszkania)",
+  "at": [
+   "1105f659"
+  ]
  },
  {
   "en": "Sorry, we've drifted off topic again.",
   "ru": "Извините, мы опять отклонились от темы.",
-  "pl": "Przepraszam, znowu odbiegliśmy od tematu."
+  "pl": "Przepraszam, znowu odbiegliśmy od tematu.",
+  "at": [
+   "5a02167a"
+  ]
  },
  {
   "en": "to digress; to stray",
   "ru": "отклоняться (от темы); сбиваться (с пути)",
-  "pl": "odbiegać (od tematu); zbaczać (z drogi)"
+  "pl": "odbiegać (od tematu); zbaczać (z drogi)",
+  "at": [
+   "424412c1"
+  ]
  },
  {
   "en": "Many older people depend on help in everyday life.",
   "ru": "Многие пожилые люди в быту зависят от помощи.",
-  "pl": "Wiele starszych osób jest w codziennym życiu zdanych na pomoc."
+  "pl": "Wiele starszych osób jest w codziennym życiu zdanych na pomoc.",
+  "at": [
+   "564a59f5"
+  ]
  },
  {
   "en": "to depend on (angewiesen sein auf); to instruct",
   "ru": "зависеть от (angewiesen sein auf); давать указание",
-  "pl": "być zdanym na (angewiesen sein auf); wydawać polecenie"
+  "pl": "być zdanym na (angewiesen sein auf); wydawać polecenie",
+  "at": [
+   "a1f29d62"
+  ]
  },
  {
   "en": "The experts came to the conclusion that the project is too expensive.",
   "ru": "Эксперты пришли к выводу, что проект слишком дорогой.",
-  "pl": "Eksperci doszli do wniosku, że projekt jest zbyt drogi."
+  "pl": "Eksperci doszli do wniosku, że projekt jest zbyt drogi.",
+  "at": [
+   "ed4ea2ac"
+  ]
  },
  {
   "en": "to come to (a conclusion); to reach",
   "ru": "приходить (к выводу, результату); добираться",
-  "pl": "dochodzić (do wniosku, wyniku); docierać"
+  "pl": "dochodzić (do wniosku, wyniku); docierać",
+  "at": [
+   "834aed4b"
+  ]
  },
  {
   "en": "I'll come by bike or by bus, depending on the weather.",
   "ru": "Я приеду на велосипеде или на автобусе — в зависимости от погоды.",
-  "pl": "Przyjadę rowerem albo autobusem — w zależności od pogody."
+  "pl": "Przyjadę rowerem albo autobusem — w zależności od pogody.",
+  "at": [
+   "5f58a419"
+  ]
  },
  {
   "en": "depending on",
   "ru": "в зависимости от того (как, ли)",
-  "pl": "w zależności od tego (jak, czy)"
+  "pl": "w zależności od tego (jak, czy)",
+  "at": [
+   "00f55526"
+  ]
  },
  {
   "en": "Please come for the blood test in the morning on an empty stomach.",
   "ru": "На анализ крови, пожалуйста, приходите утром натощак.",
-  "pl": "Na badanie krwi proszę przyjść rano na czczo."
+  "pl": "Na badanie krwi proszę przyjść rano na czczo.",
+  "at": [
+   "afd864cb"
+  ]
  },
  {
   "en": "on an empty stomach; sober, level-headed",
   "ru": "натощак; трезвый, рассудительный",
-  "pl": "na czczo; trzeźwy, rozsądny"
+  "pl": "na czczo; trzeźwy, rozsądny",
+  "at": [
+   "7db9cf28"
+  ]
  },
  {
   "en": "After the double shift she was completely exhausted.",
   "ru": "После двойной смены она была совершенно измотана.",
-  "pl": "Po podwójnej zmianie była kompletnie wyczerpana."
+  "pl": "Po podwójnej zmianie była kompletnie wyczerpana.",
+  "at": [
+   "5be91b2f"
+  ]
  },
  {
   "en": "exhausted (erschöpft); to use up",
   "ru": "измотанный (erschöpft); исчерпывать",
-  "pl": "wyczerpany (erschöpft); wyczerpywać"
+  "pl": "wyczerpany (erschöpft); wyczerpywać",
+  "at": [
+   "5ed6db7c"
+  ]
  },
  {
   "en": "The central bank wants to fight inflation with higher interest rates.",
   "ru": "Центробанк хочет бороться с инфляцией с помощью повышения ставок.",
-  "pl": "Bank centralny chce walczyć z inflacją za pomocą wyższych stóp procentowych."
+  "pl": "Bank centralny chce walczyć z inflacją za pomocą wyższych stóp procentowych.",
+  "at": [
+   "ebb6b429"
+  ]
  },
  {
   "en": "Please always quote the case number in any enquiries.",
   "ru": "При запросах всегда указывайте номер дела.",
-  "pl": "W razie pytań proszę zawsze podawać numer sprawy."
+  "pl": "W razie pytań proszę zawsze podawać numer sprawy.",
+  "at": [
+   "b1606751"
+  ]
  },
  {
   "en": "We'll finish the project by Friday, provided everyone helps.",
   "ru": "Мы закончим проект к пятнице при условии, что все помогут.",
-  "pl": "Skończymy projekt do piątku, pod warunkiem że wszyscy pomogą."
+  "pl": "Skończymy projekt do piątku, pod warunkiem że wszyscy pomogą.",
+  "at": [
+   "d102f70f"
+  ]
  },
  {
   "en": "provided (that)",
   "ru": "при условии, что",
-  "pl": "pod warunkiem że"
+  "pl": "pod warunkiem że",
+  "at": [
+   "a0aac21c"
+  ]
  },
  {
   "en": "Many parents have concerns about the school's new phone rule.",
   "ru": "У многих родителей есть сомнения насчёт нового правила о мобильных телефонах в школе.",
-  "pl": "Wielu rodziców ma wątpliwości co do nowej zasady dotyczącej telefonów komórkowych w szkole."
+  "pl": "Wielu rodziców ma wątpliwości co do nowej zasady dotyczącej telefonów komórkowych w szkole.",
+  "at": [
+   "a01977b1"
+  ]
  },
  {
   "en": "concerns, doubts",
   "ru": "сомнения, опасения (Bedenken haben)",
-  "pl": "wątpliwości, obawy (Bedenken haben)"
+  "pl": "wątpliwości, obawy (Bedenken haben)",
+  "at": [
+   "431d395e"
+  ]
  },
  {
   "en": "Before the event, the boss explained the exact schedule to us.",
   "ru": "Перед мероприятием начальница объяснила нам точный порядок проведения.",
-  "pl": "Przed wydarzeniem szefowa wyjaśniła nam jego dokładny przebieg."
+  "pl": "Przed wydarzeniem szefowa wyjaśniła nam jego dokładny przebieg.",
+  "at": [
+   "a5e458a9"
+  ]
  },
  {
   "en": "course, procedure; expiry",
   "ru": "ход, порядок (проведения); истечение (срока)",
-  "pl": "przebieg, porządek (programu); upływ (terminu)"
+  "pl": "przebieg, porządek (programu); upływ (terminu)",
+  "at": [
+   "8f3515b6"
+  ]
  },
  {
   "en": "The train was an hour late. As a result, I missed my connection.",
   "ru": "Поезд опоздал на час. Вследствие этого я опоздала на пересадку.",
-  "pl": "Pociąg miał godzinę opóźnienia. Wskutek tego spóźniłam się na przesiadkę."
+  "pl": "Pociąg miał godzinę opóźnienia. Wskutek tego spóźniłam się na przesiadkę.",
+  "at": [
+   "eb64163b"
+  ]
  },
  {
   "en": "as a result, consequently",
   "ru": "вследствие этого",
-  "pl": "wskutek tego"
+  "pl": "wskutek tego",
+  "at": [
+   "b2bb5f58"
+  ]
  },
  {
   "en": "The full extent of the problem only became visible months later.",
   "ru": "Весь масштаб проблемы стал виден лишь спустя месяцы.",
-  "pl": "Pełna skala problemu stała się widoczna dopiero kilka miesięcy później."
+  "pl": "Pełna skala problemu stała się widoczna dopiero kilka miesięcy później.",
+  "at": [
+   "0fd08a9c"
+  ]
  },
  {
   "en": "extent, scale",
   "ru": "масштаб, размах",
-  "pl": "skala, rozmiar"
+  "pl": "skala, rozmiar",
+  "at": [
+   "0f204efb"
+  ]
  },
  {
   "en": "The boss handed responsibility for the project over to me.",
   "ru": "Начальница передала мне ответственность за проект.",
-  "pl": "Szefowa przekazała mi odpowiedzialność za projekt."
+  "pl": "Szefowa przekazała mi odpowiedzialność za projekt.",
+  "at": [
+   "40766e75"
+  ]
  },
  {
   "en": "to transfer, to hand over; to broadcast",
   "ru": "передавать (полномочия, ответственность); транслировать",
-  "pl": "przekazywać (uprawnienia, odpowiedzialność); transmitować"
+  "pl": "przekazywać (uprawnienia, odpowiedzialność); transmitować",
+  "at": [
+   "d5f2a1e2"
+  ]
  },
  {
   "en": "Caring for their sick mother is a heavy burden for the whole family.",
   "ru": "Уход за больной матерью — большая нагрузка для всей семьи.",
-  "pl": "Opieka nad chorą matką to duże obciążenie dla całej rodziny."
+  "pl": "Opieka nad chorą matką to duże obciążenie dla całej rodziny.",
+  "at": [
+   "59029faf"
+  ]
  },
  {
   "en": "Are you already familiar with the new program?",
   "ru": "Вы уже освоились с новой программой?",
-  "pl": "Czy oswoił się Pan już z nowym programem?"
+  "pl": "Czy oswoił się Pan już z nowym programem?",
+  "at": [
+   "8b776806"
+  ]
  },
  {
   "en": "The noise from the building site makes my headache even worse.",
   "ru": "Шум со стройки ещё больше усиливает мою головную боль.",
-  "pl": "Hałas z budowy jeszcze bardziej wzmaga mój ból głowy."
+  "pl": "Hałas z budowy jeszcze bardziej wzmaga mój ból głowy.",
+  "at": [
+   "46f261d5"
+  ]
  },
  {
   "en": "The monthly meeting serves to exchange experience between departments.",
   "ru": "Ежемесячная встреча служит для обмена опытом между отделами.",
-  "pl": "Comiesięczne spotkanie służy wymianie doświadczeń między działami."
+  "pl": "Comiesięczne spotkanie służy wymianie doświadczeń między działami.",
+  "at": [
+   "49bdd2b1"
+  ]
  },
  {
   "en": "exchange",
   "ru": "обмен",
-  "pl": "wymiana"
+  "pl": "wymiana",
+  "at": [
+   "439d345e"
+  ]
  },
  {
   "en": "The price increase mainly affects families with children.",
   "ru": "Повышение цен затрагивает прежде всего семьи с детьми.",
-  "pl": "Podwyżka cen dotyka przede wszystkim rodziny z dziećmi."
+  "pl": "Podwyżka cen dotyka przede wszystkim rodziny z dziećmi.",
+  "at": [
+   "b2d4512d"
+  ]
  },
  {
   "en": "affected (von etw.); dismayed",
   "ru": "затронутый, пострадавший (von etw.); потрясённый",
-  "pl": "dotknięty, poszkodowany (von etw.); wstrząśnięty"
+  "pl": "dotknięty, poszkodowany (von etw.); wstrząśnięty",
+  "at": [
+   "2277deba"
+  ]
  },
  {
   "en": "I can certainly understand your criticism, but I still see it differently.",
   "ru": "Я вполне понимаю твою критику, но всё же вижу это иначе.",
-  "pl": "Jak najbardziej rozumiem twoją krytykę, ale mimo wszystko widzę to inaczej."
+  "pl": "Jak najbardziej rozumiem twoją krytykę, ale mimo wszystko widzę to inaczej.",
+  "at": [
+   "143485c7"
+  ]
  },
  {
   "en": "Influencers with a large reach earn a lot of money from advertising.",
   "ru": "Блогеры с большим охватом зарабатывают на рекламе много денег.",
-  "pl": "Influencerzy z dużym zasięgiem zarabiają na reklamach dużo pieniędzy."
+  "pl": "Influencerzy z dużym zasięgiem zarabiają na reklamach dużo pieniędzy.",
+  "at": [
+   "157f146e"
+  ]
  },
  {
   "en": "I follow the debate about the new law on the news every evening.",
   "ru": "Я каждый вечер слежу за дебатами о новом законе в новостях.",
-  "pl": "Co wieczór śledzę w wiadomościach debatę o nowej ustawie."
+  "pl": "Co wieczór śledzę w wiadomościach debatę o nowej ustawie.",
+  "at": [
+   "901e9cba"
+  ]
  },
  {
   "en": "to follow (events); to pursue (a goal)",
   "ru": "следить (за чем-либо); добиваться (цели)",
-  "pl": "śledzić (coś); dążyć (do celu)"
+  "pl": "śledzić (coś); dążyć (do celu)",
+  "at": [
+   "2646f201"
+  ]
  },
  {
   "en": "The government has changed its stance on this issue.",
   "ru": "Правительство изменило свою позицию по этому вопросу.",
-  "pl": "Rząd zmienił swoje stanowisko w tej sprawie."
+  "pl": "Rząd zmienił swoje stanowisko w tej sprawie.",
+  "at": [
+   "bd5314ed"
+  ]
  },
  {
   "en": "stance, attitude; posture",
   "ru": "позиция, отношение; осанка",
-  "pl": "stanowisko, nastawienie; postawa (ciała)"
+  "pl": "stanowisko, nastawienie; postawa (ciała)",
+  "at": [
+   "b1888d7a"
+  ]
  },
  {
   "en": "It took her a long time to overcome her fear of flying.",
   "ru": "Ей понадобилось много времени, чтобы преодолеть страх перед полётами.",
-  "pl": "Długo trwało, zanim przezwyciężyła strach przed lataniem."
+  "pl": "Długo trwało, zanim przezwyciężyła strach przed lataniem.",
+  "at": [
+   "b85be2fb"
+  ]
  },
  {
   "en": "In the end the decision turned out to be right.",
   "ru": "В итоге решение оказалось правильным.",
-  "pl": "Ostatecznie decyzja okazała się słuszna."
+  "pl": "Ostatecznie decyzja okazała się słuszna.",
+  "at": [
+   "5ca9fc57"
+  ]
  },
  {
   "en": "to turn out to be (sich als … erweisen); to do (a favour)",
   "ru": "оказываться (sich als … erweisen); оказывать (услугу)",
-  "pl": "okazywać się (sich als … erweisen); wyświadczać (przysługę)"
+  "pl": "okazywać się (sich als … erweisen); wyświadczać (przysługę)",
+  "at": [
+   "c6566864"
+  ]
  },
  {
   "en": "to keep, to preserve; to protect, to save (from); (elevated) to store",
   "ru": "сохранять (спокойствие и т. п.); уберегать (от чего-либо); (книжн.) хранить",
-  "pl": "zachowywać (spokój itp.); chronić (przed czymś); (książk.) przechowywać"
+  "pl": "zachowywać (spokój itp.); chronić (przed czymś); (książk.) przechowywać",
+  "at": [
+   "fc5797c0"
+  ]
  },
  {
   "en": "certain, some (degree); certain, particular; certain, sure",
   "ru": "некоторый, известный (о степени); некий, определённый; несомненный, верный",
-  "pl": "pewien, jakiś (o stopniu); pewien, określony; niewątpliwy, pewny"
+  "pl": "pewien, jakiś (o stopniu); pewien, określony; niewątpliwy, pewny",
+  "at": [
+   "309598ec"
+  ]
  },
  {
   "en": "case, file (official); process, event",
   "ru": "дело (в учреждении); процесс, событие",
-  "pl": "sprawa (w urzędzie); proces, zdarzenie"
+  "pl": "sprawa (w urzędzie); proces, zdarzenie",
+  "at": [
+   "f2cdefbe"
+  ]
  },
  {
   "en": "strain or burden; load; incrimination; financial encumbrance",
   "ru": "нагрузка; тягота; уличающее обвинение; финансовое обременение",
-  "pl": "obciążenie; ciężar; obciążenie zeznaniami lub dowodami; obciążenie finansowe"
+  "pl": "obciążenie; ciężar; obciążenie zeznaniami lub dowodami; obciążenie finansowe",
+  "at": [
+   "8d464ffc"
+  ]
  },
  {
   "en": "I only know him in passing; we've met twice at friends'.",
   "ru": "Я с ним лишь шапочно знаком, мы дважды виделись у друзей.",
-  "pl": "Znam go tylko przelotnie, widzieliśmy się dwa razy u przyjaciół."
+  "pl": "Znam go tylko przelotnie, widzieliśmy się dwa razy u przyjaciół.",
+  "at": [
+   "5aa34627"
+  ]
  },
  {
   "en": "coverage, audience reach; reach; range",
   "ru": "охват (аудитории); досягаемость; запас хода; радиус действия",
-  "pl": "zasięg (odbiorców); zasięg; zasięg (pojazdu); promień działania"
+  "pl": "zasięg (odbiorców); zasięg; zasięg (pojazdu); promień działania",
+  "at": [
+   "736da4c5"
+  ]
  },
  {
   "en": "in passing, superficially; fleeting",
   "ru": "шапочно, поверхностно (знать кого-либо); мимолётный",
-  "pl": "przelotnie, powierzchownie (znać kogoś); przelotny"
+  "pl": "przelotnie, powierzchownie (znać kogoś); przelotny",
+  "at": [
+   "e8516a74"
+  ]
  }
 ]

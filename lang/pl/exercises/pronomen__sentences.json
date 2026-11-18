@@ -2,526 +2,841 @@
  {
   "en": "Can you see me?",
   "ru": "Ты меня видишь?",
-  "pl": "Widzisz mnie?"
+  "pl": "Widzisz mnie?",
+  "at": [
+   "08be51b2"
+  ]
  },
  {
   "en": "Will you pick me up there?",
   "ru": "Ты заберёшь меня там?",
-  "pl": "Odbierzesz mnie stamtąd?"
+  "pl": "Odbierzesz mnie stamtąd?",
+  "at": [
+   "e6a077b2"
+  ]
  },
  {
   "en": "Can you help me?",
   "ru": "Ты можешь мне помочь?",
-  "pl": "Możesz mi pomóc?"
+  "pl": "Możesz mi pomóc?",
+  "at": [
+   "c6da7442"
+  ]
  },
  {
   "en": "Will you bring me another coffee?",
   "ru": "Принесёшь мне ещё кофе?",
-  "pl": "Przyniesiesz mi jeszcze kawy?"
+  "pl": "Przyniesiesz mi jeszcze kawy?",
+  "at": [
+   "c1fd7499"
+  ]
  },
  {
   "en": "I see you!",
   "ru": "Я тебя вижу!",
-  "pl": "Widzę cię!"
+  "pl": "Widzę cię!",
+  "at": [
+   "8da55c65"
+  ]
  },
  {
   "en": "I'll visit you tomorrow.",
   "ru": "Я навещу тебя завтра.",
-  "pl": "Odwiedzę cię jutro."
+  "pl": "Odwiedzę cię jutro.",
+  "at": [
+   "d4e62be8"
+  ]
  },
  {
   "en": "I'm giving you a present.",
   "ru": "Я дам тебе подарок.",
-  "pl": "Dam ci prezent."
+  "pl": "Dam ci prezent.",
+  "at": [
+   "fe324a1f"
+  ]
  },
  {
   "en": "I'll show you the way.",
   "ru": "Я покажу тебе дорогу.",
-  "pl": "Pokażę ci drogę."
+  "pl": "Pokażę ci drogę.",
+  "at": [
+   "3cf43d70"
+  ]
  },
  {
   "en": "I see him every morning.",
   "ru": "Я вижу его каждое утро.",
-  "pl": "Widzę go każdego ranka."
+  "pl": "Widzę go każdego ranka.",
+  "at": [
+   "8073fa3d"
+  ]
  },
  {
   "en": "We'll meet him there.",
   "ru": "Мы встретим его там.",
-  "pl": "Spotkamy go tam."
+  "pl": "Spotkamy go tam.",
+  "at": [
+   "45df7235"
+  ]
  },
  {
   "en": "I visit him every Sunday.",
   "ru": "Я навещаю его каждое воскресенье.",
-  "pl": "Odwiedzam go w każdą niedzielę."
+  "pl": "Odwiedzam go w każdą niedzielę.",
+  "at": [
+   "6e8b6a6d"
+  ]
  },
  {
   "en": "I'm helping him today.",
   "ru": "Я помогаю ему сегодня.",
-  "pl": "Pomagam mu dzisiaj."
+  "pl": "Pomagam mu dzisiaj.",
+  "at": [
+   "925954f8"
+  ]
  },
  {
   "en": "I'll pay for his coffee.",
   "ru": "Я оплачу ему кофе.",
-  "pl": "Postawię mu kawę."
+  "pl": "Postawię mu kawę.",
+  "at": [
+   "4e1e63ab"
+  ]
  },
  {
   "en": "I'll buy him a book.",
   "ru": "Я куплю ему книгу.",
-  "pl": "Kupię mu książkę."
+  "pl": "Kupię mu książkę.",
+  "at": [
+   "a2793091"
+  ]
  },
  {
   "en": "I'll pick her up in a moment.",
   "ru": "Я сейчас её заберу.",
-  "pl": "Zaraz ją odbiorę."
+  "pl": "Zaraz ją odbiorę.",
+  "at": [
+   "4098b02d"
+  ]
  },
  {
   "en": "Do you already know her?",
   "ru": "Ты уже её знаешь?",
-  "pl": "Znasz ją już?"
+  "pl": "Znasz ją już?",
+  "at": [
+   "79b60f8a"
+  ]
  },
  {
   "en": "I'm giving her the book.",
   "ru": "Я даю ей книгу.",
-  "pl": "Daję jej książkę."
+  "pl": "Daję jej książkę.",
+  "at": [
+   "c904c249"
+  ]
  },
  {
   "en": "I'll bring her a jacket.",
   "ru": "Я принесу ей куртку.",
-  "pl": "Przyniosę jej kurtkę."
+  "pl": "Przyniosę jej kurtkę.",
+  "at": [
+   "94896aa2"
+  ]
  },
  {
   "en": "I'll explain everything to her.",
   "ru": "Я ей всё объясню.",
-  "pl": "Wszystko jej wytłumaczę."
+  "pl": "Wszystko jej wytłumaczę.",
+  "at": [
+   "354e27ba"
+  ]
  },
  {
   "en": "Can you pass it to me?",
   "ru": "Передашь мне его?",
-  "pl": "Podasz mi go?"
+  "pl": "Podasz mi go?",
+  "at": [
+   "5db6c192"
+  ]
  },
  {
   "en": "I'll give it back to her tomorrow.",
   "ru": "Я верну ей его завтра.",
-  "pl": "Oddam jej go jutro."
+  "pl": "Oddam jej go jutro.",
+  "at": [
+   "5a5efed6"
+  ]
  },
  {
   "en": "I'll help the child right away.",
   "ru": "Я сразу ему помогу.",
-  "pl": "Od razu mu pomogę."
+  "pl": "Od razu mu pomogę.",
+  "at": [
+   "d17d3944"
+  ]
  },
  {
   "en": "I'll read to the baby a little longer.",
   "ru": "Я ещё немного ему почитаю.",
-  "pl": "Jeszcze trochę mu poczytam."
+  "pl": "Jeszcze trochę mu poczytam.",
+  "at": [
+   "07f61f9f"
+  ]
  },
  {
   "en": "Can you pick us up?",
   "ru": "Ты можешь нас забрать?",
-  "pl": "Możesz nas odebrać?"
+  "pl": "Możesz nas odebrać?",
+  "at": [
+   "60ba3a59"
+  ]
  },
  {
   "en": "Do you see us?",
   "ru": "Ты нас видишь?",
-  "pl": "Widzisz nas?"
+  "pl": "Widzisz nas?",
+  "at": [
+   "bfc2eb4f"
+  ]
  },
  {
   "en": "He's cooking us some soup.",
   "ru": "Он готовит нам суп.",
-  "pl": "On gotuje nam zupę."
+  "pl": "On gotuje nam zupę.",
+  "at": [
+   "57d304af"
+  ]
  },
  {
   "en": "Can you show us the way?",
   "ru": "Ты можешь показать нам дорогу?",
-  "pl": "Możesz nam pokazać drogę?"
+  "pl": "Możesz nam pokazać drogę?",
+  "at": [
+   "97feebd4"
+  ]
  },
  {
   "en": "I can see you from the window.",
   "ru": "Я вижу вас из окна.",
-  "pl": "Widzę was z okna."
+  "pl": "Widzę was z okna.",
+  "at": [
+   "7c243977"
+  ]
  },
  {
   "en": "I'm expecting you at eight.",
   "ru": "Я жду вас в восемь.",
-  "pl": "Czekam na was o ósmej."
+  "pl": "Czekam na was o ósmej.",
+  "at": [
+   "6d062df4"
+  ]
  },
  {
   "en": "I'll show you the city.",
   "ru": "Я покажу вам город.",
-  "pl": "Pokażę wam miasto."
+  "pl": "Pokażę wam miasto.",
+  "at": [
+   "2db3729a"
+  ]
  },
  {
   "en": "I'll explain everything to you later.",
   "ru": "Я объясню вам всё позже.",
-  "pl": "Wytłumaczę wam wszystko później."
+  "pl": "Wytłumaczę wam wszystko później.",
+  "at": [
+   "bbea900a"
+  ]
  },
  {
   "en": "I'll meet them after work.",
   "ru": "Я встречу их после работы.",
-  "pl": "Spotkam się z nimi po pracy."
+  "pl": "Spotkam się z nimi po pracy.",
+  "at": [
+   "0d8dfea4"
+  ]
  },
  {
   "en": "I'm calling them in to eat.",
   "ru": "Я зову их к столу.",
-  "pl": "Wołam je do stołu."
+  "pl": "Wołam je do stołu.",
+  "at": [
+   "6ed888fa"
+  ]
  },
  {
   "en": "I'm helping them at the weekend.",
   "ru": "Я помогаю им на выходных.",
-  "pl": "Pomagam im w weekend."
+  "pl": "Pomagam im w weekend.",
+  "at": [
+   "4c583cbd"
+  ]
  },
  {
   "en": "We'll bring them some water.",
   "ru": "Мы принесём им воду.",
-  "pl": "Przyniesiemy im wodę."
+  "pl": "Przyniesiemy im wodę.",
+  "at": [
+   "b8c9e5fd"
+  ]
  },
  {
   "en": "We'll show them the city.",
   "ru": "Мы покажем им город.",
-  "pl": "Pokażemy im miasto."
+  "pl": "Pokażemy im miasto.",
+  "at": [
+   "180a57db"
+  ]
  },
  {
   "en": "Then I'll visit you at ten.",
   "ru": "Тогда я зайду к Вам в десять.",
-  "pl": "W takim razie przyjdę do Pani o dziesiątej."
+  "pl": "W takim razie przyjdę do Pani o dziesiątej.",
+  "at": [
+   "407bf899"
+  ]
  },
  {
   "en": "Nice to see you again.",
   "ru": "Рад(а) снова Вас видеть.",
-  "pl": "Miło znowu Pana widzieć."
+  "pl": "Miło znowu Pana widzieć.",
+  "at": [
+   "8a746fbc"
+  ]
  },
  {
   "en": "I'll answer you in a moment.",
   "ru": "Я сейчас Вам отвечу.",
-  "pl": "Zaraz Pani odpowiem."
+  "pl": "Zaraz Pani odpowiem.",
+  "at": [
+   "2c33d727"
+  ]
  },
  {
   "en": "I'll send you the file.",
   "ru": "Я отправлю Вам файл.",
-  "pl": "Wyślę Panu plik."
+  "pl": "Wyślę Panu plik.",
+  "at": [
+   "bfb281b8"
+  ]
  },
  {
   "en": "I wish you all the best!",
   "ru": "Желаю Вам всего наилучшего!",
-  "pl": "Życzę Pani wszystkiego najlepszego!"
+  "pl": "Życzę Pani wszystkiego najlepszego!",
+  "at": [
+   "75b8992e"
+  ]
  },
  {
   "en": "My bike is new.",
   "ru": "Мой велосипед новый.",
-  "pl": "Mój rower jest nowy."
+  "pl": "Mój rower jest nowy.",
+  "at": [
+   "bb67a3f4"
+  ]
  },
  {
   "en": "My neighbours are friendly.",
   "ru": "Мои соседи дружелюбные.",
-  "pl": "Moi sąsiedzi są mili."
+  "pl": "Moi sąsiedzi są mili.",
+  "at": [
+   "705a3f26"
+  ]
  },
  {
   "en": "I'll pick up my suitcase later.",
   "ru": "Я заберу свой чемодан позже.",
-  "pl": "Odbiorę swoją walizkę później."
+  "pl": "Odbiorę swoją walizkę później.",
+  "at": [
+   "dd8662c3"
+  ]
  },
  {
   "en": "I'm looking for my bag.",
   "ru": "Я ищу свою сумку.",
-  "pl": "Szukam swojej torby."
+  "pl": "Szukam swojej torby.",
+  "at": [
+   "b0a957e9"
+  ]
  },
  {
   "en": "I'm talking to my boss.",
   "ru": "Я разговариваю со своим начальником.",
-  "pl": "Rozmawiam ze swoim szefem."
+  "pl": "Rozmawiam ze swoim szefem.",
+  "at": [
+   "e25f7672"
+  ]
  },
  {
   "en": "I'm going to Vienna with my friend.",
   "ru": "Я еду со своей подругой в Вену.",
-  "pl": "Jadę ze swoją przyjaciółką do Wiednia."
+  "pl": "Jadę ze swoją przyjaciółką do Wiednia.",
+  "at": [
+   "da717463"
+  ]
  },
  {
   "en": "I'm reading my child a story.",
   "ru": "Я читаю своему ребёнку историю.",
-  "pl": "Czytam swojemu dziecku historyjkę."
+  "pl": "Czytam swojemu dziecku historyjkę.",
+  "at": [
+   "4f79596c"
+  ]
  },
  {
   "en": "This is my brother's car.",
   "ru": "Это машина моего брата.",
-  "pl": "To samochód mojego brata."
+  "pl": "To samochód mojego brata.",
+  "at": [
+   "344df1c2"
+  ]
  },
  {
   "en": "This is my children's room.",
   "ru": "Это комната моих детей.",
-  "pl": "To pokój moich dzieci."
+  "pl": "To pokój moich dzieci.",
+  "at": [
+   "1ec9cde0"
+  ]
  },
  {
   "en": "Your dog is very calm.",
   "ru": "Твоя собака очень спокойная.",
-  "pl": "Twój pies jest bardzo spokojny."
+  "pl": "Twój pies jest bardzo spokojny.",
+  "at": [
+   "b6a92b2b"
+  ]
  },
  {
   "en": "I like your jacket.",
   "ru": "Мне нравится твоя куртка.",
-  "pl": "Podoba mi się twoja kurtka."
+  "pl": "Podoba mi się twoja kurtka.",
+  "at": [
+   "6f77dbc2"
+  ]
  },
  {
   "en": "Did you cancel your appointment?",
   "ru": "Ты отменил(а) свою запись к врачу?",
-  "pl": "Odwołałeś / Odwołałaś swoją wizytę u lekarza?"
+  "pl": "Odwołałeś / Odwołałaś swoją wizytę u lekarza?",
+  "at": [
+   "17225525"
+  ]
  },
  {
   "en": "Where did you buy your phone?",
   "ru": "Где ты купил(а) свой телефон?",
-  "pl": "Gdzie kupiłeś / kupiłaś swój telefon?"
+  "pl": "Gdzie kupiłeś / kupiłaś swój telefon?",
+  "at": [
+   "3bc8d9f2"
+  ]
  },
  {
   "en": "Have you packed your things yet?",
   "ru": "Ты уже собрал(а) свои вещи?",
-  "pl": "Spakowałeś / Spakowałaś już swoje rzeczy?"
+  "pl": "Spakowałeś / Spakowałaś już swoje rzeczy?",
+  "at": [
+   "cbb9031a"
+  ]
  },
  {
   "en": "What happened to your car?",
   "ru": "Что случилось с твоей машиной?",
-  "pl": "Co się stało z twoim samochodem?"
+  "pl": "Co się stało z twoim samochodem?",
+  "at": [
+   "89d961ef"
+  ]
  },
  {
   "en": "Do you often play with your children?",
   "ru": "Ты часто играешь со своими детьми?",
-  "pl": "Często bawisz się ze swoimi dziećmi?"
+  "pl": "Często bawisz się ze swoimi dziećmi?",
+  "at": [
+   "035ef1c4"
+  ]
  },
  {
   "en": "I like the colour of your house.",
   "ru": "Мне нравится цвет твоего дома.",
-  "pl": "Podoba mi się kolor twojego domu."
+  "pl": "Podoba mi się kolor twojego domu.",
+  "at": [
+   "ed656efa"
+  ]
  },
  {
   "en": "That's his car.",
   "ru": "Это его машина.",
-  "pl": "To jego samochód."
+  "pl": "To jego samochód.",
+  "at": [
+   "05224ee9"
+  ]
  },
  {
   "en": "He's taking his dog with him.",
   "ru": "Он берёт свою собаку с собой.",
-  "pl": "Zabiera ze sobą swojego psa."
+  "pl": "Zabiera ze sobą swojego psa.",
+  "at": [
+   "f39f9d82"
+  ]
  },
  {
   "en": "He can't find his glasses.",
   "ru": "Он не может найти свои очки.",
-  "pl": "Nie może znaleźć swoich okularów."
+  "pl": "Nie może znaleźć swoich okularów.",
+  "at": [
+   "311b1840"
+  ]
  },
  {
   "en": "He lives with his brother.",
   "ru": "Он живёт у своего брата.",
-  "pl": "Mieszka u swojego brata."
+  "pl": "Mieszka u swojego brata.",
+  "at": [
+   "f12efdfb"
+  ]
  },
  {
   "en": "I often talk to his sister.",
   "ru": "Я часто разговариваю с его сестрой.",
-  "pl": "Często rozmawiam z jego siostrą."
+  "pl": "Często rozmawiam z jego siostrą.",
+  "at": [
+   "3e23754a"
+  ]
  },
  {
   "en": "He helps his child with homework.",
   "ru": "Он помогает своему ребёнку с домашним заданием.",
-  "pl": "Pomaga swojemu dziecku w odrabianiu lekcji."
+  "pl": "Pomaga swojemu dziecku w odrabianiu lekcji.",
+  "at": [
+   "10f3016f"
+  ]
  },
  {
   "en": "This is his sister's flat.",
   "ru": "Это квартира его сестры.",
-  "pl": "To mieszkanie jego siostry."
+  "pl": "To mieszkanie jego siostry.",
+  "at": [
+   "64d4dba9"
+  ]
  },
  {
   "en": "His boss's office is on the third floor.",
   "ru": "Кабинет его начальника на третьем этаже.",
-  "pl": "Gabinet jego szefa jest na trzecim piętrze."
+  "pl": "Gabinet jego szefa jest na trzecim piętrze.",
+  "at": [
+   "29151f8a"
+  ]
  },
  {
   "en": "Her brother works here.",
   "ru": "Её брат работает здесь.",
-  "pl": "Jej brat pracuje tutaj."
+  "pl": "Jej brat pracuje tutaj.",
+  "at": [
+   "cc57daac"
+  ]
  },
  {
   "en": "Her room is very bright.",
   "ru": "Её комната очень светлая.",
-  "pl": "Jej pokój jest bardzo jasny."
+  "pl": "Jej pokój jest bardzo jasny.",
+  "at": [
+   "79f45fcf"
+  ]
  },
  {
   "en": "I can't find her key either.",
   "ru": "Я тоже не могу найти её ключ.",
-  "pl": "Ja też nie mogę znaleźć jej klucza."
+  "pl": "Ja też nie mogę znaleźć jej klucza.",
+  "at": [
+   "0acf4bb5"
+  ]
  },
  {
   "en": "She can't find her card.",
   "ru": "Она не может найти свою карту.",
-  "pl": "Nie może znaleźć swojej karty."
+  "pl": "Nie może znaleźć swojej karty.",
+  "at": [
+   "6a0331f1"
+  ]
  },
  {
   "en": "She's on the phone with her father.",
   "ru": "Она разговаривает по телефону со своим отцом.",
-  "pl": "Rozmawia przez telefon ze swoim ojcem."
+  "pl": "Rozmawia przez telefon ze swoim ojcem.",
+  "at": [
+   "325dc150"
+  ]
  },
  {
   "en": "She's going to the seaside with her mother.",
   "ru": "Она едет со своей мамой к морю.",
-  "pl": "Jedzie ze swoją mamą nad morze."
+  "pl": "Jedzie ze swoją mamą nad morze.",
+  "at": [
+   "9d6b90b4"
+  ]
  },
  {
   "en": "She's reading her child a book.",
   "ru": "Она читает своему ребёнку книгу.",
-  "pl": "Czyta swojemu dziecku książkę."
+  "pl": "Czyta swojemu dziecku książkę.",
+  "at": [
+   "d7b58ea9"
+  ]
  },
  {
   "en": "This is her daughter's room.",
   "ru": "Это комната её дочери.",
-  "pl": "To pokój jej córki."
+  "pl": "To pokój jej córki.",
+  "at": [
+   "bd00f8a0"
+  ]
  },
  {
   "en": "Our flat is small.",
   "ru": "Наша квартира маленькая.",
-  "pl": "Nasze mieszkanie jest małe."
+  "pl": "Nasze mieszkanie jest małe.",
+  "at": [
+   "d1649e30"
+  ]
  },
  {
   "en": "We're meeting our boss tomorrow.",
   "ru": "Завтра мы встречаемся со своим начальником.",
-  "pl": "Jutro spotykamy się ze swoim szefem."
+  "pl": "Jutro spotykamy się ze swoim szefem.",
+  "at": [
+   "94350477"
+  ]
  },
  {
   "en": "We're selling our car.",
   "ru": "Мы продаём свою машину.",
-  "pl": "Sprzedajemy swój samochód."
+  "pl": "Sprzedajemy swój samochód.",
+  "at": [
+   "e3fc0c08"
+  ]
  },
  {
   "en": "We're selling our furniture.",
   "ru": "Мы продаём свою мебель.",
-  "pl": "Sprzedajemy swoje meble."
+  "pl": "Sprzedajemy swoje meble.",
+  "at": [
+   "ab7d3c4a"
+  ]
  },
  {
   "en": "We're talking to our boss.",
   "ru": "Мы разговариваем с нашим начальником.",
-  "pl": "Rozmawiamy z naszym szefem."
+  "pl": "Rozmawiamy z naszym szefem.",
+  "at": [
+   "bb49dfa0"
+  ]
  },
  {
   "en": "We're staying with our friends.",
   "ru": "Мы живём у своих друзей.",
-  "pl": "Mieszkamy u swoich przyjaciół."
+  "pl": "Mieszkamy u swoich przyjaciół.",
+  "at": [
+   "935e4533"
+  ]
  },
  {
   "en": "The roof of our house is new.",
   "ru": "Крыша нашего дома новая.",
-  "pl": "Dach naszego domu jest nowy."
+  "pl": "Dach naszego domu jest nowy.",
+  "at": [
+   "a79d92d1"
+  ]
  },
  {
   "en": "Our neighbours' cars are parked in front of the house.",
   "ru": "Машины наших соседей стоят перед домом.",
-  "pl": "Samochody naszych sąsiadów stoją przed domem."
+  "pl": "Samochody naszych sąsiadów stoją przed domem.",
+  "at": [
+   "a55c8a83"
+  ]
  },
  {
   "en": "Your son is so big already.",
   "ru": "Ваш сын уже большой.",
-  "pl": "Wasz syn jest już duży."
+  "pl": "Wasz syn jest już duży.",
+  "at": [
+   "e4b5be34"
+  ]
  },
  {
   "en": "How big is your flat?",
   "ru": "Какого размера ваша квартира?",
-  "pl": "Jak duże jest wasze mieszkanie?"
+  "pl": "Jak duże jest wasze mieszkanie?",
+  "at": [
+   "36c11e73"
+  ]
  },
  {
   "en": "Your children are very nice.",
   "ru": "Ваши дети очень милые.",
-  "pl": "Wasze dzieci są bardzo miłe."
+  "pl": "Wasze dzieci są bardzo miłe.",
+  "at": [
+   "0d337232"
+  ]
  },
  {
   "en": "Are you taking your cat with you?",
   "ru": "Вы берёте своего кота с собой?",
-  "pl": "Zabieracie ze sobą swojego kota?"
+  "pl": "Zabieracie ze sobą swojego kota?",
+  "at": [
+   "42eb0c9b"
+  ]
  },
  {
   "en": "Can you explain your idea again?",
   "ru": "Вы можете ещё раз объяснить свою идею?",
-  "pl": "Możecie jeszcze raz wyjaśnić swój pomysł?"
+  "pl": "Możecie jeszcze raz wyjaśnić swój pomysł?",
+  "at": [
+   "b32951d7"
+  ]
  },
  {
   "en": "Are you going with your father?",
   "ru": "Вы едете со своим отцом?",
-  "pl": "Jedziecie ze swoim ojcem?"
+  "pl": "Jedziecie ze swoim ojcem?",
+  "at": [
+   "5e3ed9d8"
+  ]
  },
  {
   "en": "Are you talking to your teacher?",
   "ru": "Вы разговариваете со своей учительницей?",
-  "pl": "Rozmawiacie ze swoją nauczycielką?"
+  "pl": "Rozmawiacie ze swoją nauczycielką?",
+  "at": [
+   "73ee00ba"
+  ]
  },
  {
   "en": "Are you going out to eat with your colleagues?",
   "ru": "Вы идёте есть со своими коллегами?",
-  "pl": "Idziecie coś zjeść ze swoimi kolegami?"
+  "pl": "Idziecie coś zjeść ze swoimi kolegami?",
+  "at": [
+   "d988e3b5"
+  ]
  },
  {
   "en": "This is your daughter's bike.",
   "ru": "Это велосипед вашей дочери.",
-  "pl": "To rower waszej córki."
+  "pl": "To rower waszej córki.",
+  "at": [
+   "8f3bd76b"
+  ]
  },
  {
   "en": "Their son studies in Munich.",
   "ru": "Их сын учится в Мюнхене.",
-  "pl": "Ich syn studiuje w Monachium."
+  "pl": "Ich syn studiuje w Monachium.",
+  "at": [
+   "7244909c"
+  ]
  },
  {
   "en": "Their books are lying everywhere.",
   "ru": "Их книги лежат повсюду.",
-  "pl": "Ich książki leżą wszędzie."
+  "pl": "Ich książki leżą wszędzie.",
+  "at": [
+   "8559feb7"
+  ]
  },
  {
   "en": "They're selling their house.",
   "ru": "Они продают свой дом.",
-  "pl": "Sprzedają swój dom."
+  "pl": "Sprzedają swój dom.",
+  "at": [
+   "4956e8bb"
+  ]
  },
  {
   "en": "The guests are taking their jackets.",
   "ru": "Гости забирают свои куртки.",
-  "pl": "Goście zabierają swoje kurtki."
+  "pl": "Goście zabierają swoje kurtki.",
+  "at": [
+   "7b1dfa87"
+  ]
  },
  {
   "en": "They often help their neighbour.",
   "ru": "Они часто помогают своей соседке.",
-  "pl": "Często pomagają swojej sąsiadce."
+  "pl": "Często pomagają swojej sąsiadce.",
+  "at": [
+   "5d0b458f"
+  ]
  },
  {
   "en": "I'm talking to their parents.",
   "ru": "Я разговариваю с их родителями.",
-  "pl": "Rozmawiam z ich rodzicami."
+  "pl": "Rozmawiam z ich rodzicami.",
+  "at": [
+   "4d29c25b"
+  ]
  },
  {
   "en": "The garden of their house is big.",
   "ru": "Сад их дома большой.",
-  "pl": "Ogród ich domu jest duży."
+  "pl": "Ogród ich domu jest duży.",
+  "at": [
+   "3ad1f83c"
+  ]
  },
  {
   "en": "Your appointment is at ten o'clock.",
   "ru": "Ваша встреча в десять часов.",
-  "pl": "Pani wizyta jest o dziesiątej."
+  "pl": "Pani wizyta jest o dziesiątej.",
+  "at": [
+   "11ccf40b"
+  ]
  },
  {
   "en": "Your bill is at the till.",
   "ru": "Ваш счёт лежит на кассе.",
-  "pl": "Pani rachunek leży przy kasie."
+  "pl": "Pani rachunek leży przy kasie.",
+  "at": [
+   "308f4827"
+  ]
  },
  {
   "en": "Please show your ID.",
   "ru": "Пожалуйста, покажите Ваше удостоверение.",
-  "pl": "Proszę pokazać swój dowód osobisty."
+  "pl": "Proszę pokazać swój dowód osobisty.",
+  "at": [
+   "b946c209"
+  ]
  },
  {
   "en": "Do you have your ticket with you?",
   "ru": "Вы взяли с собой свой билет?",
-  "pl": "Czy ma Pan przy sobie swój bilet?"
+  "pl": "Czy ma Pan przy sobie swój bilet?",
+  "at": [
+   "e6ef5ac3"
+  ]
  },
  {
   "en": "Please bring your documents.",
   "ru": "Пожалуйста, возьмите с собой свои документы.",
-  "pl": "Proszę zabrać ze sobą swoje dokumenty."
+  "pl": "Proszę zabrać ze sobą swoje dokumenty.",
+  "at": [
+   "9eaed0ce"
+  ]
  },
  {
   "en": "Are you travelling with your children?",
   "ru": "Вы путешествуете со своими детьми?",
-  "pl": "Czy podróżuje Pan ze swoimi dziećmi?"
+  "pl": "Czy podróżuje Pan ze swoimi dziećmi?",
+  "at": [
+   "9b863d3e"
+  ]
  },
  {
   "en": "This is your son's room.",
   "ru": "Это комната Вашего сына.",
-  "pl": "To pokój Pani syna."
+  "pl": "To pokój Pani syna.",
+  "at": [
+   "49ceba4e"
+  ]
  }
 ]

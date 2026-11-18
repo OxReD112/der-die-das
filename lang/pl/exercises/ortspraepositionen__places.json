@@ -2,386 +2,617 @@
  {
   "en": "holiday, vacation",
   "ru": "отпуск",
-  "pl": "urlop"
+  "pl": "urlop",
+  "at": [
+   "de38ebcb"
+  ]
  },
  {
   "en": "garden",
   "ru": "сад",
-  "pl": "ogród"
+  "pl": "ogród",
+  "at": [
+   "48ed5abd"
+  ]
  },
  {
   "en": "Not a room, but the same pattern: im · in den · aus dem.",
   "ru": "Не помещение, но так же: im · in den · aus dem.",
-  "pl": "To nie pomieszczenie, ale tak samo: im · in den · aus dem."
+  "pl": "To nie pomieszczenie, ale tak samo: im · in den · aus dem.",
+  "at": [
+   "6475c6b4"
+  ]
  },
  {
   "en": "house (building)",
   "ru": "дом (здание)",
-  "pl": "dom (budynek)"
+  "pl": "dom (budynek)",
+  "at": [
+   "3ee9c866"
+  ]
  },
  {
   "en": "cinema",
   "ru": "кинотеатр",
-  "pl": "kino"
+  "pl": "kino",
+  "at": [
+   "62b4354a"
+  ]
  },
  {
   "en": "theatre",
   "ru": "театр",
-  "pl": "teatr"
+  "pl": "teatr",
+  "at": [
+   "e320cd06"
+  ]
  },
  {
   "en": "restaurant",
   "ru": "ресторан",
-  "pl": "restauracja"
+  "pl": "restauracja",
+  "at": [
+   "61d07882"
+  ]
  },
  {
   "en": "museum",
   "ru": "музей",
-  "pl": "muzeum"
+  "pl": "muzeum",
+  "at": [
+   "941fd2e9"
+  ]
  },
  {
   "en": "hotel",
   "ru": "гостиница",
-  "pl": "hotel"
+  "pl": "hotel",
+  "at": [
+   "ad67f2d1"
+  ]
  },
  {
   "en": "office",
   "ru": "офис",
-  "pl": "biuro"
+  "pl": "biuro",
+  "at": [
+   "9c6cac50"
+  ]
  },
  {
   "en": "supermarket (inside)",
   "ru": "супермаркет (внутри)",
-  "pl": "supermarket (w środku)"
+  "pl": "supermarket (w środku)",
+  "at": [
+   "d11781f2"
+  ]
  },
  {
   "en": "hospital",
   "ru": "больница",
-  "pl": "szpital"
+  "pl": "szpital",
+  "at": [
+   "33433894"
+  ]
  },
  {
   "en": "city centre",
   "ru": "центр города",
-  "pl": "centrum miasta"
+  "pl": "centrum miasta",
+  "at": [
+   "3a942a12"
+  ]
  },
  {
   "en": "kitchen",
   "ru": "кухня",
-  "pl": "kuchnia"
+  "pl": "kuchnia",
+  "at": [
+   "4b37c7f2"
+  ]
  },
  {
   "en": "town (going into town)",
   "ru": "город (поехать в город, в центр)",
-  "pl": "miasto (pojechać do miasta, do centrum)"
+  "pl": "miasto (pojechać do miasta, do centrum)",
+  "at": [
+   "69f3fb3b"
+  ]
  },
  {
   "en": "Not a room, but the same pattern: in der · in die · aus der.",
   "ru": "Не помещение, но так же: in der · in die · aus der.",
-  "pl": "To nie pomieszczenie, ale tak samo: in der · in die · aus der."
+  "pl": "To nie pomieszczenie, ale tak samo: in der · in die · aus der.",
+  "at": [
+   "71d905e4"
+  ]
  },
  {
   "en": "bed (in bed)",
   "ru": "кровать (в постели)",
-  "pl": "łóżko (w łóżku)"
+  "pl": "łóżko (w łóżku)",
+  "at": [
+   "9cbc3234"
+  ]
  },
  {
   "en": "Berlin",
   "ru": "Берлин",
-  "pl": "Berlin"
+  "pl": "Berlin",
+  "at": [
+   "aca922c3"
+  ]
  },
  {
   "en": "Paris",
   "ru": "Париж",
-  "pl": "Paryż"
+  "pl": "Paryż",
+  "at": [
+   "4f50a54a"
+  ]
  },
  {
   "en": "Japan",
   "ru": "Япония",
-  "pl": "Japonia"
+  "pl": "Japonia",
+  "at": [
+   "1a7b796d"
+  ]
  },
  {
   "en": "Italy",
   "ru": "Италия",
-  "pl": "Włochy"
+  "pl": "Włochy",
+  "at": [
+   "ca4f0e85"
+  ]
  },
  {
   "en": "Austria",
   "ru": "Австрия",
-  "pl": "Austria"
+  "pl": "Austria",
+  "at": [
+   "a5a5e306"
+  ]
  },
  {
   "en": "London",
   "ru": "Лондон",
-  "pl": "Londyn"
+  "pl": "Londyn",
+  "at": [
+   "8cde1b7d"
+  ]
  },
  {
   "en": "Switzerland",
   "ru": "Швейцария",
-  "pl": "Szwajcaria"
+  "pl": "Szwajcaria",
+  "at": [
+   "e088fa10"
+  ]
  },
  {
   "en": "Turkey",
   "ru": "Турция",
-  "pl": "Turcja"
+  "pl": "Turcja",
+  "at": [
+   "6934076e"
+  ]
  },
  {
   "en": "USA",
   "ru": "США",
-  "pl": "USA"
+  "pl": "USA",
+  "at": [
+   "506d43fa"
+  ]
  },
  {
   "en": "beach",
   "ru": "пляж",
-  "pl": "plaża"
+  "pl": "plaża",
+  "at": [
+   "f34587fc"
+  ]
  },
  {
   "en": "sea (at the seaside)",
   "ru": "море (на побережье)",
-  "pl": "morze (nad morzem)"
+  "pl": "morze (nad morzem)",
+  "at": [
+   "cdb10c30"
+  ]
  },
  {
   "en": "lake (on the shore)",
   "ru": "озеро (на берегу)",
-  "pl": "jezioro (nad jeziorem)"
+  "pl": "jezioro (nad jeziorem)",
+  "at": [
+   "1017de1f"
+  ]
  },
  {
   "en": "river (on the bank)",
   "ru": "река (на берегу)",
-  "pl": "rzeka (nad rzeką)"
+  "pl": "rzeka (nad rzeką)",
+  "at": [
+   "6e63e247"
+  ]
  },
  {
   "en": "window",
   "ru": "окно",
-  "pl": "okno"
+  "pl": "okno",
+  "at": [
+   "77d89b26"
+  ]
  },
  {
   "en": "table (sitting at it)",
   "ru": "стол (сесть за стол)",
-  "pl": "stół (usiąść przy stole)"
+  "pl": "stół (usiąść przy stole)",
+  "at": [
+   "ad99a82b"
+  ]
  },
  {
   "en": "the Baltic Sea (at the seaside)",
   "ru": "Балтийское море (на побережье)",
-  "pl": "Morze Bałtyckie (nad morzem)"
+  "pl": "Morze Bałtyckie (nad morzem)",
+  "at": [
+   "a77d4022"
+  ]
  },
  {
   "en": "sports ground",
   "ru": "спортивная площадка",
-  "pl": "boisko"
+  "pl": "boisko",
+  "at": [
+   "0464bc97"
+  ]
  },
  {
   "en": "playground",
   "ru": "детская площадка",
-  "pl": "plac zabaw"
+  "pl": "plac zabaw",
+  "at": [
+   "93b40c90"
+  ]
  },
  {
   "en": "market, marketplace",
   "ru": "рынок",
-  "pl": "targ, rynek"
+  "pl": "targ, rynek",
+  "at": [
+   "bf6cd6d3"
+  ]
  },
  {
   "en": "balcony",
   "ru": "балкон",
-  "pl": "balkon"
+  "pl": "balkon",
+  "at": [
+   "4795721d"
+  ]
  },
  {
   "en": "street (on the road, not an address)",
   "ru": "улица (на дороге, не адрес)",
-  "pl": "ulica (na drodze, nie adres)"
+  "pl": "ulica (na drodze, nie adres)",
+  "at": [
+   "e3e98df9"
+  ]
  },
  {
   "en": "island",
   "ru": "остров",
-  "pl": "wyspa"
+  "pl": "wyspa",
+  "at": [
+   "9ee4d97c"
+  ]
  },
  {
   "en": "mountain (at/to the top)",
   "ru": "гора (на вершине, на вершину)",
-  "pl": "góra (na szczycie, na szczyt)"
+  "pl": "góra (na szczycie, na szczyt)",
+  "at": [
+   "61ce32ae"
+  ]
  },
  {
   "en": "the countryside",
   "ru": "сельская местность (за городом, в деревне)",
-  "pl": "wieś (za miastem, na wsi)"
+  "pl": "wieś (za miastem, na wsi)",
+  "at": [
+   "1d8f5300"
+  ]
  },
  {
   "en": "roof",
   "ru": "крыша",
-  "pl": "dach"
+  "pl": "dach",
+  "at": [
+   "0aa3ca29"
+  ]
  },
  {
   "en": "toilet, bathroom",
   "ru": "туалет",
-  "pl": "toaleta"
+  "pl": "toaleta",
+  "at": [
+   "a5c76de9"
+  ]
  },
  {
   "en": "Ausnahme · it's a room, but German says auf (or zu), not in",
   "ru": "Ausnahme · это комната, но говорят auf (или zu), не in",
-  "pl": "Ausnahme · to pomieszczenie, ale mówi się auf (albo zu), nie in"
+  "pl": "Ausnahme · to pomieszczenie, ale mówi się auf (albo zu), nie in",
+  "at": [
+   "a46202e2"
+  ]
  },
  {
   "en": "doctor",
   "ru": "врач",
-  "pl": "lekarz"
+  "pl": "lekarz",
+  "at": [
+   "9b669de9"
+  ]
  },
  {
   "en": "hairdresser",
   "ru": "парикмахер",
-  "pl": "fryzjer"
+  "pl": "fryzjer",
+  "at": [
+   "2225b688"
+  ]
  },
  {
   "en": "(my) grandma",
   "ru": "бабушка (моя)",
-  "pl": "babcia (moja)"
+  "pl": "babcia (moja)",
+  "at": [
+   "fd68312e"
+  ]
  },
  {
   "en": "Lisa",
   "ru": "Лиза",
-  "pl": "Lisa"
+  "pl": "Lisa",
+  "at": [
+   "273a616c"
+  ]
  },
  {
   "en": "H&M (shop)",
   "ru": "H&M (магазин)",
-  "pl": "H&M (sklep)"
+  "pl": "H&M (sklep)",
+  "at": [
+   "5db7fe08"
+  ]
  },
  {
   "en": "picnic",
   "ru": "пикник",
-  "pl": "piknik"
+  "pl": "piknik",
+  "at": [
+   "6d42f353"
+  ]
  },
  {
   "en": "training session",
   "ru": "тренировка",
-  "pl": "trening"
+  "pl": "trening",
+  "at": [
+   "71865953"
+  ]
  },
  {
   "en": "work",
   "ru": "работа",
-  "pl": "praca"
+  "pl": "praca",
+  "at": [
+   "e6eb671c"
+  ]
  },
  {
   "en": "supermarket (by the supermarket, not inside)",
   "ru": "супермаркет (у супермаркета, не внутри)",
-  "pl": "supermarket (przy supermarkecie, nie w środku)"
+  "pl": "supermarket (przy supermarkecie, nie w środku)",
+  "at": [
+   "d11781f2"
+  ]
  },
  {
   "en": "boss",
   "ru": "начальница",
-  "pl": "szefowa"
+  "pl": "szefowa",
+  "at": [
+   "c11e3bd4"
+  ]
  },
  {
   "en": "IKEA (shop)",
   "ru": "Ikea (магазин)",
-  "pl": "Ikea (sklep)"
+  "pl": "Ikea (sklep)",
+  "at": [
+   "f72a7fb5"
+  ]
  },
  {
   "en": "exam",
   "ru": "экзамен",
-  "pl": "egzamin"
+  "pl": "egzamin",
+  "at": [
+   "436f24ad"
+  ]
  },
  {
   "en": "grandparents",
   "ru": "бабушка и дедушка",
-  "pl": "dziadkowie"
+  "pl": "dziadkowie",
+  "at": [
+   "bee3b49a"
+  ]
  },
  {
   "en": "party",
   "ru": "вечеринка",
-  "pl": "impreza"
+  "pl": "impreza",
+  "at": [
+   "55508f11"
+  ]
  },
  {
   "en": "wedding",
   "ru": "свадьба",
-  "pl": "ślub, wesele"
+  "pl": "ślub, wesele",
+  "at": [
+   "135954bd"
+  ]
  },
  {
   "en": "forest, woods",
   "ru": "лес",
-  "pl": "las"
+  "pl": "las",
+  "at": [
+   "79f64a08"
+  ]
  },
  {
   "en": "park",
   "ru": "парк",
-  "pl": "park"
+  "pl": "park",
+  "at": [
+   "8eb17dfc"
+  ]
  },
  {
   "en": "swimming pool",
   "ru": "бассейн",
-  "pl": "basen"
+  "pl": "basen",
+  "at": [
+   "5545f6ba"
+  ]
  },
  {
   "en": "mountains (in the mountains)",
   "ru": "горы (в горах)",
-  "pl": "góry (w górach)"
+  "pl": "góry (w górach)",
+  "at": [
+   "4565d9a4"
+  ]
  },
  {
   "en": "Alps",
   "ru": "Альпы",
-  "pl": "Alpy"
+  "pl": "Alpy",
+  "at": [
+   "e925ec0d"
+  ]
  },
  {
   "en": "Goethe Street (address)",
   "ru": "улица Гёте (адрес)",
-  "pl": "ulica Goethego (adres)"
+  "pl": "ulica Goethego (adres)",
+  "at": [
+   "67187ccd"
+  ]
  },
  {
   "en": "home (at, to, from home)",
   "ru": "дом (дома / домой / из дома)",
-  "pl": "dom (w domu / do domu / z domu)"
+  "pl": "dom (w domu / do domu / z domu)",
+  "at": [
+   "b3a1b4ab"
+  ]
  },
  {
   "en": "station (meeting point, train)",
   "ru": "вокзал (на вокзале: встреча, поезд)",
-  "pl": "dworzec (na dworcu: spotkanie, pociąg)"
+  "pl": "dworzec (na dworcu: spotkanie, pociąg)",
+  "at": [
+   "405ac688"
+  ]
  },
  {
   "en": "airport (flight, meeting point)",
   "ru": "аэропорт (в аэропорту: рейс, встреча)",
-  "pl": "lotnisko (na lotnisku: lot, spotkanie)"
+  "pl": "lotnisko (na lotnisku: lot, spotkanie)",
+  "at": [
+   "eddee1fe"
+  ]
  },
  {
   "en": "bus / tram stop",
   "ru": "остановка (автобуса, трамвая)",
-  "pl": "przystanek (autobusowy, tramwajowy)"
+  "pl": "przystanek (autobusowy, tramwajowy)",
+  "at": [
+   "6541dfb2"
+  ]
  },
  {
   "en": "petrol station",
   "ru": "заправка",
-  "pl": "stacja benzynowa"
+  "pl": "stacja benzynowa",
+  "at": [
+   "db04e07a"
+  ]
  },
  {
   "en": "checkout, till",
   "ru": "касса",
-  "pl": "kasa"
+  "pl": "kasa",
+  "at": [
+   "7f1fd4f8"
+  ]
  },
  {
   "en": "hinein · into it, inside",
   "ru": "hinein · внутрь",
-  "pl": "hinein · do środka"
+  "pl": "hinein · do środka",
+  "at": [
+   "4b77ac31"
+  ]
  },
  {
   "en": "direkt dran · right to the edge",
   "ru": "direkt dran · вплотную",
-  "pl": "direkt dran · tuż przy"
+  "pl": "direkt dran · tuż przy",
+  "at": [
+   "6b8b6649"
+  ]
  },
  {
   "en": "drauf · onto it",
   "ru": "drauf · на само место",
-  "pl": "drauf · na wierzch"
+  "pl": "drauf · na wierzch",
+  "at": [
+   "995634ba"
+  ]
  },
  {
   "en": "nur bis dorthin · just up to it, not into or onto it",
   "ru": "nur bis dorthin · только до места, не внутрь и не на него",
-  "pl": "nur bis dorthin · tylko do tego miejsca, nie do środka ani na wierzch"
+  "pl": "nur bis dorthin · tylko do tego miejsca, nie do środka ani na wierzch",
+  "at": [
+   "609820eb"
+  ]
  },
  {
   "en": "heraus · out of it, from inside",
   "ru": "heraus · изнутри",
-  "pl": "heraus · ze środka"
+  "pl": "heraus · ze środka",
+  "at": [
+   "865616d1"
+  ]
  },
  {
   "en": "nur von dort · from there, not from inside",
   "ru": "nur von dort · просто оттуда, не изнутри",
-  "pl": "nur von dort · po prostu stamtąd, nie ze środka"
+  "pl": "nur von dort · po prostu stamtąd, nie ze środka",
+  "at": [
+   "48e21091"
+  ]
  }
 ]

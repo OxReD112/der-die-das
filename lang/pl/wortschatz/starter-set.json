@@ -2,2181 +2,3490 @@
  {
   "en": "I'm going for a walk although it's raining.",
   "ru": "Я иду гулять, хотя идёт дождь.",
-  "pl": "Idę na spacer, chociaż pada deszcz."
+  "pl": "Idę na spacer, chociaż pada deszcz.",
+  "at": [
+   "d95b1e5c"
+  ]
  },
  {
   "en": "obwohl + verb at the end",
   "ru": "obwohl + глагол в конце",
-  "pl": "obwohl + czasownik na końcu"
+  "pl": "obwohl + czasownik na końcu",
+  "at": [
+   "737b0a51"
+  ]
  },
  {
   "en": "although, even though",
   "ru": "хотя, несмотря на то что",
-  "pl": "chociaż, mimo że"
+  "pl": "chociaż, mimo że",
+  "at": [
+   "a254e4bb"
+  ]
  },
  {
   "en": "I have to cancel my driving lesson.",
   "ru": "Мне нужно отменить урок вождения.",
-  "pl": "Muszę odwołać lekcję jazdy."
+  "pl": "Muszę odwołać lekcję jazdy.",
+  "at": [
+   "c006d1c9"
+  ]
  },
  {
   "en": "to cancel",
   "ru": "отменять",
-  "pl": "odwoływać"
+  "pl": "odwoływać",
+  "at": [
+   "e9ba0316"
+  ]
  },
  {
   "en": "What's the reason?",
   "ru": "В чём причина?",
-  "pl": "Jaki jest powód?"
+  "pl": "Jaki jest powód?",
+  "at": [
+   "1d1a203b"
+  ]
  },
  {
   "en": "reason, cause",
   "ru": "причина, основание",
-  "pl": "powód, podstawa"
+  "pl": "powód, podstawa",
+  "at": [
+   "f8a22958"
+  ]
  },
  {
   "en": "That isn't necessary.",
   "ru": "Это не обязательно / не необходимо.",
-  "pl": "To nie jest konieczne / niezbędne."
+  "pl": "To nie jest konieczne / niezbędne.",
+  "at": [
+   "d09dd7ff"
+  ]
  },
  {
   "en": "necessary",
   "ru": "необходимый, нужный",
-  "pl": "konieczny, potrzebny"
+  "pl": "konieczny, potrzebny",
+  "at": [
+   "7290e18c"
+  ]
  },
  {
   "en": "It's raining. I'm going for a walk anyway.",
   "ru": "Идёт дождь. Несмотря на это, я иду гулять.",
-  "pl": "Pada deszcz. Mimo to idę na spacer."
+  "pl": "Pada deszcz. Mimo to idę na spacer.",
+  "at": [
+   "6ee5afec"
+  ]
  },
  {
   "en": "nevertheless, anyway",
   "ru": "несмотря на это, всё же",
-  "pl": "mimo to, jednak"
+  "pl": "mimo to, jednak",
+  "at": [
+   "d116ab8b"
+  ]
  },
  {
   "en": "Can we move the appointment to Friday?",
   "ru": "Можем перенести встречу на пятницу?",
-  "pl": "Możemy przełożyć spotkanie na piątek?"
+  "pl": "Możemy przełożyć spotkanie na piątek?",
+  "at": [
+   "69f6906d"
+  ]
  },
  {
   "en": "to postpone, to move (a date)",
   "ru": "переносить",
-  "pl": "przekładać (na inny termin)"
+  "pl": "przekładać (na inny termin)",
+  "at": [
+   "063618fa"
+  ]
  },
  {
   "en": "That's a difficult decision.",
   "ru": "Это трудное решение.",
-  "pl": "To trudna decyzja."
+  "pl": "To trudna decyzja.",
+  "at": [
+   "3178cf15"
+  ]
  },
  {
   "en": "decision",
   "ru": "решение",
-  "pl": "decyzja"
+  "pl": "decyzja",
+  "at": [
+   "9992bb42"
+  ]
  },
  {
   "en": "I'll probably come later.",
   "ru": "Вероятно, я приду позже.",
-  "pl": "Prawdopodobnie przyjdę później."
+  "pl": "Prawdopodobnie przyjdę później.",
+  "at": [
+   "8cc3aa5f"
+  ]
  },
  {
   "en": "probably, likely",
   "ru": "вероятно",
-  "pl": "prawdopodobnie"
+  "pl": "prawdopodobnie",
+  "at": [
+   "607b972c"
+  ]
  },
  {
   "en": "I can't make up my mind.",
   "ru": "Я не могу решиться / сделать выбор.",
-  "pl": "Nie mogę się zdecydować / dokonać wyboru."
+  "pl": "Nie mogę się zdecydować / dokonać wyboru.",
+  "at": [
+   "cd294ea3"
+  ]
  },
  {
   "en": "to decide, to make up your mind",
   "ru": "решаться, принимать решение",
-  "pl": "decydować się, podejmować decyzję"
+  "pl": "decydować się, podejmować decyzję",
+  "at": [
+   "1bd828e0"
+  ]
  },
  {
   "en": "Our bags are similar.",
   "ru": "Наши сумки похожи.",
-  "pl": "Nasze torby są podobne."
+  "pl": "Nasze torby są podobne.",
+  "at": [
+   "3c07ebae"
+  ]
  },
  {
   "en": "similar",
   "ru": "похожий",
-  "pl": "podobny"
+  "pl": "podobny",
+  "at": [
+   "49c92305"
+  ]
  },
  {
   "en": "I'm tired, so I'm going home.",
   "ru": "Я устала, поэтому иду домой.",
-  "pl": "Jestem zmęczona, dlatego idę do domu."
+  "pl": "Jestem zmęczona, dlatego idę do domu.",
+  "at": [
+   "b90bab39"
+  ]
  },
  {
   "en": "deshalb = that's why, so",
   "ru": "deshalb = поэтому",
-  "pl": "deshalb = dlatego"
+  "pl": "deshalb = dlatego",
+  "at": [
+   "f72b18d0"
+  ]
  },
  {
   "en": "that's why, so",
   "ru": "поэтому",
-  "pl": "dlatego"
+  "pl": "dlatego",
+  "at": [
+   "4b539e86",
+   "d2ee08d7"
+  ]
  },
  {
   "en": "I suggest Saturday.",
   "ru": "Я предлагаю субботу.",
-  "pl": "Proponuję sobotę."
+  "pl": "Proponuję sobotę.",
+  "at": [
+   "f9859e22"
+  ]
  },
  {
   "en": "to suggest",
   "ru": "предлагать",
-  "pl": "proponować"
+  "pl": "proponować",
+  "at": [
+   "d1eb37a9"
+  ]
  },
  {
   "en": "My application isn't finished yet.",
   "ru": "Моё заявление ещё не готово.",
-  "pl": "Mój wniosek nie jest jeszcze gotowy."
+  "pl": "Mój wniosek nie jest jeszcze gotowy.",
+  "at": [
+   "c305c9b9"
+  ]
  },
  {
   "en": "application (form)",
   "ru": "заявление, заявка",
-  "pl": "wniosek, zgłoszenie"
+  "pl": "wniosek, zgłoszenie",
+  "at": [
+   "68526d06"
+  ]
  },
  {
   "en": "I'm ready for the exam.",
   "ru": "Я готова к экзамену.",
-  "pl": "Jestem gotowa do egzaminu."
+  "pl": "Jestem gotowa do egzaminu.",
+  "at": [
+   "f2da57ca"
+  ]
  },
  {
   "en": "ready",
   "ru": "готовый",
-  "pl": "gotowy"
+  "pl": "gotowy",
+  "at": [
+   "5d054111"
+  ]
  },
  {
   "en": "I need bread and also milk.",
   "ru": "Мне нужен хлеб, а кроме того молоко.",
-  "pl": "Potrzebuję chleba, a poza tym mleka."
+  "pl": "Potrzebuję chleba, a poza tym mleka.",
+  "at": [
+   "1c905997"
+  ]
  },
  {
   "en": "also, besides",
   "ru": "кроме того",
-  "pl": "poza tym"
+  "pl": "poza tym",
+  "at": [
+   "43d16ca4"
+  ]
  },
  {
   "en": "I avoid the supermarket on Saturdays.",
   "ru": "Я избегаю супермаркета по субботам.",
-  "pl": "Unikam supermarketu w soboty."
+  "pl": "Unikam supermarketu w soboty.",
+  "at": [
+   "debed960"
+  ]
  },
  {
   "en": "to avoid",
   "ru": "избегать",
-  "pl": "unikać"
+  "pl": "unikać",
+  "at": [
+   "ef67d84f"
+  ]
  },
  {
   "en": "The deadline is on Friday.",
   "ru": "Срок заканчивается в пятницу.",
-  "pl": "Termin upływa w piątek."
+  "pl": "Termin upływa w piątek.",
+  "at": [
+   "ed886d8c"
+  ]
  },
  {
   "en": "deadline",
   "ru": "срок",
-  "pl": "termin"
+  "pl": "termin",
+  "at": [
+   "882f8feb"
+  ]
  },
  {
   "en": "The week was very tiring.",
   "ru": "Неделя была очень утомительной.",
-  "pl": "Tydzień był bardzo męczący."
+  "pl": "Tydzień był bardzo męczący.",
+  "at": [
+   "25b44d1d"
+  ]
  },
  {
   "en": "tiring, exhausting",
   "ru": "утомительный, напряжённый",
-  "pl": "męczący, wyczerpujący"
+  "pl": "męczący, wyczerpujący",
+  "at": [
+   "4007e4ea"
+  ]
  },
  {
   "en": "I don't drink tea, I drink coffee.",
   "ru": "Я пью не чай, а кофе.",
-  "pl": "Nie piję herbaty, tylko kawę."
+  "pl": "Nie piję herbaty, tylko kawę.",
+  "at": [
+   "7c56950a"
+  ]
  },
  {
   "en": "but (rather)",
   "ru": "а, а наоборот",
-  "pl": "tylko (nie …, tylko …)"
+  "pl": "tylko (nie …, tylko …)",
+  "at": [
+   "486de551"
+  ]
  },
  {
   "en": "I'm preparing for the exam.",
   "ru": "Я готовлюсь к экзамену.",
-  "pl": "Przygotowuję się do egzaminu."
+  "pl": "Przygotowuję się do egzaminu.",
+  "at": [
+   "d2775c8e"
+  ]
  },
  {
   "en": "to prepare for",
   "ru": "готовиться к",
-  "pl": "przygotowywać się do"
+  "pl": "przygotowywać się do",
+  "at": [
+   "f5ed9025"
+  ]
  },
  {
   "en": "His remark was pretty annoying.",
   "ru": "Его замечание было довольно раздражающим.",
-  "pl": "Jego uwaga była dość irytująca."
+  "pl": "Jego uwaga była dość irytująca.",
+  "at": [
+   "8fc54adb"
+  ]
  },
  {
   "en": "annoying",
   "ru": "раздражающий, досадный",
-  "pl": "irytujący, przykry"
+  "pl": "irytujący, przykry",
+  "at": [
+   "46460a38"
+  ]
  },
  {
   "en": "The little café is very cosy.",
   "ru": "Это маленькое кафе очень уютное.",
-  "pl": "Ta mała kawiarnia jest bardzo przytulna."
+  "pl": "Ta mała kawiarnia jest bardzo przytulna.",
+  "at": [
+   "808482c0"
+  ]
  },
  {
   "en": "cosy, comfortable",
   "ru": "уютный, комфортный",
-  "pl": "przytulny, wygodny"
+  "pl": "przytulny, wygodny",
+  "at": [
+   "e9b94cef"
+  ]
  },
  {
   "en": "I was stunned when I read the message.",
   "ru": "Я была ошеломлена, когда прочитала сообщение.",
-  "pl": "Byłam oszołomiona, kiedy przeczytałam wiadomość."
+  "pl": "Byłam oszołomiona, kiedy przeczytałam wiadomość.",
+  "at": [
+   "7c9c3893"
+  ]
  },
  {
   "en": "stunned, speechless",
   "ru": "ошеломлённый, поражённый",
-  "pl": "oszołomiony, zdumiony"
+  "pl": "oszołomiony, zdumiony",
+  "at": [
+   "9d8564d0"
+  ]
  },
  {
   "en": "After the holiday I had real wanderlust.",
   "ru": "После отпуска мне очень хотелось снова куда-нибудь далеко уехать.",
-  "pl": "Po urlopie bardzo chciałam znów wyjechać gdzieś daleko."
+  "pl": "Po urlopie bardzo chciałam znów wyjechać gdzieś daleko.",
+  "at": [
+   "589e2485"
+  ]
  },
  {
   "en": "wanderlust",
   "ru": "тяга к дальним странам, тоска по путешествиям",
-  "pl": "pociąg do dalekich krajów, tęsknota za podróżami"
+  "pl": "pociąg do dalekich krajów, tęsknota za podróżami",
+  "at": [
+   "e851d472"
+  ]
  },
  {
   "en": "After the holiday I felt happy again.",
   "ru": "После отпуска я снова чувствовала себя счастливой.",
-  "pl": "Po urlopie znów czułam się szczęśliwa."
+  "pl": "Po urlopie znów czułam się szczęśliwa.",
+  "at": [
+   "8a6e2258"
+  ]
  },
  {
   "en": "happy",
   "ru": "счастливый",
-  "pl": "szczęśliwy"
+  "pl": "szczęśliwy",
+  "at": [
+   "974eeae7"
+  ]
  },
  {
   "en": "She is dissatisfied with the result.",
   "ru": "Она недовольна результатом.",
-  "pl": "Jest niezadowolona z wyniku."
+  "pl": "Jest niezadowolona z wyniku.",
+  "at": [
+   "cc09bf79"
+  ]
  },
  {
   "en": "dissatisfied, unhappy",
   "ru": "недовольный",
-  "pl": "niezadowolony"
+  "pl": "niezadowolony",
+  "at": [
+   "f3c09fc6"
+  ]
  },
  {
   "en": "Are you happy with your decision?",
   "ru": "Ты довольна своим решением?",
-  "pl": "Jesteś zadowolona ze swojej decyzji?"
+  "pl": "Jesteś zadowolona ze swojej decyzji?",
+  "at": [
+   "b11f2f42"
+  ]
  },
  {
   "en": "satisfied, happy",
   "ru": "довольный",
-  "pl": "zadowolony"
+  "pl": "zadowolony",
+  "at": [
+   "b9214209"
+  ]
  },
  {
   "en": "She does volunteer work.",
   "ru": "Она занимается волонтёрской / общественной деятельностью.",
-  "pl": "Zajmuje się wolontariatem / działalnością społeczną."
+  "pl": "Zajmuje się wolontariatem / działalnością społeczną.",
+  "at": [
+   "0f843fc4"
+  ]
  },
  {
   "en": "volunteer work",
   "ru": "волонтёрская, общественная деятельность",
-  "pl": "wolontariat, działalność społeczna"
+  "pl": "wolontariat, działalność społeczna",
+  "at": [
+   "7b09eba3"
+  ]
  },
  {
   "en": "We can't work and talk on the phone at the same time.",
   "ru": "Мы не можем одновременно работать и разговаривать по телефону.",
-  "pl": "Nie możemy jednocześnie pracować i rozmawiać przez telefon."
+  "pl": "Nie możemy jednocześnie pracować i rozmawiać przez telefon.",
+  "at": [
+   "fba720e7"
+  ]
  },
  {
   "en": "at the same time",
   "ru": "одновременно",
-  "pl": "jednocześnie"
+  "pl": "jednocześnie",
+  "at": [
+   "b7292c34"
+  ]
  },
  {
   "en": "My grandfather died two years ago.",
   "ru": "Мой дедушка умер два года назад.",
-  "pl": "Mój dziadek zmarł dwa lata temu."
+  "pl": "Mój dziadek zmarł dwa lata temu.",
+  "at": [
+   "141f32a7"
+  ]
  },
  {
   "en": "to die",
   "ru": "умирать",
-  "pl": "umierać"
+  "pl": "umierać",
+  "at": [
+   "9dde46f4"
+  ]
  },
  {
   "en": "The journey takes about two hours.",
   "ru": "Поездка длится примерно два часа.",
-  "pl": "Podróż trwa około dwóch godzin."
+  "pl": "Podróż trwa około dwóch godzin.",
+  "at": [
+   "758baa6d"
+  ]
  },
  {
   "en": "about, approximately",
   "ru": "примерно",
-  "pl": "około"
+  "pl": "około",
+  "at": [
+   "9369f2fa"
+  ]
  },
  {
   "en": "We're arranging an appointment.",
   "ru": "Мы договариваемся о встрече.",
-  "pl": "Umawiamy się na spotkanie."
+  "pl": "Umawiamy się na spotkanie.",
+  "at": [
+   "53f06733"
+  ]
  },
  {
   "en": "to arrange, to agree on",
   "ru": "договариваться, согласовывать",
-  "pl": "umawiać się, uzgadniać"
+  "pl": "umawiać się, uzgadniać",
+  "at": [
+   "86d886b0"
+  ]
  },
  {
   "en": "My salary comes at the end of the month.",
   "ru": "Моя зарплата приходит в конце месяца.",
-  "pl": "Moja pensja wpływa pod koniec miesiąca."
+  "pl": "Moja pensja wpływa pod koniec miesiąca.",
+  "at": [
+   "f5bbffde"
+  ]
  },
  {
   "en": "salary",
   "ru": "зарплата",
-  "pl": "pensja"
+  "pl": "pensja",
+  "at": [
+   "07ca6ef5"
+  ]
  },
  {
   "en": "This chair is very comfortable.",
   "ru": "Этот стул очень удобный.",
-  "pl": "To krzesło jest bardzo wygodne."
+  "pl": "To krzesło jest bardzo wygodne.",
+  "at": [
+   "fef2408d"
+  ]
  },
  {
   "en": "comfortable",
   "ru": "удобный",
-  "pl": "wygodny"
+  "pl": "wygodny",
+  "at": [
+   "a06118da"
+  ]
  },
  {
   "en": "I need at least eight hours of sleep.",
   "ru": "Мне нужно минимум восемь часов сна.",
-  "pl": "Potrzebuję co najmniej ośmiu godzin snu."
+  "pl": "Potrzebuję co najmniej ośmiu godzin snu.",
+  "at": [
+   "a7f2582e"
+  ]
  },
  {
   "en": "at least",
   "ru": "как минимум",
-  "pl": "co najmniej"
+  "pl": "co najmniej",
+  "at": [
+   "3c747f85"
+  ]
  },
  {
   "en": "I couldn't find my keys anywhere.",
   "ru": "Я нигде не нашла свои ключи.",
-  "pl": "Nigdzie nie znalazłam swoich kluczy."
+  "pl": "Nigdzie nie znalazłam swoich kluczy.",
+  "at": [
+   "7e112dc7"
+  ]
  },
  {
   "en": "nowhere",
   "ru": "нигде",
-  "pl": "nigdzie"
+  "pl": "nigdzie",
+  "at": [
+   "8bc912d4"
+  ]
  },
  {
   "en": "I'm expecting a parcel today.",
   "ru": "Я сегодня жду посылку.",
-  "pl": "Czekam dziś na paczkę."
+  "pl": "Czekam dziś na paczkę.",
+  "at": [
+   "5988df7c"
+  ]
  },
  {
   "en": "to expect",
   "ru": "ожидать",
-  "pl": "oczekiwać"
+  "pl": "oczekiwać",
+  "at": [
+   "7cb6c29b"
+  ]
  },
  {
   "en": "Your suggestion is good.",
   "ru": "Твоё предложение хорошее.",
-  "pl": "Twoja propozycja jest dobra."
+  "pl": "Twoja propozycja jest dobra.",
+  "at": [
+   "8a25396d"
+  ]
  },
  {
   "en": "suggestion, proposal",
   "ru": "предложение",
-  "pl": "propozycja"
+  "pl": "propozycja",
+  "at": [
+   "1fbca1fa"
+  ]
  },
  {
   "en": "This street is dangerous at night.",
   "ru": "Эта улица ночью опасна.",
-  "pl": "Ta ulica jest w nocy niebezpieczna."
+  "pl": "Ta ulica jest w nocy niebezpieczna.",
+  "at": [
+   "bebe728d"
+  ]
  },
  {
   "en": "dangerous",
   "ru": "опасный",
-  "pl": "niebezpieczny"
+  "pl": "niebezpieczny",
+  "at": [
+   "53610ada"
+  ]
  },
  {
   "en": "Actually, I'd like to stay at home today.",
   "ru": "Вообще-то я хочу сегодня остаться дома.",
-  "pl": "Właściwie chcę dziś zostać w domu."
+  "pl": "Właściwie chcę dziś zostać w domu.",
+  "at": [
+   "d9fefc6e"
+  ]
  },
  {
   "en": "actually",
   "ru": "вообще-то, собственно",
-  "pl": "właściwie, tak naprawdę"
+  "pl": "właściwie, tak naprawdę",
+  "at": [
+   "62788cc5"
+  ]
  },
  {
   "en": "I'd like to complain about the bad service.",
   "ru": "Я хочу пожаловаться на плохое обслуживание.",
-  "pl": "Chcę się poskarżyć na złą obsługę."
+  "pl": "Chcę się poskarżyć na złą obsługę.",
+  "at": [
+   "a79f92e8"
+  ]
  },
  {
   "en": "to complain about",
   "ru": "жаловаться на",
-  "pl": "skarżyć się na"
+  "pl": "skarżyć się na",
+  "at": [
+   "fbad9c37"
+  ]
  },
  {
   "en": "If it rains, I'll stay at home.",
   "ru": "Если пойдёт дождь, я останусь дома.",
-  "pl": "Jeśli będzie padać, zostanę w domu."
+  "pl": "Jeśli będzie padać, zostanę w domu.",
+  "at": [
+   "bb12c889"
+  ]
  },
  {
   "en": "if, in case",
   "ru": "если, в случае если",
-  "pl": "jeśli, na wypadek gdyby"
+  "pl": "jeśli, na wypadek gdyby",
+  "at": [
+   "d94b3bd6"
+  ]
  },
  {
   "en": "I want to pass the exam.",
   "ru": "Я хочу сдать экзамен.",
-  "pl": "Chcę zdać egzamin."
+  "pl": "Chcę zdać egzamin.",
+  "at": [
+   "2c44363d"
+  ]
  },
  {
   "en": "to pass (an exam); to consist; to exist",
   "ru": "сдать; состоять; существовать",
-  "pl": "zdać; składać się; istnieć"
+  "pl": "zdać; składać się; istnieć",
+  "at": [
+   "1c3edcca"
+  ]
  },
  {
   "en": "You have to decide for yourself what you want to do.",
   "ru": "Ты должна сама решить, что хочешь делать.",
-  "pl": "Musisz sama zdecydować, co chcesz robić."
+  "pl": "Musisz sama zdecydować, co chcesz robić.",
+  "at": [
+   "4fec4b6e"
+  ]
  },
  {
   "en": "to decide, to determine",
   "ru": "определять, решать",
-  "pl": "określać, decydować"
+  "pl": "określać, decydować",
+  "at": [
+   "9066fbc5"
+  ]
  },
  {
   "en": "That's my duty.",
   "ru": "Это моя обязанность.",
-  "pl": "To mój obowiązek."
+  "pl": "To mój obowiązek.",
+  "at": [
+   "44150fee"
+  ]
  },
  {
   "en": "duty",
   "ru": "обязанность",
-  "pl": "obowiązek"
+  "pl": "obowiązek",
+  "at": [
+   "f83db045"
+  ]
  },
  {
   "en": "My street is quiet at night.",
   "ru": "Моя улица ночью тихая.",
-  "pl": "Moja ulica jest w nocy cicha."
+  "pl": "Moja ulica jest w nocy cicha.",
+  "at": [
+   "6601078a"
+  ]
  },
  {
   "en": "calm, quiet",
   "ru": "спокойный, тихий",
-  "pl": "spokojny, cichy"
+  "pl": "spokojny, cichy",
+  "at": [
+   "723687d1"
+  ]
  },
  {
   "en": "I'm turning down the offer.",
   "ru": "Я отклоняю предложение.",
-  "pl": "Odrzucam ofertę."
+  "pl": "Odrzucam ofertę.",
+  "at": [
+   "03e0e047"
+  ]
  },
  {
   "en": "to decline, to turn down",
   "ru": "отклонять, отказываться",
-  "pl": "odrzucać, odmawiać"
+  "pl": "odrzucać, odmawiać",
+  "at": [
+   "9f4ef554"
+  ]
  },
  {
   "en": "I'm looking for a new job.",
   "ru": "Я ищу новую работу / должность.",
-  "pl": "Szukam nowej pracy / nowego stanowiska."
+  "pl": "Szukam nowej pracy / nowego stanowiska.",
+  "at": [
+   "38cf3de9"
+  ]
  },
  {
   "en": "A passport is required.",
   "ru": "Необходим паспорт.",
-  "pl": "Niezbędny jest paszport."
+  "pl": "Niezbędny jest paszport.",
+  "at": [
+   "0d42932a"
+  ]
  },
  {
   "en": "required, necessary",
   "ru": "необходимый, требуемый",
-  "pl": "niezbędny, wymagany"
+  "pl": "niezbędny, wymagany",
+  "at": [
+   "6b9d54b1"
+  ]
  },
  {
   "en": "I'm signing up for the course.",
   "ru": "Я записываюсь на курс.",
-  "pl": "Zapisuję się na kurs."
+  "pl": "Zapisuję się na kurs.",
+  "at": [
+   "96481177"
+  ]
  },
  {
   "en": "to sign up, to register",
   "ru": "регистрироваться, записываться",
-  "pl": "rejestrować się, zapisywać się"
+  "pl": "rejestrować się, zapisywać się",
+  "at": [
+   "7d6fa4c4"
+  ]
  },
  {
   "en": "There's no danger here.",
   "ru": "Здесь нет опасности.",
-  "pl": "Tutaj nie ma niebezpieczeństwa."
+  "pl": "Tutaj nie ma niebezpieczeństwa.",
+  "at": [
+   "267313c6"
+  ]
  },
  {
   "en": "danger",
   "ru": "опасность",
-  "pl": "niebezpieczeństwo"
+  "pl": "niebezpieczeństwo",
+  "at": [
+   "307afd9d"
+  ]
  },
  {
   "en": "My friend is very reliable.",
   "ru": "Моя подруга очень надёжная.",
-  "pl": "Moja przyjaciółka jest bardzo rzetelna."
+  "pl": "Moja przyjaciółka jest bardzo rzetelna.",
+  "at": [
+   "180d0f4d"
+  ]
  },
  {
   "en": "reliable",
   "ru": "надёжный",
-  "pl": "niezawodny, rzetelny"
+  "pl": "niezawodny, rzetelny",
+  "at": [
+   "b1ecbb9a"
+  ]
  },
  {
   "en": "Don't worry, the atmosphere here is very relaxed.",
   "ru": "Не переживай, здесь очень непринуждённая атмосфера.",
-  "pl": "Nie martw się, atmosfera jest tu bardzo swobodna."
+  "pl": "Nie martw się, atmosfera jest tu bardzo swobodna.",
+  "at": [
+   "40b99901"
+  ]
  },
  {
   "en": "relaxed, laid-back",
   "ru": "непринуждённый, расслабленный",
-  "pl": "swobodny, luźny"
+  "pl": "swobodny, luźny",
+  "at": [
+   "ef13202e"
+  ]
  },
  {
   "en": "I can recommend this cake.",
   "ru": "Я могу порекомендовать тебе этот пирог.",
-  "pl": "Mogę ci polecić to ciasto."
+  "pl": "Mogę ci polecić to ciasto.",
+  "at": [
+   "0983d7d3"
+  ]
  },
  {
   "en": "to recommend",
   "ru": "рекомендовать",
-  "pl": "polecać"
+  "pl": "polecać",
+  "at": [
+   "92323510"
+  ]
  },
  {
   "en": "I have a lot of experience with customers.",
   "ru": "У меня большой опыт работы с клиентами.",
-  "pl": "Mam duże doświadczenie w pracy z klientami."
+  "pl": "Mam duże doświadczenie w pracy z klientami.",
+  "at": [
+   "d347ee2d"
+  ]
  },
  {
   "en": "experience",
   "ru": "опыт",
-  "pl": "doświadczenie"
+  "pl": "doświadczenie",
+  "at": [
+   "89e8dbba"
+  ]
  },
  {
   "en": "The dress is lovely; however, it's very expensive.",
   "ru": "Платье красивое, однако очень дорогое.",
-  "pl": "Sukienka jest ładna, jednak bardzo droga."
+  "pl": "Sukienka jest ładna, jednak bardzo droga.",
+  "at": [
+   "7199c117"
+  ]
  },
  {
   "en": "however, though",
   "ru": "однако, правда",
-  "pl": "jednak, co prawda"
+  "pl": "jednak, co prawda",
+  "at": [
+   "78436424"
+  ]
  },
  {
   "en": "The weather is pleasant today.",
   "ru": "Сегодня приятная погода.",
-  "pl": "Dziś jest przyjemna pogoda."
+  "pl": "Dziś jest przyjemna pogoda.",
+  "at": [
+   "d920e2b9"
+  ]
  },
  {
   "en": "pleasant",
   "ru": "приятный",
-  "pl": "przyjemny"
+  "pl": "przyjemny",
+  "at": [
+   "1a676606"
+  ]
  },
  {
   "en": "I have to deal with the post today.",
   "ru": "Мне нужно сегодня разобраться с почтой.",
-  "pl": "Muszę dziś uporać się z pocztą."
+  "pl": "Muszę dziś uporać się z pocztą.",
+  "at": [
+   "4379acf0"
+  ]
  },
  {
   "en": "to deal with, to get done",
   "ru": "выполнять, улаживать",
-  "pl": "wykonywać, załatwiać"
+  "pl": "wykonywać, załatwiać",
+  "at": [
+   "0f37b99f"
+  ]
  },
  {
   "en": "I don't see any difference.",
   "ru": "Я не вижу разницы.",
-  "pl": "Nie widzę różnicy."
+  "pl": "Nie widzę różnicy.",
+  "at": [
+   "06532af5"
+  ]
  },
  {
   "en": "difference",
   "ru": "разница, различие",
-  "pl": "różnica"
+  "pl": "różnica",
+  "at": [
+   "45d64e62"
+  ]
  },
  {
   "en": "I'm ill, so I'm staying at home.",
   "ru": "Я болею, поэтому остаюсь дома.",
-  "pl": "Choruję, dlatego zostaję w domu."
+  "pl": "Choruję, dlatego zostaję w domu.",
+  "at": [
+   "b184ecc8"
+  ]
  },
  {
   "en": "The two of them had a big argument yesterday.",
   "ru": "Вчера они сильно поссорились.",
-  "pl": "Wczoraj mocno się pokłócili."
+  "pl": "Wczoraj mocno się pokłócili.",
+  "at": [
+   "c2c76e93"
+  ]
  },
  {
   "en": "argument, quarrel",
   "ru": "ссора, конфликт",
-  "pl": "kłótnia, konflikt"
+  "pl": "kłótnia, konflikt",
+  "at": [
+   "d197dad0"
+  ]
  },
  {
   "en": "I notice a mistake.",
   "ru": "Я обнаруживаю ошибку.",
-  "pl": "Wykrywam błąd."
+  "pl": "Wykrywam błąd.",
+  "at": [
+   "0dbfa99c"
+  ]
  },
  {
   "en": "to notice, to find; to establish",
   "ru": "устанавливать, констатировать; обнаруживать",
-  "pl": "ustalać, stwierdzać; wykrywać"
+  "pl": "ustalać, stwierdzać; wykrywać",
+  "at": [
+   "03e68dfb"
+  ]
  },
  {
   "en": "Please listen carefully.",
   "ru": "Пожалуйста, слушай внимательно.",
-  "pl": "Proszę, słuchaj uważnie."
+  "pl": "Proszę, słuchaj uważnie.",
+  "at": [
+   "f52155af"
+  ]
  },
  {
   "en": "attentive; attentively",
   "ru": "внимательно; внимательный",
-  "pl": "uważnie; uważny"
+  "pl": "uważnie; uważny",
+  "at": [
+   "2a5c45fc"
+  ]
  },
  {
   "en": "German B1 is an important requirement.",
   "ru": "Немецкий B1 — важное требование / условие.",
-  "pl": "Niemiecki B1 to ważny wymóg / warunek."
+  "pl": "Niemiecki B1 to ważny wymóg / warunek.",
+  "at": [
+   "a6ab2c06"
+  ]
  },
  {
   "en": "requirement, prerequisite",
   "ru": "условие, предпосылка",
-  "pl": "warunek, przesłanka"
+  "pl": "warunek, przesłanka",
+  "at": [
+   "463174dd"
+  ]
  },
  {
   "en": "My friend supports me.",
   "ru": "Моя подруга меня поддерживает.",
-  "pl": "Moja przyjaciółka mnie wspiera."
+  "pl": "Moja przyjaciółka mnie wspiera.",
+  "at": [
+   "29ff3577"
+  ]
  },
  {
   "en": "to support",
   "ru": "поддерживать",
-  "pl": "wspierać"
+  "pl": "wspierać",
+  "at": [
+   "757648c4"
+  ]
  },
  {
   "en": "Thanks for your support.",
   "ru": "Спасибо за твою поддержку.",
-  "pl": "Dziękuję za twoje wsparcie."
+  "pl": "Dziękuję za twoje wsparcie.",
+  "at": [
+   "1a6504c9"
+  ]
  },
  {
   "en": "support",
   "ru": "поддержка",
-  "pl": "wsparcie"
+  "pl": "wsparcie",
+  "at": [
+   "f1f0d616"
+  ]
  },
  {
   "en": "I'll call you as soon as I'm home.",
   "ru": "Я позвоню тебе, как только буду дома.",
-  "pl": "Zadzwonię do ciebie, jak tylko będę w domu."
+  "pl": "Zadzwonię do ciebie, jak tylko będę w domu.",
+  "at": [
+   "f46067ea"
+  ]
  },
  {
   "en": "as soon as",
   "ru": "как только",
-  "pl": "jak tylko"
+  "pl": "jak tylko",
+  "at": [
+   "a78bbf71"
+  ]
  },
  {
   "en": "This café is very popular.",
   "ru": "Это кафе очень популярное.",
-  "pl": "Ta kawiarnia jest bardzo popularna."
+  "pl": "Ta kawiarnia jest bardzo popularna.",
+  "at": [
+   "ceefdf91"
+  ]
  },
  {
   "en": "popular",
   "ru": "популярный, любимый",
-  "pl": "popularny, lubiany"
+  "pl": "popularny, lubiany",
+  "at": [
+   "3d867afe"
+  ]
  },
  {
   "en": "She offers me a coffee.",
   "ru": "Она предлагает мне кофе.",
-  "pl": "Proponuje mi kawę."
+  "pl": "Proponuje mi kawę.",
+  "at": [
+   "7d2ebae5"
+  ]
  },
  {
   "en": "to offer",
   "ru": "предлагать",
-  "pl": "proponować"
+  "pl": "proponować",
+  "at": [
+   "cf803312"
+  ]
  },
  {
   "en": "I get really homesick when I'm away from home for a long time.",
   "ru": "Я сильно скучаю по дому, когда долго не бываю дома.",
-  "pl": "Bardzo tęsknię za domem, kiedy długo mnie w nim nie ma."
+  "pl": "Bardzo tęsknię za domem, kiedy długo mnie w nim nie ma.",
+  "at": [
+   "659d2b47"
+  ]
  },
  {
   "en": "homesickness",
   "ru": "тоска по дому",
-  "pl": "tęsknota za domem"
+  "pl": "tęsknota za domem",
+  "at": [
+   "9e98e054"
+  ]
  },
  {
   "en": "The event starts at eight.",
   "ru": "Мероприятие начинается в восемь.",
-  "pl": "Wydarzenie zaczyna się o ósmej."
+  "pl": "Wydarzenie zaczyna się o ósmej.",
+  "at": [
+   "7bbc1a79"
+  ]
  },
  {
   "en": "event",
   "ru": "мероприятие",
-  "pl": "wydarzenie"
+  "pl": "wydarzenie",
+  "at": [
+   "be8e9ac6"
+  ]
  },
  {
   "en": "As long as it's raining, I'll stay here.",
   "ru": "Пока идёт дождь, я останусь здесь.",
-  "pl": "Dopóki pada, zostanę tutaj."
+  "pl": "Dopóki pada, zostanę tutaj.",
+  "at": [
+   "0e6361d7"
+  ]
  },
  {
   "en": "as long as",
   "ru": "пока, до тех пор пока",
-  "pl": "dopóki, tak długo, jak"
+  "pl": "dopóki, tak długo, jak",
+  "at": [
+   "4bae9de4"
+  ]
  },
  {
   "en": "I'm applying for a job.",
   "ru": "Я подаю заявку на вакансию.",
-  "pl": "Składam podanie o pracę."
+  "pl": "Składam podanie o pracę.",
+  "at": [
+   "c3ed6e6b"
+  ]
  },
  {
   "en": "to apply for",
   "ru": "подавать заявку на",
-  "pl": "składać podanie o"
+  "pl": "składać podanie o",
+  "at": [
+   "a6e24088"
+  ]
  },
  {
   "en": "I'm disappointed with the film.",
   "ru": "Я разочарована фильмом.",
-  "pl": "Jestem rozczarowana filmem."
+  "pl": "Jestem rozczarowana filmem.",
+  "at": [
+   "c4e41291"
+  ]
  },
  {
   "en": "disappointed",
   "ru": "разочарованный",
-  "pl": "rozczarowany"
+  "pl": "rozczarowany",
+  "at": [
+   "9c934dfe"
+  ]
  },
  {
   "en": "We have a clear agreement.",
   "ru": "У нас есть чёткая договорённость.",
-  "pl": "Mamy jasną umowę."
+  "pl": "Mamy jasną umowę.",
+  "at": [
+   "d0e288ea"
+  ]
  },
  {
   "en": "agreement, arrangement",
   "ru": "договорённость, соглашение",
-  "pl": "umowa, porozumienie"
+  "pl": "umowa, porozumienie",
+  "at": [
+   "0d4ec071"
+  ]
  },
  {
   "en": "My parents don't allow me to do that.",
   "ru": "Родители мне этого не разрешают.",
-  "pl": "Rodzice mi na to nie pozwalają."
+  "pl": "Rodzice mi na to nie pozwalają.",
+  "at": [
+   "7a60d80c"
+  ]
  },
  {
   "en": "to allow",
   "ru": "разрешать",
-  "pl": "pozwalać"
+  "pl": "pozwalać",
+  "at": [
+   "7e3f2a6b"
+  ]
  },
  {
   "en": "I'm sending my application today.",
   "ru": "Я сегодня отправляю свою заявку на работу.",
-  "pl": "Dziś wysyłam swoje podanie o pracę."
+  "pl": "Dziś wysyłam swoje podanie o pracę.",
+  "at": [
+   "235f9880"
+  ]
  },
  {
   "en": "(job) application",
   "ru": "заявка (особенно на работу); пакет документов",
-  "pl": "podanie (zwłaszcza o pracę); komplet dokumentów"
+  "pl": "podanie (zwłaszcza o pracę); komplet dokumentów",
+  "at": [
+   "1ccfbfaf"
+  ]
  },
  {
   "en": "He was so angry that he could hardly speak.",
   "ru": "Он был настолько зол, что едва мог говорить.",
-  "pl": "Był tak zły, że ledwie mógł mówić."
+  "pl": "Był tak zły, że ledwie mógł mówić.",
+  "at": [
+   "f97a6bda"
+  ]
  },
  {
   "en": "angry, furious",
   "ru": "злой, в ярости",
-  "pl": "zły, wściekły"
+  "pl": "zły, wściekły",
+  "at": [
+   "6645dc61"
+  ]
  },
  {
   "en": "By now I feel at home in Munich.",
   "ru": "Теперь я уже чувствую себя в Мюнхене как дома.",
-  "pl": "Teraz czuję się już w Monachium jak w domu."
+  "pl": "Teraz czuję się już w Monachium jak w domu.",
+  "at": [
+   "75c911ed"
+  ]
  },
  {
   "en": "by now, meanwhile",
   "ru": "тем временем, к настоящему времени",
-  "pl": "w międzyczasie, obecnie"
+  "pl": "w międzyczasie, obecnie",
+  "at": [
+   "908fea7a"
+  ]
  },
  {
   "en": "The exam was a success.",
   "ru": "Экзамен прошёл успешно.",
-  "pl": "Egzamin zakończył się sukcesem."
+  "pl": "Egzamin zakończył się sukcesem.",
+  "at": [
+   "89fae9c4"
+  ]
  },
  {
   "en": "successful",
   "ru": "успешный",
-  "pl": "udany"
+  "pl": "udany",
+  "at": [
+   "80bd55a3"
+  ]
  },
  {
   "en": "I'm getting used to the weather.",
   "ru": "Я привыкаю к погоде.",
-  "pl": "Przyzwyczajam się do pogody."
+  "pl": "Przyzwyczajam się do pogody.",
+  "at": [
+   "ee494651"
+  ]
  },
  {
   "en": "to get used to",
   "ru": "привыкать к",
-  "pl": "przyzwyczajać się do"
+  "pl": "przyzwyczajać się do",
+  "at": [
+   "3015eebe"
+  ]
  },
  {
   "en": "She's training to be a cook.",
   "ru": "Она учится на повара.",
-  "pl": "Uczy się na kucharkę."
+  "pl": "Uczy się na kucharkę.",
+  "at": [
+   "61e5dd77"
+  ]
  },
  {
   "en": "vocational training, apprenticeship",
   "ru": "профобучение, образование",
-  "pl": "nauka zawodu, wykształcenie"
+  "pl": "nauka zawodu, wykształcenie",
+  "at": [
+   "d4cff0c4"
+  ]
  },
  {
   "en": "In the end, we found a solution.",
   "ru": "В конце концов мы нашли решение.",
-  "pl": "W końcu znaleźliśmy rozwiązanie."
+  "pl": "W końcu znaleźliśmy rozwiązanie.",
+  "at": [
+   "c38121c9"
+  ]
  },
  {
   "en": "finally, in the end",
   "ru": "в конце концов, наконец",
-  "pl": "w końcu, wreszcie"
+  "pl": "w końcu, wreszcie",
+  "at": [
+   "877a5316"
+  ]
  },
  {
   "en": "I'd like to cancel my contract.",
   "ru": "Я хочу расторгнуть договор.",
-  "pl": "Chcę wypowiedzieć umowę."
+  "pl": "Chcę wypowiedzieć umowę.",
+  "at": [
+   "2cd9130c"
+  ]
  },
  {
   "en": "to quit (a job); to cancel (a contract)",
   "ru": "увольняться; расторгать",
-  "pl": "zwalniać się (z pracy); wypowiadać (umowę)"
+  "pl": "zwalniać się (z pracy); wypowiadać (umowę)",
+  "at": [
+   "b477056b"
+  ]
  },
  {
   "en": "For this job you need a knowledge of German.",
   "ru": "Для этой должности нужны знания немецкого.",
-  "pl": "Na to stanowisko potrzebna jest znajomość niemieckiego."
+  "pl": "Na to stanowisko potrzebna jest znajomość niemieckiego.",
+  "at": [
+   "0a84294d"
+  ]
  },
  {
   "en": "knowledge, skills",
   "ru": "знания",
-  "pl": "znajomość, wiedza"
+  "pl": "znajomość, wiedza",
+  "at": [
+   "73c2959a"
+  ]
  },
  {
   "en": "We need to solve the problem.",
   "ru": "Нам нужно решить проблему.",
-  "pl": "Musimy rozwiązać problem."
+  "pl": "Musimy rozwiązać problem.",
+  "at": [
+   "9d424881"
+  ]
  },
  {
   "en": "The child suddenly started to cry.",
   "ru": "Ребёнок внезапно начал плакать.",
-  "pl": "Dziecko nagle zaczęło płakać."
+  "pl": "Dziecko nagle zaczęło płakać.",
+  "at": [
+   "ae7b6ac8"
+  ]
  },
  {
   "en": "to cry",
   "ru": "плакать",
-  "pl": "płakać"
+  "pl": "płakać",
+  "at": [
+   "cbcac6d7"
+  ]
  },
  {
   "en": "Patience is an important skill.",
   "ru": "Терпение — важный навык.",
-  "pl": "Cierpliwość to ważna umiejętność."
+  "pl": "Cierpliwość to ważna umiejętność.",
+  "at": [
+   "c6ff8d65"
+  ]
  },
  {
   "en": "ability, skill",
   "ru": "способность, навык",
-  "pl": "zdolność, umiejętność"
+  "pl": "zdolność, umiejętność",
+  "at": [
+   "68833592"
+  ]
  },
  {
   "en": "I like Munich especially in summer.",
   "ru": "Мне особенно нравится Мюнхен летом.",
-  "pl": "Monachium podoba mi się szczególnie latem."
+  "pl": "Monachium podoba mi się szczególnie latem.",
+  "at": [
+   "90b680f8"
+  ]
  },
  {
   "en": "especially",
   "ru": "особенно",
-  "pl": "szczególnie"
+  "pl": "szczególnie",
+  "at": [
+   "17758a47"
+  ]
  },
  {
   "en": "We're cooking together today.",
   "ru": "Сегодня мы готовим вместе.",
-  "pl": "Dziś gotujemy razem."
+  "pl": "Dziś gotujemy razem.",
+  "at": [
+   "2d8479cd"
+  ]
  },
  {
   "en": "together; shared",
   "ru": "совместный; вместе, совместно",
-  "pl": "wspólny; razem, wspólnie"
+  "pl": "wspólny; razem, wspólnie",
+  "at": [
+   "57bb561a"
+  ]
  },
  {
   "en": "That doesn't convince me.",
   "ru": "Это меня не убеждает.",
-  "pl": "To mnie nie przekonuje."
+  "pl": "To mnie nie przekonuje.",
+  "at": [
+   "36ec1647"
+  ]
  },
  {
   "en": "to convince",
   "ru": "убеждать",
-  "pl": "przekonywać"
+  "pl": "przekonywać",
+  "at": [
+   "84416b54"
+  ]
  },
  {
   "en": "I know the area well.",
   "ru": "Я хорошо знаю окрестности.",
-  "pl": "Dobrze znam okolicę."
+  "pl": "Dobrze znam okolicę.",
+  "at": [
+   "80afe99f"
+  ]
  },
  {
   "en": "surroundings, area",
   "ru": "окружение, окрестности",
-  "pl": "otoczenie, okolica"
+  "pl": "otoczenie, okolica",
+  "at": [
+   "67c1846c"
+  ]
  },
  {
   "en": "I'll wait ten minutes at most.",
   "ru": "Я подожду максимум десять минут.",
-  "pl": "Poczekam najwyżej dziesięć minut."
+  "pl": "Poczekam najwyżej dziesięć minut.",
+  "at": [
+   "e42debc6"
+  ]
  },
  {
   "en": "at most",
   "ru": "максимум, не более",
-  "pl": "najwyżej, nie więcej niż"
+  "pl": "najwyżej, nie więcej niż",
+  "at": [
+   "8a12d59d"
+  ]
  },
  {
   "en": "I agree with you.",
   "ru": "Я с тобой согласна.",
-  "pl": "Zgadzam się z tobą."
+  "pl": "Zgadzam się z tobą.",
+  "at": [
+   "8c490ef3"
+  ]
  },
  {
   "en": "to agree",
   "ru": "соглашаться",
-  "pl": "zgadzać się"
+  "pl": "zgadzać się",
+  "at": [
+   "4bd4c770"
+  ]
  },
  {
   "en": "Trust is the basis of every good relationship.",
   "ru": "Доверие — основа любых хороших отношений.",
-  "pl": "Zaufanie to podstawa każdej dobrej relacji."
+  "pl": "Zaufanie to podstawa każdej dobrej relacji.",
+  "at": [
+   "9c5d86b2"
+  ]
  },
  {
   "en": "trust",
   "ru": "доверие",
-  "pl": "zaufanie"
+  "pl": "zaufanie",
+  "at": [
+   "2c888d39"
+  ]
  },
  {
   "en": "My driving instructor is very patient.",
   "ru": "Мой инструктор по вождению очень терпеливый.",
-  "pl": "Mój instruktor jazdy jest bardzo cierpliwy."
+  "pl": "Mój instruktor jazdy jest bardzo cierpliwy.",
+  "at": [
+   "0b667155"
+  ]
  },
  {
   "en": "patient",
   "ru": "терпеливый",
-  "pl": "cierpliwy"
+  "pl": "cierpliwy",
+  "at": [
+   "ce730f82"
+  ]
  },
  {
   "en": "They have a good relationship.",
   "ru": "У них хорошие отношения.",
-  "pl": "Mają dobre relacje."
+  "pl": "Mają dobre relacje.",
+  "at": [
+   "d5950b62"
+  ]
  },
  {
   "en": "relationship",
   "ru": "отношения, связь",
-  "pl": "relacje, związek"
+  "pl": "relacje, związek",
+  "at": [
+   "57399be9"
+  ]
  },
  {
   "en": "It depends on the weather.",
   "ru": "Это зависит от погоды.",
-  "pl": "To zależy od pogody."
+  "pl": "To zależy od pogody.",
+  "at": [
+   "b7b8a727"
+  ]
  },
  {
   "en": "to depend on",
   "ru": "зависеть от",
-  "pl": "zależeć od"
+  "pl": "zależeć od",
+  "at": [
+   "f47fab74"
+  ]
  },
  {
   "en": "His behaviour was strange.",
   "ru": "Его поведение было странным.",
-  "pl": "Jego zachowanie było dziwne."
+  "pl": "Jego zachowanie było dziwne.",
+  "at": [
+   "7bc08c28"
+  ]
  },
  {
   "en": "behaviour",
   "ru": "поведение",
-  "pl": "zachowanie"
+  "pl": "zachowanie",
+  "at": [
+   "69b9d577"
+  ]
  },
  {
   "en": "I might come later.",
   "ru": "Возможно, я приду позже.",
-  "pl": "Być może przyjdę później."
+  "pl": "Być może przyjdę później.",
+  "at": [
+   "43193325"
+  ]
  },
  {
   "en": "possibly, maybe",
   "ru": "возможно",
-  "pl": "być może"
+  "pl": "być może",
+  "at": [
+   "aaf82652"
+  ]
  },
  {
   "en": "I'm used to the weather.",
   "ru": "Я привыкла к этой погоде.",
-  "pl": "Jestem przyzwyczajona do tej pogody."
+  "pl": "Jestem przyzwyczajona do tej pogody.",
+  "at": [
+   "c0710d92"
+  ]
  },
  {
   "en": "used to (something); usual",
   "ru": "привыкший к чему-либо; привычный",
-  "pl": "przyzwyczajony do czegoś; zwykły"
+  "pl": "przyzwyczajony do czegoś; zwykły",
+  "at": [
+   "a9457ed9"
+  ]
  },
  {
   "en": "The mistake stands out immediately.",
   "ru": "Ошибка сразу бросается в глаза.",
-  "pl": "Błąd od razu rzuca się w oczy."
+  "pl": "Błąd od razu rzuca się w oczy.",
+  "at": [
+   "0640d7d0"
+  ]
  },
  {
   "en": "to stand out, to be noticed",
   "ru": "бросаться в глаза, замечаться",
-  "pl": "rzucać się w oczy, zwracać na siebie uwagę"
+  "pl": "rzucać się w oczy, zwracać na siebie uwagę",
+  "at": [
+   "5715053f"
+  ]
  },
  {
   "en": "Having coffee in the morning is a habit of mine.",
   "ru": "Кофе утром — моя привычка.",
-  "pl": "Kawa rano to moje przyzwyczajenie."
+  "pl": "Kawa rano to moje przyzwyczajenie.",
+  "at": [
+   "f7954cbe"
+  ]
  },
  {
   "en": "habit",
   "ru": "привычка",
-  "pl": "przyzwyczajenie"
+  "pl": "przyzwyczajenie",
+  "at": [
+   "b63e0195"
+  ]
  },
  {
   "en": "ridiculous",
   "ru": "смешной, нелепый, смехотворный",
-  "pl": "śmieszny, niedorzeczny, śmiechu warty"
+  "pl": "śmieszny, niedorzeczny, śmiechu warty",
+  "at": [
+   "60ff34c2"
+  ]
  },
  {
   "en": "In any case, I'd like to try.",
   "ru": "Во всяком случае, я хочу попробовать.",
-  "pl": "W każdym razie chcę spróbować."
+  "pl": "W każdym razie chcę spróbować.",
+  "at": [
+   "8e21f470"
+  ]
  },
  {
   "en": "in any case, anyway",
   "ru": "во всяком случае",
-  "pl": "w każdym razie"
+  "pl": "w każdym razie",
+  "at": [
+   "63cc911f"
+  ]
  },
  {
   "en": "The money isn't enough.",
   "ru": "Денег недостаточно.",
-  "pl": "Pieniędzy nie wystarcza."
+  "pl": "Pieniędzy nie wystarcza.",
+  "at": [
+   "66b13e88"
+  ]
  },
  {
   "en": "to be enough",
   "ru": "быть достаточным, хватать",
-  "pl": "być wystarczającym, wystarczać"
+  "pl": "być wystarczającym, wystarczać",
+  "at": [
+   "7edf5297"
+  ]
  },
  {
   "en": "The employee was very polite.",
   "ru": "Сотрудник был очень вежлив.",
-  "pl": "Pracownik był bardzo uprzejmy."
+  "pl": "Pracownik był bardzo uprzejmy.",
+  "at": [
+   "405d3e2b"
+  ]
  },
  {
   "en": "polite",
   "ru": "вежливый",
-  "pl": "uprzejmy"
+  "pl": "uprzejmy",
+  "at": [
+   "6ea49348"
+  ]
  },
  {
   "en": "Working from home has a big advantage.",
   "ru": "У удалённой работы есть большое преимущество.",
-  "pl": "Praca zdalna ma dużą zaletę."
+  "pl": "Praca zdalna ma dużą zaletę.",
+  "at": [
+   "9f2f35a2"
+  ]
  },
  {
   "en": "advantage",
   "ru": "преимущество",
-  "pl": "zaleta, przewaga"
+  "pl": "zaleta, przewaga",
+  "at": [
+   "ede75f29"
+  ]
  },
  {
   "en": "I'd like to apply for a new passport.",
   "ru": "Я хочу подать заявление на новый паспорт.",
-  "pl": "Chcę złożyć wniosek o nowy paszport."
+  "pl": "Chcę złożyć wniosek o nowy paszport.",
+  "at": [
+   "0a958e83"
+  ]
  },
  {
   "en": "to apply for (officially)",
   "ru": "подавать заявление на",
-  "pl": "składać wniosek o"
+  "pl": "składać wniosek o",
+  "at": [
+   "f190b180"
+  ]
  },
  {
   "en": "The price is a disadvantage.",
   "ru": "Цена — это недостаток.",
-  "pl": "Cena to wada."
+  "pl": "Cena to wada.",
+  "at": [
+   "679ac154"
+  ]
  },
  {
   "en": "disadvantage",
   "ru": "недостаток",
-  "pl": "wada"
+  "pl": "wada",
+  "at": [
+   "9c202cb3"
+  ]
  },
  {
   "en": "In contrast, Munich is very quiet.",
   "ru": "В отличие от этого Мюнхен очень спокойный.",
-  "pl": "W przeciwieństwie do tego Monachium jest bardzo spokojne."
+  "pl": "W przeciwieństwie do tego Monachium jest bardzo spokojne.",
+  "at": [
+   "fd0f69c0"
+  ]
  },
  {
   "en": "in contrast",
   "ru": "в отличие от этого",
-  "pl": "w przeciwieństwie do tego"
+  "pl": "w przeciwieństwie do tego",
+  "at": [
+   "f38a53ef"
+  ]
  },
  {
   "en": "I admire people who never give up.",
   "ru": "Я восхищаюсь людьми, которые никогда не сдаются.",
-  "pl": "Podziwiam ludzi, którzy nigdy się nie poddają."
+  "pl": "Podziwiam ludzi, którzy nigdy się nie poddają.",
+  "at": [
+   "1adef443"
+  ]
  },
  {
   "en": "to admire",
   "ru": "восхищаться",
-  "pl": "podziwiać"
+  "pl": "podziwiać",
+  "at": [
+   "9a511840"
+  ]
  },
  {
   "en": "I was embarrassed to speak in front of everyone.",
   "ru": "Мне было неловко говорить перед всеми.",
-  "pl": "Było mi niezręcznie mówić przed wszystkimi."
+  "pl": "Było mi niezręcznie mówić przed wszystkimi.",
+  "at": [
+   "b0b49b2d"
+  ]
  },
  {
   "en": "embarrassing",
   "ru": "неловкий, постыдный",
-  "pl": "krępujący, żenujący"
+  "pl": "krępujący, żenujący",
+  "at": [
+   "fa80e8ba"
+  ]
  },
  {
   "en": "Please give reasons for your opinion.",
   "ru": "Пожалуйста, обоснуйте своё мнение.",
-  "pl": "Proszę uzasadnić swoją opinię."
+  "pl": "Proszę uzasadnić swoją opinię.",
+  "at": [
+   "def38749"
+  ]
  },
  {
   "en": "to give reasons for, to justify",
   "ru": "обосновывать",
-  "pl": "uzasadniać"
+  "pl": "uzasadniać",
+  "at": [
+   "bc6b8896"
+  ]
  },
  {
   "en": "I'm writing a complaint.",
   "ru": "Я пишу жалобу.",
-  "pl": "Piszę skargę."
+  "pl": "Piszę skargę.",
+  "at": [
+   "69e46272"
+  ]
  },
  {
   "en": "complaint",
   "ru": "жалоба",
-  "pl": "skarga"
+  "pl": "skarga",
+  "at": [
+   "1f9754f9"
+  ]
  },
  {
   "en": "On the one hand it's expensive, on the other hand it's convenient.",
   "ru": "С одной стороны, это дорого, с другой — удобно.",
-  "pl": "Z jednej strony to drogie, z drugiej — wygodne."
+  "pl": "Z jednej strony to drogie, z drugiej — wygodne.",
+  "at": [
+   "a78cc5d0"
+  ]
  },
  {
   "en": "on the one hand … on the other hand",
   "ru": "с одной стороны … с другой стороны",
-  "pl": "z jednej strony … z drugiej strony"
+  "pl": "z jednej strony … z drugiej strony",
+  "at": [
+   "b6c9333f"
+  ]
  },
  {
   "en": "She's telling us about her trip.",
   "ru": "Она рассказывает о своей поездке.",
-  "pl": "Opowiada o swojej podróży."
+  "pl": "Opowiada o swojej podróży.",
+  "at": [
+   "f2fcdb08"
+  ]
  },
  {
   "en": "to report, to tell",
   "ru": "сообщать, рассказывать",
-  "pl": "informować, opowiadać"
+  "pl": "informować, opowiadać",
+  "at": [
+   "d5b5df17"
+  ]
  },
  {
   "en": "The price depends on the date.",
   "ru": "Цена зависит от даты.",
-  "pl": "Cena zależy od daty."
+  "pl": "Cena zależy od daty.",
+  "at": [
+   "27eb6959"
+  ]
  },
  {
   "en": "dependent (on)",
   "ru": "зависимый от",
-  "pl": "zależny od"
+  "pl": "zależny od",
+  "at": [
+   "536fde66"
+  ]
  },
  {
   "en": "I need permission.",
   "ru": "Мне нужно разрешение.",
-  "pl": "Potrzebuję pozwolenia."
+  "pl": "Potrzebuję pozwolenia.",
+  "at": [
+   "7b3e7466"
+  ]
  },
  {
   "en": "permission",
   "ru": "разрешение",
-  "pl": "pozwolenie"
+  "pl": "pozwolenie",
+  "at": [
+   "c203157d"
+  ]
  },
  {
   "en": "I'm working on a new project.",
   "ru": "Я занимаюсь новым проектом.",
-  "pl": "Zajmuję się nowym projektem."
+  "pl": "Zajmuję się nowym projektem.",
+  "at": [
+   "4cad958f"
+  ]
  },
  {
   "en": "to deal with, to work on",
   "ru": "заниматься чем-либо",
-  "pl": "zajmować się czymś"
+  "pl": "zajmować się czymś",
+  "at": [
+   "dbca109c"
+  ]
  },
  {
   "en": "It's amazing how fast time goes by.",
   "ru": "Удивительно, как быстро проходит время.",
-  "pl": "Zadziwiające, jak szybko mija czas."
+  "pl": "Zadziwiające, jak szybko mija czas.",
+  "at": [
+   "4e71da97"
+  ]
  },
  {
   "en": "amazing, astonishing",
   "ru": "удивительный, поразительный",
-  "pl": "zadziwiający, zdumiewający"
+  "pl": "zadziwiający, zdumiewający",
+  "at": [
+   "63e7cda4"
+  ]
  },
  {
   "en": "Participation is free.",
   "ru": "Участие бесплатное.",
-  "pl": "Udział jest bezpłatny."
+  "pl": "Udział jest bezpłatny.",
+  "at": [
+   "2e9158f3"
+  ]
  },
  {
   "en": "participation",
   "ru": "участие",
-  "pl": "udział"
+  "pl": "udział",
+  "at": [
+   "4345d170"
+  ]
  },
  {
   "en": "I like both coffee and tea.",
   "ru": "Я люблю и кофе, и чай.",
-  "pl": "Lubię zarówno kawę, jak i herbatę."
+  "pl": "Lubię zarówno kawę, jak i herbatę.",
+  "at": [
+   "6b4f0084"
+  ]
  },
  {
   "en": "both … and",
   "ru": "как … так и",
-  "pl": "zarówno … jak i"
+  "pl": "zarówno … jak i",
+  "at": [
+   "c9075663"
+  ]
  },
  {
   "en": "Two hours are enough.",
   "ru": "Двух часов достаточно.",
-  "pl": "Dwie godziny wystarczą."
+  "pl": "Dwie godziny wystarczą.",
+  "at": [
+   "a5b48c25"
+  ]
  },
  {
   "en": "sufficient, enough",
   "ru": "достаточный",
-  "pl": "wystarczający"
+  "pl": "wystarczający",
+  "at": [
+   "52c55f52"
+  ]
  },
  {
   "en": "I try hard to be on time.",
   "ru": "Я стараюсь быть вовремя.",
-  "pl": "Staram się przychodzić na czas."
+  "pl": "Staram się przychodzić na czas.",
+  "at": [
+   "44e44a49"
+  ]
  },
  {
   "en": "to try hard, to make an effort",
   "ru": "стараться, прилагать усилия",
-  "pl": "starać się, dokładać starań"
+  "pl": "starać się, dokładać starań",
+  "at": [
+   "98b2eb96"
+  ]
  },
  {
   "en": "Can you draw the curtains, please?",
   "ru": "Можешь, пожалуйста, задёрнуть шторы?",
-  "pl": "Możesz, proszę, zasunąć zasłony?"
+  "pl": "Możesz, proszę, zasunąć zasłony?",
+  "at": [
+   "a60fa332"
+  ]
  },
  {
   "en": "to draw (curtains), to pull shut",
   "ru": "задёргивать (шторы), закрывать, потянув на себя",
-  "pl": "zasuwać (zasłony), zamykać, przyciągając do siebie"
+  "pl": "zasuwać (zasłony), zamykać, przyciągając do siebie",
+  "at": [
+   "047599b9"
+  ]
  },
  {
   "en": "I drink neither cola nor juice.",
   "ru": "Я не пью ни колу, ни сок.",
-  "pl": "Nie piję ani coli, ani soku."
+  "pl": "Nie piję ani coli, ani soku.",
+  "at": [
+   "90471003"
+  ]
  },
  {
   "en": "neither … nor",
   "ru": "ни … ни",
-  "pl": "ani … ani"
+  "pl": "ani … ani",
+  "at": [
+   "34e98300"
+  ]
  },
  {
   "en": "The assistant is advising me.",
   "ru": "Сотрудница меня консультирует.",
-  "pl": "Pracownica mi doradza."
+  "pl": "Pracownica mi doradza.",
+  "at": [
+   "14afdb6f"
+  ]
  },
  {
   "en": "to advise",
   "ru": "консультировать, советовать",
-  "pl": "doradzać, radzić"
+  "pl": "doradzać, radzić",
+  "at": [
+   "92c018bc"
+  ]
  },
  {
   "en": "Music can calm me down quickly.",
   "ru": "Музыка может быстро меня успокоить.",
-  "pl": "Muzyka potrafi mnie szybko uspokoić."
+  "pl": "Muzyka potrafi mnie szybko uspokoić.",
+  "at": [
+   "4fd57c7a"
+  ]
  },
  {
   "en": "to calm (down)",
   "ru": "успокаивать",
-  "pl": "uspokajać"
+  "pl": "uspokajać",
+  "at": [
+   "03e8b8c1"
+  ]
  },
  {
   "en": "I'm very busy today.",
   "ru": "Я сегодня очень занята.",
-  "pl": "Jestem dziś bardzo zajęta."
+  "pl": "Jestem dziś bardzo zajęta.",
+  "at": [
+   "d434ac5d"
+  ]
  },
  {
   "en": "busy",
   "ru": "занятый",
-  "pl": "zajęty"
+  "pl": "zajęty",
+  "at": [
+   "bcf5c52a"
+  ]
  },
  {
   "en": "I don't accept this condition.",
   "ru": "Я не принимаю это условие.",
-  "pl": "Nie akceptuję tego warunku."
+  "pl": "Nie akceptuję tego warunku.",
+  "at": [
+   "0381f6fd"
+  ]
  },
  {
   "en": "condition",
   "ru": "условие",
-  "pl": "warunek"
+  "pl": "warunek",
+  "at": [
+   "d713468a"
+  ]
  },
  {
   "en": "Please take my situation into account.",
   "ru": "Пожалуйста, учтите мою ситуацию.",
-  "pl": "Proszę uwzględnić moją sytuację."
+  "pl": "Proszę uwzględnić moją sytuację.",
+  "at": [
+   "6f7867ee"
+  ]
  },
  {
   "en": "to take into account",
   "ru": "учитывать",
-  "pl": "uwzględniać"
+  "pl": "uwzględniać",
+  "at": [
+   "c4ee0845"
+  ]
  },
  {
   "en": "The monthly fee is too high.",
   "ru": "Ежемесячный взнос слишком высокий.",
-  "pl": "Miesięczna składka jest za wysoka."
+  "pl": "Miesięczna składka jest za wysoka.",
+  "at": [
+   "c4130226"
+  ]
  },
  {
   "en": "contribution; fee; post (article)",
   "ru": "вклад; взнос; публикация",
-  "pl": "wkład; składka; publikacja"
+  "pl": "wkład; składka; publikacja",
+  "at": [
+   "ec94313d"
+  ]
  },
  {
   "en": "Please speak clearly.",
   "ru": "Пожалуйста, говори чётко.",
-  "pl": "Mów, proszę, wyraźnie."
+  "pl": "Mów, proszę, wyraźnie.",
+  "at": [
+   "8f1425db"
+  ]
  },
  {
   "en": "clear; clearly",
   "ru": "ясный, отчётливый; чётко",
-  "pl": "jasny, wyraźny; wyraźnie"
+  "pl": "jasny, wyraźny; wyraźnie",
+  "at": [
+   "6ba08538"
+  ]
  },
  {
   "en": "We agree on Friday.",
   "ru": "Мы договариваемся на пятницу.",
-  "pl": "Umawiamy się na piątek."
+  "pl": "Umawiamy się na piątek.",
+  "at": [
+   "74e81de1"
+  ]
  },
  {
   "en": "to agree, to come to an agreement",
   "ru": "договариваться, приходить к согласию",
-  "pl": "uzgadniać, dochodzić do porozumienia"
+  "pl": "uzgadniać, dochodzić do porozumienia",
+  "at": [
+   "0c68894e"
+  ]
  },
  {
   "en": "I work in a creative field.",
   "ru": "Я работаю в творческой сфере.",
-  "pl": "Pracuję w branży kreatywnej."
+  "pl": "Pracuję w branży kreatywnej.",
+  "at": [
+   "6da75511"
+  ]
  },
  {
   "en": "area, field",
   "ru": "область, сфера",
-  "pl": "dziedzina, sfera"
+  "pl": "dziedzina, sfera",
+  "at": [
+   "746ac07e"
+  ]
  },
  {
   "en": "I'm discovering a new café.",
   "ru": "Я открываю для себя новое кафе.",
-  "pl": "Odkrywam nową kawiarnię."
+  "pl": "Odkrywam nową kawiarnię.",
+  "at": [
+   "01536da4"
+  ]
  },
  {
   "en": "to discover",
   "ru": "обнаруживать, открывать",
-  "pl": "wykrywać, odkrywać"
+  "pl": "wykrywać, odkrywać",
+  "at": [
+   "46db3f43"
+  ]
  },
  {
   "en": "At the weekend I just want to relax.",
   "ru": "На выходных я просто хочу расслабиться.",
-  "pl": "W weekend chcę się po prostu odprężyć."
+  "pl": "W weekend chcę się po prostu odprężyć.",
+  "at": [
+   "0046e7de"
+  ]
  },
  {
   "en": "to relax",
   "ru": "расслабляться, отдыхать",
-  "pl": "odprężać się, odpoczywać"
+  "pl": "odprężać się, odpoczywać",
+  "at": [
+   "528056f5"
+  ]
  },
  {
   "en": "I urgently need a coffee.",
   "ru": "Мне срочно нужен кофе.",
-  "pl": "Pilnie potrzebuję kawy."
+  "pl": "Pilnie potrzebuję kawy.",
+  "at": [
+   "58c7ed92"
+  ]
  },
  {
   "en": "urgent; urgently",
   "ru": "срочный; срочно",
-  "pl": "pilny; pilnie"
+  "pl": "pilny; pilnie",
+  "at": [
+   "ad205ed9"
+  ]
  },
  {
   "en": "I'm still waiting for the decision.",
   "ru": "Я всё ещё жду официального решения.",
-  "pl": "Wciąż czekam na oficjalną decyzję."
+  "pl": "Wciąż czekam na oficjalną decyzję.",
+  "at": [
+   "cbdc0c57"
+  ]
  },
  {
   "en": "official decision, notice",
   "ru": "официальное решение, уведомление",
-  "pl": "oficjalna decyzja, zawiadomienie"
+  "pl": "oficjalna decyzja, zawiadomienie",
+  "at": [
+   "37967864"
+  ]
  },
  {
   "en": "Please be honest with me.",
   "ru": "Пожалуйста, будь со мной честна.",
-  "pl": "Bądź, proszę, ze mną szczera."
+  "pl": "Bądź, proszę, ze mną szczera.",
+  "at": [
+   "3a428313"
+  ]
  },
  {
   "en": "honest",
   "ru": "честный",
-  "pl": "uczciwy, szczery"
+  "pl": "uczciwy, szczery",
+  "at": [
+   "9406df50"
+  ]
  },
  {
   "en": "The situation is developing well.",
   "ru": "Ситуация развивается хорошо.",
-  "pl": "Sytuacja rozwija się dobrze."
+  "pl": "Sytuacja rozwija się dobrze.",
+  "at": [
+   "b38929a9"
+  ]
  },
  {
   "en": "to develop",
   "ru": "развиваться",
-  "pl": "rozwijać się"
+  "pl": "rozwijać się",
+  "at": [
+   "6934c6b6"
+  ]
  },
  {
   "en": "The company has twenty employees.",
   "ru": "На предприятии двадцать сотрудников.",
-  "pl": "Przedsiębiorstwo zatrudnia dwudziestu pracowników."
+  "pl": "Przedsiębiorstwo zatrudnia dwudziestu pracowników.",
+  "at": [
+   "a016b8fd"
+  ]
  },
  {
   "en": "I don't have the time.",
   "ru": "Мне не хватает времени.",
-  "pl": "Brakuje mi czasu."
+  "pl": "Brakuje mi czasu.",
+  "at": [
+   "1c1f2137"
+  ]
  },
  {
   "en": "to be missing; to be lacking",
   "ru": "отсутствовать; не хватать",
-  "pl": "być nieobecnym; brakować"
+  "pl": "być nieobecnym; brakować",
+  "at": [
+   "38cc4684"
+  ]
  },
  {
   "en": "I'd like a flat of my own.",
   "ru": "Я хочу собственную квартиру.",
-  "pl": "Chcę mieć własne mieszkanie."
+  "pl": "Chcę mieć własne mieszkanie.",
+  "at": [
+   "adb7c13d"
+  ]
  },
  {
   "en": "own",
   "ru": "собственный",
-  "pl": "własny"
+  "pl": "własny",
+  "at": [
+   "b09807ca"
+  ]
  },
  {
   "en": "He tried to cheat me.",
   "ru": "Он пытался меня обмануть.",
-  "pl": "Próbował mnie oszukać."
+  "pl": "Próbował mnie oszukać.",
+  "at": [
+   "e136d57d"
+  ]
  },
  {
   "en": "to cheat, to deceive",
   "ru": "обманывать, мошенничать",
-  "pl": "oszukiwać"
+  "pl": "oszukiwać",
+  "at": [
+   "de34d50a"
+  ]
  },
  {
   "en": "That's a good opportunity.",
   "ru": "Это хорошая возможность.",
-  "pl": "To dobra okazja."
+  "pl": "To dobra okazja.",
+  "at": [
+   "3fba5531"
+  ]
  },
  {
   "en": "opportunity, chance",
   "ru": "возможность, случай",
-  "pl": "możliwość, okazja"
+  "pl": "możliwość, okazja",
+  "at": [
+   "77c5e6de"
+  ]
  },
  {
   "en": "The ticket is only valid today.",
   "ru": "Билет действует только сегодня.",
-  "pl": "Bilet jest ważny tylko dziś."
+  "pl": "Bilet jest ważny tylko dziś.",
+  "at": [
+   "9a08b198"
+  ]
  },
  {
   "en": "to be valid; to be considered",
   "ru": "действовать; считаться",
-  "pl": "być ważnym; być uważanym"
+  "pl": "być ważnym; być uważanym",
+  "at": [
+   "2b925027"
+  ]
  },
  {
   "en": "The fee is twenty euros.",
   "ru": "Сбор составляет двадцать евро.",
-  "pl": "Opłata wynosi dwadzieścia euro."
+  "pl": "Opłata wynosi dwadzieścia euro.",
+  "at": [
+   "28163de5"
+  ]
  },
  {
   "en": "fee, charge",
   "ru": "сбор, плата",
-  "pl": "opłata, należność"
+  "pl": "opłata, należność",
+  "at": [
+   "8ba65612"
+  ]
  },
  {
   "en": "Alone at home, I sometimes feel lonely.",
   "ru": "Одна дома я иногда чувствую себя одиноко.",
-  "pl": "Sama w domu czasem czuję się samotna."
+  "pl": "Sama w domu czasem czuję się samotna.",
+  "at": [
+   "3d9b47ce"
+  ]
  },
  {
   "en": "lonely",
   "ru": "одинокий",
-  "pl": "samotny"
+  "pl": "samotny",
+  "at": [
+   "f747cd65"
+  ]
  },
  {
   "en": "I'm enjoying my coffee.",
   "ru": "Я наслаждаюсь своим кофе.",
-  "pl": "Rozkoszuję się swoją kawą."
+  "pl": "Rozkoszuję się swoją kawą.",
+  "at": [
+   "7f044178"
+  ]
  },
  {
   "en": "to enjoy",
   "ru": "наслаждаться",
-  "pl": "rozkoszować się"
+  "pl": "rozkoszować się",
+  "at": [
+   "823dbac7"
+  ]
  },
  {
   "en": "I won't manage it today.",
   "ru": "Я сегодня с этим не справлюсь.",
-  "pl": "Dziś sobie z tym nie poradzę."
+  "pl": "Dziś sobie z tym nie poradzę.",
+  "at": [
+   "49a5d481"
+  ]
  },
  {
   "en": "to manage, to make it",
   "ru": "справляться, успевать",
-  "pl": "dawać radę, zdążać"
+  "pl": "dawać radę, zdążać",
+  "at": [
+   "aab16bae"
+  ]
  },
  {
   "en": "The damage to the car is minor.",
   "ru": "Повреждение машины небольшое.",
-  "pl": "Uszkodzenie samochodu jest niewielkie."
+  "pl": "Uszkodzenie samochodu jest niewielkie.",
+  "at": [
+   "d942df45"
+  ]
  },
  {
   "en": "damage",
   "ru": "ущерб, повреждение",
-  "pl": "szkoda, uszkodzenie"
+  "pl": "szkoda, uszkodzenie",
+  "at": [
+   "e5850332"
+  ]
  },
  {
   "en": "Before a trip I always feel great anticipation.",
   "ru": "Перед поездкой я всегда испытываю приятное предвкушение.",
-  "pl": "Przed podróżą zawsze czuję wielką radość oczekiwania."
+  "pl": "Przed podróżą zawsze czuję wielką radość oczekiwania.",
+  "at": [
+   "a9f4cb46"
+  ]
  },
  {
   "en": "anticipation, looking forward",
   "ru": "предвкушение, радостное ожидание",
-  "pl": "radość oczekiwania"
+  "pl": "radość oczekiwania",
+  "at": [
+   "03eb451d"
+  ]
  },
  {
   "en": "I'm not giving up.",
   "ru": "Я не сдаюсь.",
-  "pl": "Nie poddaję się."
+  "pl": "Nie poddaję się.",
+  "at": [
+   "8e0d61ab"
+  ]
  },
  {
   "en": "to give up",
   "ru": "сдаваться; отказываться",
-  "pl": "poddawać się; rezygnować"
+  "pl": "poddawać się; rezygnować",
+  "at": [
+   "6511c6c8"
+  ]
  },
  {
   "en": "The move to Munich was expensive.",
   "ru": "Переезд в Мюнхен был дорогим.",
-  "pl": "Przeprowadzka do Monachium była droga."
+  "pl": "Przeprowadzka do Monachium była droga.",
+  "at": [
+   "ea9dd2b1"
+  ]
  },
  {
   "en": "move (to a new home)",
   "ru": "переезд",
-  "pl": "przeprowadzka"
+  "pl": "przeprowadzka",
+  "at": [
+   "287d345e"
+  ]
  },
  {
   "en": "That sounds sensible.",
   "ru": "Это звучит разумно.",
-  "pl": "To brzmi rozsądnie."
+  "pl": "To brzmi rozsądnie.",
+  "at": [
+   "ffffe78a"
+  ]
  },
  {
   "en": "sensible, useful",
   "ru": "целесообразный, осмысленный",
-  "pl": "celowy, sensowny"
+  "pl": "celowy, sensowny",
+  "at": [
+   "8ab967d1"
+  ]
  },
  {
   "en": "I'm quitting smoking.",
   "ru": "Я прекращаю курить.",
-  "pl": "Przestaję palić."
+  "pl": "Przestaję palić.",
+  "at": [
+   "ed94fceb"
+  ]
  },
  {
   "en": "to stop",
   "ru": "прекращать",
-  "pl": "przestawać"
+  "pl": "przestawać",
+  "at": [
+   "f3107f08"
+  ]
  },
  {
   "en": "That wasn't my intention.",
   "ru": "Это не было моим намерением.",
-  "pl": "To nie było moim zamiarem."
+  "pl": "To nie było moim zamiarem.",
+  "at": [
+   "5aa716d4"
+  ]
  },
  {
   "en": "intention",
   "ru": "намерение",
-  "pl": "zamiar"
+  "pl": "zamiar",
+  "at": [
+   "491d5233"
+  ]
  },
  {
   "en": "I spend too much money on coffee.",
   "ru": "Я трачу слишком много денег на кофе.",
-  "pl": "Wydaję za dużo pieniędzy na kawę."
+  "pl": "Wydaję za dużo pieniędzy na kawę.",
+  "at": [
+   "8fdacb07"
+  ]
  },
  {
   "en": "to spend (money); to hand out",
   "ru": "тратить; выдавать",
-  "pl": "wydawać (pieniądze); rozdawać"
+  "pl": "wydawać (pieniądze); rozdawać",
+  "at": [
+   "a569bd14"
+  ]
  },
  {
   "en": "We have different opinions.",
   "ru": "У нас разные мнения.",
-  "pl": "Mamy różne zdania."
+  "pl": "Mamy różne zdania.",
+  "at": [
+   "dea28e4f"
+  ]
  },
  {
   "en": "different, various",
   "ru": "различный, разный",
-  "pl": "odmienny, różny"
+  "pl": "odmienny, różny",
+  "at": [
+   "405b865c"
+  ]
  },
  {
   "en": "He felt a bit of schadenfreude when his competitor lost.",
   "ru": "Он испытал немного злорадства, когда его конкурент проиграл.",
-  "pl": "Poczuł odrobinę złośliwej radości, kiedy jego konkurent przegrał."
+  "pl": "Poczuł odrobinę złośliwej radości, kiedy jego konkurent przegrał.",
+  "at": [
+   "fdf6aef4"
+  ]
  },
  {
   "en": "gloating (joy at others' bad luck)",
   "ru": "злорадство",
-  "pl": "złośliwa radość"
+  "pl": "złośliwa radość",
+  "at": [
+   "99228f13"
+  ]
  },
  {
   "en": "Today I'll make an exception.",
   "ru": "Сегодня я сделаю исключение.",
-  "pl": "Dziś zrobię wyjątek."
+  "pl": "Dziś zrobię wyjątek.",
+  "at": [
+   "d37c5144"
+  ]
  },
  {
   "en": "exception",
   "ru": "исключение",
-  "pl": "wyjątek"
+  "pl": "wyjątek",
+  "at": [
+   "72a74d23"
+  ]
  },
  {
   "en": "Please note the opening hours.",
   "ru": "Пожалуйста, обратите внимание на часы работы.",
-  "pl": "Proszę zwrócić uwagę na godziny otwarcia."
+  "pl": "Proszę zwrócić uwagę na godziny otwarcia.",
+  "at": [
+   "3630e96d"
+  ]
  },
  {
   "en": "to pay attention to, to note",
   "ru": "учитывать, обращать внимание",
-  "pl": "uwzględniać, zwracać uwagę"
+  "pl": "uwzględniać, zwracać uwagę",
+  "at": [
+   "1ec251fa"
+  ]
  },
  {
   "en": "My first impression was good.",
   "ru": "Моё первое впечатление было хорошим.",
-  "pl": "Moje pierwsze wrażenie było dobre."
+  "pl": "Moje pierwsze wrażenie było dobre.",
+  "at": [
+   "558f0711"
+  ]
  },
  {
   "en": "impression",
   "ru": "впечатление",
-  "pl": "wrażenie"
+  "pl": "wrażenie",
+  "at": [
+   "e596327e"
+  ]
  },
  {
   "en": "The appointment is no longer available.",
   "ru": "Эта запись больше недоступна.",
-  "pl": "Ten termin jest już niedostępny."
+  "pl": "Ten termin jest już niedostępny.",
+  "at": [
+   "7b9f6be9"
+  ]
  },
  {
   "en": "available",
   "ru": "доступный, имеющийся",
-  "pl": "dostępny, do dyspozycji"
+  "pl": "dostępny, do dyspozycji",
+  "at": [
+   "4a8f05f6"
+  ]
  },
  {
   "en": "Please let me know tomorrow.",
   "ru": "Дай мне, пожалуйста, знать завтра.",
-  "pl": "Daj mi, proszę, jutro znać."
+  "pl": "Daj mi, proszę, jutro znać.",
+  "at": [
+   "4f476049"
+  ]
  },
  {
   "en": "to let (someone) know",
   "ru": "дать знать, сообщить",
-  "pl": "dać znać, poinformować"
+  "pl": "dać znać, poinformować",
+  "at": [
+   "c5614196"
+  ]
  },
  {
   "en": "Stress has a big influence on me.",
   "ru": "Стресс сильно на меня влияет.",
-  "pl": "Stres ma na mnie duży wpływ."
+  "pl": "Stres ma na mnie duży wpływ.",
+  "at": [
+   "daf4c0a5"
+  ]
  },
  {
   "en": "influence",
   "ru": "влияние",
-  "pl": "wpływ"
+  "pl": "wpływ",
+  "at": [
+   "aff583d2"
+  ]
  },
  {
   "en": "The company is laying off ten employees.",
   "ru": "Компания увольняет десять сотрудников.",
-  "pl": "Firma zwalnia dziesięciu pracowników."
+  "pl": "Firma zwalnia dziesięciu pracowników.",
+  "at": [
+   "a3436f79"
+  ]
  },
  {
   "en": "to dismiss, to lay off; to discharge",
   "ru": "увольнять; отпускать",
-  "pl": "zwalniać; wypuszczać"
+  "pl": "zwalniać; wypuszczać",
+  "at": [
+   "de344fc6"
+  ]
  },
  {
   "en": "That can have serious consequences.",
   "ru": "У этого могут быть плохие последствия.",
-  "pl": "To może mieć złe skutki."
+  "pl": "To może mieć złe skutki.",
+  "at": [
+   "0536779f"
+  ]
  },
  {
   "en": "consequence; episode",
   "ru": "последствие; серия",
-  "pl": "skutek; odcinek"
+  "pl": "skutek; odcinek",
+  "at": [
+   "f47c526c"
+  ]
  },
  {
   "en": "She's a very warm-hearted person.",
   "ru": "Она очень душевный и добрый человек.",
-  "pl": "Jest bardzo ciepłym i dobrym człowiekiem."
+  "pl": "Jest bardzo ciepłym i dobrym człowiekiem.",
+  "at": [
+   "c6193aa8"
+  ]
  },
  {
   "en": "warm-hearted, kind",
   "ru": "душевный, сердечный, добрый",
-  "pl": "ciepły, serdeczny, dobry"
+  "pl": "ciepły, serdeczny, dobry",
+  "at": [
+   "721533f7"
+  ]
  },
  {
   "en": "I found out about it yesterday.",
   "ru": "Я узнала об этом вчера.",
-  "pl": "Dowiedziałam się o tym wczoraj."
+  "pl": "Dowiedziałam się o tym wczoraj.",
+  "at": [
+   "c55f9ee9"
+  ]
  },
  {
   "en": "to find out, to learn; to experience",
   "ru": "узнавать; испытывать",
-  "pl": "dowiadywać się; doświadczać"
+  "pl": "dowiadywać się; doświadczać",
+  "at": [
+   "ffe7d8f6"
+  ]
  },
  {
   "en": "The device isn't working.",
   "ru": "Устройство не работает.",
-  "pl": "Urządzenie nie działa."
+  "pl": "Urządzenie nie działa.",
+  "at": [
+   "6a197e82"
+  ]
  },
  {
   "en": "device, appliance",
   "ru": "прибор, устройство",
-  "pl": "przyrząd, urządzenie"
+  "pl": "przyrząd, urządzenie",
+  "at": [
+   "c4ff5149"
+  ]
  },
  {
   "en": "I can still catch the train.",
   "ru": "Я ещё успеваю на поезд.",
-  "pl": "Jeszcze zdążę na pociąg."
+  "pl": "Jeszcze zdążę na pociąg.",
+  "at": [
+   "3fac42f8"
+  ]
  },
  {
   "en": "The law has been in force since January.",
   "ru": "Закон действует с января.",
-  "pl": "Ustawa obowiązuje od stycznia."
+  "pl": "Ustawa obowiązuje od stycznia.",
+  "at": [
+   "2f5883ba"
+  ]
  },
  {
   "en": "law",
   "ru": "закон",
-  "pl": "prawo, ustawa"
+  "pl": "prawo, ustawa",
+  "at": [
+   "87e6f901"
+  ]
  },
  {
   "en": "I recognise him immediately.",
   "ru": "Я сразу его узнаю.",
-  "pl": "Od razu go poznaję."
+  "pl": "Od razu go poznaję.",
+  "at": [
+   "1faca26c"
+  ]
  },
  {
   "en": "to recognise",
   "ru": "узнавать, распознавать",
-  "pl": "poznawać, rozpoznawać"
+  "pl": "poznawać, rozpoznawać",
+  "at": [
+   "5cebce0b"
+  ]
  },
  {
   "en": "I hate housework.",
   "ru": "Я ненавижу домашние дела.",
-  "pl": "Nienawidzę obowiązków domowych."
+  "pl": "Nienawidzę obowiązków domowych.",
+  "at": [
+   "12b4a1cd"
+  ]
  },
  {
   "en": "She doesn't mention the problem.",
   "ru": "Она не упоминает проблему.",
-  "pl": "Nie wspomina o problemie."
+  "pl": "Nie wspomina o problemie.",
+  "at": [
+   "5f3baa48"
+  ]
  },
  {
   "en": "to mention",
   "ru": "упоминать",
-  "pl": "wspominać (o czymś)"
+  "pl": "wspominać (o czymś)",
+  "at": [
+   "a4509657"
+  ]
  },
  {
   "en": "He was completely desperate because he hadn't found a solution.",
   "ru": "Он был в полном отчаянии, потому что не нашёл решения.",
-  "pl": "Był w zupełnej rozpaczy, bo nie znalazł rozwiązania."
+  "pl": "Był w zupełnej rozpaczy, bo nie znalazł rozwiązania.",
+  "at": [
+   "44ca3125"
+  ]
  },
  {
   "en": "desperate",
   "ru": "отчаявшийся, в отчаянии",
-  "pl": "zrozpaczony, w rozpaczy"
+  "pl": "zrozpaczony, w rozpaczy",
+  "at": [
+   "e5bf6452"
+  ]
  },
  {
   "en": "Where you come from doesn't matter.",
   "ru": "Происхождение не имеет значения.",
-  "pl": "Pochodzenie nie ma znaczenia."
+  "pl": "Pochodzenie nie ma znaczenia.",
+  "at": [
+   "667d2d3c"
+  ]
  },
  {
   "en": "origin, background",
   "ru": "происхождение",
-  "pl": "pochodzenie"
+  "pl": "pochodzenie",
+  "at": [
+   "ce432a5b"
+  ]
  },
  {
   "en": "Please let me know your decision.",
   "ru": "Пожалуйста, сообщите мне ваше решение.",
-  "pl": "Proszę mnie poinformować o swojej decyzji."
+  "pl": "Proszę mnie poinformować o swojej decyzji.",
+  "at": [
+   "8e48e60b"
+  ]
  },
  {
   "en": "to inform, to let know",
   "ru": "сообщать",
-  "pl": "informować"
+  "pl": "informować",
+  "at": [
+   "f5be2968"
+  ]
  },
  {
   "en": "That was a good performance.",
   "ru": "Это был хороший результат / достижение.",
-  "pl": "To był dobry wynik / dobre osiągnięcie."
+  "pl": "To był dobry wynik / dobre osiągnięcie.",
+  "at": [
+   "3011b55f"
+  ]
  },
  {
   "en": "performance, achievement",
   "ru": "результат, достижение; производительность",
-  "pl": "wynik, osiągnięcie; wydajność"
+  "pl": "wynik, osiągnięcie; wydajność",
+  "at": [
+   "4fdf422c"
+  ]
  },
  {
   "en": "I'm checking the bill again.",
   "ru": "Я ещё раз проверяю счёт.",
-  "pl": "Jeszcze raz sprawdzam rachunek."
+  "pl": "Jeszcze raz sprawdzam rachunek.",
+  "at": [
+   "6966f1d1"
+  ]
  },
  {
   "en": "There's a shortage of staff.",
   "ru": "Не хватает персонала.",
-  "pl": "Brakuje personelu."
+  "pl": "Brakuje personelu.",
+  "at": [
+   "5835b728"
+  ]
  },
  {
   "en": "shortage, lack",
   "ru": "недостаток, нехватка",
-  "pl": "brak, niedobór"
+  "pl": "brak, niedobór",
+  "at": [
+   "ad00a077"
+  ]
  },
  {
   "en": "I'm comparing the prices.",
   "ru": "Я сравниваю цены.",
-  "pl": "Porównuję ceny."
+  "pl": "Porównuję ceny.",
+  "at": [
+   "d9f35f30"
+  ]
  },
  {
   "en": "to compare",
   "ru": "сравнивать",
-  "pl": "porównywać"
+  "pl": "porównywać",
+  "at": [
+   "740988df"
+  ]
  },
  {
   "en": "I'm throwing the ball.",
   "ru": "Я бросаю мяч.",
-  "pl": "Rzucam piłkę."
+  "pl": "Rzucam piłkę.",
+  "at": [
+   "ca75a659"
+  ]
  },
  {
   "en": "to throw",
   "ru": "бросать",
-  "pl": "rzucać"
+  "pl": "rzucać",
+  "at": [
+   "77437b66"
+  ]
  },
  {
   "en": "I promise to be on time.",
   "ru": "Я обещаю быть вовремя.",
-  "pl": "Obiecuję, że będę na czas."
+  "pl": "Obiecuję, że będę na czas.",
+  "at": [
+   "d566cdf8"
+  ]
  },
  {
   "en": "to promise",
   "ru": "обещать",
-  "pl": "obiecywać"
+  "pl": "obiecywać",
+  "at": [
+   "c4fd3747"
+  ]
  },
  {
   "en": "He reacted to the news with complete indifference.",
   "ru": "Он совершенно безразлично отреагировал на сообщение.",
-  "pl": "Zareagował na wiadomość zupełnie obojętnie."
+  "pl": "Zareagował na wiadomość zupełnie obojętnie.",
+  "at": [
+   "11f0adbe"
+  ]
  },
  {
   "en": "indifferent",
   "ru": "безразличный, равнодушный",
-  "pl": "obojętny"
+  "pl": "obojętny",
+  "at": [
+   "74f24295"
+  ]
  },
  {
   "en": "The glass falls to the floor.",
   "ru": "Стакан падает на пол.",
-  "pl": "Szklanka spada na podłogę."
+  "pl": "Szklanka spada na podłogę.",
+  "at": [
+   "13dd0ed2"
+  ]
  },
  {
   "en": "to fall",
   "ru": "падать",
-  "pl": "spadać, upadać"
+  "pl": "spadać, upadać",
+  "at": [
+   "b32c8c19"
+  ]
  },
  {
   "en": "I'm annoyed about the delay.",
   "ru": "Я злюсь из-за задержки.",
-  "pl": "Złoszczę się z powodu opóźnienia."
+  "pl": "Złoszczę się z powodu opóźnienia.",
+  "at": [
+   "9ff79279"
+  ]
  },
  {
   "en": "to be annoyed about",
   "ru": "злиться, раздражаться из-за",
-  "pl": "złościć się, irytować się z powodu"
+  "pl": "złościć się, irytować się z powodu",
+  "at": [
+   "fdb312c6"
+  ]
  },
  {
   "en": "Safety is important to me.",
   "ru": "Безопасность для меня важна.",
-  "pl": "Bezpieczeństwo jest dla mnie ważne."
+  "pl": "Bezpieczeństwo jest dla mnie ważne.",
+  "at": [
+   "9eff8c7f"
+  ]
  },
  {
   "en": "die Sicherheit · mostly no plural (Sicherheiten = guarantees, collateral)",
   "ru": "die Sicherheit · meist ohne Plural (Sicherheiten = гарантии/обеспечение)",
-  "pl": "die Sicherheit · zwykle bez Plural (Sicherheiten = gwarancje/zabezpieczenie)"
+  "pl": "die Sicherheit · zwykle bez Plural (Sicherheiten = gwarancje/zabezpieczenie)",
+  "at": [
+   "e5f82dde"
+  ]
  },
  {
   "en": "I don't know my way around here.",
   "ru": "Я здесь не ориентируюсь / не разбираюсь.",
-  "pl": "Nie orientuję się tutaj / nie znam się na tym."
+  "pl": "Nie orientuję się tutaj / nie znam się na tym.",
+  "at": [
+   "a2c778bf"
+  ]
  },
  {
   "en": "to know your way around",
   "ru": "разбираться, ориентироваться",
-  "pl": "znać się (na czymś), orientować się"
+  "pl": "znać się (na czymś), orientować się",
+  "at": [
+   "52543b4c"
+  ]
  },
  {
   "en": "I pick the book up off the floor.",
   "ru": "Я поднимаю книгу с пола.",
-  "pl": "Podnoszę książkę z podłogi."
+  "pl": "Podnoszę książkę z podłogi.",
+  "at": [
+   "9263cc74"
+  ]
  },
  {
   "en": "to pick up (from the floor)",
   "ru": "поднимать (с поверхности)",
-  "pl": "podnosić (z powierzchni)"
+  "pl": "podnosić (z powierzchni)",
+  "at": [
+   "5e4f7c93"
+  ]
  },
  {
   "en": "The hotel is in the centre.",
   "ru": "Отель находится в центре.",
-  "pl": "Hotel znajduje się w centrum."
+  "pl": "Hotel znajduje się w centrum.",
+  "at": [
+   "e9f4f793"
+  ]
  },
  {
   "en": "to be (located)",
   "ru": "находиться",
-  "pl": "znajdować się"
+  "pl": "znajdować się",
+  "at": [
+   "d0a143d0"
+  ]
  },
  {
   "en": "We're looking for the cause.",
   "ru": "Мы ищем причину.",
-  "pl": "Szukamy przyczyny."
+  "pl": "Szukamy przyczyny.",
+  "at": [
+   "755dcdaf"
+  ]
  },
  {
   "en": "cause",
   "ru": "причина",
-  "pl": "przyczyna"
+  "pl": "przyczyna",
+  "at": [
+   "2a61bdfc"
+  ]
  },
  {
   "en": "She looks worried.",
   "ru": "Она выглядит обеспокоенной.",
-  "pl": "Wygląda na zaniepokojoną."
+  "pl": "Wygląda na zaniepokojoną.",
+  "at": [
+   "b04a648d"
+  ]
  },
  {
   "en": "worried, concerned",
   "ru": "обеспокоенный, встревоженный",
-  "pl": "zatroskany, zaniepokojony"
+  "pl": "zatroskany, zaniepokojony",
+  "at": [
+   "06e8bcda"
+  ]
  },
  {
   "en": "Sport contributes to good health.",
   "ru": "Спорт способствует здоровью.",
-  "pl": "Sport sprzyja zdrowiu."
+  "pl": "Sport sprzyja zdrowiu.",
+  "at": [
+   "2cde8c90"
+  ]
  },
  {
   "en": "to contribute to",
   "ru": "способствовать, вносить вклад в",
-  "pl": "przyczyniać się do, wnosić wkład w"
+  "pl": "przyczyniać się do, wnosić wkład w",
+  "at": [
+   "616589ff"
+  ]
  },
  {
   "en": "There's a direct connection to Berlin.",
   "ru": "До Берлина есть прямое сообщение.",
-  "pl": "Do Berlina jest bezpośrednie połączenie."
+  "pl": "Do Berlina jest bezpośrednie połączenie.",
+  "at": [
+   "903dd849"
+  ]
  },
  {
   "en": "connection",
   "ru": "связь, соединение",
-  "pl": "związek, połączenie"
+  "pl": "związek, połączenie",
+  "at": [
+   "d0e0b996"
+  ]
  },
  {
   "en": "Please confirm the appointment.",
   "ru": "Пожалуйста, подтвердите встречу.",
-  "pl": "Proszę potwierdzić spotkanie."
+  "pl": "Proszę potwierdzić spotkanie.",
+  "at": [
+   "79633d02"
+  ]
  },
  {
   "en": "to confirm",
   "ru": "подтверждать",
-  "pl": "potwierdzać"
+  "pl": "potwierdzać",
+  "at": [
+   "b779bfc9"
+  ]
  },
  {
   "en": "What's the point of that?",
   "ru": "Какой в этом смысл?",
-  "pl": "Jaki to ma sens?"
+  "pl": "Jaki to ma sens?",
+  "at": [
+   "4ccbdd18"
+  ]
  },
  {
   "en": "purpose",
   "ru": "цель, назначение",
-  "pl": "cel, przeznaczenie"
+  "pl": "cel, przeznaczenie",
+  "at": [
+   "7ad98ba7"
+  ]
  },
  {
   "en": "I'm taking part in the project.",
   "ru": "Я участвую в проекте.",
-  "pl": "Biorę udział w projekcie."
+  "pl": "Biorę udział w projekcie.",
+  "at": [
+   "7cd10b0a"
+  ]
  },
  {
   "en": "to take part in",
   "ru": "участвовать в",
-  "pl": "uczestniczyć w"
+  "pl": "uczestniczyć w",
+  "at": [
+   "51279b51"
+  ]
  },
  {
   "en": "I don't understand the connection.",
   "ru": "Я не понимаю взаимосвязь / контекст.",
-  "pl": "Nie rozumiem związku / kontekstu."
+  "pl": "Nie rozumiem związku / kontekstu.",
+  "at": [
+   "4bd17fcf"
+  ]
  },
  {
   "en": "connection, context",
   "ru": "связь, взаимосвязь",
-  "pl": "związek, powiązanie"
+  "pl": "związek, powiązanie",
+  "at": [
+   "90b3c7dc"
+  ]
  },
  {
   "en": "I can't think of a single word.",
   "ru": "Мне не приходит в голову ни одного слова.",
-  "pl": "Nie przychodzi mi do głowy ani jedno słowo."
+  "pl": "Nie przychodzi mi do głowy ani jedno słowo.",
+  "at": [
+   "fe4084f9"
+  ]
  },
  {
   "en": "to occur to (someone), to come to mind",
   "ru": "приходить в голову",
-  "pl": "przychodzić do głowy"
+  "pl": "przychodzić do głowy",
+  "at": [
+   "d0ca3546"
+  ]
  },
  {
   "en": "I can't assess the risk.",
   "ru": "Я не могу оценить риск.",
-  "pl": "Nie potrafię ocenić ryzyka."
+  "pl": "Nie potrafię ocenić ryzyka.",
+  "at": [
+   "0a40e132"
+  ]
  },
  {
   "en": "to assess, to judge",
   "ru": "оценивать",
-  "pl": "oceniać"
+  "pl": "oceniać",
+  "at": [
+   "8af517b9"
+  ]
  },
  {
   "en": "The child was scared when left alone in the room.",
   "ru": "Ребёнку было страшно, когда он был один в комнате.",
-  "pl": "Dziecko bało się, kiedy było samo w pokoju."
+  "pl": "Dziecko bało się, kiedy było samo w pokoju.",
+  "at": [
+   "954c931d"
+  ]
  },
  {
   "en": "anxious, fearful",
   "ru": "боязливый, испуганный",
-  "pl": "bojaźliwy, przestraszony"
+  "pl": "bojaźliwy, przestraszony",
+  "at": [
+   "1f356aea"
+  ]
  },
  {
   "en": "A new house is being built here.",
   "ru": "Здесь строится / возникает новый дом.",
-  "pl": "Tutaj buduje się / powstaje nowy dom."
+  "pl": "Tutaj buduje się / powstaje nowy dom.",
+  "at": [
+   "674a355e"
+  ]
  },
  {
   "en": "to arise, to come into being",
   "ru": "возникать, появляться",
-  "pl": "powstawać, pojawiać się"
+  "pl": "powstawać, pojawiać się",
+  "at": [
+   "506d7475"
+  ]
  },
  {
   "en": "I'm thinking about the offer.",
   "ru": "Я обдумываю предложение.",
-  "pl": "Zastanawiam się nad ofertą."
+  "pl": "Zastanawiam się nad ofertą.",
+  "at": [
+   "2907fc8a"
+  ]
  },
  {
   "en": "to think about, to consider",
   "ru": "размышлять о, обдумывать",
-  "pl": "rozmyślać o, zastanawiać się nad"
+  "pl": "rozmyślać o, zastanawiać się nad",
+  "at": [
+   "2787dcd1"
+  ]
  },
  {
   "en": "The exam takes place on Monday.",
   "ru": "Экзамен состоится в понедельник.",
-  "pl": "Egzamin odbędzie się w poniedziałek."
+  "pl": "Egzamin odbędzie się w poniedziałek.",
+  "at": [
+   "70b935c0"
+  ]
  },
  {
   "en": "to take place",
   "ru": "происходить, состояться",
-  "pl": "odbywać się, mieć miejsce"
+  "pl": "odbywać się, mieć miejsce",
+  "at": [
+   "ad769fef"
+  ]
  },
  {
   "en": "I need to think for a moment.",
   "ru": "Мне нужно немного подумать.",
-  "pl": "Muszę chwilę pomyśleć."
+  "pl": "Muszę chwilę pomyśleć.",
+  "at": [
+   "e3dc5a40"
+  ]
  },
  {
   "en": "to think (something) over",
   "ru": "обдумывать",
-  "pl": "rozważać"
+  "pl": "rozważać",
+  "at": [
+   "6cdbb46f"
+  ]
  },
  {
   "en": "I'll transfer the rent tomorrow.",
   "ru": "Я переведу арендную плату завтра.",
-  "pl": "Jutro przeleję czynsz."
+  "pl": "Jutro przeleję czynsz.",
+  "at": [
+   "6884dfc2"
+  ]
  },
  {
   "en": "to transfer (money)",
   "ru": "переводить деньги",
-  "pl": "przelewać pieniądze"
+  "pl": "przelewać pieniądze",
+  "at": [
+   "13b36289"
+  ]
  },
  {
   "en": "What shall we do at the weekend?",
   "ru": "Чем займёмся на выходных?",
-  "pl": "Co będziemy robić w weekend?"
+  "pl": "Co będziemy robić w weekend?",
+  "at": [
+   "d25e54b0"
+  ]
  },
  {
   "en": "to do (something); to undertake",
   "ru": "предпринимать; делать",
-  "pl": "podejmować (działania); robić"
+  "pl": "podejmować (działania); robić",
+  "at": [
+   "5fb14e5f"
+  ]
  },
  {
   "en": "I'm arranging to meet a friend.",
   "ru": "Я договариваюсь встретиться с подругой.",
-  "pl": "Umawiam się z przyjaciółką."
+  "pl": "Umawiam się z przyjaciółką.",
+  "at": [
+   "f0c50b01"
+  ]
  },
  {
   "en": "to arrange to meet",
   "ru": "договариваться о встрече",
-  "pl": "umawiać się (na spotkanie)"
+  "pl": "umawiać się (na spotkanie)",
+  "at": [
+   "9eaa522e"
+  ]
  },
  {
   "en": "I was very nervous before my first day at work.",
   "ru": "Перед первым рабочим днём я очень волновалась.",
-  "pl": "Przed pierwszym dniem pracy bardzo się denerwowałam."
+  "pl": "Przed pierwszym dniem pracy bardzo się denerwowałam.",
+  "at": [
+   "bc055441"
+  ]
  },
  {
   "en": "excited, nervous",
   "ru": "взволнованный, возбуждённый",
-  "pl": "przejęty, podekscytowany"
+  "pl": "przejęty, podekscytowany",
+  "at": [
+   "f3626a6e"
+  ]
  },
  {
   "en": "I need to water the flowers.",
   "ru": "Мне нужно полить цветы.",
-  "pl": "Muszę podlać kwiaty."
+  "pl": "Muszę podlać kwiaty.",
+  "at": [
+   "b1614e42"
+  ]
  },
  {
   "en": "to water; to pour",
   "ru": "поливать; лить",
-  "pl": "podlewać; lać"
+  "pl": "podlewać; lać",
+  "at": [
+   "a4da8109"
+  ]
  },
  {
   "en": "I turn the key.",
   "ru": "Я поворачиваю ключ.",
-  "pl": "Przekręcam klucz."
+  "pl": "Przekręcam klucz.",
+  "at": [
+   "b1bc5f0c"
+  ]
  },
  {
   "en": "to turn",
   "ru": "поворачивать; крутить",
-  "pl": "przekręcać; kręcić"
+  "pl": "przekręcać; kręcić",
+  "at": [
+   "c7ecd16b"
+  ]
  },
  {
   "en": "I put the key in the lock.",
   "ru": "Я вставляю ключ в замок.",
-  "pl": "Wkładam klucz do zamka."
+  "pl": "Wkładam klucz do zamka.",
+  "at": [
+   "1fecd246"
+  ]
  },
  {
   "en": "to put (in); to be (stuck) in",
   "ru": "вставлять; находиться внутри",
-  "pl": "wkładać; znajdować się wewnątrz"
+  "pl": "wkładać; znajdować się wewnątrz",
+  "at": [
+   "b7256c1d"
+  ]
  },
  {
   "en": "job, position; place",
   "ru": "работа, должность; место",
-  "pl": "praca, stanowisko; miejsce"
+  "pl": "praca, stanowisko; miejsce",
+  "at": [
+   "ac9e97f6"
+  ]
  },
  {
   "en": "to solve; to loosen",
   "ru": "решать; развязывать, ослаблять",
-  "pl": "rozwiązywać; odwiązywać, luzować"
+  "pl": "rozwiązywać; odwiązywać, luzować",
+  "at": [
+   "26835fae"
+  ]
  },
  {
   "en": "His behaviour was so ridiculous that everyone had to laugh.",
   "ru": "Его поведение было настолько нелепым, что все невольно рассмеялись.",
-  "pl": "Jego zachowanie było tak niedorzeczne, że nikt nie mógł powstrzymać się od śmiechu."
+  "pl": "Jego zachowanie było tak niedorzeczne, że nikt nie mógł powstrzymać się od śmiechu.",
+  "at": [
+   "b10af895"
+  ]
  },
  {
   "en": "company, business; operation",
   "ru": "предприятие; работа",
-  "pl": "przedsiębiorstwo; działanie"
+  "pl": "przedsiębiorstwo; działanie",
+  "at": [
+   "5699c88a"
+  ]
  },
  {
   "en": "to check; to examine",
   "ru": "проверять; экзаменовать",
-  "pl": "sprawdzać; egzaminować"
+  "pl": "sprawdzać; egzaminować",
+  "at": [
+   "30e7aa3e"
+  ]
  },
  {
   "en": "safety, security; certainty",
   "ru": "безопасность; уверенность",
-  "pl": "bezpieczeństwo; pewność"
+  "pl": "bezpieczeństwo; pewność",
+  "at": [
+   "3c32860c"
+  ]
  },
  {
   "en": "I'm sending the cancellation by post.",
   "ru": "Я отправляю уведомление о расторжении договора по почте.",
-  "pl": "Wysyłam wypowiedzenie umowy pocztą."
+  "pl": "Wysyłam wypowiedzenie umowy pocztą.",
+  "at": [
+   "f26bee08"
+  ]
  },
  {
   "en": "cancellation (of a contract); dismissal, resignation",
   "ru": "расторжение (договора); увольнение",
-  "pl": "wypowiedzenie (umowy); zwolnienie (z pracy)"
+  "pl": "wypowiedzenie (umowy); zwolnienie (z pracy)",
+  "at": [
+   "b9419217"
+  ]
  },
  {
   "en": "to catch (a train); to reach; to get through to (by phone)",
   "ru": "успевать (на поезд); достигать; дозваниваться",
-  "pl": "zdążać (na pociąg); osiągać; dodzwaniać się"
+  "pl": "zdążać (na pociąg); osiągać; dodzwaniać się",
+  "at": [
+   "223d0c47"
+  ]
  },
  {
   "en": "housework, household; budget",
   "ru": "домашние дела, домашнее хозяйство; бюджет",
-  "pl": "obowiązki domowe, gospodarstwo domowe; budżet"
+  "pl": "obowiązki domowe, gospodarstwo domowe; budżet",
+  "at": [
+   "7aae7e1a"
+  ]
  }
 ]

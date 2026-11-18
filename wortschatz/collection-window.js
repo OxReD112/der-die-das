@@ -877,7 +877,13 @@
       if (!r.ok) throw new Error("set-missing");
       const set = await r.json();
       // a language pack (17.11.2026): the set's texts (the pack file the manifest gives for wortschatz/sets/<id>.json, pairs like the exercises) are read first
-      if (window.DeutschTranslation?.needsPack?.()) await new Promise(done => window.DeutschTranslation.ready(["wortschatz/" + def.file.replace(/\?.*$/, "")], done));
+      if (window.DeutschTranslation?.needsPack?.()) {
+        const src = "wortschatz/" + def.file.replace(/\?.*$/, "");
+        await new Promise(done => window.DeutschTranslation.ready([src], done));
+        /* 18.11.2026: the pack's texts written into the set by place too — a text whose Russian or English was corrected
+           keeps its translation (found by its German); path root "json", as the extraction (dev/lang/extract.cjs) */
+        window.DeutschTranslation.apply?.(set, src, "json");
+      }
       return set;
     })().catch(e => { delete setCache[def.id]; throw e; });
     return setCache[def.id];

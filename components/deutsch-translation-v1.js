@@ -107,11 +107,23 @@
         else if(v && typeof v === "object") walk(v, p + "." + k);
       }
     })(card, "");
-    var text = parts.join("\n"), h = 0x811c9dc5;
+    return fnv(parts.join("\n"));
+  }
+  function fnv(text){
+    var h = 0x811c9dc5;
     for(var j = 0; j < text.length; j++){ h ^= text.charCodeAt(j); h = Math.imul(h, 0x01000193) >>> 0; }
     return ("0000000" + h.toString(16)).slice(-8);
   }
-  return { contextFor: contextFor, germanContext: germanContext, DE_KEYS: DE_KEYS, sourcePrint: sourcePrint };
+  /* placeKey(node, path, stack) → 8 hex digits (18.11.2026, Alena: a typo fixed in the Russian or English must not take
+     the translation away): the place of a {ru, en} pair by its GERMAN — contextFor + the field it stands in (last name of
+     the path, without [n]). A pack entry lists the places it was translated for as "at": [keys]; when the app's en / ru
+     of a place no longer match any entry, the entry whose "at" has the place's key is shown (dev/lang/stamp.cjs writes
+     "at", dev/lang/pack-coverage.cjs lists such places as "carried" for the language chat to look at). */
+  function placeKey(node, p, stack){
+    var field = String(p || "").replace(/\[\d+\]/g, "").replace(/^.*\./, "");
+    return fnv(contextFor(node, p, stack) + "\u241f" + field);
+  }
+  return { contextFor: contextFor, germanContext: germanContext, DE_KEYS: DE_KEYS, sourcePrint: sourcePrint, placeKey: placeKey };
 });
 
 (function(){
@@ -274,10 +286,16 @@
     var code = getDisplayLang();
     if(!isPack(code) || !data || typeof data !== "object") return data;
     var entries = loaded[code + "/" + file];
-    var byDe = {}, twin = {};
+    if(entries === undefined){ var mapped = packFilesOf(code, file); if(mapped.length === 1) entries = loaded[code + "/" + mapped[0]]; }
+    var byDe = {}, twin = {}, byAt = {};
     if(Array.isArray(entries)) for(var i = 0; i < entries.length; i++){
       var e = entries[i];
       if(e && e.de != null && typeof e[code] === "string"){ var k = (e.en || "") + SEP + (e.ru || ""); twin[k] = true; byDe[k + SEP + e.de] = e[code]; }
+      /* places by their German (18.11.2026); a place two entries claim with different texts is not carried */
+      if(e && Array.isArray(e.at) && typeof e[code] === "string" && e[code]) for(var a = 0; a < e.at.length; a++){
+        var at = e.at[a];
+        byAt[at] = (at in byAt && byAt[at] !== e[code]) ? null : e[code];
+      }
     }
     var de = window.DeutschLangDe;
     (function walk(o, path, stack){
@@ -286,6 +304,8 @@
         var key = (o.en || "") + SEP + (o.ru || "");
         var hit = twin[key] && de ? byDe[key + SEP + de.contextFor(o, path, stack)] : undefined;
         var text = hit !== undefined ? hit : packText(code, o.en, o.ru);
+        /* en / ru changed since the translation (a typo fixed): the entry translated for this German place */
+        if(!text && de && de.placeKey){ var carried = byAt[de.placeKey(o, path, stack)]; if(carried) text = carried; }
         if(text) o[code] = text;
       }
       var up = stack.concat([o]);

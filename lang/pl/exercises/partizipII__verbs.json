@@ -2,426 +2,681 @@
  {
   "en": "to start, to begin",
   "ru": "начинать",
-  "pl": "zaczynać"
+  "pl": "zaczynać",
+  "at": [
+   "f01eefd4"
+  ]
  },
  {
   "en": "to begin",
   "ru": "начинать",
-  "pl": "zaczynać"
+  "pl": "zaczynać",
+  "at": [
+   "5b41bd31"
+  ]
  },
  {
   "en": "to get, to receive",
   "ru": "получать",
-  "pl": "dostawać"
+  "pl": "dostawać",
+  "at": [
+   "70af0586"
+  ]
  },
  {
   "en": "to stay, to remain",
   "ru": "оставаться",
-  "pl": "zostawać"
+  "pl": "zostawać",
+  "at": [
+   "7d186416"
+  ]
  },
  {
   "en": "to bring",
   "ru": "приносить; привозить",
-  "pl": "przynosić; przywozić"
+  "pl": "przynosić; przywozić",
+  "at": [
+   "43bd3e32"
+  ]
  },
  {
   "en": "to think",
   "ru": "думать",
-  "pl": "myśleć"
+  "pl": "myśleć",
+  "at": [
+   "5b42f516"
+  ]
  },
  {
   "en": "to recommend",
   "ru": "рекомендовать",
-  "pl": "polecać"
+  "pl": "polecać",
+  "at": [
+   "002a4314"
+  ]
  },
  {
   "en": "to decide",
   "ru": "решать",
-  "pl": "decydować"
+  "pl": "decydować",
+  "at": [
+   "3794e57d"
+  ]
  },
  {
   "en": "to eat",
   "ru": "есть",
-  "pl": "jeść"
+  "pl": "jeść",
+  "at": [
+   "ddab9f32"
+  ]
  },
  {
   "en": "to go (by car, train), to travel; to drive",
   "ru": "ехать; водить",
-  "pl": "jechać; prowadzić (samochód)"
+  "pl": "jechać; prowadzić (samochód)",
+  "at": [
+   "a759bb66"
+  ]
  },
  {
   "en": "to fall",
   "ru": "падать",
-  "pl": "spadać, upadać"
+  "pl": "spadać, upadać",
+  "at": [
+   "184de4c7"
+  ]
  },
  {
   "en": "to find",
   "ru": "находить",
-  "pl": "znajdować"
+  "pl": "znajdować",
+  "at": [
+   "e0192af0"
+  ]
  },
  {
   "en": "to fly",
   "ru": "лететь; летать",
-  "pl": "lecieć; latać"
+  "pl": "lecieć; latać",
+  "at": [
+   "1e235c7c"
+  ]
  },
  {
   "en": "to give",
   "ru": "давать",
-  "pl": "dawać"
+  "pl": "dawać",
+  "at": [
+   "ee059a7e"
+  ]
  },
  {
   "en": "to go, to walk",
   "ru": "идти",
-  "pl": "iść"
+  "pl": "iść",
+  "at": [
+   "df0e7bc8"
+  ]
  },
  {
   "en": "to win",
   "ru": "выигрывать",
-  "pl": "wygrywać"
+  "pl": "wygrywać",
+  "at": [
+   "95b65de4"
+  ]
  },
  {
   "en": "to have",
   "ru": "иметь",
-  "pl": "mieć"
+  "pl": "mieć",
+  "at": [
+   "5215a55e"
+  ]
  },
  {
   "en": "to hold; to stop",
   "ru": "держать; останавливаться",
-  "pl": "trzymać; zatrzymywać się"
+  "pl": "trzymać; zatrzymywać się",
+  "at": [
+   "835e8104"
+  ]
  },
  {
   "en": "to be called; to mean",
   "ru": "называться; означать",
-  "pl": "nazywać się; znaczyć"
+  "pl": "nazywać się; znaczyć",
+  "at": [
+   "e6db5b8d"
+  ]
  },
  {
   "en": "to help",
   "ru": "помогать",
-  "pl": "pomagać"
+  "pl": "pomagać",
+  "at": [
+   "743888e1"
+  ]
  },
  {
   "en": "to know (be familiar with)",
   "ru": "знать; быть знакомым",
-  "pl": "znać; znać się (z kimś)"
+  "pl": "znać; znać się (z kimś)",
+  "at": [
+   "a10f0cd0"
+  ]
  },
  {
   "en": "to come",
   "ru": "приходить; приезжать",
-  "pl": "przychodzić; przyjeżdżać"
+  "pl": "przychodzić; przyjeżdżać",
+  "at": [
+   "987b2983"
+  ]
  },
  {
   "en": "to leave; to let",
   "ru": "оставлять; позволять",
-  "pl": "zostawiać; pozwalać"
+  "pl": "zostawiać; pozwalać",
+  "at": [
+   "6da9173b"
+  ]
  },
  {
   "en": "to run; to walk",
   "ru": "бежать; ходить",
-  "pl": "biec; chodzić"
+  "pl": "biec; chodzić",
+  "at": [
+   "a8f36721"
+  ]
  },
  {
   "en": "to read",
   "ru": "читать",
-  "pl": "czytać"
+  "pl": "czytać",
+  "at": [
+   "96afa29b"
+  ]
  },
  {
   "en": "to lie (be lying down); to be located",
   "ru": "лежать; находиться",
-  "pl": "leżeć; znajdować się"
+  "pl": "leżeć; znajdować się",
+  "at": [
+   "8300384a"
+  ]
  },
  {
   "en": "to take",
   "ru": "брать",
-  "pl": "brać"
+  "pl": "brać",
+  "at": [
+   "c24610ba"
+  ]
  },
  {
   "en": "to name, to call",
   "ru": "называть",
-  "pl": "nazywać, wymieniać"
+  "pl": "nazywać, wymieniać",
+  "at": [
+   "1c18ebd1"
+  ]
  },
  {
   "en": "to call, to shout; to call (a doctor, a taxi)",
   "ru": "звать; вызывать (врача, такси)",
-  "pl": "wołać; wzywać (lekarza, taksówkę)"
+  "pl": "wołać; wzywać (lekarza, taksówkę)",
+  "at": [
+   "da4bfda7"
+  ]
  },
  {
   "en": "to sleep",
   "ru": "спать",
-  "pl": "spać"
+  "pl": "spać",
+  "at": [
+   "96e76a1f"
+  ]
  },
  {
   "en": "to close, to shut",
   "ru": "закрывать",
-  "pl": "zamykać"
+  "pl": "zamykać",
+  "at": [
+   "89a9aaad"
+  ]
  },
  {
   "en": "to cut",
   "ru": "резать",
-  "pl": "kroić, ciąć"
+  "pl": "kroić, ciąć",
+  "at": [
+   "2aa86762"
+  ]
  },
  {
   "en": "to write",
   "ru": "писать",
-  "pl": "pisać"
+  "pl": "pisać",
+  "at": [
+   "283b8c92"
+  ]
  },
  {
   "en": "to swim",
   "ru": "плавать",
-  "pl": "pływać"
+  "pl": "pływać",
+  "at": [
+   "53efc8ef"
+  ]
  },
  {
   "en": "to see",
   "ru": "видеть",
-  "pl": "widzieć"
+  "pl": "widzieć",
+  "at": [
+   "9a1b8f24"
+  ]
  },
  {
   "en": "to be",
   "ru": "быть",
-  "pl": "być"
+  "pl": "być",
+  "at": [
+   "0bb0510f"
+  ]
  },
  {
   "en": "to sing",
   "ru": "петь",
-  "pl": "śpiewać"
+  "pl": "śpiewać",
+  "at": [
+   "a9853615"
+  ]
  },
  {
   "en": "to sit (be sitting)",
   "ru": "сидеть",
-  "pl": "siedzieć"
+  "pl": "siedzieć",
+  "at": [
+   "45ac2bde"
+  ]
  },
  {
   "en": "to speak, to talk",
   "ru": "говорить",
-  "pl": "mówić, rozmawiać"
+  "pl": "mówić, rozmawiać",
+  "at": [
+   "737cc8e2"
+  ]
  },
  {
   "en": "to stand",
   "ru": "стоять",
-  "pl": "stać"
+  "pl": "stać",
+  "at": [
+   "dacadfe8"
+  ]
  },
  {
   "en": "to climb; to rise",
   "ru": "подниматься; расти (о ценах)",
-  "pl": "wspinać się; rosnąć (o cenach)"
+  "pl": "wspinać się; rosnąć (o cenach)",
+  "at": [
+   "48e40260"
+  ]
  },
  {
   "en": "to die",
   "ru": "умирать",
-  "pl": "umierać"
+  "pl": "umierać",
+  "at": [
+   "79a28f63"
+  ]
  },
  {
   "en": "to wear; to carry",
   "ru": "носить (одежду); нести",
-  "pl": "nosić (ubranie); nieść"
+  "pl": "nosić (ubranie); nieść",
+  "at": [
+   "61cd528d"
+  ]
  },
  {
   "en": "to meet",
   "ru": "встречать(ся)",
-  "pl": "spotykać (się)"
+  "pl": "spotykać (się)",
+  "at": [
+   "5fb5960c"
+  ]
  },
  {
   "en": "to drink",
   "ru": "пить",
-  "pl": "pić"
+  "pl": "pić",
+  "at": [
+   "becde0a3"
+  ]
  },
  {
   "en": "to do",
   "ru": "делать",
-  "pl": "robić"
+  "pl": "robić",
+  "at": [
+   "5157d221"
+  ]
  },
  {
   "en": "to forget",
   "ru": "забывать",
-  "pl": "zapominać"
+  "pl": "zapominać",
+  "at": [
+   "5661e579"
+  ]
  },
  {
   "en": "to lose",
   "ru": "терять; проигрывать",
-  "pl": "gubić, tracić; przegrywać"
+  "pl": "gubić, tracić; przegrywać",
+  "at": [
+   "d6108263"
+  ]
  },
  {
   "en": "to understand",
   "ru": "понимать",
-  "pl": "rozumieć"
+  "pl": "rozumieć",
+  "at": [
+   "b6cdcca8"
+  ]
  },
  {
   "en": "to become, to get",
   "ru": "становиться",
-  "pl": "stawać się"
+  "pl": "stawać się",
+  "at": [
+   "6ee42183"
+  ]
  },
  {
   "en": "to throw",
   "ru": "бросать",
-  "pl": "rzucać"
+  "pl": "rzucać",
+  "at": [
+   "e58262ac"
+  ]
  },
  {
   "en": "to know (a fact)",
   "ru": "знать",
-  "pl": "wiedzieć"
+  "pl": "wiedzieć",
+  "at": [
+   "652abfa3"
+  ]
  },
  {
   "en": "to move (house); to pull",
   "ru": "переезжать; тянуть",
-  "pl": "przeprowadzać się; ciągnąć"
+  "pl": "przeprowadzać się; ciągnąć",
+  "at": [
+   "a80fd67a"
+  ]
  },
  {
   "en": "to offer",
   "ru": "предлагать",
-  "pl": "proponować"
+  "pl": "proponować",
+  "at": [
+   "2d9ed550"
+  ]
  },
  {
   "en": "to ask for, to request",
   "ru": "просить",
-  "pl": "prosić"
+  "pl": "prosić",
+  "at": [
+   "6b356eca"
+  ]
  },
  {
   "en": "to break",
   "ru": "ломать(ся)",
-  "pl": "łamać (się)"
+  "pl": "łamać (się)",
+  "at": [
+   "0a5e1263"
+  ]
  },
  {
   "en": "to invite",
   "ru": "приглашать",
-  "pl": "zapraszać"
+  "pl": "zapraszać",
+  "at": [
+   "8039dfc0"
+  ]
  },
  {
   "en": "to happen",
   "ru": "происходить",
-  "pl": "dziać się"
+  "pl": "dziać się",
+  "at": [
+   "b0b12b03"
+  ]
  },
  {
   "en": "to lend; to borrow",
   "ru": "одалживать",
-  "pl": "pożyczać"
+  "pl": "pożyczać",
+  "at": [
+   "fbb5f240"
+  ]
  },
  {
   "en": "to lie (tell lies)",
   "ru": "лгать",
-  "pl": "kłamać"
+  "pl": "kłamać",
+  "at": [
+   "c6ab3909"
+  ]
  },
  {
   "en": "to smell",
   "ru": "пахнуть; нюхать",
-  "pl": "pachnieć; wąchać"
+  "pl": "pachnieć; wąchać",
+  "at": [
+   "121494c7"
+  ]
  },
  {
   "en": "to shine; to seem",
   "ru": "светить; казаться",
-  "pl": "świecić; wydawać się"
+  "pl": "świecić; wydawać się",
+  "at": [
+   "1d2d5a40"
+  ]
  },
  {
   "en": "to jump",
   "ru": "прыгать",
-  "pl": "skakać"
+  "pl": "skakać",
+  "at": [
+   "6c80d6c4"
+  ]
  },
  {
   "en": "to argue, to quarrel",
   "ru": "ссориться; спорить",
-  "pl": "kłócić się; spierać się"
+  "pl": "kłócić się; spierać się",
+  "at": [
+   "a0dbc062"
+  ]
  },
  {
   "en": "to connect, to link",
   "ru": "соединять; связывать",
-  "pl": "łączyć; wiązać (z czymś)"
+  "pl": "łączyć; wiązać (z czymś)",
+  "at": [
+   "8e635426"
+  ]
  },
  {
   "en": "to wash",
   "ru": "мыть; стирать",
-  "pl": "myć; prać"
+  "pl": "myć; prać",
+  "at": [
+   "41158619"
+  ]
  },
  {
   "en": "to grow",
   "ru": "расти",
-  "pl": "rosnąć"
+  "pl": "rosnąć",
+  "at": [
+   "7bba8273"
+  ]
  },
  {
   "en": "to enjoy",
   "ru": "наслаждаться",
-  "pl": "rozkoszować się"
+  "pl": "rozkoszować się",
+  "at": [
+   "0ce53e2d"
+  ]
  },
  {
   "en": "to compare",
   "ru": "сравнивать",
-  "pl": "porównywać"
+  "pl": "porównywać",
+  "at": [
+   "c77ea386"
+  ]
  },
  {
   "en": "to succeed, to work out (es gelingt mir)",
   "ru": "удаваться",
-  "pl": "udawać się"
+  "pl": "udawać się",
+  "at": [
+   "8e2b7dc3"
+  ]
  },
  {
   "en": "to disappear",
   "ru": "исчезать",
-  "pl": "znikać"
+  "pl": "znikać",
+  "at": [
+   "857b16d7"
+  ]
  },
  {
   "en": "to steal",
   "ru": "красть",
-  "pl": "kraść"
+  "pl": "kraść",
+  "at": [
+   "d91cfa9b"
+  ]
  },
  {
   "en": "to bake",
   "ru": "печь",
-  "pl": "piec"
+  "pl": "piec",
+  "at": [
+   "3aea9442"
+  ]
  },
  {
   "en": "to hang (be hanging)",
   "ru": "висеть",
-  "pl": "wisieć"
+  "pl": "wisieć",
+  "at": [
+   "de4cf6a3"
+  ]
  },
  {
   "en": "to advise; to guess",
   "ru": "советовать; угадывать",
-  "pl": "radzić; zgadywać"
+  "pl": "radzić; zgadywać",
+  "at": [
+   "a3c48c01"
+  ]
  },
  {
   "en": "to run, to race",
   "ru": "мчаться; бежать бегом",
-  "pl": "pędzić; biec"
+  "pl": "pędzić; biec",
+  "at": [
+   "f9081a07"
+  ]
  },
  {
   "en": "to hit, to beat",
   "ru": "бить; ударять",
-  "pl": "bić; uderzać"
+  "pl": "bić; uderzać",
+  "at": [
+   "0ab74dc0"
+  ]
  },
  {
   "en": "to call (on the phone)",
   "ru": "звонить (по телефону)",
-  "pl": "dzwonić (do kogoś)"
+  "pl": "dzwonić (do kogoś)",
+  "at": [
+   "2acead26"
+  ]
  },
  {
   "en": "to get up",
   "ru": "вставать (утром)",
-  "pl": "wstawać (rano)"
+  "pl": "wstawać (rano)",
+  "at": [
+   "cab1aa72"
+  ]
  },
  {
   "en": "to arrive",
   "ru": "прибывать, приезжать",
-  "pl": "przybywać, przyjeżdżać"
+  "pl": "przybywać, przyjeżdżać",
+  "at": [
+   "4ffe1481"
+  ]
  },
  {
   "en": "to get on (a bus, a train)",
   "ru": "садиться (в автобус, поезд)",
-  "pl": "wsiadać (do autobusu, pociągu)"
+  "pl": "wsiadać (do autobusu, pociągu)",
+  "at": [
+   "6bc199ea"
+  ]
  },
  {
   "en": "to watch TV",
   "ru": "смотреть телевизор",
-  "pl": "oglądać telewizję"
+  "pl": "oglądać telewizję",
+  "at": [
+   "09c2d7c1"
+  ]
  },
  {
   "en": "(sich) to apply (for a job)",
   "ru": "(sich) подавать заявку (на вакансию), откликаться",
-  "pl": "(sich) ubiegać się (o pracę), starać się"
+  "pl": "(sich) ubiegać się (o pracę), starać się",
+  "at": [
+   "f358784b"
+  ]
  },
  {
   "en": "to spend (time)",
   "ru": "проводить (время)",
-  "pl": "spędzać (czas)"
+  "pl": "spędzać (czas)",
+  "at": [
+   "3e6d0e97"
+  ]
  },
  {
   "en": "to receive (formal)",
   "ru": "получать (официально)",
-  "pl": "otrzymywać (oficjalnie)"
+  "pl": "otrzymywać (oficjalnie)",
+  "at": [
+   "7003c48d"
+  ]
  }
 ]

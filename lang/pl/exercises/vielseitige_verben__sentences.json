@@ -2,1041 +2,1702 @@
  {
   "en": "haben im Präsens + Partizip II = Perfekt (most verbs; no movement, no change)",
   "ru": "haben im Präsens + Partizip II = Perfekt (большинство глаголов: нет движения, нет изменения)",
-  "pl": "haben im Präsens + Partizip II = Perfekt (większość czasowników: brak ruchu, brak zmiany)"
+  "pl": "haben im Präsens + Partizip II = Perfekt (większość czasowników: brak ruchu, brak zmiany)",
+  "at": [
+   "ee7f76bc"
+  ]
  },
  {
   "en": "werden = become",
   "ru": "werden = становиться",
-  "pl": "werden = stawać się"
+  "pl": "werden = stawać się",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "A police officer stops you: “Is this bike really yours?” Explain.",
   "ru": "Полицейский останавливает тебя: «Это точно ваш велосипед?» Объясни.",
-  "pl": "Policjant cię zatrzymuje: „Czy to na pewno Pana / Pani rower?” Wyjaśnij."
+  "pl": "Policjant cię zatrzymuje: „Czy to na pewno Pana / Pani rower?” Wyjaśnij.",
+  "at": [
+   "b8d0f18c"
+  ]
  },
  {
   "en": "Your car is up and running again. Share the good news.",
   "ru": "Машина снова на ходу. Поделись хорошей новостью.",
-  "pl": "Samochód znowu jeździ. Podziel się dobrą wiadomością."
+  "pl": "Samochód znowu jeździ. Podziel się dobrą wiadomością.",
+  "at": [
+   "f9643e21"
+  ]
  },
  {
   "en": "You watched a horror film alone last night. Say that at one point you started to get really scared.",
   "ru": "Ты вчера одна смотрела фильм ужасов. Скажи, что тебе стало по-настоящему страшно.",
-  "pl": "Wczoraj sama oglądałaś horror. Powiedz, że zrobiło ci się naprawdę straszno."
+  "pl": "Wczoraj sama oglądałaś horror. Powiedz, że zrobiło ci się naprawdę straszno.",
+  "at": [
+   "2eb8806b"
+  ]
  },
  {
   "en": "werden = will (future)",
   "ru": "werden = будущее время",
-  "pl": "werden = czas przyszły"
+  "pl": "werden = czas przyszły",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "The kids got tired quickly on the way home. Tell their parents.",
   "ru": "По дороге домой дети быстро устали. Расскажи родителям.",
-  "pl": "W drodze do domu dzieci szybko się zmęczyły. Opowiedz rodzicom."
+  "pl": "W drodze do domu dzieci szybko się zmęczyły. Opowiedz rodzicom.",
+  "at": [
+   "e2221663"
+  ]
  },
  {
   "en": "time in the past + werden im Präteritum + adjective = became, got",
   "ru": "время в прошлом + werden im Präteritum + прилагательное = стали",
-  "pl": "czas w przeszłości + werden im Präteritum + przymiotnik = stały się"
+  "pl": "czas w przeszłości + werden im Präteritum + przymiotnik = stały się",
+  "at": [
+   "d1d3ee7f"
+  ]
  },
  {
   "en": "Med school: finally conquered. His family can relax.",
   "ru": "Медфак наконец покорён. Родные могут выдохнуть.",
-  "pl": "Dyplom lekarski wreszcie zdobyty. Rodzina może odetchnąć."
+  "pl": "Dyplom lekarski wreszcie zdobyty. Rodzina może odetchnąć.",
+  "at": [
+   "6580e5bd"
+  ]
  },
  {
   "en": "a year in the past + werden im Präteritum + noun = became",
   "ru": "год в прошлом + werden im Präteritum + существительное = стал",
-  "pl": "rok w przeszłości + werden im Präteritum + rzeczownik = został"
+  "pl": "rok w przeszłości + werden im Präteritum + rzeczownik = został",
+  "at": [
+   "51072515"
+  ]
  },
  {
   "en": "She traded lecture halls for the staff room. Share the news.",
   "ru": "Сменила аудитории на учительскую. Поделись новостью.",
-  "pl": "Zamieniła sale wykładowe na pokój nauczycielski. Podziel się nowiną."
+  "pl": "Zamieniła sale wykładowe na pokój nauczycielski. Podziel się nowiną.",
+  "at": [
+   "c7a8b522"
+  ]
  },
  {
   "en": "sein im Präsens + Partizip II von werden, no second verb = became",
   "ru": "sein im Präsens + Partizip II von werden, без второго глагола = стала",
-  "pl": "sein im Präsens + Partizip II von werden, bez drugiego czasownika = została"
+  "pl": "sein im Präsens + Partizip II von werden, bez drugiego czasownika = została",
+  "at": [
+   "b5206a0c"
+  ]
  },
  {
   "en": "noun",
   "ru": "существительное",
-  "pl": "rzeczownik"
+  "pl": "rzeczownik",
+  "at": [
+   "e0c141c4"
+  ]
  },
  {
   "en": "became",
   "ru": "стала",
-  "pl": "została"
+  "pl": "została",
+  "at": [
+   "9485b7ac"
+  ]
  },
  {
   "en": "Bike gone; lock says nothing. Tell a friend.",
   "ru": "Велосипед исчез, замок молчит. Расскажи другу.",
-  "pl": "Rower zniknął, zamek milczy. Opowiedz przyjacielowi."
+  "pl": "Rower zniknął, zamek milczy. Opowiedz przyjacielowi.",
+  "at": [
+   "452dea31"
+  ]
  },
  {
   "en": "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done",
   "ru": "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали",
-  "pl": "rzecz + sein im Präsens + Partizip II + worden = Passiv, to już zrobiono"
+  "pl": "rzecz + sein im Präsens + Partizip II + worden = Passiv, to już zrobiono",
+  "at": [
+   "16632861",
+   "eed502f1"
+  ]
  },
  {
   "en": "it was done",
   "ru": "это сделали",
-  "pl": "to zrobiono"
+  "pl": "to zrobiono",
+  "at": [
+   "4f5e00e3",
+   "a0809cf3"
+  ]
  },
  {
   "en": "Promise your friend you'll call her tomorrow.",
   "ru": "Пообещай подруге, что позвонишь ей завтра.",
-  "pl": "Obiecaj przyjaciółce, że jutro do niej zadzwonisz."
+  "pl": "Obiecaj przyjaciółce, że jutro do niej zadzwonisz.",
+  "at": [
+   "b94a6e02"
+  ]
  },
  {
   "en": "werden im Präsens + infinitive = future",
   "ru": "werden im Präsens + Infinitiv = будущее",
-  "pl": "werden im Präsens + Infinitiv = przyszłość"
+  "pl": "werden im Präsens + Infinitiv = przyszłość",
+  "at": [
+   "08c75846",
+   "551e936c"
+  ]
  },
  {
   "en": "Your friend is nervous before a job interview. Reassure her: it'll work out.",
   "ru": "Подруга нервничает перед собеседованием. Успокой её: всё получится.",
-  "pl": "Przyjaciółka denerwuje się przed rozmową o pracę. Uspokój ją: wszystko się uda."
+  "pl": "Przyjaciółka denerwuje się przed rozmową o pracę. Uspokój ją: wszystko się uda.",
+  "at": [
+   "00ec8e0f"
+  ]
  },
  {
   "en": "werden im Präsens + schon + infinitive = a confident guess: it'll be fine",
   "ru": "werden im Präsens + schon + Infinitiv = уверенное предположение: всё будет хорошо",
-  "pl": "werden im Präsens + schon + Infinitiv = pewne przypuszczenie: wszystko będzie dobrze"
+  "pl": "werden im Präsens + schon + Infinitiv = pewne przypuszczenie: wszystko będzie dobrze",
+  "at": [
+   "c7b0ff33"
+  ]
  },
  {
   "en": "infinitive",
   "ru": "Infinitiv",
-  "pl": "Infinitiv"
+  "pl": "Infinitiv",
+  "at": [
+   "1b5aee23",
+   "27860699",
+   "c5e51ebe",
+   "e7294e66",
+   "f93a709d"
+  ]
  },
  {
   "en": "it'll be fine (a confident guess)",
   "ru": "всё будет хорошо (уверенное предположение)",
-  "pl": "wszystko będzie dobrze (pewne przypuszczenie)"
+  "pl": "wszystko będzie dobrze (pewne przypuszczenie)",
+  "at": [
+   "69cbef45"
+  ]
  },
  {
   "en": "The cleaning crew is racing the clock. Give a live update.",
   "ru": "Уборщики работают на скорость. Доложи обстановку.",
-  "pl": "Ekipa sprzątająca ściga się z czasem. Zdaj relację na bieżąco."
+  "pl": "Ekipa sprzątająca ściga się z czasem. Zdaj relację na bieżąco.",
+  "at": [
+   "79b4776f"
+  ]
  },
  {
   "en": "thing + werden im Präsens + Partizip II = Passiv, it's being done right now",
   "ru": "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас",
-  "pl": "rzecz + werden im Präsens + Partizip II = Passiv, to się robi właśnie teraz"
+  "pl": "rzecz + werden im Präsens + Partizip II = Passiv, to się robi właśnie teraz",
+  "at": [
+   "97a7ef13"
+  ]
  },
  {
   "en": "Say when the Berlin Wall was built.",
   "ru": "Скажи, когда построили Берлинскую стену.",
-  "pl": "Powiedz, kiedy zbudowano mur berliński."
+  "pl": "Powiedz, kiedy zbudowano mur berliński.",
+  "at": [
+   "a20bcff0"
+  ]
  },
  {
   "en": "time in the past + werden im Präteritum + Partizip II = Passiv, it was done",
   "ru": "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали",
-  "pl": "czas w przeszłości + werden im Präteritum + Partizip II = Passiv, to zrobiono"
+  "pl": "czas w przeszłości + werden im Präteritum + Partizip II = Passiv, to zrobiono",
+  "at": [
+   "ba67d12e"
+  ]
  },
  {
   "en": "You're going away and leave the neighbour your key. Say the cat has to be fed every day.",
   "ru": "Ты уезжаешь и оставляешь соседке ключ. Скажи, что кошку нужно кормить каждый день.",
-  "pl": "Wyjeżdżasz i zostawiasz sąsiadce klucz. Powiedz, że kota trzeba karmić codziennie."
+  "pl": "Wyjeżdżasz i zostawiasz sąsiadce klucz. Powiedz, że kota trzeba karmić codziennie.",
+  "at": [
+   "b967a9d9"
+  ]
  },
  {
   "en": "it has to be done",
   "ru": "это нужно сделать",
-  "pl": "to trzeba zrobić"
+  "pl": "to trzeba zrobić",
+  "at": [
+   "89c7f4cb"
+  ]
  },
  {
   "en": "A friend invites you to the cinema. Say you'd love to come, but you have to work.",
   "ru": "Друг зовёт в кино. Скажи, что ты бы с радостью, но тебе надо работать.",
-  "pl": "Przyjaciel zaprasza cię do kina. Powiedz, że chętnie byś poszedł / poszła, ale musisz pracować."
+  "pl": "Przyjaciel zaprasza cię do kina. Powiedz, że chętnie byś poszedł / poszła, ale musisz pracować.",
+  "at": [
+   "b85b99a9"
+  ]
  },
  {
   "en": "werden im Konjunktiv II + infinitive = would (not real: you can't come)",
   "ru": "werden im Konjunktiv II + Infinitiv = бы (не на самом деле: ты не можешь пойти)",
-  "pl": "werden im Konjunktiv II + Infinitiv = -by (tak naprawdę nie: nie możesz pójść)"
+  "pl": "werden im Konjunktiv II + Infinitiv = -by (tak naprawdę nie: nie możesz pójść)",
+  "at": [
+   "06ddc099"
+  ]
  },
  {
   "en": "On the train, you're cold. Politely ask the person next to you to close the window.",
   "ru": "В электричке как в холодильнике. Вежливо попроси соседа закрыть окно.",
-  "pl": "W pociągu jest zimno jak w lodówce. Grzecznie poproś pasażera obok, żeby zamknął okno."
+  "pl": "W pociągu jest zimno jak w lodówce. Grzecznie poproś pasażera obok, żeby zamknął okno.",
+  "at": [
+   "8a380642"
+  ]
  },
  {
   "en": "werden im Konjunktiv II + infinitive = would (a polite request)",
   "ru": "werden im Konjunktiv II + Infinitiv = бы (вежливая просьба)",
-  "pl": "werden im Konjunktiv II + Infinitiv = -by (grzeczna prośba)"
+  "pl": "werden im Konjunktiv II + Infinitiv = -by (grzeczna prośba)",
+  "at": [
+   "741d9fac"
+  ]
  },
  {
   "en": "Daydream a little: what would you do with more money?",
   "ru": "Помечтай немного: что бы ты делала, будь у тебя больше денег?",
-  "pl": "Pomarz trochę: co byś robiła, gdybyś miała więcej pieniędzy?"
+  "pl": "Pomarz trochę: co byś robiła, gdybyś miała więcej pieniędzy?",
+  "at": [
+   "e1f37eb5"
+  ]
  },
  {
   "en": "werden im Konjunktiv II + infinitive = would (not real)",
   "ru": "werden im Konjunktiv II + Infinitiv = бы (нереально)",
-  "pl": "werden im Konjunktiv II + Infinitiv = -by (nierealnie)"
+  "pl": "werden im Konjunktiv II + Infinitiv = -by (nierealnie)",
+  "at": [
+   "59523acd"
+  ]
  },
  {
   "en": "Exam tomorrow. Confidence is leaving the group chat.",
   "ru": "Экзамен завтра. Уверенность уже выходит из чата.",
-  "pl": "Egzamin jutro. Pewność siebie właśnie opuszcza czat."
+  "pl": "Egzamin jutro. Pewność siebie właśnie opuszcza czat.",
+  "at": [
+   "4683722a"
+  ]
  },
  {
   "en": "werden im Präsens + adjective = become, get",
   "ru": "werden im Präsens + прилагательное = становиться",
-  "pl": "werden im Präsens + przymiotnik = stawać się"
+  "pl": "werden im Präsens + przymiotnik = stawać się",
+  "at": [
+   "b5f38c14"
+  ]
  },
  {
   "en": "The surprise party is held together with duct tape and optimism. Reassure your friends.",
   "ru": "Подготовка сюрприза держится на скотче и оптимизме. Подбодри друзей.",
-  "pl": "Przygotowania do niespodzianki trzymają się na taśmie klejącej i optymizmie. Dodaj przyjaciołom otuchy."
+  "pl": "Przygotowania do niespodzianki trzymają się na taśmie klejącej i optymizmie. Dodaj przyjaciołom otuchy.",
+  "at": [
+   "cd7278a8"
+  ]
  },
  {
   "en": "Your family is always late. Send the taxi reminder.",
   "ru": "Ваша семья вечно опаздывает. Напомни всем про такси.",
-  "pl": "Twoja rodzina wiecznie się spóźnia. Przypomnij wszystkim o taksówce."
+  "pl": "Twoja rodzina wiecznie się spóźnia. Przypomnij wszystkim o taksówce.",
+  "at": [
+   "3ee30ac7"
+  ]
  },
  {
   "en": "person + werden im Präsens + Partizip II = Passiv, it's done to us",
   "ru": "человек + werden im Präsens + Partizip II = Passiv, это делают с нами",
-  "pl": "osoba + werden im Präsens + Partizip II = Passiv, ktoś coś z nami robi"
+  "pl": "osoba + werden im Präsens + Partizip II = Passiv, ktoś coś z nami robi",
+  "at": [
+   "83f9ac8b"
+  ]
  },
  {
   "en": "No rain expected. One less thing to carry.",
   "ru": "Дождя не обещают — одной вещью меньше в сумке.",
-  "pl": "Deszczu nie zapowiadają — o jedną rzecz mniej w torbie."
+  "pl": "Deszczu nie zapowiadają — o jedną rzecz mniej w torbie.",
+  "at": [
+   "679a1115"
+  ]
  },
  {
   "en": "lassen im Präsens + thing + place, no second verb = leave",
   "ru": "lassen im Präsens + вещь + место, без второго глагола = оставить",
-  "pl": "lassen im Präsens + rzecz + miejsce, bez drugiego czasownika = zostawić"
+  "pl": "lassen im Präsens + rzecz + miejsce, bez drugiego czasownika = zostawić",
+  "at": [
+   "4dcbe6ad"
+  ]
  },
  {
   "en": "Your friend is out all night. What about the dog?",
   "ru": "Подруга гуляет всю ночь. А собака?",
-  "pl": "Przyjaciółka imprezuje całą noc. A pies?"
+  "pl": "Przyjaciółka imprezuje całą noc. A pies?",
+  "at": [
+   "12783dc3"
+  ]
  },
  {
   "en": "haben im Präsens + Partizip II von lassen, no second verb = left",
   "ru": "haben im Präsens + Partizip II von lassen, без второго глагола = оставила",
-  "pl": "haben im Präsens + Partizip II von lassen, bez drugiego czasownika = zostawiłaś"
+  "pl": "haben im Präsens + Partizip II von lassen, bez drugiego czasownika = zostawiłaś",
+  "at": [
+   "09ee4d5f"
+  ]
  },
  {
   "en": "object",
   "ru": "кого / что",
-  "pl": "kogo / co"
+  "pl": "kogo / co",
+  "at": [
+   "117b25a6",
+   "15a461fe",
+   "4454bc81",
+   "c5e51ebe",
+   "c6606322",
+   "e0c7c7e7",
+   "e7294e66",
+   "e86455a7",
+   "f93a709d"
+  ]
  },
  {
   "en": "place",
   "ru": "место",
-  "pl": "miejsce"
+  "pl": "miejsce",
+  "at": [
+   "117b25a6",
+   "15a461fe",
+   "e7294e66",
+   "e86455a7"
+  ]
  },
  {
   "en": "left",
   "ru": "оставила",
-  "pl": "zostawiłaś"
+  "pl": "zostawiłaś",
+  "at": [
+   "5afd9689"
+  ]
  },
  {
   "en": "You left the car at the repair shop; now it's back.",
   "ru": "Оставила машину в автосервисе — теперь она снова на ходу.",
-  "pl": "Zostawiłaś samochód w warsztacie — teraz znowu jeździ."
+  "pl": "Zostawiłaś samochód w warsztacie — teraz znowu jeździ.",
+  "at": [
+   "3b776845"
+  ]
  },
  {
   "en": "person + haben im Präsens + thing + infinitive + lassen im Infinitiv = had it done",
   "ru": "человек + haben im Präsens + вещь + Infinitiv + lassen im Infinitiv = поручила сделать",
-  "pl": "osoba + haben im Präsens + rzecz + Infinitiv + lassen im Infinitiv = zleciłam to komuś"
+  "pl": "osoba + haben im Präsens + rzecz + Infinitiv + lassen im Infinitiv = zleciłam to komuś",
+  "at": [
+   "9c1a98bd",
+   "ada8d7d6"
+  ]
  },
  {
   "en": "had it done",
   "ru": "мне это сделали",
-  "pl": "zrobiono to dla mnie"
+  "pl": "zrobiono to dla mnie",
+  "at": [
+   "460847ce",
+   "fe112667"
+  ]
  },
  {
   "en": "Your friend booked a salon slot. Ask her about it.",
   "ru": "Подруга записалась в салон. Спроси её об этом.",
-  "pl": "Przyjaciółka umówiła się do salonu. Zapytaj ją o to."
+  "pl": "Przyjaciółka umówiła się do salonu. Zapytaj ją o to.",
+  "at": [
+   "3f40be3b"
+  ]
  },
  {
   "en": "person + lassen im Präsens + thing + infinitive = have someone do it",
   "ru": "человек + lassen im Präsens + вещь + Infinitiv = поручить кому-то",
-  "pl": "osoba + lassen im Präsens + rzecz + Infinitiv = zlecić komuś"
+  "pl": "osoba + lassen im Präsens + rzecz + Infinitiv = zlecić komuś",
+  "at": [
+   "50c36171",
+   "5ebe5017"
+  ]
  },
  {
   "en": "Your family’s laptop is broken. Tomorrow you’re taking it to a repair shop.",
   "ru": "Семейный ноутбук сломался. Завтра вы несёте его в ремонт.",
-  "pl": "Rodzinny laptop się zepsuł. Jutro zanosicie go do naprawy."
+  "pl": "Rodzinny laptop się zepsuł. Jutro zanosicie go do naprawy.",
+  "at": [
+   "53abb9a1"
+  ]
  },
  {
   "en": "Your friend notices your new haircut.",
   "ru": "Подруга заметила новую стрижку.",
-  "pl": "Przyjaciółka zauważyła twoją nową fryzurę."
+  "pl": "Przyjaciółka zauważyła twoją nową fryzurę.",
+  "at": [
+   "69152a58"
+  ]
  },
  {
   "en": "Your friend keeps waking you up. Ask her to let you sleep.",
   "ru": "Подруга всё время тебя будит. Попроси дать тебе поспать.",
-  "pl": "Przyjaciółka ciągle cię budzi. Poproś, żeby dała ci pospać."
+  "pl": "Przyjaciółka ciągle cię budzi. Poproś, żeby dała ci pospać.",
+  "at": [
+   "e6b4cddb"
+  ]
  },
  {
   "en": "lassen im Imperativ + person + infinitive = let someone do it",
   "ru": "lassen im Imperativ + кто-то + Infinitiv = дай кому-то сделать",
-  "pl": "lassen im Imperativ + ktoś + Infinitiv = pozwól komuś coś zrobić"
+  "pl": "lassen im Imperativ + ktoś + Infinitiv = pozwól komuś coś zrobić",
+  "at": [
+   "97c40f37"
+  ]
  },
  {
   "en": "Suggest to your friend that you go for a walk.",
   "ru": "Предложи подруге пойти погулять.",
-  "pl": "Zaproponuj przyjaciółce spacer."
+  "pl": "Zaproponuj przyjaciółce spacer.",
+  "at": [
+   "59736fcc"
+  ]
  },
  {
   "en": "lassen im Imperativ (du) + uns + infinitive = let's (to one person)",
   "ru": "lassen im Imperativ (du) + uns + Infinitiv = давай (одному)",
-  "pl": "lassen im Imperativ (du) + uns + Infinitiv = chodź, zróbmy… (do jednej osoby)"
+  "pl": "lassen im Imperativ (du) + uns + Infinitiv = chodź, zróbmy… (do jednej osoby)",
+  "at": [
+   "b0591692"
+  ]
  },
  {
   "en": "Game night: everyone's at the table. Suggest to your friends that you all start.",
   "ru": "Вечер настолок, все за столом. Предложи всем начать.",
-  "pl": "Wieczór z planszówkami, wszyscy przy stole. Zaproponuj wszystkim, żebyście zaczęli."
+  "pl": "Wieczór z planszówkami, wszyscy przy stole. Zaproponuj wszystkim, żebyście zaczęli.",
+  "at": [
+   "90e7fed2"
+  ]
  },
  {
   "en": "lassen im Imperativ (ihr) + uns + infinitive = let's (to several people)",
   "ru": "lassen im Imperativ (ihr) + uns + Infinitiv = давайте (нескольким)",
-  "pl": "lassen im Imperativ (ihr) + uns + Infinitiv = chodźcie, zróbmy… (do kilku osób)"
+  "pl": "lassen im Imperativ (ihr) + uns + Infinitiv = chodźcie, zróbmy… (do kilku osób)",
+  "at": [
+   "1ef7d0dc"
+  ]
  },
  {
   "en": "Your little brother keeps poking you. Tell him to stop.",
   "ru": "Младший брат всё время тебя тыкает. Скажи ему прекратить.",
-  "pl": "Młodszy brat ciągle cię szturcha. Powiedz mu, żeby przestał."
+  "pl": "Młodszy brat ciągle cię szturcha. Powiedz mu, żeby przestał.",
+  "at": [
+   "e8576254"
+  ]
  },
  {
   "en": "Lass das! = stop it (fixed phrase)",
   "ru": "Lass das! = прекрати (устойчивое выражение)",
-  "pl": "Lass das! = przestań (stałe wyrażenie)"
+  "pl": "Lass das! = przestań (stałe wyrażenie)",
+  "at": [
+   "c65f935a"
+  ]
  },
  {
   "en": "Your friend's lamp is broken. Tell her it can be fixed.",
   "ru": "У подруги сломалась лампа. Скажи ей, что её можно починить.",
-  "pl": "Przyjaciółce zepsuła się lampa. Powiedz jej, że da się ją naprawić."
+  "pl": "Przyjaciółce zepsuła się lampa. Powiedz jej, że da się ją naprawić.",
+  "at": [
+   "05b12e95"
+  ]
  },
  {
   "en": "thing + lassen im Präsens + sich + infinitive = can be done",
   "ru": "вещь + lassen im Präsens + sich + Infinitiv = можно сделать",
-  "pl": "rzecz + lassen im Präsens + sich + Infinitiv = da się zrobić"
+  "pl": "rzecz + lassen im Präsens + sich + Infinitiv = da się zrobić",
+  "at": [
+   "7c13fb2d",
+   "805dc915"
+  ]
  },
  {
   "en": "Yesterday's train trip: you left your umbrella behind on the train.",
   "ru": "Вчерашняя поездка: ты забыла зонт в поезде и оставила его там.",
-  "pl": "Wczorajsza podróż: zapomniałaś parasola w pociągu i został tam."
+  "pl": "Wczorajsza podróż: zapomniałaś parasola w pociągu i został tam.",
+  "at": [
+   "ac994298"
+  ]
  },
  {
   "en": "lassen im Präteritum + thing + zurück = left it behind",
   "ru": "lassen im Präteritum + вещь + zurück = оставила (забыла)",
-  "pl": "lassen im Präteritum + rzecz + zurück = zostawiłam (zapomniałam)"
+  "pl": "lassen im Präteritum + rzecz + zurück = zostawiłam (zapomniałam)",
+  "at": [
+   "4a661716"
+  ]
  },
  {
   "en": "Your friend asks: “You were at the cinema yesterday, but what about the kids?”",
   "ru": "Подруга спрашивает: «Вы вчера были в кино, а как же дети?»",
-  "pl": "Przyjaciółka pyta: „Byliście wczoraj w kinie, a co z dziećmi?”"
+  "pl": "Przyjaciółka pyta: „Byliście wczoraj w kinie, a co z dziećmi?”",
+  "at": [
+   "f2e2a840"
+  ]
  },
  {
   "en": "haben im Präsens + Partizip II von lassen, no second verb = left",
   "ru": "haben im Präsens + Partizip II von lassen, без второго глагола = оставили",
-  "pl": "haben im Präsens + Partizip II von lassen, bez drugiego czasownika = zostawiliśmy"
+  "pl": "haben im Präsens + Partizip II von lassen, bez drugiego czasownika = zostawiliśmy",
+  "at": [
+   "07941e1e"
+  ]
  },
  {
   "en": "left",
   "ru": "оставили",
-  "pl": "zostawiliśmy"
+  "pl": "zostawiliśmy",
+  "at": [
+   "09636236"
+  ]
  },
  {
   "en": "You're home, but your key isn't in your bag.",
   "ru": "Ты дома, а ключа нет в сумке.",
-  "pl": "Jesteś w domu, a w torbie nie ma klucza."
+  "pl": "Jesteś w domu, a w torbie nie ma klucza.",
+  "at": [
+   "25b41800"
+  ]
  },
  {
   "en": "haben im Präsens + liegen + lassen im Infinitiv = left (forgot) something",
   "ru": "haben im Präsens + liegen + lassen im Infinitiv = забыла, оставила",
-  "pl": "haben im Präsens + liegen + lassen im Infinitiv = zapomniałam, zostawiłam"
+  "pl": "haben im Präsens + liegen + lassen im Infinitiv = zapomniałam, zostawiłam",
+  "at": [
+   "04621bde"
+  ]
  },
  {
   "en": "left behind (forgot)",
   "ru": "забыла",
-  "pl": "zapomniałam"
+  "pl": "zapomniałam",
+  "at": [
+   "f9a471f6"
+  ]
  },
  {
   "en": "You arrive at the shop and try the door. Too late, it's locked.",
   "ru": "Ты подходишь к магазину и дёргаешь дверь. Поздно, заперто.",
-  "pl": "Podchodzisz do sklepu i szarpiesz za klamkę. Za późno, zamknięte."
+  "pl": "Podchodzisz do sklepu i szarpiesz za klamkę. Za późno, zamknięte.",
+  "at": [
+   "d7e3a578"
+  ]
  },
  {
   "en": "thing + sein im Präsens + Partizip II = already done, a state",
   "ru": "вещь + sein im Präsens + Partizip II = уже сделано, состояние",
-  "pl": "rzecz + sein im Präsens + Partizip II = już zrobione, stan"
+  "pl": "rzecz + sein im Präsens + Partizip II = już zrobione, stan",
+  "at": [
+   "1dcf04f6",
+   "3fbcdd76"
+  ]
  },
  {
   "en": "The exam's over. Your friend asks how it went.",
   "ru": "Экзамен позади. Друг спрашивает, как всё прошло.",
-  "pl": "Egzamin za tobą. Przyjaciel pyta, jak poszło."
+  "pl": "Egzamin za tobą. Przyjaciel pyta, jak poszło.",
+  "at": [
+   "78a4daa1"
+  ]
  },
  {
   "en": "time in the past + sein im Präteritum + zu + infinitive = could be done",
   "ru": "время в прошлом + sein im Präteritum + zu + Infinitiv = можно было сделать",
-  "pl": "czas w przeszłości + sein im Präteritum + zu + Infinitiv = dało się zrobić"
+  "pl": "czas w przeszłości + sein im Präteritum + zu + Infinitiv = dało się zrobić",
+  "at": [
+   "85d4ac71"
+  ]
  },
  {
   "en": "Tell a friend what you did yesterday evening.",
   "ru": "Расскажи подруге, что ты делала вчера вечером.",
-  "pl": "Opowiedz przyjaciółce, co robiłaś wczoraj wieczorem."
+  "pl": "Opowiedz przyjaciółce, co robiłaś wczoraj wieczorem.",
+  "at": [
+   "266673c2"
+  ]
  },
  {
   "en": "going from A to B → sein im Präsens + Partizip II = Perfekt",
   "ru": "движение из А в Б → sein im Präsens + Partizip II = Perfekt",
-  "pl": "ruch z A do B → sein im Präsens + Partizip II = Perfekt"
+  "pl": "ruch z A do B → sein im Präsens + Partizip II = Perfekt",
+  "at": [
+   "1fcc242c",
+   "fe4d4298"
+  ]
  },
  {
   "en": "Yesterday's museum trip ended at a locked door.",
   "ru": "Вчера поход в музей закончился у закрытой двери.",
-  "pl": "Wczorajsze wyjście do muzeum skończyło się pod zamkniętymi drzwiami."
+  "pl": "Wczorajsze wyjście do muzeum skończyło się pod zamkniętymi drzwiami.",
+  "at": [
+   "0a886cb6"
+  ]
  },
  {
   "en": "thing + sein im Präteritum + Partizip II = a state in the past",
   "ru": "вещь + sein im Präteritum + Partizip II = состояние в прошлом",
-  "pl": "rzecz + sein im Präteritum + Partizip II = stan w przeszłości"
+  "pl": "rzecz + sein im Präteritum + Partizip II = stan w przeszłości",
+  "at": [
+   "bb684648"
+  ]
  },
  {
   "en": "Tell your neighbour what you did at the weekend.",
   "ru": "Расскажи соседке, что вы делали на выходных.",
-  "pl": "Opowiedz sąsiadce, co robiliście w weekend."
+  "pl": "Opowiedz sąsiadce, co robiliście w weekend.",
+  "at": [
+   "8d45e026"
+  ]
  },
  {
   "en": "You come home: the windows are clean already, the cleaners are gone.",
   "ru": "Ты приходишь домой: окна уже чистые, уборщиков нет.",
-  "pl": "Wracasz do domu: okna już czyste, ekipy sprzątającej nie ma."
+  "pl": "Wracasz do domu: okna już czyste, ekipy sprzątającej nie ma.",
+  "at": [
+   "cd2c3bf8"
+  ]
  },
  {
   "en": "Your colleague left you a note. You can hardly read it.",
   "ru": "Коллега оставил тебе записку. Её почти невозможно прочитать.",
-  "pl": "Kolega z pracy zostawił ci kartkę. Prawie nie da się jej przeczytać."
+  "pl": "Kolega z pracy zostawił ci kartkę. Prawie nie da się jej przeczytać.",
+  "at": [
+   "67c5039d"
+  ]
  },
  {
   "en": "thing + sein im Präsens + zu + infinitive = can be done",
   "ru": "вещь + sein im Präsens + zu + Infinitiv = можно сделать",
-  "pl": "rzecz + sein im Präsens + zu + Infinitiv = da się zrobić"
+  "pl": "rzecz + sein im Präsens + zu + Infinitiv = da się zrobić",
+  "at": [
+   "2f466b75"
+  ]
  },
  {
   "en": "When you got to the centre on Sunday, all the streets were already closed off.",
   "ru": "Когда вы в воскресенье приехали в центр, все улицы уже были перекрыты.",
-  "pl": "Kiedy w niedzielę dojechaliście do centrum, wszystkie ulice były już zamknięte."
+  "pl": "Kiedy w niedzielę dojechaliście do centrum, wszystkie ulice były już zamknięte.",
+  "at": [
+   "d211e6fe"
+  ]
  },
  {
   "en": "time in the past + sein im Präteritum + Partizip II = a state in the past",
   "ru": "время в прошлом + sein im Präteritum + Partizip II = состояние в прошлом",
-  "pl": "czas w przeszłości + sein im Präteritum + Partizip II = stan w przeszłości"
+  "pl": "czas w przeszłości + sein im Präteritum + Partizip II = stan w przeszłości",
+  "at": [
+   "dcb9bad0"
+  ]
  },
  {
   "en": "It's 2 pm. Ask your friend whether she's had lunch yet.",
   "ru": "Два часа дня. Спроси подругу, обедала ли она уже.",
-  "pl": "Druga po południu. Zapytaj przyjaciółkę, czy już jadła obiad."
+  "pl": "Druga po południu. Zapytaj przyjaciółkę, czy już jadła obiad.",
+  "at": [
+   "61aab58a"
+  ]
  },
  {
   "en": "haben im Präsens + Partizip II = Perfekt",
   "ru": "haben im Präsens + Partizip II = Perfekt",
-  "pl": "haben im Präsens + Partizip II = Perfekt"
+  "pl": "haben im Präsens + Partizip II = Perfekt",
+  "at": [
+   "24fd9ff4"
+  ]
  },
  {
   "en": "Friends invite you to a bar tonight, but your to-do list has other plans. Say no.",
   "ru": "Друзья зовут тебя вечером в бар, а у тебя ещё куча дел. Откажись.",
-  "pl": "Przyjaciele zapraszają cię wieczorem do baru, a ty masz jeszcze mnóstwo spraw. Odmów."
+  "pl": "Przyjaciele zapraszają cię wieczorem do baru, a ty masz jeszcze mnóstwo spraw. Odmów.",
+  "at": [
+   "a01a4399"
+  ]
  },
  {
   "en": "haben im Präsens + zu + infinitive = have to",
   "ru": "haben im Präsens + zu + Infinitiv = нужно",
-  "pl": "haben im Präsens + zu + Infinitiv = trzeba"
+  "pl": "haben im Präsens + zu + Infinitiv = trzeba",
+  "at": [
+   "16cf1c69",
+   "26d09b08"
+  ]
  },
  {
   "en": "Explain why you didn't come yesterday: chores had to come first.",
   "ru": "Объясни, почему ты вчера не пришла: пришлось заняться делами.",
-  "pl": "Wyjaśnij, dlaczego wczoraj nie przyszłaś: musiałaś zająć się obowiązkami."
+  "pl": "Wyjaśnij, dlaczego wczoraj nie przyszłaś: musiałaś zająć się obowiązkami.",
+  "at": [
+   "88ec9b5f"
+  ]
  },
  {
   "en": "time in the past + haben im Präteritum + zu + infinitive = had to",
   "ru": "время в прошлом + haben im Präteritum + zu + Infinitiv = нужно было",
-  "pl": "czas w przeszłości + haben im Präteritum + zu + Infinitiv = trzeba było"
+  "pl": "czas w przeszłości + haben im Präteritum + zu + Infinitiv = trzeba było",
+  "at": [
+   "765611a3"
+  ]
  },
  {
   "en": "Your friend says the train leaves at 8. You check the timetable.",
   "ru": "Подруга говорит, что поезд в восемь. Ты сверяешься с расписанием.",
-  "pl": "Przyjaciółka mówi, że pociąg jest o ósmej. Sprawdzasz rozkład."
+  "pl": "Przyjaciółka mówi, że pociąg jest o ósmej. Sprawdzasz rozkład.",
+  "at": [
+   "67f59621"
+  ]
  },
  {
   "en": "recht haben = to be right (fixed phrase)",
   "ru": "recht haben = быть правым (устойчивое выражение)",
-  "pl": "recht haben = mieć rację (stałe wyrażenie)"
+  "pl": "recht haben = mieć rację (stałe wyrażenie)",
+  "at": [
+   "2f40caf1"
+  ]
  },
  {
   "en": "be right",
   "ru": "быть правым",
-  "pl": "mieć rację"
+  "pl": "mieć rację",
+  "at": [
+   "0a2c74f3"
+  ]
  },
  {
   "en": "Someone starts chatting to you, but you need to catch your bus.",
   "ru": "С тобой заговорили, а тебе надо успеть на автобус.",
-  "pl": "Ktoś cię zagadnął, a ty musisz zdążyć na autobus."
+  "pl": "Ktoś cię zagadnął, a ty musisz zdążyć na autobus.",
+  "at": [
+   "fe91d840"
+  ]
  },
  {
   "en": "es eilig haben = to be in a hurry (fixed phrase)",
   "ru": "es eilig haben = торопиться (устойчивое выражение)",
-  "pl": "es eilig haben = spieszyć się (stałe wyrażenie)"
+  "pl": "es eilig haben = spieszyć się (stałe wyrażenie)",
+  "at": [
+   "f3652e1e"
+  ]
  },
  {
   "en": "be in a hurry",
   "ru": "спешить",
-  "pl": "spieszyć się"
+  "pl": "spieszyć się",
+  "at": [
+   "437f9236"
+  ]
  },
  {
   "en": "Your brother insists on a night-light and five teddy bears. Explain to Grandma.",
   "ru": "Брат требует ночник и пять мишек. Объясни бабушке.",
-  "pl": "Brat domaga się lampki nocnej i pięciu misiów. Wyjaśnij babci."
+  "pl": "Brat domaga się lampki nocnej i pięciu misiów. Wyjaśnij babci.",
+  "at": [
+   "55caee8e"
+  ]
  },
  {
   "en": "haben im Präsens + Angst = already feel it, a state",
   "ru": "haben im Präsens + Angst = уже чувствовать, состояние",
-  "pl": "haben im Präsens + Angst = już czuć, stan"
+  "pl": "haben im Präsens + Angst = już czuć, stan",
+  "at": [
+   "50de0840"
+  ]
  },
  {
   "en": "Grandma calls: “What are you cooking tonight?” Be honest.",
   "ru": "Бабушка звонит: «Что готовите на ужин?» Ответь честно.",
-  "pl": "Babcia dzwoni: „Co gotujecie na kolację?” Odpowiedz szczerze."
+  "pl": "Babcia dzwoni: „Co gotujecie na kolację?” Odpowiedz szczerze.",
+  "at": [
+   "1974c588"
+  ]
  },
  {
   "en": "haben im Präsens + Lust = feel like doing it",
   "ru": "haben im Präsens + Lust = хотеться",
-  "pl": "haben im Präsens + Lust = mieć ochotę"
+  "pl": "haben im Präsens + Lust = mieć ochotę",
+  "at": [
+   "d85d1da6"
+  ]
  },
  {
   "en": "You want to go to the lake with your friends. Ask if they're free.",
   "ru": "Хочешь позвать друзей на озеро. Спроси, свободны ли они.",
-  "pl": "Chcesz zabrać przyjaciół nad jezioro. Zapytaj, czy mają czas."
+  "pl": "Chcesz zabrać przyjaciół nad jezioro. Zapytaj, czy mają czas.",
+  "at": [
+   "c9397976"
+  ]
  },
  {
   "en": "Your neighbour saw the postman at your door. Tell her what you got.",
   "ru": "Соседка видела у твоей двери почтальона. Расскажи ей, что ты получила.",
-  "pl": "Sąsiadka widziała listonosza pod twoimi drzwiami. Powiedz jej, co dostałaś."
+  "pl": "Sąsiadka widziała listonosza pod twoimi drzwiami. Powiedz jej, co dostałaś.",
+  "at": [
+   "4a3b9379"
+  ]
  },
  {
   "en": "haben im Präsens + thing + Partizip II von bekommen = got, received",
   "ru": "haben im Präsens + вещь + Partizip II von bekommen = получила",
-  "pl": "haben im Präsens + rzecz + Partizip II von bekommen = dostałam"
+  "pl": "haben im Präsens + rzecz + Partizip II von bekommen = dostałam",
+  "at": [
+   "f08be6c9"
+  ]
  },
  {
   "en": "got, received",
   "ru": "получила",
-  "pl": "dostałam"
+  "pl": "dostałam",
+  "at": [
+   "14d0d46b"
+  ]
  },
  {
   "en": "You ordered shoes online a week ago. Call the shop and ask.",
   "ru": "Ты заказала туфли неделю назад. Позвони в магазин и спроси.",
-  "pl": "Tydzień temu zamówiłaś buty. Zadzwoń do sklepu i zapytaj."
+  "pl": "Tydzień temu zamówiłaś buty. Zadzwoń do sklepu i zapytaj.",
+  "at": [
+   "1ffee9af"
+  ]
  },
  {
   "en": "bekommen im Präsens + thing = get, receive",
   "ru": "bekommen im Präsens + вещь = получать",
-  "pl": "bekommen im Präsens + rzecz = dostawać"
+  "pl": "bekommen im Präsens + rzecz = dostawać",
+  "at": [
+   "91a7db53"
+  ]
  },
  {
   "en": "person + haben im Präsens + thing + Partizip II + Partizip II von bekommen = given / sent to you",
   "ru": "человек + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = тебе подарили / прислали",
-  "pl": "osoba + haben im Präsens + rzecz + Partizip II + Partizip II von bekommen = podarowano ci / przysłano ci"
+  "pl": "osoba + haben im Präsens + rzecz + Partizip II + Partizip II von bekommen = podarowano ci / przysłano ci",
+  "at": [
+   "462aaf52",
+   "478e5e9f"
+  ]
  },
  {
   "en": "was given",
   "ru": "мне подарили",
-  "pl": "podarowano mi"
+  "pl": "podarowano mi",
+  "at": [
+   "b902b672"
+  ]
  },
  {
   "en": "Write your memoirs: explain why you still hate socks.",
   "ru": "Пишешь мемуары: объясни, почему до сих пор терпеть не можешь носки.",
-  "pl": "Piszesz wspomnienia: wyjaśnij, dlaczego do dziś nie znosisz skarpetek."
+  "pl": "Piszesz wspomnienia: wyjaśnij, dlaczego do dziś nie znosisz skarpetek.",
+  "at": [
+   "1c9145b1"
+  ]
  },
  {
   "en": "haben + noun (a feeling) + bekommen = started to feel it",
   "ru": "haben + существительное (чувство) + bekommen = стало (страшно)",
-  "pl": "haben + rzeczownik (uczucie) + bekommen = zrobiło się (straszno)"
+  "pl": "haben + rzeczownik (uczucie) + bekommen = zrobiło się (straszno)",
+  "at": [
+   "8e4e4267"
+  ]
  },
  {
   "en": "Call your boss and explain why you won't come in today.",
   "ru": "Позвони начальнику и объясни, почему не придёшь сегодня.",
-  "pl": "Zadzwoń do szefa i wyjaśnij, dlaczego dziś nie przyjdziesz."
+  "pl": "Zadzwoń do szefa i wyjaśnij, dlaczego dziś nie przyjdziesz.",
+  "at": [
+   "7c0cd062"
+  ]
  },
  {
   "en": "haben im Präsens + illness + Partizip II von bekommen = got ill",
   "ru": "haben im Präsens + болезнь + Partizip II von bekommen = заболела",
-  "pl": "haben im Präsens + choroba + Partizip II von bekommen = zachorowałam"
+  "pl": "haben im Präsens + choroba + Partizip II von bekommen = zachorowałam",
+  "at": [
+   "36d1e74c"
+  ]
  },
  {
   "en": "You weren't hungry, but the neighbours' pizza smell has just made you hungry. Complain.",
   "ru": "Ты не была голодна, но запах пиццы от соседей только что разбудил аппетит. Пожалуйся.",
-  "pl": "Nie byłaś głodna, ale zapach pizzy od sąsiadów właśnie narobił ci apetytu. Ponarzekaj."
+  "pl": "Nie byłaś głodna, ale zapach pizzy od sąsiadów właśnie narobił ci apetytu. Ponarzekaj.",
+  "at": [
+   "dd9489b8"
+  ]
  },
  {
   "en": "bekommen im Präsens + noun (a feeling) = start to feel",
   "ru": "bekommen im Präsens + существительное (чувство) = начать чувствовать",
-  "pl": "bekommen im Präsens + rzeczownik (uczucie) = zacząć czuć"
+  "pl": "bekommen im Präsens + rzeczownik (uczucie) = zacząć czuć",
+  "at": [
+   "753887b6"
+  ]
  },
  {
   "en": "A friend asks why you look so tired. The neighbours' new baby kept you awake.",
   "ru": "Друг спрашивает, почему у тебя такой уставший вид. Тебе не давал спать новорождённый ребёнок соседей.",
-  "pl": "Przyjaciel pyta, czemu masz taką zmęczoną minę. Nie dawał ci spać noworodek sąsiadów."
+  "pl": "Przyjaciel pyta, czemu masz taką zmęczoną minę. Nie dawał ci spać noworodek sąsiadów.",
+  "at": [
+   "2dab27cc"
+  ]
  },
  {
   "en": "haben im Präsens + ein Baby + Partizip II von bekommen = had a baby",
   "ru": "haben im Präsens + ein Baby + Partizip II von bekommen = родили ребёнка",
-  "pl": "haben im Präsens + ein Baby + Partizip II von bekommen = urodziło im się dziecko"
+  "pl": "haben im Präsens + ein Baby + Partizip II von bekommen = urodziło im się dziecko",
+  "at": [
+   "a47efe92"
+  ]
  },
  {
   "en": "You and your friend are late. Hurry her up.",
   "ru": "Вы с подругой опаздываете. Поторопи её.",
-  "pl": "Ty i przyjaciółka spóźniacie się. Pospiesz ją."
+  "pl": "Ty i przyjaciółka spóźniacie się. Pospiesz ją.",
+  "at": [
+   "97678954"
+  ]
  },
  {
   "en": "bekommen im Präsens + den Zug = catch the train",
   "ru": "bekommen im Präsens + den Zug = успеть на поезд",
-  "pl": "bekommen im Präsens + den Zug = zdążyć na pociąg"
+  "pl": "bekommen im Präsens + den Zug = zdążyć na pociąg",
+  "at": [
+   "70d3605a"
+  ]
  },
  {
   "en": "Explain where your sister's dog came from: she got it for her birthday last year.",
   "ru": "Объясни, откуда у сестры собака: ей подарили её на день рождения в прошлом году.",
-  "pl": "Wyjaśnij, skąd siostra ma psa: dostała go na urodziny w zeszłym roku."
+  "pl": "Wyjaśnij, skąd siostra ma psa: dostała go na urodziny w zeszłym roku.",
+  "at": [
+   "0115561e"
+  ]
  },
  {
   "en": "The meeting starts in five minutes. Ask your colleague if they got the link.",
   "ru": "Встреча через пять минут. Спроси коллегу, прислали ли ему ссылку.",
-  "pl": "Spotkanie za pięć minut. Zapytaj kolegę z pracy, czy przysłano mu link."
+  "pl": "Spotkanie za pięć minut. Zapytaj kolegę z pracy, czy przysłano mu link.",
+  "at": [
+   "05f2fe03"
+  ]
  },
  {
   "en": "was sent to you",
   "ru": "тебе прислали",
-  "pl": "przysłano ci"
+  "pl": "przysłano ci",
+  "at": [
+   "f1b8e3c9"
+  ]
  },
  {
   "en": "A friend is scared of the dentist. Reassure him: it probably won't be that bad.",
   "ru": "Друг боится идти к зубному. Успокой его: наверняка всё не так страшно.",
-  "pl": "Przyjaciel boi się iść do dentysty. Uspokój go: na pewno nie będzie tak źle."
+  "pl": "Przyjaciel boi się iść do dentysty. Uspokój go: na pewno nie będzie tak źle.",
+  "at": [
+   "39dd0cb1"
+  ]
  },
  {
   "en": "You're sixteen. Complain that your parents won't let you go on holiday alone.",
   "ru": "Тебе шестнадцать. Пожалуйся, что родители не разрешают тебе ехать в отпуск одной.",
-  "pl": "Masz szesnaście lat. Ponarzekaj, że rodzice nie pozwalają ci jechać samej na wakacje."
+  "pl": "Masz szesnaście lat. Ponarzekaj, że rodzice nie pozwalają ci jechać samej na wakacje.",
+  "at": [
+   "36ddfc31"
+  ]
  },
  {
   "en": "lassen im Präsens + person + infinitive = let, allow",
   "ru": "lassen im Präsens + человек + Infinitiv = разрешать",
-  "pl": "lassen im Präsens + osoba + Infinitiv = pozwalać"
+  "pl": "lassen im Präsens + osoba + Infinitiv = pozwalać",
+  "at": [
+   "29c3ae61"
+  ]
  },
  {
   "en": "A colleague is panicking. Reassure him: the problem is easy to solve.",
   "ru": "Коллега паникует. Успокой его: проблема легко решается.",
-  "pl": "Kolega z pracy panikuje. Uspokój go: problem da się łatwo rozwiązać."
+  "pl": "Kolega z pracy panikuje. Uspokój go: problem da się łatwo rozwiązać.",
+  "at": [
+   "77fbd1bd"
+  ]
  },
  {
   "en": "A friend asks what you did yesterday. Honestly: you slept all day.",
   "ru": "Друг спрашивает, что ты делала вчера. Честно: проспала весь день.",
-  "pl": "Przyjaciel pyta, co robiłaś wczoraj. Szczerze: przespałaś cały dzień."
+  "pl": "Przyjaciel pyta, co robiłaś wczoraj. Szczerze: przespałaś cały dzień.",
+  "at": [
+   "932d0432"
+  ]
  },
  {
   "en": "After a day at the beach the sun gave you a headache. Complain.",
   "ru": "После дня на пляже у тебя разболелась голова от солнца. Пожалуйся.",
-  "pl": "Po dniu na plaży rozbolała cię głowa od słońca. Ponarzekaj."
+  "pl": "Po dniu na plaży rozbolała cię głowa od słońca. Ponarzekaj.",
+  "at": [
+   "c9eb7e48"
+  ]
  },
  {
   "en": "haben + pain / illness + bekommen = got it",
   "ru": "haben + боль / болезнь + bekommen = получил(а)",
-  "pl": "haben + ból / choroba + bekommen = dostał(a)"
+  "pl": "haben + ból / choroba + bekommen = dostał(a)",
+  "at": [
+   "bec8b366"
+  ]
  },
  {
   "en": "become",
   "ru": "становиться",
-  "pl": "stawać się"
+  "pl": "stawać się",
+  "at": [
+   "0fb896d7"
+  ]
  },
  {
   "en": "future",
   "ru": "будущее",
-  "pl": "przyszłość"
+  "pl": "przyszłość",
+  "at": [
+   "71dd1f87"
+  ]
  },
  {
   "en": "a guess",
   "ru": "предположение",
-  "pl": "przypuszczenie"
+  "pl": "przypuszczenie",
+  "at": [
+   "c2130b3a"
+  ]
  },
  {
   "en": "passive",
   "ru": "пассив",
-  "pl": "strona bierna"
+  "pl": "strona bierna",
+  "at": [
+   "1f4cb765",
+   "f4490469"
+  ]
  },
  {
   "en": "would",
   "ru": "бы",
-  "pl": "forma z -by"
+  "pl": "forma z -by",
+  "at": [
+   "8efa768b",
+   "9feb80e4"
+  ]
  },
  {
   "en": "leave something",
   "ru": "оставить",
-  "pl": "zostawić"
+  "pl": "zostawić",
+  "at": [
+   "bab4b056"
+  ]
  },
  {
   "en": "have someone do it",
   "ru": "поручить сделать",
-  "pl": "zlecić komuś"
+  "pl": "zlecić komuś",
+  "at": [
+   "c2dce1da"
+  ]
  },
  {
   "en": "let someone",
   "ru": "позволить",
-  "pl": "pozwolić"
+  "pl": "pozwolić",
+  "at": [
+   "e1043bdb"
+  ]
  },
  {
   "en": "let's",
   "ru": "давай",
-  "pl": "chodź, zróbmy…"
+  "pl": "chodź, zróbmy…",
+  "at": [
+   "0b550e1d"
+  ]
  },
  {
   "en": "stop it",
   "ru": "прекрати",
-  "pl": "przestań"
+  "pl": "przestań",
+  "at": [
+   "115a64f1"
+  ]
  },
  {
   "en": "can't give it up",
   "ru": "не мочь бросить",
-  "pl": "nie móc rzucić"
+  "pl": "nie móc rzucić",
+  "at": [
+   "f46a95e2"
+  ]
  },
  {
   "en": "get (an illness, pain)",
   "ru": "получить (простуду, боль)",
-  "pl": "dostać (przeziębienia, bólu)"
+  "pl": "dostać (przeziębienia, bólu)",
+  "at": [
+   "8916ca84"
+  ]
  },
  {
   "en": "have a baby",
   "ru": "родить ребёнка",
-  "pl": "urodzić dziecko"
+  "pl": "urodzić dziecko",
+  "at": [
+   "e3e4d33c"
+  ]
  },
  {
   "en": "catch (a train)",
   "ru": "успеть (на поезд)",
-  "pl": "zdążyć (na pociąg)"
+  "pl": "zdążyć (na pociąg)",
+  "at": [
+   "c992fa3a"
+  ]
  },
  {
   "en": "feel (already)",
   "ru": "испытывать (чувство)",
-  "pl": "czuć (np. strach)"
+  "pl": "czuć (np. strach)",
+  "at": [
+   "c36f318d"
+  ]
  },
  {
   "en": "can be done",
   "ru": "можно сделать",
-  "pl": "da się zrobić"
+  "pl": "da się zrobić",
+  "at": [
+   "366ab5f1"
+  ]
  },
  {
   "en": "a state",
   "ru": "состояние",
-  "pl": "stan"
+  "pl": "stan",
+  "at": [
+   "549bc5b6"
+  ]
  },
  {
   "en": "Perfekt helper",
   "ru": "вспомогательный в Perfekt",
-  "pl": "posiłkowy w Perfekt"
+  "pl": "posiłkowy w Perfekt",
+  "at": [
+   "45b42133"
+  ]
  },
  {
   "en": "have to",
   "ru": "нужно",
-  "pl": "trzeba"
+  "pl": "trzeba",
+  "at": [
+   "85202f4c"
+  ]
  },
  {
   "en": "fixed phrases",
   "ru": "устойчивые выражения",
-  "pl": "stałe wyrażenia"
+  "pl": "stałe wyrażenia",
+  "at": [
+   "7cfe318e"
+  ]
  },
  {
   "en": "get, receive",
   "ru": "получать",
-  "pl": "dostawać"
+  "pl": "dostawać",
+  "at": [
+   "826fc130"
+  ]
  },
  {
   "en": "start to feel",
   "ru": "начать чувствовать",
-  "pl": "zacząć czuć"
+  "pl": "zacząć czuć",
+  "at": [
+   "2b147186"
+  ]
  },
  {
   "en": "present tense",
   "ru": "настоящее время",
-  "pl": "czas teraźniejszy"
+  "pl": "czas teraźniejszy",
+  "at": [
+   "e8e70fdb"
+  ]
  },
  {
   "en": "past",
   "ru": "прошлое",
-  "pl": "przeszłość"
+  "pl": "przeszłość",
+  "at": [
+   "80b733e0"
+  ]
  },
  {
   "en": "for Perfekt and passive",
   "ru": "для Perfekt и пассива",
-  "pl": "do Perfekt i strony biernej"
+  "pl": "do Perfekt i strony biernej",
+  "at": [
+   "f99fb1f5"
+  ]
  },
  {
   "en": "basic form",
   "ru": "начальная форма",
-  "pl": "forma podstawowa"
+  "pl": "forma podstawowa",
+  "at": [
+   "1b64b5d8"
+  ]
  },
  {
   "en": "request, command",
   "ru": "просьба, приказ",
-  "pl": "prośba, polecenie"
+  "pl": "prośba, polecenie",
+  "at": [
+   "a353778d"
+  ]
  },
  {
   "en": "became",
   "ru": "стал(а)",
-  "pl": "stał(a) się, został(a)"
+  "pl": "stał(a) się, został(a)",
+  "at": [
+   "4617ed6d"
+  ]
  },
  {
   "en": "In the past:",
   "ru": "В прошлом:",
-  "pl": "W przeszłości:"
+  "pl": "W przeszłości:",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "haben + gelassen",
   "ru": "haben + gelassen",
-  "pl": "haben + gelassen"
+  "pl": "haben + gelassen",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "haben + infinitive + lassen",
   "ru": "haben + Infinitiv + lassen",
-  "pl": "haben + Infinitiv + lassen"
+  "pl": "haben + Infinitiv + lassen",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "*will* = want (wollen)",
   "ru": "*will* = хочу (wollen)",
-  "pl": "*will* = chcę (wollen)"
+  "pl": "*will* = chcę (wollen)",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "lassen is irregular: *ließ*, not *lasste*",
   "ru": "lassen — неправильный глагол: *ließ*, не *lasste*",
-  "pl": "lassen jest nieregularny: *ließ*, nie *lasste*"
+  "pl": "lassen jest nieregularny: *ließ*, nie *lasste*",
+  "at": [
+   "850e54ab"
+  ]
  },
  {
   "en": "bekommen has no ge-: *habe … bekommen*",
   "ru": "у bekommen нет ge-: *habe … bekommen*",
-  "pl": "bekommen nie ma ge-: *habe … bekommen*"
+  "pl": "bekommen nie ma ge-: *habe … bekommen*",
+  "at": [
+   "0d32b4a7"
+  ]
  },
  {
   "en": "*kriegen* = spoken *bekommen*. Right! In writing: *bekommen*.",
   "ru": "*kriegen* — разговорный вариант *bekommen*. Верно! Письменно — *bekommen*.",
-  "pl": "*kriegen* — potoczny wariant *bekommen*. Dobrze! Na piśmie — *bekommen*."
+  "pl": "*kriegen* — potoczny wariant *bekommen*. Dobrze! Na piśmie — *bekommen*.",
+  "at": [
+   "54f3a23d",
+   "5ecf8cb9",
+   "7dc901c1",
+   "93c753be",
+   "a4c76e81",
+   "b215eb22"
+  ]
  },
  {
   "en": "*erhalten* = formal *bekommen*. Right! In everyday speech: *bekommen*.",
   "ru": "*erhalten* — официальный вариант *bekommen*. Верно! В обычной речи — *bekommen*.",
-  "pl": "*erhalten* — oficjalny wariant *bekommen*. Dobrze! W zwykłej mowie — *bekommen*."
+  "pl": "*erhalten* — oficjalny wariant *bekommen*. Dobrze! W zwykłej mowie — *bekommen*.",
+  "at": [
+   "21e7f001",
+   "cf1f7ebd"
+  ]
  },
  {
   "en": "*erreichen* / *schaffen* / *erwischen* work too! Here we practise *bekommen*.",
   "ru": "*erreichen* / *schaffen* / *erwischen* — тоже верно! Здесь тренируем *bekommen*.",
-  "pl": "*erreichen* / *schaffen* / *erwischen* — też dobrze! Tu ćwiczymy *bekommen*."
+  "pl": "*erreichen* / *schaffen* / *erwischen* — też dobrze! Tu ćwiczymy *bekommen*.",
+  "at": [
+   "7dce92b2",
+   "a56f17a7",
+   "dacaff00"
+  ]
  },
  {
   "en": "*Macht es Ihnen etwas aus …?* is also polite and right! Here we practise *würde*.",
   "ru": "*Macht es Ihnen etwas aus …?* — тоже вежливо и верно! Здесь тренируем *würde*.",
-  "pl": "*Macht es Ihnen etwas aus …?* — też jest uprzejme i poprawne! Tu ćwiczymy *würde*."
+  "pl": "*Macht es Ihnen etwas aus …?* — też jest uprzejme i poprawne! Tu ćwiczymy *würde*.",
+  "at": [
+   "28da6dbd"
+  ]
  },
  {
   "en": "*liegen gelassen* is also correct, but less common. Here we practise *liegen lassen*.",
   "ru": "*liegen gelassen* тоже правильно, но встречается реже. Здесь мы тренируем *liegen lassen*.",
-  "pl": "*liegen gelassen* też jest poprawne, ale rzadsze. Tu ćwiczymy *liegen lassen*."
+  "pl": "*liegen gelassen* też jest poprawne, ale rzadsze. Tu ćwiczymy *liegen lassen*.",
+  "at": [
+   "50b5f6b8"
+  ]
  },
  {
   "en": "Past tense, passive:",
   "ru": "Прошлое в пассиве:",
-  "pl": "Przeszłość w stronie biernej:"
+  "pl": "Przeszłość w stronie biernej:",
+  "at": [
+   "828fd724"
+  ]
  },
  {
   "en": "speaking: sein + Partizip II + *worden* (Perfekt)",
   "ru": "в разговоре: sein + Partizip II + *worden* (Perfekt)",
-  "pl": "w mowie: sein + Partizip II + *worden* (Perfekt)"
+  "pl": "w mowie: sein + Partizip II + *worden* (Perfekt)",
+  "at": [
+   "828fd724"
+  ]
  },
  {
   "en": "writing: *wurde* + Partizip II (Präteritum)",
   "ru": "в тексте: *wurde* + Partizip II (Präteritum)",
-  "pl": "na piśmie: *wurde* + Partizip II (Präteritum)"
+  "pl": "na piśmie: *wurde* + Partizip II (Präteritum)",
+  "at": [
+   "828fd724"
+  ]
  },
  {
   "en": "Past tense:",
   "ru": "Прошлое:",
-  "pl": "Przeszłość:"
+  "pl": "Przeszłość:",
+  "at": [
+   "0d32b4a7",
+   "850e54ab"
+  ]
  },
  {
   "en": "speaking: haben + *bekommen* (Perfekt)",
   "ru": "в разговоре: haben + *bekommen* (Perfekt)",
-  "pl": "w mowie: haben + *bekommen* (Perfekt)"
+  "pl": "w mowie: haben + *bekommen* (Perfekt)",
+  "at": [
+   "0d32b4a7"
+  ]
  },
  {
   "en": "writing: *bekam* (Präteritum)",
   "ru": "в тексте: *bekam* (Präteritum)",
-  "pl": "na piśmie: *bekam* (Präteritum)"
+  "pl": "na piśmie: *bekam* (Präteritum)",
+  "at": [
+   "0d32b4a7"
+  ]
  },
  {
   "en": "speaking: haben + *gelassen* (Perfekt)",
   "ru": "в разговоре: haben + *gelassen* (Perfekt)",
-  "pl": "w mowie: haben + *gelassen* (Perfekt)"
+  "pl": "w mowie: haben + *gelassen* (Perfekt)",
+  "at": [
+   "850e54ab"
+  ]
  },
  {
   "en": "writing: *ließ* (Präteritum)",
   "ru": "в тексте: *ließ* (Präteritum)",
-  "pl": "na piśmie: *ließ* (Präteritum)"
+  "pl": "na piśmie: *ließ* (Präteritum)",
+  "at": [
+   "850e54ab"
+  ]
  },
  {
   "en": "lassen + infinitive = someone else does it",
   "ru": "lassen + Infinitiv = сделает кто-то другой",
-  "pl": "lassen + Infinitiv = zrobi to ktoś inny"
+  "pl": "lassen + Infinitiv = zrobi to ktoś inny",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "only a subject → werden — *Das Auto wird repariert.*",
   "ru": "только подлежащее → werden — *Das Auto wird repariert.*",
-  "pl": "tylko podmiot → werden — *Das Auto wird repariert.*"
+  "pl": "tylko podmiot → werden — *Das Auto wird repariert.*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "subject + object → lassen — *Ich lasse das Auto reparieren.*",
   "ru": "подлежащее + дополнение → lassen — *Ich lasse das Auto reparieren.*",
-  "pl": "podmiot + dopełnienie → lassen — *Ich lasse das Auto reparieren.*"
+  "pl": "podmiot + dopełnienie → lassen — *Ich lasse das Auto reparieren.*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "sein + **zu** + infinitive",
   "ru": "sein + **zu** + Infinitiv",
-  "pl": "sein + **zu** + Infinitiv"
+  "pl": "sein + **zu** + Infinitiv",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "lassen + **sich** + infinitive",
   "ru": "lassen + **sich** + Infinitiv",
-  "pl": "lassen + **sich** + Infinitiv"
+  "pl": "lassen + **sich** + Infinitiv",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "werden = the action: what happens / happened",
   "ru": "werden = действие: что происходит / произошло",
-  "pl": "werden = czynność: co się dzieje / stało"
+  "pl": "werden = czynność: co się dzieje / stało",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "sein = the result: how it is / was at that moment",
   "ru": "sein = результат: как всё есть / было в тот момент",
-  "pl": "sein = wynik: jak wszystko jest / było w danym momencie"
+  "pl": "sein = wynik: jak wszystko jest / było w danym momencie",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "werden = a change — *wird Arzt, wurden müde*",
   "ru": "werden = изменение — *wird Arzt, wurden müde*",
-  "pl": "werden = zmiana — *wird Arzt, wurden müde*"
+  "pl": "werden = zmiana — *wird Arzt, wurden müde*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "sein = a state — *ist Arzt, waren müde*",
   "ru": "sein = состояние — *ist Arzt, waren müde*",
-  "pl": "sein = stan — *ist Arzt, waren müde*"
+  "pl": "sein = stan — *ist Arzt, waren müde*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "bekommen = get, receive",
   "ru": "bekommen = получать",
-  "pl": "bekommen = dostawać"
+  "pl": "bekommen = dostawać",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "werden + Partizip II = it is done to the thing — *wurde geschenkt*",
   "ru": "werden + Partizip II = это сделали с вещью — *wurde geschenkt*",
-  "pl": "werden + Partizip II = coś zrobiono z rzeczą — *wurde geschenkt*"
+  "pl": "werden + Partizip II = coś zrobiono z rzeczą — *wurde geschenkt*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "bekommen + Partizip II = you receive it — *bekam es geschenkt*",
   "ru": "bekommen + Partizip II = ты получаешь — *bekam es geschenkt*",
-  "pl": "bekommen + Partizip II = ty dostajesz — *bekam es geschenkt*"
+  "pl": "bekommen + Partizip II = ty dostajesz — *bekam es geschenkt*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "bekommen + noun — *Angst bekommen*",
   "ru": "bekommen + существительное — *Angst bekommen*",
-  "pl": "bekommen + rzeczownik — *Angst bekommen*"
+  "pl": "bekommen + rzeczownik — *Angst bekommen*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "werden + adjective — *nervös werden*",
   "ru": "werden + прилагательное — *nervös werden*",
-  "pl": "werden + przymiotnik — *nervös werden*"
+  "pl": "werden + przymiotnik — *nervös werden*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "haben + a feeling = already feel it",
   "ru": "haben + чувство = уже чувствовать",
-  "pl": "haben + uczucie = już czuć"
+  "pl": "haben + uczucie = już czuć",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "bekommen + a feeling = start to feel",
   "ru": "bekommen + чувство = начать чувствовать",
-  "pl": "bekommen + uczucie = zacząć czuć"
+  "pl": "bekommen + uczucie = zacząć czuć",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "lassen = you arrange it yourself",
   "ru": "lassen = ты сам(а) это устраиваешь",
-  "pl": "lassen = sam(a) to załatwiasz"
+  "pl": "lassen = sam(a) to załatwiasz",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "bekommen = it's given to you, you just receive it",
   "ru": "bekommen = тебе это дают, ты только получаешь",
-  "pl": "bekommen = ktoś ci to daje, ty tylko dostajesz"
+  "pl": "bekommen = ktoś ci to daje, ty tylko dostajesz",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "*have* something done = **lassen**, not haben",
   "ru": "англ. *have* something done = **lassen**, не haben",
-  "pl": "ang. *have* something done = **lassen**, nie haben"
+  "pl": "ang. *have* something done = **lassen**, nie haben",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "sein: movement, change + *sein, bleiben, passieren*",
   "ru": "sein: движение, изменение + *sein, bleiben, passieren*",
-  "pl": "sein: ruch, zmiana + *sein, bleiben, passieren*"
+  "pl": "sein: ruch, zmiana + *sein, bleiben, passieren*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "haben: most verbs",
   "ru": "haben: большинство глаголов",
-  "pl": "haben: większość czasowników"
+  "pl": "haben: większość czasowników",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "sein + zu: the thing that can / must be done — *Die Aufgabe ist zu lösen*",
   "ru": "sein + zu: вещь, которую можно / нужно сделать — *Die Aufgabe ist zu lösen*",
-  "pl": "sein + zu: rzecz, którą można / trzeba zrobić — *Die Aufgabe ist zu lösen*"
+  "pl": "sein + zu: rzecz, którą można / trzeba zrobić — *Die Aufgabe ist zu lösen*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "haben + zu: the person who has to act — *Ich habe zu tun*",
   "ru": "haben + zu: человек, которому нужно действовать — *Ich habe zu tun*",
-  "pl": "haben + zu: osoba, która musi działać — *Ich habe zu tun*"
+  "pl": "haben + zu: osoba, która musi działać — *Ich habe zu tun*",
+  "at": [
+   "27228e55"
+  ]
  },
  {
   "en": "modal verb + Partizip II + werden = Passiv with a modal verb: it has to be done",
   "ru": "модальный глагол + Partizip II + werden = Passiv с модальным глаголом: это нужно сделать",
-  "pl": "czasownik modalny + Partizip II + werden = Passiv z czasownikiem modalnym: to trzeba zrobić"
+  "pl": "czasownik modalny + Partizip II + werden = Passiv z czasownikiem modalnym: to trzeba zrobić",
+  "at": [
+   "014600a9"
+  ]
  },
  {
   "en": "left behind (forgot)",
   "ru": "оставила (забыла)",
-  "pl": "zostawiłam (zapomniałam)"
+  "pl": "zostawiłam (zapomniałam)",
+  "at": [
+   "b101470e"
+  ]
  },
  {
   "en": "time in the past + haben im Präsens + thing + Partizip II + Partizip II von bekommen = I was given (as presents)",
   "ru": "время в прошлом + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = мне дарили",
-  "pl": "czas w przeszłości + haben im Präsens + rzecz + Partizip II + Partizip II von bekommen = dawano mi w prezencie"
+  "pl": "czas w przeszłości + haben im Präsens + rzecz + Partizip II + Partizip II von bekommen = dawano mi w prezencie",
+  "at": [
+   "c4e826e1"
+  ]
  },
  {
   "en": "time in the past + haben im Präsens + something / someone + Partizip II von bekommen = got, received",
   "ru": "время в прошлом + haben im Präsens + что / кого + Partizip II von bekommen = получила",
-  "pl": "czas w przeszłości + haben im Präsens + co / kogo + Partizip II von bekommen = dostała"
+  "pl": "czas w przeszłości + haben im Präsens + co / kogo + Partizip II von bekommen = dostała",
+  "at": [
+   "44dddc70"
+  ]
  },
  {
   "en": "werden im Präsens + schon + infinitive = reassurance: surely it's not that bad",
   "ru": "werden im Präsens + schon + Infinitiv = успокаиваю: наверняка всё не так страшно",
-  "pl": "werden im Präsens + schon + Infinitiv = uspokajam: na pewno nie jest tak źle"
+  "pl": "werden im Präsens + schon + Infinitiv = uspokajam: na pewno nie jest tak źle",
+  "at": [
+   "fc17d3e1"
+  ]
  },
  {
   "en": "surely not that bad (reassuring)",
   "ru": "наверняка не так страшно (успокаиваю)",
-  "pl": "na pewno nie jest tak źle (uspokajam)"
+  "pl": "na pewno nie jest tak źle (uspokajam)",
+  "at": [
+   "6ac7fb63"
+  ]
  },
  {
   "en": "given / sent to you",
   "ru": "тебе подарили / прислали",
-  "pl": "podarowano ci / przysłano ci"
+  "pl": "podarowano ci / przysłano ci",
+  "at": [
+   "f2aca48a"
+  ]
  },
  {
   "en": "werden + infinitive = future: you will do it (yourself)",
   "ru": "werden + Infinitiv = будущее: ты сделаешь это сам(а)",
-  "pl": "werden + Infinitiv = przyszłość: zrobisz to sam(a)"
+  "pl": "werden + Infinitiv = przyszłość: zrobisz to sam(a)",
+  "at": [
+   "27228e55"
+  ]
  }
 ]

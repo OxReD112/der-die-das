@@ -2,426 +2,687 @@
  {
   "en": "According to the weather forecast, it will rain tomorrow.",
   "ru": "Согласно прогнозу погоды, завтра будет дождь.",
-  "pl": "Według prognozy pogody jutro będzie padać."
+  "pl": "Według prognozy pogody jutro będzie padać.",
+  "at": [
+   "32c8e108"
+  ]
  },
  {
   "en": "He was fired because of a mistake.",
   "ru": "Из-за ошибки его уволили.",
-  "pl": "Z powodu błędu został zwolniony."
+  "pl": "Z powodu błędu został zwolniony.",
+  "at": [
+   "bb91b365"
+  ]
  },
  {
   "en": "Also: aufgrund von + Dativ.",
   "ru": "Также: aufgrund von + Dativ.",
-  "pl": "Także: aufgrund von + Dativ."
+  "pl": "Także: aufgrund von + Dativ.",
+  "at": [
+   "377b2170"
+  ]
  },
  {
   "en": "due to, because of, on the basis of",
   "ru": "из-за, вследствие, на основании",
-  "pl": "z powodu, wskutek, na podstawie"
+  "pl": "z powodu, wskutek, na podstawie",
+  "at": [
+   "569790ef"
+  ]
  },
  {
   "en": "through",
   "ru": "через, сквозь",
-  "pl": "przez"
+  "pl": "przez",
+  "at": [
+   "7988b2fb"
+  ]
  },
  {
   "en": "He is walking through the park.",
   "ru": "Он идёт через парк.",
-  "pl": "Idzie przez park."
+  "pl": "Idzie przez park.",
+  "at": [
+   "fa66f289"
+  ]
  },
  {
   "en": "for",
   "ru": "для, за",
-  "pl": "dla, za"
+  "pl": "dla, za",
+  "at": [
+   "f93250cb"
+  ]
  },
  {
   "en": "This is a present for my father.",
   "ru": "Это подарок для моего отца.",
-  "pl": "To prezent dla mojego ojca."
+  "pl": "To prezent dla mojego ojca.",
+  "at": [
+   "76059379"
+  ]
  },
  {
   "en": "against; around (time)",
   "ru": "против; около (о времени)",
-  "pl": "przeciw; około (o czasie)"
+  "pl": "przeciw; około (o czasie)",
+  "at": [
+   "c26795a1"
+  ]
  },
  {
   "en": "She walked into the wall.",
   "ru": "Она врезалась в стену.",
-  "pl": "Wpadła na ścianę."
+  "pl": "Wpadła na ścianę.",
+  "at": [
+   "c66c7d93"
+  ]
  },
  {
   "en": "without",
   "ru": "без",
-  "pl": "bez"
+  "pl": "bez",
+  "at": [
+   "02270531"
+  ]
  },
  {
   "en": "I never leave the house without my umbrella.",
   "ru": "Я никогда не выхожу из дома без зонта.",
-  "pl": "Nigdy nie wychodzę z domu bez parasola."
+  "pl": "Nigdy nie wychodzę z domu bez parasola.",
+  "at": [
+   "a69a2783"
+  ]
  },
  {
   "en": "We are sitting around the table.",
   "ru": "Мы сидим вокруг стола.",
-  "pl": "Siedzimy wokół stołu."
+  "pl": "Siedzimy wokół stołu.",
+  "at": [
+   "c8d2b717"
+  ]
  },
  {
   "en": "until, as far as",
   "ru": "до",
-  "pl": "do"
+  "pl": "do",
+  "at": [
+   "21226968"
+  ]
  },
  {
   "en": "I'm working until next Friday.",
   "ru": "Я работаю до следующей пятницы.",
-  "pl": "Pracuję do przyszłego piątku."
+  "pl": "Pracuję do przyszłego piątku.",
+  "at": [
+   "a2203624"
+  ]
  },
  {
   "en": "Often used with another preposition: bis zum Bahnhof (then Dativ because of zu).",
   "ru": "Часто вместе с другим предлогом: bis zum Bahnhof (тогда Dativ из-за zu).",
-  "pl": "Często razem z innym przyimkiem: bis zum Bahnhof (wtedy Dativ ze względu na zu)."
+  "pl": "Często razem z innym przyimkiem: bis zum Bahnhof (wtedy Dativ ze względu na zu).",
+  "at": [
+   "4ca1d2c1"
+  ]
  },
  {
   "en": "along (after the noun)",
   "ru": "вдоль (после слова)",
-  "pl": "wzdłuż (po rzeczowniku)"
+  "pl": "wzdłuż (po rzeczowniku)",
+  "at": [
+   "b7b10a9f"
+  ]
  },
  {
   "en": "He is walking along the street.",
   "ru": "Он идёт вдоль улицы.",
-  "pl": "Idzie wzdłuż ulicy."
+  "pl": "Idzie wzdłuż ulicy.",
+  "at": [
+   "a6439c75"
+  ]
  },
  {
   "en": "After the noun: Akkusativ. Before the noun: Genitiv: entlang des Flusses.",
   "ru": "После слова - Akkusativ. Перед словом - Genitiv: entlang des Flusses.",
-  "pl": "Po rzeczowniku — Akkusativ. Przed rzeczownikiem — Genitiv: entlang des Flusses."
+  "pl": "Po rzeczowniku — Akkusativ. Przed rzeczownikiem — Genitiv: entlang des Flusses.",
+  "at": [
+   "7fe769e0"
+  ]
  },
  {
   "en": "along (before the noun)",
   "ru": "вдоль (перед словом)",
-  "pl": "wzdłuż (przed rzeczownikiem)"
+  "pl": "wzdłuż (przed rzeczownikiem)",
+  "at": [
+   "0ccea883"
+  ]
  },
  {
   "en": "There are old trees along the river.",
   "ru": "Вдоль реки стоят старые деревья.",
-  "pl": "Wzdłuż rzeki rosną stare drzewa."
+  "pl": "Wzdłuż rzeki rosną stare drzewa.",
+  "at": [
+   "a9949c51"
+  ]
  },
  {
   "en": "Before the noun: Genitiv (less often Dativ). After the noun: Akkusativ: den Fluss entlang.",
   "ru": "Перед словом - Genitiv (реже Dativ). После слова - Akkusativ: den Fluss entlang.",
-  "pl": "Przed rzeczownikiem — Genitiv (rzadziej Dativ). Po rzeczowniku — Akkusativ: den Fluss entlang."
+  "pl": "Przed rzeczownikiem — Genitiv (rzadziej Dativ). Po rzeczowniku — Akkusativ: den Fluss entlang.",
+  "at": [
+   "5f7888cc"
+  ]
  },
  {
   "en": "Dativ is also possible, but Genitiv is more common.",
   "ru": "Dativ тоже возможен, но Genitiv встречается чаще.",
-  "pl": "Dativ też jest możliwy, ale Genitiv występuje częściej."
+  "pl": "Dativ też jest możliwy, ale Genitiv występuje częściej.",
+  "at": [
+   "011f4e71",
+   "a2ad84f9"
+  ]
  },
  {
   "en": "out of, from",
   "ru": "из, от",
-  "pl": "z"
+  "pl": "z",
+  "at": [
+   "a8cd1c36"
+  ]
  },
  {
   "en": "He's just coming out of the cinema.",
   "ru": "Он как раз идёт из кино.",
-  "pl": "Właśnie wraca z kina."
+  "pl": "Właśnie wraca z kina.",
+  "at": [
+   "adfee67e"
+  ]
  },
  {
   "en": "at, with, near",
   "ru": "у, при, около",
-  "pl": "u, przy, koło"
+  "pl": "u, przy, koło",
+  "at": [
+   "adc502ca"
+  ]
  },
  {
   "en": "He lives with his parents.",
   "ru": "Он живёт у своих родителей.",
-  "pl": "Mieszka u swoich rodziców."
+  "pl": "Mieszka u swoich rodziców.",
+  "at": [
+   "1c77240a"
+  ]
  },
  {
   "en": "with; by (transport)",
   "ru": "с; на (о транспорте)",
-  "pl": "z; pociągiem (o transporcie)"
+  "pl": "z; pociągiem (o transporcie)",
+  "at": [
+   "3540bb03"
+  ]
  },
  {
   "en": "I'm going by train.",
   "ru": "Я еду на поезде.",
-  "pl": "Jadę pociągiem."
+  "pl": "Jadę pociągiem.",
+  "at": [
+   "7492bfd1"
+  ]
  },
  {
   "en": "after; to (cities, countries)",
   "ru": "после; в (о городах и странах)",
-  "pl": "po; do (o miastach i krajach)"
+  "pl": "po; do (o miastach i krajach)",
+  "at": [
+   "271d1d8c"
+  ]
  },
  {
   "en": "After class I'm going home.",
   "ru": "После занятий я иду домой.",
-  "pl": "Po zajęciach idę do domu."
+  "pl": "Po zajęciach idę do domu.",
+  "at": [
+   "109a71e0"
+  ]
  },
  {
   "en": "since, for (time)",
   "ru": "с (какого-то времени)",
-  "pl": "od (jakiegoś czasu)"
+  "pl": "od (jakiegoś czasu)",
+  "at": [
+   "1e9eab10"
+  ]
  },
  {
   "en": "I have been learning German for three years.",
   "ru": "Я уже три года учу немецкий.",
-  "pl": "Uczę się niemieckiego już od trzech lat."
+  "pl": "Uczę się niemieckiego już od trzech lat.",
+  "at": [
+   "4c8b81ec"
+  ]
  },
  {
   "en": "from, of, by",
   "ru": "от, из, с, о",
-  "pl": "od, z, o"
+  "pl": "od, z, o",
+  "at": [
+   "daf0fbf6"
+  ]
  },
  {
   "en": "That's my boss's car.",
   "ru": "Это машина моего начальника.",
-  "pl": "To samochód mojego szefa."
+  "pl": "To samochód mojego szefa.",
+  "at": [
+   "7f0e893e"
+  ]
  },
  {
   "en": "to",
   "ru": "к, в, на",
-  "pl": "do, na"
+  "pl": "do, na",
+  "at": [
+   "2d2f3cab"
+  ]
  },
  {
   "en": "I'm going to the doctor's.",
   "ru": "Я иду к врачу.",
-  "pl": "Idę do lekarza."
+  "pl": "Idę do lekarza.",
+  "at": [
+   "d3de8019"
+  ]
  },
  {
   "en": "from, as of",
   "ru": "начиная с",
-  "pl": "począwszy od"
+  "pl": "począwszy od",
+  "at": [
+   "dad91072"
+  ]
  },
  {
   "en": "I'll be working here from the first of May.",
   "ru": "С первого мая я буду работать здесь.",
-  "pl": "Od pierwszego maja będę tu pracować."
+  "pl": "Od pierwszego maja będę tu pracować.",
+  "at": [
+   "9d04d1b2"
+  ]
  },
  {
   "en": "I'm on holiday from next Monday.",
   "ru": "Со следующего понедельника у меня отпуск.",
-  "pl": "Od przyszłego poniedziałku mam urlop."
+  "pl": "Od przyszłego poniedziałku mam urlop.",
+  "at": [
+   "ae95cc80"
+  ]
  },
  {
   "en": "Akkusativ is also possible - without an article, with an adjective: ab nächsten Montag.",
   "ru": "Akkusativ тоже возможен - без артикля, с прилагательным: ab nächsten Montag.",
-  "pl": "Akkusativ też jest możliwy — bez rodzajnika, z przymiotnikiem: ab nächsten Montag."
+  "pl": "Akkusativ też jest możliwy — bez rodzajnika, z przymiotnikiem: ab nächsten Montag.",
+  "at": [
+   "00d8a1d3"
+  ]
  },
  {
   "en": "Usually Dativ. Akkusativ only without an article, with an adjective.",
   "ru": "Обычно - Dativ. Akkusativ - только без артикля, с прилагательным.",
-  "pl": "Zwykle — Dativ. Akkusativ — tylko bez rodzajnika, z przymiotnikiem."
+  "pl": "Zwykle — Dativ. Akkusativ — tylko bez rodzajnika, z przymiotnikiem.",
+  "at": [
+   "684fa390"
+  ]
  },
  {
   "en": "except, apart from",
   "ru": "кроме",
-  "pl": "oprócz"
+  "pl": "oprócz",
+  "at": [
+   "bb1d9977"
+  ]
  },
  {
   "en": "Everyone was there except him.",
   "ru": "Все были там, кроме него.",
-  "pl": "Wszyscy tam byli oprócz niego."
+  "pl": "Wszyscy tam byli oprócz niego.",
+  "at": [
+   "5298accd"
+  ]
  },
  {
   "en": "opposite; towards, in relation to (someone)",
   "ru": "напротив; по отношению к",
-  "pl": "naprzeciwko; wobec"
+  "pl": "naprzeciwko; wobec",
+  "at": [
+   "026b45de"
+  ]
  },
  {
   "en": "The café is opposite the station.",
   "ru": "Кафе находится напротив вокзала.",
-  "pl": "Kawiarnia znajduje się naprzeciwko dworca."
+  "pl": "Kawiarnia znajduje się naprzeciwko dworca.",
+  "at": [
+   "a91227c6"
+  ]
  },
  {
   "en": "He's always honest with me.",
   "ru": "Он со мной всегда честен.",
-  "pl": "Zawsze jest wobec mnie szczery."
+  "pl": "Zawsze jest wobec mnie szczery.",
+  "at": [
+   "1b94e51c"
+  ]
  },
  {
   "en": "With a personal pronoun, it comes after it: mir gegenüber.",
   "ru": "С личным местоимением - после него: mir gegenüber.",
-  "pl": "Z zaimkiem osobowym — po nim: mir gegenüber."
+  "pl": "Z zaimkiem osobowym — po nim: mir gegenüber.",
+  "at": [
+   "20270e97"
+  ]
  },
  {
   "en": "contrary to; towards",
   "ru": "вопреки; навстречу",
-  "pl": "wbrew; naprzeciw (komuś)"
+  "pl": "wbrew; naprzeciw (komuś)",
+  "at": [
+   "cab630dd"
+  ]
  },
  {
   "en": "Contrary to all expectations, he won.",
   "ru": "Вопреки всем ожиданиям он победил.",
-  "pl": "Wbrew wszelkim oczekiwaniom wygrał."
+  "pl": "Wbrew wszelkim oczekiwaniom wygrał.",
+  "at": [
+   "81ef54f7"
+  ]
  },
  {
   "en": "according to",
   "ru": "согласно, по данным",
-  "pl": "według, zgodnie z"
+  "pl": "według, zgodnie z",
+  "at": [
+   "4e0c4354"
+  ]
  },
  {
   "en": "Genitiv is also possible, but less common.",
   "ru": "Genitiv тоже возможен, но реже.",
-  "pl": "Genitiv też jest możliwy, ale występuje rzadziej."
+  "pl": "Genitiv też jest możliwy, ale występuje rzadziej.",
+  "at": [
+   "91dafca5"
+  ]
  },
  {
   "en": "Genitiv is also possible, but Dativ is more common.",
   "ru": "Genitiv тоже возможен, но Dativ встречается чаще.",
-  "pl": "Genitiv też jest możliwy, ale Dativ występuje częściej."
+  "pl": "Genitiv też jest możliwy, ale Dativ występuje częściej.",
+  "at": [
+   "3a46433a"
+  ]
  },
  {
   "en": "because of",
   "ru": "из-за",
-  "pl": "z powodu"
+  "pl": "z powodu",
+  "at": [
+   "0c452d4e"
+  ]
  },
  {
   "en": "Because of the bad weather, we stayed at home.",
   "ru": "Из-за плохой погоды мы остались дома.",
-  "pl": "Z powodu złej pogody zostaliśmy w domu."
+  "pl": "Z powodu złej pogody zostaliśmy w domu.",
+  "at": [
+   "5de4f316"
+  ]
  },
  {
   "en": "In spoken German, Dativ is also used.",
   "ru": "В разговорной речи также используется Dativ.",
-  "pl": "W mowie potocznej używa się też Dativu."
+  "pl": "W mowie potocznej używa się też Dativu.",
+  "at": [
+   "3a0e1840",
+   "3aae9687",
+   "694cba5b"
+  ]
  },
  {
   "en": "This is the colloquial form. In writing, Genitiv is better.",
   "ru": "Это разговорный вариант. В письменной речи лучше Genitiv.",
-  "pl": "To wariant potoczny. W piśmie lepiej Genitiv."
+  "pl": "To wariant potoczny. W piśmie lepiej Genitiv.",
+  "at": [
+   "2cab32f4",
+   "e96e531d",
+   "f61470c8"
+  ]
  },
  {
   "en": "despite, in spite of",
   "ru": "несмотря на",
-  "pl": "mimo"
+  "pl": "mimo",
+  "at": [
+   "0bc73919"
+  ]
  },
  {
   "en": "Despite the rain, we went for a walk.",
   "ru": "Несмотря на дождь, мы пошли гулять.",
-  "pl": "Mimo deszczu poszliśmy na spacer."
+  "pl": "Mimo deszczu poszliśmy na spacer.",
+  "at": [
+   "d0c22ceb"
+  ]
  },
  {
   "en": "Dativ - more common in southern Germany, Austria and Switzerland; in writing, Genitiv. But always: trotz allem (Dativ).",
   "ru": "Dativ - чаще на юге Германии, в Австрии и Швейцарии; в письменной речи - Genitiv. Но всегда: trotz allem (Dativ).",
-  "pl": "Dativ — częściej na południu Niemiec, w Austrii i Szwajcarii; w piśmie — Genitiv. Ale zawsze: trotz allem (Dativ)."
+  "pl": "Dativ — częściej na południu Niemiec, w Austrii i Szwajcarii; w piśmie — Genitiv. Ale zawsze: trotz allem (Dativ).",
+  "at": [
+   "00a99b97",
+   "48a97fd2"
+  ]
  },
  {
   "en": "during",
   "ru": "во время",
-  "pl": "podczas"
+  "pl": "podczas",
+  "at": [
+   "2128dc7f"
+  ]
  },
  {
   "en": "They didn't talk during the meal.",
   "ru": "Во время еды они не разговаривали.",
-  "pl": "Podczas jedzenia nie rozmawiali."
+  "pl": "Podczas jedzenia nie rozmawiali.",
+  "at": [
+   "69cc4f15"
+  ]
  },
  {
   "en": "instead of",
   "ru": "вместо",
-  "pl": "zamiast"
+  "pl": "zamiast",
+  "at": [
+   "267ff33a"
+  ]
  },
  {
   "en": "Instead of a letter, he wrote me an email.",
   "ru": "Вместо письма он написал мне имейл.",
-  "pl": "Zamiast listu napisał do mnie e-mail."
+  "pl": "Zamiast listu napisał do mnie e-mail.",
+  "at": [
+   "3cc2eb5a"
+  ]
  },
  {
   "en": "instead of, in place of",
   "ru": "вместо",
-  "pl": "zamiast"
+  "pl": "zamiast",
+  "at": [
+   "70f685cd"
+  ]
  },
  {
   "en": "I came instead of my brother.",
   "ru": "Я пришёл(а) вместо брата.",
-  "pl": "Przyszedłem / Przyszłam zamiast brata."
+  "pl": "Przyszedłem / Przyszłam zamiast brata.",
+  "at": [
+   "63aa2cc7"
+  ]
  },
  {
   "en": "Also: anstelle von + Dativ.",
   "ru": "Также: anstelle von + Dativ.",
-  "pl": "Także: anstelle von + Dativ."
+  "pl": "Także: anstelle von + Dativ.",
+  "at": [
+   "f7de7aae"
+  ]
  },
  {
   "en": "thanks to",
   "ru": "благодаря",
-  "pl": "dzięki"
+  "pl": "dzięki",
+  "at": [
+   "8d5c930b"
+  ]
  },
  {
   "en": "Thanks to your tip, I got the job.",
   "ru": "Благодаря твоему совету я получил(а) работу.",
-  "pl": "Dzięki twojej radzie dostałem / dostałam pracę."
+  "pl": "Dzięki twojej radzie dostałem / dostałam pracę.",
+  "at": [
+   "423575b9"
+  ]
  },
  {
   "en": "Dativ is also possible, but less common.",
   "ru": "Dativ также возможен, но реже.",
-  "pl": "Dativ też jest możliwy, ale występuje rzadziej."
+  "pl": "Dativ też jest możliwy, ale występuje rzadziej.",
+  "at": [
+   "cde469f4"
+  ]
  },
  {
   "en": "with the help of",
   "ru": "с помощью",
-  "pl": "za pomocą"
+  "pl": "za pomocą",
+  "at": [
+   "a154a119"
+  ]
  },
  {
   "en": "I translated the text with the help of a dictionary.",
   "ru": "С помощью словаря я перевёл(а) текст.",
-  "pl": "Za pomocą słownika przetłumaczyłem / przetłumaczyłam tekst."
+  "pl": "Za pomocą słownika przetłumaczyłem / przetłumaczyłam tekst.",
+  "at": [
+   "cbc724eb"
+  ]
  },
  {
   "en": "Also: mithilfe von + Dativ.",
   "ru": "Также: mithilfe von + Dativ.",
-  "pl": "Także: mithilfe von + Dativ."
+  "pl": "Także: mithilfe von + Dativ.",
+  "at": [
+   "598537d2"
+  ]
  },
  {
   "en": "using, based on",
   "ru": "на основе, по (чему-либо)",
-  "pl": "na podstawie, po (czymś)"
+  "pl": "na podstawie, po (czymś)",
+  "at": [
+   "58523129"
+  ]
  },
  {
   "en": "I'll explain it to you using an example.",
   "ru": "Я объясню тебе это на примере.",
-  "pl": "Wyjaśnię ci to na przykładzie."
+  "pl": "Wyjaśnię ci to na przykładzie.",
+  "at": [
+   "f0e9259b"
+  ]
  },
  {
   "en": "Also: anhand von + Dativ.",
   "ru": "Также: anhand von + Dativ.",
-  "pl": "Także: anhand von + Dativ."
+  "pl": "Także: anhand von + Dativ.",
+  "at": [
+   "cc290d22"
+  ]
  },
  {
   "en": "in view of, given",
   "ru": "ввиду, учитывая",
-  "pl": "w obliczu, biorąc pod uwagę"
+  "pl": "w obliczu, biorąc pod uwagę",
+  "at": [
+   "5462ad7f"
+  ]
  },
  {
   "en": "Given the high price, I didn't buy the car.",
   "ru": "Учитывая высокую цену, я не купил(а) машину.",
-  "pl": "Biorąc pod uwagę wysoką cenę, nie kupiłem / nie kupiłam samochodu."
+  "pl": "Biorąc pod uwagę wysoką cenę, nie kupiłem / nie kupiłam samochodu.",
+  "at": [
+   "cf983a15"
+  ]
  },
  {
   "en": "Within a month, everything was ready.",
   "ru": "В течение месяца всё было готово.",
-  "pl": "W ciągu miesiąca wszystko było gotowe."
+  "pl": "W ciągu miesiąca wszystko było gotowe.",
+  "at": [
+   "a97be63c"
+  ]
  },
  {
   "en": "Often: innerhalb von + Dativ (innerhalb von zwei Wochen).",
   "ru": "Часто: innerhalb von + Dativ (innerhalb von zwei Wochen).",
-  "pl": "Często: innerhalb von + Dativ (innerhalb von zwei Wochen)."
+  "pl": "Często: innerhalb von + Dativ (innerhalb von zwei Wochen).",
+  "at": [
+   "5cb88d99"
+  ]
  },
  {
   "en": "outside",
   "ru": "вне, за пределами",
-  "pl": "poza"
+  "pl": "poza",
+  "at": [
+   "28128d91"
+  ]
  },
  {
   "en": "The hotel is outside the centre.",
   "ru": "Отель находится за пределами центра.",
-  "pl": "Hotel znajduje się poza centrum."
+  "pl": "Hotel znajduje się poza centrum.",
+  "at": [
+   "46ddf923"
+  ]
  },
  {
   "en": "Also: außerhalb von + Dativ.",
   "ru": "Также: außerhalb von + Dativ.",
-  "pl": "Także: außerhalb von + Dativ."
+  "pl": "Także: außerhalb von + Dativ.",
+  "at": [
+   "d334630a"
+  ]
  },
  {
   "en": "around; at (time)",
   "ru": "вокруг; в (о времени)",
-  "pl": "wokół; o (godzinie)"
+  "pl": "wokół; o (godzinie)",
+  "at": [
+   "b7cc3f3d"
+  ]
  },
  {
   "en": "inside; within (time)",
   "ru": "внутри; в течение",
-  "pl": "wewnątrz; w ciągu"
+  "pl": "wewnątrz; w ciągu",
+  "at": [
+   "fa783140"
+  ]
  }
 ]

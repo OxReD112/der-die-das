@@ -2,151 +2,241 @@
  {
   "en": "“I only understand train station.”",
   "ru": "«Я понимаю только вокзал.»",
-  "pl": "„Rozumiem tylko dworzec.”"
+  "pl": "„Rozumiem tylko dworzec.”",
+  "at": [
+   "fc66d5bc"
+  ]
  },
  {
   "en": "I don't understand a thing (≈ “It's all Greek to me”).",
   "ru": "Я вообще ничего не понимаю (≈ «китайская грамота»).",
-  "pl": "Zupełnie nic nie rozumiem (≈ „to dla mnie chińszczyzna”)."
+  "pl": "Zupełnie nic nie rozumiem (≈ „to dla mnie chińszczyzna”).",
+  "at": [
+   "c4692a0c"
+  ]
  },
  {
   "en": "“to stand on the hose”",
   "ru": "«стоять на шланге»",
-  "pl": "„stać na wężu (ogrodowym)”"
+  "pl": "„stać na wężu (ogrodowym)”",
+  "at": [
+   "434e5b6d"
+  ]
  },
  {
   "en": "To be slow to understand, not to see something obvious right now.",
   "ru": "Тупить, не понимать очевидное / не соображать в данный момент.",
-  "pl": "Nie łapać, nie rozumieć czegoś oczywistego / mieć chwilowe zaćmienie."
+  "pl": "Nie łapać, nie rozumieć czegoś oczywistego / mieć chwilowe zaćmienie.",
+  "at": [
+   "609d399d"
+  ]
  },
  {
   "en": "“to have tomatoes on your eyes”",
   "ru": "«иметь помидоры на глазах»",
-  "pl": "„mieć pomidory na oczach”"
+  "pl": "„mieć pomidory na oczach”",
+  "at": [
+   "bd6bc47a"
+  ]
  },
  {
   "en": "To miss the obvious, not to see what's right in front of you.",
   "ru": "Не замечать очевидного, не видеть то, что прямо перед тобой (≈ «слона-то я и не приметил»).",
-  "pl": "Nie zauważać oczywistego, nie widzieć tego, co jest tuż przed nosem (≈ „najciemniej pod latarnią”)."
+  "pl": "Nie zauważać oczywistego, nie widzieć tego, co jest tuż przed nosem (≈ „najciemniej pod latarnią”).",
+  "at": [
+   "fc4963fa"
+  ]
  },
  {
   "en": "“to get the cow off the ice”",
   "ru": "«снять корову со льда»",
-  "pl": "„ściągnąć krowę z lodu”"
+  "pl": "„ściągnąć krowę z lodu”",
+  "at": [
+   "d20af3fc"
+  ]
  },
  {
   "en": "To get out of a tricky situation, to solve the problem.",
   "ru": "Вытащить ситуацию из неприятного положения, решить проблему (≈ «разрулить ситуацию»).",
-  "pl": "Wybrnąć z trudnej sytuacji, rozwiązać problem (≈ „uratować sytuację”)."
+  "pl": "Wybrnąć z trudnej sytuacji, rozwiązać problem (≈ „uratować sytuację”).",
+  "at": [
+   "fe43ae4c"
+  ]
  },
  {
   "en": "“to have pig”",
   "ru": "«иметь свинью»",
-  "pl": "„mieć świnię”"
+  "pl": "„mieć świnię”",
+  "at": [
+   "087c4fd6"
+  ]
  },
  {
   "en": "To be lucky, to get lucky.",
   "ru": "Повезти, иметь удачу (≈ «родиться в рубашке»).",
-  "pl": "Mieć szczęście (≈ „mieć farta”, „urodzić się w czepku”)."
+  "pl": "Mieć szczęście (≈ „mieć farta”, „urodzić się w czepku”).",
+  "at": [
+   "bcbb51be"
+  ]
  },
  {
   "en": "“to step into the little pot of fat”",
   "ru": "«наступить в миску с жиром»",
-  "pl": "„wdepnąć w miseczkę z tłuszczem”"
+  "pl": "„wdepnąć w miseczkę z tłuszczem”",
+  "at": [
+   "56abb560"
+  ]
  },
  {
   "en": "To say or do something embarrassing by accident (≈ “to put your foot in it”).",
   "ru": "Ляпнуть или сделать что-то неловкое, попасть в неудобную ситуацию (≈ «сесть в лужу», «попасть впросак»).",
-  "pl": "Palnąć albo zrobić coś niezręcznego, wpakować się w kłopotliwą sytuację (≈ „strzelić gafę”, „dać plamę”)."
+  "pl": "Palnąć albo zrobić coś niezręcznego, wpakować się w kłopotliwą sytuację (≈ „strzelić gafę”, „dać plamę”).",
+  "at": [
+   "2d431568"
+  ]
  },
  {
   "en": "“to have two left hands”",
   "ru": "«иметь две левые руки»",
-  "pl": "„mieć dwie lewe ręce”"
+  "pl": "„mieć dwie lewe ręce”",
+  "at": [
+   "5c55f352"
+  ]
  },
  {
   "en": "To be clumsy, to be bad at practical things (≈ “to be all thumbs”).",
   "ru": "Быть неумелым в практических делах, ничего не уметь делать руками (≈ «руки не из того места растут»).",
-  "pl": "Nie mieć smykałki do prac ręcznych, nic nie umieć zrobić własnymi rękami (po polsku mówi się tak samo)."
+  "pl": "Nie mieć smykałki do prac ręcznych, nic nie umieć zrobić własnymi rękami (po polsku mówi się tak samo).",
+  "at": [
+   "cc2572a2"
+  ]
  },
  {
   "en": "“to make a monkey of yourself”",
   "ru": "«сделать из себя обезьяну»",
-  "pl": "„zrobić z siebie małpę”"
+  "pl": "„zrobić z siebie małpę”",
+  "at": [
+   "61cbb678"
+  ]
  },
  {
   "en": "To embarrass yourself, to look stupid in front of others.",
   "ru": "Выставить себя дураком / опозориться.",
-  "pl": "Zrobić z siebie głupka / ośmieszyć się."
+  "pl": "Zrobić z siebie głupka / ośmieszyć się.",
+  "at": [
+   "e358d370"
+  ]
  },
  {
   "en": "“That's sausage to me.”",
   "ru": "«Мне это колбаса.»",
-  "pl": "„To dla mnie kiełbasa.”"
+  "pl": "„To dla mnie kiełbasa.”",
+  "at": [
+   "6105ce0c"
+  ]
  },
  {
   "en": "I don't care, it makes no difference to me.",
   "ru": "Мне всё равно / мне без разницы (≈ «мне по барабану»).",
-  "pl": "Wszystko mi jedno / nie ma to dla mnie znaczenia (≈ „mam to w nosie”)."
+  "pl": "Wszystko mi jedno / nie ma to dla mnie znaczenia (≈ „mam to w nosie”).",
+  "at": [
+   "66fa281c"
+  ]
  },
  {
   "en": "“to have your nose full”",
   "ru": "«иметь полный нос»",
-  "pl": "„mieć pełny nos”"
+  "pl": "„mieć pełny nos”",
+  "at": [
+   "dadc9d29"
+  ]
  },
  {
   "en": "To have had enough of something (≈ “to be fed up”).",
   "ru": "Быть сытым по горло, с меня хватит.",
-  "pl": "Mieć czegoś po dziurki w nosie, mieć dość."
+  "pl": "Mieć czegoś po dziurki w nosie, mieć dość.",
+  "at": [
+   "8099abd1"
+  ]
  },
  {
   "en": "“to go on someone's biscuit”",
   "ru": "«идти кому-то на печенье»",
-  "pl": "„wchodzić komuś na ciastko”"
+  "pl": "„wchodzić komuś na ciastko”",
+  "at": [
+   "21fbbca6"
+  ]
  },
  {
   "en": "To annoy someone, to irritate someone (≈ “to get on someone's nerves”).",
   "ru": "Действовать на нервы, раздражать.",
-  "pl": "Działać komuś na nerwy, irytować."
+  "pl": "Działać komuś na nerwy, irytować.",
+  "at": [
+   "8651c68e"
+  ]
  },
  {
   "en": "“That's not my beer.”",
   "ru": "«Это не моё пиво.»",
-  "pl": "„To nie moje piwo.”"
+  "pl": "„To nie moje piwo.”",
+  "at": [
+   "4c6c1cee"
+  ]
  },
  {
   "en": "That's not my business, it's nothing to do with me.",
   "ru": "Это не моё дело, меня это не касается (≈ «моя хата с краю»).",
-  "pl": "To nie moja sprawa, mnie to nie dotyczy (≈ „to nie moja broszka”)."
+  "pl": "To nie moja sprawa, mnie to nie dotyczy (≈ „to nie moja broszka”).",
+  "at": [
+   "d4a3b5c6"
+  ]
  },
  {
   "en": "“to hit the nail on the head”",
   "ru": "«попасть гвоздю по шляпке»",
-  "pl": "„trafić w łebek gwoździa”"
+  "pl": "„trafić w łebek gwoździa”",
+  "at": [
+   "3f2fdb3a"
+  ]
  },
  {
   "en": "To be exactly right, to say exactly the right thing (same idiom in English).",
   "ru": "Попасть в точку, сказать именно то, что нужно.",
-  "pl": "Trafić w sedno, powiedzieć dokładnie to, co trzeba."
+  "pl": "Trafić w sedno, powiedzieć dokładnie to, co trzeba.",
+  "at": [
+   "c38d80ba"
+  ]
  },
  {
   "en": "“The bear is tap-dancing there.”",
   "ru": "«Там медведь танцует степ.»",
-  "pl": "„Tam stepuje niedźwiedź.”"
+  "pl": "„Tam stepuje niedźwiedź.”",
+  "at": [
+   "8521c777"
+  ]
  },
  {
   "en": "It's a great party, there's a lot going on (about a party or event).",
   "ru": "Там очень весело, там кипит жизнь — о вечеринке, событии (≈ «дым коромыслом»).",
-  "pl": "Jest tam bardzo wesoło, wszystko tętni życiem — o imprezie, wydarzeniu (≈ „zabawa na sto dwa”)."
+  "pl": "Jest tam bardzo wesoło, wszystko tętni życiem — o imprezie, wydarzeniu (≈ „zabawa na sto dwa”).",
+  "at": [
+   "19ed46a7"
+  ]
  },
  {
   "en": "“End good, all good.”",
   "ru": "«Конец хороший — всё хорошо.»",
-  "pl": "„Koniec dobry, wszystko dobre.”"
+  "pl": "„Koniec dobry, wszystko dobre.”",
+  "at": [
+   "d40b7cba"
+  ]
  },
  {
   "en": "If it ends well, everything is fine (≈ “All's well that ends well”).",
   "ru": "Всё хорошо, что хорошо кончается.",
-  "pl": "Wszystko dobre, co się dobrze kończy."
+  "pl": "Wszystko dobre, co się dobrze kończy.",
+  "at": [
+   "5869223a"
+  ]
  }
 ]

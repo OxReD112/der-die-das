@@ -2,11 +2,17 @@
  {
   "en": "Polite form — capitalised: {w}",
   "ru": "Вежливая форма — с большой буквы: {w}",
-  "pl": "Forma grzecznościowa — wielką literą: {w}"
+  "pl": "Forma grzecznościowa — wielką literą: {w}",
+  "at": [
+   "894e4dca"
+  ]
  },
  {
   "en": "Lower case here: {w}",
   "ru": "Здесь с маленькой буквы: {w}",
-  "pl": "Tutaj małą literą: {w}"
+  "pl": "Tutaj małą literą: {w}",
+  "at": [
+   "32d4eb0d"
+  ]
  }
 ]

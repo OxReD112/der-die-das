@@ -2,332 +2,545 @@
  {
   "en": "had a baby",
   "ru": "появился ребёнок",
-  "pl": "urodziło się dziecko"
+  "pl": "urodziło się dziecko",
+  "at": [
+   "868717e8"
+  ]
  },
  {
   "en": "feel (already)",
   "ru": "испытывать (чувство)",
-  "pl": "czuć (np. strach)"
+  "pl": "czuć (np. strach)",
+  "at": [
+   "1f03ced3"
+  ]
  },
  {
   "en": "stop it!",
   "ru": "прекрати!",
-  "pl": "przestań!"
+  "pl": "przestań!",
+  "at": [
+   "e99bbdde"
+  ]
  },
  {
   "en": "became",
   "ru": "стал(а)",
-  "pl": "stał(a) się, został(a)"
+  "pl": "stał(a) się, został(a)",
+  "at": [
+   "9db085d8"
+  ]
  },
  {
   "en": "Passiv",
   "ru": "пассив",
-  "pl": "strona bierna"
+  "pl": "strona bierna",
+  "at": [
+   "6ab58987",
+   "9db085d8"
+  ]
  },
  {
   "en": "become, get",
   "ru": "становиться",
-  "pl": "stawać się"
+  "pl": "stawać się",
+  "at": [
+   "af978a99"
+  ]
  },
  {
   "en": "adjective / noun",
   "ru": "прилагательное / существительное",
-  "pl": "przymiotnik / rzeczownik"
+  "pl": "przymiotnik / rzeczownik",
+  "at": [
+   "4aa06595"
+  ]
  },
  {
   "en": "becomes, became",
   "ru": "становится, стал(а)",
-  "pl": "staje się / zostaje, stał(a) się / został(a)"
+  "pl": "staje się / zostaje, stał(a) się / został(a)",
+  "at": [
+   "44ee4aff"
+  ]
  },
  {
   "en": "future",
   "ru": "будущее",
-  "pl": "przyszłość"
+  "pl": "przyszłość",
+  "at": [
+   "cee4d69e"
+  ]
  },
  {
   "en": "infinitive",
   "ru": "Infinitiv",
-  "pl": "Infinitiv"
+  "pl": "Infinitiv",
+  "at": [
+   "1ead42f0",
+   "24b16fb7",
+   "551d3e58",
+   "65190016",
+   "73a838d4",
+   "b9721d41",
+   "c4fd19ab"
+  ]
  },
  {
   "en": "will",
   "ru": "будет (делать)",
-  "pl": "będzie (robić)"
+  "pl": "będzie (robić)",
+  "at": [
+   "cccb3230"
+  ]
  },
  {
   "en": "For plans, Präsens is often enough: *Ich rufe dich morgen an.* Use werden for a promise or forecast.",
   "ru": "Для планов часто достаточно Präsens: *Ich rufe dich morgen an.* werden используют для обещания или прогноза.",
-  "pl": "Przy planach często wystarczy Präsens: *Ich rufe dich morgen an.* werden używa się przy obietnicy albo prognozie."
+  "pl": "Przy planach często wystarczy Präsens: *Ich rufe dich morgen an.* werden używa się przy obietnicy albo prognozie.",
+  "at": [
+   "eea53d7d"
+  ]
  },
  {
   "en": "Usage",
   "ru": "Употребление",
-  "pl": "Użycie"
+  "pl": "Użycie",
+  "at": [
+   "0b2bc1f4"
+  ]
  },
  {
   "en": "a guess",
   "ru": "предположение",
-  "pl": "przypuszczenie"
+  "pl": "przypuszczenie",
+  "at": [
+   "8d66ad70"
+  ]
  },
  {
   "en": "probably; it'll be fine",
   "ru": "наверное; всё будет хорошо",
-  "pl": "pewnie; wszystko będzie dobrze"
+  "pl": "pewnie; wszystko będzie dobrze",
+  "at": [
+   "aaaa4386"
+  ]
  },
  {
   "en": "*wohl* = probably: *Er wird wohl schlafen.* · *schon* = don't worry: *Es wird schon nicht so schlimm sein.*",
   "ru": "*wohl* = наверное: *Er wird wohl schlafen.* · *schon* = не волнуйся: *Es wird schon nicht so schlimm sein.*",
-  "pl": "*wohl* = pewnie: *Er wird wohl schlafen.* · *schon* = nie martw się: *Es wird schon nicht so schlimm sein.*"
+  "pl": "*wohl* = pewnie: *Er wird wohl schlafen.* · *schon* = nie martw się: *Es wird schon nicht so schlimm sein.*",
+  "at": [
+   "b918e2df"
+  ]
  },
  {
   "en": "Also",
   "ru": "Ещё",
-  "pl": "Także"
+  "pl": "Także",
+  "at": [
+   "8d42fa6e"
+  ]
  },
  {
   "en": "it is being done / was done",
   "ru": "это делают / сделали",
-  "pl": "to się robi / zrobiono"
+  "pl": "to się robi / zrobiono",
+  "at": [
+   "23c6bff1"
+  ]
  },
  {
   "en": "would",
   "ru": "бы",
-  "pl": "forma z -by"
+  "pl": "forma z -by",
+  "at": [
+   "81cc4b6f"
+  ]
  },
  {
   "en": "would: polite, or not real",
   "ru": "бы: вежливо или не на самом деле",
-  "pl": "-by: grzecznie albo nierealnie"
+  "pl": "-by: grzecznie albo nierealnie",
+  "at": [
+   "93df1c79"
+  ]
  },
  {
   "en": "*Würdest du mir kurz helfen?*",
   "ru": "*Würdest du mir kurz helfen?*",
-  "pl": "*Würdest du mir kurz helfen?*"
+  "pl": "*Würdest du mir kurz helfen?*",
+  "at": [
+   "2268fc36"
+  ]
  },
  {
   "en": "Polite request",
   "ru": "Вежливая просьба",
-  "pl": "Grzeczna prośba"
+  "pl": "Grzeczna prośba",
+  "at": [
+   "e1039321"
+  ]
  },
  {
   "en": "after a 2nd verb",
   "ru": "после 2-го глагола",
-  "pl": "po 2. czasowniku"
+  "pl": "po 2. czasowniku",
+  "at": [
+   "9db085d8"
+  ]
  },
  {
   "en": "leave something",
   "ru": "оставить",
-  "pl": "zostawić"
+  "pl": "zostawić",
+  "at": [
+   "c59708e7"
+  ]
  },
  {
   "en": "object",
   "ru": "вещь",
-  "pl": "rzecz"
+  "pl": "rzecz",
+  "at": [
+   "9091664d",
+   "abc2ab8f",
+   "bc8c8a8f",
+   "c4fd19ab"
+  ]
  },
  {
   "en": "place",
   "ru": "место",
-  "pl": "miejsce"
+  "pl": "miejsce",
+  "at": [
+   "abc2ab8f"
+  ]
  },
  {
   "en": "leave (somewhere)",
   "ru": "оставить (где-то)",
-  "pl": "zostawić (gdzieś)"
+  "pl": "zostawić (gdzieś)",
+  "at": [
+   "0c943b51"
+  ]
  },
  {
   "en": "have someone do it",
   "ru": "поручить сделать",
-  "pl": "zlecić komuś"
+  "pl": "zlecić komuś",
+  "at": [
+   "675e7dbb"
+  ]
  },
  {
   "en": "someone else does it for you",
   "ru": "делает кто-то другой",
-  "pl": "robi to ktoś inny"
+  "pl": "robi to ktoś inny",
+  "at": [
+   "3ea8e50d"
+  ]
  },
  {
   "en": "allow someone",
   "ru": "разрешить",
-  "pl": "pozwolić"
+  "pl": "pozwolić",
+  "at": [
+   "8dba765d"
+  ]
  },
  {
   "en": "person",
   "ru": "человек",
-  "pl": "osoba"
+  "pl": "osoba",
+  "at": [
+   "b9721d41"
+  ]
  },
  {
   "en": "allow someone to do something",
   "ru": "разрешить кому-то что-то сделать",
-  "pl": "pozwolić komuś coś zrobić"
+  "pl": "pozwolić komuś coś zrobić",
+  "at": [
+   "804d682b"
+  ]
  },
  {
   "en": "*Lass mich das tragen!* = let me carry it",
   "ru": "*Lass mich das tragen!* = давай я понесу",
-  "pl": "*Lass mich das tragen!* = daj, ja to poniosę"
+  "pl": "*Lass mich das tragen!* = daj, ja to poniosę",
+  "at": [
+   "a65e7edc"
+  ]
  },
  {
   "en": "Offer help",
   "ru": "Предложить помощь",
-  "pl": "Zaproponować pomoc"
+  "pl": "Zaproponować pomoc",
+  "at": [
+   "1a1348ef"
+  ]
  },
  {
   "en": "let's",
   "ru": "давай",
-  "pl": "chodź, zróbmy…"
+  "pl": "chodź, zróbmy…",
+  "at": [
+   "a4031f76"
+  ]
  },
  {
   "en": "let's",
   "ru": "давай(те)",
-  "pl": "chodź(cie), zróbmy…"
+  "pl": "chodź(cie), zróbmy…",
+  "at": [
+   "392b9128"
+  ]
  },
  {
   "en": "One person: *lass uns* · several: *lasst uns* · formal: *Lassen Sie uns*",
   "ru": "Одному: *lass uns* · нескольким: *lasst uns* · вежливо: *Lassen Sie uns*",
-  "pl": "Do jednej osoby: *lass uns* · do kilku: *lasst uns* · grzecznie: *Lassen Sie uns*"
+  "pl": "Do jednej osoby: *lass uns* · do kilku: *lasst uns* · grzecznie: *Lassen Sie uns*",
+  "at": [
+   "e2fc3345"
+  ]
  },
  {
   "en": "Forms",
   "ru": "Формы",
-  "pl": "Formy"
+  "pl": "Formy",
+  "at": [
+   "f3cca3ec"
+  ]
  },
  {
   "en": "can be done",
   "ru": "можно сделать",
-  "pl": "da się zrobić"
+  "pl": "da się zrobić",
+  "at": [
+   "02ff551d",
+   "78641c12"
+  ]
  },
  {
   "en": "it can be done",
   "ru": "это можно сделать",
-  "pl": "to da się zrobić"
+  "pl": "to da się zrobić",
+  "at": [
+   "4cf83adc"
+  ]
  },
  {
   "en": "stop it! (fixed phrase)",
   "ru": "прекрати! (устойчивое выражение)",
-  "pl": "przestań! (stałe wyrażenie)"
+  "pl": "przestań! (stałe wyrażenie)",
+  "at": [
+   "a655c470"
+  ]
  },
  {
   "en": "can't give it up",
   "ru": "не мочь бросить",
-  "pl": "nie móc rzucić"
+  "pl": "nie móc rzucić",
+  "at": [
+   "4bcaff80"
+  ]
  },
  {
   "en": "activity",
   "ru": "занятие",
-  "pl": "zajęcie"
+  "pl": "zajęcie",
+  "at": [
+   "36b62046"
+  ]
  },
  {
   "en": "not stop doing something; can't give it up",
   "ru": "не прекращать занятие; не мочь бросить",
-  "pl": "nie przestawać czegoś robić; nie móc rzucić"
+  "pl": "nie przestawać czegoś robić; nie móc rzucić",
+  "at": [
+   "fc648256"
+  ]
  },
  {
   "en": "a state",
   "ru": "состояние",
-  "pl": "stan"
+  "pl": "stan",
+  "at": [
+   "875a6333"
+  ]
  },
  {
   "en": "the result of an action: how the thing is now (was then)",
   "ru": "результат действия: какая вещь сейчас (была тогда)",
-  "pl": "wynik czynności: jaka rzecz jest teraz (była wtedy)"
+  "pl": "wynik czynności: jaka rzecz jest teraz (była wtedy)",
+  "at": [
+   "42107205"
+  ]
  },
  {
   "en": "Being done right now → werden: *Die Tür wird gerade geschlossen.*",
   "ru": "Делают прямо сейчас → werden: *Die Tür wird gerade geschlossen.*",
-  "pl": "Robią to właśnie teraz → werden: *Die Tür wird gerade geschlossen.*"
+  "pl": "Robią to właśnie teraz → werden: *Die Tür wird gerade geschlossen.*",
+  "at": [
+   "2b805072"
+  ]
  },
  {
   "en": "Compare",
   "ru": "Сравните",
-  "pl": "Porównaj"
+  "pl": "Porównaj",
+  "at": [
+   "7f455d3d",
+   "d028199d",
+   "d7aa421e"
+  ]
  },
  {
   "en": "zu + infinitive",
   "ru": "zu + Infinitiv",
-  "pl": "zu + Infinitiv"
+  "pl": "zu + Infinitiv",
+  "at": [
+   "3d576fc0",
+   "6fb9b301"
+  ]
  },
  {
   "en": "it can / could be done",
   "ru": "это можно / можно было сделать",
-  "pl": "to da się / dało się zrobić"
+  "pl": "to da się / dało się zrobić",
+  "at": [
+   "e26c13eb"
+  ]
  },
  {
   "en": "Sometimes = must: *Die Rechnung ist bis Freitag zu bezahlen.*",
   "ru": "Иногда = нужно: *Die Rechnung ist bis Freitag zu bezahlen.*",
-  "pl": "Czasem = trzeba: *Die Rechnung ist bis Freitag zu bezahlen.*"
+  "pl": "Czasem = trzeba: *Die Rechnung ist bis Freitag zu bezahlen.*",
+  "at": [
+   "8444599c"
+  ]
  },
  {
   "en": "Can also mean",
   "ru": "Также может значить",
-  "pl": "Może też znaczyć"
+  "pl": "Może też znaczyć",
+  "at": [
+   "7c31f4af"
+  ]
  },
  {
   "en": "Perfekt (movement, change)",
   "ru": "Perfekt (движение, изменение)",
-  "pl": "Perfekt (ruch, zmiana)"
+  "pl": "Perfekt (ruch, zmiana)",
+  "at": [
+   "c6a27cfc"
+  ]
  },
  {
   "en": "past of a verb of movement or change (gehen, fahren, werden)",
   "ru": "прошлое глагола движения или изменения (gehen, fahren, werden)",
-  "pl": "przeszłość czasownika ruchu lub zmiany (gehen, fahren, werden)"
+  "pl": "przeszłość czasownika ruchu lub zmiany (gehen, fahren, werden)",
+  "at": [
+   "c4dd80aa"
+  ]
  },
  {
   "en": "Also *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
   "ru": "Ещё *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
-  "pl": "Także *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*"
+  "pl": "Także *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
+  "at": [
+   "0468b3a3"
+  ]
  },
  {
   "en": "Other common verbs",
   "ru": "Другие частые глаголы",
-  "pl": "Inne częste czasowniki"
+  "pl": "Inne częste czasowniki",
+  "at": [
+   "cbe9d9b2"
+  ]
  },
  {
   "en": "Perfekt",
   "ru": "Perfekt",
-  "pl": "Perfekt"
+  "pl": "Perfekt",
+  "at": [
+   "dd887b52"
+  ]
  },
  {
   "en": "past (most verbs)",
   "ru": "прошлое (большинство глаголов)",
-  "pl": "przeszłość (większość czasowników)"
+  "pl": "przeszłość (większość czasowników)",
+  "at": [
+   "c23eac1c"
+  ]
  },
  {
   "en": "have to",
   "ru": "нужно",
-  "pl": "trzeba"
+  "pl": "trzeba",
+  "at": [
+   "18be7a66"
+  ]
  },
  {
   "en": "have to / had to",
   "ru": "нужно / нужно было",
-  "pl": "trzeba / trzeba było"
+  "pl": "trzeba / trzeba było",
+  "at": [
+   "4563b9d8"
+  ]
  },
  {
   "en": "a feeling you already have",
   "ru": "чувство уже есть",
-  "pl": "uczucie już jest"
+  "pl": "uczucie już jest",
+  "at": [
+   "0a7a6aa5"
+  ]
  },
  {
   "en": "When the feeling starts → bekommen: *Ich bekomme Angst.*",
   "ru": "Когда чувство только появляется → bekommen: *Ich bekomme Angst.*",
-  "pl": "Kiedy uczucie dopiero się pojawia → bekommen: *Ich bekomme Angst.*"
+  "pl": "Kiedy uczucie dopiero się pojawia → bekommen: *Ich bekomme Angst.*",
+  "at": [
+   "4db05492"
+  ]
  },
  {
   "en": "fixed phrases",
   "ru": "устойчивые выражения",
-  "pl": "stałe wyrażenia"
+  "pl": "stałe wyrażenia",
+  "at": [
+   "6478fff1"
+  ]
  },
  {
   "en": "be right · be in a hurry",
   "ru": "быть правым · спешить",
-  "pl": "mieć rację · spieszyć się"
+  "pl": "mieć rację · spieszyć się",
+  "at": [
+   "4e2da377"
+  ]
  },
  {
   "en": "no ge-",
   "ru": "без ge-",
-  "pl": "bez ge-"
+  "pl": "bez ge-",
+  "at": [
+   "9db085d8"
+  ]
  },
  {
   "en": "get, receive",
   "ru": "получать",
-  "pl": "dostawać"
+  "pl": "dostawać",
+  "at": [
+   "b22a45e7",
+   "ba0a4051"
+  ]
  },
  {
   "en": "get (not „become“!)",
@@ -337,56 +550,89 @@
  {
   "en": "start to feel",
   "ru": "начать чувствовать",
-  "pl": "zacząć czuć"
+  "pl": "zacząć czuć",
+  "at": [
+   "420ab940"
+  ]
  },
  {
   "en": "a feeling starts",
   "ru": "чувство появляется",
-  "pl": "uczucie się pojawia"
+  "pl": "uczucie się pojawia",
+  "at": [
+   "e917e516"
+  ]
  },
  {
   "en": "Already there → haben: *Ich habe Angst.*",
   "ru": "Чувство уже есть → haben: *Ich habe Angst.*",
-  "pl": "Uczucie już jest → haben: *Ich habe Angst.*"
+  "pl": "Uczucie już jest → haben: *Ich habe Angst.*",
+  "at": [
+   "ce878dcf"
+  ]
  },
  {
   "en": "get ill",
   "ru": "заболеть",
-  "pl": "zachorować"
+  "pl": "zachorować",
+  "at": [
+   "c7aaf799"
+  ]
  },
  {
   "en": "illness",
   "ru": "болезнь",
-  "pl": "choroba"
+  "pl": "choroba",
+  "at": [
+   "db885495"
+  ]
  },
  {
   "en": "caught (a cold …)",
   "ru": "заболел(а)",
-  "pl": "zachorował(a)"
+  "pl": "zachorował(a)",
+  "at": [
+   "40d7ffff"
+  ]
  },
  {
   "en": "have a baby",
   "ru": "родить ребёнка",
-  "pl": "urodzić dziecko"
+  "pl": "urodzić dziecko",
+  "at": [
+   "d23a3836"
+  ]
  },
  {
   "en": "catch (a train)",
   "ru": "успеть (на поезд)",
-  "pl": "zdążyć (na pociąg)"
+  "pl": "zdążyć (na pociąg)",
+  "at": [
+   "ea559d17"
+  ]
  },
  {
   "en": "make it in time",
   "ru": "успеть",
-  "pl": "zdążyć"
+  "pl": "zdążyć",
+  "at": [
+   "1312d741"
+  ]
  },
  {
   "en": "you receive it: given, sent",
   "ru": "ты получаешь: подарили, прислали",
-  "pl": "dostajesz: podarowano, przysłano"
+  "pl": "dostajesz: podarowano, przysłano",
+  "at": [
+   "e01d9877"
+  ]
  },
  {
   "en": "given / sent to you",
   "ru": "тебе подарили / прислали",
-  "pl": "podarowano ci / przysłano ci"
+  "pl": "podarowano ci / przysłano ci",
+  "at": [
+   "9318acf1"
+  ]
  }
 ]
