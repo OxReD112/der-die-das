@@ -142,8 +142,8 @@
   const MESSAGES_RU = {
     "Reading position could not be saved.": "Не удалось сохранить место чтения.",
     "Meaning selected, but the correction could not be saved.": "Значение выбрано, но сохранить выбор не удалось.",
-    "The word form is unavailable. Please reload and try again.": "Форма слова недоступна. Перезагрузите страницу и попробуйте ещё раз.",
-    "Vocabulary could not be loaded. Try reopening this word.": "Не удалось загрузить слова. Откройте это слово ещё раз.",
+    "Couldn't add the word. Please reload the page.": "Не удалось добавить слово. Перезагрузите страницу.", // 18.11 (was «Форма слова недоступна…»)
+    "Couldn't load your marked words.": "Не удалось загрузить отмеченные слова.", // 18.11
     "The book could not be loaded. Check your internet connection.": "Не удалось загрузить книгу. Проверьте подключение к интернету.",
     "Could not undo the mark. Please try again.": "Не удалось отменить отметку. Попробуйте ещё раз.",
     "The mark could not be saved. Please try again.": "Не удалось сохранить отметку. Попробуйте ещё раз.",
@@ -164,7 +164,7 @@
     "This EPUB is missing a required book file.": "В этом EPUB не хватает нужного файла.",
     "An EPUB chapter is too large to import.": "Одна из глав EPUB слишком большая.",
     "This EPUB uses an unsupported or invalid text encoding.": "В этом EPUB неподдерживаемая или неверная кодировка текста.",
-    "This file is not a valid EPUB book.": "Это не EPUB-книга.",
+    "This file is not a valid EPUB book.": "Файл повреждён или не является EPUB-книгой.", // 18.11 (was «Это не EPUB-книга.»)
     "This EPUB is missing its chapter list.": "В этом EPUB нет списка глав.",
     "This EPUB is DRM-protected. Choose a DRM-free book.": "Этот EPUB защищён (DRM). Выберите книгу без защиты.",
     "This EPUB references a missing chapter.": "В этом EPUB не хватает главы.",
@@ -1743,7 +1743,7 @@
   function selectedResolutionNow() { return selectedResolution; }
   function addToWortschatz(item) {
     const form = window.WortschatzCollectionWindow;
-    if (!form) { showToast("The word form is unavailable. Please reload and try again."); return; }
+    if (!form) { showToast("Couldn't add the word. Please reload the page."); return; }
     closePopups();
     form.addDictionaryWord({
       id: Date.now().toString(36) + Math.random().toString(36).slice(2),
@@ -1781,12 +1781,12 @@
       if (request !== lookupRequest) return;
       if (window.BibliothekVocabulary.identity(input) !== window.BibliothekVocabulary.identity(bookmarkInput() || {})) return;
       const marked = records.some(record => record.key === window.BibliothekVocabulary.identity(input));
-      const label = marked ? "Remove mark" : "Mark as unknown";
+      // 18.11 (Alena): no hover hint on the bookmark; for screen readers one neutral German name «Merken» (in the
+      // HTML) and the state in aria-pressed (was «Mark as unknown» / «Remove mark», English in every language)
       button.setAttribute("aria-pressed", String(marked));
-      button.setAttribute("aria-label", label); button.title = label;
       button.disabled = bookmarkBusy;
     } catch (_) {
-      if (request === lookupRequest) { button.disabled = true; showToast("Vocabulary could not be loaded. Try reopening this word."); }
+      if (request === lookupRequest) { button.disabled = true; showToast("Couldn't load your marked words."); }
     }
   }
   function bookmarkToast(message, undo) {
@@ -1796,7 +1796,8 @@
     const button = document.createElement("button"); button.type = "button"; button.className = "toast-undo"; button.textContent = "Rückgängig";
     button.addEventListener("click", async () => {
       button.disabled = true;
-      try { await undo(); showToast("Mark removed."); refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
+      // 18.11 (Alena): after «Rückgängig» no message — the bookmark simply goes empty (was «Mark removed.», English)
+      try { await undo(); clearTimeout(toastTimer); $("reader-toast").hidden = true; $("reader-toast").classList.remove("has-undo"); refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
       catch (_) { button.disabled = false; showToast("Could not undo the mark. Please try again."); }
     });
     $("reader-toast").append(button);
