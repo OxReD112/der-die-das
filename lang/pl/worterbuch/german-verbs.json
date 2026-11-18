@@ -17502,11 +17502,11 @@
   "example_pl": "Na szczęście rowerzysta wyszedł z wypadku tylko z kilkoma zadrapaniami.",
   "complements": [
    {
-    "note_pl": "wyjść (z czegoś) tylko z czymś"
+    "note_pl": "wyjść (z czegoś) tylko z czymś: mit dem Schrecken davonkommen — skończyć się (dla kogoś) na strachu; mit dem Leben davonkommen — ujść z życiem"
    }
   ],
-  "_src": "81d5c927",
-  "_src_reader": "68ea825e"
+  "_src": "2986b2e7",
+  "_src_reader": "959ab91e"
  },
  "verb-1760": {
   "translation_pl": "degradować (obniżać stopień lub stanowisko); (przen.) sprowadzać (do roli kogoś, czegoś)",
@@ -20581,11 +20581,11 @@
   "complements": [
    {
     "meaning_pl": "(książk.) badać (coś)",
-    "note_pl": "czemuś (Dat.): einem Geheimnis nachforschen"
+    "note_pl": "czemuś (Dat.): einem Geheimnis nachforschen — dociekać tajemnicy"
    }
   ],
-  "_src": "6fcd9f91",
-  "_src_reader": "92f52e44"
+  "_src": "cef9b5aa",
+  "_src_reader": "62e6a4c3"
  },
  "verb-2049": {
   "translation_pl": "pomagać, popychać (żeby coś szło lepiej); poganiać (kogoś)",

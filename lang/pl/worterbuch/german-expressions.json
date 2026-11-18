@@ -2356,9 +2356,9 @@
   "translation_pl": "(przestarz.) jeszcze do tego daleko, nie ma pośpiechu; nic nie szkodzi, jakoś to będzie",
   "example_pl": "„Do zimy jeszcze daleko” — powiedział rolnik.",
   "notes_pl": [
-   "Duden (Weg 2.2, veraltend): damit hat es / das hat noch gute Wege — „noch Zeit”. Znaczenie „nic nie szkodzi, jakoś to będzie” — z kontekstu u Grimmów: »Das hat gute Wege,« antwortete der Schneider, »kein Haar haben sie mir gekrümmt.« Dziś: das hat keine Eile, das hat Zeit."
+   "Duden (Weg, veraltend): damit hat es / das hat noch gute Wege — „noch Zeit”. Znaczenie „nic nie szkodzi, jakoś to będzie” — z kontekstu u Grimmów („Dzielny krawczyk”, Das tapfere Schneiderlein): »Das hat gute Wege,« antwortete der Schneider, »kein Haar haben sie mir gekrümmt.« Dziś: das hat keine Eile, das hat Zeit."
   ],
-  "_src": "f5b6cc46",
+  "_src": "ce81fd46",
   "_src_reader": "242587c7"
  },
  "expression-250": {
@@ -3064,381 +3064,381 @@
   "_src_reader": "4f7bbeee"
  },
  "expression-333": {
-  "_src": "7be3c739",
   "translation_pl": "głęboko odetchnąć, złapać oddech",
   "example_pl": "Zanim odpowiedział, wziął głęboki oddech.",
   "notes_pl": [
    "Także tief Atem holen. Luft holen — wciągnąć powietrze, złapać oddech: Ich musste erst einmal Luft holen. — Najpierw musiałem / musiałam złapać oddech."
   ],
+  "_src": "7be3c739",
   "_src_reader": "602de6d6"
  },
  "expression-334": {
-  "_src": "4443c90e",
   "translation_pl": "ściśle biorąc, właściwie",
   "example_pl": "Ściśle biorąc, to wcale nie jest błąd.",
   "notes_pl": [
    "Także streng genommen — ściśle biorąc. Nie mylić: Er hat es mit der Wahrheit nicht so genau genommen — nie trzymał się zbytnio prawdy (es genau nehmen)."
   ],
+  "_src": "4443c90e",
   "_src_reader": "21ca2d8b"
  },
  "expression-335": {
-  "_src": "87b9e91c",
   "translation_pl": "zjeść, wypić, przyjąć (pokarm); wziąć do siebie (dziecko)",
   "example_pl": "Od wczoraj nic nie jadł.",
   "notes_pl": [
    "Zwykle o jedzeniu: etwas zu sich nehmen — coś zjeść. O człowieku: Die Großmutter nahm das Kind zu sich — babcia wzięła dziecko do siebie; Gott hat ihn zu sich genommen — (eufem.) umarł."
   ],
+  "_src": "87b9e91c",
   "_src_reader": "09e086db"
  },
  "expression-336": {
-  "_src": "0c229645",
   "translation_pl": "wychodzić z założenia (, że); zakładać",
   "example_pl": "Zakładam, że pociąg przyjedzie o czasie.",
   "notes_pl": [
    "Także von etwas ausgehen — przyjmować coś za punkt wyjścia: Wir gehen vom schlimmsten Fall aus. — Zakładamy najgorszy scenariusz."
   ],
+  "_src": "0c229645",
   "_src_reader": "daa1f958"
  },
  "expression-337": {
-  "_src": "c4559cc4",
   "translation_pl": "zaryzykować, spróbować (co będzie, to będzie)",
   "example_pl": "Nie wiem, czy się uda, ale zaryzykuję.",
   "notes_pl": [
    "Także es auf etwas ankommen lassen — doprowadzić do (kłótni, procesu): Sie ließ es auf einen Streit ankommen. Nie mylić: es kommt darauf an — to zależy (od czegoś)."
   ],
+  "_src": "c4559cc4",
   "_src_reader": "11e1feed"
  },
  "expression-338": {
-  "_src": "4b10ef1a",
   "translation_pl": "do diabła!, do cholery!",
   "example_pl": "Do diabła, no otwórz się wreszcie!",
   "notes_pl": [
    "Pot., dość dosadne. Także verdammt noch eins, verflixt noch mal. Samo verdammt! — cholera!"
   ],
+  "_src": "4b10ef1a",
   "_src_reader": "83fc9e78"
  },
  "expression-339": {
-  "_src": "74a7358d",
   "translation_pl": "cholera!, niech to szlag!",
   "example_pl": "Cholera! Uciekł mi autobus.",
   "notes_pl": [
    "Pot. Przed przymiotnikiem — cholernie: verdammt kalt — cholernie zimno (to nie to wyrażenie)."
   ],
+  "_src": "74a7358d",
   "_src_reader": "b18f3a0a"
  },
  "expression-340": {
-  "_src": "c7c6e2d6",
   "translation_pl": "o rany!, a to dopiero!; o mój Boże!",
   "example_pl": "O rany, mało brakowało!",
   "notes_pl": [
    "Pot., wykrzyknienie zdziwienia, irytacji lub zachwytu. Także Mensch!: Mensch, ist das schön! Samo Mann, na początku zdania to często zwrot do kogoś („mężu”, „stary”): Mann, steh auf! — tu wyrażenie nie jest rozpoznawane."
   ],
+  "_src": "c7c6e2d6",
   "_src_reader": "d792fadd"
  },
  "expression-341": {
-  "_src": "4a16ce44",
   "translation_pl": "pora, nadszedł czas",
   "example_pl": "Pora, żebyśmy coś zmienili.",
   "notes_pl": [
    "Także es ist (höchste) Zeit — (najwyższa) pora."
   ],
+  "_src": "4a16ce44",
   "_src_reader": "a8dca4f1"
  },
  "expression-342": {
-  "_src": "d8b57e5f",
   "translation_pl": "do kogoś dotarło, ktoś wreszcie zrozumiał",
   "example_pl": "Po jakimś czasie wreszcie do niego dotarło.",
   "notes_pl": [
    "Pot. Der Groschen ist gefallen — (wreszcie) dotarło. Der Groschen — dawna drobna moneta."
   ],
+  "_src": "d8b57e5f",
   "_src_reader": "ba8b297a"
  },
  "expression-343": {
-  "_src": "c6020726",
   "translation_pl": "rozkręcić się, rozochocić się; nakręcić się (rozzłościć się); nabrać rozpędu",
   "example_pl": "Po drugim kieliszku naprawdę się rozkręcił.",
   "notes_pl": [
    "Pot. Także in Fahrt sein — być w formie; jdn. in Fahrt bringen — rozruszać kogoś."
   ],
+  "_src": "c6020726",
   "_src_reader": "8b952758"
  },
  "expression-344": {
-  "_src": "e65d77b7",
   "translation_pl": "w ostatecznym rozrachunku, koniec końców",
   "example_pl": "Koniec końców to ty musisz zdecydować.",
   "notes_pl": [
    "Także letztendlich — w ostatecznym rozrachunku."
   ],
+  "_src": "e65d77b7",
   "_src_reader": "e8fc1d7a"
  },
  "expression-345": {
-  "_src": "9154b523",
   "translation_pl": "nie mówiąc już o",
   "example_pl": "Ledwo mówi po angielsku, nie mówiąc już o francuskim.",
   "notes_pl": [
    "Także na końcu: von den Kosten ganz zu schweigen — nie mówiąc już o kosztach."
   ],
+  "_src": "9154b523",
   "_src_reader": "b6a3a0e1"
  },
  "expression-346": {
-  "_src": "c4273715",
   "translation_pl": "rzecz w tym, że; to dlatego, że",
   "example_pl": "Rzecz w tym, że nikt nie słuchał.",
   "notes_pl": [
    "Pytanie: Woran liegt das? — Co jest tego przyczyną? Także das liegt an … — to przez …: Das liegt am Wetter."
   ],
+  "_src": "c4273715",
   "_src_reader": "471cfc00"
  },
  "expression-347": {
-  "_src": "a5c44391",
   "translation_pl": "zawrzeć pokój; pogodzić się",
   "example_pl": "Po długiej kłótni bracia wreszcie się pogodzili.",
   "notes_pl": [
    "Mit jemandem / etwas Frieden schließen — pogodzić się z kimś; pogodzić się z czymś."
   ],
+  "_src": "a5c44391",
   "_src_reader": "1c6eab32"
  },
  "expression-348": {
-  "_src": "6a7695a0",
   "translation_pl": "ktoś (nie) ma ochoty na coś, komuś (nie) w głowie coś",
   "example_pl": "Nie mam dziś ochoty na zabawę.",
   "notes_pl": [
    "Pot. Mir ist nach Tanzen — mam ochotę potańczyć. Nie mylić: Mir ist nach dem Essen schlecht — po jedzeniu jest mi niedobrze."
   ],
+  "_src": "6a7695a0",
   "_src_reader": "94c82961"
  },
  "expression-349": {
-  "_src": "4f075736",
   "translation_pl": "palić się (do czegoś), nie móc się doczekać",
   "example_pl": "Dzieci nie mogą się doczekać rozpakowania prezentów.",
   "notes_pl": [
    "Ich kann es kaum erwarten — nie mogę się doczekać."
   ],
+  "_src": "4f075736",
   "_src_reader": "b6d91487"
  },
  "expression-350": {
-  "_src": "e06d7862",
   "translation_pl": "o co w tym chodzi, co się za tym kryje",
   "example_pl": "Nikt nie wiedział, o co chodzi ze starą wieżą.",
   "notes_pl": [
    "Także Was hat es damit auf sich? — O co w tym chodzi?"
   ],
+  "_src": "e06d7862",
   "_src_reader": "17b2f10d"
  },
  "expression-351": {
-  "_src": "5e2e715c",
   "translation_pl": "zapoznać się (z czymś), oswoić się",
   "example_pl": "Przed egzaminem muszę zapoznać się z zasadami.",
   "notes_pl": [
    "Także mit etwas vertraut sein — dobrze coś znać, być obeznanym z czymś; jdn. mit etw. vertraut machen — zapoznać kogoś (z czymś)."
   ],
+  "_src": "5e2e715c",
   "_src_reader": "ab2d74e7"
  },
  "expression-352": {
-  "_src": "8e153173",
   "translation_pl": "oprócz, z wyjątkiem",
   "example_pl": "Byli wszyscy oprócz mojego brata.",
   "notes_pl": [
    "Alle bis auf einen — wszyscy oprócz jednego. Z rodzajnikiem zwykle „do”: bis auf den Boden — do samej podłogi; bis auf den letzten Platz — do ostatniego miejsca (to nie to wyrażenie)."
   ],
+  "_src": "8e153173",
   "_src_reader": "c6a4feda"
  },
  "expression-353": {
-  "_src": "5ce32441",
   "translation_pl": "komuś łuski spadły z oczu, ktoś nagle przejrzał na oczy",
   "example_pl": "Nagle jakby łuski spadły mi z oczu.",
   "notes_pl": [
    "Książk. Z Biblii (Dzieje Apostolskie 9,18)."
   ],
+  "_src": "5ce32441",
   "_src_reader": "ce2020ae"
  },
  "expression-354": {
-  "_src": "ac81efeb",
   "translation_pl": "rozgościć się, usadowić się wygodnie",
   "example_pl": "Rozgość się, zrobię nam herbaty.",
   "notes_pl": [
    "Także es sich bequem machen."
   ],
+  "_src": "ac81efeb",
   "_src_reader": "29ebfdae"
  },
  "expression-355": {
-  "_src": "b5129a75",
   "translation_pl": "być zdanym na siebie, liczyć tylko na siebie",
   "example_pl": "Po śmierci rodziców była całkowicie zdana na siebie.",
   "notes_pl": [
    "Także auf sich allein gestellt."
   ],
+  "_src": "b5129a75",
   "_src_reader": "54165fb6"
  },
  "expression-356": {
-  "_src": "683e2084",
   "translation_pl": "nie ryzykować, dmuchać na zimne",
   "example_pl": "Wezmę parasol na wszelki wypadek.",
   "notes_pl": [
    "Pot."
   ],
+  "_src": "683e2084",
   "_src_reader": "c88c58ee"
  },
  "expression-357": {
-  "_src": "e5f53562",
   "translation_pl": "naraz, za jednym zamachem, od razu",
   "example_pl": "Nagle wszystkie światła naraz zgasły.",
   "notes_pl": [
    "Pot. Także mit einem Schlag — w jednej chwili."
   ],
+  "_src": "e5f53562",
   "_src_reader": "c05e240b"
  },
  "expression-358": {
-  "_src": "dd806be5",
   "translation_pl": "rzucić żartem",
   "example_pl": "Nawet w trudnych chwilach lubi zażartować.",
   "notes_pl": [
    "Pot. Także Witze reißen — sypać dowcipami."
   ],
+  "_src": "dd806be5",
   "_src_reader": "67c413ba"
  },
  "expression-359": {
-  "_src": "9a47d394",
   "translation_pl": "wzruszyć ramionami",
   "example_pl": "Na moje pytanie tylko wzruszył ramionami.",
   "notes_pl": [
    "Także achselzuckend — wzruszając ramionami."
   ],
+  "_src": "9a47d394",
   "_src_reader": "8be0d4bd"
  },
  "expression-360": {
-  "_src": "e477ae72",
   "translation_pl": "zmusić, skłonić, namówić (kogoś do zrobienia czegoś)",
   "example_pl": "Jak go namówiłeś, żeby poszedł z nami?",
   "notes_pl": [
    "Także jdn. so weit bringen, dass … — doprowadzić do tego, że …"
   ],
+  "_src": "e477ae72",
   "_src_reader": "63bdc33c"
  },
  "expression-361": {
-  "_src": "b672b112",
   "translation_pl": "pozwolić sobie (finansowo; na coś)",
   "example_pl": "Na tak drogi samochód nie mogę sobie pozwolić.",
   "notes_pl": [
    "Także sich einen Fehler leisten — pozwolić sobie na błąd. Nie mylić: Hilfe leisten — udzielić pomocy."
   ],
+  "_src": "b672b112",
   "_src_reader": "c8e28563"
  },
  "expression-362": {
-  "_src": "1d282f41",
   "translation_pl": "no pewnie!, jeszcze jak!",
   "example_pl": "„Jesteś głodny?” — „No pewnie!”",
   "notes_pl": [
    "Pot., w odpowiedzi. Także Und ob ich das weiß! — no pewnie, że wiem!"
   ],
+  "_src": "1d282f41",
   "_src_reader": "232dbf7e"
  },
  "expression-363": {
-  "_src": "31de067b",
   "translation_pl": "pomóc, dać impuls (komuś); pomóc przypomnieć sobie",
   "example_pl": "Jeśli zapomniałeś imienia, podpowiem ci.",
   "notes_pl": [
    "Pot. dem Gedächtnis auf die Sprünge helfen — odświeżyć pamięć."
   ],
+  "_src": "31de067b",
   "_src_reader": "a4a52463"
  },
  "expression-364": {
-  "_src": "0e7fe783",
   "translation_pl": "wyciągnąć wniosek",
   "example_pl": "Z danych wyciągamy jasny wniosek.",
   "notes_pl": [
    "Aus etwas Schlüsse ziehen — wyciągać wnioski z czegoś."
   ],
+  "_src": "0e7fe783",
   "_src_reader": "0b18e5ce"
  },
  "expression-365": {
-  "_src": "fe8e10e1",
   "translation_pl": "przejść do historii",
   "example_pl": "Ten dzień przejdzie do historii.",
   "notes_pl": [
    "Także in die Annalen eingehen — zapisać się w annałach."
   ],
+  "_src": "fe8e10e1",
   "_src_reader": "5ef2dad9"
  },
  "expression-366": {
-  "_src": "4bbc8182",
   "translation_pl": "nie odpuszczać, nie poddawać się, obstawać przy swoim",
   "example_pl": "Nie odpuszczała, dopóki nie dostała odpowiedzi.",
   "notes_pl": [
    "Pot."
   ],
+  "_src": "4bbc8182",
   "_src_reader": "b1746897"
  },
  "expression-367": {
-  "_src": "5dc3b742",
   "translation_pl": "co kilka (minut, dni …)",
   "example_pl": "Autobus przyjeżdża co kilka minut.",
   "notes_pl": [
    "Także alle zwei Tage — co drugi dzień, alle drei Wochen — co trzy tygodnie."
   ],
+  "_src": "5dc3b742",
   "_src_reader": "fe82dbcd"
  },
  "expression-368": {
-  "_src": "aa578eba",
   "translation_pl": "ujdzie, może być, znośnie; można, da się",
   "example_pl": "Krzesło trochę się chwieje, ale ujdzie.",
   "notes_pl": [
    "Pot. Es geht so — tak sobie. Nie mylić: es geht um … — chodzi o …; es geht ihm gut — ma się dobrze; es geht los — zaczyna się."
   ],
+  "_src": "aa578eba",
   "_src_reader": "e3a426ae"
  },
  "expression-369": {
-  "_src": "5add102b",
   "translation_pl": "bez względu na to, jak; (na początku, przed przecinkiem) jakkolwiek by było, tak czy inaczej",
   "example_pl": "Bez względu na to, jak trudne to będzie, damy radę.",
   "notes_pl": [
    "Wie auch immer, wir müssen weiter. — Jakkolwiek by było, musimy iść dalej. Nie mylić: wie immer — jak zawsze."
   ],
+  "_src": "5add102b",
   "_src_reader": "889fd847"
  },
  "expression-370": {
-  "_src": "65788277",
   "translation_pl": "ktokolwiek",
   "example_pl": "Ktokolwiek to był, miał szczęście.",
   "notes_pl": [
    "Nie mylić: Wer ist auch immer so laut? — kto to wiecznie tak hałasuje?"
   ],
+  "_src": "65788277",
   "_src_reader": "12fbe23f"
  },
  "expression-371": {
-  "_src": "e510c008",
   "translation_pl": "gdziekolwiek",
   "example_pl": "Gdziekolwiek jesteś, myślę o tobie.",
   "notes_pl": [
    "Dokądkolwiek — wohin auch immer."
   ],
+  "_src": "e510c008",
   "_src_reader": "e8785815"
  },
  "expression-372": {
-  "_src": "e3a3b5bb",
   "translation_pl": "dokądkolwiek",
   "example_pl": "Dokądkolwiek pójdziesz, pójdę z tobą.",
   "notes_pl": [
    "Gdziekolwiek — wo auch immer."
   ],
+  "_src": "e3a3b5bb",
   "_src_reader": "d761ebc1"
  },
  "expression-373": {
-  "_src": "09fc36b4",
   "translation_pl": "kiedykolwiek",
   "example_pl": "Kiedykolwiek będziesz potrzebować pomocy, zadzwoń do mnie.",
   "notes_pl": [
    "Nie mylić: Wann kommst du auch immer nach Hause? — o której ty wiecznie wracasz do domu?"
   ],
+  "_src": "09fc36b4",
   "_src_reader": "b2dfd2a1"
  },
  "expression-374": {
-  "_src": "7f2600e2",
   "translation_pl": "którykolwiek, jakikolwiek",
   "example_pl": "Którąkolwiek weźmiesz, wszystkie są dobre.",
   "notes_pl": [
    "Welch- uzgadnia się z rzeczownikiem: welcher Plan, welche Lösung, welches Buch auch immer."
   ],
+  "_src": "7f2600e2",
   "_src_reader": "1721e04a"
  },
  "expression-375": {
