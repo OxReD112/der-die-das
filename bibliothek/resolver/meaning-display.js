@@ -1312,7 +1312,11 @@
     const ownItem = candidate.item || (options.lookup ? options.lookup({word:lemma, type:'Verb'}) : null);
     const dativeField = ownItem?.reflexive?.case === 'Dativ';
     if (k.freeDative && !dativeField) return {...result, heading:lemma, grammar:result.grammar.split(' · ').map(m => m.replace(` mit sich ${lemma}`, ` mit ${lemma}`)).join(' · ')};
-    const field = dativeField ? (k.reflexiveCase !== 'Akkusativ' ? ownItem.reflexive : null) : k.reflexiveCase !== 'Dativ' && !k.objectGroup ? ownItem?.reflexive : null;
+    // (links chat 18.11, WN batch 152: the object only when the common count of п. 99 — reflexiveDirectObject — agrees with the field's old
+    // sign: the old sign misread a subject with a genitive after it as the object (sammeln sich die Gegner des Ausbaus), the count alone
+    // misreads others (verteidigte sich die arme Alice, verwandelte sich das Rehkälbchen) — count 18.11: 1 980 sentences)
+    const objectForField = k.objectGroup && candidate.reflexiveDirectObject !== false;
+    const field = dativeField ? (k.reflexiveCase !== 'Akkusativ' ? ownItem.reflexive : null) : k.reflexiveCase !== 'Dativ' && !objectForField ? ownItem?.reflexive : null;
     // (shown as an own card's meaning — brackets kept, fit() with «ещё N значений» —; derived, so a choice row shows it too)
     // (a pack language: the field's text of the pack when the field is this card's own — candidate.packItem, Ч2б; otherwise the English
     // one, as an English card)

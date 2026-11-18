@@ -8873,6 +8873,15 @@
         "ihr": "sammeltet",
         "sie": "sammelten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "собираться, скапливаться; собраться (с мыслями), сосредоточиться",
+      "translation_en": "to gather, to accumulate; to collect oneself, to compose oneself",
+      "example_de": "Sie schloss kurz die Augen, um sich zu sammeln.",
+      "example_ru": "Она на мгновение закрыла глаза, чтобы собраться с мыслями.",
+      "example_en": "She closed her eyes for a moment to collect herself.",
+      "note_ru": "Die Schüler sammeln sich auf dem Hof. — Ученики собираются во дворе. Im Keller sammelt sich Wasser. — В подвале скапливается вода.",
+      "note_en": "Die Schüler sammeln sich auf dem Hof. — The pupils gather in the schoolyard. Im Keller sammelt sich Wasser. — Water collects in the cellar."
     }
   },
   {

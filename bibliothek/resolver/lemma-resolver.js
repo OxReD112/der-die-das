@@ -20731,8 +20731,33 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         !ws.slice(Math.max(0, i - 3), i).some(y => prepositions.has(norm(y.w)) || /^(?:am|im|zum|zur|beim|vom|ins|ans|aufs)$/u.test(norm(y.w))));
     };
     async function reflexiveSenseMarks(context, result) {
-      const rows = [...new Set([...(result?.candidates || []),result?.selected].filter(Boolean))].filter(c => c.construction?.id === 'reflexive-verb' &&
-        !c.construction.lexicalSenseConfirmed && canonicalPos(c.pos) === 'Verb' && !c.item?.reflexive && !c.reflexiveMarks?.en);
+      const all = [...new Set([...(result?.candidates || []),result?.selected].filter(Boolean))].filter(c => c.construction?.id === 'reflexive-verb' &&
+        !c.construction.lexicalSenseConfirmed && canonicalPos(c.pos) === 'Verb');
+      // (links chat 18.11, WN batch 152: an own card with the field `reflexive` takes the object by the same common count of п. 99 — rule B of
+      // 16.11 for both kinds; the field's old sign objectGroup misread the subject with a genitive after it as the object: Seit dem Herbst
+      // sammeln sich die Gegner des Ausbaus im Bürgerhaus)
+      // (count 18.11: not when a second group with a nominative / accusative determiner follows in the part — not after a preposition, und /
+      // oder or a noun (a genitive): teilen sich ausländische Investoren das Fell — das Fell is the object the count does not see)
+      for (const c of all.filter(c => c.item?.reflexive && c.reflexiveDirectObject === undefined)) {
+        const sentence = String(context?.sentence || ''), at = c.construction.pronoun?.start, tokens = sharedTokens(sentence,'reflexiveDirectAccusative');
+        const v = tokens.findIndex(t => t.index === at);
+        if (v < 0) continue;
+        let groups = 0, open = false;
+        for (let i = v + 1; i < tokens.length; i++) {
+          if (/[,;:.!?()–—»«„“"]/u.test(sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index))) break;
+          const w = norm(tokens[i][0]), before = norm(tokens[i-1][0]);
+          if (/^(?:und|oder|aber|sondern|denn)$/u.test(w)) break;
+          const afterPreposition = prepositions.has(before) || (forms.get(before) || []).some(e => e.type === 'preposition') || /^(?:am|im|zum|zur|beim|vom|ins|ans|aufs)$/u.test(before);
+          if (/^(?:die|das|den|ein|eine|einen|kein|keine|keinen|(?:mein|dein|sein|ihr|unser|eur)(?:e|en)?|diese|diesen|dieses)$/u.test(w) && !afterPreposition) { groups++; open = true; }
+          else if (/^(?:der|dem|des|eines|einer|einem)$/u.test(w) || afterPreposition) open = true;
+          // (a group without a determiner — ausländische Investoren — counts only as the first group after sich)
+          else if (/^\p{Lu}/u.test(tokens[i][0]) && !open && groups === 0) groups++;
+          if (/^\p{Lu}/u.test(tokens[i][0])) open = false;
+        }
+        if (groups >= 2) continue;
+        c.reflexiveDirectObject = reflexiveDirectAccusative(sentence, tokens, at);
+      }
+      const rows = all.filter(c => !c.item?.reflexive && !c.reflexiveMarks?.en);
       for (const c of rows) {
         if (accusativeObjectAfter(context?.sentence, c.construction.pronoun) || nounObjectAfterSubject(context?.sentence, c.construction)) c.reflexiveObjectSign = true;
         // (advisor 16.11, (3): rule B of 27.10 takes the object only by the common count of п. 99 — directAccusativeBetween)
