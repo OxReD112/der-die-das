@@ -4055,15 +4055,28 @@ function apostropheText(text) {
       // A4 (advisor 16.11, Alice): an outside noun of another gender (der Krachen «coombe») does not block where the determiner shows
       // the neuter singular (das Krachen, ein lautes Krachen) — checked below; our own noun and an outside neuter noun still block
       const sameNoun = candidates.filter(c => canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === base);
-      if (sameNoun.some(c => c.source === "main" || !["der","die"].includes(c.nounArticle))) return null;
+      // (advisor 18.11) the noun from the infinitive against a noun with this very form (Reisen — die Reise, Fischen — der Fisch, Wagen —
+      // der Wagen): the noun from the infinitive is neuter singular only. A determiner that shows the neuter singular decides for it —
+      // das / dieses / ein + -es before any noun of another gender (das Wagen, das Fischen); dem / beim / zum / vom / im where every own noun
+      // has this form only in the plural (dem Fischen — den Fischen is the plural of Fisch). Plural determiners keep the noun · Plural.
+      const ownNouns = candidates.filter(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && c.item);
+      const pluralOnlyHere = c => { const w = norm(c.item.word), pl = String(c.item.plural || "").split(/\s*,\s*/u).map(norm).filter(p => p && p !== "—");
+        return w !== base && pl.some(p => p === base || p + "n" === base); };
+      const sameOwnOtherGender = sameNoun.length && sameNoun.every(c => c.source === "main" ? (c.item?.article || c.nounArticle) && (c.item?.article || c.nounArticle) !== "das" :
+        ["der","die"].includes(c.nounArticle));
+      const sameOuterNeuter = sameNoun.length && sameNoun.every(c => c.source !== "main") && ownNouns.length && ownNouns.every(pluralOnlyHere);
+      // (the pair choice: only these two new ways in; everything else as before)
+      const pairChoice = sameNoun.some(c => c.source === "main" || !["der","die"].includes(c.nounArticle));
+      if (pairChoice && !sameOwnOtherGender && !sameOuterNeuter) return null;
       // An own noun declined like an adjective has this very form (einem Kranken): not an infinitive.
       if (candidates.some(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && adjectivalNounStem(c.item) &&
         [...["e","en","er","em","es"]].some(ending => norm(adjectivalNounStem(c.item))+ending === base))) return null;
       const verbs = candidates.filter(c => canonicalPos(c.pos) === "Verb" && norm(c.lemma) === base);
       if (!verbs.length) return null;
+      if (pairChoice && sameNoun.some(c => c.source === "main") && !verbs.some(c => c.source === "main")) return null;
       const slot = nominalSlot(word,context,'generalInfinitiveNoun',{headModifiers:false});
       if (!slot || slot.separateHead) return null;
-      const {tokens,index,joined} = slot;
+      const {sentence,tokens,index,joined} = slot;
       let d = index-1;
       while (d > 0 && index-d <= 3 && /^[a-zäöüß]/u.test(tokens[d][0]) && joined(d-1,d) &&
         (modifiers.has(norm(tokens[d][0])) || (forms.get(norm(tokens[d][0])) || []).some(e => e.type === "Adjektiv"))) d--;
@@ -4076,8 +4089,18 @@ function apostropheText(text) {
         const dn = contractionArticle(norm(tokens[d][0])) || norm(tokens[d][0]);
         const strongEs = d < index-1 && /es$/u.test(norm(tokens[index-1][0]));
         const neuterOnly = dn === "das" || /^(?:dies|jen|jed|all|welch|manch|solch)es$/u.test(dn) || /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)$/u.test(dn) && strongEs;
-        if (!neuterOnly) return null;
+        // (advisor 18.11) dem Fischen, beim Fischen: an outside neuter noun of this form is the noun from the infinitive itself
+        const neuterDative = sameOuterNeuter && /^(?:dem|diesem|jenem|jedem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem)$/u.test(dn);
+        if (!neuterOnly && !neuterDative) return null;
       }
+      // (the pair of 18.11 only; the noun from the verb of an own noun with the same headword needs our own verb card — the outside one
+      // carries the meanings of the noun: Laden) not das / dem right after a comma — the relative pronoun (ein Dokument, das Daten … enthält; ein Büro,
+      // das Reisen verkauft); not the first part of a compound cut off by a hyphen (zum Pflanzen- und Ackerbau)
+      // (run 159: ein Einhorn, das großen Schaden anrichtet — the relative das before an attribute too; and das / dem + an attribute must
+      // show the weak ending -e / -en of the neuter singular: das leise Summen, dem lauten Rufen — not das großen)
+      if (pairChoice && (/^(?:das|dem)$/u.test(norm(tokens[d][0])) && /,\s*$/u.test(sentence.slice(0,tokens[d].index)) ||
+          norm(tokens[d][0]) === "das" && tokens.slice(d+1,index).some(t => !/e$/u.test(norm(t[0]))) ||
+          /^\s*[-–]/u.test(sentence.slice(tokens[index].index+tokens[index][0].length)))) return null;
       // C19 (18.10.2026): an own noun with this very form in the singular is no
       // infinitive (dem Jungen, des Jungen — der Junge; in ihrem Herzen — das Herz).
       // Masculine weak nouns take -(e)n in every case but the nominative (n-declension:
@@ -11242,6 +11265,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // frame too when the ending can follow it without an article: -en, or -e after a preposition that takes the accusative; only adverbs
     // and attributes of the same ending between, no number, no und: not Um 1970 versuchte …, Erst vor kurzem erklärte …)
     const TE_ACCUSATIVE_PREPOSITIONS = new Set(["für","durch","gegen","ohne","um","auf","in","an","über","unter","vor","hinter","neben","zwischen"]);
+    // (WN batches 143 / 147 / 148 / 150, advisor 17.11) one sign of a measure: a unit card right after a figure — 40 km, 490 km², 3 Mrd.,
+    // 5 % — is part of the figure, for the noun group (nounGroupAfter) and for the attribute frame (attributeFrameWideWalk): eine 40 km lange
+    // Leitung, auf den etwa 4 km nordwestlich … gelegenen Burgberg. With its point: the point right after it and a lower-case word next (not the
+    // end of a sentence: Es dauerte 5 Min. Dann …); an abbreviation before a number (Nr. 5, S. 12, ca. 3) never stands after a figure.
+    function measureUnitAt(sentence, tokens, i, joined) {
+      if (i < 1 || !tokens[i+1] || !/\d\s*$/u.test(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index))) return false;
+      const t = tokens[i][0], unitGap = sentence.slice(tokens[i].index+t.length,tokens[i+1].index);
+      return (lemmas.get(norm(t)) || []).concat(lemmas.get(norm(t) + ".") || []).some(e => e.type === "Abkürzung" &&
+        (e.word === t && /^\p{Ll}/u.test(t) && (joined(i,i+1) || /^[²³][ \t]+$/u.test(unitGap)) ||
+         e.word === t + "." && /^\.[ \t]+$/u.test(unitGap) && /^\p{Ll}/u.test(tokens[i+1][0])));
+    }
     function attributeFrameWide(tokens, index, sentence) {
       const state = {prep:-1, clean:true};
       const d = attributeFrameWideWalk(tokens, index, sentence, state);
@@ -11305,6 +11339,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (inside a group with a preposition: its own attributes, not a verb form — not … veröffentlichten Alben produzierte Orzabal)
         if (pending) { if ((verbAnalyses.get(w) || []).length && !adjectivalForm(t) && !ownModifierForm(t)) return -1; continue; }
         if (teAdverb(t)) continue;
+        // (advisor 17.11: a unit right after a figure is part of the figure — im 1,5 km entfernten, den etwa 4 km nordwestlich … gelegenen)
+        // (an undeclined comparative grades the attribute: strategisch besser gelegenen, weiter entfernten)
+        if (irregularComparatives.has(w) || comparativeForms.has(w) && !(verbAnalyses.get(w) || []).length) continue;
+        if (measureUnitAt(sentence, tokens, k, (a,b) => /^[ \t]+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index)))) { state.clean = false; continue; }
         // (an attribute of the form's own group: the same ending — not vor kurzem erklärte)
         if (teSeriesAttribute(t, ending)) { state.clean = state.clean && true; continue; }
         if (!(verbAnalyses.get(w) || []).length && !(forms.get(w) || []).length && !LOWERCASE_DECLINED_WORD.test(t)) { state.clean = false; continue; }
@@ -11907,6 +11945,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const indexJoined = /^[A-ZÄÖÜ]/u.test(surface) && (forms.get(s) || []).length && (forms.get(s) || []).every(e => e.importedSeparable && norm(e.word) !== s) &&
         morph.candidates.every(c => canonicalPos(c.pos) === "Verb" && (forms.get(s) || []).some(e => norm(e.word) === norm(c.lemma)));
       if ((!morph.candidates.length || indexJoined) && /^[A-ZÄÖÜ]/u.test(surface)) readings.push({number:null,gender:null,cases:new Set(),unknown:true});
+      // (advisor 17.11, das Speichern der Daten) a capitalised infinitive of a known verb is also the noun from the verb (das Speichern,
+      // das Reisen, das Wagen) — neuter singular, even when the spelling is a plural of another noun (die Speicher → den Speichern)
+      if (/^[A-ZÄÖÜ]/u.test(surface) && readings.length && !readings.some(r => r.number === "singular" && (r.gender === "neuter" || r.gender === null) && !r.unknown) &&
+          (verbAnalyses.get(s) || []).some(a => a.kind === "infinitive"))
+        readings.push({number:"singular",gender:"neuter",cases:new Set(["nominative","accusative","dative"])});
       return readings;
     }
     // Endings a modifier token can show; invariant tokens (degree adverbs,
@@ -11945,6 +11988,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Bounded noun group to the right of an anchor (article or preposition):
     // [determiner] modifier{0,3} ["] Noun, whitespace-joined only. The head of
     // a hyphenated compound is its last part (ein Fünf-Sterne-Hotel → Hotel).
+    // (advisor 17.11) words the group walk does not take before a declined attribute — adverbs, an undeclined comparative, a measure after a
+    // figure (auf den etwa 4 km nordwestlich und strategisch besser gelegenen Burgberg, aus einem über 20 m langen Gang): the shared
+    // attribute frame (attributeFrameDeterminer, the wide walk) decides that the determiner at det opens it; the group is then read from
+    // the attribute on (its noun, its agreement). Only a frame with a figure in it (a measure, a year: der im Jahr 2011 aktualisierten Liste).
+    async function framedNounGroup(sentence, tokens, det, consumer) {
+      for (let j = det + 2; j < tokens.length - 1 && j <= det + 12; j++) {
+        if (!/^\p{Ll}/u.test(tokens[j][0]) || !LOWERCASE_DECLINED_WORD.test(tokens[j][0]) || !/^\p{Lu}/u.test(tokens[j+1][0])) continue;
+        if (!/\d/u.test(sentence.slice(tokens[det].index, tokens[j].index))) return null;
+        if (attributeFrameDeterminer(tokens,j,det,sentence,true) !== det) return null;
+        const framed = await nounGroupAfter(sentence,tokens,j-1,{determiner:false,consumer});
+        return framed?.readings ? framed : null;
+      }
+      return null;
+    }
     async function nounGroupAfter(sentence, tokens, anchor, {determiner, consumer, genitiveRelative = false}) {
       let i = anchor + 1, det = null;
       const quote = /^\s*(?:``|[„“"«‚‘])\s*$/u;
@@ -11961,13 +12018,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 17.11) a unit card with its point too (cm, Mrd.; Std., Min. when they come), in lower or upper case: the point stays
       // right after it and an attribute in lower case follows — eine 3 Mrd. teure Anlage; not at the end of a sentence (Es dauerte
       // 5 Min. Dann …), and an abbreviation before a number (Nr. 5, S. 12, ca. 3) never stands after a figure
-      const unitAt = i => {
-        if (!tokens[i+1] || !/\d\s*$/u.test(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index))) return false;
-        const unitGap = sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index);
-        return (lemmas.get(norm(tokens[i][0])) || []).concat(lemmas.get(norm(tokens[i][0]) + ".") || []).some(e => e.type === "Abkürzung" &&
-          (e.word === tokens[i][0] && /^\p{Ll}/u.test(tokens[i][0]) && (beforeHead(i,i+1) || /^[²³][ \t]+$/u.test(unitGap)) ||
-           e.word === tokens[i][0] + "." && /^\.[ \t]+$/u.test(unitGap) && /^\p{Ll}/u.test(tokens[i+1][0])));
-      };
+      const unitAt = i => measureUnitAt(sentence,tokens,i,beforeHead);
       while (tokens[i] && (!/^[A-ZÄÖÜ]/u.test(tokens[i][0]) || unitAt(i))) {
         if (modifierRows.length >= 3) return {reason:"window"};
         if (unitAt(i)) { i++; continue; }
@@ -12067,7 +12118,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         (forms.get(norm(tokens[index+1][0])) || []).some(e => e.type === "numeral") &&
         !(index + 2 < tokens.length && /^\p{Lu}/u.test(tokens[index+2][0]) && /^\s*$/u.test(sentence.slice(tokens[index+1].index+tokens[index+1][0].length,tokens[index+2].index)));
       if (nextNumeral) return {candidate:articles[0],evidence:"article-before-numeral"};
-      const group = await nounGroupAfter(sentence,tokens,index,{determiner:false,consumer:'articleInNounGroup'});
+      let group = await nounGroupAfter(sentence,tokens,index,{determiner:false,consumer:'articleInNounGroup'});
+      if (!group.readings && group.reason === "modifier-unproven") group = await framedNounGroup(sentence,tokens,index,'articleInNounGroup') || group;
       if (!group.readings) return definite ? articleBeforeNounByForm(sentence,tokens,index,articles[0]) : null;
       const governed = previous ? governedCases(previous) : null;
       const agreeing = agreeingFeatures(features,group,governed);
@@ -13604,6 +13656,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (relativeSlot && !enumerationBefore()) return null;
       let group;
       try { group = await nounGroupAfter(sentence,tokens,det,{determiner:false,consumer:'articleNounLink'}); } catch (_) { return null; }
+      // (advisor 17.11) the same frame as articleInNounGroup: adverbs / a measure before the declined attribute
+      let framed = false;
+      if (!group?.readings && group?.reason === "modifier-unproven") {
+        try { const g = await framedNounGroup(sentence,tokens,det,'articleNounLink'); if (g) { group = g; framed = true; } } catch (_) { return null; }
+      }
       if (!group?.readings) return null;
       if (relativeSlot) {
         const end = wordEnd(group.head), rest = tokens[end+1] ? gap(end,end+1) : sentence.slice(tokens[end].index+tokens[end][0].length);
@@ -13626,10 +13683,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // declined modifier (ein wirklich guter Kaffee, den vermeintlich sicheren Tod);
       // alone (dem völlig Schraubenschlüssel) or as a preposition opening an extended
       // attribute (die in Gaza … geplanten Industrieparks) it gives no pair.
-      if (group.modifiers.some((m,k) => m.base === 'adjective' && (!group.modifiers[k+1]?.endings ||
-          prepositionCardsByForm.has(norm(tokens[m.index][0]))))) return null;
       // A preposition never stands inside a compact group (der mit 1,8 Millionen … überfüllten …).
-      if (group.modifiers.some(m => prepositionCardsByForm.has(norm(tokens[m.index][0])))) return null;
+      // (advisor 17.11) such a group is read by the attribute frame instead — einem über 20 m langen Gang, eine um 68 cm größere Spannweite
+      const compactBroken = g => g.modifiers.some((m,k) => m.base === 'adjective' && (!g.modifiers[k+1]?.endings ||
+          prepositionCardsByForm.has(norm(tokens[m.index][0])))) || g.modifiers.some(m => prepositionCardsByForm.has(norm(tokens[m.index][0])));
+      if (compactBroken(group)) {
+        let g = null;
+        if (!framed) try { g = await framedNounGroup(sentence,tokens,det,'articleNounLink'); } catch (_) { g = null; }
+        if (!g || compactBroken(g)) return null;
+        group = g; framed = true;
+      }
       let first = wordStart(group.head), last = group.head, between = group.modifiers.length;
       // Two capitalised words: the first is the head when it is a known noun and
       // not an adjective (die Stadt Berlin, ein Stück Kuchen); a capitalised or

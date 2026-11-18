@@ -129598,5 +129598,51 @@
       "sitzen lassen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/sitzen_lassen"
+  },
+  {
+    "id": "verb-2805",
+    "infinitive": "laden",
+    "translation_ru": "грузить; заряжать (аккумулятор, оружие); загружать (данные); приглашать",
+    "translation_en": "to load; to charge (a battery); to load (data, a gun); to invite",
+    "auxiliary": "haben",
+    "usage_note_ru": "Сильный: lädt, lud, hat geladen. Das Laden dauert zwei Stunden. — Зарядка длится два часа. Seite wird geladen … — Страница загружается … «Приглашать» — книжн., обычно einladen; vor Gericht laden — вызывать в суд. (разг.) geladen sein — быть взбешённым. Ср. der Laden — магазин.",
+    "usage_note_en": "Strong: lädt, lud, hat geladen. Das Laden dauert zwei Stunden. — Charging takes two hours. Seite wird geladen … — Page is loading … «To invite» — formal, usually einladen; vor Gericht laden — to summon to court. (colloquial) geladen sein — to be furious. Cf. der Laden — shop.",
+    "example_de": "Wir haben die Möbel in den Lieferwagen geladen.",
+    "example_cloze": "Wir haben die Möbel in den Lieferwagen {{c1::geladen}}.",
+    "example_ru": "Мы погрузили мебель в фургон.",
+    "example_en": "We loaded the furniture into the van.",
+    "perfect_form": "haben geladen",
+    "forms": {
+      "Präsens": {
+        "ich": "lade",
+        "du": "lädst",
+        "er/sie/es": "lädt",
+        "wir": "laden",
+        "ihr": "ladet",
+        "sie": "laden"
+      },
+      "Präteritum": {
+        "ich": "lud",
+        "du": "ludst",
+        "er/sie/es": "lud",
+        "wir": "luden",
+        "ihr": "ludet",
+        "sie": "luden"
+      },
+      "Konjunktiv II": {
+        "ich": "lüde",
+        "du": "lüdest",
+        "er/sie/es": "lüde",
+        "wir": "lüden",
+        "ihr": "lüdet",
+        "sie": "lüden"
+      },
+      "Imperativ": {
+        "du": "Lad!",
+        "ihr": "Ladet!",
+        "Sie": "Laden Sie!"
+      }
+    },
+    "source_url": "https://www.duden.de/rechtschreibung/laden_aufladen_beladen"
   }
 ]
