@@ -14,6 +14,8 @@
  * drops the older ones; an older version (an old page from the HTTP cache) is not stored.
  * A language pack (lang/<code>/…, 17.11): its files that are not dictionary parts — one copy per file, the one just stored
  * (the pack version is a hash, not a date); its dictionary parts — as all parts, under the limit.
+ * One cache for the whole site (18.11): any page may load this script (the site root comes from the script's own address);
+ * BibliothekDataCache.store(urls) puts files on disk without reading them (a downloaded pack, the reader's warm-up).
  * A changed data file needs a new version in its address (dev/bibliothek/tools/data-versions.json, regression
  * data-cache-versions-qa.cjs); otherwise this cache keeps answering the old file.
  * The limit takes only parts (speed chat 07.11): on the iPhone our own data files stored 26.10 were the oldest entries, the
@@ -46,7 +48,10 @@
     /^worterbuch\/reader\/german-[\w-]+(?:-details\/\d{2})?\.json$/,
     // a language pack (17.11.2026, task of the main languages chat; pack-translations.js): the pack's manifest, its phrases
     // (reader.json), the translations of our cards (worterbuch/german-*.json) and its dictionary (manifest + 1 024 parts)
-    /^lang\/[a-z]{2,3}\/(?:manifest|reader)\.json$/,
+    /^lang\/[a-z]{2,3}\/(?:manifest|reader|ui)\.json$/,
+    // (18.11.2026, main languages chat: one cache for the whole site — the pack kept for work without the network on every page;
+    // the exercises and the Wortschatz sets of the pack, as listed in its manifest.files)
+    /^lang\/[a-z]{2,3}\/(?:exercises|wortschatz)\/[\w-]+\.json$/,
     /^lang\/[a-z]{2,3}\/worterbuch\/german-[\w-]+\.json$/,
     /^lang\/[a-z]{2,3}\/dictionary\/(?:parts\/\d{4}|manifest)\.json$/,
     // (18.11.2026, Ч6б) the pack texts of the dictionary reference: its index and parts (dev/lang/pack-reader-parts.cjs) — a pack
@@ -68,8 +73,11 @@
   let site = null, opened = null, pausedUntil = 0, lastUse = 0, countTimer = null;
   try {
     // host.__bibliothekNoDataCache: tests that block parts to simulate a failing network switch the cache off (review 07.11)
+    // the site root (…/der-die-das/) from this script's own address — bibliothek/resolver/data-cache.js → ../../ (18.11: any page
+    // of the site may load it, at any depth); without the script's address (tests) — one level above the page, as before
+    const self = typeof document !== "undefined" && document.currentScript && document.currentScript.src;
     if (typeof caches !== "undefined" && typeof location !== "undefined" && host.isSecureContext !== false && !host.__bibliothekNoDataCache)
-      site = new URL("../", location.href);        // bibliothek/bibliothek.html → the site root (…/der-die-das/)
+      site = self ? new URL("../../", self) : new URL("../", location.href);
   } catch (_) { site = null; }
   const pathOf = url => url.pathname.slice(site.pathname.length);
   function cacheable(url, options) {
@@ -213,7 +221,45 @@
     }
     return response;
   }
-  // the first open (reading the list of entries) happens while the page loads, not at the first tap
-  if (site) setTimeout(() => { open().catch(() => {}); }, 0);
-  host.BibliothekDataCache = Object.freeze({fetch: cachedFetch, enabled: !!site, stats});
+  // BibliothekDataCache.store(urls, {parallel}) (18.11.2026, main languages chat): puts the files on disk without reading them —
+  // a pack downloaded for work without the network (DeutschTranslation.download), the reader's warm-up of the pack's card texts.
+  // Each address: not ours (other paths, no ?v=) → skipped; already stored (this exact version) → present; otherwise asked from the
+  // network and stored → stored, or failed (no network, not 200). The rules of fetch() hold (one copy of a pack file, parts under
+  // the limit). Resolves {enabled, stored, present, failed, skipped} (lists of addresses); never rejects. No cache → all skipped.
+  async function storeAll(urls, options) {
+    const out = {enabled: !!site, stored: [], present: [], failed: [], skipped: []};
+    const list = [...new Set((typeof urls === "string" ? [urls] : Array.from(urls || [])).map(u => String(u)))];
+    if (!site || Date.now() < pausedUntil) { out.skipped.push(...list); out.enabled = !!site && Date.now() >= pausedUntil; return out; }
+    let cache = null;
+    try { const c = await within(open(), OPEN_WAIT_MS); cache = c === STALLED ? null : c; } catch (_) { cache = null; }
+    if (!cache) { out.skipped.push(...list); out.enabled = false; return out; }
+    const queue = list.slice(), parallel = Math.max(1, Math.min(6, Math.floor(Number(options && options.parallel)) || 2));
+    // (review 18.11) a stalled cache (WebKit) — the rest skipped and plain fetch for a while, as for the reader's lookups
+    const stall = () => { pausedUntil = Date.now() + PAUSE_MS; stats.stalled++; out.skipped.push(...queue.splice(0)); };
+    const work = async () => {
+      for (let href = queue.shift(); href !== undefined; href = queue.shift()) {
+        let url = null;
+        try { url = new URL(href, location.href); } catch (_) { url = null; }
+        if (!url || !cacheable(url)) { out.skipped.push(href); continue; }
+        try {
+          lastUse = clock();
+          const kept = await within(cache.match(url.href, {ignoreVary: true}), WAIT_MS);
+          if (kept === STALLED) { out.skipped.push(href); stall(); return; }
+          if (kept) { out.present.push(href); continue; }
+          const response = await fetch(url.href);
+          if (response.status !== 200 || response.type !== "basic") { out.failed.push(href); continue; }
+          const done = await within(store(cache, url, response), OPEN_WAIT_MS);
+          lastUse = clock();
+          if (done === STALLED) { out.skipped.push(href); stall(); return; }
+          out.stored.push(href);    // (an older version of our own dictionary is not stored over a later one — reported as stored)
+        } catch (_) { out.failed.push(href); }
+      }
+    };
+    await Promise.all(Array.from({length: parallel}, work));
+    return out;
+  }
+  // the first open (reading the list of entries) happens while the reader loads, not at the first tap; on the other pages the
+  // cache is opened when it is first used (store / fetch of a pack file) — those pages read no dictionaries
+  if (site && typeof location !== "undefined" && /\/bibliothek\/[^/]*$/.test(location.pathname)) setTimeout(() => { open().catch(() => {}); }, 0);
+  host.BibliothekDataCache = Object.freeze({fetch: cachedFetch, store: storeAll, enabled: !!site, stats});
 })();

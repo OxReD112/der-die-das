@@ -374,5 +374,34 @@
     const fields = part.rows[String(id)];
     return fields && typeof fields === "object" ? fields : null;
   }
-  window.BibliothekPackTranslations = Object.freeze({lookup, enrich, phrase, hasPhrases, sheet, sheetFields});
+  // Warm-up (speed chat 18.11.2026, main languages chat): the reader opened with a pack language puts the pack's card texts
+  // (worterbuch/german-*.json of its manifest, ~1 MB over the network for pl) on disk in the background after the page has loaded —
+  // otherwise the first tap that needs them waits for all of them (measured 18.11: +1–1.8 s on that tap). Only to disk
+  // (BibliothekDataCache.store, two at a time): read and kept in memory only when a tap needs them, as before. A pack downloaded in
+  // full is already there — nothing is asked again. warmed: a promise of the store() result (null: nothing to warm) — for tests.
+  // (review 18.11: a tap that already reads them — no second download; the pack manifest of DeutschTranslation not read yet — asked
+  // again up to 3 times, 3 s apart; no window events (node tests) — nothing)
+  let warmDone = null;
+  const warmed = new Promise(resolve => { warmDone = resolve; });
+  function warm(attempt = 0) {
+    try {
+      const code = window.DeutschTranslation?.getDisplayLang?.(), cache = window.BibliothekDataCache;
+      if (!valid(code) || typeof cache?.store !== "function" || owns.has(code)) { warmDone(null); return; }
+      const v = packVersion(code);
+      if (!v) { if (attempt < 3) setTimeout(() => warm(attempt + 1), 3000); else warmDone(null); return; }
+      dataFetch(new URL(`../../lang/${code}/manifest.json?v=${encodeURIComponent(v)}`, script))
+        .then(r => r.ok ? r.json() : null)
+        .then(m => { if (!m || typeof m.version !== "string" || !m.version) return null;
+          const files = Object.keys(m.files || {}).filter(f => /^worterbuch\/german-[\w-]+\.json$/u.test(f));
+          return cache.store(files.map(f => new URL(`../../lang/${code}/${f}?v=${encodeURIComponent(m.version)}`, script).href), {parallel: 2}); })
+        .then(result => warmDone(result || null), () => warmDone(null));
+    } catch (_) { warmDone(null); }
+  }
+  try {
+    if (typeof window.addEventListener === "function" && typeof setTimeout === "function" && typeof document !== "undefined") {
+      if (document.readyState === "complete") setTimeout(() => warm(), 3000);
+      else window.addEventListener("load", () => setTimeout(() => warm(), 3000), {once: true});
+    } else warmDone(null);
+  } catch (_) { warmDone(null); }
+  window.BibliothekPackTranslations = Object.freeze({lookup, enrich, phrase, hasPhrases, sheet, sheetFields, warmed});
 })();
