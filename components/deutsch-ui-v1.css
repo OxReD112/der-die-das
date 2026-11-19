@@ -171,6 +171,11 @@
 .ui-clear:active {
   color: var(--text);
 }
+/* 19.11.2026 (asked by the native app): the field hides its × while it is empty (the hidden attribute) — display:
+   grid above overrode it, so in the words window the × showed at an empty field (Wörterbuch had its own rule). */
+.ui-clear[hidden] {
+  display: none;
+}
 
 /* ---- .ui-panel-close (06.11): the big × of a full-screen panel, drawn as an icon (was the letter × at 28 px) ----
    Same markup as .ui-clear; the panel places it. */
