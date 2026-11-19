@@ -326,22 +326,34 @@ html:not(.is-touch) .check {
 .feedback.wrong {
   --state: var(--red);
 }
+/* 19.11.2026 (Alena, as the app): the glow only UNDER the line — a band 150 high, strongest at the line, fading
+   down (0.20 × (1 − smoothstep(0, 150, y))^1.8 + 0.07 × e^−(y/16)²), fading out over the outer 30 % on each side.
+   Was an ellipse centred on the line (−180 … +180). Same in Pronomen, Partikeln, Verben mit Präpositionen. */
 .feedback:after {
   content: "";
   position: absolute;
   z-index: -2;
   left: 0;
   right: 0;
-  top: -180px;
-  height: 360px;
+  top: 0;
+  height: 150px;
   pointer-events: none;
-  opacity: 0.9;
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    color-mix(in srgb, var(--state) 22%, transparent) 0%,
-    color-mix(in srgb, var(--state) 10%, transparent) 32%,
-    transparent 70%
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--state) 27.0%, transparent) 0px,
+    color-mix(in srgb, var(--state) 25.2%, transparent) 8px,
+    color-mix(in srgb, var(--state) 21.4%, transparent) 16px,
+    color-mix(in srgb, var(--state) 18.3%, transparent) 24px,
+    color-mix(in srgb, var(--state) 16.1%, transparent) 32px,
+    color-mix(in srgb, var(--state) 12.2%, transparent) 48px,
+    color-mix(in srgb, var(--state) 8.2%, transparent) 64px,
+    color-mix(in srgb, var(--state) 4.8%, transparent) 80px,
+    color-mix(in srgb, var(--state) 1.8%, transparent) 100px,
+    color-mix(in srgb, var(--state) 0.3%, transparent) 120px,
+    transparent 150px
   );
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent);
 }
 .feedback:before {
   content: "";

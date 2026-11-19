@@ -447,37 +447,55 @@ html:not(.is-touch) #check {
 .feedback.wrong-r {
   --state-r: var(--red);
 }
-/* Glow: one ellipse per half, masked so they meet softly in the middle.
+/* 19.11.2026 (Alena, as the app): the glow only UNDER the line — a band 150 high, strongest at the line, fading
+   down (0.20 × (1 − smoothstep(0, 150, y))^1.8 + 0.07 × e^−(y/16)²), fading out over the outer 30 % on each side.
+   Was an ellipse centred on the line (−180 … +180). Same in Pronomen, Partikeln, Verben mit Präpositionen. */
+/* One band per half, masked so they meet softly in the middle (44–56 %); the outer 30 % fades out.
    When both halves have the same colour it looks like one single glow. */
 .glow {
   position: absolute;
   z-index: -2;
   left: 0;
   right: 0;
-  top: -180px;
-  height: 360px;
+  top: 0;
+  height: 150px;
   pointer-events: none;
-  opacity: 0.9;
 }
 .glow.l {
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    color-mix(in srgb, var(--state-l) 22%, transparent) 0%,
-    color-mix(in srgb, var(--state-l) 10%, transparent) 32%,
-    transparent 70%
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--state-l) 27.0%, transparent) 0px,
+    color-mix(in srgb, var(--state-l) 25.2%, transparent) 8px,
+    color-mix(in srgb, var(--state-l) 21.4%, transparent) 16px,
+    color-mix(in srgb, var(--state-l) 18.3%, transparent) 24px,
+    color-mix(in srgb, var(--state-l) 16.1%, transparent) 32px,
+    color-mix(in srgb, var(--state-l) 12.2%, transparent) 48px,
+    color-mix(in srgb, var(--state-l) 8.2%, transparent) 64px,
+    color-mix(in srgb, var(--state-l) 4.8%, transparent) 80px,
+    color-mix(in srgb, var(--state-l) 1.8%, transparent) 100px,
+    color-mix(in srgb, var(--state-l) 0.3%, transparent) 120px,
+    transparent 150px
   );
-  -webkit-mask-image: linear-gradient(to right, #000 44%, transparent 56%);
-  mask-image: linear-gradient(to right, #000 44%, transparent 56%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 30%, #000 44%, transparent 56%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 30%, #000 44%, transparent 56%);
 }
 .glow.r {
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    color-mix(in srgb, var(--state-r) 22%, transparent) 0%,
-    color-mix(in srgb, var(--state-r) 10%, transparent) 32%,
-    transparent 70%
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--state-r) 27.0%, transparent) 0px,
+    color-mix(in srgb, var(--state-r) 25.2%, transparent) 8px,
+    color-mix(in srgb, var(--state-r) 21.4%, transparent) 16px,
+    color-mix(in srgb, var(--state-r) 18.3%, transparent) 24px,
+    color-mix(in srgb, var(--state-r) 16.1%, transparent) 32px,
+    color-mix(in srgb, var(--state-r) 12.2%, transparent) 48px,
+    color-mix(in srgb, var(--state-r) 8.2%, transparent) 64px,
+    color-mix(in srgb, var(--state-r) 4.8%, transparent) 80px,
+    color-mix(in srgb, var(--state-r) 1.8%, transparent) 100px,
+    color-mix(in srgb, var(--state-r) 0.3%, transparent) 120px,
+    transparent 150px
   );
-  -webkit-mask-image: linear-gradient(to right, transparent 44%, #000 56%);
-  mask-image: linear-gradient(to right, transparent 44%, #000 56%);
+  -webkit-mask-image: linear-gradient(to right, transparent 44%, #000 56%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 44%, #000 56%, #000 70%, transparent 100%);
 }
 /* Line: spreads out from the centre; left/right colours blend in the middle. Its soft shadow (same as
    Pronomen: 18px, 70%) comes from two halves that meet exactly at 50%, so the glow never doubles up. */
