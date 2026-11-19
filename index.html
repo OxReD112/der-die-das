@@ -136,8 +136,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=86" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=86" rel="stylesheet"/>');
+     ? '<link href="home.css?v=87" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=87" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -311,14 +311,11 @@
     <div class="mosaic today-bottom">
     <div aria-label="Tagesziel" class="tile tile-today">
      <div class="today-label">
-      Heute
+      Punkte heute
      </div>
      <div class="today-score">
       <div class="today-number" id="todayTotal">
        0
-      </div>
-      <div class="today-unit">
-       Punkte
       </div>
      </div>
      <div class="today-progress">
@@ -394,7 +391,7 @@
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>Über Deutsch.</span></span></button>
     </div>
-    <button class="settings-version" id="versionsOpen" type="button" aria-label="Deutsch. Version 5.223 — Versionen aller Seiten anzeigen">Deutsch. Version 5.223 <span aria-hidden="true" class="ui-chev"></span></button>
+    <button class="settings-version" id="versionsOpen" type="button" aria-label="Deutsch. Version 5.224 — Versionen aller Seiten anzeigen">Deutsch. Version 5.224 <span aria-hidden="true" class="ui-chev"></span></button>
    </div>
    </section>
   </div>

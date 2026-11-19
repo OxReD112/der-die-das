@@ -714,6 +714,8 @@ header h1 {
   z-index: 1;
 }
 
+/* 19.11.2026 (Alena): «Punkte heute» on the left, the number alone on the right (was «Heute» … «86 Punkte» —
+   the small word after the big number). */
 .today-label {
   grid-column: 1;
   grid-row: 1;
@@ -736,11 +738,6 @@ header h1 {
   font-size: 28px;
   line-height: 1;
   font-weight: 650;
-}
-
-.today-unit {
-  color: var(--muted);
-  font-size: 12px;
 }
 
 .today-progress {
@@ -2230,10 +2227,6 @@ body > .ui-window {
     font-size: 34px;
   }
 
-  html:not(.home-wide-layout) .today-unit {
-    font-size: 14px;
-  }
-
   html:not(.home-wide-layout) .settings-launcher {
     font-size: 14px;
   }
@@ -2372,9 +2365,6 @@ html.home-wide-layout body {
   font-size: 14px;
 }
 .home-wide-layout .today-label {
-  font-size: 14px;
-}
-.home-wide-layout .today-unit {
   font-size: 14px;
 }
 .home-wide-layout .greeting,
