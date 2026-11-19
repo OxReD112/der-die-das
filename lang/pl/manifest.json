@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "39f4708890cc",
+ "version": "885f92b641f2",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -272,6 +272,11 @@
    "texts": 150,
    "done": 50
   },
+  "worterbuch/german-light.json": {
+   "items": 0,
+   "texts": 0,
+   "done": 0
+  },
   "worterbuch/german-nouns.json": {
    "items": 5377,
    "texts": 12899,
@@ -303,7 +308,7 @@
   },
   "reader.json": {
    "items": 274,
-   "done": 274
+   "done": 282
   }
  },
  "dictionary": {

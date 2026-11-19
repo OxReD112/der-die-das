@@ -1818,8 +1818,13 @@
  "verb-178": {
   "translation_pl": "zbierać; kolekcjonować",
   "example_pl": "Mój syn zbiera znaczki.",
-  "_src": "bb72db07",
-  "_src_reader": "b353fd4b"
+  "reflexive": {
+   "translation_pl": "zbierać się, gromadzić się; zebrać myśli, skupić się",
+   "example_pl": "Na chwilę zamknęła oczy, żeby zebrać myśli.",
+   "note_pl": "Die Schüler sammeln sich auf dem Hof. — Uczniowie zbierają się na podwórku. Im Keller sammelt sich Wasser. — W piwnicy gromadzi się woda."
+  },
+  "_src": "6a864342",
+  "_src_reader": "679a16a6"
  },
  "verb-179": {
   "translation_pl": "świecić; wydawać się",

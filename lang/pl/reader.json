@@ -1079,6 +1079,46 @@
    "en": "towards",
    "ru": "навстречу",
    "pl": "naprzeciw"
+  },
+  {
+   "en": "{0}th",
+   "ru": "{0}-й",
+   "pl": "{0}."
+  },
+  {
+   "en": "for the {0}th time",
+   "ru": "в {0}-й раз",
+   "pl": "po raz {0}."
+  },
+  {
+   "en": "diminutive of {0}",
+   "ru": "уменьш. от {0}",
+   "pl": "zdrobn. od {0}"
+  },
+  {
+   "en": "feminine of {0}",
+   "ru": "жен. к {0}",
+   "pl": "forma żeńska od {0}"
+  },
+  {
+   "en": "obsolete form of {0}",
+   "ru": "устар. форма от {0}",
+   "pl": "przestarz. forma od {0}"
+  },
+  {
+   "en": "colloquial form of {0}",
+   "ru": "разг. форма от {0}",
+   "pl": "pot. forma od {0}"
+  },
+  {
+   "en": "short form of {0}",
+   "ru": "краткая форма от {0}",
+   "pl": "skrócona forma od {0}"
+  },
+  {
+   "en": "form of {0}",
+   "ru": "форма от {0}",
+   "pl": "forma od {0}"
   }
  ],
  "pronouns": [
