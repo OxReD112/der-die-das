@@ -2,7 +2,7 @@
    the page now asks this file and draws what it returns, and the native app runs it as it is (JavaScriptCore), as
    answer-rules.js of Vielseitige Verben / Pronomen. Same rules, same texts, same order of Math.random (the app checks
    itself against the site with a repeatable «random»): shuffling the round in build(), pickOne() of the typo hints,
-   shuffling in prepareTomorrowNotifications().
+   shuffling in prepareTomorrowNotifications(). Shuffling is Fisher–Yates (19.11.2026; same order in every engine).
 
    Nothing of the page here: no DOM, network, media queries, speech or timers. Needs (loaded before): DeutschDay
    (components/deutsch-day-v1.js), getTranslation (components/deutsch-translation-v1.js); when they are there:
@@ -208,6 +208,18 @@
   const HINT_FIRST = ["Sooo nah dran!", "Ups, fast! Nochmal?", "Die Buchstaben machen Quatsch.", "Knapp! Du hast es gleich."];
   const HINT_LAST = ["Ein Blick noch. Keine Panik.", "Einmal noch, ganz in Ruhe."];
   const pickOne = a => a[Math.floor(Math.random() * a.length)];
+  /* Fisher–Yates (19.11.2026, request of the native app): the same order in every browser and in the app for the same
+     Math.random — sort(() => Math.random() - 0.5) gave a different order in Chrome, Node and Safari. One Math.random per
+     step, from the end of the list. Shuffles the array in place and returns it. */
+  const shuffle = a => {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = a[i];
+      a[i] = a[j];
+      a[j] = t;
+    }
+    return a;
+  };
   // Damerau (OSA) distance: missing / extra / wrong letter or two neighbouring letters swapped = 1 slip.
   function osa(x, y) {
     const a = [...x],
@@ -310,7 +322,7 @@
   function prepareTomorrowNotifications(limit = 4) {
     const tomorrow = add(1);
     const candidates = activeCards().filter(c => rec(c).due === tomorrow);
-    const shuffled = [...candidates].sort(() => Math.random() - 0.5);
+    const shuffled = shuffle([...candidates]);
     const notifications = shuffled.slice(0, Math.min(4, limit)).map(c => ({
       id: c.id,
       sentence: c.revealed || c.sentence || "",
@@ -328,7 +340,7 @@
 
   function build(cards = null) {
     ensureDeck();
-    queue = (cards || activeCards().filter(c => rec(c).due <= day())).sort(() => Math.random() - 0.5);
+    queue = shuffle(cards || activeCards().filter(c => rec(c).due <= day()));
     idx = 0;
     sessionTotal = queue.length;
     completed = 0;
