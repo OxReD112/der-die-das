@@ -1334,6 +1334,14 @@
     // before; the marks work for an accusative sich without an object and for mir / dir without such an object)
     // (advisor 16.11, (3): the object by the common count of п. 99 — reflexiveDirectObject — when the resolver gave it; the old signs otherwise)
     const objectDative = !!((candidate.reflexiveDirectObject !== undefined ? candidate.reflexiveDirectObject : k.objectGroup || candidate.reflexiveObjectSign) || k.freeDative && k.reflexiveCase !== 'Dativ');
+    // (links chat 19.11, advisor 19.11, L52: sich machen + a direction group — the resolver's reflexiveDirection; the dated sense the card does
+    // not hold; a pack language shows the English with its mark)
+    if (candidate.reflexiveDirection) {
+      const directionLanguage = isPack(language) ? 'en' : language;
+      const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
+      return {...rest, heading:`sich ${lemma}`, grammar:rest.grammar.split(' · ').map(m => m.replace(` mit ${lemma}`, ` mit sich ${lemma}`)).join(' · '),
+        text:L(directionLanguage, '(уст.) отправиться, забраться (куда-либо)', '(dated) to go, to make one\'s way (somewhere)'), textLanguage:directionLanguage, missing:false, derived:true, note:rest.note || '', more:0};
+    }
     if (!candidate.reflexivePhraseVerb && !objectDative && !(candidate.item || options.lookup?.({word:lemma, type:'Verb'}))?.reflexive) {
       const dative = k.reflexiveCase === 'Dativ';
       const unclear = !dative && k.reflexiveCase !== 'Akkusativ' && ['uns','euch'].includes(norm(k.pronoun?.text || ''));

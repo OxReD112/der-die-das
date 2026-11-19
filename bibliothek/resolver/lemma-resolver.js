@@ -20941,6 +20941,42 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         !TIME_NOUN.test(norm(x.w)) && !OBJ_TIME.test(norm(x.w)) && (forms.get(norm(x.w)) || []).some(e => e.type === 'Nomen') &&
         !ws.slice(Math.max(0, i - 3), i).some(y => prepositions.has(norm(y.w)) || /^(?:am|im|zum|zur|beim|vom|ins|ans|aufs)$/u.test(norm(y.w))));
     };
+    // (links chat 19.11, advisor 19.11) a direction group after sich in its part — a preposition with the accusative (in die Äste, auf die
+    // Reise, ins Haus; not an — sich an etw. machen; nach Hause / nach + a name) or a direction adverb (hinaus, hinab, davon, fort …) — and nothing else that sich machen
+    // takes: no accusative group, no es / nichts / was, no adjective (lustig, selbstständig, unkenntlich), no capital word outside a
+    // prepositional group but a name right after sich (machte sich Daumesdick hinaus) or the subject after the finite verb
+    const MACHEN_DIRECTION_ADVERBS = /^(?:hinaus|heraus|hinab|herab|hinunter|herunter|hinauf|herauf|hinein|herein|hinüber|herüber|davon|fort|weg|heim|dahin|dorthin|hierher|hinweg|heimwärts|davon)$/u;
+    // (not an: sich an etw. machen «приниматься» — sich an die Arbeit machen, reference F12-C1af, run 204)
+    const MACHEN_ACC_PREPOSITIONS = /^(?:in|auf|über|unter|hinter|vor|zwischen|neben)$/u;
+    function machenDirection(sentence, at) {
+      if (!Number.isInteger(at)) return false;
+      const tokens = sharedTokens(sentence,'machenDirection'), v = tokens.findIndex(t => t.index === at);
+      if (v < 0) return false;
+      let direction = false, inGroup = 0;
+      for (let i = v + 1; i < tokens.length; i++) {
+        if (/[,;:.!?()–—»«„“"]/u.test(sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index))) break;
+        const t = tokens[i][0], w = norm(t);
+        if (/^(?:und|oder|aber|sondern|denn|dass|daß|wie|als)$/u.test(w)) break;
+        if (/^(?:es|nichts|was|etwas|viel|wenig|nicht[s]?)$/u.test(w) && w !== 'nicht') return false;
+        if (MACHEN_ACC_PREPOSITIONS.test(w) && /^(?:den|die|das|einen|eine|ein|meinen|deinen|seinen|ihren|unseren|euren|meine|deine|seine|ihre|unsere|eure|diesen|diese|dieses)$/u.test(norm(tokens[i+1]?.[0] ?? ''))) { direction = true; inGroup = 4; continue; }
+        if (/^(?:ins|aufs|übers|unters|hinters|vors)$/u.test(w)) { direction = true; inGroup = 3; continue; }
+        if (w === 'nach' && /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? '')) { direction = true; inGroup = 2; continue; }
+        if (MACHEN_DIRECTION_ADVERBS.test(w)) { direction = true; continue; }
+        if (prepositions.has(w) || /^(?:am|im|zum|zur|beim|vom)$/u.test(w)) { if (/^(?:zum|zur|zu)$/u.test(w)) return false; inGroup = 4; continue; }
+        if (inGroup > 0) { if (/^\p{Lu}/u.test(t)) inGroup = 0; else inGroup--; continue; }
+        // (the subject right after sich: der + its noun — machte sich der Junge hinaus; not die / das / ein: also an accusative)
+        if (i === v + 1 && w === 'der') { inGroup = 3; continue; }
+        if (/^\p{Lu}/u.test(t)) { if (i === v + 1 && !(forms.get(w) || []).some(e => e.type === 'Nomen')) continue; return false; }
+        if (DETERMINER_WORD.test(w)) return false;
+        if ((forms.get(w) || []).some(e => e.type === 'Adjektiv') && !(forms.get(w) || []).some(e => e.type === 'Adverb')) return false;
+      }
+      // (tests chat 19.11: not «sich in die Hose(n) / ins Bett machen» — «наделать в штаны», «намочить постель»; a cause with vor —
+      // vor Angst, vor Lachen — marks the same idiom)
+      const rest = tokens.slice(v + 1).map(t => norm(t[0]));
+      if (rest.some((w, k) => /^(?:hose|hosen|höschen|windel|windeln|bett)$/u.test(w) && k > 0 && /^(?:die|ins|in|das)$/u.test(rest[k-1])) ||
+          rest.some((w, k) => w === 'vor' && /^(?:angst|schreck|schrecken|lachen|furcht|aufregung)$/u.test(rest[k+1] || ''))) return false;
+      return direction;
+    }
     async function reflexiveSenseMarks(context, result) {
       const all = [...new Set([...(result?.candidates || []),result?.selected].filter(Boolean))].filter(c => c.construction?.id === 'reflexive-verb' &&
         !c.construction.lexicalSenseConfirmed && canonicalPos(c.pos) === 'Verb');
@@ -20977,6 +21013,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (advisor 16.11, (3): rule B of 27.10 takes the object only by the common count of п. 99 — directAccusativeInPart)
 
         const base = norm(c.lemma).replace(/^sich\s+/u, '');
+        // (links chat 19.11, advisor 19.11, L52: sich machen + a direction group and no other object — die Katze und der Hahn machten sich
+        // in die Äste, machte sich Daumesdick hinaus in die Scheune — the dated «отправиться, забраться»; the card has no such sense and a
+        // field would take sich lustig / selbstständig machen, sich Vorwürfe machen too — cards chat 19.11)
+        if (base === 'machen' && !c.reflexiveDirectObject && machenDirection(String(context?.sentence || ''), c.construction.pronoun?.start)) { c.reflexiveDirection = true; continue; }
         if (hasSichPhrases(base)) { c.reflexivePhraseVerb = true; continue; }
         let groups = [];
         try { groups = await fallback.lookup(base) || []; } catch (_) { groups = []; }
