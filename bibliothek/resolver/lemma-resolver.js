@@ -11375,6 +11375,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
         if (["sowie","aber","sondern","wie","dass","daß","ob","weil","wenn"].includes(w)) return -1;
         if (/^\p{Lu}/u.test(t)) { if (grammaticalWords.has(w) && !pending) return -1; pending = true; state.clean = false; continue; }
+        // (advisor 18.11) a dative personal pronoun or sich right after the determiner is part of the frame — die ihm bekannten Gegenden,
+        // das ihm verhasste Papsttum, eine sich entwickelnde Krankheit, die sich nähernden Schritte; not after a comma (the relative: …,
+        // die ihm bekannten Leuten half) and not after a preposition after a comma (…, an die sich …)
+        if (/^(?:mir|dir|ihm|ihr|uns|euch|ihnen|sich)$/u.test(w) && k > 0 && !pending && !prepositions.has(norm(tokens[k-1][0]))) {
+          const d = norm(tokens[k-1][0]), dw = tokens[k-1][0];
+          const gapBefore = a => a > 0 ? sentence.slice(tokens[a-1].index + tokens[a-1][0].length, tokens[a].index) : sentence.slice(0, tokens[a].index);
+          const afterComma = /,\s*$/u.test(gapBefore(k-1)) || k > 1 && prepositions.has(norm(tokens[k-2][0])) && /,\s*$/u.test(gapBefore(k-2));
+          // (the form right after a preposition is the attribute of that group, not of this frame — einen sich an vorhandenen
+          // Trennflächen … lösenden Gesteinskörper: vorhandenen belongs to an … Trennflächen; not bis dahin unbekannten)
+          const ownPreposition = index-1 > k && prepositions.has(norm(tokens[index-1][0]));
+          const tight = /^\s*$/u.test(sentence.slice(tokens[k-1].index + dw.length, tokens[k].index));
+          if ((ATTRIBUTE_FRAME_DETERMINER.test(d) || contractionArticle(d)) && /^\p{Ll}/u.test(dw) && !afterComma && !ownPreposition && tight) { state.clean = false; continue; }
+          // (the determiner opening the sentence — Die sich nähernden Schritte)
+          if (ATTRIBUTE_FRAME_DETERMINER.test(d) && /^\p{Lu}/u.test(dw) && /^(?:|.*[.!?:»«„“"]\s*|\s*)$/u.test(gapBefore(k-1)) && !ownPreposition && tight)
+            return attributeFrameEndings(d).includes(ending) ? k-1 : -1;
+        }
         if (PRONOUN_PERSONS[w] && !prepositions.has(norm(tokens[k-1]?.[0] || ""))) return -1;
         // (advisor 18.11) a personal pronoun right after its preposition is a group of the frame — die von ihm gebaute Kirche, der für mich
         // gekaufte Wagen
