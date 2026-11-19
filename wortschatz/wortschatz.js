@@ -570,7 +570,8 @@ const CHOOSE_TEXT = {
   chooseOwn: { en: "＋ Start with my own words", ru: "＋ Начать со своих слов" },
   chooseOwnHint: { en: "Search the Wörterbuch, type or import", ru: "Найди в Wörterbuch, введи сам или импортируй" }
 };
-if ($("wsSettings")) $("wsSettings").setAttribute("aria-label", getTranslation({ t: { en: "Settings", ru: "Настройки" } }, "t"));
+// 19.11.2026: the button is «Lerntempo» (aria-label in index.html); its icon shows the pace — tortoise / hare (wortschatz.css)
+if ($("wsSettings") && window.WortschatzCollection) $("wsSettings").dataset.pace = WortschatzCollection.getPace();
 function showChoose() {
   Object.keys(CHOOSE_TEXT).forEach(id => {
     if ($(id)) $(id).textContent = getTranslation(CHOOSE_TEXT, id);

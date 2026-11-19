@@ -1069,6 +1069,8 @@
         const b = button("ui-choice" + (on ? " on" : ""), "", () => {
           C.setPace(id);
           if (typeof window.WortschatzSetPace === "function") window.WortschatzSetPace(id);
+          const paceBtn = document.getElementById("wsSettings"); // 19.11.2026: the icon follows the pace (tortoise / hare)
+          if (paceBtn) paceBtn.dataset.pace = id;
           draw();
         });
         b.setAttribute("role", "radio");
