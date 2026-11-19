@@ -1228,12 +1228,14 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   -webkit-tap-highlight-color: transparent;
 }
 /* 19.11.2026 (Alena): the button opens «Lerntempo» — its icon shows the pace: a tortoise for Standard, a hare for
-   Intensiv (drawn by Alena in Photoshop, the paths taken over as they are; line 1.8). 24 (the gear was 17): animals
-   need the room. data-pace on the button (wortschatz.js at load, collection-window.js on a change). */
+   Intensiv (drawn by Alena in Photoshop, the paths taken over as they are). 24 (the gear was 17): animals
+   need the room. data-pace on the button (wortschatz.js at load, collection-window.js on a change).
+   19.11.2026 (Alena, variant B): the line is 1.2 px like every other icon (it was 1.8 — much heavier). */
 .ws-settings-btn svg {
   width: 24px;
   height: 24px;
 }
+.ws-settings-btn svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
 .ws-settings-btn .pace-intensiv,
 .ws-settings-btn[data-pace="intensiv"] .pace-standard {
   display: none;
