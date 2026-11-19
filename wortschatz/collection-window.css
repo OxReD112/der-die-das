@@ -707,3 +707,9 @@ textarea.coll-paste {
 .reading-review-row > input:indeterminate { border-color: var(--text); background: var(--text); }
 .reading-review-row > input:checked::after { content: ""; width: 9px; height: 5px; border-left: 1.6px solid var(--bg); border-bottom: 1.6px solid var(--bg); transform: translateY(-1px) rotate(-45deg); }
 .reading-review-row > input:indeterminate::after { content: ""; width: 10px; height: 1.6px; border-radius: 1px; background: var(--bg); }
+
+/* 19.11.2026 (Alena, variant A): «Lerntempo» — the pace's icon (tortoise / hare, as on the button #wsSettings) right
+   after its name, 22, grey like the notes, the 1.2 px line of every icon; the name line keeps its 20 (nothing moves). */
+.coll-pace-name { display: flex; align-items: center; gap: 8px; height: 20px; }
+.coll-pace-icon { flex: 0 0 auto; width: 22px; height: 22px; margin: -1px 0; color: var(--muted); }
+.coll-pace-icon * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }

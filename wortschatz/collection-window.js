@@ -578,8 +578,7 @@
         confirming = true;
         for (const control of sc.querySelectorAll("input,button,select")) control.disabled = true;
         try {
-          const r = await M.confirmReading(request);
-          if (r.persisted) persist();
+          const r = await M.confirmReading(request, persist);
           if (r.error) { error.textContent = r.error; return; }
           dirty = true;
           sessionStorage.removeItem(READING_PENDING);
@@ -775,7 +774,15 @@
         b.setAttribute("aria-checked", o.on ? "true" : "false");
         b.appendChild(el("span", "ui-choice-dot", null, { "aria-hidden": "true" }));
         const t = el("span", "ui-choice-text");
-        t.appendChild(el("span", "ui-choice-name", o.name));
+        const name = el("span", "ui-choice-name", o.name); t.appendChild(name);
+        // 19.11.2026 (Alena, variant A): the pace's icon right after its name — the same tortoise / hare as on the
+        // button (#wsSettings), so it is clear where the button's icon comes from. Silent for VoiceOver.
+        const icon = document.querySelector("#wsSettings svg")?.cloneNode(true);
+        if (icon) {
+          icon.setAttribute("class", "coll-pace-icon");
+          icon.querySelectorAll("path").forEach(path => { if (!path.classList.contains("pace-" + o.id)) path.remove(); else path.removeAttribute("class"); });
+          if (icon.querySelector("path")) { name.classList.add("coll-pace-name"); name.appendChild(icon); }
+        }
         t.appendChild(el("span", "ui-choice-note", o.note));
         t.appendChild(el("span", "ui-choice-note ui-choice-num", o.days));
         b.appendChild(t);

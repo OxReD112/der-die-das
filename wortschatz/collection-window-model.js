@@ -33,7 +33,7 @@
      choose() → the choose screen's set lines (+ counts via loadSet)
      search texts, loadDictionaryIndex(), findInDictionary(index, q), searchFields(item, lang), addFromSearch(…), undoSearch(…)
      dictionaryConfirm(), dictionaryError(error), prepareDictionaryWord(request)          a word from the Wörterbuch page
-     reading texts, readingSelected(request), confirmReading(request), readingDone(result, words, unavailable)  words from a book
+     reading texts, readingSelected(request), confirmReading(request, persist), readingDone(result, words, unavailable)  words from a book
      sessionEditable(w)               ✎ in the round: may this card be edited here (own collection, id «u…»)
    Tokens of the form: splitToken, tokensFromCloze, tokensFromText, plainText, clozeText, hiddenWords, previewParts. */
 (function (root) {
@@ -457,24 +457,25 @@
   const readingSelected = request => request.rows.map((row, index) => ({ row, index })).filter(({ index }) => !request.excluded.includes(index));
   // «Add …» of the review. → { error } | { ok, result, words } (the page: dirty, forget the draft, then the confirmation
   // (from a book) or the list with notice / scroll to the first added word).
-  async function confirmReading(request) {
+  // persist() — the page's «keep the draft» (sessionStorage); called once the words passed the check and BEFORE they
+  // are added, as before 19.11: if keeping the draft fails (storage full), nothing is added and the error is shown.
+  async function confirmReading(request, persist) {
     const I = root.WortschatzDictionaryImport;
-    let persisted = false; // the page keeps the draft once the words passed the check (as before 19.11)
     try {
       const selection = readingSelected(request), rows = selection.map(({ row }) => row);
       const dictionary = await I.load(), issues = I.validate(rows, dictionary);
       if (issues.length) return { error: issues.map(issue => I.describe({ ...issue, n: selection[issue.n - 1].index + 1 })).join("; ") };
-      persisted = true;
+      if (persist) persist();
       const items = rows.map(row => ({ ...row.card, dictionaryId: dictionary.get(row.dictionaryId)?.id || row.dictionaryId })), prepared = C.prepare(items, own() ? C.cards() : []);
-      if (prepared.skipped.length) return { error: prepared.skipped.map(issue => I.describe({ ...issue, n: selection[issue.n - 1].index + 1, dictionaryId: rows[issue.n - 1].dictionaryId, base: rows[issue.n - 1].card.base })).join("; "), persisted: true };
-      if (!prepared.cards.length) return { error: L("These words are already in your collection.", "Эти слова уже есть в коллекции."), persisted: true };
+      if (prepared.skipped.length) return { error: prepared.skipped.map(issue => I.describe({ ...issue, n: selection[issue.n - 1].index + 1, dictionaryId: rows[issue.n - 1].dictionaryId, base: rows[issue.n - 1].card.base })).join("; ") };
+      if (!prepared.cards.length) return { error: L("These words are already in your collection.", "Эти слова уже есть в коллекции.") };
       const result = own() ? C.add(items, { placement: request.placement }) : C.create(request.name.trim() || MY_WORDS(), items);
-      if (!result.added) return { error: L("No words were added.", "Слова не добавлены."), persisted: true };
+      if (!result.added) return { error: L("No words were added.", "Слова не добавлены.") };
       const notice = L("{0} words added", "Добавлено: {1}", result.added, wordsLabel(result.added)) + (request.placement === "next" ? L(" as the next new words", " — следующими новыми") : "") + "." + (result.duplicates ? L(" {0} already in your collection.", " Уже были в коллекции: {0}.", result.duplicates) : "");
       const added = new Set(result.ids || C.cards().map(word => word.id));
-      return { ok: true, persisted: true, result, words: selection.map(({ row }) => row.card || {}), notice, scrollTo: C.cards().findIndex(word => added.has(word.id)) };
+      return { ok: true, result, words: selection.map(({ row }) => row.card || {}), notice, scrollTo: C.cards().findIndex(word => added.has(word.id)) };
     } catch (e) {
-      return { error: L("The words could not be saved. Your review is kept; please try again.", "Не удалось сохранить слова. Твой выбор сохранён — попробуй ещё раз."), failed: true, persisted };
+      return { error: L("The words could not be saved. Your review is kept; please try again.", "Не удалось сохранить слова. Твой выбор сохранён — попробуй ещё раз."), failed: true };
     }
   }
   function readingDone(result, words, unavailable) {
