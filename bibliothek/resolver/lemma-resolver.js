@@ -4335,7 +4335,10 @@ function apostropheText(text) {
           // article cannot mean, nor the plural)
           // Only after das: a noun keeps its own article's forms (der Stille, der Antike — the genitive of die Stille), das names the
           // neuter alone — ins Leere, im Dunkeln stay as they are
-          determiner === "das" && norm(c.lemma) === surface && !!c.nounArticle && c.nounArticle !== "das");
+          determiner === "das" && norm(c.lemma) === surface && !!c.nounArticle && c.nounArticle !== "das" ||
+          // (advisor 19.11, «Астронавт»: das Gleiche) after das a record of the spelling without a gender (gleiche «equality») beside the neuter
+          // record of this very nominalization (gleiches «nominalization of gleich») — the article names that one
+          determiner === "das" && norm(c.lemma) === surface && !c.nounArticle && others.some(o => nominalization(o) && norm(o.lemma) === stem0 + "es"));
       // (advisor 09.11, партия 63) our own bare-stem noun of a gender that cannot be meant blocks no more than an outside one (der Reiche —
       // not das Reich), beside a record of this nominalization
       const ownGender = c => ({"der":"male","die":"female","das":"neuter"})[String(c.item?.article || "")];
@@ -15806,6 +15809,41 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const next = tokens[at+1];
       return !!next && /^\s+$/u.test(sentence.slice(t.index + t[0].length, next.index)) && /^\p{Ll}/u.test(next[0]) && (forms.get(norm(next[0])) || []).length > 0;
     }
+    // (advisor 19.11, «Астронавт») a German number word → a number (zwanzig 20, dreizehn 13, zehntausend 10000, zwei 2, anderthalb 1.5);
+    // null when the word is no number
+    function germanNumber(word) {
+      const w = norm(word);
+      if (w === "anderthalb") return 1.5;
+      const UNITS = {ein:1,eins:1,zwei:2,drei:3,vier:4,fünf:5,sechs:6,sieben:7,acht:8,neun:9,zehn:10,elf:11,zwölf:12,sech:6,sieb:7};
+      const TENS = {zwanzig:20,dreißig:30,vierzig:40,fünfzig:50,sechzig:60,siebzig:70,achtzig:80,neunzig:90};
+      const below100 = x => {
+        if (!x) return null;
+        if (x in UNITS && !["sech","sieb"].includes(x)) return UNITS[x];
+        if (x in TENS) return TENS[x];
+        const teen = /^(drei|vier|fünf|sech|sieb|acht|neun)zehn$/u.exec(x); if (teen) return 10 + UNITS[teen[1]];
+        const und = /^(ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)und(\p{Ll}+zig|dreißig)$/u.exec(x);
+        if (und && und[2] in TENS) return UNITS[und[1]] + TENS[und[2]];
+        return null;
+      };
+      const below1000 = x => {
+        const h = /^(\p{Ll}*?)hundert(\p{Ll}*)$/u.exec(x);
+        if (h) { const a = h[1] ? below100(h[1]) : 1, b = h[2] ? below100(h[2]) : 0; return a != null && b != null && a < 10 ? a * 100 + b : null; }
+        return below100(x);
+      };
+      const t = /^(\p{Ll}*?)tausend(\p{Ll}*)$/u.exec(w);
+      if (t) { const a = t[1] ? below1000(t[1]) : 1, b = t[2] ? below1000(t[2]) : 0; return a != null && b != null ? a * 1000 + b : null; }
+      return below1000(w);
+    }
+    function numberWord(lemma) {
+      const w = norm(lemma);
+      if (w === "anderthalb") return {kind:"one5", n:1.5};
+      const half = /^(\p{Ll}+)einhalb$/u.exec(w);
+      if (half) { const n = germanNumber(half[1]); return n === 1 ? {kind:"one5", n:1.5} : n != null && n >= 2 ? {kind:"half", n} : null; }
+      const m = /^(\p{Ll}+?)(mal|fach|minütig|stündig|tägig|wöchig|monatig|jährig)(?:e|en|er|es|em)?$/u.exec(w);
+      if (!m) return null;
+      const n = germanNumber(m[1]);
+      return n != null && (n >= 2 || n === 1.5 || m[2] !== "mal" && m[2] !== "fach") ? {kind:m[2], n} : null;
+    }
     function alleAfterPronoun(tokens, at) {
       if (norm(tokens[at]?.[0] ?? "") !== "alle") return false;
       const text = String(tokens[at].input ?? "");
@@ -18559,16 +18597,58 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const OTHER_LABELS = {adv:["pron"], intj:["adv","particle"], pron:["unknown","det"], det:["unknown","pron"], adj:["num"], num:["adj"]};
       // (the list «нет русского перевода», group 2) an external adjective that is the Partizip II of a verb of the same spelling — its
       // English a past participle (verheißen «promised») — the verb's text: «От verheißen — обещать». Our verb card first.
-      const participleVerbText = async c => {
-        const lemma = String(c.lemma || ""), first = String((c.meanings || [c.translation?.en || ""])[0] || "").split(/[,;]/u)[0].trim();
-        if (c.pos !== "adj" || !/en$/u.test(lemma) || !/^[a-z]+(?:ed|en|wn|lt|nt)$/u.test(first)) return;
-        const own = (lemmas.get(norm(lemma)) || []).find(e => e.type === "Verb");
+      // (advisor 19.11, «Астронавт»: every participle adjective — drohend, quietschend, wirkend (Partizip I: the verb is the form without
+      // the final d), gemessen, vorhergesagt, ausgerüstet, abgestrahlt (Partizip II: the verb of the form by the inflection tables, else
+      // the form without ge- / -t, -et + -en; the English a past participle)) — «От X — …» with the verb's text)
+      const verbText = async base => {
+        const own = (lemmas.get(norm(base)) || []).find(e => e.type === "Verb");
         let ru = own ? String(own.translation_ru || "") : "";
         if (!ru && window.BibliothekRussianTranslations?.lookup) {
-          try { const r = await window.BibliothekRussianTranslations.lookup(lemma,"verb"); const names = new Set(r?.names || []);
+          try { const r = await window.BibliothekRussianTranslations.lookup(base,"verb"); const names = new Set(r?.names || []);
             ru = r ? (r.shown || r.meanings || []).filter(m => !names.has(m)).join("; ") : ""; } catch (_) { ru = ""; }
         }
-        if (ru) c.formOf = {kind:"verb", base:lemma, pos:"verb", dictionaryId:own?.id ?? null, text:{ru}};
+        return ru ? {ru, own} : null;
+      };
+      const participleVerbText = async c => {
+        const lemma = String(c.lemma || ""), first = String((c.meanings || [c.translation?.en || ""])[0] || "").split(/[,;]/u)[0].trim();
+        if (c.pos !== "adj") return;
+        // (advisor 19.11, variant (в)) only a record that is a bare pointer «present / past participle of X» with no meaning of its own; a
+        // record with its own meanings (ausstehend «outstanding», ergreifend «moving», drohend «threatening») keeps its text
+        const own = (c.meanings || [c.translation?.en || ""]).map(m => String(m || "").trim()).filter(Boolean);
+        // (the rule of main 19.11 stays: a form in -en whose English is one past participle — verheißen «promised»)
+        const mainRule = /en$/u.test(lemma) && /^[a-z]+(?:ed|en|wn|lt|nt)$/u.test(first);
+        // (advisor 19.11, correction to (в)) a record with its own meanings keeps them as the main text; the verb «От X — …» goes to a second
+        // line like «состав» (c.participleOf, the Russian popup)
+        const ownMeanings = !mainRule && own.some(m => !/^(?:(?:present|past|perfect) )?participle of \S/iu.test(m));
+        const low = norm(lemma), bases = [];
+        if (/[^e]end$/u.test(low) || /[lr]nd$/u.test(low)) bases.push(low.slice(0, -1));
+        else if (/^[a-z]+(?:ed|en|wn|lt|nt|ght)$/u.test(first) && /(?:t|en)$/u.test(low)) {
+          if (/en$/u.test(low)) bases.push(low);
+          for (const a of verbAnalyses.get(low) || []) if (a.kind === "participle" && a.base) bases.push(norm(a.base));
+          const ge = /^(.*?)ge(\p{Ll}{2,}?)(e?t)$/u.exec(low);
+          if (ge) bases.push(ge[1] + ge[2] + "en");
+          const insep = /^((?:be|er|ver|zer|ent|emp|miss|über|unter|durch|hinter|wider)\p{Ll}{2,}?)(e?t)$/u.exec(low);
+          if (insep) bases.push(insep[1] + "en");
+        }
+        // (count 19.11: abtretend «resigning» ≠ «изнашивать», lösend «solvent» ≠ «решать», einhergehend «associated» ≠ «ходить») the
+        // participle's English must share a word stem with the verb's English (threatening / to threaten, squeaky / to squeak, rising / to
+        // rise) — else the verb's first meanings may be another sense; the record's English stays
+        const stems = text => String(text || "").toLowerCase().split(/[^a-z]+/u).filter(x => x.length > 2 && !/^(?:to|the|and|for|with|one|something|someone)$/u.test(x))
+          .map(x => x.length > 4 ? x.replace(/(?:ing|ed|ive|ion|ions|ly|y|ent|ant|er|s)$/u, "").replace(/(.)\1$/u, "$1").replace(/e$/u, "") : x.replace(/e$/u, ""));
+        const mine = stems((c.meanings || [c.translation?.en || ""]).join(" "));
+        const shared = verbEn => { const theirs = stems(verbEn);
+          return mine.some(a => theirs.some(b => { let k = 0; while (k < a.length && k < b.length && a[k] === b[k]) k++;
+            return k >= 4 || k >= 3 && k === Math.min(a.length, b.length); })); };
+        for (const base of [...new Set(bases)]) {
+          const t = await verbText(base);
+          if (!t) continue;
+          let en = t.own ? String(t.own.translation_en || "") : "";
+          if (!en && fallback.meaningsOf) { try { en = (await fallback.meaningsOf(base, "verb")).join("; "); } catch (_) { en = ""; } }
+          if (ownMeanings) { c.participleOf = {base, dictionaryId:t.own?.id ?? null, text:{ru:t.ru}}; return; }
+          // (a verb known only in Russian — abstrahlen — has nothing to compare: its text is taken; a bare pointer names its verb itself)
+          if (mainRule && en && !shared(en)) return;
+          c.formOf = {kind:"verb", base, pos:"verb", dictionaryId:t.own?.id ?? null, text:{ru:t.ru}}; return;
+        }
       };
       const otherLabelText = async c => {
         const labels = OTHER_LABELS[c.pos];
@@ -18632,6 +18712,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // popup without the record's own English — not in English; the form-of link asks the Russian dictionary outside English only
       const englishPopup = (window.DeutschTranslation?.getLang?.() || 'en') === 'en';
       if (fallback.formOfLink) await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.explanation && !c.formation).map(async c => {
+        // (advisor 19.11, «Астронавт») a word made of a number: X-einhalb, X-mal, X-fach, X-minütig / -stündig / -tägig / -wöchig /
+        // -monatig / -jährig — «2 с половиной», «20 раз», «в 10 000 раз», «20-минутный», «13-летний» (meaning-display, a phrase of
+        // the display)
+        const number = numberWord(c.lemma);
+        if (number) { c.formOf = {kind:"number", base:c.lemma, pos:c.pos, dictionaryId:null, text:{}, number}; return; }
         const link = await fallback.formOfLink(c.lemma,c.pos);
         if (!link) { if (englishPopup) return; await sameWordText(c); if (!c.formOf) await otherLabelText(c); if (!c.formOf) await participleVerbText(c); return; }
         const type = {noun:"Nomen",verb:"Verb",adj:"Adjektiv",adv:"Adverb"}[c.pos] || null;

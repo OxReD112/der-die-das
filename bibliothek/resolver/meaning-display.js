@@ -377,6 +377,23 @@
   function formOfText(candidate, language) {
     const f = candidate?.formOf;
     if (!f || !f.text) return null;
+    // (advisor 19.11, «Астронавт») a word made of a number — a phrase of the display; English keeps the record's own text, a pack without
+    // the phrase too
+    if (f.kind === 'number') {
+      if (language === 'en' || !f.number) return null;
+      const n = f.number.n, digits = n === 1.5 ? null : Number(n).toLocaleString('de-DE').replace(/\./gu, '\u00a0');
+      // (Russian: 2–4, 22–24 … раза; otherwise раз)
+      const raza = Number.isInteger(n) && [2,3,4].includes(n % 10) && ![12,13,14].includes(n % 100);
+      if (f.number.kind === 'one5') { if (isPack(language) && !packPhrase(language, 'one and a half', 'полтора')) return null; return {text:L(language, 'полтора', 'one and a half'), language}; }
+      const phrase = {half:['{0} с половиной','{0} and a half'], mal:[raza ? '{0} раза' : '{0} раз','{0} times'], fach:[raza ? 'в {0} раза' : 'в {0} раз','{0}-fold'],
+        minütig:['{0}-минутный','{0}-minute'], stündig:['{0}-часовой','{0}-hour'], tägig:['{0}-дневный','{0}-day'], wöchig:['{0}-недельный','{0}-week'],
+        monatig:['{0}-месячный','{0}-month'], jährig:['{0}-летний','{0}-year-old']}[f.number.kind];
+      if (!phrase) return null;
+      const one5 = n === 1.5 ? {mal:['полтора раза','one and a half times'], fach:['в полтора раза','one-and-a-half-fold']}[f.number.kind] : null;
+      if (n === 1.5 && !one5) return null;
+      if (isPack(language) && !packPhrase(language, one5 ? one5[1] : phrase[1], one5 ? one5[0] : phrase[0])) return null;
+      return {text:one5 ? L(language, one5[0], one5[1]) : L(language, phrase[0], phrase[1], digits), language};
+    }
     const own = language === 'en' ? f.text.en : f.text[language] || '', shownLanguage = own ? language : 'en', baseText = own || f.text.en || '';
     if (!baseText) return null;
     // (advisor 19.11) the same word in another part of speech — its text as it is (unbarmherzig: «безжалостный»); a noun from the
@@ -1002,6 +1019,11 @@
         model = {...model, text:shown.text, textLanguage:shown.language, more:0, segments:labels ? [{labels, text:shown.text}] : undefined, segmentPrefix:undefined, formOf:true};
       }
     }
+    // (advisor 19.11, «Астронавт»: a participle with its own record — drohend «threatening») the main text stays the record's; its verb
+    // goes to a second line like «состав», the lemma only — «От drohen»: the verb's first meaning may be another sense (bestehend
+    // «existing» — bestehen «сдать экзамен»), and the sense is not chosen (the Russian popup)
+    if (candidate?.participleOf && language === 'ru' && model && !model.missing && !model.composition && candidate.participleOf.base)
+      model = {...model, composition:{prefix:'', lines:[{text:`От ${candidate.participleOf.base}`, more:0}]}};
     if (candidate?.composition && language === 'ru' && /(?:^|— )английский: /u.test(String(model.text || ''))) {
       // (advisor 06.11: the lines of the «Kompositum» card itself — the same parts and the same meanings, two of them; a part
       // with more meanings is a button that opens them in the line, as «ещё N значений» of the card)
