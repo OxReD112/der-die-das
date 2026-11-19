@@ -97,8 +97,11 @@
   const englishPartsLines = (candidate, language) => {
     const f = candidate?.englishByParts;
     if (!isPack(language) || !f || typeof f !== 'object' || f.kind !== 'particle-verb' || !f.particle || !(f.verb || f.verbs?.length)) return null;
+    // (19.11.2026, user: the mark stands before the English it is about — «angielski: ab- · säbeln — to saw away at» read as if the
+    // particle were English) none of the parts in the pack either: the lines, each English meaning with its mark
+    // (the pack not here — no mark to give: the English card as is)
     const lines = particleVerbLines(f, language);
-    return lines.some(l => l.language === language) ? lines : null;
+    return lines.some(l => l.language === language) || englishPrefix(language) ? lines : null;
   };
   // (19.11.2026) an external verb shown by its parts (G47: candidate.directionalSimple — the switch of wordCard below, decided by English)
   const simpleParts = candidate => !!candidate?.directionalSimple && byParts(candidate.directionalSimple) &&
@@ -404,6 +407,10 @@
       const formOf = base.formOf && (language === 'en' || !brief(base, language)) ? formOfText(base, language) : null;
       if (formOf) return [{candidate:base, text:formOf.text, language:formOf.language}];
       const translated = brief(base, language);
+      // (19.11.2026, review B: «angielski: herum — around · …» put the mark before German) a verb read by its parts in a pack language:
+      // its lines, as its card shows them — each part in its language, an English meaning with its own mark
+      const partLines = !translated && isPack(language) ? englishPartsLines(base, language) : null;
+      if (partLines) return [{candidate:base, text:partLines.map(l => l.text).join(' · '), language}];
       const displayLanguage = translated ? language : 'en';
       const text = translated || brief(base, 'en');
       if (!text && !base.explanation) return [];
@@ -1064,8 +1071,10 @@
     if (!isPack(language) || !model || model.textLanguage !== 'en' || model.missing || model.lines || !model.text) return model;
     // (no second mark: a text composed around an English meaning carries the mark already — in its text or in its segments' prefix)
     const mark = englishPrefix(language);
-    if (!mark || String(model.text).includes(mark) || String(model.segmentPrefix || '').includes(mark)) return model;
-    return {...model, text:`${mark}${model.text}`, ...(model.segments ? {segmentPrefix:`${mark}${model.segmentPrefix || ''}`} : {})};
+    // (19.11.2026, user: no English line without the mark) the note of an English card is English too — it carries the mark as well
+    const note = mark && model.note && !String(model.note).includes(mark) ? {note:`${mark}${model.note}`} : {};
+    if (!mark || String(model.text).includes(mark) || String(model.segmentPrefix || '').includes(mark)) return {...model, ...note};
+    return {...model, ...note, text:`${mark}${model.text}`, ...(model.segments ? {segmentPrefix:`${mark}${model.segmentPrefix || ''}`} : {})};
   }
   function cardShown(resolution, candidate, options = {}) {
     if (options.all) return withAll(() => cardBase(resolution, candidate, options));
@@ -1185,7 +1194,8 @@
       if (nounMeaning) { marks = []; text = {text:nounMeaning, language:isPack(language) && !usage?.noun?.translation?.[language] ? 'en' : language}; }
       else if (language === 'en' && ownNoun) text = {text:ownNoun, language};
       else {
-        const own = entryFit(baseEntry, language), ownEn = entryFit(baseEntry, 'en');
+        // (19.11.2026) a pack language: the own base card's pack text (pack-translations.js usage.baseText) — «Od alt — stary»
+        const own = isPack(language) && usage?.baseText?.[language] ? fit(usage.baseText[language]) : entryFit(baseEntry, language), ownEn = entryFit(baseEntry, 'en');
         // G8 (22.10.2026, user): without an own card of the base, the base word's external record among the candidates
         // gives its meaning (das Grinsen — «От grinsen — скалиться, усмехаться»; das Glucksen — «From glucksen — to gurgle»
         // instead of «verbal noun»).
@@ -1199,7 +1209,11 @@
         const siblingText = lang => { if (!sibling || realMeaning(lang)) return '';
           const t = brief(sibling, lang); return t && !label(t) ? t : ''; };
         // (a pack text is a dictionary gloss, not «… от «x»: meaning» — nothing to cut at its colon: «lm od: Narr», review B 17.11)
-        const meaning = own.text || (isPack(language) ? '' : compact(synthetic(candidate.translation?.[language]))) || siblingText(language);
+        // (19.11.2026) a pack language, the base verb read by its parts (englishByParts — das Herumschleichen): its lines, each part in
+        // the pack, an English one with its mark — «Od herumschleichen — herum — … · schleichen — …»
+        const siblingParts = () => { if (!isPack(language) || !sibling || realMeaning(language)) return '';
+          const lines = englishPartsLines(sibling, language); return lines?.some(l => l.language === language) ? lines.map(l => l.text).join(' · ') : ''; };
+        const meaning = own.text || (isPack(language) ? '' : compact(synthetic(candidate.translation?.[language]))) || siblingText(language) || siblingParts();
         const english = !meaning && language !== 'en' ? ownEn.text || compact(synthetic(candidate.translation?.en)) || ownNoun || siblingText('en') : '';
         // The noun's own meaning in this language comes first (das Grinsen «ухмылка») — unless an own card of the verb is there
         // and the noun's record has several readings (das Übersetzen «переправа; перевод» — the verb card decides): review 23.10.
@@ -1341,7 +1355,17 @@
   // (G57's card() wraps this one, so «ещё N значений» counts the reflexive card that is shown)
   function cardBase(resolution, candidate, options = {}) {
     // (a pack language: the card is built in it only when this candidate has a text in it — otherwise the English card)
-    if (isPack(textLanguage(options.language))) options = {...options, language:cardLanguage(candidate, options.language)};
+    if (isPack(textLanguage(options.language))) {
+      const pack = textLanguage(options.language), shown = cardLanguage(candidate, options.language);
+      // (19.11.2026) a nominalized infinitive of a verb read by its parts (das Herumschleichen): the card in the pack when a part of
+      // that verb is in it (cardCore: «Od herumschleichen — …», each part in its language)
+      const usage = candidate?.usage, nominalParts = shown === 'en' && usage?.role === 'nominalized' && usage.kind === 'infinitive' &&
+        (resolution?.candidates || []).some(c => c !== candidate && c.source === 'fallback' && pos(c) === 'Verb' && norm(c.lemma) === norm(usage.base) &&
+          !c.construction && englishPartsLines(c, pack)?.some(l => l.language === pack));
+      // (and a nominalized word of an own card whose pack text is read: der Alte — «Od alt — stary»)
+      const nominalOwn = shown === 'en' && usage?.role === 'nominalized' && !!usage.baseText?.[pack] && !usage.noun;
+      options = {...options, language:nominalParts || nominalOwn ? pack : shown};
+    }
     const result = cardCore(resolution, candidate, options);
     const k = candidate?.construction, language = textLanguage(options.language);
     if (!k || k.id !== 'reflexive-verb' || k.lexicalSenseConfirmed || k.interpretation || k.attachmentOnly || candidate.formation ||
@@ -1409,7 +1433,9 @@
     // (shown as an own card's meaning — brackets kept, fit() with «ещё N значений» —; derived, so a choice row shows it too)
     // (a pack language: the field's text of the pack when the field is this card's own — candidate.packItem, Ч2б; otherwise the English
     // one, as an English card)
-    const packField = isPack(language) && field && ownItem === candidate.item ? candidate.packItem?.[language]?.reflexive : null;
+    // (19.11.2026: a candidate of the external dictionary whose field is its own card's — that card's pack texts, candidate.packOwnVerb)
+    const packField = !isPack(language) || !field ? null : ownItem === candidate.item ? candidate.packItem?.[language]?.reflexive :
+      ownItem && candidate.packOwnVerb?.[language]?.id === ownItem.id ? candidate.packOwnVerb[language].fields?.reflexive : null;
     const fieldLanguage = isPack(language) && !String(packField?.[`translation_${language}`] || '').trim() ? 'en' : language;
     const fieldSource = fieldLanguage === language && isPack(language) ? packField : field;
     // (links chat 19.11, advisor 19.11: a meaning of the field proved by its government — the resolver's fieldSenseFirst — comes first)

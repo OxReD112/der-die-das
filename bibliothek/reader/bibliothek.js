@@ -1276,6 +1276,19 @@
     const expandedLines = new Set(), expandedParts = new Set();
     // («ещё N значений»: the plural of the framework — en one|other, ru one|few|many, a pack language its own forms)
     const moreLabel = n => T("{0} more {0|meaning|meanings}", "ещё {0} {0|значение|значения|значений}", n);
+    // (19.11.2026) a button of the frame inside the card (a pack language): its lang is the language its label is in; ru / en — none
+    const moreEn = n => `${n} more ${n === 1 ? "meaning" : "meanings"}`;
+    const frameLang = (el, text, en) => { if (popupLanguage() !== locale()) el.lang = shownIn(text, en); };
+    // (19.11.2026) the lang of the popup's frame in a pack language (each text of T — the language it is in: shownIn); ru / en — none
+    const packLangs = () => {
+      const pack = popupLanguage() !== locale();
+      const set = (el, language) => { if (!el) return; if (pack && language) el.lang = language; else el.removeAttribute("lang"); };
+      set($("popover-word"), "de");
+      const more = $("popover-more"), moreEn = more.firstChild?.textContent?.trim() === "Pronoun reference" || more.firstChild?.textContent?.trim() === "Dictionary details";
+      set(more, moreEn ? "en" : popupLanguage());
+      const summary = $("popover-alternatives").querySelector("summary");
+      set(summary, shownIn(summary.textContent, "Other meanings"));
+    };
     const expandAndKeepFocus = () => { renderSelection(); content.focus({preventScroll:true}); };
     const renderSelection = () => {
       const candidate = selectedResolution;
@@ -1333,11 +1346,17 @@
         // (advisor + user 10.11) a whole Russian record of a word nothing else knows (Russian interface only)
         model = display.wholeCard(resolution, word, locale());
       } else {
-        model = {heading:word, grammar:"", spans:null, helpEntry:null, textLanguage:locale(),
+        // (19.11.2026, chat «languages in the reader»; user: no English line without the mark) a pack language: «not found» in the
+        // pack (its line of reader.json; none — English, as before), the English meanings of an unresolved word after the mark
+        const packShown = popupLanguage() !== locale() ? popupLanguage() : "";
+        const notFound = packShown ? display.text(display.NO_TRANSLATION, packShown) : display.NO_TRANSLATION[locale()];
+        const unresolved = !resolution.candidates.length && !resolution.error && resolution.unresolvedMeanings.length > 0;
+        model = {heading:word, grammar:"", spans:null, helpEntry:null,
+          textLanguage:!packShown || resolution.candidates.length || resolution.error ? locale() : unresolved ? "en" : notFound !== display.NO_TRANSLATION[locale()] ? packShown : locale(),
           // G57 (user 24.10.2026): the choice window is the list of cards alone, without a «choose» line.
           text:resolution.candidates.length ? "" :
             resolution.error ? T("The dictionary could not be loaded. Please try again.", "Не удалось загрузить словарь. Попробуйте ещё раз.") :
-            resolution.unresolvedMeanings.length ? `${ru ? "английский: " : ""}${resolution.unresolvedMeanings.join("; ")}` : display.NO_TRANSLATION[locale()]};
+            resolution.unresolvedMeanings.length ? `${ru ? "английский: " : packShown ? display.englishMark?.(packShown) || "" : ""}${resolution.unresolvedMeanings.join("; ")}` : notFound};
       }
       selectedEntry = model.helpEntry || null;
       partEntries = model.lines ? model.lines.map(l => l.helpEntry).filter((e, i, all) => e && all.findIndex(o => o?.id === e.id) === i) : [];
@@ -1350,7 +1369,7 @@
       const shown = expandedMain && full && !model.lines ? full : model;
       const moreButton = (n, onClick) => {
         const more = document.createElement("button"); more.type = "button"; more.className = "popover-more-meanings";
-        more.append(moreLabel(n), "\u00a0", sideChevron()); more.setAttribute("aria-expanded", "false");
+        more.append(moreLabel(n), "\u00a0", sideChevron()); more.setAttribute("aria-expanded", "false"); frameLang(more, moreLabel(n), moreEn(n));
         more.addEventListener("click", onClick); return more;
       };
       // (user 07.11) a line of parts opens and closes with a chevron: down — «ещё N значений», up — collapse it again.
@@ -1358,7 +1377,7 @@
       const sideChevron = () => { const c = document.createElement("span"); c.className = "ui-chev"; c.setAttribute("aria-hidden", "true"); return c; };
       const collapseButton = onClick => { const b = document.createElement("button"); b.type = "button"; b.className = "popover-more-meanings popover-collapse";
         const label = T("collapse", "свернуть"); b.setAttribute("aria-expanded", "true");
-        b.setAttribute("aria-label", label); b.title = label; b.append(chevron(true));
+        b.setAttribute("aria-label", label); b.title = label; b.append(chevron(true)); frameLang(b, label, "collapse");
         b.addEventListener("click", onClick); return b; };
       const chevron = up => { const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("class", "popover-chevron"); svg.setAttribute("viewBox", "0 0 12 12"); svg.setAttribute("aria-hidden", "true");
@@ -1369,7 +1388,7 @@
         const button = document.createElement("button"); button.type = "button"; button.className = "popover-more-meanings";
         const label = moreLabel(n);
         if (text) button.append(label, "\u00a0"); else { button.setAttribute("aria-label", label); button.title = label; }
-        button.append(sideChevron()); button.setAttribute("aria-expanded", "false");
+        button.append(sideChevron()); button.setAttribute("aria-expanded", "false"); frameLang(button, label, moreEn(n));
         button.addEventListener("click", onClick); return button;
       };
       if (shown.segments) appendLabelSegments(content, shown.segments, shown.segmentPrefix);
@@ -1413,6 +1432,7 @@
       content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : popupLanguage();
       updateTranslationFade();
       $("popover-alternatives").querySelector("summary").textContent = T("Other meanings", "Другие значения");
+      packLangs();
       if (referencePronoun && linkedReflexive) {
         const link = document.createElement("button"); link.type = "button"; link.className = "lemma-choice reflexive-link";
         link.textContent = `${T("Linked verb", "Связанный глагол")}: ${linkedReflexive.lemma}`;
@@ -1420,6 +1440,9 @@
       }
       $("popover-more").hidden = !selectedEntry && !partEntries.length;
       $("popover-more").firstChild.textContent=`${showPronounSummary ? T("Pronoun reference", "Справка о местоимениях") : T("Dictionary details", "Словарная справка")} `;
+      // (19.11.2026, chat «languages in the reader») a pack language: the frame's texts in their language (a line of ui.json — the pack's,
+      // none — English), the German heading in German; ru / en: no lang here, as before
+      packLangs();
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" && !(locale() === "ru" && candidate.wholeRu) : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback") && !(locale() === "ru" && resolution.wholeRu);
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
       // (links chat, advisor 15.11: a window keeps the chain of its verb — modal / auxiliary group — lit; resolver windowChain)
@@ -1518,6 +1541,10 @@
       // and the number is the one that card shows (a card of parts: all its lines).
       const hidden = altModel.lines ? altModel.lines.reduce((sum, l) => sum + (l.more || 0), 0) : altModel.more || 0;
       const moreText = hidden > 0 ? moreLabel(hidden) : "";
+      // (19.11.2026) a pack language: each part of the row in its language — German heading and grammar, the meaning in the row's,
+      // «N more meanings» in the frame's; ru / en — no lang, as before
+      const packRow = popupLanguage() !== locale(), rowLang = {"lemma-choice-heading":"de", "lemma-choice-grammar":"de",
+        "lemma-choice-text":altModel.derived ? altModel.textLanguage : language, "lemma-choice-more":shownIn(moreText, moreText ? `${hidden} more ${hidden === 1 ? "meaning" : "meanings"}` : "")};
       for (const [cls, value] of [["lemma-choice-heading", altModel.heading], ["lemma-choice-grammar", altModel.grammar], ["lemma-choice-text", marked], ["lemma-choice-more", moreText]]) {
         if (!value) continue;
         // Separators stay in the text (screen readers, copy) but not on screen.
@@ -1525,6 +1552,7 @@
         const part = document.createElement("span"); part.className = cls;
         if (cls === "lemma-choice-text" && segments && !altModel.derived) appendLabelSegments(part, segments, englishRow, false);
         else part.textContent = value;
+        if (packRow && rowLang[cls]) part.lang = rowLang[cls];
         button.append(part);
       }
       button.addEventListener("click",()=>chooseCandidate(candidate));
@@ -1664,18 +1692,22 @@
     // a text the pack has not → the English one with the mark «angielski: »; no pack texts (outdated, not read) → the English
     // reference as a whole. RU / EN: as before (code null). The reference's language is its lang (tests chat, Ч6а).
     const pack = packSheet(item), code = pack ? sheetLanguage() : null;
-    if (sheetLanguage()) root.lang = code || "en"; else root.removeAttribute("lang");
-    const mark = code ? window.BibliothekMeaningDisplay?.englishMark?.(code) || "" : "";
+    // (19.11.2026) a pack language chosen: the reference is in it (its frame, its notes) even when the card's texts are English —
+    // each English text carries the mark and lang="en" itself
+    if (sheetLanguage()) root.lang = code || sheetLanguage(); else root.removeAttribute("lang");
+    // (19.11.2026, user: no English line without the mark) a pack language whose texts this card has not (outdated, not read, a card the
+    // resolver made — das Alte «nominalized adjective of “alt”»): the English reference, each English text with the mark as well
+    const chosen = sheetLanguage() || null, mark = chosen ? window.BibliothekMeaningDisplay?.englishMark?.(chosen) || "" : "", shownLang = code || chosen;
     // [text, its language or null]: RU / EN the text as before; a pack language its own text, else the English one marked
-    const say = (english, own) => !code ? [english, null] : String(own || "").trim() ? [String(own), code] : english ? [mark + english, "en"] : ["", null];
+    const say = (english, own) => !chosen ? [english, null] : String(own || "").trim() ? [String(own), shownLang] : english ? [mark + english, "en"] : ["", null];
     // The pronoun reference is only for Pronomen cards; other excluded
     // function-word cards (articles, prepositions, numerals) render normally.
     if(item.type==="Pronomen"&&window.BibliothekPronounReference.excluded(item)){
-      window.BibliothekPronounReference.render(root,item,code || locale(),selectedWord,pack);
+      window.BibliothekPronounReference.render(root,item,code || chosen || locale(),selectedWord,pack);
       return;
     }
     const addInfo = (tag, cls, text, language = null) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; if (language) el.lang = language; root.append(el); };
-    const addSaid = (tag, cls, [text, language]) => addInfo(tag, cls, text, language && language !== code ? language : null);
+    const addSaid = (tag, cls, [text, language]) => addInfo(tag, cls, text, language && language !== shownLang ? language : null);
     const formKey = value => String(value || "").normalize("NFC").trim().toLowerCase();
     const clickedForm = formKey(selectedWord);
     const reflexiveGroup = selectedResolution?.construction?.id === "reflexive-verb" ? selectedResolution.construction : null;
@@ -1702,23 +1734,26 @@
         } else element.append(document.createTextNode(part));
       }
     };
-    const head = document.createElement("h2"); head.className = "dictionary-headword"; if (!list) head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
+    const head = document.createElement("h2"); head.className = "dictionary-headword"; if (!list) head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; if (chosen) head.lang = "de"; root.append(head);
     // 09.11 (Alena): the word of «Словарная справка» (in the book and on Meine Wörter's second screen) is read aloud on a
     // tap, like the popover's; the list of Meine Wörter itself stays silent.
     if (window.DeutschVoice?.available()) {
       head.classList.add("can-speak");
       head.addEventListener("click", () => window.DeutschVoice.speak(spokenHeading(head.textContent)));
     }
-    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Zahlwort",particle:"Partikel"})[item.type] || item.type);
-    if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
+    // (19.11.2026) a pack language: the German headword and part of speech in German (lang), not in the reference's language
+    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Zahlwort",particle:"Partikel"})[item.type] || item.type, chosen ? "de" : null);
+    const usageLine = selectedResolution?.dictionaryId === item.id ? usageNote(selectedResolution) : "";
+    addInfo("p","dictionary-detail",usageLine);
     const forThis = selectedResolution?.dictionaryId === item.id;
     addSaid("p","dictionary-translation",say(forThis ?
       (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item),
-      code && (forThis ? selectedResolution.translation?.[code] ||
+      // (19.11.2026) a card the resolver made (das Herumschleichen): its text in the pack language (pack-translations.js templates)
+      !code ? forThis && chosen && item.id == null ? selectedResolution.translation?.[chosen] : "" : (forThis ? selectedResolution.translation?.[code] ||
         (String(selectedResolution.translation?.en || "").trim() === String(item.translation_en || "").trim() ? pack[`translation_${code}`] : "") : pack[`translation_${code}`])));
     // G70 step 2: the `reflexive` field of a verb card — «sich X — …» under the translation, as in the Wörterbuch.
     if (item.reflexive) { const [text, language] = say(locale() === "ru" ? item.reflexive.translation_ru || item.reflexive.translation_en : item.reflexive.translation_en || item.reflexive.translation_ru, code && pack.reflexive?.[`translation_${code}`]);
-      addInfo("p","dictionary-translation",`sich ${item.infinitive || item.word} — ${text}`, language && language !== code ? language : null); }
+      addInfo("p","dictionary-translation",`sich ${item.infinitive || item.word} — ${text}`, language && language !== shownLang ? language : null); }
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
     addSaid("p","dictionary-detail",say(locale() === "ru" ? item.plural_note_ru : item.plural_note_en, code && pack[`plural_note_${code}`]));
     if (item.declension_forms) addInfo("p","dictionary-detail",`Deklination: ${item.declension_forms}`);
@@ -1732,7 +1767,10 @@
     if (item.comparative || item.superlative) addInfo("p","dictionary-detail",`Steigerung: ${[item.comparative,item.superlative].filter(Boolean).join(" · ")}`);
     // A list of notes (conjunction cards) is one line per note.
     const ownNotes = code ? [].concat((item.usage_note_en ? pack[`usage_note_${code}`] : pack[`notes_${code}`]) || []) : [];
-    [].concat((locale() === "ru" ? item.usage_note_ru || item.notes_ru : item.usage_note_en || item.notes_en) || []).forEach((note, i) => addSaid("p","dictionary-detail",say(note, ownNotes[i])));
+    // (19.11.2026, review B) a pack language, a card the resolver made (no id): its English usage note only repeats the line above
+    // («Bezokolicznik zsubstantywizowany · herumschleichen» — «Nominalized infinitive of herumschleichen.»)
+    if (!(chosen && !code && usageLine && item.id == null))
+      [].concat((locale() === "ru" ? item.usage_note_ru || item.notes_ru : item.usage_note_en || item.notes_en) || []).forEach((note, i) => addSaid("p","dictionary-detail",say(note, ownNotes[i])));
     if (item.word_order_rule) addInfo("p","dictionary-detail",`Wortstellung: ${item.word_order_rule}`);
     // One line per pattern line („\n“); „**Verb**“ is shown in bold, as in the Wörterbuch.
     String(item.word_order_pattern || "").split("\n").filter(Boolean).forEach((line,index) => {
@@ -1740,7 +1778,7 @@
       (index ? line : `Muster: ${line}`).split(/\*\*(.+?)\*\*/).forEach((part,i) => { if (part) el.append(i % 2 ? Object.assign(document.createElement("strong"),{textContent:part}) : document.createTextNode(part)); });
       root.append(el);
     });
-    if (Array.isArray(item.complements) && item.complements.length && !code) {
+    if (Array.isArray(item.complements) && item.complements.length && !chosen) {
       const parts = item.complements.map(value => `${value.pattern}${(locale() === "ru" ? value.note_ru : value.note_en) ? ` — ${locale() === "ru" ? value.note_ru : value.note_en}` : ""}`);
       addInfo("p","dictionary-detail",`Ergänzungen: ${parts.join(" · ")}`);
     } else if (Array.isArray(item.complements) && item.complements.length) {
@@ -1749,10 +1787,10 @@
       item.complements.forEach((value, i) => {
         if (i) line.append(" · ");
         line.append(value.pattern);
-        const [text, language] = say(value.note_en, pack.complements?.[i]?.[`note_${code}`]);
+        const [text, language] = say(value.note_en, pack?.complements?.[i]?.[`note_${code}`]);
         if (!text) return;
         line.append(" — ");
-        if (language && language !== code) line.append(Object.assign(document.createElement("span"), {textContent:text, lang:language}));
+        if (language && language !== shownLang) line.append(Object.assign(document.createElement("span"), {textContent:text, lang:language}));
         else line.append(text);
       });
       root.append(line);
@@ -1832,12 +1870,13 @@
       const [text, language] = say(locale() === "ru" ? example.example_ru || example.example_en || "" : example.example_en || example.example_ru || "",
         code && (i ? pack.additional_examples?.[i - 1] : pack)?.[`example_${code}`]);
       const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = text;
-      if (code) { block.lang = "de"; tr.lang = language || code; }
+      if (chosen) { block.lang = "de"; tr.lang = language || shownLang; }
       block.append(tr); root.append(block);
     });
     // Expressions are not added to Wortschatz (user 22.10): no button, as on the Wörterbuch page.
     if (item.type === "Ausdruck" || list) return;
     const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Zum Wortschatz"; // German, as in Wörterbuch (user 27.10.2026)
+    if (chosen) button.lang = "de";
     button.addEventListener("click", () => addToWortschatz(item)); root.append(button);
   }
   function selectedWordNow() { return selectedWord; }

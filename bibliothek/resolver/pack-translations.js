@@ -234,6 +234,25 @@
     const own = kind ? phrase(code, tpl, ru) : "";
     return own ? own.replace(/\{0\}/gu, String(value)) : "";
   }
+  // (19.11.2026, chat «languages in the reader»; user: no English without the mark, a text of the pack where one can be) the texts the
+  // resolver writes itself around a word (lemma-resolver.js; «dynamic» of dev/lang/reader-source.json): their pair in reader.json with
+  // places {0}, {1} — the words, as they stand in the English (and in the Russian at the same places); none → English with the mark
+  const RESOLVER_TEMPLATES = Object.freeze([
+    ["относящийся к {0}", "of/from {0}"],
+    ["субстантивированный инфинитив от «{0}»", "nominalized infinitive of “{0}”"],
+    ["часть слова: {0}… — конец как в {1}", "part of a word: {0}… — ending as in {1}"]]);
+  const templateRe = t => new RegExp(`^${t.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&").replace(/\\\{(\d)\\\}/gu, "(.+?)")}$`, "u");
+  function resolverText(translation, code) {
+    const en = String(translation?.en || ""), ru = String(translation?.ru || "");
+    for (const [ruT, enT] of RESOLVER_TEMPLATES) {
+      const m = templateRe(enT).exec(en), r = templateRe(ruT).exec(ru);
+      // (the words at the same places in both: a text written by this rule, not a dictionary gloss that happens to look like it)
+      if (!m || !r || m.slice(1).join("\u0000") !== r.slice(1).join("\u0000")) continue;
+      const own = phrase(code, enT, ruT);
+      return own ? own.replace(/\{(\d)\}/gu, (_, i) => m[+i + 1] ?? "") : "";
+    }
+    return "";
+  }
   // The first tap waits for the card texts at most OWN_WAIT_MS (≈ 0.8 MB gzip at the first load): later the card is English for
   // this tap, the texts keep loading for the next ones (review A Ч2б).
   const OWN_WAIT_MS = 1500;
@@ -249,7 +268,7 @@
   async function enrichOwn(resolution, code, entryOf) {
     const mine = resolution.candidates.filter(c => c.item && typeof c.item.id === "string");
     const contractions = resolution.candidates.map(c => [c, componentOf(c, entryOf)]).filter(([, item]) => item);
-    if (!mine.length && !contractions.length && !resolution.candidates.some(c => c && c.genderPair)) return;
+    if (!mine.length && !contractions.length && !resolution.candidates.some(c => c && (c.genderPair || !c.item && c.construction?.id === "reflexive-verb"))) return;
     // (one deadline for every tap of the first load, counted from its start — review C Ч2б)
     const load = ownTexts(code), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
@@ -281,6 +300,15 @@
         const text = at >= 0 ? fields.form_translations?.[at]?.[code] : c.item.collective && same(c.item.collective.en, ft.en) ? fields.collective?.[code] : "";
         if (String(text || "").trim()) c.formTranslation = {...ft, [code]:String(text).trim()};
       }
+    }
+    // (19.11.2026) a reflexive use of a verb read from the external dictionary (Hüte dich!) whose «sich X» field is its own card's
+    // (meaning-display.js: ownItem by the lemma): that card's pack texts, kept apart from packItem — the candidate is not that card
+    for (const c of resolution.candidates) {
+      if (!c || c.item || c.construction?.id !== "reflexive-verb" || typeof entryOf !== "function") continue;
+      let item = null; try { item = entryOf({word:String(c.lemma || "").replace(/^sich\s+/u, ""), type:"Verb"}); } catch (_) { item = null; }
+      const fields = item && typeof item.id === "string" ? texts.get(item.id) : null;
+      if (!fields || typeof fields !== "object" || typeof fields._src_reader === "string" && outdated(fields._src_reader, item)) continue;
+      c.packOwnVerb = {...(c.packOwnVerb || {}), [code]:{id:item.id, fields}};
     }
     // (19.11.2026) a der/die card of two gender records (den Kranken, der/die Tote — resolver genderPair): the other record's pack text
     // (its own card by id; a text translated from another English or an outdated print — none, both stay English as before)
@@ -332,7 +360,10 @@
     // (19.11.2026, advisor: ENGLISH_BY_PARTS) an external particle verb whose English text the resolver built from its parts keeps that
     // reading (candidate.englishByParts — the resolver's formation object): its verb lines take the pack's text as a particle verb's do
     const byEnglishParts = resolution.candidates.filter(c => c && c.englishByParts && typeof c.englishByParts === "object" && c.englishByParts.kind === "particle-verb");
-    if (!formed.length && !byEnglishParts.length && !simple.length && !resolution.candidates.some(c => c && c.formOf)) return;
+    // (19.11.2026) a nominalized word of an own card (der Alte — alt adjective-001, das Laufen — laufen): the pack text of that card
+    // (usage.baseText[code]; meaning-display.js «Od alt — stary»)
+    const nominal = resolution.candidates.filter(c => c && c.usage?.role === "nominalized" && c.usage.baseDictionaryId != null && !c.usage.baseText?.[code]);
+    if (!formed.length && !byEnglishParts.length && !simple.length && !nominal.length && !resolution.candidates.some(c => c && c.formOf)) return;
     // (the same deadline as the own cards — counted from the start of their load: the first tap never waits for all of them)
     const load = ownTexts(code).catch(() => null), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
@@ -343,6 +374,11 @@
       if (!fields || typeof fields._src_reader === "string" && outdated(fields._src_reader, item)) return "";
       return same(english, item.translation_en) ? String(fields[`translation_${code}`] || "").trim() : "";
     };
+    for (const c of nominal) {
+      let item = null; try { item = typeof entryOf === "function" ? entryOf({id:c.usage.baseDictionaryId}) : null; } catch (_) { item = null; }
+      const t = item ? ownText(item.id, item.translation_en) : "";
+      if (t) c.usage = {...c.usage, baseText:{...(c.usage.baseText || {}), [code]:t}};
+    }
     // (review C 18.11: a part's dictionary record under a deadline too — a stalled pack dictionary must not hold the popup; English then)
     const partsUntil = Date.now() + OWN_WAIT_MS;
     const dictionaryText = async (lemma, pos) => {
@@ -426,6 +462,18 @@
         candidate.packTranslationError = "unavailable";
       }
     }));
+    // (19.11.2026) a nominalized adjective whose meaning is an outside noun of it (die Alte «old woman» — usage.noun): that noun's record
+    // in the pack dictionary (the popup and its reference alike; none — English with the mark, as before)
+    await Promise.all(resolution.candidates.filter(c => c && c.usage?.role === "nominalized" && c.usage.noun?.translation?.en && !c.usage.noun.translation[code]).map(async c => {
+      const noun = c.usage.noun, base = String(noun.lemma || c.lemma || "");
+      if (!base) return;
+      const key = JSON.stringify([base, "noun", null, false]);
+      if (!pending.has(key)) pending.set(key, lookup(base, "noun", code, null, false));
+      const asked = pending.get(key).catch(() => null), until = Date.now() + OWN_WAIT_MS;
+      const result = typeof setTimeout === "function" ? await Promise.race([asked, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, until - Date.now())))]) : await asked;
+      const text = Array.isArray(result?.meanings) ? result.meanings.join("; ").trim() : "";
+      if (text) c.usage = {...c.usage, noun:{...noun, translation:{...noun.translation, [code]:text}}};
+    }));
     // (19.11.2026) an own verb card whose reflexive meanings the resolver took from the English external dictionary (reflexiveMarks.en —
     // sich holen «to get, to cop», sich denken «to imagine»): the pack dictionary's marks of the same verb (a word it does not know or
     // without marks — the English ones with the mark, as before; the choice is the English marks', meaning-display.js)
@@ -455,7 +503,7 @@
     for (const candidate of resolution.candidates) for (const field of ["translation", "formTranslation"]) {
       const value = candidate[field];
       if (!value || typeof value !== "object" || value[code] || typeof value.en !== "string" || typeof value.ru !== "string") continue;
-      const own = phrase(code, value.en, value.ru);
+      const own = phrase(code, value.en, value.ru) || resolverText(value, code);
       if (own) candidate[field] = {...value, [code]:own};
     }
     return resolution0;
