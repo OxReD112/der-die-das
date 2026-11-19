@@ -59787,5 +59787,3242 @@
         "Fahrt ihr an die Oder?"
       ]
     }
+  },
+  {
+    "id": "expression-376",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "es sich (D) wohl sein lassen",
+    "translation_ru": "наслаждаться жизнью, хорошо проводить время, ни в чём себе не отказывать",
+    "translation_en": "to enjoy oneself, to have a good time, to live it up",
+    "example_de": "Lasst es euch wohl sein!",
+    "example_ru": "Ни в чём себе не отказывайте!",
+    "example_en": "Enjoy yourselves!",
+    "notes_ru": [
+      "Высокий, книжный стиль (Duden: meist gehoben), часто в повелительном: Lasst es euch wohl sein! Не путать: etw. sein lassen — бросить, перестать (Lass das sein! — Брось это!)."
+    ],
+    "notes_en": [
+      "Elevated, somewhat literary (Duden: meist gehoben), often imperative: Lasst es euch wohl sein! Do not confuse: etw. sein lassen — to stop, to give up (Lass das sein! — Stop it!)."
+    ],
+    "related_ids": [
+      "verb-2595",
+      "adverb-197",
+      "expression-141"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/wohl",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "lass",
+              "laß",
+              "lasst",
+              "laßt",
+              "lasse",
+              "lässt",
+              "läßt",
+              "ließ",
+              "ließest",
+              "ließen",
+              "ließt",
+              "ließet",
+              "ließe",
+              "lassen"
+            ]
+          },
+          {
+            "form": [
+              "es"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch",
+              "Ihnen"
+            ]
+          },
+          {
+            "form": [
+              "wohl sein"
+            ],
+            "next_mark": [
+              ".",
+              "!",
+              "?",
+              ",",
+              ";",
+              ":",
+              "«",
+              "»",
+              "“",
+              "”",
+              "\"",
+              "–",
+              "—",
+              ")",
+              "…"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "lass",
+              "laß",
+              "lasst",
+              "laßt",
+              "lasse",
+              "lässt",
+              "läßt",
+              "ließ",
+              "ließest",
+              "ließen",
+              "ließt",
+              "ließet",
+              "ließe",
+              "lassen"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ]
+          },
+          {
+            "form": [
+              "es"
+            ]
+          },
+          {
+            "form": [
+              "wohl sein"
+            ],
+            "next_mark": [
+              ".",
+              "!",
+              "?",
+              ",",
+              ";",
+              ":",
+              "«",
+              "»",
+              "“",
+              "”",
+              "\"",
+              "–",
+              "—",
+              ")",
+              "…"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es"
+            ]
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch",
+              "Ihnen"
+            ]
+          },
+          {
+            "form": [
+              "wohl sein ließ",
+              "wohl sein ließest",
+              "wohl sein ließen",
+              "wohl sein ließt",
+              "wohl sein ließet",
+              "wohl sein ließe",
+              "wohl sein lassen",
+              "wohl sein lasst",
+              "wohl sein laßt",
+              "wohl sein lässt",
+              "wohl sein läßt",
+              "wohl sein lasse",
+              "wohl sein gelassen",
+              "wohl sein zu lassen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ]
+          },
+          {
+            "form": [
+              "es"
+            ]
+          },
+          {
+            "form": [
+              "wohl sein ließ",
+              "wohl sein ließest",
+              "wohl sein ließen",
+              "wohl sein ließt",
+              "wohl sein ließet",
+              "wohl sein ließe",
+              "wohl sein lassen",
+              "wohl sein lasst",
+              "wohl sein laßt",
+              "wohl sein lässt",
+              "wohl sein läßt",
+              "wohl sein lasse",
+              "wohl sein gelassen",
+              "wohl sein zu lassen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Lasst es euch wohl sein!",
+        "Laßt’s euch wohl sein!",
+        "Lass es dir wohl sein.",
+        "Laß dir’s wohl sein.",
+        "Er meinte, dass er sich’s wohl sein ließ.",
+        "Lasst euch’s wohl sein!",
+        "Du ließest es dir wohl sein.",
+        "Weil ihr es euch wohl sein lasst, bleibt ihr hier.",
+        "Wenn er es sich wohl sein ließe, wäre er froh.",
+        "Sie ließen es sich wohl sein.",
+        "Ich weiß, dass er es sich wohl sein ließ.",
+        "Im Urlaub wollen wir es uns wohl sein lassen."
+      ],
+      "negative": [
+        "Lass das sein!",
+        "Lass es sein!",
+        "Es wird wohl sein, wie du sagst.",
+        "Er hat das Rauchen sein lassen.",
+        "Lass dir das eine Lehre sein.",
+        "Er wird es wohl sein lassen.",
+        "Das wird es wohl sein.",
+        "Er lässt es sich wohl sein Geld kosten.",
+        "Er ließ es sich wohl sein ganzes Geld kosten lassen."
+      ]
+    }
+  },
+  {
+    "id": "expression-377",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Was ist in jdn. gefahren?",
+    "translation_ru": "что на тебя / него нашло?",
+    "translation_en": "what’s got into you / him?",
+    "example_de": "Was ist nur in dich gefahren?",
+    "example_ru": "Что на тебя нашло?",
+    "example_en": "What’s got into you?",
+    "notes_ru": [
+      "Разг. С удивлением или упрёком. По-русски — кого? (на тебя), по-немецки — in + Akk: in dich, in ihn."
+    ],
+    "notes_en": [
+      "Colloquial. With surprise or reproach. The person is in + accusative: in dich, in ihn."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/fahren",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "was",
+              "Was"
+            ]
+          },
+          {
+            "form": [
+              "ist",
+              "war",
+              "sei",
+              "wäre",
+              "sind",
+              "waren"
+            ]
+          },
+          {
+            "form": [
+              "in"
+            ]
+          },
+          {
+            "form": [
+              "mich",
+              "dich",
+              "ihn",
+              "sie",
+              "es",
+              "uns",
+              "euch",
+              "Sie",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "Ihren",
+              "diesen",
+              "den"
+            ]
+          },
+          {
+            "form": [
+              "gefahren"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 4
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "was",
+              "Was"
+            ]
+          },
+          {
+            "form": [
+              "in"
+            ]
+          },
+          {
+            "form": [
+              "mich",
+              "dich",
+              "ihn",
+              "sie",
+              "es",
+              "uns",
+              "euch",
+              "Sie",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "Ihren",
+              "diesen",
+              "den"
+            ]
+          },
+          {
+            "form": [
+              "gefahren"
+            ]
+          },
+          {
+            "form": [
+              "ist",
+              "war",
+              "sei",
+              "wäre",
+              "sind",
+              "waren"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Was ist nur in dich gefahren?",
+        "Was ist denn in euch gefahren?",
+        "Was ist bloß in deinen Bruder gefahren?",
+        "Ich weiß nicht, was in mich gefahren ist.",
+        "Sie fragte, was in ihn gefahren sei."
+      ],
+      "negative": [
+        "Wir sind in die Stadt gefahren.",
+        "Was ist mit dir?",
+        "Was ist in die Garage gefahren?"
+      ]
+    }
+  },
+  {
+    "id": "expression-378",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. schießt etw. durch den Kopf",
+    "translation_ru": "(о мысли) приходить в голову, мелькать в голове",
+    "translation_en": "something flashes through sb’s mind",
+    "example_de": "Plötzlich schoss ihm ein Gedanke durch den Kopf.",
+    "example_ru": "Вдруг ему в голову пришла мысль.",
+    "example_en": "Suddenly a thought flashed through his mind.",
+    "notes_ru": [
+      "Подлежащее — мысль, идея, вопрос; кому — дательный (может не быть). Перфект с sein: Mir ist ein Gedanke durch den Kopf geschossen. Близко: jdm. fällt etw. ein. Не путать: jdm. durch den Kopf schießen — выстрелить в голову."
+    ],
+    "notes_en": [
+      "The subject is a thought, an idea, a question; the person is dative (may be left out). Perfect with sein: Mir ist ein Gedanke durch den Kopf geschossen. Similar: jdm. fällt etw. ein. Do not confuse: jdm. durch den Kopf schießen — to shoot someone through the head."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/schiessen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "schießt",
+              "schoss",
+              "schoß",
+              "schossen",
+              "schösse",
+              "schössen",
+              "schießen"
+            ]
+          },
+          {
+            "form": [
+              "durch den Kopf"
+            ],
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "ihres",
+              "meines",
+              "deines"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "durch den Kopf"
+            ],
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "ihres",
+              "meines",
+              "deines"
+            ]
+          },
+          {
+            "form": [
+              "schießt",
+              "schoss",
+              "schoß",
+              "schossen",
+              "schösse",
+              "schössen",
+              "schießen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wären",
+              "sei"
+            ]
+          },
+          {
+            "form": [
+              "durch den Kopf"
+            ],
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "ihres",
+              "meines",
+              "deines"
+            ]
+          },
+          {
+            "form": [
+              "geschossen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "durch den Kopf"
+            ],
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "ihres",
+              "meines",
+              "deines"
+            ]
+          },
+          {
+            "form": [
+              "geschossen"
+            ]
+          },
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wären",
+              "sei"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Plötzlich schoss ihm ein Gedanke durch den Kopf.",
+        "Mir schoss eine Idee durch den Kopf.",
+        "Tausend Fragen schossen ihr durch den Kopf.",
+        "Ich weiß noch, was mir damals durch den Kopf schoss.",
+        "Ein seltsamer Gedanke ist mir durch den Kopf geschossen."
+      ],
+      "negative": [
+        "Er schoss den Ball durch das Fenster.",
+        "Er schoss auf das Tor.",
+        "Die Kugel ging durch den Kopf.",
+        "Der Polizist hat ihm durch den Kopf geschossen.",
+        "Ihm wurde durch den Kopf geschossen.",
+        "Er schießt durch den Kopf des Gegners."
+      ]
+    }
+  },
+  {
+    "id": "expression-379",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. jdn. auf den Hals hetzen / jagen / schicken",
+    "translation_ru": "натравить, напустить (кого-либо на кого-либо)",
+    "translation_en": "to set / sic sb on sb",
+    "example_de": "Er hat ihnen die Polizei auf den Hals gehetzt.",
+    "example_ru": "Он натравил на них полицию.",
+    "example_en": "He set the police on them.",
+    "notes_ru": [
+      "Разг. Кому — дательный, кого — винительный: jdm. die Polizei / das Finanzamt / die Hunde auf den Hals hetzen."
+    ],
+    "notes_en": [
+      "Colloquial. On whom — dative, whom — accusative: jdm. die Polizei / das Finanzamt / die Hunde auf den Hals hetzen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Hals",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "auf den Hals"
+            ],
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "ihres",
+              "meines",
+              "deines"
+            ]
+          },
+          {
+            "form": [
+              "jagen",
+              "jagt",
+              "jagst",
+              "jage",
+              "jagte",
+              "jagten",
+              "jagtest",
+              "gejagt",
+              "zu jagen",
+              "hetzen",
+              "hetzt",
+              "hetze",
+              "hetzte",
+              "hetzten",
+              "hetztest",
+              "gehetzt",
+              "zu hetzen",
+              "schicken",
+              "schickt",
+              "schickst",
+              "schicke",
+              "schickte",
+              "schickten",
+              "schicktest",
+              "geschickt",
+              "zu schicken"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "jagt",
+              "jagst",
+              "jage",
+              "jagte",
+              "jagten",
+              "jagtest",
+              "hetzt",
+              "hetze",
+              "hetzte",
+              "hetzten",
+              "hetztest",
+              "jag",
+              "hetz",
+              "schickt",
+              "schickst",
+              "schicke",
+              "schickte",
+              "schickten",
+              "schick"
+            ]
+          },
+          {
+            "form": [
+              "auf den Hals"
+            ],
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "ihres",
+              "meines",
+              "deines"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er hat ihnen die Polizei auf den Hals gehetzt.",
+        "Er jagte ihnen die Hunde auf den Hals.",
+        "Sie drohte, uns das Finanzamt auf den Hals zu hetzen.",
+        "Wer hat dir diese Leute auf den Hals gejagt?",
+        "Er schickte ihnen die Polizei auf den Hals."
+      ],
+      "negative": [
+        "Sie jagten den Hasen durch den Wald.",
+        "Er hatte einen Schal um den Hals.",
+        "Der Hund sprang ihm auf den Hals.",
+        "Er hetzte die Hunde auf den Hals des Hirsches."
+      ]
+    }
+  },
+  {
+    "id": "expression-380",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. / jdn. in Mitleidenschaft ziehen",
+    "translation_ru": "затронуть, (попутно) нанести ущерб, повредить",
+    "translation_en": "to affect, to damage, to take a toll on",
+    "example_de": "Das Gebäude wurde durch den Sturm stark in Mitleidenschaft gezogen.",
+    "example_ru": "Здание сильно пострадало от бури.",
+    "example_en": "The building was badly damaged by the storm.",
+    "notes_ru": [
+      "Чаще в пассиве (wurde / ist in Mitleidenschaft gezogen — пострадал); частое в новостях."
+    ],
+    "notes_en": [
+      "Often passive (wurde / ist in Mitleidenschaft gezogen — was affected, suffered); frequent in the news."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Mitleidenschaft",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "in Mitleidenschaft"
+            ]
+          },
+          {
+            "form": [
+              "ziehen",
+              "zieht",
+              "ziehst",
+              "ziehe",
+              "zog",
+              "zogen",
+              "zogst",
+              "zöge",
+              "zögen",
+              "gezogen",
+              "zu ziehen",
+              "gezogene",
+              "gezogenen",
+              "gezogener",
+              "gezogenes",
+              "gezogenem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ziehen",
+              "zieht",
+              "ziehst",
+              "ziehe",
+              "zog",
+              "zogen",
+              "zogst",
+              "zöge",
+              "zögen",
+              "gezogen",
+              "zu ziehen"
+            ]
+          },
+          {
+            "form": [
+              "in Mitleidenschaft"
+            ],
+            "not_next": [
+              "genommen",
+              "genommene",
+              "genommenen",
+              "genommener",
+              "genommenes",
+              "gezogene",
+              "gezogenen",
+              "gezogener",
+              "gezogenes",
+              "gezogenem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Das Gebäude wurde durch den Sturm stark in Mitleidenschaft gezogen.",
+        "Das Gebäude ist arg in Mitleidenschaft gezogen.",
+        "Die Ernte wurde in Mitleidenschaft gezogen.",
+        "Der Sturm zog viele Häuser in Mitleidenschaft.",
+        "Es gab Unwetter, die den Ort in Mitleidenschaft zogen.",
+        "Der in Mitleidenschaft gezogene Wagen stand am Rand.",
+        "Die Krise zog auch uns in Mitleidenschaft und alle anderen."
+      ],
+      "negative": [
+        "Er zog den Wagen in die Garage.",
+        "Sie zog in eine neue Wohnung.",
+        "Er zog einen arg in Mitleidenschaft genommenen Schirm hervor."
+      ]
+    }
+  },
+  {
+    "id": "expression-381",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich in Bewegung setzen",
+    "translation_ru": "тронуться (с места), прийти в движение",
+    "translation_en": "to start moving, to set off",
+    "example_de": "Der Zug setzte sich langsam in Bewegung.",
+    "example_ru": "Поезд медленно тронулся.",
+    "example_en": "The train slowly started moving.",
+    "notes_ru": [
+      "О поезде, машине, толпе, процессии. Без sich — etw. in Bewegung setzen — привести что-либо в движение, запустить."
+    ],
+    "notes_en": [
+      "Of a train, a car, a crowd, a procession. Without sich — etw. in Bewegung setzen — to set something in motion."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Bewegung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "sich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "sich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ich",
+              "Ich"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "mich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "ich"
+            ]
+          },
+          {
+            "form": [
+              "mich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ich",
+              "Ich"
+            ]
+          },
+          {
+            "form": [
+              "mich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "du",
+              "Du"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "du"
+            ]
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "du",
+              "Du"
+            ]
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wir",
+              "Wir"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "uns"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "wir"
+            ]
+          },
+          {
+            "form": [
+              "uns"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wir",
+              "Wir"
+            ]
+          },
+          {
+            "form": [
+              "uns"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ihr",
+              "Ihr"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          },
+          {
+            "form": [
+              "ihr"
+            ]
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ihr",
+              "Ihr"
+            ]
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setz",
+              "setze",
+              "Setz",
+              "Setze"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setzt",
+              "Setzt"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Bewegung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Zug setzte sich langsam in Bewegung.",
+        "Die kleinen Schiffe setzten sich alle zugleich in Bewegung.",
+        "Es klingelte, als sich der Zug in Bewegung setzte.",
+        "Langsam hat sich die Menge in Bewegung gesetzt.",
+        "Wir müssen uns endlich in Bewegung setzen.",
+        "Setz dich endlich in Bewegung!"
+      ],
+      "negative": [
+        "Er setzte sich auf den Stuhl.",
+        "Die Bewegung setzte sich durch.",
+        "Sie ist ständig in Bewegung.",
+        "Die Musik setzte mich in Bewegung.",
+        "Er setzte für uns alle Hebel in Bewegung."
+      ]
+    }
+  },
+  {
+    "id": "expression-382",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich in (Lebens)gefahr begeben / bringen",
+    "translation_ru": "подвергать себя опасности, рисковать (жизнью)",
+    "translation_en": "to put oneself in danger, to risk one's life",
+    "example_de": "Er hat sich unnötig in Gefahr begeben.",
+    "example_ru": "Он без нужды подверг себя опасности.",
+    "example_en": "He put himself in danger for no reason.",
+    "notes_ru": [
+      "С begeben или bringen; реже, книжн. — с setzen (в сказках: sich in Lebensgefahr setzen). Близко: sich einer Gefahr aussetzen. Без sich — jdn. in Gefahr bringen — подвергать опасности кого-либо."
+    ],
+    "notes_en": [
+      "With begeben or bringen; less often, literary, with setzen (in fairy tales: sich in Lebensgefahr setzen). Similar: sich einer Gefahr aussetzen. Without sich — jdn. in Gefahr bringen — to put someone in danger."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Gefahr",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "sich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "sich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ich",
+              "Ich"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "mich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "ich"
+            ]
+          },
+          {
+            "form": [
+              "mich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ich",
+              "Ich"
+            ]
+          },
+          {
+            "form": [
+              "mich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "du",
+              "Du"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "du"
+            ]
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "du",
+              "Du"
+            ]
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wir",
+              "Wir"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "uns"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "wir"
+            ]
+          },
+          {
+            "form": [
+              "uns"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wir",
+              "Wir"
+            ]
+          },
+          {
+            "form": [
+              "uns"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ihr",
+              "Ihr"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          },
+          {
+            "form": [
+              "ihr"
+            ]
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ihr",
+              "Ihr"
+            ]
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          },
+          {
+            "form": [
+              "setze",
+              "setzt",
+              "setzte",
+              "setzten",
+              "setztest",
+              "setzen",
+              "gesetzt",
+              "zu setzen",
+              "setz",
+              "setzest",
+              "setztet",
+              "begebe",
+              "begibst",
+              "begibt",
+              "begeben",
+              "begebt",
+              "begab",
+              "begaben",
+              "begabst",
+              "zu begeben",
+              "begäbe",
+              "begäben",
+              "begäbest",
+              "begib",
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachten",
+              "brachtest",
+              "gebracht",
+              "zu bringen",
+              "brächte",
+              "brächten",
+              "brächtest",
+              "bring"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setz",
+              "setze",
+              "begib",
+              "bring",
+              "bringe",
+              "Setz",
+              "Setze",
+              "Begib",
+              "Bring",
+              "Bringe"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": [
+              "dich"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "setzt",
+              "begebt",
+              "bringt",
+              "Setzt",
+              "Begebt",
+              "Bringt"
+            ],
+            "clause_start": true
+          },
+          {
+            "form": [
+              "euch"
+            ],
+            "not_after": [
+              "für",
+              "mit",
+              "gegen",
+              "durch",
+              "an",
+              "auf",
+              "in",
+              "über",
+              "unter",
+              "vor",
+              "hinter",
+              "neben",
+              "zwischen",
+              "bei",
+              "zu",
+              "von",
+              "nach",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "in Gefahr",
+              "in Lebensgefahr",
+              "in Todesgefahr",
+              "in große Gefahr",
+              "in größte Gefahr",
+              "in höchste Gefahr",
+              "in ernste Gefahr",
+              "in akute Gefahr",
+              "in tödliche Gefahr",
+              "in unnötige Gefahr",
+              "in solche Gefahr",
+              "in diese Gefahr"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er hat sich unnötig in Gefahr begeben.",
+        "Sie brachte sich in Gefahr.",
+        "Niemand konnte ihn retten, ohne sich in Lebensgefahr zu setzen.",
+        "Warum begibst du dich in solche Gefahr?",
+        "Begib dich nicht in Gefahr!",
+        "Bringt euch nicht in Gefahr!",
+        "Er tat alles, um sich nicht in Gefahr zu bringen.",
+        "Sie brächten sich in größte Gefahr.",
+        "Ich weiß, dass er sich in große Gefahr gebracht hat."
+      ],
+      "negative": [
+        "Er brachte das Kind in Sicherheit.",
+        "Die Stadt ist in Gefahr.",
+        "Er brachte die Kinder in Gefahr.",
+        "Er brachte uns in Gefahr.",
+        "Du bringst mich in Gefahr!",
+        "Er brachte für uns sein Leben in Gefahr."
+      ]
+    }
   }
 ]
