@@ -35,20 +35,6 @@
   --diff-arrow: #e8d9d9;
   --diff-correct: #f2f0ed;
 
-  --good-glow: radial-gradient(
-    ellipse,
-    rgba(91, 200, 164, 0.24) 0%,
-    rgba(91, 200, 164, 0.12) 28%,
-    rgba(91, 200, 164, 0.04) 52%,
-    transparent 74%
-  );
-  --bad-glow: radial-gradient(
-    ellipse,
-    rgba(255, 119, 112, 0.34) 0%,
-    rgba(255, 119, 112, 0.17) 30%,
-    rgba(255, 119, 112, 0.055) 55%,
-    transparent 76%
-  );
   --good-line-shadow: 0 0 14px rgba(91, 200, 164, 0.3);
   --bad-line-shadow: 0 0 14px rgba(255, 119, 112, 0.34);
 
@@ -86,20 +72,6 @@
   --diff-arrow: #77777c;
   --diff-correct: #5a5651;
 
-  --good-glow: radial-gradient(
-    ellipse at center,
-    rgba(63, 166, 138, 0.16) 0%,
-    rgba(63, 166, 138, 0.08) 28%,
-    rgba(63, 166, 138, 0.025) 52%,
-    transparent 74%
-  );
-  --bad-glow: radial-gradient(
-    ellipse at center,
-    rgba(233, 94, 102, 0.19) 0%,
-    rgba(233, 94, 102, 0.09) 30%,
-    rgba(233, 94, 102, 0.025) 55%,
-    transparent 76%
-  );
   --good-line-shadow: 0 0 14px rgba(63, 166, 138, 0.22);
   --bad-line-shadow: 0 0 14px rgba(233, 94, 102, 0.24);
 }
@@ -701,7 +673,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   left: 50%;
   top: -1px;
   width: 0;
-  height: 1px;
+  height: 2px; /* 19.11.2026: 2, as in every exercise (was 1) */
   transform: translateX(-50%);
   background: var(--accent);
   box-shadow: var(--good-line-shadow);
@@ -714,24 +686,45 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 .feedback.show .detail::before {
   animation: lineGrow 0.62s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
+/* 19.11.2026 (Alena): the glow only ABOVE the line — over the answer (your word → the right word): a band 150
+   high, strongest at the line, fading up; the band of Pronomen / Partikeln / Verben mit Präpositionen turned upside
+   down (there it is under the line): 0.20 × (1 − smoothstep(0, 150, y))^1.8 + 0.07 × e^−(y/16)²; the outer 30 %
+   on each side fades out. Was an ellipse centred on the line (±180, 760 wide). */
+.feedback.good .detail {
+  --state: var(--accent);
+}
+.feedback.bad .detail {
+  --state: var(--error);
+}
 .detail::after {
   content: "";
   position: absolute;
   z-index: -1;
-  left: 50%;
-  top: 0;
-  width: min(760px, 100vw);
-  height: 360px;
-  transform: translate(-50%, -50%);
+  left: 0;
+  right: 0;
+  top: -150px;
+  height: 150px;
   pointer-events: none;
   opacity: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--state) 27.0%, transparent) 0px,
+    color-mix(in srgb, var(--state) 25.2%, transparent) 8px,
+    color-mix(in srgb, var(--state) 21.4%, transparent) 16px,
+    color-mix(in srgb, var(--state) 18.3%, transparent) 24px,
+    color-mix(in srgb, var(--state) 16.1%, transparent) 32px,
+    color-mix(in srgb, var(--state) 12.2%, transparent) 48px,
+    color-mix(in srgb, var(--state) 8.2%, transparent) 64px,
+    color-mix(in srgb, var(--state) 4.8%, transparent) 80px,
+    color-mix(in srgb, var(--state) 1.8%, transparent) 100px,
+    color-mix(in srgb, var(--state) 0.3%, transparent) 120px,
+    transparent 150px
+  );
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent);
 }
-.feedback.good .detail::after {
-  background: var(--good-glow);
-  animation: glowIn 0.65s ease forwards;
-}
+.feedback.good .detail::after,
 .feedback.bad .detail::after {
-  background: var(--bad-glow);
   animation: glowIn 0.65s ease forwards;
 }
 @keyframes lineGrow {
