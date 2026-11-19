@@ -200,6 +200,40 @@
     return owns.get(code);
   }
   const same = (a, b) => !!String(a || "").trim() && String(a || "").trim() === String(b || "").trim();
+  // (19.11.2026) meanings by their number: the resolver's text for this place made of whole meanings of the card («; » between them),
+  // in any order, the Russian at the same numbers; the pack's text has as many meanings as the English — its meanings at those numbers.
+  // Otherwise "" (the English with the mark; a pack whose meanings are counted otherwise needs a field of correspondence — main chat).
+  // (split at «;» outside brackets — as meaning-display.js meaningParts: «to cover (with something; a roof)» is one meaning; review A 19.11)
+  const meaningsOf = text => { const out = []; let depth = 0, cur = "";
+    for (const ch of String(text || "")) { if (ch === "(") depth++; else if (ch === ")") depth = Math.max(0, depth - 1);
+      if (ch === ";" && !depth) { out.push(cur); cur = ""; } else cur += ch; }
+    out.push(cur); return out.map(m => m.trim()).filter(Boolean); };
+  function byNumber(shown, item, packText) {
+    const en = meaningsOf(item?.translation_en), mine = meaningsOf(packText), part = meaningsOf(shown?.en);
+    if (!part.length || en.length < 2 || mine.length !== en.length) return "";
+    const at = part.map(m => en.indexOf(m));
+    if (at.some(i => i < 0) || new Set(at).size !== at.length) return "";
+    // (the card's Russian counted as the English one — as meaning-display.js byNumber; review B 19.11)
+    const ru = meaningsOf(item.translation_ru), partRu = meaningsOf(shown?.ru);
+    if (ru.length && ru.length !== en.length) return "";
+    if (partRu.length && (partRu.length !== part.length || partRu.some((m, k) => ru[at[k]] !== m))) return "";
+    return at.map(i => mine[i]).join("; ");
+  }
+  // (19.11.2026, with the TODO of the numerals) a numeral the resolver wrote itself (numeral-generated: «2000», «4th», «for the 3rd
+  // time»): digits are the same in every language; an ordinal — the pack's line for the template with the number in its place (the
+  // pairs NUMERAL_TEMPLATES below, in reader.json — dev/lang/scan-reader.cjs); none → English with the mark
+  const NUMERAL_TEMPLATES = Object.freeze({ordinal:["{0}-й", "{0}th"], time:["в {0}-й раз", "for the {0}th time"]});
+  // («for the first time» is a pair the resolver writes itself — lemma-resolver.js — and has its line in reader.json already)
+  function numeralText(item, code) {
+    if (!item || typeof item.id !== "string" || !item.id.startsWith("numeral-generated:") || !item.grammar?.generated) return "";
+    const en = String(item.translation_en || ""), value = item.grammar.value;
+    if (/^\d+$/u.test(en)) return en;
+    const kind = /^\d+(?:st|nd|rd|th)$/u.test(en) ? "ordinal" : en === "for the first time" ? "first" : /^for the \d+(?:st|nd|rd|th) time$/u.test(en) ? "time" : "";
+    if (kind === "first") return phrase(code, "for the first time", "впервые (в 1-й раз)");
+    const [ru, tpl] = NUMERAL_TEMPLATES[kind] || [];
+    const own = kind ? phrase(code, tpl, ru) : "";
+    return own ? own.replace(/\{0\}/gu, String(value)) : "";
+  }
   // The first tap waits for the card texts at most OWN_WAIT_MS (≈ 0.8 MB gzip at the first load): later the card is English for
   // this tap, the texts keep loading for the next ones (review A Ч2б).
   const OWN_WAIT_MS = 1500;
@@ -236,6 +270,10 @@
       c.packItem = {...(c.packItem || {}), [code]:fields};
       const main = String(fields[`translation_${code}`] || "").trim();
       if (main && !c.translation?.[code] && same(c.translation?.en, c.item.translation_en)) c.translation = {...c.translation, [code]:main};
+      // (19.11.2026, advisor: by the number of the meaning) the resolver showed some meanings of the card for this place (mögen «may,
+      // might (possibility); to like», lassen «(with an infinitive) …»): each of them is a meaning of the card's English (and its Russian
+      // one of the card's Russian at the same place); the pack's card has as many meanings — the pack's meanings with those numbers
+      else if (main && !c.translation?.[code]) { const picked = byNumber(c.translation, c.item, main); if (picked) c.translation = {...c.translation, [code]:picked}; }
       // a form of the card (alles on the alle card, zu zweit — collective): its own pack text, found by the form's English text
       const ft = c.formTranslation;
       if (ft && !ft[code]) {
@@ -369,6 +407,12 @@
     // tap, the next taps have them; review B Ч4)
     const phrasesLeft = (phraseStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     await (typeof setTimeout === "function" ? Promise.race([phrases, new Promise(resolve => setTimeout(resolve, Math.max(0, phrasesLeft)))]) : phrases);
+    // (19.11.2026) a numeral the resolver wrote itself: digits as they are, an ordinal by the pack's template
+    for (const candidate of resolution.candidates) {
+      if (candidate.translation?.[code] || !candidate.item || !same(candidate.translation?.en, candidate.item.translation_en)) continue;
+      const own = numeralText(candidate.item, code);
+      if (own) candidate.translation = {...candidate.translation, [code]:own};
+    }
     // (Ч4) a text the resolver wrote as a pair {ru, en} for this place («здесь: …», a form of the card): its line in reader.json
     for (const candidate of resolution.candidates) for (const field of ["translation", "formTranslation"]) {
       const value = candidate[field];

@@ -77,7 +77,14 @@
   // such place, so the card stays English (the choice is the same in every language, advisor 17.11).
   const provenSense = c => Number.isInteger(c?.senseFirst) || Number.isInteger(c?.senseFirstEn) ||
     Array.isArray(c?.sensesFirst) && c.sensesFirst.length > 0 || Array.isArray(c?.sensesFirstEn) && c.sensesFirstEn.length > 0;
-  const packText = (c, language) => !!c && !provenSense(c) && !!(String(c.translation?.[language] || '').trim() ||
+  // (19.11.2026, advisor: by the number of the meaning) an own card whose pack text has as many meanings as its English (and Russian)
+  // one: the meaning the resolver proved has the same number in the pack — the pack's card is built, its meanings in that order
+  const byNumber = (c, language) => { if (!isPack(language) || !c || !ownCard(c)) return false;
+    const mine = String(c.translation?.[language] || '').trim();
+    if (!mine || mine !== String(c.packItem?.[language]?.[`translation_${language}`] || '').trim()) return false;
+    const n = meaningParts(c.translation?.en || '').length, ru = String(c.translation?.ru || '').trim();
+    return n > 1 && meaningParts(mine).length === n && (!ru || meaningParts(ru).length === n); };
+  const packText = (c, language) => !!c && (!provenSense(c) || byNumber(c, language)) && !!(String(c.translation?.[language] || '').trim() ||
     c.reflexiveMarks?.[language] || String(c.packItem?.[language]?.reflexive?.[`translation_${language}`] || '').trim() || String(c.formTranslation?.[language] || '').trim());
   // the language a card is built in: a pack language only when this candidate has a text in it
   // (18.11.2026) a word read by its parts (not a name) is built in the pack language: its lines say, part by part, which is in the
@@ -257,10 +264,17 @@
   }
   function brief(candidate, language, inline = false) {
     // inline: a text shown without label segments (der/die pair) keeps the source gloss with its inline label
-    if (isPack(language) && provenSense(candidate)) return '';
-    // (lassen + infinitive: the card's senses are reordered by their Russian / English wording — a pack text cannot be; the English
-    // card, as for a proven sense — review B Ч2б 17.11)
-    if (isPack(language) && candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb') return '';
+    // (a pack language: the order the resolver proved is the English one's, applied to the pack's meanings with the same numbers — only
+    // when they are counted alike, byNumber; otherwise the English card, as before — advisor 17.11 / 19.11)
+    if (isPack(language) && (provenSense(candidate) || candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb')) {
+      if (!byNumber(candidate, language)) return '';
+      const order = meaningParts(brief(candidate, 'en', inline)).map(m => m.trim()), en = meaningParts(candidate.translation.en).map(m => m.trim());
+      const mine = meaningParts(candidate.translation[language]).map(m => m.trim()), at = order.map(m => en.indexOf(m));
+      if (!order.length || at.some(i => i < 0)) return '';
+      const text = at.map(i => mine[i]).join('; ');
+      // (review A 19.11: lassen + infinitive keeps every meaning visible, as its English card — no fit)
+      return ownCard(candidate) && candidate.construction?.id !== 'lassen-infinitive' ? fit(text).text : text;
+    }
     if (!inline && isExternal(candidate) && candidate.meaningLabels?.[language] && !Number.isInteger(candidate.senseFirst) && !(language === 'en' && Number.isInteger(candidate.senseFirstEn)) &&
         candidate.construction?.id !== 'lassen-infinitive' && !/^gerund of /i.test(String(candidate.translation?.[language] || '').trim()))
       return labelledParts(candidate, language).slice(0, shownCount(Infinity)).map(row => row.text).join('; ');
