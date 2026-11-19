@@ -1031,9 +1031,11 @@
     : candidate?.usage?.role === "attributive"
     ? `${candidate.usage.form} · ${window.BibliothekMeaningDisplay.participleName(candidate.usage) || T("adjective", "прилагательное")} (${candidate.usage.base}) · ${T("modifier of", "определение к")} ${candidate.usage.head}` : "";
   // Dictionary entry by id, or by word and reader type (help for am + Superlativ, contractions, "From …" lines).
+  // (advisor 19.11) the light records (worterbuch/german-light.json) — by id only: a pack's text of a record (pack-translations.js)
+  let lightRecords = [];
   function findEntry({id, word, type} = {}) {
     if (!dictionary) return null;
-    if (id) { const byId = dictionary.find(entry => entry.id === id); if (byId) return byId; }
+    if (id) { const byId = dictionary.find(entry => entry.id === id) || lightRecords.find(entry => entry.id === id); if (byId) return byId; }
     if (!word) return null;
     const key = String(word).toLowerCase();
     const types = type === "Adjektiv" ? ["Adjektiv","Adverb"] : [type];
@@ -1047,7 +1049,7 @@
     // 08.11.2026 (speed chat): the reader loads worterbuch/reader/ — the cards without their examples and notes (built from
     // worterbuch/german-*.json by dev/bibliothek/scripts/build-reader-dictionaries.cjs, same version); the details come with
     // the reference card (ensureCardDetails). A file in the old form (a list of cards) is read as before.
-    const versionOf = path => path === "german-function-words.json" ? "20261117-wn-units150-1" : path === "german-verbs.json" ? "20261119-wn-sammeln152-1" : path === "german-nouns.json" ? "20261118-wn-wbsrc156-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261118-wn-wbsrc156-1" : path === "german-adverbs.json" ? "20261118-wn-wbsrc156-1" : path === "german-expressions.json" ? "20261118-wn-expr157-1" : path === "german-pronouns.json" ? "20261114-wn-selber110-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261117-wn-astronaut143-1" : "20261011-um-zu-en-1";
+    const versionOf = path => path === "german-light.json" ? "20261119-light-1" : path === "german-function-words.json" ? "20261117-wn-units150-1" : path === "german-verbs.json" ? "20261119-wn-sammeln152-1" : path === "german-nouns.json" ? "20261118-wn-wbsrc156-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261118-wn-wbsrc156-1" : path === "german-adverbs.json" ? "20261118-wn-wbsrc156-1" : path === "german-expressions.json" ? "20261118-wn-expr157-1" : path === "german-pronouns.json" ? "20261114-wn-selber110-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261117-wn-astronaut143-1" : "20261011-um-zu-en-1";
     const get = path => dataFetch(`../worterbuch/reader/${path}?v=${versionOf(path)}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); })
       .then(data => { if (Array.isArray(data)) return data;
         if (data?.format_version !== 1 || !Array.isArray(data.entries) || !(data.details_parts >= 1)) throw new Error("dictionary load failed");
@@ -1060,8 +1062,12 @@
     dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json"),get("german-adjective-adverbs.json"),
       get("german-articles.json"),get("german-prepositions.json"),get("german-numerals.json"),get("german-function-words.json"),
       // E1 (22.10.2026): expression cards (vor sich hin) — type «Ausdruck», found only through their `match`; a missing file is no expressions.
-      get("german-expressions.json").catch(() => [])])
-      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns,adjectiveAdverbs,articles,prepositions,numerals,functionWords,expressions]) => {
+      get("german-expressions.json").catch(() => []),
+      // (advisor 19.11) the light records of the dictionary supplement (worterbuch/german-light.json): not cards — the resolver reads
+      // them under its own priority (create(…, {light})); a missing file is no records
+      get("german-light.json").catch(() => [])])
+      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns,adjectiveAdverbs,articles,prepositions,numerals,functionWords,expressions,light]) => {
+        lightRecords = Array.isArray(light) ? light : [];
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),
           ...verbs.map(x => ({ ...x, word:x.infinitive, type:"Verb" })),
@@ -1076,7 +1082,7 @@
           ...functionWords.map(x => ({ ...x, type:functionWordType[x.type] || x.type })),
           ...expressions.map(x => ({ ...x, type:"Ausdruck" }))
         ];
-        lemmaResolver = window.BibliothekLemmaResolver.create(dictionary, window.DeutschFallbackDictionary);
+        lemmaResolver = window.BibliothekLemmaResolver.create(dictionary, window.DeutschFallbackDictionary, {light:lightRecords});
         return dictionary;
       }).catch(error => { dictionaryPromise = null; throw error; });
     return dictionaryPromise;

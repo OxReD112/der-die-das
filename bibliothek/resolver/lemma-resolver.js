@@ -1660,7 +1660,54 @@ function apostropheText(text) {
     const stemOrDroppedE = async a => (await stemVerbReadings(a)).length > 0 || (await droppedEReadings(a)).length > 0;
     return {analyse, HALF, stemOrDroppedE};
   }
-  function create(entries, fallback, {diagnostics = window.BibliothekAnalysisDiagnostics} = {}) {
+  function create(entries, fallback, {diagnostics = window.BibliothekAnalysisDiagnostics, light = []} = {}) {
+    // (advisor 19.11, claude/DICT_SUPPLEMENT_GERMAN_PART_RESOLVER_2026-11-19_RU.md) the light records of the dictionary supplement
+    // (worterbuch/german-light.json: id, word, pos — the external dictionary's parts of speech, gender?, plural?, forms?, translation_en,
+    // translation_ru?, auxiliary?, complements?, reflexive?, separable_prefix?). Not cards: (1) our card stays above everything (a record
+    // never takes part in our cards' readings); (2) a record with the same «word + part of speech» as a reading of the external
+    // dictionary adds or replaces that reading's fields — its text and the fields above — the reading, its forms, grammar and the choice
+    // stay the external dictionary's; (3) a word no dictionary reads — the record is the spare reading, by its word and its forms.
+    const lightRecords = (Array.isArray(light) ? light : []).filter(e => e && typeof e === "object" && e.id != null && e.word && e.pos);
+    const lightByWordPos = new Map(lightRecords.map(e => [`${norm(e.word)}|${e.pos}`, e]));
+    const lightByForm = new Map();
+    for (const e of lightRecords) for (const f of new Set([e.word, ...(e.plural ? [e.plural] : []), ...(Array.isArray(e.forms) ? e.forms : [])].map(x => norm(String(x || ""))).filter(Boolean)))
+      lightByForm.set(f, [...(lightByForm.get(f) || []), e]);
+    const LIGHT_FIELDS = ["auxiliary", "complements", "reflexive", "separable_prefix"];
+    // (advisor 19.11) the fields of a record for an external verb go the way of the external dictionary's own data — the rules read them
+    // with no logic of their own: auxiliary → perfectAuxiliaries (as the auxiliary rows of the export: Perfekt / state, batch 137),
+    // complements «X + Kasus» → verbPrepositions (the verb + preposition list), separable_prefix → separableEntries (the separable index:
+    // [verb, particle, the base's forms, meanings]). Only for records that have such a field; without records the dictionary is the same object.
+    {
+      const verbs = lightRecords.filter(e => e.pos === "verb");
+      const aux = new Map(verbs.filter(e => e.auxiliary != null).map(e => [norm(e.word), (Array.isArray(e.auxiliary) ? e.auxiliary : [e.auxiliary]).map(x => norm(String(x))).filter(Boolean)]));
+      const preps = verbs.flatMap(e => (Array.isArray(e.complements) ? e.complements : []).map(c => String(c?.pattern || "").match(/^(\p{L}+) \+ (Akkusativ|Dativ|Genitiv|Nominativ)$/u))
+        .filter(Boolean).map(m => [`${e.reflexive ? "sich " : ""}${e.word}`, m[1], m[2]]));
+      const seps = verbs.filter(e => e.separable_prefix && norm(e.word).startsWith(norm(e.separable_prefix))).map(e => {
+        const p = norm(e.separable_prefix), stems = [...new Set([e.word, ...(Array.isArray(e.forms) ? e.forms : [])].map(f => norm(String(f))).filter(f => f.startsWith(p) && f.length > p.length + 1 && !f.includes(p + "zu") && !/^ge/u.test(f.slice(p.length))).map(f => f.slice(p.length)))];
+        return [norm(e.word), p, stems, String(e.translation_en || "").split(/;\s*/u).filter(Boolean)]; });
+      if (aux.size || preps.length || seps.length) {
+        const base = fallback;
+        fallback = Object.assign({}, base, {
+          ...(aux.size && base.perfectAuxiliaries ? {perfectAuxiliaries:async lemma => aux.get(norm(String(lemma))) || base.perfectAuxiliaries(lemma)} : {}),
+          ...(preps.length && base.verbPrepositions ? {verbPrepositions:async () => [...(await base.verbPrepositions()), ...preps]} : {}),
+          ...(seps.length && base.separableEntries ? {separableEntries:async () => [...(await base.separableEntries()), ...seps]} : {})});
+      }
+    }
+    const lightOver = (c, e) => {
+      c.light = e.id;
+      const en = String(e.translation_en || "").trim(), ru = String(e.translation_ru || "").trim();
+      c.translation = {...(c.translation || {}), ...(en ? {en} : {}), ...(ru ? {ru} : {})};
+      if (en) c.meanings = en.split(/;\s*/u).filter(Boolean);
+      for (const field of LIGHT_FIELDS) if (e[field] != null) c[field] = e[field];
+      return c;
+    };
+    const lightCandidate = (e, word) => {
+      const pos = String(e.pos), c = {source:"fallback", lemma:e.word, pos, posLabel:canonicalPos(pos) || pos, translation:{}, meanings:[]};
+      const gender = Array.isArray(e.gender) ? (e.gender.length === 1 ? e.gender[0] : null) : e.gender;
+      if (pos === "noun" && gender) c.nounArticle = {m:"der", f:"die", n:"das"}[gender] || undefined;
+      if (pos === "noun" && e.plural && norm(word) === norm(e.plural) && norm(e.plural) !== norm(e.word)) c.number = "plural";
+      return lightOver(c, e);
+    };
     // auxiliary as a list (advisor + user 05.11): a card may name both auxiliaries — ["sein", "haben"] (zerbrechen: ist zerbrochen /
     // hat … zerbrochen). Read once here: the full list (auxiliaries) is for the Perfekt chains (auxiliariesOf), the field auxiliary
     // becomes «haben» for every other check — such a card is not «only sein» (L68, P4 / T3, L53 choices stay as they are). The
@@ -18217,6 +18264,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (resolution.selected) resolution.selected = resolution.candidates.find(c => identity(c) === identity(resolution.selected)) || resolution.selected;
         if (resolution.preferred) resolution.preferred = resolution.candidates.find(c => identity(c) === identity(resolution.preferred)) || resolution.preferred;
       };
+      // (advisor 19.11) the light records: (2) over a reading of the external dictionary with the same word and part of speech — its
+      // text and fields; (3) a word no dictionary reads — the record is the spare reading (create: lightOver / lightCandidate)
+      if (lightRecords.length) {
+        for (const c of resolution.candidates) if (c.source === "fallback" && !c.explanation && c.light == null) {
+          const e = lightByWordPos.get(`${norm(c.lemma)}|${c.pos}`); if (e) lightOver(c, e); }
+        const records = !resolution.candidates.length ? lightByForm.get(norm(word)) || [] : [];
+        if (records.length) {
+          const list = records.map(e => lightCandidate(e, word));
+          resolution.candidates = list; resolution.selected = list.length === 1 ? list[0] : null; resolution.preferred = resolution.selected;
+          resolution.status = list.length === 1 ? "resolved" : "ambiguous"; resolution.evidence = "light-record";
+        }
+      }
       // The feminine personal pronoun's dative form means her, not she.
       if (norm(word) === "ihr") {
         const candidate = resolution.candidates.find(c => c.dictionaryId === "pronoun-004");
