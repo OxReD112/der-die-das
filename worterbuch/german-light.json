@@ -1,1 +1,43 @@
-[]
+[
+ {
+  "id": "light-0001",
+  "word": "Geschworenengericht",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Geschworenengerichte",
+  "forms": [
+   "Geschworenengerichts",
+   "Geschworenengerichtes",
+   "Geschworenengerichten"
+  ],
+  "translation_en": "jury court; court with a jury",
+  "translation_ru": "(юр.) суд присяжных"
+ },
+ {
+  "id": "light-0002",
+  "word": "geladen",
+  "pos": "adj",
+  "translation_en": "loaded, charged; colloq. furious, fuming",
+  "translation_ru": "заряженный; разг. взбешённый"
+ },
+ {
+  "id": "light-0003",
+  "word": "eingelassen",
+  "pos": "adj",
+  "translation_en": "set in, embedded; flush",
+  "translation_ru": "встроенный, вделанный"
+ },
+ {
+  "id": "light-0004",
+  "word": "Pathogen",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Pathogene",
+  "forms": [
+   "Pathogens",
+   "Pathogenen"
+  ],
+  "translation_en": "pathogen",
+  "translation_ru": "патоген, возбудитель болезни"
+ }
+]

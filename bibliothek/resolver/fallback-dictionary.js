@@ -854,6 +854,11 @@
   // speech (gülden → golden, not gilden / gilten); still several — none. → {base, kind} or null; kind: diminutive | feminine |
   // obsolete | colloquial | short | form.
   const FORM_OF_GRAMMAR = /^(?:plural|singular|nominative|accusative|genitive|dative|masculine|neuter|strong|weak|mixed|definite|indefinite|first-person|second-person|third-person|present|preterite|past|participle|imperative|infinitive|subjunctive-i|subjunctive-ii|indicative|comparative|superlative|positive|predicative|attributive|without-article|subordinate-clause|zu|multiword-construction)$/u;
+  // (advisor 19.11) the English meanings of a word in one part of speech (the record's groups) — for the check of a shared meaning
+  async function meaningsOf(word, pos) {
+    try { return [...new Set((await lexicalGroups(String(word || "").normalize("NFC").toLowerCase())).filter(group => group.pos === pos).flatMap(group => group.meanings || []).map(String))]; }
+    catch (_) { return []; }
+  }
   async function formOfLink(word, pos) {
     try {
       const key = String(word || "").normalize("NFC").toLowerCase(), data = await record(key);
@@ -867,11 +872,14 @@
       // (advisor 19.11) no Kaikki link — the English text as the spare: every meaning «alternative / obsolete / … spelling of X» of
       // one X (spellingReference); then the same display (the base's text in the popup language)
       if (!rows.length) {
-        const targets = senses.map(row => spellingReference(row[3]));
+        // (and «apocopic / alternative / obsolete … form of X» without a link — Treu «apocopic form of Treue»)
+        const formReference = gloss => { const m = String(gloss || "").trim().match(/^(?:apocopic|alternative|obsolete|archaic|dated|rare) form of ([\p{L}\p{M}-]+)/iu); return m ? m[1] : null; };
+        const targets = senses.map(row => spellingReference(row[3]) || formReference(row[3]));
         if (targets.some(t => !t)) return null;
         const keys = [...new Set(targets.map(t => t.normalize("NFC").toLowerCase()))];
         if (keys.length !== 1 || keys[0] === key || /\s/u.test(keys[0])) return null;
-        const kind = senses.some(row => /^(?:obsolete|archaic|dated|formerly standard)\b/iu.test(String(row[3] || "").trim())) ? "obsolete" : "form";
+        const kind = senses.some(row => /^(?:obsolete|archaic|dated|formerly standard)\b/iu.test(String(row[3] || "").trim())) ? "obsolete" :
+          senses.some(row => /^apocopic\b/iu.test(String(row[3] || "").trim())) ? "short" : "form";
         rows.push({base:keys[0], tags:[], kind});
       }
       let bases = [...new Set(rows.map(row => row.base))];
@@ -912,5 +920,5 @@
     for (const hypothesis of weakHypotheses(word)) if (await mayBeVerb(hypothesis.lemma)) return true;
     return false;
   }
-  window.DeutschFallbackDictionary = {strongEnPlural,mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  window.DeutschFallbackDictionary = {strongEnPlural,mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,meaningsOf,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup,lookupEntry,separableEntries,mayBeVerb,spellingTranslation,superlativeEntries};
 })();

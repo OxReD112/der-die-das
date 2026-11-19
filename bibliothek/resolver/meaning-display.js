@@ -370,6 +370,10 @@
     if (!f || !f.text) return null;
     const own = language === 'en' ? f.text.en : f.text[language] || '', shownLanguage = own ? language : 'en', baseText = own || f.text.en || '';
     if (!baseText) return null;
+    // (advisor 19.11) the same word in another part of speech — its text as it is (unbarmherzig: «безжалостный»); a noun from the
+    // infinitive — «От abwerfen — сбрасывать», as the infinitive nouns of the resolver (fromText); only in the language of that text
+    if (f.kind === 'same') return own ? {text:fit(own).text, language} : null;
+    if (f.kind === 'verb') return own ? {text:fromText(f.base, fit(own).text, language), language} : null;
     const label = {diminutive:['уменьш. от {0}','diminutive of {0}'], feminine:['жен. к {0}','feminine of {0}'], obsolete:['устар. форма от {0}','obsolete form of {0}'],
       colloquial:['разг. форма от {0}','colloquial form of {0}'], short:['краткая форма от {0}','short form of {0}'], form:['форма от {0}','form of {0}']}[f.kind] || ['форма от {0}','form of {0}'];
     const mark = shownLanguage === 'en' && language !== 'en' ? englishPrefix(language) : '';
@@ -960,6 +964,14 @@
     const language = textLanguage(options.language);
     if (candidate?.wordFragment) return {heading:candidate.lemma, grammar:'', text:candidate.translation[language], textLanguage:language,
       missing:false, derived:true, note:'', more:0, spans:candidate.compound?.spans || null, helpEntry:null};
+    // (advisor 19.11, wrong card 1) a single letter without a full stop (Warum mit M?, Wer A sagt …): «Buchstabe · буква „M“» — a shared
+    // phrase of the display, translated by the packs; a pack without it — English
+    if (candidate?.letter) {
+      const own = language === 'ru' || language === 'en' || !isPack(language) ? '' : packPhrase(language, 'letter “{0}”', 'буква „{0}“');
+      const shownLanguage = language === 'ru' || language === 'en' || own ? language : 'en';
+      return {heading:candidate.lemma, grammar:'Buchstabe', text:own ? fill(own, [candidate.lemma]) : L(shownLanguage, 'буква „{0}“', 'letter “{0}”', candidate.lemma),
+        textLanguage:shownLanguage, missing:false, derived:false, note:'', more:0, spans:null, helpEntry:null};
+    }
     let model = wordCard(resolution, candidate, options);
     // (advisor 06.11, fresh sample item 3 (в), DRAFT): an external word known only in English — its composition from our parts as a
     // line under the English text, in the Russian interface only; a hint, not a translation («состав:», as «(без sich)»).

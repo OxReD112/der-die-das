@@ -119,7 +119,9 @@
     // English noun keys are often lowercase. Only nouns may use an initial
     // capital alias; never casefold the entire Russian dictionary or merge POS.
     const spellings = [...new Set(pos === "noun"
-      ? [word.charAt(0).toUpperCase() + word.slice(1),word]
+      // (19.11, the list «нет русского перевода»: U-boot of the English dictionary is U-Boot of the Russian one — each part of a hyphened
+      // noun with its capital, after the plain spellings)
+      ? [word.charAt(0).toUpperCase() + word.slice(1),word,...(word.includes("-") ? [word.split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join("-")] : [])]
       : [word,word.toLowerCase()])];
     for (const spelling of spellings) {
       const matched = (await records(spelling)).filter(row => row.word === spelling && row.pos === pos);
