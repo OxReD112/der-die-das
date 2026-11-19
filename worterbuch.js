@@ -97,7 +97,7 @@
     }
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261118-wn-wbsrc156-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261119-wn-sammeln152-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261119-wn-x167-halten-1"),
       loadJson("worterbuch/german-adjectives.json?v=20261118-wn-wbsrc156-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261118-wn-wbsrc156-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261116-wn-alice130-1"),

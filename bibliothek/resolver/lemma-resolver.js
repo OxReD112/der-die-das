@@ -9422,6 +9422,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let particleIndex = -1;
       if (particle) for (let i = end; i > index; i--) if (norm(tokens[i][0]) === particle) { particleIndex = i; break; }
       const words = []; for (let i = start; i <= end; i++) if (i !== index && i !== particleIndex) words.push({i,w:norm(tokens[i][0]),t:tokens[i][0]});
+      // (links chat 19.11, advisor 19.11 (3)) zu before an infinitive is no preposition for the cards' «zu + case» — zu halten, Schritt zu
+      // halten, die Tür zu halten: the cards' prepositions are read from prepWords (the zu-clause signs keep words)
+      const zuBeforeInfinitive = i => norm(tokens[i]?.[0] ?? "") === "zu" && (i + 1 === index || /^\p{Ll}/u.test(tokens[i+1]?.[0] ?? "") &&
+        (verbAnalyses.get(norm(tokens[i+1][0])) || []).some(r => r.kind === "infinitive"));
+      // (cards chat 19.11, batch 167: nor zu / zum / zur right after a noun — the noun's group: Distanz zur Kirche, Treue zu Richard —, nor
+      // a bare zu before a capital word — a set phrase or a feast: zu Gnaden, zu Mariä Himmelfahrt, zu Hause)
+      // Only when every «zu» card's complement belongs to one meaning (halten zu + Dativ): the plain zu + Dativ cards keep their zu
+      // (das Reich zur Größe zurückführen, zog … zu Hause)
+      const zuMeaningOnly = !cards.some(c => (c.item.complements || []).some(x => !x.meaning_ru && /(?:^|[\s/])zu\b/u.test(String(x.pattern || ""))));
+      const zuNotGoverned = x => zuMeaningOnly && /^(?:zu|zum|zur)$/u.test(x.w) && (x.i > start && /^\p{Lu}/u.test(tokens[x.i-1][0]) && !clauseInitial(sentence, tokens[x.i-1].index) ||
+        x.w === "zu" && /^\p{Lu}/u.test(tokens[x.i+1]?.[0] ?? ""));
+      const prepWords = words.filter(x => !zuBeforeInfinitive(x.i) && !zuNotGoverned(x));
       // (zurückführen twins, advisor 06.11: two haben cards that differ only by their prepositions — the preposition of one card in the
       // part decides also where the object signs are not used: a passive participle, sich … lassen — auf drei Vorfälle zurückgeführt
       // wird, sich auf … zurückführen lassen «возводить»)
@@ -9440,7 +9452,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (/[,;:.!?()–—]/u.test(sentence.slice(tokens[k-1].index + tokens[k-1][0].length,tokens[k].index))) return false;
         if (k > i+1 && /^\p{Lu}/u.test(tokens[k][0]) && /^\p{Lu}/u.test(tokens[k-1][0]) && !/-\s*$/u.test(sentence.slice(tokens[k-1].index + tokens[k-1][0].length,tokens[k].index))) return false; }
         return true; };
-      const prepFits = (c,p) => words.some(x => { if (x.i <= start || x.i > index || !toVerb(x.i)) return false;
+      const prepFits = (c,p) => prepWords.some(x => { if (x.i <= start || x.i > index || !toVerb(x.i)) return false;
         if (CONTRACTED_CASE[x.w]) return CONTRACTED_CASE[x.w][0] === p && caseOfPattern(c,p).includes(CONTRACTED_CASE[x.w][1]);
         if (x.w !== p) return false;
         if (!TWO_WAY_P.test(p)) return true;
@@ -9514,7 +9526,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const accusativeCard = () => explicitAccusative || (auxPair ? cards.find(c => c.item.auxiliary === "haben") : null);
       const intransitiveCard = () => {
         const acc = accusativeCard(); if (!acc) return null;
-        return pick(cards.filter(c => c !== acc && !patterns(c).some(p => /Akkusativ|Dativ/u.test(p))));
+        // (batch 167) a complement of one meaning only (halten zu + Dativ «быть на стороне») does not make the card an object card
+        return pick(cards.filter(c => c !== acc && !(c.item.complements || []).some(x => !x.meaning_ru && /Akkusativ|Dativ/u.test(String(x.pattern || "")))));
       };
       const nounAt = k => k <= end && k !== particleIndex && /^\p{Lu}/u.test(tokens[k]?.[0] ?? "");
       // den zahnlosen Mund: up to two lowercase modifiers between the determiner and the noun.
@@ -9635,7 +9648,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (cards.some(c => directAccusativeInPart(c, sentence, tokens))) { const c = pick(cards.filter(anyAcc)); if (c) return {candidate:c,evidence:'accusative-object'}; }
           else if (cards.every(c => noAccusativeInPart(c, sentence, tokens))) {
             const open = cards.filter(c => !cardAcc(c));
-            const ownPrepIn = c => { const ps = [...preps(c)]; return !ps.length || ps.some(x => words.some(y => y.w === x)); };
+            const ownPrepIn = c => { const ps = [...preps(c)]; return !ps.length || ps.some(x => prepWords.some(y => y.w === x)); };
             const c = pick(open.length > 1 ? open.filter(ownPrepIn) : open);
             if (c) return {candidate:c,evidence:'no-accusative'}; } } }
       // G91 (b) (advisor 01.11.2026): of two cards that both take an accusative, the card with the double accusative
@@ -9683,7 +9696,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const TIME_BEFORE = /^(?:bald|gleich|kurz|lange|sofort|tags|gleichzeitig)$/u;
       const daPreps = words.filter(x => DA_PREP.test(x.w) && !(x.i === start && x.w === "darauf") && !(x.i > start && /^\p{Lu}/u.test(tokens[x.i-1]?.[0] ?? "")) && !TIME_BEFORE.test(norm(tokens[x.i-1]?.[0] ?? "")))
         .map(x => x.w.match(DA_PREP)[1]);
-      const clauseWords = new Set([...words.map(x => x.w), ...daPreps]);
+      const clauseWords = new Set([...prepWords.map(x => x.w), ...daPreps]);
       // L36: a haben card whose preposition takes the accusative object along (hielt ihn für einen Spitzbuben «считать»,
       // Hältst du mich für blöde?) decides before the object; für + a personal pronoun is a beneficiary (für sie).
       const PERSONAL = PERSONAL_OBJECT_PRONOUN;
@@ -9838,9 +9851,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (zurückführen twins, advisor 06.11: so are zum / zur zu + the dative — zurück zum Sport, zur Größe zurückführen; not im / am /
       // vom / beim — a place, a time or a noun's attribute far more often: im Extremfall, Anzeichen vom Schnatz)
       const CONTRACTED_DAT = {zum:"zu",zur:"zu"};
-      const contractedAcc = (c,p) => words.some(x => CONTRACTED_ACC[x.w] === p) &&
+      const contractedAcc = (c,p) => prepWords.some(x => CONTRACTED_ACC[x.w] === p) &&
         patterns(c).some(q => q.split(/\s*\/\s*/u).some(alt => new RegExp(`^${p}\\s*\\+\\s*Akkusativ`,"u").test(alt.trim()))) ||
-        words.some(x => CONTRACTED_DAT[x.w] === p) &&
+        prepWords.some(x => CONTRACTED_DAT[x.w] === p) &&
         patterns(c).some(q => q.split(/\s*\/\s*/u).some(alt => new RegExp(`^${p}\\s*\\+\\s*Dativ`,"u").test(alt.trim())));
       const prepCounts = (c,p) => ((clauseWords.has(p) || contractedAcc(c,p)) && !(daStart && looseAfter && daStart.w.match(DA_PREP)[1] === p && !words.some(x => x.w === p))) && !(p === "für" && accPrep(c).includes("für") &&
         !words.some(x => x.w === "für" && predicateAfter(x.i)) && !(daPreps.includes("für") && free.some(x => OBJ_PRON.test(x.w))));
@@ -9878,7 +9891,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const phraseToVerb = i => i < index && toVerb(i);
       const nonFiniteOpen = !nonFinite || !nominalHeads.length || nominalHeads.every(x => subjectSpan(x.i)) && nominalHeads.filter(x => /^\p{Lu}/u.test(x.t)).length <= 1;
       const viaAdverb = (c,p) => daPreps.includes(p);
-      const withPrep = (prepBlind && !preps(explicitAccusative).size ? [] : cards.filter(c => [...preps(c)].some(p => prepCounts(c,p) && directionOk(c,p) && (nonFiniteOpen || viaAdverb(c,p) || habenPair && words.some(x => x.i > start && (x.w === p || CONTRACTED_ACC[x.w] === p || CONTRACTED_DAT[x.w] === p) && phraseToVerb(x.i))))))
+      const withPrep = (prepBlind && !preps(explicitAccusative).size ? [] : cards.filter(c => [...preps(c)].some(p => prepCounts(c,p) && directionOk(c,p) && (nonFiniteOpen || viaAdverb(c,p) || habenPair && prepWords.some(x => x.i > start && (x.w === p || CONTRACTED_ACC[x.w] === p || CONTRACTED_DAT[x.w] === p) && phraseToVerb(x.i))))))
         .filter(c => !(looseNP && (subjectKnown || /^(?:sie|es)$/u.test(norm(tokens[index+1]?.[0] ?? "")) && free.some(x => x.i > index+1 && QUANT_DET.test(x.w))) && c.item.auxiliary === "sein" && cards.some(h => h.item.auxiliary === "haben")));
       // L38 (22.10.2026, bestehen «заключаться» in + Dativ beside «существовать» without complements): a two-way preposition with
       // the dative may be a place (Die Firma besteht seit 1900 in Berlin): beside a card without complements it decides only as a
@@ -14728,7 +14741,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const reflexiveInClause = f.clauseIndices.some(i => reflexivePronouns.has(norm(f.tokens[i][0])));
         // (review 25.10) a dative pronoun with a Dativ card (Ihm wurde nicht getraut — «доверять») or a preposition of a card's
         // complements in the clause (wurde für einen Dieb gehalten — halten für «считать») — other rules decide.
-        const PP_WORDS = f.clauseIndices.map(i => norm(f.tokens[i][0]));
+        // (links chat 19.11, batch 167: zu before an infinitive, a bare zu before a capital word — zu Ostern, zu Mariä Himmelfahrt — and zu /
+        // zum / zur right after a noun are no preposition of a card's «zu + case»)
+        const zuOff = i => { const w = norm(f.tokens[i][0]), next = f.tokens[i+1]?.[0] ?? "", prev = f.tokens[i-1]?.[0] ?? "";
+          if (!/^(?:zu|zum|zur)$/u.test(w)) return false;
+          // (as zuNotGoverned) the set-phrase and noun-group exclusions only when the «zu» complements are of one meaning
+          const meaningOnly = !f.verbs.some(c => (c.item.complements || []).some(x => !x.meaning_ru && /(?:^|[\s/])zu\b/u.test(String(x.pattern || ""))));
+          if (!meaningOnly) return w === "zu" && /^\p{Ll}/u.test(next) && (verbAnalyses.get(norm(next)) || []).some(r => r.kind === "infinitive");
+          return w === "zu" && (/^\p{Lu}/u.test(next) || /^\p{Ll}/u.test(next) && (verbAnalyses.get(norm(next)) || []).some(r => r.kind === "infinitive")) ||
+            i > f.start && /^\p{Lu}/u.test(prev) && !clauseInitial(f.sentence ?? "", f.tokens[i-1].index); };
+        const PP_WORDS = f.clauseIndices.filter(i => !zuOff(i)).map(i => norm(f.tokens[i][0]));
         const cardPreps = c => (c.item?.complements || []).map(x => String(x.pattern || "")).filter(p => /[a-zäöü]\s*\+/u.test(p))
           .flatMap(p => p.split("+")[0].split(/[\/…]/u)).map(x => norm(x.trim())).filter(Boolean);
         // (L53-2, user 25.10.2026) the card of that preposition — wurde für einen Dieb gehalten → halten für «считать» (as L36; von / durch
@@ -21437,7 +21459,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -21995,6 +22017,75 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         ...(en.length === ru.length ? {sensesFirstEn:indices} : {}), senseEvidence:"dative-object"};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
         candidates:(result.candidates || []).map(x => x === c ? selected : x)};
+    }
+    // (links chat 19.11, advisor 19.11 (б): «продвижение по управлению») a meaning tied to a prepositional government — complements[]
+    // «P + case» + meaning_ru (sich stoßen «von + Dativ» → «(книжн.) оттолкнуться»), or the same in the field reflexive.complements (sich
+    // fassen «an / bei + Dativ» → «(bei / an den Händen) взяться (за руки)») — comes first when its part holds P with a group of that case
+    // (the case by prepositionPhraseCase for the two-way prepositions). Not zu before an infinitive (zu halten, Schritt zu halten); not a
+    // group right after a noun (der Brief von meiner Mutter — the noun's); the meanings are not reordered otherwise.
+    const GOV_PATTERN = /^([a-zäöüß]+(?:\s*\/\s*[a-zäöüß]+)*)\s*\+\s*(Dativ|Akkusativ|Genitiv)$/u;
+    const GOV_CONTRACTION = {vom:["von","Dativ"],zum:["zu","Dativ"],zur:["zu","Dativ"],beim:["bei","Dativ"],im:["in","Dativ"],am:["an","Dativ"],
+      ins:["in","Akkusativ"],ans:["an","Akkusativ"],aufs:["auf","Akkusativ"],übers:["über","Akkusativ"],unters:["unter","Akkusativ"],vors:["vor","Akkusativ"],durchs:["durch","Akkusativ"],fürs:["für","Akkusativ"],ums:["um","Akkusativ"]};
+    const GOV_FIXED = {von:"Dativ",mit:"Dativ",zu:"Dativ",aus:"Dativ",bei:"Dativ",nach:"Dativ",seit:"Dativ",gegenüber:"Dativ",
+      für:"Akkusativ",durch:"Akkusativ",gegen:"Akkusativ",ohne:"Akkusativ",um:"Akkusativ",wegen:"Genitiv",trotz:"Genitiv",während:"Genitiv"};
+    function governedGroupInPart(sentence, tokens, at, pattern) {
+      const m = GOV_PATTERN.exec(String(pattern || "").trim());
+      if (!m) return false;
+      const preps = m[1].split(/\s*\/\s*/u), kase = m[2];
+      const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      const STOP = /^(?:und|oder|aber|sondern|denn)$/u;
+      let a = at; while (a > 0 && !/[,;:.!?»«„“"()–—]/u.test(gap(a-1, a)) && !STOP.test(norm(tokens[a-1][0]))) a--;
+      let b = at; while (b + 1 < tokens.length && !/[,;:.!?»«„“"()–—]/u.test(gap(b, b+1)) && !STOP.test(norm(tokens[b+1][0]))) b++;
+      for (let k = a; k <= b; k++) {
+        const w = norm(tokens[k][0]);
+        let p = null, c = null;
+        if (GOV_CONTRACTION[w]) [p, c] = GOV_CONTRACTION[w];
+        else if (preps.includes(w)) { p = w; c = TWO_WAY_PREPOSITION.test(w) ? prepositionPhraseCase(tokens, k, b) : GOV_FIXED[w] || null; }
+        if (!p || !preps.includes(p) || c !== kase || k + 1 > b) continue;
+        // (zu before an infinitive is no preposition — zu halten, Schritt zu halten, aufzuhalten)
+        if (p === "zu" && w === "zu" && /^\p{Ll}/u.test(tokens[k+1][0]) && (verbAnalyses.get(norm(tokens[k+1][0])) || []).some(r => r.kind === "infinitive")) continue;
+        // (a bare zu before a capital word is a set phrase — zu Gnaden, zu Mariä Himmelfahrt, zu Hause)
+        if (w === "zu" && /^\p{Lu}/u.test(tokens[k+1][0])) continue;
+        // (a group of time or a set adverbial is no object — zur Mittagszeit, zum Glück, von Zeit zu Zeit, zum Beispiel)
+        { let n = k + 1; while (n <= b && n <= k + 4 && !/^\p{Lu}/u.test(tokens[n][0])) n++;
+          if (n <= b && /^\p{Lu}/u.test(tokens[n][0]) && (/(?:zeit|tag|nacht|stunde|woche|jahr|monat|abend|morgen|mittag)$/u.test(norm(tokens[n][0])) ||
+            /^(?:glück|beispiel|teil|schluss|schluß|ende|anfang|beginn|hause|haus|fuß|fuss|recht|unrecht|zeit|stande|tisch)$/u.test(norm(tokens[n][0])))) continue; }
+        // (a group right after a noun is the noun's — der Brief von meiner Mutter)
+        if (k > a && /^\p{Lu}/u.test(tokens[k-1][0]) && !clauseInitial(sentence, tokens[k-1].index) && (forms.get(norm(tokens[k-1][0])) || []).some(e => e.type === "Nomen")) continue;
+        return true;
+      }
+      return false;
+    }
+    async function governedSenseFirst(word, context, result) {
+      const c = result?.selected;
+      if (!c || c.source !== "main" || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || !Number.isInteger(context?.tokenOffset)) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'governedSenseFirst');
+      const at = clickedTokenIndex(tokens, context.tokenOffset, word);
+      if (at < 0) return result;
+      const pick = (text, rows) => {
+        const ru = String(text || "").split(";").map(x => x.trim()).filter(Boolean);
+        if (ru.length < 2) return -1;
+        const marks = (rows || []).filter(x => x && x.meaning_ru && GOV_PATTERN.test(String(x.pattern || "").trim()));
+        for (const x of marks) {
+          const k = ru.indexOf(String(x.meaning_ru).trim());
+          if (k > 0 && governedGroupInPart(sentence, tokens, at, x.pattern)) return k;
+        }
+        return -1;
+      };
+      const field = c.construction?.id === "reflexive-verb" && c.item?.reflexive && typeof c.item.reflexive === "object" ? c.item.reflexive : null;
+      if (field && Array.isArray(field.complements)) {
+        const k = pick(field.translation_ru, field.complements);
+        if (k > 0) {
+          const en = String(field.translation_en || "").split(";").map(x => x.trim()).filter(Boolean), ru = String(field.translation_ru).split(";").map(x => x.trim()).filter(Boolean);
+          const selected = {...c, fieldSenseFirst:k, fieldSenseFirstEn:en.length === ru.length ? k : 0, senseEvidence:"government"};
+          return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
+        }
+      }
+      const k = pick(c.item?.translation_ru, c.item?.complements);
+      if (k <= 0) return result;
+      const ru = String(c.item.translation_ru).split(";").map(x => x.trim()).filter(Boolean), en = String(c.item?.translation_en || "").split(";").map(x => x.trim()).filter(Boolean);
+      const selected = {...c, senseFirst:k, senseFirstEn:en.length === ru.length ? k : 0, senseEvidence:"government"};
+      return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
     async function stateAlternative(word, context, result) {
       if (!result?.candidates?.length || !context || !Number.isInteger(context.tokenOffset)) return result;

@@ -7092,11 +7092,11 @@
   {
     "id": "verb-2565",
     "infinitive": "halten",
-    "translation_ru": "останавливаться (о транспорте); держаться, не портиться (о цветах, обуви, погоде)",
-    "translation_en": "to stop (of a vehicle); to last, to hold (of flowers, shoes, the weather)",
+    "translation_ru": "останавливаться (о транспорте); держаться, не портиться (о цветах, обуви, погоде); быть на (чьей-либо) стороне",
+    "translation_en": "to stop (of a vehicle); to last, to hold (of flowers, shoes, the weather); to stand by, to side with (someone)",
     "auxiliary": "haben",
-    "usage_note_ru": "Без дополнения. Der Bus hält vor dem Haus. — Автобус останавливается у дома. Halt! — Стой! zu jemandem halten — быть на чьей-либо стороне. Держать что-либо — отдельная карточка halten.",
-    "usage_note_en": "Without an object. Der Bus hält vor dem Haus. — The bus stops in front of the house. Halt! — Stop! zu jemandem halten — to stand by someone. To hold something — separate card halten.",
+    "usage_note_ru": "Без прямого дополнения. Der Bus hält vor dem Haus. — Автобус останавливается у дома. Halt! — Стой! zu jemandem halten — быть на чьей-либо стороне, оставаться верным (кому-либо): Egal, was passiert, ich halte zu dir. — Что бы ни случилось, я на твоей стороне. Держать что-либо — отдельная карточка halten.",
+    "usage_note_en": "Without a direct object. Der Bus hält vor dem Haus. — The bus stops in front of the house. Halt! — Stop! zu jemandem halten — to stand by someone, to stick by someone: Egal, was passiert, ich halte zu dir. — Whatever happens, I'm on your side. To hold something — separate card halten.",
     "example_de": "Hält dieser Bus auch am Rathaus?",
     "example_cloze": "{{c1::Hält}} dieser Bus auch am Rathaus?",
     "example_ru": "Этот автобус останавливается и у ратуши?",
@@ -7132,7 +7132,15 @@
         "ihr": "Haltet!",
         "Sie": "Halten Sie!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "meaning_ru": "быть на (чьей-либо) стороне",
+        "note_ru": "быть на чьей-либо стороне, оставаться верным кому-либо",
+        "note_en": "to stand by someone, to stick by someone"
+      }
+    ]
   },
   {
     "id": "verb-147",
@@ -15595,11 +15603,11 @@
   {
     "id": "verb-312",
     "infinitive": "schaffen",
-    "translation_ru": "справляться; успевать",
-    "translation_en": "to manage; to make it",
+    "translation_ru": "справляться; успевать; (разг.) доставлять, относить, убирать (куда-либо)",
+    "translation_en": "to manage; to make it; (colloquial) to take, to bring, to get (somewhere)",
     "auxiliary": "haben",
-    "usage_note_ru": "В значении «создавать» — сильный глагол: schuf, geschaffen (отдельная карточка).",
-    "usage_note_en": "In the sense “create” it is a strong verb: schuf, geschaffen (separate card).",
+    "usage_note_ru": "В значении «создавать» — сильный глагол: schuf, geschaffen (отдельная карточка). Доставить, убрать: Schafft mir den Kerl aus dem Haus! — Уберите этого парня из дома! jdn. aus dem Weg schaffen — убрать с дороги, устранить; sich (D) jdn. / etw. vom Hals schaffen — избавиться от кого-либо / чего-либо; etw. aus der Welt schaffen — устранить (проблему, спор).",
+    "usage_note_en": "In the sense “create” it is a strong verb: schuf, geschaffen (separate card). To take, to get: Schafft mir den Kerl aus dem Haus! — Get that fellow out of the house! jdn. aus dem Weg schaffen — to get someone out of the way, to eliminate; sich (D) jdn. / etw. vom Hals schaffen — to get rid of someone / something; etw. aus der Welt schaffen — to settle (a problem, a dispute) once and for all.",
     "example_de": "Schaffst du das allein?",
     "example_cloze": "{{c1::Schaffst}} du das allein?",
     "example_ru": "Справишься без помощи?",
@@ -15637,16 +15645,6 @@
         "pattern": "Akkusativ",
         "note_ru": "справляться с чем-либо, успевать что-либо",
         "note_en": "to manage something, to get something done"
-      }
-    ],
-    "extra_meanings": [
-      {
-        "ru": "доставить, отнести, убрать (куда-либо)",
-        "en": "to take, to bring, to get (somewhere)",
-        "register": "landschaftlich, umgangssprachlich",
-        "example_de": "Schafft mir den Kerl aus dem Haus!",
-        "example_ru": "Уберите этого парня из дома!",
-        "example_en": "Get that fellow out of the house!"
       }
     ]
   },
@@ -25241,8 +25239,16 @@
       "example_de": "Nach dem ersten Schreck fasste sie sich schnell.",
       "example_ru": "После первого испуга она быстро взяла себя в руки.",
       "example_en": "After the first shock she quickly composed herself.",
-      "note_ru": "Fass dich kurz! — Говори короче! Sie hatten sich bei den Händen gefasst. — Они взялись за руки.",
-      "note_en": "Fass dich kurz! — Keep it short! Sie hatten sich bei den Händen gefasst. — They had joined hands."
+      "note_ru": "Fass dich kurz! — Говори короче! Взяться за руки — an / bei + D: Sie hatten sich bei den Händen gefasst. — Они взялись за руки.",
+      "note_en": "Fass dich kurz! — Keep it short! To join hands — an / bei + dative: Sie hatten sich bei den Händen gefasst. — They had joined hands.",
+      "complements": [
+        {
+          "pattern": "an / bei + Dativ",
+          "meaning_ru": "(bei / an den Händen) взяться (за руки)",
+          "note_ru": "взяться за руки: sich an / bei den Händen fassen",
+          "note_en": "to join hands: sich an / bei den Händen fassen"
+        }
+      ]
     }
   },
   {
@@ -31491,11 +31497,11 @@
   {
     "id": "verb-652",
     "infinitive": "sich stoßen",
-    "translation_ru": "удариться, ушибить (руку, голову); (перен.) возмущаться, коробить (чем-либо)",
-    "translation_en": "to bump oneself, to hurt (one's hand, head); to take offence (at)",
+    "translation_ru": "удариться, ушибить (руку, голову); (перен.) возмущаться, коробить (чем-либо); (книжн.) оттолкнуться (от чего-либо)",
+    "translation_en": "to bump oneself, to hurt (one's hand, head); to take offence (at); (literary) to push off (from something)",
     "auxiliary": "haben",
-    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Перен. — an + Dativ: Sie stößt sich an seinem Ton. — Её коробит его тон. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки. Оттолкнуться — sich abstoßen: Er stieß sich vom Beckenrand ab.",
-    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Figuratively — an + dative: Sie stößt sich an seinem Ton. — She takes offence at his tone. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards. To push off — sich abstoßen: Er stieß sich vom Beckenrand ab.",
+    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Перен. — an + Dativ: Sie stößt sich an seinem Ton. — Её коробит его тон. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки. Оттолкнуться — обычно sich abstoßen: Er stieß sich vom Beckenrand ab. Реже, книжн., без ab с направлением: Er stieß sich vom Boden in die Höhe.",
+    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Figuratively — an + dative: Sie stößt sich an seinem Ton. — She takes offence at his tone. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards. To push off — usually sich abstoßen: Er stieß sich vom Beckenrand ab. Less often, literary, without ab and with a direction: Er stieß sich vom Boden in die Höhe.",
     "example_de": "Pass auf, dass du dich nicht am Kopf stößt!",
     "example_cloze": "Pass auf, dass du dich nicht am Kopf {{c1::stößt}}!",
     "example_ru": "Смотри не ударься головой!",
@@ -31538,6 +31544,12 @@
         "meaning_ru": "удариться, ушибить (руку, голову)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
+      },
+      {
+        "pattern": "von + Dativ",
+        "meaning_ru": "(книжн.) оттолкнуться (от чего-либо)",
+        "note_ru": "(книжн.) оттолкнуться от чего-либо (vom Boden); обычно — sich abstoßen",
+        "note_en": "(literary) to push off from something (vom Boden); usually sich abstoßen"
       }
     ],
     "lookup_forms": {

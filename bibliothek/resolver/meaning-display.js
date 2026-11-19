@@ -1400,7 +1400,12 @@
     const packField = isPack(language) && field && ownItem === candidate.item ? candidate.packItem?.[language]?.reflexive : null;
     const fieldLanguage = isPack(language) && !String(packField?.[`translation_${language}`] || '').trim() ? 'en' : language;
     const fieldSource = fieldLanguage === language && isPack(language) ? packField : field;
-    const fieldFit = fit(String(fieldSource?.[`translation_${fieldLanguage}`] || ''));
+    // (links chat 19.11, advisor 19.11: a meaning of the field proved by its government — the resolver's fieldSenseFirst — comes first)
+    const fieldFirst = fieldLanguage === 'en' ? candidate.fieldSenseFirstEn : fieldLanguage === 'ru' ? candidate.fieldSenseFirst : null;
+    const fieldRaw = String(fieldSource?.[`translation_${fieldLanguage}`] || '');
+    const fieldText = Number.isInteger(fieldFirst) && fieldFirst > 0 ? (() => { const parts = fieldRaw.split(';').map(x => x.trim()).filter(Boolean);
+      return fieldFirst < parts.length ? [parts[fieldFirst], ...parts.filter((_, i) => i !== fieldFirst)].join('; ') : fieldRaw; })() : fieldRaw;
+    const fieldFit = fit(fieldText);
     if (fieldFit.text) {
       const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
       const note = String(fieldSource[`note_${fieldLanguage}`] || '').trim();
