@@ -19488,13 +19488,28 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         candidates:(result.candidates || []).map(c => c === result.selected ? selected : c)};
     }
     let outsideHeadingVerbs = null;
-    // (speed chat 18.11) the expression records whose heading has this word — the records a probe may find (built once per word)
-    const outsideTakersCache = new Map();
+    // (speed chat 18.11) the expression records whose heading has this word — the records a probe may find. One index of all
+    // expression headings, built once at the first probe (a filter over all entries per word cost ~8 MB on the 28 perf-check taps).
+    // (advisor 18.11) It lives in this resolver instance, as constructionAnchors and outsideHeadingVerbs: built from this instance's
+    // `entries` (set once at creation, never changed); new expression data (another version) makes a new resolver and a new index.
+    let outsideTakersIndex = null;
     const outsideTakers = base => {
-      if (!outsideTakersCache.has(base)) outsideTakersCache.set(base, entries.filter(e => e.type === "Ausdruck" &&
-        String(e.word || "").replace(/[()?!.,]/gu, " ").split(/\s+/u).map(norm).includes(base)));
-      return outsideTakersCache.get(base);
+      if (!outsideTakersIndex) {
+        outsideTakersIndex = new Map();
+        for (const e of entries) if (e.type === "Ausdruck")
+          for (const w of new Set(String(e.word || "").replace(/[()?!.,]/gu, " ").split(/\s+/u).map(norm))) {
+            if (!outsideTakersIndex.has(w)) outsideTakersIndex.set(w, []);
+            outsideTakersIndex.get(w).push(e);
+          }
+      }
+      return outsideTakersIndex.get(base) || [];
     };
+    // (speed chat 18.11; advisor 18.11: by the search's own parsing of forms — partList(part, "alternatives"), compared with the
+    // token keys as keyIs does) can this pattern match in a sentence with these words at all: every part with a form (not optional)
+    // has an alternative whose words all stand among the sentence's keys ('s counts as es, as asEs). Reflexive and zu-infinitive
+    // parts count as present. Only a pre-check: when no pattern of an expression passes it, the full search cannot find it either.
+    const patternWordsPresent = (m, present) => Array.isArray(m?.parts) && m.parts.every(part => part.optional || part.reflexive || part.zu_infinitive ||
+      !part.form || partList(part,"alternatives").some(({words}) => words.every(w => present.has(w))));
     async function applyConstruction(word, context, resolution) {
       // (the card of an expression's verb, read without expressions: expressionVerb)
       if (context?.noExpression) return resolution;
@@ -19552,10 +19567,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (speed chat 18.11; advisor 18.11: by the search's own index — constructionAnchors, the same keys as constructionAt): only from
           // words that anchor an expression taking this verb / nicht outside — the same result, one full search per such word instead of
           // per word of the window (46 → 4 searches on the 28 taps of perf-check)
+          const present = new Set(tokens.map(x => norm(x[0])));
+          if (/['’]s/u.test(sentence)) present.add("es");
           const takers = new Set((norm(word) === "nicht" ? ["nicht"] : (verbAnalyses.get(norm(word)) || []).map(a => norm(a.base || a.entry?.word || ""))).flatMap(b => outsideTakers(b)));
           for (let i = from; i <= to && !found; i++) {
             if (i === at) continue;
-            if (!(constructionAnchors.get(norm(tokens[i][0])) || []).some(({entry}) => takers.has(entry))) continue;
+            // (speed chat 18.11: and only when such an expression can match at all — its parts' words stand in the sentence)
+            if (!(constructionAnchors.get(norm(tokens[i][0])) || []).some(({entry, m}) => takers.has(entry) && patternWordsPresent(m, present))) continue;
             let other = null;
             try { other = await constructionAt(tokens[i][0], {...context, tokenOffset:tokens[i].index, outsideProbe:true}); } catch (_) { other = null; }
             if (other?.entry?.type !== "Ausdruck") continue;
