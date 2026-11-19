@@ -16995,7 +16995,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const type = canonicalPos(card.pos), isVerb = type === 'Verb', isPreposition = card.pos === 'preposition' || type === 'prep' || alsCard;
       // (batch 142: the particle verb of a pair — sah ihn für einen Dieb an — keeps its separable link and takes the pair, below only
       // for a particle verb of the list)
-      if (!isVerb && !isPreposition || isVerb && card.construction && card.construction.id !== 'separable-verb') return;
+      // (L24, links chat 19.11: a verb in a time / modal / passive chain — würden mit der Arbeit anfangen, ist in Not geraten — takes the
+      // pair too; the display adds it after the chain's marks and lights the preposition with the chain)
+      // A reflexive card keeps its own construction with the complement (sich freuen + auf) — as before.
+      if (!isVerb && !isPreposition || isVerb && card.construction?.id === 'reflexive-verb' && card.construction.complement) return;
+      const chainVerb = isVerb && card.construction && card.construction.id !== 'separable-verb';
       let list;
       try { list = await fallback.verbPrepositions(); } catch (_) { return; }
       let clause = verbalClause(word,context,'verbPrepositionLink',clauseBoundaries.verbGroup);
@@ -17075,8 +17079,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const partnerTopic = (x, y) => /^(?:mit\+über|bei\+für|bei\+über)$/u.test([x,y].sort().join('+'));
       // (A2 (б), 16.11: only a pair that holds blocks — its case agrees and its preposition is not a part of our expression entry: gehört mit
       // 4,6 Prozent zu den niedrigsten auf dem Kontinent — hören auf + Akk does not hold on «auf dem»; Wer zum Teufel will mit dir sprechen)
-      const otherBlocks = l => links.some(o => o !== l && (o.p === l.p || o.v === l.v && !partnerTopic(prepositionAt(o.p),prepositionAt(l.p))) &&
-        holds.get(o));
+      // (expressions chat 19.11, Astronaut P122-014; advisor 19.11: a general rule) a pair that needs sich (and es: es handelt sich um),
+      // with them in the part, is not blocked by a plain pair of the same verb without sich: es handelte sich um eine Ansammlung von
+      // Partikeln — von is the noun's, there is no «es handelt sich von»; the plain pair is still blocked by it
+      const sichPair = l => l.rows.some(r => impersonal(r[0]) || /^sich\s/u.test(norm(r[0])));
+      const otherBlocks = l => links.some(o => o !== l && (o.p === l.p || o.v === l.v && !partnerTopic(prepositionAt(o.p),prepositionAt(l.p)) &&
+        !(sichPair(l) && !sichPair(o))) && holds.get(o));
       // The checks of one pair; gives its case or null.
       // (A2 (б2), advisor 16.11: a case shown right after the preposition — an article, a pronoun, a contraction)
       // (den / meinen … + a noun by the shared prepositionPhraseCase — advisor 16.11: auf den Zug Akkusativ, in den Autos / den Hotels Dativ)
@@ -17148,6 +17156,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const caseOf = chosen.map(pairCase);
       if (caseOf.some(c => !c)) return;
       const {v,p,verbBase,rows} = chosen[0];
+      // (L24: als of a chain verb — Märchen werden als Mythen angesehen — stays with the chain: in the passive the als group is no
+      // accusative)
+      if (chainVerb && chosen.some(l => prepositionAt(l.p) === 'als')) return;
       // (advisor 16.11, Alice P657: a verb of the author's words right after direct speech takes no von / über of the speech — its
       // content is in the quotes: »…«, sprach ein fetter Lachs vom Rhein; er sprach von seiner Reise keeps its pair)
       // (the quote must close speech: a comma after it, or the speech's own end sign before it — not a quoted name: über das der

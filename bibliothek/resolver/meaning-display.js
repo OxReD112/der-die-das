@@ -1246,7 +1246,9 @@
     let linkSpans = null;
     // (batch 142, advisor 17.11: a particle verb keeps its separable highlight and adds the pair — sah ihn für einen Dieb an:
     // «Trennbares Verb · für + Akkusativ», sah / an / für lit)
-    const separableLink = link && candidate.construction?.id === 'separable-verb' && k.spans;
+    // (L24, links chat 19.11: so does a verb of a chain — Perfekt, Konjunktiv II, Futur, Modal, Passiv: «Verb · Perfekt mit geraten ·
+    // in + Akkusativ», the chain and the preposition lit)
+    const separableLink = link && candidate.construction && k.spans;
     if (link && (!k.spans || separableLink)) {
       marks.push(pos(candidate) === 'Verb' ? link.pattern : `${link.verb} + ${link.pattern}`);
       linkSpans = separableLink ? [...k.spans, ...link.spans.filter(s => !k.spans.some(t => t.start === s.start))].sort((a,b) => a.start - b.start) : link.spans;
