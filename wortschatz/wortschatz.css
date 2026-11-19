@@ -1205,6 +1205,17 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   font-size: 14px;
   color: var(--muted);
 }
+/* 19.11.2026 (found by the native app, Wortschatz part 4): on iPhone SE (375 × 667) the choose screen ran into
+   «Worum geht's?» — the hint under the main button ended 6 below its top. Short phones: the QUICK START block
+   16 above / below (28), each set 12 (14) — the hint ends ~30 above «Worum geht's?». Taller phones unchanged. */
+@media (max-width: 699px) and (max-height: 700px) {
+  #choose .startWords {
+    padding: 16px 0;
+  }
+  .chooseSet {
+    padding: 12px 0;
+  }
+}
 
 /* ===== SETTINGS GEAR (2026-10-26): bottom right, on the line of the version number — the line the shared Home
    button sits on (Home centres the button there). Plain icon like Home's own settings gear and Bibliothek's
