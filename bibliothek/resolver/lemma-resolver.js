@@ -20050,17 +20050,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!row) continue;
         const [particle, ru, en] = row, simple = whole.slice(particle.length);
         if (!englishParts.has(whole)) {
-          let text = "";
+          let text = "", parts = null;
           try {
             const inner = await resolveWithDiagnostics(simple, {sentence:simple, tokenOffset:0});
             const verbs = (inner?.candidates || []).filter(v => canonicalPos(v.pos) === "Verb" && plainLemma(v) === simple && !v.construction);
-            if (verbs.length) text = window.BibliothekMeaningDisplay?.formationText?.({kind:"particle-verb", particle:{form:particle, ru, en}, verb:verbs[0], verbs, lemma:whole, pos:"Verb"}, "en") || "";
-          } catch (_) { text = ""; }
+            if (verbs.length) {
+              parts = {kind:"particle-verb", particle:{form:particle, ru, en}, verb:verbs[0], verbs, lemma:whole, pos:"Verb"};
+              text = window.BibliothekMeaningDisplay?.formationText?.(parts, "en") || "";
+            }
+          } catch (_) { text = ""; parts = null; }
           if (englishParts.size > 2048) englishParts.clear();
-          englishParts.set(whole, text);
+          englishParts.set(whole, {text, parts});
         }
-        const text = englishParts.get(whole);
-        if (text) swap.set(c, {...c, translation:{...(c.translation || {}), en:text}, englishByParts:true});
+        // (19.11.2026, advisor; chat «languages in the reader») the parts the English text was built from are kept with it —
+        // englishByParts is that formation (truthy as before): a pack language shows each part in the pack (meaning-display.js)
+        const {text, parts} = englishParts.get(whole);
+        if (text) swap.set(c, {...c, translation:{...(c.translation || {}), en:text}, englishByParts:parts || true});
       }
       if (!swap.size) return result;
       const map = c => swap.get(c) || c;

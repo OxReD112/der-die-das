@@ -90,8 +90,18 @@
   // (18.11.2026) a word read by its parts (not a name) is built in the pack language: its lines say, part by part, which is in the
   // pack and which is English (formationMeaning, particleVerbLines)
   const byParts = candidate => !!candidate?.formation && typeof candidate.formation === 'object' && candidate.formation.kind !== 'name';
+  // (19.11.2026, advisor: ENGLISH_BY_PARTS) an external particle verb whose English text the resolver built from its parts
+  // (candidate.englishByParts — the resolver's formation; hinwenden «hin — … · wenden — …»): in a pack language without a text of its own
+  // it is shown as a particle verb's lines (п. 2: each part in the pack, a part without one — English with the mark on its line); none of
+  // the parts in the pack — null: the English text with one mark, as before
+  const englishPartsLines = (candidate, language) => {
+    const f = candidate?.englishByParts;
+    if (!isPack(language) || !f || typeof f !== 'object' || f.kind !== 'particle-verb' || !f.particle || !(f.verb || f.verbs?.length)) return null;
+    const lines = particleVerbLines(f, language);
+    return lines.some(l => l.language === language) ? lines : null;
+  };
   const cardLanguage = (candidate, value) => { const language = textLanguage(value);
-    return isPack(language) && !packText(candidate, language) && !byParts(candidate) && !candidate?.formOf?.text?.[language] ? 'en' : language; };
+    return isPack(language) && !packText(candidate, language) && !byParts(candidate) && !candidate?.formOf?.text?.[language] && !englishPartsLines(candidate, language) ? 'en' : language; };
   // Phrases of the popup (Ч4, 17.11.2026): L(language, ru, en, …args) — ru / en exactly as written before (byte for byte); a pack
   // language: its line for this pair in lang/<code>/reader.json (pack-translations.js `phrase`), otherwise the English one. The pair
   // (with its places {0}, {1} … — the template, not the filled text) is the key; dev/lang/scan-reader.cjs lists the pairs.
@@ -823,7 +833,7 @@
     // (18.11.2026, advisor: each part in the pack) a pack language: the particle's own text (f.particle[code], pack-translations.js),
     // else the English one with the pack's mark
     if (isPack(language)) {
-      const own = f.particle[language] || packPhrase(language, f.particle.en, f.particle.ru), text = own || f.particle.en;
+      const own = packPhrase(language, f.particle.en, f.particle.ru) || f.particle[language], text = own || f.particle.en;
       return [{text:text ? `${f.particle.form} — ${own ? '' : englishPrefix(language)}${text}` : `${f.particle.form}-`, more:0, entryId:null, ...(text ? {language:own ? language : 'en'} : {})},
         ...(f.verbs || [f.verb]).map(v => { const l = line(v); return {...l, language:l.shown}; })];
     }
@@ -912,6 +922,10 @@
   function meaningText(candidate, language, inline = false) {
     // (a pack language without a text of its own: the English meaning, as an English card shows it)
     if (isPack(language) && !brief(candidate, language, inline)) {
+      // (advisor 19.11, ENGLISH_BY_PARTS: a verb read by its parts — its lines, each in its own language)
+      const lines = englishPartsLines(candidate, language);
+      if (lines) return {text:lines.map(l => l.text).join(' · '), language, more:0,
+        lines:lines.map(l => ({text:l.text, more:0, helpEntry:null, ...(l.language ? {language:l.language} : {})}))};
       // (Ч4: with the pack's line for «English: » that mark stands before the English text, as «английский: » in Russian)
       const english = meaningText(candidate, 'en', inline), mark = englishPrefix(language);
       return english && mark ? {...english, text:`${mark}${english.text}`, prefix:`${mark}${english.prefix || ''}`} : english;
@@ -1242,7 +1256,9 @@
       text = {text:role, language:isPack(language) && !ROLE_TEXT[k.role]?.[language] && role === ROLE_TEXT[k.role]?.en ? 'en' : language}; }
     if (!text && !contraction?.expression) { text = meaningText(candidate, language); more = text?.more || 0; }
     // (advisor 17.11: the gerundive — «здесь: (который) надо / можно — …» before the meaning; the card's text is not declined)
-    if (features?.zuGerundive && text?.text) text = {...text, text:`${L(language, 'здесь: (который) надо / можно', 'here: to be done / can be done')} — ${text.text}`};
+    if (features?.zuGerundive && text?.text) { const here = `${L(language, 'здесь: (который) надо / можно', 'here: to be done / can be done')} — `;
+      // (review A 19.11: a text shown as lines — a verb read by its parts in a pack language — carries it on its first line)
+      text = {...text, text:`${here}${text.text}`, ...(text.lines?.length ? {lines:text.lines.map((l, i) => i ? l : {...l, text:`${here}${l.text}`})} : {})}; }
     // Links chat, step A (advisor 03.11): werden / haben / sein without a link, a participle in the part (resolver auxiliaryHint) —
     // «auxiliary verb» first, the own meaning second (the order of senses, not a link: no mark, no highlight).
     const auxHint = candidate.formFeatures?.auxiliaryHint;
@@ -1288,7 +1304,7 @@
     // Labels (reference 2.A): segments of the plain text, only when the text is the meaning itself.
     const segments = text?.segments && (!derived || text.prefix) && !contraction ? {segments:text.segments, segmentPrefix:text.prefix || ''} : {};
     return {heading:headingText, grammar, text:text ? text.text : say(NO_TRANSLATION, language), textLanguage:text ? text.language : language,
-      missing:!text, derived, note, more:text ? more : 0, spans:exprSpans || (separableLink ? linkSpans : k.spans) || linkSpans || candidate.compound?.spans || null, helpEntry, ...segments};
+      missing:!text, derived, note, more:text ? more : 0, ...(text?.lines ? {lines:text.lines} : {}), spans:exprSpans || (separableLink ? linkSpans : k.spans) || linkSpans || candidate.compound?.spans || null, helpEntry, ...segments};
   }
   // G70 (user 24.10.2026): the heading, the grammar line and the translation come from one card. A reflexive use of a verb whose
   // card has no reflexive meaning (lexicalSenseConfirmed false):

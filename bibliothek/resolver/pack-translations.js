@@ -316,7 +316,10 @@
   // changed in place (the resolver keeps it): part.pack[code] / verb.translation[code].
   async function enrichParts(resolution, code, entryOf) {
     const formed = resolution.candidates.filter(c => c && c.formation && typeof c.formation === "object" && c.formation.kind !== "name");
-    if (!formed.length && !resolution.candidates.some(c => c && c.formOf)) return;
+    // (19.11.2026, advisor: ENGLISH_BY_PARTS) an external particle verb whose English text the resolver built from its parts keeps that
+    // reading (candidate.englishByParts — the resolver's formation object): its verb lines take the pack's text as a particle verb's do
+    const byEnglishParts = resolution.candidates.filter(c => c && c.englishByParts && typeof c.englishByParts === "object" && c.englishByParts.kind === "particle-verb");
+    if (!formed.length && !byEnglishParts.length && !resolution.candidates.some(c => c && c.formOf)) return;
     // (the same deadline as the own cards — counted from the start of their load: the first tap never waits for all of them)
     const load = ownTexts(code).catch(() => null), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
@@ -343,19 +346,23 @@
       const t = ownText(c.formOf.dictionaryId, c.formOf.text?.en) || (c.formOf.dictionaryId == null ? await dictionaryText(c.formOf.base, c.formOf.pos) : "");
       if (t) c.formOf = {...c.formOf, text:{...(c.formOf.text || {}), [code]:t}};
     }));
+    // a verb line: its own card's pack text, else the pack dictionary's record (a text the resolver chose stays English)
+    const verb = async v => { if (!v || typeof v !== "object" || v.translation?.[code]) return v;
+      const t = ownText(v.dictionaryId ?? v.item?.id, v.translation?.en) || (v.source !== "main" && v.lemma ? await dictionaryText(v.lemma, "verb") : "");
+      return t ? {...v, translation:{...(v.translation || {}), [code]:t}} : v; };
+    // (the particle: its line of reader.json, looked up when the card is drawn — meaning-display.js particleVerbLines; review A/B:
+    // reader.json may arrive after this step)
+    // (19.11: a particle whose text is its own card's — fort, the resolver's CARD_PARTICLE_LINES — takes that card's pack text; a line of
+    // reader.json for the pair goes first, meaning-display.js particleVerbLines)
+    const particle = p => { if (!p || typeof p !== "object" || p[code] || !p.form || !p.en || typeof entryOf !== "function") return p;
+      let item = null; try { item = entryOf({word:p.form, type:"Adverb"}); } catch (_) { item = null; }
+      const t = item ? ownText(item.id, p.en) : ""; return t ? {...p, [code]:t} : p; };
+    const verbLines = async f => { const verbs = Array.isArray(f.verbs) ? await Promise.all(f.verbs.map(verb)) : null;
+      return {...f, ...(f.particle ? {particle:particle(f.particle)} : {}), ...(f.verb ? {verb:await verb(f.verb)} : {}), ...(verbs ? {verbs} : {})}; };
+    await Promise.all(byEnglishParts.map(async c => { c.englishByParts = await verbLines(c.englishByParts); }));
     await Promise.all(formed.map(async c => {
       const f = c.formation;
-      if (f.kind === "particle-verb") {
-        // a verb line: its own card's pack text, else the pack dictionary's record (a text the resolver chose stays English)
-        const verb = async v => { if (!v || typeof v !== "object" || v.translation?.[code]) return v;
-          const t = ownText(v.dictionaryId ?? v.item?.id, v.translation?.en) || (v.source !== "main" && v.lemma ? await dictionaryText(v.lemma, "verb") : "");
-          return t ? {...v, translation:{...(v.translation || {}), [code]:t}} : v; };
-        // (the particle: its line of reader.json, looked up when the card is drawn — meaning-display.js particleVerbLines; review A/B:
-        // reader.json may arrive after this step)
-        const verbs = Array.isArray(f.verbs) ? await Promise.all(f.verbs.map(verb)) : null;
-        c.formation = {...f, ...(f.verb ? {verb:await verb(f.verb)} : {}), ...(verbs ? {verbs} : {})};
-        return;
-      }
+      if (f.kind === "particle-verb") { c.formation = await verbLines(f); return; }
       const parts = Array.isArray(f.parts) ? await Promise.all(f.parts.map(withPack)) : null;
       c.formation = {...f, ...(parts ? {parts} : {}), ...(f.base ? {base:await withPack(f.base)} : {})};
     }));
