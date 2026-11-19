@@ -833,6 +833,63 @@
       return bases.length === 1 ? bases[0] : null;
     } catch (_) { return null; }
   }
+  // (advisor 19.11, reference G12 19.11) «form of X» by the Kaikki link — the record's own row [form, base, tags]: a diminutive, a
+  // feminine, an alternative (obsolete / dated / archaic, colloquial / regional, apocopic) form. One function for all kinds; only when
+  // every meaning of the record in this part of speech is a pointer to that base (Mäuslein «diminutive of Maus», Mörsel «obsolete form
+  // of Mörser», nich, Krämerin «female equivalent of Krämer»): a record with a meaning of its own keeps it. Not an abbreviation (ma →
+  // Magistratsabteilung) and not a form of the word (plural, a case, a person). Several bases — the one with a record in the same part of
+  // speech (gülden → golden, not gilden / gilten); still several — none. → {base, kind} or null; kind: diminutive | feminine |
+  // obsolete | colloquial | short | form.
+  const FORM_OF_GRAMMAR = /^(?:plural|singular|nominative|accusative|genitive|dative|masculine|neuter|strong|weak|mixed|definite|indefinite|first-person|second-person|third-person|present|preterite|past|participle|imperative|infinitive|subjunctive-i|subjunctive-ii|indicative|comparative|superlative|positive|predicative|attributive|without-article|subordinate-clause|zu|multiword-construction)$/u;
+  async function formOfLink(word, pos) {
+    try {
+      const key = String(word || "").normalize("NFC").toLowerCase(), data = await record(key);
+      if (!data) return null;
+      const senses = (data.senses || []).filter(row => row[2] === pos);
+      const rows = (data.inflections || []).filter(row => row[0] === key && row[1] && row[1] !== key).map(row => ({base:row[1], tags:String(row[2] || "").split(",").filter(Boolean)}))
+        .filter(row => !row.tags.includes("abbreviation") && !row.tags.includes("initialism") &&
+          (row.tags.includes("diminutive") || row.tags.includes("alternative") || row.tags.length === 1 && row.tags[0] === "feminine") &&
+          !row.tags.some(tag => tag !== "feminine" && tag !== "neuter" && FORM_OF_GRAMMAR.test(tag)));
+      if (!senses.length) return null;
+      // (advisor 19.11) no Kaikki link — the English text as the spare: every meaning «alternative / obsolete / … spelling of X» of
+      // one X (spellingReference); then the same display (the base's text in the popup language)
+      if (!rows.length) {
+        const targets = senses.map(row => spellingReference(row[3]));
+        if (targets.some(t => !t)) return null;
+        const keys = [...new Set(targets.map(t => t.normalize("NFC").toLowerCase()))];
+        if (keys.length !== 1 || keys[0] === key || /\s/u.test(keys[0])) return null;
+        const kind = senses.some(row => /^(?:obsolete|archaic|dated|formerly standard)\b/iu.test(String(row[3] || "").trim())) ? "obsolete" : "form";
+        rows.push({base:keys[0], tags:[], kind});
+      }
+      let bases = [...new Set(rows.map(row => row.base))];
+      if (bases.length > 1) {
+        const same = [];
+        for (const base of bases) { const other = await record(base); if ((other?.senses || []).some(row => row[2] === pos)) same.push(base); }
+        bases = same;
+      }
+      // (a base of several words — wachliegen → wach liegen — is an expression, not a word to point to)
+      if (bases.length !== 1 || /\s/u.test(bases[0])) return null;
+      const base = bases[0], tags = rows.filter(row => row.base === base).flatMap(row => row.tags);
+      // (every meaning names the base: «diminutive of Maus», «pronunciation spelling of nicht, representing …»)
+      const named = new RegExp(`(?:^|\\s)of ${base.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}(?![\\p{L}\\p{M}])`, "iu");
+      if (!senses.every(row => named.test(String(row[3] || "")))) return null;
+      // (an abbreviation / initialism / clipping by its meaning — WSL «abbreviation of wahrscheinlich» — is no form of the word)
+      if (senses.some(row => /^(?:abbreviation|initialism|acronym|clipping)\b/iu.test(String(row[3] || "")))) return null;
+      const kind = rows.find(row => row.kind)?.kind || (tags.includes("diminutive") ? "diminutive" : tags.includes("feminine") && !tags.includes("alternative") ? "feminine" :
+        tags.some(tag => /^(?:obsolete|dated|archaic)$/u.test(tag)) ? "obsolete" :
+        tags.some(tag => /^(?:colloquial|informal|regional|dialectal|nonstandard|pronunciation-spelling)$/u.test(tag)) ? "colloquial" :
+        tags.includes("apocopic") ? "short" : "form");
+      // (the base's English meanings — the text of an English popup and of a language without the base's text)
+      let en = [];
+      try { en = [...new Set((await lexicalGroups(base)).filter(group => group.pos === pos).flatMap(group => group.meanings || []).map(String))]; } catch (_) { en = []; }
+      // (the base must be a word of its own, not another form or pointer — Wär → wäre, ND → net: its meanings are only «… of X»)
+      const baseRecord = await record(base);
+      const baseSenses = (baseRecord?.senses || []).filter(row => row[2] === pos).map(row => String(row[3] || ""));
+      const pointer = x => /:$/u.test(x) || /^[^,;]*\b(?:form|spelling|inflection|singular|plural|person|subjunctive|participle|imperative|tense|diminutive|equivalent|contraction|clipping|abbreviation|synonym)\b[^,;]* of \S/iu.test(x);
+      if (baseSenses.length && baseSenses.every(pointer)) return null;
+      return {base:pos === "noun" || pos === "name" ? base.charAt(0).toUpperCase() + base.slice(1) : base, kind, en};
+    } catch (_) { return null; }
+  }
   async function lookupFacts(word) { const issues = []; return {groups:await lookup(word,issues),issues}; }
   // (speed chat 10.11, advisor) may the word be a verb form the reader can read — a recorded form (the filter), or a weak form
   // the lookup builds itself (weakHypotheses: vorankündigtet, nopptest) whose infinitive is in the filter. The filter holds
@@ -842,5 +899,5 @@
     for (const hypothesis of weakHypotheses(word)) if (await mayBeVerb(hypothesis.lemma)) return true;
     return false;
   }
-  window.DeutschFallbackDictionary = {mayBeVerbForm,wordParts,hasRecord,diminutiveBase,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  window.DeutschFallbackDictionary = {mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();

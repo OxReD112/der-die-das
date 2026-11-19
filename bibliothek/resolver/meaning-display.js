@@ -84,7 +84,7 @@
   // pack and which is English (formationMeaning, particleVerbLines)
   const byParts = candidate => !!candidate?.formation && typeof candidate.formation === 'object' && candidate.formation.kind !== 'name';
   const cardLanguage = (candidate, value) => { const language = textLanguage(value);
-    return isPack(language) && !packText(candidate, language) && !byParts(candidate) ? 'en' : language; };
+    return isPack(language) && !packText(candidate, language) && !byParts(candidate) && !candidate?.formOf?.text?.[language] ? 'en' : language; };
   // Phrases of the popup (Ч4, 17.11.2026): L(language, ru, en, …args) — ru / en exactly as written before (byte for byte); a pack
   // language: its line for this pair in lang/<code>/reader.json (pack-translations.js `phrase`), otherwise the English one. The pair
   // (with its places {0}, {1} … — the template, not the filled text) is the key; dev/lang/scan-reader.cjs lists the pairs.
@@ -339,6 +339,18 @@
       return [{candidate:others.find(c => c.source === 'main') || others[0], rows:others}, {candidate:names[0], rows:names}];
     });
   }
+  // (advisor 19.11) «form of X» text of a candidate with candidate.formOf: «уменьш. от Maus — мышь» / «diminutive of Maus — mouse»; a
+  // language without the base's text — English with the mark. → {text, language} or null. One function for the card and its alternatives.
+  function formOfText(candidate, language) {
+    const f = candidate?.formOf;
+    if (!f || !f.text) return null;
+    const own = language === 'en' ? f.text.en : f.text[language] || '', shownLanguage = own ? language : 'en', baseText = own || f.text.en || '';
+    if (!baseText) return null;
+    const label = {diminutive:['уменьш. от {0}','diminutive of {0}'], feminine:['жен. к {0}','feminine of {0}'], obsolete:['устар. форма от {0}','obsolete form of {0}'],
+      colloquial:['разг. форма от {0}','colloquial form of {0}'], short:['краткая форма от {0}','short form of {0}'], form:['форма от {0}','form of {0}']}[f.kind] || ['форма от {0}','form of {0}'];
+    const mark = shownLanguage === 'en' && language !== 'en' ? englishPrefix(language) : '';
+    return {text:`${L(language, label[0], label[1], f.base)} — ${mark}${fit(baseText).text}`, language:shownLanguage === 'en' && language !== 'en' ? 'en' : language};
+  }
   function alternatives(resolution, selected, language) {
     language = textLanguage(language);
     const same = c => !!selected && key(c) === key(selected) && isName(c) === isName(selected);
@@ -354,6 +366,9 @@
       // G9 (21.10.2026, reference F13-N1): a name as another meaning is «Name» without the English note
       // (the same rule as a selected name, reference 13).
       if (isName(base) && !base.explanation) return [{candidate:base, text:'', language}];
+      // (advisor 19.11) «form of X» — the same text as its card (formOfText), in place of an English-only record text
+      const formOf = base.formOf && (language === 'en' || !brief(base, language)) ? formOfText(base, language) : null;
+      if (formOf) return [{candidate:base, text:formOf.text, language:formOf.language}];
       const translated = brief(base, language);
       const displayLanguage = translated ? language : 'en';
       const text = translated || brief(base, 'en');
@@ -922,6 +937,18 @@
     // line under the English text, in the Russian interface only; a hint, not a translation («состав:», as «(без sich)»).
     // (only under an English text: a card that already says it in Russian — «От missachten — …» — needs no parts)
     // (and a diminutive of such a word: «Lämmerschwanz — английский: lamb tail (уменьш.)», advisor 07.11)
+    // (advisor 19.11, reference G12 19.11) a record that only points to its base by the Kaikki link (resolver: candidate.formOf) —
+    // «уменьш. от Maus — мышь», «устар. форма от Mörser — ступка», «разг. форма от nicht — не», «жен. к Krämer — …»; the base's text in
+    // the popup language (a pack: its own text of the base, else English with the mark); only in place of the record's English text
+    if (candidate?.formOf && model && !model.missing) {
+      const english = language === 'en' || /^(?:английский: )/u.test(String(model.text || '')) || model.textLanguage === 'en' && language !== 'ru';
+      const shown = english ? formOfText(candidate, language) : null;
+      if (shown) {
+        // (the record's own labels stay before the text — nich «разг.», Appel «colloq. reg.», Feldscherer «dated»)
+        const labels = (model.segments || []).find(segment => segment?.labels?.length)?.labels;
+        model = {...model, text:shown.text, textLanguage:shown.language, more:0, segments:labels ? [{labels, text:shown.text}] : undefined, segmentPrefix:undefined, formOf:true};
+      }
+    }
     if (candidate?.composition && language === 'ru' && /(?:^|— )английский: /u.test(String(model.text || ''))) {
       // (advisor 06.11: the lines of the «Kompositum» card itself — the same parts and the same meanings, two of them; a part
       // with more meanings is a button that opens them in the line, as «ещё N значений» of the card)

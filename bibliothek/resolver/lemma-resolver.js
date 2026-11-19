@@ -18236,6 +18236,25 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           c.spellingTranslationUnavailable = true;
         }
       }));
+      // (advisor 19.11, reference G12 19.11) «form of X» by the Kaikki link (fallback.formOfLink): a record that only points to its base
+      // — a diminutive, a feminine, an alternative / obsolete / colloquial / short form — shows the base and its meaning in the popup
+      // language: «уменьш. от Maus — мышь», «устар. форма от Mörser — ступка», «жен. к Krämer — …». Display only: the candidate, its
+      // grammar, highlight and rank stay; the base's text — our card, else the Russian dictionary (ru), the external record (en); a
+      // pack language — the pack's text of the base (pack-translations.js).
+      if (fallback.formOfLink) await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.explanation && !c.formation).map(async c => {
+        const link = await fallback.formOfLink(c.lemma,c.pos);
+        if (!link) return;
+        const type = {noun:"Nomen",verb:"Verb",adj:"Adjektiv",adv:"Adverb"}[c.pos] || null;
+        const own = type ? (lemmas.get(norm(link.base)) || []).find(e => e.type === type) : null;
+        let ru = own ? String(own.translation_ru || "") : "";
+        if (!ru && window.BibliothekRussianTranslations?.lookup) {
+          try { const r = await window.BibliothekRussianTranslations.lookup(link.base,c.pos); const names = new Set(r?.names || []);
+            ru = r ? (r.shown || r.meanings || []).filter(m => !names.has(m)).join("; ") : ""; } catch (_) { ru = ""; }
+        }
+        const en = own ? String(own.translation_en || "") : link.en.join("; ");
+        if (!ru && !en) return;
+        c.formOf = {kind:link.kind, base:link.base, pos:c.pos, dictionaryId:own?.id ?? null, text:{...(ru ? {ru} : {}), ...(en ? {en} : {})}};
+      }));
       observe('stage', {stage:'presentation-spelling'});
       // Article-noun link for the card and the highlight.
       resolution.candidates = resolution.candidates.map(c => {

@@ -278,7 +278,7 @@
   // changed in place (the resolver keeps it): part.pack[code] / verb.translation[code].
   async function enrichParts(resolution, code, entryOf) {
     const formed = resolution.candidates.filter(c => c && c.formation && typeof c.formation === "object" && c.formation.kind !== "name");
-    if (!formed.length) return;
+    if (!formed.length && !resolution.candidates.some(c => c && c.formOf)) return;
     // (the same deadline as the own cards — counted from the start of their load: the first tap never waits for all of them)
     const load = ownTexts(code).catch(() => null), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
@@ -300,6 +300,11 @@
     const partText = async p => !p || typeof p !== "object" ? "" :
       ownText(p.dictionaryId, p.en) || (p.source !== "main" && p.lemma && p.pos ? await dictionaryText(p.lemma, p.pos) : "");
     const withPack = async p => { if (!p || typeof p !== "object") return p; const t = await partText(p); return t ? {...p, pack:{...(p.pack || {}), [code]:t}} : p; };
+    // (advisor 19.11) «form of X» (resolver: candidate.formOf) — the base's pack text: its own card, else the pack dictionary's record
+    await Promise.all(resolution.candidates.filter(c => c && c.formOf && typeof c.formOf === "object" && !c.formOf.text?.[code]).map(async c => {
+      const t = ownText(c.formOf.dictionaryId, c.formOf.text?.en) || (c.formOf.dictionaryId == null ? await dictionaryText(c.formOf.base, c.formOf.pos) : "");
+      if (t) c.formOf = {...c.formOf, text:{...(c.formOf.text || {}), [code]:t}};
+    }));
     await Promise.all(formed.map(async c => {
       const f = c.formation;
       if (f.kind === "particle-verb") {
