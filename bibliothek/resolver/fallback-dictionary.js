@@ -708,6 +708,19 @@
     }
     return order;
   }
+  // (links chat 19.11, advisor 19.11 «Plural без артикля» (3)) a masculine noun whose plural in -(e)n is only a plural: the record of the
+  // stem + s / es is «genitive singular of <lemma>» (a strong singular: des Staates, des Investors, des Schmerzes) and the record of the
+  // form calls it a plural with no singular reading (Staaten «plural of Staat»; not Menschen, Patienten, Namen, Nachbarn — weak or mixed,
+  // «accusative/dative/genitive singular of …»). False when a record is missing or cannot be read.
+  async function strongEnPlural(form, lemma) {
+    const f = String(form || "").normalize("NFC").toLowerCase(), l = String(lemma || "").normalize("NFC").toLowerCase();
+    if (!/n$/u.test(f) || f === l || !/^\p{L}+$/u.test(l)) return false;
+    const nounSenses = async w => { let d; try { d = await record(w); } catch (_) { return null; } return (d?.senses || []).filter(s => s[2] === "noun").map(s => String(s[3] || "").trim().toLowerCase()); };
+    const [s1, s2, own] = await Promise.all([nounSenses(l + "s"), nounSenses(l + "es"), nounSenses(f)]);
+    if (!s1 || !s2 || !own) return false;
+    const genitive = [...s1, ...s2].some(x => x.startsWith(`genitive singular of ${l}`) && !/^\p{L}/u.test(x.slice(`genitive singular of ${l}`.length)));
+    return genitive && own.some(x => /\bplural\b/u.test(x)) && !own.some(x => /\bsingular\b/u.test(x));
+  }
   async function lookupEntry(word) { return meanings(await record(word)); }
   function spellingReference(value) {
     const text = String(value || '').trim();
@@ -899,5 +912,5 @@
     for (const hypothesis of weakHypotheses(word)) if (await mayBeVerb(hypothesis.lemma)) return true;
     return false;
   }
-  window.DeutschFallbackDictionary = {mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  window.DeutschFallbackDictionary = {strongEnPlural,mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();

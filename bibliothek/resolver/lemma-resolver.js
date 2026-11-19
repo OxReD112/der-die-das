@@ -6201,6 +6201,61 @@ function apostropheText(text) {
       const primary=scanSeparableCandidates(word,local);
       return primary.length?primary:scanSeparableCandidates(word,local,true);
     }
+    // (links chat 19.11, advisor 19.11, train passive (1)) the inserted clauses and noun enumerations of a part that goes on after them
+    // (Astronaut (6), second resolver chat 18.11) — one function for the separable particle and the passive participle: `closes` tells
+    // how many words at the end of the rest close the part (0 — the part does not close there).
+    async function partInsertionRanges(original, closes, consumer) {
+      const ranges = [];
+      const INSERTIONS = /,\s*(?:wie|während|obwohl|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?|als|wenn|weil|dass|daß|ob|nachdem|bevor|sobald|falls|obgleich|wo)\b[^,;:.!?]*,/gu;
+      // A closed subordinate insertion owns its predicates and particles.
+      // Unmarked comma clauses and unfinished insertions retain the old guards.
+      // (Astronaut (6), advisor 17.11: also a relative clause and a clause of als / wenn / weil / dass … — Er gab das Buch, das er
+      // gekauft hatte, zurück; Sie gehen als der erste Mensch, der … Kontakt hatte, in die Geschichte ein: closed by its finite verb)
+      for (const match of observedMatches(original.matchAll(INSERTIONS),consumer)) {
+        const inner=rangeTokens(original,match.index,match.index+match[0].length,consumer);
+        const tail=inner.at(-1);
+        const finite=tail&&(await tokenAnalyses(tail[0], undefined, consumer)).some(a=>a.kind==='finite');
+        // (the new openers: the part goes on after the insertion with no finite verb of its own — else it is another predicate:
+        // war voll Freude, als sie … erblickte, hob es auf; fingen an zu laufen, wenn es ihnen einfiel, hörten auf)
+        if (!/^,\s*(?:wie|während|obwohl)\b/u.test(match[0])) {
+          const after=original.slice(match.index+match[0].length), rest=after.slice(0,after.search(/[,;:.!?»«"“”()–—]|$/u));
+          const restTokens=rangeTokens(original,match.index+match[0].length,match.index+match[0].length+rest.length,consumer);
+          if (!restTokens.length || !/^\p{Ll}/u.test(tail?.[0] ?? '')) continue;
+          // (the part after it closes on a particle — not a clause of its own after the particle: wenden ein, dass …, die … hinauswiesen)
+          const closing=await closes(restTokens);
+          if (!closing) continue;
+          let own=false;
+          for (const t of restTokens.slice(0,-closing)) if (/^\p{Ll}/u.test(t[0]) && (await tokenAnalyses(t[0], undefined, consumer)).some(a=>a.kind==='finite') &&
+            !DETERMINER_WORD.test(norm(t[0]))) { own=true; break; }
+          if (own) continue;
+        }
+        if (finite && inner.length>=3) ranges.push([match.index,match.index+match[0].length]);
+      }
+      // (second resolver chat / tests chat 18.11) an enumeration of nouns is no part border — laden zum Wandern, Joggen und Mountainbiken
+      // ein; kaufte Brot, Milch und Käse ein: a capital word before the comma, members of up to two lowercase words (determiners,
+      // adjectives — no finite verb) and a capital word, closed by und / oder / sowie + such a member; the rest of the part has no finite
+      // verb of its own and closes on a particle. «Sie laden, wir packen ein» stays two parts (lowercase verb before the comma).
+      const MEMBER = String.raw`(?:[\p{Ll}][\p{L}-]*\s+){0,2}\p{Lu}[\p{L}-]*`;
+      const ENUMERATION = new RegExp(String.raw`,\s*${MEMBER}(?:\s*,\s*${MEMBER})*\s+(?:und|oder|sowie)\s+${MEMBER}`,'gu');
+      for (const match of observedMatches(original.matchAll(ENUMERATION),consumer)) {
+        const before=rangeTokens(original,0,match.index,consumer).at(-1);
+        if (!before || !/^\p{Lu}/u.test(before[0])) continue;
+        const inner=rangeTokens(original,match.index,match.index+match[0].length,consumer);
+        let verb=false;
+        for (const t of inner) if (/^\p{Ll}/u.test(t[0]) && !['und','oder','sowie'].includes(norm(t[0])) && !DETERMINER_WORD.test(norm(t[0])) &&
+          (await tokenAnalyses(t[0], undefined, consumer)).some(a=>['finite','infinitive','imperative','participle'].includes(a.kind))) { verb=true; break; }
+        if (verb) continue;
+        const after=original.slice(match.index+match[0].length), rest=after.slice(0,after.search(/[,;:.!?»«"“”()–—]|$/u));
+        const restTokens=rangeTokens(original,match.index+match[0].length,match.index+match[0].length+rest.length,consumer);
+        const closing=restTokens.length?await closes(restTokens):0;
+        if (!closing) continue;
+        let own=false;
+        for (const t of restTokens.slice(0,-closing)) if (/^\p{Ll}/u.test(t[0]) && (await tokenAnalyses(t[0], undefined, consumer)).some(a=>a.kind==='finite') &&
+          !DETERMINER_WORD.test(norm(t[0]))) { own=true; break; }
+        if (!own) ranges.push([match.index,match.index+match[0].length]);
+      }
+      return ranges;
+    }
     async function separableScope(context) {
       if (!context || !Number.isInteger(context.tokenOffset)) return context;
       const original = String(context.sentence || '');
@@ -6240,51 +6295,7 @@ function apostropheText(text) {
         if (!CONTINUES.test(rest)) continue;
         if (!await hasPredicate(match.index,match.index+match[0].length) && !SENTENCE_INSIDE.test(match[0]) && !/,/u.test(match[0])) ranges.push([match.index,match.index+match[0].length]);
       }
-      // A closed subordinate insertion owns its predicates and particles.
-      // Unmarked comma clauses and unfinished insertions retain the old guards.
-      // (Astronaut (6), advisor 17.11: also a relative clause and a clause of als / wenn / weil / dass … — Er gab das Buch, das er
-      // gekauft hatte, zurück; Sie gehen als der erste Mensch, der … Kontakt hatte, in die Geschichte ein: closed by its finite verb)
-      for (const match of observedMatches(original.matchAll(INSERTIONS),'separableScope')) {
-        const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
-        const tail=inner.at(-1);
-        const finite=tail&&(await tokenAnalyses(tail[0], undefined, 'separableScope')).some(a=>a.kind==='finite');
-        // (the new openers: the part goes on after the insertion with no finite verb of its own — else it is another predicate:
-        // war voll Freude, als sie … erblickte, hob es auf; fingen an zu laufen, wenn es ihnen einfiel, hörten auf)
-        if (!/^,\s*(?:wie|während|obwohl)\b/u.test(match[0])) {
-          const after=original.slice(match.index+match[0].length), rest=after.slice(0,after.search(/[,;:.!?»«"“”()–—]|$/u));
-          const restTokens=rangeTokens(original,match.index+match[0].length,match.index+match[0].length+rest.length,'separableScope');
-          if (!restTokens.length || !/^\p{Ll}/u.test(tail?.[0] ?? '')) continue;
-          // (the part after it closes on a particle — not a clause of its own after the particle: wenden ein, dass …, die … hinauswiesen)
-          if (!SEPARABLE_PARTICLE_WORDS.test(norm(restTokens.at(-1)[0]))) continue;
-          let own=false;
-          for (const t of restTokens.slice(0,-1)) if (/^\p{Ll}/u.test(t[0]) && (await tokenAnalyses(t[0], undefined, 'separableScope')).some(a=>a.kind==='finite') &&
-            !DETERMINER_WORD.test(norm(t[0]))) { own=true; break; }
-          if (own) continue;
-        }
-        if (finite && inner.length>=3) ranges.push([match.index,match.index+match[0].length]);
-      }
-      // (second resolver chat / tests chat 18.11) an enumeration of nouns is no part border — laden zum Wandern, Joggen und Mountainbiken
-      // ein; kaufte Brot, Milch und Käse ein: a capital word before the comma, members of up to two lowercase words (determiners,
-      // adjectives — no finite verb) and a capital word, closed by und / oder / sowie + such a member; the rest of the part has no finite
-      // verb of its own and closes on a particle. «Sie laden, wir packen ein» stays two parts (lowercase verb before the comma).
-      const MEMBER = String.raw`(?:[\p{Ll}][\p{L}-]*\s+){0,2}\p{Lu}[\p{L}-]*`;
-      const ENUMERATION = new RegExp(String.raw`,\s*${MEMBER}(?:\s*,\s*${MEMBER})*\s+(?:und|oder|sowie)\s+${MEMBER}`,'gu');
-      for (const match of observedMatches(original.matchAll(ENUMERATION),'separableScope')) {
-        const before=rangeTokens(original,0,match.index,'separableScope').at(-1);
-        if (!before || !/^\p{Lu}/u.test(before[0])) continue;
-        const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
-        let verb=false;
-        for (const t of inner) if (/^\p{Ll}/u.test(t[0]) && !['und','oder','sowie'].includes(norm(t[0])) && !DETERMINER_WORD.test(norm(t[0])) &&
-          (await tokenAnalyses(t[0], undefined, 'separableScope')).some(a=>['finite','infinitive','imperative','participle'].includes(a.kind))) { verb=true; break; }
-        if (verb) continue;
-        const after=original.slice(match.index+match[0].length), rest=after.slice(0,after.search(/[,;:.!?»«"“”()–—]|$/u));
-        const restTokens=rangeTokens(original,match.index+match[0].length,match.index+match[0].length+rest.length,'separableScope');
-        if (!restTokens.length || !SEPARABLE_PARTICLE_WORDS.test(norm(restTokens.at(-1)[0]))) continue;
-        let own=false;
-        for (const t of restTokens.slice(0,-1)) if (/^\p{Ll}/u.test(t[0]) && (await tokenAnalyses(t[0], undefined, 'separableScope')).some(a=>a.kind==='finite') &&
-          !DETERMINER_WORD.test(norm(t[0]))) { own=true; break; }
-        if (!own) ranges.push([match.index,match.index+match[0].length]);
-      }
+      for (const r of await partInsertionRanges(original, async rest => SEPARABLE_PARTICLE_WORDS.test(norm(rest.at(-1)[0])) ? 1 : 0, 'separableScope')) ranges.push(r);
       // (advisor 07.11) the short insertion «, wie (bereits …) participle,» owns no particle of the part — the same wieParticipleWords
       for (const match of observedMatches(original.matchAll(/,\s*wie(?:\s+\p{L}+){1,3}\s*,/gu),'separableScope')) {
         const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
@@ -7013,7 +7024,13 @@ function apostropheText(text) {
       // modal / Futur group (müssen … gewälzt haben, würde … ertragen können). Elsewhere a participle
       // stays competing: it may be the main verb (wird zerstreut … genutzt) or a Perfekt of its own
       // (hat versucht, mich umzubringen; strict for haben / sein + zu).
-      const middleModifier = (i, strict = false) => /^\p{Lu}/u.test(tokens[i][0]) ? !clauseInitial(sentence, tokens[i].index) :
+      // (links chat 19.11, advisor 19.11, train passive (5)) the first word of the clause with a capital and no own verb card — a verb only
+      // as the stem of a separable verb written apart (flache … ab) — right before a noun or a finite werden is the subject or its attribute
+      // (Meier wurde … überführt, Flache Stellen werden … genannt), not a competing verb
+      const WERDEN_FINITE = /^(?:wird|wurde|wurden|werden|würde|würden|werde|wirst|werdet|wurdest)$/u;
+      const initialSubject = i => i === start && clauseInitial(sentence, tokens[i].index) && !verbs(i).length &&
+        (nounToken(i+1) || WERDEN_FINITE.test(norm(tokens[i+1]?.[0] ?? ""))) && /^\s+$/u.test(sentence.slice(tokens[i].index + tokens[i][0].length, tokens[i+1]?.index ?? 0));
+      const middleModifier = (i, strict = false) => /^\p{Lu}/u.test(tokens[i][0]) ? !clauseInitial(sentence, tokens[i].index) || consumer === 'werdenGroup' && initialSubject(i) :
         adjectivalForm(tokens[i][0]) || ownModifierForm(tokens[i][0]) || !strict && (i === end-1 || i === end-2 && verbs(end-1).length) && verbs(i).some(e=>participleOf(e,i));
       // Gaps (links chat, 24.10.2026; train: 49 passives): a declined form right before a noun, after a verb, a determiner, a
       // number or a preposition, is attributive (werden vereinbarte Termine auch eingehalten), not a second predicate.
@@ -8835,8 +8852,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       {id:'kommen-participle',produce:(word,context) => kommenParticipleGroup(word,context),nounGroups:true},
       {id:'modal-direction',produce:(word,context,candidates) => modalDirectionGroup(word,context,candidates)},
       {id:'zu-infinitive',produce:(word,context) => zuInfinitiveGroup(word,context)},
-      {id:'coordinated',produce:(word,context,candidates) => coordinatedGroup(word,context,candidates)}
+      {id:'coordinated',produce:(word,context,candidates) => coordinatedGroup(word,context,candidates)},
+      {id:'passive-insertion',produce:(word,context,candidates) => passiveInsertionGroup(word,context,candidates),nounGroups:true}
     ].map(row => Object.freeze(row)));
+    // (links chat 19.11, advisor 19.11, train passive (1)) an inserted clause or a noun enumeration between werden and its participle
+    // (wurde im Strawberry Fields Memorial, das John Lennon gewidmet ist, gedreht; wurde für Tagalog, Ilokano und Pangasinan verwendet):
+    // the same insertions as before a separable particle (partInsertionRanges), the part closing on a participle and the auxiliaries
+    // after it; the insertion is blanked and the passive producers read the part again. Only a passive group is taken.
+    const PASSIVE_TAIL_AUX = /^(?:werden|wird|wurde|wurden|worden|würde|würden|werde|wirst|werdet|wurdest|sein|ist|war|wäre|sind|waren|wären|sei|seien|kann|können|konnte|konnten|muss|müssen|musste|mussten|soll|sollen|sollte|sollten|darf|dürfen|durfte|durften|mag|mögen|möchte|möchten|will|wollen|wollte|wollten)$/u;
+    async function passiveInsertionGroup(word, context, candidates) {
+      if (!Number.isInteger(context?.tokenOffset) || context.passiveScoped) return null;
+      const original = String(context.sentence || '');
+      if (!/,/u.test(original) || !/(?:^|[^\p{L}])(?:werden|wird|wurde|wurden|worden|würde|würden|werde|ward)(?![\p{L}])/iu.test(original)) return null;
+      const closes = async rest => {
+        let n = 0; while (n < rest.length - 1 && PASSIVE_TAIL_AUX.test(norm(rest[rest.length-1-n][0]))) n++;
+        const last = rest[rest.length-1-n];
+        if (!last || !/^\p{Ll}/u.test(last[0])) return 0;
+        const rows = await tokenAnalyses(last[0], undefined, 'passiveInsertion');
+        return rows.some(a => a.kind === 'participle') || participleLikeWord(last[0]) ? n + 1 : 0;
+      };
+      const ranges = (await partInsertionRanges(original, closes, 'passiveInsertion')).filter(([a,b]) => !(context.tokenOffset >= a && context.tokenOffset < b));
+      if (!ranges.length) return null;
+      const chars = original.split(''); for (const [a,b] of ranges) for (let i = a; i < b; i++) chars[i] = ' ';
+      const subset = constructionProducers.filter(p => ['werden','external-passive','coordinated'].includes(p.id));
+      const group = await runConstructionProducers(word,{...context,sentence:chars.join(''),passiveScoped:true},candidates,subset);
+      return group && ['werden-passive','werden-passive-perfect','werden-future-passive'].includes(group.id) ? group : null;
+    }
     // A1: a perfect or modal group of a verb with an own reflexive card is named
     // after it (Perfekt mit sich waschen) only when the reflexive link of the
     // lexical verb is confirmed in the sentence (Er hat sich gewaschen); the plain
@@ -9011,7 +9052,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (a subject pronoun right after und opens a clause of its own — und sie tanzen)
       if (SUBJECT_PRONOUNS.has(norm(tokens[u+1][0]))) return {clause:"strong"};
       let p2 = u+1;
-      while (p2+1 < tokens.length && !/[,;:.!?…»«"“”()–—]/u.test(gapText(p2,p2+1)) && !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[p2+1][0]))) p2++;
+      // (links chat 19.11, advisor 19.11, train passive (2): in an auxiliary group und / oder between two nouns of the second part — zu
+      // Teppichen und Matratzen verarbeitet — joins the nouns and does not end the part)
+      const nounPairAt = j => aux && /^\p{Lu}/u.test(tokens[j-1]?.[0] ?? "") && (/^\p{Lu}/u.test(tokens[j+1]?.[0] ?? "") ||
+        DETERMINER_WORD.test(norm(tokens[j+1]?.[0] ?? "")) && /^\p{Lu}/u.test(tokens[j+2]?.[0] ?? ""));
+      while (p2+1 < tokens.length && !/[,;:.!?…»«"“”()–—]/u.test(gapText(p2,p2+1)) && (!COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[p2+1][0])) || nounPairAt(p2+1))) p2++;
       if (p2 === u+1 && !/^\p{Ll}/u.test(tokens[p2][0])) return group;
       let nounClause = null;
       // (review 30.10: a separable particle written apart right before either infinitive — teil nehmen, mit ziehen — the second verb is
@@ -10744,6 +10789,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (let i = p2-1; i > 0; i--) {
         // A comma between «und» and the word starts another clause (… und zusehen, dass … können).
         if (/[,;:.!?…»«"“”()–—]/u.test(sentence.slice(tokens[i].index + tokens[i][0].length,tokens[i+1].index))) return null;
+        // (links chat 19.11, advisor 19.11, train passive (2): und / oder between two nouns inside the second part — zu Teppichen und
+        // Matratzen verarbeitet — joins the nouns, not the participles: the search goes on to the und before)
+        if (COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i][0])) && i > 0 && /^\p{Lu}/u.test(tokens[i-1][0]) && i+1 < p2 &&
+            (/^\p{Lu}/u.test(tokens[i+1][0]) || DETERMINER_WORD.test(norm(tokens[i+1][0])) && /^\p{Lu}/u.test(tokens[i+2]?.[0] ?? ""))) continue;
         if (COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i][0]))) { u = i; break; }
         if (/^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === "finite")) return null;
       }
@@ -17942,6 +17991,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (cell: the spelling is a plural cell of the card; wie / so viel only then — not so viel Recht, a mass noun)
       const pluralBeforeGroup = (cell = true) => {
         const g = groupBefore();
+        // (links chat 19.11, advisor 19.11 «Plural без артикля» (1)) a masculine / neuter noun in a plural cell after attribute adjectives
+        // with no determiner that open the part — Gegend, nette Menschen; Kleine Planeten drehten sich; Andere Staaten protestierten:
+        // -e is the strong nominative / accusative plural there (the singular would be netter Mensch, kleiner Planet); -er + the plural
+        // cell is the strong genitive plural (voll unsichtbarer Menschen; the singular would be netter Mensch / netter Frau). Not -em
+        // (auf halbem Wege, unter eigenem Namen); not after a hyphen; at most three attributes
+        if (cell && g && Number.isInteger(context?.tokenOffset)) {
+          const ws = g.ws; let j = ws.length - 1; const at = [];
+          // (andere / weitere / folgende … decline like adjectives: andere Staaten, anderer Staat)
+          const adjective = x => (forms.get(norm(x)) || []).some(e => e.type === "Adjektiv") || /^(?:andere|anderer|weitere|weiterer|folgende|folgender|verschiedene|verschiedener|zahlreiche|zahlreicher|einzelne|einzelner|sonstige|übrige)$/u.test(norm(x)) ||
+            // (an unknown lowercase word only when it cannot be a verb form of a verb we lack: not -te — höhnte Onkel Vernon; not -ere /
+            // -ele — schlittere Garn; Potter / Grimm, links chat 19.11)
+            /^\p{Ll}/u.test(x) && !/(?:te|ere|ele)$/u.test(norm(x)) && !(forms.get(norm(x)) || []).length && !(verbAnalyses.get(norm(x)) || []).length;
+          while (j >= 0 && at.length < 3 && /^\p{L}{3,}(?:e|er)$/u.test(ws[j]) && !ANY_DETERMINER.test(norm(ws[j])) && !prepositions.has(norm(ws[j])) && adjective(ws[j]) &&
+            !/^(?:über|unter|hinter|wider|außer|aber|oder|sondern|immer|wieder|sehr|mehr|nie|je|weder|später|ferner|lieber|eher|bitte|gerne|alle|beide|viele|wenige|einige|mehrere|sämtliche|diese|jene|solche|manche|keine)$/u.test(norm(ws[j]))) { at.unshift(ws[j]); j--; }
+          // (a comma between two attributes is no part boundary — der alte, kranke Lehrer; ein großer, klebriger Kuchen)
+          const attributeComma = ws[j] === "," && j > 0 && /^\p{Ll}\p{L}+(?:e|er|es|en|em)$/u.test(ws[j-1]) && adjective(ws[j-1]);
+          const opens = j < 0 || /^[,;:.!?()»«„“"–—]$/u.test(ws[j]) && !attributeComma || /^(?:und|oder|sowie|wie|als|voll|voller)$/u.test(norm(ws[j])) ||
+            /^\p{Ll}/u.test(ws[j]) && (verbAnalyses.get(norm(ws[j])) || []).some(a => a.kind === "finite") && !ANY_DETERMINER.test(norm(ws[j]));
+          const allE = at.length && at.every(a => /e$/u.test(a)), allEr = at.length && at.every(a => /er$/u.test(a));
+          // (a capital attribute only at the very start of the part — not a name before it: Max Hasak)
+          const capitalOk = at.every((a,i) => /^\p{Ll}/u.test(a) || i === 0 && (j < 0 || /^[,;:.!?()»«„“"–—]$/u.test(ws[j])));
+          // (-er only where the spelling is no singular — netter Wagen, alter Schatten are singular nominatives)
+          if (opens && capitalOk && (allE || allEr && /n$/u.test(form) && !(lemmas.get(form) || []).some(e => e.type === "Nomen"))) return true;
+        }
         if (!g || g.k < 0 || /^[,;:.!?()»«„“"–—]$/u.test(g.ws[g.k])) return false;
         const {det, prev, attrs} = g;
         if (/^(?:alle|keine|solche|manche|diese|jene|sämtliche)$/u.test(det)) return true;
@@ -18096,6 +18169,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           return j >= 0 && /^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|manchem|solchem|demselben|desselben|ebendem|ebendiesem|im|am|vom|zum|beim|des|eines|keines|meines|deines|seines|ihres|unseres|eures|dieses|jenes|welches|jedes|einen|keinen|jeden)$/u.test(norm(ws[j]));
         };
         if (plurals.has(form) && !singulars.has(form) && !(entry.article === "der" && /n$/u.test(form) && singularDeterminer())) return {number:"plural"};
+        // (links chat 19.11, advisor 19.11 «Plural без артикля» (3)) a masculine plural cell in -(e)n that the external dictionary knows only as
+        // a plural (candidate.strongEnPlural: genitive singular in -(e)s — Staaten, Investoren, Schmerzen; not the weak Menschen, Patienten,
+        // Namen) — plural with no determiner in its group too (Vereinigte Staaten, Andere Investoren kamen, vor Schmerzen); not after a
+        // hyphen (groupBefore), nor after a singular determiner (zu dem Flecken)
+        // (not a plural spelled as the singular — ein kleiner Karren, ein klebriger Schokoladenkuchen: Potter, links chat 19.11)
+        if (entry.article === "der" && candidate.strongEnPlural === form && form !== word && plurals.has(form) && !singularDeterminer()) {
+          const g = groupBefore();
+          if (g && !ANY_DETERMINER.test(g.det) && !contractionForms[g.det]) return {number:"plural"};
+        }
         // (11.11, G69 remainder) by the word before the noun group (attribute words skipped, as in step 2 below):
         //   der (not a relative after a comma) before a masculine / neuter noun in a plural form other than its nominative — the genitive
         //     plural (der Probleme, der Patienten, der Gebäude); den before a neuter one — the dative plural (in den Augen);
@@ -18144,7 +18226,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const after = sentence.slice(context.tokenOffset + String(word).length);
             const nameChain = !start && !capitalOpening && attrs === 0 && k >= 0 && /^\p{Lu}/u.test(words[k]) && !DETERMINER.test(det) && !/^(?:paar|art|menge|reihe|sorte|dutzend|haufen|anzahl|vielzahl|zahl)$/u.test(det) ||
               /^\s+\p{Lu}/u.test(after);
-            if (!datSgChain && !nameChain && form === plural && form === word + "e" && (start || capitalOpening || prepWithAttr || bare || DETERMINER.test(det) && !datSg.test(det) && !["der","den"].includes(det))) return {number:"plural"};
+            // (links chat 19.11, advisor 19.11 «Plural без артикля» (2): a preposition with the accusative only right before the -e form —
+            // ohne Probleme, für Briefe, durch Wälder…: the old dative singular cannot stand there; ohne Ende / Hilfe are singular nouns in -e,
+            // not plural cells; a weak masculine in -en is not taken — ohne Namen)
+            const accusativePreposition = attrs === 0 && /^(?:ohne|für|durch|gegen|um|wider)$/u.test(det);
+            if (!datSgChain && !nameChain && form === plural && form === word + "e" && (start || capitalOpening || prepWithAttr || bare || accusativePreposition || DETERMINER.test(det) && !datSg.test(det) && !["der","den"].includes(det))) return {number:"plural"};
             if (form === plural && form === word + "s" && (start || capitalOpening || ["der","den","die","keine","alle","meine","deine","seine","ihre","unsere","eure","diese","jene","welche"].includes(det) || prepositions.has(det) && !contractionForms[det])) return {number:"plural"};
           }
         }
@@ -18382,6 +18468,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Display-only form marks (reader reference): a mark is kept only when every
       // analysis of the form agrees; ambiguous forms (macht, schneller) stay unmarked; weak -te forms
       // (spielte) are Präteritum outside a Konjunktiv context (step P1, weakPastIndicative).
+      // (links chat 19.11, advisor 19.11 «Plural без артикля» (3)) an own masculine card whose plural cell in -(e)n is no singular form by the
+      // external dictionary (genitive singular in -(e)s: Staaten, Investoren, Schmerzen) — formFeatures reads the flag
+      if (fallback.strongEnPlural && /^\p{Lu}/u.test(String(word)) && /n$/u.test(norm(word))) resolution.candidates = await Promise.all(resolution.candidates.map(async c => {
+        if (c.source !== 'main' || canonicalPos(c.pos) !== 'Nomen' || c.usage || c.item?.article !== 'der' || !c.item?.plural) return c;
+        if (!norm(c.item.plural).split(/\s*[,\/]\s*/u).includes(norm(word))) return c;
+        let strong = false; try { strong = await fallback.strongEnPlural(norm(word), norm(c.item.word || c.lemma)); } catch (_) { strong = false; }
+        return strong ? {...c,strongEnPlural:norm(word)} : c;
+      }));
       resolution.candidates = resolution.candidates.map(c => {
         const hint = auxiliaryHint(word, c, context);
         const features = {...formFeatures(word, c, resolution, context), ...(modalAsFullVerb(word, c, context) ? {fullVerb:true} : {}),
