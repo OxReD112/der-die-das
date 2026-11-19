@@ -100,8 +100,14 @@
     const lines = particleVerbLines(f, language);
     return lines.some(l => l.language === language) ? lines : null;
   };
+  // (19.11.2026) an external verb shown by its parts (G47: candidate.directionalSimple — the switch of wordCard below, decided by English)
+  const simpleParts = candidate => !!candidate?.directionalSimple && byParts(candidate.directionalSimple) &&
+    (!brief(candidate.directionalFull || candidate, 'en') || !!candidate.directionalPhrase?.en);
   const cardLanguage = (candidate, value) => { const language = textLanguage(value);
-    return isPack(language) && !packText(candidate, language) && !byParts(candidate) && !candidate?.formOf?.text?.[language] && !englishPartsLines(candidate, language) ? 'en' : language; };
+    return isPack(language) && !packText(candidate, language) && !byParts(candidate) && !simpleParts(candidate) && !candidate?.formOf?.text?.[language] && !englishPartsLines(candidate, language) &&
+      // (19.11.2026) a reflexive use of a verb without a pack text (sich bezeigen): the card in the pack — its own lines say «(bez sich)»
+      // and carry the English meaning with the mark (cardBase below), never a whole English card without one
+      candidate?.construction?.id !== 'reflexive-verb' ? 'en' : language; };
   // Phrases of the popup (Ч4, 17.11.2026): L(language, ru, en, …args) — ru / en exactly as written before (byte for byte); a pack
   // language: its line for this pair in lang/<code>/reader.json (pack-translations.js `phrase`), otherwise the English one. The pair
   // (with its places {0}, {1} … — the template, not the filled text) is the key; dev/lang/scan-reader.cjs lists the pairs.
@@ -1049,6 +1055,12 @@
   // «English: » of the pack (as «английский: » in Russian) before its text; ru / en — unchanged
   function card(resolution, candidate, options = {}) {
     const model = cardShown(resolution, candidate, options), language = textLanguage(options.language);
+    // (19.11.2026) a pack language, a card with no text in any language (an external verb no dictionary translates — bespannen): the
+    // message «not found» in the pack's language when reader.json has it (as an own card's message), never the English one
+    if (isPack(language) && model?.missing && model.textLanguage === 'en') {
+      const own = packPhrase(language, NO_TRANSLATION.en, NO_TRANSLATION.ru);
+      if (own) return {...model, text:own, textLanguage:language};
+    }
     if (!isPack(language) || !model || model.textLanguage !== 'en' || model.missing || model.lines || !model.text) return model;
     // (no second mark: a text composed around an English meaning carries the mark already — in its text or in its segments' prefix)
     const mark = englishPrefix(language);

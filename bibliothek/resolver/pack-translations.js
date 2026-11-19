@@ -249,7 +249,7 @@
   async function enrichOwn(resolution, code, entryOf) {
     const mine = resolution.candidates.filter(c => c.item && typeof c.item.id === "string");
     const contractions = resolution.candidates.map(c => [c, componentOf(c, entryOf)]).filter(([, item]) => item);
-    if (!mine.length && !contractions.length) return;
+    if (!mine.length && !contractions.length && !resolution.candidates.some(c => c && c.genderPair)) return;
     // (one deadline for every tap of the first load, counted from its start — review C Ч2б)
     const load = ownTexts(code), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
@@ -281,6 +281,17 @@
         const text = at >= 0 ? fields.form_translations?.[at]?.[code] : c.item.collective && same(c.item.collective.en, ft.en) ? fields.collective?.[code] : "";
         if (String(text || "").trim()) c.formTranslation = {...ft, [code]:String(text).trim()};
       }
+    }
+    // (19.11.2026) a der/die card of two gender records (den Kranken, der/die Tote — resolver genderPair): the other record's pack text
+    // (its own card by id; a text translated from another English or an outdated print — none, both stay English as before)
+    for (const c of resolution.candidates) {
+      const pair = c.genderPair;
+      if (!pair || typeof pair !== "object" || pair.dictionaryId == null || pair.translation?.[code] || typeof entryOf !== "function") continue;
+      let item = null; try { item = entryOf({id:pair.dictionaryId}); } catch (_) { item = null; }
+      const fields = item && typeof item.id === "string" ? texts.get(item.id) : null;
+      if (!fields || typeof fields !== "object" || typeof fields._src_reader === "string" && outdated(fields._src_reader, item)) continue;
+      const main = String(fields[`translation_${code}`] || "").trim();
+      if (main && same(pair.translation?.en, item.translation_en)) c.genderPair = {...pair, translation:{...(pair.translation || {}), [code]:main}};
     }
   }
   // Phrases of the popup in a pack language (Ч4): lang/<code>/reader.json — {"phrases": [{en, ru, <code>}], "pronouns": [{en, ru, <code>}]}
@@ -316,10 +327,12 @@
   // changed in place (the resolver keeps it): part.pack[code] / verb.translation[code].
   async function enrichParts(resolution, code, entryOf) {
     const formed = resolution.candidates.filter(c => c && c.formation && typeof c.formation === "object" && c.formation.kind !== "name");
+    // (19.11.2026) an external verb shown by its parts (G47, the resolver's directionalSimple card): its parts as a particle verb's — on a copy
+    const simple = resolution.candidates.filter(c => c && c.directionalSimple && typeof c.directionalSimple === "object" && c.directionalSimple.formation?.kind === "particle-verb");
     // (19.11.2026, advisor: ENGLISH_BY_PARTS) an external particle verb whose English text the resolver built from its parts keeps that
     // reading (candidate.englishByParts — the resolver's formation object): its verb lines take the pack's text as a particle verb's do
     const byEnglishParts = resolution.candidates.filter(c => c && c.englishByParts && typeof c.englishByParts === "object" && c.englishByParts.kind === "particle-verb");
-    if (!formed.length && !byEnglishParts.length && !resolution.candidates.some(c => c && c.formOf)) return;
+    if (!formed.length && !byEnglishParts.length && !simple.length && !resolution.candidates.some(c => c && c.formOf)) return;
     // (the same deadline as the own cards — counted from the start of their load: the first tap never waits for all of them)
     const load = ownTexts(code).catch(() => null), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
@@ -360,6 +373,7 @@
     const verbLines = async f => { const verbs = Array.isArray(f.verbs) ? await Promise.all(f.verbs.map(verb)) : null;
       return {...f, ...(f.particle ? {particle:particle(f.particle)} : {}), ...(f.verb ? {verb:await verb(f.verb)} : {}), ...(verbs ? {verbs} : {})}; };
     await Promise.all(byEnglishParts.map(async c => { c.englishByParts = await verbLines(c.englishByParts); }));
+    await Promise.all(simple.map(async c => { c.directionalSimple = {...c.directionalSimple, formation:await verbLines(c.directionalSimple.formation)}; }));
     await Promise.all(formed.map(async c => {
       const f = c.formation;
       if (f.kind === "particle-verb") { c.formation = await verbLines(f); return; }
@@ -368,8 +382,13 @@
     }));
   }
   // entryOf (optional; not «lookup» — that is the external dictionary's function above): the reader's own card by id ({id} → card) — for the contractions above
-  async function enrich(resolution, code, entryOf = null) {
-    if (!valid(code) || !resolution || !Array.isArray(resolution.candidates)) return resolution;
+  async function enrich(resolution0, code, entryOf = null) {
+    if (!valid(code) || !resolution0 || !Array.isArray(resolution0.candidates)) return resolution0;
+    // (19.11.2026, chat «languages in the reader») the card shown may be the resolver's copy of a candidate, not in the list (a Perfekt
+    // group: gefahren, getaucht, verbrannt — selected / preferred carry the construction): it takes the pack's texts as the list does.
+    // The resolution itself is returned unchanged in shape; only the copy's fields are filled.
+    const extra = [resolution0.selected, resolution0.preferred].filter((c, i, all) => c && typeof c === "object" && !resolution0.candidates.includes(c) && all.indexOf(c) === i);
+    const resolution = extra.length ? {...resolution0, candidates:[...resolution0.candidates, ...extra]} : resolution0;
     const phrases = readerPhrases(code);
     const own = enrichOwn(resolution, code, entryOf).catch(() => { /* the own cards stay English */ });
     const pending = new Map();
@@ -407,6 +426,18 @@
         candidate.packTranslationError = "unavailable";
       }
     }));
+    // (19.11.2026) an own verb card whose reflexive meanings the resolver took from the English external dictionary (reflexiveMarks.en —
+    // sich holen «to get, to cop», sich denken «to imagine»): the pack dictionary's marks of the same verb (a word it does not know or
+    // without marks — the English ones with the mark, as before; the choice is the English marks', meaning-display.js)
+    await Promise.all(resolution.candidates.filter(c => c && c.source !== "fallback" && c.reflexiveMarks?.en && !c.reflexiveMarks[code]).map(async c => {
+      const base = String(c.lemma || "").replace(/^sich\s+/u, "");
+      const key = JSON.stringify([base, "verb", null, false]);
+      if (!pending.has(key)) pending.set(key, lookup(base, "verb", code, null, false));
+      // (review A 19.11: under the deadline of the own cards — a stalled pack dictionary does not hold an own card's popup)
+      const asked = pending.get(key).catch(() => null), until = Date.now() + OWN_WAIT_MS;
+      const result = typeof setTimeout === "function" ? await Promise.race([asked, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, until - Date.now())))]) : await asked;
+      if (result?.reflexive) c.reflexiveMarks = {...c.reflexiveMarks, [code]:result.reflexive};
+    }));
     await own;
     // (the parts after the own cards: their texts are read; a part's dictionary record — as the external words above)
     await enrichParts(resolution, code, entryOf).catch(() => { /* the parts stay English */ });
@@ -427,7 +458,7 @@
       const own = phrase(code, value.en, value.ru);
       if (own) candidate[field] = {...value, [code]:own};
     }
-    return resolution;
+    return resolution0;
   }
   // (Ч4, advisor 17.11) the phrases of this language are loaded (reader.json read): a missing line is then shown as its English text
   // with the mark «English: »; without reader.json (the pack not downloaded) — the English popup exactly
