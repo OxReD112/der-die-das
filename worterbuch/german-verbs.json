@@ -1018,8 +1018,8 @@
   {
     "id": "verb-023",
     "infinitive": "anfangen",
-    "translation_ru": "начинать",
-    "translation_en": "to begin; to start",
+    "translation_ru": "начинать; делать (что-либо) с (чем-либо), находить применение",
+    "translation_en": "to begin, to start; to do (something) with, to make of",
     "auxiliary": "haben",
     "example_de": "Der Film fängt um acht Uhr an.",
     "example_cloze": "Der Film {{c1::fängt}} um acht Uhr {{c1::an}}.",
@@ -1069,7 +1069,9 @@
         "note_en": "to start (doing something)"
       }
     ],
-    "separable_prefix": "an"
+    "separable_prefix": "an",
+    "usage_note_ru": "Etw. mit etw. / jdm. anfangen — делать что-либо с чем-либо / кем-либо, найти применение; обычно с was, nichts, etwas, viel, wenig: Mit dem alten Rechner kann ich nichts mehr anfangen. — Со старым компьютером я уже ничего не могу сделать. Часто с damit: Was fange ich jetzt damit an? — Что мне теперь с этим делать? Но mit etw. anfangen без такого дополнения — «начинать с чего-либо»: Wir fangen mit der zweiten Übung an. — Начнём со второго упражнения.",
+    "usage_note_en": "Etw. mit etw. / jdm. anfangen — to do something with something / someone, to make use of; usually with was, nichts, etwas, viel, wenig: Mit dem alten Rechner kann ich nichts mehr anfangen. — I can't do anything with the old computer any more. Often with damit: Was fange ich jetzt damit an? — What am I supposed to do with it now? But mit etw. anfangen without such an object is \"to start with something\": Wir fangen mit der zweiten Übung an. — Let's start with the second exercise."
   },
   {
     "id": "verb-024",

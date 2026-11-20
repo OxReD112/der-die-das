@@ -42664,6 +42664,178 @@
           },
           {
             "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "darauf",
+              "drauf",
+              "worauf",
+              "auf"
+            ],
+            "not_next": [
+              "dem",
+              "einem",
+              "der",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "diesem",
+              "dieser",
+              "jedem",
+              "jeder",
+              "den"
+            ]
+          },
+          {
+            "form": "an"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "kommt",
+              "kam",
+              "käme",
+              "komme",
+              "kommen",
+              "kamen",
+              "kämen"
+            ]
+          },
+          {
+            "form": [
+              "darauf",
+              "drauf",
+              "worauf",
+              "auf"
+            ],
+            "not_next": [
+              "dem",
+              "einem",
+              "der",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "diesem",
+              "dieser",
+              "jedem",
+              "jeder",
+              "den"
+            ]
+          },
+          {
+            "form": "an"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "darauf",
+              "drauf",
+              "worauf",
+              "auf"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "ankommt",
+              "ankam",
+              "ankäme",
+              "ankomme",
+              "ankommen",
+              "ankamen",
+              "angekommen",
+              "anzukommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "darauf",
+              "drauf"
+            ]
+          },
+          {
+            "form": [
+              "ankommt",
+              "ankam",
+              "ankäme",
+              "ankomme",
+              "ankommen",
+              "ankamen",
+              "angekommen",
+              "anzukommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "kommt",
+              "kam",
+              "käme",
+              "komme",
+              "kommen",
+              "kamen",
+              "kämen"
+            ]
+          },
+          {
+            "form": [
               "darauf",
               "drauf",
               "worauf",
@@ -42812,7 +42984,9 @@
         "Und wenn's auch ein Viertelpfund ist, kommt es mir nicht darauf an.",
         "Es kommt nur auf dich an.",
         "Ob es klappt, hängt davon ab, wie sehr es darauf ankommt.",
-        "Das ist der Punkt, auf den es ankommt."
+        "Das ist der Punkt, auf den es ankommt.",
+        "Jetzt komme es darauf an, dass die Konkretisierung wirksam angegangen werde.",
+        "Es kommt darauf an, wie viel Zeit wir haben."
       ],
       "negative": [
         "Als Klein in Bukarest ankommt, regnet es.",
@@ -64502,6 +64676,203 @@
         "Er lief weiter als alle anderen.",
         "Es geht nichts weiter.",
         "Es ging nichts weiter voran."
+      ]
+    }
+  },
+  {
+    "id": "expression-395",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Kritik üben (an + D)",
+    "translation_ru": "критиковать (кого-либо, что-либо)",
+    "translation_en": "to criticize, to voice criticism (of)",
+    "example_de": "Die Opposition übt Kritik am neuen Gesetz.",
+    "example_ru": "Оппозиция критикует новый закон.",
+    "example_en": "The opposition criticizes the new law.",
+    "notes_ru": [
+      "Нейтр., чаще в письменной речи; часто в новостях. С прилагательным: scharfe / heftige / leise Kritik üben. Предмет критики — an + D: Kritik an der Regierung üben. Selbstkritik üben — заниматься самокритикой, признавать свои ошибки."
+    ],
+    "notes_en": [
+      "Neutral, mostly written; common in the news. With an adjective: scharfe / heftige / leise Kritik üben. What is criticized — an + dative: Kritik an der Regierung üben. Selbstkritik üben — to admit one's own mistakes."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Kritik",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "übe",
+              "übest",
+              "übet",
+              "übst",
+              "übt",
+              "üben",
+              "übte",
+              "übtest",
+              "übten",
+              "übtet",
+              "geübt",
+              "zu üben",
+              "üb",
+              "übend",
+              "übende",
+              "übenden",
+              "übender",
+              "übendes",
+              "geübte",
+              "geübten",
+              "geübter",
+              "geübtes",
+              "geübtem"
+            ]
+          },
+          {
+            "form": [
+              "Kritik",
+              "Selbstkritik"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Kritik",
+              "Selbstkritik"
+            ]
+          },
+          {
+            "form": [
+              "übe",
+              "übest",
+              "übet",
+              "übst",
+              "übt",
+              "üben",
+              "übte",
+              "übtest",
+              "übten",
+              "übtet",
+              "geübt",
+              "zu üben",
+              "üb",
+              "übend",
+              "übende",
+              "übenden",
+              "übender",
+              "übendes",
+              "geübte",
+              "geübten",
+              "geübter",
+              "geübtes",
+              "geübtem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Opposition übt Kritik am neuen Gesetz.",
+        "Sie hat scharfe Kritik an dem Plan geübt.",
+        "Viele kritisieren ihn, weil er nie Kritik übte.",
+        "Kritik an der Entscheidung übten auch die Lehrer.",
+        "Der Minister musste Selbstkritik üben.",
+        "Die an der Reform geübte Kritik war berechtigt.",
+        "Es ist leicht, Kritik zu üben."
+      ],
+      "negative": [
+        "Er übt jeden Tag Klavier.",
+        "Die Kritik an dem Film war scharf.",
+        "Sie übt für die Prüfung, die Kritik ist ihr egal."
+      ]
+    }
+  },
+  {
+    "id": "expression-396",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "der Reihe nach",
+    "translation_ru": "по очереди, по порядку",
+    "translation_en": "in turn, one after another",
+    "example_de": "Die Kinder kamen der Reihe nach an die Tafel.",
+    "example_ru": "Дети по очереди выходили к доске.",
+    "example_en": "The children came to the board one after another.",
+    "notes_ru": [
+      "Нейтр. Как восклицание: Der Reihe nach! — По очереди! Не путать: an der Reihe sein — чья-то очередь (Du bist an der Reihe)."
+    ],
+    "notes_en": [
+      "Neutral. As an exclamation: Der Reihe nach! — One at a time! Not to be confused with: an der Reihe sein — to be someone's turn (Du bist an der Reihe)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Reihe",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "der",
+              "Der"
+            ],
+            "not_after": [
+              "in",
+              "an",
+              "auf",
+              "aus",
+              "von",
+              "zu",
+              "mit",
+              "bei",
+              "nach",
+              "seit",
+              "hinter",
+              "vor",
+              "neben",
+              "über",
+              "unter",
+              "zwischen",
+              "gegenüber"
+            ]
+          },
+          {
+            "form": [
+              "Reihe"
+            ]
+          },
+          {
+            "form": [
+              "nach"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Kinder kamen der Reihe nach an die Tafel.",
+        "Der Reihe nach!",
+        "Erzähl mir alles der Reihe nach.",
+        "Wir haben die Fragen der Reihe nach beantwortet."
+      ],
+      "negative": [
+        "Jetzt bist du an der Reihe.",
+        "Er ging nach der Reihe der Häuser.",
+        "Sie stand in der Reihe nach Tickets an.",
+        "In der Reihe nach vorn ist noch ein Platz frei.",
+        "Auf der Reihe nach unten lagen Bücher."
       ]
     }
   }
