@@ -2376,6 +2376,7 @@ function apostropheText(text) {
     const grammarCache = new Map();
     // (31.10.2026: clause / subject facts per sentence — sentenceSubjectFacts)
     const subjectFactsCache = new Map();
+    const articleNominalCache = new Map();
     let lookupFailures = 0, morphologyEpoch = 0;
     const sourceSpelling = word => String(word || '').normalize('NFC').trim();
     const sourceVersion = () => String(fallback.version ?? fallback.dictionaryVersion ?? 'resolver-instance');
@@ -2386,7 +2387,7 @@ function apostropheText(text) {
       retainedSourceVersion=version;
       sourceFacts.clear();morphologyFacts.clear();verbFacts.clear();
       readerProbes.clear();clearPartialSources();
-      grammarCache.clear();nounFrames.clear();separableNounEvidence.clear();separableDiscoveryCache.clear();subjectFactsCache.clear();
+      grammarCache.clear();nounFrames.clear();separableNounEvidence.clear();separableDiscoveryCache.clear();subjectFactsCache.clear();articleNominalCache.clear();
       observe('fact-invalidation',{reason:'source-version',version});
     }
     const incompleteGroups = new WeakSet();
@@ -13815,6 +13816,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Possessive and demonstrative determiners keep separate cards: no pair.
     // Display only: no selection, gender, number or case is claimed.
     const articleForm = form => (articleCardsByForm.get(norm(form)) || []).length > 0;
+    // (advisor 20.11; speed chat 20.11) the article before a nominalization: the noun's own link with its article, read from the
+    // noun's resolution — once per sentence and place, dropped after a failed lookup like the subject facts.
+    function articleNominalLink(sentence, next, context) {
+      const key = `${next.index}\u0000${sentence}`;
+      if (!articleNominalCache.has(key)) {
+        if (articleNominalCache.size >= 64) articleNominalCache.delete(articleNominalCache.keys().next().value);
+        const failures = lookupFailures;
+        const pending = resolveWithDiagnostics(next[0],{...context,tokenOffset:next.index,articleLookahead:true})
+          .then(r => r?.selected?.usage?.role === 'nominalized' ? r.selected.nounArticleLink || null : null, () => null);
+        articleNominalCache.set(key,pending);
+        pending.then(() => { if (lookupFailures !== failures && articleNominalCache.get(key) === pending) articleNominalCache.delete(key); });
+      }
+      return articleNominalCache.get(key);
+    }
     async function articleNounLink(word, context, afterComma = false) {
       if (!Number.isInteger(context?.tokenOffset)) return null;
       if (word.length > 1 && word === word.toUpperCase()) return null;
@@ -16227,6 +16242,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               candidates.push({source:"fallback",lemma:group.word,pos:"verb",posLabel:"Verb",meanings:[],translation:{en:"",ru:""},russianOnly:true,
                 ...(group.derived === "separable-participle" ? {separableParticiple:true} : {})});
             if (group.meanings.length) candidates.push({source:"fallback",lemma:group.word,pos:group.pos || "",posLabel:partOfSpeech,
+              ...(group.written ? {written:group.written} : {}),
               ...(group.derived === "separable-participle" ? {separableParticiple:true} : {}),
               translation:{en:group.meanings.join("; "),ru:""},meanings:group.meanings,...(group.labels ? {meaningLabels:{en:group.labels}} : {}),
               ...externalNounFacts(group, word),
@@ -18795,7 +18811,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             afterCommaArticle = !!r?.g50ArticleAfterComma;
           }
         }
-        const pair = await articleNounLink(word,context,afterCommaArticle);
+        let pair = await articleNounLink(word,context,afterCommaArticle);
+        // (advisor 20.11, after T-009 in der Siebten) the article before a nominalization (der Kleinen, mit der Bedienten, in der Siebten —
+        // no noun of a dictionary for the group to read): the pair its noun's own tap makes, the article's card unchanged — only the
+        // noun is lit as well, as with any noun (in der Stadt)
+        // The noun's resolution is made once per sentence and place (articleNominalCache) and never from inside another such
+        // lookahead (context.articleLookahead): the noun after a comma reads its article's tap (G89 above), which would read the
+        // noun again (… Perlen, die Decken waren …).
+        if (!pair && !context?.articleLookahead && Number.isInteger(context?.tokenOffset) && (articleForm(word) || contractionArticle(word))) {
+          const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'articleNounLink');
+          const at = clickedTokenIndex(tokens,context.tokenOffset,word), next = tokens[at+1];
+          // only a word with an adjective's ending in lower case can be a nominalization (die Siebte, des Guten, im Innern) — not
+          // der DDR, ein Standard (speed chat 20.11: about half the lookaheads, none of the nominalizations lost)
+          if (at >= 0 && next && /^\p{Lu}/u.test(next[0]) && /[a-zäöüß](?:e|en|em|er|es|n)$/u.test(next[0]) && /^\s+$/u.test(sentence.slice(tokens[at].index+tokens[at][0].length,next.index))) {
+            const link = await articleNominalLink(sentence,next,context);
+            if (link && link.spans?.some(sp => sp.start === tokens[at].index && sp.text === word)) pair = {...link, clicked:'article'};
+          }
+        }
         if (pair) {
           resolution.candidates = resolution.candidates.map(c => pair.contraction && pair.clicked === 'article' && contractionCard(c)
             ? {...c,construction:{...c.construction,spans:pair.spans}} :

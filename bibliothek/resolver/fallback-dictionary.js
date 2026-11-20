@@ -334,7 +334,10 @@
       const labels = Object.fromEntries(meanings.filter(m => all[m]).map(m => [m,all[m]]));
       const marks = reflexiveByPos.get(pos) || {}, reflexive = Object.fromEntries(meanings.filter(m => marks[m]).map(m => [m,marks[m]]));
       const noun = pos === "noun" ? nounFacts(word, data, meanings.map(m => genderByPos.get(pos)[m])) : null;
-      return {word,pos,meanings,formNotes:notes,...(Object.keys(labels).length ? {labels} : {}),...(Object.keys(reflexive).length ? {reflexive} : {}),
+      // (advisor 20.11: the heading keeps the dictionary's own spelling — EU-Kommission, DNA-Test, SUV, not Eu-kommission / Suv) the written
+      // form of the entry (entries[i][4].w), when it is this very word with capitals inside
+      const written = (data?.entries || []).map(e => e?.[4]?.w).find(w => typeof w === "string" && w.toLowerCase() === String(word).toLowerCase() && /\p{Lu}/u.test(w.slice(1)));
+      return {word,pos,meanings,formNotes:notes,...(written ? {written} : {}),...(Object.keys(labels).length ? {labels} : {}),...(Object.keys(reflexive).length ? {reflexive} : {}),
         ...(noun ? {noun} : {}),...(transitivityByPos.get(pos)?.size ? {transitivity:[...transitivityByPos.get(pos)].sort()} : {}),
         ...(transitivityOfByPos.get(pos) ? {transitivityOf:Object.fromEntries(meanings.filter(m => m in transitivityOfByPos.get(pos)).map(m => [m,transitivityOfByPos.get(pos)[m]]))} : {})};
     });
@@ -660,6 +663,7 @@
         if (group.transitivity) target.transitivity = [...new Set([...(target.transitivity || []),...group.transitivity])].sort();
         if (group.transitivityOf) target.transitivityOf = {...(target.transitivityOf || {}),...group.transitivityOf};
         if (group.noun && !target.noun) target.noun = group.noun;
+        if (group.written && !target.written) target.written = group.written;
       }
       if (merged.size || notes.length) return [...merged.values(),...notes];
       if (meanings(data).length) return [{word:candidate,pos:"",meanings:meanings(data),unresolved:true}];
