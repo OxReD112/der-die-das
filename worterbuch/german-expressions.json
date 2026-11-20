@@ -55370,9 +55370,7 @@
           {
             "form": [
               "verdammt",
-              "Verdammt",
-              "verflixt",
-              "Verflixt"
+              "Verdammt"
             ]
           },
           {
@@ -55426,9 +55424,7 @@
           {
             "form": [
               "Verdammt",
-              "verdammt",
-              "Verflixt",
-              "verflixt"
+              "verdammt"
             ],
             "clause_start": true,
             "clause_start_after": [
@@ -55503,20 +55499,31 @@
       {
         "parts": [
           {
-            "form": [
+            "form": "Mann",
+            "after": [
               "aber",
               "Aber",
               "na",
               "Na"
+            ],
+            "next_mark": [
+              "!",
+              "?",
+              ",",
+              ".",
+              "…",
+              "«",
+              "»",
+              "\"",
+              "“",
+              "–",
+              "—"
             ]
-          },
-          {
-            "form": "Mann"
           }
         ],
         "order": "fixed",
         "scope": "adjacent",
-        "anchor": 1,
+        "anchor": 0,
         "clause_rest": []
       }
     ],
@@ -57251,6 +57258,34 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "Es"
+            ]
+          },
+          {
+            "form": "wie"
+          },
+          {
+            "form": "Schuppen"
+          },
+          {
+            "form": "von"
+          },
+          {
+            "form": "den"
+          },
+          {
+            "form": "Augen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
       }
     ],
     "tests": {
@@ -63022,6 +63057,1451 @@
         "Er brachte uns in Gefahr.",
         "Du bringst mich in Gefahr!",
         "Er brachte für uns sein Leben in Gefahr."
+      ]
+    }
+  },
+  {
+    "id": "expression-383",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "das A und O",
+    "translation_ru": "самое главное, суть, основа",
+    "translation_en": "the be-all and end-all, the essentials",
+    "example_de": "Übung ist das A und O.",
+    "example_ru": "Практика — это самое главное.",
+    "example_en": "Practice is the be-all and end-all.",
+    "notes_ru": [
+      "От первой и последней буквы греческого алфавита (альфа и омега). Часто с родительным: das A und O jeder Beziehung."
+    ],
+    "notes_en": [
+      "From the first and last letters of the Greek alphabet (alpha and omega). Often with a genitive: das A und O jeder Beziehung."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/a_Buchstabe_Ton",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "das",
+              "Das",
+              "dem",
+              "des"
+            ]
+          },
+          {
+            "form": [
+              "A und O",
+              "A und das O"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ist",
+              "sind",
+              "war",
+              "waren",
+              "bleibt",
+              "wäre",
+              "sei"
+            ]
+          },
+          {
+            "form": [
+              "A und O"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Übung ist das A und O.",
+        "Das A und O ist die Vorbereitung.",
+        "Vertrauen ist das A und O jeder Beziehung.",
+        "Gute Planung ist A und O.",
+        "Pünktlichkeit ist das A und das O."
+      ],
+      "negative": [
+        "Er schrieb ein A und ein O an die Tafel.",
+        "Zwischen A und O liegen viele Buchstaben.",
+        "Sie malte A und O an die Wand."
+      ]
+    }
+  },
+  {
+    "id": "expression-384",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "von A bis Z",
+    "translation_ru": "от начала до конца, полностью, от а до я",
+    "translation_en": "from A to Z, from start to finish",
+    "example_de": "Er kennt die Stadt von A bis Z.",
+    "example_ru": "Он знает город от а до я.",
+    "example_en": "He knows the city from A to Z.",
+    "notes_ru": [
+      "Разг. Полностью, без исключения: alles von A bis Z erklären; von A bis Z gelogen — враньё от начала до конца."
+    ],
+    "notes_en": [
+      "Colloquial. Completely, without exception: alles von A bis Z erklären; von A bis Z gelogen — a lie from start to finish."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/a_Buchstabe_Ton",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "von A bis Z"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er kennt die Stadt von A bis Z.",
+        "Das Buch erklärt alles von A bis Z.",
+        "Das war von A bis Z gelogen."
+      ],
+      "negative": [
+        "Die Straße führt von A nach B."
+      ]
+    }
+  },
+  {
+    "id": "expression-385",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "[sich] (vor Angst) in die Hose(n) machen",
+    "translation_ru": "наделать в штаны (от страха)",
+    "translation_en": "to wet / soil one's pants (with fear)",
+    "example_de": "Er hat sich vor Angst in die Hose gemacht.",
+    "example_ru": "Он от страха наделал в штаны.",
+    "example_en": "He wet his pants with fear.",
+    "notes_ru": [
+      "Фам., грубовато (Duden: salopp); часто перен. — очень испугаться. sich и vor Angst — необязательны: Das Kind hat in die Hose gemacht."
+    ],
+    "notes_en": [
+      "Slang, rather crude (Duden: salopp); often figurative — to be scared stiff. sich and vor Angst are optional: Das Kind hat in die Hose gemacht."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Hose",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "mach",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machten",
+              "machtest",
+              "Mach",
+              "Mache",
+              "Macht"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "wieder",
+              "noch",
+              "nachts",
+              "immer",
+              "oft",
+              "manchmal",
+              "schon",
+              "nicht",
+              "nie",
+              "gleich",
+              "fast",
+              "beinahe",
+              "fast schon",
+              "wirklich",
+              "glatt",
+              "sofort",
+              "jedes Mal",
+              "dauernd",
+              "wohl",
+              "bestimmt",
+              "vor Angst",
+              "vor Schreck",
+              "vor Lachen"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "wieder",
+              "noch",
+              "nachts",
+              "immer",
+              "oft",
+              "manchmal",
+              "schon",
+              "nicht",
+              "nie",
+              "gleich",
+              "fast",
+              "beinahe",
+              "fast schon",
+              "wirklich",
+              "glatt",
+              "sofort",
+              "jedes Mal",
+              "dauernd",
+              "wohl",
+              "bestimmt",
+              "vor Angst",
+              "vor Schreck",
+              "vor Lachen"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "in die Hose",
+              "in die Hosen"
+            ],
+            "next_mark": [
+              ".",
+              "!",
+              "?",
+              ",",
+              ";",
+              ":",
+              "«",
+              "»",
+              "“",
+              "”",
+              "\"",
+              "–",
+              "—",
+              ")",
+              "…"
+            ],
+            "not_after": [
+              "Loch",
+              "Löcher",
+              "Fleck",
+              "Flecken",
+              "Riss",
+              "Naht",
+              "Tasche",
+              "Weg",
+              "auf",
+              "davon",
+              "mit",
+              "ab",
+              "Wärmflasche",
+              "Tee"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 5
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "in die Hose machen",
+              "in die Hose macht",
+              "in die Hose machst",
+              "in die Hose mache",
+              "in die Hose machte",
+              "in die Hose machten",
+              "in die Hose gemacht",
+              "in die Hose zu machen",
+              "in die Hosen machen",
+              "in die Hosen macht",
+              "in die Hosen machst",
+              "in die Hosen mache",
+              "in die Hosen machte",
+              "in die Hosen machten",
+              "in die Hosen gemacht",
+              "in die Hosen zu machen"
+            ],
+            "not_after": [
+              "Loch",
+              "Löcher",
+              "Fleck",
+              "Flecken",
+              "Riss",
+              "Naht",
+              "Tasche",
+              "Weg",
+              "auf",
+              "davon",
+              "mit",
+              "ab",
+              "Wärmflasche",
+              "Tee"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er hat sich vor Angst in die Hose gemacht.",
+        "Ich mach mir gleich in die Hosen!",
+        "Der Kleine hatte sich in die Hose gemacht.",
+        "Mach dir nicht gleich in die Hose!",
+        "Das Kind hat in die Hose gemacht."
+      ],
+      "negative": [
+        "Er machte die Hose sauber.",
+        "Sie steckte das Geld in die Hose.",
+        "Er machte ihr Flecken in die Hose.",
+        "Er machte sich einen Fleck in die Hose.",
+        "Er machte sich ein Loch in die Hose."
+      ]
+    }
+  },
+  {
+    "id": "expression-386",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "[sich] ins Bett machen",
+    "translation_ru": "намочить постель",
+    "translation_en": "to wet the bed",
+    "example_de": "Der Kleine hat sich wieder ins Bett gemacht.",
+    "example_ru": "Малыш опять намочил постель.",
+    "example_en": "The little one wet the bed again.",
+    "notes_ru": [
+      "Разг., о детях; обычно без sich: Das Kind macht nachts ins Bett. Не путать: das Bett machen — застелить постель; ins Bett gehen — ложиться спать; разг. ich mach mich ins Bett — иду спать."
+    ],
+    "notes_en": [
+      "Colloquial, of children; usually without sich: Das Kind macht nachts ins Bett. Do not confuse: das Bett machen — to make the bed; ins Bett gehen — to go to bed; colloquial ich mach mich ins Bett — I'm off to bed."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.aok.de/pp/bv/bettnaessen-bei-kindern/",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "mach",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machten",
+              "machtest",
+              "Mach",
+              "Mache",
+              "Macht"
+            ]
+          },
+          {
+            "form": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "Sie"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "wieder",
+              "noch",
+              "nachts",
+              "immer",
+              "oft",
+              "manchmal",
+              "schon",
+              "nicht",
+              "nie",
+              "gleich",
+              "fast",
+              "beinahe",
+              "fast schon",
+              "wirklich",
+              "glatt",
+              "sofort",
+              "jedes Mal",
+              "dauernd",
+              "wohl",
+              "bestimmt",
+              "vor Angst",
+              "vor Schreck",
+              "vor Lachen"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "wieder",
+              "noch",
+              "nachts",
+              "immer",
+              "oft",
+              "manchmal",
+              "schon",
+              "nicht",
+              "nie",
+              "gleich",
+              "fast",
+              "beinahe",
+              "fast schon",
+              "wirklich",
+              "glatt",
+              "sofort",
+              "jedes Mal",
+              "dauernd",
+              "wohl",
+              "bestimmt",
+              "vor Angst",
+              "vor Schreck",
+              "vor Lachen"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "ins Bett"
+            ],
+            "next_mark": [
+              ".",
+              "!",
+              "?",
+              ",",
+              ";",
+              ":",
+              "«",
+              "»",
+              "“",
+              "”",
+              "\"",
+              "–",
+              "—",
+              ")",
+              "…"
+            ],
+            "not_after": [
+              "Loch",
+              "Löcher",
+              "Fleck",
+              "Flecken",
+              "Riss",
+              "Naht",
+              "Tasche",
+              "Weg",
+              "auf",
+              "davon",
+              "mit",
+              "ab",
+              "Wärmflasche",
+              "Tee"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 5
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ins Bett machen",
+              "ins Bett macht",
+              "ins Bett machst",
+              "ins Bett mache",
+              "ins Bett machte",
+              "ins Bett machten",
+              "ins Bett gemacht",
+              "ins Bett zu machen"
+            ],
+            "not_after": [
+              "Loch",
+              "Löcher",
+              "Fleck",
+              "Flecken",
+              "Riss",
+              "Naht",
+              "Tasche",
+              "Weg",
+              "auf",
+              "davon",
+              "mit",
+              "ab",
+              "Wärmflasche",
+              "Tee"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Kleine hat sich wieder ins Bett gemacht.",
+        "Mit fünf machte er sich noch manchmal ins Bett.",
+        "Ich weiß nicht, warum sie nachts ins Bett macht.",
+        "Das Kind macht nachts wieder ins Bett."
+      ],
+      "negative": [
+        "Er machte das Bett.",
+        "Sie geht ins Bett.",
+        "Wir machen uns fürs Bett fertig.",
+        "Sie machte sich ins Bett fertig.",
+        "Er machte sich auf den Weg ins Bett.",
+        "Er machte sich eine Wärmflasche ins Bett."
+      ]
+    }
+  },
+  {
+    "id": "expression-387",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. rutscht / fällt das Herz in die Hose",
+    "translation_ru": "у кого-либо душа ушла в пятки",
+    "translation_en": "sb's heart sinks (into their boots)",
+    "example_de": "Als er den Lehrer sah, rutschte ihm das Herz in die Hose.",
+    "example_ru": "Когда он увидел учителя, у него душа ушла в пятки.",
+    "example_en": "When he saw the teacher, his heart sank into his boots.",
+    "notes_ru": [
+      "Разг. Кому — дательный (ihm, mir …). Глагол: rutschen, fallen; реже sinken. Также sein / ihr Herz."
+    ],
+    "notes_en": [
+      "Colloquial. To whom — dative (ihm, mir …). The verb: rutschen, fallen; less often sinken. Also sein / ihr Herz."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Herz",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "rutscht",
+              "rutschte",
+              "rutschten",
+              "gerutscht",
+              "rutschen",
+              "sinkt",
+              "sank",
+              "gesunken",
+              "sinken",
+              "fällt",
+              "fiel",
+              "gefallen",
+              "fallen"
+            ]
+          },
+          {
+            "form": [
+              "das Herz",
+              "sein Herz",
+              "ihr Herz",
+              "mein Herz",
+              "dein Herz",
+              "unser Herz",
+              "euer Herz"
+            ]
+          },
+          {
+            "form": [
+              "in die Hose",
+              "in die Hosen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "das Herz",
+              "sein Herz",
+              "ihr Herz",
+              "mein Herz",
+              "dein Herz",
+              "unser Herz",
+              "euer Herz",
+              "Das Herz",
+              "Sein Herz",
+              "Ihr Herz",
+              "Mein Herz",
+              "Dein Herz",
+              "Unser Herz",
+              "Euer Herz"
+            ]
+          },
+          {
+            "form": [
+              "rutscht",
+              "rutschte",
+              "rutschten",
+              "gerutscht",
+              "rutschen",
+              "sinkt",
+              "sank",
+              "gesunken",
+              "sinken",
+              "fällt",
+              "fiel",
+              "gefallen",
+              "fallen"
+            ]
+          },
+          {
+            "form": [
+              "in die Hose",
+              "in die Hosen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "das Herz",
+              "sein Herz",
+              "ihr Herz",
+              "mein Herz",
+              "dein Herz",
+              "unser Herz",
+              "euer Herz"
+            ]
+          },
+          {
+            "form": [
+              "in die Hose",
+              "in die Hosen"
+            ]
+          },
+          {
+            "form": [
+              "rutscht",
+              "rutschte",
+              "rutschten",
+              "gerutscht",
+              "rutschen",
+              "sinkt",
+              "sank",
+              "gesunken",
+              "sinken",
+              "fällt",
+              "fiel",
+              "gefallen",
+              "fallen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Als er den Lehrer sah, rutschte ihm das Herz in die Hose.",
+        "Das Herz rutschte ihr in die Hose.",
+        "Mir ist das Herz in die Hose gerutscht.",
+        "Das Herz sank ihm in die Hose.",
+        "Sein Herz rutschte ihm in die Hose.",
+        "Ihm fiel das Herz in die Hose.",
+        "Ich merkte, wie mir das Herz in die Hose rutschte."
+      ],
+      "negative": [
+        "Das Herz schlug ihm bis zum Hals.",
+        "Der Schlüssel rutschte ihm in die Hosentasche."
+      ]
+    }
+  },
+  {
+    "id": "expression-388",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "zum ersten / zweiten / … / letzten Mal",
+    "translation_ru": "в первый / второй / … / последний раз",
+    "translation_en": "for the first / second / … / last time",
+    "example_de": "Er war zum ersten Mal in Berlin.",
+    "example_ru": "Он впервые был в Берлине.",
+    "example_en": "He was in Berlin for the first time.",
+    "notes_ru": [
+      "Порядковое числительное с -en: zum dritten Mal, zum letzten Mal, zum x-ten Mal, zum wiederholten Mal. Старое слитное написание: zum erstenmal. bis zum nächsten Mal — до следующего раза."
+    ],
+    "notes_en": [
+      "An ordinal ending in -en: zum dritten Mal, zum letzten Mal, zum x-ten Mal, zum wiederholten Mal. The old one-word spelling: zum erstenmal. bis zum nächsten Mal — until next time."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Mal_Zeitpunkt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "zum",
+              "Zum"
+            ]
+          },
+          {
+            "form": [
+              "ersten",
+              "zweiten",
+              "dritten",
+              "vierten",
+              "fünften",
+              "sechsten",
+              "siebten",
+              "siebenten",
+              "achten",
+              "neunten",
+              "zehnten",
+              "elften",
+              "zwölften",
+              "zwanzigsten",
+              "hundertsten",
+              "tausendsten",
+              "letzten",
+              "nächsten",
+              "soundsovielten",
+              "wievielten",
+              "unzähligen",
+              "ersten und letzten",
+              "allerersten",
+              "allerletzten",
+              "wiederholten",
+              "vorletzten",
+              "ungezählten",
+              "dreißigsten",
+              "fünfzigsten",
+              "millionsten",
+              "einundzwanzigsten"
+            ]
+          },
+          {
+            "form": [
+              "Mal",
+              "Male"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zum",
+              "Zum"
+            ]
+          },
+          {
+            "form": [
+              "letztenmal",
+              "nächstenmal",
+              "soundsovieltenmal",
+              "wievieltenmal"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zum",
+              "Zum"
+            ]
+          },
+          {
+            "form": [
+              "x",
+              "n"
+            ]
+          },
+          {
+            "form": [
+              "ten"
+            ]
+          },
+          {
+            "form": [
+              "Mal",
+              "Male"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er war zum ersten Mal in Berlin.",
+        "Sie sprach zum dritten Mal mit ihm.",
+        "Ich sage es dir zum letzten Mal!",
+        "Er sprach zum letztenmal.",
+        "Zum ersten Male sah er das Meer.",
+        "Ich erkläre es zum x-ten Mal.",
+        "Zum allerersten Mal sah sie Schnee.",
+        "Er kam zum wiederholten Mal zu spät."
+      ],
+      "negative": [
+        "Wir treffen uns zum Mittagessen.",
+        "Mal sehen, was passiert.",
+        "Zum Schluss kam das erste Mal.",
+        "Er sprach zum drittenmal."
+      ]
+    }
+  },
+  {
+    "id": "expression-389",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. zur Verfügung stehen",
+    "translation_ru": "быть в (чьём-либо) распоряжении, иметься",
+    "translation_en": "to be available (to sb), to be at sb's disposal",
+    "example_de": "Das Geld steht Ihnen zur Verfügung.",
+    "example_ru": "Деньги в вашем распоряжении.",
+    "example_en": "The money is at your disposal.",
+    "notes_ru": [
+      "Нейтр.; часто в деловом стиле. Близко: etw. zur Verfügung haben — иметь в распоряжении. Предоставлять — etw. zur Verfügung stellen."
+    ],
+    "notes_en": [
+      "Neutral; common in official style. Similar: etw. zur Verfügung haben — to have at one's disposal. To make available — etw. zur Verfügung stellen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Verfuegung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "stehe",
+              "stehst",
+              "steht",
+              "stehen",
+              "stand",
+              "standen",
+              "standest",
+              "stündest",
+              "stünde",
+              "stände",
+              "gestanden",
+              "zu stehen",
+              "stehn",
+              "stehend",
+              "stehende",
+              "stehenden",
+              "stehender",
+              "stehendes",
+              "stehendem"
+            ]
+          },
+          {
+            "form": [
+              "zur Verfügung",
+              "zur freien Verfügung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zur Verfügung",
+              "zur freien Verfügung"
+            ]
+          },
+          {
+            "form": [
+              "stehe",
+              "stehst",
+              "steht",
+              "stehen",
+              "stand",
+              "standen",
+              "standest",
+              "stündest",
+              "stünde",
+              "stände",
+              "gestanden",
+              "zu stehen",
+              "stehn",
+              "stehend",
+              "stehende",
+              "stehenden",
+              "stehender",
+              "stehendes",
+              "stehendem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Das Geld steht Ihnen zur Verfügung.",
+        "Für Fragen stehe ich gern zur Verfügung.",
+        "Es ist unklar, wie viel Zeit uns zur Verfügung steht.",
+        "Ein Arzt stand nicht zur Verfügung.",
+        "Die zur Verfügung stehenden Mittel reichen nicht.",
+        "Das Geld steht zur freien Verfügung."
+      ],
+      "negative": [
+        "Er stand an der Tür.",
+        "Die Stadt stellt Räume zur Verfügung."
+      ]
+    }
+  },
+  {
+    "id": "expression-390",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "(jdm.) etw. zur Verfügung stellen",
+    "translation_ru": "предоставлять (в распоряжение)",
+    "translation_en": "to make available, to provide",
+    "example_de": "Die Stadt stellt Räume zur Verfügung.",
+    "example_ru": "Город предоставляет помещения.",
+    "example_en": "The city provides rooms.",
+    "notes_ru": [
+      "Нейтр.; часто в деловом стиле, в пассиве: zur Verfügung gestellt werden. sich zur Verfügung stellen — вызваться, предложить свою помощь; sein Amt zur Verfügung stellen — предложить свою отставку. Быть в распоряжении — zur Verfügung stehen."
+    ],
+    "notes_en": [
+      "Neutral; common in official style, often passive: zur Verfügung gestellt werden. sich zur Verfügung stellen — to volunteer, to offer one's help; sein Amt zur Verfügung stellen — to offer one's resignation. To be available — zur Verfügung stehen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Verfuegung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "stelle",
+              "stellst",
+              "stellt",
+              "stellen",
+              "stellte",
+              "stellten",
+              "stelltest",
+              "gestellt",
+              "zu stellen",
+              "stell",
+              "gestellte",
+              "gestellten",
+              "gestellter",
+              "gestelltes",
+              "gestelltem"
+            ]
+          },
+          {
+            "form": [
+              "zur Verfügung",
+              "zur freien Verfügung"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zur Verfügung",
+              "zur freien Verfügung"
+            ]
+          },
+          {
+            "form": [
+              "stelle",
+              "stellst",
+              "stellt",
+              "stellen",
+              "stellte",
+              "stellten",
+              "stelltest",
+              "gestellt",
+              "zu stellen",
+              "stell",
+              "gestellte",
+              "gestellten",
+              "gestellter",
+              "gestelltes",
+              "gestelltem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Stadt stellt Räume zur Verfügung.",
+        "Wir danken für die Bilder, die uns zur Verfügung gestellt wurden.",
+        "Er hat mir sein Auto zur Verfügung gestellt.",
+        "Stell mir bitte dein Zimmer zur Verfügung.",
+        "Wir prüfen die zur Verfügung gestellten Daten."
+      ],
+      "negative": [
+        "Er stellte die Vase auf den Tisch.",
+        "Das Geld steht Ihnen zur Verfügung."
+      ]
+    }
+  },
+  {
+    "id": "expression-391",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "verflixt!",
+    "translation_ru": "чёрт!, проклятье!",
+    "translation_en": "darn!, blast!",
+    "example_de": "Verflixt! Ich habe den Schlüssel vergessen.",
+    "example_ru": "Чёрт! Я забыл ключ.",
+    "example_en": "Darn! I forgot the key.",
+    "notes_ru": [
+      "Разг., мягче, чем verdammt!. Как прилагательное — verflixt schwer «чертовски трудно» — это не восклицание."
+    ],
+    "notes_en": [
+      "Colloquial, milder than verdammt!. As an adjective — verflixt schwer «darn hard» — it is not the exclamation."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/verflixt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "Verflixt",
+              "verflixt"
+            ],
+            "not_next": [
+              "und",
+              "noch",
+              "nochmal",
+              "nocheinmal"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "oh",
+              "Oh",
+              "ach",
+              "Ach",
+              "so",
+              "na",
+              "Na"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "clause_rest": []
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Verflixt! Ich habe den Schlüssel vergessen.",
+        "Oh, verflixt!",
+        "Verflixt, das tut weh!"
+      ],
+      "negative": [
+        "Das ist verflixt schwer.",
+        "Die verflixte Tür klemmt."
+      ]
+    }
+  },
+  {
+    "id": "expression-392",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "verflixt noch mal!",
+    "translation_ru": "чёрт возьми!, чёрт побери!",
+    "translation_en": "darn it!, for heaven's sake!",
+    "example_de": "Verflixt noch mal, wo ist meine Brille?",
+    "example_ru": "Чёрт возьми, где мои очки?",
+    "example_en": "Darn it, where are my glasses?",
+    "notes_ru": [
+      "Разг., мягче, чем verdammt noch mal!. Также verflixt noch einmal / noch eins; часто пишут слитно: verflixt nochmal."
+    ],
+    "notes_en": [
+      "Colloquial, milder than verdammt noch mal!. Also verflixt noch einmal / noch eins; often spelled verflixt nochmal."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/verflixt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "Verflixt",
+              "verflixt"
+            ]
+          },
+          {
+            "form": [
+              "noch"
+            ]
+          },
+          {
+            "form": [
+              "mal",
+              "einmal",
+              "eins"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Verflixt",
+              "verflixt"
+            ]
+          },
+          {
+            "form": [
+              "nochmal",
+              "nocheinmal"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Verflixt noch mal, wo ist meine Brille?",
+        "Wo ist, verflixt noch mal, mein Schlüssel?",
+        "Verflixt noch einmal!",
+        "Verflixt nochmal, wo bist du?",
+        "Verflixt noch eins!"
+      ],
+      "negative": [
+        "Er hat die verflixte Aufgabe noch mal gemacht."
+      ]
+    }
+  },
+  {
+    "id": "expression-393",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "einen Blick (auf etw.) werfen",
+    "translation_ru": "взглянуть, бросить взгляд (на что-либо)",
+    "translation_en": "to take a look, to glance (at sth)",
+    "example_de": "Er warf einen Blick auf die Uhr.",
+    "example_ru": "Он взглянул на часы.",
+    "example_en": "He glanced at the clock.",
+    "notes_ru": [
+      "auf + Akk: einen Blick auf etw. werfen. Между Blick и глаголом могут стоять прилагательные: einen kurzen / langen Blick werfen. Близко: jdm. einen Blick zuwerfen — бросить взгляд на кого-либо."
+    ],
+    "notes_en": [
+      "auf + accusative: einen Blick auf etw. werfen. Adjectives may come in between: einen kurzen / langen Blick werfen. Similar: jdm. einen Blick zuwerfen — to cast someone a glance."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Blick",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "werfen",
+              "wirft",
+              "wirfst",
+              "werfe",
+              "werft",
+              "warf",
+              "warfen",
+              "warfst",
+              "geworfen",
+              "zu werfen",
+              "würfe",
+              "wirf",
+              "Wirf",
+              "Werft",
+              "werf"
+            ],
+            "not_clause_has": [
+              "zu",
+              "hinüber",
+              "herüber",
+              "hin",
+              "her"
+            ]
+          },
+          {
+            "form": [
+              "Blick",
+              "Blicke",
+              "Blickchen"
+            ],
+            "not_after": [
+              "einem",
+              "dem",
+              "im",
+              "vom",
+              "beim",
+              "mit"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Blick",
+              "Blicke",
+              "Blickchen"
+            ],
+            "not_after": [
+              "einem",
+              "dem",
+              "im",
+              "vom",
+              "beim",
+              "mit"
+            ]
+          },
+          {
+            "form": [
+              "werfen",
+              "wirft",
+              "wirfst",
+              "werfe",
+              "werft",
+              "warf",
+              "warfen",
+              "warfst",
+              "geworfen",
+              "zu werfen",
+              "würfe",
+              "wirf",
+              "Wirf",
+              "Werft",
+              "werf"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er warf einen Blick auf die Uhr.",
+        "Sie bat ihn, einen langen und sehr genauen Blick auf die Pläne zu werfen.",
+        "Wirf mal einen Blick darauf!",
+        "Hast du schon einen Blick in das Buch geworfen?",
+        "Ich werfe nur kurz einen Blick hinein."
+      ],
+      "negative": [
+        "Sein Blick fiel auf das Bild.",
+        "Er warf den Ball.",
+        "Ihr Blick war ernst, und sie lachte nicht.",
+        "Er warf ihr einen bösen Blick zu.",
+        "Mit einem Blick auf die Uhr warf er den Ball."
+      ]
+    }
+  },
+  {
+    "id": "expression-394",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "nichts weiter / weiter nichts",
+    "translation_ru": "ничего больше; ничего особенного",
+    "translation_en": "nothing more; nothing special",
+    "example_de": "Er nickte, sagte aber nichts weiter.",
+    "example_ru": "Он кивнул, но больше ничего не сказал.",
+    "example_en": "He nodded but said nothing more.",
+    "notes_ru": [
+      "Разг. Das ist nichts weiter — ничего особенного, пустяки. Не путать: nichts weiter als — всего лишь."
+    ],
+    "notes_en": [
+      "Colloquial. Das ist nichts weiter — it's nothing (special). Do not confuse: nichts weiter als — nothing but."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/weiter_ferner_sonst",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "nichts",
+              "Nichts"
+            ]
+          },
+          {
+            "form": [
+              "weiter"
+            ],
+            "not_next": [
+              "als"
+            ],
+            "not_clause_has": [
+              "geht",
+              "ging",
+              "gingen",
+              "gehen",
+              "gegangen",
+              "geht's",
+              "geht’s",
+              "ginge"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "weiter",
+              "Weiter"
+            ],
+            "not_clause_has": [
+              "geht",
+              "ging",
+              "gingen",
+              "gehen",
+              "gegangen",
+              "geht's",
+              "geht’s",
+              "ginge"
+            ]
+          },
+          {
+            "form": [
+              "nichts"
+            ],
+            "not_next": [
+              "als"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er nickte, sagte aber nichts weiter.",
+        "Das ist nichts weiter.",
+        "Es war weiter nichts.",
+        "»Ach, das sei nichts weiter«, sagte sie schnell."
+      ],
+      "negative": [
+        "Das ist nichts weiter als ein Trick.",
+        "Weiter weiß ich nichts.",
+        "Er lief weiter als alle anderen.",
+        "Es geht nichts weiter.",
+        "Es ging nichts weiter voran."
       ]
     }
   }

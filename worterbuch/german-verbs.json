@@ -2910,6 +2910,15 @@
         "ihr": "schicktet",
         "sie": "schickten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "подобать, приличествовать; (устар.) смириться (с чем-либо)",
+      "translation_en": "to be proper, to be fitting; (dated) to resign oneself (to)",
+      "example_de": "Das schickt sich nicht.",
+      "example_ru": "Так не подобает.",
+      "example_en": "That isn't proper.",
+      "note_ru": "sich in etwas (A) schicken — смириться с чем-либо: Sie schickte sich in ihr Schicksal. — Она смирилась со своей судьбой.",
+      "note_en": "sich in etwas (A) schicken — to resign oneself to something: Sie schickte sich in ihr Schicksal. — She resigned herself to her fate."
     }
   },
   {
@@ -3133,6 +3142,16 @@
         "ihr": "denkt",
         "sie": "denken"
       }
+    },
+    "reflexive": {
+      "translation_ru": "представить себе; догадываться, думать (про себя)",
+      "translation_en": "to imagine; to guess, to think (to oneself)",
+      "example_de": "Das kann ich mir denken.",
+      "example_ru": "Это я могу себе представить.",
+      "example_en": "I can imagine that.",
+      "note_ru": "sich (D) etwas denken: Denk dir nur! — Представь себе! Ich habe mir schon gedacht, dass du kommst. — Я так и думал, что ты придёшь. Was hast du dir dabei gedacht? — О чём ты (вообще) думал?",
+      "note_en": "sich (D) etwas denken: Denk dir nur! — Just imagine! Ich habe mir schon gedacht, dass du kommst. — I thought you'd come. Was hast du dir dabei gedacht? — What were you thinking?",
+      "case": "Dativ"
     }
   },
   {
@@ -7332,6 +7351,16 @@
         "ihr": "holtet",
         "sie": "holten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "взять себе, сходить за; подхватить (болезнь, царапину)",
+      "translation_en": "to get oneself; to catch (an illness), to get (a scratch)",
+      "example_de": "Ich hole mir einen Kaffee.",
+      "example_ru": "Я схожу за кофе (возьму себе кофе).",
+      "example_en": "I'll get myself a coffee.",
+      "note_ru": "sich (D) etwas holen: Er hat sich eine Erkältung geholt. — Он подхватил простуду.",
+      "note_en": "sich (D) etwas holen: Er hat sich eine Erkältung geholt. — He caught a cold.",
+      "case": "Dativ"
     }
   },
   {
@@ -16104,6 +16133,16 @@
         "ihr": "spartet",
         "sie": "sparten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "избавить себя от, не утруждать себя; копить, откладывать (себе)",
+      "translation_en": "to spare oneself, not to bother with; to save (up) (for oneself)",
+      "example_de": "Das kannst du dir sparen.",
+      "example_ru": "Можешь не утруждать себя.",
+      "example_en": "You needn't bother.",
+      "note_ru": "sich (D) etwas sparen: Den Weg kannst du dir sparen. — Можешь не ходить. Копить себе: Ich habe mir das Geld für ein Fahrrad gespart. — Я накопил себе на велосипед.",
+      "note_en": "sich (D) etwas sparen: Den Weg kannst du dir sparen. — You can spare yourself the trip. To save up: Ich habe mir das Geld für ein Fahrrad gespart. — I saved up for a bike.",
+      "case": "Dativ"
     }
   },
   {
@@ -19688,7 +19727,7 @@
     "id": "verb-395",
     "infinitive": "aufgeben",
     "translation_ru": "бросать; сдаваться; отправлять (посылку); сдавать (багаж)",
-    "translation_en": "to give up; to send; to check in",
+    "translation_en": "to give up (a habit); to give up, to surrender; to send; to check in",
     "auxiliary": "haben",
     "example_de": "Gib nicht auf, du schaffst das!",
     "example_cloze": "{{c1::Gib}} nicht {{c1::auf}}, du schaffst das!",
@@ -23043,6 +23082,13 @@
         "ihr": "eiltet",
         "sie": "eilten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(устар., рег.) спешить, торопиться",
+      "translation_en": "(dated, regional) to hurry",
+      "example_de": "Eil dich, sonst kommen wir zu spät!",
+      "example_ru": "Поторопись, а то опоздаем!",
+      "example_en": "Hurry up, or we'll be late!"
     }
   },
   {
@@ -32140,8 +32186,8 @@
   {
     "id": "verb-661",
     "infinitive": "treten",
-    "translation_ru": "ступать; шагать; подходить",
-    "translation_en": "to step",
+    "translation_ru": "ступать, шагать; подходить",
+    "translation_en": "to step; to approach",
     "auxiliary": "sein",
     "usage_note_ru": "Treten Sie näher! — Подходите ближе! Пинать, наступать (намеренно) — Perfekt с haben (отдельная карточка).",
     "usage_note_en": "Treten Sie näher! — Come closer! To kick or step on something on purpose takes haben (separate card).",

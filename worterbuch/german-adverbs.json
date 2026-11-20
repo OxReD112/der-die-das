@@ -837,13 +837,13 @@
   {
     "id": "adverb-077",
     "word": "weiter",
-    "translation_ru": "дальше; далее",
-    "translation_en": "further; on",
+    "translation_ru": "дальше, далее; больше, ещё, кроме того",
+    "translation_en": "further, on; more, else, besides",
     "example_de": "Bitte lesen Sie weiter.",
     "example_ru": "Пожалуйста, читайте дальше.",
     "example_en": "Please read on.",
-    "usage_note_ru": "С глаголами значит «продолжать»: weiterlesen, weiterarbeiten. Und so weiter (usw.) — и так далее.",
-    "usage_note_en": "With verbs it means “to keep on”: weiterlesen, weiterarbeiten. Und so weiter (usw.) — and so on.",
+    "usage_note_ru": "С глаголами значит «продолжать»: weiterlesen, weiterarbeiten. Und so weiter (usw.) — и так далее. Больше, ещё, кроме того (Duden: außerdem, sonst) — чаще после отрицания или в вопросе: Weiter weiß ich nichts. — Больше я ничего не знаю. Es war niemand weiter da. — Больше никого не было. Was weiter? — И что ещё? nichts weiter als — всего лишь: Das ist nichts weiter als ein Kratzer. — Это всего лишь царапина.",
+    "usage_note_en": "With verbs it means “to keep on”: weiterlesen, weiterarbeiten. Und so weiter (usw.) — and so on. More, else, besides (Duden: außerdem, sonst) — mostly after a negation or in a question: Weiter weiß ich nichts. — I don't know anything more. Es war niemand weiter da. — There was nobody else there. Was weiter? — What else? nichts weiter als — nothing but: Das ist nichts weiter als ein Kratzer. — It's nothing but a scratch.",
     "example_cloze": "Bitte lesen Sie {{c1::weiter}}."
   },
   {
@@ -1495,7 +1495,7 @@
     "id": "adverb-132",
     "word": "danach",
     "translation_ru": "после этого, потом; (спросить) об этом",
-    "translation_en": "afterwards; after that; about it",
+    "translation_en": "afterwards, after that; about it",
     "word_order_pattern": "danach · **Verb** · Subjekt · …",
     "example_de": "Wir gehen ins Kino und danach essen wir etwas.",
     "example_ru": "Мы пойдём в кино, а потом что-нибудь поедим.",

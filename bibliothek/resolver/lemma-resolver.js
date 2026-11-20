@@ -19089,16 +19089,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       } else return false;
       return plainFinite(k) && finiteBefore();
     }
-    async function constructionAt(word, context) {
-      if (!Number.isInteger(context?.tokenOffset) || !constructionAnchors.size) return null;
-      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'constructionAt');
-      const index = clickedTokenIndex(tokens,context.tokenOffset,word);
-      if (index < 0) return null;
+    // The parts of the sentence of the expression search (one number per token; a new number after punctuation or at und / oder
+    // before a clause of its own), and whether a token opens its part. 20.11.2026 (advisor 20.11): one function for constructionAt and
+    // for the heading verb outside the parts in expressionGrammar — the same boundary as no_finite_between.
+    function expressionClauses(tokens, sentence) {
       const gap = i => i > 0 ? sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index) : "";
       const clause = [], opening = [];
-      // E3 (links chat, 22.10.2026; check of expressions 002–007): und / oder right before a finite verb starts another clause
-      // (Die FDP hat erst zugestimmt und will jetzt nichts damit zu tun haben — hat is not a part of the expression).
-      const finiteHere = i => /^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === "finite");
       for (let i = 0, c = 0; i < tokens.length; i++) {
         // (05.11.2026, expressions chat: the point of an abbreviation inside the sentence is no boundary here either — the same
         // clauseGapText as the verbal groups (L40 / P8), and a point without spaces between two short letter groups, one of them
@@ -19110,6 +19106,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (review 05.11: the point inside u.a. / d.h. opens nothing — D.H. Lawrence, U.A. Fanthorpe stay names)
         clause.push(c); opening.push(!i || !innerPoint && /[.!?:„“"«»]/u.test(gap(i)));
       }
+      return {clause, opening};
+    }
+    async function constructionAt(word, context) {
+      if (!Number.isInteger(context?.tokenOffset) || !constructionAnchors.size) return null;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'constructionAt');
+      const index = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (index < 0) return null;
+      const gap = i => i > 0 ? sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index) : "";
+      const clause = [], opening = [];
+      // E3 (links chat, 22.10.2026; check of expressions 002–007): und / oder right before a finite verb starts another clause
+      // (Die FDP hat erst zugestimmt und will jetzt nichts damit zu tun haben — hat is not a part of the expression).
+      const finiteHere = i => /^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === "finite");
+      { const parts = expressionClauses(tokens, sentence); clause.push(...parts.clause); opening.push(...parts.opening); }
       const keys = tokens.map(t => norm(t[0]));
       // Expressions chat 16.11 (advisor 16.11): in the search of expressions the s of a lone 's / ’s and of a contraction geht's /
       // gibt's / wie's / mir's is es — by the same function as A12 (colloquialExpansions); not where A12 does not read es
@@ -19176,6 +19185,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
                   // (a verb-final part keeps the conjunction: Warte, bis dahin alles fertig ist)
                   !partEndsWithFiniteVerb(sentence, tokens, i, {alone:true}))) continue;
             if (part.not_after && i > 0 && keyIn(i-1, partList(part,"not_after"))) continue;
+            // 19.11.2026 (expressions chat, advisor 19.11, «Астронавт»): `after` — the reverse of not_after: the word right before the part,
+            // in the same clause, is one of these, and it is no part of the expression (…, aber Mann! — Mann! is the expression, aber
+            // stays the conjunction «но»)
+            if (part.after && !(i > 0 && clause[i-1] === clause[i] && keyIn(i-1, partList(part,"after")))) continue;
             // 29.10.2026 (expressions chat; 101 / 106 dabei sein; advisor decision): `not_after_clause_adjective: "<word>"` — the
             // word right before the part opens its clause and has an own adjective card, and the part's first word is followed
             // right away by this word: Wichtig ist dabei, regelmäßig zu trinken — dabei «при этом», not «dabei sein». A word
@@ -19874,8 +19887,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // imperative — the expression would carry the wrong «Imperativ»)
         const verbShape = t => /^\p{Ll}/u.test(clauseTokens[t.i][0]) ||
           opensPart(t) && !(t.rows.some(a => a.kind === "imperative") && ["es","er","sie","ich","du","ihr","wir","man"].includes(norm(clauseTokens[t.i+1]?.[0] || "")));
-        if (fixed && lastVerb && !hits.length && !variantVerb()) {
-          const near = clause.filter(t => !inSpans(t) && verbShape(t) && !/^\p{Lu}/u.test(clauseTokens[t.i+1]?.[0] || "") &&
+        // (19.11.2026, advisor 19.11, «Астронавт»: also an Ausdruck whose heading has a finite verb outside its parts — jdm. fällt es
+        // wie Schuppen von den Augen: … da fiel es mir wie Schuppen von den Augen — fiel is the expression's verb)
+        if (lastVerb && !hits.length && !variantVerb()) {
+          // (advisor 20.11 (2): only in the part of the sentence of the parts — the boundary of constructionAt / no_finite_between)
+          const partClauses = expressionClauses(clauseTokens, sentence).clause, partIds = new Set(clause.filter(inSpans).map(t => partClauses[t.i]));
+          // (advisor 20.11 (3): a finite form with its detached particle in the sentence — by the resolver's own separable scan — is the
+          // separable verb, not the heading verb: fiel … auf is auffallen, not fallen; macht … auf is aufmachen, not machen. When the
+          // separable verb is the heading verb itself, it stays: jdm. etw. vormachen — macht ihm … vor)
+          const detachedHere = t => t.rows.some(a => a.detached) &&
+            separableCandidates(clauseTokens[t.i][0], {sentence, tokenOffset:clauseTokens[t.i].index}).some(c => norm(c.lemma || "") !== norm(lastVerb));
+          const near = clause.filter(t => !inSpans(t) && partIds.has(partClauses[t.i]) && !detachedHere(t) && verbShape(t) && !/^\p{Lu}/u.test(clauseTokens[t.i+1]?.[0] || "") &&
             t.rows.some(a => ["finite","infinitive","participle","imperative"].includes(a.kind) && ofHead(lastVerb, a)))
             .sort((a,b) => Math.min(Math.abs(clauseTokens[a.i].index - firstAt), Math.abs(clauseTokens[a.i].index - lastAt)) -
               Math.min(Math.abs(clauseTokens[b.i].index - firstAt), Math.abs(clauseTokens[b.i].index - lastAt)))[0];
@@ -19990,6 +20012,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         candidates:(result.candidates || []).map(c => c === result.selected ? selected : c)};
     }
     let outsideHeadingVerbs = null;
+    // (19.11.2026) the words of an expression heading, and for a lowercase finite verb among them its infinitive as well
+    // (reviewer 20.11: not the separable compounds of a detached stem — macht → aufmachen, anmachen … — they only widened the index)
+    const headingWordsWithBases = word => String(word || "").replace(/[()?!.,]/gu, " ").split(/\s+/u).filter(Boolean).flatMap(w => [norm(w),
+      ...(/^\p{Ll}/u.test(w) ? (verbAnalyses.get(norm(w)) || []).filter(a => a.kind === "finite" && !a.detached).map(a => norm(a.base || "")).filter(Boolean) : [])]);
     // (speed chat 18.11) the expression records whose heading has this word — the records a probe may find. One index of all
     // expression headings, built once at the first probe (a filter over all entries per word cost ~8 MB on the 28 perf-check taps).
     // (advisor 18.11) It lives in this resolver instance, as constructionAnchors and outsideHeadingVerbs: built from this instance's
@@ -19999,7 +20025,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!outsideTakersIndex) {
         outsideTakersIndex = new Map();
         for (const e of entries) if (e.type === "Ausdruck")
-          for (const w of new Set(String(e.word || "").replace(/[()?!.,]/gu, " ").split(/\s+/u).map(norm))) {
+          for (const w of new Set(headingWordsWithBases(e.word))) {
             if (!outsideTakersIndex.has(w)) outsideTakersIndex.set(w, []);
             outsideTakersIndex.get(w).push(e);
           }
@@ -20056,7 +20082,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // expression found from another word of the same part of the sentence, kept only when it takes the tapped word.
       // (reviewer 17.11: only for a verb that is the heading verb of some expression — a cheap pre-filter, the probe costs one search per
       // word — and at most 8 words to each side)
-      outsideHeadingVerbs ||= new Set(entries.filter(e => e.type === "Ausdruck").flatMap(e => String(e.word || "").replace(/[()?!.,]/gu, " ").split(/\s+/u).map(norm)));
+      // (19.11.2026, advisor 19.11: a finite verb of a heading counts by its infinitive too — fällt → fallen, so a tap on fiel finds
+      // jdm. fällt es wie Schuppen von den Augen)
+      outsideHeadingVerbs ||= new Set(entries.filter(e => e.type === "Ausdruck").flatMap(e => headingWordsWithBases(e.word)));
       if (!found && !contracted && Number.isInteger(context?.tokenOffset) && !context.outsideProbe &&
           (norm(word) === "nicht" ? outsideHeadingVerbs.has("nicht") : (verbAnalyses.get(norm(word)) || []).some(a => outsideHeadingVerbs.has(norm(a.base || a.entry?.word || ""))))) {
         const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, 'expressionGrammar');
