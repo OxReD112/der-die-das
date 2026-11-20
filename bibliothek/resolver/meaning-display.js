@@ -134,7 +134,7 @@
     // dictionary, whose keys are lowercase (brunnen -> Brunnen); the article of external nouns is a later step.
     const capital = gerund || candidate.source === 'fallback' && ['noun','name'].includes(candidate.pos);
     // G16 (advisor 25.10): an external noun with one gender of its meanings takes its article (die Schnecke, der Brunnen).
-    return `${candidate.item?.article || (gerund ? 'das' : '') || (candidate.source === 'fallback' && candidate.pos === 'noun' && candidate.nounArticle) || ''} ${capital ? candidate.lemma.charAt(0).toUpperCase() + candidate.lemma.slice(1) : candidate.lemma}`.trim();
+    return `${candidate.item?.article || (gerund ? 'das' : '') || (candidate.source === 'fallback' && candidate.pos === 'noun' && (candidate.headingArticle || candidate.nounArticle)) || ''} ${capital ? candidate.lemma.charAt(0).toUpperCase() + candidate.lemma.slice(1) : candidate.lemma}`.trim();
   }
   // G45 (2), reference 2.A (user 22.10.2026): dictionary labels before their meaning, from both dictionaries
   // (codes: fc122e9 English senses[6], a706d75 Russian `labels`). Style and region map to a short set; the domain

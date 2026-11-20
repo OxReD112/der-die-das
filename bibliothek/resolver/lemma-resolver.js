@@ -1685,9 +1685,20 @@ function apostropheText(text) {
       const seps = verbs.filter(e => e.separable_prefix && norm(e.word).startsWith(norm(e.separable_prefix))).map(e => {
         const p = norm(e.separable_prefix), stems = [...new Set([e.word, ...(Array.isArray(e.forms) ? e.forms : [])].map(f => norm(String(f))).filter(f => f.startsWith(p) && f.length > p.length + 1 && !f.includes(p + "zu") && !/^ge/u.test(f.slice(p.length))).map(f => f.slice(p.length)))];
         return [norm(e.word), p, stems, String(e.translation_en || "").split(/;\s*/u).filter(Boolean)]; });
-      if (aux.size || preps.length || seps.length) {
+      // (advisor 20.11) gender → the external reading's noun gender, the same way: nounGender (one article, several → «?» as for an
+      // external word of two genders) and the noun facts of lookup / lookupFacts (noun.article: one article, several → none) — the
+      // agreement rules (article, case, the attribute frame, the plural) and the heading take the gender from one place
+      const genders = new Map(lightRecords.filter(e => e.pos === "noun" && e.gender != null).map(e => [norm(e.word),
+        [...new Set((Array.isArray(e.gender) ? e.gender : [e.gender]).map(g => ({m:"der", f:"die", n:"das"})[String(g)]).filter(Boolean))]]).filter(([, a]) => a.length));
+      const regender = groups => Array.isArray(groups) ? groups.map(g => {
+        const a = g?.pos === "noun" && g.noun ? genders.get(norm(String(g.word || ""))) : null;
+        return a ? {...g, noun:{...g.noun, article:a.length === 1 ? a[0] : null, articles:a}} : g; }) : groups;
+      if (aux.size || preps.length || seps.length || genders.size) {
         const base = fallback;
         fallback = Object.assign({}, base, {
+          ...(genders.size && base.nounGender ? {nounGender:async word => { const a = genders.get(norm(String(word))); return a ? (a.length === 1 ? a[0] : "?") : base.nounGender(word); }} : {}),
+          ...(genders.size && base.lookup ? {lookup:async (word, issues) => regender(await base.lookup(word, issues))} : {}),
+          ...(genders.size && base.lookupFacts ? {lookupFacts:async word => { const r = await base.lookupFacts(word); return r ? {...r, groups:regender(r.groups)} : r; }} : {}),
           ...(aux.size && base.perfectAuxiliaries ? {perfectAuxiliaries:async lemma => aux.get(norm(String(lemma))) || base.perfectAuxiliaries(lemma)} : {}),
           ...(preps.length && base.verbPrepositions ? {verbPrepositions:async () => [...(await base.verbPrepositions()), ...preps]} : {}),
           ...(seps.length && base.separableEntries ? {separableEntries:async () => [...(await base.separableEntries()), ...seps]} : {})});
@@ -1699,6 +1710,12 @@ function apostropheText(text) {
       c.translation = {...(c.translation || {}), ...(en ? {en} : {}), ...(ru ? {ru} : {})};
       if (en) c.meanings = en.split(/;\s*/u).filter(Boolean);
       for (const field of LIGHT_FIELDS) if (e[field] != null) c[field] = e[field];
+      // (advisor 20.11) the gender of a record over the external reading — the heading only («das Interferometer»; two genders, in the
+      // order of the record — «das / die Hightech»); the reading's own article stays for the rules
+      if (c.pos === "noun" && e.gender != null) {
+        const articles = (Array.isArray(e.gender) ? e.gender : [e.gender]).map(g => ({m:"der", f:"die", n:"das"})[String(g)]).filter(Boolean);
+        if (articles.length) c.headingArticle = [...new Set(articles)].join(" / ");
+      }
       return c;
     };
     const lightCandidate = (e, word) => {

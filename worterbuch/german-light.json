@@ -621,5 +621,388 @@
   "pos": "adj",
   "translation_en": "departing, sailing; expiring, being phased out",
   "translation_ru": "отплывающий, выходящий в море; истекающий, снимаемый с производства"
+ },
+ {
+  "id": "light-0078",
+  "word": "Abwehrmechanismus",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Abwehrmechanismen",
+  "translation_en": "defence mechanism",
+  "translation_ru": "защитный механизм"
+ },
+ {
+  "id": "light-0079",
+  "word": "Besatzungsmitglied",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Besatzungsmitglieder",
+  "translation_en": "crew member",
+  "translation_ru": "член экипажа"
+ },
+ {
+  "id": "light-0080",
+  "word": "Brenner",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Brenner",
+  "translation_en": "burner; distiller",
+  "translation_ru": "горелка; винокур"
+ },
+ {
+  "id": "light-0081",
+  "word": "Celsius",
+  "pos": "noun",
+  "translation_en": "Celsius",
+  "translation_ru": "Цельсий, по Цельсию"
+ },
+ {
+  "id": "light-0082",
+  "word": "EKG",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "EKGs",
+  "translation_en": "ECG, EKG, electrocardiogram",
+  "translation_ru": "ЭКГ, электрокардиограмма"
+ },
+ {
+  "id": "light-0083",
+  "word": "LED",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "LEDs",
+  "translation_en": "LED, light-emitting diode",
+  "translation_ru": "светодиод"
+ },
+ {
+  "id": "light-0084",
+  "word": "Ufo",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Ufos",
+  "translation_en": "UFO",
+  "translation_ru": "НЛО"
+ },
+ {
+  "id": "light-0085",
+  "word": "Jet",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Jets",
+  "translation_en": "jet, jet plane",
+  "translation_ru": "реактивный самолёт"
+ },
+ {
+  "id": "light-0086",
+  "word": "Luftschleuse",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Luftschleusen",
+  "translation_en": "airlock",
+  "translation_ru": "шлюз, воздушный шлюз"
+ },
+ {
+  "id": "light-0087",
+  "word": "Kontrollraum",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Kontrollräume",
+  "translation_en": "control room",
+  "translation_ru": "центр управления, пункт управления, диспетчерская"
+ },
+ {
+  "id": "light-0088",
+  "word": "Kubikwurzel",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Kubikwurzeln",
+  "translation_en": "cube root",
+  "translation_ru": "кубический корень"
+ },
+ {
+  "id": "light-0089",
+  "word": "Livesendung",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Livesendungen",
+  "translation_en": "live broadcast",
+  "translation_ru": "прямой эфир, прямая трансляция"
+ },
+ {
+  "id": "light-0090",
+  "word": "Liveübertragung",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Liveübertragungen",
+  "translation_en": "live broadcast, live transmission",
+  "translation_ru": "прямая трансляция"
+ },
+ {
+  "id": "light-0091",
+  "word": "infrarot",
+  "pos": "adj",
+  "translation_en": "infrared",
+  "translation_ru": "инфракрасный"
+ },
+ {
+  "id": "light-0092",
+  "word": "Infrarotbereich",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Infrarotbereiche",
+  "translation_en": "infrared range",
+  "translation_ru": "инфракрасный диапазон"
+ },
+ {
+  "id": "light-0093",
+  "word": "Infrarotstrahlung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "infrared radiation",
+  "translation_ru": "инфракрасное излучение"
+ },
+ {
+  "id": "light-0094",
+  "word": "extraterrestrisch",
+  "pos": "adj",
+  "translation_en": "extraterrestrial",
+  "translation_ru": "внеземной"
+ },
+ {
+  "id": "light-0095",
+  "word": "geografisch",
+  "pos": "adj",
+  "translation_en": "geographical",
+  "translation_ru": "географический"
+ },
+ {
+  "id": "light-0096",
+  "word": "solar",
+  "pos": "adj",
+  "translation_en": "solar",
+  "translation_ru": "солнечный"
+ },
+ {
+  "id": "light-0097",
+  "word": "hyperventilieren",
+  "pos": "verb",
+  "translation_en": "to hyperventilate",
+  "translation_ru": "учащённо дышать, гипервентилировать"
+ },
+ {
+  "id": "light-0098",
+  "word": "herauszoomen",
+  "pos": "verb",
+  "translation_en": "to zoom out",
+  "translation_ru": "уменьшить масштаб, отдалить изображение"
+ },
+ {
+  "id": "light-0099",
+  "word": "hineinzoomen",
+  "pos": "verb",
+  "translation_en": "to zoom in",
+  "translation_ru": "увеличить масштаб, приблизить изображение"
+ },
+ {
+  "id": "light-0100",
+  "word": "Objektträger",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Objektträger",
+  "translation_en": "microscope slide",
+  "translation_ru": "предметное стекло"
+ },
+ {
+  "id": "light-0101",
+  "word": "Organelle",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Organellen",
+  "translation_en": "organelle",
+  "translation_ru": "органелла"
+ },
+ {
+  "id": "light-0102",
+  "word": "Zellwand",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Zellwände",
+  "translation_en": "cell wall",
+  "translation_ru": "клеточная стенка"
+ },
+ {
+  "id": "light-0103",
+  "word": "Harnröhre",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Harnröhren",
+  "translation_en": "urethra",
+  "translation_ru": "мочеиспускательный канал, уретра"
+ },
+ {
+  "id": "light-0104",
+  "word": "Formaldehyd",
+  "pos": "noun",
+  "gender": [
+   "m",
+   "n"
+  ],
+  "translation_en": "formaldehyde",
+  "translation_ru": "формальдегид"
+ },
+ {
+  "id": "light-0105",
+  "word": "Autoklav",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Autoklaven",
+  "translation_en": "autoclave",
+  "translation_ru": "автоклав"
+ },
+ {
+  "id": "light-0106",
+  "word": "Interferometer",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Interferometer",
+  "translation_en": "interferometer",
+  "translation_ru": "интерферометр"
+ },
+ {
+  "id": "light-0107",
+  "word": "Skyline",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Skylines",
+  "translation_en": "skyline",
+  "translation_ru": "силуэт города, городская панорама"
+ },
+ {
+  "id": "light-0108",
+  "word": "Nerd",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Nerds",
+  "translation_en": "colloq. nerd, geek",
+  "translation_ru": "разг. ботаник, компьютерщик"
+ },
+ {
+  "id": "light-0109",
+  "word": "Taskforce",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Taskforces",
+  "translation_en": "task force",
+  "translation_ru": "оперативная группа, рабочая группа"
+ },
+ {
+  "id": "light-0110",
+  "word": "Timing",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Timings",
+  "translation_en": "timing",
+  "translation_ru": "выбор момента, расчёт времени"
+ },
+ {
+  "id": "light-0111",
+  "word": "Toga",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Togen",
+  "translation_en": "toga",
+  "translation_ru": "тога"
+ },
+ {
+  "id": "light-0112",
+  "word": "Mailingliste",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Mailinglisten",
+  "translation_en": "mailing list",
+  "translation_ru": "список рассылки"
+ },
+ {
+  "id": "light-0113",
+  "word": "Hightech",
+  "pos": "noun",
+  "gender": [
+   "n",
+   "f"
+  ],
+  "translation_en": "high tech",
+  "translation_ru": "высокие технологии, хай-тек"
+ },
+ {
+  "id": "light-0114",
+  "word": "Mikro",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Mikros",
+  "translation_en": "colloq. mic, microphone",
+  "translation_ru": "разг. микрофон"
+ },
+ {
+  "id": "light-0115",
+  "word": "Mobile",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Mobiles",
+  "translation_en": "mobile, hanging decoration",
+  "translation_ru": "мобиль, подвесное украшение"
+ },
+ {
+  "id": "light-0116",
+  "word": "Single",
+  "pos": "noun",
+  "gender": [
+   "f",
+   "m"
+  ],
+  "plural": "Singles",
+  "translation_en": "single, record; single, unattached person",
+  "translation_ru": "сингл, пластинка; одинокий человек, холостяк"
+ },
+ {
+  "id": "light-0117",
+  "word": "Review",
+  "pos": "noun",
+  "gender": [
+   "n",
+   "m"
+  ],
+  "plural": "Reviews",
+  "translation_en": "review",
+  "translation_ru": "рецензия, обзор"
+ },
+ {
+  "id": "light-0118",
+  "word": "Jackpot",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Jackpots",
+  "translation_en": "jackpot",
+  "translation_ru": "джекпот"
+ },
+ {
+  "id": "light-0119",
+  "word": "SUV",
+  "pos": "noun",
+  "gender": [
+   "m",
+   "n"
+  ],
+  "plural": "SUVs",
+  "translation_en": "SUV, sport utility vehicle",
+  "translation_ru": "внедорожник, кроссовер"
+ },
+ {
+  "id": "light-0120",
+  "word": "Pi",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Pis",
+  "translation_en": "pi, the number; pi, the Greek letter",
+  "translation_ru": "число пи; пи, греческая буква"
  }
 ]
