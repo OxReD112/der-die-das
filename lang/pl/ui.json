@@ -915,9 +915,9 @@
   "pl": "Wypełnij formularz: "
  },
  {
-  "en": "✓ Added",
-  "ru": "✓ Добавлено",
-  "pl": "✓ Dodano"
+  "en": "This word isn't in the Wörterbuch yet.",
+  "ru": "Этого слова в Wörterbuch пока нет.",
+  "pl": "Tego słowa nie ma jeszcze w Wörterbuch."
  },
  {
   "en": "Added. Tap to undo",
@@ -935,34 +935,24 @@
   "pl": "Dodaj "
  },
  {
-  "en": "＋ adds the word to the end of your list.",
-  "ru": "＋ добавляет слово в конец списка.",
-  "pl": "＋ dodaje słowo na koniec listy."
- },
- {
-  "en": "＋ adds the word to your next new words.",
-  "ru": "＋ добавляет слово к следующим новым словам.",
-  "pl": "＋ dodaje słowo do następnych nowych słów."
- },
- {
-  "en": "Keep typing…",
-  "ru": "Печатай дальше…",
-  "pl": "Pisz dalej…"
- },
- {
   "en": "Loading the Wörterbuch…",
   "ru": "Загружаем Wörterbuch…",
   "pl": "Wczytywanie Wörterbuch…"
  },
  {
-  "en": "The Wörterbuch couldn't be loaded. Please try again.",
-  "ru": "Не удалось загрузить Wörterbuch. Попробуй ещё раз.",
-  "pl": "Nie udało się wczytać Wörterbuch. Spróbuj jeszcze raz."
+  "en": "Couldn't load the Wörterbuch. Maybe you're offline.",
+  "ru": "Не получилось загрузить Wörterbuch. Возможно, пропал интернет.",
+  "pl": "Nie udało się wczytać Wörterbuch. Możliwe, że nie masz połączenia z internetem."
  },
  {
-  "en": "Not in the Wörterbuch. Clear the search to type your own word.",
-  "ru": "В Wörterbuch такого нет. Очисти поиск, чтобы ввести своё слово.",
-  "pl": "Tego nie ma w Wörterbuch. Wyczyść wyszukiwanie, aby wpisać własne słowo."
+  "en": "Try again",
+  "ru": "Попробовать ещё раз",
+  "pl": "Spróbuj jeszcze raz"
+ },
+ {
+  "en": "＋ Add it yourself",
+  "ru": "＋ Добавить самому",
+  "pl": "＋ Dodaj samodzielnie"
  },
  {
   "en": "Your Own Words",
@@ -1515,34 +1505,9 @@
   "pl": "Pomaga zapamiętywać słowa w prawdziwych zdaniach. Każde słowo wraca tuż przed tym, jak je zapomnisz - i z czasem coraz rzadziej."
  },
  {
-  "en": "Where do you want to start?",
-  "ru": "С чего начнём?",
-  "pl": "Od czego zaczniemy?"
- },
- {
-  "en": "Quick start",
-  "ru": "Быстрый старт",
-  "pl": "Szybki start"
- },
- {
-  "en": "Pick the words you want to learn",
-  "ru": "Выбери слова, которые хочешь учить",
-  "pl": "Wybierz słowa, których chcesz się uczyć"
- },
- {
   "en": "＋ Start with my own words",
   "ru": "＋ Начать со своих слов",
   "pl": "＋ Zacznij od własnych słów"
- },
- {
-  "en": "Search the Wörterbuch, type or import",
-  "ru": "Найди в Wörterbuch, введи сам или импортируй",
-  "pl": "Znajdź w Wörterbuch, wpisz ręcznie albo zaimportuj"
- },
- {
-  "en": "Settings",
-  "ru": "Настройки",
-  "pl": "Ustawienia"
  },
  {
   "en": "<p><strong>Which files work</strong> EPUB without copy protection (DRM) and TXT. Books bought in shops such as Kindle, Apple Books or Kobo are usually protected and won’t open. PDF isn’t supported.</p><p><strong>Where books are kept</strong> Only on this device. Browser storage can be cleared, so keep your original files as a backup.</p>",

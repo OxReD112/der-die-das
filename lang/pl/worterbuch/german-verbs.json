@@ -198,7 +198,7 @@
   "_src_reader": "7b37b280"
  },
  "verb-023": {
-  "translation_pl": "zaczynać",
+  "translation_pl": "zaczynać; robić (coś) z (czymś), znajdować (czemuś) zastosowanie",
   "example_pl": "Film zaczyna się o ósmej.",
   "complements": [
    {
@@ -208,8 +208,9 @@
     "note_pl": "zaczynać (coś robić)"
    }
   ],
-  "_src": "6afc28e1",
-  "_src_reader": "e594f1c6"
+  "usage_note_pl": "Etw. mit etw. / jdm. anfangen — robić coś z czymś / kimś, znaleźć (czemuś) zastosowanie; zwykle z was, nichts, etwas, viel, wenig: Mit dem alten Rechner kann ich nichts mehr anfangen. — Ze starym komputerem nic już nie mogę zrobić. Często z damit: Was fange ich jetzt damit an? — Co mam teraz z tym zrobić? Ale mit etw. anfangen bez takiego dopełnienia — „zaczynać od czegoś”: Wir fangen mit der zweiten Übung an. — Zaczynamy od drugiego ćwiczenia.",
+  "_src": "d58029e9",
+  "_src_reader": "260221b5"
  },
  "verb-024": {
   "translation_pl": "przybywać",
@@ -579,8 +580,13 @@
  "verb-063": {
   "translation_pl": "posyłać; wysyłać",
   "example_pl": "Dziś wyślę ci wiadomość.",
-  "_src": "02e69af0",
-  "_src_reader": "7db5f798"
+  "reflexive": {
+   "translation_pl": "wypadać, być stosownym; (przestarz.) pogodzić się (z czymś)",
+   "example_pl": "Tak nie wypada.",
+   "note_pl": "sich in etwas (A) schicken — pogodzić się z czymś: Sie schickte sich in ihr Schicksal. — Pogodziła się ze swoim losem."
+  },
+  "_src": "8244475f",
+  "_src_reader": "bb3b0047"
  },
  "verb-064": {
   "translation_pl": "przeprowadzać się",
@@ -619,8 +625,13 @@
     "note_pl": "wyrażać opinię o kimś lub o czymś"
    }
   ],
-  "_src": "aa95b6c0",
-  "_src_reader": "9d06571b"
+  "reflexive": {
+   "translation_pl": "wyobrazić sobie; domyślać się, myśleć (w duchu)",
+   "example_pl": "To mogę sobie wyobrazić.",
+   "note_pl": "sich (D) etwas denken: Denk dir nur! — Wyobraź sobie! Ich habe mir schon gedacht, dass du kommst. — Tak myślałem, że przyjdziesz. Was hast du dir dabei gedacht? — Co ty sobie (w ogóle) myślałeś?"
+  },
+  "_src": "ea21b286",
+  "_src_reader": "13a140b7"
  },
  "verb-068": {
   "translation_pl": "decydować się; podejmować decyzję",
@@ -1449,11 +1460,17 @@
   "_src_reader": "45716071"
  },
  "verb-2565": {
-  "translation_pl": "zatrzymywać się (o pojazdach); trzymać się, nie psuć się (o kwiatach, butach, pogodzie)",
-  "usage_note_pl": "Bez dopełnienia. Der Bus hält vor dem Haus. — Autobus zatrzymuje się przed domem. Halt! — Stój! zu jemandem halten — stać po czyjejś stronie. Trzymać coś — osobne hasło halten.",
+  "translation_pl": "zatrzymywać się (o pojazdach); trzymać się, nie psuć się (o kwiatach, butach, pogodzie); stać po (czyjejś) stronie",
+  "usage_note_pl": "Bez dopełnienia bliższego. Der Bus hält vor dem Haus. — Autobus zatrzymuje się przed domem. Halt! — Stój! zu jemandem halten — stać po czyjejś stronie, pozostawać wiernym (komuś): Egal, was passiert, ich halte zu dir. — Cokolwiek się stanie, jestem po twojej stronie. Trzymać coś — osobne hasło halten.",
   "example_pl": "Czy ten autobus zatrzymuje się też przy ratuszu?",
-  "_src": "5ee9883f",
-  "_src_reader": "3f293420"
+  "complements": [
+   {
+    "meaning_pl": "stać po (czyjejś) stronie",
+    "note_pl": "stać po czyjejś stronie, pozostawać wiernym komuś"
+   }
+  ],
+  "_src": "3b538678",
+  "_src_reader": "f12c92fa"
  },
  "verb-147": {
   "translation_pl": "uważać (za kogoś, za coś); być (jakiegoś) zdania",
@@ -1495,8 +1512,13 @@
  "verb-150": {
   "translation_pl": "pójść (po coś); odbierać; przynosić",
   "example_pl": "Szybko pójdę do piekarni po bułki.",
-  "_src": "38273962",
-  "_src_reader": "96231a5c"
+  "reflexive": {
+   "translation_pl": "wziąć sobie, pójść po; nabawić się (choroby, zadrapania)",
+   "example_pl": "Pójdę po kawę (wezmę sobie kawę).",
+   "note_pl": "sich (D) etwas holen: Er hat sich eine Erkältung geholt. — Nabawił się przeziębienia."
+  },
+  "_src": "78a48ae1",
+  "_src_reader": "b80bd5f7"
  },
  "verb-151": {
   "translation_pl": "wspinać się; wdrapywać się; uprawiać wspinaczkę",
@@ -3237,22 +3259,16 @@
   "_src_reader": "2e110bb4"
  },
  "verb-312": {
-  "translation_pl": "dawać radę; zdążać",
-  "usage_note_pl": "W znaczeniu „tworzyć” — czasownik mocny: schuf, geschaffen (osobne hasło).",
+  "translation_pl": "dawać radę; zdążać; (pot.) dostarczać, zanosić, zabierać (dokądś)",
+  "usage_note_pl": "W znaczeniu „tworzyć” — czasownik mocny: schuf, geschaffen (osobne hasło). Dostarczyć, zabrać: Schafft mir den Kerl aus dem Haus! — Zabierzcie mi tego faceta z domu! jdn. aus dem Weg schaffen — usunąć z drogi, zlikwidować; sich (D) jdn. / etw. vom Hals schaffen — pozbyć się kogoś / czegoś; etw. aus der Welt schaffen — rozwiązać raz na zawsze (problem, spór).",
   "example_pl": "Dasz radę sam / sama?",
   "complements": [
    {
     "note_pl": "dawać sobie radę z czymś, zdążać z czymś"
    }
   ],
-  "extra_meanings": [
-   {
-    "pl": "dostarczyć, zanieść, zabrać (dokądś)",
-    "example_pl": "Zabierzcie mi tego faceta z domu!"
-   }
-  ],
-  "_src": "c5879a66",
-  "_src_reader": "13da16e1"
+  "_src": "dca7fa78",
+  "_src_reader": "3449a058"
  },
  "verb-313": {
   "translation_pl": "tworzyć",
@@ -3362,8 +3378,13 @@
     "note_pl": "odkładać na coś"
    }
   ],
-  "_src": "8957abd4",
-  "_src_reader": "32a45b86"
+  "reflexive": {
+   "translation_pl": "oszczędzić sobie, nie fatygować się; oszczędzać, odkładać (sobie)",
+   "example_pl": "Możesz się nie fatygować.",
+   "note_pl": "sich (D) etwas sparen: Den Weg kannst du dir sparen. — Możesz sobie oszczędzić drogi. Odkładać sobie: Ich habe mir das Geld für ein Fahrrad gespart. — Odłożyłem sobie na rower."
+  },
+  "_src": "cdc7229c",
+  "_src_reader": "0027c19e"
  },
  "verb-323": {
   "translation_pl": "zapisywać (dane); przechowywać",
@@ -4146,8 +4167,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "ee18ebdb",
-  "_src_reader": "ec9e0092"
+  "_src": "3b988e66",
+  "_src_reader": "878ff2cb"
  },
  "verb-396": {
   "translation_pl": "przytrzymywać (drzwi); zatrzymywać",
@@ -4788,8 +4809,12 @@
   "translation_pl": "spieszyć (dokądś); spieszyć się",
   "usage_note_pl": "W znaczeniu „być pilnym” Perfekt z haben: Es eilt! — To pilne!",
   "example_pl": "Pospieszyła na dworzec.",
-  "_src": "f06b9d1b",
-  "_src_reader": "e5e37374"
+  "reflexive": {
+   "translation_pl": "(przestarz., reg.) spieszyć się",
+   "example_pl": "Pospiesz się, bo się spóźnimy!"
+  },
+  "_src": "d104984e",
+  "_src_reader": "3f81eb2d"
  },
  "verb-470": {
   "translation_pl": "włamywać się; dokonywać kradzieży z włamaniem",
@@ -5222,10 +5247,16 @@
   "reflexive": {
    "translation_pl": "wziąć się w garść, uspokoić się; (kurz) wyrażać się zwięźle, mówić krótko; (bei / an den Händen) wziąć się (za ręce)",
    "example_pl": "Po pierwszym przestrachu szybko wzięła się w garść.",
-   "note_pl": "Fass dich kurz! — Mów krócej! Sie hatten sich bei den Händen gefasst. — Wzięli się za ręce."
+   "note_pl": "Fass dich kurz! — Mów krócej! Wziąć się za ręce — an / bei + D: Sie hatten sich bei den Händen gefasst. — Wzięli się za ręce.",
+   "complements": [
+    {
+     "meaning_pl": "(bei / an den Händen) wziąć się (za ręce)",
+     "note_pl": "wziąć się za ręce: sich an / bei den Händen fassen"
+    }
+   ]
   },
-  "_src": "c824f349",
-  "_src_reader": "428aec1e"
+  "_src": "25099948",
+  "_src_reader": "bbb840c9"
  },
  "verb-519": {
   "translation_pl": "leniuchować; lenić się",
@@ -6578,8 +6609,8 @@
   "_src_reader": "a6fc47bf"
  },
  "verb-652": {
-  "translation_pl": "uderzyć się, stłuc sobie (rękę, głowę); (przen.) oburzać się, gorszyć się (czymś)",
-  "usage_note_pl": "Stłuc sobie coś — zaimek w Dativie: Ich habe mir den Kopf gestoßen. — Uderzyłem się w głowę. Przen. — an + Dativ: Sie stößt sich an seinem Ton. — Razi ją jego ton. Bez sich: stoßen — popychać (haben); auf + Akkusativ — natknąć się (sein); osobne hasła. Odepchnąć się — sich abstoßen: Er stieß sich vom Beckenrand ab.",
+  "translation_pl": "uderzyć się, stłuc sobie (rękę, głowę); (przen.) oburzać się, gorszyć się (czymś); (książk.) odepchnąć się (od czegoś)",
+  "usage_note_pl": "Stłuc sobie coś — zaimek w Dativie: Ich habe mir den Kopf gestoßen. — Uderzyłem się w głowę. Przen. — an + Dativ: Sie stößt sich an seinem Ton. — Razi ją jego ton. Bez sich: stoßen — popychać (haben); auf + Akkusativ — natknąć się (sein); osobne hasła. Odepchnąć się — zwykle sich abstoßen: Er stieß sich vom Beckenrand ab. Rzadziej, książkowo, bez ab, z określeniem kierunku: Er stieß sich vom Boden in die Höhe.",
   "example_pl": "Uważaj, nie uderz się w głowę!",
   "complements": [
    {
@@ -6588,10 +6619,14 @@
    {
     "meaning_pl": "uderzyć się, stłuc sobie (rękę, głowę)",
     "note_pl": "coś / kogoś"
+   },
+   {
+    "meaning_pl": "(książk.) odepchnąć się (od czegoś)",
+    "note_pl": "(książk.) odepchnąć się od czegoś (vom Boden); zwykle — sich abstoßen"
    }
   ],
-  "_src": "6cc752ab",
-  "_src_reader": "8dc91362"
+  "_src": "43240286",
+  "_src_reader": "2ca7008f"
  },
  "verb-2559": {
   "translation_pl": "popychać, szturchać; uderzać (nogą, łokciem); wbijać, wtykać",
@@ -6721,11 +6756,11 @@
   "_src_reader": "d4af5906"
  },
  "verb-661": {
-  "translation_pl": "stąpać; stawiać kroki; podchodzić",
+  "translation_pl": "stąpać, stawiać kroki; podchodzić",
   "usage_note_pl": "Treten Sie näher! — Proszę podejść bliżej! Kopać, nadeptywać (celowo) — Perfekt z haben (osobne hasło).",
   "example_pl": "Podeszła do okna.",
-  "_src": "b01e5d2e",
-  "_src_reader": "1745ee8c"
+  "_src": "31b1cd46",
+  "_src_reader": "b61883c6"
  },
  "verb-662": {
   "translation_pl": "kopać (nogą); nadeptywać (na coś)",

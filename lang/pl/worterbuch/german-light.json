@@ -1,1 +1,272 @@
-{}
+{
+ "light-0001": {
+  "translation_pl": "(praw.) sąd przysięgłych",
+  "_src": "7ef00a65",
+  "_src_reader": "7ef00a65"
+ },
+ "light-0002": {
+  "translation_pl": "naładowany; pot. wściekły",
+  "_src": "882f2c7a",
+  "_src_reader": "882f2c7a"
+ },
+ "light-0003": {
+  "translation_pl": "wbudowany, osadzony",
+  "_src": "3346f473",
+  "_src_reader": "3346f473"
+ },
+ "light-0004": {
+  "translation_pl": "patogen, czynnik chorobotwórczy",
+  "_src": "12995d17",
+  "_src_reader": "12995d17"
+ },
+ "light-0005": {
+  "translation_pl": "według, zgodnie z",
+  "_src": "caef3f2a",
+  "_src_reader": "caef3f2a"
+ },
+ "light-0006": {
+  "translation_pl": "przez, w ciągu; cały, całą (den ganzen Tag über — cały dzień)",
+  "_src": "547a970d",
+  "_src_reader": "547a970d"
+ },
+ "light-0009": {
+  "translation_pl": "pot. zamknięty; zamknięty (o sklepie); zapięty; środ. zalany w trupa",
+  "_src": "4c8cebdc",
+  "_src_reader": "4c8cebdc"
+ },
+ "light-0010": {
+  "translation_pl": "witaj!, witamy!",
+  "_src": "bc7b5904",
+  "_src_reader": "bc7b5904"
+ },
+ "light-0011": {
+  "translation_pl": "pot. najważniejsze, byle tylko",
+  "_src": "a7e1d661",
+  "_src_reader": "a7e1d661"
+ },
+ "light-0013": {
+  "translation_pl": "płynnie się otworzyć, odsunąć się w bok",
+  "_src": "afaa35ff",
+  "_src_reader": "afaa35ff"
+ },
+ "light-0014": {
+  "translation_pl": "górny; wyższy, nadrzędny",
+  "_src": "b4646c30",
+  "_src_reader": "b4646c30"
+ },
+ "light-0015": {
+  "translation_pl": "dolny; niższy, podrzędny",
+  "_src": "75a417fa",
+  "_src_reader": "75a417fa"
+ },
+ "light-0016": {
+  "translation_pl": "tylny",
+  "_src": "d8ddf709",
+  "_src_reader": "d8ddf709"
+ },
+ "light-0017": {
+  "translation_pl": "zewnętrzny; zewnętrzny, zagraniczny",
+  "_src": "b4c5059f",
+  "_src_reader": "b4c5059f"
+ },
+ "light-0019": {
+  "translation_pl": "zostawiać samego",
+  "_src": "c885d84e",
+  "_src_reader": "c885d84e"
+ },
+ "light-0021": {
+  "translation_pl": "odsuwać na bok; zbywać, odrzucać",
+  "_src": "33408063",
+  "_src_reader": "33408063"
+ },
+ "light-0022": {
+  "translation_pl": "brzeg łóżka",
+  "_src": "8459a49d",
+  "_src_reader": "8459a49d"
+ },
+ "light-0025": {
+  "translation_pl": "sos pieczeniowy, sos do pieczeni",
+  "_src": "c371947c",
+  "_src_reader": "c371947c"
+ },
+ "light-0026": {
+  "translation_pl": "kawałek, bryła; strzępy zdań",
+  "_src": "d0522b93",
+  "_src_reader": "d0522b93"
+ },
+ "light-0027": {
+  "translation_pl": "pot. fajny, super; opanowany, niewzruszony",
+  "_src": "19997f19",
+  "_src_reader": "19997f19"
+ },
+ "light-0028": {
+  "translation_pl": "odliczanie",
+  "_src": "0f88d24e",
+  "_src_reader": "0f88d24e"
+ },
+ "light-0029": {
+  "translation_pl": "przestraszony",
+  "_src": "451214c9",
+  "_src_reader": "451214c9"
+ },
+ "light-0030": {
+  "translation_pl": "mała walizka, walizeczka",
+  "_src": "e6927359",
+  "_src_reader": "e6927359"
+ },
+ "light-0031": {
+  "translation_pl": "hej!",
+  "_src": "64cf74da",
+  "_src_reader": "64cf74da"
+ },
+ "light-0032": {
+  "translation_pl": "co ciekawe",
+  "_src": "e9309724",
+  "_src_reader": "e9309724"
+ },
+ "light-0033": {
+  "translation_pl": "kapsuła; osłona, skorupa",
+  "_src": "1f15fa42",
+  "_src_reader": "1f15fa42"
+ },
+ "light-0034": {
+  "translation_pl": "koja; kajuta",
+  "_src": "29ed0322",
+  "_src_reader": "29ed0322"
+ },
+ "light-0036": {
+  "translation_pl": "pot. cholera!, kurczę!",
+  "_src": "2f83a00a",
+  "_src_reader": "2f83a00a"
+ },
+ "light-0037": {
+  "translation_pl": "pot. o rany!, no, no!",
+  "_src": "70a5178b",
+  "_src_reader": "70a5178b"
+ },
+ "light-0039": {
+  "translation_pl": "najbliższy",
+  "_src": "1ce7a639",
+  "_src_reader": "1ce7a639"
+ },
+ "light-0043": {
+  "translation_pl": "pot. kłuć, ukłuć",
+  "_src": "490f73a3",
+  "_src_reader": "490f73a3"
+ },
+ "light-0046": {
+  "translation_pl": "rozwiązanie tymczasowe, prowizorka",
+  "_src": "b2592f34",
+  "_src_reader": "b2592f34"
+ },
+ "light-0048": {
+  "translation_pl": "wokół, dookoła",
+  "_src": "bc5534a2",
+  "_src_reader": "bc5534a2"
+ },
+ "light-0049": {
+  "translation_pl": "wokół, dookoła",
+  "_src": "d4d6f41d",
+  "_src_reader": "d4d6f41d"
+ },
+ "light-0050": {
+  "translation_pl": "odrzut; ciąg odrzutowy",
+  "_src": "c55f397c",
+  "_src_reader": "c55f397c"
+ },
+ "light-0054": {
+  "translation_pl": "zrozumiały bez wyjaśnień",
+  "_src": "2010900b",
+  "_src_reader": "2010900b"
+ },
+ "light-0055": {
+  "translation_pl": "odstęp, okres; zakres, rozpiętość",
+  "_src": "a4cb08c7",
+  "_src_reader": "a4cb08c7"
+ },
+ "light-0058": {
+  "translation_pl": "siennik",
+  "_src": "52529129",
+  "_src_reader": "52529129"
+ },
+ "light-0059": {
+  "translation_pl": "przyłbica, osłona; celownik",
+  "_src": "7002cc3e",
+  "_src_reader": "7002cc3e"
+ },
+ "light-0060": {
+  "translation_pl": "zdrzemnąć się, przysnąć",
+  "_src": "3d28a955",
+  "_src_reader": "3d28a955"
+ },
+ "light-0062": {
+  "translation_pl": "tubka pasty do zębów",
+  "_src": "b6560659",
+  "_src_reader": "b6560659"
+ },
+ "light-0063": {
+  "translation_pl": "współlokator, kolega z pokoju",
+  "_src": "8f737c57",
+  "_src_reader": "8f737c57"
+ },
+ "light-0064": {
+  "translation_pl": "pędzić w stronę czegoś, mknąć ku czemuś",
+  "_src": "218cc605",
+  "_src_reader": "218cc605"
+ },
+ "light-0065": {
+  "translation_pl": "zbombardować",
+  "_src": "c617f3ca",
+  "_src_reader": "c617f3ca"
+ },
+ "light-0066": {
+  "translation_pl": "z jej strony; z ich strony",
+  "_src": "e5d7b8bf",
+  "_src_reader": "e5d7b8bf"
+ },
+ "light-0067": {
+  "translation_pl": "pot. bałwan, głupek",
+  "_src": "c887338b",
+  "_src_reader": "c887338b"
+ },
+ "light-0068": {
+  "translation_pl": "nieurodzaj",
+  "_src": "ee9a8b99",
+  "_src_reader": "ee9a8b99"
+ },
+ "light-0069": {
+  "translation_pl": "źdźbło trawy",
+  "_src": "0fbf717e",
+  "_src_reader": "0fbf717e"
+ },
+ "light-0071": {
+  "translation_pl": "należny, niezapłacony; oczekiwany, nadchodzący",
+  "_src": "2d54624f",
+  "_src_reader": "2d54624f"
+ },
+ "light-0072": {
+  "translation_pl": "towarzyszący, związany",
+  "_src": "667bd004",
+  "_src_reader": "667bd004"
+ },
+ "light-0073": {
+  "translation_pl": "ustępujący, odchodzący ze stanowiska",
+  "_src": "81d6579d",
+  "_src_reader": "81d6579d"
+ },
+ "light-0074": {
+  "translation_pl": "zainwestowany, ulokowany; zaplanowany, pomyślany",
+  "_src": "7969570c",
+  "_src_reader": "7969570c"
+ },
+ "light-0075": {
+  "translation_pl": "wzruszający, poruszający",
+  "_src": "7ce46f7f",
+  "_src_reader": "7ce46f7f"
+ },
+ "light-0077": {
+  "translation_pl": "wypływający, wychodzący w morze; wygasający, wycofywany z produkcji",
+  "_src": "9987d65f",
+  "_src_reader": "9987d65f"
+ }
+}

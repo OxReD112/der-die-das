@@ -1119,6 +1119,86 @@
    "en": "form of {0}",
    "ru": "форма от {0}",
    "pl": "forma od {0}"
+  },
+  {
+   "en": "of/from {0}",
+   "ru": "относящийся к {0}",
+   "pl": "związany z miejscowością {0}"
+  },
+  {
+   "en": "nominalized infinitive of “{0}”",
+   "ru": "субстантивированный инфинитив от «{0}»",
+   "pl": "zsubstantywizowany bezokolicznik od „{0}”"
+  },
+  {
+   "en": "part of a word: {0}… — ending as in {1}",
+   "ru": "часть слова: {0}… — конец как в {1}",
+   "pl": "część słowa: {0}… — koniec jak w {1}"
+  },
+  {
+   "en": "letter “{0}”",
+   "ru": "буква „{0}“",
+   "pl": "litera „{0}”"
+  },
+  {
+   "en": "(dated) to go, to make one's way (somewhere)",
+   "ru": "(уст.) отправиться, забраться (куда-либо)",
+   "pl": "(przestarz.) udać się, dostać się (dokądś)"
+  },
+  {
+   "en": "one and a half",
+   "ru": "полтора",
+   "pl": "półtora"
+  },
+  {
+   "en": "{0} and a half",
+   "ru": "{0} с половиной",
+   "pl": "{0} i pół"
+  },
+  {
+   "en": "{0}-minute",
+   "ru": "{0}-минутный",
+   "pl": "{0}-minutowy"
+  },
+  {
+   "en": "{0}-hour",
+   "ru": "{0}-часовой",
+   "pl": "{0}-godzinny"
+  },
+  {
+   "en": "{0}-day",
+   "ru": "{0}-дневный",
+   "pl": "{0}-dniowy"
+  },
+  {
+   "en": "{0}-week",
+   "ru": "{0}-недельный",
+   "pl": "{0}-tygodniowy"
+  },
+  {
+   "en": "{0}-month",
+   "ru": "{0}-месячный",
+   "pl": "{0}-miesięczny"
+  },
+  {
+   "en": "{0}-year-old",
+   "ru": "{0}-летний",
+   "pl": "{0}-letni"
+  },
+  {
+   "en": "one and a half times",
+   "ru": "полтора раза",
+   "pl": "półtora raza"
+  },
+  {
+   "en": "one-and-a-half-fold",
+   "ru": "в полтора раза",
+   "pl": "półtorakrotny"
+  },
+  {
+   "en": "{0} (in order; the noun left out)",
+   "ru": "{0} (по счёту; существительное опущено)",
+   "pl": "{0} (z kolei; pominięty rzeczownik)"
   }
  ],
  "pronouns": [

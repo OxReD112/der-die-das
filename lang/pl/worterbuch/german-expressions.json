@@ -3449,5 +3449,176 @@
   ],
   "_src": "99a253c2",
   "_src_reader": "f50ac384"
+ },
+ "expression-376": {
+  "translation_pl": "cieszyć się życiem, dobrze się bawić, niczego sobie nie odmawiać",
+  "example_pl": "Niczego sobie nie odmawiajcie!",
+  "notes_pl": [
+   "Styl podniosły, książkowy (Duden: meist gehoben), często w trybie rozkazującym: Lasst es euch wohl sein! Nie mylić: etw. sein lassen — rzucić, przestać (Lass das sein! — Przestań!)."
+  ],
+  "_src": "08394273",
+  "_src_reader": "822356e8"
+ },
+ "expression-377": {
+  "translation_pl": "co w ciebie / niego wstąpiło?",
+  "example_pl": "Co też w ciebie wstąpiło?",
+  "notes_pl": [
+   "Pot. Ze zdziwieniem lub wyrzutem. Osoba — in + Akk: in dich, in ihn (jak po polsku: w ciebie, w niego)."
+  ],
+  "_src": "b0e08855",
+  "_src_reader": "487eb0e8"
+ },
+ "expression-378": {
+  "translation_pl": "(o myśli) przychodzić do głowy, przemykać przez głowę",
+  "example_pl": "Nagle przez głowę przemknęła mu myśl.",
+  "notes_pl": [
+   "Podmiotem jest myśl, pomysł, pytanie; komu — w Dativie (może go nie być). Perfekt z sein: Mir ist ein Gedanke durch den Kopf geschossen. Podobnie: jdm. fällt etw. ein. Nie mylić: jdm. durch den Kopf schießen — strzelić komuś w głowę."
+  ],
+  "_src": "3b2cdb9b",
+  "_src_reader": "5a57a47b"
+ },
+ "expression-379": {
+  "translation_pl": "napuścić, nasłać (kogoś na kogoś)",
+  "example_pl": "Nasłał na nich policję.",
+  "notes_pl": [
+   "Pot. Na kogo — w Dativie, kogo — w Akkusativie: jdm. die Polizei / das Finanzamt / die Hunde auf den Hals hetzen."
+  ],
+  "_src": "07e746e8",
+  "_src_reader": "dfddb423"
+ },
+ "expression-380": {
+  "translation_pl": "dotknąć, (przy okazji) wyrządzić szkodę, uszkodzić",
+  "example_pl": "Budynek mocno ucierpiał wskutek wichury.",
+  "notes_pl": [
+   "Częściej w stronie biernej (wurde / ist in Mitleidenschaft gezogen — ucierpiał); często pojawia się w wiadomościach."
+  ],
+  "_src": "8dae0a1a",
+  "_src_reader": "e57c58ec"
+ },
+ "expression-381": {
+  "translation_pl": "ruszyć (z miejsca), zacząć się poruszać",
+  "example_pl": "Pociąg powoli ruszył.",
+  "notes_pl": [
+   "O pociągu, samochodzie, tłumie, pochodzie. Bez sich — etw. in Bewegung setzen — wprawić coś w ruch, uruchomić."
+  ],
+  "_src": "eec8e33d",
+  "_src_reader": "14635774"
+ },
+ "expression-382": {
+  "translation_pl": "narażać się na niebezpieczeństwo, ryzykować (życiem)",
+  "example_pl": "Niepotrzebnie naraził się na niebezpieczeństwo.",
+  "notes_pl": [
+   "Z begeben lub bringen; rzadziej, książk. — z setzen (w baśniach: sich in Lebensgefahr setzen). Podobnie: sich einer Gefahr aussetzen. Bez sich — jdn. in Gefahr bringen — narażać kogoś na niebezpieczeństwo."
+  ],
+  "_src": "4ca9d388",
+  "_src_reader": "0e0608c9"
+ },
+ "expression-383": {
+  "translation_pl": "rzecz najważniejsza, sedno, podstawa",
+  "example_pl": "Najważniejsza jest praktyka.",
+  "notes_pl": [
+   "Od pierwszej i ostatniej litery alfabetu greckiego (alfa i omega). Często z Genitivem: das A und O jeder Beziehung."
+  ],
+  "_src": "ff491bdc",
+  "_src_reader": "3d6989b1"
+ },
+ "expression-384": {
+  "translation_pl": "od początku do końca, całkowicie, od A do Z",
+  "example_pl": "Zna miasto od A do Z.",
+  "notes_pl": [
+   "Pot. Całkowicie, bez wyjątku: alles von A bis Z erklären; von A bis Z gelogen — kłamstwo od początku do końca."
+  ],
+  "_src": "b99db2a8",
+  "_src_reader": "574a23a1"
+ },
+ "expression-385": {
+  "translation_pl": "narobić w spodnie (ze strachu)",
+  "example_pl": "Ze strachu narobił w spodnie.",
+  "notes_pl": [
+   "Pot., dość dosadne (Duden: salopp); często przen. — bardzo się przestraszyć. sich i vor Angst są nieobowiązkowe: Das Kind hat in die Hose gemacht."
+  ],
+  "_src": "7764bacc",
+  "_src_reader": "c9643041"
+ },
+ "expression-386": {
+  "translation_pl": "zmoczyć łóżko",
+  "example_pl": "Maluch znowu zmoczył łóżko.",
+  "notes_pl": [
+   "Pot., o dzieciach; zwykle bez sich: Das Kind macht nachts ins Bett. Nie mylić: das Bett machen — posłać łóżko; ins Bett gehen — kłaść się spać; pot. ich mach mich ins Bett — idę spać."
+  ],
+  "_src": "61d6041f",
+  "_src_reader": "f43ed616"
+ },
+ "expression-387": {
+  "translation_pl": "komuś serce uciekło w pięty",
+  "example_pl": "Kiedy zobaczył nauczyciela, serce uciekło mu w pięty.",
+  "notes_pl": [
+   "Pot. Komu — w Dativie (ihm, mir …). Czasownik: rutschen, fallen; rzadziej sinken. Także sein / ihr Herz."
+  ],
+  "_src": "9b28dcb4",
+  "_src_reader": "43ebd5be"
+ },
+ "expression-388": {
+  "translation_pl": "po raz pierwszy / drugi / … / ostatni",
+  "example_pl": "Po raz pierwszy był w Berlinie.",
+  "notes_pl": [
+   "Liczebnik porządkowy z końcówką -en: zum dritten Mal, zum letzten Mal, zum x-ten Mal, zum wiederholten Mal. Dawna pisownia łączna: zum erstenmal. bis zum nächsten Mal — do następnego razu."
+  ],
+  "_src": "1efd14a9",
+  "_src_reader": "20da13ab"
+ },
+ "expression-389": {
+  "translation_pl": "być do (czyjejś) dyspozycji, być dostępnym",
+  "example_pl": "Pieniądze są do Pana dyspozycji.",
+  "notes_pl": [
+   "Neutralne; często w stylu urzędowym. Podobnie: etw. zur Verfügung haben — mieć do dyspozycji. Udostępniać — etw. zur Verfügung stellen."
+  ],
+  "_src": "4e130132",
+  "_src_reader": "e98d7dac"
+ },
+ "expression-390": {
+  "translation_pl": "udostępniać, oddawać do dyspozycji",
+  "example_pl": "Miasto udostępnia pomieszczenia.",
+  "notes_pl": [
+   "Neutralne; często w stylu urzędowym, w stronie biernej: zur Verfügung gestellt werden. sich zur Verfügung stellen — zgłosić się na ochotnika, zaoferować swoją pomoc; sein Amt zur Verfügung stellen — oddać swoje stanowisko do dyspozycji. Być do dyspozycji — zur Verfügung stehen."
+  ],
+  "_src": "31a1e946",
+  "_src_reader": "10ce33a1"
+ },
+ "expression-391": {
+  "translation_pl": "kurczę!, a niech to!",
+  "example_pl": "Kurczę! Zapomniałem klucza.",
+  "notes_pl": [
+   "Pot., łagodniejsze niż verdammt!. Jako przymiotnik — verflixt schwer „diabelnie trudno” — to nie jest wykrzyknienie."
+  ],
+  "_src": "3563ae65",
+  "_src_reader": "e7a28cca"
+ },
+ "expression-392": {
+  "translation_pl": "do licha!, niech to licho weźmie!",
+  "example_pl": "Do licha, gdzie są moje okulary?",
+  "notes_pl": [
+   "Pot., łagodniejsze niż verdammt noch mal!. Także verflixt noch einmal / noch eins; często pisze się łącznie: verflixt nochmal."
+  ],
+  "_src": "9c2df19f",
+  "_src_reader": "92e67d91"
+ },
+ "expression-393": {
+  "translation_pl": "spojrzeć, rzucić okiem (na coś)",
+  "example_pl": "Rzucił okiem na zegarek.",
+  "notes_pl": [
+   "auf + Akk: einen Blick auf etw. werfen. Między einen a Blick mogą stać przymiotniki: einen kurzen / langen Blick werfen. Podobnie: jdm. einen Blick zuwerfen — rzucić komuś spojrzenie."
+  ],
+  "_src": "0dd75000",
+  "_src_reader": "7afeb6ad"
+ },
+ "expression-394": {
+  "translation_pl": "nic więcej; nic szczególnego",
+  "example_pl": "Kiwnął głową, ale nic więcej nie powiedział.",
+  "notes_pl": [
+   "Pot. Das ist nichts weiter — nic szczególnego, drobiazg. Nie mylić: nichts weiter als — nic innego jak."
+  ],
+  "_src": "4bfeb1a0",
+  "_src_reader": "34546ae0"
  }
 }
