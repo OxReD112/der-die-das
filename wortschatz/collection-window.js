@@ -624,7 +624,7 @@
       const info = el("p", "collCount", "");
       wrap.appendChild(info);
       box.appendChild(wrap);
-      M.loadSet(def).then(set => { info.textContent = M.setCount(set); }).catch(() => {});
+      M.loadSet(def).then(set => { info.textContent = M.chooseCount(set); }).catch(() => {});
     });
     if (ownBtn) ownBtn.onclick = () => open(viewCreate);
   }

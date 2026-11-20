@@ -524,6 +524,8 @@
     return setCache[def.id];
   }
   const setCount = set => wordsLabel((set.entries || []).length);
+  // 20.11.2026: the choose screen counts in German, like the start screen («200 Wörter»).
+  const chooseCount = set => { const n = (set.entries || []).length; return n + (n === 1 ? " Wort" : " Wörter"); };
   const pickLang = v => (v && typeof v === "object" ? v[cardLang()] || (packLang() ? D().pick(v) : "") || v.en || v.ru || "" : v || "");
   function setsScreen() {
     return {
@@ -813,7 +815,7 @@ Rules:
     SEARCH, fold, loadDictionaryIndex, findInDictionary, searchFields, searchState, addFromSearch, undoSearch,
     dictionaryConfirm, dictionaryError, prepareDictionaryWord,
     READING, readingSelected, confirmReading, readingDone,
-    SETS, loadSet, setCount, setsScreen, SETPICK, setWords, setPickState, inList, addFromSet,
+    SETS, loadSet, setCount, chooseCount, setsScreen, SETPICK, setWords, setPickState, inList, addFromSet,
     settings, setPace,
     FORMAT_BLOCK_EN, FORMAT_BLOCK_RU, create, createName, importScreen, fileProblem, fileUnreadable, runImport, result, format,
     rename, renameTo, exportFile, deleteScreen, deleteCollection, sessionEditable

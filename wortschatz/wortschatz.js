@@ -562,13 +562,11 @@ function layoutStart() {
 addEventListener("resize", layoutStart);
 /* CHOOSE SCREEN (2026-10-26): no words yet → word sets (quick start) or own words. Same layout as the start
    screen; the set lines use the start screen's collection-line look (no frames). */
-// Choose screen texts in the user's language (02.11.2026, RU / EN); the title stays German.
+// Choose screen texts (20.11.2026, Alena — variant A): German like the start screen («Wortlisten», «200 Wörter»);
+// only the button stays in the user's language (so it is clear what it does). The question «Where do you want to
+// start?», «Pick the words you want to learn» and the hint under the button are gone (02.11–19.11).
 const CHOOSE_TEXT = {
-  chooseQuestion: { en: "Where do you want to start?", ru: "С чего начнём?" },
-  chooseQuick: { en: "Quick start", ru: "Быстрый старт" },
-  chooseHint: { en: "Pick the words you want to learn", ru: "Выбери слова, которые хочешь учить" },
-  chooseOwn: { en: "＋ Start with my own words", ru: "＋ Начать со своих слов" },
-  chooseOwnHint: { en: "Search the Wörterbuch, type or import", ru: "Найди в Wörterbuch, введи сам или импортируй" }
+  chooseOwn: { en: "＋ Start with my own words", ru: "＋ Начать со своих слов" }
 };
 // 19.11.2026: the button is «Lerntempo» (aria-label in index.html); its icon shows the pace — tortoise / hare (wortschatz.css)
 if ($("wsSettings") && window.WortschatzCollection) $("wsSettings").dataset.pace = WortschatzCollection.getPace();
