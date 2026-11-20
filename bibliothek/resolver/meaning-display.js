@@ -103,6 +103,14 @@
     const lines = particleVerbLines(f, language);
     return lines.some(l => l.language === language) || englishPrefix(language) ? lines : null;
   };
+  // (20.11.2026, chat of languages: hereintreten «… treten — to step; to approach · treten — to kick; to tread on» cut into meanings as
+  // one line by «;» — «to tread on» of the second treten hidden behind «1 more meaning») English and Russian too: the lines of the
+  // parts, each cut on its own as in a pack language; Russian only when the verb has no Russian text of its own
+  const ownPartsLines = (candidate, language) => {
+    const f = candidate?.englishByParts;
+    if (isPack(language) || !f || typeof f !== 'object' || f.kind !== 'particle-verb' || !f.particle || !(f.verb || f.verbs?.length)) return null;
+    return language === 'en' || !brief(candidate, language) ? particleVerbLines(f, language) : null;
+  };
   // (19.11.2026) an external verb shown by its parts (G47: candidate.directionalSimple — the switch of wordCard below, decided by English)
   const simpleParts = candidate => !!candidate?.directionalSimple && byParts(candidate.directionalSimple) &&
     (!brief(candidate.directionalFull || candidate, 'en') || !!candidate.directionalPhrase?.en);
@@ -426,7 +434,7 @@
       const translated = brief(base, language);
       // (19.11.2026, review B: «angielski: herum — around · …» put the mark before German) a verb read by its parts in a pack language:
       // its lines, as its card shows them — each part in its language, an English meaning with its own mark
-      const partLines = !translated && isPack(language) ? englishPartsLines(base, language) : null;
+      const partLines = !translated && isPack(language) ? englishPartsLines(base, language) : ownPartsLines(base, language);
       if (partLines) return [{candidate:base, text:partLines.map(l => l.text).join(' · '), language}];
       const displayLanguage = translated ? language : 'en';
       const text = translated || brief(base, 'en');
@@ -964,6 +972,8 @@
       const english = meaningText(candidate, 'en', inline), mark = englishPrefix(language);
       return english && mark ? {...english, text:`${mark}${english.text}`, prefix:`${mark}${english.prefix || ''}`} : english;
     }
+    { const lines = ownPartsLines(candidate, language);
+      if (lines) return {text:lines.map(l => l.text).join(' · '), language, more:0, lines:lines.map(l => ({text:l.text, more:0, helpEntry:null}))}; }
     if (inline) { const own = brief(candidate, language, true), en = !own && language === 'ru' ? brief(candidate, 'en', true) : '';
       return own ? {text:own, language, more:hiddenMeanings(candidate, language)} : en ? {text:`английский: ${en}`, language:'en', more:hiddenMeanings(candidate, 'en')} : null; }
     const own = brief(candidate, language);
