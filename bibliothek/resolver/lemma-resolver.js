@@ -4275,6 +4275,16 @@ function apostropheText(text) {
       const allCandidates = candidates;
       if (!clauseInitial(context.sentence, context.tokenOffset)) candidates = candidates.filter(c => canonicalPos(c.pos) !== "Verb" || c.construction);
       let bases = candidates.filter(c => canonicalPos(c.pos) === "Adjektiv"), surface = norm(word);
+      // (chat of the reference 20.11, T-009 in der Siebten; advisor 20.11) an ordinal of ours with a capital inside the sentence and no
+      // noun or adjective after it — the noun is left out: «die Siebte · Nomen · aus Zahlwort siebte — 7-й (по счёту; существительное
+      // опущено)», as der Alte; no «класс / число» put in, no Russian gender by the German article. The first word of the sentence has a
+      // capital anyway — no sign there (Erste Hilfe, der Erste Weltkrieg: a noun follows)
+      const ordinal = !clauseInitial(context.sentence, context.tokenOffset) ? (() => {
+        const own = allCandidates.filter(c => c.source === "main" && c.pos === "numeral" && /(?:t|st)e$/u.test(norm(c.lemma)) &&
+          (/:ordinal:/u.test(String(c.dictionaryId || "")) || /(?:-й|ый|ий|ой)(?![\p{L}\p{M}])/u.test(String(c.item?.translation_ru || ""))));
+        return own.length === 1 ? own[0] : null; })() : null;
+      if (ordinal) { bases = [{...ordinal, pos:"Adjektiv", ordinalBase:true}]; candidates = candidates.filter(c => c.source === "main" && c !== ordinal &&
+        !["numeral","Adjektiv","Adverb"].includes(canonicalPos(c.pos)) && c.pos !== "numeral"); }
       // (advisor 15.11, #64) no adjective: a participle of a verb with an adjective ending — Partizip II (die Bedienten — bedient) or
       // Partizip I (die Reisenden — reisend) — is the base; «Nomen · aus Verb bedienen» with the verb's meaning.
       let participleVerb = null;
@@ -4373,6 +4383,8 @@ function apostropheText(text) {
       // die Neue Zürcher Zeitung) keeps the adjective attributive.
       const gap = next ? sentence.slice(tokens[index].index+tokens[index][0].length,next.index) : "";
       if (next && (/^\s*[-‐]\s*$/u.test(gap) || slot.joined(index,index+1) && /^[A-ZÄÖÜ]/u.test(next[0]))) return null;
+      // (an ordinal: no declined adjective after it either — der Erste große Sieg)
+      if (ordinal && next && slot.joined(index,index+1) && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(next[0]) && (modifiers.get(norm(next[0])) || []).some(r => r.kind === "adjective")) return null;
       // After a capitalised word inside the sentence (a noun or name) the word is
       // a name in apposition (die Fahrschule Rauer), not a nominalized adjective.
       if (index > 1 && /^[A-ZÄÖÜ]/u.test(tokens[index-1][0])) return null;
@@ -4399,7 +4411,7 @@ function apostropheText(text) {
         translation.ru = `субстантивированное причастие от «${verbBase}»${meaning.ru ? `: ${meaning.ru}` : ""}`;
       }
       return {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation,
-        usage:{role:"nominalized",kind:participleVerb ? "participle" : "adjective",base:participleVerb ? norm(participleVerb.lemma) : base,
+        usage:{role:"nominalized",kind:participleVerb ? "participle" : ordinal ? "ordinal" : "adjective",base:participleVerb ? norm(participleVerb.lemma) : base,
           baseDictionaryId:adjective.dictionaryId || null,form:word,general:true,...(noun ? {noun} : {}),
           // #89 (advisor 16.11, Alice P566 der Schwächste): the form is the superlative stem + ending — «Superlativ», «самый …»
           // (not am Schönsten — the adverbial superlative, advisor 16.11: not touched)
@@ -23532,7 +23544,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const cards = (whole?.candidates || []).filter(c => norm(c.lemma).includes("-") && c.pos !== "character");
       if (!cards.length) return null;
       const span = {text:compound,start,end};
-      const mark = c => ({...c,compound:{form:compound,part:word,spans:[span]}});
+      // (chat of the reference 20.11, fresh sample L-009: in der S-Bahn — the article was linked to nothing) the article before the whole
+      // word pairs with it as with any noun (rule of the pair, reference 4, 11.10): the pair is read from the last part (EU-Kommission —
+      // the capital abbreviation EU is never a noun of the pair), and the highlight is the article + the whole word
+      let pair = null;
+      { const last = /[\p{L}\p{M}\d]+$/u.exec(compound)[0];
+        if (cards.some(c => canonicalPos(c.pos) === "Nomen")) try { pair = await articleNounLink(last,{...context,tokenOffset:end-last.length}); } catch (_) { pair = null; }
+        if (pair && !pair.spans.some(p => p.start <= start && end <= p.end)) pair = null; }
+      const mark = c => ({...c,compound:{form:compound,part:word,spans:pair && canonicalPos(c.pos) === "Nomen" ? pair.spans : [span]},
+        ...(pair && canonicalPos(c.pos) === "Nomen" && !c.nounArticleLink ? {nounArticleLink:{...pair,clicked:"noun"}} : {})});
       const marked = new Map(whole.candidates.map(c => [c,mark(c)]));
       whole.candidates = whole.candidates.map(c => marked.get(c));
       if (whole.selected) whole.selected = marked.get(whole.selected) || mark(whole.selected);

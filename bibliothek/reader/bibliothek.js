@@ -1979,7 +1979,9 @@
     const paragraph = activeWordSpan.closest("[data-paragraph]");
     paragraph?.querySelectorAll(".reading-word").forEach(span => {
       const offset = Number(span.dataset.tokenOffset) - origin;
-      if (spans.some(part => part.start === offset && part.text === span.textContent)) span.classList.add("is-active-word");
+      // (chat of the reference 20.11: a span of a hyphenated word — S-Bahn, Ampel-Regierung — covers all its reading words)
+      if (spans.some(part => part.start === offset && part.text === span.textContent ||
+        /^[^\s]*[-‐‑][^\s]*$/u.test(part.text) && part.start <= offset && offset + span.textContent.length <= part.end)) span.classList.add("is-active-word");
     });
   }
   function closePopups() {

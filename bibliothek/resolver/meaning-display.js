@@ -1214,7 +1214,7 @@
       // (a person noun of a verb base — der Reisende: «aus Verb reisen», its own meaning «путешественник» stays)
       const labelVerb = fromVerb || usage.kind === 'person' && usage.verb === true;
       const base = gerund ? gerund[1].trim() : usage.base;
-      type = 'Nomen'; marks = [`aus ${labelVerb ? 'Verb' : 'Adjektiv'} ${base}`];
+      type = 'Nomen'; marks = [`aus ${labelVerb ? 'Verb' : usage?.kind === 'ordinal' ? 'Zahlwort' : 'Adjektiv'} ${base}`];
       if (usage?.kind === 'infinitive' || gerund) headingText = `das ${base.charAt(0).toUpperCase()}${base.slice(1)}`;
       // #20 (reference NOM-02g): etwas Neues / nichts Besonderes — the -e form as the heading, without an article (Neue).
       else if (usage?.kind === 'adjective' && usage.marker) headingText = String(candidate.lemma || '').replace(/s$/u, '');
@@ -1258,7 +1258,13 @@
         // and the noun's record has several readings (das Übersetzen «переправа; перевод» — the verb card decides): review 23.10.
         const nounOwn = gerund && language !== 'en' && realMeaning(language) &&
           (!own.text || !/;/u.test(String(candidate.translation?.en || '').replace(/^gerund of[^;]*;?/iu, '').trim()));
-        if (nounOwn) text = {text:compactIn(String(candidate.translation[language]).replace(/^gerund of[^;]*;?/iu, ''), language), language};
+        // (advisor 20.11, in der Siebten) an ordinal with its noun left out: the ordinal's meaning + «(по счёту; существительное опущено)» —
+        // a shared phrase of the display, translated by the packs (a pack without it: the meaning alone); no «От X —»
+        // (advisor 20.11: one template with the place {0}, so the packs translate it — dev/lang/reader-source.json, as «буква „{0}“»)
+        if (usage?.kind === 'ordinal' && meaning) {
+          const own = language === 'ru' || language === 'en' || !isPack(language) ? '' : packPhrase(language, '{0} (in order; the noun left out)', '{0} (по счёту; существительное опущено)');
+          text = {text:own ? fill(own, [meaning]) : language === 'ru' || language === 'en' ? L(language, '{0} (по счёту; существительное опущено)', '{0} (in order; the noun left out)', meaning) : meaning, language}; more = 0; }
+        else if (nounOwn) text = {text:compactIn(String(candidate.translation[language]).replace(/^gerund of[^;]*;?/iu, ''), language), language};
         else if (meaning) { text = {text:fromText(base, usage?.superlative && language === 'ru' ? superlativeRu(meaning) : meaning, language), language}; more = own.text ? own.rest : 0; }
         // (advisor 20.11: the frame «От X —» in the language shown, the English after it with the mark)
         else if (english) { text = {text:fromText(base, `${englishPrefix(language)}${english}`, language), language:'en'}; more = ownEn.text ? ownEn.rest : 0; }
