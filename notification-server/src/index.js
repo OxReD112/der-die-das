@@ -1,4 +1,8 @@
 import webpush from "web-push";
+// 20.11.2026: the rule «which sentence, when» lives in one shared file — the native app runs the same file.
+import "../../components/deutsch-notification-schedule-v1.js";
+
+const Schedule = globalThis.DeutschNotificationSchedule;
 
 const MAX_NOTIFICATIONS = 4;
 const NOTIFICATIONS_ENABLED_PREFIX = "enabled:";
@@ -70,6 +74,40 @@ async function deleteUserData(env, userId) {
   }
 
   await kv.delete(enabledKey(userId));
+}
+
+const parsePool = Schedule.parsePool;
+
+// Today's pool, or the most recent earlier non-empty pool.
+// Returns { pool, fallbackFrom } (fallbackFrom = the older date, or null),
+// or null when this user has no usable list at all.
+async function findPool(env, userId, date) {
+  const kv = env.GERMAN_NOTIFICATION_STATE;
+
+  const today = parsePool(await kv.get(`pool:${userId}:${date}`));
+  if (today) return { pool: today, fallbackFrom: null };
+
+  const prefix = `pool:${userId}:`;
+  const names = [];
+  let cursor;
+  do {
+    const listed = await kv.list({ prefix, cursor });
+    for (const key of listed.keys) names.push(key.name);
+    cursor = listed.list_complete ? undefined : listed.cursor;
+  } while (cursor);
+
+  // The newest earlier dates first, at most Schedule.LOOKBACK (30) of them.
+  const earlier = Schedule.earlierDates(
+    names.map(name => name.slice(prefix.length)),
+    date
+  );
+
+  for (const d of earlier) {
+    const pool = parsePool(await kv.get(`${prefix}${d}`));
+    if (pool) return { pool, fallbackFrom: d };
+  }
+
+  return null;
 }
 
 function enabledKey(userId) {
@@ -588,9 +626,9 @@ export default {
     const date = `${parts.year}-${parts.month}-${parts.day}`;
     const time = `${parts.hour}:${parts.minute}`;
 
-    const slots = ["09:30", "12:30", "18:00", "20:00"];
+    const slotIndex = Schedule.slotIndex(time);
 
-    if (!slots.includes(time)) {
+    if (slotIndex < 0) {
       console.log(
         `[CRON] ${date} ${time} — not a notification slot`
       );
@@ -609,8 +647,6 @@ export default {
       console.log(`[CRON] ${date} ${time} — no registered users.`);
       return;
     }
-
-    const slotIndex = slots.indexOf(time);
 
     // Users whose devices are gone. Removed from the index after the loop,
     // in one write, so parallel updates cannot overwrite each other.
@@ -647,31 +683,25 @@ export default {
         continue;
       }
 
-      const storedPool = await env.GERMAN_NOTIFICATION_STATE.get(
-        `pool:${userId}:${date}`
-      );
+      // Today's list, or — if Wortschatz was not finished yesterday or the
+      // list for today is empty — the most recent earlier non-empty list.
+      const found = await findPool(env, userId, date);
 
-      if (!storedPool) {
+      if (!found) {
         continue;
       }
 
-      let poolState;
-      try {
-        poolState = JSON.parse(storedPool);
-      } catch {
-        console.error(`[CRON] Invalid pool for user ${userId}.`);
-        continue;
+      const { pool, fallbackFrom } = found;
+
+      // Today's list: one sentence per slot. An older list is shifted by one
+      // sentence per day (Schedule.pick).
+      const notification = Schedule.pick(pool, slotIndex, date, fallbackFrom);
+
+      if (fallbackFrom) {
+        console.log(
+          `[CRON] ${date} ${time} — user ${userId}: no list for today, using ${fallbackFrom}.`
+        );
       }
-
-      const pool = Array.isArray(poolState.notifications)
-        ? poolState.notifications
-        : [];
-
-      if (pool.length === 0) {
-        continue;
-      }
-
-      const notification = pool[slotIndex % pool.length];
 
       // The same notification goes to every registered device of this user.
       const results = await Promise.all(
