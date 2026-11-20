@@ -450,6 +450,33 @@ textarea.coll-paste {
 .coll-search {
   position: relative;
 }
+/* 20.11.2026 (Alena): the field sits at the top of the form's scroll and leaves with it while you fill the card in.
+   While you search, the form's fields are hidden, the field stays on top and the results scroll under it. */
+.coll-scroll > .coll-search {
+  margin-bottom: 18px; /* inside the scroll its 2 would melt into the label's 16 above it — the form keeps its place */
+}
+.coll-searching > .coll-search {
+  margin-bottom: 2px;
+}
+.coll-results {
+  display: flow-root; /* its first line keeps its own top margin (as when the results had their own scroll) */
+}
+.coll-searching > :not(.coll-search):not(.coll-results) {
+  display: none;
+}
+.coll-searching > .coll-search {
+  position: sticky;
+  top: 4px; /* = its margin: it does not move when the results start to scroll */
+  z-index: 1;
+}
+/* the window's own colour behind the field, edge to edge, so nothing shows past it while the results scroll */
+.coll-searching > .coll-search::after {
+  content: "";
+  position: absolute;
+  inset: -4px -22px -6px;
+  z-index: -1;
+  background: var(--window-surface, var(--card-bg));
+}
 /* magnifier, so the field reads as a search and not as one more form field */
 .coll-search::before {
   content: "";
@@ -482,9 +509,6 @@ textarea.coll-paste {
   top: 50%;
   right: 4px;
   transform: translateY(-50%);
-}
-.coll-results-note {
-  margin: 10px 0 0;
 }
 .coll-hit {
   align-items: center;

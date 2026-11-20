@@ -325,8 +325,7 @@
       const v = String(q || "").trim();
       return v ? { field: /[\u0400-\u04ff]/.test(v) ? "cfMeaning" : "cfBase", value: v } : null;
     },
-    noteEnd: L("＋ adds the word to the end of your list.", "＋ добавляет слово в конец списка."),
-    noteNext: L("＋ adds the word to your next new words.", "＋ добавляет слово к следующим новым словам."),
+    // 20.11.2026 (Alena): no line under the search about where ＋ puts the word (noteEnd / noteNext) — unclear; „Learn now“ decides it
     // 20.11.2026 (Alena, variant C): added = a mint tick in a mint ring in place of ＋ (no text; the label is for VoiceOver)
     addedAria: L("Added. Tap to undo", "Добавлено. Нажми, чтобы отменить"),
     inList: T.inList(),

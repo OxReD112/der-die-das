@@ -340,10 +340,12 @@
     };
     input.addEventListener("input", () => { clearBtn.hidden = !input.value; });
     wrap.appendChild(clearBtn);
-    card.appendChild(wrap);
-    const results = el("div", "coll-scroll coll-results");
+    // 20.11.2026 (Alena): the field is the top of the form and scrolls away with it while you fill the card in;
+    // while you search it stays on top and the results scroll under it (.coll-searching)
+    form.appendChild(wrap);
+    const results = el("div", "coll-results");
     results.style.display = "none";
-    card.appendChild(results);
+    form.appendChild(results);
     const addedHere = new Map(); // dictionaryId → card id added from this search (for undo)
     let timer = 0, run = 0;
 
@@ -397,17 +399,17 @@
       box.appendChild(msg);
       return box;
     }
-    function note() {
-      return el("p", "coll-hint coll-results-note", placement() === "end" ? S.noteEnd : S.noteNext);
-    }
     async function update() {
       const q = input.value.trim(), mine = ++run;
       const searching = q.length > 0;
       // 03.11 (Alena): the window keeps its height while you search — the results take the form's place
       // (before, „no results“ shrank the window and it jumped down under the keyboard)
-      if (searching && form.style.display !== "none") results.style.minHeight = form.offsetHeight + "px";
+      if (searching && !form.classList.contains("coll-searching")) {
+        results.style.minHeight = Math.max(0, form.clientHeight - wrap.offsetHeight - 6) + "px";
+        form.scrollTop = 0;
+      }
       if (!searching) results.style.minHeight = "";
-      form.style.display = searching ? "none" : "";
+      form.classList.toggle("coll-searching", searching);
       results.style.display = searching ? "" : "none";
       if (!searching) { results.textContent = ""; return; }
       if (q.length < 2) { results.textContent = ""; results.appendChild(el("p", "coll-note", S.keepTyping)); return; }
@@ -438,7 +440,7 @@
         }));
         return;
       }
-      results.appendChild(note());
+      // 20.11.2026 (Alena): the list right under the search — no line about where ＋ puts the word
       const list = el("div", "coll-list coll-list-below");
       items.forEach(item => list.appendChild(row(item)));
       results.appendChild(list);
