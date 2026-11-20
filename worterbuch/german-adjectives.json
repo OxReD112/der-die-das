@@ -17692,5 +17692,34 @@
       "weiterem"
     ],
     "example_cloze": "Haben Sie noch {{c1::weitere}} Fragen zum Vertrag?"
+  },
+  {
+    "id": "adjective-1623",
+    "word": "verärgert",
+    "translation_ru": "раздосадованный, рассерженный",
+    "translation_en": "annoyed, angry",
+    "example_de": "Die Kunden waren über die lange Wartezeit verärgert.",
+    "example_ru": "Клиенты были раздосадованы долгим ожиданием.",
+    "example_en": "The customers were annoyed at the long wait.",
+    "example_cloze": "Die Kunden waren über die lange Wartezeit {{c1::verärgert}}.",
+    "usage_note_ru": "verärgert über + Akkusativ — раздосадованный, рассерженный чем-либо (из-за чего-либо); часто после глагола: verärgert reagieren — отреагировать с раздражением. Также форма глагола verärgern: Seine Antwort hat sie verärgert. — Его ответ её рассердил.",
+    "usage_note_en": "verärgert über + accusative — annoyed about something; often after a verb: verärgert reagieren — to react with annoyance. Also a form of the verb verärgern: Seine Antwort hat sie verärgert. — His answer annoyed her.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ"
+      }
+    ]
+  },
+  {
+    "id": "adjective-1624",
+    "word": "bedroht",
+    "translation_ru": "находящийся под угрозой, в опасности",
+    "translation_en": "threatened, endangered, at risk",
+    "example_de": "Viele Vogelarten sind vom Aussterben bedroht.",
+    "example_ru": "Многие виды птиц находятся под угрозой исчезновения.",
+    "example_en": "Many bird species are threatened with extinction.",
+    "example_cloze": "Viele Vogelarten sind vom Aussterben {{c1::bedroht}}.",
+    "usage_note_ru": "sich bedroht fühlen — чувствовать угрозу, чувствовать себя в опасности: In der dunklen Straße fühlte sie sich bedroht. — На тёмной улице она чувствовала себя в опасности. Также форма глагола bedrohen: Der Mann hat ihn mit einem Messer bedroht. — Мужчина угрожал ему ножом.",
+    "usage_note_en": "sich bedroht fühlen — to feel threatened: In der dunklen Straße fühlte sie sich bedroht. — She felt threatened in the dark street. Also a form of the verb bedrohen: Der Mann hat ihn mit einem Messer bedroht. — The man threatened him with a knife."
   }
 ]

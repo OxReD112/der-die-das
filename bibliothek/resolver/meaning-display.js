@@ -1454,7 +1454,9 @@
       return {...rest, heading:`sich ${lemma}`, grammar:rest.grammar.split(' · ').map(m => m.replace(` mit ${lemma}`, ` mit sich ${lemma}`)).join(' · '),
         text:L(directionLanguage, '(уст.) отправиться, забраться (куда-либо)', '(dated) to go, to make one\'s way (somewhere)'), textLanguage:directionLanguage, missing:false, derived:true, note:rest.note || '', more:0};
     }
-    if (!candidate.reflexivePhraseVerb && !objectDative && !(candidate.item || options.lookup?.({word:lemma, type:'Verb'}))?.reflexive) {
+    // (advisor 20.11: a field marked "direction" with no direction group — as no field: the external marks too)
+    const fieldItem = (candidate.item || options.lookup?.({word:lemma, type:'Verb'}))?.reflexive;
+    if (!candidate.reflexivePhraseVerb && !objectDative && (!fieldItem || fieldItem.direction && !candidate.reflexiveFieldDirection)) {
       const dative = k.reflexiveCase === 'Dativ';
       const unclear = !dative && k.reflexiveCase !== 'Akkusativ' && ['uns','euch'].includes(norm(k.pronoun?.text || ''));
       const markedSenses = lang => {
@@ -1493,7 +1495,9 @@
     // sign: the old sign misread a subject with a genitive after it as the object (sammeln sich die Gegner des Ausbaus), the count alone
     // misreads others (verteidigte sich die arme Alice, verwandelte sich das Rehkälbchen) — count 18.11: 1 980 sentences)
     const objectForField = k.objectGroup && candidate.reflexiveDirectObject !== false;
-    const field = dativeField ? (k.reflexiveCase !== 'Akkusativ' ? ownItem.reflexive : null) : k.reflexiveCase !== 'Dativ' && !objectForField ? ownItem?.reflexive : null;
+    // (advisor 20.11, batch 173: a field marked "direction": true only with the resolver's direction sign — reflexiveFieldDirection)
+    const directionOff = !!ownItem?.reflexive?.direction && !candidate.reflexiveFieldDirection;
+    const field = directionOff ? null : dativeField ? (k.reflexiveCase !== 'Akkusativ' ? ownItem.reflexive : null) : k.reflexiveCase !== 'Dativ' && !objectForField ? ownItem?.reflexive : null;
     // (shown as an own card's meaning — brackets kept, fit() with «ещё N значений» —; derived, so a choice row shows it too)
     // (a pack language: the field's text of the pack when the field is this card's own — candidate.packItem, Ч2б; otherwise the English
     // one, as an English card)

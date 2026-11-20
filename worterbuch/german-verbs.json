@@ -344,6 +344,16 @@
         "ihr": "arbeitetet",
         "sie": "arbeiteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "пробиться, проработать (с трудом)",
+      "translation_en": "to work one's way (up / through)",
+      "example_de": "Er hat sich nach oben gearbeitet.",
+      "example_ru": "Он пробился наверх.",
+      "example_en": "He worked his way up.",
+      "note_ru": "sich nach oben / durch etwas arbeiten: Ich arbeite mich durch den Stapel Briefe. — Я разбираю (с трудом прорабатываю) кипу писем.",
+      "note_en": "sich nach oben / durch etwas arbeiten: Ich arbeite mich durch den Stapel Briefe. — I'm working my way through the pile of letters.",
+      "direction": true
     }
   },
   {
@@ -4347,7 +4357,16 @@
         "note_ru": "пытаться (сделать что-либо)",
         "note_en": "to try (to do something)"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "попробовать себя (в чём-либо)",
+      "translation_en": "to try one's hand (at)",
+      "example_de": "Sie hat sich als Malerin versucht.",
+      "example_ru": "Она попробовала себя как художница.",
+      "example_en": "She tried her hand at painting.",
+      "note_ru": "sich in / an etwas (D) versuchen: Er versuchte sich an einem Roman. — Он попробовал написать роман.",
+      "note_en": "sich in / an etwas (D) versuchen: Er versuchte sich an einem Roman. — He tried his hand at a novel."
+    }
   },
   {
     "id": "verb-089",
@@ -25239,6 +25258,15 @@
         "ihr": "Fangt!",
         "Sie": "Fangen Sie!"
       }
+    },
+    "reflexive": {
+      "translation_ru": "прийти в себя, удержаться на ногах; попасться, запутаться (в чём-либо)",
+      "translation_en": "to recover, to steady oneself; to get caught (in)",
+      "example_de": "Nach dem Schreck hat sie sich schnell wieder gefangen.",
+      "example_ru": "После испуга она быстро пришла в себя.",
+      "example_en": "After the fright she quickly recovered.",
+      "note_ru": "Er stolperte, fing sich aber im letzten Moment. — Он споткнулся, но в последний момент удержался на ногах. Der Vogel hatte sich im Netz gefangen. — Птица запуталась в сети. Sich (D) etwas fangen (разг.) — подхватить, схлопотать: Ich habe mir eine Erkältung gefangen. — Я подхватил простуду.",
+      "note_en": "Er stolperte, fing sich aber im letzten Moment. — He tripped but caught himself at the last moment. Der Vogel hatte sich im Netz gefangen. — The bird got caught in the net. Sich (D) etwas fangen (colloquial) — to catch, to get: Ich habe mir eine Erkältung gefangen. — I caught a cold."
     }
   },
   {
@@ -26082,6 +26110,16 @@
         "ihr": "fresst",
         "Sie": "fressen Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "въедаться, вгрызаться",
+      "translation_en": "to eat into, to eat one's way through",
+      "example_de": "Der Rost frisst sich ins Metall.",
+      "example_ru": "Ржавчина въедается в металл.",
+      "example_en": "Rust eats into the metal.",
+      "note_ru": "sich in / durch etwas fressen: Der Bagger fraß sich durch den Hang. — Экскаватор вгрызался в склон.",
+      "note_en": "sich in / durch etwas fressen: Der Bagger fraß sich durch den Hang. — The digger ate its way through the slope.",
+      "direction": true
     }
   },
   {

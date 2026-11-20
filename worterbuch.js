@@ -97,8 +97,8 @@
     }
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261118-wn-wbsrc156-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261120-wn-x178-anfangen-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261118-wn-wbsrc156-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261120-wn-x182-sichheld-3"),
+      loadJson("worterbuch/german-adjectives.json?v=20261120-wn-x184-adj-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261119-wn-x168-weiter-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261116-wn-alice130-1"),
       loadJson("worterbuch/german-pronouns.json?v=20261114-wn-selber110-1"),
