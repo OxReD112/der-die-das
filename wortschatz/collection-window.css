@@ -582,7 +582,8 @@ textarea.coll-paste {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.coll-add-self {
+.coll-add-self,
+.coll-retry {
   margin-top: 16px;
 }
 .coll-hit-in {

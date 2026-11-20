@@ -314,9 +314,10 @@
   const SEARCH = () => ({
     placeholder: L("Search the Wörterbuch", "Поиск в Wörterbuch"),
     clear: L("Clear search", "Очистить поиск"),
-    keepTyping: L("Keep typing…", "Печатай дальше…"),
     loading: L("Loading the Wörterbuch…", "Загружаем Wörterbuch…"),
-    loadError: L("The Wörterbuch couldn't be loaded. Please try again.", "Не удалось загрузить Wörterbuch. Попробуй ещё раз."),
+    // 20.11.2026 (Alena, variant A): what happened, then a button that does it again (no request the person can't act on)
+    loadError: L("Couldn't load the Wörterbuch. Maybe you're offline.", "Не получилось загрузить Wörterbuch. Возможно, пропал интернет."),
+    retry: L("Try again", "Попробовать ещё раз"),
     // 20.11.2026 (Alena): kinder — what is missing, then a button that does it (clears the search, opens the form)
     none: L("This word isn't in the Wörterbuch yet.", "Этого слова в Wörterbuch пока нет."),
     addSelf: L("＋ Add it yourself", "＋ Добавить самому"),

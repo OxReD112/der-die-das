@@ -412,18 +412,22 @@
       form.classList.toggle("coll-searching", searching);
       results.style.display = searching ? "" : "none";
       if (!searching) { results.textContent = ""; return; }
-      if (q.length < 2) { results.textContent = ""; results.appendChild(el("p", "coll-note", S.keepTyping)); return; }
+      // 20.11.2026 (Alena): from the first letter, like the Wörterbuch on Home — no «Keep typing…» (it sounded like an order)
       if (!results.childElementCount) results.appendChild(el("p", "coll-note", S.loading));
       let index;
       try { index = await M.loadDictionaryIndex(); } catch (e) {
         if (mine !== run) return;
         results.textContent = "";
         results.appendChild(el("p", "coll-error", S.loadError));
+        // 20.11.2026 (Alena): loads the Wörterbuch again (the model forgets a failed load)
+        results.appendChild(button("coll-raised coll-retry", S.retry, () => { results.textContent = ""; clearTimeout(timer); update(); }));
         return;
       }
       if (mine !== run) return;
       const items = M.findInDictionary(index, q);
       results.textContent = "";
+      // 20.11.2026: one or two letters with nothing found (a translation is found from its 3rd letter) — nothing yet, not «not in the Wörterbuch»
+      if (!items.length && q.length < 3) return;
       if (!items.length) {
         results.appendChild(el("p", "coll-note", S.none));
         // 20.11.2026 (Alena: the main cream button — the outlined one looked disabled): the same as × — clears the search, the form comes back — then the cursor in its first field
