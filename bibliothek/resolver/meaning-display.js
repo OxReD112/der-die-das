@@ -1192,9 +1192,14 @@
         // No own participle card: the source verb explains the form.
         const meaning = meaningText(candidate, language);
         headingText = usage.form; type = participle;
-        text = meaning ? {text:fromText(candidate.lemma, bare(meaning), meaning.language), language:meaning.language,
+        // (advisor 20.11: English inside a line always with the mark; the frame «От X —» in the language shown — any language shown,
+        // EN unchanged: there the meaning is of the language shown)
+        const other = meaning && meaning.language && meaning.language !== language;
+        text = !meaning ? null : other ? {text:fromText(candidate.lemma, meaning.text, language), language:meaning.language,
+          ...(meaning.segments ? {segments:meaning.segments, prefix:`${fromText(candidate.lemma, '', language)}${meaning.prefix || ''}`} : {})}
+          : {text:fromText(candidate.lemma, bare(meaning), meaning.language), language:meaning.language,
           // review 22.10: the labels cut from the source text stand before the meaning after «От X —»
-          ...(meaning.segments ? {segments:meaning.segments, prefix:`${meaning.prefix || ''}${fromText(candidate.lemma, '', meaning.language)}`} : {})} : null;
+          ...(meaning.segments ? {segments:meaning.segments, prefix:`${meaning.prefix || ''}${fromText(candidate.lemma, '', meaning.language)}`} : {})};
         more = meaning?.more || 0;
       } else if (participle) type = participle;
       else if (usage.kind === 'comparative') marks.push('Komparativ');
@@ -1253,7 +1258,8 @@
           (!own.text || !/;/u.test(String(candidate.translation?.en || '').replace(/^gerund of[^;]*;?/iu, '').trim()));
         if (nounOwn) text = {text:compactIn(String(candidate.translation[language]).replace(/^gerund of[^;]*;?/iu, ''), language), language};
         else if (meaning) { text = {text:fromText(base, usage?.superlative && language === 'ru' ? superlativeRu(meaning) : meaning, language), language}; more = own.text ? own.rest : 0; }
-        else if (english) { text = {text:`${englishPrefix(language)}${fromText(base, english, 'en')}`, language:'en'}; more = ownEn.text ? ownEn.rest : 0; }
+        // (advisor 20.11: the frame «От X —» in the language shown, the English after it with the mark)
+        else if (english) { text = {text:fromText(base, `${englishPrefix(language)}${english}`, language), language:'en'}; more = ownEn.text ? ownEn.rest : 0; }
       }
       if (baseEntry && !candidate.item) helpEntry = baseEntry;
     }
@@ -1398,7 +1404,11 @@
           !c.construction && englishPartsLines(c, pack)?.some(l => l.language === pack));
       // (and a nominalized word of an own card whose pack text is read: der Alte — «Od alt — stary»)
       const nominalOwn = shown === 'en' && usage?.role === 'nominalized' && !!usage.baseText?.[pack] && !usage.noun;
-      options = {...options, language:nominalParts || nominalOwn ? pack : shown};
+      // (advisor 20.11: a participle of a verb with no own participle card and no pack text — the frame «Od X —» in the pack, the
+      // English meaning after it with the mark: «Od fernsteuern — angielski: …», not «angielski: From fernsteuern — …»)
+      const participleFrame = shown === 'en' && (usage?.role === 'attributive' || usage?.role === 'adverbial') && !!participleName(usage) &&
+        pos(candidate) === 'Verb' && !!packPhrase(pack, 'From {0} — {1}', 'От {0} — {1}');
+      options = {...options, language:nominalParts || nominalOwn || participleFrame ? pack : shown};
     }
     const result = cardCore(resolution, candidate, options);
     const k = candidate?.construction, language = textLanguage(options.language);
@@ -1488,8 +1498,10 @@
     const meaning = meaningText(candidate, language);
     // (user 06.11: the mark «(без sich)» after the verb's name is required — without it the line reads as the meaning of «sich X»)
     // (18.11.2026: a pack language keeps the mark «English: » of an English meaning — the line is the plain verb's, in English)
-    const lines = meaning ? [{...namedLine(`${lemma} ${L(language, '(без sich)', '(without sich)')}`, isPack(language) ? meaning.text : bare(meaning), meaning.more || 0), helpEntry:candidate.item || null,
-      ...(isPack(language) && meaning.language && meaning.language !== language ? {language:meaning.language} : {})}]
+    // (advisor 20.11: any language shown — a meaning not in the language shown keeps its mark «английский: » / «English: »)
+    const other = meaning && meaning.language && meaning.language !== language;
+    const lines = meaning ? [{...namedLine(`${lemma} ${L(language, '(без sich)', '(without sich)')}`, other ? meaning.text : bare(meaning), meaning.more || 0), helpEntry:candidate.item || null,
+      ...(other ? {language:meaning.language} : {})}]
       : [{text:say(NO_TRANSLATION, language), more:0, helpEntry:null}];
     const {segments: _s, segmentPrefix: _p, ...rest} = result;
     return {...rest, heading:`sich ${lemma}`, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true, more:0};

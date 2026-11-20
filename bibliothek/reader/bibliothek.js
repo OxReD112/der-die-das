@@ -195,6 +195,8 @@
   };
   const say = message => T(message, MESSAGES_RU[message] || message);
   function applyLibraryTexts() {
+    // (advisor 20.11) the page in Russian is lang="ru"; English (and a pack language — its frame is English) as before
+    document.documentElement.lang = locale() === "ru" ? "ru" : "en";
     const note = T(LIBRARY_NOTE.en, LIBRARY_NOTE.ru), empty = T(LIBRARY_EMPTY.en, LIBRARY_EMPTY.ru);
     $("storage-note").innerHTML = note;
     $("storage-note").lang = shownIn(note, LIBRARY_NOTE.en);
@@ -1278,10 +1280,12 @@
     const moreLabel = n => T("{0} more {0|meaning|meanings}", "ещё {0} {0|значение|значения|значений}", n);
     // (19.11.2026) a button of the frame inside the card (a pack language): its lang is the language its label is in; ru / en — none
     const moreEn = n => `${n} more ${n === 1 ? "meaning" : "meanings"}`;
-    const frameLang = (el, text, en) => { if (popupLanguage() !== locale()) el.lang = shownIn(text, en); };
+    // (advisor 20.11) the same lang rules for Russian as for a pack language (langRules): any language shown but English
+    const langRules = () => popupLanguage() !== "en";
+    const frameLang = (el, text, en) => { if (langRules()) el.lang = shownIn(text, en); };
     // (19.11.2026) the lang of the popup's frame in a pack language (each text of T — the language it is in: shownIn); ru / en — none
     const packLangs = () => {
-      const pack = popupLanguage() !== locale();
+      const pack = langRules();
       const set = (el, language) => { if (!el) return; if (pack && language) el.lang = language; else el.removeAttribute("lang"); };
       set($("popover-word"), "de");
       const more = $("popover-more"), moreEn = more.firstChild?.textContent?.trim() === "Pronoun reference" || more.firstChild?.textContent?.trim() === "Dictionary details";
@@ -1429,7 +1433,8 @@
         });
         content.append(note);
       }
-      content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : popupLanguage();
+      // (advisor 20.11: Russian as a pack language — an English text after the mark is lang="en")
+      content.lang = model.textLanguage === "en" ? "en" : popupLanguage();
       updateTranslationFade();
       $("popover-alternatives").querySelector("summary").textContent = T("Other meanings", "Другие значения");
       packLangs();
@@ -1543,7 +1548,7 @@
       const moreText = hidden > 0 ? moreLabel(hidden) : "";
       // (19.11.2026) a pack language: each part of the row in its language — German heading and grammar, the meaning in the row's,
       // «N more meanings» in the frame's; ru / en — no lang, as before
-      const packRow = popupLanguage() !== locale(), rowLang = {"lemma-choice-heading":"de", "lemma-choice-grammar":"de",
+      const packRow = langRules(), rowLang = {"lemma-choice-heading":"de", "lemma-choice-grammar":"de",
         "lemma-choice-text":altModel.derived ? altModel.textLanguage : language, "lemma-choice-more":shownIn(moreText, moreText ? `${hidden} more ${hidden === 1 ? "meaning" : "meanings"}` : "")};
       for (const [cls, value] of [["lemma-choice-heading", altModel.heading], ["lemma-choice-grammar", altModel.grammar], ["lemma-choice-text", marked], ["lemma-choice-more", moreText]]) {
         if (!value) continue;
@@ -1694,7 +1699,9 @@
     const pack = packSheet(item), code = pack ? sheetLanguage() : null;
     // (19.11.2026) a pack language chosen: the reference is in it (its frame, its notes) even when the card's texts are English —
     // each English text carries the mark and lang="en" itself
-    if (sheetLanguage()) root.lang = code || sheetLanguage(); else root.removeAttribute("lang");
+    // (advisor 20.11) Russian: the same lang rules (langShown) — the reference ru, German texts de; its texts and marks as before
+    const langShown = sheetLanguage() || (popupLanguage() === "ru" ? "ru" : null);
+    if (langShown) root.lang = code || langShown; else root.removeAttribute("lang");
     // (19.11.2026, user: no English line without the mark) a pack language whose texts this card has not (outdated, not read, a card the
     // resolver made — das Alte «nominalized adjective of “alt”»): the English reference, each English text with the mark as well
     const chosen = sheetLanguage() || null, mark = chosen ? window.BibliothekMeaningDisplay?.englishMark?.(chosen) || "" : "", shownLang = code || chosen;
@@ -1734,7 +1741,7 @@
         } else element.append(document.createTextNode(part));
       }
     };
-    const head = document.createElement("h2"); head.className = "dictionary-headword"; if (!list) head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; if (chosen) head.lang = "de"; root.append(head);
+    const head = document.createElement("h2"); head.className = "dictionary-headword"; if (!list) head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; if (langShown) head.lang = "de"; root.append(head);
     // 09.11 (Alena): the word of «Словарная справка» (in the book and on Meine Wörter's second screen) is read aloud on a
     // tap, like the popover's; the list of Meine Wörter itself stays silent.
     if (window.DeutschVoice?.available()) {
@@ -1742,7 +1749,7 @@
       head.addEventListener("click", () => window.DeutschVoice.speak(spokenHeading(head.textContent)));
     }
     // (19.11.2026) a pack language: the German headword and part of speech in German (lang), not in the reference's language
-    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Zahlwort",particle:"Partikel"})[item.type] || item.type, chosen ? "de" : null);
+    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Zahlwort",particle:"Partikel"})[item.type] || item.type, langShown ? "de" : null);
     const usageLine = selectedResolution?.dictionaryId === item.id ? usageNote(selectedResolution) : "";
     addInfo("p","dictionary-detail",usageLine);
     const forThis = selectedResolution?.dictionaryId === item.id;
@@ -1870,13 +1877,13 @@
       const [text, language] = say(locale() === "ru" ? example.example_ru || example.example_en || "" : example.example_en || example.example_ru || "",
         code && (i ? pack.additional_examples?.[i - 1] : pack)?.[`example_${code}`]);
       const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = text;
-      if (chosen) { block.lang = "de"; tr.lang = language || shownLang; }
+      if (langShown) { block.lang = "de"; tr.lang = language || shownLang || langShown; }
       block.append(tr); root.append(block);
     });
     // Expressions are not added to Wortschatz (user 22.10): no button, as on the Wörterbuch page.
     if (item.type === "Ausdruck" || list) return;
     const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Zum Wortschatz"; // German, as in Wörterbuch (user 27.10.2026)
-    if (chosen) button.lang = "de";
+    if (langShown) button.lang = "de";
     button.addEventListener("click", () => addToWortschatz(item)); root.append(button);
   }
   function selectedWordNow() { return selectedWord; }
