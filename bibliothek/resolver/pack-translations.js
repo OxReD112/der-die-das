@@ -503,8 +503,11 @@
     for (const candidate of resolution.candidates) for (const field of ["translation", "formTranslation"]) {
       const value = candidate[field];
       if (!value || typeof value !== "object" || value[code] || typeof value.en !== "string" || typeof value.ru !== "string") continue;
-      const own = phrase(code, value.en, value.ru) || resolverText(value, code);
+      const fixed = phrase(code, value.en, value.ru), templated = fixed ? "" : resolverText(value, code), own = fixed || templated;
       if (own) candidate[field] = {...value, [code]:own};
+      // (advisor 20.11) a text of a resolver template around the word (… od {0}) is the resolver's label in the pack, not a meaning:
+      // meaning-display.js lets the word's own parts / base show (Herumwandern)
+      if (templated && field === "translation") candidate.packTemplate = {...(candidate.packTemplate || {}), [code]:true};
     }
     return resolution0;
   }

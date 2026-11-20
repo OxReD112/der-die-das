@@ -1243,7 +1243,12 @@
         // only when the noun itself has no meaning of its own in this language (das Zureden «уговоры», das Verscheiden «кончина»
         // keep theirs); «gerund of …», «субстантивированный инфинитив от «x»:» and «alternative / obsolete form of …» are no meaning.
         const label = t => /^(?:gerund of |субстантивированн|nominaliz)/iu.test(t) || /^(?:alternative|obsolete|archaic|dated|nonstandard)\b[^;]*\b(?:form|spelling) of\b/iu.test(t);
-        const realMeaning = lang => { const t = String(candidate.translation?.[lang] || '').trim(); return !!t && !label(t); };
+        // (20.11.2026, Polish chat: Herumwandern) a pack text that translates the resolver's label (pack-translations.js RESOLVER_TEMPLATES:
+        // «zsubstantywizowany bezokolicznik od „herumwandern”») is a label too — not a meaning that would stop the sibling's parts
+        const realMeaning = lang => { const t = String(candidate.translation?.[lang] || '').trim();
+          // (advisor 20.11: any resolver template around the word — pack-translations.js packTemplate — is a label, not a meaning; a
+          // gerund's «gerund of X» beside a real pack meaning is not one of them: das Übersetzen «tłumaczenie», das Zureden «namawianie»)
+          return !!t && !label(t) && !(isPack(lang) && candidate.packTemplate?.[lang]); };
         // The sibling's meaning as the card shows it (labels cut, two senses at most), never a bare form note.
         const siblingText = lang => { if (!sibling || realMeaning(lang)) return '';
           const t = brief(sibling, lang); return t && !label(t) ? t : ''; };
@@ -1416,7 +1421,11 @@
       // English meaning after it with the mark: «Od fernsteuern — angielski: …», not «angielski: From fernsteuern — …»)
       const participleFrame = shown === 'en' && (usage?.role === 'attributive' || usage?.role === 'adverbial') && !!participleName(usage) &&
         pos(candidate) === 'Verb' && !!packPhrase(pack, 'From {0} — {1}', 'От {0} — {1}');
-      options = {...options, language:nominalParts || nominalOwn || participleFrame ? pack : shown};
+      // (20.11.2026, review C: «angielski: From glucksen — …») the same for any nominalized word of a base verb / adjective with no pack
+      // text: «Od glucksen — angielski: …» (cardCore's frame, advisor 20.11)
+      const nominalFrame = shown === 'en' && (usage?.role === 'nominalized' && !!usage.base && !usage.noun ||
+        pos(candidate) === 'Nomen' && /^gerund of\s+[\p{L}\p{M}]+$/iu.test(String(candidate.translation?.en || '').trim())) && !!packPhrase(pack, 'From {0} — {1}', 'От {0} — {1}');
+      options = {...options, language:nominalParts || nominalOwn || participleFrame || nominalFrame ? pack : shown};
     }
     const result = cardCore(resolution, candidate, options);
     const k = candidate?.construction, language = textLanguage(options.language);
@@ -1491,14 +1500,20 @@
     const fieldLanguage = isPack(language) && !String(packField?.[`translation_${language}`] || '').trim() ? 'en' : language;
     const fieldSource = fieldLanguage === language && isPack(language) ? packField : field;
     // (links chat 19.11, advisor 19.11: a meaning of the field proved by its government — the resolver's fieldSenseFirst — comes first)
-    const fieldFirst = fieldLanguage === 'en' ? candidate.fieldSenseFirstEn : fieldLanguage === 'ru' ? candidate.fieldSenseFirst : null;
+    // (20.11.2026, chat «languages in the reader», advisor 19.11 «по номеру»: a pack text of the field with as many meanings as the English
+    // one — the English number; another count — the field's own order, as before)
+    const count = t => String(t || '').split(';').map(x => x.trim()).filter(Boolean).length;
+    const fieldFirst = fieldLanguage === 'en' ? candidate.fieldSenseFirstEn : fieldLanguage === 'ru' ? candidate.fieldSenseFirst :
+      isPack(fieldLanguage) && count(fieldSource?.[`translation_${fieldLanguage}`]) === count(field?.translation_en) ? candidate.fieldSenseFirstEn : null;
     const fieldRaw = String(fieldSource?.[`translation_${fieldLanguage}`] || '');
     const fieldText = Number.isInteger(fieldFirst) && fieldFirst > 0 ? (() => { const parts = fieldRaw.split(';').map(x => x.trim()).filter(Boolean);
       return fieldFirst < parts.length ? [parts[fieldFirst], ...parts.filter((_, i) => i !== fieldFirst)].join('; ') : fieldRaw; })() : fieldRaw;
     const fieldFit = fit(fieldText);
     if (fieldFit.text) {
       const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
-      const note = String(fieldSource[`note_${fieldLanguage}`] || '').trim();
+      // (20.11.2026: a pack field without its note — the English note with the mark, not none)
+      const ownNote = String(fieldSource[`note_${fieldLanguage}`] || '').trim(), enNote = isPack(fieldLanguage) && !ownNote ? String(field?.note_en || '').trim() : '';
+      const note = ownNote || (enNote && englishPrefix(fieldLanguage) ? `${englishPrefix(fieldLanguage)}${enNote}` : '');
       return {...rest, heading:`sich ${lemma}`, text:fieldFit.text, textLanguage:fieldLanguage, missing:false, derived:true, note, more:fieldFit.rest};
     }
     // (advisor + user 06.11, SICH_X_NO_TRANSLATION: no meaning of «sich X» in the interface language — the plain verb's own line,
