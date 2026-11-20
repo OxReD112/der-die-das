@@ -115,7 +115,8 @@
         return {
           word: w,
           isNew,
-          newText: isNew ? L("New", "Новое") : null,
+          // 20.11.2026 (Alena, variant A): German for every language, like «Wortlisten», «200 Wörter»; the label stays in the translation language
+          newText: isNew ? "Neu" : null,
           newLabel: isNew ? L("Added within the last 24 hours", "Добавлено за последние 24 часа") : null,
           de: w.base || String(w.target || "").split(" / ").join(" "),
           tr: tr(w, "translation")
