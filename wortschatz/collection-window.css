@@ -534,14 +534,32 @@ textarea.coll-paste {
 .coll-hit-added:active {
   transform: scale(0.94);
 }
+/* 20.11.2026 (Alena, variant C): added — the ＋ circle in mint with a mint tick (was the words «✓ Added» —
+   too wide, the meaning got squeezed); a tap still undoes it */
 .coll-hit-added {
-  border: 0;
-  background: none;
-  padding: 8px 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: transparent;
   color: var(--accent);
-  font: 600 13px/1 var(--font);
-  white-space: nowrap;
   cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.coll-hit-added svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.coll-add-self {
+  margin-top: 16px;
 }
 .coll-hit-in {
   color: var(--muted);

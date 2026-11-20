@@ -365,7 +365,8 @@
         status.textContent = "";
         const state = M.searchState(addedHere, item, fields);
         if (state === "added") {
-          const b = button("coll-hit-added", S.added, () => { M.undoSearch(item, addedHere); dirty = true; refreshButtons(); draw(); });
+          const b = button("coll-hit-added", "", () => { M.undoSearch(item, addedHere); dirty = true; refreshButtons(); draw(); });
+          b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4 8-9"/></svg>';
           b.setAttribute("aria-label", S.addedAria);
           status.appendChild(b);
         } else if (state === "in") {
@@ -423,6 +424,18 @@
       results.textContent = "";
       if (!items.length) {
         results.appendChild(el("p", "coll-note", S.none));
+        // 20.11.2026 (Alena: the main cream button — the outlined one looked disabled): the same as × — clears the search, the form comes back — then the cursor in its first field
+        results.appendChild(button("coll-main coll-add-self", S.addSelf, () => {
+          const fill = S.selfFill(q);
+          input.value = "";
+          input.dispatchEvent(new Event("input"));
+          clearTimeout(timer);
+          update(); // show the form now (the input event waits 120 ms), so the field can take the cursor
+          const target = fill && $(fill.field);
+          if (target && !target.value.trim()) { target.value = fill.value; target.dispatchEvent(new Event("input", { bubbles: true })); }
+          const first = $("cfSentence"); // the form's first field
+          if (first) first.focus({ preventScroll: true });
+        }));
         return;
       }
       results.appendChild(note());

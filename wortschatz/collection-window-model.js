@@ -317,10 +317,17 @@
     keepTyping: L("Keep typing…", "Печатай дальше…"),
     loading: L("Loading the Wörterbuch…", "Загружаем Wörterbuch…"),
     loadError: L("The Wörterbuch couldn't be loaded. Please try again.", "Не удалось загрузить Wörterbuch. Попробуй ещё раз."),
-    none: L("Not in the Wörterbuch. Clear the search to type your own word.", "В Wörterbuch такого нет. Очисти поиск, чтобы ввести своё слово."),
+    // 20.11.2026 (Alena): kinder — what is missing, then a button that does it (clears the search, opens the form)
+    none: L("This word isn't in the Wörterbuch yet.", "Этого слова в Wörterbuch пока нет."),
+    addSelf: L("＋ Add it yourself", "＋ Добавить самому"),
+    // 20.11.2026 (Alena): what was typed goes into the form — Cyrillic = the meaning, otherwise the base form (German)
+    selfFill: q => {
+      const v = String(q || "").trim();
+      return v ? { field: /[\u0400-\u04ff]/.test(v) ? "cfMeaning" : "cfBase", value: v } : null;
+    },
     noteEnd: L("＋ adds the word to the end of your list.", "＋ добавляет слово в конец списка."),
     noteNext: L("＋ adds the word to your next new words.", "＋ добавляет слово к следующим новым словам."),
-    added: L("✓ Added", "✓ Добавлено"),
+    // 20.11.2026 (Alena, variant C): added = a mint tick in a mint ring in place of ＋ (no text; the label is for VoiceOver)
     addedAria: L("Added. Tap to undo", "Добавлено. Нажми, чтобы отменить"),
     inList: T.inList(),
     fill: base => L("Fill the form with ", "Заполнить форму: ") + base,
