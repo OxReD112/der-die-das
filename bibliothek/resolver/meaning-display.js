@@ -22,7 +22,9 @@
   const shownCount = n => ALL ? n : 2;
   function compact(text) {
     // Parenthesised remarks may contain ";" themselves: drop them before splitting.
-    const parts = String(text || '').replace(/\([^()]*\)/g, '').split(';').map(value => {
+    // (advisor 20.11, aufrappeln: «(sich mühsam erheben, aufstehen): to pick oneself up») a bracket at the start of a meaning dropped as a
+    // remark takes the colon right after it along
+    const parts = String(text || '').replace(/(^|;)\s*\([^()]*\)\s*:\s*/gu, '$1').replace(/\([^()]*\)/g, '').split(';').map(value => {
       if (/^to call on.*divine being/i.test(value.trim()) || /^to call upon$/i.test(value.trim())) return 'to invoke';
       return value.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
     }).filter(Boolean);
