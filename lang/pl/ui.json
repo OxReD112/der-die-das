@@ -680,11 +680,6 @@
   "pl": "werden czy lassen? wird czy ist? Pomaga odróżniać czasowniki o wielu funkcjach i wybierać właściwą formę zależnie od znaczenia."
  },
  {
-  "en": "Search German words for a brief grammar note",
-  "ru": "Немецкие слова: краткая грамматическая справка",
-  "pl": "Niemieckie słowa: krótka informacja gramatyczna"
- },
- {
   "en": "My Words",
   "ru": "Мои слова",
   "pl": "Moje słowa"
@@ -723,11 +718,6 @@
   "en": "Word Sets",
   "ru": "Наборы слов",
   "pl": "Zestawy słów"
- },
- {
-  "en": "New",
-  "ru": "Новое",
-  "pl": "Nowe"
  },
  {
   "en": "Added within the last 24 hours",
@@ -833,6 +823,11 @@
   "en": "Grammar",
   "ru": "Грамматика",
   "pl": "Gramatyka"
+ },
+ {
+  "en": "That's a bit long - try a shorter one.",
+  "ru": "Ой, слишком длинно. Сократи немного.",
+  "pl": "Ups, to za długie. Skróć to trochę."
  },
  {
   "en": "Word Class",
@@ -993,6 +988,16 @@
   "en": "The dictionary example has invalid answer markup and needs correction.",
   "ru": "В примере из словаря неверно отмечено слово — его нужно исправить.",
   "pl": "W przykładzie ze słownika słowo jest źle zaznaczone — trzeba to poprawić."
+ },
+ {
+  "en": "You're already learning this word in Wortschatz.",
+  "ru": "Ты уже учишь это слово в Wortschatz.",
+  "pl": "Uczysz się już tego słowa w Wortschatz."
+ },
+ {
+  "en": "Already in Your Collection",
+  "ru": "Слово уже в коллекции",
+  "pl": "Słowo jest już w kolekcji"
  },
  {
   "en": "Unknown word",
@@ -1245,6 +1250,21 @@
   "pl": "Słowo, w którym się pomylisz, zawsze wraca następnego dnia. Zmiana tempa dotyczy tylko kolejnych powtórek."
  },
  {
+  "en": "English",
+  "ru": "Russian",
+  "pl": "Polish"
+ },
+ {
+  "en": "appointment",
+  "ru": "встреча",
+  "pl": "spotkanie"
+ },
+ {
+  "en": "The appointment is tomorrow at ten.",
+  "ru": "Встреча завтра в десять.",
+  "pl": "Spotkanie jest jutro o dziesiątej."
+ },
+ {
   "en": "Delete this word?",
   "ru": "Удалить слово?",
   "pl": "Usunąć to słowo?"
@@ -1263,11 +1283,6 @@
   "en": "Keep",
   "ru": "Оставить",
   "pl": "Zostaw"
- },
- {
-  "en": "Format the words as a JSON list and answer with the list only - no other text.\nOne object per word, like this:\n\n[\n  {\n    \"sentence\": \"Ich {{c1::schlage}} Samstag {{c1::vor}}.\",\n    \"translation\": \"to suggest\",\n    \"sentenceTranslation\": \"I suggest Saturday.\",\n    \"base\": \"vorschlagen\",\n    \"grammar\": \"schlägt vor · schlug vor · hat vorgeschlagen\",\n    \"pos\": \"Verb\"\n  },\n  {\n    \"sentence\": \"Der {{c1::Termin}} ist morgen um zehn.\",\n    \"translation\": \"appointment\",\n    \"sentenceTranslation\": \"The appointment is tomorrow at ten.\",\n    \"base\": \"der Termin\",\n    \"grammar\": \"die Termine\",\n    \"pos\": \"Substantiv\"\n  }\n]\n\nRules:\n- \"sentence\": a short, natural, everyday German sentence. Mark the word to practise with {{c1::…}}, exactly as it appears in the sentence.\n- Mark only ONE word per sentence. Separable verbs: mark both parts, e.g. \"Ich {{c1::rufe}} dich morgen {{c1::an}}.\"\n- \"translation\" (meaning of the word) and \"sentenceTranslation\" (the whole sentence): in the language I asked for - English if I didn't say.\n- \"base\": the dictionary form. Nouns with der / die / das.\n- \"grammar\": verbs: 3rd person · Präteritum · Perfekt. Nouns: the plural. Otherwise leave it empty.\n- \"pos\": the word class in German (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).",
-  "ru": "Оформи слова как список JSON и ответь только списком — без другого текста.\nОдин объект на слово, вот так:\n\n[\n  {\n    \"sentence\": \"Ich {{c1::schlage}} Samstag {{c1::vor}}.\",\n    \"translation\": \"предлагать\",\n    \"sentenceTranslation\": \"Предлагаю субботу.\",\n    \"base\": \"vorschlagen\",\n    \"grammar\": \"schlägt vor · schlug vor · hat vorgeschlagen\",\n    \"pos\": \"Verb\"\n  },\n  {\n    \"sentence\": \"Der {{c1::Termin}} ist morgen um zehn.\",\n    \"translation\": \"встреча, назначенное время\",\n    \"sentenceTranslation\": \"Встреча завтра в десять.\",\n    \"base\": \"der Termin\",\n    \"grammar\": \"die Termine\",\n    \"pos\": \"Substantiv\"\n  }\n]\n\nПравила:\n- \"sentence\": короткое естественное немецкое предложение из обычной жизни. Слово для тренировки отметь как {{c1::…}} — ровно в том виде, в каком оно стоит в предложении.\n- Отмечай только ОДНО слово в предложении. Глаголы с отделяемой приставкой: отметь обе части, например \"Ich {{c1::rufe}} dich morgen {{c1::an}}.\"\n- \"translation\" (значение слова) и \"sentenceTranslation\" (всё предложение): на языке, который я попросил; если я не сказал — на русском.\n- \"base\": словарная форма. Существительные — с der / die / das.\n- \"grammar\": у глаголов — 3-е лицо · Präteritum · Perfekt. У существительных — множественное число. Иначе оставь пустым.\n- \"pos\": часть речи по-немецки (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).",
-  "pl": "Sformatuj słowa jako listę JSON i odpowiedz tylko listą — bez innego tekstu.\nJeden obiekt na słowo, na przykład tak:\n\n[\n  {\n    \"sentence\": \"Ich {{c1::schlage}} Samstag {{c1::vor}}.\",\n    \"translation\": \"proponować\",\n    \"sentenceTranslation\": \"Proponuję sobotę.\",\n    \"base\": \"vorschlagen\",\n    \"grammar\": \"schlägt vor · schlug vor · hat vorgeschlagen\",\n    \"pos\": \"Verb\"\n  },\n  {\n    \"sentence\": \"Der {{c1::Termin}} ist morgen um zehn.\",\n    \"translation\": \"termin, umówione spotkanie\",\n    \"sentenceTranslation\": \"Termin jest jutro o dziesiątej.\",\n    \"base\": \"der Termin\",\n    \"grammar\": \"die Termine\",\n    \"pos\": \"Substantiv\"\n  }\n]\n\nZasady:\n- \"sentence\": krótkie, naturalne niemieckie zdanie z codziennego życia. Słowo do ćwiczenia zaznacz jako {{c1::…}} — dokładnie w takiej formie, w jakiej stoi w zdaniu.\n- Zaznaczaj tylko JEDNO słowo w zdaniu. Czasowniki z przedrostkiem rozdzielnym: zaznacz obie części, np. \"Ich {{c1::rufe}} dich morgen {{c1::an}}.\"\n- \"translation\" (znaczenie słowa) i \"sentenceTranslation\" (całe zdanie): w języku, o który prosiłem; jeśli nie napisałem — po polsku.\n- \"base\": forma słownikowa. Rzeczowniki — z der / die / das.\n- \"grammar\": czasowniki — 3. osoba · Präteritum · Perfekt. Rzeczowniki — liczba mnoga. Dla innych słów zostaw puste.\n- \"pos\": część mowy po niemiecku (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …)."
  },
  {
   "en": "Give your collection a name, then add words: search the Wörterbuch, type them or import a list.",
@@ -1323,6 +1338,11 @@
   "en": "This doesn't look like a list. Copy the AI's whole answer - from [ to ].",
   "ru": "Это не похоже на список. Скопируй весь ответ ИИ — от [ до ].",
   "pl": "To nie wygląda na listę. Skopiuj całą odpowiedź AI — od [ do ]."
+ },
+ {
+  "en": "Too long: {0}",
+  "ru": "Слишком длинно: {0}",
+  "pl": "Za długi tekst w polu: {0}"
  },
  {
   "en": "Storage is full - nothing was saved.",
@@ -1748,6 +1768,16 @@
   "en": "To bring your progress to another device, like an iPad, make a backup. It's a small file you can open there with Wiederherstellen.",
   "ru": "Чтобы перенести прогресс на другое устройство, например на iPad, сделай бэкап. Это небольшой файл, его можно открыть там через Wiederherstellen.",
   "pl": "Aby przenieść postępy na inne urządzenie, na przykład na iPada, zrób kopię zapasową. To mały plik, który można tam otworzyć za pomocą Wiederherstellen."
+ },
+ {
+  "en": "Notifications are turned off in iPhone Settings.",
+  "ru": "Уведомления запрещены в настройках iPhone.",
+  "pl": "Powiadomienia są wyłączone w Ustawieniach iPhone'a."
+ },
+ {
+  "en": "Open iPhone Settings",
+  "ru": "Открыть настройки iPhone",
+  "pl": "Otwórz Ustawienia iPhone'a"
  },
  {
   "en": "Couldn't add the word. Please reload the page.",

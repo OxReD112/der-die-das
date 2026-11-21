@@ -6949,7 +6949,7 @@
  },
  "adjective-1173": {
   "translation_pl": "nieoficjalny",
-  "example_pl": "Po konferencji kilku uczestników spotkało się jeszcze w pubie na nieoficjalną rozmowę.",
+  "example_pl": "Po konferencji kilku uczestników spotkało się w pubie na nieoficjalną rozmowę.",
   "_src": "0b28b888",
   "_src_reader": "b2e1000f"
  },
@@ -9856,5 +9856,19 @@
   "example_pl": "Czy ma Pan jeszcze jakieś pytania dotyczące umowy?",
   "_src": "fc06b7f5",
   "_src_reader": "3156c960"
+ },
+ "adjective-1623": {
+  "translation_pl": "zirytowany, rozgniewany",
+  "example_pl": "Klienci byli zirytowani długim czasem oczekiwania.",
+  "usage_note_pl": "verärgert über + Akkusativ — zirytowany, rozgniewany czymś (z powodu czegoś); często po czasowniku: verärgert reagieren — zareagować z irytacją. Także forma czasownika verärgern: Seine Antwort hat sie verärgert. — Jego odpowiedź ją rozgniewała.",
+  "_src": "0654b289",
+  "_src_reader": "a95d0ff8"
+ },
+ "adjective-1624": {
+  "translation_pl": "zagrożony, w niebezpieczeństwie",
+  "example_pl": "Wiele gatunków ptaków jest zagrożonych wyginięciem.",
+  "usage_note_pl": "sich bedroht fühlen — czuć zagrożenie, czuć się zagrożonym: In der dunklen Straße fühlte sie sich bedroht. — Na ciemnej ulicy czuła się zagrożona. Także forma czasownika bedrohen: Der Mann hat ihn mit einem Messer bedroht. — Mężczyzna groził mu nożem.",
+  "_src": "bdb18b03",
+  "_src_reader": "3655d728"
  }
 }

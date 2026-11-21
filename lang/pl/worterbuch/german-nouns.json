@@ -14,8 +14,13 @@
  "noun-003": {
   "translation_pl": "pytanie",
   "example_pl": "Mam jeszcze jedno pytanie.",
-  "_src": "6a5140d4",
-  "_src_reader": "5857af8d"
+  "complements": [
+   {
+    "note_pl": "pytanie o coś: die Frage nach dem Weg"
+   }
+  ],
+  "_src": "c59258d3",
+  "_src_reader": "4c5a9c6a"
  },
  "noun-004": {
   "translation_pl": "jabłko",
@@ -355,8 +360,16 @@
  "noun-059": {
   "translation_pl": "rozmowa",
   "example_pl": "Odbyliśmy długą rozmowę.",
-  "_src": "72f47c48",
-  "_src_reader": "8e5b3594"
+  "complements": [
+   {
+    "note_pl": "rozmowa z kimś"
+   },
+   {
+    "note_pl": "rozmowa o czymś"
+   }
+  ],
+  "_src": "1028686e",
+  "_src_reader": "e4f1b316"
  },
  "noun-060": {
   "translation_pl": "napój",
@@ -593,8 +606,13 @@
  "noun-099": {
   "translation_pl": "cena; nagroda",
   "example_pl": "Cena jest podana na etykiecie.",
-  "_src": "542cf8ac",
-  "_src_reader": "b3d2f51b"
+  "complements": [
+   {
+    "note_pl": "cena czegoś, za coś: der Preis für das Ticket; nagroda za coś: der Preis für den besten Film"
+   }
+  ],
+  "_src": "c53456d4",
+  "_src_reader": "3b8be343"
  },
  "noun-100": {
   "translation_pl": "jezioro",
@@ -623,8 +641,13 @@
  "noun-104": {
   "translation_pl": "klucz",
   "example_pl": "Klucz leży obok drzwi.",
-  "_src": "d311cee2",
-  "_src_reader": "1e71b3f2"
+  "complements": [
+   {
+    "note_pl": "klucz do czegoś: der Schlüssel zum Erfolg"
+   }
+  ],
+  "_src": "f985c07d",
+  "_src_reader": "dffd1e17"
  },
  "noun-105": {
   "translation_pl": "drzwi",
@@ -908,8 +931,13 @@
  "noun-151": {
   "translation_pl": "wizyta; odwiedziny",
   "example_pl": "W niedzielę przyjdą do nas goście.",
-  "_src": "c14dbbac",
-  "_src_reader": "8487e382"
+  "complements": [
+   {
+    "note_pl": "wizyta u kogoś: ein Besuch bei den Großeltern"
+   }
+  ],
+  "_src": "71f1f5c4",
+  "_src_reader": "87c4b3aa"
  },
  "noun-152": {
   "translation_pl": "zaproszenie",
@@ -986,8 +1014,13 @@
  "noun-164": {
   "translation_pl": "doświadczenie",
   "example_pl": "Ona ma duże doświadczenie w sprzedaży.",
-  "_src": "dd1928a0",
-  "_src_reader": "f7fa3579"
+  "complements": [
+   {
+    "note_pl": "doświadczenie z czymś, kimś"
+   }
+  ],
+  "_src": "59068c5a",
+  "_src_reader": "72813493"
  },
  "noun-165": {
   "translation_pl": "zdolność; umiejętność",
@@ -1004,8 +1037,13 @@
  "noun-167": {
   "translation_pl": "możliwość",
   "example_pl": "Czy jest możliwość, żeby zacząć wcześniej?",
-  "_src": "b5236545",
-  "_src_reader": "f4081638"
+  "complements": [
+   {
+    "note_pl": "możliwość czegoś: die Möglichkeit zur Weiterbildung"
+   }
+  ],
+  "_src": "a68870c8",
+  "_src_reader": "22769afb"
  },
  "noun-168": {
   "translation_pl": "okazja; możliwość",
@@ -1026,10 +1064,28 @@
   "_src_reader": "f4278e9a"
  },
  "noun-171": {
-  "translation_pl": "powód; podstawa",
+  "translation_pl": "powód; podstawa; tło; dno",
   "example_pl": "Jaki jest powód opóźnienia?",
-  "_src": "d1e3217c",
-  "_src_reader": "66195956"
+  "complements": [
+   {
+    "note_pl": "powód, podstawa czegoś: der Grund für die Verspätung",
+    "meaning_pl": "powód"
+   },
+   {
+    "note_pl": "powód, podstawa czegoś: der Grund für die Verspätung",
+    "meaning_pl": "podstawa"
+   },
+   {
+    "note_pl": "powód, podstawa do czegoś: kein Grund zur Panik, Grund zur Annahme",
+    "meaning_pl": "powód"
+   },
+   {
+    "note_pl": "powód, podstawa do czegoś: kein Grund zur Panik, Grund zur Annahme",
+    "meaning_pl": "podstawa"
+   }
+  ],
+  "_src": "5dbfc6fb",
+  "_src_reader": "d1bfef7d"
  },
  "noun-172": {
   "translation_pl": "cel; miejsce docelowe",
@@ -1052,8 +1108,13 @@
  "noun-175": {
   "translation_pl": "relacja; związek",
   "example_pl": "Jej relacje z kolegami są dobre.",
-  "_src": "af3b0734",
-  "_src_reader": "4f8e3fd6"
+  "complements": [
+   {
+    "note_pl": "relacje z kimś, związek z czymś"
+   }
+  ],
+  "_src": "8f587d9f",
+  "_src_reader": "fb6bb057"
  },
  "noun-176": {
   "translation_pl": "zdrowie",
@@ -1137,8 +1198,13 @@
  "noun-189": {
   "translation_pl": "przesłanka; warunek",
   "example_pl": "Dobra znajomość języka to ważny warunek.",
-  "_src": "21d311ce",
-  "_src_reader": "efe6111b"
+  "complements": [
+   {
+    "note_pl": "przesłanka, warunek czegoś"
+   }
+  ],
+  "_src": "b98cfd7b",
+  "_src_reader": "5d4cd896"
  },
  "noun-190": {
   "translation_pl": "skutek; wpływ",
@@ -1155,8 +1221,13 @@
  "noun-192": {
   "translation_pl": "odpowiedzialność",
   "example_pl": "Ona ponosi odpowiedzialność za ten projekt.",
-  "_src": "c344ee00",
-  "_src_reader": "ebd39663"
+  "complements": [
+   {
+    "note_pl": "odpowiedzialność za kogoś, coś"
+   }
+  ],
+  "_src": "cf328845",
+  "_src_reader": "86ce545c"
  },
  "noun-193": {
   "translation_pl": "społeczeństwo; spółka (firma), towarzystwo (krąg ludzi)",
@@ -1179,8 +1250,16 @@
  "noun-196": {
   "translation_pl": "związek; powiązanie",
   "example_pl": "Między tymi dwoma wydarzeniami istnieje związek.",
-  "_src": "825e68f6",
-  "_src_reader": "f4bebdf6"
+  "complements": [
+   {
+    "note_pl": "związek z czymś"
+   },
+   {
+    "note_pl": "związek między czymś a czymś"
+   }
+  ],
+  "_src": "12d9e7ad",
+  "_src_reader": "fd215af1"
  },
  "noun-197": {
   "translation_pl": "wniosek, spostrzeżenie; zdolność poznania",
@@ -1192,8 +1271,13 @@
  "noun-198": {
   "translation_pl": "praca",
   "example_pl": "Codziennie jeżdżę do pracy autobusem.",
-  "_src": "9f76555f",
-  "_src_reader": "f8f3ff20"
+  "complements": [
+   {
+    "note_pl": "praca nad czymś: die Arbeit an einem Buch"
+   }
+  ],
+  "_src": "741bcc03",
+  "_src_reader": "e8c7affc"
  },
  "noun-199": {
   "translation_pl": "czas",
@@ -1361,14 +1445,24 @@
  "noun-224": {
   "translation_pl": "odpowiedź",
   "example_pl": "Wciąż czekam na odpowiedź.",
-  "_src": "977b8df4",
-  "_src_reader": "3b35048f"
+  "complements": [
+   {
+    "note_pl": "odpowiedź na coś"
+   }
+  ],
+  "_src": "d887067b",
+  "_src_reader": "5c7d9e58"
  },
  "noun-225": {
   "translation_pl": "problem",
   "example_pl": "Nie ma problemu, pomogę ci.",
-  "_src": "2a6e7c45",
-  "_src_reader": "4292f852"
+  "complements": [
+   {
+    "note_pl": "problem z czymś, kimś"
+   }
+  ],
+  "_src": "282d4836",
+  "_src_reader": "12fad63b"
  },
  "noun-226": {
   "translation_pl": "egzamin; kontrola",
@@ -1492,8 +1586,13 @@
  "noun-245": {
   "translation_pl": "głód",
   "example_pl": "Bardzo chce mi się jeść.",
-  "_src": "d42e58e7",
-  "_src_reader": "72f6112c"
+  "complements": [
+   {
+    "note_pl": "głód, pragnienie czegoś: der Hunger nach Liebe"
+   }
+  ],
+  "_src": "ce34ad46",
+  "_src_reader": "89fae111"
  },
  "noun-246": {
   "plural_note_pl": "Lm rzadko używana, np.: Die Ärzte haben viele Leben gerettet („Lekarze uratowali wiele istnień”).",
@@ -1505,8 +1604,14 @@
  "noun-247": {
   "translation_pl": "rozwiązanie; roztwór",
   "example_pl": "Na pewno znajdziemy rozwiązanie.",
-  "_src": "25db06b2",
-  "_src_reader": "430810dc"
+  "complements": [
+   {
+    "note_pl": "rozwiązanie czegoś: problemu, zadania",
+    "meaning_pl": "rozwiązanie"
+   }
+  ],
+  "_src": "3ceef4de",
+  "_src_reader": "c5eb1980"
  },
  "noun-248": {
   "translation_pl": "apteka",
@@ -1614,8 +1719,16 @@
  "noun-265": {
   "translation_pl": "zdanie, opinia",
   "example_pl": "Jakie jest twoje zdanie na ten temat?",
-  "_src": "7cf6b237",
-  "_src_reader": "1034dd95"
+  "complements": [
+   {
+    "note_pl": "zdanie, opinia o czymś, kimś"
+   },
+   {
+    "note_pl": "zdanie, opinia na temat czegoś"
+   }
+  ],
+  "_src": "2539fe88",
+  "_src_reader": "b6718dde"
  },
  "noun-266": {
   "plural_note_pl": "W znaczeniu „historia (przeszłość, nauka)” występuje bez liczby mnogiej; Geschichten — opowieści, historie.",
@@ -1627,14 +1740,27 @@
  "noun-267": {
   "translation_pl": "pomoc",
   "example_pl": "Dziękuję za pomoc!",
-  "_src": "f9c12a64",
-  "_src_reader": "3eab74a0"
+  "complements": [
+   {
+    "note_pl": "pomoc w czymś, przy czymś"
+   }
+  ],
+  "_src": "13485449",
+  "_src_reader": "b47f9771"
  },
  "noun-268": {
   "translation_pl": "strach",
   "example_pl": "Boi się psów.",
-  "_src": "53b1fe96",
-  "_src_reader": "0daadcf7"
+  "complements": [
+   {
+    "note_pl": "strach przed kimś, czymś"
+   },
+   {
+    "note_pl": "niepokój o kogoś, coś: Angst um die Kinder"
+   }
+  ],
+  "_src": "91b5a554",
+  "_src_reader": "75fdc5e1"
  },
  "noun-269": {
   "plural_note_pl": "Zwykle występuje bez liczby mnogiej; forma die Glücke jest rzadka.",
@@ -1684,8 +1810,13 @@
  "noun-276": {
   "translation_pl": "raport, sprawozdanie; reportaż",
   "example_pl": "Raport musi być gotowy do piątku.",
-  "_src": "b593cc78",
-  "_src_reader": "452611b3"
+  "complements": [
+   {
+    "note_pl": "raport, reportaż o czymś"
+   }
+  ],
+  "_src": "fa6e9eeb",
+  "_src_reader": "05655150"
  },
  "noun-277": {
   "translation_pl": "znaczenie",
@@ -1697,8 +1828,16 @@
   "plural_note_pl": "Beschwerden oznacza także „dolegliwości, bóle”; w tym znaczeniu występuje tylko w liczbie mnogiej.",
   "translation_pl": "skarga, reklamacja",
   "example_pl": "Klient napisał skargę.",
-  "_src": "ed5c39a3",
-  "_src_reader": "cdaeef14"
+  "complements": [
+   {
+    "note_pl": "skarga na kogoś, coś"
+   },
+   {
+    "note_pl": "skarga do kogoś, do jakiejś instytucji"
+   }
+  ],
+  "_src": "4bfbef5c",
+  "_src_reader": "86b4d303"
  },
  "noun-279": {
   "translation_pl": "umowa; kontrakt",
@@ -1715,8 +1854,16 @@
  "noun-281": {
   "translation_pl": "propozycja",
   "example_pl": "Masz lepszą propozycję?",
-  "_src": "91904e0f",
-  "_src_reader": "e74554aa"
+  "complements": [
+   {
+    "note_pl": "propozycja w sprawie czegoś: ein Vorschlag zur Lösung"
+   },
+   {
+    "note_pl": "propozycja co do czegoś"
+   }
+  ],
+  "_src": "5a89d6fd",
+  "_src_reader": "ddd22424"
  },
  "noun-282": {
   "translation_pl": "podatek",
@@ -1733,8 +1880,13 @@
  "noun-284": {
   "translation_pl": "ustalenie, umowa; porozumienie",
   "example_pl": "Zawarliśmy jasną umowę.",
-  "_src": "c48bf987",
-  "_src_reader": "870a81b6"
+  "complements": [
+   {
+    "note_pl": "porozumienie w sprawie czegoś"
+   }
+  ],
+  "_src": "afadaeb4",
+  "_src_reader": "365cc5bd"
  },
  "noun-285": {
   "plural_note_pl": "W znaczeniu „negocjacje” zwykle w lm.",
@@ -1960,8 +2112,14 @@
  "noun-319": {
   "translation_pl": "oferta, propozycja; promocja",
   "example_pl": "W tym tygodniu kawa jest w promocji.",
-  "_src": "e3a22e26",
-  "_src_reader": "45cc5463"
+  "complements": [
+   {
+    "note_pl": "oferta czegoś, wybór: das Angebot an Wohnungen",
+    "meaning_pl": "oferta, propozycja"
+   }
+  ],
+  "_src": "1dd1c2de",
+  "_src_reader": "b7f87e0b"
  },
  "noun-320": {
   "translation_pl": "przybycie, przyjazd",
@@ -2033,8 +2191,18 @@
   "plural_note_pl": "W znaczeniu „punkt informacyjny” występuje bez liczby mnogiej.",
   "translation_pl": "informacja; punkt informacyjny",
   "example_pl": "Czy może mi Pan, proszę, udzielić informacji?",
-  "_src": "047d8362",
-  "_src_reader": "a33bd247"
+  "complements": [
+   {
+    "note_pl": "informacja o kimś, czymś",
+    "meaning_pl": "informacja"
+   },
+   {
+    "note_pl": "informacja o kimś, czymś",
+    "meaning_pl": "informacja"
+   }
+  ],
+  "_src": "a96d3081",
+  "_src_reader": "fdb22b84"
  },
  "noun-332": {
   "translation_pl": "łazienka; kąpiel w wannie; kąpiel (w morzu, jeziorze); basen, pływalnia",
@@ -2118,8 +2286,13 @@
  "noun-345": {
   "translation_pl": "pragnienie",
   "example_pl": "Chce mi się pić. Jest woda?",
-  "_src": "49752e34",
-  "_src_reader": "08dc1849"
+  "complements": [
+   {
+    "note_pl": "pragnienie czegoś: der Durst nach Wissen"
+   }
+  ],
+  "_src": "205feef1",
+  "_src_reader": "e4e59da2"
  },
  "noun-346": {
   "translation_pl": "róg",
@@ -2175,8 +2348,13 @@
  "noun-354": {
   "translation_pl": "gratulacje, życzenia",
   "example_pl": "Wszystkiego najlepszego z okazji urodzin!",
-  "_src": "4b54cf74",
-  "_src_reader": "fb331145"
+  "complements": [
+   {
+    "note_pl": "gratulacje, życzenia z okazji czegoś: Glückwunsch zum Geburtstag"
+   }
+  ],
+  "_src": "79654d85",
+  "_src_reader": "eeb9b4d8"
  },
  "noun-355": {
   "translation_pl": "pozdrowienie; powitanie",
@@ -2199,8 +2377,18 @@
  "noun-358": {
   "translation_pl": "informacja; punkt informacyjny",
   "example_pl": "Więcej informacji znajdą Państwo na naszej stronie internetowej.",
-  "_src": "9a698dfd",
-  "_src_reader": "514a0a89"
+  "complements": [
+   {
+    "note_pl": "informacja o czymś",
+    "meaning_pl": "informacja"
+   },
+   {
+    "note_pl": "informacja na temat czegoś",
+    "meaning_pl": "informacja"
+   }
+  ],
+  "_src": "24ba26de",
+  "_src_reader": "d55f28d6"
  },
  "noun-359": {
   "translation_pl": "internet",
@@ -2448,8 +2636,14 @@
   "plural_note_pl": "W znaczeniu „przyjemność” (Spaß machen, Spaß haben) występuje bez liczby mnogiej; Späße — żarty.",
   "translation_pl": "przyjemność; żart",
   "example_pl": "Ta gra sprawia dużo przyjemności!",
-  "_src": "42f30427",
-  "_src_reader": "b1b0be88"
+  "complements": [
+   {
+    "note_pl": "przyjemność z czegoś",
+    "meaning_pl": "przyjemność"
+   }
+  ],
+  "_src": "a03e44e5",
+  "_src_reader": "1d78dfc2"
  },
  "noun-399": {
   "translation_pl": "obiad (pot.)",
@@ -2478,15 +2672,26 @@
  "noun-403": {
   "translation_pl": "ogłoszenie; zawiadomienie (na policję); wskaźnik, wyświetlacz",
   "example_pl": "Znaleźliśmy mieszkanie z ogłoszenia w gazecie.",
-  "_src": "aaf283b0",
-  "_src_reader": "a6427868"
+  "complements": [
+   {
+    "note_pl": "zawiadomienie na policję przeciwko komuś",
+    "meaning_pl": "zawiadomienie (na policję)"
+   }
+  ],
+  "_src": "432332ad",
+  "_src_reader": "f05d0015"
  },
  "noun-404": {
   "plural_note_pl": "Zwykle występuje bez liczby mnogiej; forma die Appetite jest rzadko spotykana.",
   "translation_pl": "apetyt",
   "example_pl": "Smacznego!",
-  "_src": "78d3d8c1",
-  "_src_reader": "90b7e8ca"
+  "complements": [
+   {
+    "note_pl": "apetyt na coś, ochota na zjedzenie czegoś: Appetit auf etwas Süßes"
+   }
+  ],
+  "_src": "d30f4de5",
+  "_src_reader": "01e0c03e"
  },
  "noun-405": {
   "translation_pl": "autostrada",
@@ -2516,8 +2721,13 @@
  "noun-409": {
   "translation_pl": "prośba",
   "example_pl": "Mam do Pana prośbę.",
-  "_src": "433173e3",
-  "_src_reader": "24705918"
+  "complements": [
+   {
+    "note_pl": "prośba o coś: eine Bitte um Hilfe"
+   }
+  ],
+  "_src": "7c6f5200",
+  "_src_reader": "fbf41467"
  },
  "noun-410": {
   "translation_pl": "ołówek",
@@ -2529,8 +2739,13 @@
   "plural_note_pl": "W znaczeniu „widok (z okna, na miasto)” występuje bez liczby mnogiej; Blicke — spojrzenia.",
   "translation_pl": "spojrzenie; widok",
   "example_pl": "Z balkonu jest piękny widok na jezioro.",
-  "_src": "e120519d",
-  "_src_reader": "f62f714d"
+  "complements": [
+   {
+    "note_pl": "spojrzenie, widok na coś"
+   }
+  ],
+  "_src": "f93e46e9",
+  "_src_reader": "9d668699"
  },
  "noun-412": {
   "translation_pl": "bluzka",
@@ -2553,8 +2768,13 @@
  "noun-415": {
   "translation_pl": "wdzięczność, podziękowanie",
   "example_pl": "Bardzo dziękuję za Pana pomoc!",
-  "_src": "207143a5",
-  "_src_reader": "5a279418"
+  "complements": [
+   {
+    "note_pl": "wdzięczność, podziękowanie za coś"
+   }
+  ],
+  "_src": "0ac4ad69",
+  "_src_reader": "0286785c"
  },
  "noun-416": {
   "translation_pl": "doktor (stopień naukowy); lekarz (pot.)",
@@ -2726,8 +2946,13 @@
   "plural_note_pl": "W znaczeniu „chęć, ochota” (Lust haben) występuje bez liczby mnogiej; Lüste — namiętności, żądze.",
   "translation_pl": "chęć, ochota",
   "example_pl": "Masz ochotę pójść do kina?",
-  "_src": "1841b5be",
-  "_src_reader": "79448f80"
+  "complements": [
+   {
+    "note_pl": "chęć, ochota na coś: Lust auf Eis"
+   }
+  ],
+  "_src": "2b6f95e7",
+  "_src_reader": "b3819935"
  },
  "noun-444": {
   "translation_pl": "płaszcz; powłoka (kabla), opona",
@@ -3565,8 +3790,16 @@
   "plural_note_pl": "W znaczeniu „zainteresowanie, uwaga” (Interesse an etwas) zwykle bez liczby mnogiej; Interessen — interesy, zainteresowania.",
   "translation_pl": "zainteresowanie",
   "example_pl": "Bardzo interesuje się muzyką.",
-  "_src": "a5be8284",
-  "_src_reader": "b7b0f800"
+  "complements": [
+   {
+    "note_pl": "zainteresowanie czymś"
+   },
+   {
+    "note_pl": "zainteresowanie czymś"
+   }
+  ],
+  "_src": "068640bf",
+  "_src_reader": "d1f1f3bb"
  },
  "noun-578": {
   "translation_pl": "dom towarowy",
@@ -3583,8 +3816,16 @@
  "noun-580": {
   "translation_pl": "kontakt",
   "example_pl": "Będziemy w kontakcie!",
-  "_src": "4d1ef94f",
-  "_src_reader": "46148dfb"
+  "complements": [
+   {
+    "note_pl": "kontakt z kimś"
+   },
+   {
+    "note_pl": "kontakt z kimś, czymś"
+   }
+  ],
+  "_src": "766dfa7e",
+  "_src_reader": "cce3d334"
  },
  "noun-581": {
   "translation_pl": "koncert",
@@ -3694,8 +3935,13 @@
  "noun-598": {
   "translation_pl": "życzenie, pragnienie",
   "example_pl": "Masz jakieś życzenie na urodziny?",
-  "_src": "2d2ecae6",
-  "_src_reader": "c1270274"
+  "complements": [
+   {
+    "note_pl": "pragnienie czegoś"
+   }
+  ],
+  "_src": "ea96fda0",
+  "_src_reader": "2f61e706"
  },
  "noun-599": {
   "translation_pl": "liczba; cyfra",
@@ -3778,8 +4024,13 @@
   "plural_note_pl": "Lm rzadko używana.",
   "translation_pl": "pozwolenie, zezwolenie",
   "example_pl": "Na parkowanie tutaj trzeba mieć zezwolenie.",
-  "_src": "02b65216",
-  "_src_reader": "b55c6cdd"
+  "complements": [
+   {
+    "note_pl": "pozwolenie, zezwolenie na coś: die Erlaubnis zum Parken"
+   }
+  ],
+  "_src": "fcec9b4e",
+  "_src_reader": "39b8e805"
  },
  "noun-612": {
   "translation_pl": "zniżka, ulga",
@@ -3839,8 +4090,16 @@
   "plural_note_pl": "W znaczeniu „wiedza, umiejętności” (Kenntnisse in Englisch) występuje tylko w liczbie mnogiej; w liczbie pojedynczej — „informacje, wiedza o czymś” (Kenntnis von etwas haben).",
   "translation_pl": "znajomość, wiedza",
   "example_pl": "Ma dobrą znajomość angielskiego.",
-  "_src": "7c7ed0e4",
-  "_src_reader": "a788fa0c"
+  "complements": [
+   {
+    "note_pl": "wiedza z czegoś (w lm — Kenntnisse): Kenntnisse in Mathematik"
+   },
+   {
+    "note_pl": "wiedza o czymś: Kenntnis von etwas haben"
+   }
+  ],
+  "_src": "ccf417d4",
+  "_src_reader": "e26e18dc"
  },
  "noun-622": {
   "translation_pl": "łańcuch; łańcuszek; sieć (sklepów)",
@@ -4207,8 +4466,13 @@
  "noun-681": {
   "translation_pl": "sen; marzenie",
   "example_pl": "Dom nad morzem to moje marzenie.",
-  "_src": "e5c7fa94",
-  "_src_reader": "9638a332"
+  "complements": [
+   {
+    "note_pl": "marzenie o czymś: der Traum von einem Haus; sen o kimś, czymś: ein Traum von der Schule"
+   }
+  ],
+  "_src": "fa72d710",
+  "_src_reader": "7a5d73de"
  },
  "noun-682": {
   "translation_pl": "przeprowadzka; pochód",
@@ -4225,8 +4489,16 @@
  "noun-684": {
   "translation_pl": "różnica",
   "example_pl": "Jaka jest różnica między tymi dwoma słowami?",
-  "_src": "bc468622",
-  "_src_reader": "71fd4178"
+  "complements": [
+   {
+    "note_pl": "różnica między czymś a czymś"
+   },
+   {
+    "note_pl": "różnica w stosunku do czegoś: im Unterschied zu dir"
+   }
+  ],
+  "_src": "f3db4dc5",
+  "_src_reader": "61b9f7e3"
  },
  "noun-685": {
   "translation_pl": "środek transportu",
@@ -4331,8 +4603,14 @@
  "noun-701": {
   "translation_pl": "uwaga; ostrożność; szacunek",
   "example_pl": "Uwaga, tu jest mokra podłoga!",
-  "_src": "b0e82220",
-  "_src_reader": "51e994d8"
+  "complements": [
+   {
+    "note_pl": "szacunek dla kogoś, czegoś",
+    "meaning_pl": "szacunek"
+   }
+  ],
+  "_src": "963d2df3",
+  "_src_reader": "63323f2f"
  },
  "noun-702": {
   "translation_pl": "forma zwracania się, zwrot grzecznościowy",
@@ -4350,8 +4628,13 @@
   "translation_pl": "przesiadka, połączenie (pociąg, lot); podłączenie (do sieci, telefonu)",
   "example_pl": "W Kolonii mamy tylko dziesięć minut na przesiadkę.",
   "plural_note_pl": "W znaczeniu „kontakt, znajomość” (Anschluss finden) występuje bez liczby mnogiej.",
-  "_src": "13aad820",
-  "_src_reader": "484d8b06"
+  "complements": [
+   {
+    "note_pl": "podłączenie, przyłączenie do czegoś: der Anschluss an das Netz; przesiadka na coś: Anschluss an den Zug nach Bonn"
+   }
+  ],
+  "_src": "ee59f6d4",
+  "_src_reader": "c2654562"
  },
  "noun-705": {
   "translation_pl": "apartament; mieszkanie",
@@ -4770,8 +5053,13 @@
     "example_pl": "Stary oficer podał się do dymisji."
    }
   ],
-  "_src": "29203375",
-  "_src_reader": "9a8a7783"
+  "complements": [
+   {
+    "note_pl": "pożegnanie z kimś, czymś"
+   }
+  ],
+  "_src": "58682786",
+  "_src_reader": "69b74f5c"
  },
  "noun-772": {
   "translation_pl": "ukończenie, zakończenie; dyplom, świadectwo (o wykształceniu)",
@@ -4913,14 +5201,24 @@
  "noun-794": {
   "translation_pl": "wymaganie; prawo (do czegoś); roszczenie",
   "example_pl": "Ma Pan prawo do 30 dni urlopu w roku.",
-  "_src": "b673c402",
-  "_src_reader": "c24502c3"
+  "complements": [
+   {
+    "note_pl": "prawo, roszczenie do czegoś"
+   }
+  ],
+  "_src": "93984736",
+  "_src_reader": "a88b88c7"
  },
  "noun-795": {
   "translation_pl": "wniosek; podanie",
   "example_pl": "Wniosek o zasiłek rodzicielski można złożyć online.",
-  "_src": "e741824b",
-  "_src_reader": "c037a6eb"
+  "complements": [
+   {
+    "note_pl": "wniosek, podanie o coś: ein Antrag auf Elterngeld"
+   }
+  ],
+  "_src": "e22cce89",
+  "_src_reader": "351d93dd"
  },
  "noun-796": {
   "translation_pl": "adwokat",
@@ -5000,8 +5298,14 @@
  "noun-813": {
   "translation_pl": "przyjęcie (do organizacji, do szpitala); zdjęcie; nagranie",
   "example_pl": "Przyjęcie do klubu sportowego kosztuje 20 euro.",
-  "_src": "1a1f11d4",
-  "_src_reader": "5fa148db"
+  "complements": [
+   {
+    "note_pl": "przyjęcie do czegoś: die Aufnahme in die EU",
+    "meaning_pl": "przyjęcie (do organizacji, do szpitala)"
+   }
+  ],
+  "_src": "3f9bb50c",
+  "_src_reader": "115a8293"
  },
  "noun-814": {
   "translation_pl": "zadanie, polecenie; zamówienie",
@@ -5051,15 +5355,25 @@
  "noun-821": {
   "translation_pl": "wyjątek",
   "example_pl": "Dziś zrobię wyjątek i zjem kawałek ciasta.",
-  "_src": "4bc7334b",
-  "_src_reader": "0253ccc4"
+  "complements": [
+   {
+    "note_pl": "wyjątek od czegoś: eine Ausnahme von der Regel"
+   }
+  ],
+  "_src": "a5f08725",
+  "_src_reader": "c331c78a"
  },
  "noun-822": {
   "translation_pl": "widok (z okna, z góry); perspektywa, szansa",
   "example_pl": "Z naszego balkonu mamy wspaniały widok na góry.",
   "plural_note_pl": "W znaczeniu „widok” Plural występuje rzadko; Aussichten — perspektywy, szanse.",
-  "_src": "31a05918",
-  "_src_reader": "46699efe"
+  "complements": [
+   {
+    "note_pl": "widok na coś; perspektywa czegoś: Aussicht auf Erfolg"
+   }
+  ],
+  "_src": "3a596947",
+  "_src_reader": "a6bc45b5"
  },
  "noun-823": {
   "translation_pl": "wymowa; szczera rozmowa",
@@ -5160,8 +5474,13 @@
   "translation_pl": "potrzeba; popyt",
   "example_pl": "W razie potrzeby proszę zadzwonić do lekarza.",
   "plural_note_pl": "Plural Bedarfe występuje tylko w języku specjalistycznym.",
-  "_src": "13c681d3",
-  "_src_reader": "ec4a7324"
+  "complements": [
+   {
+    "note_pl": "zapotrzebowanie na coś"
+   }
+  ],
+  "_src": "819fbaf8",
+  "_src_reader": "8b2e7d27"
  },
  "noun-839": {
   "translation_pl": "instrukcja obsługi",
@@ -5179,14 +5498,24 @@
  "noun-841": {
   "translation_pl": "uzasadnienie, wyjaśnienie powodów; założenie (czegoś)",
   "example_pl": "Złożył wypowiedzenie bez uzasadnienia.",
-  "_src": "0ee2a012",
-  "_src_reader": "9e1f7ac8"
+  "complements": [
+   {
+    "note_pl": "uzasadnienie czegoś"
+   }
+  ],
+  "_src": "aef31d8b",
+  "_src_reader": "00ced0a3"
  },
  "noun-842": {
   "translation_pl": "składka; wkład; artykuł, materiał (w mediach)",
   "example_pl": "Składka w klubie fitness wynosi 30 euro miesięcznie.",
-  "_src": "a9894879",
-  "_src_reader": "e2576ab0"
+  "complements": [
+   {
+    "note_pl": "wkład w coś: ein Beitrag zum Umweltschutz; składka na coś: der Beitrag zur Krankenversicherung; artykuł, materiał na jakiś temat: ein Beitrag zum Thema"
+   }
+  ],
+  "_src": "08b28411",
+  "_src_reader": "760b5c08"
  },
  "noun-843": {
   "translation_pl": "paragon, pokwitowanie, dokument potwierdzający; dowód",
@@ -5285,8 +5614,13 @@
  "noun-858": {
   "translation_pl": "dowód",
   "example_pl": "Policja nie ma przeciwko niemu dowodów.",
-  "_src": "15fc16f3",
-  "_src_reader": "a5c70022"
+  "complements": [
+   {
+    "note_pl": "dowód czegoś, na coś"
+   }
+  ],
+  "_src": "36afb64e",
+  "_src_reader": "7c664c85"
  },
  "noun-859": {
   "translation_pl": "mieszkaniec; lokator",
@@ -6011,15 +6345,25 @@
  "noun-973": {
   "translation_pl": "dyskusja",
   "example_pl": "Po filmie była długa dyskusja.",
-  "_src": "43b1211d",
-  "_src_reader": "5e2e4ca1"
+  "complements": [
+   {
+    "note_pl": "dyskusja o czymś"
+   }
+  ],
+  "_src": "e7e3712e",
+  "_src_reader": "d1a4e0b2"
  },
  "noun-974": {
   "translation_pl": "odległość, dystans; rezerwa, dystans (w kontaktach)",
   "example_pl": "Z tej odległości nie mogę przeczytać tabliczki.",
   "plural_note_pl": "W znaczeniu „rezerwa (w kontaktach)” — bez liczby mnogiej.",
-  "_src": "e5b04c22",
-  "_src_reader": "cc50a5da"
+  "complements": [
+   {
+    "note_pl": "dystans do kogoś, czegoś"
+   }
+  ],
+  "_src": "d05775f1",
+  "_src_reader": "67cbf455"
  },
  "noun-975": {
   "translation_pl": "dieta",
@@ -6070,8 +6414,13 @@
   "translation_pl": "ciśnienie, presja; naciśnięcie",
   "example_pl": "Przed egzaminem jest pod dużą presją.",
   "plural_note_pl": "W znaczeniach „naciśnięcie” i „presja, przymus” — bez liczby mnogiej; Drücke (rzadziej Drucke) — w fizyce. Der Druck „druk” — inne słowo (Plural Drucke).",
-  "_src": "cf9adf99",
-  "_src_reader": "e6abef71"
+  "complements": [
+   {
+    "note_pl": "presja na kogoś, coś: Druck auf die Regierung; naciśnięcie czegoś: ein Druck auf den Knopf"
+   }
+  ],
+  "_src": "885a3cf9",
+  "_src_reader": "118d4511"
  },
  "noun-983": {
   "translation_pl": "średnia",
@@ -6142,8 +6491,13 @@
  "noun-994": {
   "translation_pl": "wpływ",
   "example_pl": "Pogoda ma duży wpływ na mój nastrój.",
-  "_src": "523c45e2",
-  "_src_reader": "e44638d6"
+  "complements": [
+   {
+    "note_pl": "wpływ na kogoś, coś"
+   }
+  ],
+  "_src": "e4c85ede",
+  "_src_reader": "c7190d3a"
  },
  "noun-995": {
   "translation_pl": "wprowadzenie; wdrożenie",
@@ -6314,8 +6668,14 @@
  "noun-1022": {
   "translation_pl": "wyjaśnienie; oświadczenie",
   "example_pl": "Dziękuję za wyjaśnienie, teraz rozumiem tę regułę.",
-  "_src": "3fb65967",
-  "_src_reader": "4790aaf6"
+  "complements": [
+   {
+    "note_pl": "wyjaśnienie czegoś",
+    "meaning_pl": "wyjaśnienie"
+   }
+  ],
+  "_src": "f83edeef",
+  "_src_reader": "df2835ee"
  },
  "noun-1023": {
   "translation_pl": "przeziębienie",
@@ -6344,8 +6704,13 @@
  "noun-1027": {
   "translation_pl": "zamiennik, zastępstwo; rekompensata",
   "example_pl": "Za zepsuty laptop dostanę zamiennik.",
-  "_src": "074d8489",
-  "_src_reader": "6f6f0e40"
+  "complements": [
+   {
+    "note_pl": "zastępstwo za kogoś, zamiennik czegoś: ein Ersatz für Zucker; rekompensata za coś: Ersatz für den Schaden"
+   }
+  ],
+  "_src": "4ff21a13",
+  "_src_reader": "36150832"
  },
  "noun-1028": {
   "translation_pl": "wychowanie",
@@ -6393,8 +6758,13 @@
  "noun-1035": {
   "translation_pl": "ekspert, specjalista",
   "example_pl": "Ekspert sprawdził obraz — jest autentyczny.",
-  "_src": "18a9e4b2",
-  "_src_reader": "c3b035f1"
+  "complements": [
+   {
+    "note_pl": "ekspert w dziedzinie czegoś, od czegoś"
+   }
+  ],
+  "_src": "fa55081b",
+  "_src_reader": "6b373c94"
  },
  "noun-1036": {
   "translation_pl": "ekspertka",
@@ -6592,8 +6962,16 @@
  "noun-1067": {
   "translation_pl": "żądanie",
   "example_pl": "Związek zawodowy przedstawił swoje żądania.",
-  "_src": "26f8389a",
-  "_src_reader": "2b0f7cec"
+  "complements": [
+   {
+    "note_pl": "żądanie czegoś"
+   },
+   {
+    "note_pl": "żądanie wobec kogoś, czegoś"
+   }
+  ],
+  "_src": "edfdee3d",
+  "_src_reader": "9ed87a13"
  },
  "noun-1068": {
   "translation_pl": "kształt, forma; forma (kondycja fizyczna); forma do pieczenia",
@@ -6657,14 +7035,27 @@
   "translation_pl": "radość",
   "example_pl": "Dzieci głośno krzyczały z radości.",
   "plural_note_pl": "W znaczeniu „radość (uczucie)” występuje bez liczby mnogiej; Freuden (książk.) — radości, przyjemności.",
-  "_src": "fb0a2de8",
-  "_src_reader": "51b4c63a"
+  "complements": [
+   {
+    "note_pl": "radość z czegoś: die Freude an der Musik"
+   },
+   {
+    "note_pl": "radość z powodu czegoś: die Freude über das Geschenk"
+   }
+  ],
+  "_src": "935a3f9f",
+  "_src_reader": "7f52dbfd"
  },
  "noun-1078": {
   "translation_pl": "przyjaźń",
   "example_pl": "Nasza przyjaźń trwa już od czasów szkolnych.",
-  "_src": "03661a6f",
-  "_src_reader": "594567d7"
+  "complements": [
+   {
+    "note_pl": "przyjaźń z kimś"
+   }
+  ],
+  "_src": "b5a9c6d5",
+  "_src_reader": "28a4bf5d"
  },
  "noun-1079": {
   "translation_pl": "pokój (brak wojny); spokój, zgoda",
@@ -6738,8 +7129,13 @@
  "noun-1090": {
   "translation_pl": "gwarancja",
   "example_pl": "Na telewizor ma Pan dwa lata gwarancji.",
-  "_src": "1e7ed0d3",
-  "_src_reader": "4b6667f0"
+  "complements": [
+   {
+    "note_pl": "gwarancja na coś"
+   }
+  ],
+  "_src": "7544b720",
+  "_src_reader": "3ad1b2c3"
  },
  "noun-1091": {
   "translation_pl": "szatnia (w teatrze); wieszak (w przedpokoju); odzież, garderoba",
@@ -6806,8 +7202,14 @@
   "translation_pl": "myśl; pomysł",
   "example_pl": "Myśl o egzaminie mnie denerwuje.",
   "usage_note_pl": "Deklinacja nietypowa: des Gedankens; den, dem Gedanken.",
-  "_src": "f2f02c0c",
-  "_src_reader": "5e378d55"
+  "complements": [
+   {
+    "note_pl": "myśl o kimś, czymś: der Gedanke an den Urlaub",
+    "meaning_pl": "myśl"
+   }
+  ],
+  "_src": "b07ce4d5",
+  "_src_reader": "bfae8c04"
  },
  "noun-1102": {
   "translation_pl": "wiersz",
@@ -6824,8 +7226,13 @@
  "noun-1104": {
   "translation_pl": "niebezpieczeństwo",
   "example_pl": "Gołoledź to duże niebezpieczeństwo dla kierowców.",
-  "_src": "5e1bb245",
-  "_src_reader": "31b2920c"
+  "complements": [
+   {
+    "note_pl": "niebezpieczeństwo dla kogoś, czegoś"
+   }
+  ],
+  "_src": "f99cf67f",
+  "_src_reader": "5e8dd90a"
  },
  "noun-1105": {
   "translation_pl": "więzienie; kara więzienia",
@@ -6835,10 +7242,16 @@
   "_src_reader": "15b86551"
  },
  "noun-1106": {
-  "translation_pl": "uczucie; odczucie, wrażenie",
+  "translation_pl": "uczucie, poczucie; odczucie, wrażenie",
   "example_pl": "Mam wrażenie, że już się znamy.",
-  "_src": "a8b7060b",
-  "_src_reader": "b5d82acb"
+  "complements": [
+   {
+    "note_pl": "poczucie czegoś: ein Gefühl für Rhythmus",
+    "meaning_pl": "uczucie, poczucie"
+   }
+  ],
+  "_src": "1135a2ff",
+  "_src_reader": "a440854f"
  },
  "noun-1107": {
   "translation_pl": "okolica, rejon",
@@ -6849,8 +7262,13 @@
  "noun-1108": {
   "translation_pl": "przeciwieństwo; kontrast",
   "example_pl": "„Ciepły” to przeciwieństwo słowa „zimny”.",
-  "_src": "c290e46a",
-  "_src_reader": "6d0738cd"
+  "complements": [
+   {
+    "note_pl": "przeciwieństwo czegoś: im Gegensatz zu dir"
+   }
+  ],
+  "_src": "9ceabfc7",
+  "_src_reader": "9459e3cc"
  },
  "noun-1109": {
   "translation_pl": "przedmiot; temat",
@@ -6918,8 +7336,13 @@
   "translation_pl": "smak, gust",
   "example_pl": "Zupa ma lekko ostry smak.",
   "plural_note_pl": "Geschmäcker — potoczna, żartobliwa forma: Die Geschmäcker sind verschieden.",
-  "_src": "1a9d8c0d",
-  "_src_reader": "8617550a"
+  "complements": [
+   {
+    "note_pl": "upodobanie do czegoś: Geschmack an etwas finden"
+   }
+  ],
+  "_src": "81e99cce",
+  "_src_reader": "9e7940f7"
  },
  "noun-1120": {
   "translation_pl": "prędkość",
@@ -6943,8 +7366,14 @@
   "translation_pl": "przemoc; władza; siła",
   "example_pl": "Przemoc nie jest rozwiązaniem.",
   "plural_note_pl": "W znaczeniach „przemoc” i „władza” występuje bez liczby mnogiej; Gewalten — siły natury (die Naturgewalten).",
-  "_src": "3559fd35",
-  "_src_reader": "f69c9ce2"
+  "complements": [
+   {
+    "note_pl": "przemoc wobec kogoś: Gewalt gegen Frauen",
+    "meaning_pl": "przemoc"
+   }
+  ],
+  "_src": "4bb2b2d4",
+  "_src_reader": "0da539eb"
  },
  "noun-1124": {
   "translation_pl": "związek zawodowy",
@@ -7044,8 +7473,18 @@
  "noun-1139": {
   "translation_pl": "granica; kres",
   "example_pl": "Na granicy trzeba pokazać paszport.",
-  "_src": "e396b28e",
-  "_src_reader": "d578089f"
+  "complements": [
+   {
+    "note_pl": "granica z czymś: die Grenze zu Polen",
+    "meaning_pl": "granica"
+   },
+   {
+    "note_pl": "granica między czymś a czymś",
+    "meaning_pl": "granica"
+   }
+  ],
+  "_src": "1acf7e65",
+  "_src_reader": "aaa3faa8"
  },
  "noun-1140": {
   "translation_pl": "Grek",
@@ -7158,8 +7597,13 @@
  "noun-1158": {
   "translation_pl": "tęsknota za domem, za ojczyzną",
   "example_pl": "W pierwszym roku w Niemczech często tęskniła za domem.",
-  "_src": "3e052871",
-  "_src_reader": "cdd40c13"
+  "complements": [
+   {
+    "note_pl": "tęsknota za domem, za kimś, czymś"
+   }
+  ],
+  "_src": "375ceb8c",
+  "_src_reader": "beeaddbc"
  },
  "noun-1159": {
   "translation_pl": "bohater",
@@ -7201,8 +7645,13 @@
  "noun-1165": {
   "translation_pl": "wskazówka, podpowiedź; sygnał, oznaka",
   "example_pl": "Dzięki za wskazówkę, zupełnie o tym zapomniałem / zapomniałam.",
-  "_src": "43b713a4",
-  "_src_reader": "079045d2"
+  "complements": [
+   {
+    "note_pl": "wskazówka co do czegoś, oznaka czegoś"
+   }
+  ],
+  "_src": "67a7a14b",
+  "_src_reader": "8903446f"
  },
  "noun-1166": {
   "translation_pl": "hit",
@@ -7226,8 +7675,13 @@
  "noun-1169": {
   "translation_pl": "nadzieja",
   "example_pl": "Nie straciliśmy jeszcze nadziei.",
-  "_src": "9ce1b91b",
-  "_src_reader": "71f5f987"
+  "complements": [
+   {
+    "note_pl": "nadzieja na coś"
+   }
+  ],
+  "_src": "caebaff0",
+  "_src_reader": "8737e118"
  },
  "noun-1170": {
   "translation_pl": "drewno; drwa",
@@ -7424,8 +7878,19 @@
  "noun-1201": {
   "translation_pl": "walka; bój",
   "example_pl": "Walka ze zmianami klimatu dotyczy nas wszystkich.",
-  "_src": "1904d5f4",
-  "_src_reader": "2b325f83"
+  "complements": [
+   {
+    "note_pl": "walka z czymś, przeciwko czemuś"
+   },
+   {
+    "note_pl": "walka o zdobycie czegoś: der Kampf um die Macht"
+   },
+   {
+    "note_pl": "walka o coś, w obronie czegoś"
+   }
+  ],
+  "_src": "d3e4da3f",
+  "_src_reader": "a5ac30b2"
  },
  "noun-1202": {
   "translation_pl": "kanał",
@@ -7436,8 +7901,13 @@
  "noun-1203": {
   "translation_pl": "kandydat",
   "example_pl": "Na którego kandydata głosujesz w niedzielę?",
-  "_src": "13a20892",
-  "_src_reader": "ca5d6310"
+  "complements": [
+   {
+    "note_pl": "kandydat na coś"
+   }
+  ],
+  "_src": "77c6a238",
+  "_src_reader": "18d1c19e"
  },
  "noun-1204": {
   "translation_pl": "kandydatka",
@@ -7653,8 +8123,13 @@
  "noun-1238": {
   "translation_pl": "komentarz",
   "example_pl": "Pod filmikiem jest już sto komentarzy.",
-  "_src": "06d525b8",
-  "_src_reader": "6bcba6ca"
+  "complements": [
+   {
+    "note_pl": "komentarz do czegoś"
+   }
+  ],
+  "_src": "f569735c",
+  "_src_reader": "a06029de"
  },
  "noun-1239": {
   "translation_pl": "porozumiewanie się, komunikacja",
@@ -7678,8 +8153,16 @@
  "noun-1242": {
   "translation_pl": "konflikt",
   "example_pl": "Między sąsiadami często dochodzi do konfliktów z powodu hałasu.",
-  "_src": "21a737ca",
-  "_src_reader": "b541d9ef"
+  "complements": [
+   {
+    "note_pl": "konflikt z kimś"
+   },
+   {
+    "note_pl": "konflikt między kimś a kimś"
+   }
+  ],
+  "_src": "a11ebcfd",
+  "_src_reader": "1f3118b8"
  },
  "noun-1243": {
   "translation_pl": "konsulat",
@@ -7696,8 +8179,13 @@
  "noun-1245": {
   "translation_pl": "kontrola",
   "example_pl": "W pociągu była dziś kontrola, ale na szczęście miałem / miałam bilet.",
-  "_src": "520c7156",
-  "_src_reader": "1a6ee90b"
+  "complements": [
+   {
+    "note_pl": "kontrola nad kimś, czymś"
+   }
+  ],
+  "_src": "931b3379",
+  "_src_reader": "d2fbd9b4"
  },
  "noun-1246": {
   "translation_pl": "kopia",
@@ -7826,8 +8314,14 @@
   "translation_pl": "krytyka; recenzja",
   "example_pl": "Nie potrafi dobrze przyjmować krytyki.",
   "plural_note_pl": "W znaczeniu „krytyka (uwagi)” Plural występuje rzadko; Kritiken — recenzje.",
-  "_src": "fd57e018",
-  "_src_reader": "c6dfe329"
+  "complements": [
+   {
+    "note_pl": "krytyka kogoś, czegoś",
+    "meaning_pl": "krytyka"
+   }
+  ],
+  "_src": "6d802664",
+  "_src_reader": "f8670d45"
  },
  "noun-1266": {
   "translation_pl": "krokodyl",
@@ -8063,8 +8557,13 @@
   "translation_pl": "miłość",
   "example_pl": "Pobrali się z miłości.",
   "plural_note_pl": "W znaczeniu „miłość (uczucie)” występuje bez liczby mnogiej; Lieben — romanse, miłostki (seine früheren Lieben — jego dawne miłostki).",
-  "_src": "b71b5f81",
-  "_src_reader": "4547b491"
+  "complements": [
+   {
+    "note_pl": "miłość do kogoś, czegoś"
+   }
+  ],
+  "_src": "0eb8309a",
+  "_src_reader": "b1991e5c"
  },
  "noun-1304": {
   "translation_pl": "dostawa",
@@ -8193,8 +8692,14 @@
   "translation_pl": "brak, niedobór; wada",
   "example_pl": "W wielu szpitalach jest niedobór personelu pielęgniarskiego.",
   "plural_note_pl": "W znaczeniu „niedobór” występuje bez liczby mnogiej; Mängel — wady, usterki.",
-  "_src": "2efc6ec2",
-  "_src_reader": "a31969da"
+  "complements": [
+   {
+    "note_pl": "brak, niedobór czegoś",
+    "meaning_pl": "brak, niedobór"
+   }
+  ],
+  "_src": "8636de9c",
+  "_src_reader": "f285ee50"
  },
  "noun-1325": {
   "translation_pl": "teczka (na dokumenty); aktówka",
@@ -8483,8 +8988,13 @@
  "noun-1371": {
   "translation_pl": "odwaga",
   "example_pl": "Trzeba było dużo odwagi, żeby powiedzieć prawdę.",
-  "_src": "9635d053",
-  "_src_reader": "62ec0b4f"
+  "complements": [
+   {
+    "note_pl": "odwaga do czegoś: der Mut zur Wahrheit"
+   }
+  ],
+  "_src": "344ee3e0",
+  "_src_reader": "eac3afb8"
  },
  "noun-1372": {
   "translation_pl": "język ojczysty",
@@ -8544,8 +9054,13 @@
  "noun-1381": {
   "translation_pl": "popyt; zapytanie, pytanie",
   "example_pl": "Latem popyt na lody jest bardzo duży.",
-  "_src": "3c1e911f",
-  "_src_reader": "c67f3224"
+  "complements": [
+   {
+    "note_pl": "popyt na coś: die Nachfrage nach Wohnungen; pytanie o kogoś, coś: die Nachfrage nach seinem Befinden"
+   }
+  ],
+  "_src": "ec7f827b",
+  "_src_reader": "280a0a58"
  },
  "noun-1382": {
   "translation_pl": "korepetycje, zajęcia dodatkowe",
@@ -8844,8 +9359,13 @@
  "noun-1429": {
   "translation_pl": "obowiązek",
   "example_pl": "Jako najemca ma się nie tylko prawa, ale i obowiązki.",
-  "_src": "80159479",
-  "_src_reader": "cdb337a9"
+  "complements": [
+   {
+    "note_pl": "obowiązek zrobienia czegoś: die Pflicht zur Hilfe"
+   }
+  ],
+  "_src": "3c32a05e",
+  "_src_reader": "47bc72f4"
  },
  "noun-1430": {
   "translation_pl": "piknik",
@@ -8994,8 +9514,13 @@
  "noun-1453": {
   "translation_pl": "protest",
   "example_pl": "Przeciwko budowie drogi było wiele protestów.",
-  "_src": "2bb57a83",
-  "_src_reader": "922d2d32"
+  "complements": [
+   {
+    "note_pl": "protest przeciwko czemuś"
+   }
+  ],
+  "_src": "f41c1aa3",
+  "_src_reader": "8e0a3792"
  },
  "noun-1454": {
   "translation_pl": "proces (sądowy); proces (rozwój)",
@@ -9105,8 +9630,13 @@
  "noun-1471": {
   "translation_pl": "reakcja",
   "example_pl": "Jego reakcja na tę wiadomość mnie zaskoczyła.",
-  "_src": "61b5f66c",
-  "_src_reader": "7bb55fc0"
+  "complements": [
+   {
+    "note_pl": "reakcja na coś"
+   }
+  ],
+  "_src": "3ad9c334",
+  "_src_reader": "52e58d68"
  },
  "noun-1472": {
   "translation_pl": "rzeczywistość",
@@ -9138,14 +9668,24 @@
   "translation_pl": "prawo",
   "example_pl": "Każdy człowiek ma prawo do edukacji.",
   "plural_note_pl": "W znaczeniu „prawo (system przepisów)” — bez liczby mnogiej.",
-  "_src": "ef916057",
-  "_src_reader": "e87e6d3f"
+  "complements": [
+   {
+    "note_pl": "prawo do czegoś: das Recht auf Bildung"
+   }
+  ],
+  "_src": "d247fda5",
+  "_src_reader": "f300c939"
  },
  "noun-1477": {
   "translation_pl": "przemówienie, wystąpienie",
   "example_pl": "Burmistrz wygłosił krótkie przemówienie.",
-  "_src": "26948165",
-  "_src_reader": "e31b9b77"
+  "complements": [
+   {
+    "note_pl": "mowa o czymś: Davon kann keine Rede sein."
+   }
+  ],
+  "_src": "7ce7b4ad",
+  "_src_reader": "a91dfa0f"
  },
  "noun-1478": {
   "translation_pl": "referat; wydział (w urzędzie)",
@@ -9242,8 +9782,13 @@
  "noun-1493": {
   "translation_pl": "szacunek",
   "example_pl": "Uczniowie mają wielki szacunek dla swojej nauczycielki.",
-  "_src": "1e06b6ae",
-  "_src_reader": "7a4a13c5"
+  "complements": [
+   {
+    "note_pl": "szacunek dla kogoś, czegoś"
+   }
+  ],
+  "_src": "b7075d13",
+  "_src_reader": "fd88af1a"
  },
  "noun-1494": {
   "translation_pl": "sędzia",
@@ -9312,8 +9857,13 @@
  "noun-1504": {
   "translation_pl": "powrót",
   "example_pl": "Po powrocie z Japonii dużo opowiadał.",
-  "_src": "b6283f0e",
-  "_src_reader": "f772ce0f"
+  "complements": [
+   {
+    "note_pl": "powrót do czegoś: die Rückkehr zur Normalität"
+   }
+  ],
+  "_src": "2231b306",
+  "_src_reader": "d05688d7"
  },
  "noun-1505": {
   "translation_pl": "informacja zwrotna, opinia; odpowiedź",
@@ -9325,8 +9875,13 @@
   "translation_pl": "wzgląd, liczenie się (z innymi), takt",
   "example_pl": "Proszę liczyć się z sąsiadami i zachowywać się cicho.",
   "plural_note_pl": "Zwykle w liczbie pojedynczej; Rücksichten — względy.",
-  "_src": "7bb95c25",
-  "_src_reader": "48200647"
+  "complements": [
+   {
+    "note_pl": "wzgląd na kogoś, coś: Rücksicht auf die Nachbarn"
+   }
+  ],
+  "_src": "5ed67eea",
+  "_src_reader": "d9c90882"
  },
  "noun-1507": {
   "translation_pl": "sala",
@@ -9512,8 +10067,14 @@
   "translation_pl": "wina; dług",
   "example_pl": "Wina za ten błąd nie leży po twojej stronie.",
   "plural_note_pl": "Schulden — długi pieniężne, zwykle w liczbie mnogiej. W znaczeniu „wina” nie ma liczby mnogiej.",
-  "_src": "f197169c",
-  "_src_reader": "63d14f50"
+  "complements": [
+   {
+    "note_pl": "wina za coś: Schuld am Unfall",
+    "meaning_pl": "wina"
+   }
+  ],
+  "_src": "75e19c6d",
+  "_src_reader": "758a7a0b"
  },
  "noun-1537": {
   "translation_pl": "ramię",
@@ -9525,8 +10086,16 @@
   "translation_pl": "ochrona; schronienie",
   "example_pl": "Chata daje schronienie przed deszczem.",
   "plural_note_pl": "Liczba mnoga jest rzadka (zwłaszcza w Szwajcarii) i oznacza pojedyncze urządzenia ochronne. Ochrona jako pojęcie występuje bez liczby mnogiej.",
-  "_src": "1b403d80",
-  "_src_reader": "5ccd31f5"
+  "complements": [
+   {
+    "note_pl": "ochrona przed czymś"
+   },
+   {
+    "note_pl": "ochrona przed czymś: Schutz gegen Kälte"
+   }
+  ],
+  "_src": "4ef84d53",
+  "_src_reader": "cc470482"
  },
  "noun-1539": {
   "translation_pl": "ciąża",
@@ -9620,8 +10189,13 @@
  "noun-1553": {
   "translation_pl": "zwycięstwo",
   "example_pl": "Drużyna świętuje swoje pierwsze zwycięstwo w sezonie.",
-  "_src": "2e0649da",
-  "_src_reader": "5fb342a6"
+  "complements": [
+   {
+    "note_pl": "zwycięstwo nad kimś, czymś"
+   }
+  ],
+  "_src": "e2f34fae",
+  "_src_reader": "d30b16f2"
  },
  "noun-1554": {
   "translation_pl": "zwycięzca",
@@ -9639,8 +10213,14 @@
   "translation_pl": "sens; zmysł, zdolność postrzegania",
   "example_pl": "Nie rozumiem sensu tego zdania.",
   "plural_note_pl": "Sinne — narządy zmysłów lub zdolności postrzegania. W znaczeniu „sens” nie ma liczby mnogiej.",
-  "_src": "b71a1599",
-  "_src_reader": "b6dd034d"
+  "complements": [
+   {
+    "note_pl": "zmysł do czegoś, poczucie czegoś: Sinn für Humor",
+    "meaning_pl": "zmysł, zdolność postrzegania"
+   }
+  ],
+  "_src": "296a0cf5",
+  "_src_reader": "f64dc649"
  },
  "noun-1557": {
   "translation_pl": "siedzenie; miejsce; siedziba, centrala",
@@ -9692,8 +10272,13 @@
   "example_pl": "Niepokój o chorego ojca nie pozwala jej zasnąć.",
   "plural_note_pl": "Sorgen — zmartwienia i troski. W książkowym znaczeniu „troska o kogoś” (Fürsorge) nie ma liczby mnogiej.",
   "usage_note_pl": "W znaczeniu „troska o kogoś” — wyraz książkowy.",
-  "_src": "68a417aa",
-  "_src_reader": "10d4fc78"
+  "complements": [
+   {
+    "note_pl": "niepokój, obawa o kogoś, coś"
+   }
+  ],
+  "_src": "386cea00",
+  "_src_reader": "1c8942e2"
  },
  "noun-1565": {
   "translation_pl": "pamiątka",
@@ -9731,8 +10316,13 @@
   "translation_pl": "specjalista; lekarz specjalista",
   "example_pl": "Do naprawy potrzebujemy specjalisty.",
   "usage_note_pl": "Deklinacja: einen Spezialisten · mit dem Spezialisten.",
-  "_src": "693a64ad",
-  "_src_reader": "e7067d3f"
+  "complements": [
+   {
+    "note_pl": "specjalista od czegoś, w dziedzinie czegoś"
+   }
+  ],
+  "_src": "b8857ed1",
+  "_src_reader": "20c9937b"
  },
  "noun-1571": {
   "translation_pl": "specjalistka; lekarka specjalistka",
@@ -9957,8 +10547,19 @@
   "translation_pl": "spór; kłótnia",
   "example_pl": "Między sąsiadami toczy się spór o płot.",
   "plural_note_pl": "Liczba mnoga Streite występuje rzadko. O poszczególnych kłótniach mówi się zwykle Streitigkeiten.",
-  "_src": "33648616",
-  "_src_reader": "1bba3745"
+  "complements": [
+   {
+    "note_pl": "kłótnia, spór z kimś"
+   },
+   {
+    "note_pl": "spór o coś: Streit um das Erbe"
+   },
+   {
+    "note_pl": "spór o coś, na temat czegoś"
+   }
+  ],
+  "_src": "f9e5e6d3",
+  "_src_reader": "840adc80"
  },
  "noun-1607": {
   "translation_pl": "struktura; budowa",
@@ -10023,8 +10624,13 @@
   "translation_pl": "uzależnienie; chorobliwy pociąg",
   "example_pl": "Jego uzależnienie od hazardu obciąża całą rodzinę.",
   "plural_note_pl": "Zwykła forma — Süchte; Suchten występuje rzadko.",
-  "_src": "c1dad3e9",
-  "_src_reader": "f131e9b1"
+  "complements": [
+   {
+    "note_pl": "żądza czegoś, chorobliwy pociąg do czegoś: die Sucht nach Anerkennung"
+   }
+  ],
+  "_src": "a35db315",
+  "_src_reader": "3ca10905"
  },
  "noun-1617": {
   "translation_pl": "substancja uzależniająca",
@@ -10097,8 +10703,14 @@
  "noun-1628": {
   "translation_pl": "talent, zdolność; utalentowana osoba",
   "example_pl": "Ma wielki talent do języków.",
-  "_src": "99165ac7",
-  "_src_reader": "e967ffee"
+  "complements": [
+   {
+    "note_pl": "talent do czegoś",
+    "meaning_pl": "talent, zdolność"
+   }
+  ],
+  "_src": "945e22ba",
+  "_src_reader": "c7cecce3"
  },
  "noun-1629": {
   "translation_pl": "stacja benzynowa",
@@ -10158,8 +10770,13 @@
  "noun-1638": {
   "translation_pl": "udział",
   "example_pl": "Udział w warsztatach jest bezpłatny.",
-  "_src": "8aa95ffd",
-  "_src_reader": "61518944"
+  "complements": [
+   {
+    "note_pl": "udział w czymś"
+   }
+  ],
+  "_src": "b97ae077",
+  "_src_reader": "42ad6c46"
  },
  "noun-1639": {
   "translation_pl": "uczestnik",
@@ -10553,14 +11170,24 @@
  "noun-1700": {
   "translation_pl": "przyczyna",
   "example_pl": "Przyczyna przerwy w dostawie prądu jest jeszcze nieznana.",
-  "_src": "90dff5bc",
-  "_src_reader": "c095170e"
+  "complements": [
+   {
+    "note_pl": "przyczyna czegoś"
+   }
+  ],
+  "_src": "56896e3e",
+  "_src_reader": "afb6ecb8"
  },
  "noun-1701": {
   "translation_pl": "wyrok; orzeczenie sądowe; osąd",
   "example_pl": "Sąd ogłosi jutro swój wyrok.",
-  "_src": "ce651e91",
-  "_src_reader": "393314b1"
+  "complements": [
+   {
+    "note_pl": "wyrok, orzeczenie sądu w sprawie kogoś, czegoś: das Urteil über den Angeklagten; osąd o kimś, czymś: ein Urteil über den Film"
+   }
+  ],
+  "_src": "fbf736aa",
+  "_src_reader": "31b342d2"
  },
  "noun-1702": {
   "translation_pl": "użytkownik",
@@ -10585,14 +11212,27 @@
  "noun-1705": {
   "translation_pl": "umówione spotkanie; ustalenie",
   "example_pl": "Dziś wieczorem mam umówione spotkanie z przyjaciółmi.",
-  "_src": "a214be16",
-  "_src_reader": "e12f479f"
+  "complements": [
+   {
+    "note_pl": "umówione spotkanie, randka z kimś"
+   }
+  ],
+  "_src": "14b02fff",
+  "_src_reader": "8eb8a9ca"
  },
  "noun-1706": {
   "translation_pl": "związek; połączenie; połączenie komunikacyjne",
   "example_pl": "Połączenie z internetem zostało przerwane.",
-  "_src": "5863e745",
-  "_src_reader": "60515a1c"
+  "complements": [
+   {
+    "note_pl": "kontakt, łączność z kimś, czymś: die Verbindung zur Außenwelt"
+   },
+   {
+    "note_pl": "związek, połączenie między czymś a czymś"
+   }
+  ],
+  "_src": "669ada89",
+  "_src_reader": "5fb46018"
  },
  "noun-1707": {
   "translation_pl": "zakaz",
@@ -10615,8 +11255,16 @@
  "noun-1710": {
   "translation_pl": "podejrzenie",
   "example_pl": "Policja sprawdza podejrzenie oszustwa.",
-  "_src": "743fd521",
-  "_src_reader": "d0f3128a"
+  "complements": [
+   {
+    "note_pl": "podejrzenie czegoś: Verdacht auf Grippe"
+   },
+   {
+    "note_pl": "podejrzenie wobec kogoś"
+   }
+  ],
+  "_src": "e8298d8a",
+  "_src_reader": "32c4169b"
  },
  "noun-1711": {
   "translation_pl": "przeszłość",
@@ -10628,8 +11276,17 @@
  "noun-1712": {
   "translation_pl": "porównanie; ugoda",
   "example_pl": "Porównanie cen pomaga oszczędzać.",
-  "_src": "9b141606",
-  "_src_reader": "5617f6da"
+  "complements": [
+   {
+    "note_pl": "porównanie z czymś: ein Vergleich mit dem Vorjahr; ugoda z kimś: ein Vergleich mit den Gläubigern"
+   },
+   {
+    "note_pl": "porównanie między czymś a czymś: ein Vergleich zwischen den beiden Ländern",
+    "meaning_pl": "porównanie"
+   }
+  ],
+  "_src": "a3f5c0b4",
+  "_src_reader": "1a1dd5a4"
  },
  "noun-1713": {
   "translation_pl": "przyjemność; rozrywka",
@@ -10649,8 +11306,26 @@
   "translation_pl": "stosunek, proporcja; stosunki; warunki",
   "example_pl": "Stosunek wody do ryżu wynosi dwa do jednego.",
   "plural_note_pl": "W znaczeniu „warunki, okoliczności” występuje tylko w liczbie mnogiej: Verhältnisse.",
-  "_src": "57875265",
-  "_src_reader": "7a5dc6f5"
+  "complements": [
+   {
+    "note_pl": "stosunek do czegoś: ein entspanntes Verhältnis zum Geld; stosunki z kimś: sein Verhältnis zum Chef",
+    "meaning_pl": "stosunek, proporcja"
+   },
+   {
+    "note_pl": "stosunek do czegoś: ein entspanntes Verhältnis zum Geld; stosunki z kimś: sein Verhältnis zum Chef",
+    "meaning_pl": "stosunki"
+   },
+   {
+    "note_pl": "proporcja między czymś a czymś: das Verhältnis zwischen Preis und Leistung; stosunki między kimś a kimś: das Verhältnis zwischen den Brüdern",
+    "meaning_pl": "stosunek, proporcja"
+   },
+   {
+    "note_pl": "proporcja między czymś a czymś: das Verhältnis zwischen Preis und Leistung; stosunki między kimś a kimś: das Verhältnis zwischen den Brüdern",
+    "meaning_pl": "stosunki"
+   }
+  ],
+  "_src": "2ce3a3b1",
+  "_src_reader": "9091cba1"
  },
  "noun-1716": {
   "translation_pl": "znak drogowy",
@@ -10716,8 +11391,13 @@
   "translation_pl": "zrozumienie",
   "example_pl": "Rysunek ułatwia zrozumienie tekstu.",
   "plural_note_pl": "Liczba mnoga Verständnisse występuje rzadko — w znaczeniu różnych sposobów rozumienia lub interpretacji. W znaczeniu współczucia lub zrozumienia drugiego człowieka liczby mnogiej nie ma.",
-  "_src": "c8e8833e",
-  "_src_reader": "dc84d32f"
+  "complements": [
+   {
+    "note_pl": "zrozumienie dla czegoś, kogoś"
+   }
+  ],
+  "_src": "12c60491",
+  "_src_reader": "06099d42"
  },
  "noun-1727": {
   "translation_pl": "próba; doświadczenie, eksperyment",
@@ -10728,8 +11408,16 @@
  "noun-1728": {
   "translation_pl": "zaufanie",
   "example_pl": "Dla dobrej współpracy ważne jest wzajemne zaufanie.",
-  "_src": "9232cc38",
-  "_src_reader": "cd0a7c3c"
+  "complements": [
+   {
+    "note_pl": "zaufanie do czegoś: Vertrauen in die Zukunft"
+   },
+   {
+    "note_pl": "zaufanie do kogoś: Vertrauen zum Arzt"
+   }
+  ],
+  "_src": "3348623c",
+  "_src_reader": "6c52e848"
  },
  "noun-1729": {
   "translation_pl": "przedstawiciel; zastępca; przedstawiciel handlowy",
@@ -10843,8 +11531,14 @@
   "translation_pl": "wyobrażenie, obraz w myślach; przedstawienie, seans; przedstawienie się, przedstawienie (kogoś)",
   "example_pl": "Mam jasne wyobrażenie o moim nowym pokoju.",
   "plural_note_pl": "Vorstellungen — pojedyncze wyobrażenia, obrazy w myślach lub przedstawienia. Wyobraźnia jako zdolność — bez liczby mnogiej.",
-  "_src": "764b8423",
-  "_src_reader": "235512aa"
+  "complements": [
+   {
+    "note_pl": "wyobrażenie o czymś",
+    "meaning_pl": "wyobrażenie, obraz w myślach"
+   }
+  ],
+  "_src": "7a246d93",
+  "_src_reader": "17bf53fa"
  },
  "noun-1747": {
   "translation_pl": "rozmowa kwalifikacyjna",
@@ -10861,15 +11555,30 @@
  "noun-1749": {
   "translation_pl": "wyrzut, zarzut",
   "example_pl": "Zarzut, że skłamał, jest bezpodstawny.",
-  "_src": "59f29261",
-  "_src_reader": "3c3a4a5f"
+  "complements": [
+   {
+    "note_pl": "wyrzut, zarzut pod adresem kogoś"
+   }
+  ],
+  "_src": "bd533512",
+  "_src_reader": "ca94c4b4"
  },
  "noun-1750": {
-  "translation_pl": "wybór; wybory",
+  "translation_pl": "wybór; wybory; wybór (na stanowisko)",
   "example_pl": "Przy wyborze kursu pomaga mi doradczyni.",
   "plural_note_pl": "W znaczeniu wyboru (decyzji) Plural występuje rzadko; w znaczeniu wyborów (głosowania) jest powszechny. Wybór kogoś na stanowisko — bez Plural.",
-  "_src": "d3819bc4",
-  "_src_reader": "b3e04d15"
+  "complements": [
+   {
+    "note_pl": "wybory do czegoś: die Wahl zum Bundestag; wybór na kogoś: die Wahl zum Präsidenten",
+    "meaning_pl": "wybory"
+   },
+   {
+    "note_pl": "wybory do czegoś: die Wahl zum Bundestag; wybór na kogoś: die Wahl zum Präsidenten",
+    "meaning_pl": "wybór (na stanowisko)"
+   }
+  ],
+  "_src": "21a8d467",
+  "_src_reader": "a59391dc"
  },
  "noun-1751": {
   "translation_pl": "prawda",
@@ -10989,8 +11698,14 @@
  "noun-1769": {
   "translation_pl": "wiedza; świadomość",
   "example_pl": "Jego wiedza o roślinach robi wrażenie.",
-  "_src": "7f77e750",
-  "_src_reader": "96ef643d"
+  "complements": [
+   {
+    "note_pl": "wiedza o czymś, świadomość czegoś: das Wissen um die Gefahr",
+    "meaning_pl": "świadomość"
+   }
+  ],
+  "_src": "73cbf5bc",
+  "_src_reader": "b270e519"
  },
  "noun-1770": {
   "translation_pl": "nauka",
@@ -11083,8 +11798,13 @@
  "noun-1784": {
   "translation_pl": "znak; sygnał; symbol",
   "example_pl": "Nauczycielka daje nam znak, że możemy zaczynać.",
-  "_src": "a3a6c6a1",
-  "_src_reader": "cfa9f7ce"
+  "complements": [
+   {
+    "note_pl": "znak, oznaka czegoś"
+   }
+  ],
+  "_src": "6790137f",
+  "_src_reader": "5cff5a1c"
  },
  "noun-1785": {
   "translation_pl": "rysunek; rysowanie",
@@ -11155,8 +11875,18 @@
   "translation_pl": "wejście, przejście; dostęp; napływ",
   "example_pl": "Wejście do muzeum znajduje się po drugiej stronie.",
   "plural_note_pl": "Zugänge — wejścia, możliwości dostępu lub nowo przybyłe osoby/przedmioty. Napływ jako proces — bez Plural.",
-  "_src": "89fdb8dd",
-  "_src_reader": "ea11ad3c"
+  "complements": [
+   {
+    "note_pl": "wejście, przejście do czegoś: der Zugang zum Garten; dostęp do czegoś: Zugang zum Internet",
+    "meaning_pl": "wejście, przejście"
+   },
+   {
+    "note_pl": "wejście, przejście do czegoś: der Zugang zum Garten; dostęp do czegoś: Zugang zum Internet",
+    "meaning_pl": "dostęp"
+   }
+  ],
+  "_src": "c41955a6",
+  "_src_reader": "b63a1f3d"
  },
  "noun-1796": {
   "translation_pl": "dom rodzinny; dom, miejsce zamieszkania",
@@ -11186,8 +11916,13 @@
  "noun-1800": {
   "translation_pl": "współpraca",
   "example_pl": "Współpraca z nowym zespołem układa się dobrze.",
-  "_src": "b41153a4",
-  "_src_reader": "57000b76"
+  "complements": [
+   {
+    "note_pl": "współpraca z kimś"
+   }
+  ],
+  "_src": "224ee739",
+  "_src_reader": "b58a448d"
  },
  "noun-1801": {
   "translation_pl": "widz",
@@ -11216,8 +11951,13 @@
  "noun-1805": {
   "translation_pl": "zgoda, aprobata",
   "example_pl": "Do publikacji potrzebujemy Pana zgody.",
-  "_src": "3f79fc0e",
-  "_src_reader": "2872eec5"
+  "complements": [
+   {
+    "note_pl": "zgoda na coś"
+   }
+  ],
+  "_src": "14e3ab06",
+  "_src_reader": "e941db6d"
  },
  "noun-1806": {
   "translation_pl": "składnik; dodatek",
@@ -11235,8 +11975,13 @@
  "noun-1808": {
   "translation_pl": "wątpliwość",
   "example_pl": "Nie mam żadnych wątpliwości co do jej uczciwości.",
-  "_src": "3bbd6592",
-  "_src_reader": "8c3ee50d"
+  "complements": [
+   {
+    "note_pl": "wątpliwość co do czegoś"
+   }
+  ],
+  "_src": "c20154b5",
+  "_src_reader": "9e475474"
  },
  "noun-1809": {
   "translation_pl": "drugi język",
@@ -11261,8 +12006,18 @@
  "noun-1812": {
   "translation_pl": "złość, irytacja; kłopoty",
   "example_pl": "Jego złość z powodu opóźnienia jest zrozumiała.",
-  "_src": "3a18c1bb",
-  "_src_reader": "1b9d3923"
+  "complements": [
+   {
+    "note_pl": "złość z powodu czegoś",
+    "meaning_pl": "złość, irytacja"
+   },
+   {
+    "note_pl": "kłopoty z kimś, czymś: Ärger mit dem Chef",
+    "meaning_pl": "kłopoty"
+   }
+  ],
+  "_src": "39b216f3",
+  "_src_reader": "1927fe2b"
  },
  "noun-1813": {
   "translation_pl": "opinia publiczna; jawność",
@@ -11663,8 +12418,14 @@
   "translation_pl": "słabość, osłabienie; wada; słabość (do czegoś)",
   "example_pl": "Po chorobie czuje jeszcze lekkie osłabienie.",
   "plural_note_pl": "W znaczeniu osłabienia fizycznego i niewydolności narządu Plural jest rzadki. Schwächen — zwykły Plural w znaczeniu wad; słabość do czegoś — bez Plural.",
-  "_src": "b0cc2aa8",
-  "_src_reader": "4566770e"
+  "complements": [
+   {
+    "note_pl": "słabość do czegoś, kogoś: eine Schwäche für Süßes",
+    "meaning_pl": "słabość (do czegoś)"
+   }
+  ],
+  "_src": "8d585c2c",
+  "_src_reader": "3b5797ba"
  },
  "noun-1876": {
   "translation_pl": "szampon",
@@ -11740,8 +12501,13 @@
  "noun-1887": {
   "translation_pl": "zapytanie, prośba o informację",
   "example_pl": "Na Pana zapytanie odpowiemy w ciągu dwóch dni.",
-  "_src": "9e333e36",
-  "_src_reader": "d81df6bf"
+  "complements": [
+   {
+    "note_pl": "zapytanie do kogoś, do jakiejś instytucji"
+   }
+  ],
+  "_src": "273f422e",
+  "_src_reader": "f4537487"
  },
  "noun-1888": {
   "translation_pl": "dzień pracy",
@@ -11982,15 +12748,28 @@
  "noun-1925": {
   "translation_pl": "wściekłość",
   "example_pl": "Z wściekłości uderza ręką w stół.",
-  "_src": "7363b118",
-  "_src_reader": "02bc9cdb"
+  "complements": [
+   {
+    "note_pl": "wściekłość na kogoś, coś"
+   },
+   {
+    "note_pl": "wściekłość z powodu czegoś"
+   }
+  ],
+  "_src": "49e3d277",
+  "_src_reader": "67ea70ec"
  },
  "noun-1926": {
   "translation_pl": "zadowolenie, satysfakcja",
   "example_pl": "Wynik napawa ją zadowoleniem.",
   "plural_note_pl": "Zadowolenie jako stan — bez Plural. Zufriedenheiten — rzadki Plural na określenie różnych stopni zadowolenia.",
-  "_src": "d8dfe5d7",
-  "_src_reader": "bfadb7b5"
+  "complements": [
+   {
+    "note_pl": "zadowolenie z czegoś"
+   }
+  ],
+  "_src": "7d18140b",
+  "_src_reader": "0320e8c1"
  },
  "noun-1927": {
   "translation_pl": "gaz spalinowy lub odlotowy",
@@ -12444,8 +13223,18 @@
  "noun-1997": {
   "translation_pl": "argument; argument funkcji; argument w gramatyce",
   "example_pl": "Jej argument mnie przekonuje.",
-  "_src": "32fe1795",
-  "_src_reader": "0ac2c22c"
+  "complements": [
+   {
+    "note_pl": "argument za czymś",
+    "meaning_pl": "argument"
+   },
+   {
+    "note_pl": "argument przeciwko czemuś",
+    "meaning_pl": "argument"
+   }
+  ],
+  "_src": "839941ac",
+  "_src_reader": "868e87b7"
  },
  "noun-1998": {
   "translation_pl": "atmosfera, nastrój; gazowa powłoka ciała niebieskiego; jednostka ciśnienia",
@@ -12585,8 +13374,14 @@
   "translation_pl": "zaangażowanie, poświęcenie; zobowiązanie; angaż artysty",
   "example_pl": "Jej zaangażowanie na rzecz stowarzyszenia robi wrażenie.",
   "plural_note_pl": "Osobiste zaangażowanie — bez Plural. Engagements — zobowiązania, udziały w przedsięwzięciach biznesowych lub angaże artystów.",
-  "_src": "bb42c7f8",
-  "_src_reader": "e2cfce86"
+  "complements": [
+   {
+    "note_pl": "zaangażowanie w coś, oddanie czemuś",
+    "meaning_pl": "zaangażowanie, poświęcenie"
+   }
+  ],
+  "_src": "c3db2862",
+  "_src_reader": "9d3bf018"
  },
  "noun-2020": {
   "translation_pl": "relaks; odprężenie (w polityce)",
@@ -12976,8 +13771,18 @@
   "translation_pl": "tolerancja; odporność na wpływy zewnętrzne; dopuszczalne odchylenie",
   "example_pl": "W zespole przywiązujemy dużą wagę do tolerancji.",
   "plural_note_pl": "Tolerancja wobec innych ludzi — bez Plural. Toleranzen odnosi się do odporności na wpływy lub do dopuszczalnych odchyleń.",
-  "_src": "ef8b4786",
-  "_src_reader": "1550a127"
+  "complements": [
+   {
+    "note_pl": "tolerancja wobec kogoś, czegoś: Toleranz gegenüber Andersdenkenden; odporność na coś: die Toleranz gegenüber Alkohol",
+    "meaning_pl": "tolerancja"
+   },
+   {
+    "note_pl": "tolerancja wobec kogoś, czegoś: Toleranz gegenüber Andersdenkenden; odporność na coś: die Toleranz gegenüber Alkohol",
+    "meaning_pl": "odporność na wpływy zewnętrzne"
+   }
+  ],
+  "_src": "9dbecd25",
+  "_src_reader": "c0ec7ce2"
  },
  "noun-2081": {
   "translation_pl": "przejście na inny system, zmiana; przestawienie; okrążenie",
@@ -13013,8 +13818,13 @@
  "noun-2086": {
   "translation_pl": "uprzedzenie",
   "example_pl": "Osobista rozmowa może pomóc przełamać uprzedzenia.",
-  "_src": "fd660ab2",
-  "_src_reader": "b3cc96ae"
+  "complements": [
+   {
+    "note_pl": "uprzedzenie do kogoś, czegoś"
+   }
+  ],
+  "_src": "dadaa304",
+  "_src_reader": "0c9761c4"
  },
  "noun-2087": {
   "translation_pl": "toaleta",
@@ -13103,8 +13913,13 @@
   "translation_pl": "udział, część; udział w kapitale; współczucie, życzliwe zainteresowanie",
   "example_pl": "Mój udział w kosztach wynosi dwadzieścia euro.",
   "plural_note_pl": "Współczucie, życzliwe zainteresowanie — bez Plural. Anteile — udziały lub części, w tym w kapitale.",
-  "_src": "9a1d7dbc",
-  "_src_reader": "a2e8cff3"
+  "complements": [
+   {
+    "note_pl": "udział w czymś: sein Anteil am Gewinn; udział w kapitale: Anteile an einem Unternehmen; współczucie: Anteil an seinem Schicksal nehmen"
+   }
+  ],
+  "_src": "0dc5acf1",
+  "_src_reader": "03402aa4"
  },
  "noun-2101": {
   "translation_pl": "aspekt, punkt widzenia; układ ciał niebieskich; aspekt czasownika",
@@ -13358,8 +14173,18 @@
   "translation_pl": "przekonanie, wiara; wiara religijna; wyznanie",
   "example_pl": "Jego wiara w przyszłość dodaje mu sił.",
   "declension_note_pl": "Także Glaube(n); Genitiv: des Glaubens.",
-  "_src": "8df319c9",
-  "_src_reader": "c88744fb"
+  "complements": [
+   {
+    "note_pl": "wiara w kogoś, coś",
+    "meaning_pl": "przekonanie, wiara"
+   },
+   {
+    "note_pl": "wiara w kogoś, coś",
+    "meaning_pl": "wiara religijna"
+   }
+  ],
+  "_src": "43ceeda2",
+  "_src_reader": "8ef1e206"
  },
  "noun-2140": {
   "translation_pl": "równouprawnienie, zrównanie w prawach i pozycji",
@@ -13576,8 +14401,14 @@
   "translation_pl": "władza, wpływ; potężna siła; wpływowe państwo lub grupa",
   "example_pl": "Rząd ma dużą władzę.",
   "plural_note_pl": "Wpływ i władza polityczna — bez Plural. Mächte — poszczególne siły, państwa lub wpływowe grupy; o tajemniczych siłach zwykle mówi się w liczbie mnogiej.",
-  "_src": "cd239b7d",
-  "_src_reader": "759d195a"
+  "complements": [
+   {
+    "note_pl": "władza nad kimś, czymś",
+    "meaning_pl": "władza, wpływ"
+   }
+  ],
+  "_src": "d0a94cd4",
+  "_src_reader": "ab5073f1"
  },
  "noun-2173": {
   "translation_pl": "otwarcie granicy NRD z RFN, upadek muru berlińskiego",
@@ -13995,8 +14826,14 @@
  "noun-2235": {
   "translation_pl": "odmowa, odwołanie ustaleń; odrzucenie",
   "example_pl": "W odpowiedzi na moją aplikację otrzymałem odmowę.",
-  "_src": "3655c46f",
-  "_src_reader": "d8fcb956"
+  "complements": [
+   {
+    "note_pl": "odrzucenie czegoś: eine klare Absage an Gewalt",
+    "meaning_pl": "odrzucenie"
+   }
+  ],
+  "_src": "7a74bf4b",
+  "_src_reader": "39857e0a"
  },
  "noun-2236": {
   "translation_pl": "ósma część",
@@ -14125,8 +14962,13 @@
  "noun-2256": {
   "translation_pl": "widok; spojrzenie na przyszłe wydarzenia, perspektywa",
   "example_pl": "Z okna mamy piękny widok na dolinę.",
-  "_src": "7816d8ae",
-  "_src_reader": "72fb361a"
+  "complements": [
+   {
+    "note_pl": "widok na coś; spojrzenie na przyszłość czegoś"
+   }
+  ],
+  "_src": "ee629214",
+  "_src_reader": "1f212354"
  },
  "noun-2257": {
   "translation_pl": "praca dorywcza na zastępstwo lub do pomocy stałym pracownikom",
@@ -14998,8 +15840,13 @@
  "noun-2397": {
   "translation_pl": "retrospektywny przegląd; spojrzenie wstecz",
   "example_pl": "Artykuł przedstawia retrospektywny przegląd minionego roku.",
-  "_src": "5d76633b",
-  "_src_reader": "a3003e70"
+  "complements": [
+   {
+    "note_pl": "spojrzenie wstecz na coś, przegląd czegoś"
+   }
+  ],
+  "_src": "1221ceaf",
+  "_src_reader": "3598d55c"
  },
  "noun-2398": {
   "translation_pl": "punkt zbiórki ludzi lub rzeczy",
@@ -15991,8 +16838,13 @@
  "noun-2555": {
   "translation_pl": "oznaka; objaw; zapowiedź",
   "example_pl": "Ciemne chmury były oznaką nadciągającej burzy.",
-  "_src": "a2ed4e4f",
-  "_src_reader": "b587e7c3"
+  "complements": [
+   {
+    "note_pl": "oznaka czegoś"
+   }
+  ],
+  "_src": "f4d694a1",
+  "_src_reader": "8dafad8d"
  },
  "noun-2556": {
   "translation_pl": "Arab; koń arabski",
@@ -16023,8 +16875,22 @@
   "translation_pl": "zdanie; pogląd; rozumienie; zdolność rozumienia",
   "example_pl": "Moje zdanie zmieniło się po rozmowie z sąsiadami.",
   "plural_note_pl": "W znaczeniu „zdolność rozumienia” — bez liczby mnogiej.",
-  "_src": "a3869660",
-  "_src_reader": "eab02152"
+  "complements": [
+   {
+    "note_pl": "rozumienie czegoś, pogląd na coś",
+    "meaning_pl": "zdanie"
+   },
+   {
+    "note_pl": "rozumienie czegoś, pogląd na coś",
+    "meaning_pl": "pogląd"
+   },
+   {
+    "note_pl": "rozumienie czegoś, pogląd na coś",
+    "meaning_pl": "rozumienie"
+   }
+  ],
+  "_src": "68e85d57",
+  "_src_reader": "eeb55d0b"
  },
  "noun-2561": {
   "translation_pl": "rozwiązanie (organizacji); zakończenie; rozpuszczenie; rozkład; rozwiązanie zagadki; rozdzielczość obrazu",
@@ -16068,8 +16934,13 @@
  "noun-2567": {
   "translation_pl": "potrzeba; pragnienie",
   "example_pl": "Po długim dniu pracy poczuła potrzebę, żeby przez chwilę pobyć sama.",
-  "_src": "7a1c1745",
-  "_src_reader": "fb5c2eba"
+  "complements": [
+   {
+    "note_pl": "potrzeba czegoś"
+   }
+  ],
+  "_src": "bf2a0190",
+  "_src_reader": "46c2e031"
  },
  "noun-2568": {
   "translation_pl": "pośpiech; „pospiesz się!” (wezwanie)",
@@ -16107,8 +16978,14 @@
   "translation_pl": "znajomość; znajoma osoba; krąg znajomych",
   "example_pl": "Nasza znajomość zaczęła się na kursie językowym i wkrótce przerodziła się w przyjaźń.",
   "plural_note_pl": "W znaczeniu „znajomość, osobista więź” liczba mnoga występuje rzadko.",
-  "_src": "9c751223",
-  "_src_reader": "da3e2821"
+  "complements": [
+   {
+    "note_pl": "znajomość z kimś, zapoznanie się z czymś",
+    "meaning_pl": "znajomość"
+   }
+  ],
+  "_src": "5c8d73f8",
+  "_src_reader": "acc37878"
  },
  "noun-2574": {
   "translation_pl": "oświetlenie; sprzęt oświetleniowy; naświetlenie sprawy",
@@ -16190,8 +17067,14 @@
   "translation_pl": "pokrowiec; poszewka; związek; odbiór; wprowadzenie się",
   "example_pl": "Pokrowiec poduszki z kanapy można prać w temperaturze trzydziestu stopni.",
   "plural_note_pl": "Odbiór towarów — bez liczby mnogiej. Bezüge oznacza też wynagrodzenie, dochody; w Austrii w tym znaczeniu możliwy jest także Singular.",
-  "_src": "2834e86e",
-  "_src_reader": "dfe79472"
+  "complements": [
+   {
+    "note_pl": "związek z czymś, odniesienie do czegoś: in Bezug auf die Frage",
+    "meaning_pl": "związek"
+   }
+  ],
+  "_src": "b12568d2",
+  "_src_reader": "d40135be"
  },
  "noun-2587": {
   "translation_pl": "edukacja; wykształcenie; tworzenie, kształtowanie; tworzenie wyrazu lub formy",
@@ -16862,9 +17745,9 @@
  },
  "noun-2691": {
   "translation_pl": "Indianin (dyskryminujące określenie zewnętrzne); zwiadowca (środ.)",
-  "example_pl": "W starszych książkach przedstawiciela rdzennej ludności Ameryki często nazywa się Indianinem.",
+  "example_pl": "W starszych książkach rdzennych mieszkańców Ameryki często nazywa się Indianami.",
   "usage_note_pl": "Duden opisuje to określenie zewnętrzne jako dyskryminujące. Bardziej neutralnie jest podać nazwę konkretnego ludu lub powiedzieć indigene Bevölkerung Amerikas.",
-  "_src": "2a538b9e",
+  "_src": "61a3a958",
   "_src_reader": "09cfc1ee"
  },
  "noun-2692": {
@@ -17085,8 +17968,13 @@
   "translation_pl": "pochwała; uznanie",
   "example_pl": "Pochwała nauczyciela dodała jej odwagi, by dalej ćwiczyć.",
   "plural_note_pl": "Lm rzadko używana.",
-  "_src": "ff67c7d1",
-  "_src_reader": "92f73b0b"
+  "complements": [
+   {
+    "note_pl": "pochwała za coś"
+   }
+  ],
+  "_src": "e81157d0",
+  "_src_reader": "e23a2a4e"
  },
  "noun-2727": {
   "translation_pl": "lob (uderzenie w tenisie, badmintonie lub siatkówce)",
@@ -17171,8 +18059,13 @@
  "noun-2739": {
   "translation_pl": "współczucie; współodczuwanie; litość",
   "example_pl": "Ze współczucia przyniosła rannemu psu wodę.",
-  "_src": "a3f926a3",
-  "_src_reader": "1ba616ba"
+  "complements": [
+   {
+    "note_pl": "litość nad kimś, współczucie dla kogoś"
+   }
+  ],
+  "_src": "cd8be460",
+  "_src_reader": "422b9333"
  },
  "noun-2740": {
   "translation_pl": "wiadomość; powiadomienie",
@@ -17264,8 +18157,13 @@
  "noun-2754": {
   "translation_pl": "zazdrość",
   "example_pl": "Próbowała przezwyciężyć swoją zazdrość o sukces kolegi.",
-  "_src": "c006a6ac",
-  "_src_reader": "6cb05527"
+  "complements": [
+   {
+    "note_pl": "zazdrość o coś, wobec kogoś"
+   }
+  ],
+  "_src": "c03b2bc9",
+  "_src_reader": "621d0b54"
  },
  "noun-2755": {
   "translation_pl": "natręt; utrapienie; coś irytującego (pot.)",
@@ -17803,8 +18701,14 @@
   "translation_pl": "żal, smutek; okres żałoby; strój żałobny",
   "example_pl": "Po stracie przyjaciela odczuwała głęboki żal.",
   "plural_note_pl": "Zwykle występuje w liczbie pojedynczej.",
-  "_src": "b1cecb58",
-  "_src_reader": "638c984c"
+  "complements": [
+   {
+    "note_pl": "żal po kimś",
+    "meaning_pl": "żal, smutek"
+   }
+  ],
+  "_src": "02c8ab4c",
+  "_src_reader": "0b8934e0"
  },
  "noun-2837": {
   "translation_pl": "smutek; smutne wydarzenie",
@@ -17850,8 +18754,18 @@
   "example_pl": "Regularny kontakt z sąsiadami pomógł jej się zadomowić.",
   "plural_note_pl": "Kontakt oraz obchodzenie się z kimś lub czymś — bez Plural. Umgänge odnosi się do obejść, galerii i procesji.",
   "usage_note_pl": "Obejście lub galeria — znaczenie architektoniczne; okrężna trasa — rzadkie.",
-  "_src": "e6e23db6",
-  "_src_reader": "e7d774f5"
+  "complements": [
+   {
+    "note_pl": "kontakt z kimś: der Umgang mit Kollegen; obchodzenie się z czymś: der Umgang mit Geld",
+    "meaning_pl": "kontakt"
+   },
+   {
+    "note_pl": "kontakt z kimś: der Umgang mit Kollegen; obchodzenie się z czymś: der Umgang mit Geld",
+    "meaning_pl": "obchodzenie się z kimś lub czymś"
+   }
+  ],
+  "_src": "f79fdf07",
+  "_src_reader": "81604904"
  },
  "noun-2844": {
   "translation_pl": "realizacja; przeniesienie; przesadzenie rośliny; przekształcenie; artystyczne przetworzenie",
@@ -18088,8 +19002,13 @@
   "translation_pl": "wola; zamiar, zdecydowanie",
   "example_pl": "Wykazując się silną wolą, kontynuowała treningi po kontuzji.",
   "usage_note_pl": "Rzadki wariant formy podstawowej: der Willen. Deklinacja: den Willen · mit dem Willen · des Willens.",
-  "_src": "8051f8a2",
-  "_src_reader": "b985e2af"
+  "complements": [
+   {
+    "note_pl": "wola czegoś: der Wille zum Erfolg"
+   }
+  ],
+  "_src": "3dc1c84c",
+  "_src_reader": "0bdbc3a9"
  },
  "noun-2881": {
   "translation_pl": "wdowa, kobieta, której zmarł małżonek lub małżonka",
@@ -18200,15 +19119,26 @@
  "noun-2897": {
   "translation_pl": "widok z góry, ogólny widok; orientacja w całości; krótkie omówienie",
   "example_pl": "Z wieży widokowej dobrze widzieliśmy cały teren portu.",
-  "_src": "ae56d4cd",
-  "_src_reader": "a740589f"
+  "complements": [
+   {
+    "note_pl": "przegląd, krótkie omówienie czegoś: ein Überblick über das Thema; orientacja w czymś: den Überblick über die Finanzen behalten; widok z góry: der Überblick über die Stadt"
+   }
+  ],
+  "_src": "784cf180",
+  "_src_reader": "68ae6610"
  },
  "noun-2898": {
   "translation_pl": "miejsce przejścia; przejście przez coś; przejście do nowego stanu; okres przejściowy; rozwiązanie tymczasowe; dopłata do biletu na przejazd wyższą klasą; przeniesienie własności",
   "example_pl": "Podczas prac budowlanych przejście przez tory jest zamknięte.",
   "plural_note_pl": "Okres przejściowy i rozwiązanie tymczasowe — bez Plural.",
-  "_src": "a4f9fbed",
-  "_src_reader": "9727f3f6"
+  "complements": [
+   {
+    "note_pl": "przejście do czegoś: der Übergang zur Demokratie",
+    "meaning_pl": "przejście do nowego stanu"
+   }
+  ],
+  "_src": "31d6aee0",
+  "_src_reader": "4c478851"
  },
  "noun-2899": {
   "translation_pl": "namysł; przemyślenie",
@@ -18233,14 +19163,27 @@
  "noun-2902": {
   "translation_pl": "zależność, niesamodzielność; uwarunkowanie; uzależnienie od substancji",
   "example_pl": "Zależność od jednego dostawcy czyni firmę podatną na zagrożenia.",
-  "_src": "ecd93d18",
-  "_src_reader": "c24bbba4"
+  "complements": [
+   {
+    "note_pl": "zależność od kogoś, czegoś"
+   }
+  ],
+  "_src": "110ad01c",
+  "_src_reader": "9f777d98"
  },
  "noun-2903": {
   "translation_pl": "porozumienie, umowa",
   "example_pl": "Nowe porozumienie reguluje współpracę obu uniwersytetów.",
-  "_src": "70819c40",
-  "_src_reader": "58e64936"
+  "complements": [
+   {
+    "note_pl": "porozumienie w sprawie czegoś"
+   },
+   {
+    "note_pl": "porozumienie z kimś"
+   }
+  ],
+  "_src": "5f9737de",
+  "_src_reader": "61bec03c"
  },
  "noun-2904": {
   "translation_pl": "odpływ; otwór odpływowy; przebieg, kolejność; porządek programu; upływ terminu; wodowanie statku; start lub miejsce startu",
@@ -18452,8 +19395,14 @@
  "noun-2936": {
   "translation_pl": "pogląd; widok; widoczna strona, fasada",
   "example_pl": "Po rozmowie jego pogląd na tę kwestię się zmienił.",
-  "_src": "d01a3e14",
-  "_src_reader": "eb838959"
+  "complements": [
+   {
+    "note_pl": "pogląd na coś, opinia o czymś",
+    "meaning_pl": "pogląd"
+   }
+  ],
+  "_src": "2305d28a",
+  "_src_reader": "4815b4d7"
  },
  "noun-2937": {
   "translation_pl": "krótkie przemówienie; opis celu; zwracanie się do kogoś; uwaga, kontakt z ludźmi; oddźwięk; działanie leczenia; czułość instrumentu muzycznego",
@@ -18570,8 +19519,14 @@
   "translation_pl": "uwaga; troskliwość; drobny upominek",
   "example_pl": "Podczas wyjaśnień skupiła całą uwagę na rysunku.",
   "plural_note_pl": "Uwaga — bez Plural; w znaczeniu troskliwego zachowania Plural występuje rzadko; Aufmerksamkeiten zwykle oznacza drobne upominki.",
-  "_src": "d573d970",
-  "_src_reader": "89a3cf53"
+  "complements": [
+   {
+    "note_pl": "uwaga poświęcana czemuś",
+    "meaning_pl": "uwaga"
+   }
+  ],
+  "_src": "afb152c1",
+  "_src_reader": "7b1a836a"
  },
  "noun-2955": {
   "translation_pl": "zdenerwowanie, podekscytowanie; zamieszanie",
@@ -18583,8 +19538,14 @@
   "translation_pl": "wyjaśnienie, informacje; udostępnienie złoża; przygotowanie surowca w metalurgii; rozkład lub rozpuszczenie substancji; odsłonięcie skał; otwarcie drzwi celi więziennej",
   "example_pl": "Badanie dostarczyło informacji o przyczynie usterki.",
   "usage_note_pl": "Poza informacjami znaczenia dotyczą górnictwa, metalurgii, chemii, biologii, geologii i porządku więziennego.",
-  "_src": "eaf5fd4c",
-  "_src_reader": "6ce1ecb8"
+  "complements": [
+   {
+    "note_pl": "wyjaśnienie, informacje o czymś: Aufschluss über etwas geben",
+    "meaning_pl": "wyjaśnienie, informacje"
+   }
+  ],
+  "_src": "073687ec",
+  "_src_reader": "6672c118"
  },
  "noun-2957": {
   "translation_pl": "powszechne zainteresowanie, sensacja",
@@ -18835,8 +19796,13 @@
  "noun-2995": {
   "translation_pl": "spotkanie; mecz",
   "example_pl": "Przypadkowe spotkanie na dworcu zapoczątkowało długą przyjaźń.",
-  "_src": "609b76c8",
-  "_src_reader": "44ea1d38"
+  "complements": [
+   {
+    "note_pl": "spotkanie z kimś, czymś"
+   }
+  ],
+  "_src": "1e26006b",
+  "_src_reader": "175bf9e5"
  },
  "noun-2996": {
   "translation_pl": "ograniczenie; granica, ogrodzenie",
@@ -18874,8 +19840,18 @@
  "noun-3001": {
   "translation_pl": "obciążenie; ciężar; obciążenie zeznaniami lub dowodami; obciążenie finansowe",
   "example_pl": "Przed otwarciem sprawdzono obciążenie mostu.",
-  "_src": "e89df163",
-  "_src_reader": "7aacf392"
+  "complements": [
+   {
+    "note_pl": "obciążenie, ciężar dla kogoś, czegoś",
+    "meaning_pl": "obciążenie"
+   },
+   {
+    "note_pl": "obciążenie, ciężar dla kogoś, czegoś",
+    "meaning_pl": "ciężar"
+   }
+  ],
+  "_src": "e82c0ab6",
+  "_src_reader": "9236b9cd"
  },
  "noun-3002": {
   "translation_pl": "wysiłek, staranie; usługa specjalisty ujęta w rachunku",
@@ -18900,8 +19876,14 @@
   "translation_pl": "gotowość; jednostka operacyjna",
   "example_pl": "Jej gotowość do współpracy ułatwiła pierwsze rozmowy.",
   "plural_note_pl": "W znaczeniu gotowości liczba mnoga występuje rzadko; Bereitschaften oznacza także jednostki operacyjne.",
-  "_src": "627c383a",
-  "_src_reader": "23a2054c"
+  "complements": [
+   {
+    "note_pl": "gotowość do czegoś",
+    "meaning_pl": "gotowość"
+   }
+  ],
+  "_src": "ac392789",
+  "_src_reader": "3c07a82f"
  },
  "noun-3006": {
   "translation_pl": "uwzględnienie, wzięcie pod uwagę",
@@ -18938,8 +19920,13 @@
  "noun-3011": {
   "translation_pl": "niepokój, obawa",
   "example_pl": "Jego długa nieobecność dała sąsiadom powód do niepokoju.",
-  "_src": "7288d020",
-  "_src_reader": "ee53169a"
+  "complements": [
+   {
+    "note_pl": "zaniepokojenie czymś"
+   }
+  ],
+  "_src": "afe23ec9",
+  "_src_reader": "7b29dd49"
  },
  "noun-3012": {
   "translation_pl": "część składowa, składnik",
@@ -19498,8 +20485,13 @@
  "noun-3097": {
   "translation_pl": "możliwość zajrzenia do środka; wgląd w dokumenty; wyobrażenie o czymś",
   "example_pl": "Okno pozwala zajrzeć do warsztatu.",
-  "_src": "ee1b5cf7",
-  "_src_reader": "af49b5a9"
+  "complements": [
+   {
+    "note_pl": "wyobrażenie o czymś: Einblick in die Arbeit; wgląd w coś: Einblick in die Akten; możliwość zajrzenia do środka: Einblick in den Hof"
+   }
+  ],
+  "_src": "34cb09e3",
+  "_src_reader": "78cd9505"
  },
  "noun-3098": {
   "translation_pl": "jednoznaczność; jednoznaczna wypowiedź lub jednoznaczne zachowanie",
@@ -19568,14 +20560,25 @@
   "translation_pl": "nastawienie, stosunek; umieszczenie na miejscu lub czasowe przechowanie; przyjęcie do pracy; ustawienie, regulacja; zaprzestanie działalności; wyrównanie rekordu sportowego; przygotowanie drużyny do gry z przeciwnikiem; wpisanie kwoty do budżetu; ujęcie nakręcone bez przerwy",
   "example_pl": "Jej otwarte nastawienie do nowych pomysłów pomagało całemu zespołowi.",
   "usage_note_pl": "Wyrównanie rekordu i przygotowanie drużyny — sport; wpisanie kwoty do budżetu — urzędowo; ujęcie — kinematografia.",
-  "_src": "6a227ed8",
-  "_src_reader": "b5fefd2f"
+  "complements": [
+   {
+    "note_pl": "stosunek do czegoś, kogoś",
+    "meaning_pl": "nastawienie, stosunek"
+   }
+  ],
+  "_src": "959a93fa",
+  "_src_reader": "45676599"
  },
  "noun-3109": {
   "translation_pl": "zastrzeżenie, krytyczna uwaga",
   "example_pl": "Zgłosiła rzeczowe zastrzeżenie do harmonogramu.",
-  "_src": "116a2b6f",
-  "_src_reader": "f27a7d6a"
+  "complements": [
+   {
+    "note_pl": "zastrzeżenie do czegoś"
+   }
+  ],
+  "_src": "d4033939",
+  "_src_reader": "2ef4ec4c"
  },
  "noun-3110": {
   "translation_pl": "próżność; marność, daremność",
@@ -19792,8 +20795,8 @@
  },
  "noun-3143": {
   "translation_pl": "stopniowe nasilanie stosowanych środków; niekontrolowane zaostrzenie konfliktu",
-  "example_pl": "Raport opisuje stopniowe nasilanie działań wojskowych od ostrzeżeń po naloty.",
-  "_src": "1e9bd6af",
+  "example_pl": "Raport opisuje stopniowe nasilanie działań od ostrzeżeń po naloty.",
+  "_src": "a77b98f8",
   "_src_reader": "577c0bd9"
  },
  "noun-3144": {
@@ -20012,8 +21015,13 @@
  "noun-3177": {
   "translation_pl": "strach, obawa",
   "example_pl": "Strach przed kolejnym błędem odbierał mu pewność siebie.",
-  "_src": "f5a870c7",
-  "_src_reader": "1b1a3eb2"
+  "complements": [
+   {
+    "note_pl": "strach przed kimś, czymś"
+   }
+  ],
+  "_src": "613973cc",
+  "_src_reader": "a1550377"
  },
  "noun-3178": {
   "translation_pl": "dar, prezent; jałmużna, datek; talent; podanie leku; dawka",
@@ -20443,8 +21451,14 @@
   "example_pl": "Na stromym zboczu rośnie tylko kilka drzew.",
   "plural_note_pl": "Skłonność lub upodobanie — bez Plural.",
   "usage_note_pl": "Zwis — termin gimnastyczny.",
-  "_src": "0cb221eb",
-  "_src_reader": "cc3c9b35"
+  "complements": [
+   {
+    "note_pl": "skłonność do czegoś: ein Hang zur Faulheit",
+    "meaning_pl": "skłonność, upodobanie"
+   }
+  ],
+  "_src": "764a4c87",
+  "_src_reader": "7a4fdd51"
  },
  "noun-3242": {
   "translation_pl": "niepohamowanie, brak zahamowań",
@@ -20758,8 +21772,13 @@
  "noun-3288": {
   "translation_pl": "długoterminowa lokata kapitału w dobra materialne; nakład, wydatek",
   "example_pl": "Inwestycja w nową instalację produkcyjną ma się opłacić w dłuższej perspektywie.",
-  "_src": "68376ede",
-  "_src_reader": "4783133b"
+  "complements": [
+   {
+    "note_pl": "inwestycja w coś"
+   }
+  ],
+  "_src": "15de8776",
+  "_src_reader": "c2b41273"
  },
  "noun-3289": {
   "translation_pl": "ironia, ukryta drwina; paradoksalny zbieg okoliczności",
@@ -20859,8 +21878,13 @@
  "noun-3302": {
   "translation_pl": "podobieństwo",
   "example_pl": "Podobieństwo między obiema siostrami jest zdumiewające.",
-  "_src": "b4983674",
-  "_src_reader": "3b71084c"
+  "complements": [
+   {
+    "note_pl": "podobieństwo do kogoś, czegoś"
+   }
+  ],
+  "_src": "f821d856",
+  "_src_reader": "8f90f6f6"
  },
  "noun-3303": {
   "translation_pl": "gardło",
@@ -21151,8 +22175,18 @@
   "translation_pl": "skupienie, koncentracja (uwagi); stężenie (substancji); koncentracja (sił, kapitału)",
   "example_pl": "Po ośmiu godzinach pracy jej koncentracja wyraźnie osłabła.",
   "plural_note_pl": "W znaczeniu „skupienie, ukierunkowanie na cel” — bez liczby mnogiej.",
-  "_src": "1d1e71ee",
-  "_src_reader": "0667cd0f"
+  "complements": [
+   {
+    "note_pl": "skupienie, koncentracja na czymś",
+    "meaning_pl": "skupienie, koncentracja (uwagi)"
+   },
+   {
+    "note_pl": "skupienie, koncentracja na czymś",
+    "meaning_pl": "koncentracja (sił, kapitału)"
+   }
+  ],
+  "_src": "98aab693",
+  "_src_reader": "1afceaa6"
  },
  "noun-3347": {
   "translation_pl": "zepsucie moralne, demoralizacja; przekupywanie",
@@ -21203,8 +22237,14 @@
   "translation_pl": "smutek, żal; zmartwienia, kłopoty",
   "example_pl": "Śmierć psa sprawiła jej wielki ból.",
   "usage_note_pl": "W znaczeniu „zmartwienia, kłopoty” — potocznie.",
-  "_src": "5ce3b38e",
-  "_src_reader": "99f85bf4"
+  "complements": [
+   {
+    "note_pl": "smutek, żal z powodu czegoś: Kummer über den Verlust",
+    "meaning_pl": "smutek, żal"
+   }
+  ],
+  "_src": "07c64b5b",
+  "_src_reader": "c0f87c53"
  },
  "noun-3355": {
   "translation_pl": "krótkowzroczność; brak dalekowzroczności",
@@ -21276,8 +22316,13 @@
   "translation_pl": "pasja, zamiłowanie; namiętność",
   "example_pl": "Jego zamiłowanie do starych samochodów kosztuje go dużo pieniędzy.",
   "plural_note_pl": "W znaczeniu „namiętna miłość do drugiej osoby” — bez liczby mnogiej.",
-  "_src": "dcd87123",
-  "_src_reader": "266cac17"
+  "complements": [
+   {
+    "note_pl": "pasja do czegoś"
+   }
+  ],
+  "_src": "77588979",
+  "_src_reader": "aeb9b5b1"
  },
  "noun-3366": {
   "translation_pl": "sprawność, wydolność; wydajność, moc",
@@ -21471,15 +22516,25 @@
  "noun-3395": {
   "translation_pl": "nieufność",
   "example_pl": "Po tym oszustwie odnosiła się do każdego nieznajomego z nieufnością.",
-  "_src": "72acadcd",
-  "_src_reader": "621440f6"
+  "complements": [
+   {
+    "note_pl": "nieufność wobec kogoś, czegoś"
+   }
+  ],
+  "_src": "bdf37e5c",
+  "_src_reader": "46de1079"
  },
  "noun-3396": {
   "translation_pl": "współczucie",
   "example_pl": "Pielęgniarka traktowała pacjentów z wielkim współczuciem.",
   "plural_note_pl": "Lm rzadko używana.",
-  "_src": "7a673623",
-  "_src_reader": "9e4f439b"
+  "complements": [
+   {
+    "note_pl": "współczucie dla kogoś"
+   }
+  ],
+  "_src": "cedfd1f8",
+  "_src_reader": "b0106e78"
  },
  "noun-3397": {
   "translation_pl": "przeciętność",
@@ -21999,8 +23054,13 @@
  "noun-3472": {
   "translation_pl": "zemsta",
   "example_pl": "Z zemsty porysował samochód swojego sąsiada.",
-  "_src": "88c89520",
-  "_src_reader": "921b698d"
+  "complements": [
+   {
+    "note_pl": "zemsta na kimś"
+   }
+  ],
+  "_src": "6816817d",
+  "_src_reader": "72d1b2ae"
  },
  "noun-3473": {
   "translation_pl": "radar; radiolokacja",
@@ -22541,8 +23601,13 @@
  "noun-3552": {
   "translation_pl": "sceptycyzm, wątpliwość",
   "example_pl": "Wielu obywateli patrzy na nowe plany ze sceptycyzmem.",
-  "_src": "95fb3056",
-  "_src_reader": "8ce9bd35"
+  "complements": [
+   {
+    "note_pl": "sceptycyzm wobec czegoś"
+   }
+  ],
+  "_src": "87a1382b",
+  "_src_reader": "148b8320"
  },
  "noun-3553": {
   "translation_pl": "smoking",
@@ -22680,8 +23745,13 @@
  "noun-3573": {
   "translation_pl": "oświadczenie, opinia, stanowisko (w sprawie)",
   "example_pl": "Firma opublikowała oficjalne oświadczenie w sprawie zarzutów.",
-  "_src": "8043ec34",
-  "_src_reader": "ea92ece7"
+  "complements": [
+   {
+    "note_pl": "oświadczenie, opinia w sprawie czegoś"
+   }
+  ],
+  "_src": "b0e3a1e4",
+  "_src_reader": "eebc9c17"
  },
  "noun-3574": {
   "translation_pl": "zastępca, przedstawiciel",
@@ -23105,8 +24175,13 @@
  "noun-3638": {
   "translation_pl": "niezadowolenie",
   "example_pl": "Wśród pracowników rośnie niezadowolenie z kierownictwa.",
-  "_src": "aaac097e",
-  "_src_reader": "8171eb38"
+  "complements": [
+   {
+    "note_pl": "niezadowolenie z kogoś, czegoś"
+   }
+  ],
+  "_src": "75f7fa1a",
+  "_src_reader": "a4533604"
  },
  "noun-3639": {
   "translation_pl": "wariant, odmiana",
@@ -23258,8 +24333,14 @@
   "translation_pl": "obowiązek, zobowiązanie; zobowiązania finansowe; zakontraktowanie (artysty, zawodnika)",
   "example_pl": "Oprócz pracy zajmuje się wieloma obowiązkami rodzinnymi.",
   "plural_note_pl": "W znaczeniu „zobowiązania finansowe” — zwykle w liczbie mnogiej.",
-  "_src": "917aa519",
-  "_src_reader": "75ac1814"
+  "complements": [
+   {
+    "note_pl": "zobowiązanie do zrobienia, przestrzegania czegoś: die Verpflichtung zur Verschwiegenheit",
+    "meaning_pl": "obowiązek, zobowiązanie"
+   }
+  ],
+  "_src": "bde02b46",
+  "_src_reader": "e11d1677"
  },
  "noun-3663": {
   "translation_pl": "zatajenie, maskowanie, zawoalowanie",
@@ -23311,8 +24392,14 @@
   "translation_pl": "nagana; odsyłacz (do innego miejsca w tekście)",
   "example_pl": "Za ciągłe spóźnienia uczeń dostał naganę.",
   "usage_note_pl": "Także: odsyłacz — ein Verweis auf Seite 20.",
-  "_src": "2ad8b4d3",
-  "_src_reader": "e2479fed"
+  "complements": [
+   {
+    "note_pl": "odsyłacz do czegoś",
+    "meaning_pl": "odsyłacz (do innego miejsca w tekście)"
+   }
+  ],
+  "_src": "cbe2f943",
+  "_src_reader": "a416133d"
  },
  "noun-3671": {
   "translation_pl": "zawiłość, zagmatwanie",
@@ -23563,8 +24650,14 @@
   "translation_pl": "opór, przeciwdziałanie; przeszkoda; opór (elektr.)",
   "example_pl": "Wśród ludności panuje duży opór przeciwko budowie drogi.",
   "usage_note_pl": "Także: ruch oporu (bez lm).",
-  "_src": "3e8822b4",
-  "_src_reader": "443d810d"
+  "complements": [
+   {
+    "note_pl": "opór przeciwko czemuś, komuś",
+    "meaning_pl": "opór, przeciwdziałanie"
+   }
+  ],
+  "_src": "30f37aac",
+  "_src_reader": "40f8e195"
  },
  "noun-3709": {
   "translation_pl": "skuteczność, efektywność",
@@ -23656,8 +24749,13 @@
  "noun-3723": {
   "translation_pl": "kompetencja, odpowiedzialność (za coś)",
   "example_pl": "Pozwolenia na budowę należą do kompetencji urzędu budowlanego.",
-  "_src": "d07a5020",
-  "_src_reader": "eeddfee3"
+  "complements": [
+   {
+    "note_pl": "kompetencja w zakresie czegoś, odpowiedzialność za coś"
+   }
+  ],
+  "_src": "fe20c413",
+  "_src_reader": "ec1c33c0"
  },
  "noun-3724": {
   "translation_pl": "niezawodność",
@@ -24281,8 +25379,13 @@
  "noun-3820": {
   "translation_pl": "niechęć, antypatia",
   "example_pl": "Od dzieciństwa ma głęboką niechęć do szpinaku.",
-  "_src": "98f4fc03",
-  "_src_reader": "930de9bd"
+  "complements": [
+   {
+    "note_pl": "niechęć do kogoś, czegoś"
+   }
+  ],
+  "_src": "3b822883",
+  "_src_reader": "36a0433d"
  },
  "noun-3821": {
   "translation_pl": "rachunek, (końcowe) rozliczenie, sprawozdanie z wydatków; podliczenie; wyrównanie rachunków, odwet",
@@ -24566,8 +25669,18 @@
  "noun-3863": {
   "translation_pl": "powód, przyczyna; okazja, wydarzenie",
   "example_pl": "Spór o parkowanie był powodem zerwania stosunków między sąsiadami.",
-  "_src": "76e4199a",
-  "_src_reader": "dba9d729"
+  "complements": [
+   {
+    "note_pl": "powód do czegoś: kein Anlass zur Sorge",
+    "meaning_pl": "powód, przyczyna"
+   },
+   {
+    "note_pl": "powód czegoś, do czegoś",
+    "meaning_pl": "powód, przyczyna"
+   }
+  ],
+  "_src": "29b94f3d",
+  "_src_reader": "61b42aca"
  },
  "noun-3864": {
   "translation_pl": "próba; rozbieg; początek, rozruch",
@@ -24626,8 +25739,14 @@
   "translation_pl": "zamach, atak terrorystyczny; ogłoszenie (wywieszone); uderzenie (w klawisz), znak (przy pisaniu tekstu); uderzenie (sposób gry na fortepianie); ogranicznik",
   "example_pl": "W zamachu na dworzec zostało rannych kilka osób.",
   "usage_note_pl": "Stałe wyrażenie: bis zum Anschlag — do oporu.",
-  "_src": "44bd88cf",
-  "_src_reader": "5f4d35b5"
+  "complements": [
+   {
+    "note_pl": "zamach na kogoś, atak terrorystyczny na coś",
+    "meaning_pl": "zamach, atak terrorystyczny"
+   }
+  ],
+  "_src": "8cab064e",
+  "_src_reader": "9291a57c"
  },
  "noun-3873": {
   "translation_pl": "adres",
@@ -24671,8 +25790,14 @@
   "translation_pl": "bodziec, impuls, zachęta; rozpoczęcie gry (w piłce nożnej)",
   "example_pl": "Rozmowa z nauczycielką była dla niej impulsem, żeby studiować medycynę.",
   "usage_note_pl": "Stałe wyrażenia: Anstoß erregen — wywoływać oburzenie; an etwas Anstoß nehmen — oburzać się na coś.",
-  "_src": "a51f8f0e",
-  "_src_reader": "c318812b"
+  "complements": [
+   {
+    "note_pl": "bodziec, impuls do czegoś: den Anstoß zur Reform geben",
+    "meaning_pl": "bodziec, impuls, zachęta"
+   }
+  ],
+  "_src": "f5e7d2f6",
+  "_src_reader": "82c66003"
  },
  "noun-3880": {
   "translation_pl": "obecność; występowanie",
@@ -24908,8 +26033,14 @@
  "noun-3915": {
   "translation_pl": "apel, odezwa; wywołanie (nazwiska, numeru); wywołanie, otwarcie (programu, strony), wyświetlenie (filmu)",
   "example_pl": "Organizacja humanitarna opublikowała apel o datki dla ofiar powodzi.",
-  "_src": "9839a011",
-  "_src_reader": "8a77470c"
+  "complements": [
+   {
+    "note_pl": "apel o coś, wezwanie do czegoś: ein Aufruf zum Streik",
+    "meaning_pl": "apel, odezwa"
+   }
+  ],
+  "_src": "d038bf3f",
+  "_src_reader": "5209841a"
  },
  "noun-3916": {
   "translation_pl": "rebelia, bunt; wzburzenie, poruszenie",
@@ -25417,8 +26548,18 @@
  "noun-3995": {
   "translation_pl": "przywiązanie, więź; zobowiązanie; wiązanie (narciarskie); wiązanie (chemiczne)",
   "example_pl": "Między babcią a wnukiem istnieje bliska więź.",
-  "_src": "2c64feaf",
-  "_src_reader": "87ad7148"
+  "complements": [
+   {
+    "note_pl": "przywiązanie do kogoś, czegoś: die Bindung an die Familie; zobowiązanie, związanie czymś: die Bindung an den Vertrag",
+    "meaning_pl": "przywiązanie, więź"
+   },
+   {
+    "note_pl": "przywiązanie do kogoś, czegoś: die Bindung an die Familie; zobowiązanie, związanie czymś: die Bindung an den Vertrag",
+    "meaning_pl": "zobowiązanie"
+   }
+  ],
+  "_src": "583edb06",
+  "_src_reader": "2aef8759"
  },
  "noun-3996": {
   "translation_pl": "kontakt wzrokowy",
@@ -25519,8 +26660,13 @@
  "noun-4011": {
   "translation_pl": "sojusz, przymierze",
   "example_pl": "Kilka małych partii zawarło sojusz przed wyborami.",
-  "_src": "d0aae549",
-  "_src_reader": "5ab70583"
+  "complements": [
+   {
+    "note_pl": "sojusz z kimś"
+   }
+  ],
+  "_src": "7a92271e",
+  "_src_reader": "9e2cbb36"
  },
  "noun-4012": {
   "translation_pl": "główny inspektor, starszy inspektor",
@@ -25839,8 +26985,22 @@
   "translation_pl": "zrozumienie, uświadomienie sobie; rozsądek, rozwaga; wgląd (w dokumenty); widok (do wnętrza)",
   "example_pl": "Jego nagłe olśnienie zaskoczyło nas wszystkich.",
   "plural_note_pl": "W znaczeniach „wgląd” i „widok” bez lm.",
-  "_src": "e8d4dd68",
-  "_src_reader": "e1eb1cd2"
+  "complements": [
+   {
+    "note_pl": "zrozumienie czegoś: die Einsicht in die Notwendigkeit; wgląd w coś: Einsicht in die Akten; widok do wnętrza: die Einsicht in den Garten",
+    "meaning_pl": "zrozumienie, uświadomienie sobie"
+   },
+   {
+    "note_pl": "zrozumienie czegoś: die Einsicht in die Notwendigkeit; wgląd w coś: Einsicht in die Akten; widok do wnętrza: die Einsicht in den Garten",
+    "meaning_pl": "wgląd (w dokumenty)"
+   },
+   {
+    "note_pl": "zrozumienie czegoś: die Einsicht in die Notwendigkeit; wgląd w coś: Einsicht in die Akten; widok do wnętrza: die Einsicht in den Garten",
+    "meaning_pl": "widok (do wnętrza)"
+   }
+  ],
+  "_src": "35b8b6f0",
+  "_src_reader": "db056eda"
  },
  "noun-4062": {
   "translation_pl": "odwołanie, sprzeciw (od decyzji); zastrzeżenie, protest",
@@ -25897,8 +27057,14 @@
   "translation_pl": "oburzenie, wzburzenie; powstanie, bunt",
   "example_pl": "Decyzja sądu wywołała wielkie oburzenie.",
   "plural_note_pl": "W znaczeniu „oburzenie” bez lm.",
-  "_src": "53971ad8",
-  "_src_reader": "3a197c5e"
+  "complements": [
+   {
+    "note_pl": "oburzenie czymś",
+    "meaning_pl": "oburzenie, wzburzenie"
+   }
+  ],
+  "_src": "becef8f8",
+  "_src_reader": "81695dbe"
  },
  "noun-4071": {
   "translation_pl": "wynik końcowy, ostateczny rezultat",
@@ -27116,8 +28282,8 @@
  },
  "noun-4262": {
   "translation_pl": "hipokrytka, obłudnica",
-  "example_pl": "Nazwała swoją koleżankę hipokrytką, ponieważ ta w oczy uśmiechała się do niej, a za jej plecami ją obgadywała.",
-  "_src": "eadd3685",
+  "example_pl": "Nazwała koleżankę hipokrytką, która uśmiecha się w oczy, a za plecami obgaduje.",
+  "_src": "b6fc4640",
   "_src_reader": "6237871d"
  },
  "noun-4263": {
@@ -28253,8 +29419,13 @@
  "noun-4440": {
   "translation_pl": "członkostwo",
   "example_pl": "Członkostwo w klubie sportowym kosztuje dziesięć euro miesięcznie.",
-  "_src": "1a36386f",
-  "_src_reader": "14129e59"
+  "complements": [
+   {
+    "note_pl": "członkostwo w czymś"
+   }
+  ],
+  "_src": "527b8e86",
+  "_src_reader": "9789ce06"
  },
  "noun-4441": {
   "translation_pl": "środek, punkt centralny; centrum uwagi",
@@ -29315,8 +30486,13 @@
   "translation_pl": "nieśmiałość, lękliwość; płochliwość (zwierząt)",
   "example_pl": "Z nieśmiałości wobec obcych dziewczynka schowała się za mamę.",
   "usage_note_pl": "Nie mylić z przymiotnikiem scheu — nieśmiały, płochliwy.",
-  "_src": "66f73b09",
-  "_src_reader": "3d6609cf"
+  "complements": [
+   {
+    "note_pl": "nieśmiałość wobec kogoś, lęk przed kimś, czymś"
+   }
+  ],
+  "_src": "b8373e53",
+  "_src_reader": "efd34531"
  },
  "noun-4606": {
   "translation_pl": "los, dola; przeznaczenie, fatum",
@@ -29769,8 +30945,14 @@
   "example_pl": "W tej pozycji nie mogę długo siedzieć, bolą mnie plecy.",
   "plural_note_pl": "W znaczeniach „status” i „stosunek” — bez lm.",
   "usage_note_pl": "Stałe wyrażenie: Stellung nehmen — wypowiedzieć się, zająć stanowisko.",
-  "_src": "6e75e147",
-  "_src_reader": "b41723bb"
+  "complements": [
+   {
+    "note_pl": "stanowisko w sprawie czegoś: Stellung zu einer Frage nehmen",
+    "meaning_pl": "stanowisko, stosunek (do czegoś)"
+   }
+  ],
+  "_src": "7a733331",
+  "_src_reader": "bb913845"
  },
  "noun-4676": {
   "translation_pl": "prawa burta",
@@ -30327,8 +31509,13 @@
   "translation_pl": "pogarda",
   "example_pl": "Spojrzała z pogardą na mężczyznę, który ją oszukał.",
   "plural_note_pl": "Lm rzadko — w znaczeniu „przejawy pogardy”.",
-  "_src": "dabf8aec",
-  "_src_reader": "db57c282"
+  "complements": [
+   {
+    "note_pl": "pogarda dla kogoś, czegoś"
+   }
+  ],
+  "_src": "5b92f40f",
+  "_src_reader": "37276689"
  },
  "noun-4762": {
   "translation_pl": "spalanie; oparzenie",
@@ -30340,8 +31527,13 @@
   "translation_pl": "(poczucie) więzi, bliskości, jedności",
   "example_pl": "Mieszkańcy wsi czują silną więź między sobą.",
   "plural_note_pl": "Zwykle występuje w liczbie pojedynczej.",
-  "_src": "46e9b5eb",
-  "_src_reader": "03df14de"
+  "complements": [
+   {
+    "note_pl": "więź, bliskość z kimś, czymś"
+   }
+  ],
+  "_src": "0f78c800",
+  "_src_reader": "3af4968f"
  },
  "noun-4764": {
   "translation_pl": "podejrzany",
@@ -30557,8 +31749,13 @@
  "noun-4797": {
   "translation_pl": "naruszenie (przepisów, prawa)",
   "example_pl": "Za każde naruszenie regulaminu porządku domowego udziela się pisemnego upomnienia.",
-  "_src": "4ca57b34",
-  "_src_reader": "3b875e19"
+  "complements": [
+   {
+    "note_pl": "naruszenie czegoś: ein Verstoß gegen die Regeln"
+   }
+  ],
+  "_src": "608fdcf5",
+  "_src_reader": "1e3cce44"
  },
  "noun-4798": {
   "translation_pl": "pokusa",
@@ -30728,8 +31925,13 @@
  "noun-4824": {
   "translation_pl": "upodobanie, skłonność",
   "example_pl": "Jej upodobanie do ostrego jedzenia czuć w każdej potrawie, którą gotuje.",
-  "_src": "1525662c",
-  "_src_reader": "c33cf56c"
+  "complements": [
+   {
+    "note_pl": "upodobanie do czegoś"
+   }
+  ],
+  "_src": "921a8eac",
+  "_src_reader": "f617caec"
  },
  "noun-4825": {
   "translation_pl": "urządzenie, przyrząd, mechanizm",
@@ -30753,8 +31955,14 @@
  "noun-4828": {
   "translation_pl": "przewaga; występ",
   "example_pl": "Biegaczka weszła na ostatnie okrążenie z dziesięciosekundową przewagą.",
-  "_src": "0a4b1f71",
-  "_src_reader": "e9765b02"
+  "complements": [
+   {
+    "note_pl": "przewaga nad kimś",
+    "meaning_pl": "przewaga"
+   }
+  ],
+  "_src": "94edcf8d",
+  "_src_reader": "94acb1f6"
  },
  "noun-4829": {
   "translation_pl": "(wcześniejsze) ostrzeżenie",
@@ -31046,8 +32254,16 @@
  "noun-4875": {
   "translation_pl": "gniew",
   "example_pl": "Kiedy zobaczył stłuczony wazon, twarz mu poczerwieniała z gniewu.",
-  "_src": "436d051d",
-  "_src_reader": "6db0d88a"
+  "complements": [
+   {
+    "note_pl": "gniew na kogoś, coś"
+   },
+   {
+    "note_pl": "gniew z powodu czegoś"
+   }
+  ],
+  "_src": "2cba049a",
+  "_src_reader": "8fe64c33"
  },
  "noun-4876": {
   "translation_pl": "schronienie, ostoja",
@@ -31064,8 +32280,13 @@
  "noun-4878": {
   "translation_pl": "sympatia, przywiązanie, życzliwość",
   "example_pl": "Kot okazuje swoje przywiązanie, przytulając się do moich nóg.",
-  "_src": "4c57809d",
-  "_src_reader": "7422b92a"
+  "complements": [
+   {
+    "note_pl": "przywiązanie do kogoś"
+   }
+  ],
+  "_src": "9ae05fc3",
+  "_src_reader": "ba224534"
  },
  "noun-4879": {
   "translation_pl": "upadek, krach; załamanie (fizyczne lub nerwowe), utrata sił",
@@ -31404,8 +32625,14 @@
  "noun-4931": {
   "translation_pl": "uzdolnienie, talent, zdolności; osoba uzdolniona, talent",
   "example_pl": "Jego talent do języków ujawnił się już w szkole podstawowej.",
-  "_src": "917a4bd1",
-  "_src_reader": "7de1cf44"
+  "complements": [
+   {
+    "note_pl": "talent, zdolności do czegoś",
+    "meaning_pl": "uzdolnienie, talent, zdolności"
+   }
+  ],
+  "_src": "e8cc86aa",
+  "_src_reader": "7a45c5d5"
  },
  "noun-4932": {
   "translation_pl": "ułaskawienie",
@@ -31688,8 +32915,13 @@
  "noun-4975": {
   "translation_pl": "nabożny szacunek, głęboka cześć",
   "example_pl": "Pełni nabożnego szacunku turyści stali przed ogromną katedrą.",
-  "_src": "3ccb3c84",
-  "_src_reader": "b43b7949"
+  "complements": [
+   {
+    "note_pl": "nabożny szacunek dla kogoś, czegoś"
+   }
+  ],
+  "_src": "a9b32e38",
+  "_src_reader": "153690c5"
  },
  "noun-4976": {
   "translation_pl": "olśnienie, nagła myśl, natchnienie",
@@ -32126,8 +33358,13 @@
  "noun-5042": {
   "translation_pl": "obojętność",
   "example_pl": "Jego obojętność wobec zmartwień kolegów rozczarowała wszystkich.",
-  "_src": "cae28965",
-  "_src_reader": "7f0b3828"
+  "complements": [
+   {
+    "note_pl": "obojętność wobec kogoś, czegoś"
+   }
+  ],
+  "_src": "af95ca32",
+  "_src_reader": "218ee2b9"
  },
  "noun-5043": {
   "translation_pl": "kończyna",
@@ -33266,8 +34503,13 @@
  "noun-5213": {
   "translation_pl": "tęsknota, gorące pragnienie, dążenie",
   "example_pl": "Po trzech miesiącach za granicą czuł wielką tęsknotę za rodziną.",
-  "_src": "26603014",
-  "_src_reader": "afca63a4"
+  "complements": [
+   {
+    "note_pl": "tęsknota za kimś, czymś"
+   }
+  ],
+  "_src": "ce6ef3a1",
+  "_src_reader": "9a2025d3"
  },
  "noun-5214": {
   "translation_pl": "sekcja, dział, oddział; sekcja zwłok; sekcja (gotowy segment, zwłaszcza statku)",
@@ -33818,8 +35060,13 @@
  "noun-5299": {
   "translation_pl": "rozpacz",
   "example_pl": "W rozpaczy zadzwonił w środku nocy do matki.",
-  "_src": "e0cd55fd",
-  "_src_reader": "424537f1"
+  "complements": [
+   {
+    "note_pl": "rozpacz z powodu czegoś"
+   }
+  ],
+  "_src": "cea6f454",
+  "_src_reader": "cad9f862"
  },
  "noun-5300": {
   "translation_pl": "ukończenie, zakończenie; ukoronowanie, szczyt, kulminacja; doskonałość",

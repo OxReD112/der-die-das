@@ -24,15 +24,19 @@
   "_src_reader": "6eecbea9"
  },
  "verb-005": {
-  "translation_pl": "przychodzić; przyjeżdżać",
+  "translation_pl": "przychodzić; przyjeżdżać; dochodzić (do czegoś), zdarzać się",
   "example_pl": "Pociąg przyjeżdża punktualnie.",
   "complements": [
    {
     "note_pl": "wpaść na coś (na pomysł), domyślić się, wymyślić"
+   },
+   {
+    "meaning_pl": "dochodzić (do czegoś), zdarzać się",
+    "note_pl": "es kommt zu etw. — dochodzi do czegoś, coś się dzieje: Es kam zu einem Streit."
    }
   ],
-  "_src": "3e24e155",
-  "_src_reader": "c1ccbc25"
+  "_src": "1b60f7f8",
+  "_src_reader": "4a492202"
  },
  "verb-006": {
   "translation_pl": "robić",
@@ -58,8 +62,13 @@
     "note_pl": "pracować jako ktoś"
    }
   ],
-  "_src": "42194afc",
-  "_src_reader": "3660a393"
+  "reflexive": {
+   "translation_pl": "przebić się, przebrnąć (z trudem)",
+   "example_pl": "Przebił się na szczyt.",
+   "note_pl": "sich nach oben / durch etwas arbeiten: Ich arbeite mich durch den Stapel Briefe. — Przekopuję się (z trudem brnę) przez stos listów."
+  },
+  "_src": "d21afe39",
+  "_src_reader": "00162cdc"
  },
  "verb-009": {
   "translation_pl": "mówić; rozmawiać",
@@ -899,8 +908,13 @@
     "note_pl": "próbować (coś zrobić)"
    }
   ],
-  "_src": "e3be33a1",
-  "_src_reader": "601c7e5b"
+  "reflexive": {
+   "translation_pl": "spróbować swoich sił (w czymś)",
+   "example_pl": "Spróbowała swoich sił jako malarka.",
+   "note_pl": "sich in / an etwas (D) versuchen: Er versuchte sich an einem Roman. — Spróbował napisać powieść."
+  },
+  "_src": "0487aefa",
+  "_src_reader": "d4691e38"
  },
  "verb-089": {
   "translation_pl": "proponować",
@@ -4102,8 +4116,13 @@
   "translation_pl": "stosować; używać",
   "usage_note_pl": "Także: wendete an, angewendet.",
   "example_pl": "Jak się stosuje tę regułę?",
-  "_src": "970ad4f6",
-  "_src_reader": "bb69c195"
+  "complements": [
+   {
+    "note_pl": "stosować do czegoś: eine Regel auf einen Fall anwenden"
+   }
+  ],
+  "_src": "016571e4",
+  "_src_reader": "9f2dcc7b"
  },
  "verb-391": {
   "translation_pl": "zgłaszać (na policję), zawiadamiać, ogłaszać (zaręczyny, narodziny); pokazywać (o przyrządzie, tablicy; na ekranie)",
@@ -4800,10 +4819,13 @@
   "complements": [
    {
     "note_pl": "nadawać się do czegoś"
+   },
+   {
+    "note_pl": "nadawać się na kogoś, do czegoś: Er eignet sich nicht zum Lehrer."
    }
   ],
-  "_src": "ab8dad35",
-  "_src_reader": "56fc7126"
+  "_src": "4f43b76c",
+  "_src_reader": "2186ab47"
  },
  "verb-469": {
   "translation_pl": "spieszyć (dokądś); spieszyć się",
@@ -4861,10 +4883,13 @@
    },
    {
     "note_pl": "porozumieć się z kimś"
+   },
+   {
+    "note_pl": "porozumieć się co do czegoś: sich über den Preis einigen"
    }
   ],
-  "_src": "90563495",
-  "_src_reader": "ec0d7630"
+  "_src": "c0a59fce",
+  "_src_reader": "dc6475f3"
  },
  "verb-475": {
   "translation_pl": "zadomawiać się; przyzwyczajać się (do nowego miejsca)",
@@ -5237,8 +5262,13 @@
  "verb-517": {
   "translation_pl": "łapać",
   "example_pl": "Kot złapał mysz.",
-  "_src": "b28523b1",
-  "_src_reader": "a98f8b6b"
+  "reflexive": {
+   "translation_pl": "dojść do siebie, utrzymać się na nogach; złapać się, zaplątać się (w coś)",
+   "example_pl": "Po przestrachu szybko doszła do siebie.",
+   "note_pl": "Er stolperte, fing sich aber im letzten Moment. — Potknął się, ale w ostatniej chwili utrzymał się na nogach. Der Vogel hatte sich im Netz gefangen. — Ptak zaplątał się w sieć. Sich (D) etwas fangen (pot.) — złapać, nabawić się: Ich habe mir eine Erkältung gefangen. — Złapałem przeziębienie."
+  },
+  "_src": "dfaeec33",
+  "_src_reader": "deee5ead"
  },
  "verb-518": {
   "translation_pl": "chwytać; łapać (za coś); mieścić",
@@ -5427,8 +5457,13 @@
   "translation_pl": "jeść (o zwierzętach); żreć (pot.)",
   "usage_note_pl": "O zwierzętach; o ludziach — grubiańsko (ludzie: essen).",
   "example_pl": "Nasz pies najchętniej je mięso.",
-  "_src": "6cf94ca3",
-  "_src_reader": "9540ac69"
+  "reflexive": {
+   "translation_pl": "wżerać się, wgryzać się",
+   "example_pl": "Rdza wżera się w metal.",
+   "note_pl": "sich in / durch etwas fressen: Der Bagger fraß sich durch den Hang. — Koparka przegryzała się przez zbocze."
+  },
+  "_src": "851dbe6f",
+  "_src_reader": "96b4ccf5"
  },
  "verb-536": {
   "translation_pl": "marznąć; zamarzać",
@@ -7170,10 +7205,14 @@
   "complements": [
    {
     "note_pl": "żądać od kogoś"
+   },
+   {
+    "note_pl": "żądać czegoś, prosić o coś; pytać o kogoś: Der Kranke verlangte nach Wasser.",
+    "meaning_pl": "żądać"
    }
   ],
-  "_src": "cd1cafdf",
-  "_src_reader": "43afd435"
+  "_src": "21291065",
+  "_src_reader": "97060caf"
  },
  "verb-703": {
   "translation_pl": "przedłużać; wydłużać",
@@ -11793,8 +11832,8 @@
  },
  "verb-1161": {
   "translation_pl": "dyskwalifikować",
-  "example_pl": "Sędziowie zdyskwalifikowali pływaka, bo przy nawrocie nie dotknął ściany basenu.",
-  "_src": "c30da72d",
+  "example_pl": "Sędziowie zdyskwalifikowali pływaka, bo nie dotknął ściany.",
+  "_src": "cd0b7bdc",
   "_src_reader": "9064bfcf"
  },
  "verb-1162": {
@@ -12039,13 +12078,13 @@
  "verb-1187": {
   "translation_pl": "oponować",
   "usage_note_pl": "Także: wendete ein, hat eingewendet. (pot.) nichts dagegen einzuwenden haben — nie mieć nic przeciwko temu.",
-  "example_pl": "Kiedy zaproponowałem wyjazd nad morze, siostra zaoponowała, że w maju woda jest jeszcze za zimna.",
+  "example_pl": "Kiedy chciałem pojechać nad morze, siostra zaoponowała, że woda jest jeszcze za zimna.",
   "complements": [
    {
     "note_pl": "oponować przeciwko czemuś"
    }
   ],
-  "_src": "c4fb4ee7",
+  "_src": "a25ce49d",
   "_src_reader": "b3633692"
  },
  "verb-1188": {
@@ -13566,8 +13605,8 @@
  "verb-1348": {
   "translation_pl": "rewidować (opinię, decyzję)",
   "usage_note_pl": "Także — sprawdzać, kontrolować (sprawozdawczość, kasę); (szwajc.) naprawiać, przeprowadzać przegląd techniczny.",
-  "example_pl": "Po pierwszym wspólnym projekcie całkowicie zrewidowałem swoje zdanie o nowym koledze.",
-  "_src": "0877eec3",
+  "example_pl": "Po pierwszym projekcie całkowicie zrewidowałem swoje zdanie o nowym koledze.",
+  "_src": "fd95d988",
   "_src_reader": "77ddc8c2"
  },
  "verb-1349": {
@@ -13593,8 +13632,8 @@
  },
  "verb-1351": {
   "translation_pl": "zamieniać w rytuał",
-  "example_pl": "Wielu kibiców piłkarskich wręcz zamieniło przygotowania do meczu w rytuał: ta sama koszulka, to samo miejsce, to samo piwo.",
-  "_src": "d6d811bc",
+  "example_pl": "Wielu kibiców zamieniło przygotowania do meczu w rytuał: ta sama koszulka, to samo miejsce.",
+  "_src": "c91096d3",
   "_src_reader": "655601cb"
  },
  "verb-1352": {
@@ -13948,13 +13987,13 @@
  },
  "verb-1392": {
   "translation_pl": "opłakiwać, być w żałobie",
-  "example_pl": "Cała wieś opłakuje starego piekarza, który przez pięćdziesiąt lat co rano piekł świeże bułki.",
+  "example_pl": "Cała wieś opłakuje starego piekarza, który przez pięćdziesiąt lat piekł bułki.",
   "complements": [
    {
     "note_pl": "opłakiwać kogoś, coś"
    }
   ],
-  "_src": "47233f15",
+  "_src": "b0ea310a",
   "_src_reader": "569bc93f"
  },
  "verb-1393": {
@@ -14102,8 +14141,8 @@
  "verb-1410": {
   "translation_pl": "ubierać w uniformy",
   "usage_note_pl": "Częściej imiesłów uniformiert — w mundurze; der/die Uniformierte — osoba w mundurze. (książk., pejor.) ujednolicać.",
-  "example_pl": "Na jubileusz miasta stowarzyszenie ubrało wszystkich wolontariuszy w nowe uniformy: noszą teraz czerwone kurtki z herbem miasta.",
-  "_src": "6610d4e3",
+  "example_pl": "Na jubileusz miasta stowarzyszenie ubrało wszystkich pomocników w nowe uniformy: noszą teraz czerwone kurtki.",
+  "_src": "867816b5",
   "_src_reader": "0c5383d1"
  },
  "verb-1411": {
@@ -14417,7 +14456,7 @@
  "verb-1443": {
   "translation_pl": "wyposażać, zaopatrywać (w coś); pełnić (obowiązki)",
   "usage_note_pl": "sich versehen — pomylić się (przy czytaniu, liczeniu). das Versehen — przeoczenie: aus Versehen — niechcący.",
-  "example_pl": "Gmina wyposażyła wszystkie parkowe ławki w małe tabliczki, na których widnieją nazwiska darczyńców.",
+  "example_pl": "Gmina wyposażyła parkowe ławki w tabliczki, na których widnieją nazwiska darczyńców.",
   "complements": [
    {
     "note_pl": "wyposażać w coś"
@@ -14426,7 +14465,7 @@
   "reflexive": {
    "translation_pl": "pomylić się (przy czytaniu, liczeniu)"
   },
-  "_src": "3d5a2c7c",
+  "_src": "9b2298bc",
   "_src_reader": "cd31cc1d"
  },
  "verb-1444": {
@@ -14498,12 +14537,12 @@
  "verb-1451": {
   "translation_pl": "realizować, wcielać w życie",
   "usage_note_pl": "sich (selbst) verwirklichen — realizować się. sich verwirklichen — spełnić się (o marzeniach, planach).",
-  "example_pl": "Za pieniądze z crowdfundingu zespół mógł zrealizować swoje zamierzenie: sklep zupełnie bez plastikowych opakowań.",
+  "example_pl": "Za te pieniądze zespół mógł zrealizować swoje zamierzenie: sklep zupełnie bez plastiku.",
   "reflexive": {
    "translation_pl": "realizować się; spełnić się (o marzeniach, planach)",
    "note_pl": "sich (selbst) verwirklichen — realizować się"
   },
-  "_src": "539f4809",
+  "_src": "3d673538",
   "_src_reader": "bfa43f67"
  },
  "verb-1452": {
@@ -15971,8 +16010,8 @@
  "verb-1595": {
   "translation_pl": "podnosić na duchu, rozweselić",
   "usage_note_pl": "jemanden zu etwas aufmuntern — zachęcać kogoś do czegoś. aufmunternd — zachęcająco.",
-  "example_pl": "Po zawalonym egzaminie mój współlokator rozweselił mnie pizzą i głupim filmem.",
-  "_src": "2e3944ab",
+  "example_pl": "Po zawalonym egzaminie mój współlokator rozweselił mnie pizzą i filmem.",
+  "_src": "b7b2b56c",
   "_src_reader": "ef80e51c"
  },
  "verb-1596": {
@@ -16647,8 +16686,8 @@
  "verb-1671": {
   "translation_pl": "zagrażać (istnieniu), narażać na niebezpieczeństwo; grozić (komuś)",
   "usage_note_pl": "vom Aussterben bedroht — zagrożony wyginięciem. jemanden mit etwas bedrohen — grozić komuś czymś. sich bedroht fühlen — czuć się zagrożonym.",
-  "example_pl": "Wiele państw wyspiarskich na Pacyfiku widzi w podnoszącym się poziomie morza zagrożenie dla swojego istnienia.",
-  "_src": "632666de",
+  "example_pl": "Wiele państw wyspiarskich widzi w podnoszącym się poziomie morza zagrożenie dla swojego istnienia.",
+  "_src": "19c76387",
   "_src_reader": "ad6e6b52"
  },
  "verb-1672": {
@@ -17898,8 +17937,8 @@
  "verb-1793": {
   "translation_pl": "wyciekać, wychodzić na jaw (o informacjach); przesączać się (o cieczy)",
   "usage_note_pl": "Dosłownie — o cieczy: Nach dem Gewitter hatten wir nasse Flecken an der Decke – das Regenwasser war durchgesickert. Por. sickern — sączyć się.",
-  "example_pl": "Mimo wszelkich środków ostrożności pierwsze szczegóły nowego smartfona wyciekły już przed prezentacją.",
-  "_src": "a4e0c041",
+  "example_pl": "Pierwsze szczegóły nowego smartfona wyciekły już przed prezentacją.",
+  "_src": "16ed04da",
   "_src_reader": "5ffb538b"
  },
  "verb-1794": {
@@ -20450,12 +20489,12 @@
  "verb-2030": {
   "translation_pl": "przerzedzać (las)",
   "usage_note_pl": "den Anker lichten — podnieść kotwicę. Por. licht — jasny, rzadki.",
-  "example_pl": "Jesienią robotnicy leśni przerzedzili gęsty las świerkowy, żeby młode buki miały więcej światła.",
+  "example_pl": "Jesienią robotnicy leśni przerzedzili las, żeby młode buki miały więcej światła.",
   "reflexive": {
    "translation_pl": "rzednąć, rozpraszać się (o lesie, włosach, mgle, tłumie)",
    "example_pl": "Około południa mgła się rozproszyła."
   },
-  "_src": "17a59e21",
+  "_src": "a072893a",
   "_src_reader": "5f3c1982"
  },
  "verb-2031": {
@@ -20593,13 +20632,13 @@
  "verb-2046": {
   "translation_pl": "mobilizować; podrywać (ludzi do działania), angażować (siły, środki)",
   "usage_note_pl": "Także znaczenie wojskowe: Truppen mobilisieren — mobilizować wojska. Mit letzter Energie mobilisierte er noch einmal seine Reserven — resztkami sił jeszcze raz zebrał rezerwy. (med.) uruchamiać (staw). die Mobilisierung — mobilizacja.",
-  "example_pl": "W ciągu kilku dni inicjatywa obywatelska zmobilizowała ponad tysiąc zwolenników przeciwko budowie autostrady.",
+  "example_pl": "W ciągu kilku dni inicjatywa zmobilizowała ponad tysiąc zwolenników przeciwko autostradzie.",
   "complements": [
    {
     "note_pl": "zmobilizować przeciwko czemuś / na rzecz czegoś"
    }
   ],
-  "_src": "b5ee845f",
+  "_src": "7e9e278c",
   "_src_reader": "2eb5ac5f"
  },
  "verb-2047": {
@@ -20762,13 +20801,13 @@
  "verb-2060": {
   "translation_pl": "(książk.) należeć do obowiązków, spoczywać na (kimś)",
   "usage_note_pl": "Tylko 3. osoba, komu — w Dativie: es obliegt ihm — to jego obowiązek. Nierozdzielny: obliegt, oblag, hat oblegen (przestarz.: liegt ob, lag ob, obgelegen). Styl urzędowy.",
-  "example_pl": "Zgodnie z nowym statutem utrzymanie terenów zielonych nie jest już obowiązkiem gminy, lecz stowarzyszenia.",
+  "example_pl": "Zgodnie z nowym statutem utrzymanie terenów zielonych nie należy już do obowiązków gminy.",
   "complements": [
    {
     "note_pl": "należeć do czyichś obowiązków"
    }
   ],
-  "_src": "15c633e2",
+  "_src": "24fff91a",
   "_src_reader": "046dbbaa"
  },
  "verb-2061": {
@@ -20808,8 +20847,8 @@
  "verb-2064": {
   "translation_pl": "(środ.) zrobić coming out; (żart.) przyznać się (do czegoś)",
   "usage_note_pl": "Zrobić coming out — otwarcie ujawnić swoją (homo)seksualność. Użycie przechodnie: jemanden outen — ujawnić czyjąś orientację (bez zgody tej osoby); publicznie wskazać, zdemaskować. Żartobliwie: sich als … outen — przyznać się, że jest się …. Z ang. to out.",
-  "example_pl": "W wieku dwudziestu lat aktor zrobił coming out w talk-show, a jego fani zareagowali entuzjastycznie.",
-  "_src": "ecd50560",
+  "example_pl": "W wieku dwudziestu lat aktor zrobił coming out w talk-show, a fani wiwatowali.",
+  "_src": "31212eca",
   "_src_reader": "4ec7b8c1"
  },
  "verb-2065": {
@@ -21142,7 +21181,7 @@
  "verb-2094": {
   "translation_pl": "regenerować się, odzyskiwać siły (po wysiłku); (książk.) odtwarzać, odnawiać; (biol.) regenerować",
   "usage_note_pl": "Także sich regenerieren — odzyskiwać siły; (biol.) regenerować się: Die Leber kann sich teilweise regenerieren. (techn.) odzyskiwać (materiały). die Regeneration — regeneracja.",
-  "example_pl": "Po półmaratonie należy regenerować się co najmniej trzy dni, zanim znów zacznie się intensywnie trenować.",
+  "example_pl": "Po półmaratonie należy regenerować się przez trzy dni, zanim znów zacznie się intensywnie trenować.",
   "complements": [
    {
     "meaning_pl": "(książk.) odtwarzać, odnawiać",
@@ -21152,7 +21191,7 @@
   "reflexive": {
    "translation_pl": "regenerować się"
   },
-  "_src": "30609eb7",
+  "_src": "8f64a145",
   "_src_reader": "b63706fd"
  },
  "verb-2095": {
@@ -21471,8 +21510,8 @@
  "verb-2125": {
   "translation_pl": "szokować, oburzać",
   "usage_note_pl": "Bez ge-: schockierte, hat schockiert. schockiert sein (über + Akk.) — być zszokowanym (czymś). schockierend — szokujący. Por. der Schock — szok.",
-  "example_pl": "Swoją wytatuowaną twarzą piosenkarka zszokowała konserwatywną publiczność na gali wręczenia nagród.",
-  "_src": "6d26fac5",
+  "example_pl": "Swoją wytatuowaną twarzą piosenkarka zszokowała konserwatywną publiczność.",
+  "_src": "4993df75",
   "_src_reader": "d58919c4"
  },
  "verb-2126": {
@@ -21546,8 +21585,8 @@
  "verb-2133": {
   "translation_pl": "pędzić (bimber, spirytus) nielegalnie, bez licencji",
   "usage_note_pl": "Czasownik mieszany: brannte schwarz, hat schwarzgebrannt. (przestarz.) także nielegalnie wypalać (płyty). Por. schwarz (pot.) — nielegalnie: schwarzarbeiten, schwarzfahren. der Schwarzbrenner — bimbrownik.",
-  "example_pl": "W piwnicy dziadek miał małą destylarnię i co roku potajemnie pędził śliwowicę.",
-  "_src": "01f48c04",
+  "example_pl": "W piwnicy dziadek co roku potajemnie pędził śliwowicę.",
+  "_src": "0a692d88",
   "_src_reader": "a4bfe68c"
  },
  "verb-2134": {
@@ -21968,13 +22007,13 @@
  "verb-2176": {
   "translation_pl": "triumfować, szaleć z radości; zatriumfować (nad kimś, czymś)",
   "usage_note_pl": "über jemanden / etwas triumphieren — zatriumfować nad kimś / czymś. triumphierend (przysł.) — triumfalnie. Bez ge-: triumphierte, hat triumphiert. der Triumph — triumf.",
-  "example_pl": "Kiedy outsider w ostatniej minucie strzelił zwycięskiego gola, jego kibice na trybunach szaleli z radości.",
+  "example_pl": "Kiedy outsider w ostatniej minucie strzelił zwycięskiego gola, jego kibice szaleli z radości.",
   "complements": [
    {
     "note_pl": "zatriumfować nad"
    }
   ],
-  "_src": "163b91d0",
+  "_src": "9f29a7b5",
   "_src_reader": "0e126832"
  },
  "verb-2177": {
@@ -22007,12 +22046,12 @@
  "verb-2180": {
   "translation_pl": "oferować wyższą cenę, przebijać (ofertę); poprawiać (rekord, wynik)",
   "usage_note_pl": "Nierozdzielny, mocny: überbot, hat überboten. einen Rekord überbieten — pobić rekord. kaum zu überbieten sein — być niezrównanym (często ironicznie). sich gegenseitig überbieten — prześcigać się (w czymś).",
-  "example_pl": "W rywalizacji o działkę inwestor z Monachium wyraźnie przebił wszystkie pozostałe oferty.",
+  "example_pl": "W walce o działkę jeden z inwestorów wyraźnie przebił wszystkie pozostałe oferty.",
   "reflexive": {
    "translation_pl": "prześcigać się (w czymś)",
    "note_pl": "sich gegenseitig überbieten"
   },
-  "_src": "3bb4866c",
+  "_src": "f253dc0a",
   "_src_reader": "ac19ae5e"
  },
  "verb-2181": {
@@ -22190,8 +22229,8 @@
  "verb-2197": {
   "translation_pl": "(pot.) zwariować, sfiksować",
   "usage_note_pl": "Rozdzielny: schnappte über, ist übergeschnappt. Częściej w czasie Perfekt: Bist du übergeschnappt? — czy ty zwariowałeś? Także o głosie — załamywać się.",
-  "example_pl": "Kiedy chciał polecieć do Las Vegas ze wszystkimi swoimi oszczędnościami, wszyscy uznali, że zwariował.",
-  "_src": "f168ff5c",
+  "example_pl": "Kiedy chciał jechać do Las Vegas ze wszystkimi oszczędnościami, wszyscy uznali, że zwariował.",
+  "_src": "b07ee39f",
   "_src_reader": "112a3d89"
  },
  "verb-2198": {
@@ -22575,8 +22614,8 @@
  "verb-2232": {
   "translation_pl": "podpisywać (oficjalnie — umowę, dokument)",
   "usage_note_pl": "Bardziej oficjalne niż unterschreiben. Nierozdzielny, bez ge-: unterzeichnete, hat unterzeichnet. der / die Unterzeichnete — niżej podpisany. die Unterzeichnung — podpisanie.",
-  "example_pl": "Po wielomiesięcznych negocjacjach oba kraje podpisały porozumienie o wspólnym korzystaniu z rzeki.",
-  "_src": "f4624cff",
+  "example_pl": "Po długich negocjacjach oba kraje podpisały porozumienie w sprawie korzystania z rzeki.",
+  "_src": "d305bda1",
   "_src_reader": "54a5cd8c"
  },
  "verb-2233": {
@@ -22872,13 +22911,13 @@
  "verb-2263": {
   "translation_pl": "upewnić się (co do czegoś), przekonać się (o czymś)",
   "usage_note_pl": "Tylko zwrotny; ze zdaniem podrzędnym (dass / ob) lub z Genitivem: sich einer Sache vergewissern. Bez ge-: vergewisserte sich, hat sich vergewissert. Por. gewiss — niewątpliwy.",
-  "example_pl": "Po trzęsieniu ziemi od razu zadzwonił do rodziców, żeby się upewnić, że nic im się nie stało.",
+  "example_pl": "Po trzęsieniu ziemi zadzwonił do rodziców, żeby się upewnić, że nic im się nie stało.",
   "complements": [
    {
     "note_pl": "upewnić się co do czegoś"
    }
   ],
-  "_src": "683fd53f",
+  "_src": "19be443f",
   "_src_reader": "2a7e23c9"
  },
  "verb-2264": {
@@ -23250,12 +23289,12 @@
  "verb-2301": {
   "translation_pl": "połykać, łapczywie pożerać; (przen.) pochłaniać (pieniądze, czas), „połykać” (książkę); splatać, przeplatać",
   "usage_note_pl": "Czasownik mocny: verschlang, hat verschlungen. jemanden mit Blicken verschlingen — pożerać kogoś wzrokiem. sich ineinander verschlingen — przeplatać się: Die Wurzeln der Bäume haben sich ineinander verschlungen. — Korzenie drzew splotły się ze sobą. verschlungen (przym.) — kręty, zawiły.",
-  "example_pl": "Ledwie dziecko uniosło bułkę, mewa ją chapnęła i połknęła jednym kęsem.",
+  "example_pl": "Ledwie chłopiec uniósł bułkę, mewa ją chapnęła i połknęła jednym kęsem.",
   "reflexive": {
    "translation_pl": "przeplatać się",
    "note_pl": "sich ineinander verschlingen"
   },
-  "_src": "35c01145",
+  "_src": "87f2f9f1",
   "_src_reader": "59639ae1"
  },
  "verb-2302": {
@@ -23355,13 +23394,13 @@
  "verb-2311": {
   "translation_pl": "zaopatrywać (w coś); utrzymywać (rodzinę); opiekować się (chorym), opatrywać (ranę)",
   "usage_note_pl": "W co — mit + Dat. Także utrzymywać (rodzinę, dzieci); udzielać pomocy (rannym), opatrywać (ranę). Słaby: versorgte, hat versorgt. die Versorgung — zaopatrzenie, zabezpieczenie; opieka.",
-  "example_pl": "Od czasu powodzi Czerwony Krzyż zaopatruje odcięte wsie w wodę pitną za pomocą śmigłowców.",
+  "example_pl": "Od czasu powodzi Czerwony Krzyż zaopatruje wsie w wodę pitną za pomocą śmigłowców.",
   "complements": [
    {
     "note_pl": "zaopatrywać w coś"
    }
   ],
-  "_src": "2e3b7e09",
+  "_src": "f3b0a931",
   "_src_reader": "c3dd192a"
  },
  "verb-2312": {
@@ -23450,7 +23489,7 @@
  "verb-2320": {
   "translation_pl": "(książk.) wplątywać, wciągać (w coś nieprzyjemnego)",
   "usage_note_pl": "W co — in + Akk. Często w stronie biernej: in etwas verstrickt sein — być w coś zamieszanym. Dosłowne znaczenie — zużyć na robótkę na drutach (włóczkę). Słaby: verstrickte, hat verstrickt.",
-  "example_pl": "Wobec burmistrza toczy się śledztwo, ponieważ jest on rzekomo zamieszany w nielegalne transakcje gruntami.",
+  "example_pl": "Wobec burmistrza toczy się śledztwo: jest rzekomo zamieszany w nielegalne transakcje.",
   "complements": [
    {
     "note_pl": "wplątać w coś"
@@ -23460,7 +23499,7 @@
    "translation_pl": "uwikłać się (w coś)",
    "note_pl": "w co — in + Akkusativ: sich in Widersprüche verstricken — uwikłać się w sprzeczności. Także — pomylić się przy robieniu na drutach."
   },
-  "_src": "980a3793",
+  "_src": "ec1156e0",
   "_src_reader": "bc2b0f42"
  },
  "verb-2321": {
@@ -24350,13 +24389,13 @@
  "verb-2402": {
   "translation_pl": "wić się, skręcać się (z bólu, zakłopotania); wić się (o drodze, rzece); wykręcać się",
   "usage_note_pl": "Mocny: wand sich, hat sich gewunden; Konjunktiv II wände. gewunden — kręty; (o wypowiedzi) wymijający, zawiły. Bez sich (książk.) — pleść, splatać (wieniec), owijać; także podnosić wciągarką. Jest też słaby homonim winden (windete) — o wietrze, rzadko.",
-  "example_pl": "Kiedy nauczyciel zapytał o pracę domową, Paul wiercił się na krześle i szukał wymówki.",
+  "example_pl": "Kiedy nauczyciel zapytał o pracę domową, Paul wiercił się na krześle.",
   "complements": [
    {
     "note_pl": "wić się z czegoś (z bólu, zakłopotania)"
    }
   ],
-  "_src": "304d7f16",
+  "_src": "1e31dcac",
   "_src_reader": "71bb08bb"
  },
  "verb-2403": {
@@ -24422,12 +24461,12 @@
  "verb-2409": {
   "translation_pl": "rozszarpać (o drapieżnikach)",
   "usage_note_pl": "Przen.: sich gegenseitig zerfleischen — bezlitośnie skakać sobie do gardeł (o partiach, rywalach); (książk.) sich mit Selbstvorwürfen zerfleischen — zadręczać się wyrzutami sumienia. Słaby: zerfleischte, hat zerfleischt.",
-  "example_pl": "Wędrowcy znaleźli szczątki owcy, którą najwyraźniej rozszarpały bezpańskie psy.",
+  "example_pl": "Wędrowcy znaleźli owcę, którą najwyraźniej rozszarpały bezpańskie psy.",
   "reflexive": {
    "translation_pl": "bezlitośnie skakać sobie do gardeł (o partiach, rywalach); (książk.) zadręczać się wyrzutami sumienia",
    "note_pl": "sich gegenseitig zerfleischen — bezlitośnie skakać sobie do gardeł (o partiach, rywalach); sich mit Selbstvorwürfen zerfleischen — (książk.) zadręczać się wyrzutami sumienia"
   },
-  "_src": "d1872d60",
+  "_src": "527a3e23",
   "_src_reader": "43662b64"
  },
  "verb-2410": {
@@ -24482,12 +24521,12 @@
  "verb-2416": {
   "translation_pl": "rozcinać (na części); pociąć",
   "usage_note_pl": "Czasownik mocny: zerschnitt, hat zerschnitten. Także pokaleczyć, pociąć (uszkadzając): sich (Dat.) die Hand an einer Scherbe zerschneiden — skaleczyć sobie rękę odłamkiem.",
-  "example_pl": "Kiedy rozmawiałam przez telefon, moja mała córka pocięła nową firankę nożyczkami do wycinanek.",
+  "example_pl": "Kiedy rozmawiałam przez telefon, córka pocięła nożyczkami nową firankę.",
   "reflexive": {
    "translation_pl": "skaleczyć sobie (rękę itp.)",
    "note_pl": "sich (D) etwas zerschneiden"
   },
-  "_src": "46f211c8",
+  "_src": "de289ced",
   "_src_reader": "450bf439"
  },
  "verb-2417": {
@@ -24941,8 +24980,8 @@
  "verb-2457": {
   "translation_pl": "tymczasowo przechowywać (w magazynie przejściowym)",
   "usage_note_pl": "Wyraz techniczny; używa się go głównie w bezokoliczniku i formie Partizip. Rozdzielny: lagerte zwischen, hat zwischengelagert. das Zwischenlager — składowisko przejściowe.",
-  "example_pl": "Wypalone elementy paliwowe mają być do odwołania tymczasowo przechowywane w halach obok elektrowni.",
-  "_src": "36da6233",
+  "example_pl": "Elementy paliwowe mają być na razie tymczasowo przechowywane w halach obok elektrowni.",
+  "_src": "cc92cdaa",
   "_src_reader": "2415d59c"
  },
  "verb-2458": {

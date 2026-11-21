@@ -3620,5 +3620,104 @@
   ],
   "_src": "4bfeb1a0",
   "_src_reader": "34546ae0"
+ },
+ "expression-395": {
+  "translation_pl": "krytykować, poddawać krytyce (kogoś, coś)",
+  "example_pl": "Opozycja krytykuje nową ustawę.",
+  "notes_pl": [
+   "Neutralne, częściej w języku pisanym; często pojawia się w wiadomościach. Z przymiotnikiem: scharfe / heftige / leise Kritik üben. Przedmiot krytyki — an + D: Kritik an der Regierung üben. Selbstkritik üben — uprawiać samokrytykę, przyznawać się do swoich błędów."
+  ],
+  "_src": "3052b0f1",
+  "_src_reader": "b7792568"
+ },
+ "expression-396": {
+  "translation_pl": "po kolei, kolejno",
+  "example_pl": "Dzieci po kolei podchodziły do tablicy.",
+  "notes_pl": [
+   "Neutralne. Jako wykrzyknienie: Der Reihe nach! — Po kolei! Nie mylić: an der Reihe sein — czyjaś kolej (Du bist an der Reihe)."
+  ],
+  "_src": "4a996968",
+  "_src_reader": "f7742cf8"
+ },
+ "expression-397": {
+  "translation_pl": "pociągać (coś) za sobą, skutkować (czymś)",
+  "example_pl": "Strajk pociągnął za sobą długi czas oczekiwania.",
+  "notes_pl": [
+   "Neutralne, częściej w języku pisanym. Często z dass: Das hatte zur Folge, dass … — W rezultacie … Podmiot — przyczyna, dopełnienie — skutek."
+  ],
+  "_src": "f016065d",
+  "_src_reader": "ee86f0c8"
+ },
+ "expression-398": {
+  "translation_pl": "czy to … czy, niezależnie od tego, czy … czy",
+  "example_pl": "Czy to lato, czy zima, codziennie jeździ na rowerze.",
+  "notes_pl": [
+   "W tym haśle — tylko wyliczenie bez własnego czasownika, zwykle na początku zdania: Ob jung oder alt – alle machen mit. Z czasownikiem (Ob es regnet oder schneit, wir gehen) — to samo znaczenie, ale nie jest tu omawiane. Nie mylić z pytaniem zależnym: Ich weiß nicht, ob er kommt oder nicht — „nie wiem, czy przyjdzie, czy nie”."
+  ],
+  "_src": "3008c1d6",
+  "_src_reader": "b47ae732"
+ },
+ "expression-399": {
+  "translation_pl": "już tylko, jedynie; zostało tylko, jeszcze tylko",
+  "example_pl": "Od urlopu pije już tylko herbatę.",
+  "notes_pl": [
+   "Neutralne. 1) „już nic poza”: Er isst nur noch Gemüse. 2) „zostało tylko”: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. Ze stopniem wyższym — co innego: Das macht es nur noch schlimmer — „tylko jeszcze gorzej”. (Nur noch) Haut und Knochen sein — osobne wyrażenie."
+  ],
+  "_src": "f1f02b62",
+  "_src_reader": "7d163f54"
+ },
+ "expression-400": {
+  "translation_pl": "sposób",
+  "example_pl": "W ten sposób jest szybciej.",
+  "notes_pl": [
+   "Para wyrazów bliskoznacznych: znaczy to samo co Art lub Weise osobno, ale brzmi dobitniej. Zwykle: auf diese / welche / andere Art und Weise; die Art und Weise, wie … — to, jak …; in gewisser Art und Weise — w pewnym sensie. Nie mylić: eine Art Kuchen — coś w rodzaju ciasta."
+  ],
+  "_src": "b1636466",
+  "_src_reader": "9aa4f8f1"
+ },
+ "expression-401": {
+  "translation_pl": "(pot.) do później, do zobaczenia (jeszcze dziś)",
+  "example_pl": "Przyjadę po ciebie o szóstej. Do później!",
+  "notes_pl": [
+   "Spotkanie tego samego dnia, zwykle niedługo. Duden: bis nachher, bis später — potoczne formuły pożegnania. Bis nachher dann — to samo. Nie mylić: Das hat Zeit bis nachher. — To może poczekać, zajmiemy się tym później (w znaczeniu dosłownym)."
+  ],
+  "_src": "f27db415",
+  "_src_reader": "7f663b47"
+ },
+ "expression-402": {
+  "translation_pl": "najwięcej, najbardziej",
+  "example_pl": "Najbardziej ucieszył się z listu.",
+  "notes_pl": [
+   "Stopień najwyższy od viel i sehr: Wer hat am meisten gegessen? — Kto zjadł najwięcej? Nie mylić: die meisten — większość (meist)."
+  ],
+  "_src": "070dde10",
+  "_src_reader": "34dafe9a"
+ },
+ "expression-403": {
+  "translation_pl": "pojawić się, znaleźć się, ukazać się",
+  "example_pl": "Pod dywanem znalazł się stary list.",
+  "notes_pl": [
+   "O czymś, co było ukryte i stało się widoczne: wieder zum Vorschein kommen — odnaleźć się. Nie mylić: etw. zum Vorschein bringen — wyjąć, wydobyć (ktoś to pokazuje)."
+  ],
+  "_src": "1adbee52",
+  "_src_reader": "f9c48be6"
+ },
+ "expression-404": {
+  "translation_pl": "wyjąć, wydobyć, pokazać; ujawnić",
+  "example_pl": "Sięgnął do kieszeni i wyjął nóż.",
+  "notes_pl": [
+   "Ktoś sprawia, że widać to, co było ukryte: Die Untersuchung brachte neue Fakten zum Vorschein. — Śledztwo ujawniło nowe fakty. Nie mylić: zum Vorschein kommen — pojawić się (samo)."
+  ],
+  "_src": "2e2f181a",
+  "_src_reader": "a047f742"
+ },
+ "expression-405": {
+  "translation_pl": "być właściwym (komuś), mieć w sobie",
+  "example_pl": "Jest w nim coś wzruszającego.",
+  "notes_pl": [
+   "Zwykle z etwas / nichts + przymiotnik: Sie hat etwas Geheimnisvolles an sich. — Jest w niej coś tajemniczego; Er war ungeduldig, wie es Kinder an sich haben. — Był niecierpliwy, jak to bywa u dzieci; pot. Das hat er so an sich. — Taki już ma sposób bycia. Nie mylić: an sich — sam w sobie, w zasadzie (Die Idee an sich ist gut; Ich habe an sich nichts dagegen); an sich denken — myśleć o sobie."
+  ],
+  "_src": "a07f9391",
+  "_src_reader": "0af191b3"
  }
 }

@@ -1,6 +1,6 @@
 {
  "light-0001": {
-  "translation_pl": "(praw.) sąd przysięgłych",
+  "translation_pl": "sąd przysięgłych",
   "_src": "7ef00a65",
   "_src_reader": "7ef00a65"
  },
@@ -134,6 +134,11 @@
   "_src": "29ed0322",
   "_src_reader": "29ed0322"
  },
+ "light-0035": {
+  "translation_pl": "błoto; chlapa, breja",
+  "_src": "0d16a0b3",
+  "_src_reader": "0d16a0b3"
+ },
  "light-0036": {
   "translation_pl": "pot. cholera!, kurczę!",
   "_src": "2f83a00a",
@@ -264,9 +269,937 @@
   "_src": "7ce46f7f",
   "_src_reader": "7ce46f7f"
  },
+ "light-0076": {
+  "translation_pl": "wart zachodu, uzasadniony, opłacalny",
+  "_src": "986bf3ff",
+  "_src_reader": "986bf3ff"
+ },
  "light-0077": {
   "translation_pl": "wypływający, wychodzący w morze; wygasający, wycofywany z produkcji",
   "_src": "9987d65f",
   "_src_reader": "9987d65f"
+ },
+ "light-0079": {
+  "translation_pl": "członek załogi",
+  "_src": "1b7d36d0",
+  "_src_reader": "1b7d36d0"
+ },
+ "light-0080": {
+  "translation_pl": "palnik; gorzelnik",
+  "_src": "aefd7752",
+  "_src_reader": "aefd7752"
+ },
+ "light-0081": {
+  "translation_pl": "skala Celsjusza, w skali Celsjusza",
+  "_src": "f9d57cbb",
+  "_src_reader": "f9d57cbb"
+ },
+ "light-0082": {
+  "translation_pl": "EKG, elektrokardiogram",
+  "_src": "d1b5b132",
+  "_src_reader": "d1b5b132"
+ },
+ "light-0083": {
+  "translation_pl": "dioda LED",
+  "_src": "a9973535",
+  "_src_reader": "a9973535"
+ },
+ "light-0084": {
+  "translation_pl": "UFO",
+  "_src": "aa85f7e7",
+  "_src_reader": "aa85f7e7"
+ },
+ "light-0086": {
+  "translation_pl": "śluza, śluza powietrzna",
+  "_src": "3775b98e",
+  "_src_reader": "3775b98e"
+ },
+ "light-0087": {
+  "translation_pl": "centrum sterowania, sterownia, dyspozytornia",
+  "_src": "39856849",
+  "_src_reader": "39856849"
+ },
+ "light-0088": {
+  "translation_pl": "pierwiastek sześcienny",
+  "_src": "f116fcd6",
+  "_src_reader": "f116fcd6"
+ },
+ "light-0090": {
+  "translation_pl": "transmisja na żywo",
+  "_src": "1203db14",
+  "_src_reader": "1203db14"
+ },
+ "light-0092": {
+  "translation_pl": "zakres podczerwieni",
+  "_src": "2a860771",
+  "_src_reader": "2a860771"
+ },
+ "light-0093": {
+  "translation_pl": "promieniowanie podczerwone",
+  "_src": "6b98b59b",
+  "_src_reader": "6b98b59b"
+ },
+ "light-0097": {
+  "translation_pl": "szybko oddychać, hiperwentylować",
+  "_src": "6cac598e",
+  "_src_reader": "6cac598e"
+ },
+ "light-0098": {
+  "translation_pl": "pomniejszyć widok, oddalić obraz",
+  "_src": "b0af4a87",
+  "_src_reader": "b0af4a87"
+ },
+ "light-0099": {
+  "translation_pl": "powiększyć widok, przybliżyć obraz",
+  "_src": "267a9ab4",
+  "_src_reader": "267a9ab4"
+ },
+ "light-0100": {
+  "translation_pl": "szkiełko podstawowe",
+  "_src": "7b15fa1a",
+  "_src_reader": "7b15fa1a"
+ },
+ "light-0106": {
+  "translation_pl": "interferometr",
+  "_src": "598b53e6",
+  "_src_reader": "598b53e6"
+ },
+ "light-0107": {
+  "translation_pl": "sylweta miasta, panorama miasta",
+  "_src": "87e63732",
+  "_src_reader": "87e63732"
+ },
+ "light-0109": {
+  "translation_pl": "grupa zadaniowa, grupa robocza",
+  "_src": "c120eb27",
+  "_src_reader": "c120eb27"
+ },
+ "light-0110": {
+  "translation_pl": "wybór momentu, wyczucie czasu",
+  "_src": "88b7b407",
+  "_src_reader": "88b7b407"
+ },
+ "light-0113": {
+  "translation_pl": "wysokie technologie, high-tech",
+  "_src": "43ccb817",
+  "_src_reader": "43ccb817"
+ },
+ "light-0114": {
+  "translation_pl": "pot. mikrofon",
+  "_src": "32c4952a",
+  "_src_reader": "32c4952a"
+ },
+ "light-0118": {
+  "translation_pl": "jackpot",
+  "_src": "6438facd",
+  "_src_reader": "6438facd"
+ },
+ "light-0119": {
+  "translation_pl": "SUV, crossover",
+  "_src": "e815f495",
+  "_src_reader": "e815f495"
+ },
+ "light-0121": {
+  "complements": [
+   {
+    "note_pl": "widok na coś: die Sicht auf die Berge"
+   }
+  ],
+  "_src": "c64a2d17",
+  "_src_reader": "c64a2d17"
+ },
+ "light-0122": {
+  "translation_pl": "zwracać, kierować (ku czemuś)",
+  "complements": [
+   {
+    "note_pl": "sich hinwenden zu — obracać się, zwracać się do kogoś, czegoś: Sie wandte sich zu ihm hin."
+   }
+  ],
+  "_src": "726f6b71",
+  "_src_reader": "726f6b71"
+ },
+ "light-0123": {
+  "translation_pl": "robić aluzję; rozpoczynać grę, wychodzić (w kartach); podawać (piłkę)",
+  "complements": [
+   {
+    "note_pl": "robić aluzję do czegoś: Er spielte auf ihren Fehler an.",
+    "meaning_pl": "robić aluzję"
+   }
+  ],
+  "_src": "dcb9b8b1",
+  "_src_reader": "dcb9b8b1"
+ },
+ "light-0124": {
+  "complements": [
+   {
+    "note_pl": "poszukiwanie kogoś, czegoś: die Suche nach einer Wohnung"
+   }
+  ],
+  "_src": "832523b3",
+  "_src_reader": "832523b3"
+ },
+ "light-0125": {
+  "translation_pl": "odległość, dystans, odstęp; odstęp czasu, interwał; dystans, rezerwa",
+  "complements": [
+   {
+    "note_pl": "odległość do kogoś, czegoś: Abstand zum Vordermann; odstęp czasu: der zeitliche Abstand zum letzten Treffen; dystans, rezerwa: Abstand zu den Kollegen halten"
+   },
+   {
+    "note_pl": "odległość od czegoś: Abstand von der Straße; odstęp czasu: im Abstand von zwei Jahren",
+    "meaning_pl": "odległość, dystans, odstęp"
+   },
+   {
+    "note_pl": "odległość od czegoś: Abstand von der Straße; odstęp czasu: im Abstand von zwei Jahren",
+    "meaning_pl": "odstęp czasu, interwał"
+   }
+  ],
+  "_src": "fe76c99f",
+  "_src_reader": "fe76c99f"
+ },
+ "light-0126": {
+  "translation_pl": "atak, napaść, natarcie; atak (w sporcie); napaści, ostra krytyka",
+  "complements": [
+   {
+    "note_pl": "atak na kogoś, coś: ein Angriff auf die Stadt; atak na coś w sporcie: ein Angriff auf das Tor; napaści na kogoś: Angriffe auf die Regierung"
+   }
+  ],
+  "_src": "f5224551",
+  "_src_reader": "f5224551"
+ },
+ "light-0127": {
+  "translation_pl": "nadzór, kontrola, opieka; dyżurny, osoba nadzorująca",
+  "complements": [
+   {
+    "note_pl": "nadzór nad kimś, czymś: die Aufsicht über die Kinder",
+    "meaning_pl": "nadzór, kontrola, opieka"
+   }
+  ],
+  "_src": "65fb0ceb",
+  "_src_reader": "65fb0ceb"
+ },
+ "light-0128": {
+  "complements": [
+   {
+    "note_pl": "nienawiść do kogoś, czegoś"
+   },
+   {
+    "note_pl": "nienawiść do kogoś, czegoś: Hass gegen Minderheiten"
+   }
+  ],
+  "_src": "ace2c5fb",
+  "_src_reader": "ace2c5fb"
+ },
+ "light-0129": {
+  "translation_pl": "polowanie; pogoń",
+  "complements": [
+   {
+    "note_pl": "pogoń za czymś: die Jagd nach dem Glück",
+    "meaning_pl": "pogoń"
+   },
+   {
+    "note_pl": "polowanie na kogoś: die Jagd auf Hasen; pogoń za kimś: die Jagd auf den Täter",
+    "meaning_pl": "polowanie"
+   },
+   {
+    "note_pl": "polowanie na kogoś: die Jagd auf Hasen; pogoń za kimś: die Jagd auf den Täter",
+    "meaning_pl": "pogoń"
+   }
+  ],
+  "_src": "4f219335",
+  "_src_reader": "4f219335"
+ },
+ "light-0130": {
+  "translation_pl": "skarga; pozew, powództwo; lament, narzekanie",
+  "complements": [
+   {
+    "note_pl": "skarga na kogoś, coś: Klagen über den Service; lament nad czymś: die Klage über den Verlust",
+    "meaning_pl": "skarga"
+   },
+   {
+    "note_pl": "skarga na kogoś, coś: Klagen über den Service; lament nad czymś: die Klage über den Verlust",
+    "meaning_pl": "lament, narzekanie"
+   },
+   {
+    "note_pl": "pozew przeciwko komuś: eine Klage gegen die Firma",
+    "meaning_pl": "pozew, powództwo"
+   }
+  ],
+  "_src": "2c93d1f5",
+  "_src_reader": "2c93d1f5"
+ },
+ "light-0131": {
+  "translation_pl": "sympatia, życzliwość; poparcie, aprobata",
+  "complements": [
+   {
+    "note_pl": "sympatia do kogoś, czegoś"
+   }
+  ],
+  "_src": "00c216fd",
+  "_src_reader": "00c216fd"
+ },
+ "light-0132": {
+  "translation_pl": "rezygnacja, zrzeczenie się",
+  "complements": [
+   {
+    "note_pl": "rezygnacja z czegoś: der Verzicht auf Fleisch"
+   }
+  ],
+  "_src": "9ee6fe8c",
+  "_src_reader": "9ee6fe8c"
+ },
+ "light-0133": {
+  "translation_pl": "apel, wezwanie; apel, zbiórka",
+  "complements": [
+   {
+    "note_pl": "apel do kogoś, czegoś: ein Appell an die Vernunft"
+   }
+  ],
+  "_src": "4c3e67aa",
+  "_src_reader": "4c3e67aa"
+ },
+ "light-0134": {
+  "translation_pl": "zamach (na czyjeś życie); zamach terrorystyczny",
+  "complements": [
+   {
+    "note_pl": "zamach na kogoś"
+   }
+  ],
+  "_src": "b3bf616f",
+  "_src_reader": "b3bf616f"
+ },
+ "light-0135": {
+  "translation_pl": "krzyk, zawołanie, wołanie; reputacja, sława; wezwanie, żądanie; powołanie na stanowisko",
+  "complements": [
+   {
+    "note_pl": "krzyk, wołanie o coś: der Ruf nach Hilfe; wezwanie do czegoś, żądanie: der Ruf nach Reformen",
+    "meaning_pl": "krzyk, zawołanie, wołanie"
+   },
+   {
+    "note_pl": "krzyk, wołanie o coś: der Ruf nach Hilfe; wezwanie do czegoś, żądanie: der Ruf nach Reformen",
+    "meaning_pl": "wezwanie, żądanie"
+   },
+   {
+    "note_pl": "powołanie na stanowisko w jakiejś instytucji: einen Ruf an die Universität Bonn erhalten",
+    "meaning_pl": "powołanie na stanowisko"
+   }
+  ],
+  "_src": "f41a20d3",
+  "_src_reader": "f41a20d3"
+ },
+ "light-0136": {
+  "translation_pl": "rezygnacja, odejście, wyrzeczenie się",
+  "complements": [
+   {
+    "note_pl": "rezygnacja z czegoś, odejście od czegoś: die Abkehr von der Atomkraft"
+   }
+  ],
+  "_src": "3c3e1a2b",
+  "_src_reader": "3c3e1a2b"
+ },
+ "light-0137": {
+  "complements": [
+   {
+    "note_pl": "agresja wobec kogoś, czegoś"
+   }
+  ],
+  "_src": "bf072f41",
+  "_src_reader": "bf072f41"
+ },
+ "light-0138": {
+  "translation_pl": "prawo, uprawnienie; abonament, karnet",
+  "complements": [
+   {
+    "note_pl": "prawo do czegoś: ein Anrecht auf Urlaub"
+   }
+  ],
+  "_src": "b84519e6",
+  "_src_reader": "b84519e6"
+ },
+ "light-0139": {
+  "translation_pl": "żądza, pożądanie, pragnienie",
+  "complements": [
+   {
+    "note_pl": "żądza czegoś: die Begierde nach Macht"
+   }
+  ],
+  "_src": "52fcf65c",
+  "_src_reader": "52fcf65c"
+ },
+ "light-0140": {
+  "translation_pl": "napór, parcie; popęd, pęd, impuls",
+  "complements": [
+   {
+    "note_pl": "dążenie, pęd do czegoś: der Drang nach Freiheit"
+   }
+  ],
+  "_src": "5bcb5742",
+  "_src_reader": "5bcb5742"
+ },
+ "light-0141": {
+  "translation_pl": "chciwość, zachłanność, żądza",
+  "complements": [
+   {
+    "note_pl": "chciwość, zachłanność na coś: die Gier nach Geld"
+   }
+  ],
+  "_src": "260fee41",
+  "_src_reader": "260fee41"
+ },
+ "light-0142": {
+  "translation_pl": "udział, uczestnictwo",
+  "complements": [
+   {
+    "note_pl": "udział, uczestnictwo w czymś"
+   }
+  ],
+  "_src": "358a0a29",
+  "_src_reader": "358a0a29"
+ },
+ "light-0143": {
+  "translation_pl": "niezawodność, możliwość polegania (na kimś)",
+  "complements": [
+   {
+    "note_pl": "na kimś można polegać: Auf ihn ist Verlass."
+   }
+  ],
+  "_src": "1706edbc",
+  "_src_reader": "1706edbc"
+ },
+ "light-0144": {
+  "complements": [
+   {
+    "note_pl": "przynależność do czegoś"
+   }
+  ],
+  "_src": "45c7e681",
+  "_src_reader": "45c7e681"
+ },
+ "light-0145": {
+  "complements": [
+   {
+    "note_pl": "antypatia do kogoś, czegoś"
+   }
+  ],
+  "_src": "f5557ec5",
+  "_src_reader": "f5557ec5"
+ },
+ "light-0146": {
+  "complements": [
+   {
+    "note_pl": "duma z kogoś, czegoś"
+   }
+  ],
+  "_src": "a1a9eb70",
+  "_src_reader": "a1a9eb70"
+ },
+ "light-0147": {
+  "complements": [
+   {
+    "note_pl": "odraza do kogoś, czegoś"
+   }
+  ],
+  "_src": "2f12803a",
+  "_src_reader": "2f12803a"
+ },
+ "light-0148": {
+  "complements": [
+   {
+    "note_pl": "wyjście z czegoś, rezygnacja z czegoś: der Ausstieg aus der Atomenergie"
+   }
+  ],
+  "_src": "02516810",
+  "_src_reader": "02516810"
+ },
+ "light-0149": {
+  "translation_pl": "wstąpienie, przystąpienie",
+  "complements": [
+   {
+    "note_pl": "przystąpienie do czegoś: der Beitritt zur EU"
+   }
+  ],
+  "_src": "b2cea9e3",
+  "_src_reader": "b2cea9e3"
+ },
+ "light-0150": {
+  "translation_pl": "obrzydzenie, wstręt; obrzydliwiec, wstręciuch",
+  "complements": [
+   {
+    "note_pl": "wstręt do kogoś, czegoś",
+    "meaning_pl": "obrzydzenie, wstręt"
+   }
+  ],
+  "_src": "b4a38031",
+  "_src_reader": "b4a38031"
+ },
+ "light-0151": {
+  "translation_pl": "odpowiedzialność, odpowiedzialność materialna; przyczepność, przyleganie",
+  "complements": [
+   {
+    "note_pl": "odpowiedzialność za coś: keine Haftung für Schäden",
+    "meaning_pl": "odpowiedzialność, odpowiedzialność materialna"
+   }
+  ],
+  "_src": "c9847ff1",
+  "_src_reader": "c9847ff1"
+ },
+ "light-0152": {
+  "translation_pl": "dymisja, ustąpienie ze stanowiska; rezygnacja, odstąpienie od umowy",
+  "complements": [
+   {
+    "note_pl": "odstąpienie od czegoś, wystąpienie z czegoś: der Rücktritt vom Vertrag"
+   }
+  ],
+  "_src": "6b083aae",
+  "_src_reader": "6b083aae"
+ },
+ "light-0153": {
+  "complements": [
+   {
+    "note_pl": "wierność komuś, czemuś"
+   }
+  ],
+  "_src": "a770922e",
+  "_src_reader": "a770922e"
+ },
+ "light-0154": {
+  "translation_pl": "dostęp; pochwycenie, chwyt, interwencja",
+  "complements": [
+   {
+    "note_pl": "dostęp do czegoś: Zugriff auf die Daten",
+    "meaning_pl": "dostęp"
+   }
+  ],
+  "_src": "e212c41a",
+  "_src_reader": "e212c41a"
+ },
+ "light-0155": {
+  "translation_pl": "dotacja, subwencja, dopłata",
+  "complements": [
+   {
+    "note_pl": "dopłata do czegoś: ein Zuschuss zu den Fahrtkosten"
+   }
+  ],
+  "_src": "da64ba2c",
+  "_src_reader": "da64ba2c"
+ },
+ "light-0156": {
+  "translation_pl": "owijać, bandażować; oprawiać; angażować, włączać",
+  "_src": "281b375b",
+  "_src_reader": "281b375b"
+ },
+ "light-0157": {
+  "translation_pl": "bez telefonów komórkowych; gdzie nie wolno korzystać z telefonu",
+  "_src": "cc007c70",
+  "_src_reader": "cc007c70"
+ },
+ "light-0158": {
+  "translation_pl": "niewłaściwy, błędny; na odwrót, tyłem do przodu, do góry nogami, na lewą stronę",
+  "_src": "ba5b9737",
+  "_src_reader": "ba5b9737"
+ },
+ "light-0159": {
+  "translation_pl": "chusteczka, obrusik; kawałek materiału, skrawek tkaniny",
+  "_src": "3ee6a245",
+  "_src_reader": "3ee6a245"
+ },
+ "light-0160": {
+  "translation_pl": "odważać; ważyć na wadze",
+  "_src": "89f9c69c",
+  "_src_reader": "89f9c69c"
+ },
+ "light-0161": {
+  "translation_pl": "oparzenie słoneczne; książk. palące słońce, skwar",
+  "_src": "81e5f2b8",
+  "_src_reader": "81e5f2b8"
+ },
+ "light-0162": {
+  "translation_pl": "miły, uroczy; przyjemny, łagodny; półsłodki",
+  "_src": "2955de21",
+  "_src_reader": "2955de21"
+ },
+ "light-0163": {
+  "translation_pl": "obrotnica przedniej osi, wózek skrętny przyczepy; taboret obrotowy",
+  "_src": "661e3366",
+  "_src_reader": "661e3366"
+ },
+ "light-0164": {
+  "translation_pl": "fotografia; fotografowanie",
+  "_src": "f0783669",
+  "_src_reader": "f0783669"
+ },
+ "light-0165": {
+  "translation_pl": "do przyjęcia; znośny",
+  "_src": "660f1250",
+  "_src_reader": "660f1250"
+ },
+ "light-0167": {
+  "translation_pl": "cep bojowy",
+  "_src": "3784895c",
+  "_src_reader": "3784895c"
+ },
+ "light-0168": {
+  "translation_pl": "cep bojowy",
+  "_src": "3784895c",
+  "_src_reader": "3784895c"
+ },
+ "light-0169": {
+  "translation_pl": "niepoprawny",
+  "_src": "8e1170ee",
+  "_src_reader": "8e1170ee"
+ },
+ "light-0170": {
+  "translation_pl": "niepoprawny",
+  "_src": "84d97e0b",
+  "_src_reader": "84d97e0b"
+ },
+ "light-0171": {
+  "translation_pl": "wapnieć; pokrywać się kamieniem; pot. dostawać sklerozy",
+  "_src": "9e2fa873",
+  "_src_reader": "9e2fa873"
+ },
+ "light-0172": {
+  "translation_pl": "profil krzyżowy",
+  "_src": "c7bc7dd1",
+  "_src_reader": "c7bc7dd1"
+ },
+ "light-0173": {
+  "translation_pl": "przekodowywać",
+  "_src": "9d07d4c7",
+  "_src_reader": "9d07d4c7"
+ },
+ "light-0174": {
+  "translation_pl": "bot. rozdzielnopłciowy",
+  "_src": "472d5c56",
+  "_src_reader": "472d5c56"
+ },
+ "light-0175": {
+  "translation_pl": "sport. linia środkowa boiska; linia środkowa jezdni",
+  "_src": "0d7f2059",
+  "_src_reader": "0d7f2059"
+ },
+ "light-0176": {
+  "translation_pl": "plastyczny, dający się ugniatać",
+  "_src": "0be9e4b3",
+  "_src_reader": "0be9e4b3"
+ },
+ "light-0177": {
+  "translation_pl": "pędzić, rzucać się naprzód, nacierać",
+  "_src": "cc71d713",
+  "_src_reader": "cc71d713"
+ },
+ "light-0178": {
+  "translation_pl": "techn. cyrkiel traserski",
+  "_src": "ba3777c2",
+  "_src_reader": "ba3777c2"
+ },
+ "light-0179": {
+  "translation_pl": "mat. rozstęp międzykwartylowy",
+  "_src": "9366e135",
+  "_src_reader": "9366e135"
+ },
+ "light-0180": {
+  "translation_pl": "nabieranie pewności siebie, autoafirmacja",
+  "_src": "02a7a433",
+  "_src_reader": "02a7a433"
+ },
+ "light-0181": {
+  "translation_pl": "śledź bałtycki",
+  "_src": "ea4c4f65",
+  "_src_reader": "ea4c4f65"
+ },
+ "light-0182": {
+  "translation_pl": "mor. żyroskopowy stabilizator kołysań",
+  "_src": "9f7c5393",
+  "_src_reader": "9f7c5393"
+ },
+ "light-0183": {
+  "translation_pl": "zaburzenie ruchu; med. zaburzenie ruchowe",
+  "_src": "ebf795ea",
+  "_src_reader": "ebf795ea"
+ },
+ "light-0184": {
+  "translation_pl": "związany z kondycją fizyczną",
+  "_src": "1cb3aa39",
+  "_src_reader": "1cb3aa39"
+ },
+ "light-0185": {
+  "translation_pl": "bot. komonica",
+  "_src": "67a50afb",
+  "_src_reader": "67a50afb"
+ },
+ "light-0186": {
+  "translation_pl": "poryw wichury, tchnienie wichury",
+  "_src": "670f2185",
+  "_src_reader": "670f2185"
+ },
+ "light-0187": {
+  "translation_pl": "reaktor badawczy",
+  "_src": "1a70b180",
+  "_src_reader": "1a70b180"
+ },
+ "light-0188": {
+  "translation_pl": "patentowy, zgodny z patentem",
+  "_src": "0cc3bfa1",
+  "_src_reader": "0cc3bfa1"
+ },
+ "light-0189": {
+  "translation_pl": "niedogodność, kłopot, utrudnienie",
+  "_src": "dae6b01e",
+  "_src_reader": "dae6b01e"
+ },
+ "light-0190": {
+  "translation_pl": "szkolny, zgodny z wymogami szkoły; podręcznikowy, wzorcowy",
+  "_src": "65dedd2a",
+  "_src_reader": "65dedd2a"
+ },
+ "light-0191": {
+  "translation_pl": "plastikowy obrus, cerata; plastikowe pokrycie",
+  "_src": "d38e5d11",
+  "_src_reader": "d38e5d11"
+ },
+ "light-0192": {
+  "translation_pl": "jęz. rozkład długości zdań",
+  "_src": "ac0531b2",
+  "_src_reader": "ac0531b2"
+ },
+ "light-0193": {
+  "translation_pl": "władza dyscyplinarna",
+  "_src": "c9f74e5b",
+  "_src_reader": "c9f74e5b"
+ },
+ "light-0194": {
+  "translation_pl": "pełnowartościowy",
+  "_src": "95061b2c",
+  "_src_reader": "95061b2c"
+ },
+ "light-0195": {
+  "translation_pl": "fizjol. interoreceptor",
+  "_src": "7316d66f",
+  "_src_reader": "7316d66f"
+ },
+ "light-0196": {
+  "translation_pl": "radiogram; rentgenogram",
+  "_src": "7169bf89",
+  "_src_reader": "7169bf89"
+ },
+ "light-0197": {
+  "translation_pl": "przećwiczyć w całości, zrobić próbę całości",
+  "_src": "efd096b2",
+  "_src_reader": "efd096b2"
+ },
+ "light-0198": {
+  "translation_pl": "skarmiać",
+  "_src": "bdfbe7a2",
+  "_src_reader": "bdfbe7a2"
+ },
+ "light-0199": {
+  "translation_pl": "oddawać w leasing",
+  "_src": "df3b2ba8",
+  "_src_reader": "df3b2ba8"
+ },
+ "light-0200": {
+  "translation_pl": "napływać falą, wlewać się",
+  "_src": "4b43478f",
+  "_src_reader": "4b43478f"
+ },
+ "light-0201": {
+  "translation_pl": "wygłupy, głupia gadanina",
+  "_src": "837486f3",
+  "_src_reader": "837486f3"
+ },
+ "light-0202": {
+  "translation_pl": "zbiorniczek jadowy, gruczoł jadowy",
+  "_src": "b4699bee",
+  "_src_reader": "b4699bee"
+ },
+ "light-0203": {
+  "translation_pl": "fiz. ferrielektryczny",
+  "_src": "b95c0640",
+  "_src_reader": "b95c0640"
+ },
+ "light-0204": {
+  "translation_pl": "kotłownia, ciepłownia",
+  "_src": "05b1934a",
+  "_src_reader": "05b1934a"
+ },
+ "light-0205": {
+  "translation_pl": "elektr. zwarcie doziemne",
+  "_src": "6ca59613",
+  "_src_reader": "6ca59613"
+ },
+ "light-0206": {
+  "translation_pl": "osuszacz powietrza",
+  "_src": "11e88ae0",
+  "_src_reader": "11e88ae0"
+ },
+ "light-0207": {
+  "translation_pl": "liniowanie, liniatura",
+  "_src": "fe66afcd",
+  "_src_reader": "fe66afcd"
+ },
+ "light-0208": {
+  "translation_pl": "techn. punktować, napunktowywać; łow. nęcić ziarnem",
+  "_src": "04ec622c",
+  "_src_reader": "04ec622c"
+ },
+ "light-0209": {
+  "translation_pl": "med. meteoropatia, meteowrażliwość",
+  "_src": "e65c768d",
+  "_src_reader": "e65c768d"
+ },
+ "light-0210": {
+  "translation_pl": "bot. cebula morska",
+  "_src": "be53596f",
+  "_src_reader": "be53596f"
+ },
+ "light-0212": {
+  "translation_pl": "drewniana poręcz, drewniana balustrada",
+  "_src": "ced1169f",
+  "_src_reader": "ced1169f"
+ },
+ "light-0213": {
+  "translation_pl": "bomba lodowa",
+  "_src": "5094deee",
+  "_src_reader": "5094deee"
+ },
+ "light-0214": {
+  "translation_pl": "budowa maszyn",
+  "_src": "db778ddd",
+  "_src_reader": "db778ddd"
+ },
+ "light-0215": {
+  "translation_pl": "mor. rejs trampowy; żegluga trampowa",
+  "_src": "82aa1557",
+  "_src_reader": "82aa1557"
+ },
+ "light-0216": {
+  "translation_pl": "dodatek paszowy",
+  "_src": "e5761fdb",
+  "_src_reader": "e5761fdb"
+ },
+ "light-0218": {
+  "translation_pl": "niegnący się, sztywny; nieugięty, bezkompromisowy, niezłomny",
+  "_src": "784f79b9",
+  "_src_reader": "784f79b9"
+ },
+ "light-0220": {
+  "translation_pl": "przeżycie emocjonalne, emocja, afekt",
+  "_src": "97296be7",
+  "_src_reader": "97296be7"
+ },
+ "light-0221": {
+  "translation_pl": "środek wykrztuśny, mukolityk",
+  "_src": "b36768e3",
+  "_src_reader": "b36768e3"
+ },
+ "light-0222": {
+  "translation_pl": "praw. szczególna ochrona ideowego charakteru organizacji",
+  "_src": "f9400d25",
+  "_src_reader": "f9400d25"
+ },
+ "light-0223": {
+  "translation_pl": "hedging walutowy",
+  "_src": "5413b26e",
+  "_src_reader": "5413b26e"
+ },
+ "light-0224": {
+  "translation_pl": "aktówka, dyplomatka",
+  "_src": "de8d0ff1",
+  "_src_reader": "de8d0ff1"
+ },
+ "light-0225": {
+  "translation_pl": "tytułować, nadawać tytuł; film. opatrywać napisami",
+  "_src": "d6aebe6d",
+  "_src_reader": "d6aebe6d"
+ },
+ "light-0226": {
+  "translation_pl": "wersja reżyserska",
+  "_src": "7b263fbf",
+  "_src_reader": "7b263fbf"
+ },
+ "light-0227": {
+  "translation_pl": "techn. pilnik zdzierak",
+  "_src": "1a0b8f25",
+  "_src_reader": "1a0b8f25"
+ },
+ "light-0228": {
+  "translation_pl": "wyłącznik elektromagnetyczny; elektromagnes rozrusznika",
+  "_src": "e0bed471",
+  "_src_reader": "e0bed471"
+ },
+ "light-0229": {
+  "translation_pl": "stolarz budowlany",
+  "_src": "dc1b175b",
+  "_src_reader": "dc1b175b"
+ },
+ "light-0230": {
+  "translation_pl": "abolicjonistka",
+  "_src": "443e6de6",
+  "_src_reader": "443e6de6"
+ },
+ "light-0231": {
+  "translation_pl": "przyjęcie w przeddzień ślubu z tłuczeniem naczyń",
+  "_src": "f5433f7d",
+  "_src_reader": "f5433f7d"
+ },
+ "light-0232": {
+  "translation_pl": "med. środek wymiotny",
+  "_src": "bac0e426",
+  "_src_reader": "bac0e426"
+ },
+ "light-0233": {
+  "translation_pl": "med. środek wymiotny",
+  "_src": "bac0e426",
+  "_src_reader": "bac0e426"
+ },
+ "light-0234": {
+  "translation_pl": "środek wymiotny",
+  "_src": "8d5eb200",
+  "_src_reader": "8d5eb200"
+ },
+ "light-0235": {
+  "translation_pl": "tylne światło, lampa tylna",
+  "_src": "1dbd0931",
+  "_src_reader": "1dbd0931"
+ },
+ "light-0236": {
+  "translation_pl": "tylne światło, lampa tylna",
+  "_src": "e4faa1c1",
+  "_src_reader": "e4faa1c1"
+ },
+ "light-0237": {
+  "translation_pl": "prawo patronatu; patronat, auspicje",
+  "_src": "85e41398",
+  "_src_reader": "85e41398"
+ },
+ "light-0238": {
+  "translation_pl": "krzyż przydrożny",
+  "_src": "751e95db",
+  "_src_reader": "751e95db"
+ },
+ "light-0239": {
+  "translation_pl": "brydż, gra karciana; muz. bridge, łącznik w piosence",
+  "_src": "6e579efe",
+  "_src_reader": "6e579efe"
+ },
+ "light-0241": {
+  "translation_pl": "siadać okrakiem, dosiadać konia; dawać się nabrać, łapać się na haczyk",
+  "_src": "29798d12",
+  "_src_reader": "29798d12"
+ },
+ "light-0242": {
+  "translation_pl": "policzek; pośladek; szczęka imadła, szczęka hamulcowa",
+  "_src": "d2853852",
+  "_src_reader": "d2853852"
+ },
+ "light-0243": {
+  "translation_pl": "na szparkę, na wąską szczelinę",
+  "_src": "f425c206",
+  "_src_reader": "f425c206"
+ },
+ "light-0244": {
+  "translation_pl": "przestarz. podkręcone wąsy z bródką w szpic",
+  "_src": "7ffd8ec3",
+  "_src_reader": "7ffd8ec3"
  }
 }
