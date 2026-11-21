@@ -1196,7 +1196,12 @@
       if (participle && pos(candidate) === 'Verb') {
         // No own participle card: the source verb explains the form.
         const meaning = meaningText(candidate, language);
-        headingText = usage.form; type = participle;
+        // (advisor 21.11, Goethe C1: the heading is the dictionary form of the participle from the verb's forms, not the declined form of
+        // the text — die gestörte Nachtruhe → gestört, den schlafenden Kindern → schlafend; else the form as before)
+        const verbBase = String(candidate.lemma || '').replace(/^sich\s+/u, '');
+        const dictionaryForm = usage.kind === 'participle-II' ? String(candidate.item?.perfect_form || '').trim().split(/\s+/u).pop()
+          : usage.kind === 'participle-I' && /n$/u.test(verbBase) ? `${verbBase}d` : '';
+        headingText = dictionaryForm && String(usage.form || '').toLowerCase().startsWith(dictionaryForm.toLowerCase()) ? dictionaryForm : usage.form; type = participle;
         // (advisor 20.11: English inside a line always with the mark; the frame «От X —» in the language shown — any language shown,
         // EN unchanged: there the meaning is of the language shown)
         const other = meaning && meaning.language && meaning.language !== language;
@@ -1304,7 +1309,8 @@
     // in + Akkusativ», the chain and the preposition lit)
     const separableLink = link && candidate.construction && k.spans;
     if (link && (!k.spans || separableLink)) {
-      marks.push(pos(candidate) === 'Verb' ? link.pattern : `${link.verb} + ${link.pattern}`);
+      // (advisor 21.11: the participle as an adjective names the pattern as its verb does — beteiligt «Adjektiv · an + Dativ»)
+      marks.push(['Verb','Adjektiv','Nomen'].includes(pos(candidate)) ? link.pattern : `${link.verb} + ${link.pattern}`);
       linkSpans = separableLink ? [...k.spans, ...link.spans.filter(s => !k.spans.some(t => t.start === s.start))].sort((a,b) => a.start - b.start) : link.spans;
     }
     const features = candidate.formFeatures;
