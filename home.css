@@ -985,7 +985,50 @@ header h1 {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.45;
-  text-align: left;
+  text-align: center; /* 21.11.2026 (Alena, variant A): centred, a new line after the colon (worterbuch.js) */
+  text-wrap: balance;
+}
+/* 21.11.2026 (Alena): the words are loading — the jumping dots of the Bibliothek popup (bibliothek.css
+   .popover-loading, lookup-dot), centred where the list will come */
+.dictionary-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  min-height: 24px;
+  margin: 22px 0 0;
+  color: var(--muted);
+}
+.dictionary-loading span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: dictionary-dot 0.9s ease-in-out infinite;
+}
+.dictionary-loading span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.dictionary-loading span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes dictionary-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dictionary-loading span {
+    animation: none;
+    opacity: 0.65;
+  }
 }
 .dictionary-intro[hidden] {
   display: none;

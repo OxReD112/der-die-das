@@ -24,9 +24,19 @@
     return element;
   }
 
+  // 21.11.2026 (Alena): while the words load — the three jumping dots of the Bibliothek popup, centred (the app needs
+  // ~3.5 s the first time); VoiceOver still hears «Wörter werden geladen …»
+  function loadingDots() {
+    const dots = node("div", "dictionary-loading");
+    dots.setAttribute("role", "status");
+    dots.setAttribute("aria-label", M.TEXT.loading);
+    for (let i = 0; i < 3; i++) dots.append(node("span"));
+    return dots;
+  }
+
   function loadDatabase() {
     if (M.loaded() || M.loading()) return;
-    results.replaceChildren(node("p", "dictionary-hint", M.TEXT.loading));
+    results.replaceChildren(loadingDots());
     M.load().then(cards => {
       if (cards) render();
       else results.replaceChildren(node("p", "dictionary-hint", M.TEXT.loadError));
@@ -207,7 +217,8 @@
     if (clear) clear.hidden = !query;
     if (intro) {
       intro.hidden = Boolean(query.trim());
-      intro.textContent = M.TEXT.intro();
+      // centred, a new line after the colon (21.11.2026, Alena)
+      intro.replaceChildren(...M.TEXT.introLines().flatMap((line, i) => (i ? [node("br"), line] : [line])));
     }
     if (selected) return showEntry(selected);
     show(M.decide(query));

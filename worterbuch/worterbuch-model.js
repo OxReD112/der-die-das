@@ -54,7 +54,8 @@
              { kind: "expression", word, translation, card }      opens that card
      All texts are already in the person's language (DeutschTranslation.field); German stays German.
 
-   TEXT — the texts of the panel: hint under the field (TEXT.intro(), in the person's language), placeholder
+   TEXT — the texts of the panel: hint under the field (TEXT.intro(), in the person's language; TEXT.introLines() — the
+   same split after its colon, shown centred, one line each), placeholder
    «Wort suchen …», «Wörter werden geladen …», «Kein Wort gefunden.», «Die Wörterliste konnte nicht geladen werden.»,
    «Zurück zur Suche», «＋ Zum Wortschatz», VoiceOver: «Deutsches Wort suchen» (field), «Suche leeren» (clear).
    (index.html carries the placeholder and the two VoiceOver labels in its markup — the same words.) */
@@ -93,6 +94,12 @@
 
   const TEXT = Object.freeze({
     intro: () => T() ? T().t("Search German words for a brief grammar note", "Немецкие слова: краткая грамматическая справка") : "Search German words for a brief grammar note",
+    // 21.11.2026 (Alena): the hint is centred and breaks after its colon („Немецкие слова:“ / „краткая …“), not one
+    // word alone on the last line → its lines (one line when there is no colon, as in English)
+    introLines: () => {
+      const text = TEXT.intro(), at = text.indexOf(": ");
+      return at < 0 ? [text] : [text.slice(0, at + 1), text.slice(at + 2)];
+    },
     placeholder: "Wort suchen …",
     loading: "Wörter werden geladen …",
     none: "Kein Wort gefunden.",
