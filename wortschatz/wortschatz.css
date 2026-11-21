@@ -705,10 +705,10 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 .feedback.show .detail::before {
   animation: lineGrow 0.62s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
-/* 19.11.2026 (Alena): the glow only ABOVE the line — over the answer (your word → the right word): a band 150
-   high, strongest at the line, fading up; the band of Pronomen / Partikeln / Verben mit Präpositionen turned upside
-   down (there it is under the line): 0.20 × (1 − smoothstep(0, 150, y))^1.8 + 0.07 × e^−(y/16)²; the outer 30 %
-   on each side fades out. Was an ellipse centred on the line (±180, 760 wide). */
+/* 21.11.2026 (Alena): the glow UNDER the line, as in every exercise (Pronomen / Partikeln / Verben mit
+   Präpositionen): a band 150 high, strongest at the line, fading down: 0.20 × (1 − smoothstep(0, 150, y))^1.8 +
+   0.07 × e^−(y/16)²; the outer 30 % on each side fades out. 19.11–21.11 it was the same band turned up, over the
+   answer; before 19.11 an ellipse centred on the line (±180, 760 wide). */
 .feedback.good .detail {
   --state: var(--accent);
 }
@@ -721,12 +721,12 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   z-index: -1;
   left: 0;
   right: 0;
-  top: -150px;
+  top: 0;
   height: 150px;
   pointer-events: none;
   opacity: 0;
   background: linear-gradient(
-    to top,
+    to bottom,
     color-mix(in srgb, var(--state) 27.0%, transparent) 0px,
     color-mix(in srgb, var(--state) 25.2%, transparent) 8px,
     color-mix(in srgb, var(--state) 21.4%, transparent) 16px,
