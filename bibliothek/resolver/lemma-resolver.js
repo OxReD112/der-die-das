@@ -12318,7 +12318,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return null;
     }
-    async function nounGroupAfter(sentence, tokens, anchor, {determiner, consumer, genitiveRelative = false}) {
+    // (advisor 21.11) the extended attribute is tried only where the plain group cannot start (the preposition is no modifier); a frame
+    // that does not end in a group of its own gives the plain answer back (der in Belgien operierenden Österreichischen Freiheitsfront)
+    async function nounGroupAfter(sentence, tokens, anchor, options) {
+      const plain = await nounGroupAfterCore(sentence, tokens, anchor, options, false);
+      if (options?.determiner || !prepositions.has(norm(tokens[anchor+1]?.[0] ?? ''))) return plain;
+      // (a plain group that agrees with the anchor's determiner stays — an den zu kurzen Belichtungszeiten: zu is no preposition there)
+      const features = determinerFeatures(tokens[anchor][0]);
+      if (!plain.reason && features && agreeingFeatures(features,plain,null).length) return plain;
+      const framed = await nounGroupAfterCore(sentence, tokens, anchor, options, true);
+      // (and the framed group itself agrees with it — einen für sie vorteilhaften Ausgleich mit dem oströmischen Reich: not Reich)
+      return framed.frame && !framed.reason && (!features || agreeingFeatures(features,framed,null).length) ? framed : plain;
+    }
+    async function nounGroupAfterCore(sentence, tokens, anchor, {determiner, consumer, genitiveRelative = false}, frameSkip = false) {
       let i = anchor + 1, det = null;
       const quote = /^\s*(?:``|[„“"«‚‘])\s*$/u;
       const beforeHead = (a,b) => groupJoined(sentence,tokens,a,b) || quote.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
@@ -12335,6 +12347,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // right after it and an attribute in lower case follows — eine 3 Mrd. teure Anlage; not at the end of a sentence (Es dauerte
       // 5 Min. Dann …), and an abbreviation before a number (Nr. 5, S. 12, ca. 3) never stands after a figure
       const unitAt = i => measureUnitAt(sentence,tokens,i,beforeHead);
+      // (advisor 21.11) an extended attribute right after the anchor's determiner — der durch eine Zugbrücke gesicherte Eingang, der durch
+      // die Stadt fließende Fluss: the preposition's group is skipped up to the participle / adjective whose attribute frame opens at the
+      // anchor (attributeFrameDeterminer); the participle's ending and the noun then agree as any modifier. Der durch die Tür kam, … — kam
+      // has no attribute ending: no frame
+      let frame = false;
+      if (frameSkip && !determiner && !det && tokens[i] && /^\p{Ll}/u.test(tokens[i][0]) && prepositions.has(norm(tokens[i][0])))
+        for (let k = i+2; k <= i+8 && tokens[k]; k++) {
+          if (/[,;:.!?()–—"„“»«]/u.test(sentence.slice(tokens[k-1].index+tokens[k-1][0].length,tokens[k].index))) break;
+          // (the preposition's group holds its own noun before the frame's form — an einer chronischen Lungenentzündung leidende: not
+          // chronischen; the last such form before the head — in den verschiedenen Handschriften bezeugten Lesarten)
+          if (!tokens.slice(i+1,k).some(t => /^\p{Lu}/u.test(t[0]))) continue;
+          // (a participle — Partizip I / II with an adjective's ending, as the advisor named the frame: vom Gouverneur unter zweifelhaften
+          // Begleitumständen ernannten Senators — ernannten, not zweifelhaften; eine außerhalb Mesopotamiens entstandene Kultur — not dauerhafte)
+          if (attributeFrameDeterminer(tokens,k,anchor,sentence) !== anchor) continue;
+          const base = norm(tokens[k][0]).replace(/(?:en|em|er|es|e)$/u, '');
+          let participle = /end$/u.test(base) || (verbAnalyses.get(base) || []).some(r => r.kind === 'participle');
+          if (!participle) try { participle = (await collectMorphology(base,{discoverModifiers:false},'nounGroupAfter-frame')).analyses
+            .some(a => canonicalPos(a.pos) === 'Verb' && (a.tags || []).includes('participle')); } catch (_) {}
+          if (participle) { i = k; frame = true; break; }
+          // (an adjective of the frame that does not open an inner group — right after a noun, not after a preposition or determiner: der
+          // mit Abstand höchste Fuselölwert aller getesteten Pilsener — is the article's own modifier: no frame beyond it)
+          if (!prepositions.has(norm(tokens[k-1][0])) && !determinerFeatures(tokens[k-1][0]) && /^\p{Lu}/u.test(tokens[k-1][0])) break;
+        }
       while (tokens[i] && (!/^[A-ZÄÖÜ]/u.test(tokens[i][0]) || unitAt(i))) {
         if (modifierRows.length >= 3) return {reason:"window"};
         if (unitAt(i)) { i++; continue; }
@@ -12382,7 +12417,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const second = nounReadings(tokens[i+1][0],following).filter(r => !r.unknown);
         if (second.length) readings = [...readings,...second];
       }
-      return {det,head:i,modifiers:modifierRows,readings};
+      return {det,head:i,modifiers:modifierRows,readings,...(frame ? {frame:true} : {})};
     }
     // Without a determiner, modifiers take strong endings; a bare group with
     // modifiers proves its possible cases from those endings and the head.
