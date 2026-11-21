@@ -15378,20 +15378,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const grammarRuleOrder = selectionRules.filter(rule => rule.group === 'grammar' && !rule.shared).map(rule => rule.id);
     const separateSensesVerbRows = Object.freeze(['sentence-initial-finite-verb','finite-verb-with-subject','finite-verb-after-question-word','finite-verb-with-noun-subject','validated-finite-form']);
     // Our verb cards whose participle is this word (beschäftigt — beschäftigen).
-    // (advisor 10.11, decision 07.11 (a)) The own verb card of an attributive participle chosen as an external adjective, when that
-    // adjective has no translation in the interface language: {card, selected} — the card with the attributive Partizip II use.
+    // (advisor 10.11, decision 07.11 (a); advisor 21.11: the choice depends on no language and no translation) The own verb card of an
+    // attributive participle chosen as an external adjective — no own adjective card (the caller): {card, selected} — the card with the
+    // attributive Partizip II use, in every language (das verlorene Auge, mit erhobenem Zauberstab).
     async function attributiveOwnVerb(adjective, candidates) {
-      const lang = window.DeutschTranslation?.getLang?.() || 'en';
       const rows = (verbAnalyses.get(norm(adjective.lemma)) || []).filter(a => a.kind === 'participle' && a.entry);
       const own = candidates.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Verb' && !c.construction &&
         rows.some(a => norm(a.base) === norm(c.lemma).replace(/^sich\s+/u,'')));
       const plain = own.filter(c => !/^sich\s/u.test(norm(c.lemma))), pool = plain.length ? plain : own;
       if (!pool.length || new Set(pool.map(c => norm(c.lemma))).size !== 1) return null;
-      if (String(adjective.translation?.[lang] || '').trim()) return null;
-      if (lang === 'ru' && window.BibliothekRussianTranslations) {
-        const ru = await window.BibliothekRussianTranslations.lookup(adjective.lemma,adjective.pos).catch(() => null);
-        if (ru && (ru.meanings || []).length) return null;
-      }
       const card = pool[0];
       return {card, selected:{...card,usage:{...adjective.usage,kind:'participle-II',base:card.lemma}}};
     }
@@ -16270,9 +16265,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (Number.isInteger(context?.tokenOffset) && /^\s*[-‐–]/u.test(String(context.sentence || '').slice(context.tokenOffset + String(word).length))) return result;
       // another card of ours in the window (Sieben — the numeral, Aktive — the adjective, Feiern — the verb) keeps the window
       if (list.some(c => c.source === 'main' && c !== chosen)) return result;
-      // an outside plural only with a meaning in a dictionary of ours (Huhn «курица»; not Trope «figure of speech» beside die
-      // Tropen «tropics», a plural-only word)
-      if (chosen.source !== 'main' && !String(chosen.translation?.ru || '').trim()) return result;
+      // (advisor 21.11: no translation decides — the record's own data, the same in every language; before: an outside plural only
+      // with a Russian meaning) a bare record that is a plural itself with a meaning of no register label is a plural-only noun of
+      // its own — die Tropen «tropics» beside Trope «figure of speech» (pkg232 train): the window stays; not mäuse «money» (slang) beside
+      // Maus, nor hühner «a loud group of women» (slang, no plural form)
+      // (pkg233: only beside an outside record — our card stays first: die Tage, Karten «card game», Mäuse «money»)
+      { const b0 = bare[0], labels = b0.meaningLabels?.en || {};
+        if (chosen.source !== 'main' && b0.externalPlural && (b0.meanings || []).some(m => !(labels[m] || []).length)) return result; }
       // the form must be a plural of it (our card's plural field / search forms, or the outside record's plural)
       const plural = chosen.source === 'main' ? String(chosen.item?.plural || '').split(/[,;/]\s*/u).map(x => norm(x.replace(/^die\s+/u,''))).includes(w) : !!chosen.externalPlural;
       if (!plural) return result;
@@ -17168,8 +17167,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // card — the verb, «Partizip II · От X» (die verbesserte Audioqualität → verbessern «улучшать»). An own adjective card (bekannt,
       // befreundet) and an external adjective with a translation in the interface language stay as they are.
       { const sel = resolution.selected;
+        // (advisor 21.11: no own adjective — neither our card nor a light record of the adjective)
         if (sel && sel.source !== 'main' && canonicalPos(sel.pos) === 'Adjektiv' && sel.usage?.role === 'attributive' &&
-            !resolution.candidates.some(c => c.source === 'main' && canonicalPos(c.pos) === 'Adjektiv')) {
+            !resolution.candidates.some(c => c.source === 'main' && canonicalPos(c.pos) === 'Adjektiv') &&
+            !lightByWordPos.has(`${norm(sel.lemma || '')}|${sel.pos}`) && !lightByWordPos.has(`${norm(sel.lemma || '')}|adj`)) {
           const verbs = await attributiveOwnVerb(sel, resolution.candidates);
           if (verbs) selection.override(resolution,'own-verb-over-untranslated-adjective',{selected:verbs.selected,
             candidates:[verbs.selected,...resolution.candidates.filter(c => c !== sel && c !== verbs.card),sel],evidence:'own-verb-over-untranslated-adjective'});
@@ -21430,8 +21431,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             }
           }
         }
-        // (the adverb card when it is ours or has a Russian translation, else the adjective — a German adjective is its adverb too)
-        if (mod) { const pick = adverb && (adverb.source === "main" || adverb.russianTranslation) ? adverb : adjective || adverb; return {...result, selected:pick, preferred:pick, status:"resolved", evidence:"participle-before-modifier"}; }
+        // (the adverb card when it is ours; else our adjective card — a German adjective is its adverb too —; else the external adverb,
+        // else the adjective: no translation decides, the same in every language — advisor 21.11; Ihm war allmählich entschieden übel)
+        if (mod) { const pick = adverb && adverb.source === "main" ? adverb : adjective?.source === "main" ? adjective : adverb || adjective; return {...result, selected:pick, preferred:pick, status:"resolved", evidence:"participle-before-modifier"}; }
       }
       if (wide.some(k => AUX.test(low(k)))) return result;
       // (the participle + a verb of its part is a dictionary verb — verloren ging (verlorengehen), gefangen zu nehmen (gefangennehmen))
@@ -21551,7 +21553,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!c || !Number.isInteger(context?.tokenOffset)) return result;
       const reflexive = x => /^sich\s/u.test(norm(x.lemma || "")) || x.construction?.id === "reflexive-verb";
       // (dative-card-object-qa: Sie bildet sich etwas ein — the external einbilden «sich ~ воображать» is a reflexive card itself)
-      if (reflexive(c) || /^sich\s*~/u.test(String(c.translation?.ru || "")) || !/^verb/iu.test(String(c.pos || ""))) return result;
+      // (advisor 21.11: not the Russian text «sich ~» of the external record — no translation decides; besann er sich eines bessern)
+      if (reflexive(c) || !/^verb/iu.test(String(c.pos || ""))) return result;
       const base = norm(c.lemma || "");
       // (a dative «sich X» card — sich zuziehen «подхватить» — is the object rule's (dative-card-object-qa: Der Himmel zog sich etwas zu))
       const own = (result.candidates || []).filter(x => x !== c && reflexive(x) && x.item?.reflexive_case !== "Dativ" &&
@@ -21915,6 +21918,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const selected = {...sel, senseFirst:k, senseFirstEn:en.length === ru.length ? k : 0, senseEvidence:"modal-infinitive"};
       return {...result, selected, preferred:result.preferred === sel ? selected : result.preferred, candidates:(result.candidates || []).map(c => c === sel ? selected : c)};
     }
+    // (advisor 20.11, Goethe C1 — deferred: entsetzt und beeindruckt zugleich) a window of a participle and its own adjective card, joined
+    // by und / oder to a word read as an adjective right before it — Die Eltern reagierten entsetzt und beeindruckt zugleich, Sie war
+    // entsetzt und beeindruckt: the same part of speech, the adjective. Only a window: a decided verb stays (Er hat sie entsetzt und
+    // beeindruckt — the Perfekt of both).
+    async function coordinatedAdjective(word, context, result, pipeline) {
+      const at = context?.tokenOffset, sentence = String(context?.sentence || "");
+      if (!result || result.selected || context?.noCoordAdjective || !Number.isInteger(at) || !/^\p{Ll}/u.test(word)) return result;
+      const adjective = (result.candidates || []).find(c => c.source === "main" && canonicalPos(c.pos) === "Adjektiv" && norm(c.lemma) === norm(word));
+      if (!adjective || !(result.candidates || []).some(c => canonicalPos(c.pos) === "Verb")) return result;
+      const tokens = sharedTokens(sentence, "coordinatedAdjective"), k = clickedTokenIndex(tokens, at, word);
+      const plain = (a, b) => /^\s+$/u.test(sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index));
+      if (k < 2 || !/^(?:und|oder)$/u.test(norm(tokens[k-1][0])) || !plain(k-2, k-1) || !plain(k-1, k) || !/^\p{Ll}/u.test(tokens[k-2][0])) return result;
+      let other; try { other = await pipeline(tokens[k-2][0], {...context, tokenOffset: tokens[k-2].index, noCoordAdjective: true, noCoordUnion: true}); } catch (_) { return result; }
+      if (canonicalPos(other?.selected?.pos) !== "Adjektiv") return result;
+      return {...result, candidates:[adjective, ...result.candidates.filter(c => c !== adjective)], selected:adjective, preferred:adjective, status:"resolved", evidence:"coordinated-adjective"};
+    }
     async function coordinationUnion(word, context, result, pipeline) {
       const at = context?.tokenOffset, sentence = String(context?.sentence || ""), AND = /^(?:und|oder)$/u;
       if (!result || context?.noCoordUnion || !Number.isInteger(at) || !/^\p{Ll}/u.test(word)) return result;
@@ -21980,7 +21999,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>ordinalNounPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>pairWindowChoice(result)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>ordinalNounPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>pairWindowChoice(result)).then(result=>coordinatedAdjective(w,c,result,pipeline)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -22947,9 +22966,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!tokens.slice(a, at).some(t => /^\p{Lu}/u.test(t[0]) && (forms.get(norm(t[0])) || []).some(e => e.type === "Nomen") || /^\p{Lu}/u.test(t[0]) && !(forms.get(norm(t[0])) || []).length)) return result;
       for (let i = a; i <= b; i++) {
         if (i === at || !/^\p{Ll}/u.test(tokens[i][0])) continue;
-        const r = await tokenAnalyses(tokens[i][0], undefined, 'verblessPartVerb');
-        // (a lowercase word is no noun: waren, kosten count — not an adjective / adverb / conjunction form)
-        if (r.some(x => x.kind === "finite") && !(forms.get(norm(tokens[i][0])) || []).some(e => !["Verb","Nomen"].includes(e.type))) return result;
+        // (a lowercase word is no noun: waren, kosten count — not an adjective / adverb / conjunction form; the person form — the shared
+        // personalVerbFormExternal, advisor 21.11)
+        if (await personalVerbFormExternal(tokens[i][0]) && !(forms.get(norm(tokens[i][0])) || []).some(e => !["Verb","Nomen"].includes(e.type))) return result;
       }
       const x = {...verb, evidence:"verbless-part"};
       return {...result, candidates:[x, ...candidates.filter(c => c !== verb)], selected:x, preferred:x, status:"resolved"};
@@ -22982,7 +23001,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (v && !result.selected?.construction && canonicalPos(result.selected?.pos) !== "Adjektiv" && result.selected?.formFeatures?.tense !== "Partizip II") {
           const place = finitePlace(sentence, tokens, at);
           const OBJECT_WORD = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|ihn|ihm|ihr|ihnen|mich|dich|uns|euch|mir|dir|sich|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|unser\p{Ll}*|eur\p{Ll}*|dies\p{Ll}*|jed\p{Ll}*)$/u;
-          const finiteAt = async i => /^\p{Ll}/u.test(tokens[i][0]) && (await tokenAnalyses(tokens[i][0], undefined, 'participlePhrase')).some(a => a.kind === "finite") &&
+          // (the person form — the shared personalVerbFormExternal, advisor 21.11)
+          const finiteAt = async i => /^\p{Ll}/u.test(tokens[i][0]) && await personalVerbFormExternal(tokens[i][0]) &&
             !(/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") && !MARK.test(gap(i+1)));
           if (place.start === at && !place.opens && !SUBJECT_PRONOUNS.has(norm(tokens[at+1]?.[0] ?? ""))) {
             // (advisor 21.11: a name of two words after the preposition is one group — begleitet von Hendrik Wüst, unterstützt von Angela
@@ -23036,7 +23056,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           /^\p{Lu}/u.test(tokens[at+1][0]) && !MARK.test(gap(at+1))) {
         // (not a Partizip I — zwinkernde, flatternde, quiekende: the stem ends in -nd; not a finite form — Alles gehörte Harry, die
         // Firma erkannte Fehler an)
-        const finiteForm = (await tokenAnalyses(w, undefined, "participlePhrase")).some(a => a.kind === "finite");
+        const finiteForm = await personalVerbFormExternal(w);
         const rows = /nd$/u.test(ending[1]) || finiteForm ? [] : (await tokenAnalyses(ending[1], undefined, "participlePhrase")).filter(a => a.kind === "participle" && a.tense !== "Partizip I");
         const v = verbs.find(c => rows.some(a => norm(a.base || a.lemma || "") === norm(c.lemma))) || (rows.length && verbs.length === 1 ? verbs[0] : null);
         if (v) return choose(v);
@@ -23074,8 +23094,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (!helper && !place.opens && place.end === at) {
             for (const f of [place.start, place.second]) {
               if (!(f >= place.start && f < at) || !/^\p{Ll}/u.test(tokens[f][0])) continue;
+              if (!(await personalVerbFormExternal(tokens[f][0]))) continue;
               const rows = await tokenAnalyses(tokens[f][0], undefined, 'participlePhrase');
-              if (!rows.some(a => a.kind === "finite")) continue;
               other = !rows.some(a => a.kind === "finite" && HELPER.test(norm(a.base || "")));
               break;
             }
@@ -23099,7 +23119,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (let i = start; i < at; i++) {
         const t = tokens[i][0];
         if (/^\p{Lu}/u.test(t)) continue;
-        if ((await tokenAnalyses(t, undefined, 'participlePhrase')).some(a => a.kind === "finite") && !(forms.get(norm(t)) || []).some(e => e.type !== "Verb")) return result;
+        if (await personalVerbFormExternal(t) && !(forms.get(norm(t)) || []).some(e => e.type !== "Verb")) return result;
       }
       return choose(p2);
     }

@@ -2255,5 +2255,131 @@
   "plural": "Knebelbärte",
   "translation_en": "dated twirled moustache with a pointed beard",
   "translation_ru": "устар. закрученные усы с бородкой клинышком"
+ },
+ {
+  "id": "light-0245",
+  "word": "gepunktet",
+  "pos": "adj",
+  "translation_ru": "в горошек, в крапинку; пунктирный",
+  "translation_en": "polka-dot, spotted; dotted"
+ },
+ {
+  "id": "light-0246",
+  "word": "gehoben",
+  "pos": "adj",
+  "translation_ru": "высокий, высокопоставленный; возвышенный, книжный; приподнятый, праздничный",
+  "translation_en": "higher, senior, upscale; elevated, formal; elated, festive"
+ },
+ {
+  "id": "light-0247",
+  "word": "aufgeklärt",
+  "pos": "adj",
+  "translation_ru": "просвещённый",
+  "translation_en": "enlightened"
+ },
+ {
+  "id": "light-0248",
+  "word": "bewegt",
+  "pos": "adj",
+  "translation_ru": "взволнованный, растроганный; бурный, богатый событиями; движущийся",
+  "translation_en": "moved, touched; eventful, turbulent; moving"
+ },
+ {
+  "id": "light-0249",
+  "word": "gelungen",
+  "pos": "adj",
+  "translation_ru": "удачный, удавшийся",
+  "translation_en": "successful, well done"
+ },
+ {
+  "id": "light-0250",
+  "word": "gepflegt",
+  "pos": "adj",
+  "translation_ru": "ухоженный, опрятный; изысканный, культурный",
+  "translation_en": "well-kept, neat; refined, cultivated"
+ },
+ {
+  "id": "light-0251",
+  "word": "verflucht",
+  "pos": "adj",
+  "translation_ru": "проклятый; чёртов, треклятый",
+  "translation_en": "cursed; damned, blasted"
+ },
+ {
+  "id": "light-0252",
+  "word": "gebrochen",
+  "pos": "adj",
+  "translation_ru": "сломанный; ломаный, с ошибками; надломленный, сломленный; дробный",
+  "translation_en": "broken; halting, faulty; crushed, dispirited; fractional"
+ },
+ {
+  "id": "light-0253",
+  "word": "verloren",
+  "pos": "adj",
+  "translation_ru": "потерянный; пропащий, безнадёжный; затерянный, одинокий",
+  "translation_en": "lost; hopeless, doomed; forlorn, lonely"
+ },
+ {
+  "id": "light-0254",
+  "word": "ausgeglichen",
+  "pos": "adj",
+  "translation_ru": "уравновешенный, спокойный; равный, сбалансированный",
+  "translation_en": "balanced, even-tempered; even, balanced"
+ },
+ {
+  "id": "light-0255",
+  "word": "gelernt",
+  "pos": "adj",
+  "translation_ru": "квалифицированный, дипломированный; выученный",
+  "translation_en": "trained, skilled; learned"
+ },
+ {
+  "id": "light-0256",
+  "word": "angewandt",
+  "pos": "adj",
+  "translation_ru": "прикладной; применяемый, применённый",
+  "translation_en": "applied; used, employed"
+ },
+ {
+  "id": "light-0257",
+  "word": "gewunden",
+  "pos": "adj",
+  "translation_ru": "извилистый; витиеватый, уклончивый",
+  "translation_en": "winding, tortuous; convoluted, evasive"
+ },
+ {
+  "id": "light-0258",
+  "word": "betont",
+  "pos": "adj",
+  "translation_ru": "подчёркнутый, нарочитый; ударный",
+  "translation_en": "emphatic, deliberate; stressed"
+ },
+ {
+  "id": "light-0259",
+  "word": "angesagt",
+  "pos": "adj",
+  "translation_ru": "модный, популярный; объявленный, анонсированный",
+  "translation_en": "trendy, fashionable; announced"
+ },
+ {
+  "id": "light-0260",
+  "word": "beschränkt",
+  "pos": "adj",
+  "translation_ru": "ограниченный; недалёкий, туповатый",
+  "translation_en": "limited, restricted; narrow-minded, dim"
+ },
+ {
+  "id": "light-0261",
+  "word": "gesegnet",
+  "pos": "adj",
+  "translation_ru": "благословенный; изрядный, отменный",
+  "translation_en": "blessed; hearty, healthy"
+ },
+ {
+  "id": "light-0262",
+  "word": "ausgestorben",
+  "pos": "adj",
+  "translation_ru": "вымерший; безлюдный, опустевший",
+  "translation_en": "extinct; deserted"
  }
 ]
