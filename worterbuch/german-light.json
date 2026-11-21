@@ -1004,5 +1004,529 @@
   "plural": "Pis",
   "translation_en": "pi, the number; pi, the Greek letter",
   "translation_ru": "число пи; пи, греческая буква"
+ },
+ {
+  "id": "light-0121",
+  "word": "Sicht",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "вид на что-либо: die Sicht auf die Berge",
+    "note_en": "view of something: die Sicht auf die Berge"
+   }
+  ]
+ },
+ {
+  "id": "light-0122",
+  "word": "hinwenden",
+  "pos": "verb",
+  "translation_en": "to turn, to turn towards",
+  "complements": [
+   {
+    "pattern": "zu + Dativ",
+    "note_ru": "sich hinwenden zu — поворачиваться, обращаться к кому-либо, чему-либо: Sie wandte sich zu ihm hin.",
+    "note_en": "sich hinwenden zu — to turn to someone, something: Sie wandte sich zu ihm hin."
+   }
+  ]
+ },
+ {
+  "id": "light-0123",
+  "word": "anspielen",
+  "pos": "verb",
+  "translation_ru": "намекать; начинать игру, ходить первым; пасовать",
+  "translation_en": "to allude, to insinuate; to kick off, to lead; to pass to",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "намекать на что-либо: Er spielte auf ihren Fehler an.",
+    "note_en": "to allude to something: Er spielte auf ihren Fehler an.",
+    "meaning_ru": "намекать"
+   }
+  ]
+ },
+ {
+  "id": "light-0124",
+  "word": "Suche",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "поиск кого-либо, чего-либо: die Suche nach einer Wohnung",
+    "note_en": "search for someone, something: die Suche nach einer Wohnung"
+   }
+  ]
+ },
+ {
+  "id": "light-0125",
+  "word": "Abstand",
+  "pos": "noun",
+  "translation_ru": "расстояние, дистанция, промежуток; интервал, промежуток времени; дистанция, сдержанность",
+  "translation_en": "distance, gap, space; interval, time gap; distance, reserve",
+  "complements": [
+   {
+    "pattern": "zu + Dativ",
+    "note_ru": "расстояние до кого-либо, чего-либо: Abstand zum Vordermann",
+    "note_en": "distance to someone, something: Abstand zum Vordermann"
+   },
+   {
+    "pattern": "von + Dativ",
+    "note_ru": "расстояние от чего-либо: Abstand von der Straße",
+    "note_en": "distance from something: Abstand von der Straße"
+   }
+  ]
+ },
+ {
+  "id": "light-0126",
+  "word": "Angriff",
+  "pos": "noun",
+  "translation_ru": "нападение, атака, наступление; атака, нападение в спорте; нападки, резкая критика",
+  "translation_en": "attack, assault, offensive; attack in sport, offence; attack, sharp criticism",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "нападение на кого-либо, что-либо",
+    "note_en": "attack on someone, something"
+   }
+  ]
+ },
+ {
+  "id": "light-0127",
+  "word": "Aufsicht",
+  "pos": "noun",
+  "translation_ru": "надзор, контроль, присмотр; дежурный, надзирающий",
+  "translation_en": "supervision, oversight; supervisor, person on duty",
+  "complements": [
+   {
+    "pattern": "über + Akkusativ",
+    "note_ru": "надзор за кем-либо, чем-либо: die Aufsicht über die Kinder",
+    "note_en": "supervision of someone, something: die Aufsicht über die Kinder",
+    "meaning_ru": "надзор, контроль, присмотр"
+   }
+  ]
+ },
+ {
+  "id": "light-0128",
+  "word": "Hass",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "ненависть к кому-либо, чему-либо",
+    "note_en": "hatred of someone, something"
+   },
+   {
+    "pattern": "gegen + Akkusativ",
+    "note_ru": "ненависть к кому-либо, чему-либо: Hass gegen Minderheiten",
+    "note_en": "hatred of someone, something: Hass gegen Minderheiten"
+   }
+  ]
+ },
+ {
+  "id": "light-0129",
+  "word": "Jagd",
+  "pos": "noun",
+  "translation_ru": "охота; погоня",
+  "translation_en": "hunt, hunting; chase, pursuit",
+  "complements": [
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "погоня за чем-либо: die Jagd nach dem Glück",
+    "note_en": "chase for something: die Jagd nach dem Glück",
+    "meaning_ru": "погоня"
+   },
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "охота на кого-либо: die Jagd auf Hasen",
+    "note_en": "hunt for someone: die Jagd auf Hasen",
+    "meaning_ru": "охота"
+   },
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "охота на кого-либо: die Jagd auf Hasen",
+    "note_en": "hunt for someone: die Jagd auf Hasen",
+    "meaning_ru": "погоня"
+   }
+  ]
+ },
+ {
+  "id": "light-0130",
+  "word": "Klage",
+  "pos": "noun",
+  "translation_ru": "жалоба; иск, судебный иск; плач, сетование",
+  "translation_en": "complaint; lawsuit, action; lament, lamentation",
+  "complements": [
+   {
+    "pattern": "über + Akkusativ",
+    "note_ru": "жалоба на кого-либо, что-либо: Klagen über den Service",
+    "note_en": "complaint about someone, something: Klagen über den Service",
+    "meaning_ru": "жалоба"
+   },
+   {
+    "pattern": "über + Akkusativ",
+    "note_ru": "жалоба на кого-либо, что-либо: Klagen über den Service",
+    "note_en": "complaint about someone, something: Klagen über den Service",
+    "meaning_ru": "плач, сетование"
+   },
+   {
+    "pattern": "gegen + Akkusativ",
+    "note_ru": "иск против кого-либо: eine Klage gegen die Firma",
+    "note_en": "lawsuit against someone: eine Klage gegen die Firma",
+    "meaning_ru": "иск, судебный иск"
+   }
+  ]
+ },
+ {
+  "id": "light-0131",
+  "word": "Sympathie",
+  "pos": "noun",
+  "translation_ru": "симпатия, расположение; сочувствие, одобрение",
+  "translation_en": "liking, affection; sympathy, approval",
+  "complements": [
+   {
+    "pattern": "für + Akkusativ",
+    "note_ru": "симпатия к кому-либо, чему-либо",
+    "note_en": "sympathy for someone, something"
+   }
+  ]
+ },
+ {
+  "id": "light-0132",
+  "word": "Verzicht",
+  "pos": "noun",
+  "translation_ru": "отказ, отречение",
+  "translation_en": "renunciation, waiver, giving up",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "отказ от чего-либо: der Verzicht auf Fleisch",
+    "note_en": "giving up something: der Verzicht auf Fleisch"
+   }
+  ]
+ },
+ {
+  "id": "light-0133",
+  "word": "Appell",
+  "pos": "noun",
+  "translation_en": "appeal, call; roll call, muster, parade",
+  "complements": [
+   {
+    "pattern": "an + Akkusativ",
+    "note_ru": "призыв к кому-либо, чему-либо: ein Appell an die Vernunft",
+    "note_en": "appeal to someone, something: ein Appell an die Vernunft"
+   }
+  ]
+ },
+ {
+  "id": "light-0134",
+  "word": "Attentat",
+  "pos": "noun",
+  "translation_en": "assassination attempt; terrorist attack",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "покушение на кого-либо",
+    "note_en": "assassination attempt on someone"
+   }
+  ]
+ },
+ {
+  "id": "light-0135",
+  "word": "Ruf",
+  "pos": "noun",
+  "translation_ru": "крик, оклик, зов; репутация, слава; призыв, требование; приглашение на должность",
+  "translation_en": "call, shout, cry; reputation; call, demand; offer of a post",
+  "complements": [
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "призыв к чему-либо, требование чего-либо: der Ruf nach Reformen",
+    "note_en": "call for something: der Ruf nach Reformen",
+    "meaning_ru": "крик, оклик, зов"
+   },
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "призыв к чему-либо, требование чего-либо: der Ruf nach Reformen",
+    "note_en": "call for something: der Ruf nach Reformen",
+    "meaning_ru": "призыв, требование"
+   },
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "призыв к чему-либо, требование чего-либо: der Ruf nach Reformen",
+    "note_en": "call for something: der Ruf nach Reformen",
+    "meaning_ru": "приглашение на должность"
+   }
+  ]
+ },
+ {
+  "id": "light-0136",
+  "word": "Abkehr",
+  "pos": "noun",
+  "translation_ru": "отказ, отход, отречение",
+  "translation_en": "turning away, rejection, renunciation",
+  "complements": [
+   {
+    "pattern": "von + Dativ",
+    "note_ru": "отказ, отход от чего-либо: die Abkehr von der Atomkraft",
+    "note_en": "turning away from something: die Abkehr von der Atomkraft"
+   }
+  ]
+ },
+ {
+  "id": "light-0137",
+  "word": "Aggression",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "gegen + Akkusativ",
+    "note_ru": "агрессия против кого-либо, чего-либо",
+    "note_en": "aggression towards someone, something"
+   }
+  ]
+ },
+ {
+  "id": "light-0138",
+  "word": "Anrecht",
+  "pos": "noun",
+  "translation_en": "right, claim, entitlement; subscription, season ticket",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "право на что-либо: ein Anrecht auf Urlaub",
+    "note_en": "right to something: ein Anrecht auf Urlaub"
+   }
+  ]
+ },
+ {
+  "id": "light-0139",
+  "word": "Begierde",
+  "pos": "noun",
+  "translation_ru": "страстное желание, вожделение, жажда",
+  "translation_en": "desire, craving, lust",
+  "complements": [
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "жажда чего-либо: die Begierde nach Macht",
+    "note_en": "desire for something: die Begierde nach Macht"
+   }
+  ]
+ },
+ {
+  "id": "light-0140",
+  "word": "Drang",
+  "pos": "noun",
+  "translation_en": "pressure, rush; urge, drive, impulse",
+  "complements": [
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "стремление, тяга к чему-либо: der Drang nach Freiheit",
+    "note_en": "urge for something: der Drang nach Freiheit"
+   }
+  ]
+ },
+ {
+  "id": "light-0141",
+  "word": "Gier",
+  "pos": "noun",
+  "translation_ru": "жадность, алчность, жажда",
+  "translation_en": "greed, craving",
+  "complements": [
+   {
+    "pattern": "nach + Dativ",
+    "note_ru": "алчность, жадность к чему-либо: die Gier nach Geld",
+    "note_en": "greed for something: die Gier nach Geld"
+   }
+  ]
+ },
+ {
+  "id": "light-0142",
+  "word": "Teilhabe",
+  "pos": "noun",
+  "translation_en": "participation, involvement",
+  "complements": [
+   {
+    "pattern": "an + Dativ",
+    "note_ru": "участие, причастность к чему-либо",
+    "note_en": "participation in something"
+   }
+  ]
+ },
+ {
+  "id": "light-0143",
+  "word": "Verlass",
+  "pos": "noun",
+  "translation_ru": "надёжность, на кого можно положиться",
+  "translation_en": "reliance, reliability",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "на кого-либо можно положиться: Auf ihn ist Verlass.",
+    "note_en": "someone can be relied on: Auf ihn ist Verlass."
+   }
+  ]
+ },
+ {
+  "id": "light-0144",
+  "word": "Zugehörigkeit",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Dativ",
+    "note_ru": "принадлежность к чему-либо",
+    "note_en": "belonging to something"
+   }
+  ]
+ },
+ {
+  "id": "light-0145",
+  "word": "Antipathie",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "gegen + Akkusativ",
+    "note_ru": "антипатия к кому-либо, чему-либо",
+    "note_en": "antipathy towards someone, something"
+   }
+  ]
+ },
+ {
+  "id": "light-0146",
+  "word": "Stolz",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "гордость за кого-либо, что-либо",
+    "note_en": "pride in someone, something"
+   }
+  ]
+ },
+ {
+  "id": "light-0147",
+  "word": "Abscheu",
+  "pos": "noun",
+  "gender": [
+   "m",
+   "f"
+  ],
+  "complements": [
+   {
+    "pattern": "vor + Dativ",
+    "note_ru": "отвращение к кому-либо, чему-либо",
+    "note_en": "disgust at, loathing of someone, something"
+   }
+  ]
+ },
+ {
+  "id": "light-0148",
+  "word": "Ausstieg",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "aus + Dativ",
+    "note_ru": "выход из чего-либо, отказ от чего-либо: der Ausstieg aus der Atomenergie",
+    "note_en": "exit from, phase-out of something: der Ausstieg aus der Atomenergie"
+   }
+  ]
+ },
+ {
+  "id": "light-0149",
+  "word": "Beitritt",
+  "pos": "noun",
+  "translation_ru": "вступление, присоединение",
+  "translation_en": "joining, accession, entry",
+  "complements": [
+   {
+    "pattern": "zu + Dativ",
+    "note_ru": "вступление во что-либо: der Beitritt zur EU",
+    "note_en": "accession to something: der Beitritt zur EU"
+   }
+  ]
+ },
+ {
+  "id": "light-0150",
+  "word": "Ekel",
+  "pos": "noun",
+  "gender": [
+   "m",
+   "n"
+  ],
+  "translation_ru": "отвращение, омерзение; противный человек",
+  "complements": [
+   {
+    "pattern": "vor + Dativ",
+    "note_ru": "отвращение к кому-либо, чему-либо",
+    "note_en": "disgust at someone, something",
+    "meaning_ru": "отвращение, омерзение"
+   }
+  ]
+ },
+ {
+  "id": "light-0151",
+  "word": "Haftung",
+  "pos": "noun",
+  "translation_ru": "ответственность, материальная ответственность; сцепление, прилипание",
+  "complements": [
+   {
+    "pattern": "für + Akkusativ",
+    "note_ru": "ответственность за что-либо: keine Haftung für Schäden",
+    "note_en": "liability for something: keine Haftung für Schäden",
+    "meaning_ru": "ответственность, материальная ответственность"
+   }
+  ]
+ },
+ {
+  "id": "light-0152",
+  "word": "Rücktritt",
+  "pos": "noun",
+  "translation_ru": "отставка, уход с должности; отказ, расторжение договора",
+  "translation_en": "resignation; withdrawal, rescission",
+  "complements": [
+   {
+    "pattern": "von + Dativ",
+    "note_ru": "отказ от чего-либо, выход из чего-либо: der Rücktritt vom Vertrag",
+    "note_en": "withdrawal from something: der Rücktritt vom Vertrag"
+   }
+  ]
+ },
+ {
+  "id": "light-0153",
+  "word": "Treue",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Dativ",
+    "note_ru": "верность кому-либо, чему-либо",
+    "note_en": "loyalty to someone, something"
+   }
+  ]
+ },
+ {
+  "id": "light-0154",
+  "word": "Zugriff",
+  "pos": "noun",
+  "translation_ru": "доступ; захват, хватка, вмешательство",
+  "translation_en": "access; grasp, grip, intervention",
+  "complements": [
+   {
+    "pattern": "auf + Akkusativ",
+    "note_ru": "доступ к чему-либо: Zugriff auf die Daten",
+    "note_en": "access to something: Zugriff auf die Daten",
+    "meaning_ru": "доступ"
+   }
+  ]
+ },
+ {
+  "id": "light-0155",
+  "word": "Zuschuss",
+  "pos": "noun",
+  "translation_ru": "дотация, субсидия, доплата",
+  "translation_en": "subsidy, grant, allowance",
+  "complements": [
+   {
+    "pattern": "zu + Dativ",
+    "note_ru": "доплата к чему-либо: ein Zuschuss zu den Fahrtkosten",
+    "note_en": "subsidy towards something: ein Zuschuss zu den Fahrtkosten"
+   }
+  ]
  }
 ]

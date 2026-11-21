@@ -17201,15 +17201,31 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // rows of the list, else the complements of its own card)
       const nounVerb = !isVerb && !isPreposition && type === 'Nomen' && /^\p{Lu}/u.test(String(word)) ? (card.usage?.role === 'nominalized' && card.usage.kind === 'infinitive' ? norm(card.usage.base || '')
         : /ung$/u.test(norm(card.lemma || '')) && norm(card.lemma).length > 5 ? norm(card.lemma).replace(/([^aeiouäöü])(er|el)ung$/u, '$1$2n').replace(/ung$/u, 'en') : '') : '';
+      // (advisor 21.11, the governance list; WN batches 189, 191, 193 and light 190, 192, 194: a noun's own complements «X + Kasus» —
+      // die Antwort auf die Frage, das Interesse an Musik, der Zuschuss zu den Kosten — by the same path: the preposition right after
+      // the noun; its own pairs first, else its verb's)
+      const nounOwn = !isVerb && !isPreposition && type === 'Nomen' && /^\p{Lu}/u.test(String(word)) ? (card.item?.complements || card.complements ||
+        (card.source === 'fallback' ? lightByWordPos.get(`${norm(card.lemma || '')}|${card.pos}`)?.complements : null) || [])
+        .map(x => [/^(\S+)\s*\+\s*(Akkusativ|Dativ|Genitiv)$/u.exec(String(x?.pattern || '').trim()), String(x?.meaning_ru || '').trim()]).filter(([m]) => m)
+        .map(([m, meaning]) => [norm(m[1]), m[2], meaning]) : [];
+      // (advisor 21.11 (1): the pair is a meaning's — complements[].meaning_ru as the verbs have it (governedSenseFirst); a pair
+      // without it is the whole word's. With the pair's preposition in the text its meaning comes first and the pair is in the grammar;
+      // the other meanings stay on the card — our cards and the light records alike)
+      // (the light record's text is the one shown — presentResolution puts it over the external reading)
+      const lightRecord = card.source === 'fallback' ? lightByWordPos.get(`${norm(card.lemma || '')}|${card.pos}`) : null;
+      const nounMeanings = String(card.item?.translation_ru || lightRecord?.translation_ru || card.translation?.ru || '').split(';').map(x => x.trim()).filter(Boolean);
+      const nounMeaningsEn = String(card.item?.translation_en || lightRecord?.translation_en || card.translation?.en || '').split(';').map(x => x.trim()).filter(Boolean);
+      const pairSenses = own => own.some(([,, meaning]) => !meaning) ? [] : [...new Set(own.map(([,, meaning]) => nounMeanings.indexOf(meaning)))].filter(i => i >= 0).sort((a,b) => a-b);
+      const nounLink = nounVerb || (nounOwn.length ? norm(card.lemma || word) : '');
       // (the verb's participle in a state or as an adjective has no sich of its own: the sich pair holds without it)
-      const stateish = participleCard || !!nounVerb || isVerb && !!card.construction?.stateOnly;
+      const stateish = participleCard || !!nounLink || isVerb && !!card.construction?.stateOnly;
       let participleInChain = false;
       // (batch 142: the particle verb of a pair — sah ihn für einen Dieb an — keeps its separable link and takes the pair, below only
       // for a particle verb of the list)
       // (L24, links chat 19.11: a verb in a time / modal / passive chain — würden mit der Arbeit anfangen, ist in Not geraten — takes the
       // pair too; the display adds it after the chain's marks and lights the preposition with the chain)
       // A reflexive card keeps its own construction with the complement (sich freuen + auf) — as before.
-      if (!isVerb && !isPreposition && !participleCard && !nounVerb || isVerb && card.construction?.id === 'reflexive-verb' && card.construction.complement) return;
+      if (!isVerb && !isPreposition && !participleCard && !nounLink || isVerb && card.construction?.id === 'reflexive-verb' && card.construction.complement) return;
       const chainVerb = isVerb && card.construction && card.construction.id !== 'separable-verb';
       let list;
       try { list = await fallback.verbPrepositions(); } catch (_) { return; }
@@ -17285,10 +17301,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (p === clause.end && detachedParticleAt(v) === norm(tokens[p][0]) && verbBasesAt(v).some(b => b.startsWith(norm(tokens[p][0])) && list.some(([verb]) => base(verb) === b))) continue;
         links.push({v,p,verbBase,rows:pairs(verbBase,prepositionAt(p),v)});
       }
-      if (nounVerb && indices.includes(selected + 1) && (prepositions.has(norm(tokens[selected+1][0])) || contractionCase[norm(tokens[selected+1][0])])) {
+      if (nounLink && indices.includes(selected + 1) && !zuParticle(selected + 1) && (prepositions.has(norm(tokens[selected+1][0])) || contractionCase[norm(tokens[selected+1][0])])) {
         const prep = prepositionAt(selected + 1);
-        let rows = pairs(nounVerb, prep, selected);
-        if (!rows.length) rows = (lemmas.get(nounVerb) || []).filter(e => e.type === 'Verb').flatMap(e => e.complements || [])
+        const ownRows = nounOwn.filter(([pr]) => pr === prep);
+        let rows = ownRows.map(([pr, c]) => [nounLink, pr, c]);
+        if (!rows.length && nounVerb) rows = pairs(nounVerb, prep, selected);
+        if (!rows.length && nounVerb) rows = (lemmas.get(nounVerb) || []).filter(e => e.type === 'Verb').flatMap(e => e.complements || [])
           .map(x => /^(\S+)\s*\+\s*(Akkusativ|Dativ|Genitiv)\b/u.exec(String(x.pattern || '')))
           .filter(m => m && norm(m[1]) === prep).map(m => [nounVerb, prep, m[2]]);
         // (count 21.11) not von (mostly the genitive's stand-in: die Erfahrung von CARE, die Befreiung von Paris); not a date or a number
@@ -17298,16 +17316,25 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const CALENDAR = /^(?:montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember|wochenende|jahr|jahre|jahren|jahres|monat|monaten|woche|wochen|tag|tagen|stunde|stunden|minute|minuten|uhr|prozent)$/u;
         const verbTakes = b => list.some(([verb,pr]) => base(verb) === b && pr === prep) || (lemmas.get(b) || []).some(e => e.type === 'Verb' &&
           (e.complements || []).some(x => norm(String(x.pattern || '').split(/\s+/u)[0]) === prep));
-        const laterPair = indices.some(i => i > selected + 1 && /^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => verbTakes(base(a.base))));
+        // (advisor 21.11 (3): the pair of a verb of the same part comes before the noun's — a later verb (as before), and a verb with its
+        // detached particle closing the part, before or after the noun: schlägt … vor Wut auf Gegenstände ein (einschlagen auf); the
+        // verbs of the list come in by the links above (another pair on the same preposition blocks)
+        const laterPair = indices.some(i => i > selected + 1 && /^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => verbTakes(base(a.base)))) ||
+          indices.some(i => i !== selected && /^\p{Ll}/u.test(tokens[i][0]) && detachedParticleAt(i) && (verbAnalyses.get(norm(tokens[i][0])) || [])
+            .some(a => a.kind === 'finite' && verbTakes(detachedParticleAt(i) + base(a.base))));
+        // (advisor 21.11 (4): «one after another» — einem albernen Wunsch nach dem nächsten, eine Frage nach der anderen: nach + the
+        // article and nächste / andere with no noun of its own is no object)
+        const oneAfterAnother = prep === 'nach' && selected + 3 <= clause.end && /^(?:dem|der)$/u.test(norm(tokens[selected+2][0])) &&
+          /^(?:nächsten|anderen)$/u.test(norm(tokens[selected+3][0])) && !(selected + 4 <= clause.end && /^\p{Lu}/u.test(tokens[selected+4][0]));
         const loneDeterminer = selected + 2 <= clause.end && DETERMINER_WORD.test(norm(tokens[selected+2][0])) && (selected + 3 > clause.end || /[,;:.!?]/u.test(clause.sentence.slice(tokens[selected+2].index + tokens[selected+2][0].length, tokens[selected+3]?.index ?? clause.sentence.length)));
-        if (rows.length && prep !== 'von' && !obj.some(t => /\d/u.test(t[0]) || CALENDAR.test(norm(t[0]))) && !laterPair && !loneDeterminer)
-          links.push({v:selected, p:selected + 1, verbBase:nounVerb, rows});
+        if (rows.length && prep !== 'von' && !obj.some(t => /\d/u.test(t[0]) || CALENDAR.test(norm(t[0]))) && !laterPair && !loneDeterminer && !oneAfterAnother)
+          links.push({v:selected, p:selected + 1, verbBase:nounLink, rows, senses:pairSenses(ownRows)});
       }
       // (the particle verb with its particle closing the part wins over the bare verb of the same form — dachte über … nach: nachdenken,
       // not denken über; wies auf … hin: hinweisen)
       for (let k = links.length-1; k >= 0; k--) { const l = links[k], particle = detachedParticleAt(l.v);
         if (particle && !l.verbBase.startsWith(particle) && links.some(o => o.v === l.v && o.verbBase === particle + l.verbBase)) links.splice(k,1); }
-      const mine = links.filter(l => (isVerb || participleCard || nounVerb ? l.v : l.p) === selected && (!isVerb || l.verbBase === base(card.lemma)) &&
+      const mine = links.filter(l => (isVerb || participleCard || nounLink ? l.v : l.p) === selected && (!isVerb || l.verbBase === base(card.lemma)) &&
         (!isVerb || card.construction?.id !== 'separable-verb' || detachedParticleAt(l.v) && l.verbBase.startsWith(detachedParticleAt(l.v))));
       // One pair in the clause; the same preposition or verb in another pair blocks. (Second resolver chat 11.11, advisor 08.11 / 11.11 —
       // claude/TWO_PREP_COUNT_2026-11-11_RU.md) A partner and a topic of one verb (mit + über, bei + für / über) no longer block each
@@ -17359,7 +17386,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const last = tokens[clause.end];
         // (batch 142: not the particle of the pair's own verb — sah ihn für einen Dieb an → ansehen)
         // (not for a noun's pair: a particle closing the part is the sentence verb's — Die Beteiligung an der Studie war hoch)
-        if (!(nounVerb && v === selected) && clause.end > v && clause.end !== p && clause.end !== p+1 && /^\p{Ll}/u.test(last[0]) && !(verbBase.startsWith(norm(last[0])) && detachedParticleAt(v) === norm(last[0])) &&
+        if (!(nounLink && v === selected) && clause.end > v && clause.end !== p && clause.end !== p+1 && /^\p{Ll}/u.test(last[0]) && !(verbBase.startsWith(norm(last[0])) && detachedParticleAt(v) === norm(last[0])) &&
             ['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder','hoch','fern','frei','kennen','statt','teil'].includes(norm(last[0]))) return null;
         // (batch 142, advisor 17.11: für + a stretch of time is no «принимать за» — sah ihn für einen Augenblick an, für fünf Minuten)
         if (prepositionAt(p) === 'für' && tokens.slice(p+1,Math.min(p+4,clause.end+1)).some(t =>
@@ -17394,6 +17421,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const caseOf = chosen.map(pairCase);
       if (caseOf.some(c => !c)) return;
       const {v,p,verbBase,rows} = chosen[0];
+      // (advisor 21.11 (2): an expression comes before the noun's pair — Zugang zum Beispiel über …)
+      if (nounLink && v === selected && await inExpression(p)) return;
       // (L24: als of a chain verb — Märchen werden als Mythen angesehen — stays with the chain: in the passive the als group is no
       // accusative)
       if (chainVerb && chosen.some(l => prepositionAt(l.p) === 'als')) return;
@@ -17443,7 +17472,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (both pairs on the verb: «mit + Dativ · über + Akkusativ», the verb and both prepositions lit)
       if (chosen.length === 2) Object.assign(link,{pattern:chosen.map((l,n) => `${prepositionAt(l.p)} + ${caseOf[n]}`).join(' · '),
         pairs:chosen.map((l,n) => ({preposition:prepositionAt(l.p),case:caseOf[n]})),spans:[v,...chosen.map(l => l.p)].sort((a,b) => a-b).map(span)});
-      const marked = {...card,prepositionLink:link}, id = window.BibliothekVocabulary.identity(card);
+      // (advisor 21.11 (1)) the meaning of the noun's pair first, as governedSenseFirst does for a verb; the English line only when it
+      // has as many meanings
+      const senses = nounLink && v === selected ? chosen[0].senses || [] : [];
+      const sensed = senses.length && senses.length < nounMeanings.length && !(senses.length === 1 && senses[0] === 0) ? {
+        ...(senses.length === 1 ? {senseFirst:senses[0], senseFirstEn:nounMeaningsEn.length === nounMeanings.length ? senses[0] : 0}
+          : {sensesFirst:senses, ...(nounMeaningsEn.length === nounMeanings.length ? {sensesFirstEn:senses} : {})}), senseEvidence:'government'} : {};
+      const marked = {...card,...sensed,prepositionLink:link}, id = window.BibliothekVocabulary.identity(card);
       resolution.candidates = resolution.candidates.map(c => window.BibliothekVocabulary.identity(c) === id ? marked : c);
       if (resolution.preferred === card) resolution.preferred = marked;
       resolution.selected = marked;

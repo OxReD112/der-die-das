@@ -19548,7 +19548,14 @@
         "ihr": "wendet an",
         "sie": "wenden an"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "применять к чему-либо: eine Regel auf einen Fall anwenden",
+        "note_en": "to apply to something: eine Regel auf einen Fall anwenden"
+      }
+    ]
   },
   {
     "id": "verb-391",
@@ -23035,6 +23042,11 @@
         "pattern": "für + Akkusativ",
         "note_ru": "подходить для чего-либо",
         "note_en": "to be suitable for something"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "годиться в, быть пригодным к чему-либо: Er eignet sich nicht zum Lehrer.",
+        "note_en": "to be suited to, to be cut out for: Er eignet sich nicht zum Lehrer."
       }
     ],
     "lookup_forms": {
@@ -23319,6 +23331,11 @@
         "pattern": "mit + Dativ",
         "note_ru": "договориться с кем-либо",
         "note_en": "to come to an agreement with someone"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "договориться о чём-либо: sich über den Preis einigen",
+        "note_en": "to agree on something: sich über den Preis einigen"
       }
     ],
     "lookup_forms": {
@@ -34267,6 +34284,12 @@
         "pattern": "von + Dativ",
         "note_ru": "требовать от кого-либо",
         "note_en": "to demand from someone"
+      },
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "требовать, просить чего-либо; спрашивать кого-либо: Der Kranke verlangte nach Wasser.",
+        "note_en": "to ask for, to call for: Der Kranke verlangte nach Wasser.",
+        "meaning_ru": "требовать"
       }
     ],
     "lookup_forms": {

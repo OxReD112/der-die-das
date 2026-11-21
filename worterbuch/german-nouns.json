@@ -33,7 +33,14 @@
     "example_de": "Ich habe noch eine Frage.",
     "example_cloze": "Ich habe noch eine {{c1::Frage}}.",
     "example_ru": "У меня есть ещё один вопрос.",
-    "example_en": "I have one more question."
+    "example_en": "I have one more question.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "вопрос о чём-либо: die Frage nach dem Weg",
+        "note_en": "question about something: die Frage nach dem Weg"
+      }
+    ]
   },
   {
     "id": "noun-004",
@@ -716,7 +723,19 @@
     "example_de": "Wir hatten ein langes Gespräch.",
     "example_cloze": "Wir hatten ein langes {{c1::Gespräch}}.",
     "example_ru": "У нас состоялся долгий разговор.",
-    "example_en": "We had a long conversation."
+    "example_en": "We had a long conversation.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "разговор с кем-либо",
+        "note_en": "conversation with someone"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "разговор о чём-либо",
+        "note_en": "conversation about something"
+      }
+    ]
   },
   {
     "id": "noun-060",
@@ -1194,7 +1213,14 @@
     "example_de": "Der Preis steht auf dem Etikett.",
     "example_cloze": "Der {{c1::Preis}} steht auf dem Etikett.",
     "example_ru": "Цена указана на этикетке.",
-    "example_en": "The price is on the label."
+    "example_en": "The price is on the label.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "цена на что-либо, за что-либо",
+        "note_en": "price of, price for something"
+      }
+    ]
   },
   {
     "id": "noun-100",
@@ -1254,7 +1280,14 @@
     "example_de": "Der Schlüssel liegt neben der Tür.",
     "example_cloze": "Der {{c1::Schlüssel}} liegt neben der Tür.",
     "example_ru": "Ключ лежит рядом с дверью.",
-    "example_en": "The key is next to the door."
+    "example_en": "The key is next to the door.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "ключ к чему-либо: der Schlüssel zum Erfolg",
+        "note_en": "key to something: der Schlüssel zum Erfolg"
+      }
+    ]
   },
   {
     "id": "noun-105",
@@ -1824,7 +1857,14 @@
     "example_de": "Am Sonntag bekommen wir Besuch.",
     "example_cloze": "Am Sonntag bekommen wir {{c1::Besuch}}.",
     "example_ru": "В воскресенье к нам придут гости.",
-    "example_en": "We are having visitors on Sunday."
+    "example_en": "We are having visitors on Sunday.",
+    "complements": [
+      {
+        "pattern": "bei + Dativ",
+        "note_ru": "визит к кому-либо: ein Besuch bei den Großeltern",
+        "note_en": "visit to someone: ein Besuch bei den Großeltern"
+      }
+    ]
   },
   {
     "id": "noun-152",
@@ -1980,7 +2020,14 @@
     "example_de": "Sie hat viel Erfahrung im Verkauf.",
     "example_cloze": "Sie hat viel {{c1::Erfahrung}} im Verkauf.",
     "example_ru": "У неё большой опыт в продажах.",
-    "example_en": "She has a lot of experience in sales."
+    "example_en": "She has a lot of experience in sales.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "опыт с чем-либо, кем-либо",
+        "note_en": "experience with something, someone"
+      }
+    ]
   },
   {
     "id": "noun-165",
@@ -2016,7 +2063,14 @@
     "example_de": "Gibt es eine Möglichkeit, früher anzufangen?",
     "example_cloze": "Gibt es eine {{c1::Möglichkeit}}, früher anzufangen?",
     "example_ru": "Есть ли возможность начать раньше?",
-    "example_en": "Is there a way to start earlier?"
+    "example_en": "Is there a way to start earlier?",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "возможность для чего-либо: die Möglichkeit zur Weiterbildung",
+        "note_en": "opportunity for something: die Möglichkeit zur Weiterbildung"
+      }
+    ]
   },
   {
     "id": "noun-168",
@@ -2059,12 +2113,38 @@
     "word": "Grund",
     "article": "der",
     "plural": "Gründe",
-    "translation_ru": "причина; основание",
-    "translation_en": "reason; basis",
+    "translation_ru": "причина; основание; фон; дно",
+    "translation_en": "reason; basis; background; bottom",
     "example_de": "Was ist der Grund für die Verspätung?",
     "example_cloze": "Was ist der {{c1::Grund}} für die Verspätung?",
     "example_ru": "Какова причина опоздания?",
-    "example_en": "What is the reason for the delay?"
+    "example_en": "What is the reason for the delay?",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "причина чего-либо",
+        "note_en": "reason for something",
+        "meaning_ru": "причина"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "причина чего-либо",
+        "note_en": "reason for something",
+        "meaning_ru": "основание"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "повод для чего-либо: kein Grund zur Panik",
+        "note_en": "reason for, cause for: kein Grund zur Panik",
+        "meaning_ru": "причина"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "повод для чего-либо: kein Grund zur Panik",
+        "note_en": "reason for, cause for: kein Grund zur Panik",
+        "meaning_ru": "основание"
+      }
+    ]
   },
   {
     "id": "noun-172",
@@ -2112,7 +2192,14 @@
     "example_de": "Ihre Beziehung zu den Kollegen ist gut.",
     "example_cloze": "Ihre {{c1::Beziehung}} zu den Kollegen ist gut.",
     "example_ru": "У неё хорошие отношения с коллегами.",
-    "example_en": "She has a good relationship with her colleagues."
+    "example_en": "She has a good relationship with her colleagues.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "отношения с кем-либо, отношение к чему-либо",
+        "note_en": "relationship with someone, relation to something"
+      }
+    ]
   },
   {
     "id": "noun-176",
@@ -2282,7 +2369,14 @@
     "example_de": "Gute Sprachkenntnisse sind eine wichtige Voraussetzung.",
     "example_cloze": "Gute Sprachkenntnisse sind eine wichtige {{c1::Voraussetzung}}.",
     "example_ru": "Хорошее знание языка — важное условие.",
-    "example_en": "Good language skills are an important prerequisite."
+    "example_en": "Good language skills are an important prerequisite.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "предпосылка, условие для чего-либо",
+        "note_en": "prerequisite for something"
+      }
+    ]
   },
   {
     "id": "noun-190",
@@ -2318,7 +2412,14 @@
     "example_de": "Für dieses Projekt trägt sie die Verantwortung.",
     "example_cloze": "Für dieses Projekt trägt sie die {{c1::Verantwortung}}.",
     "example_ru": "Она несёт ответственность за этот проект.",
-    "example_en": "She is responsible for this project."
+    "example_en": "She is responsible for this project.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "ответственность за кого-либо, что-либо",
+        "note_en": "responsibility for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-193",
@@ -2366,7 +2467,19 @@
     "example_de": "Zwischen den beiden Ereignissen gibt es einen Zusammenhang.",
     "example_cloze": "Zwischen den beiden Ereignissen gibt es einen {{c1::Zusammenhang}}.",
     "example_ru": "Между этими двумя событиями есть связь.",
-    "example_en": "There is a connection between the two events."
+    "example_en": "There is a connection between the two events.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "связь с чем-либо",
+        "note_en": "connection with something"
+      },
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "связь между чем-либо",
+        "note_en": "connection between"
+      }
+    ]
   },
   {
     "id": "noun-197",
@@ -2392,7 +2505,14 @@
     "example_de": "Ich fahre jeden Tag mit dem Bus zur Arbeit.",
     "example_cloze": "Ich fahre jeden Tag mit dem Bus zur {{c1::Arbeit}}.",
     "example_ru": "Я каждый день езжу на работу на автобусе.",
-    "example_en": "I take the bus to work every day."
+    "example_en": "I take the bus to work every day.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "работа над чем-либо: die Arbeit an einem Buch",
+        "note_en": "work on something: die Arbeit an einem Buch"
+      }
+    ]
   },
   {
     "id": "noun-199",
@@ -2731,7 +2851,14 @@
     "example_de": "Ich warte noch auf eine Antwort.",
     "example_cloze": "Ich warte noch auf eine {{c1::Antwort}}.",
     "example_ru": "Я всё ещё жду ответа.",
-    "example_en": "I am still waiting for an answer."
+    "example_en": "I am still waiting for an answer.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "ответ на что-либо",
+        "note_en": "answer to something"
+      }
+    ]
   },
   {
     "id": "noun-225",
@@ -2743,7 +2870,14 @@
     "example_de": "Kein Problem, ich helfe dir.",
     "example_cloze": "Kein {{c1::Problem}}, ich helfe dir.",
     "example_ru": "Без проблем, я тебе помогу.",
-    "example_en": "No problem, I'll help you."
+    "example_en": "No problem, I'll help you.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "проблема с чем-либо, кем-либо",
+        "note_en": "problem with something, someone"
+      }
+    ]
   },
   {
     "id": "noun-226",
@@ -2993,7 +3127,14 @@
     "example_de": "Ich habe großen Hunger.",
     "example_cloze": "Ich habe großen {{c1::Hunger}}.",
     "example_ru": "Я очень хочу есть.",
-    "example_en": "I am very hungry."
+    "example_en": "I am very hungry.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "голод, жажда чего-либо: der Hunger nach Liebe",
+        "note_en": "hunger for something: der Hunger nach Liebe"
+      }
+    ]
   },
   {
     "id": "noun-246",
@@ -3019,7 +3160,15 @@
     "example_de": "Wir finden bestimmt eine Lösung.",
     "example_cloze": "Wir finden bestimmt eine {{c1::Lösung}}.",
     "example_ru": "Мы обязательно найдём решение.",
-    "example_en": "We will surely find a solution."
+    "example_en": "We will surely find a solution.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "решение чего-либо: проблемы, задачи",
+        "note_en": "solution to something",
+        "meaning_ru": "решение"
+      }
+    ]
   },
   {
     "id": "noun-248",
@@ -3237,7 +3386,19 @@
     "example_de": "Was ist deine Meinung dazu?",
     "example_cloze": "Was ist deine {{c1::Meinung}} dazu?",
     "example_ru": "Какое у тебя мнение на этот счёт?",
-    "example_en": "What is your opinion on this?"
+    "example_en": "What is your opinion on this?",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "мнение о чём-либо, ком-либо",
+        "note_en": "opinion about something, someone"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "мнение по поводу чего-либо",
+        "note_en": "opinion on something"
+      }
+    ]
   },
   {
     "id": "noun-266",
@@ -3263,7 +3424,14 @@
     "example_de": "Danke für deine Hilfe!",
     "example_cloze": "Danke für deine {{c1::Hilfe}}!",
     "example_ru": "Спасибо за твою помощь!",
-    "example_en": "Thanks for your help!"
+    "example_en": "Thanks for your help!",
+    "complements": [
+      {
+        "pattern": "bei + Dativ",
+        "note_ru": "помощь в чём-либо, с чем-либо",
+        "note_en": "help with something"
+      }
+    ]
   },
   {
     "id": "noun-268",
@@ -3275,7 +3443,19 @@
     "example_de": "Er hat Angst vor Hunden.",
     "example_cloze": "Er hat {{c1::Angst}} vor Hunden.",
     "example_ru": "Он боится собак.",
-    "example_en": "He is afraid of dogs."
+    "example_en": "He is afraid of dogs.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "страх перед кем-либо, чем-либо",
+        "note_en": "fear of someone, something"
+      },
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "тревога за кого-либо, что-либо: Angst um die Kinder",
+        "note_en": "worry for someone, something: Angst um die Kinder"
+      }
+    ]
   },
   {
     "id": "noun-269",
@@ -3378,7 +3558,14 @@
     "example_de": "Der Bericht muss bis Freitag fertig sein.",
     "example_cloze": "Der {{c1::Bericht}} muss bis Freitag fertig sein.",
     "example_ru": "Отчёт должен быть готов к пятнице.",
-    "example_en": "The report must be ready by Friday."
+    "example_en": "The report must be ready by Friday.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "отчёт, репортаж о чём-либо",
+        "note_en": "report on something"
+      }
+    ]
   },
   {
     "id": "noun-277",
@@ -3404,7 +3591,19 @@
     "example_de": "Der Kunde hat eine Beschwerde geschrieben.",
     "example_cloze": "Der Kunde hat eine {{c1::Beschwerde}} geschrieben.",
     "example_ru": "Клиент написал жалобу.",
-    "example_en": "The customer wrote a complaint."
+    "example_en": "The customer wrote a complaint.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "жалоба на кого-либо, что-либо",
+        "note_en": "complaint about someone, something"
+      },
+      {
+        "pattern": "bei + Dativ",
+        "note_ru": "жалоба кому-либо, в какую-либо инстанцию",
+        "note_en": "complaint to someone"
+      }
+    ]
   },
   {
     "id": "noun-279",
@@ -3440,7 +3639,19 @@
     "example_de": "Hast du einen besseren Vorschlag?",
     "example_cloze": "Hast du einen besseren {{c1::Vorschlag}}?",
     "example_ru": "У тебя есть предложение получше?",
-    "example_en": "Do you have a better suggestion?"
+    "example_en": "Do you have a better suggestion?",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "предложение по чему-либо: ein Vorschlag zur Lösung",
+        "note_en": "suggestion for something: ein Vorschlag zur Lösung"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "предложение насчёт чего-либо",
+        "note_en": "suggestion for something"
+      }
+    ]
   },
   {
     "id": "noun-282",
@@ -3476,7 +3687,14 @@
     "example_de": "Wir haben eine klare Vereinbarung getroffen.",
     "example_cloze": "Wir haben eine klare {{c1::Vereinbarung}} getroffen.",
     "example_ru": "Мы пришли к чёткой договорённости.",
-    "example_en": "We reached a clear agreement."
+    "example_en": "We reached a clear agreement.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "соглашение о чём-либо",
+        "note_en": "agreement on something"
+      }
+    ]
   },
   {
     "id": "noun-285",
@@ -3930,7 +4148,15 @@
     "example_de": "Diese Woche ist Kaffee im Angebot.",
     "example_cloze": "Diese Woche ist Kaffee im {{c1::Angebot}}.",
     "example_ru": "На этой неделе кофе продаётся по акции.",
-    "example_en": "Coffee is on special offer this week."
+    "example_en": "Coffee is on special offer this week.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "предложение чего-либо, выбор: das Angebot an Wohnungen",
+        "note_en": "supply of, range of: das Angebot an Wohnungen",
+        "meaning_ru": "предложение"
+      }
+    ]
   },
   {
     "id": "noun-320",
@@ -4076,7 +4302,21 @@
     "example_de": "Können Sie mir bitte eine Auskunft geben?",
     "example_cloze": "Können Sie mir bitte eine {{c1::Auskunft}} geben?",
     "example_ru": "Не могли бы вы дать мне справку?",
-    "example_en": "Could you give me some information, please?"
+    "example_en": "Could you give me some information, please?",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "справка, сведения о ком-либо, чём-либо",
+        "note_en": "information about someone, something",
+        "meaning_ru": "справка"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "справка, сведения о ком-либо, чём-либо",
+        "note_en": "information about someone, something",
+        "meaning_ru": "информация"
+      }
+    ]
   },
   {
     "id": "noun-332",
@@ -4246,7 +4486,14 @@
     "example_de": "Ich habe Durst. Gibt es Wasser?",
     "example_cloze": "Ich habe {{c1::Durst}}. Gibt es Wasser?",
     "example_ru": "Я хочу пить. Есть вода?",
-    "example_en": "I'm thirsty. Is there any water?"
+    "example_en": "I'm thirsty. Is there any water?",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "жажда чего-либо: der Durst nach Wissen",
+        "note_en": "thirst for something: der Durst nach Wissen"
+      }
+    ]
   },
   {
     "id": "noun-346",
@@ -4360,7 +4607,14 @@
     "example_de": "Herzlichen Glückwunsch zum Geburtstag!",
     "example_cloze": "Herzlichen {{c1::Glückwunsch}} zum Geburtstag!",
     "example_ru": "С днём рождения!",
-    "example_en": "Happy birthday!"
+    "example_en": "Happy birthday!",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "поздравление с чем-либо: Glückwunsch zum Geburtstag",
+        "note_en": "congratulations on something: Glückwunsch zum Geburtstag"
+      }
+    ]
   },
   {
     "id": "noun-355",
@@ -4408,7 +4662,21 @@
     "example_de": "Weitere Informationen finden Sie auf unserer Website.",
     "example_cloze": "Weitere {{c1::Informationen}} finden Sie auf unserer Website.",
     "example_ru": "Дополнительную информацию вы найдёте на нашем сайте.",
-    "example_en": "You can find more information on our website."
+    "example_en": "You can find more information on our website.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "информация о чём-либо",
+        "note_en": "information about something",
+        "meaning_ru": "информация"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "информация по чему-либо",
+        "note_en": "information on something",
+        "meaning_ru": "информация"
+      }
+    ]
   },
   {
     "id": "noun-359",
@@ -4906,7 +5174,15 @@
     "example_de": "Das Spiel macht viel Spaß!",
     "example_cloze": "Das Spiel macht viel {{c1::Spaß}}!",
     "example_ru": "В эту игру очень весело играть!",
-    "example_en": "The game is great fun!"
+    "example_en": "The game is great fun!",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "удовольствие от чего-либо",
+        "note_en": "fun in, enjoyment of something",
+        "meaning_ru": "удовольствие"
+      }
+    ]
   },
   {
     "id": "noun-399",
@@ -4966,7 +5242,15 @@
     "example_de": "Wir haben die Wohnung über eine Anzeige in der Zeitung gefunden.",
     "example_cloze": "Wir haben die Wohnung über eine {{c1::Anzeige}} in der Zeitung gefunden.",
     "example_ru": "Мы нашли квартиру по объявлению в газете.",
-    "example_en": "We found the flat through an advert in the newspaper."
+    "example_en": "We found the flat through an advert in the newspaper.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "заявление в полицию на кого-либо",
+        "note_en": "criminal complaint against someone",
+        "meaning_ru": "заявление (в полицию)"
+      }
+    ]
   },
   {
     "id": "noun-404",
@@ -4980,7 +5264,14 @@
     "example_de": "Guten Appetit!",
     "example_cloze": "Guten {{c1::Appetit}}!",
     "example_ru": "Приятного аппетита!",
-    "example_en": "Enjoy your meal!"
+    "example_en": "Enjoy your meal!",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "аппетит, желание съесть что-либо: Appetit auf etwas Süßes",
+        "note_en": "appetite for something: Appetit auf etwas Süßes"
+      }
+    ]
   },
   {
     "id": "noun-405",
@@ -5042,7 +5333,14 @@
     "example_de": "Ich habe eine Bitte an Sie.",
     "example_cloze": "Ich habe eine {{c1::Bitte}} an Sie.",
     "example_ru": "У меня к вам просьба.",
-    "example_en": "I have a favour to ask you."
+    "example_en": "I have a favour to ask you.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "просьба о чём-либо: eine Bitte um Hilfe",
+        "note_en": "request for something: eine Bitte um Hilfe"
+      }
+    ]
   },
   {
     "id": "noun-410",
@@ -5068,7 +5366,14 @@
     "example_de": "Vom Balkon hat man einen schönen Blick auf den See.",
     "example_cloze": "Vom Balkon hat man einen schönen {{c1::Blick}} auf den See.",
     "example_ru": "С балкона открывается красивый вид на озеро.",
-    "example_en": "There is a lovely view of the lake from the balcony."
+    "example_en": "There is a lovely view of the lake from the balcony.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "взгляд, вид на что-либо",
+        "note_en": "look at, view of something"
+      }
+    ]
   },
   {
     "id": "noun-412",
@@ -5116,7 +5421,14 @@
     "example_de": "Vielen Dank für Ihre Hilfe!",
     "example_cloze": "Vielen {{c1::Dank}} für Ihre Hilfe!",
     "example_ru": "Большое спасибо за вашу помощь!",
-    "example_en": "Many thanks for your help!"
+    "example_en": "Many thanks for your help!",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "благодарность за что-либо",
+        "note_en": "thanks for something"
+      }
+    ]
   },
   {
     "id": "noun-416",
@@ -5462,7 +5774,14 @@
     "example_de": "Hast du Lust, ins Kino zu gehen?",
     "example_cloze": "Hast du {{c1::Lust}}, ins Kino zu gehen?",
     "example_ru": "Хочешь пойти в кино?",
-    "example_en": "Do you fancy going to the cinema?"
+    "example_en": "Do you fancy going to the cinema?",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "желание чего-либо, охота к чему-либо: Lust auf Eis",
+        "note_en": "desire for something, feel like: Lust auf Eis"
+      }
+    ]
   },
   {
     "id": "noun-444",
@@ -7166,7 +7485,19 @@
     "example_de": "Er hat großes Interesse an Musik.",
     "example_cloze": "Er hat großes {{c1::Interesse}} an Musik.",
     "example_ru": "Он очень интересуется музыкой.",
-    "example_en": "He has a great interest in music."
+    "example_en": "He has a great interest in music.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "интерес к чему-либо, заинтересованность в чём-либо",
+        "note_en": "interest in something"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "интерес к чему-либо",
+        "note_en": "interest in something"
+      }
+    ]
   },
   {
     "id": "noun-578",
@@ -7202,7 +7533,19 @@
     "example_de": "Wir bleiben in Kontakt!",
     "example_cloze": "Wir bleiben in {{c1::Kontakt}}!",
     "example_ru": "Будем на связи!",
-    "example_en": "Let's stay in touch!"
+    "example_en": "Let's stay in touch!",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "контакт с кем-либо",
+        "note_en": "contact with someone"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "контакт с кем-либо, чем-либо",
+        "note_en": "contact with someone, something"
+      }
+    ]
   },
   {
     "id": "noun-581",
@@ -7424,7 +7767,14 @@
     "example_de": "Hast du einen Wunsch zum Geburtstag?",
     "example_cloze": "Hast du einen {{c1::Wunsch}} zum Geburtstag?",
     "example_ru": "Чего ты хочешь на день рождения?",
-    "example_en": "Is there anything you'd like for your birthday?"
+    "example_en": "Is there anything you'd like for your birthday?",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "желание чего-либо",
+        "note_en": "wish for something"
+      }
+    ]
   },
   {
     "id": "noun-599",
@@ -7597,7 +7947,14 @@
     "example_de": "Für das Parken hier braucht man eine Erlaubnis.",
     "example_cloze": "Für das Parken hier braucht man eine {{c1::Erlaubnis}}.",
     "example_ru": "Чтобы парковаться здесь, нужно разрешение.",
-    "example_en": "You need a permit to park here."
+    "example_en": "You need a permit to park here.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "разрешение на что-либо: die Erlaubnis zum Parken",
+        "note_en": "permission for something: die Erlaubnis zum Parken"
+      }
+    ]
   },
   {
     "id": "noun-612",
@@ -7719,7 +8076,19 @@
     "example_de": "Sie hat gute Kenntnisse in Englisch.",
     "example_cloze": "Sie hat gute {{c1::Kenntnisse}} in Englisch.",
     "example_ru": "У неё хорошие знания английского.",
-    "example_en": "She has a good knowledge of English."
+    "example_en": "She has a good knowledge of English.",
+    "complements": [
+      {
+        "pattern": "in + Dativ",
+        "note_ru": "знания в чём-либо, во мн. ч.: Kenntnisse in Mathematik",
+        "note_en": "knowledge of something, in the plural: Kenntnisse in Mathematik"
+      },
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "осведомлённость о чём-либо: Kenntnis von etwas haben",
+        "note_en": "knowledge of something: Kenntnis von etwas haben"
+      }
+    ]
   },
   {
     "id": "noun-622",
@@ -8455,7 +8824,14 @@
     "example_de": "Ein Haus am Meer ist mein Traum.",
     "example_cloze": "Ein Haus am Meer ist mein {{c1::Traum}}.",
     "example_ru": "Дом у моря — моя мечта.",
-    "example_en": "A house by the sea is my dream."
+    "example_en": "A house by the sea is my dream.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "мечта о чём-либо",
+        "note_en": "dream of something"
+      }
+    ]
   },
   {
     "id": "noun-682",
@@ -8491,7 +8867,19 @@
     "example_de": "Was ist der Unterschied zwischen den beiden Wörtern?",
     "example_cloze": "Was ist der {{c1::Unterschied}} zwischen den beiden Wörtern?",
     "example_ru": "В чём разница между этими двумя словами?",
-    "example_en": "What is the difference between the two words?"
+    "example_en": "What is the difference between the two words?",
+    "complements": [
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "разница между чем-либо",
+        "note_en": "difference between"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "отличие от чего-либо: im Unterschied zu dir",
+        "note_en": "difference from: im Unterschied zu dir"
+      }
+    ]
   },
   {
     "id": "noun-685",
@@ -8703,7 +9091,15 @@
     "example_cloze": "{{c1::Achtung}}, hier ist der Boden nass!",
     "example_ru": "Осторожно, здесь мокрый пол!",
     "example_en": "Caution, the floor is wet here!",
-    "id": "noun-701"
+    "id": "noun-701",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "уважение к кому-либо, чему-либо",
+        "note_en": "respect for someone, something",
+        "meaning_ru": "уважение"
+      }
+    ]
   },
   {
     "word": "Anrede",
@@ -8741,7 +9137,14 @@
     "example_en": "In Cologne we only have ten minutes to make our connection.",
     "plural_note_ru": "В значении «контакт, знакомство» (Anschluss finden) употребляется без множественного числа.",
     "plural_note_en": "In the sense of social contact (Anschluss finden), it is used without a plural.",
-    "id": "noun-704"
+    "id": "noun-704",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "подключение, присоединение к чему-либо",
+        "note_en": "connection to something"
+      }
+    ]
   },
   {
     "word": "Apartment",
@@ -9580,6 +9983,13 @@
         "example_ru": "Старый офицер вышел в отставку.",
         "example_en": "The old officer resigned his commission."
       }
+    ],
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "прощание с кем-либо, чем-либо",
+        "note_en": "farewell to someone, something"
+      }
     ]
   },
   {
@@ -9876,7 +10286,14 @@
     "example_cloze": "Sie haben {{c1::Anspruch}} auf 30 Tage Urlaub im Jahr.",
     "example_ru": "Вы имеете право на 30 дней отпуска в год.",
     "example_en": "You are entitled to 30 days’ holiday a year.",
-    "id": "noun-794"
+    "id": "noun-794",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "право, притязание на что-либо",
+        "note_en": "claim to, right to something"
+      }
+    ]
   },
   {
     "word": "Antrag",
@@ -9888,7 +10305,14 @@
     "example_cloze": "Den {{c1::Antrag}} auf Elterngeld können Sie online stellen.",
     "example_ru": "Заявление на пособие по уходу за ребёнком можно подать онлайн.",
     "example_en": "You can submit the application for parental allowance online.",
-    "id": "noun-795"
+    "id": "noun-795",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "заявление, ходатайство о чём-либо: ein Antrag auf Elterngeld",
+        "note_en": "application for something: ein Antrag auf Elterngeld"
+      }
+    ]
   },
   {
     "word": "Anwalt",
@@ -10050,7 +10474,15 @@
     "example_de": "Die Aufnahme in den Sportverein kostet 20 Euro.",
     "example_cloze": "Die {{c1::Aufnahme}} in den Sportverein kostet 20 Euro.",
     "example_ru": "Вступление в спортивный клуб стоит 20 евро.",
-    "example_en": "Joining the sports club costs 20 euros."
+    "example_en": "Joining the sports club costs 20 euros.",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "приём, принятие во что-либо: die Aufnahme in die EU",
+        "note_en": "admission to something: die Aufnahme in die EU",
+        "meaning_ru": "приём (в организацию, в больницу)"
+      }
+    ]
   },
   {
     "id": "noun-814",
@@ -10152,7 +10584,14 @@
     "example_de": "Heute mache ich eine Ausnahme und esse ein Stück Kuchen.",
     "example_cloze": "Heute mache ich eine {{c1::Ausnahme}} und esse ein Stück Kuchen.",
     "example_ru": "Сегодня я сделаю исключение и съем кусок торта.",
-    "example_en": "Today I’ll make an exception and have a piece of cake."
+    "example_en": "Today I’ll make an exception and have a piece of cake.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "исключение из чего-либо: eine Ausnahme von der Regel",
+        "note_en": "exception to something: eine Ausnahme von der Regel"
+      }
+    ]
   },
   {
     "id": "noun-822",
@@ -10166,7 +10605,14 @@
     "example_ru": "С нашего балкона открывается прекрасный вид на горы.",
     "example_en": "We have a great view of the mountains from our balcony.",
     "plural_note_ru": "В значении «вид» Plural употребляется редко; Aussichten — перспективы, шансы.",
-    "plural_note_en": "In the sense of view, the plural is rare; Aussichten means prospects, chances."
+    "plural_note_en": "In the sense of view, the plural is rare; Aussichten means prospects, chances.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "вид на что-либо; перспектива чего-либо: Aussicht auf Erfolg",
+        "note_en": "view of something; prospect of something: Aussicht auf Erfolg"
+      }
+    ]
   },
   {
     "id": "noun-823",
@@ -10370,7 +10816,14 @@
     "example_ru": "При необходимости, пожалуйста, позвоните врачу.",
     "example_en": "If necessary, please call the doctor.",
     "plural_note_ru": "Plural Bedarfe употребляется только в специальной речи.",
-    "plural_note_en": "The plural Bedarfe is used only in technical language."
+    "plural_note_en": "The plural Bedarfe is used only in technical language.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "потребность в чём-либо",
+        "note_en": "need for, demand for something"
+      }
+    ]
   },
   {
     "id": "noun-839",
@@ -10408,7 +10861,14 @@
     "example_de": "Er hat ohne Begründung gekündigt.",
     "example_cloze": "Er hat ohne {{c1::Begründung}} gekündigt.",
     "example_ru": "Он уволился без объяснения причин.",
-    "example_en": "He quit without giving a reason."
+    "example_en": "He quit without giving a reason.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "обоснование чего-либо",
+        "note_en": "justification for something"
+      }
+    ]
   },
   {
     "id": "noun-842",
@@ -10420,7 +10880,14 @@
     "example_de": "Der Beitrag für das Fitnessstudio beträgt 30 Euro im Monat.",
     "example_cloze": "Der {{c1::Beitrag}} für das Fitnessstudio beträgt 30 Euro im Monat.",
     "example_ru": "Взнос за фитнес-клуб — 30 евро в месяц.",
-    "example_en": "The gym membership fee is 30 euros a month."
+    "example_en": "The gym membership fee is 30 euros a month.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "вклад во что-либо",
+        "note_en": "contribution to something"
+      }
+    ]
   },
   {
     "id": "noun-843",
@@ -10620,7 +11087,14 @@
     "example_de": "Die Polizei hat keine Beweise gegen ihn.",
     "example_cloze": "Die Polizei hat keine {{c1::Beweise}} gegen ihn.",
     "example_ru": "У полиции нет против него доказательств.",
-    "example_en": "The police have no evidence against him."
+    "example_en": "The police have no evidence against him.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "доказательство чего-либо",
+        "note_en": "proof of something"
+      }
+    ]
   },
   {
     "id": "noun-859",
@@ -12113,7 +12587,14 @@
     "example_de": "Nach dem Film gab es eine lange Diskussion.",
     "example_cloze": "Nach dem Film gab es eine lange {{c1::Diskussion}}.",
     "example_ru": "После фильма была долгая дискуссия.",
-    "example_en": "After the film there was a long discussion."
+    "example_en": "After the film there was a long discussion.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "дискуссия о чём-либо",
+        "note_en": "discussion about something"
+      }
+    ]
   },
   {
     "id": "noun-974",
@@ -12127,7 +12608,14 @@
     "example_ru": "С такого расстояния я не могу прочитать табличку.",
     "example_en": "I can’t read the sign from this distance.",
     "plural_note_ru": "В значении «сдержанность (в общении)» — без множественного числа.",
-    "plural_note_en": "In the sense of reserve (towards people), it has no plural."
+    "plural_note_en": "In the sense of reserve (towards people), it has no plural.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "дистанция по отношению к кому-либо, чему-либо",
+        "note_en": "distance from someone, something"
+      }
+    ]
   },
   {
     "id": "noun-975",
@@ -12231,7 +12719,14 @@
     "example_ru": "Перед экзаменом она находится под сильным давлением.",
     "example_en": "She is under a lot of pressure before the exam.",
     "plural_note_ru": "В значениях «нажатие» и «давление, принуждение» — без множественного числа; Drücke (реже Drucke) — в физике. Der Druck «печать» — другое слово (Plural Drucke).",
-    "plural_note_en": "In the senses press and pressure, coercion, it has no plural; Drücke (less often Drucke) is used in physics. Der Druck ‘print’ is a different word (plural Drucke)."
+    "plural_note_en": "In the senses press and pressure, coercion, it has no plural; Drücke (less often Drucke) is used in physics. Der Druck ‘print’ is a different word (plural Drucke).",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "давление на кого-либо, что-либо",
+        "note_en": "pressure on someone, something"
+      }
+    ]
   },
   {
     "id": "noun-983",
@@ -12375,7 +12870,14 @@
     "example_de": "Das Wetter hat großen Einfluss auf meine Laune.",
     "example_cloze": "Das Wetter hat großen {{c1::Einfluss}} auf meine Laune.",
     "example_ru": "Погода сильно влияет на моё настроение.",
-    "example_en": "The weather has a big influence on my mood."
+    "example_en": "The weather has a big influence on my mood.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "влияние на кого-либо, что-либо",
+        "note_en": "influence on someone, something"
+      }
+    ]
   },
   {
     "id": "noun-995",
@@ -12719,7 +13221,15 @@
     "example_de": "Danke für die Erklärung, jetzt verstehe ich die Regel.",
     "example_cloze": "Danke für die {{c1::Erklärung}}, jetzt verstehe ich die Regel.",
     "example_ru": "Спасибо за объяснение, теперь я понимаю правило.",
-    "example_en": "Thanks for the explanation, now I understand the rule."
+    "example_en": "Thanks for the explanation, now I understand the rule.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "объяснение чего-либо",
+        "note_en": "explanation for something",
+        "meaning_ru": "объяснение"
+      }
+    ]
   },
   {
     "id": "noun-1023",
@@ -12779,7 +13289,14 @@
     "example_de": "Für den kaputten Laptop bekomme ich einen Ersatz.",
     "example_cloze": "Für den kaputten Laptop bekomme ich einen {{c1::Ersatz}}.",
     "example_ru": "Вместо сломанного ноутбука я получу замену.",
-    "example_en": "I’ll get a replacement for the broken laptop."
+    "example_en": "I’ll get a replacement for the broken laptop.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "замена кому-либо, чему-либо",
+        "note_en": "substitute for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1028",
@@ -12877,7 +13394,14 @@
     "example_de": "Ein Experte hat das Bild geprüft – es ist echt.",
     "example_cloze": "Ein {{c1::Experte}} hat das Bild geprüft – es ist echt.",
     "example_ru": "Эксперт проверил картину — она подлинная.",
-    "example_en": "An expert examined the painting – it’s genuine."
+    "example_en": "An expert examined the painting – it’s genuine.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "эксперт в чём-либо, по чему-либо",
+        "note_en": "expert on something"
+      }
+    ]
   },
   {
     "id": "noun-1036",
@@ -13275,7 +13799,19 @@
     "example_de": "Die Gewerkschaft hat ihre Forderungen genannt.",
     "example_cloze": "Die Gewerkschaft hat ihre {{c1::Forderungen}} genannt.",
     "example_ru": "Профсоюз назвал свои требования.",
-    "example_en": "The union has stated its demands."
+    "example_en": "The union has stated its demands.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "требование чего-либо",
+        "note_en": "demand for something"
+      },
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "требование к кому-либо, чему-либо",
+        "note_en": "demand on someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1068",
@@ -13405,7 +13941,19 @@
     "example_ru": "Дети громко закричали от радости.",
     "example_en": "The children shouted loudly with joy.",
     "plural_note_ru": "В значении «радость (чувство)» — без множественного числа; Freuden (книжн.) — радости, удовольствия.",
-    "plural_note_en": "In the sense of joy (the feeling), it has no plural; Freuden (formal) means joys, pleasures."
+    "plural_note_en": "In the sense of joy (the feeling), it has no plural; Freuden (formal) means joys, pleasures.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "радость от чего-либо: die Freude an der Musik",
+        "note_en": "joy in something: die Freude an der Musik"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "радость по поводу чего-либо: die Freude über das Geschenk",
+        "note_en": "joy about something: die Freude über das Geschenk"
+      }
+    ]
   },
   {
     "id": "noun-1078",
@@ -13417,7 +13965,14 @@
     "example_de": "Unsere Freundschaft hält schon seit der Schulzeit.",
     "example_cloze": "Unsere {{c1::Freundschaft}} hält schon seit der Schulzeit.",
     "example_ru": "Наша дружба длится ещё со школы.",
-    "example_en": "Our friendship goes back to our school days."
+    "example_en": "Our friendship goes back to our school days.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "дружба с кем-либо",
+        "note_en": "friendship with someone"
+      }
+    ]
   },
   {
     "id": "noun-1079",
@@ -13567,7 +14122,14 @@
     "example_de": "Auf den Fernseher haben Sie zwei Jahre Garantie.",
     "example_cloze": "Auf den Fernseher haben Sie zwei Jahre {{c1::Garantie}}.",
     "example_ru": "На телевизор у вас гарантия два года.",
-    "example_en": "The TV has a two-year warranty."
+    "example_en": "The TV has a two-year warranty.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "гарантия на что-либо",
+        "note_en": "guarantee on something"
+      }
+    ]
   },
   {
     "id": "noun-1091",
@@ -13703,7 +14265,14 @@
     "example_ru": "Мысль об экзамене заставляет меня нервничать.",
     "example_en": "The thought of the exam makes me nervous.",
     "usage_note_ru": "Особое склонение: des Gedankens; den, dem Gedanken.",
-    "usage_note_en": "Irregular declension: des Gedankens; den, dem Gedanken."
+    "usage_note_en": "Irregular declension: des Gedankens; den, dem Gedanken.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "мысль о ком-либо, чём-либо",
+        "note_en": "thought of someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1102",
@@ -13739,7 +14308,14 @@
     "example_de": "Glatteis ist eine große Gefahr für Autofahrer.",
     "example_cloze": "Glatteis ist eine große {{c1::Gefahr}} für Autofahrer.",
     "example_ru": "Гололёд — большая опасность для водителей.",
-    "example_en": "Black ice is a big danger for drivers."
+    "example_en": "Black ice is a big danger for drivers.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "опасность для кого-либо, чего-либо",
+        "note_en": "danger to someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1105",
@@ -13765,7 +14341,15 @@
     "example_de": "Ich habe das Gefühl, dass wir uns schon kennen.",
     "example_cloze": "Ich habe das {{c1::Gefühl}}, dass wir uns schon kennen.",
     "example_ru": "У меня такое чувство, что мы уже знакомы.",
-    "example_en": "I have a feeling we’ve met before."
+    "example_en": "I have a feeling we’ve met before.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "чувство чего-либо: ein Gefühl für Rhythmus",
+        "note_en": "feel for, sense of something: ein Gefühl für Rhythmus",
+        "meaning_ru": "чувство"
+      }
+    ]
   },
   {
     "id": "noun-1107",
@@ -13789,7 +14373,14 @@
     "example_de": "„Warm“ ist der Gegensatz zu „kalt“.",
     "example_cloze": "„Warm“ ist der {{c1::Gegensatz}} zu „kalt“.",
     "example_ru": "«Тёплый» — противоположность слову «холодный».",
-    "example_en": "“Warm” is the opposite of “cold”."
+    "example_en": "“Warm” is the opposite of “cold”.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "противоположность чему-либо: im Gegensatz zu dir",
+        "note_en": "contrast to something: im Gegensatz zu dir"
+      }
+    ]
   },
   {
     "id": "noun-1109",
@@ -13927,7 +14518,14 @@
     "example_ru": "У супа слегка острый вкус.",
     "example_en": "The soup has a slightly spicy taste.",
     "plural_note_ru": "Geschmäcker — разговорная шутливая форма: Die Geschmäcker sind verschieden.",
-    "plural_note_en": "Geschmäcker is colloquial and jokey: Die Geschmäcker sind verschieden."
+    "plural_note_en": "Geschmäcker is colloquial and jokey: Die Geschmäcker sind verschieden.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "вкус к чему-либо: Geschmack an etwas finden",
+        "note_en": "taste for something: Geschmack an etwas finden"
+      }
+    ]
   },
   {
     "id": "noun-1120",
@@ -13977,7 +14575,15 @@
     "example_ru": "Насилие — это не решение.",
     "example_en": "Violence is not a solution.",
     "plural_note_ru": "В значениях «насилие» и «власть» — без множественного числа; Gewalten — стихийные силы (die Naturgewalten).",
-    "plural_note_en": "In the senses violence and power, it has no plural; Gewalten means forces of nature (die Naturgewalten)."
+    "plural_note_en": "In the senses violence and power, it has no plural; Gewalten means forces of nature (die Naturgewalten).",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "насилие в отношении кого-либо: Gewalt gegen Frauen",
+        "note_en": "violence against someone: Gewalt gegen Frauen",
+        "meaning_ru": "насилие"
+      }
+    ]
   },
   {
     "id": "noun-1124",
@@ -14179,7 +14785,21 @@
     "example_de": "An der Grenze müssen Sie Ihren Pass zeigen.",
     "example_cloze": "An der {{c1::Grenze}} müssen Sie Ihren Pass zeigen.",
     "example_ru": "На границе нужно показать паспорт.",
-    "example_en": "You have to show your passport at the border."
+    "example_en": "You have to show your passport at the border.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "граница с чем-либо: die Grenze zu Polen",
+        "note_en": "border with something: die Grenze zu Polen",
+        "meaning_ru": "граница"
+      },
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "граница между чем-либо",
+        "note_en": "border between",
+        "meaning_ru": "граница"
+      }
+    ]
   },
   {
     "id": "noun-1140",
@@ -14407,7 +15027,14 @@
     "example_de": "Im ersten Jahr in Deutschland hatte sie oft Heimweh.",
     "example_cloze": "Im ersten Jahr in Deutschland hatte sie oft {{c1::Heimweh}}.",
     "example_ru": "В первый год в Германии она часто скучала по дому.",
-    "example_en": "In her first year in Germany she was often homesick."
+    "example_en": "In her first year in Germany she was often homesick.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "тоска по дому, по кому-либо, чему-либо",
+        "note_en": "homesickness for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1159",
@@ -14493,7 +15120,14 @@
     "example_de": "Danke für den Hinweis, das hatte ich ganz vergessen.",
     "example_cloze": "Danke für den {{c1::Hinweis}}, das hatte ich ganz vergessen.",
     "example_ru": "Спасибо за подсказку, у меня это совсем вылетело из головы.",
-    "example_en": "Thanks for the tip, that had completely slipped my mind."
+    "example_en": "Thanks for the tip, that had completely slipped my mind.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "указание на что-либо, намёк на что-либо",
+        "note_en": "hint at, indication of something"
+      }
+    ]
   },
   {
     "id": "noun-1166",
@@ -14543,7 +15177,14 @@
     "example_de": "Wir haben die Hoffnung noch nicht aufgegeben.",
     "example_cloze": "Wir haben die {{c1::Hoffnung}} noch nicht aufgegeben.",
     "example_ru": "Мы ещё не потеряли надежду.",
-    "example_en": "We haven’t given up hope yet."
+    "example_en": "We haven’t given up hope yet.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "надежда на что-либо",
+        "note_en": "hope for something"
+      }
+    ]
   },
   {
     "id": "noun-1170",
@@ -14939,7 +15580,24 @@
     "example_de": "Der Kampf gegen den Klimawandel betrifft uns alle.",
     "example_cloze": "Der {{c1::Kampf}} gegen den Klimawandel betrifft uns alle.",
     "example_ru": "Борьба с изменением климата касается всех нас.",
-    "example_en": "The fight against climate change affects us all."
+    "example_en": "The fight against climate change affects us all.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "борьба против чего-либо",
+        "note_en": "fight against something"
+      },
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "борьба за обладание чем-либо: der Kampf um die Macht",
+        "note_en": "fight for, struggle for: der Kampf um die Macht"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "борьба за что-либо, в защиту чего-либо",
+        "note_en": "fight for something"
+      }
+    ]
   },
   {
     "id": "noun-1202",
@@ -14963,7 +15621,14 @@
     "example_de": "Welchen Kandidaten wählst du am Sonntag?",
     "example_cloze": "Welchen {{c1::Kandidaten}} wählst du am Sonntag?",
     "example_ru": "За какого кандидата ты будешь голосовать в воскресенье?",
-    "example_en": "Which candidate are you voting for on Sunday?"
+    "example_en": "Which candidate are you voting for on Sunday?",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "кандидат на что-либо",
+        "note_en": "candidate for something"
+      }
+    ]
   },
   {
     "id": "noun-1204",
@@ -15397,7 +16062,14 @@
     "example_de": "Unter dem Video stehen schon hundert Kommentare.",
     "example_cloze": "Unter dem Video stehen schon hundert {{c1::Kommentare}}.",
     "example_ru": "Под видео уже сто комментариев.",
-    "example_en": "There are already a hundred comments under the video."
+    "example_en": "There are already a hundred comments under the video.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "комментарий к чему-либо",
+        "note_en": "comment on something"
+      }
+    ]
   },
   {
     "id": "noun-1239",
@@ -15447,7 +16119,19 @@
     "example_de": "Zwischen den Nachbarn gibt es oft Konflikte wegen des Lärms.",
     "example_cloze": "Zwischen den Nachbarn gibt es oft {{c1::Konflikte}} wegen des Lärms.",
     "example_ru": "Между соседями часто бывают конфликты из-за шума.",
-    "example_en": "There are often conflicts between the neighbours about the noise."
+    "example_en": "There are often conflicts between the neighbours about the noise.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "конфликт с кем-либо",
+        "note_en": "conflict with someone"
+      },
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "конфликт между кем-либо",
+        "note_en": "conflict between"
+      }
+    ]
   },
   {
     "id": "noun-1243",
@@ -15483,7 +16167,14 @@
     "example_de": "Im Zug gab es heute eine Kontrolle, aber ich hatte zum Glück eine Fahrkarte.",
     "example_cloze": "Im Zug gab es heute eine {{c1::Kontrolle}}, aber ich hatte zum Glück eine Fahrkarte.",
     "example_ru": "Сегодня в поезде была проверка, но у меня, к счастью, был билет.",
-    "example_en": "There was a ticket inspection on the train today, but luckily I had a ticket."
+    "example_en": "There was a ticket inspection on the train today, but luckily I had a ticket.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "контроль над кем-либо, чем-либо",
+        "note_en": "control over someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1246",
@@ -15754,7 +16445,15 @@
     "example_ru": "Он плохо воспринимает критику.",
     "example_en": "He doesn’t handle criticism well.",
     "plural_note_ru": "В значении «критика (замечания)» Plural употребляется редко; Kritiken — рецензии.",
-    "plural_note_en": "In the sense of criticism, the plural is rare; Kritiken means reviews."
+    "plural_note_en": "In the sense of criticism, the plural is rare; Kritiken means reviews.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "критика кого-либо, чего-либо",
+        "note_en": "criticism of someone, something",
+        "meaning_ru": "критика"
+      }
+    ]
   },
   {
     "id": "noun-1266",
@@ -16228,7 +16927,14 @@
     "example_ru": "Они поженились по любви.",
     "example_en": "They married for love.",
     "plural_note_ru": "В значении «любовь (чувство)» — без множественного числа; Lieben — романы, увлечения (seine früheren Lieben — его прежние увлечения).",
-    "plural_note_en": "In the sense of love (the feeling), it has no plural; Lieben means love affairs, past loves (seine früheren Lieben — his former loves)."
+    "plural_note_en": "In the sense of love (the feeling), it has no plural; Lieben means love affairs, past loves (seine früheren Lieben — his former loves).",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "любовь к кому-либо, чему-либо",
+        "note_en": "love for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1304",
@@ -16488,7 +17194,15 @@
     "example_ru": "Во многих больницах не хватает медперсонала.",
     "example_en": "Many hospitals have a shortage of nursing staff.",
     "plural_note_ru": "В значении «нехватка» — без множественного числа; Mängel — недостатки, дефекты.",
-    "plural_note_en": "In the sense of shortage, it has no plural; Mängel means defects, faults."
+    "plural_note_en": "In the sense of shortage, it has no plural; Mängel means defects, faults.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "нехватка, недостаток чего-либо",
+        "note_en": "lack of something",
+        "meaning_ru": "нехватка, недостаток"
+      }
+    ]
   },
   {
     "id": "noun-1325",
@@ -17069,7 +17783,14 @@
     "example_de": "Es hat viel Mut gebraucht, die Wahrheit zu sagen.",
     "example_cloze": "Es hat viel {{c1::Mut}} gebraucht, die Wahrheit zu sagen.",
     "example_ru": "Чтобы сказать правду, понадобилось много смелости.",
-    "example_en": "It took a lot of courage to tell the truth."
+    "example_en": "It took a lot of courage to tell the truth.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "смелость на что-либо: der Mut zur Wahrheit",
+        "note_en": "courage for something: der Mut zur Wahrheit"
+      }
+    ]
   },
   {
     "id": "noun-1372",
@@ -17191,7 +17912,14 @@
     "example_de": "Im Sommer ist die Nachfrage nach Eis sehr groß.",
     "example_cloze": "Im Sommer ist die {{c1::Nachfrage}} nach Eis sehr groß.",
     "example_ru": "Летом спрос на мороженое очень большой.",
-    "example_en": "In summer the demand for ice cream is very high."
+    "example_en": "In summer the demand for ice cream is very high.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "спрос на что-либо",
+        "note_en": "demand for something"
+      }
+    ]
   },
   {
     "id": "noun-1382",
@@ -17792,7 +18520,14 @@
     "example_de": "Als Mieter hat man nicht nur Rechte, sondern auch Pflichten.",
     "example_cloze": "Als Mieter hat man nicht nur Rechte, sondern auch {{c1::Pflichten}}.",
     "example_ru": "У арендатора есть не только права, но и обязанности.",
-    "example_en": "As a tenant you have not only rights but also obligations."
+    "example_en": "As a tenant you have not only rights but also obligations.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "обязанность сделать что-либо: die Pflicht zur Hilfe",
+        "note_en": "duty to do something: die Pflicht zur Hilfe"
+      }
+    ]
   },
   {
     "id": "noun-1430",
@@ -18092,7 +18827,14 @@
     "example_de": "Gegen den Bau der Straße gab es viele Proteste.",
     "example_cloze": "Gegen den Bau der Straße gab es viele {{c1::Proteste}}.",
     "example_ru": "Против строительства дороги было много протестов.",
-    "example_en": "There were many protests against building the road."
+    "example_en": "There were many protests against building the road.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "протест против чего-либо",
+        "note_en": "protest against something"
+      }
+    ]
   },
   {
     "id": "noun-1454",
@@ -18314,7 +19056,14 @@
     "example_de": "Seine Reaktion auf die Nachricht hat mich überrascht.",
     "example_cloze": "Seine {{c1::Reaktion}} auf die Nachricht hat mich überrascht.",
     "example_ru": "Его реакция на новость меня удивила.",
-    "example_en": "His reaction to the news surprised me."
+    "example_en": "His reaction to the news surprised me.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "реакция на что-либо",
+        "note_en": "reaction to something"
+      }
+    ]
   },
   {
     "id": "noun-1472",
@@ -18380,7 +19129,14 @@
     "example_ru": "Каждый человек имеет право на образование.",
     "example_en": "Everyone has the right to education.",
     "plural_note_ru": "В значении «право (система законов)» — без множественного числа.",
-    "plural_note_en": "In the sense of law (the legal system), it has no plural."
+    "plural_note_en": "In the sense of law (the legal system), it has no plural.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "право на что-либо: das Recht auf Bildung",
+        "note_en": "right to something: das Recht auf Bildung"
+      }
+    ]
   },
   {
     "id": "noun-1477",
@@ -18392,7 +19148,14 @@
     "example_de": "Der Bürgermeister hat eine kurze Rede gehalten.",
     "example_cloze": "Der Bürgermeister hat eine kurze {{c1::Rede}} gehalten.",
     "example_ru": "Мэр выступил с короткой речью.",
-    "example_en": "The mayor gave a short speech."
+    "example_en": "The mayor gave a short speech.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "речь о чём-либо: Davon kann keine Rede sein.",
+        "note_en": "talk of something: Davon kann keine Rede sein."
+      }
+    ]
   },
   {
     "id": "noun-1478",
@@ -18588,7 +19351,14 @@
     "example_de": "Die Schüler haben großen Respekt vor ihrer Lehrerin.",
     "example_cloze": "Die Schüler haben großen {{c1::Respekt}} vor ihrer Lehrerin.",
     "example_ru": "Ученики очень уважают свою учительницу.",
-    "example_en": "The pupils have great respect for their teacher."
+    "example_en": "The pupils have great respect for their teacher.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "уважение к кому-либо, чему-либо",
+        "note_en": "respect for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1494",
@@ -18728,7 +19498,14 @@
     "example_de": "Nach seiner Rückkehr aus Japan hat er viel erzählt.",
     "example_cloze": "Nach seiner {{c1::Rückkehr}} aus Japan hat er viel erzählt.",
     "example_ru": "После возвращения из Японии он много рассказывал.",
-    "example_en": "After his return from Japan he told us a lot."
+    "example_en": "After his return from Japan he told us a lot.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "возвращение к чему-либо: die Rückkehr zur Normalität",
+        "note_en": "return to something: die Rückkehr zur Normalität"
+      }
+    ]
   },
   {
     "id": "noun-1505",
@@ -18754,7 +19531,14 @@
     "example_ru": "Пожалуйста, считайтесь с соседями и не шумите.",
     "example_en": "Please be considerate of the neighbours and keep the noise down.",
     "plural_note_ru": "Обычно в единственном числе; Rücksichten — соображения.",
-    "plural_note_en": "Usually singular; Rücksichten means considerations."
+    "plural_note_en": "Usually singular; Rücksichten means considerations.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "внимание, уважение к кому-либо, чему-либо: Rücksicht auf die Nachbarn",
+        "note_en": "consideration for someone, something: Rücksicht auf die Nachbarn"
+      }
+    ]
   },
   {
     "id": "noun-1507",
@@ -19128,7 +19912,15 @@
     "example_ru": "В этой ошибке нет твоей вины.",
     "example_en": "The mistake is not your fault.",
     "plural_note_ru": "Schulden — денежные долги, обычно во множественном числе. В значении «вина» множественного числа нет.",
-    "plural_note_en": "Schulden means financial debts and is usually used in the plural. Fault or guilt has no plural."
+    "plural_note_en": "Schulden means financial debts and is usually used in the plural. Fault or guilt has no plural.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "вина в чём-либо: Schuld am Unfall",
+        "note_en": "blame for something: Schuld am Unfall",
+        "meaning_ru": "вина"
+      }
+    ]
   },
   {
     "id": "noun-1537",
@@ -19154,7 +19946,19 @@
     "example_ru": "В хижине можно укрыться от дождя.",
     "example_en": "The hut provides shelter from the rain.",
     "plural_note_ru": "Множественное число редкое, особенно швейцарское, для отдельных защитных приспособлений. Защита как понятие употребляется без множественного числа.",
-    "plural_note_en": "The plural is rare, particularly Swiss, for individual protective devices. Protection as an abstract concept has no plural."
+    "plural_note_en": "The plural is rare, particularly Swiss, for individual protective devices. Protection as an abstract concept has no plural.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "защита от чего-либо",
+        "note_en": "protection from something"
+      },
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "защита от чего-либо: Schutz gegen Kälte",
+        "note_en": "protection against something: Schutz gegen Kälte"
+      }
+    ]
   },
   {
     "id": "noun-1539",
@@ -19344,7 +20148,14 @@
     "example_de": "Die Mannschaft feiert ihren ersten Sieg der Saison.",
     "example_cloze": "Die Mannschaft feiert ihren ersten {{c1::Sieg}} der Saison.",
     "example_ru": "Команда празднует свою первую победу в сезоне.",
-    "example_en": "The team celebrates its first win of the season."
+    "example_en": "The team celebrates its first win of the season.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "победа над кем-либо, чем-либо",
+        "note_en": "victory over someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1554",
@@ -19382,7 +20193,15 @@
     "example_ru": "Я не понимаю смысл этого предложения.",
     "example_en": "I do not understand the meaning of this sentence.",
     "plural_note_ru": "Sinne — органы чувств или способности восприятия. В значении «смысл» множественного числа нет.",
-    "plural_note_en": "Sinne refers to the senses or faculties of perception. Meaning has no plural."
+    "plural_note_en": "Sinne refers to the senses or faculties of perception. Meaning has no plural.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "чувство чего-либо: Sinn für Humor",
+        "note_en": "sense of something: Sinn für Humor",
+        "meaning_ru": "чувство, способность восприятия"
+      }
+    ]
   },
   {
     "id": "noun-1557",
@@ -19488,7 +20307,14 @@
     "plural_note_ru": "Sorgen — тревоги и заботы. В книжном значении «забота о ком-либо» (Fürsorge) множественного числа нет.",
     "plural_note_en": "Sorgen refers to worries and concerns. Care for someone (Fürsorge) is a formal sense without a plural.",
     "usage_note_ru": "В значении «забота о ком-либо» — книжное слово.",
-    "usage_note_en": "The sense of care for someone is formal."
+    "usage_note_en": "The sense of care for someone is formal.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "беспокойство, тревога о ком-либо, чём-либо",
+        "note_en": "worry about someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1565",
@@ -19566,7 +20392,14 @@
     "example_ru": "Для ремонта нам нужен специалист.",
     "example_en": "We need a specialist for the repair.",
     "usage_note_ru": "Склонение: einen Spezialisten · mit dem Spezialisten.",
-    "usage_note_en": "Declension: einen Spezialisten · mit dem Spezialisten."
+    "usage_note_en": "Declension: einen Spezialisten · mit dem Spezialisten.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "специалист по чему-либо",
+        "note_en": "specialist in something"
+      }
+    ]
   },
   {
     "id": "noun-1571",
@@ -20018,7 +20851,24 @@
     "example_ru": "Между соседями возник спор из-за забора.",
     "example_en": "There is a dispute between the neighbours over the fence.",
     "plural_note_ru": "Множественное число Streite встречается редко. Для отдельных ссор обычно говорят Streitigkeiten.",
-    "plural_note_en": "The plural Streite is rare. Individual disputes are usually called Streitigkeiten."
+    "plural_note_en": "The plural Streite is rare. Individual disputes are usually called Streitigkeiten.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "ссора, спор с кем-либо",
+        "note_en": "quarrel with someone"
+      },
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "спор из-за чего-либо: Streit um das Erbe",
+        "note_en": "quarrel over something: Streit um das Erbe"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "спор о чём-либо",
+        "note_en": "dispute about something"
+      }
+    ]
   },
   {
     "id": "noun-1607",
@@ -20160,7 +21010,14 @@
     "example_ru": "Его зависимость от азартных игр тяжело отражается на всей семье.",
     "example_en": "His gambling addiction puts a strain on the whole family.",
     "plural_note_ru": "Обычная форма — Süchte; Suchten встречается редко.",
-    "plural_note_en": "The usual plural is Süchte; Suchten is rare."
+    "plural_note_en": "The usual plural is Süchte; Suchten is rare.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "страсть, болезненная тяга к чему-либо: die Sucht nach Anerkennung",
+        "note_en": "craving for something: die Sucht nach Anerkennung"
+      }
+    ]
   },
   {
     "id": "noun-1617",
@@ -20308,7 +21165,15 @@
     "example_de": "Sie hat ein großes Talent für Sprachen.",
     "example_cloze": "Sie hat ein großes {{c1::Talent}} für Sprachen.",
     "example_ru": "У неё большой талант к языкам.",
-    "example_en": "She has a great talent for languages."
+    "example_en": "She has a great talent for languages.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "талант к чему-либо",
+        "note_en": "talent for something",
+        "meaning_ru": "талант, способность"
+      }
+    ]
   },
   {
     "id": "noun-1629",
@@ -20430,7 +21295,14 @@
     "example_de": "Die Teilnahme am Workshop ist kostenlos.",
     "example_cloze": "Die {{c1::Teilnahme}} am Workshop ist kostenlos.",
     "example_ru": "Участие в семинаре бесплатное.",
-    "example_en": "Participation in the workshop is free."
+    "example_en": "Participation in the workshop is free.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "участие в чём-либо",
+        "note_en": "participation in something"
+      }
+    ]
   },
   {
     "id": "noun-1639",
@@ -21230,7 +22102,14 @@
     "example_de": "Die Ursache des Stromausfalls ist noch unbekannt.",
     "example_cloze": "Die {{c1::Ursache}} des Stromausfalls ist noch unbekannt.",
     "example_ru": "Причина отключения электричества пока неизвестна.",
-    "example_en": "The cause of the power cut is still unknown."
+    "example_en": "The cause of the power cut is still unknown.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "причина чего-либо",
+        "note_en": "cause of something"
+      }
+    ]
   },
   {
     "id": "noun-1701",
@@ -21242,7 +22121,14 @@
     "example_de": "Das Gericht verkündet morgen sein Urteil.",
     "example_cloze": "Das Gericht verkündet morgen sein {{c1::Urteil}}.",
     "example_ru": "Завтра суд огласит свой приговор.",
-    "example_en": "The court will announce its verdict tomorrow."
+    "example_en": "The court will announce its verdict tomorrow.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "суждение о ком-либо, чём-либо; оценка кого-либо, чего-либо",
+        "note_en": "judgement on someone, something"
+      }
+    ]
   },
   {
     "id": "noun-1702",
@@ -21294,7 +22180,14 @@
     "example_de": "Ich habe heute Abend eine Verabredung mit Freunden.",
     "example_cloze": "Ich habe heute Abend eine {{c1::Verabredung}} mit Freunden.",
     "example_ru": "Сегодня вечером у меня встреча с друзьями.",
-    "example_en": "I have arranged to meet friends this evening."
+    "example_en": "I have arranged to meet friends this evening.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "договорённая встреча, свидание с кем-либо",
+        "note_en": "date, appointment with someone"
+      }
+    ]
   },
   {
     "id": "noun-1706",
@@ -21306,7 +22199,19 @@
     "example_de": "Die Verbindung zum Internet ist unterbrochen.",
     "example_cloze": "Die {{c1::Verbindung}} zum Internet ist unterbrochen.",
     "example_ru": "Соединение с интернетом прервано.",
-    "example_en": "The internet connection has been interrupted."
+    "example_en": "The internet connection has been interrupted.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "связь с кем-либо, чем-либо: die Verbindung zur Außenwelt",
+        "note_en": "connection with someone, something: die Verbindung zur Außenwelt"
+      },
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "связь, сообщение между чем-либо",
+        "note_en": "connection between"
+      }
+    ]
   },
   {
     "id": "noun-1707",
@@ -21354,7 +22259,19 @@
     "example_de": "Die Polizei prüft den Verdacht auf Betrug.",
     "example_cloze": "Die Polizei prüft den {{c1::Verdacht}} auf Betrug.",
     "example_ru": "Полиция проверяет подозрение в мошенничестве.",
-    "example_en": "The police are investigating a suspicion of fraud."
+    "example_en": "The police are investigating a suspicion of fraud.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "подозрение на что-либо: Verdacht auf Grippe",
+        "note_en": "suspicion of something: Verdacht auf Grippe"
+      },
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "подозрение в отношении кого-либо",
+        "note_en": "suspicion against someone"
+      }
+    ]
   },
   {
     "id": "noun-1711",
@@ -21380,7 +22297,19 @@
     "example_de": "Ein Vergleich der Preise hilft beim Sparen.",
     "example_cloze": "Ein {{c1::Vergleich}} der Preise hilft beim Sparen.",
     "example_ru": "Сравнение цен помогает экономить.",
-    "example_en": "Comparing prices helps save money."
+    "example_en": "Comparing prices helps save money.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "сравнение с чем-либо",
+        "note_en": "comparison with something"
+      },
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "сравнение между чем-либо",
+        "note_en": "comparison between"
+      }
+    ]
   },
   {
     "id": "noun-1713",
@@ -21422,7 +22351,33 @@
     "example_ru": "Соотношение воды и риса составляет два к одному.",
     "example_en": "The ratio of water to rice is two to one.",
     "plural_note_ru": "В значении «условия, обстоятельства» употребляется только во множественном числе: Verhältnisse.",
-    "plural_note_en": "In the sense of conditions or circumstances, only the plural Verhältnisse is used."
+    "plural_note_en": "In the sense of conditions or circumstances, only the plural Verhältnisse is used.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "отношение к кому-либо, чему-либо",
+        "note_en": "relationship with someone, something",
+        "meaning_ru": "отношение, соотношение"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "отношение к кому-либо, чему-либо",
+        "note_en": "relationship with someone, something",
+        "meaning_ru": "отношения"
+      },
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "отношения, соотношение между чем-либо",
+        "note_en": "relationship between",
+        "meaning_ru": "отношение, соотношение"
+      },
+      {
+        "pattern": "zwischen + Dativ",
+        "note_ru": "отношения, соотношение между чем-либо",
+        "note_en": "relationship between",
+        "meaning_ru": "отношения"
+      }
+    ]
   },
   {
     "id": "noun-1716",
@@ -21556,7 +22511,14 @@
     "example_ru": "Рисунок облегчает понимание текста.",
     "example_en": "The drawing makes the text easier to understand.",
     "plural_note_ru": "Множественное число Verständnisse встречается редко для разных пониманий или трактовок. В значении сочувствия или понимания другого человека множественного числа нет.",
-    "plural_note_en": "The plural Verständnisse is rare for different understandings or interpretations. Empathy or understanding another person has no plural."
+    "plural_note_en": "The plural Verständnisse is rare for different understandings or interpretations. Empathy or understanding another person has no plural.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "понимание чего-либо, кого-либо",
+        "note_en": "understanding for something, someone"
+      }
+    ]
   },
   {
     "id": "noun-1727",
@@ -21580,7 +22542,19 @@
     "example_de": "Für eine gute Zusammenarbeit ist gegenseitiges Vertrauen wichtig.",
     "example_cloze": "Für eine gute Zusammenarbeit ist gegenseitiges {{c1::Vertrauen}} wichtig.",
     "example_ru": "Для хорошего сотрудничества важно взаимное доверие.",
-    "example_en": "Mutual trust is important for good cooperation."
+    "example_en": "Mutual trust is important for good cooperation.",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "доверие к чему-либо: Vertrauen in die Zukunft",
+        "note_en": "trust in something: Vertrauen in die Zukunft"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "доверие к кому-либо: Vertrauen zum Arzt",
+        "note_en": "trust in someone: Vertrauen zum Arzt"
+      }
+    ]
   },
   {
     "id": "noun-1729",
@@ -21810,7 +22784,15 @@
     "example_ru": "У меня есть чёткое представление о моей новой комнате.",
     "example_en": "I have a clear idea of my new room.",
     "plural_note_ru": "Vorstellungen — отдельные представления, мысленные образы или спектакли. Воображение как способность — без множественного числа.",
-    "plural_note_en": "Vorstellungen refers to individual ideas, mental images or performances. Imagination as a faculty has no plural."
+    "plural_note_en": "Vorstellungen refers to individual ideas, mental images or performances. Imagination as a faculty has no plural.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "представление о чём-либо",
+        "note_en": "idea of something",
+        "meaning_ru": "представление, мысленный образ"
+      }
+    ]
   },
   {
     "id": "noun-1747",
@@ -21846,21 +22828,42 @@
     "example_de": "Der Vorwurf, dass er gelogen habe, ist unbegründet.",
     "example_cloze": "Der {{c1::Vorwurf}}, dass er gelogen habe, ist unbegründet.",
     "example_ru": "Обвинение в том, что он солгал, необоснованно.",
-    "example_en": "The accusation that he lied is unfounded."
+    "example_en": "The accusation that he lied is unfounded.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "упрёк, обвинение в адрес кого-либо",
+        "note_en": "accusation against someone"
+      }
+    ]
   },
   {
     "id": "noun-1750",
     "word": "Wahl",
     "article": "die",
     "plural": "Wahlen",
-    "translation_ru": "выбор; выборы",
-    "translation_en": "choice; election",
+    "translation_ru": "выбор; выборы; избрание (на должность)",
+    "translation_en": "choice; election; election to an office",
     "example_de": "Bei der Wahl des Kurses hilft mir die Beraterin.",
     "example_cloze": "Bei der {{c1::Wahl}} des Kurses hilft mir die Beraterin.",
     "example_ru": "При выборе курса мне помогает консультант.",
     "example_en": "The adviser helps me choose the course.",
     "plural_note_ru": "Для выбора решения Plural редкий; для выборов голосованием — обычный. Избрание человека на должность — без Plural.",
-    "plural_note_en": "The plural is rare for making a choice and normal for elections. A person's being elected to office has no plural."
+    "plural_note_en": "The plural is rare for making a choice and normal for elections. A person's being elected to office has no plural.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "избрание кем-либо: die Wahl zum Präsidenten",
+        "note_en": "election as: die Wahl zum Präsidenten",
+        "meaning_ru": "выборы"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "избрание кем-либо: die Wahl zum Präsidenten",
+        "note_en": "election as: die Wahl zum Präsidenten",
+        "meaning_ru": "избрание (на должность)"
+      }
+    ]
   },
   {
     "id": "noun-1751",
@@ -22102,7 +23105,15 @@
     "example_de": "Sein Wissen über Pflanzen ist beeindruckend.",
     "example_cloze": "Sein {{c1::Wissen}} über Pflanzen ist beeindruckend.",
     "example_ru": "Его знания о растениях впечатляют.",
-    "example_en": "His knowledge of plants is impressive."
+    "example_en": "His knowledge of plants is impressive.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "знание, осознание чего-либо: das Wissen um die Gefahr",
+        "note_en": "awareness of something: das Wissen um die Gefahr",
+        "meaning_ru": "осведомлённость"
+      }
+    ]
   },
   {
     "id": "noun-1770",
@@ -22290,7 +23301,14 @@
     "example_de": "Die Lehrerin gibt uns ein Zeichen, dass wir anfangen können.",
     "example_cloze": "Die Lehrerin gibt uns ein {{c1::Zeichen}}, dass wir anfangen können.",
     "example_ru": "Учительница подаёт нам знак, что можно начинать.",
-    "example_en": "The teacher gives us a sign that we can start."
+    "example_en": "The teacher gives us a sign that we can start.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "знак, признак чего-либо",
+        "note_en": "sign of something"
+      }
+    ]
   },
   {
     "id": "noun-1785",
@@ -22434,7 +23452,21 @@
     "example_ru": "Вход в музей находится с другой стороны.",
     "example_en": "The entrance to the museum is on the other side.",
     "plural_note_ru": "Zugänge — входы, доступы или вновь поступившие люди/предметы. Поступление как процесс — без Plural.",
-    "plural_note_en": "Zugänge refers to entrances, accesses or newly arrived people/items. Arrival as a process has no plural."
+    "plural_note_en": "Zugänge refers to entrances, accesses or newly arrived people/items. Arrival as a process has no plural.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "доступ к чему-либо",
+        "note_en": "access to something",
+        "meaning_ru": "вход, проход"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "доступ к чему-либо",
+        "note_en": "access to something",
+        "meaning_ru": "доступ"
+      }
+    ]
   },
   {
     "id": "noun-1796",
@@ -22496,7 +23528,14 @@
     "example_de": "Die Zusammenarbeit mit dem neuen Team läuft gut.",
     "example_cloze": "Die {{c1::Zusammenarbeit}} mit dem neuen Team läuft gut.",
     "example_ru": "Совместная работа с новой командой идёт хорошо.",
-    "example_en": "Collaboration with the new team is going well."
+    "example_en": "Collaboration with the new team is going well.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "сотрудничество с кем-либо",
+        "note_en": "cooperation with someone"
+      }
+    ]
   },
   {
     "id": "noun-1801",
@@ -22556,7 +23595,14 @@
     "example_de": "Für die Veröffentlichung brauchen wir Ihre Zustimmung.",
     "example_cloze": "Für die Veröffentlichung brauchen wir Ihre {{c1::Zustimmung}}.",
     "example_ru": "Для публикации нам нужно ваше согласие.",
-    "example_en": "We need your consent for publication."
+    "example_en": "We need your consent for publication.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "согласие на что-либо",
+        "note_en": "approval of something"
+      }
+    ]
   },
   {
     "id": "noun-1806",
@@ -22594,7 +23640,14 @@
     "example_de": "Ich habe keinen Zweifel an ihrer Ehrlichkeit.",
     "example_cloze": "Ich habe keinen {{c1::Zweifel}} an ihrer Ehrlichkeit.",
     "example_ru": "Я не сомневаюсь в её честности.",
-    "example_en": "I have no doubt about her honesty."
+    "example_en": "I have no doubt about her honesty.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "сомнение в чём-либо",
+        "note_en": "doubt about something"
+      }
+    ]
   },
   {
     "id": "noun-1809",
@@ -22646,7 +23699,21 @@
     "example_de": "Sein Ärger über die Verspätung ist verständlich.",
     "example_cloze": "Sein {{c1::Ärger}} über die Verspätung ist verständlich.",
     "example_ru": "Его раздражение из-за опоздания понятно.",
-    "example_en": "His annoyance about the delay is understandable."
+    "example_en": "His annoyance about the delay is understandable.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "досада из-за чего-либо",
+        "note_en": "anger about something",
+        "meaning_ru": "досада, раздражение"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "неприятности с кем-либо, чем-либо: Ärger mit dem Chef",
+        "note_en": "trouble with someone, something: Ärger mit dem Chef",
+        "meaning_ru": "неприятности"
+      }
+    ]
   },
   {
     "id": "noun-1813",
@@ -23452,7 +24519,15 @@
     "example_ru": "После болезни он ещё чувствует лёгкую слабость.",
     "example_en": "He still feels slightly weak after the illness.",
     "plural_note_ru": "Для физической слабости и недостаточной работы органа Plural редкий. Schwächen — обычный Plural для недостатков; особое пристрастие — без Plural.",
-    "plural_note_en": "The plural is rare for physical weakness or impaired organ function. Schwächen is normal for flaws; a soft spot has no plural."
+    "plural_note_en": "The plural is rare for physical weakness or impaired organ function. Schwächen is normal for flaws; a soft spot has no plural.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "слабость к чему-либо, кому-либо: eine Schwäche für Süßes",
+        "note_en": "weakness for something, someone: eine Schwäche für Süßes",
+        "meaning_ru": "особое пристрастие"
+      }
+    ]
   },
   {
     "id": "noun-1876",
@@ -23606,7 +24681,14 @@
     "example_de": "Ihre Anfrage beantworten wir innerhalb von zwei Tagen.",
     "example_cloze": "Ihre {{c1::Anfrage}} beantworten wir innerhalb von zwei Tagen.",
     "example_ru": "На ваш запрос мы ответим в течение двух дней.",
-    "example_en": "We will answer your enquiry within two days."
+    "example_en": "We will answer your enquiry within two days.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "запрос кому-либо, в какую-либо инстанцию",
+        "note_en": "inquiry to someone"
+      }
+    ]
   },
   {
     "id": "noun-1888",
@@ -24100,7 +25182,19 @@
     "example_de": "Aus Wut schlägt er mit der Hand auf den Tisch.",
     "example_cloze": "Aus {{c1::Wut}} schlägt er mit der Hand auf den Tisch.",
     "example_ru": "В ярости он ударяет рукой по столу.",
-    "example_en": "In a rage, he hits the table with his hand."
+    "example_en": "In a rage, he hits the table with his hand.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "ярость на кого-либо, что-либо",
+        "note_en": "rage at someone, something"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "ярость из-за чего-либо",
+        "note_en": "rage about something"
+      }
+    ]
   },
   {
     "id": "noun-1926",
@@ -24114,7 +25208,14 @@
     "example_ru": "Результат приносит ей удовлетворение.",
     "example_en": "The result fills her with satisfaction.",
     "plural_note_ru": "Довольство как состояние — без Plural. Zufriedenheiten — редкий Plural для разных степеней удовлетворённости.",
-    "plural_note_en": "Contentment as a state has no plural. Zufriedenheiten is a rare plural for different degrees of satisfaction."
+    "plural_note_en": "Contentment as a state has no plural. Zufriedenheiten is a rare plural for different degrees of satisfaction.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "удовлетворённость чем-либо",
+        "note_en": "satisfaction with something"
+      }
+    ]
   },
   {
     "id": "noun-1927",
@@ -25024,7 +26125,21 @@
     "example_de": "Ihr Argument überzeugt mich.",
     "example_cloze": "Ihr {{c1::Argument}} überzeugt mich.",
     "example_ru": "Её довод меня убеждает.",
-    "example_en": "Her argument convinces me."
+    "example_en": "Her argument convinces me.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "аргумент за что-либо",
+        "note_en": "argument for something",
+        "meaning_ru": "аргумент, довод"
+      },
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "аргумент против чего-либо",
+        "note_en": "argument against something",
+        "meaning_ru": "аргумент, довод"
+      }
+    ]
   },
   {
     "id": "noun-1998",
@@ -25316,7 +26431,15 @@
     "example_ru": "Её самоотдача в работе для объединения впечатляет.",
     "example_en": "Her dedication to the association is impressive.",
     "plural_note_ru": "Личная самоотдача — без Plural. Engagements — обязательства, деловые участия или ангажементы артистов.",
-    "plural_note_en": "Personal dedication has no plural. Engagements refers to undertakings, business commitments or performers’ engagements."
+    "plural_note_en": "Personal dedication has no plural. Engagements refers to undertakings, business commitments or performers’ engagements.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "активное участие в чём-либо, приверженность чему-либо",
+        "note_en": "commitment to something",
+        "meaning_ru": "активное участие, самоотдача"
+      }
+    ]
   },
   {
     "id": "noun-2020",
@@ -26108,7 +27231,21 @@
     "example_ru": "В нашей команде мы придаём большое значение терпимости.",
     "example_en": "We place great value on tolerance within the team.",
     "plural_note_ru": "Терпимость — без Plural. Toleranzen относится к переносимости воздействий или допустимым отклонениям.",
-    "plural_note_en": "Tolerance of other people has no plural. Toleranzen refers to resistance to influences or permitted deviations."
+    "plural_note_en": "Tolerance of other people has no plural. Toleranzen refers to resistance to influences or permitted deviations.",
+    "complements": [
+      {
+        "pattern": "gegenüber + Dativ",
+        "note_ru": "терпимость к кому-либо, чему-либо",
+        "note_en": "tolerance of someone, something",
+        "meaning_ru": "терпимость"
+      },
+      {
+        "pattern": "gegenüber + Dativ",
+        "note_ru": "терпимость к кому-либо, чему-либо",
+        "note_en": "tolerance of someone, something",
+        "meaning_ru": "переносимость внешних воздействий"
+      }
+    ]
   },
   {
     "id": "noun-2081",
@@ -26182,7 +27319,14 @@
     "example_de": "Ein persönliches Gespräch kann helfen, Vorurteile abzubauen.",
     "example_cloze": "Ein persönliches Gespräch kann helfen, {{c1::Vorurteile}} abzubauen.",
     "example_ru": "Личная беседа может помочь избавиться от предубеждений.",
-    "example_en": "A personal conversation can help reduce prejudices."
+    "example_en": "A personal conversation can help reduce prejudices.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "предубеждение против кого-либо, чего-либо",
+        "note_en": "prejudice against someone, something"
+      }
+    ]
   },
   {
     "id": "noun-2087",
@@ -26372,7 +27516,14 @@
     "example_ru": "Моя доля расходов составляет двадцать евро.",
     "example_en": "My share of the costs is twenty euros.",
     "plural_note_ru": "Сочувственное участие — без Plural. Anteile — доли или части, в том числе в капитале.",
-    "plural_note_en": "Sympathetic interest has no plural. Anteile refers to shares or parts, including equity interests."
+    "plural_note_en": "Sympathetic interest has no plural. Anteile refers to shares or parts, including equity interests.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "доля в чём-либо; участие в чём-либо",
+        "note_en": "share of, share in something"
+      }
+    ]
   },
   {
     "id": "noun-2101",
@@ -26893,7 +28044,21 @@
     "example_ru": "Его вера в будущее придаёт ему силы.",
     "example_en": "His belief in the future gives him strength.",
     "declension_note_ru": "Также Glaube(n); Genitiv: des Glaubens.",
-    "declension_note_en": "Also Glaube(n); genitive des Glaubens."
+    "declension_note_en": "Also Glaube(n); genitive des Glaubens.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "вера в кого-либо, что-либо",
+        "note_en": "belief in someone, something",
+        "meaning_ru": "убеждённость, вера"
+      },
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "вера в кого-либо, что-либо",
+        "note_en": "belief in someone, something",
+        "meaning_ru": "религиозная вера"
+      }
+    ]
   },
   {
     "id": "noun-2140",
@@ -27339,7 +28504,15 @@
     "example_ru": "У правительства много власти.",
     "example_en": "The government has a lot of power.",
     "plural_note_ru": "Влияние и политическая власть — без Plural. Mächte — отдельные силы, государства или влиятельные группы; таинственные силы обычно называются во множественном числе.",
-    "plural_note_en": "Influence and political power have no plural. Mächte refers to forces, states or influential groups; mysterious forces are usually referred to in the plural."
+    "plural_note_en": "Influence and political power have no plural. Mächte refers to forces, states or influential groups; mysterious forces are usually referred to in the plural.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "власть над кем-либо, чем-либо",
+        "note_en": "power over someone, something",
+        "meaning_ru": "власть, влияние"
+      }
+    ]
   },
   {
     "id": "noun-2173",
@@ -28227,7 +29400,15 @@
     "example_de": "Auf meine Bewerbung habe ich eine Absage erhalten.",
     "example_cloze": "Auf meine Bewerbung habe ich eine {{c1::Absage}} erhalten.",
     "example_ru": "В ответ на моё заявление о приёме на работу я получил отказ.",
-    "example_en": "I received a rejection in response to my job application."
+    "example_en": "I received a rejection in response to my job application.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "отказ от чего-либо: eine klare Absage an Gewalt",
+        "note_en": "rejection of something: eine klare Absage an Gewalt",
+        "meaning_ru": "отклонение"
+      }
+    ]
   },
   {
     "id": "noun-2236",
@@ -28487,7 +29668,14 @@
     "example_de": "Vom Fenster haben wir einen schönen Ausblick auf das Tal.",
     "example_cloze": "Vom Fenster haben wir einen schönen {{c1::Ausblick}} auf das Tal.",
     "example_ru": "Из окна открывается красивый вид на долину.",
-    "example_en": "We have a beautiful view of the valley from the window."
+    "example_en": "We have a beautiful view of the valley from the window.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "вид на что-либо; взгляд на будущее чего-либо",
+        "note_en": "view of, outlook on something"
+      }
+    ]
   },
   {
     "id": "noun-2257",
@@ -30234,7 +31422,14 @@
     "example_de": "Der Artikel bietet einen Rückblick auf das vergangene Jahr.",
     "example_cloze": "Der Artikel bietet einen {{c1::Rückblick}} auf das vergangene Jahr.",
     "example_ru": "Статья предлагает ретроспективный обзор прошедшего года.",
-    "example_en": "The article offers a review of the past year."
+    "example_en": "The article offers a review of the past year.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "взгляд назад на что-либо, обзор чего-либо",
+        "note_en": "look back at, review of something"
+      }
+    ]
   },
   {
     "id": "noun-2398",
@@ -32253,7 +33448,14 @@
     "example_cloze": "Die dunklen Wolken waren ein {{c1::Anzeichen}} für das kommende Gewitter.",
     "example_ru": "Тёмные облака были признаком приближающейся грозы.",
     "example_en": "The dark clouds were a sign of the approaching thunderstorm.",
-    "example_de": "Die dunklen Wolken waren ein Anzeichen für das kommende Gewitter."
+    "example_de": "Die dunklen Wolken waren ein Anzeichen für das kommende Gewitter.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "признак чего-либо",
+        "note_en": "sign of something"
+      }
+    ]
   },
   {
     "id": "noun-2556",
@@ -32317,7 +33519,27 @@
     "example_en": "My opinion changed after the conversation with the neighbours.",
     "example_de": "Meine Auffassung hat sich nach dem Gespräch mit den Nachbarn geändert.",
     "plural_note_ru": "В значении «способность понимать» — без множественного числа.",
-    "plural_note_en": "The sense of ability to comprehend has no plural."
+    "plural_note_en": "The sense of ability to comprehend has no plural.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "понимание чего-либо, взгляд на что-либо",
+        "note_en": "view of something",
+        "meaning_ru": "мнение"
+      },
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "понимание чего-либо, взгляд на что-либо",
+        "note_en": "view of something",
+        "meaning_ru": "взгляд"
+      },
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "понимание чего-либо, взгляд на что-либо",
+        "note_en": "view of something",
+        "meaning_ru": "понимание"
+      }
+    ]
   },
   {
     "id": "noun-2561",
@@ -32407,7 +33629,14 @@
     "example_cloze": "Nach dem langen Arbeitstag hatte sie das {{c1::Bedürfnis}}, eine Weile allein zu sein.",
     "example_ru": "После долгого рабочего дня ей хотелось некоторое время побыть одной.",
     "example_en": "After the long working day, she felt the need to be alone for a while.",
-    "example_de": "Nach dem langen Arbeitstag hatte sie das Bedürfnis, eine Weile allein zu sein."
+    "example_de": "Nach dem langen Arbeitstag hatte sie das Bedürfnis, eine Weile allein zu sein.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "потребность в чём-либо",
+        "note_en": "need for something"
+      }
+    ]
   },
   {
     "id": "noun-2568",
@@ -32485,7 +33714,15 @@
     "example_en": "We became acquainted on a language course and soon became friends.",
     "example_de": "Unsere Bekanntschaft begann bei einem Sprachkurs und wurde bald zu einer Freundschaft.",
     "plural_note_ru": "В значении «знакомство, личная связь» множественное число редко.",
-    "plural_note_en": "The sense of being acquainted or having a personal relationship rarely takes a plural."
+    "plural_note_en": "The sense of being acquainted or having a personal relationship rarely takes a plural.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "знакомство с кем-либо, чем-либо",
+        "note_en": "acquaintance with someone, something",
+        "meaning_ru": "знакомство"
+      }
+    ]
   },
   {
     "id": "noun-2574",
@@ -32651,7 +33888,15 @@
     "example_en": "The sofa cushion cover can be washed at thirty degrees.",
     "example_de": "Den Bezug des Sofakissens kann man bei dreißig Grad waschen.",
     "plural_note_ru": "Получение товаров — без множественного числа. Bezüge также означает зарплату, доходы; в Австрии для этого значения возможен и Singular.",
-    "plural_note_en": "Receipt of goods has no plural. Bezüge also means pay or income; in Austria this sense may also occur in the singular."
+    "plural_note_en": "Receipt of goods has no plural. Bezüge also means pay or income; in Austria this sense may also occur in the singular.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "связь, отношение к чему-либо: in Bezug auf die Frage",
+        "note_en": "relation to something: in Bezug auf die Frage",
+        "meaning_ru": "связь"
+      }
+    ]
   },
   {
     "id": "noun-2587",
@@ -34457,7 +35702,14 @@
     "example_en": "Her teacher's praise encouraged her to keep practising.",
     "example_de": "Das Lob ihres Lehrers machte ihr Mut, weiterzuüben.",
     "plural_note_ru": "Множественное число редко.",
-    "plural_note_en": "The plural is rare."
+    "plural_note_en": "The plural is rare.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "похвала за что-либо",
+        "note_en": "praise for something"
+      }
+    ]
   },
   {
     "id": "noun-2727",
@@ -34629,7 +35881,14 @@
     "example_cloze": "Aus {{c1::Mitleid}} brachte sie dem verletzten Hund Wasser.",
     "example_ru": "Из сострадания она принесла раненой собаке воду.",
     "example_en": "Out of compassion, she brought water to the injured dog.",
-    "example_de": "Aus Mitleid brachte sie dem verletzten Hund Wasser."
+    "example_de": "Aus Mitleid brachte sie dem verletzten Hund Wasser.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "жалость, сострадание к кому-либо",
+        "note_en": "pity for someone"
+      }
+    ]
   },
   {
     "id": "noun-2740",
@@ -34815,7 +36074,14 @@
     "example_cloze": "Sie versuchte, ihren {{c1::Neid}} auf den Erfolg ihres Kollegen zu überwinden.",
     "example_ru": "Она пыталась преодолеть зависть к успеху коллеги.",
     "example_en": "She tried to overcome her envy of her colleague's success.",
-    "example_de": "Sie versuchte, ihren Neid auf den Erfolg ihres Kollegen zu überwinden."
+    "example_de": "Sie versuchte, ihren Neid auf den Erfolg ihres Kollegen zu überwinden.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "зависть к кому-либо, чему-либо",
+        "note_en": "envy of someone, something"
+      }
+    ]
   },
   {
     "id": "noun-2755",
@@ -35893,7 +37159,15 @@
     "example_en": "After losing her friend, she felt deep grief.",
     "example_de": "Nach dem Verlust ihres Freundes empfand sie tiefe Trauer.",
     "plural_note_ru": "Обычно употребляется в единственном числе.",
-    "plural_note_en": "Usually used in the singular."
+    "plural_note_en": "Usually used in the singular.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "скорбь по кому-либо",
+        "note_en": "mourning for someone",
+        "meaning_ru": "горе, скорбь"
+      }
+    ]
   },
   {
     "id": "noun-2837",
@@ -35987,7 +37261,21 @@
     "plural_note_ru": "Общение и обращение с кем-либо или чем-либо — без Plural. Umgänge относится к обходам, галереям и процессиям.",
     "plural_note_en": "Social contact and handling or treatment have no plural. Umgänge refers to circuits, ambulatories and processions.",
     "usage_note_ru": "Обход или галерея — архитектурное значение; обходной маршрут — редкое.",
-    "usage_note_en": "An ambulatory or gallery is architectural; tour or circuit is rare."
+    "usage_note_en": "An ambulatory or gallery is architectural; tour or circuit is rare.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "обращение с кем-либо, чем-либо: der Umgang mit Geld",
+        "note_en": "handling of, dealing with: der Umgang mit Geld",
+        "meaning_ru": "общение"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "обращение с кем-либо, чем-либо: der Umgang mit Geld",
+        "note_en": "handling of, dealing with: der Umgang mit Geld",
+        "meaning_ru": "обращение с кем-либо или чем-либо"
+      }
+    ]
   },
   {
     "id": "noun-2844",
@@ -36473,7 +37761,14 @@
     "example_en": "With strong determination, she continued her training after the injury.",
     "example_de": "Mit starkem Willen setzte sie ihr Training nach der Verletzung fort.",
     "usage_note_ru": "Редкий вариант основной формы: der Willen. Склонение: den Willen · mit dem Willen · des Willens.",
-    "usage_note_en": "Rare variant of the headword: der Willen. Declension: den Willen · mit dem Willen · des Willens."
+    "usage_note_en": "Rare variant of the headword: der Willen. Declension: den Willen · mit dem Willen · des Willens.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "воля к чему-либо: der Wille zum Erfolg",
+        "note_en": "will to something: der Wille zum Erfolg"
+      }
+    ]
   },
   {
     "id": "noun-2881",
@@ -36697,7 +37992,14 @@
     "example_cloze": "Vom Aussichtsturm hatten wir einen guten {{c1::Überblick}} über das Hafengelände.",
     "example_ru": "Со смотровой башни нам хорошо была видна вся территория порта.",
     "example_en": "From the observation tower, we had a good view of the entire harbour area.",
-    "example_de": "Vom Aussichtsturm hatten wir einen guten Überblick über das Hafengelände."
+    "example_de": "Vom Aussichtsturm hatten wir einen guten Überblick über das Hafengelände.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "обзор чего-либо: ein Überblick über das Thema",
+        "note_en": "overview of something: ein Überblick über das Thema"
+      }
+    ]
   },
   {
     "id": "noun-2898",
@@ -36711,7 +38013,15 @@
     "example_en": "The crossing over the tracks is closed during the construction work.",
     "example_de": "Der Übergang über die Gleise ist während der Bauarbeiten gesperrt.",
     "plural_note_ru": "Переходный период и временное решение — без Plural.",
-    "plural_note_en": "Transitional period and temporary solution have no plural."
+    "plural_note_en": "Transitional period and temporary solution have no plural.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "переход к чему-либо: der Übergang zur Demokratie",
+        "note_en": "transition to something: der Übergang zur Demokratie",
+        "meaning_ru": "переход к новому состоянию"
+      }
+    ]
   },
   {
     "id": "noun-2899",
@@ -36763,7 +38073,14 @@
     "example_cloze": "Die {{c1::Abhängigkeit}} von einem einzigen Lieferanten macht den Betrieb verwundbar.",
     "example_ru": "Зависимость от единственного поставщика делает предприятие уязвимым.",
     "example_en": "Dependence on a single supplier makes the business vulnerable.",
-    "example_de": "Die Abhängigkeit von einem einzigen Lieferanten macht den Betrieb verwundbar."
+    "example_de": "Die Abhängigkeit von einem einzigen Lieferanten macht den Betrieb verwundbar.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "зависимость от кого-либо, чего-либо",
+        "note_en": "dependence on someone, something"
+      }
+    ]
   },
   {
     "id": "noun-2903",
@@ -36775,7 +38092,19 @@
     "example_cloze": "Das neue {{c1::Abkommen}} regelt die Zusammenarbeit der beiden Universitäten.",
     "example_ru": "Новое соглашение регулирует сотрудничество двух университетов.",
     "example_en": "The new agreement governs cooperation between the two universities.",
-    "example_de": "Das neue Abkommen regelt die Zusammenarbeit der beiden Universitäten."
+    "example_de": "Das neue Abkommen regelt die Zusammenarbeit der beiden Universitäten.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "соглашение о чём-либо",
+        "note_en": "agreement on something"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "соглашение с кем-либо",
+        "note_en": "agreement with someone"
+      }
+    ]
   },
   {
     "id": "noun-2904",
@@ -37204,7 +38533,15 @@
     "example_cloze": "Seine {{c1::Ansicht}} zu dieser Frage hat sich nach dem Gespräch geändert.",
     "example_ru": "После разговора его мнение по этому вопросу изменилось.",
     "example_en": "His opinion on this issue changed after the conversation.",
-    "example_de": "Seine Ansicht zu dieser Frage hat sich nach dem Gespräch geändert."
+    "example_de": "Seine Ansicht zu dieser Frage hat sich nach dem Gespräch geändert.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "взгляд на что-либо, мнение о чём-либо",
+        "note_en": "view on something",
+        "meaning_ru": "мнение"
+      }
+    ]
   },
   {
     "id": "noun-2937",
@@ -37440,7 +38777,15 @@
     "example_en": "During the explanation, she focused all her attention on the drawing.",
     "example_de": "Während der Erklärung richtete sie ihre ganze Aufmerksamkeit auf die Zeichnung.",
     "plural_note_ru": "Внимание — без Plural; для заботливого поведения Plural редкий; Aufmerksamkeiten обычно означает небольшие подарки.",
-    "plural_note_en": "Attention has no plural; the plural is rare for considerate behaviour; Aufmerksamkeiten normally means small gifts."
+    "plural_note_en": "Attention has no plural; the plural is rare for considerate behaviour; Aufmerksamkeiten normally means small gifts.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "внимание к чему-либо",
+        "note_en": "attention to something",
+        "meaning_ru": "внимание"
+      }
+    ]
   },
   {
     "id": "noun-2955",
@@ -37466,7 +38811,15 @@
     "example_en": "The investigation provided information about the cause of the fault.",
     "example_de": "Die Untersuchung gab Aufschluss über die Ursache des Defekts.",
     "usage_note_ru": "Помимо сведений, значения относятся к горному делу, металлургии, химии, биологии, геологии и тюремному распорядку.",
-    "usage_note_en": "Besides information, the senses belong to mining, metallurgy, chemistry, biology, geology and prison routines."
+    "usage_note_en": "Besides information, the senses belong to mining, metallurgy, chemistry, biology, geology and prison routines.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "разъяснение, сведения о чём-либо: Aufschluss über etwas geben",
+        "note_en": "insight into, information about something: Aufschluss über etwas geben",
+        "meaning_ru": "разъяснение, сведения"
+      }
+    ]
   },
   {
     "id": "noun-2957",
@@ -37970,7 +39323,14 @@
     "example_cloze": "Die zufällige {{c1::Begegnung}} am Bahnhof führte zu einer langen Freundschaft.",
     "example_ru": "Случайная встреча на вокзале привела к долгой дружбе.",
     "example_en": "The chance encounter at the station led to a lasting friendship.",
-    "example_de": "Die zufällige Begegnung am Bahnhof führte zu einer langen Freundschaft."
+    "example_de": "Die zufällige Begegnung am Bahnhof führte zu einer langen Freundschaft.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "встреча с кем-либо, чем-либо",
+        "note_en": "encounter with someone, something"
+      }
+    ]
   },
   {
     "id": "noun-2996",
@@ -38048,7 +39408,21 @@
     "example_cloze": "Die {{c1::Belastung}} der Brücke wurde vor der Freigabe geprüft.",
     "example_ru": "Перед открытием проверили нагрузку на мост.",
     "example_en": "The load on the bridge was checked before it was opened.",
-    "example_de": "Die Belastung der Brücke wurde vor der Freigabe geprüft."
+    "example_de": "Die Belastung der Brücke wurde vor der Freigabe geprüft.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "нагрузка, бремя для кого-либо, чего-либо",
+        "note_en": "burden on someone, something",
+        "meaning_ru": "нагрузка"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "нагрузка, бремя для кого-либо, чего-либо",
+        "note_en": "burden on someone, something",
+        "meaning_ru": "тягота"
+      }
+    ]
   },
   {
     "id": "noun-3002",
@@ -38100,7 +39474,15 @@
     "example_en": "Her willingness to cooperate made the initial talks easier.",
     "example_de": "Ihre Bereitschaft zur Zusammenarbeit erleichterte die ersten Gespräche.",
     "plural_note_ru": "В значении готовности множественное число редко; Bereitschaften также означает оперативные подразделения.",
-    "plural_note_en": "The willingness sense rarely takes a plural; Bereitschaften also means operational units."
+    "plural_note_en": "The willingness sense rarely takes a plural; Bereitschaften also means operational units.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "готовность к чему-либо",
+        "note_en": "willingness to, readiness for something",
+        "meaning_ru": "готовность"
+      }
+    ]
   },
   {
     "id": "noun-3006",
@@ -38176,7 +39558,14 @@
     "example_cloze": "Seine lange Abwesenheit gab den Nachbarn Anlass zur {{c1::Besorgnis}}.",
     "example_ru": "Его долгое отсутствие дало соседям повод для беспокойства.",
     "example_en": "His prolonged absence gave the neighbours cause for concern.",
-    "example_de": "Seine lange Abwesenheit gab den Nachbarn Anlass zur Besorgnis."
+    "example_de": "Seine lange Abwesenheit gab den Nachbarn Anlass zur Besorgnis.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "обеспокоенность чем-либо",
+        "note_en": "concern about something"
+      }
+    ]
   },
   {
     "id": "noun-3012",
@@ -39296,7 +40685,14 @@
     "example_cloze": "Das Fenster bietet einen {{c1::Einblick}} in die Werkstatt.",
     "example_ru": "Окно позволяет заглянуть в мастерскую.",
     "example_en": "The window provides a view into the workshop.",
-    "example_de": "Das Fenster bietet einen Einblick in die Werkstatt."
+    "example_de": "Das Fenster bietet einen Einblick in die Werkstatt.",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "представление о чём-либо, взгляд внутрь чего-либо: Einblick in die Arbeit",
+        "note_en": "insight into something: Einblick in die Arbeit"
+      }
+    ]
   },
   {
     "id": "noun-3098",
@@ -39436,7 +40832,15 @@
     "example_en": "Her open attitude towards new ideas helped the whole team.",
     "example_de": "Ihre offene Einstellung gegenüber neuen Ideen half dem ganzen Team.",
     "usage_note_ru": "Повторение рекорда и подготовка команды — спорт; включение суммы в бюджет — канцелярское; кадр — кинематография.",
-    "usage_note_en": "Equalling a record and preparing a team belong to sport; allocation in a budget is bureaucratic; shot is a film sense."
+    "usage_note_en": "Equalling a record and preparing a team belong to sport; allocation in a budget is bureaucratic; shot is a film sense.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "отношение к чему-либо, кому-либо",
+        "note_en": "attitude towards something, someone",
+        "meaning_ru": "настрой, отношение"
+      }
+    ]
   },
   {
     "id": "noun-3109",
@@ -39448,7 +40852,14 @@
     "example_cloze": "Gegen den Zeitplan brachte sie einen sachlichen {{c1::Einwand}} vor.",
     "example_ru": "Она высказала обоснованное возражение против графика.",
     "example_en": "She raised a reasoned objection to the schedule.",
-    "example_de": "Gegen den Zeitplan brachte sie einen sachlichen Einwand vor."
+    "example_de": "Gegen den Zeitplan brachte sie einen sachlichen Einwand vor.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "возражение против чего-либо",
+        "note_en": "objection to something"
+      }
+    ]
   },
   {
     "id": "noun-3110",
@@ -40327,7 +41738,14 @@
     "example_cloze": "Die {{c1::Furcht}} vor einem erneuten Fehler machte ihn unsicher.",
     "example_ru": "Страх перед новой ошибкой лишал его уверенности.",
     "example_en": "The fear of making another mistake made him uncertain.",
-    "example_de": "Die Furcht vor einem erneuten Fehler machte ihn unsicher."
+    "example_de": "Die Furcht vor einem erneuten Fehler machte ihn unsicher.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "страх перед кем-либо, чем-либо",
+        "note_en": "fear of someone, something"
+      }
+    ]
   },
   {
     "id": "noun-3178",
@@ -41195,7 +42613,15 @@
     "plural_note_ru": "Склонность или пристрастие — без Plural.",
     "plural_note_en": "The inclination or penchant sense has no plural.",
     "usage_note_ru": "Вис — термин гимнастики.",
-    "usage_note_en": "Hang is a gymnastics term."
+    "usage_note_en": "Hang is a gymnastics term.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "склонность к чему-либо: ein Hang zur Faulheit",
+        "note_en": "tendency to something: ein Hang zur Faulheit",
+        "meaning_ru": "склонность, пристрастие"
+      }
+    ]
   },
   {
     "id": "noun-3242",
@@ -41825,7 +43251,14 @@
     "example_cloze": "Die {{c1::Investition}} in eine neue Produktionsanlage soll sich langfristig auszahlen.",
     "example_ru": "Вложение в новую производственную установку должно окупиться в долгосрочной перспективе.",
     "example_en": "The investment in a new production facility is expected to pay off in the long term.",
-    "example_de": "Die Investition in eine neue Produktionsanlage soll sich langfristig auszahlen."
+    "example_de": "Die Investition in eine neue Produktionsanlage soll sich langfristig auszahlen.",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "вложение во что-либо",
+        "note_en": "investment in something"
+      }
+    ]
   },
   {
     "id": "noun-3289",
@@ -42027,7 +43460,14 @@
     "example_de": "Die Ähnlichkeit zwischen den beiden Schwestern ist verblüffend.",
     "example_cloze": "Die {{c1::Ähnlichkeit}} zwischen den beiden Schwestern ist verblüffend.",
     "example_ru": "Сходство между двумя сёстрами поразительное.",
-    "example_en": "The resemblance between the two sisters is striking."
+    "example_en": "The resemblance between the two sisters is striking.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "сходство с кем-либо, чем-либо",
+        "note_en": "similarity to someone, something"
+      }
+    ]
   },
   {
     "id": "noun-3303",
@@ -42611,7 +44051,21 @@
     "example_ru": "После восьми часов работы её сосредоточенность заметно ослабла.",
     "example_en": "After eight hours of work her concentration dropped noticeably.",
     "plural_note_ru": "В значении «сосредоточенность, направленность на цель» — без множественного числа.",
-    "plural_note_en": "In the sense of mental focus: no plural."
+    "plural_note_en": "In the sense of mental focus: no plural.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "сосредоточение на чём-либо",
+        "note_en": "concentration on something",
+        "meaning_ru": "сосредоточенность, концентрация (внимания)"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "сосредоточение на чём-либо",
+        "note_en": "concentration on something",
+        "meaning_ru": "сосредоточение (сил, капитала)"
+      }
+    ]
   },
   {
     "id": "noun-3347",
@@ -42715,7 +44169,14 @@
     "example_ru": "Смерть собаки причинила ей большое горе.",
     "example_en": "The death of her dog caused her great grief.",
     "usage_note_ru": "Значение «заботы, неприятности» — разговорное.",
-    "usage_note_en": "The sense 'trouble, worries' is colloquial."
+    "usage_note_en": "The sense 'trouble, worries' is colloquial.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "горе, печаль из-за чего-либо",
+        "note_en": "grief about something"
+      }
+    ]
   },
   {
     "id": "noun-3355",
@@ -42861,7 +44322,14 @@
     "example_ru": "Его страсть к старым машинам обходится ему дорого.",
     "example_en": "His passion for old cars costs him a lot of money.",
     "plural_note_ru": "В значении «страстная любовь к человеку» — без множественного числа.",
-    "plural_note_en": "In the sense 'passionate love for a person': no plural."
+    "plural_note_en": "In the sense 'passionate love for a person': no plural.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "страсть к чему-либо",
+        "note_en": "passion for something"
+      }
+    ]
   },
   {
     "id": "noun-3366",
@@ -43251,7 +44719,14 @@
     "example_de": "Nach dem Betrug begegnete sie jedem Fremden mit Misstrauen.",
     "example_cloze": "Nach dem Betrug begegnete sie jedem Fremden mit {{c1::Misstrauen}}.",
     "example_ru": "После того обмана она относилась к каждому незнакомцу с недоверием.",
-    "example_en": "After being cheated, she treated every stranger with mistrust."
+    "example_en": "After being cheated, she treated every stranger with mistrust.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "недоверие к кому-либо, чему-либо",
+        "note_en": "distrust of someone, something"
+      }
+    ]
   },
   {
     "id": "noun-3396",
@@ -43265,7 +44740,14 @@
     "example_ru": "Медсестра обращалась с пациентами с большим сочувствием.",
     "example_en": "The nurse treated the patients with great compassion.",
     "plural_note_ru": "Множественное число редко.",
-    "plural_note_en": "The plural is rare."
+    "plural_note_en": "The plural is rare.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "сочувствие к кому-либо",
+        "note_en": "compassion for someone"
+      }
+    ]
   },
   {
     "id": "noun-3397",
@@ -44307,7 +45789,14 @@
     "example_de": "Aus Rache zerkratzte er das Auto seines Nachbarn.",
     "example_cloze": "Aus {{c1::Rache}} zerkratzte er das Auto seines Nachbarn.",
     "example_ru": "Из мести он поцарапал машину соседа.",
-    "example_en": "Out of revenge he scratched his neighbour's car."
+    "example_en": "Out of revenge he scratched his neighbour's car.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "месть кому-либо",
+        "note_en": "revenge on someone"
+      }
+    ]
   },
   {
     "id": "noun-3473",
@@ -45391,7 +46880,14 @@
     "example_de": "Viele Bürger betrachten die neuen Pläne mit Skepsis.",
     "example_cloze": "Viele Bürger betrachten die neuen Pläne mit {{c1::Skepsis}}.",
     "example_ru": "Многие граждане относятся к новым планам скептически.",
-    "example_en": "Many citizens view the new plans with scepticism."
+    "example_en": "Many citizens view the new plans with scepticism.",
+    "complements": [
+      {
+        "pattern": "gegenüber + Dativ",
+        "note_ru": "скептицизм по отношению к чему-либо",
+        "note_en": "scepticism about something"
+      }
+    ]
   },
   {
     "id": "noun-3553",
@@ -45669,7 +47165,14 @@
     "example_de": "Die Firma hat eine offizielle Stellungnahme zu den Vorwürfen veröffentlicht.",
     "example_cloze": "Die Firma hat eine offizielle {{c1::Stellungnahme}} zu den Vorwürfen veröffentlicht.",
     "example_ru": "Фирма опубликовала официальное заявление по поводу обвинений.",
-    "example_en": "The company has published an official statement on the allegations."
+    "example_en": "The company has published an official statement on the allegations.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "заявление, отзыв по поводу чего-либо",
+        "note_en": "statement on something"
+      }
+    ]
   },
   {
     "id": "noun-3574",
@@ -46519,7 +48022,14 @@
     "example_de": "Unter den Mitarbeitern wächst die Unzufriedenheit mit der Leitung.",
     "example_cloze": "Unter den Mitarbeitern wächst die {{c1::Unzufriedenheit}} mit der Leitung.",
     "example_ru": "Среди сотрудников растёт недовольство руководством.",
-    "example_en": "Discontent with the management is growing among the staff."
+    "example_en": "Discontent with the management is growing among the staff.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "недовольство кем-либо, чем-либо",
+        "note_en": "dissatisfaction with someone, something"
+      }
+    ]
   },
   {
     "id": "noun-3639",
@@ -46825,7 +48335,15 @@
     "example_ru": "Помимо работы она занимается множеством семейных обязанностей.",
     "example_en": "Besides work she takes care of many family obligations.",
     "plural_note_ru": "В значении «долговые обязательства» — обычно во множественном числе.",
-    "plural_note_en": "In the sense 'liabilities' usually plural."
+    "plural_note_en": "In the sense 'liabilities' usually plural.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "обязательство сделать, соблюдать что-либо: die Verpflichtung zur Verschwiegenheit",
+        "note_en": "obligation to something: die Verpflichtung zur Verschwiegenheit",
+        "meaning_ru": "обязанность, обязательство"
+      }
+    ]
   },
   {
     "id": "noun-3663",
@@ -46931,7 +48449,15 @@
     "example_ru": "За постоянные опоздания ученик получил выговор.",
     "example_en": "The pupil was given a reprimand for constantly being late.",
     "usage_note_ru": "Также: ссылка — ein Verweis auf Seite 20.",
-    "usage_note_en": "Also: cross-reference — ein Verweis auf Seite 20."
+    "usage_note_en": "Also: cross-reference — ein Verweis auf Seite 20.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "ссылка на что-либо",
+        "note_en": "reference to something",
+        "meaning_ru": "ссылка (на другое место текста)"
+      }
+    ]
   },
   {
     "id": "noun-3671",
@@ -47445,7 +48971,15 @@
     "example_ru": "Строительство дороги встречает сильное сопротивление населения.",
     "example_en": "There is strong resistance among the population to building the road.",
     "usage_note_ru": "Также: движение Сопротивления (без мн. ч.).",
-    "usage_note_en": "Also: the Resistance movement (no plural)."
+    "usage_note_en": "Also: the Resistance movement (no plural).",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "сопротивление чему-либо, кому-либо",
+        "note_en": "resistance to something, someone",
+        "meaning_ru": "сопротивление, противодействие"
+      }
+    ]
   },
   {
     "id": "noun-3709",
@@ -47631,7 +49165,14 @@
     "example_de": "Für Baugenehmigungen liegt die Zuständigkeit beim Bauamt.",
     "example_cloze": "Für Baugenehmigungen liegt die {{c1::Zuständigkeit}} beim Bauamt.",
     "example_ru": "Выдача разрешений на строительство входит в компетенцию строительного управления.",
-    "example_en": "Responsibility for building permits lies with the building authority."
+    "example_en": "Responsibility for building permits lies with the building authority.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "компетенция, ответственность за что-либо",
+        "note_en": "responsibility for something"
+      }
+    ]
   },
   {
     "id": "noun-3724",
@@ -49217,7 +50758,14 @@
     "example_de": "Seit seiner Kindheit hat er eine tiefe Abneigung gegen Spinat.",
     "example_cloze": "Seit seiner Kindheit hat er eine tiefe {{c1::Abneigung}} gegen Spinat.",
     "example_ru": "С детства у него сильная неприязнь к шпинату.",
-    "example_en": "Since childhood he has had a deep aversion to spinach."
+    "example_en": "Since childhood he has had a deep aversion to spinach.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "неприязнь к кому-либо, чему-либо",
+        "note_en": "aversion to someone, something"
+      }
+    ]
   },
   {
     "id": "noun-3821",
@@ -49797,7 +51345,21 @@
     "example_de": "Der Streit um das Parken war der Anlass für den Bruch zwischen den Nachbarn.",
     "example_cloze": "Der Streit um das Parken war der {{c1::Anlass}} für den Bruch zwischen den Nachbarn.",
     "example_ru": "Спор о парковке стал поводом для разрыва между соседями.",
-    "example_en": "The argument about parking was what sparked the falling-out between the neighbours."
+    "example_en": "The argument about parking was what sparked the falling-out between the neighbours.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "повод для чего-либо: kein Anlass zur Sorge",
+        "note_en": "reason for, cause for: kein Anlass zur Sorge",
+        "meaning_ru": "повод, причина"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "повод для чего-либо",
+        "note_en": "reason for something",
+        "meaning_ru": "повод, причина"
+      }
+    ]
   },
   {
     "id": "noun-3864",
@@ -49917,7 +51479,15 @@
     "example_ru": "При теракте на вокзале пострадали несколько человек.",
     "example_en": "Several people were injured in the attack on the station.",
     "usage_note_ru": "Устойчиво: bis zum Anschlag — до упора.",
-    "usage_note_en": "Set phrase: bis zum Anschlag — as far as it will go."
+    "usage_note_en": "Set phrase: bis zum Anschlag — as far as it will go.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "покушение на кого-либо, теракт против чего-либо",
+        "note_en": "attack on someone, something",
+        "meaning_ru": "покушение, теракт"
+      }
+    ]
   },
   {
     "id": "noun-3873",
@@ -50007,7 +51577,15 @@
     "example_ru": "Разговор с учительницей стал для неё толчком к решению изучать медицину.",
     "example_en": "A conversation with her teacher was what prompted her to study medicine.",
     "usage_note_ru": "Устойчиво: Anstoß erregen — вызывать возмущение; an etwas Anstoß nehmen — возмущаться чем-л.",
-    "usage_note_en": "Set phrases: Anstoß erregen — cause offence; an etwas Anstoß nehmen — take offence at something."
+    "usage_note_en": "Set phrases: Anstoß erregen — cause offence; an etwas Anstoß nehmen — take offence at something.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "толчок к чему-либо: den Anstoß zur Reform geben",
+        "note_en": "impetus for something: den Anstoß zur Reform geben",
+        "meaning_ru": "толчок, импульс, стимул"
+      }
+    ]
   },
   {
     "id": "noun-3880",
@@ -50485,7 +52063,15 @@
     "example_de": "Die Hilfsorganisation veröffentlichte einen Aufruf zu Spenden für die Flutopfer.",
     "example_cloze": "Die Hilfsorganisation veröffentlichte einen {{c1::Aufruf}} zu Spenden für die Flutopfer.",
     "example_ru": "Благотворительная организация опубликовала призыв жертвовать в пользу пострадавших от наводнения.",
-    "example_en": "The aid organisation published an appeal for donations for the flood victims."
+    "example_en": "The aid organisation published an appeal for donations for the flood victims.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "призыв к чему-либо: ein Aufruf zum Streik",
+        "note_en": "call for something: ein Aufruf zum Streik",
+        "meaning_ru": "призыв, воззвание"
+      }
+    ]
   },
   {
     "id": "noun-3916",
@@ -51507,7 +53093,21 @@
     "example_de": "Zwischen Großmutter und Enkel besteht eine enge Bindung.",
     "example_cloze": "Zwischen Großmutter und Enkel besteht eine enge {{c1::Bindung}}.",
     "example_ru": "Между бабушкой и внуком тесная связь.",
-    "example_en": "There is a close bond between grandmother and grandson."
+    "example_en": "There is a close bond between grandmother and grandson.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "привязанность к кому-либо, чему-либо",
+        "note_en": "attachment to someone, something",
+        "meaning_ru": "привязанность, связь"
+      },
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "привязанность к кому-либо, чему-либо",
+        "note_en": "attachment to someone, something",
+        "meaning_ru": "обязательство"
+      }
+    ]
   },
   {
     "id": "noun-3996",
@@ -51711,7 +53311,14 @@
     "example_de": "Mehrere kleine Parteien schlossen ein Bündnis für die Wahl.",
     "example_cloze": "Mehrere kleine Parteien schlossen ein {{c1::Bündnis}} für die Wahl.",
     "example_ru": "Несколько небольших партий заключили союз перед выборами.",
-    "example_en": "Several small parties formed an alliance for the election."
+    "example_en": "Several small parties formed an alliance for the election.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "союз с кем-либо",
+        "note_en": "alliance with someone"
+      }
+    ]
   },
   {
     "id": "noun-4012",
@@ -52351,7 +53958,27 @@
     "example_ru": "Его внезапное прозрение всех нас удивило.",
     "example_en": "His sudden realization surprised us all.",
     "plural_note_ru": "В значениях «ознакомление» и «вид» без мн. ч.",
-    "plural_note_en": "No plural in the senses 'inspection' and 'view'."
+    "plural_note_en": "No plural in the senses 'inspection' and 'view'.",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "доступ к ознакомлению с чем-либо; понимание чего-либо: Einsicht in die Akten",
+        "note_en": "access to, insight into something: Einsicht in die Akten",
+        "meaning_ru": "понимание, осознание"
+      },
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "доступ к ознакомлению с чем-либо; понимание чего-либо: Einsicht in die Akten",
+        "note_en": "access to, insight into something: Einsicht in die Akten",
+        "meaning_ru": "ознакомление (с документами)"
+      },
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "доступ к ознакомлению с чем-либо; понимание чего-либо: Einsicht in die Akten",
+        "note_en": "access to, insight into something: Einsicht in die Akten",
+        "meaning_ru": "вид (внутрь)"
+      }
+    ]
   },
   {
     "id": "noun-4062",
@@ -52467,7 +54094,15 @@
     "example_ru": "Решение суда вызвало сильное возмущение.",
     "example_en": "The court's decision caused great outrage.",
     "plural_note_ru": "В значении «возмущение» без мн. ч.",
-    "plural_note_en": "No plural in the sense 'indignation'."
+    "plural_note_en": "No plural in the sense 'indignation'.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "возмущение чем-либо",
+        "note_en": "outrage at something",
+        "meaning_ru": "возмущение, негодование"
+      }
+    ]
   },
   {
     "id": "noun-4071",
@@ -57233,7 +58868,14 @@
     "example_de": "Die Mitgliedschaft im Sportverein kostet zehn Euro im Monat.",
     "example_cloze": "Die {{c1::Mitgliedschaft}} im Sportverein kostet zehn Euro im Monat.",
     "example_ru": "Членство в спортивном клубе стоит десять евро в месяц.",
-    "example_en": "Membership of the sports club costs ten euros a month."
+    "example_en": "Membership of the sports club costs ten euros a month.",
+    "complements": [
+      {
+        "pattern": "in + Dativ",
+        "note_ru": "членство в чём-либо",
+        "note_en": "membership in something"
+      }
+    ]
   },
   {
     "id": "noun-4441",
@@ -59367,7 +61009,14 @@
     "example_ru": "Из робости перед чужими девочка спряталась за маму.",
     "example_en": "Out of shyness towards strangers the girl hid behind her mother.",
     "usage_note_ru": "Не путать с прилагательным scheu — робкий, пугливый.",
-    "usage_note_en": "Not to be confused with the adjective scheu 'shy, timid'."
+    "usage_note_en": "Not to be confused with the adjective scheu 'shy, timid'.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "робость, боязнь перед кем-либо, чем-либо",
+        "note_en": "shyness of, aversion to someone, something"
+      }
+    ]
   },
   {
     "id": "noun-4606",
@@ -60275,7 +61924,15 @@
     "plural_note_ru": "В значениях «статус» и «отношение» без мн. ч.",
     "plural_note_en": "No plural in the senses 'status' and 'attitude'.",
     "usage_note_ru": "Устойчиво: Stellung nehmen — высказаться, занять позицию.",
-    "usage_note_en": "Set phrase: Stellung nehmen — comment, take a stand."
+    "usage_note_en": "Set phrase: Stellung nehmen — comment, take a stand.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "позиция по чему-либо: Stellung zu einer Frage nehmen",
+        "note_en": "position on something: Stellung zu einer Frage nehmen",
+        "meaning_ru": "позиция, отношение (к чему-л.)"
+      }
+    ]
   },
   {
     "id": "noun-4676",
@@ -61405,7 +63062,14 @@
     "example_ru": "Она с презрением посмотрела на мужчину, который её обманул.",
     "example_en": "She looked with contempt at the man who had deceived her.",
     "plural_note_ru": "Мн. ч. редко — в значении «проявления презрения».",
-    "plural_note_en": "The plural is rare, meaning 'acts of contempt'."
+    "plural_note_en": "The plural is rare, meaning 'acts of contempt'.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "презрение к кому-либо, чему-либо",
+        "note_en": "contempt for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-4762",
@@ -61431,7 +63095,14 @@
     "example_ru": "Жители деревни чувствуют сильную связь друг с другом.",
     "example_en": "The villagers feel a strong bond with one another.",
     "plural_note_ru": "Обычно в единственном числе.",
-    "plural_note_en": "Usually singular."
+    "plural_note_en": "Usually singular.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "связь, близость с кем-либо, чем-либо",
+        "note_en": "bond with someone, something"
+      }
+    ]
   },
   {
     "id": "noun-4764",
@@ -61875,7 +63546,14 @@
     "example_de": "Für jeden Verstoß gegen die Hausordnung gibt es eine schriftliche Mahnung.",
     "example_cloze": "Für jeden {{c1::Verstoß}} gegen die Hausordnung gibt es eine schriftliche Mahnung.",
     "example_ru": "За каждое нарушение правил внутреннего распорядка выносится письменное предупреждение.",
-    "example_en": "Every breach of the house rules results in a written warning."
+    "example_en": "Every breach of the house rules results in a written warning.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "нарушение чего-либо: ein Verstoß gegen die Regeln",
+        "note_en": "violation of something: ein Verstoß gegen die Regeln"
+      }
+    ]
   },
   {
     "id": "noun-4798",
@@ -62217,7 +63895,14 @@
     "example_de": "Ihre Vorliebe für scharfes Essen merkt man an jedem Gericht, das sie kocht.",
     "example_cloze": "Ihre {{c1::Vorliebe}} für scharfes Essen merkt man an jedem Gericht, das sie kocht.",
     "example_ru": "Её пристрастие к острой еде чувствуется в каждом блюде, которое она готовит.",
-    "example_en": "Her fondness for spicy food shows in every dish she cooks."
+    "example_en": "Her fondness for spicy food shows in every dish she cooks.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "пристрастие к чему-либо",
+        "note_en": "preference for something"
+      }
+    ]
   },
   {
     "id": "noun-4825",
@@ -62267,7 +63952,15 @@
     "example_de": "Die Läuferin ging mit zehn Sekunden Vorsprung in die letzte Runde.",
     "example_cloze": "Die Läuferin ging mit zehn Sekunden {{c1::Vorsprung}} in die letzte Runde.",
     "example_ru": "Бегунья вышла на последний круг с отрывом в десять секунд.",
-    "example_en": "The runner went into the final lap with a ten-second lead."
+    "example_en": "The runner went into the final lap with a ten-second lead.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "преимущество, отрыв от кого-либо",
+        "note_en": "lead over someone",
+        "meaning_ru": "преимущество, отрыв"
+      }
+    ]
   },
   {
     "id": "noun-4829",
@@ -62857,7 +64550,19 @@
     "example_de": "Als er die zerbrochene Vase sah, wurde sein Gesicht rot vor Zorn.",
     "example_cloze": "Als er die zerbrochene Vase sah, wurde sein Gesicht rot vor {{c1::Zorn}}.",
     "example_ru": "Когда он увидел разбитую вазу, его лицо покраснело от гнева.",
-    "example_en": "When he saw the broken vase, his face turned red with anger."
+    "example_en": "When he saw the broken vase, his face turned red with anger.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "гнев на кого-либо, что-либо",
+        "note_en": "anger at someone, something"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "гнев из-за чего-либо",
+        "note_en": "anger about something"
+      }
+    ]
   },
   {
     "id": "noun-4876",
@@ -62893,7 +64598,14 @@
     "example_de": "Die Katze zeigt ihre Zuneigung, indem sie sich an meine Beine schmiegt.",
     "example_cloze": "Die Katze zeigt ihre {{c1::Zuneigung}}, indem sie sich an meine Beine schmiegt.",
     "example_ru": "Кошка проявляет привязанность, прижимаясь к моим ногам.",
-    "example_en": "The cat shows its affection by rubbing against my legs."
+    "example_en": "The cat shows its affection by rubbing against my legs.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "привязанность к кому-либо",
+        "note_en": "affection for someone"
+      }
+    ]
   },
   {
     "id": "noun-4879",
@@ -63581,7 +65293,15 @@
     "example_de": "Seine Begabung für Sprachen zeigte sich schon in der Grundschule.",
     "example_cloze": "Seine {{c1::Begabung}} für Sprachen zeigte sich schon in der Grundschule.",
     "example_ru": "Его способности к языкам проявились ещё в начальной школе.",
-    "example_en": "His gift for languages showed itself even at primary school."
+    "example_en": "His gift for languages showed itself even at primary school.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "талант, способности к чему-либо",
+        "note_en": "talent for something",
+        "meaning_ru": "дарование, талант, способности"
+      }
+    ]
   },
   {
     "id": "noun-4932",
@@ -64149,7 +65869,14 @@
     "example_de": "Voller Ehrfurcht standen die Touristen vor dem riesigen Dom.",
     "example_cloze": "Voller {{c1::Ehrfurcht}} standen die Touristen vor dem riesigen Dom.",
     "example_ru": "Туристы с благоговением стояли перед огромным собором.",
-    "example_en": "The tourists stood in awe before the huge cathedral."
+    "example_en": "The tourists stood in awe before the huge cathedral.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "note_ru": "благоговение перед кем-либо, чем-либо",
+        "note_en": "reverence for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-4976",
@@ -65025,7 +66752,14 @@
     "example_de": "Seine Gleichgültigkeit gegenüber den Sorgen seiner Kollegen hat alle enttäuscht.",
     "example_cloze": "Seine {{c1::Gleichgültigkeit}} gegenüber den Sorgen seiner Kollegen hat alle enttäuscht.",
     "example_ru": "Его равнодушие к заботам коллег разочаровало всех.",
-    "example_en": "His indifference to his colleagues' worries disappointed everyone."
+    "example_en": "His indifference to his colleagues' worries disappointed everyone.",
+    "complements": [
+      {
+        "pattern": "gegenüber + Dativ",
+        "note_ru": "равнодушие к кому-либо, чему-либо",
+        "note_en": "indifference to someone, something"
+      }
+    ]
   },
   {
     "id": "noun-5043",
@@ -67305,7 +69039,14 @@
     "example_de": "Nach drei Monaten im Ausland hatte er große Sehnsucht nach seiner Familie.",
     "example_cloze": "Nach drei Monaten im Ausland hatte er große {{c1::Sehnsucht}} nach seiner Familie.",
     "example_ru": "После трёх месяцев за границей он сильно тосковал по семье.",
-    "example_en": "After three months abroad, he felt a great longing for his family."
+    "example_en": "After three months abroad, he felt a great longing for his family.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "тоска по кому-либо, чему-либо",
+        "note_en": "longing for someone, something"
+      }
+    ]
   },
   {
     "id": "noun-5214",
@@ -68413,7 +70154,14 @@
     "example_de": "In seiner Verzweiflung rief er mitten in der Nacht seine Mutter an.",
     "example_cloze": "In seiner {{c1::Verzweiflung}} rief er mitten in der Nacht seine Mutter an.",
     "example_ru": "В отчаянии он позвонил матери посреди ночи.",
-    "example_en": "In his despair, he called his mother in the middle of the night."
+    "example_en": "In his despair, he called his mother in the middle of the night.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "отчаяние из-за чего-либо",
+        "note_en": "despair at something"
+      }
+    ]
   },
   {
     "id": "noun-5300",

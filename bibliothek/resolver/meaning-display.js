@@ -1312,6 +1312,10 @@
       // (advisor 21.11: the participle as an adjective names the pattern as its verb does — beteiligt «Adjektiv · an + Dativ»)
       marks.push(['Verb','Adjektiv','Nomen'].includes(pos(candidate)) ? link.pattern : `${link.verb} + ${link.pattern}`);
       linkSpans = separableLink ? [...k.spans, ...link.spans.filter(s => !k.spans.some(t => t.start === s.start))].sort((a,b) => a.start - b.start) : link.spans;
+      // (links chat 21.11, pkg226: a noun's pair keeps its article lit with it — die zuvor erlernte Reaktion auf …: the noun phrase's
+      // spans and the preposition)
+      const phrase = pos(candidate) === 'Nomen' ? candidate.nounPhrase?.[0]?.spans || candidate.nounArticleLink?.spans : null;
+      if (phrase?.length) linkSpans = [...phrase, ...link.spans.filter(s => !phrase.some(t => t.start === s.start))].sort((a,b) => a.start - b.start);
     }
     const features = candidate.formFeatures;
     if (features?.tense) marks.push(features.tense);
