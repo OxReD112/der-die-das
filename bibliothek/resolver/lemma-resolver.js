@@ -17264,6 +17264,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const chainVerb = isVerb && card.construction && card.construction.id !== 'separable-verb';
       let list;
       try { list = await fallback.verbPrepositions(); } catch (_) { return; }
+      await loadImpersonalPairs();
       let clause = verbalClause(word,context,'verbPrepositionLink',clauseBoundaries.verbGroup);
       if (!clause) return;
       // (batch 142, advisor 17.11: on a verb of an als row — sieht ihn als Freund an — als is no boundary of the part; the pair checks
@@ -17350,7 +17351,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const obj = tokens.slice(selected + 2, Math.min(selected + 5, clause.end + 1));
         const CALENDAR = /^(?:montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember|wochenende|jahr|jahre|jahren|jahres|monat|monaten|woche|wochen|tag|tagen|stunde|stunden|minute|minuten|uhr|prozent)$/u;
         const verbTakes = b => list.some(([verb,pr]) => base(verb) === b && pr === prep) || (lemmas.get(b) || []).some(e => e.type === 'Verb' &&
-          (e.complements || []).some(x => norm(String(x.pattern || '').split(/\s+/u)[0]) === prep));
+          (e.complements || []).some(x => norm(String(x.pattern || '').split(/\s+/u)[0]) === prep && (!impersonalComplement(b, x) || esInClause)));
         // (advisor 21.11 (3): the pair of a verb of the same part comes before the noun's — a later verb (as before), and a verb with its
         // detached particle closing the part, before or after the noun: schlägt … vor Wut auf Gegenstände ein (einschlagen auf); the
         // verbs of the list come in by the links above (another pair on the same preposition blocks)
@@ -22475,7 +22476,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       ins:["in","Akkusativ"],ans:["an","Akkusativ"],aufs:["auf","Akkusativ"],übers:["über","Akkusativ"],unters:["unter","Akkusativ"],vors:["vor","Akkusativ"],durchs:["durch","Akkusativ"],fürs:["für","Akkusativ"],ums:["um","Akkusativ"]};
     const GOV_FIXED = {von:"Dativ",mit:"Dativ",zu:"Dativ",aus:"Dativ",bei:"Dativ",nach:"Dativ",seit:"Dativ",gegenüber:"Dativ",
       für:"Akkusativ",durch:"Akkusativ",gegen:"Akkusativ",ohne:"Akkusativ",um:"Akkusativ",wegen:"Genitiv",trotz:"Genitiv",während:"Genitiv"};
-    function governedGroupInPart(sentence, tokens, at, pattern) {
+    function governedGroupInPart(sentence, tokens, at, pattern, impersonal = false) {
       const m = GOV_PATTERN.exec(String(pattern || "").trim());
       if (!m) return false;
       const preps = m[1].split(/\s*\/\s*/u), kase = m[2];
@@ -22492,20 +22493,50 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (zu before an infinitive is no preposition — zu halten, Schritt zu halten, aufzuhalten)
         if (p === "zu" && w === "zu" && /^\p{Ll}/u.test(tokens[k+1][0]) && (verbAnalyses.get(norm(tokens[k+1][0])) || []).some(r => r.kind === "infinitive")) continue;
         // (a bare zu before a capital word is a set phrase — zu Gnaden, zu Mariä Himmelfahrt, zu Hause)
-        if (w === "zu" && /^\p{Lu}/u.test(tokens[k+1][0])) continue;
+        // (not for the impersonal es-complement: es kommt zu Problemen — its group is a bare noun as often as not)
+        if (w === "zu" && /^\p{Lu}/u.test(tokens[k+1][0]) && !impersonal) continue;
+        // (tests chat 21.11: a personal pronoun after zu is a person reached — Das Paket? Es kommt morgen zu dir; not «es kommt zu»)
+        if (impersonal && /^(?:mir|dir|ihm|ihr|uns|euch|ihnen|Ihnen)$/u.test(tokens[k+1][0])) continue;
         // (a group of time or a set adverbial is no object — zur Mittagszeit, zum Glück, von Zeit zu Zeit, zum Beispiel)
         { let n = k + 1; while (n <= b && n <= k + 4 && !/^\p{Lu}/u.test(tokens[n][0])) n++;
           if (n <= b && /^\p{Lu}/u.test(tokens[n][0]) && (/(?:zeit|tag|nacht|stunde|woche|jahr|monat|abend|morgen|mittag)$/u.test(norm(tokens[n][0])) ||
             /^(?:glück|beispiel|teil|schluss|schluß|ende|anfang|beginn|hause|haus|fuß|fuss|recht|unrecht|zeit|stande|tisch)$/u.test(norm(tokens[n][0])))) continue; }
         // (a group right after a noun is the noun's — der Brief von meiner Mutter)
-        if (k > a && /^\p{Lu}/u.test(tokens[k-1][0]) && !clauseInitial(sentence, tokens[k-1].index) && (forms.get(norm(tokens[k-1][0])) || []).some(e => e.type === "Nomen")) continue;
+        // (advisor 21.11 (3): the impersonal es-complement before the noun's pair — dass es nach der Wahl zu einer Einigung kommt)
+        if (!impersonal && k > a && /^\p{Lu}/u.test(tokens[k-1][0]) && !clauseInitial(sentence, tokens[k-1].index) && (forms.get(norm(tokens[k-1][0])) || []).some(e => e.type === "Nomen")) continue;
         return true;
       }
+      return false;
+    }
+    // (advisor 21.11 (3), WN batch 197: es kommt zu etw. «доходить до, происходить») a complement of a verb whose pair the list of
+    // pairs writes with es — es kommt + zu + Dativ, as es geht um, es handelt sich um — holds only with es in the verb's part: Es kam
+    // zu einem Streit, … dass es zu einer Einigung kommt; not kam zu dem Turm, zum Einsatz kommen. No field of its own: the list
+    // (advisor 21.11)
+    let impersonalPairs = null;
+    async function loadImpersonalPairs() {
+      if (impersonalPairs) return impersonalPairs;
+      let rows = [];
+      try { rows = fallback.verbPrepositions ? await fallback.verbPrepositions() : []; } catch (_) { rows = []; }
+      impersonalPairs = new Set(rows.filter(([verb]) => /^es\s+\p{L}+$/u.test(String(verb || ""))).flatMap(([verb, prep, kase]) => {
+        const form = norm(String(verb).split(/\s+/u)[1]);
+        return [...new Set((verbAnalyses.get(form) || []).filter(a => a.kind === "finite").map(a => norm(a.base || "")))].map(b => `${b}|${norm(prep)}|${kase}`); }));
+      return impersonalPairs;
+    }
+    const impersonalComplement = (verb, x) => { const m = /^(\S+)\s*\+\s*(Akkusativ|Dativ|Genitiv)$/u.exec(String(x?.pattern || "").trim());
+      return !!(m && impersonalPairs && impersonalPairs.has(`${norm(String(verb || "")).replace(/^sich\s+/u, "")}|${norm(m[1])}|${m[2]}`)); };
+    function esInPart(sentence, tokens, at) {
+      const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      // (count 21.11: not over und / oder — ging es fort und kam zu einem Backofen: es is the girl of the first verb)
+      const STOP = /^(?:und|oder|aber|sondern|denn)$/u;
+      let a = at; while (a > 0 && !/[,;:.!?»«„“"()–—]/u.test(gap(a-1, a)) && !STOP.test(norm(tokens[a-1][0]))) a--;
+      let b = at; while (b + 1 < tokens.length && !/[,;:.!?»«„“"()–—]/u.test(gap(b, b+1)) && !STOP.test(norm(tokens[b+1][0]))) b++;
+      for (let k = a; k <= b; k++) if (norm(tokens[k][0]) === "es") return true;
       return false;
     }
     async function governedSenseFirst(word, context, result) {
       const c = result?.selected;
       if (!c || c.source !== "main" || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || !Number.isInteger(context?.tokenOffset)) return result;
+      await loadImpersonalPairs();
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'governedSenseFirst');
       const at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
@@ -22515,7 +22546,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const marks = (rows || []).filter(x => x && x.meaning_ru && GOV_PATTERN.test(String(x.pattern || "").trim()));
         for (const x of marks) {
           const k = ru.indexOf(String(x.meaning_ru).trim());
-          if (k > 0 && governedGroupInPart(sentence, tokens, at, x.pattern)) return k;
+          if (k > 0 && (impersonalComplement(c.lemma, x) ? esInPart(sentence, tokens, at) && governedGroupInPart(sentence, tokens, at, x.pattern, true) : governedGroupInPart(sentence, tokens, at, x.pattern))) return k;
         }
         return -1;
       };
@@ -22796,7 +22827,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (j < 0) return -1;
         for (;;) {
           if (j <= end && prepositions.has(word(j))) { const k = nounGroup(j + 1); if (k < 0) return j; j = k; continue; }
-          if (j <= end && /^(?:des|der|eines|einer)$/u.test(word(j))) { const k = nounGroup(j); if (k < 0) return j; j = k; continue; }
+          // (advisor 21.11: a genitive attribute right after the noun with any genitive determiner — Die Dynamik solcher Situationen
+          // gleiche …, die Preise solcher Autos, die Folgen dieser / vieler Entscheidungen: the leading noun stays the group)
+          if (j <= end && /^(?:des|der|eines|einer|dieser|jener|solcher|mancher|welcher|jeder|aller|vieler|weniger|mehrerer|einiger|keiner|meiner|deiner|seiner|ihrer|unserer|eurer)$/u.test(word(j))) { const k = nounGroup(j); if (k < 0) return j; j = k; continue; }
           return j;
         }
       };
@@ -22879,12 +22912,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const finiteAt = async i => /^\p{Ll}/u.test(tokens[i][0]) && (await tokenAnalyses(tokens[i][0], undefined, 'participlePhrase')).some(a => a.kind === "finite") &&
             !(/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") && !MARK.test(gap(i+1)));
           if (place.start === at && !place.opens && !SUBJECT_PRONOUNS.has(norm(tokens[at+1]?.[0] ?? ""))) {
-            let inPrep = false, object = false, after = -1;
+            // (advisor 21.11: a name of two words after the preposition is one group — begleitet von Hendrik Wüst, unterstützt von Angela
+            // Merkel: the first word a proper name of the external dictionary, the next no ordinary noun; not von Beruf Lehrer, seit Jahren
+            // Angst, aus Liebe Opfer, mit Freude Briefe)
+            const lookupGroups = async x => { try { return (fallback.lookupFacts ? (await fallback.lookupFacts(x)).groups : await fallback.lookup(x)) || []; } catch (_) { return []; } };
+            const knownName = async i => (await lookupGroups(tokens[i][0])).some(g => g.pos === "name");
+            const ordinaryNoun = async i => (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Nomen") || (await lookupGroups(tokens[i][0])).some(g => g.pos === "noun");
+            let inPrep = false, object = false, after = -1, nameAt = -1;
             for (let i = at + 1; i <= place.end; i++) {
               const t = norm(tokens[i][0]);
               if (prepositions.has(t) || contractionPreposition[t]) { inPrep = true; continue; }
               if (await finiteAt(i)) { after = i; break; }
-              if (/^\p{Lu}/u.test(tokens[i][0])) { if (!inPrep) { object = true; break; } inPrep = false; continue; }
+              if (/^\p{Lu}/u.test(tokens[i][0])) {
+                if (!inPrep) { if (nameAt === i - 1 && !MARK.test(gap(i)) && !(await ordinaryNoun(i))) { nameAt = i; continue; } object = true; break; }
+                inPrep = false; nameAt = await knownName(i) ? i : -1; continue; }
               if (OBJECT_WORD.test(t) && !inPrep) { object = true; break; }
             }
             // (count 21.11) the finite verb of the sentence comes after the phrase: in the same part only when the phrase opens the

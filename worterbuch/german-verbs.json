@@ -173,8 +173,8 @@
   {
     "id": "verb-005",
     "infinitive": "kommen",
-    "translation_ru": "приходить; приезжать",
-    "translation_en": "to come; to arrive",
+    "translation_ru": "приходить; приезжать; доходить (до чего-либо), происходить",
+    "translation_en": "to come; to arrive; to come to, to happen",
     "auxiliary": "sein",
     "example_de": "Der Zug kommt pünktlich.",
     "example_cloze": "Der Zug {{c1::kommt}} pünktlich.",
@@ -212,6 +212,12 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "прийти к чему-либо (к мысли), догадаться, додуматься",
         "note_en": "to hit on something (an idea), to think of something"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "meaning_ru": "доходить (до чего-либо), происходить",
+        "note_ru": "es kommt zu etw. — дело доходит до чего-либо, происходит что-либо: Es kam zu einem Streit.",
+        "note_en": "es kommt zu etw. — it comes to something, something happens: Es kam zu einem Streit."
       }
     ]
   },
