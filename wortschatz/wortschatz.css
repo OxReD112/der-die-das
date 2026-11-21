@@ -508,6 +508,25 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 .feedbackShell.show {
   display: flex;
 }
+/* 21.11.2026: the answer does not fit (DeutschBottom.fitScroll → .ui-fit-scroll on the shell): the page is one screen
+   high, the shell takes the room under the stage's top, only #feedback scrolls and Weiter stays on the bottom line */
+.app:has(.feedbackShell.ui-fit-scroll) {
+  height: 100dvh;
+}
+.stage:has(.feedbackShell.ui-fit-scroll) {
+  min-height: 0;
+}
+.feedbackShell.ui-fit-scroll {
+  --ui-fit-side: 22px;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+}
+/* the scrolling answer reaches out by the side padding (shared rule) — keep the text exactly as wide as before */
+.feedbackShell.ui-fit-scroll > .feedback {
+  width: auto;
+  align-self: stretch;
+}
 .feedback {
   display: none;
   width: 100%;

@@ -69,6 +69,7 @@ function placeTabletAnswer() {
     c = $("continue");
   shell.style.marginTop = "";
   c.style.marginTop = "";
+  DeutschBottom.fitScroll(shell, null); // off until measured again below
   if (!$("keyboard")?.classList.contains("is-touch") || !$("feedback").classList.contains("show")) return;
   if (TABLET.matches) {
     if (tabletTop == null) return;
@@ -77,6 +78,9 @@ function placeTabletAnswer() {
   } else if (keyboardBottom == null) return;
   // the shared bottom line (components/deutsch-bottom-v1.js) = where the keyboard ended, on phones and tablets
   DeutschBottom.pin(c, c, { scroller: null });
+  // 21.11.2026 (Alena): a long sentence + translation (iPhone SE) pushed Weiter below the screen. Now Weiter stays on
+  // the line and only the answer scrolls above it (the shared last way out, as Ortspräpositionen / Partikeln).
+  if (DeutschBottom.fitScroll(shell, $("feedback"), { button: c, scroller: document.scrollingElement })) c.style.marginTop = "";
 }
 addEventListener("resize", fitTopZone);
 addEventListener("resize", rememberTabletTop);
@@ -232,7 +236,7 @@ function render() {
   $("almostHint").textContent = "";
   $("question").classList.remove("hidden");
   setupPeek(v.canPeek);
-  $("feedback").className = "feedback";
+  $("feedback").className = "feedback ui-fit-body"; // ui-fit-body: the part that scrolls when the answer does not fit (21.11)
   $("feedbackShell").className = "feedbackShell";
   $("feedbackShell").style.transform = "";
   $("feedbackShell").style.opacity = "";
@@ -284,7 +288,7 @@ function check() {
   $("question").classList.add("hidden");
   $("keyboard")?.classList.remove("show");
   $("feedbackShell").className = "feedbackShell show";
-  $("feedback").className = "feedback show " + res.kind;
+  $("feedback").className = "feedback ui-fit-body show " + res.kind;
   $("answerSentence").innerHTML = revealHTML(res.answer);
   $("answerTranslation").textContent = res.translation;
   $("typedDiff").innerHTML = res.diff ? diffHTML(res.diff.top) : "";

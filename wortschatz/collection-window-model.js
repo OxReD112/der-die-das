@@ -26,7 +26,7 @@
      create() / createName(text)      «Your Own Words»
      importScreen(opts) / runImport(text, opts) / fileProblem(size) / fileUnreadable()     «Import List»
      result(r, opts)                  «Words Added» / «Collection Created»
-     format()                         «Format for the AI» (FORMAT_BLOCK_EN / _RU, Copy / Copied ✓ / select it)
+     format()                         «Format for the AI» (FORMAT_BLOCK(): always English, Copy / Copied ✓ / select it)
      exportFile()                     { name, text } — the page downloads it (the app: the share sheet)
      settings() / setPace(id)         «Lerntempo»
      SETS, loadSet(def), setsScreen(), setWords(def), setPick(…), addFromSet(…)            word sets
@@ -167,6 +167,22 @@
       });
   }
   const plainText = toks => toks.map(t => t.lead + t.core + t.trail).join(" ");
+  // 21.11.2026 (Alena): a longer sentence pushes the keyboard off a small screen in the round (iPhone SE: about 100
+  // characters fit). Own words: every field has a limit (LIMIT, in characters; the sentence without {{c1::…}}) — the
+  // others keep the answer screen in place (Alena 21.11). The form stops typing there (maxlength) and says tooLong
+  // under the field; import skips such cards and says which field. Words from a book are Wörterbuch cards too (their
+  // examples are kept within the limits, cards chat 21.11), so the same limits apply when one is edited before adding.
+  const LIMIT = { sentence: 100, sentenceTranslation: 130, translation: 60, otherMeanings: 150, base: 50, grammar: 60 };
+  const LIMIT_NAME = {
+    sentence: () => L("Sentence", "Предложение"),
+    sentenceTranslation: () => L("Sentence Translation", "Перевод предложения"),
+    translation: () => L("Meaning", "Значение"),
+    otherMeanings: () => L("Other Meanings", "Другие значения"),
+    base: () => L("Base Form", "Начальная форма"),
+    grammar: () => L("Grammar", "Грамматика")
+  };
+  const tooLong = () => L("That's a bit long - try a shorter one.", "Ой, слишком длинно. Сократи немного.");
+  const plainOf = sentence => String(sentence || "").replace(/\{\{c\d+::(.*?)(::.*?)?\}\}/g, "$1");
   const clozeText = toks => toks.map(t => (t.on && t.core ? t.lead + "{{c1::" + t.core + "}}" + t.trail : t.lead + t.core + t.trail)).join(" ");
   const hiddenWords = toks => toks.filter(t => t.on && t.core).map(t => t.core).join(" ");
   // The preview with the gap: [{ text } | { blank: true }] in order — " " between tokens; null when no word is ticked.
@@ -197,13 +213,13 @@
     const toks = editing ? tokensFromCloze(w.sentence) : prefill ? tokensFromCloze(prefill.sentence || "") : [];
     const auto = hiddenWords(toks);
     const fields = [
-      { id: "cfSentence", tag: "textarea", rows: "2", label: L("Sentence", "Предложение"), optional: false, placeholder: "Ich schlage Samstag vor.", value: plainText(toks) },
-      { id: "cfMeaning", tag: "input", label: L("Meaning", "Значение"), optional: false, placeholder: L("to suggest", "предлагать"), value: value("translation") },
+      { id: "cfSentence", tag: "textarea", rows: "2", label: L("Sentence", "Предложение"), optional: false, placeholder: "Ich schlage Samstag vor.", value: plainText(toks), max: LIMIT.sentence },
+      { id: "cfMeaning", tag: "input", label: L("Meaning", "Значение"), optional: false, placeholder: L("to suggest", "предлагать"), value: value("translation"), max: LIMIT.translation },
       // 2026-10-26: the word's other meanings (shown quietly as „auch: …“ under the answer), separated by „;“
-      { id: "cfOther", tag: "input", label: L("Other Meanings", "Другие значения"), optional: true, placeholder: L("to propose; to recommend", "выдвигать; советовать"), value: value("otherMeanings") },
-      { id: "cfTrans", tag: "input", label: L("Sentence Translation", "Перевод предложения"), optional: true, placeholder: L("I suggest Saturday.", "Предлагаю субботу."), value: value("sentenceTranslation") },
-      { id: "cfBase", tag: "input", label: L("Base Form", "Начальная форма"), optional: true, placeholder: null, value: editing && w.base && w.base !== auto ? w.base : prefill ? prefill.base || "" : "" },
-      { id: "cfGram", tag: "input", label: L("Grammar", "Грамматика"), optional: true, placeholder: "schlug vor · hat vorgeschlagen", value: value("grammar") }
+      { id: "cfOther", tag: "input", label: L("Other Meanings", "Другие значения"), optional: true, placeholder: L("to propose; to recommend", "выдвигать; советовать"), value: value("otherMeanings"), max: LIMIT.otherMeanings },
+      { id: "cfTrans", tag: "input", label: L("Sentence Translation", "Перевод предложения"), optional: true, placeholder: L("I suggest Saturday.", "Предлагаю субботу."), value: value("sentenceTranslation"), max: LIMIT.sentenceTranslation },
+      { id: "cfBase", tag: "input", label: L("Base Form", "Начальная форма"), optional: true, placeholder: null, value: editing && w.base && w.base !== auto ? w.base : prefill ? prefill.base || "" : "", max: LIMIT.base },
+      { id: "cfGram", tag: "input", label: L("Grammar", "Грамматика"), optional: true, placeholder: "schlug vor · hat vorgeschlagen", value: value("grammar"), max: LIMIT.grammar }
     ];
     return {
       view: "form",
@@ -217,6 +233,7 @@
       examples: !editing, // examples (placeholders) only for a new word
       hint: L("Tap the word you want to practise. For separable verbs, tap both parts.", "Нажми на слово, которое хочешь тренировать. У глаголов с отделяемой приставкой — на обе части."),
       gapLabel: L("gap", "пропуск"),
+      tooLong: tooLong(), // shown under the form when a field with `max` is full
       posLabel: L("Word Class", "Часть речи"),
       optional: T.optional(),
       pos: editing ? w.pos || "" : prefill ? prefill.pos || "" : "",
@@ -256,6 +273,9 @@
     if (!v.toks.length) return { error: L("Please type a sentence.", "Напиши предложение."), focus: "cfSentence" };
     if (!hiddenWords(v.toks)) return { error: L("Please tap the word you want to practise.", "Нажми на слово, которое хочешь тренировать.") };
     if (!v.meaning.trim()) return { error: L("Please type the meaning.", "Напиши значение."), focus: "cfMeaning" };
+    const over = [["cfSentence", plainText(v.toks), LIMIT.sentence], ["cfMeaning", v.meaning, LIMIT.translation], ["cfOther", v.other, LIMIT.otherMeanings],
+      ["cfTrans", v.trans, LIMIT.sentenceTranslation], ["cfBase", v.base, LIMIT.base], ["cfGram", v.gram, LIMIT.grammar]].find(([, text, max]) => String(text || "").length > max);
+    if (over) return { error: tooLong(), focus: over[0] };
     try {
       if (opts.validate) {
         const problems = await opts.validate();
@@ -636,22 +656,29 @@
 
   /* ---------- own words: create a collection / import a list ---------- */
   // The AI part: users write their own request (which words, level, language) and paste this block after it.
-  const FORMAT_BLOCK_EN = `Format the words as a JSON list and answer with the list only - no other text.
+  // 21.11.2026 (Alena): always in English (an AI reads it, not the user); the translations default to the language
+  // chosen in the app; the limits (LIMIT) and otherMeanings are in it — exactly what the import takes.
+  const AI_LANGUAGE = { en: "English", ru: "Russian", pl: "Polish" };
+  const FORMAT_BLOCK = () => {
+    const lang = AI_LANGUAGE[D()?.getDisplayLang?.() || (RU() ? "ru" : "en")] || "English";
+    const q = s => JSON.stringify(s);
+    return `Format the words as a JSON list and answer with the list only - no other text.
 One object per word, like this:
 
 [
   {
     "sentence": "Ich {{c1::schlage}} Samstag {{c1::vor}}.",
-    "translation": "to suggest",
-    "sentenceTranslation": "I suggest Saturday.",
+    "translation": ${q(L("to suggest", "предлагать"))},
+    "otherMeanings": ${q(L("to propose; to recommend", "выдвигать; советовать"))},
+    "sentenceTranslation": ${q(L("I suggest Saturday.", "Предлагаю субботу."))},
     "base": "vorschlagen",
     "grammar": "schlägt vor · schlug vor · hat vorgeschlagen",
     "pos": "Verb"
   },
   {
     "sentence": "Der {{c1::Termin}} ist morgen um zehn.",
-    "translation": "appointment",
-    "sentenceTranslation": "The appointment is tomorrow at ten.",
+    "translation": ${q(L("appointment", "встреча"))},
+    "sentenceTranslation": ${q(L("The appointment is tomorrow at ten.", "Встреча завтра в десять."))},
     "base": "der Termin",
     "grammar": "die Termine",
     "pos": "Substantiv"
@@ -659,42 +686,13 @@ One object per word, like this:
 ]
 
 Rules:
-- "sentence": a short, natural, everyday German sentence. Mark the word to practise with {{c1::…}}, exactly as it appears in the sentence.
+- "sentence": a short, natural, everyday German sentence - at most ${LIMIT.sentence} characters. Mark the word to practise with {{c1::…}}, exactly as it appears in the sentence.
 - Mark only ONE word per sentence. Separable verbs: mark both parts, e.g. "Ich {{c1::rufe}} dich morgen {{c1::an}}."
-- "translation" (meaning of the word) and "sentenceTranslation" (the whole sentence): in the language I asked for - English if I didn't say.
-- "base": the dictionary form. Nouns with der / die / das.
-- "grammar": verbs: 3rd person · Präteritum · Perfekt. Nouns: the plural. Otherwise leave it empty.
+- "translation": the meaning of the word in this sentence (at most ${LIMIT.translation} characters). "otherMeanings": its other common meanings, separated by ";" - or leave it out (at most ${LIMIT.otherMeanings} characters). "sentenceTranslation": the whole sentence (at most ${LIMIT.sentenceTranslation} characters). All of them in ${lang}, unless I asked for another language.
+- "base": the dictionary form, at most ${LIMIT.base} characters. Nouns with der / die / das.
+- "grammar": verbs: 3rd person · Präteritum · Perfekt. Nouns: the plural. Otherwise leave it out (at most ${LIMIT.grammar} characters).
 - "pos": the word class in German (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).`;
-  const FORMAT_BLOCK_RU = `Оформи слова как список JSON и ответь только списком — без другого текста.
-Один объект на слово, вот так:
-
-[
-  {
-    "sentence": "Ich {{c1::schlage}} Samstag {{c1::vor}}.",
-    "translation": "предлагать",
-    "sentenceTranslation": "Предлагаю субботу.",
-    "base": "vorschlagen",
-    "grammar": "schlägt vor · schlug vor · hat vorgeschlagen",
-    "pos": "Verb"
-  },
-  {
-    "sentence": "Der {{c1::Termin}} ist morgen um zehn.",
-    "translation": "встреча, назначенное время",
-    "sentenceTranslation": "Встреча завтра в десять.",
-    "base": "der Termin",
-    "grammar": "die Termine",
-    "pos": "Substantiv"
-  }
-]
-
-Правила:
-- "sentence": короткое естественное немецкое предложение из обычной жизни. Слово для тренировки отметь как {{c1::…}} — ровно в том виде, в каком оно стоит в предложении.
-- Отмечай только ОДНО слово в предложении. Глаголы с отделяемой приставкой: отметь обе части, например "Ich {{c1::rufe}} dich morgen {{c1::an}}."
-- "translation" (значение слова) и "sentenceTranslation" (всё предложение): на языке, который я попросил; если я не сказал — на русском.
-- "base": словарная форма. Существительные — с der / die / das.
-- "grammar": у глаголов — 3-е лицо · Präteritum · Perfekt. У существительных — множественное число. Иначе оставь пустым.
-- "pos": часть речи по-немецки (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).`;
-  const FORMAT_BLOCK = () => L(FORMAT_BLOCK_EN, FORMAT_BLOCK_RU);
+  };
 
   // No collection yet → own words: name, then add the first word (Wörterbuch search / typing) or import a list.
   function create() {
@@ -734,9 +732,30 @@ Rules:
     const parsed = C.parse(text);
     if (parsed.error)
       return { error: parsed.error === "empty" ? L("Please paste the list first.", "Сначала вставь список.") : L("This doesn't look like a list. Copy the AI's whole answer - from [ to ].", "Это не похоже на список. Скопируй весь ответ ИИ — от [ до ].") };
+    // too long (21.11.2026): skipped with their number, the rest goes on as before
+    const long = [],
+      items = [],
+      numbers = [];
+    parsed.items.forEach((raw, i) => {
+      const t = raw && (raw.sentenceTranslation !== undefined ? raw.sentenceTranslation : raw.ru !== undefined ? raw.ru : raw.en);
+      const field = raw && Object.keys(LIMIT).find(k => {
+        const value = k === "sentence" ? plainOf(raw.sentence) : k === "sentenceTranslation" ? t : raw[k];
+        // a value may be one string or { ru, en, … } (the built-in format)
+        const texts = typeof value === "string" ? [value] : value && typeof value === "object" ? Object.values(value) : [];
+        return texts.some(x => typeof x === "string" && x.trim().length > LIMIT[k]);
+      });
+      if (field) long.push({ n: i + 1, reason: L("Too long: {0}", "Слишком длинно: {0}", LIMIT_NAME[field]()), preview: plainOf(raw.sentence).slice(0, 60) });
+      else {
+        items.push(raw);
+        numbers.push(i + 1);
+      }
+    });
     let r;
     try {
-      r = opts.create ? C.create(opts.name, parsed.items) : C.add(parsed.items);
+      r = opts.create ? C.create(opts.name, items) : C.add(items);
+      if (long.length) {
+        r.skipped = r.skipped.map(x => Object.assign({}, x, { n: numbers[x.n - 1] })).concat(long).sort((a, b) => a.n - b.n);
+      }
     } catch (e) {
       return { error: e.message === "storage-full" ? L("Storage is full - nothing was saved.", "Память заполнена — ничего не сохранено.") : L("The list couldn't be saved.", "Не удалось сохранить список.") };
     }
@@ -825,7 +844,7 @@ Rules:
     READING, readingSelected, confirmReading, readingDone,
     SETS, loadSet, setCount, chooseCount, setsScreen, SETPICK, setWords, setPickState, inList, addFromSet,
     settings, setPace,
-    FORMAT_BLOCK_EN, FORMAT_BLOCK_RU, create, createName, importScreen, fileProblem, fileUnreadable, runImport, result, format,
+    FORMAT_BLOCK, LIMIT, create, createName, importScreen, fileProblem, fileUnreadable, runImport, result, format,
     rename, renameTo, exportFile, deleteScreen, deleteCollection, sessionEditable
   };
 })(typeof window !== "undefined" ? window : globalThis);

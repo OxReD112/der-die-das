@@ -398,6 +398,10 @@ textarea.coll-field {
 .coll-error:empty {
   display: none;
 }
+/* 21.11: „too long“ right under its field (6, as label → field), the chips below it a little farther */
+.coll-limit {
+  margin: 6px 0 14px;
+}
 .coll-form-buttons {
   flex: 0 0 auto;
   display: flex;

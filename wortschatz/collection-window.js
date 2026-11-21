@@ -162,10 +162,13 @@
     if (f.tag === "textarea") attrs.rows = f.rows;
     else attrs.type = "text";
     if (f.placeholder !== null) attrs.placeholder = f.placeholder;
+    if (f.max) attrs.maxlength = String(f.max); // 21.11: stops typing there (the model's SENTENCE_MAX / TRANSLATION_MAX)
     const node = el(f.tag, "coll-field", null, Object.assign({ autocomplete: "off", autocapitalize: "off", spellcheck: "false" }, attrs));
     l.setAttribute("for", f.id);
     wrap.appendChild(l);
     wrap.appendChild(node);
+    // 21.11: right under a field with a limit — „too long“ when it is full (see the form's input listener)
+    if (f.max) node.limitNote = wrap.appendChild(el("p", "coll-error coll-limit"));
     node.value = f.value;
     return [wrap, node];
   }
@@ -231,9 +234,12 @@
     }
     const err = el("p", "coll-error");
     sc.appendChild(err);
-    sc.addEventListener("input", () => {
-      err.textContent = "";
-    }); // an old hint disappears as soon as you type
+    sc.addEventListener("input", e => {
+      const f = e.target;
+      err.textContent = ""; // an old hint disappears as soon as you type
+      // a full field (maxlength, also after pasting) says so right under it
+      if (f && f.limitNote) f.limitNote.textContent = f.value.length >= f.maxLength ? v.tooLong : "";
+    });
     if (!v.examples)
       sc.querySelectorAll(".coll-field").forEach(f => {
         f.placeholder = "";
