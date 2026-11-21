@@ -35255,10 +35255,10 @@
     "plural": "Indianer",
     "translation_ru": "индеец (дискриминирующее внешнее обозначение); разведчик (жарг.)",
     "translation_en": "Native American man (term labelled discriminatory); scout (jargon)",
-    "example_cloze": "In älteren Büchern wird ein Angehöriger der indigenen Bevölkerung Amerikas oft als {{c1::Indianer}} bezeichnet.",
-    "example_ru": "В старых книгах представителя коренного населения Америки часто называют индейцем.",
-    "example_en": "In older books, a member of the indigenous population of the Americas is often referred to as an Indian.",
-    "example_de": "In älteren Büchern wird ein Angehöriger der indigenen Bevölkerung Amerikas oft als Indianer bezeichnet.",
+    "example_cloze": "In älteren Büchern werden die Ureinwohner Amerikas oft als {{c1::Indianer}} bezeichnet.",
+    "example_ru": "В старых книгах коренных жителей Америки часто называют индейцами.",
+    "example_en": "In older books, the indigenous peoples of the Americas are often called Indians.",
+    "example_de": "In älteren Büchern werden die Ureinwohner Amerikas oft als Indianer bezeichnet.",
     "usage_note_ru": "Duden помечает это внешнее обозначение как дискриминирующее. Нейтральнее назвать конкретный народ или сказать indigene Bevölkerung Amerikas.",
     "usage_note_en": "Duden labels this external designation as discriminatory. Use the specific people’s name or indigene Bevölkerung Amerikas as neutral alternatives."
   },
@@ -41294,10 +41294,10 @@
     "plural": "Eskalationen",
     "translation_ru": "постепенное усиление применяемых средств; неконтролируемое обострение конфликта",
     "translation_en": "gradual increase in the means employed; uncontrolled escalation of a conflict",
-    "example_cloze": "Der Bericht beschreibt die {{c1::Eskalation}} der militärischen Maßnahmen von Warnungen bis zu Luftangriffen.",
-    "example_ru": "Доклад описывает постепенное усиление военных мер от предупреждений до авиаударов.",
-    "example_en": "The report describes the escalation of military measures from warnings to air strikes.",
-    "example_de": "Der Bericht beschreibt die Eskalation der militärischen Maßnahmen von Warnungen bis zu Luftangriffen."
+    "example_cloze": "Der Bericht beschreibt die {{c1::Eskalation}} der Maßnahmen von Warnungen bis zu Luftangriffen.",
+    "example_ru": "Доклад описывает постепенное усиление мер от предупреждений до авиаударов.",
+    "example_en": "The report describes the escalation of measures from warnings to air strikes.",
+    "example_de": "Der Bericht beschreibt die Eskalation der Maßnahmen von Warnungen bis zu Luftangriffen."
   },
   {
     "id": "noun-3144",
@@ -56583,10 +56583,10 @@
     "plural": "Heuchlerinnen",
     "translation_ru": "лицемерка, ханжа",
     "translation_en": "hypocrite (female)",
-    "example_de": "Sie nannte ihre Kollegin eine Heuchlerin, weil sie ihr ins Gesicht lächelte und hinter ihrem Rücken lästerte.",
-    "example_cloze": "Sie nannte ihre Kollegin eine {{c1::Heuchlerin}}, weil sie ihr ins Gesicht lächelte und hinter ihrem Rücken lästerte.",
-    "example_ru": "Она назвала коллегу лицемеркой, потому что та улыбалась ей в лицо, а за спиной сплетничала.",
-    "example_en": "She called her colleague a hypocrite because she smiled to her face and gossiped behind her back."
+    "example_de": "Sie nannte die Kollegin eine Heuchlerin, die ins Gesicht lächelt und hinterm Rücken lästert.",
+    "example_cloze": "Sie nannte die Kollegin eine {{c1::Heuchlerin}}, die ins Gesicht lächelt und hinterm Rücken lästert.",
+    "example_ru": "Она назвала коллегу лицемеркой, которая в лицо улыбается, а за спиной сплетничает.",
+    "example_en": "She called her colleague a hypocrite who smiles to her face and gossips behind her back."
   },
   {
     "id": "noun-4263",

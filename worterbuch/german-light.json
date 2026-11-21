@@ -11,7 +11,7 @@
    "Geschworenengerichten"
   ],
   "translation_en": "jury court; court with a jury",
-  "translation_ru": "(юр.) суд присяжных"
+  "translation_ru": "суд присяжных"
  },
  {
   "id": "light-0002",
@@ -1528,5 +1528,708 @@
     "note_en": "subsidy towards something: ein Zuschuss zu den Fahrtkosten"
    }
   ]
+ },
+ {
+  "id": "light-0156",
+  "word": "einbinden",
+  "pos": "verb",
+  "translation_en": "to wrap, to bandage; to bind, to cover; to involve, to integrate",
+  "translation_ru": "завёртывать, перевязывать; переплетать; вовлекать, включать",
+  "complements": [
+   {
+    "pattern": "in + Akkusativ"
+   }
+  ]
+ },
+ {
+  "id": "light-0157",
+  "word": "handyfrei",
+  "pos": "adj",
+  "translation_en": "phone-free, without a mobile phone; where phones may not be used",
+  "translation_ru": "без мобильных телефонов; где нельзя пользоваться телефоном"
+ },
+ {
+  "id": "light-0158",
+  "word": "verkehrt",
+  "pos": "adj",
+  "translation_en": "wrong, mistaken; the wrong way round, back to front, upside down, inside out",
+  "translation_ru": "неправильный, неверный; наоборот, задом наперёд, вверх ногами, наизнанку"
+ },
+ {
+  "id": "light-0159",
+  "word": "Tüchlein",
+  "pos": "noun",
+  "gender": "n",
+  "plural": "Tüchlein",
+  "translation_en": "handkerchief, small tablecloth; small piece of cloth, scrap of cloth",
+  "translation_ru": "платочек, скатёрка; кусочек ткани, лоскуток"
+ },
+ {
+  "id": "light-0160",
+  "word": "abwiegen",
+  "pos": "verb",
+  "translation_en": "to weigh out; to weigh",
+  "translation_ru": "отвешивать; взвешивать на весах"
+ },
+ {
+  "id": "light-0161",
+  "word": "Sonnenbrand",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Sonnenbrände",
+  "translation_en": "sunburn; literary burning heat of the sun",
+  "translation_ru": "солнечный ожог; книжн. палящее солнце, зной"
+ },
+ {
+  "id": "light-0162",
+  "word": "lieblich",
+  "pos": "adj",
+  "translation_en": "lovely, charming; pleasant, sweet; medium-sweet",
+  "translation_ru": "милый, прелестный; приятный, нежный; полусладкий"
+ },
+ {
+  "id": "light-0163",
+  "word": "Drehschemel",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "turntable, fifth wheel; swivel stool",
+  "translation_ru": "поворотный круг передней оси, поворотная тележка прицепа; вращающийся табурет"
+ },
+ {
+  "id": "light-0164",
+  "word": "Photografie",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "photograph; photography",
+  "translation_ru": "фотография; фотографирование"
+ },
+ {
+  "id": "light-0165",
+  "word": "annehmbar",
+  "pos": "adj",
+  "translation_en": "acceptable; tolerable, reasonable",
+  "translation_ru": "приемлемый; сносный"
+ },
+ {
+  "id": "light-0166",
+  "word": "Niedergeschlagenheit",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "dejection, despondency, depression, low spirits",
+  "translation_ru": "подавленность, уныние"
+ },
+ {
+  "id": "light-0167",
+  "word": "Streitflegel",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "war flail, military flail",
+  "translation_ru": "боевой цеп"
+ },
+ {
+  "id": "light-0168",
+  "word": "Kriegsflegel",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "war flail, military flail",
+  "translation_ru": "боевой цеп"
+ },
+ {
+  "id": "light-0169",
+  "word": "inkorrigibel",
+  "pos": "adj",
+  "translation_en": "incorrigible",
+  "translation_ru": "неисправимый"
+ },
+ {
+  "id": "light-0170",
+  "word": "unverbesserlich",
+  "pos": "adj",
+  "translation_en": "incorrigible, hopeless",
+  "translation_ru": "неисправимый"
+ },
+ {
+  "id": "light-0171",
+  "word": "verkalken",
+  "pos": "verb",
+  "auxiliary": "sein",
+  "translation_en": "to calcify; to fur up, to scale; colloq. to become senile",
+  "translation_ru": "обызвествляться; покрываться накипью; разг. впадать в маразм"
+ },
+ {
+  "id": "light-0172",
+  "word": "Kreuzprofil",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "cross-shaped profile, cruciform section",
+  "translation_ru": "крестообразный профиль"
+ },
+ {
+  "id": "light-0173",
+  "word": "umkodieren",
+  "pos": "verb",
+  "translation_en": "to recode, to re-encode",
+  "translation_ru": "перекодировать"
+ },
+ {
+  "id": "light-0174",
+  "word": "diklin",
+  "pos": "adj",
+  "translation_en": "bot. diclinous, unisexual",
+  "translation_ru": "ботан. раздельнополый, диклинный"
+ },
+ {
+  "id": "light-0175",
+  "word": "Mittellinie",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "sport halfway line; centre line of a road",
+  "translation_ru": "спорт. средняя линия поля; осевая линия дороги"
+ },
+ {
+  "id": "light-0176",
+  "word": "knetbar",
+  "pos": "adj",
+  "translation_en": "kneadable, malleable",
+  "translation_ru": "пластичный, поддающийся лепке"
+ },
+ {
+  "id": "light-0177",
+  "word": "heranstürmen",
+  "pos": "verb",
+  "auxiliary": "sein",
+  "translation_en": "to rush up, to charge up",
+  "translation_ru": "мчаться, устремляться, налетать"
+ },
+ {
+  "id": "light-0178",
+  "word": "Anreißzirkel",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "tech. scribing compass, dividers",
+  "translation_ru": "техн. разметочный циркуль"
+ },
+ {
+  "id": "light-0179",
+  "word": "Quartilsabstand",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "math. interquartile range",
+  "translation_ru": "матем. межквартильный размах"
+ },
+ {
+  "id": "light-0180",
+  "word": "Selbstvergewisserung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "self-reassurance, self-affirmation",
+  "translation_ru": "обретение уверенности в себе, утверждение в себе"
+ },
+ {
+  "id": "light-0181",
+  "word": "Strömling",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "Baltic herring",
+  "translation_ru": "салака, балтийская сельдь"
+ },
+ {
+  "id": "light-0182",
+  "word": "Schiffskreisel",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "naut. ship stabilizer gyroscope",
+  "translation_ru": "морск. гироскопический успокоитель качки"
+ },
+ {
+  "id": "light-0183",
+  "word": "Bewegungsstörung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "disruption of movement, disturbance of movement; med. movement disorder",
+  "translation_ru": "нарушение движения; мед. двигательное расстройство"
+ },
+ {
+  "id": "light-0184",
+  "word": "konditionell",
+  "pos": "adj",
+  "translation_en": "relating to physical fitness",
+  "translation_ru": "связанный с физической формой"
+ },
+ {
+  "id": "light-0185",
+  "word": "Hornklee",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "bot. bird's-foot trefoil",
+  "translation_ru": "ботан. лядвенец"
+ },
+ {
+  "id": "light-0186",
+  "word": "Sturmhauch",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "breath of a storm, gust",
+  "translation_ru": "порыв бури, дыхание бури"
+ },
+ {
+  "id": "light-0187",
+  "word": "Forschungsreaktor",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "research reactor",
+  "translation_ru": "исследовательский реактор"
+ },
+ {
+  "id": "light-0188",
+  "word": "patentmäßig",
+  "pos": "adj",
+  "translation_en": "patent, according to the patent",
+  "translation_ru": "патентный, согласно патенту"
+ },
+ {
+  "id": "light-0189",
+  "word": "Ungelegenheit",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "inconvenience, trouble",
+  "translation_ru": "неудобство, хлопоты, затруднение"
+ },
+ {
+  "id": "light-0190",
+  "word": "schulmäßig",
+  "pos": "adj",
+  "translation_en": "school-like, as at school; textbook, by the book",
+  "translation_ru": "школьный, соответствующий требованиям школы; по всем правилам, образцовый"
+ },
+ {
+  "id": "light-0191",
+  "word": "Plastikdecke",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "plastic tablecloth, oilcloth; plastic cover",
+  "translation_ru": "пластиковая скатерть, клеёнка; пластиковое покрытие"
+ },
+ {
+  "id": "light-0192",
+  "word": "Satzlängenverteilung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "ling. sentence length distribution",
+  "translation_ru": "лингв. распределение длины предложений"
+ },
+ {
+  "id": "light-0193",
+  "word": "Disziplinargewalt",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "disciplinary authority",
+  "translation_ru": "дисциплинарная власть"
+ },
+ {
+  "id": "light-0194",
+  "word": "vollwertig",
+  "pos": "adj",
+  "translation_en": "full, fully-fledged, adequate",
+  "translation_ru": "полноценный"
+ },
+ {
+  "id": "light-0195",
+  "word": "Interorezeptor",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "physiol. interoceptor",
+  "translation_ru": "физиол. интерорецептор"
+ },
+ {
+  "id": "light-0196",
+  "word": "Radiogramm",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "radiogram, radio message; radiograph, X-ray image",
+  "translation_ru": "радиограмма; рентгенограмма"
+ },
+ {
+  "id": "light-0197",
+  "word": "durchproben",
+  "pos": "verb",
+  "separable_prefix": "durch",
+  "auxiliary": "haben",
+  "forms": [
+   "durchproben",
+   "durchprobe",
+   "durchprobst",
+   "durchprobt",
+   "durchprobte",
+   "durchprobtest",
+   "durchprobten",
+   "durchprobtet",
+   "durchgeprobt",
+   "durchzuproben"
+  ],
+  "translation_en": "to rehearse through",
+  "translation_ru": "прорепетировать целиком, прогнать"
+ },
+ {
+  "id": "light-0198",
+  "word": "verfüttern",
+  "pos": "verb",
+  "translation_en": "to feed to animals",
+  "translation_ru": "скармливать"
+ },
+ {
+  "id": "light-0199",
+  "word": "verleasen",
+  "pos": "verb",
+  "translation_en": "to lease out",
+  "translation_ru": "сдавать в лизинг"
+ },
+ {
+  "id": "light-0200",
+  "word": "einfluten",
+  "pos": "verb",
+  "auxiliary": "sein",
+  "translation_en": "to flood in, to pour in",
+  "translation_ru": "вливаться потоком, литься"
+ },
+ {
+  "id": "light-0201",
+  "word": "Geblödel",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "fooling around, silly talk",
+  "translation_ru": "дурачество, глупая болтовня"
+ },
+ {
+  "id": "light-0202",
+  "word": "Giftblase",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "venom sac, venom gland",
+  "translation_ru": "ядовитый пузырёк, ядовитая железа"
+ },
+ {
+  "id": "light-0203",
+  "word": "ferrielektrisch",
+  "pos": "adj",
+  "translation_en": "phys. ferrielectric",
+  "translation_ru": "физ. ферриэлектрический"
+ },
+ {
+  "id": "light-0204",
+  "word": "Heizwerk",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "heating plant",
+  "translation_ru": "котельная, районная котельная"
+ },
+ {
+  "id": "light-0205",
+  "word": "Erdschluß",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "electr. earth fault, ground fault",
+  "translation_ru": "эл. замыкание на землю"
+ },
+ {
+  "id": "light-0206",
+  "word": "Entfeuchter",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "dehumidifier",
+  "translation_ru": "осушитель воздуха"
+ },
+ {
+  "id": "light-0207",
+  "word": "Linierung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "ruling, lining",
+  "translation_ru": "линовка, разлиновка"
+ },
+ {
+  "id": "light-0208",
+  "word": "ankörnen",
+  "pos": "verb",
+  "separable_prefix": "an",
+  "auxiliary": "haben",
+  "forms": [
+   "ankörnen",
+   "ankörne",
+   "ankörnst",
+   "ankörnt",
+   "ankörnte",
+   "ankörntest",
+   "ankörnten",
+   "ankörntet",
+   "angekörnt",
+   "anzukörnen"
+  ],
+  "translation_en": "tech. to centre-punch; hunt. to bait with grain",
+  "translation_ru": "техн. кернить, накернивать; охот. приманивать зерном"
+ },
+ {
+  "id": "light-0209",
+  "word": "Meteoropathie",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "med. meteoropathy, weather sensitivity",
+  "translation_ru": "мед. метеопатия, метеочувствительность"
+ },
+ {
+  "id": "light-0210",
+  "word": "Meerzwiebel",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "bot. sea squill",
+  "translation_ru": "ботан. морской лук"
+ },
+ {
+  "id": "light-0211",
+  "word": "Doppeldeckerbus",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "double-decker bus",
+  "translation_ru": "двухэтажный автобус"
+ },
+ {
+  "id": "light-0212",
+  "word": "Holzgeländer",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "wooden railing, wooden banister",
+  "translation_ru": "деревянные перила"
+ },
+ {
+  "id": "light-0213",
+  "word": "Eisbombe",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "bombe glacée, ice-cream bombe",
+  "translation_ru": "бомба-глясе, мороженое-бомба"
+ },
+ {
+  "id": "light-0214",
+  "word": "Maschinenbauwesen",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "mechanical engineering",
+  "translation_ru": "машиностроение"
+ },
+ {
+  "id": "light-0215",
+  "word": "Trampfahrt",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "naut. tramp voyage; tramp shipping",
+  "translation_ru": "морск. трамповый рейс; трамповое судоходство"
+ },
+ {
+  "id": "light-0216",
+  "word": "Futterzusatzstoff",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "feed additive",
+  "translation_ru": "кормовая добавка"
+ },
+ {
+  "id": "light-0217",
+  "word": "sinnverwandt",
+  "pos": "adj",
+  "translation_en": "synonymous, related in meaning"
+ },
+ {
+  "id": "light-0218",
+  "word": "unbeugsam",
+  "pos": "adj",
+  "translation_en": "unbending, rigid; inflexible, uncompromising, indomitable"
+ },
+ {
+  "id": "light-0219",
+  "word": "germanisieren",
+  "pos": "verb",
+  "translation_en": "to Germanize",
+  "translation_ru": "германизировать, онемечивать"
+ },
+ {
+  "id": "light-0220",
+  "word": "Gemütsbewegung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "emotional experience, emotion, affect"
+ },
+ {
+  "id": "light-0221",
+  "word": "Schleimlösemittel",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "expectorant, mucolytic",
+  "translation_ru": "отхаркивающее средство, муколитик"
+ },
+ {
+  "id": "light-0222",
+  "word": "Tendenzschutz",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "protection of an organization's ideological orientation",
+  "translation_ru": "юр. особая защита идейной направленности организации"
+ },
+ {
+  "id": "light-0223",
+  "word": "Währungsabsicherung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "currency hedging",
+  "translation_ru": "валютное хеджирование"
+ },
+ {
+  "id": "light-0224",
+  "word": "Diplomatenkoffer",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "attaché case",
+  "translation_ru": "кейс, дипломат"
+ },
+ {
+  "id": "light-0225",
+  "word": "titeln",
+  "pos": "verb",
+  "translation_en": "to title, to headline; film to add titles",
+  "translation_ru": "озаглавливать, давать заголовок; кино снабжать титрами"
+ },
+ {
+  "id": "light-0226",
+  "word": "Regiefassung",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "director's cut",
+  "translation_ru": "режиссёрская версия"
+ },
+ {
+  "id": "light-0227",
+  "word": "Schruppfeile",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "tech. rough file, roughing file",
+  "translation_ru": "техн. драчёвый напильник"
+ },
+ {
+  "id": "light-0228",
+  "word": "Magnetschalter",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "solenoid switch, magnetic switch; starter solenoid",
+  "translation_ru": "электромагнитный выключатель; тяговое реле стартера"
+ },
+ {
+  "id": "light-0229",
+  "word": "Bauschreiner",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "construction joiner",
+  "translation_ru": "строительный столяр"
+ },
+ {
+  "id": "light-0230",
+  "word": "Abolitionistin",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "female abolitionist",
+  "translation_ru": "аболиционистка"
+ },
+ {
+  "id": "light-0231",
+  "word": "Polterabend",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "eve-of-wedding party with smashing of crockery",
+  "translation_ru": "вечеринка накануне свадьбы с битьём посуды"
+ },
+ {
+  "id": "light-0232",
+  "word": "Vomitivum",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "med. emetic",
+  "translation_ru": "мед. рвотное средство"
+ },
+ {
+  "id": "light-0233",
+  "word": "Vomitiv",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "med. emetic",
+  "translation_ru": "мед. рвотное средство"
+ },
+ {
+  "id": "light-0234",
+  "word": "Emetikum",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "emetic"
+ },
+ {
+  "id": "light-0235",
+  "word": "Rücklicht",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "tail light, rear light",
+  "translation_ru": "задний фонарь"
+ },
+ {
+  "id": "light-0236",
+  "word": "Rückleuchte",
+  "pos": "noun",
+  "gender": "f",
+  "translation_en": "tail light, rear light, taillamp",
+  "translation_ru": "задний фонарь"
+ },
+ {
+  "id": "light-0237",
+  "word": "Patronat",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "patronate; patronage, auspices"
+ },
+ {
+  "id": "light-0238",
+  "word": "Wegekreuz",
+  "pos": "noun",
+  "gender": "n",
+  "translation_en": "wayside cross",
+  "translation_ru": "придорожный крест"
+ },
+ {
+  "id": "light-0239",
+  "word": "Bridge",
+  "pos": "noun",
+  "gender": [
+   "n",
+   "f"
+  ],
+  "translation_en": "bridge, card game; music bridge of a song",
+  "translation_ru": "бридж, карточная игра; муз. бридж, связка в песне"
+ },
+ {
+  "id": "light-0240",
+  "word": "Bungalow",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "bungalow",
+  "translation_ru": "бунгало"
+ },
+ {
+  "id": "light-0241",
+  "word": "aufsitzen",
+  "pos": "verb",
+  "translation_ru": "садиться верхом, садиться на коня; попасться на обман, клюнуть на удочку",
+  "translation_en": "to mount; to fall for, to be taken in by"
+ },
+ {
+  "id": "light-0242",
+  "word": "Backe",
+  "pos": "noun",
+  "translation_ru": "щека; ягодица; губка тисков, тормозная колодка",
+  "translation_en": "cheek; buttock; jaw of a vice, brake shoe"
  }
 ]

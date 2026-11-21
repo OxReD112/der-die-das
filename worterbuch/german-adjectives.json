@@ -12537,10 +12537,10 @@
     "word": "inoffiziell",
     "translation_ru": "неофициальный",
     "translation_en": "unofficial, informal",
-    "example_de": "Nach der Konferenz trafen sich einige Teilnehmer noch zu einem inoffiziellen Gespräch in einer Kneipe.",
-    "example_ru": "После конференции некоторые участники ещё встретились в пивной для неофициальной беседы.",
+    "example_de": "Nach der Konferenz trafen sich einige Teilnehmer zu einem inoffiziellen Gespräch in einer Kneipe.",
+    "example_ru": "После конференции некоторые участники встретились в пивной для неофициальной беседы.",
     "example_en": "After the conference some of the participants met in a pub for an unofficial chat.",
-    "example_cloze": "Nach der Konferenz trafen sich einige Teilnehmer noch zu einem {{c1::inoffiziellen}} Gespräch in einer Kneipe."
+    "example_cloze": "Nach der Konferenz trafen sich einige Teilnehmer zu einem {{c1::inoffiziellen}} Gespräch in einer Kneipe."
   },
   {
     "id": "adjective-1174",

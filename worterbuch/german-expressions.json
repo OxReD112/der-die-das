@@ -64875,5 +64875,503 @@
         "Auf der Reihe nach unten lagen Bücher."
       ]
     }
+  },
+  {
+    "id": "expression-397",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. zur Folge haben",
+    "translation_ru": "повлечь за собой, иметь следствием",
+    "translation_en": "to result in, to lead to",
+    "example_de": "Der Streik hatte lange Wartezeiten zur Folge.",
+    "example_ru": "Забастовка повлекла за собой долгие очереди.",
+    "example_en": "The strike resulted in long waiting times.",
+    "notes_ru": [
+      "Нейтр., чаще в письменной речи. Часто с dass-предложением: Das hatte zur Folge, dass … — В результате … Подлежащее — причина, дополнение — следствие."
+    ],
+    "notes_en": [
+      "Neutral, mostly written. Often with a dass clause: Das hatte zur Folge, dass … — As a result, … The subject is the cause, the object the consequence."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Folge",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hab",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt",
+              "zu haben",
+              "habend",
+              "habende",
+              "habenden"
+            ]
+          },
+          {
+            "form": [
+              "zur Folge"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zur Folge"
+            ]
+          },
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hab",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt",
+              "zu haben",
+              "habend",
+              "habende",
+              "habenden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Streik hatte lange Wartezeiten zur Folge.",
+        "Das hat schwere Konsequenzen zur Folge.",
+        "Der Fehler hatte zur Folge, dass alles neu gemacht werden musste.",
+        "Diese Entscheidung wird in vielen Fällen Probleme zur Folge haben.",
+        "Er wusste nicht, was der Umzug zur Folge haben würde."
+      ],
+      "negative": [
+        "Sie sah die zweite Folge der Serie.",
+        "Er ging zur Folge-Sitzung.",
+        "Er hat zur Folge-Sitzung eingeladen.",
+        "Wir haben die Folge gestern gesehen."
+      ]
+    }
+  },
+  {
+    "id": "expression-398",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "ob … oder",
+    "translation_ru": "будь то … или, независимо от того … или",
+    "translation_en": "be it … or, whether … or",
+    "example_de": "Ob Sommer oder Winter, er fährt jeden Tag mit dem Rad.",
+    "example_ru": "Будь то лето или зима, он каждый день ездит на велосипеде.",
+    "example_en": "Be it summer or winter, he cycles every day.",
+    "notes_ru": [
+      "В этой карточке — только перечисление без своего глагола, обычно в начале предложения: Ob jung oder alt – alle machen mit. С глаголом (Ob es regnet oder schneit, wir gehen) — то же значение, но сюда не входит. Не путать с косвенным вопросом: Ich weiß nicht, ob er kommt oder nicht — «ли … или»."
+    ],
+    "notes_en": [
+      "This card covers only a list without a verb of its own, usually at the start of a sentence: Ob jung oder alt – alle machen mit. With a verb (Ob es regnet oder schneit, wir gehen) the meaning is the same, but it is not covered here. Not to be confused with an indirect question: Ich weiß nicht, ob er kommt oder nicht — «whether he is coming or not»."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/ob_ob_wohl_obwohl",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "ob",
+              "Ob"
+            ]
+          },
+          {
+            "form": [
+              "oder"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "no_finite_between": true,
+        "no_finite_after": true
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ob Sommer oder Winter, er fährt jeden Tag mit dem Rad.",
+        "Ob jung oder alt – alle machen mit.",
+        "Ob Regen oder Sonne, wir gehen spazieren.",
+        "Ob mit dem Auto oder zu Fuß, der Weg ist weit."
+      ],
+      "negative": [
+        "Ich weiß nicht, ob er kommt oder nicht.",
+        "Er fragt, ob sie Tee oder Kaffee möchte.",
+        "Ob er heute oder morgen kommt, weiß ich nicht."
+      ]
+    }
+  },
+  {
+    "id": "expression-399",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "nur noch",
+    "translation_ru": "уже только, лишь; осталось только, ещё только",
+    "translation_en": "only, nothing but … any more; only … left, just",
+    "example_de": "Seit dem Urlaub trinkt sie nur noch Tee.",
+    "example_ru": "После отпуска она пьёт уже только чай.",
+    "example_en": "Since the holiday she drinks nothing but tea.",
+    "notes_ru": [
+      "Нейтр. 1) «больше ничего, кроме»: Er isst nur noch Gemüse. 2) «осталось только»: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. С сравнительной степенью — другое: Das macht es nur noch schlimmer — «только ещё хуже». (Nur noch) Haut und Knochen sein — отдельное выражение."
+    ],
+    "notes_en": [
+      "Neutral. 1) «nothing else any more»: Er isst nur noch Gemüse. 2) «only … left»: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. With a comparative it is different: Das macht es nur noch schlimmer — «only makes it (even) worse». (Nur noch) Haut und Knochen sein is an expression of its own."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/noch_Adverb",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "nur",
+              "Nur"
+            ]
+          },
+          {
+            "form": [
+              "noch"
+            ],
+            "not_next": [
+              "mehr",
+              "weniger",
+              "besser",
+              "schlechter",
+              "schlimmer",
+              "ärger",
+              "größer",
+              "kleiner",
+              "schöner",
+              "stärker",
+              "schwächer",
+              "schneller",
+              "langsamer",
+              "schwerer",
+              "schwieriger",
+              "leichter",
+              "lauter",
+              "leiser",
+              "weiter",
+              "höher",
+              "tiefer",
+              "länger",
+              "kürzer",
+              "deutlicher",
+              "klarer",
+              "heftiger",
+              "dunkler",
+              "heller",
+              "enger",
+              "größere",
+              "größeren",
+              "teurer",
+              "komplizierter",
+              "wütender",
+              "verrückter",
+              "interessanter",
+              "schlimmere",
+              "schlimmeren",
+              "mehr als"
+            ],
+            "not_next_comparative": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Seit dem Urlaub trinkt sie nur noch Tee.",
+        "Er isst nur noch Gemüse.",
+        "Es sind nur noch zwei Tage bis Weihnachten.",
+        "Sie spricht nur noch Deutsch mit ihm.",
+        "Ich muss nur noch schnell einkaufen."
+      ],
+      "negative": [
+        "Er hat nicht nur Geld, sondern noch mehr.",
+        "Das macht alles nur noch schlimmer.",
+        "Nur noch mehr Arbeit wartete auf ihn."
+      ]
+    }
+  },
+  {
+    "id": "expression-400",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "Art und Weise",
+    "translation_ru": "образ, способ, манера",
+    "translation_en": "way, manner",
+    "example_de": "Auf diese Art und Weise geht es schneller.",
+    "example_ru": "Таким образом получается быстрее.",
+    "example_en": "It's quicker this way.",
+    "notes_ru": [
+      "Парное выражение, значит то же, что Art или Weise по отдельности, но звучит основательнее. Обычно: auf diese / welche / andere Art und Weise; die Art und Weise, wie … — то, как …; in gewisser Art und Weise — в известном смысле. Не путать: eine Art Kuchen — что-то вроде пирога."
+    ],
+    "notes_en": [
+      "A pair phrase: the same as Art or Weise alone, but weightier. Usually: auf diese / welche / andere Art und Weise; die Art und Weise, wie … — the way (that) …; in gewisser Art und Weise — in a certain way. Do not confuse: eine Art Kuchen — a kind of cake."
+    ],
+    "related_ids": [
+      "noun-808",
+      "noun-3699"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Art_Weise_Gattung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "Art"
+          },
+          {
+            "form": "und"
+          },
+          {
+            "form": "Weise"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Auf diese Art und Weise geht es schneller.",
+        "Mir gefällt die Art und Weise, wie er spricht.",
+        "In gewisser Art und Weise hast du recht.",
+        "Auf welche Art und Weise wurde das gemacht?"
+      ],
+      "negative": [
+        "Das ist eine Art Kuchen.",
+        "Er sprach auf weise Art.",
+        "Die Art und die Weise sind verschieden.",
+        "Jede Art und jede Weise ist erlaubt."
+      ]
+    }
+  },
+  {
+    "id": "expression-401",
+    "type": "Ausdruck",
+    "group": "speech_formula",
+    "word": "Bis nachher!",
+    "translation_ru": "(разг.) до скорого, увидимся (сегодня же)",
+    "translation_en": "(colloquial) see you later (today)",
+    "example_de": "Ich hole dich um sechs ab. Bis nachher!",
+    "example_ru": "Я заеду за тобой в шесть. До скорого!",
+    "example_en": "I'll pick you up at six. See you later!",
+    "notes_ru": [
+      "Встреча в тот же день, обычно скоро. Duden: bis nachher, bis später — разговорные формулы прощания. Bis nachher dann — то же. Не путать: Das hat Zeit bis nachher. — Это подождёт, займёмся этим позже (по частям)."
+    ],
+    "notes_en": [
+      "A meeting later the same day, usually soon. Duden: bis nachher, bis später — colloquial goodbye formulas. Bis nachher dann — the same. Do not confuse: Das hat Zeit bis nachher. — That can wait till later (word by word)."
+    ],
+    "related_ids": [
+      "expression-017",
+      "preposition-015",
+      "adverb-012"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/nachher",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "also",
+              "und",
+              "dann",
+              "na",
+              "gut",
+              "okay",
+              "ok",
+              "tja",
+              "nun"
+            ]
+          },
+          {
+            "form": "nachher"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "dann",
+          "also",
+          "mal",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag",
+          "allerseits",
+          "alle",
+          "zusammen",
+          "leute",
+          "ihr",
+          "wieder",
+          "uhr",
+          "halb",
+          "ein",
+          "eins",
+          "zwei",
+          "drei",
+          "vier",
+          "fünf",
+          "sechs",
+          "sieben",
+          "acht",
+          "neun",
+          "zehn",
+          "elf",
+          "zwölf"
+        ],
+        "clause_rest_before_number": [
+          "um"
+        ],
+        "clause_rest_place": [
+          "im",
+          "in",
+          "am",
+          "an",
+          "beim",
+          "bei",
+          "auf",
+          "vor",
+          "zum",
+          "zur",
+          "hinter",
+          "neben",
+          "unter"
+        ],
+        "clause_rest_place_after": [
+          "dann",
+          "bald",
+          "später",
+          "morgen",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich hole dich um sechs ab. Bis nachher!",
+        "Bis nachher.",
+        "»Bis nachher dann«, sagte sie.",
+        "Gut. Bis nachher!"
+      ],
+      "negative": [
+        "Das hat Zeit bis nachher.",
+        "Wir warten bis nachher.",
+        "Bis nachher um acht muss alles fertig sein.",
+        "Er bleibt bis nachher im Büro."
+      ]
+    }
+  },
+  {
+    "id": "expression-402",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "am meisten",
+    "translation_ru": "больше всего, сильнее всего",
+    "translation_en": "most, the most",
+    "example_de": "Am meisten freute er sich über den Brief.",
+    "example_ru": "Больше всего он обрадовался письму.",
+    "example_en": "What pleased him most was the letter.",
+    "notes_ru": [
+      "Превосходная степень от viel и sehr: Wer hat am meisten gegessen? — Кто съел больше всех? Не путать: die meisten — большинство (meist)."
+    ],
+    "notes_en": [
+      "The superlative of viel and sehr: Wer hat am meisten gegessen? — Who ate the most? Do not confuse: die meisten — most (people), the majority (meist)."
+    ],
+    "related_ids": [
+      "adjective-1582",
+      "adverb-427"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/meist",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "am",
+              "Am"
+            ]
+          },
+          {
+            "form": "meisten"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Am meisten freute er sich über den Brief.",
+        "Wer hat am meisten gegessen?",
+        "Das gefällt mir am meisten."
+      ],
+      "negative": [
+        "Die meisten Leute kamen.",
+        "Die meisten kamen am Abend.",
+        "Am Abend kamen die meisten."
+      ]
+    }
   }
 ]

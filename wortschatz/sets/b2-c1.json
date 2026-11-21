@@ -532,10 +532,10 @@
   },
   {
    "id": "conjunction-040",
-   "sentence": "Die Ergebnisse sind {{c1::insofern}} überraschend, als niemand mit einem so klaren Unterschied gerechnet hatte.",
+   "sentence": "Die Ergebnisse sind {{c1::insofern}} überraschend, als niemand mit solch einem Unterschied gerechnet hatte.",
    "sentenceTranslation": {
-    "ru": "Результаты удивительны в том смысле, что никто не ожидал такой явной разницы.",
-    "en": "The results are surprising insofar as nobody had expected such a clear difference."
+    "ru": "Результаты удивительны в том смысле, что никто не ожидал такой разницы.",
+    "en": "The results are surprising insofar as nobody had expected such a difference."
    },
    "translation": {
     "ru": "в том смысле, что (insofern … als); поскольку",

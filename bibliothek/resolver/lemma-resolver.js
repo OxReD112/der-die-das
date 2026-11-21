@@ -19607,9 +19607,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // immer liest, …), a question has it inside (Wo warst du auch immer?, Was machst du auch immer für Sachen?). Any lowercase form
             // with a finite analysis counts, also one with a card of another kind (independent review 18.11: Was weiß ich auch immer! —
             // weiß has an adjective card); wie + a degree word that is also a verb form (Wie lange es auch immer dauert) is a pattern of its own.
+            // (21.11.2026, advisor 21.11: a person form of a verb by the resolver's shared personalVerbForm — indicative, Konjunktiv I / II,
+            // the imperative of a word without a card of another kind; a lowercase word, as before)
+            const personalHere = k => /^\p{Ll}/u.test(tokens[k][0]) && personalVerbForm(tokens[k][0]);
             if (m.no_finite_between) for (let k = flat[0] + 1; k < flat.at(-1); k++) {
-              if (!flat.includes(k) && clause[k] === clause[flat[0]] && finiteHere(k)) return;
+              if (!flat.includes(k) && clause[k] === clause[flat[0]] && personalHere(k)) return;
             }
+            // 21.11.2026 (expressions chat, advisor 21.11): `no_finite_after: true` — no person form of a verb after the last part up to the
+            // end of its part of the sentence by the resolver's shared finitePlace (links chat; up to the next , ; : . ! ? – —, quotes and
+            // brackets do not end it): ob … oder as an enumeration has no verb of its own (Ob jung oder alt – alle machen mit), an indirect
+            // question has it after oder (Er fragt, ob sie Tee oder Kaffee möchte; ob die Wellenlänge größer oder kleiner als die "…"
+            // (etwa …) des Versuches ist).
+            if (m.no_finite_after) { const end = finitePlace(sentence, tokens, flat.at(-1)).end;
+              for (let k = flat.at(-1) + 1; k <= end; k++) if (personalHere(k)) return; }
             // 18.11.2026 (expressions chat, TODO 43, advisor 18.11): a reflexive part right after und / oder whose owner is a verb of its
             // own further on in the clause (the shared reflexiveOwnerAtCoordination of the links chat, direction forward — it keeps a
             // coordinated subject out: Anna und Max sich …, er und sie sich …) is not the pattern's when that verb is outside the pattern:
