@@ -41,7 +41,7 @@
     const n = group?.noun, w = String(word || '').normalize('NFC').toLowerCase();
     // (reviewer 27.10: only for a noun-like spelling — a capital and lower-case letters; runden, schüppeln, BESITZEN are no noun taps)
     if (!/^\p{Lu}\p{Ll}/u.test(String(word || ''))) return {};
-    return n ? {...(n.article ? {nounArticle:n.article} : {}),...(n.plural.includes(w) && !n.singular.includes(w) ? {externalPlural:true} : {}),
+    return n ? {...(n.article ? {nounArticle:n.article} : {}),...(Array.isArray(n.articles) && n.articles.length > 1 ? {nounArticles:n.articles} : {}),...(Array.isArray(n.plural) && n.plural.length ? {externalPluralKnown:true} : {}),...(n.plural.includes(w) && !n.singular.includes(w) ? {externalPlural:true} : {}),
       ...(n.plural.includes(w) && n.singular.includes(w) ? {externalPluralAlso:true} : {})} : {};
   };
   // G50 step 3 (advisor 01.11): the class of determiners and pronominal adjectives — words that stand after an article and are
@@ -2017,6 +2017,16 @@ function apostropheText(text) {
     };
     const imperativeAnalyses = new Map();
     const phraseRows = key => [...(verbAnalyses.get(key) || []),...(phraseAnalyses.get(key) || []),...(imperativeAnalyses.get(key) || [])];
+    // (advisor 21.11) «a person form of a verb»: any finite row — indicative, Konjunktiv I / II — or the imperative, of our cards (for
+    // the keys no_finite_between / no_finite_after and the rules that ask the same); the word in any case, the rows of verbAnalyses
+    // An imperative row counts only for a word with no own card of another part of speech: arm, reich, still, schon, halt, mal, gar are
+    // also imperatives of armen, reichen, stillen, schonen, halten, malen, garen (expressions chat 21.11: Ob arm oder reich, alle kamen;
+    // Was er halt auch immer sagt)
+    const personalVerbForm = word => {
+      const key = norm(String(word || '')), rows = verbAnalyses.get(key) || [];
+      if (rows.some(a => a.kind === "finite")) return true;
+      return rows.some(a => a.kind === "imperative") && !(forms.get(key) || []).some(e => e.type && e.type !== "Verb");
+    };
     function indexVerb(entry) {
       const base = norm(entry.word).replace(/^sich\s+/u,""), phrase = base.split(/\s+/u);
       const common = {entry,base,compound:phrase.length > 1 ? phrase.slice(0,-1) : []};
@@ -12186,19 +12196,33 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return facts;
     }
-    function nounReadings(surface, morph) {
+    function nounReadings(surface, morph, {beforeCapital = false} = {}) {
       const s = norm(surface), readings = [], notes = formNoteNounFacts(morph);
       for (const c of morph.candidates.filter(c => canonicalPos(c.pos) === "Nomen")) {
         const rows = morph.analyses.filter(a => a.kind === "inflection" && canonicalPos(a.pos) === "Nomen" && norm(a.lemma) === norm(c.lemma));
-        const genders = nounGenders[c.item?.article] ? [nounGenders[c.item.article]] :
-          [...new Set(rows.flatMap(a => a.tags || []).filter(t => ["masculine","feminine","neuter"].includes(t)))];
+        // (advisor 21.11) an external noun with no gender tags in its rows: the gender of its record — the light record's over the
+        // export's (nounArticle, two genders: nounArticles — das / die Hightech); den Interferometer then makes no pair
+        const tagged = [...new Set(rows.flatMap(a => a.tags || []).filter(t => ["masculine","feminine","neuter"].includes(t)))];
+        // (only for the dictionary form itself — den Interferometer; an inflected spelling, die Russen of der Russe, keeps the readings of
+        // its rows, whose number the record's facts do not always give)
+        // (and not for a noun that is also an adjective — das Berliner Ensemble, der Münchner Flughafen, die Freie Universität)
+        // (nor before another capitalised word — der Leipziger Volkszeitung, an der Wall Street, in der Premier League: the article may
+        // belong to the next word, as before)
+        // (and only for the one noun reading of the word — dem Herde: our der Herd beside die Herde; einen Greifen: der Greif beside das
+        // Greifen — the other noun may be the one meant, as before)
+        const recordGenders = !beforeCapital && !c.item && c.source === "fallback" && norm(c.lemma) === s && !morph.candidates.some(o => canonicalPos(o.pos) === "Adjektiv") &&
+          morph.candidates.filter(o => canonicalPos(o.pos) === "Nomen").length === 1 ? (c.nounArticles || (c.nounArticle ? [c.nounArticle] : [])).map(a => nounGenders[a]).filter(Boolean) : [];
+        const genders = nounGenders[c.item?.article] ? [nounGenders[c.item.article]] : tagged.length ? tagged : recordGenders;
         const cases = new Set(rows.flatMap(a => a.tags || []).filter(t => caseTags.has(t)));
         const word = norm(c.item?.word || c.lemma);
         const plurals = String(c.item?.plural || "").split(/\s*,\s*/u).filter(p => p && p !== "—").map(norm);
         // The export splits case and number over rows; its case tags only narrow
         // readings that the export itself supplies, never own plural/singular forms.
         const ownPlural = plurals.some(p => p === s || !/[ns]$/u.test(p) && p + "n" === s), ownSingular = !!c.item && word === s;
-        const plural = ownPlural || rows.some(a => a.number === "plural");
+        // (21.11) the dictionary form that is also its plural (die Interferometer) keeps the plural beside the record's gender
+        // (a record with no plural column — die Stadtwerke, die Inka, der Massensterben — may be the plural; no dative rule then)
+        const recordPlural = recordGenders.length && (!!c.externalPluralAlso || !c.externalPluralKnown);
+        const plural = ownPlural || rows.some(a => a.number === "plural") || recordPlural;
         let singular = !c.item?.plural_only && (word === s || rows.some(a => a.number === "singular"));
         let singularCases = ownSingular ? new Set() : cases;
         // Facts from the export's form notes replace its partial case tags.
@@ -12212,7 +12236,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
         if (!singular && c.item && (s === word + "s" || s === word + "es") && genders.some(g => g !== "feminine")) { singular = true; singularCases = new Set(["genitive"]); }
         // A dictionary plural that can take -n has no dative without it (den Kindern, not den Kinder).
-        const noDative = plurals.some(p => p === s && !/[ns]$/u.test(p));
+        const noDative = plurals.some(p => p === s && !/[ns]$/u.test(p)) || recordPlural && !/[ns]$/u.test(s);
         if (plural) readings.push({number:"plural",gender:null,cases:singular || ownPlural ? new Set() : cases,noDative});
         if (singular) for (const gender of genders.length ? genders : [null]) readings.push({number:"singular",gender,cases:plural ? new Set() : singularCases});
       }
@@ -12337,7 +12361,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (/^\s*[-‐‑–]/u.test(tail) && !/^\s+[–—]\s/u.test(tail)) return {reason:"compound-head-unproven"};
       const morph = lowercaseHead || await tokenMorphology(tokens[i],{discoverModifiers:false},consumer);
       if (morph.errors.length) return {reason:"head-morphology-error"};
-      let readings = nounReadings(tokens[i][0],morph);
+      let readings = nounReadings(tokens[i][0],morph,{beforeCapital:!!tokens[i+1] && /^\p{Lu}/u.test(tokens[i+1][0]) && /^\s+$/u.test(sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index))});
       if (lowercaseHead) readings = readings.filter(r => !r.unknown);
       if (!readings.length) {
         // The last part of a compound may be unknown on its own: unknown features.
@@ -12381,6 +12405,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     // Block 7: a clicked article form in a confirmed noun group is the article
     // card. Agreement is checked against the card's own form table.
+    // (advisor 21.11, after the article ↔ external noun gender) a preposition form right before the article that is no preposition there:
+    // nach wie vor — the expression (nach wie vor der Platzhirsch); aus closing a group opened by von (von der Insel aus der Schiffsverkehr);
+    // während opening a part that ends with a person form of a verb — the conjunction, its group the subject (Während der Fiskus …
+    // anheizte, …)
+    async function prepositionWordNotPreposition(sentence, tokens, i) {
+      const key = i >= 0 ? norm(tokens[i][0]) : '', gap = (a,b) => sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index);
+      if (key === 'vor' && i >= 2 && norm(tokens[i-1][0]) === 'wie' && norm(tokens[i-2][0]) === 'nach' && (lemmas.get('nach wie vor') || []).length) return true;
+      if (key === 'aus' && i >= 2 && /^\p{Lu}/u.test(tokens[i-1][0]))
+        for (let j = i-2; j >= 0 && i-j <= 5 && !/[,;:.!?()]/u.test(gap(j,j+1)); j--) if (norm(tokens[j][0]) === 'von') return true;
+      if (key === 'während' && (i === 0 || /[,;:.!?()–—]/u.test(gap(i-1,i)))) {
+        let k = i+1;
+        while (tokens[k+1] && !/[,;:.!?()–—]/u.test(gap(k,k+1))) k++;
+        if (!(k > i+2 && /^\p{Ll}/u.test(tokens[k][0]))) return false;
+        const last = norm(tokens[k][0]);
+        if ((verbAnalyses.get(last) || []).some(a => a.kind === 'finite')) return true;
+        // (a verb of the external dictionary only: anheizte — its finite row)
+        if ((forms.get(last) || []).some(e => e.type && e.type !== 'Verb')) return false;
+        try { if ((await collectMorphology(last,{discoverModifiers:false},'prepositionWordNotPreposition')).analyses
+          .some(a => canonicalPos(a.pos) === 'Verb' && a.kind === 'inflection' && /present|preterite|subjunctive/u.test(String(a.tense || '')))) return true; } catch (_) { return false; }
+        // (a joined separable form the export does not list — anheizte, zurückkam: a past or present ending)
+        return /(?:te|ten|test|tet)$/u.test(last) && last.length > 5;
+      }
+      return false;
+    }
     async function articleInNounGroup(word, context, candidates) {
       if (!Number.isInteger(context?.tokenOffset)) return null;
       const articles = candidates.filter(c => c.source === "main" && c.pos === "article");
@@ -12396,7 +12444,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // …, in der Menschen leben): no automatic article there. 20.10.2026: not after a colon, which opens a new
       // clause (…: Außer dem Hochwasserschutz hält er …), and never for des (…, aufgrund des Rätselcharakters).
       const commaBefore = i => i > 0 && /[,;(]/u.test(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index));
-      const previous = index > 0 && joinedTokens(sentence,tokens,index-1,index) ? prepositionCardsByForm.get(norm(tokens[index-1][0])) : null;
+      const previous = index > 0 && joinedTokens(sentence,tokens,index-1,index) && !(await prepositionWordNotPreposition(sentence,tokens,index-1)) ? prepositionCardsByForm.get(norm(tokens[index-1][0])) : null;
       // Only der-forms double as relative pronouns; ein/kein forms do not.
       const definite = articles[0].item?.grammar?.article_kind === "definite";
       if (definite && norm(word) !== "des" && (commaBefore(index) || previous && commaBefore(index-1))) return null;
@@ -14084,7 +14132,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (G89, 29.10: a genitive before its noun — zu des Mannes Tochter, auf des Königs Schloß: des belongs to the first noun; the
       // preposition governs the second one, not des)
       const prenominalGenitive = norm(tokens[det][0]) === 'des' && !!tokens[last+1] && /^\p{Lu}/u.test(tokens[last+1][0]) && /^\s+$/u.test(sentence.slice(tokens[last].index+tokens[last][0].length,tokens[last+1].index));
-      if (!agreeingFeatures(features,group,previous && !prenominalGenitive ? governedCases(previous) : null).length) return null;
+      if (!agreeingFeatures(features,group,previous && !prenominalGenitive && !(!contracted && await prepositionWordNotPreposition(sentence,tokens,det-1)) ? governedCases(previous) : null).length) return null;
       const span = (i,j = i) => ({text:sentence.slice(tokens[i].index,tokens[j].index+tokens[j][0].length),start:tokens[i].index,end:tokens[j].index+tokens[j][0].length});
       return {article:tokens[det][0],noun:span(first,last).text,clicked:det === clicked ? 'article' : 'noun',spans:[span(det),span(first,last)],
         ...(contracted ? {contraction:true} : {})};
@@ -18877,6 +18925,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // The noun's resolution is made once per sentence and place (articleNominalCache) and never from inside another such
         // lookahead (context.articleLookahead): the noun after a comma reads its article's tap (G89 above), which would read the
         // noun again (… Perlen, die Decken waren …).
+        let nominalPair = false;
         if (!pair && !context?.articleLookahead && Number.isInteger(context?.tokenOffset) && (articleForm(word) || contractionArticle(word))) {
           const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'articleNounLink');
           const at = clickedTokenIndex(tokens,context.tokenOffset,word), next = tokens[at+1];
@@ -18884,7 +18933,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // der DDR, ein Standard (speed chat 20.11: about half the lookaheads, none of the nominalizations lost)
           if (at >= 0 && next && /^\p{Lu}/u.test(next[0]) && /[a-zäöüß](?:e|en|em|er|es|n)$/u.test(next[0]) && /^\s+$/u.test(sentence.slice(tokens[at].index+tokens[at][0].length,next.index))) {
             const link = await articleNominalLink(sentence,next,context);
-            if (link && link.spans?.some(sp => sp.start === tokens[at].index && sp.text === word)) pair = {...link, clicked:'article'};
+            if (link && link.spans?.some(sp => sp.start === tokens[at].index && sp.text === word)) { pair = {...link, clicked:'article'}; nominalPair = true; }
           }
         }
         if (pair) {
@@ -18894,6 +18943,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             pair.clicked === 'article' ? c.pos === 'article' && c.source === 'main' ? {...c,nounArticleLink:pair} : c :
             canonicalPos(c.pos) === 'Nomen' && !c.formation?.maybeName ? {...c,nounArticleLink:pair} : c);
           repoint();
+          // (advisor 21.11) the window article / pronoun before a nominalization (Sie half der Kleinen, Er sah die Abgeordneten): the
+          // article, as before any noun (der Frau) — the word after it is its noun (the noun's own pair above); Sie half der, die … — no pair
+          if (nominalPair && !resolution.selected) {
+            const article = resolution.candidates.find(c => c.pos === 'article' && c.source === 'main' && c.nounArticleLink);
+            if (article) { resolution.selected = article; resolution.preferred = article; resolution.evidence = 'article-before-nominalization';
+              observe('decision', {outcome:'select', rule:'article-before-nominalization', reason:pair.noun?.text || ''}); }
+          }
         }
       }
       // Origin of an own noun from its dictionary field derived_from (der Kranke ← krank,
