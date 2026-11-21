@@ -4413,6 +4413,23 @@ function apostropheText(text) {
       // «nominalization of gut» is no meaning. The Russian record is added in russian-translations (enrich).
       const strip = t => String(t || "").replace(/^(?:(?:female|male) equivalent|nominali[sz]ation) of [^:;]*(?::\s*|$)/iu,"").trim();
       const noun = nouns[0] && strip(nouns[0].translation?.en) ? {lemma:nouns[0].lemma,translation:{en:strip(nouns[0].translation.en)}} : null;
+      // (advisor 20.11, der Zehnte) an ordinal with a noun record of the same stem (ours, light or outside: Zehnt «tithe», Erster «winner»)
+      // whose gender the form confirms — an article or ending of one gender in the singular (der Erste, ein Erster, den Zehnten); another
+      // gender (das Erste, die Zweite) or the plural only (zu den Ersten) — no second reading. The record is the window's second reading.
+      // Without a determiner (als Erster, wurde Zweiter) and not after a preposition the strong ending in the nominative / accusative
+      // names the gender (-er masculine, -e feminine, -es neuter, -en masculine accusative).
+      const strongGenders = {er:["male"],e:["female","plural"],es:["neuter"],en:["male"]};
+      const ordinalNoun = ordinal ? (() => {
+        const formGenders = article ? genders : prepositions.has(determiner) || NOMINAL_MARKERS.has(determiner) ? new Set() : new Set(strongGenders[ending] || []);
+        const single = [...formGenders].filter(g => g !== "plural");
+        if (single.length !== 1) return null;
+        const byArticle = {der:"male",die:"female",das:"neuter"};
+        const genderOf = c => { const en = String(c.meanings?.[0] || c.translation?.en || "");
+          return c.source === "main" ? byArticle[String(c.item?.article || "")] : byArticle[c.nounArticle] ||
+            (/^female equivalent of\b|\(female\b/iu.test(en) ? "female" : /\(male\b/iu.test(en) ? "male" : null); };
+        const records = allCandidates.filter(c => ["main","fallback"].includes(c.source) && canonicalPos(c.pos) === "Nomen" && !c.usage &&
+          [stem0,stem0+"e",stem0+"er",stem0+"es"].includes(norm(c.lemma)) && genderOf(c) === single[0]);
+        return records.length === 1 ? {source:records[0].source,lemma:records[0].lemma} : null; })() : null;
       if (participleVerb) {
         const verbBase = norm(participleVerb.lemma);
         translation.en = `nominalized participle of “${verbBase}”${meaning.en ? `: ${meaning.en}` : ""}`;
@@ -4420,7 +4437,7 @@ function apostropheText(text) {
       }
       return {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation,
         usage:{role:"nominalized",kind:participleVerb ? "participle" : ordinal ? "ordinal" : "adjective",base:participleVerb ? norm(participleVerb.lemma) : base,
-          baseDictionaryId:adjective.dictionaryId || null,form:word,general:true,...(noun ? {noun} : {}),
+          baseDictionaryId:adjective.dictionaryId || null,form:word,general:true,...(noun ? {noun} : {}),...(ordinalNoun ? {ordinalNoun} : {}),
           // #89 (advisor 16.11, Alice P566 der Schwächste): the form is the superlative stem + ending — «Superlativ», «самый …»
           // (not am Schönsten — the adverbial superlative, advisor 16.11: not touched)
           // (nor a superlative the card names as its own meaning — nah «следующий (nächst-)»: als Nächstes)
@@ -16283,7 +16300,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               candidates.push({source:"fallback",lemma:group.word,pos:"verb",posLabel:"Verb",meanings:[],translation:{en:"",ru:""},russianOnly:true,
                 ...(group.derived === "separable-participle" ? {separableParticiple:true} : {})});
             if (group.meanings.length) candidates.push({source:"fallback",lemma:group.word,pos:group.pos || "",posLabel:partOfSpeech,
-              ...(group.written ? {written:group.written} : {}),
+              // (20.11) of several dictionary spellings the one the text uses (Gaue — Gau, not GAU; Aids, Ufos)
+              ...(group.written ? {written:(group.spellings || []).find(sp => String(word).startsWith(sp)) || group.written} : {}),
               ...(group.derived === "separable-participle" ? {separableParticiple:true} : {}),
               translation:{en:group.meanings.join("; "),ru:""},meanings:group.meanings,...(group.labels ? {meaningLabels:{en:group.labels}} : {}),
               ...externalNounFacts(group, word),
@@ -21699,7 +21717,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>ordinalNounPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -22901,6 +22919,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const letter = {source:"fallback",lemma:w,pos:"letter",posLabel:"Buchstabe",letter:true,translation:{en:`letter “${w}”`,ru:`буква „${w}“`},item:null};
       return keepDecision(result,{...result,candidates:[letter],selected:letter,preferred:letter,status:'resolved',evidence:'single-letter'},
         {outcome:'selected',rule:'single-letter',reason:'single-letter'});
+    }
+    // (advisor 20.11, der Zehnte) an ordinal left without its noun beside a noun record of the same stem whose gender the form confirms
+    // (generalAdjectiveNoun: usage.ordinalNoun): the window of the two readings — «N-й (по счёту…)» and the record — no choice by meaning
+    async function ordinalNounPair(word, context, result) {
+      const sel = result?.selected, own = sel?.usage?.kind === "ordinal" ? sel.usage.ordinalNoun : null;
+      if (!own) return result;
+      const record = (result.candidates || []).find(c => c.source === own.source && c.lemma === own.lemma && canonicalPos(c.pos) === "Nomen" && !c.usage);
+      if (!record) return result;
+      return keepDecision(result,{...result,candidates:[sel,record],selected:null,preferred:null,status:'ambiguous',evidence:'ordinal-noun-pair'},
+        {outcome:'window',rule:'ordinal-noun-pair',reason:`${sel.lemma} / ${record.lemma}`});
     }
     async function konj1PastPair(word, context, result) {
       const sel = result?.selected, w = norm(word);

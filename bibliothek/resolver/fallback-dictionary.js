@@ -336,8 +336,12 @@
       const noun = pos === "noun" ? nounFacts(word, data, meanings.map(m => genderByPos.get(pos)[m])) : null;
       // (advisor 20.11: the heading keeps the dictionary's own spelling — EU-Kommission, DNA-Test, SUV, not Eu-kommission / Suv) the written
       // form of the entry (entries[i][4].w), when it is this very word with capitals inside
-      const written = (data?.entries || []).map(e => e?.[4]?.w).find(w => typeof w === "string" && w.toLowerCase() === String(word).toLowerCase() && /\p{Lu}/u.test(w.slice(1)));
-      return {word,pos,meanings,formNotes:notes,...(written ? {written} : {}),...(Object.keys(labels).length ? {labels} : {}),...(Object.keys(reflexive).length ? {reflexive} : {}),
+      const fitsWord = w => typeof w === "string" && w.toLowerCase() === String(word).toLowerCase() && /\p{Lu}/u.test(w.slice(1));
+      const entry = (data?.entries || []).find(e => fitsWord(e?.[4]?.w)), written = entry?.[4]?.w;
+      // (20.11) the other spellings the entry gives (alt: Gau beside GAU, Aids beside AIDS, Ufo beside UFO) — the resolver takes the one
+      // the text uses; the entry may join two words (der Gau «shire» and der GAU)
+      const spellings = written ? [...new Set([written,...(entry[4].alt || []).map(a => a?.[2]).filter(a => typeof a === "string" && a && a.toLowerCase() === written.toLowerCase())])] : [];
+      return {word,pos,meanings,formNotes:notes,...(written ? {written} : {}),...(spellings.length > 1 ? {spellings} : {}),...(Object.keys(labels).length ? {labels} : {}),...(Object.keys(reflexive).length ? {reflexive} : {}),
         ...(noun ? {noun} : {}),...(transitivityByPos.get(pos)?.size ? {transitivity:[...transitivityByPos.get(pos)].sort()} : {}),
         ...(transitivityOfByPos.get(pos) ? {transitivityOf:Object.fromEntries(meanings.filter(m => m in transitivityOfByPos.get(pos)).map(m => [m,transitivityOfByPos.get(pos)[m]]))} : {})};
     });
@@ -644,7 +648,10 @@
       const groups = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(async lemma => {
         const mapped = await lexicalGroups(lemma,new Set([candidate]),describedPositions.size ? describedPositions : null);
         // A verb inflection must not inherit unrelated noun senses of its lemma.
-        return mapped.filter(group => !describedPositions.size || describedPositions.has(group.pos));
+        // (20.11, Half-Life) a form of an initialism written in capitals (LIFe, plural of LIF — key «life») only for a spelling with a
+        // capital after the first letter: the keys are lower case, so Life / life of the text would read as LIFe
+        return mapped.filter(group => (!describedPositions.size || describedPositions.has(group.pos)) &&
+          !(typeof group.written === "string" && [group.written,...(group.spellings || [])].every(sp => /^\p{Lu}{2,}$/u.test(sp)) && !/\p{Lu}/u.test(String(word).normalize("NFC").trim().slice(1))));
       }))).flat();
       const usable = [...groups,...direct].filter(group => group.meanings.length);
       const notes = [...direct.filter(group => group.formNotes.length).map(group => ({
@@ -664,6 +671,7 @@
         if (group.transitivityOf) target.transitivityOf = {...(target.transitivityOf || {}),...group.transitivityOf};
         if (group.noun && !target.noun) target.noun = group.noun;
         if (group.written && !target.written) target.written = group.written;
+        if (group.spellings && !target.spellings) target.spellings = group.spellings;
       }
       if (merged.size || notes.length) return [...merged.values(),...notes];
       if (meanings(data).length) return [{word:candidate,pos:"",meanings:meanings(data),unresolved:true}];
