@@ -2052,6 +2052,10 @@ function apostropheText(text) {
         }
         if (tense === "Präsens" && person === "ihr") addAnalysis(stem,{...row,kind:"imperative",tense:"Imperativ"});
       }
+      // (expressions chat + advisor 21.11) Konjunktiv I of sein — the cards have no Konjunktiv I table, and the other verbs' 3rd person
+      // equals the 1st of the Präsens (er habe = ich habe); sei was the imperative only: … ob sie an der Reihe sei oder nicht
+      if (base === "sein" && phrase.length === 1) for (const [form,persons] of [["sei",["ich","er/sie/es"]],["seiest",["du"]],["seist",["du"]],["seien",["wir","sie"]],["seiet",["ihr"]]])
+        for (const person of persons) addAnalysis(form,{...common,person:personOf(person),kind:"finite",tense:"Konjunktiv I",mood:"Konjunktiv I",konj1Sein:true,prefix:null,detached:false});
       // 5а.2 (cards chat + advisor 12.11): imperative: "none" is the plain card's (betragen «составлять»); its field `reflexive` (sich
       // betragen «вести себя») has the imperative — Betrag dich anständig!, Betrage dich!, Betragt euch! Rows of the regular stem marked
       // reflexiveField: only the reflexive group takes them (the reading without sich stays without an imperative).
@@ -14283,7 +14287,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const rows = verbAnalyses.get(norm(tokens[i][0])) || [];
         return rows.length > 0 && rows.every(r => r.kind === "imperative");
       };
-      const otherFinite = clauseIndices.some(i => i !== index && (certainFinite(i) || imperativeOnly(i)));
+      // (r2-konj1, 21.11) sei / seien … — a person form of sein in Konjunktiv I (its rows only verbAnalyses has) or the imperative: the
+      // finite verb of the part as well (… sei man trotz der Krisen gut … gekommen — trotz the preposition, as when sei was the imperative only)
+      const konj1Sein = i => /^[a-zäöüß]/u.test(tokens[i][0]) || i === 0 ? (verbAnalyses.get(norm(tokens[i][0])) || []).some(r => r.konj1Sein) && !matches(i).some(e => e.type !== "Verb") : false;
+      const otherFinite = clauseIndices.some(i => i !== index && (certainFinite(i) || imperativeOnly(i) || konj1Sein(i)));
       // Verb readings that may still be finite here; with another certain finite
       // verb only a spelling equal to the infinitive remains (lassen, meinen).
       const verbReadings = otherFinite ? verbs.filter(c => norm(c.lemma) === norm(word) || c.item && phraseFirst(c.item) && norm(c.lemma).split(/\s+/u).at(-1) === norm(word)) : verbs;
@@ -17853,6 +17860,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (norm(row.base) !== base && !(simple && norm(row.base) === simple)) continue;
           // The detached particle of a separable verb is no verb form of its own.
           if (separableSpans && row.kind === "infinitive") continue;
+          // (the Konjunktiv I rows of sein name no tense here: sei is read by its place below — Sei still! «Imperativ»)
+          if (row.konj1Sein) continue;
           labels.add(row.tense); ownLabels.add(row.tense); sources.set(row.tense, {form:f, start});
           if (formsOf(row.entry)?.["Konjunktiv II"]) ownKonjunktiv = true;
         }
