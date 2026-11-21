@@ -2027,6 +2027,19 @@ function apostropheText(text) {
       if (rows.some(a => a.kind === "finite")) return true;
       return rows.some(a => a.kind === "imperative") && !(forms.get(key) || []).some(e => e.type && e.type !== "Verb");
     };
+    // (advisor 21.11, links chat 21.11) the same check with the external dictionary: the rows of tokenAnalyses (a verb with no card of
+    // ours — its finite and imperative forms from the external inflections) by the same rule — any finite row, or an imperative row of a
+    // word with no own card of another part of speech. Our rows decide first (no lookup); a lookup that fails gives false. The one
+    // «person form of a verb» for every chat: the links chat's rules, the expressions chat's no_finite_between / no_finite_after.
+    async function personalVerbFormExternal(word) {
+      if (personalVerbForm(word)) return true;
+      const key = norm(String(word || ''));
+      if (!key) return false;
+      let rows;
+      try { rows = await tokenAnalyses(String(word),lexicalLookup,'personalVerbForm'); } catch (_) { return false; }
+      if (rows.some(a => a.kind === "finite")) return true;
+      return rows.some(a => a.kind === "imperative") && !(forms.get(key) || []).some(e => e.type && e.type !== "Verb");
+    }
     function indexVerb(entry) {
       const base = norm(entry.word).replace(/^sich\s+/u,""), phrase = base.split(/\s+/u);
       const common = {entry,base,compound:phrase.length > 1 ? phrase.slice(0,-1) : []};
@@ -24220,6 +24233,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       entry:id => byId.get(String(id)) || null,
       matchSeparable:(word,context) => separatedForms.has(norm(word)) ? separableCandidates(word,context) : [],
       matchReflexive:reflexiveCandidates,
+      // 21.11.2026 (advisor 21.11): «a person form of a verb» with the external dictionary — personalVerbFormExternal (tests)
+      personalVerbForm:async word=>{await prepareSeparable();return personalVerbFormExternal(word);},
       // 31.10.2026 (expressions chat): every reflexive pronoun of a sentence with reflexiveAgreesWithSubject (tests; the links chat's lassenGroup)
       reflexiveAgreement:async sentence=>{await prepareSeparable();const {facts,subjectFacts}=await sentenceSubjectFacts(String(sentence||''),'resolve');
         return facts.words.map((w,i)=>({i,word:facts.tokens[i][0],reflexive:reflexivePronouns.has(w)})).filter(x=>x.reflexive).map(x=>({index:x.i,word:x.word,agrees:reflexiveAgreesWithSubject(facts,subjectFacts,x.i)}));},
