@@ -932,6 +932,8 @@
       };
       heading += ` = ${f.parts.map(label).join(' + ')}`;
       marks.push('Kompositum');
+      // (advisor 21.11) a comparative / superlative last part: the degree of the word (goldgieriger — «Adjektiv · Kompositum · Komparativ»)
+      if (!noun && candidate.formFeatures?.degree) marks.push(candidate.formFeatures.degree);
     } else if (f.kind === 'feminine') marks.push(`weibliche Form von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);

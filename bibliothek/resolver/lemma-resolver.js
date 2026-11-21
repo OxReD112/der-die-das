@@ -1195,8 +1195,41 @@ function apostropheText(text) {
         if (HALF.has(b)) { out.push({pos: 'Adjektiv', lemma: b, source: 'main', form: false, text: b, ending: e, half: true, ru: b, en: b}); continue; }
         for (const r of await readings(b, ['Adjektiv'], true)) if (r.source === 'main') out.push({...r, text: b, ending: e});
       }
-      out.sort((x, y) => (x.half ? 0 : 1) - (y.half ? 0 : 1));
+      // (advisor 21.11, goldgieriger) the comparative / superlative of an own adjective card as the last part (gierig — gieriger, kalt — kälter):
+      // the same forms as an ordinary adjective's (formFeatures: the card's comparative / superlative, otherwise positive + er / st / est); the
+      // degree goes with the head. A bare comparative has no ending (ward nur noch goldgieriger); a superlative always has one.
+      for (const e of ADJ_END) {
+        if (!s.endsWith(e) || s.length - e.length < min + 2) continue;
+        const b = s.slice(0, s.length - e.length);
+        for (const r of await degreeHeads(b, e)) out.push(r);
+      }
+      out.sort((x, y) => (x.half ? 0 : 1) - (y.half ? 0 : 1) || (x.degree ? 1 : 0) - (y.degree ? 1 : 0));
       return withRu(out);
+    }
+    // The positive of a comparative / superlative stem (gieriger, kälter, dunkler, leiser; gierigst, kältest, größt) among own adjective cards.
+    async function degreeHeads(b, e) {
+      const plain = t => t.replace(/ä(?!.*[äöü])/u, 'a').replace(/ö(?!.*[äöü])/u, 'o').replace(/ü(?!.*[äöü])/u, 'u');
+      const out = [];
+      for (const [degree, cut] of [['Komparativ', /er$/u], ['Superlativ', /e?st$/u]]) {
+        if (degree === 'Superlativ' && !e) continue;
+        const m = cut.exec(b);
+        if (!m) continue;
+        const stems = degree === 'Superlativ' && m[0] === 'est' ? [b.slice(0, -3), b.slice(0, -2)] : [b.slice(0, -m[0].length)];
+        // (a card in -e without its own comparative is left out: linke, obere — «schräglinker» is no comparative)
+        const positives = new Set(stems.flatMap(p => [p, plain(p), p + 'e', ...(/[^aeiouäöü][lr]$/u.test(p) ? [p.slice(0, -1) + 'e' + p.slice(-1)] : [])]));
+        for (const p of positives) {
+          if (p.length < 3) continue;
+          for (const r of await readings(p, ['Adjektiv'], true)) {
+            if (r.source !== 'main' || !r.entry) continue;
+            const positive = norm(r.entry.word || r.lemma);
+            const elided = /[^e](?:el|er)$/u.test(positive) ? positive.slice(0, -2) + positive.slice(-1) : null;
+            const forms = degree === 'Komparativ' ? [norm(r.entry.comparative || positive + 'er'), ...(elided && !r.entry.comparative ? [elided + 'er'] : []), ] :
+              r.entry.superlative ? [norm(r.entry.superlative).replace(/^am\s+/u, '').replace(/en$/u, '')] : [positive + 'st', positive + 'est'];
+            if (forms.includes(b) && !out.some(x => x.lemma === r.lemma && x.degree === degree)) out.push({...r, text: positive, ending: e, degree});
+          }
+        }
+      }
+      return out;
     }
     const shortOk = parts => parts.every(p => p.text.length >= 4 || p.source === 'main');
     // A first part on -ung, -heit, -keit, -schaft, -tät, -ling takes the linking -s- (G68, 24.10): Aufführung(s) + Orte,
@@ -1317,6 +1350,10 @@ function apostropheText(text) {
       return ctx.title || ctx.name || ctx.nameSlot ? false : 'maybe';
     };
     const headPart = (h, surface) => ({...h, text: h.ending !== undefined ? h.text : surface, surface});
+    // An adjective head with an ending stands before a noun; one without an ending does not (Zwergenreich Moria is a name). The first head
+    // decides; only a comparative / superlative head (degreeHeads) may stand in when it does not fit.
+    const headFits = (h, ctx) => h.ending ? ctx.nextNoun : !ctx.nextCapital;
+    const adjHead = (hs, ctx) => headFits(hs[0], ctx) ? hs[0] : hs.find(h => h.degree && headFits(h, ctx)) || null;
     // (advisor 10.11, claude/CAUSES_SAMPLE100_2026-11-10_RU.md п. 4) a split whose part has no Russian meaning is kept: the part shows
     // its English meaning in the Russian interface («английский: …», as in «состав»), the split is no longer thrown away
     // Only a split with a sign of a common noun (not «возможно, имя»: Greenberg, Griphook, Stockport) and a part whose English is
@@ -1363,7 +1400,7 @@ function apostropheText(text) {
       const cutHeads = await Promise.all(cuts.map(([, h0]) => headOf(w.slice(h0), 3)));
       await Promise.all(cuts.map(([i], k) => {
         const hs = cutHeads[k];
-        return hs.length && !(!noun && (hs[0].ending ? !ctx.nextNoun : ctx.nextCapital)) ? modOf(w.slice(0, i), 3) : null;
+        return hs.length && (noun || adjHead(hs, ctx)) ? modOf(w.slice(0, i), 3) : null;
       }));
       // Old spelling with two consonants for three (Schalloch = Schall + Loch): the head may share the doubled consonant;
       // with an ordinary split as well (Schal + Loch) the word has two splits — no card.
@@ -1376,11 +1413,13 @@ function apostropheText(text) {
           // of its own: Staubecken = Stau + Becken / Staub + Ecke — two last parts, no split
           if (!hs.length) { if (hs.undecided && noun && !shared && (await modOf(w.slice(0, i), 3)).length) undecided.push(h0); continue; }
           // An adjective with an ending stands before a noun; one without an ending does not (Zwergenreich Moria is a name).
-          if (!noun && (hs[0].ending ? !ctx.nextNoun : ctx.nextCapital)) continue;
+          // (advisor 21.11) when the first head does not fit, a comparative / superlative head may (ward nur noch goldgieriger)
+          const head = noun ? hs[0] : adjHead(hs, ctx);
+          if (!head) continue;
           // A verb stem never shares the consonant (Kommandantin is not Komm + Mandantin; the old Schwimmeister is lost).
           const ms = (await modOf(w.slice(0, i), 3)).filter(m => !shared || !m.stem);
           if (!ms.length) continue;
-          const parts = [ms[0], headPart(hs[0], w.slice(h0))];
+          const parts = [ms[0], headPart(head, w.slice(h0))];
           // das Stühlerücken, das Zeitunglesen: a plural object before an infinitive is a nominalized verb phrase.
           if (noun && ms[0].plural && NEUTER_DET.test(ctx.detForm || '') && (await readings(w.slice(h0), ['Verb'], true)).length) continue;
           // (the exception: a head that is only a verb's infinitive — Lesen, not Stürmen, also a plural of Sturm: Zwilling(s) + Türmen)
@@ -4991,7 +5030,14 @@ function apostropheText(text) {
       const item = {word:lemma,type:noun ? "Nomen" : "Adjektiv",...(gender && !number ? {article:gender} : {})};
       // The meaning stored with a saved word (Wortschatz): the parts with their meanings, as on the card.
       const translation = {en:window.BibliothekMeaningDisplay?.formationText?.(formation,"en") || "",ru:window.BibliothekMeaningDisplay?.formationText?.(formation,"ru") || ""};
+      // (advisor 21.11) a comparative / superlative last part: the word's degree (goldgieriger — Komparativ)
+      const degree = !noun && found.compound ? found.compound.parts.at(-1).degree || null : null;
+      // (not a capital word — Notebooksbilliger bietet …, a name; not a bare comparative before an attribute and its noun — großer,
+      // dünnbesetzter linearer Gleichungssysteme is the declined positive)
+      if (degree && (capital || !found.compound.parts.at(-1).ending &&
+          /^[ \t]+\p{Ll}{3,}(?:e|en|em|er|es)[ \t]+\p{Lu}/u.test(around.slice(context.tokenOffset + spelling.length)))) return null;
       return {source:"fallback",lemma,pos:noun ? "noun" : "adj",posLabel:noun ? "Nomen" : "Adjektiv",translation,formation,
+        ...(degree ? {formationDegree:degree,formFeatures:{degree}} : {}),
         item:{...item,translation_en:translation.en,translation_ru:translation.ru}};
     }
     // (advisor 08.11, claude/ATTR_SIMPLE_FRAME_COUNT_2026-11-08_RU.md) a compound noun no dictionary has as a whole, as the head of a
@@ -19121,7 +19167,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }));
       resolution.candidates = resolution.candidates.map(c => {
         const hint = auxiliaryHint(word, c, context);
-        const features = {...formFeatures(word, c, resolution, context), ...(modalAsFullVerb(word, c, context) ? {fullVerb:true} : {}),
+        const features = {...formFeatures(word, c, resolution, context), ...(c.formationDegree ? {degree:c.formationDegree} : {}),
+          ...(modalAsFullVerb(word, c, context) ? {fullVerb:true} : {}),
           ...(hint ? {auxiliaryHint:hint} : {}),
           ...(modalMood(word, c, context) ? {modalMood:modalMood(word, c, context), ...(modalMood(word, c, context) === "Konjunktiv I" && reportedSpeech(word, context) ? {reportedSpeech:true} : {})} : {}),
           ...(externalSeparable(c, word) ? {separable:true} : {})};
@@ -19264,8 +19311,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!token || /^[A-ZÄÖÜ]/u.test(token[0]) && i > 0) return false;
       const key = norm(token[0]);
       if (irregularComparatives.has(key)) return true;
-      if (!comparativeForms.has(key)) return false;
+      if (!comparativeForms.has(key) && !(await compoundComparative(token))) return false;
       return !(tokens[i+1] && sameClause(i, i+1) && /^\p{Lu}/u.test(tokens[i+1][0]));
+    }
+    // (advisor 21.11, goldgieriger) a compound no dictionary knows whose last part is the comparative of an own adjective card (nur noch
+    // goldgieriger «ещё более алчным»): the word formation decides (wordFormationCandidate — the degree of its last part)
+    async function compoundComparative(token) {
+      const key = norm(token[0]), sentence = typeof token.input === "string" ? token.input : null;
+      if (!sentence || key.length < 7 || (forms.get(key) || []).length || (lemmas.get(key) || []).length) return false;
+      let tail = false;
+      for (let k = 3; k <= key.length - 4 && !tail; k++) tail = comparativeForms.has(key.slice(k));
+      if (!tail) return false;
+      try {
+        const formed = await wordFormationCandidate(token[0],{sentence,tokenOffset:token.index});
+        return formed?.formationDegree === "Komparativ";
+      } catch (_) { return false; }
     }
     // A degree word after so (so geschwind, so viel, so große Freude): an adjective or adverb, not a finite verb
     // (so steige ich), a pronoun or a preposition (so hinter einem Baum).
