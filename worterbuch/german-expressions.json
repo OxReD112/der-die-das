@@ -65373,5 +65373,434 @@
         "Am Abend kamen die meisten."
       ]
     }
+  },
+  {
+    "id": "expression-403",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zum Vorschein kommen",
+    "translation_ru": "появиться, обнаружиться, показаться",
+    "translation_en": "to appear, to come to light, to turn up",
+    "example_de": "Unter dem Teppich kam ein alter Brief zum Vorschein.",
+    "example_ru": "Под ковром обнаружилось старое письмо.",
+    "example_en": "An old letter turned up under the carpet.",
+    "notes_ru": [
+      "О том, что было скрыто и стало видно: wieder zum Vorschein kommen — снова найтись. Не путать: etw. zum Vorschein bringen — достать, извлечь (кто-то показывает)."
+    ],
+    "notes_en": [
+      "Of something hidden that becomes visible: wieder zum Vorschein kommen — to turn up again. Do not confuse: etw. zum Vorschein bringen — to bring out, to produce (someone shows it)."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Vorschein",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": [
+              "zum Vorschein"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zum Vorschein"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Unter dem Teppich kam ein alter Brief zum Vorschein.",
+        "Es kam kein Tropfen Milch zum Vorschein.",
+        "Beim Aufräumen ist das Foto wieder zum Vorschein gekommen.",
+        "Die Wahrheit wird bald zum Vorschein kommen."
+      ],
+      "negative": [
+        "Er brachte ein Messer zum Vorschein.",
+        "Er kam zum Bahnhof.",
+        "Zum Vorschein brachte sie nur einen alten Schlüssel."
+      ]
+    }
+  },
+  {
+    "id": "expression-404",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. zum Vorschein bringen",
+    "translation_ru": "достать, извлечь, показать; выявить",
+    "translation_en": "to bring out, to produce; to reveal",
+    "example_de": "Er griff in die Tasche und brachte ein Messer zum Vorschein.",
+    "example_ru": "Он полез в карман и достал нож.",
+    "example_en": "He reached into his pocket and produced a knife.",
+    "notes_ru": [
+      "Кто-то делает видимым то, что было скрыто: Die Untersuchung brachte neue Fakten zum Vorschein. — Расследование выявило новые факты. Не путать: zum Vorschein kommen — появиться (само)."
+    ],
+    "notes_en": [
+      "Someone makes visible what was hidden: Die Untersuchung brachte neue Fakten zum Vorschein. — The investigation brought new facts to light. Do not confuse: zum Vorschein kommen — to appear (by itself)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Vorschein",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachtest",
+              "brachten",
+              "brachtet",
+              "brächte",
+              "brächtest",
+              "brächten",
+              "brächtet",
+              "bring",
+              "gebracht",
+              "zu bringen"
+            ]
+          },
+          {
+            "form": [
+              "zum Vorschein"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zum Vorschein"
+            ]
+          },
+          {
+            "form": [
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachtest",
+              "brachten",
+              "brachtet",
+              "brächte",
+              "brächtest",
+              "brächten",
+              "brächtet",
+              "bring",
+              "gebracht",
+              "zu bringen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er griff in die Tasche und brachte ein Messer zum Vorschein.",
+        "Er brachte ein Messer zum Vorschein.",
+        "Die Untersuchung hat neue Fakten zum Vorschein gebracht.",
+        "Zum Vorschein brachte sie nur einen alten Schlüssel."
+      ],
+      "negative": [
+        "Unter dem Teppich kam ein alter Brief zum Vorschein.",
+        "Er brachte den Brief zur Post."
+      ]
+    }
+  },
+  {
+    "id": "expression-405",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. an sich haben",
+    "translation_ru": "быть свойственным, иметь в себе",
+    "translation_en": "to have something about one",
+    "example_de": "Er hat etwas Rührendes an sich.",
+    "example_ru": "В нём есть что-то трогательное.",
+    "example_en": "There is something touching about him.",
+    "notes_ru": [
+      "Обычно с etwas / nichts + прилагательное: Sie hat etwas Geheimnisvolles an sich. — В ней есть что-то загадочное; Er war ungeduldig, wie es Kinder an sich haben. — Он был нетерпелив, как это свойственно детям; разг. Das hat er so an sich. — Такая уж у него манера. Не путать: an sich — само по себе, вообще-то (Die Idee an sich ist gut; Ich habe an sich nichts dagegen); an sich denken — думать о себе."
+    ],
+    "notes_en": [
+      "Usually with etwas / nichts + adjective: Sie hat etwas Geheimnisvolles an sich. — There is something mysterious about her; Er war ungeduldig, wie es Kinder an sich haben. — He was impatient, as children tend to be; colloquial Das hat er so an sich. — That's just the way he is. Do not confuse: an sich — in itself, actually (Die Idee an sich ist gut; Ich habe an sich nichts dagegen); an sich denken — to think of oneself."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/haben",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hab",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt",
+              "zu haben"
+            ],
+            "not_clause_has": [
+              "gedacht",
+              "denken",
+              "denkt",
+              "denke",
+              "dachte",
+              "dachten",
+              "genommen",
+              "nehmen",
+              "nahm",
+              "nimmt",
+              "gerissen",
+              "reißen",
+              "riss",
+              "gezogen",
+              "ziehen",
+              "zog",
+              "gedrückt",
+              "drückte",
+              "gebunden",
+              "erinnert",
+              "gewöhnt",
+              "geglaubt",
+              "gezweifelt",
+              "gearbeitet",
+              "gerichtet",
+              "geschrieben",
+              "gewandt",
+              "gefesselt",
+              "gelassen",
+              "herangelassen",
+              "lassen",
+              "ließ",
+              "vornehmen",
+              "vorgenommen",
+              "durchführen",
+              "durchgeführt",
+              "gemacht",
+              "machen",
+              "angewandt",
+              "angewendet",
+              "erlebt",
+              "erfahren",
+              "gespürt",
+              "bemerkt",
+              "beobachtet",
+              "festgestellt",
+              "gesehen",
+              "getestet",
+              "ausprobiert",
+              "dagegen",
+              "dafür",
+              "recht",
+              "Recht",
+              "tun",
+              "bedeuten",
+              "sagen",
+              "einzuwenden"
+            ]
+          },
+          {
+            "form": [
+              "an sich"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "an sich"
+            ]
+          },
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hab",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt",
+              "zu haben"
+            ],
+            "not_clause_has": [
+              "gedacht",
+              "denken",
+              "denkt",
+              "denke",
+              "dachte",
+              "dachten",
+              "genommen",
+              "nehmen",
+              "nahm",
+              "nimmt",
+              "gerissen",
+              "reißen",
+              "riss",
+              "gezogen",
+              "ziehen",
+              "zog",
+              "gedrückt",
+              "drückte",
+              "gebunden",
+              "erinnert",
+              "gewöhnt",
+              "geglaubt",
+              "gezweifelt",
+              "gearbeitet",
+              "gerichtet",
+              "geschrieben",
+              "gewandt",
+              "gefesselt",
+              "gelassen",
+              "herangelassen",
+              "lassen",
+              "ließ",
+              "vornehmen",
+              "vorgenommen",
+              "durchführen",
+              "durchgeführt",
+              "gemacht",
+              "machen",
+              "angewandt",
+              "angewendet",
+              "erlebt",
+              "erfahren",
+              "gespürt",
+              "bemerkt",
+              "beobachtet",
+              "festgestellt",
+              "gesehen",
+              "getestet",
+              "ausprobiert",
+              "dagegen",
+              "dafür",
+              "recht",
+              "Recht",
+              "tun",
+              "bedeuten",
+              "sagen",
+              "einzuwenden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er hat etwas Rührendes an sich.",
+        "Sie hatte nichts Besonderes an sich.",
+        "Der Ort hat etwas Geheimnisvolles an sich.",
+        "Er war ungeduldig, wie es Kinder an sich haben."
+      ],
+      "negative": [
+        "Die Idee an sich ist gut.",
+        "Er denkt nur an sich.",
+        "Er hat nur an sich gedacht.",
+        "Sie hat das Buch an sich genommen.",
+        "Sie hat die Operation an sich vornehmen lassen.",
+        "Er hat die neue Methode an sich selbst ausprobiert.",
+        "Ich habe an sich nichts dagegen.",
+        "Er hat an sich recht.",
+        "Das hat an sich nichts zu bedeuten.",
+        "Das hat an sich nichts mit Geld zu tun."
+      ]
+    }
   }
 ]

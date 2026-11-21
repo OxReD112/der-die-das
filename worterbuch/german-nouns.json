@@ -1217,8 +1217,8 @@
     "complements": [
       {
         "pattern": "für + Akkusativ",
-        "note_ru": "цена на что-либо, за что-либо",
-        "note_en": "price of, price for something"
+        "note_ru": "цена на что-либо, за что-либо: der Preis für das Ticket; приз за что-либо: der Preis für den besten Film",
+        "note_en": "price of something: der Preis für das Ticket; prize for something: der Preis für den besten Film"
       }
     ]
   },
@@ -2122,26 +2122,26 @@
     "complements": [
       {
         "pattern": "für + Akkusativ",
-        "note_ru": "причина чего-либо",
-        "note_en": "reason for something",
+        "note_ru": "причина, основание чего-либо: der Grund für die Verspätung",
+        "note_en": "reason for something: der Grund für die Verspätung",
         "meaning_ru": "причина"
       },
       {
         "pattern": "für + Akkusativ",
-        "note_ru": "причина чего-либо",
-        "note_en": "reason for something",
+        "note_ru": "причина, основание чего-либо: der Grund für die Verspätung",
+        "note_en": "reason for something: der Grund für die Verspätung",
         "meaning_ru": "основание"
       },
       {
         "pattern": "zu + Dativ",
-        "note_ru": "повод для чего-либо: kein Grund zur Panik",
-        "note_en": "reason for, cause for: kein Grund zur Panik",
+        "note_ru": "повод, основание для чего-либо: kein Grund zur Panik, Grund zur Annahme",
+        "note_en": "reason, grounds for something: kein Grund zur Panik, Grund zur Annahme",
         "meaning_ru": "причина"
       },
       {
         "pattern": "zu + Dativ",
-        "note_ru": "повод для чего-либо: kein Grund zur Panik",
-        "note_en": "reason for, cause for: kein Grund zur Panik",
+        "note_ru": "повод, основание для чего-либо: kein Grund zur Panik, Grund zur Annahme",
+        "note_en": "reason, grounds for something: kein Grund zur Panik, Grund zur Annahme",
         "meaning_ru": "основание"
       }
     ]
@@ -8828,8 +8828,8 @@
     "complements": [
       {
         "pattern": "von + Dativ",
-        "note_ru": "мечта о чём-либо",
-        "note_en": "dream of something"
+        "note_ru": "мечта о чём-либо: der Traum von einem Haus; сон о ком-либо, чём-либо: ein Traum von der Schule",
+        "note_en": "dream of something: der Traum von einem Haus; dream about someone, something: ein Traum von der Schule"
       }
     ]
   },
@@ -9141,8 +9141,8 @@
     "complements": [
       {
         "pattern": "an + Akkusativ",
-        "note_ru": "подключение, присоединение к чему-либо",
-        "note_en": "connection to something"
+        "note_ru": "подключение, присоединение к чему-либо: der Anschluss an das Netz; пересадка на что-либо: Anschluss an den Zug nach Bonn",
+        "note_en": "connection to something: der Anschluss an das Netz; connection to a train: Anschluss an den Zug nach Bonn"
       }
     ]
   },
@@ -10884,8 +10884,8 @@
     "complements": [
       {
         "pattern": "zu + Dativ",
-        "note_ru": "вклад во что-либо",
-        "note_en": "contribution to something"
+        "note_ru": "вклад во что-либо: ein Beitrag zum Umweltschutz; взнос на что-либо: der Beitrag zur Krankenversicherung; статья, материал на какую-либо тему: ein Beitrag zum Thema",
+        "note_en": "contribution to something: ein Beitrag zum Umweltschutz; contribution, fee: der Beitrag zur Krankenversicherung; article on a subject: ein Beitrag zum Thema"
       }
     ]
   },
@@ -12723,8 +12723,8 @@
     "complements": [
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "давление на кого-либо, что-либо",
-        "note_en": "pressure on someone, something"
+        "note_ru": "давление на кого-либо, что-либо: Druck auf die Regierung; нажатие на что-либо: ein Druck auf den Knopf",
+        "note_en": "pressure on someone, something: Druck auf die Regierung; press on something (a button): ein Druck auf den Knopf"
       }
     ]
   },
@@ -13293,8 +13293,8 @@
     "complements": [
       {
         "pattern": "für + Akkusativ",
-        "note_ru": "замена кому-либо, чему-либо",
-        "note_en": "substitute for someone, something"
+        "note_ru": "замена кому-либо, чему-либо: ein Ersatz für Zucker; возмещение чего-либо: Ersatz für den Schaden",
+        "note_en": "substitute for someone, something: ein Ersatz für Zucker; compensation for something: Ersatz für den Schaden"
       }
     ]
   },
@@ -14269,8 +14269,9 @@
     "complements": [
       {
         "pattern": "an + Akkusativ",
-        "note_ru": "мысль о ком-либо, чём-либо",
-        "note_en": "thought of someone, something"
+        "note_ru": "мысль о ком-либо, чём-либо: der Gedanke an den Urlaub",
+        "note_en": "thought of someone, something: der Gedanke an den Urlaub",
+        "meaning_ru": "мысль"
       }
     ]
   },
@@ -17916,8 +17917,8 @@
     "complements": [
       {
         "pattern": "nach + Dativ",
-        "note_ru": "спрос на что-либо",
-        "note_en": "demand for something"
+        "note_ru": "спрос на что-либо: die Nachfrage nach Wohnungen; вопрос о ком-либо, чём-либо: die Nachfrage nach seinem Befinden",
+        "note_en": "demand for something: die Nachfrage nach Wohnungen; inquiry about something: die Nachfrage nach seinem Befinden"
       }
     ]
   },
@@ -22125,8 +22126,8 @@
     "complements": [
       {
         "pattern": "über + Akkusativ",
-        "note_ru": "суждение о ком-либо, чём-либо; оценка кого-либо, чего-либо",
-        "note_en": "judgement on someone, something"
+        "note_ru": "приговор, решение суда о ком-либо, чём-либо: das Urteil über den Angeklagten; суждение о ком-либо, чём-либо: ein Urteil über den Film",
+        "note_en": "sentence, court decision on someone, something: das Urteil über den Angeklagten; judgement on someone, something: ein Urteil über den Film"
       }
     ]
   },
@@ -22301,13 +22302,14 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
-        "note_ru": "сравнение с чем-либо",
-        "note_en": "comparison with something"
+        "note_ru": "сравнение с чем-либо: ein Vergleich mit dem Vorjahr; мировое соглашение с кем-либо: ein Vergleich mit den Gläubigern",
+        "note_en": "comparison with something: ein Vergleich mit dem Vorjahr; settlement with someone: ein Vergleich mit den Gläubigern"
       },
       {
         "pattern": "zwischen + Dativ",
-        "note_ru": "сравнение между чем-либо",
-        "note_en": "comparison between"
+        "note_ru": "сравнение между чем-либо: ein Vergleich zwischen den beiden Ländern",
+        "note_en": "comparison between: ein Vergleich zwischen den beiden Ländern",
+        "meaning_ru": "сравнение"
       }
     ]
   },
@@ -22355,26 +22357,26 @@
     "complements": [
       {
         "pattern": "zu + Dativ",
-        "note_ru": "отношение к кому-либо, чему-либо",
-        "note_en": "relationship with someone, something",
+        "note_ru": "отношение к чему-либо: ein entspanntes Verhältnis zum Geld; отношения с кем-либо: sein Verhältnis zum Chef",
+        "note_en": "attitude to something: ein entspanntes Verhältnis zum Geld; relationship with someone: sein Verhältnis zum Chef",
         "meaning_ru": "отношение, соотношение"
       },
       {
         "pattern": "zu + Dativ",
-        "note_ru": "отношение к кому-либо, чему-либо",
-        "note_en": "relationship with someone, something",
+        "note_ru": "отношение к чему-либо: ein entspanntes Verhältnis zum Geld; отношения с кем-либо: sein Verhältnis zum Chef",
+        "note_en": "attitude to something: ein entspanntes Verhältnis zum Geld; relationship with someone: sein Verhältnis zum Chef",
         "meaning_ru": "отношения"
       },
       {
         "pattern": "zwischen + Dativ",
-        "note_ru": "отношения, соотношение между чем-либо",
-        "note_en": "relationship between",
+        "note_ru": "соотношение между чем-либо: das Verhältnis zwischen Preis und Leistung; отношения между кем-либо: das Verhältnis zwischen den Brüdern",
+        "note_en": "ratio between: das Verhältnis zwischen Preis und Leistung; relationship between: das Verhältnis zwischen den Brüdern",
         "meaning_ru": "отношение, соотношение"
       },
       {
         "pattern": "zwischen + Dativ",
-        "note_ru": "отношения, соотношение между чем-либо",
-        "note_en": "relationship between",
+        "note_ru": "соотношение между чем-либо: das Verhältnis zwischen Preis und Leistung; отношения между кем-либо: das Verhältnis zwischen den Brüdern",
+        "note_en": "ratio between: das Verhältnis zwischen Preis und Leistung; relationship between: das Verhältnis zwischen den Brüdern",
         "meaning_ru": "отношения"
       }
     ]
@@ -22853,14 +22855,14 @@
     "complements": [
       {
         "pattern": "zu + Dativ",
-        "note_ru": "избрание кем-либо: die Wahl zum Präsidenten",
-        "note_en": "election as: die Wahl zum Präsidenten",
+        "note_ru": "выборы во что-либо: die Wahl zum Bundestag; избрание кем-либо: die Wahl zum Präsidenten",
+        "note_en": "election to something: die Wahl zum Bundestag; being elected as: die Wahl zum Präsidenten",
         "meaning_ru": "выборы"
       },
       {
         "pattern": "zu + Dativ",
-        "note_ru": "избрание кем-либо: die Wahl zum Präsidenten",
-        "note_en": "election as: die Wahl zum Präsidenten",
+        "note_ru": "выборы во что-либо: die Wahl zum Bundestag; избрание кем-либо: die Wahl zum Präsidenten",
+        "note_en": "election to something: die Wahl zum Bundestag; being elected as: die Wahl zum Präsidenten",
         "meaning_ru": "избрание (на должность)"
       }
     ]
@@ -23456,14 +23458,14 @@
     "complements": [
       {
         "pattern": "zu + Dativ",
-        "note_ru": "доступ к чему-либо",
-        "note_en": "access to something",
+        "note_ru": "вход, проход куда-либо: der Zugang zum Garten; доступ к чему-либо: Zugang zum Internet",
+        "note_en": "way in, entrance to something: der Zugang zum Garten; access to something: Zugang zum Internet",
         "meaning_ru": "вход, проход"
       },
       {
         "pattern": "zu + Dativ",
-        "note_ru": "доступ к чему-либо",
-        "note_en": "access to something",
+        "note_ru": "вход, проход куда-либо: der Zugang zum Garten; доступ к чему-либо: Zugang zum Internet",
+        "note_en": "way in, entrance to something: der Zugang zum Garten; access to something: Zugang zum Internet",
         "meaning_ru": "доступ"
       }
     ]
@@ -27235,14 +27237,14 @@
     "complements": [
       {
         "pattern": "gegenüber + Dativ",
-        "note_ru": "терпимость к кому-либо, чему-либо",
-        "note_en": "tolerance of someone, something",
+        "note_ru": "терпимость к кому-либо, чему-либо: Toleranz gegenüber Andersdenkenden; переносимость чего-либо: die Toleranz gegenüber Alkohol",
+        "note_en": "tolerance of someone, something: Toleranz gegenüber Andersdenkenden; tolerance to something: die Toleranz gegenüber Alkohol",
         "meaning_ru": "терпимость"
       },
       {
         "pattern": "gegenüber + Dativ",
-        "note_ru": "терпимость к кому-либо, чему-либо",
-        "note_en": "tolerance of someone, something",
+        "note_ru": "терпимость к кому-либо, чему-либо: Toleranz gegenüber Andersdenkenden; переносимость чего-либо: die Toleranz gegenüber Alkohol",
+        "note_en": "tolerance of someone, something: Toleranz gegenüber Andersdenkenden; tolerance to something: die Toleranz gegenüber Alkohol",
         "meaning_ru": "переносимость внешних воздействий"
       }
     ]
@@ -27520,8 +27522,8 @@
     "complements": [
       {
         "pattern": "an + Dativ",
-        "note_ru": "доля в чём-либо; участие в чём-либо",
-        "note_en": "share of, share in something"
+        "note_ru": "доля в чём-либо: sein Anteil am Gewinn; доля в капитале: Anteile an einem Unternehmen; сочувствие: Anteil an seinem Schicksal nehmen",
+        "note_en": "share of something: sein Anteil am Gewinn; shares in a company: Anteile an einem Unternehmen; sympathy: Anteil an seinem Schicksal nehmen"
       }
     ]
   },
@@ -37265,14 +37267,14 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
-        "note_ru": "обращение с кем-либо, чем-либо: der Umgang mit Geld",
-        "note_en": "handling of, dealing with: der Umgang mit Geld",
+        "note_ru": "общение с кем-либо: der Umgang mit Kollegen; обращение с чем-либо: der Umgang mit Geld",
+        "note_en": "dealings with someone: der Umgang mit Kollegen; handling of something: der Umgang mit Geld",
         "meaning_ru": "общение"
       },
       {
         "pattern": "mit + Dativ",
-        "note_ru": "обращение с кем-либо, чем-либо: der Umgang mit Geld",
-        "note_en": "handling of, dealing with: der Umgang mit Geld",
+        "note_ru": "общение с кем-либо: der Umgang mit Kollegen; обращение с чем-либо: der Umgang mit Geld",
+        "note_en": "dealings with someone: der Umgang mit Kollegen; handling of something: der Umgang mit Geld",
         "meaning_ru": "обращение с кем-либо или чем-либо"
       }
     ]
@@ -37996,8 +37998,8 @@
     "complements": [
       {
         "pattern": "über + Akkusativ",
-        "note_ru": "обзор чего-либо: ein Überblick über das Thema",
-        "note_en": "overview of something: ein Überblick über das Thema"
+        "note_ru": "обзор, краткое изложение чего-либо: ein Überblick über das Thema; понимание общей картины чего-либо: den Überblick über die Finanzen behalten; вид сверху: der Überblick über die Stadt",
+        "note_en": "overview of something: ein Überblick über das Thema; grasp of the whole: den Überblick über die Finanzen behalten; view over: der Überblick über die Stadt"
       }
     ]
   },
@@ -40689,8 +40691,8 @@
     "complements": [
       {
         "pattern": "in + Akkusativ",
-        "note_ru": "представление о чём-либо, взгляд внутрь чего-либо: Einblick in die Arbeit",
-        "note_en": "insight into something: Einblick in die Arbeit"
+        "note_ru": "представление о чём-либо: Einblick in die Arbeit; ознакомление с чем-либо: Einblick in die Akten; возможность заглянуть внутрь: Einblick in den Hof",
+        "note_en": "insight into something: Einblick in die Arbeit; inspection of, access to files: Einblick in die Akten; view into: Einblick in den Hof"
       }
     ]
   },
@@ -44173,8 +44175,9 @@
     "complements": [
       {
         "pattern": "über + Akkusativ",
-        "note_ru": "горе, печаль из-за чего-либо",
-        "note_en": "grief about something"
+        "note_ru": "горе, печаль из-за чего-либо: Kummer über den Verlust",
+        "note_en": "grief over something: Kummer über den Verlust",
+        "meaning_ru": "горе, печаль"
       }
     ]
   },
@@ -53097,14 +53100,14 @@
     "complements": [
       {
         "pattern": "an + Akkusativ",
-        "note_ru": "привязанность к кому-либо, чему-либо",
-        "note_en": "attachment to someone, something",
+        "note_ru": "привязанность к кому-либо, чему-либо: die Bindung an die Familie; обязательство, связанность чем-либо: die Bindung an den Vertrag",
+        "note_en": "attachment to someone, something: die Bindung an die Familie; commitment, being bound by: die Bindung an den Vertrag",
         "meaning_ru": "привязанность, связь"
       },
       {
         "pattern": "an + Akkusativ",
-        "note_ru": "привязанность к кому-либо, чему-либо",
-        "note_en": "attachment to someone, something",
+        "note_ru": "привязанность к кому-либо, чему-либо: die Bindung an die Familie; обязательство, связанность чем-либо: die Bindung an den Vertrag",
+        "note_en": "attachment to someone, something: die Bindung an die Familie; commitment, being bound by: die Bindung an den Vertrag",
         "meaning_ru": "обязательство"
       }
     ]
@@ -53962,20 +53965,20 @@
     "complements": [
       {
         "pattern": "in + Akkusativ",
-        "note_ru": "доступ к ознакомлению с чем-либо; понимание чего-либо: Einsicht in die Akten",
-        "note_en": "access to, insight into something: Einsicht in die Akten",
+        "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
+        "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
         "meaning_ru": "понимание, осознание"
       },
       {
         "pattern": "in + Akkusativ",
-        "note_ru": "доступ к ознакомлению с чем-либо; понимание чего-либо: Einsicht in die Akten",
-        "note_en": "access to, insight into something: Einsicht in die Akten",
+        "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
+        "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
         "meaning_ru": "ознакомление (с документами)"
       },
       {
         "pattern": "in + Akkusativ",
-        "note_ru": "доступ к ознакомлению с чем-либо; понимание чего-либо: Einsicht in die Akten",
-        "note_en": "access to, insight into something: Einsicht in die Akten",
+        "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
+        "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
         "meaning_ru": "вид (внутрь)"
       }
     ]

@@ -1066,13 +1066,20 @@
   "complements": [
    {
     "pattern": "zu + Dativ",
-    "note_ru": "расстояние до кого-либо, чего-либо: Abstand zum Vordermann",
-    "note_en": "distance to someone, something: Abstand zum Vordermann"
+    "note_ru": "расстояние до кого-либо, чего-либо: Abstand zum Vordermann; промежуток времени: der zeitliche Abstand zum letzten Treffen; сдержанность: Abstand zu den Kollegen halten",
+    "note_en": "distance to someone, something: Abstand zum Vordermann; interval: der zeitliche Abstand zum letzten Treffen; reserve: Abstand zu den Kollegen halten"
    },
    {
     "pattern": "von + Dativ",
-    "note_ru": "расстояние от чего-либо: Abstand von der Straße",
-    "note_en": "distance from something: Abstand von der Straße"
+    "note_ru": "расстояние от чего-либо: Abstand von der Straße; промежуток времени: im Abstand von zwei Jahren",
+    "note_en": "distance from something: Abstand von der Straße; interval: im Abstand von zwei Jahren",
+    "meaning_ru": "расстояние, дистанция, промежуток"
+   },
+   {
+    "pattern": "von + Dativ",
+    "note_ru": "расстояние от чего-либо: Abstand von der Straße; промежуток времени: im Abstand von zwei Jahren",
+    "note_en": "distance from something: Abstand von der Straße; interval: im Abstand von zwei Jahren",
+    "meaning_ru": "интервал, промежуток времени"
    }
   ]
  },
@@ -1085,8 +1092,8 @@
   "complements": [
    {
     "pattern": "auf + Akkusativ",
-    "note_ru": "нападение на кого-либо, что-либо",
-    "note_en": "attack on someone, something"
+    "note_ru": "нападение на кого-либо, что-либо: ein Angriff auf die Stadt; атака на что-либо в спорте: ein Angriff auf das Tor; нападки на кого-либо: Angriffe auf die Regierung",
+    "note_en": "attack on someone, something: ein Angriff auf die Stadt; attack on goal: ein Angriff auf das Tor; attacks on someone: Angriffe auf die Regierung"
    }
   ]
  },
@@ -1137,14 +1144,14 @@
    },
    {
     "pattern": "auf + Akkusativ",
-    "note_ru": "охота на кого-либо: die Jagd auf Hasen",
-    "note_en": "hunt for someone: die Jagd auf Hasen",
+    "note_ru": "охота на кого-либо: die Jagd auf Hasen; погоня за кем-либо: die Jagd auf den Täter",
+    "note_en": "hunt for someone: die Jagd auf Hasen; chase after someone: die Jagd auf den Täter",
     "meaning_ru": "охота"
    },
    {
     "pattern": "auf + Akkusativ",
-    "note_ru": "охота на кого-либо: die Jagd auf Hasen",
-    "note_en": "hunt for someone: die Jagd auf Hasen",
+    "note_ru": "охота на кого-либо: die Jagd auf Hasen; погоня за кем-либо: die Jagd auf den Täter",
+    "note_en": "hunt for someone: die Jagd auf Hasen; chase after someone: die Jagd auf den Täter",
     "meaning_ru": "погоня"
    }
   ]
@@ -1158,14 +1165,14 @@
   "complements": [
    {
     "pattern": "über + Akkusativ",
-    "note_ru": "жалоба на кого-либо, что-либо: Klagen über den Service",
-    "note_en": "complaint about someone, something: Klagen über den Service",
+    "note_ru": "жалоба на кого-либо, что-либо: Klagen über den Service; сетование о чём-либо: die Klage über den Verlust",
+    "note_en": "complaint about someone, something: Klagen über den Service; lament over something: die Klage über den Verlust",
     "meaning_ru": "жалоба"
    },
    {
     "pattern": "über + Akkusativ",
-    "note_ru": "жалоба на кого-либо, что-либо: Klagen über den Service",
-    "note_en": "complaint about someone, something: Klagen über den Service",
+    "note_ru": "жалоба на кого-либо, что-либо: Klagen über den Service; сетование о чём-либо: die Klage über den Verlust",
+    "note_en": "complaint about someone, something: Klagen über den Service; lament over something: die Klage über den Verlust",
     "meaning_ru": "плач, сетование"
    },
    {
@@ -1239,20 +1246,20 @@
   "complements": [
    {
     "pattern": "nach + Dativ",
-    "note_ru": "призыв к чему-либо, требование чего-либо: der Ruf nach Reformen",
-    "note_en": "call for something: der Ruf nach Reformen",
+    "note_ru": "крик, зов о чём-либо: der Ruf nach Hilfe; призыв к чему-либо, требование: der Ruf nach Reformen",
+    "note_en": "cry, call for something: der Ruf nach Hilfe; call for, demand for something: der Ruf nach Reformen",
     "meaning_ru": "крик, оклик, зов"
    },
    {
     "pattern": "nach + Dativ",
-    "note_ru": "призыв к чему-либо, требование чего-либо: der Ruf nach Reformen",
-    "note_en": "call for something: der Ruf nach Reformen",
+    "note_ru": "крик, зов о чём-либо: der Ruf nach Hilfe; призыв к чему-либо, требование: der Ruf nach Reformen",
+    "note_en": "cry, call for something: der Ruf nach Hilfe; call for, demand for something: der Ruf nach Reformen",
     "meaning_ru": "призыв, требование"
    },
    {
-    "pattern": "nach + Dativ",
-    "note_ru": "призыв к чему-либо, требование чего-либо: der Ruf nach Reformen",
-    "note_en": "call for something: der Ruf nach Reformen",
+    "pattern": "an + Akkusativ",
+    "note_ru": "приглашение на должность куда-либо: einen Ruf an die Universität Bonn erhalten",
+    "note_en": "offer of a post somewhere: einen Ruf an die Universität Bonn erhalten",
     "meaning_ru": "приглашение на должность"
    }
   ]
@@ -2231,5 +2238,22 @@
   "pos": "noun",
   "translation_ru": "щека; ягодица; губка тисков, тормозная колодка",
   "translation_en": "cheek; buttock; jaw of a vice, brake shoe"
+ },
+ {
+  "id": "light-0243",
+  "word": "Spaltbreit",
+  "pos": "noun",
+  "gender": "m",
+  "translation_en": "a crack, a chink",
+  "translation_ru": "на щёлку, на узкую щель"
+ },
+ {
+  "id": "light-0244",
+  "word": "Knebelbart",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Knebelbärte",
+  "translation_en": "dated twirled moustache with a pointed beard",
+  "translation_ru": "устар. закрученные усы с бородкой клинышком"
  }
 ]
