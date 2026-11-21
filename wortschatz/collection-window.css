@@ -586,6 +586,21 @@ textarea.coll-paste {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+/* 21.11.2026 (Alena, A2): «Already in your collection» — the tick in its ring + the word, then a grey line */
+.coll-already {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 6px;
+}
+.coll-already .coll-hit-added {
+  cursor: default;
+}
+.coll-already-word {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sec-text);
+}
 .coll-add-self,
 .coll-retry {
   margin-top: 16px;

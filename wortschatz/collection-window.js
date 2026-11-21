@@ -492,6 +492,18 @@
     const v = M.dictionaryError(error);
     card.textContent = "";
     card.appendChild(head(v.title, embedded ? close : viewMain));
+    if (v.already) {
+      // 21.11.2026 (Alena, A2): the word is already there — the tick of the search's «added» (.coll-hit-added, not a
+      // button here) before the word, then a grey line
+      const line = el("div", "coll-already");
+      const tick = el("span", "coll-hit-added", null, { "aria-hidden": "true" });
+      tick.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg>';
+      line.append(tick, el("span", "coll-already-word", v.word));
+      card.appendChild(line);
+      card.appendChild(el("p", "coll-text", v.error, { role: "status" }));
+      card.appendChild(button("coll-main", v.close, close));
+      return;
+    }
     card.appendChild(el("p", "coll-text", v.word));
     card.appendChild(el("p", "coll-error", v.error, { role: "alert" }));
     if (v.hint !== null) card.appendChild(el("p", "coll-hint", v.hint));

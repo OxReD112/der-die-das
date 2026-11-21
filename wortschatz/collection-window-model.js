@@ -33,6 +33,7 @@
      choose() → the choose screen's set lines (+ counts via loadSet)
      search texts, loadDictionaryIndex(), findInDictionary(index, q), searchFields(item, lang), addFromSearch(…), undoSearch(…)
      dictionaryConfirm(), dictionaryError(error), prepareDictionaryWord(request)          a word from the Wörterbuch page
+                                      (a word already in the own collection → error DICTIONARY_DUPLICATE, 21.11)
      reading texts, readingSelected(request), confirmReading(request, persist), readingDone(result, words, unavailable)  words from a book
      sessionEditable(w)               ✎ in the round: may this card be edited here (own collection, id «u…»)
    Tokens of the form: splitToken, tokensFromCloze, tokensFromText, plainText, clozeText, hiddenWords, previewParts. */
@@ -433,14 +434,19 @@
     const reasons = {
       DICTIONARY_ENTRY_MISSING: L("The dictionary entry is missing.", "В словаре нет этой статьи."),
       DICTIONARY_ENTRY_EXCLUDED: L("This word has no learning card.", "У этого слова нет учебной карточки."), // 08.11: not only pronouns
-      DICTIONARY_CLOZE_INVALID: L("The dictionary example has invalid answer markup and needs correction.", "В примере из словаря неверно отмечено слово — его нужно исправить.")
+      DICTIONARY_CLOZE_INVALID: L("The dictionary example has invalid answer markup and needs correction.", "В примере из словаря неверно отмечено слово — его нужно исправить."),
+      DICTIONARY_DUPLICATE: L("You're already learning this word in Wortschatz.", "Ты уже учишь это слово в Wortschatz.")
     };
+    const duplicate = error.code === "DICTIONARY_DUPLICATE";
     return {
       view: "dictionaryError",
-      title: L("Word Cannot Be Added", "Слово нельзя добавить"),
+      // 21.11.2026 (Alena, site variant A): a word already in the collection says so at once, no form
+      title: duplicate ? L("Already in Your Collection", "Слово уже в коллекции") : L("Word Cannot Be Added", "Слово нельзя добавить"),
       word: error.base || L("Unknown word", "Неизвестное слово"), // 08.11 (Alena): no record number
       error: reasons[error.code] || L("The word could not be prepared. Please try again.", "Не удалось подготовить слово. Попробуй ещё раз."),
       hint: error.code === "DICTIONARY_CLOZE_INVALID" ? error.reason : null,
+      // 21.11.2026 (Alena, variant A2): not an error — the word with the mint tick in its ring, then a grey line
+      already: duplicate,
       close: T.close()
     };
   }
@@ -455,6 +461,8 @@
     const issues = I.validate([row], dictionary);
     if (issues.length) return { error: { ...issues[0], code: "DICTIONARY_CLOZE_INVALID" } };
     const validate = async () => I.validate([row], await I.load());
+    // 21.11.2026 (Alena, variant A): already in the own collection → say so now (the same rule as «Save», which stays)
+    if (own() && C.has({ ...row.card, dictionaryId: item.id })) return { error: { code: "DICTIONARY_DUPLICATE", dictionaryId: item.id, base: row.card.base || "" } };
     return own() ? { form: { prefill: row.card, validate, dictionaryId: item.id, fromDictionary: true } } : { confirm: [row.card, validate, item.id] };
   }
 
