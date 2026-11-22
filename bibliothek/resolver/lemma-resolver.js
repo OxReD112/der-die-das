@@ -8699,13 +8699,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // after a comma or borrow a subject from an earlier clause.
         if(outer===null && l===end && words(l)===H && words(l-1)!=='zu') {
           const pluralSubject=indices.some(i=>i!==l && ['wir','sie'].includes(words(i))) ||
-            indices.some(i=>i!==l && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && ['die','diese','jene'].includes(words(i-1)) &&
+            // (advisor 22.11: also a possessive or keine / solche before the plural form — Wenn sich ihre Kinder ablenken lassen)
+            indices.some(i=>i!==l && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && ['die','diese','jene','meine','deine','seine','ihre','unsere','eure','keine','solche'].includes(words(i-1)) &&
               (forms.get(words(i))||[]).some(e=>e.type==='Nomen'&&String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words(i)))) ||
             // (coverage step C, a2, 30.10: the relative die / welche right after a comma — Göttinnen, die ihm … zukommen lassen: lassen, not
             // lässt, so the plural; a plural noun after a word of quantity — mehr Menschen erreichen lassen)
             ['die','welche'].includes(words(start))&&start>0&&!/^\p{Lu}/u.test(tokens[start+1]?.[0]||'')&&/,\s*$/u.test(sentence.slice(tokens[start-1].index+tokens[start-1][0].length,tokens[start].index)) ||
             indices.some(i=>i!==l && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && LASSEN_QUANTITY_WORDS.has(words(i-1)) &&
-              (forms.get(words(i))||[]).some(e=>e.type==='Nomen'&&String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words(i))));
+              (forms.get(words(i))||[]).some(e=>e.type==='Nomen'&&String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words(i)))) ||
+            // (advisor 22.11, C1: a bare plural noun of our card — no article, maybe lowercase attributes before it — right after the opener
+            // of a subordinate part, sich between them or not (a clause-final finite lassen is only in such a part): Wenn sich Kinder ablenken lassen, dass sich kleine Kinder leicht ablenken lassen; not one governed by
+            // a preposition or after a determiner — mit Kindern, ihre Kinder are other groups)
+            // (a noun of time or measure is no subject — und 5 Minuten dünsten lassen; und / oder open no part here)
+            indices.some(i=>i!==l && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && !OBJ_TIME.test(words(i)) && !MEASURE.test(words(i)) &&
+              (forms.get(words(i))||[]).some(e=>e.type==='Nomen'&&String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words(i))) &&
+              (()=>{let j=i-1;while(j>=start&&/^\p{Ll}/u.test(tokens[j][0])&&(modifiers.get(words(j))||[]).length&&!DETERMINER_WORD.test(words(j))&&
+                !reflexivePronouns.has(words(j))&&!(forms.get(words(j))||[]).some(e=>['preposition','article','Pronomen','Konjunktion'].includes(e.type)))j--;
+                if(j>=0&&reflexivePronouns.has(words(j)))j--;
+                return j>=0&&j>=start-1&&!['und','oder','sowie','aber','sondern','denn','doch'].includes(words(j))&&(OBJECT_CLAUSE_OPENERS.includes(words(j))||(forms.get(words(j))||[]).some(e=>e.type==='Konjunktion'));})());
           if(!pluralSubject)continue;
         }
         if(part<start||part===outer||part===l||!headRows.length)continue;
@@ -8972,6 +8983,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // (der / die alone are pronouns before a verb, sich or lassen — die laß ich mir …; der anderen is a genitive)
             // (an own pronoun card is a member too — niemand, jemand, keiner, jeder, wer: no «impersonal» without proof)
             const pronounMember=(subjectPersons[w]||LASSEN_CAN_SUBJECTS.has(w)||!reflexivePronouns.has(w)&&!DETERMINER_WORD.test(w)&&!DETERMINER_WORD.test(words(i-1))&&(forms.get(w)||[]).some(e=>e.type==='Pronomen')||/^(?:keine[rsn]?|jede[rsmn]?|manche[rsn]?|viele|beide|einige|alle|einer)$/u.test(w)&&!(tokens[i+1]&&/^\p{Lu}/u.test(tokens[i+1][0])&&i+1<=end)||['die','der'].includes(w)&&(i+1===l||i+1===reflexiveIndex||finite(i+1).length>0))&&
+              // (advisor 22.11: a word of quantity before a noun is its attribute — Wenn sich viele Kinder ablenken lassen)
+              !(LASSEN_QUANTITY_WORDS.has(w)&&tokens[i+1]&&i+1<=end&&/^\p{Lu}/u.test(tokens[i+1][0]))&&
               !(DETERMINER_WORD.test(w)&&tokens[i+1]&&i+1<=end&&(/^\p{Lu}/u.test(tokens[i+1][0])||/^\p{Ll}/u.test(tokens[i+1][0])&&/^\p{Lu}/u.test(tokens[i+2]?.[0]||'')&&i+2<=end));
             // (a capital at the clause start is a member too — a name has no card: Gretel ließ sich das nicht sagen —, unless an own card
             // of another kind or a participle says otherwise: Ebenso, Daraus, Zusammenfassend)
