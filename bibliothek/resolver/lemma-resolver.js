@@ -5182,6 +5182,32 @@ function apostropheText(text) {
       const heads = grammarHeadTokens(tokens, index, word).map(([token, attr]) => [token, attr, compoundHeadFormation(sentence, token, attr)]);
       for (const [token, attr, formed] of heads) await compoundHeadEntry(sentence, token, attr, formed);
     }
+    // (advisor 22.11, source audit B2) the gender / number of the nouns after der / die / das near the tapped verb, prepared in the
+    // async stage for the sync grammar rows (finite-verb-with-noun-subject): nounFactsAt — our card, the light record, the English
+    // dictionary. Key: the sentence and the token's place; a token's facts depend only on the token, never on the tap.
+    const clauseNounFacts = new Map();
+    const clauseNounKey = (sentence, token) => sentence + "\u0000" + token.index;
+    async function grammarNounFacts(word, context, candidates) {
+      if (!context || !Number.isInteger(context.tokenOffset) || !candidates.some(c => canonicalPos(c.pos) === "Verb")) return;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'grammarRank'), index = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (index < 0) return;
+      // (advisor + speed chat 22.11) exactly what finite-verb-with-noun-subject reads: the part around the verb (grammarClauseBounds)
+      // and, after und, the first group before it; all at once; a failed load is not kept — the next tap tries again
+      const {start,end} = grammarClauseBounds(sentence,tokens,index);
+      const wanted = [];
+      for (let i = Math.max(1,start+1); i <= end; i++) wanted.push(i);
+      if (start >= 3 && norm(tokens[start-1][0]) === 'und') wanted.push(start-2);
+      await Promise.all(wanted.map(async i => {
+        // (advisor + speed chat 22.11) not for words in capitals — the same check as the article + noun pair (allCapsWord)
+        if (!SUBJECT_ARTICLES.includes(norm(tokens[i-1][0])) || !/^\p{Lu}/u.test(tokens[i][0]) || allCapsWord(tokens[i][0]) || allCapsWord(tokens[i-1][0])) return;
+        const key = clauseNounKey(sentence,tokens[i]);
+        if (clauseNounFacts.has(key)) return;
+        const facts = await nounFactsAt(tokens,i,'grammarRank').catch(() => null);
+        if (!facts) return;
+        if (clauseNounFacts.size > 4096) clauseNounFacts.clear();
+        clauseNounFacts.set(key,facts.rows.map(r => ({number:r.number,gender:r.gender,cases:[...(r.cases || [])]})));
+      }));
+    }
     let preparation = null;
     const DA_PARTICLES = ["darüber","darunter","davor","dahinter","daran","darauf","darin","daraus","dazwischen","davon","dahin","daher","dabei","dafür","dagegen","daneben"];
     function prepareSeparable() {
@@ -12935,17 +12961,48 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (advisor 22.11) is the clause before the comma closed — one sign for the list and the relative rule: it has a finite verb, and
     // that is a full verb, or the frame of a modal / werden is closed by its infinitive / participle (Gab es wirklich Läden, …). Open:
     // no finite verb (Wie nun der Wirt, …) or a modal with no infinitive yet (Im Mittelpunkt sollen der Austausch …, …).
-    function priorClauseClosed(sentence, tokens, comma) {
-      const chunk = sentence.slice(0,tokens[comma].index).replace(/[,;]\s*$/u,'').split(/[.;:!?»«"“”„–—,(]/u).pop();
-      const words = [...chunk.matchAll(/\p{L}+/gu)].map(m => m[0]);
+    // (advisor 22.11, fact 5 — one function) the state of the frame in the words of one part: 'none' — no finite verb; 'closed' — a
+    // finite full verb, or the frame verb's infinitive / participle is there; 'open' — only a frame verb (of the given list) and nothing
+    // closing it yet.
+    function clauseFrameState(words, frame) {
       const rows = x => [norm(x),norm(x).replace(/ß/gu,'ss')].flatMap(f => verbAnalyses.get(f) || []);
       const finite = words.filter((x,i) => (/^\p{Ll}/u.test(x) || i === 0 && !(forms.get(norm(x)) || []).some(e => e.type === 'Nomen' || e.type === 'article')) &&
         rows(x).some(r => r.kind === 'finite'));
-      if (!finite.length) return false;
-      const frame = ['können','sollen','müssen','wollen','dürfen','mögen','werden'];
-      const full = finite.some(x => rows(x).some(r => r.kind === 'finite' && !frame.includes(r.base)));
-      if (full) return true;
-      return words.some(x => /^\p{Ll}/u.test(x) && rows(x).some(r => r.kind === 'infinitive' || r.kind === 'participle') && !finite.includes(x));
+      if (!finite.length) return 'none';
+      // (a frame verb is a word with a finite row of a frame verb — wurde is werden even though loswerden shares the form)
+      if (finite.some(x => !rows(x).some(r => r.kind === 'finite' && frame.includes(r.base)))) return 'closed';
+      return words.some(x => /^\p{Ll}/u.test(x) && rows(x).some(r => r.kind === 'infinitive' || r.kind === 'participle') && !finite.includes(x)) ? 'closed' : 'open';
+    }
+    function priorClauseClosed(sentence, tokens, comma) {
+      const chunk = sentence.slice(0,tokens[comma].index).replace(/[,;]\s*$/u,'').split(/[.;:!?»«"“”„–—,(]/u).pop();
+      return clauseFrameState([...chunk.matchAll(/\p{L}+/gu)].map(m => m[0]),['können','sollen','müssen','wollen','dürfen','mögen','werden']) === 'closed';
+    }
+    // (advisor 22.11, fact 5) an open frame before the word that a participle / infinitive at the word may close: the nearest main
+    // clause before it — over insertions and subordinate clauses (a part opened by a subordinating word, a relative word or a
+    // preposition + relative word) — is 'open' by clauseFrameState with werden / sein / haben / modals. A word inside a subordinate
+    // part itself closes nothing of the main clause (…, dass der Plan ihm gefällt).
+    function openFrameBefore(sentence, tokens, index) {
+      const before = sentence.slice(0,tokens[index].index).split(/[.!?]\s/u).pop();
+      const parts = before.split(/[,;:–—()]/u).map(p => [...p.matchAll(/\p{L}+/gu)].map(m => m[0]));
+      const RELATIVE = ['der','die','das','dem','den','denen','deren','dessen','welche','welcher','welches','welchem','welchen','wo','was','wer'];
+      const verbish = x => [norm(x),norm(x).replace(/ß/gu,'ss')].some(f => (verbAnalyses.get(f) || []).length);
+      const subordinate = words => {
+        const a = norm(words[0] || ''), b = norm(words[1] || '');
+        return ['weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','falls','sobald','da','seit','seitdem',
+          'bis','indem','sodass','ehe','solange','wie'].includes(a) || (forms.get(a) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
+          RELATIVE.includes(a) && /^\p{Ll}/u.test(words[0]) && !(words[1] && /^\p{Lu}/u.test(words[1])) ||
+          !!prepositionCardsByForm.get(a) && RELATIVE.includes(b) && !(words[2] && /^\p{Lu}/u.test(words[2]) && !verbish(words[2]));
+      };
+      const FRAME = ['werden','sein','haben','können','sollen','müssen','wollen','dürfen','mögen'];
+      const own = parts.pop();
+      if (subordinate(own)) return false;
+      const here = clauseFrameState(own,FRAME);
+      if (here !== 'none') return here === 'open';
+      for (let k = parts.length-1; k >= 0; k--) {
+        if (!parts[k].length || subordinate(parts[k])) continue;
+        return clauseFrameState(parts[k],FRAME) === 'open';
+      }
+      return false;
     }
     async function derRoleByVerbPlace(word, context, candidates) {
       if (!Number.isInteger(context?.tokenOffset)) return null;
@@ -14577,9 +14634,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return articleNominalCache.get(key);
     }
+    // a word written wholly in capitals (ÖFFNEN SIE DAS PAKET): no noun pair is read from it (articleNounLink, grammarNounFacts)
+    const allCapsWord = w => String(w).length > 1 && String(w) === String(w).toUpperCase();
     async function articleNounLink(word, context, afterComma = false) {
       if (!Number.isInteger(context?.tokenOffset)) return null;
-      if (word.length > 1 && word === word.toUpperCase()) return null;
+      if (allCapsWord(word)) return null;
       const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'articleNounLink');
       const clicked = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (clicked < 0) return null;
@@ -14784,16 +14843,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // is the grammar group of selectionRules (one table); a rule returns
     // undefined to pass, a result to settle the group (preference, ordering of
     // candidates, or an explicit stop/block without a preference).
-    function grammarClause(word, context, candidates, inflections) {
-      if (!context || !Number.isInteger(context.tokenOffset)) return null;
-      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'grammarRank');
-      const index = clickedTokenIndex(tokens,context.tokenOffset,word);
-      if (index < 0) return null;
+    // The part of the sentence the grammar rows read: cut at punctuation and at und / oder / aber / denn / sondern / doch and the
+    // subordinating words. One function for the rows and for their async preparation (grammarNounFacts).
+    function grammarClauseBounds(sentence, tokens, index) {
       const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","daß","wenn","ob","als","bevor","nachdem"]);
       const connected = (a,b) => !/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[a].index + tokens[a][0].length,tokens[b].index));
       let start = index, end = index;
       while (start > 0 && connected(start-1,start) && (!boundaries.has(norm(tokens[start-1][0])) || midClauseDoch(sentence,tokens,start-1))) start--;
       while (end+1 < tokens.length && connected(end,end+1) && (!boundaries.has(norm(tokens[end+1][0])) || midClauseDoch(sentence,tokens,end+1))) end++;
+      return {start,end};
+    }
+    function grammarClause(word, context, candidates, inflections) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'grammarRank');
+      const index = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (index < 0) return null;
+      const {start,end} = grammarClauseBounds(sentence,tokens,index);
       // (advisor 08.11: an unknown compound noun after the word — its word-formation card, prepared in the async stage)
       // (the same attributeBefore as the async stage computed for this tapped word)
       // (advisor 10.11: only the heads grammarHeads() reads for this tap — up to three words after it, not for a conjunction / adverb /
@@ -14933,7 +14998,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Verb readings that may still be finite here; with another certain finite
       // verb only a spelling equal to the infinitive remains (lassen, meinen).
       const verbReadings = otherFinite ? verbs.filter(c => norm(c.lemma) === norm(word) || c.item && phraseFirst(c.item) && norm(c.lemma).split(/\s+/u).at(-1) === norm(word)) : verbs;
-      return {word,sentence,tokens,index,start,end,matches,candidates,inflections,unchanged,verbs,nouns,finite,
+      const nounFacts = i => tokens[i] ? clauseNounFacts.get(clauseNounKey(sentence,tokens[i])) : undefined;
+      return {word,sentence,tokens,index,start,end,matches,nounFacts,candidates,inflections,unchanged,verbs,nouns,finite,
         candidateFinite,choose,startsUtterance,nounCapitalisation,adjectives,adverbs,clauseVerbs,clauseIndices,adjective,
         adjectiveAdverbPair,participles,otherFinite,verbReadings};
     }
@@ -15742,7 +15808,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         for (let i=start+1;i<=end;i++) {
           const article=norm(tokens[i-1][0]), surface=norm(tokens[i][0]);
           if (!SUBJECT_ARTICLES.includes(article) || !/^[A-ZÄÖÜ]/u.test(tokens[i][0])) continue;
-          const readings=f.matches(i).filter(e=>e.type==='Nomen').flatMap(e=>{
+          // (advisor 22.11, source audit B2) the noun's gender / number from nounFactsAt (every source); the singular only where it may
+          // be the nominative of the article's gender, the plural only after die
+          const facts=f.nounFacts(i);
+          const genderOf={der:'masculine',die:'feminine',das:'neuter'};
+          const readings=facts?facts.flatMap(r=>r.number==='singular'&&r.gender===genderOf[article]&&(!r.cases.length||r.cases.includes('nominative'))?['er/sie/es']:
+            r.number==='plural'&&article==='die'&&(!r.cases.length||r.cases.includes('nominative'))?['sie']:[]):
+            f.matches(i).filter(e=>e.type==='Nomen').flatMap(e=>{
             const singular=surface===norm(e.word)&&article===norm(e.article);
             const plural=surface===norm(e.plural)&&article==='die';
             return [...(singular?['er/sie/es']:[]),...(plural?['sie']:[])];
@@ -15779,14 +15851,44 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const agreed=f.verbs.filter(c=>f.candidateFinite(c,relativeSubject.person));
           return agreed.length ? f.choose(agreed,'finite-verb-with-noun-subject') : undefined;
         }
-        if(nounSubjects.length!==1||otherSubject||otherVerb||
-          ['und','oder','aber','sondern','doch'].includes(norm(tokens[start-1]?.[0])))return undefined;
-        const subject=nounSubjects[0];
-        const before=subject.index===index-1&&subject.index-1===start;
-        const after=subject.index===index+2&&index===start;
-        if(!before&&!after)return undefined;
-        const agreed=f.verbs.filter(c=>f.candidateFinite(c,subject.person));
-        return agreed.length ? f.choose(agreed,'finite-verb-with-noun-subject') : undefined;
+        // (advisor 22.11) two noun subjects joined by und right before the verb (the part starts after und): Der Mann und die Frau
+        // kommen — the plural. The first one: der / die / das + a noun at the start of the sentence or after a comma.
+        if(nounSubjects.length===1&&!otherSubject&&!otherVerb&&norm(tokens[start-1]?.[0]||'')==='und'&&start>=3){
+          const b=nounSubjects[0], a=start-2, sentence=String(f.sentence||'');
+          const opens=a-1===0?!sentence.slice(0,tokens[0].index).trim():/[,;:]\s*$/u.test(sentence.slice(0,tokens[a-1].index));
+          const first=f.nounFacts(a)||[];
+          if(b.index-1===start&&index===b.index+1&&opens&&SUBJECT_ARTICLES.includes(norm(tokens[a-1][0]))&&/^\p{Lu}/u.test(tokens[a][0])&&
+            first.some(r=>r.number==='singular'&&r.gender==={der:'masculine',die:'feminine',das:'neuter'}[norm(tokens[a-1][0])]||r.number==='plural'&&norm(tokens[a-1][0])==='die')){
+            const agreed=f.verbs.filter(c=>f.candidateFinite(c,'sie'));
+            return agreed.length ? f.choose(agreed,'finite-verb-with-noun-subject') : undefined;
+          }
+        }
+        // (advisor 22.11) after und the noun group before it may be a second subject — then no singular from the nearest one (Der Mann
+        // und die Frau kommen). Not when it cannot be one: a finite verb between it and und (Der Mann schläft und die Frau kommt — two
+        // clauses), a group that is not der / die / das + noun (Ich sehe den Mann und die Frau kommt herein), or oder (Der Mann oder die
+        // Frau kommt — the verb agrees with the nearest one)
+        const coordinator=norm(tokens[start-1]?.[0]||'');
+        const coSubject=coordinator==='und'&&start>=3&&/^\p{Lu}/u.test(tokens[start-2][0])&&SUBJECT_ARTICLES.includes(norm(tokens[start-3][0]));
+        if(!nounSubjects.length||otherSubject||otherVerb||coSubject||['sondern'].includes(coordinator))return undefined;
+        // (Mac run w247, train; advisor 22.11) the form is also the participle of another verb and an open werden / sein / haben frame
+        // it may close stands before it, over insertions and subordinate clauses (2006 wurde vom Presbyterium …, zu der Wenden gehört,
+        // der Beschluss gefällt): by form both, the window. Not a frame in another part or one already closed (Weil er krank war,
+        // gefällt der Plan ihm nicht; Er hat gestern gesagt, dass der Plan ihm gefällt) — fact 5 of the relative rule, one function
+        // (a verb reading the form is no finite form of — our card's Partizip II or the English dictionary's form-of row: gefällt of fällen)
+        const participleTwin=f.verbs.some(c=>c.item&&norm(String(c.item.perfect_form||'').split(/\s+/u).pop())===norm(tokens[index][0])||
+          !c.item&&!['ich','du','er/sie/es','wir','ihr','sie'].some(p=>f.candidateFinite(c,p)));
+        if(participleTwin&&openFrameBefore(String(f.sentence||''),tokens,index))return undefined;
+        // (advisor 22.11) the places of the subject in a German clause: (a) right before the finite verb at the start of the part (Das
+        // Thema erhitzt …); (b) right after the finite verb of a verb-second part, whatever stands first (Heute erhitzt das Thema …, Den
+        // Kuchen isst der Junge); (c) the first group after a subordinating word in a verb-last part (weil das Thema die Gemüter erhitzt —
+        // the group right before the verb is an object). Other noun groups are objects; with several candidates only the one whose person
+        // the verb form takes
+        const subordinate=index===end&&start>0&&((f.matches(start-1)||[]).some(e=>e.type==='Konjunktion'&&conjunctionKind(e)==='subordinating')||
+          ['weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','falls','sobald'].includes(norm(tokens[start-1][0])));
+        const placed=nounSubjects.filter(s=>s.index===index-1&&s.index-1===start||s.index===index+2||subordinate&&s.index-1===start);
+        const fits=placed.map(s=>({s,agreed:f.verbs.filter(c=>f.candidateFinite(c,s.person))})).filter(x=>x.agreed.length);
+        if(placed.length>1&&new Set(fits.map(x=>x.s.person)).size!==1)return undefined;
+        return fits.length ? f.choose(fits[0].agreed,'finite-verb-with-noun-subject') : undefined;
       },
       // Twins of one form (advisor 29.10, user): gehört is only a participle of hören, but also a finite form of gehören (gelobt —
       // loben / geloben, geleitet — leiten / geleiten). With no auxiliary, modal or lassen in its part of the sentence and a
@@ -17043,7 +17145,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // for manual selection but cannot rank or resolve themselves.
       // L01 attributive participles have independent noun-phrase evidence;
       // they must not require an explicit reflexive pronoun in the text.
-      if (derived.some(e=>reflexiveEntries.has(e))) await grammarHeads(word,context,candidates);
+      if (derived.some(e=>reflexiveEntries.has(e))) { await grammarHeads(word,context,candidates); await grammarNounFacts(word,context,candidates); }
       const attributed = derived.some(e=>reflexiveEntries.has(e))
         ? grammarRank(word,context,candidates,inflections).candidates.filter(c=>reflexiveEntries.has(c.item) && c.usage?.role === "attributive") : [];
       candidates = candidates.filter(c => !reflexiveEntries.has(c.item) || norm(word) === norm(c.lemma));
@@ -17334,6 +17436,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           nameReadingOrders.set(`${pos}:${word}`,order);
         }
       await grammarHeads(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
+      await grammarNounFacts(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const roleRank = await sharedRoleRank(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const grammatical = roleRank || grammarRank(word, context, candidates.filter(c => !c.reflexiveUnconfirmed), inflections);
       const ranked = contextualRank(word, context, grammatical.candidates);
