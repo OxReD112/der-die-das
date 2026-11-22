@@ -129178,8 +129178,8 @@
     "translation_ru": "проводить, осуществлять (закон, решение); добиваться (осуществления), навязывать",
     "translation_en": "to enforce, to push through, to carry through; to get accepted, to impose",
     "auxiliary": "haben",
-    "usage_note_ru": "seinen Willen durchsetzen — настоять на своём; eine Reform gegen Widerstände durchsetzen — провести реформу вопреки сопротивлению; seine Forderungen durchsetzen — добиться выполнения своих требований. Возвратное sich durchsetzen (утвердиться, взять верх) — см. отдельную карточку. Не путать с неотделяемым durchsetzen (Partizip II durchsetzt): mit etwas durchsetzt — пронизанный, перемешанный с чем-либо.",
-    "usage_note_en": "seinen Willen durchsetzen — to get one's way; eine Reform gegen Widerstände durchsetzen — to push a reform through against resistance; seine Forderungen durchsetzen — to get one's demands met. The reflexive sich durchsetzen (to assert oneself, to prevail) has its own card. Not to be confused with the inseparable durchsetzen (past participle durchsetzt): mit etwas durchsetzt — permeated, interspersed with something.",
+    "usage_note_ru": "seinen Willen durchsetzen — настоять на своём; eine Reform gegen Widerstände durchsetzen — провести реформу вопреки сопротивлению; seine Forderungen durchsetzen — добиться выполнения своих требований. Возвратное sich durchsetzen (утвердиться, взять верх) — см. отдельную карточку. Не путать: durchsetzen (неотделяемый: durchsetzt, hat durchsetzt) — пронизывать (отдельная карточка).",
+    "usage_note_en": "seinen Willen durchsetzen — to get one's way; eine Reform gegen Widerstände durchsetzen — to push a reform through against resistance; seine Forderungen durchsetzen — to get one's demands met. The reflexive sich durchsetzen (to assert oneself, to prevail) has its own card. Do not confuse: durchsetzen (inseparable: durchsetzt, hat durchsetzt) — to permeate (separate card).",
     "example_de": "Die Regierung will das neue Gesetz noch in diesem Jahr durchsetzen.",
     "example_ru": "Правительство хочет провести новый закон ещё в этом году.",
     "example_en": "The government wants to push the new law through this year.",
@@ -129787,5 +129787,58 @@
       }
     },
     "source_url": "https://www.duden.de/rechtschreibung/laden_aufladen_beladen"
+  },
+  {
+    "id": "verb-2806",
+    "infinitive": "durchsetzen",
+    "translation_ru": "пронизывать, перемежать, насыщать (чем-либо)",
+    "translation_en": "to permeate, to intersperse, to shoot through (with something)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Неотделяемый: durchsetzt, durchsetzte, hat durchsetzt. Также о людях: einen Betrieb mit Spitzeln durchsetzen — наводнить предприятие шпиками. Обычно как причастие: mit etwas, von etwas durchsetzt sein — быть пронизанным, перемешанным с чем-либо: Der Text ist mit Fehlern durchsetzt. Не путать: durchsetzen (отделяемый: setzt durch, hat durchgesetzt) — проводить, добиваться (отдельная карточка).",
+    "usage_note_en": "Inseparable: durchsetzt, durchsetzte, hat durchsetzt. Also of people: einen Betrieb mit Spitzeln durchsetzen — to infiltrate a company with informers. Mostly as a participle: mit etwas, von etwas durchsetzt sein — to be shot through, interspersed with something: Der Text ist mit Fehlern durchsetzt. Do not confuse: durchsetzen (separable: setzt durch, hat durchgesetzt) — to enforce, to push through (separate card).",
+    "example_de": "Das Gestein ist von feinen Goldadern durchsetzt.",
+    "example_cloze": "Das Gestein ist von feinen Goldadern {{c1::durchsetzt}}.",
+    "example_ru": "Порода пронизана тонкими золотыми жилами.",
+    "example_en": "The rock is shot through with fine veins of gold.",
+    "perfect_form": "haben durchsetzt",
+    "forms": {
+      "Präsens": {
+        "ich": "durchsetze",
+        "du": "durchsetzt",
+        "er/sie/es": "durchsetzt",
+        "wir": "durchsetzen",
+        "ihr": "durchsetzt",
+        "sie": "durchsetzen"
+      },
+      "Präteritum": {
+        "ich": "durchsetzte",
+        "du": "durchsetztest",
+        "er/sie/es": "durchsetzte",
+        "wir": "durchsetzten",
+        "ihr": "durchsetztet",
+        "sie": "durchsetzten"
+      },
+      "Konjunktiv II": {
+        "ich": "durchsetzte",
+        "du": "durchsetztest",
+        "er/sie/es": "durchsetzte",
+        "wir": "durchsetzten",
+        "ihr": "durchsetztet",
+        "sie": "durchsetzten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо: einen Prosatext mit Versen durchsetzen",
+        "note_en": "something: einen Prosatext mit Versen durchsetzen"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "чем-либо: einen Betrieb mit Spitzeln durchsetzen, mit Fehlern durchsetzt",
+        "note_en": "with something: einen Betrieb mit Spitzeln durchsetzen, mit Fehlern durchsetzt"
+      }
+    ]
   }
 ]

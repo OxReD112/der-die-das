@@ -22116,7 +22116,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>ordinalNounPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>pairWindowChoice(result)).then(result=>coordinatedAdjective(w,c,result,pipeline)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>ordinalNounPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>pairWindowChoice(result)).then(result=>coordinatedAdjective(w,c,result,pipeline)).then(result=>twinParticiple(w,c,result)).then(result=>zuSpellingTwin(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -22959,6 +22959,58 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // einen andern unterlegen könnte); an adjective ending (übertragenen) is a frame. An adjective card of the form stays first (as
     // before): the window stays as it was.
     const TWIN_ENDINGS = ["","e","en","em","er","es"];
+    // Advisor 22.11 (1), all twins: the spelling of a zu-infinitive is the form of only one of the two own verbs of one infinitive —
+    // zu inside the word (durchzusetzen, überzusetzen, umzustellen) only the separable one, a separate zu (zu durchsetzen, zu
+    // umstellen) only the inseparable one: the other twin is not offered either (L7 zu-infinitive-separability already chooses).
+    function zuSpellingTwin(word, context, result) {
+      if (!result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const cands = result.candidates || [];
+      const own = cands.filter(c => c.source === "main" && canonicalPos(c.item?.type || c.pos) === "Verb");
+      const separable = own.filter(c => c.item?.separable_prefix), plain = own.filter(c => !c.item?.separable_prefix);
+      if (!separable.length || !plain.length) return result;
+      const base = c => norm(c.lemma).replace(/^sich\s+/u,"");
+      const sep = separable[0], prefix = norm(sep.item.separable_prefix), inf = base(sep);
+      const twins = plain.filter(c => base(c) === inf);
+      if (!twins.length || !separable.every(c => base(c) === inf)) return result;
+      const w = norm(word);
+      let keep = null;
+      if (w === prefix + "zu" + inf.slice(prefix.length)) keep = "separable";
+      // (advisor 22.11 (2): the participle by its form — prefix + ge (durchgesetzt, umgestellt) is the separable one's only)
+      else if (w.startsWith(prefix + "ge") && !inf.slice(prefix.length).startsWith("ge")) keep = "separable";
+      // (tests chat 22.11: the reading chosen is the separable twin's reflexive card — sich durchsetzen «добиваться своего» — and the
+      // inseparable twin has no reflexive card: it is not offered — Er konnte sich nicht durchsetzen)
+      else if (result.selected && separable.includes(result.selected) && /^sich\s/u.test(norm(result.selected.lemma)) &&
+        !twins.some(c => /^sich\s/u.test(norm(c.lemma)))) keep = "separable";
+      // (train pkg237: wobei er sich mit 67,2 Prozent … durchsetzte — the inseparable twin has no reflexive card and took sich only as a
+      // reflexive construction of a plain verb (its sense not confirmed), while the separable twin has a reflexive card: that card is the
+      // reading, with the same group — sich … durchsetzte)
+      else if (result.selected && twins.includes(result.selected) && result.selected.construction?.id === "reflexive-verb" &&
+        result.selected.construction.lexicalSenseConfirmed === false && !twins.some(c => /^sich\s/u.test(norm(c.lemma)))) {
+        const entry = [...reflexiveEntries].find(e => norm(e.word) === "sich " + inf && e.separable_prefix);
+        if (entry) {
+          const g = result.selected.construction, keepSpan = x => x.start === g.pronoun?.start || x.start === g.verb?.start;
+          const own = {...(cands.find(c => c.dictionaryId === entry.id) || mainCandidate(entry)), formFeatures:result.selected.formFeatures,
+            reflexiveUnconfirmed:false, reflexiveLexical:{baseLemma:inf,evidence:"dictionary-reflexive-lemma"},
+            construction:{...g, lemma:entry.word, spans:(g.spans || []).filter(keepSpan), lexicalSenseConfirmed:true, complement:undefined}};
+          return {...result, candidates:[own, ...cands.filter(c => c.dictionaryId !== entry.id && !twins.includes(c))], selected:own, preferred:own,
+            status:"resolved", evidence:"twin-reflexive-card"};
+        }
+      }
+      else if (w === inf) {
+        const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'zuSpellingTwin'), at = clickedTokenIndex(tokens,context.tokenOffset,word);
+        if (at > 0 && norm(tokens[at-1][0]) === "zu" && /^\s+$/u.test(sentence.slice(tokens[at-1].index + tokens[at-1][0].length, tokens[at].index))) keep = "plain";
+      }
+      if (!keep) return result;
+      const drop = new Set(keep === "separable" ? twins : separable);
+      const kept = cands.filter(c => !drop.has(c));
+      if (kept.length === cands.length) return result;
+      // (a window stays a window: the order and the choice are kept as they were, only the other twin goes — sich-unlinked-window)
+      if (!result.selected || !drop.has(result.selected)) return {...result, candidates:kept, ...(result.preferred && drop.has(result.preferred) ? {preferred:result.selected} : {}),
+        ...(result.selected && result.status === "ambiguous" && kept.length === 1 ? {status:"resolved"} : {})};
+      const selected = keep === "separable" ? separable[0] : twins[0];
+      return {...result, candidates:[selected, ...kept.filter(c => c !== selected)], selected, preferred:selected,
+        status: result.status === "ambiguous" && kept.length === 1 ? "resolved" : result.status};
+    }
     async function twinParticiple(word, context, result) {
       const w = String(word || ""), f = norm(w);
       if (!result || result.selected || !context || !Number.isInteger(context.tokenOffset)) return result;
