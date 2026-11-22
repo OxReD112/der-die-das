@@ -19413,7 +19413,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // possible verb right after it opens — an imperative or colloquial form (gieß, hol), a separated form of an index verb (grinste,
     // schrumpelten) — besides the finite verb of the own cards below)
     const COORDINATOR_PARTICLE = /^(?:ab|an|auf|aus|bei|ein|her|hin|mit|nach|vor|weg|zu|zurück|fort|los|hinauf|hinab|herauf|herab|hinunter|herunter|hinein|herein|hinaus|heraus|hinüber|herüber|herum|umher|davon|dahin|daher|zusammen|weiter|nieder|empor|entgegen|vorbei|voran|voraus|durch|um|über|unter)$/u;
-    function coordinatorOpensClause(tokens, i, sentence = null) {
+    // (advisor 21.11) the offsets of the words after und / oder of a sentence that have the shape of a separable participle (particle + ge
+    // + stem + t), no card of ours and no person form by personalVerbFormExternal: such a word opens no part (coordinatorOpensClause).
+    // Prepared (async) by constructionAt; expressionClauses reads it for the same sentence, otherwise none — the rule as before.
+    const PARTICLE_GE_T = new RegExp(`^(?:${SEPARABLE_PARTICIPLE_PARTICLES})ge\\p{Ll}{2,}t$`,"u");
+    const clauseParticipleSets = new Map();
+    async function clauseParticiples(tokens, sentence) {
+      if (clauseParticipleSets.has(sentence)) return clauseParticipleSets.get(sentence);
+      const out = new Set();
+      for (let i = 2; i < tokens.length; i++) {
+        const key = norm(tokens[i][0]);
+        if (!/^\p{Ll}/u.test(tokens[i][0]) || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i-1][0])) || !PARTICLE_GE_T.test(key) || (forms.get(key) || []).length) continue;
+        if (!(await personalVerbFormExternal(tokens[i][0]))) out.add(tokens[i].index);
+      }
+      if (clauseParticipleSets.size > 256) clauseParticipleSets.clear();
+      clauseParticipleSets.set(sentence, out);
+      return out;
+    }
+    function coordinatorOpensClause(tokens, i, sentence = null, participles = null) {
       if (i < 2 || !tokens[i] || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i-1][0]))) return false;
       if (sentence && /^\s*\d[\d.,]*\s*%?\s*$/u.test(String(sentence).slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index))) return false;
       { const key = norm(tokens[i][0]), after = sentence && tokens[i+1] ? String(sentence).slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index) : "";
@@ -19424,7 +19441,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               (x,y) => /[,;:.!?…“”„"«»()–—]/u.test(sentence ? String(sentence).slice(tokens[x].index + tokens[x][0].length, tokens[y].index) : "") ||
                 ["und","oder","aber","denn","sondern","weil","dass","daß","wenn","ob","als","bevor","nachdem"].includes(norm(tokens[y][0]))))) return true;
         // (a word unknown to the own dictionary with a verb ending -t / -te / -ten / -st may be a verb — schrumpelten, grinste; the scan's rule)
+        // (expressions chat 20.11, batch 169; advisor 21.11: not a particle + ge + stem + t that the shared check does not read as a person
+        // form — personalVerbFormExternal, prepared for the sentence by clauseParticiples: verflixt und zugenäht; was mich angeht, weil er
+        // der Partei angehört stay person forms)
         if (/^\p{Ll}/u.test(tokens[i][0]) && !(forms.get(key) || []).length && /(?:t|te|ten|tet|test|st)$/u.test(key) &&
+            !participles?.has(tokens[i].index) &&
             !(/e[nmrs]?$/u.test(key) && /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "")) &&
             !/(?:(?:ig|lich|isch|haft|sam|bar|los|end)(?:e[nmrs]?)?)$/u.test(key)) return true;
         if (/^\p{Ll}/u.test(tokens[i][0]) && !(/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") && DETERMINER_WORD.test(key)) &&
@@ -19466,7 +19487,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // The parts of the sentence of the expression search (one number per token; a new number after punctuation or at und / oder
     // before a clause of its own), and whether a token opens its part. 20.11.2026 (advisor 20.11): one function for constructionAt and
     // for the heading verb outside the parts in expressionGrammar — the same boundary as no_finite_between.
-    function expressionClauses(tokens, sentence) {
+    function expressionClauses(tokens, sentence, participles = clauseParticipleSets.get(sentence) || null) {
       const gap = i => i > 0 ? sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index) : "";
       const clause = [], opening = [];
       for (let i = 0, c = 0; i < tokens.length; i++) {
@@ -19476,7 +19497,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const innerPoint = i && gap(i) === "." && /^\p{L}{1,3}$/u.test(tokens[i-1][0]) && /^\p{L}{1,3}$/u.test(tokens[i][0]) &&
           (/^\p{L}$/u.test(tokens[i-1][0]) || /^\p{L}$/u.test(tokens[i][0]));
         if (i && !innerPoint && /[,;:.!?…–—()"„“”«»]/u.test(clauseGapText(gap(i), tokens[i-1][0], tokens[i][0]))) c++;
-        else if (coordinatorOpensClause(tokens, i, sentence)) c++;
+        else if (coordinatorOpensClause(tokens, i, sentence, participles)) c++;
         // (review 05.11: the point inside u.a. / d.h. opens nothing — D.H. Lawrence, U.A. Fanthorpe stay names)
         clause.push(c); opening.push(!i || !innerPoint && /[.!?:„“"«»]/u.test(gap(i)));
       }
@@ -19492,7 +19513,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // E3 (links chat, 22.10.2026; check of expressions 002–007): und / oder right before a finite verb starts another clause
       // (Die FDP hat erst zugestimmt und will jetzt nichts damit zu tun haben — hat is not a part of the expression).
       const finiteHere = i => /^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === "finite");
-      { const parts = expressionClauses(tokens, sentence); clause.push(...parts.clause); opening.push(...parts.opening); }
+      { const parts = expressionClauses(tokens, sentence, await clauseParticiples(tokens, sentence)); clause.push(...parts.clause); opening.push(...parts.opening); }
       const keys = tokens.map(t => norm(t[0]));
       // Expressions chat 16.11 (advisor 16.11): in the search of expressions the s of a lone 's / ’s and of a contraction geht's /
       // gibt's / wie's / mir's is es — by the same function as A12 (colloquialExpansions); not where A12 does not read es
@@ -24315,6 +24336,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       matchReflexive:reflexiveCandidates,
       // 21.11.2026 (advisor 21.11): «a person form of a verb» with the external dictionary — personalVerbFormExternal (tests)
       personalVerbForm:async word=>{await prepareSeparable();return personalVerbFormExternal(word);},
+      // 21.11.2026 (advisor 21.11): the part numbers of the expression search for a sentence (tests)
+      expressionParts:async sentence=>{await prepareSeparable();const s=String(sentence||''),tokens=sharedTokens(s,'constructionAt');
+        return expressionClauses(tokens,s,await clauseParticiples(tokens,s)).clause;},
       // 31.10.2026 (expressions chat): every reflexive pronoun of a sentence with reflexiveAgreesWithSubject (tests; the links chat's lassenGroup)
       reflexiveAgreement:async sentence=>{await prepareSeparable();const {facts,subjectFacts}=await sentenceSubjectFacts(String(sentence||''),'resolve');
         return facts.words.map((w,i)=>({i,word:facts.tokens[i][0],reflexive:reflexivePronouns.has(w)})).filter(x=>x.reflexive).map(x=>({index:x.i,word:x.word,agrees:reflexiveAgreesWithSubject(facts,subjectFacts,x.i)}));},

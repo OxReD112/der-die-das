@@ -20,13 +20,16 @@
   let ALL = false;
   const withAll = f => { const prev = ALL; ALL = true; try { return f(); } finally { ALL = prev; } };
   const shownCount = n => ALL ? n : 2;
+  // (advisor 21.11) a remark in brackets dropped from a meaning leaves no space before the punctuation after it: «равняться (чему-л.), быть
+  // равным» → «равняться, быть равным», not «равняться , быть равным». One helper for every place that drops the brackets of the display.
+  const dropBrackets = (value, inner = /\([^()]*\)/g) => String(value || '').replace(inner, '').replace(/\s+(?=[,.;:!?])/gu, '');
   function compact(text) {
     // Parenthesised remarks may contain ";" themselves: drop them before splitting.
     // (advisor 20.11, aufrappeln: «(sich mühsam erheben, aufstehen): to pick oneself up») a bracket at the start of a meaning dropped as a
     // remark takes the colon right after it along
-    const parts = String(text || '').replace(/(^|;)\s*\([^()]*\)\s*:\s*/gu, '$1').replace(/\([^()]*\)/g, '').split(';').map(value => {
+    const parts = dropBrackets(String(text || '').replace(/(^|;)\s*\([^()]*\)\s*:\s*/gu, '$1')).split(';').map(value => {
       if (/^to call on.*divine being/i.test(value.trim()) || /^to call upon$/i.test(value.trim())) return 'to invoke';
-      return value.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+      return dropBrackets(value, /\([^)]*\)/g).replace(/\s+/g, ' ').trim();
     }).filter(Boolean);
     return [...new Set(parts)].slice(0, shownCount(Infinity)).join('; ');
   }
@@ -189,7 +192,7 @@
   // Reference 2.A, refined 22.10 (a23492d): on the first meaning only these special domains (Fock «морск. фок»);
   // any domain on the second and later meanings (Wolf «волк; мед. опрелость»).
   const FIRST_MEANING_DOMAINS = new Set(['nautical','technology','military','law','medicine','hunting','mining','printing','railways','aviation']);
-  const labelKey = value => String(value || '').replace(/\([^()]*\)/g, '').replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+  const labelKey = value => dropBrackets(dropBrackets(value), /\([^)]*\)/g).replace(/\s+/g, ' ').trim();
   // Labels by shown text. Texts are compared without brackets, so two senses can meet in one key (saugen: «to suck» and
   // «to suck (to be inferior)», slang): then an unlabelled sense wins (review 22.10); otherwise the first one decides.
   function partCodes(map, glosses) {
@@ -794,7 +797,7 @@
   const onlyLabels = m => { const w = String(m).split(/[\s,]+/u).filter(Boolean); return w.length > 0 && w.every(x => /\.$/u.test(x) && LABEL_WORDS.has(x)); };
   const RUDE_OWN = /^\([^()]*(?:груб|вульг|бран|неодобр|пренебр|презр|жарг|обсц|непристойн|оскорб)[^()]*\)/u;
   function formationMeaning(p, language) {
-    const list = text => p.source === 'main' ? meaningParts(text) : meaningParts(String(text || '').replace(/\([^()]*\)/g, ''));
+    const list = text => p.source === 'main' ? meaningParts(text) : meaningParts(dropBrackets(text));
     // A wiki template left in an external Russian meaning («:Шаблон:Дрозд») is no meaning (G68).
     // (a «meaning» that is only a label — Arsch «вульг.» — is no meaning)
     const own = list(language === 'ru' ? p.ru : p.en).filter(m => !/Шаблон:|^:/u.test(m) && !onlyLabels(m)), en = list(p.en);
