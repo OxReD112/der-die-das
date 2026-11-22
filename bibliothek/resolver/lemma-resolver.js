@@ -2070,7 +2070,53 @@ function apostropheText(text) {
     // ours — its finite and imperative forms from the external inflections) by the same rule — any finite row, or an imperative row of a
     // word with no own card of another part of speech. Our rows decide first (no lookup); a lookup that fails gives false. The one
     // «person form of a verb» for every chat: the links chat's rules, the expressions chat's no_finite_between / no_finite_after.
-    async function personalVerbFormExternal(word) {
+    // (advisor 22.11, expressions chat 22.11) with the word's place (tokens, i): an adjective form in the place of an attribute is no person
+    // form, even of a verb homonym (grünen, leeren, kühlen, weiten): a word with an adjective ending and an adjective reading, right before
+    // a noun (a capital word, only spaces between) or before one through und / oder / a comma and further such adjectives, and after a
+    // preposition, a determiner or another such adjective — mit vollen oder leeren Händen, in roten oder grünen Kleidern, auf den grünen
+    // Wiesen. Die Bäume grünen., Sie leeren die Gläser., wenn sie die Gläser leeren stay person forms. Without the place — as before.
+    async function attributiveAdjectiveAt(tokens, i) {
+      const ADJ = /^\p{Ll}\p{L}*(?:e|en|em|er|es)$/u;
+      const word = tokens[i]?.[0] || "", input = typeof tokens[i]?.input === "string" ? tokens[i].input : null;
+      if (!input || !ADJ.test(word)) return false;
+      const gap = k => input.slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index);
+      const adjective = async k => {
+        if (!ADJ.test(tokens[k]?.[0] || "")) return false;
+        // (an adjective reading from any source — advisor 22.11: an own adjective card's form, a light record of an adjective (its word + an
+        // adjective ending), or an adjective / participle row of the morphology, external included)
+        const key = norm(tokens[k][0]);
+        if ((forms.get(key) || []).some(e => canonicalPos(e.type) === "Adjektiv")) return true;
+        if (["e","en","em","er","es"].some(e => key.endsWith(e) && (lightByForm.get(key.slice(0, -e.length)) || []).some(r => r.pos === "adj"))) return true;
+        let rows;
+        try { rows = (await collectMorphology(tokens[k][0], undefined, 'personalVerbForm'))?.analyses || []; } catch (_) { return false; }
+        return rows.some(a => a.pos === "Adjektiv" || a.kind === "adjective" || a.kind === "participle");
+      };
+      if (!(await adjective(i))) return false;
+      // to the right: the noun, through a row of adjectives (und / oder / a comma)
+      let k = i;
+      for (;;) {
+        if (k + 1 >= tokens.length || !/^\s+$/u.test(gap(k + 1))) {
+          if (k + 1 < tokens.length && /^\s*,\s*$/u.test(gap(k + 1)) && await adjective(k + 1)) { k++; continue; }
+          return false;
+        }
+        if (/^\p{Lu}/u.test(tokens[k + 1][0])) break;
+        if (COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[k + 1][0])) && k + 2 < tokens.length && /^\s+$/u.test(gap(k + 2)) && await adjective(k + 2)) { k += 2; continue; }
+        if (await adjective(k + 1)) { k++; continue; }
+        return false;
+      }
+      // to the left: through the row, then a preposition, a determiner or another adjective
+      let j = i;
+      for (;;) {
+        if (j < 1) return false;
+        const g = gap(j), prev = norm(tokens[j - 1][0]);
+        if (/^\s+$/u.test(g) && COORDINATORS_WITHOUT_COMMA.includes(prev) && j >= 2 && /^\s+$/u.test(gap(j - 1)) && await adjective(j - 2)) { j -= 2; continue; }
+        if (/^\s*,\s*$/u.test(g) && await adjective(j - 1)) { j--; continue; }
+        if (!/^\s+$/u.test(g)) return false;
+        return prepositions.has(prev) || !!determinerFeatures(tokens[j - 1][0]) || await adjective(j - 1);
+      }
+    }
+    async function personalVerbFormExternal(word, tokens = null, i = null) {
+      if (tokens && i != null && tokens[i] && await attributiveAdjectiveAt(tokens, i)) return false;
       if (personalVerbForm(word)) return true;
       const key = norm(String(word || ''));
       if (!key) return false;
@@ -19424,7 +19470,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (let i = 2; i < tokens.length; i++) {
         const key = norm(tokens[i][0]);
         if (!/^\p{Ll}/u.test(tokens[i][0]) || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i-1][0])) || !PARTICLE_GE_T.test(key) || (forms.get(key) || []).length) continue;
-        if (!(await personalVerbFormExternal(tokens[i][0]))) out.add(tokens[i].index);
+        if (!(await personalVerbFormExternal(tokens[i][0], tokens, i))) out.add(tokens[i].index);
       }
       if (clauseParticipleSets.size > 256) clauseParticipleSets.clear();
       clauseParticipleSets.set(sentence, out);
@@ -22989,7 +23035,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (i === at || !/^\p{Ll}/u.test(tokens[i][0])) continue;
         // (a lowercase word is no noun: waren, kosten count — not an adjective / adverb / conjunction form; the person form — the shared
         // personalVerbFormExternal, advisor 21.11)
-        if (await personalVerbFormExternal(tokens[i][0]) && !(forms.get(norm(tokens[i][0])) || []).some(e => !["Verb","Nomen"].includes(e.type))) return result;
+        if (await personalVerbFormExternal(tokens[i][0], tokens, i) && !(forms.get(norm(tokens[i][0])) || []).some(e => !["Verb","Nomen"].includes(e.type))) return result;
       }
       const x = {...verb, evidence:"verbless-part"};
       return {...result, candidates:[x, ...candidates.filter(c => c !== verb)], selected:x, preferred:x, status:"resolved"};
@@ -23023,7 +23069,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const place = finitePlace(sentence, tokens, at);
           const OBJECT_WORD = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|ihn|ihm|ihr|ihnen|mich|dich|uns|euch|mir|dir|sich|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|unser\p{Ll}*|eur\p{Ll}*|dies\p{Ll}*|jed\p{Ll}*)$/u;
           // (the person form — the shared personalVerbFormExternal, advisor 21.11)
-          const finiteAt = async i => /^\p{Ll}/u.test(tokens[i][0]) && await personalVerbFormExternal(tokens[i][0]) &&
+          const finiteAt = async i => /^\p{Ll}/u.test(tokens[i][0]) && await personalVerbFormExternal(tokens[i][0], tokens, i) &&
             !(/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") && !MARK.test(gap(i+1)));
           if (place.start === at && !place.opens && !SUBJECT_PRONOUNS.has(norm(tokens[at+1]?.[0] ?? ""))) {
             // (advisor 21.11: a name of two words after the preposition is one group — begleitet von Hendrik Wüst, unterstützt von Angela
@@ -23077,7 +23123,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           /^\p{Lu}/u.test(tokens[at+1][0]) && !MARK.test(gap(at+1))) {
         // (not a Partizip I — zwinkernde, flatternde, quiekende: the stem ends in -nd; not a finite form — Alles gehörte Harry, die
         // Firma erkannte Fehler an)
-        const finiteForm = await personalVerbFormExternal(w);
+        const finiteForm = await personalVerbFormExternal(w, tokens, at);
         const rows = /nd$/u.test(ending[1]) || finiteForm ? [] : (await tokenAnalyses(ending[1], undefined, "participlePhrase")).filter(a => a.kind === "participle" && a.tense !== "Partizip I");
         const v = verbs.find(c => rows.some(a => norm(a.base || a.lemma || "") === norm(c.lemma))) || (rows.length && verbs.length === 1 ? verbs[0] : null);
         if (v) return choose(v);
@@ -23115,7 +23161,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (!helper && !place.opens && place.end === at) {
             for (const f of [place.start, place.second]) {
               if (!(f >= place.start && f < at) || !/^\p{Ll}/u.test(tokens[f][0])) continue;
-              if (!(await personalVerbFormExternal(tokens[f][0]))) continue;
+              if (!(await personalVerbFormExternal(tokens[f][0], tokens, f))) continue;
               const rows = await tokenAnalyses(tokens[f][0], undefined, 'participlePhrase');
               other = !rows.some(a => a.kind === "finite" && HELPER.test(norm(a.base || "")));
               break;
@@ -23140,7 +23186,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (let i = start; i < at; i++) {
         const t = tokens[i][0];
         if (/^\p{Lu}/u.test(t)) continue;
-        if (await personalVerbFormExternal(t) && !(forms.get(norm(t)) || []).some(e => e.type !== "Verb")) return result;
+        if (await personalVerbFormExternal(t, tokens, i) && !(forms.get(norm(t)) || []).some(e => e.type !== "Verb")) return result;
       }
       return choose(p2);
     }
@@ -24335,7 +24381,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       matchSeparable:(word,context) => separatedForms.has(norm(word)) ? separableCandidates(word,context) : [],
       matchReflexive:reflexiveCandidates,
       // 21.11.2026 (advisor 21.11): «a person form of a verb» with the external dictionary — personalVerbFormExternal (tests)
-      personalVerbForm:async word=>{await prepareSeparable();return personalVerbFormExternal(word);},
+      // (with a sentence: the place of the word in it — the first occurrence, or the one at offset)
+      personalVerbForm:async (word,sentence=null,offset=null)=>{await prepareSeparable();if(sentence==null)return personalVerbFormExternal(word);
+        const s=String(sentence),tokens=sharedTokens(s,'constructionAt'),i=tokens.findIndex(t=>offset==null?t[0]===word:t.index===offset);
+        return personalVerbFormExternal(word,i<0?null:tokens,i<0?null:i);},
       // 21.11.2026 (advisor 21.11): the part numbers of the expression search for a sentence (tests)
       expressionParts:async sentence=>{await prepareSeparable();const s=String(sentence||''),tokens=sharedTokens(s,'constructionAt');
         return expressionClauses(tokens,s,await clauseParticiples(tokens,s)).clause;},
