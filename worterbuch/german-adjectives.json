@@ -4452,8 +4452,8 @@
     "example_ru": "Местность здесь совершенно плоская — идеально для велосипеда.",
     "example_en": "The area here is completely flat, ideal for cycling.",
     "example_cloze": "Die Gegend hier ist völlig {{c1::platt}}, ideal zum Radfahren.",
-    "usage_note_ru": "«Банальный» — неодобрительное. platt sein (разговорное): 1) быть ошарашенным; 2) быть без сил. einen Platten haben — проколоть шину.",
-    "usage_note_en": "“Trite” is disapproving. platt sein (colloquial): 1) to be flabbergasted; 2) to be worn out. einen Platten haben — to have a flat tyre."
+    "usage_note_ru": "«Банальный» — неодобрительное. platt sein (разговорное): (1) быть ошарашенным; (2) быть без сил. einen Platten haben — проколоть шину.",
+    "usage_note_en": "“Trite” is disapproving. platt sein (colloquial): (1) to be flabbergasted; (2) to be worn out. einen Platten haben — to have a flat tyre."
   },
   {
     "id": "adjective-465",
@@ -13273,8 +13273,8 @@
   {
     "id": "adjective-1238",
     "word": "organisch",
-    "translation_ru": "органический (о живой природе, веществах; в химии); органический, телесный (об органах, болезни); органичный, естественный, гармоничный",
-    "translation_en": "organic (of living nature, substances; in chemistry); organic, physical (of organs, illness); organic, natural, harmonious",
+    "translation_ru": "органический (о живой природе, веществах, в химии); органический, телесный (об органах, болезни); органичный, естественный, гармоничный",
+    "translation_en": "organic (of living nature, substances, in chemistry); organic, physical (of organs, illness); organic, natural, harmonious",
     "example_de": "Organische Abfälle wie Obstschalen kommen bei uns in die braune Tonne.",
     "example_ru": "Органические отходы, например кожура от фруктов, у нас идут в коричневый бак.",
     "example_en": "Organic waste such as fruit peel goes in the brown bin in our house.",

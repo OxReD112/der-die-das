@@ -195,8 +195,8 @@
     "example_ru": "Ага, теперь понимаю!",
     "example_en": "Aha, now I understand!",
     "target_file": null,
-    "usage_note_ru": "",
-    "usage_note_en": "",
+    "usage_note_ru": "Понимание, догадка: Aha, jetzt verstehe ich! — Ага, теперь понятно! Иронично: Aha, so ist das also! — Ага, вот оно что!",
+    "usage_note_en": "Understanding, realisation: Aha, jetzt verstehe ich! — Aha, now I see! Ironic: Aha, so ist das also! — Aha, so that's how it is!",
     "search_forms": [
       "aha"
     ],
@@ -213,8 +213,8 @@
     "example_ru": "А, вот ты где!",
     "example_en": "Ah, there you are!",
     "target_file": null,
-    "usage_note_ru": "",
-    "usage_note_en": "",
+    "usage_note_ru": "Удивление, понимание, удовольствие: Ah, da bist du ja! — А, вот ты где! Ah, wie schön! — Ах, как красиво!",
+    "usage_note_en": "Surprise, understanding, pleasure: Ah, da bist du ja! — Ah, there you are! Ah, wie schön! — Oh, how lovely!",
     "search_forms": [
       "ah"
     ],
@@ -231,8 +231,8 @@
     "example_ru": "Н-да, тут ничего не поделаешь.",
     "example_en": "Oh well, there's nothing you can do about it.",
     "target_file": null,
-    "usage_note_ru": "",
-    "usage_note_en": "",
+    "usage_note_ru": "Колебание, смирение: Tja, da kann man nichts machen. — Ну что ж, тут ничего не поделаешь.",
+    "usage_note_en": "Hesitation, resignation: Tja, da kann man nichts machen. — Oh well, there's nothing you can do.",
     "search_forms": [
       "tja"
     ],
@@ -267,8 +267,8 @@
     "example_ru": "Ай, больно!",
     "example_en": "Ouch, that hurts!",
     "target_file": null,
-    "usage_note_ru": "",
-    "usage_note_en": "",
+    "usage_note_ru": "Внезапная боль: Autsch, das tut weh! — Ой, больно!",
+    "usage_note_en": "Sudden pain: Autsch, das tut weh! — Ouch, that hurts!",
     "search_forms": [
       "autsch"
     ],
@@ -279,8 +279,8 @@
     "id": "function-016",
     "type": "Interjektion",
     "word": "hu",
-    "translation_ru": "у-у!, ух!, фу! (испуг, холод, отвращение; чтобы напугать)",
-    "translation_en": "ooh!, ugh!, boo! (fear, cold, disgust; to scare someone)",
+    "translation_ru": "ух!, у-у!, фу! (испуг, холод, отвращение); бу! (чтобы напугать)",
+    "translation_en": "ooh!, ugh! (fear, cold, disgust); boo! (to scare someone)",
     "example_de": "Hu, ist das kalt hier drinnen!",
     "example_ru": "Ух, как здесь холодно!",
     "example_en": "Ooh, it's cold in here!",

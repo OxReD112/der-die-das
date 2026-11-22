@@ -30266,8 +30266,8 @@
     "type": "Ausdruck",
     "group": "verbal_expression",
     "word": "jemandem über den Kopf wachsen",
-    "translation_ru": "стать не по силам (кому-либо), захлестнуть, выйти из-под контроля (о делах, проблемах; о детях — перестать слушаться); (букв.) перерасти (кого-либо ростом)",
-    "translation_en": "to become too much for someone, to get out of hand (of children — to get beyond someone's control); (lit.) to outgrow someone",
+    "translation_ru": "стать не по силам (кому-либо), захлестнуть, выйти из-под контроля (о делах, проблемах), перестать слушаться (о детях); (букв.) перерасти (кого-либо ростом)",
+    "translation_en": "to become too much for someone, to get out of hand (of affairs, problems), to get beyond someone's control (of children); (lit.) to outgrow someone",
     "example_de": "Die viele Arbeit wächst mir langsam über den Kopf.",
     "example_ru": "Вся эта работа понемногу становится мне не по силам.",
     "example_en": "All this work is slowly getting too much for me.",
@@ -46627,10 +46627,10 @@
     "example_ru": "Когда мост рухнул, путник подумал: ну всё, мне конец.",
     "example_en": "When the bridge collapsed, the traveller thought: now I'm done for.",
     "notes_ru": [
-      "Обычно с ist's / es ist: Nun ist's um uns geschehen! — Теперь нам конец! Duden: 1) кто-то погиб, разорён, без шансов; 2) кто-то безнадёжно влюбился: Als er sie sah, war es um ihn geschehen. Также о вещах: Da war es um seine Ruhe geschehen — тут прощай его покой."
+      "Обычно с ist's / es ist: Nun ist's um uns geschehen! — Теперь нам конец! Duden: (1) кто-то погиб, разорён, без шансов; (2) кто-то безнадёжно влюбился: Als er sie sah, war es um ihn geschehen. Также о вещах: Da war es um seine Ruhe geschehen — тут прощай его покой."
     ],
     "notes_en": [
-      "Usually with ist's / es ist: Nun ist's um uns geschehen! — Now we're done for! Duden: 1) someone is lost, ruined, has no chance; 2) someone has fallen hopelessly in love: Als er sie sah, war es um ihn geschehen. Also of things: Da war es um seine Ruhe geschehen — that was the end of his peace."
+      "Usually with ist's / es ist: Nun ist's um uns geschehen! — Now we're done for! Duden: (1) someone is lost, ruined, has no chance; (2) someone has fallen hopelessly in love: Als er sie sah, war es um ihn geschehen. Also of things: Da war es um seine Ruhe geschehen — that was the end of his peace."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/geschehen",
@@ -58182,7 +58182,7 @@
     "type": "Ausdruck",
     "group": "verbal_expression",
     "word": "sich (D) etw. leisten (können)",
-    "translation_ru": "позволить себе (по средствам; что-либо)",
+    "translation_ru": "позволить себе (что-либо, по средствам)",
     "translation_en": "to (be able to) afford something",
     "example_de": "So ein teures Auto kann ich mir nicht leisten.",
     "example_ru": "Такую дорогую машину я не могу себе позволить.",
@@ -65053,10 +65053,10 @@
     "example_ru": "После отпуска она пьёт уже только чай.",
     "example_en": "Since the holiday she drinks nothing but tea.",
     "notes_ru": [
-      "Нейтр. 1) «больше ничего, кроме»: Er isst nur noch Gemüse. 2) «осталось только»: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. С сравнительной степенью — другое: Das macht es nur noch schlimmer — «только ещё хуже». (Nur noch) Haut und Knochen sein — отдельное выражение."
+      "Нейтр. (1) «больше ничего, кроме»: Er isst nur noch Gemüse. (2) «осталось только»: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. С сравнительной степенью — другое: Das macht es nur noch schlimmer — «только ещё хуже». (Nur noch) Haut und Knochen sein — отдельное выражение."
     ],
     "notes_en": [
-      "Neutral. 1) «nothing else any more»: Er isst nur noch Gemüse. 2) «only … left»: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. With a comparative it is different: Das macht es nur noch schlimmer — «only makes it (even) worse». (Nur noch) Haut und Knochen sein is an expression of its own."
+      "Neutral. (1) «nothing else any more»: Er isst nur noch Gemüse. (2) «only … left»: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. With a comparative it is different: Das macht es nur noch schlimmer — «only makes it (even) worse». (Nur noch) Haut und Knochen sein is an expression of its own."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/noch_Adverb",

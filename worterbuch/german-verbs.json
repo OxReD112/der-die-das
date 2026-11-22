@@ -7129,7 +7129,7 @@
       }
     ],
     "reflexive": {
-      "translation_ru": "держаться (стойко; за что-либо), сохраняться; придерживаться (правил, фактов); не портиться (о продуктах)",
+      "translation_ru": "держаться (стойко, за что-либо), сохраняться; придерживаться (правил, фактов); не портиться (о продуктах)",
       "translation_en": "to hold on, to hold up (bravely), to last; to stick to (rules, facts); to keep (of food)",
       "note_ru": "sich halten an + Akk. — придерживаться (правил, фактов)",
       "note_en": "sich halten an + accusative — to stick to (rules, facts)"
@@ -16682,7 +16682,7 @@
     "id": "verb-333",
     "infinitive": "träumen",
     "translation_ru": "мечтать; видеть сон",
-    "translation_en": "to dream",
+    "translation_en": "to dream (of something one wishes for); to dream (in one's sleep)",
     "auxiliary": "haben",
     "example_de": "Ich träume von einer Reise nach Japan.",
     "example_cloze": "Ich {{c1::träume}} von einer Reise nach Japan.",
@@ -18999,7 +18999,7 @@
     "id": "verb-380",
     "infinitive": "angeben",
     "translation_ru": "указывать; хвастаться",
-    "translation_en": "to give; to state; to show off",
+    "translation_en": "to give, to state; to show off",
     "auxiliary": "haben",
     "example_de": "Bitte geben Sie Ihre Adresse an.",
     "example_cloze": "Bitte {{c1::geben}} Sie Ihre Adresse {{c1::an}}.",
@@ -19566,8 +19566,8 @@
   {
     "id": "verb-391",
     "infinitive": "anzeigen",
-    "translation_ru": "заявлять (в полицию), извещать, объявлять (о помолвке, рождении); показывать (о приборе, табло; на экране)",
-    "translation_en": "to report (to the police), to announce, to give notice of (an engagement, a birth); to display, to show (of an instrument, a board; on a screen)",
+    "translation_ru": "заявлять (в полицию), извещать, объявлять (о помолвке, рождении); показывать (о приборе, табло, на экране)",
+    "translation_en": "to report (to the police), to announce, to give notice of (an engagement, a birth); to display, to show (of an instrument, a board, on a screen)",
     "auxiliary": "haben",
     "example_de": "Sie hat den Diebstahl bei der Polizei angezeigt.",
     "example_cloze": "Sie hat den Diebstahl bei der Polizei {{c1::angezeigt}}.",
@@ -26877,8 +26877,8 @@
   {
     "id": "verb-552",
     "infinitive": "greifen",
-    "translation_ru": "тянуться (за чем-либо); хватать; браться",
-    "translation_en": "to reach (for); to grab",
+    "translation_ru": "тянуться (за чем-либо); хватать; браться (за что-либо), прибегать (к чему-либо)",
+    "translation_en": "to reach (for); to grab; to take up, to resort to (something)",
     "auxiliary": "haben",
     "example_de": "Das Kind greift nach dem Spielzeug.",
     "example_cloze": "Das Kind {{c1::greift}} nach dem Spielzeug.",
@@ -36232,7 +36232,7 @@
     "id": "verb-740",
     "infinitive": "wiegen",
     "translation_ru": "весить; взвешивать",
-    "translation_en": "to weigh",
+    "translation_en": "to weigh (be of a certain weight); to weigh (something)",
     "auxiliary": "haben",
     "usage_note_ru": "sich wiegen — взвешиваться. Слабый глагол wiegen (wiegte, hat gewiegt) — качать, баюкать: ein Baby wiegen.",
     "usage_note_en": "sich wiegen — to weigh oneself. The weak verb wiegen (wiegte, hat gewiegt) means to rock: ein Baby wiegen.",
@@ -44341,7 +44341,7 @@
     "id": "verb-912",
     "infinitive": "knacken",
     "translation_ru": "колоть, раскалывать (орехи); взламывать (код); трещать",
-    "translation_en": "to crack (nuts, a code); to creak, to crackle",
+    "translation_en": "to crack (nuts); to crack (a code); to creak, to crackle",
     "auxiliary": "haben",
     "usage_note_ru": "(фам.) einen Safe knacken — взломать сейф.",
     "usage_note_en": "(slang) einen Safe knacken — to crack a safe.",
@@ -44601,7 +44601,7 @@
     "id": "verb-916",
     "infinitive": "kommunizieren",
     "translation_ru": "(книжн.) общаться, поддерживать связь; сообщать",
-    "translation_en": "(formal) to communicate",
+    "translation_en": "(formal) to communicate, to be in touch; to communicate, to convey (something)",
     "auxiliary": "haben",
     "usage_note_ru": "Duden помечает слово как книжное (bildungssprachlich).",
     "usage_note_en": "Duden marks the word as educated / formal (bildungssprachlich).",
@@ -53846,7 +53846,7 @@
     "id": "verb-1112",
     "infinitive": "balancieren",
     "translation_ru": "удерживать в равновесии; балансировать",
-    "translation_en": "to balance",
+    "translation_en": "to balance (something); to balance, to keep one's balance",
     "auxiliary": "haben",
     "usage_note_ru": "Идти, балансируя — Perfekt с sein: Die Kleine ist auf dem Bordstein bis nach Hause balanciert.",
     "usage_note_en": "To walk while balancing takes sein: Die Kleine ist auf dem Bordstein bis nach Hause balanciert.",
@@ -54760,7 +54760,7 @@
     "id": "verb-1133",
     "infinitive": "beschleunigen",
     "translation_ru": "ускорять; разгоняться (о машине)",
-    "translation_en": "to speed up, to accelerate",
+    "translation_en": "to speed up, to accelerate (something); to accelerate (of a car)",
     "auxiliary": "haben",
     "usage_note_ru": "Разгоняться: Kurz vor der Kurve beschleunigte die Fahrerin noch einmal.",
     "usage_note_en": "To accelerate: Kurz vor der Kurve beschleunigte die Fahrerin noch einmal.",
@@ -58528,8 +58528,8 @@
   {
     "id": "verb-1216",
     "infinitive": "erwerben",
-    "translation_ru": "приобретать (покупать; знания, опыт)",
-    "translation_en": "to acquire, to purchase",
+    "translation_ru": "приобретать, покупать; приобретать (знания, опыт)",
+    "translation_en": "to acquire, to purchase; to acquire (knowledge, experience)",
     "auxiliary": "haben",
     "usage_note_ru": "Знания, опыт: In dem Praktikum habe ich viel praktische Erfahrung erworben. sich (Dat.) etwas erwerben — заслужить (уважение, доверие).",
     "usage_note_en": "Knowledge, experience: In dem Praktikum habe ich viel praktische Erfahrung erworben. sich (Dat.) etwas erwerben — to earn (respect, trust).",
@@ -61029,7 +61029,7 @@
     "id": "verb-1270",
     "infinitive": "investieren",
     "translation_ru": "вкладывать, инвестировать (деньги); вкладывать (время, силы)",
-    "translation_en": "to invest (money; time, effort)",
+    "translation_en": "to invest (money); to invest (time, effort)",
     "auxiliary": "haben",
     "example_de": "Die Stadt investiert in den nächsten Jahren zehn Millionen Euro in neue Radwege.",
     "example_cloze": "Die Stadt {{c1::investiert}} in den nächsten Jahren zehn Millionen Euro in neue Radwege.",
@@ -61744,7 +61744,7 @@
     "id": "verb-1287",
     "infinitive": "kondensieren",
     "translation_ru": "конденсироваться; сгущать",
-    "translation_en": "to condense",
+    "translation_en": "to condense (of vapour); to condense, to thicken (something)",
     "auxiliary": "haben",
     "usage_note_ru": "Также с sein: Der Dampf ist an der Scheibe kondensiert.",
     "usage_note_en": "Also with sein: Der Dampf ist an der Scheibe kondensiert.",
@@ -75684,8 +75684,8 @@
       }
     },
     "reflexive": {
-      "translation_ru": "проясняться (о недоразумении; о небе)",
-      "translation_en": "to be cleared up (a misunderstanding)"
+      "translation_ru": "проясняться (о недоразумении); проясняться (о небе)",
+      "translation_en": "to be cleared up (of a misunderstanding); to clear up, to brighten (of the sky)"
     }
   },
   {
@@ -96341,7 +96341,7 @@
     "id": "verb-2028",
     "infinitive": "läuten",
     "translation_ru": "звонить (о колоколе, звонке); звонить (в колокол, в дверь)",
-    "translation_en": "to ring, to toll",
+    "translation_en": "to ring, to toll (of a bell); to ring (a bell, the doorbell)",
     "auxiliary": "haben",
     "usage_note_ru": "an der Tür läuten (южнонем., австр., швейц., иначе книжн.) — позвонить в дверь (обычнее klingeln). (разг.) Ich habe davon läuten hören, dass … — до меня дошли слухи, что …",
     "usage_note_en": "an der Tür läuten (southern German, Austrian, Swiss, otherwise elevated) — to ring the doorbell (more often klingeln). (colloquial) Ich habe davon läuten hören, dass … — I've heard rumours that …",
@@ -107401,8 +107401,8 @@
   {
     "id": "verb-2264",
     "infinitive": "vergießen",
-    "translation_ru": "проливать (слёзы, кровь; жидкость)",
-    "translation_en": "to shed (tears, blood); to spill",
+    "translation_ru": "проливать (слёзы, кровь); проливать, разливать (жидкость)",
+    "translation_en": "to shed (tears, blood); to spill (liquid)",
     "auxiliary": "haben",
     "usage_note_ru": "Сильный глагол: vergoss, hat vergossen. Также случайно пролить (кофе, молоко); Blut vergießen — проливать кровь. (тех.) заливать (в форму).",
     "usage_note_en": "Strong verb: vergoss, hat vergossen. Also to spill (coffee, milk) by accident; Blut vergießen — to shed blood. (technology) to cast (into a mould).",
@@ -123756,8 +123756,8 @@
   {
     "id": "verb-2641",
     "infinitive": "decken",
-    "translation_ru": "покрывать, накрывать (чем-либо; крышу, расходы); накрывать (на стол); прикрывать (кого-либо)",
-    "translation_en": "to cover (with something; a roof, costs); to set (the table); to cover (for someone)",
+    "translation_ru": "покрывать, накрывать (чем-либо), крыть (крышу); покрывать (расходы); накрывать (на стол); прикрывать (кого-либо)",
+    "translation_en": "to cover (with something), to roof (a house); to cover (costs); to set (the table); to cover (for someone)",
     "auxiliary": "haben",
     "usage_note_ru": "Den Tisch decken — накрывать на стол: Kannst du bitte den Tisch decken?",
     "usage_note_en": "Den Tisch decken — to set the table: Kannst du bitte den Tisch decken?",
@@ -127952,8 +127952,8 @@
   {
     "id": "verb-2743",
     "infinitive": "ablassen",
-    "translation_ru": "сливать, спускать (воду, воздух, пар); уступить, сбросить (с цены); (книжн.; von + Dat.) отказаться, отстать (от кого-, чего-либо)",
-    "translation_en": "to drain, to let out (water, air, steam); to knock off (the price); (formal; von) to desist from, to leave alone",
+    "translation_ru": "сливать, спускать (воду, воздух, пар); уступить, сбросить (с цены); (книжн., von + Dat.) отказаться, отстать (от кого-, чего-либо)",
+    "translation_en": "to drain, to let out (water, air, steam); to knock off (the price); (formal, von) to desist from, to leave alone",
     "auxiliary": "haben",
     "usage_note_ru": "Отделяемый: lässt ab, ließ ab, hat abgelassen. Сливать — Akkusativ: das Wasser aus der Wanne ablassen. С цены: Er hat mir zehn Euro abgelassen. — Он уступил мне десять евро. Dampf ablassen — выпустить пар (и перен.: разрядиться, сорвать злость). Отстать (книжн.) — von + Dativ: Er ließ nicht von ihr ab. — Он не отставал от неё.",
     "usage_note_en": "Separable: lässt ab, ließ ab, hat abgelassen. To drain — accusative: das Wasser aus der Wanne ablassen. Off the price: Er hat mir zehn Euro abgelassen. — He knocked ten euros off for me. Dampf ablassen — to let off steam (also figurative). To desist (formal) — von + dative: Er ließ nicht von ihr ab. — He wouldn't leave her alone.",
@@ -128554,8 +128554,8 @@
   {
     "id": "verb-2771",
     "infinitive": "fegen",
-    "translation_ru": "мчаться, проноситься (о ветре, буре; о человеке)",
-    "translation_en": "to sweep, to race, to tear (of wind, a storm; of a person)",
+    "translation_ru": "мчаться, проноситься (о ветре, буре, человеке)",
+    "translation_en": "to sweep, to race, to tear (of wind, a storm, a person)",
     "auxiliary": "sein",
     "direction_required": true,
     "usage_note_ru": "О движении Perfekt с sein: Er ist um die Ecke gefegt. «Подметать» — fegen с haben (отдельная карточка).",
@@ -129190,9 +129190,16 @@
       {
         "pattern": "Akkusativ",
         "required": true,
-        "meaning_ru": "проводить, осуществлять (закон, решение); добиваться (осуществления), навязывать",
-        "note_ru": "что-либо (ein Gesetz, seinen Willen, eine Forderung)",
-        "note_en": "something (ein Gesetz, seinen Willen, eine Forderung)"
+        "meaning_ru": "проводить, осуществлять (закон, решение)",
+        "note_ru": "что-либо: ein Gesetz durchsetzen",
+        "note_en": "something: ein Gesetz durchsetzen"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "добиваться (осуществления), навязывать",
+        "note_ru": "что-либо: seinen Willen durchsetzen",
+        "note_en": "something: seinen Willen durchsetzen"
       }
     ],
     "lookup_forms": {

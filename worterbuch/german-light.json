@@ -1028,7 +1028,8 @@
     "note_ru": "sich hinwenden zu — поворачиваться, обращаться к кому-либо, чему-либо: Sie wandte sich zu ihm hin.",
     "note_en": "sich hinwenden zu — to turn to someone, something: Sie wandte sich zu ihm hin."
    }
-  ]
+  ],
+  "translation_ru": "обращать, поворачивать"
  },
  {
   "id": "light-0123",
@@ -1222,7 +1223,8 @@
     "note_ru": "призыв к кому-либо, чему-либо: ein Appell an die Vernunft",
     "note_en": "appeal to someone, something: ein Appell an die Vernunft"
    }
-  ]
+  ],
+  "translation_ru": "призыв, воззвание; перекличка, построение, смотр"
  },
  {
   "id": "light-0134",
@@ -1235,7 +1237,8 @@
     "note_ru": "покушение на кого-либо",
     "note_en": "assassination attempt on someone"
    }
-  ]
+  ],
+  "translation_ru": "покушение; теракт"
  },
  {
   "id": "light-0135",
@@ -1301,7 +1304,8 @@
     "note_ru": "право на что-либо: ein Anrecht auf Urlaub",
     "note_en": "right to something: ein Anrecht auf Urlaub"
    }
-  ]
+  ],
+  "translation_ru": "право, притязание; абонемент"
  },
  {
   "id": "light-0139",
@@ -1328,7 +1332,8 @@
     "note_ru": "стремление, тяга к чему-либо: der Drang nach Freiheit",
     "note_en": "urge for something: der Drang nach Freiheit"
    }
-  ]
+  ],
+  "translation_ru": "напор, натиск; стремление, тяга, порыв"
  },
  {
   "id": "light-0141",
@@ -1355,7 +1360,8 @@
     "note_ru": "участие, причастность к чему-либо",
     "note_en": "participation in something"
    }
-  ]
+  ],
+  "translation_ru": "участие, причастность"
  },
  {
   "id": "light-0143",
@@ -1465,7 +1471,8 @@
     "note_en": "disgust at someone, something",
     "meaning_ru": "отвращение, омерзение"
    }
-  ]
+  ],
+  "translation_en": "disgust, revulsion; colloq. obnoxious person"
  },
  {
   "id": "light-0151",
@@ -1479,7 +1486,8 @@
     "note_en": "liability for something: keine Haftung für Schäden",
     "meaning_ru": "ответственность, материальная ответственность"
    }
-  ]
+  ],
+  "translation_en": "liability, legal responsibility; adhesion, grip"
  },
  {
   "id": "light-0152",
@@ -2043,13 +2051,15 @@
   "id": "light-0217",
   "word": "sinnverwandt",
   "pos": "adj",
-  "translation_en": "synonymous, related in meaning"
+  "translation_en": "synonymous, related in meaning",
+  "translation_ru": "близкий по значению, синонимичный"
  },
  {
   "id": "light-0218",
   "word": "unbeugsam",
   "pos": "adj",
-  "translation_en": "unbending, rigid; inflexible, uncompromising, indomitable"
+  "translation_en": "inflexible, uncompromising, indomitable",
+  "translation_ru": "непреклонный, несгибаемый"
  },
  {
   "id": "light-0219",
@@ -2063,7 +2073,8 @@
   "word": "Gemütsbewegung",
   "pos": "noun",
   "gender": "f",
-  "translation_en": "emotional experience, emotion, affect"
+  "translation_en": "emotional experience, emotion, affect",
+  "translation_ru": "душевное волнение, переживание, эмоция"
  },
  {
   "id": "light-0221",
@@ -2173,7 +2184,8 @@
   "word": "Emetikum",
   "pos": "noun",
   "gender": "n",
-  "translation_en": "emetic"
+  "translation_en": "emetic",
+  "translation_ru": "мед. рвотное средство"
  },
  {
   "id": "light-0235",
@@ -2196,7 +2208,8 @@
   "word": "Patronat",
   "pos": "noun",
   "gender": "n",
-  "translation_en": "patronate; patronage, auspices"
+  "translation_en": "hist. patronate; patronage, auspices; eccl. patronage, advowson",
+  "translation_ru": "ист. патронат; покровительство, шефство; церк. право патроната"
  },
  {
   "id": "light-0238",
@@ -2416,7 +2429,8 @@
   "id": "light-0268",
   "word": "beifallen",
   "pos": "verb",
-  "translation_ru": "приходить на ум; выпадать на долю; устар. присоединяться, соглашаться"
+  "translation_ru": "устар. приходить на ум; устар. соглашаться, присоединяться",
+  "translation_en": "dated to occur to someone, to come to mind; dated to agree, to side with"
  },
  {
   "id": "light-0269",
@@ -2452,7 +2466,8 @@
   "id": "light-0274",
   "word": "honorieren",
   "pos": "verb",
-  "translation_ru": "оплачивать, выплачивать гонорар; вознаграждать, ценить по достоинству; оплачивать вексель; устар. оказывать почести"
+  "translation_ru": "оплачивать, выплачивать гонорар; вознаграждать, ценить по достоинству; банк. оплачивать вексель, чек",
+  "translation_en": "to pay a fee for, to remunerate; to reward, to appreciate; bank. to honour a bill, a cheque"
  },
  {
   "id": "light-0275",
@@ -2470,6 +2485,62 @@
   "id": "light-0277",
   "word": "einsprechen",
   "pos": "verb",
-  "translation_ru": "наговаривать, записывать голосом; уговаривать, убеждать; устар. возражать; устар. заходить, навещать"
+  "translation_ru": "наговаривать, записывать голосом; уговаривать, убеждать; устар. возражать; устар. заходить, навещать",
+  "translation_en": "to record by speaking, to voice; to talk insistently to, to urge; dated to object; dated to call on, to drop in"
+ },
+ {
+  "id": "light-0278",
+  "word": "strahlend",
+  "pos": "adv",
+  "translation_ru": "ослепительно, ярко, сияюще"
+ },
+ {
+  "id": "light-0279",
+  "word": "strahlend",
+  "pos": "adj",
+  "translation_ru": "ясный, солнечный; сияющий, лучезарный; физ. излучающий, радиоактивный",
+  "translation_en": "bright, sunny; radiant, beaming; phys. radiating, radioactive"
+ },
+ {
+  "id": "light-0280",
+  "word": "beteiligt",
+  "pos": "adj",
+  "translation_ru": "участвующий, причастный; имеющий долю; заинтересованный",
+  "translation_en": "involved, participating; having a share; concerned",
+  "complements": [
+   {
+    "pattern": "an + Dativ",
+    "meaning_ru": "участвующий, причастный",
+    "note_ru": "участвующий в чём-либо, причастный к чему-либо: Er war an dem Projekt beteiligt.",
+    "note_en": "involved in, taking part in something: Er war an dem Projekt beteiligt."
+   },
+   {
+    "pattern": "an + Dativ",
+    "meaning_ru": "имеющий долю",
+    "note_ru": "имеющий долю в чём-либо: Er ist am Gewinn beteiligt.",
+    "note_en": "having a share in something: Er ist am Gewinn beteiligt."
+   }
+  ]
+ },
+ {
+  "id": "light-0281",
+  "word": "gewesen",
+  "pos": "adj",
+  "translation_ru": "австр. бывший, прежний",
+  "translation_en": "Austr. former, ex-"
+ },
+ {
+  "id": "light-0282",
+  "word": "ausgewiesen",
+  "pos": "adj",
+  "translation_ru": "признанный, авторитетный; обозначенный, указанный; высланный",
+  "translation_en": "acknowledged, renowned, proven; designated, stated; expelled"
+ },
+ {
+  "id": "light-0283",
+  "word": "erklärt",
+  "pos": "adj",
+  "translation_ru": "открытый, убеждённый; явный, признанный",
+  "translation_en": "avowed, declared; obvious, acknowledged"
  }
 ]
