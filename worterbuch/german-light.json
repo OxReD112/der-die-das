@@ -2542,5 +2542,19 @@
   "pos": "adj",
   "translation_ru": "открытый, убеждённый; явный, признанный",
   "translation_en": "avowed, declared; obvious, acknowledged"
+ },
+ {
+  "id": "light-0284",
+  "word": "se",
+  "pos": "pron",
+  "translation_ru": "диал. она, они, её, их",
+  "translation_en": "dial. she, they, her, them"
+ },
+ {
+  "id": "light-0285",
+  "word": "em",
+  "pos": "pron",
+  "translation_ru": "диал. ему, его",
+  "translation_en": "dial. him"
  }
 ]

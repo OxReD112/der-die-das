@@ -547,9 +547,14 @@
     "zudem","allerdings","jedoch","denn","bis","für","um","durch","über","unter","gegen","ohne","seine","ihr","ihre","ihren","ihrem","sein","seinen",
     "seinem","unser","unseren","diesen","diesem","jenes","welche","welcher","welches","nicht","nur","immer","dazu","daher","dafür","also"]);
   let ownNounWords = null;
+  // (advisor 15.11, L21: the words before an ordinal in digits — der 22. Minute, am 3. Mai, zum 1. Januar; ORDINAL_GAP: the digits and the
+  // point between two words; expressionClauses opens no part there, advisor 22.11)
+  const ORDINAL_BEFORE_WORDS = "der|die|das|dem|den|des|ein|einem|einen|einer|eines|am|im|zum|zur|vom|beim|ins|in|an|auf|ab|seit|bis|nach|vor|um|für|gegen|über|unter|mit|von|zu|bei|aus";
+  const ORDINAL_BEFORE = new RegExp(`^(?:${ORDINAL_BEFORE_WORDS})$`, "u");
+  const ORDINAL_GAP = /^\s+\d{1,4}\.\s+$/u;
   function abbreviationEnd(segment, next) {
     // (advisor 15.11, L21: an ordinal after a determiner or a preposition is no sentence end — in der 22. Minute, am 3. Mai, zum 1. Januar)
-    if (/(?:^|\s)(?:der|die|das|dem|den|des|ein|einem|einen|einer|eines|am|im|zum|zur|vom|beim|ins|in|an|auf|ab|seit|bis|nach|vor|um|für|gegen|über|unter|mit|von|zu|bei|aus)\s+\d{1,4}\.\s*$/iu.test(String(segment)) &&
+    if (new RegExp(`(?:^|\\s)(?:${ORDINAL_BEFORE_WORDS})\\s+\\d{1,4}\\.\\s*$`, "iu").test(String(segment)) &&
       (w => !!w && !SENTENCE_OPENERS.has(w.toLowerCase()) && !!ownNounWords && ownNounWords.has(w.toLowerCase()))(/^\s*(\p{Lu}\p{Ll}+)/u.exec(String(next ?? ""))?.[1])) return true;
     const text = String(segment), m = /(?:^|[\s(])([\p{L}]+)\.\s*$/u.exec(text); if (!m) return false;
     const after = /^\s*([\p{L}\d]+)/u.exec(String(next ?? ""))?.[1]; if (!after) return false;
@@ -18949,7 +18954,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const e = lightByWordPos.get(`${norm(c.lemma)}|${c.pos}`); if (e) lightOver(c, e); }
         // (cards chat 19.11, batch 163: Geschworenengericht) a reading built only from parts — a compound, a word formation — is no
         // dictionary's reading: the record stands before it, as before an empty answer
-        const guessed = resolution.candidates.length && resolution.candidates.every(c => c.formation || c.compound || c.composition && c.source !== "fallback");
+        // (advisor 22.11, batch 211 se / em) the form decides over an abbreviation: a reading of the external dictionary written in capitals
+        // only (SE, EM — an initialism) is not this word written otherwise (se, Se, em: the same letters, at most the first a capital) — the
+        // record of that written form stands before it; a form of the initialism itself (UFOs beside UFO) is not another form
+        const otherForm = c => c.source === "fallback" && typeof c.written === "string" && /^\p{Lu}{2,}$/u.test(c.written) &&
+          c.written !== String(word) && norm(c.written) === norm(word) && !/\p{Lu}{2}/u.test(String(word));
+        const guessed = resolution.candidates.length && resolution.candidates.every(c => c.formation || c.compound || c.composition && c.source !== "fallback" || otherForm(c));
         const records = !resolution.candidates.length || guessed ? lightByForm.get(norm(word)) || [] : [];
         if (records.length) {
           const list = records.map(e => lightCandidate(e, word));
@@ -19555,10 +19565,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // a single letter (as innerPoint of step «boundaries»): u. a. / u.a., d. h. / d.h. become one span for their expression records)
         const innerPoint = i && gap(i) === "." && /^\p{L}{1,3}$/u.test(tokens[i-1][0]) && /^\p{L}{1,3}$/u.test(tokens[i][0]) &&
           (/^\p{L}$/u.test(tokens[i-1][0]) || /^\p{L}$/u.test(tokens[i][0]));
-        if (i && !innerPoint && /[,;:.!?…–—()"„“”«»]/u.test(clauseGapText(gap(i), tokens[i-1][0], tokens[i][0]))) c++;
+        // (22.11.2026, advisor 22.11, batch 174: an ordinal in digits after a determiner or a preposition is no boundary either — the same
+        // words as abbreviationEnd joins the reader's segments with: zum 100. Mal, beim 3. Mal, am 3. Mai)
+        const ordinalGap = i && ORDINAL_GAP.test(gap(i)) && ORDINAL_BEFORE.test(norm(tokens[i-1][0]));
+        if (i && !innerPoint && !ordinalGap && /[,;:.!?…–—()"„“”«»]/u.test(clauseGapText(gap(i), tokens[i-1][0], tokens[i][0]))) c++;
         else if (coordinatorOpensClause(tokens, i, sentence, participles)) c++;
         // (review 05.11: the point inside u.a. / d.h. opens nothing — D.H. Lawrence, U.A. Fanthorpe stay names)
-        clause.push(c); opening.push(!i || !innerPoint && /[.!?:„“"«»]/u.test(gap(i)));
+        clause.push(c); opening.push(!i || !innerPoint && !ordinalGap && /[.!?:„“"«»]/u.test(gap(i)));
       }
       return {clause, opening};
     }
@@ -19708,6 +19721,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // 28.10.2026 (expressions chat; 108 um sein, 030 zu Haus; advisor decision): `not_next_number: true` — no number in digits
             // right after the part (digits are not tokens: Die Pause ist um 10 — the time, not «закончиться»; Er ging zu Haus 5).
             if (part.not_next_number && /^\s*\d/u.test(sentence.slice(tokens[last].index + tokens[last][0].length))) continue;
+            // 22.11.2026 (advisor 22.11, batch 174 Zum 100. Mal): `ordinal_digits_before: true` — an ordinal in digits (digits and a point) right
+            // before the part, after the word before it: zum 100. Mal, beim 3. Mal (digits are not tokens: the record has [zum][Mal])
+            if (part.ordinal_digits_before && !(i > 0 && ORDINAL_GAP.test(sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index)))) continue;
             // 24.10.2026 (review of expression 031): `not_next_capital: true` — no capitalised word (a noun) right after the part in its clause
             // (eine Stunde nach dem anderen Termin — «другой», not «один за другим»; a list of nouns is never complete).
             if (part.not_next_capital && tokens[last+1] && clause[last+1] === clause[last] && upper(tokens[last+1][0])) continue;
