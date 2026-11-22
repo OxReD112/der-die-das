@@ -84,14 +84,14 @@
     return separablePromise;
   }
   // A2 (15.10.2026): agreed verb + preposition pairs (exercise list, reference 4.9).
-  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261121-es-kommt-zu-1", document.currentScript.src);
+  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261122-a17-halten-von-3", document.currentScript.src);
   let verbPrepositionPromise = null;
   function verbPrepositions() {
     if (!verbPrepositionPromise) verbPrepositionPromise = dataFetch(verbPrepositionUrl).then(response => {
       if (!response.ok) throw new Error("Verb preposition list unavailable");
       return response.json();
     }).then(data => {
-      if (data.format_version !== 1 || !Array.isArray(data.entries) || data.entries.some(r => !Array.isArray(r) || r.length !== 3 || r.some(v => typeof v !== "string")))
+      if (data.format_version !== 1 || !Array.isArray(data.entries) || data.entries.some(r => !Array.isArray(r) || r.length < 3 || r.length > 4 || r.slice(0,3).some(v => typeof v !== "string") || r.length === 4 && (!r[3] || typeof r[3] !== "object" || !Array.isArray(r[3].requires_any) || r[3].requires_any.some(v => typeof v !== "string"))))
         throw new Error("Invalid verb preposition list");
       return data.entries;
     }).catch(error => { verbPrepositionPromise = null; throw error; });
