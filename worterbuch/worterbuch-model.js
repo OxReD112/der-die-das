@@ -82,7 +82,7 @@
     { file: "german-pronouns.json", version: "20261114-wn-selber110-1", type: "pronoun" },
     { file: "german-adjective-adverbs.json", version: "20261112-wn-md94-1", type: "adjective" },
     // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-    { file: "german-expressions.json", version: "20261122-wn-x207-structure-1", type: "expression", optional: true }
+    { file: "german-expressions.json", version: "20261122-wn-x207-structure-expr174-zum100-1", type: "expression", optional: true }
   ].map(Object.freeze));
 
   const ORDER = ["german-nouns.json", "german-verbs.json", "german-adjectives.json", "german-adverbs.json", "german-adjective-adverbs.json", "german-conjunctions.json", "german-pronouns.json", "german-expressions.json"];

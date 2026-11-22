@@ -64084,6 +64084,25 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zum",
+              "Zum"
+            ]
+          },
+          {
+            "form": [
+              "Mal"
+            ],
+            "ordinal_digits_before": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
       }
     ],
     "tests": {
@@ -64095,13 +64114,16 @@
         "Zum ersten Male sah er das Meer.",
         "Ich erkläre es zum x-ten Mal.",
         "Zum allerersten Mal sah sie Schnee.",
-        "Er kam zum wiederholten Mal zu spät."
+        "Er kam zum wiederholten Mal zu spät.",
+        "Er versuchte es zum 100. Mal.",
+        "Zum 3. Mal klingelte das Telefon."
       ],
       "negative": [
         "Wir treffen uns zum Mittagessen.",
         "Mal sehen, was passiert.",
         "Zum Schluss kam das erste Mal.",
-        "Er sprach zum drittenmal."
+        "Er sprach zum drittenmal.",
+        "Das war 1999. Mal sehen, was kommt."
       ]
     }
   },
