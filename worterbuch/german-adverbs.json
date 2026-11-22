@@ -288,7 +288,7 @@
     "id": "adverb-027",
     "word": "ansonsten",
     "translation_ru": "в остальном; иначе",
-    "translation_en": "otherwise; apart from that",
+    "translation_en": "apart from that; otherwise, or else",
     "word_order_pattern": "ansonsten · **Verb** · Subjekt · …",
     "example_de": "Der Weg ist etwas lang, ansonsten ist die Strecke einfach.",
     "example_ru": "Путь немного длинный, а в остальном маршрут простой.",
@@ -464,7 +464,7 @@
     "id": "adverb-042",
     "word": "mittlerweile",
     "translation_ru": "тем временем; к настоящему времени",
-    "translation_en": "by now; in the meantime",
+    "translation_en": "in the meantime; by now",
     "example_de": "Früher fuhr er mit dem Bus zur Arbeit, mittlerweile fährt er mit dem Fahrrad.",
     "example_ru": "Раньше он ездил на работу на автобусе, а теперь ездит на велосипеде.",
     "example_en": "He used to take the bus to work; by now, he cycles.",
@@ -474,7 +474,7 @@
     "id": "adverb-044",
     "word": "schließlich",
     "translation_ru": "в конце концов; всё-таки",
-    "translation_en": "after all; eventually",
+    "translation_en": "eventually, finally; after all",
     "example_de": "Wir sollten jetzt losgehen. Schließlich wartet unsere Gastgeberin auf uns.",
     "example_ru": "Нам пора идти. Всё-таки хозяйка нас ждёт.",
     "example_en": "We should leave now. After all, our host is waiting for us.",
@@ -574,7 +574,7 @@
     "id": "adverb-056",
     "word": "dann",
     "translation_ru": "потом, затем; тогда",
-    "translation_en": "then; after that",
+    "translation_en": "after that, then; then (in that case)",
     "word_order_pattern": "dann · **Verb** · Subjekt · …",
     "example_de": "Zuerst esse ich, dann mache ich meine Hausaufgaben.",
     "example_ru": "Сначала я поем, потом сделаю домашнее задание.",
@@ -603,7 +603,7 @@
     "id": "adverb-058",
     "word": "einmal",
     "translation_ru": "один раз; однажды; когда-нибудь",
-    "translation_en": "once; one time; some time",
+    "translation_en": "once, one time; once (in the past), at one time; some time",
     "example_de": "Ich war einmal in Wien.",
     "example_ru": "Я однажды был в Вене.",
     "example_en": "I've been to Vienna once.",
@@ -766,7 +766,7 @@
     "id": "adverb-072",
     "word": "so",
     "translation_ru": "так; такой; итак",
-    "translation_en": "so; like this; such",
+    "translation_en": "so, like this; such; so (well then)",
     "example_de": "Mach es bitte so wie ich.",
     "example_ru": "Сделай, пожалуйста, так же, как я.",
     "example_en": "Please do it like me.",
@@ -1506,7 +1506,14 @@
     "notes_en": [
       "danach = da + nach, replaces nach + a thing: Er fragt nach dem Weg. → Er fragt danach."
     ],
-    "example_cloze": "Wir gehen ins Kino und {{c1::danach}} essen wir etwas."
+    "example_cloze": "Wir gehen ins Kino und {{c1::danach}} essen wir etwas.",
+    "sense_marks": [
+      {
+        "rule": "governed-preposition",
+        "meaning_ru": "(спросить) об этом",
+        "meaning_en": "about it"
+      }
+    ]
   },
   {
     "id": "adverb-134",
@@ -1799,7 +1806,7 @@
     "id": "adverb-161",
     "word": "jeweils",
     "translation_ru": "каждый раз; соответственно; по (каждому)",
-    "translation_en": "each; each time; respectively",
+    "translation_en": "each time; respectively; each",
     "example_de": "Die beiden Zimmer kosten jeweils 80 Euro pro Nacht.",
     "example_ru": "Оба номера стоят по 80 евро за ночь.",
     "example_en": "The two rooms cost 80 euros a night each.",
@@ -1855,7 +1862,14 @@
     "example_en": "Can you give me a hand?",
     "usage_note_ru": "Как частица смягчает просьбу или приказ: Komm mal her! — Иди-ка сюда! Kannst du mir mal helfen? — Не поможешь мне? nun mal — уж так: Das ist nun mal so. Сокращение от einmal: Warst du schon mal hier? — Ты когда-нибудь здесь был? В математике: drei mal vier — три умножить на четыре. Существительное: das Mal (раз).",
     "usage_note_en": "As a particle it softens a request or an order: Komm mal her! — Come here, will you! Kannst du mir mal helfen? — Could you give me a hand? nun mal — just: Das ist nun mal so. Short for einmal: Warst du schon mal hier? — Have you ever been here? In maths: drei mal vier — three times four. Noun: das Mal (time, occasion).",
-    "example_cloze": "Kannst du mir {{c1::mal}} helfen?"
+    "example_cloze": "Kannst du mir {{c1::mal}} helfen?",
+    "sense_marks": [
+      {
+        "rule": "mal-times",
+        "meaning_ru": "умножить на (2 mal 3)",
+        "meaning_en": "times (2 mal 3)"
+      }
+    ]
   },
   {
     "id": "adverb-166",
@@ -2135,7 +2149,7 @@
   {
     "id": "adverb-190",
     "word": "unterwegs",
-    "translation_ru": "в пути; по дороге",
+    "translation_ru": "в пути, по дороге; не дома, в разъездах",
     "translation_en": "on the way; out and about",
     "example_de": "Ich rufe dich an, ich bin gerade unterwegs.",
     "example_ru": "Я тебе перезвоню, я сейчас в пути.",
@@ -2280,7 +2294,7 @@
     "id": "adverb-204",
     "word": "überhaupt",
     "translation_ru": "вообще; совсем",
-    "translation_en": "at all; in general",
+    "translation_en": "in general; at all",
     "example_de": "Ich habe überhaupt keine Zeit.",
     "example_ru": "У меня вообще нет времени.",
     "example_en": "I have no time at all.",
@@ -2364,7 +2378,7 @@
   {
     "id": "adverb-211",
     "word": "weiterhin",
-    "translation_ru": "и дальше; по-прежнему; кроме того",
+    "translation_ru": "по-прежнему; и дальше; кроме того",
     "translation_en": "still; in future; furthermore",
     "example_de": "Ich wünsche Ihnen weiterhin viel Erfolg.",
     "example_ru": "Желаю вам и дальше больших успехов.",
@@ -2401,7 +2415,7 @@
     "id": "adverb-214",
     "word": "also",
     "translation_ru": "итак; значит; то есть",
-    "translation_en": "so; therefore; well",
+    "translation_en": "so; therefore; that is, i.e.",
     "word_order_pattern": "also · **Verb** · Subjekt · …",
     "example_de": "Der Bus kommt nicht. Also gehen wir zu Fuß.",
     "example_ru": "Автобус не идёт. Значит, пойдём пешком.",
@@ -5015,7 +5029,14 @@
     "example_en": "I'm afraid I can't give you a clear answer to this.",
     "example_cloze": "Ich kann dir {{c1::hierauf}} leider keine klare Antwort geben.",
     "usage_note_ru": "Заменяет auf + вещь (как darauf, но с hier — «вот на это»); для людей — auf + местоимение. В рассказах часто: Hierauf ging er fort. — После этого (затем) он ушёл.",
-    "usage_note_en": "Replaces auf + a thing (like darauf, but with hier — ‘on this here’); for people use auf + pronoun. In stories often: Hierauf ging er fort. — After this (then) he left."
+    "usage_note_en": "Replaces auf + a thing (like darauf, but with hier — ‘on this here’); for people use auf + pronoun. In stories often: Hierauf ging er fort. — After this (then) he left.",
+    "sense_marks": [
+      {
+        "rule": "temporal-sign",
+        "meaning_ru": "после этого, затем",
+        "meaning_en": "after this, then"
+      }
+    ]
   },
   {
     "id": "adverb-424",
@@ -5167,7 +5188,14 @@
     "example_en": "The chair is broken, please don't sit on it.",
     "example_cloze": "Der Stuhl ist kaputt, setz dich bitte nicht {{c1::darauf}}.",
     "usage_note_ru": "Заменяет auf + вещь; для людей — auf + местоимение (auf ihn). С глаголами и прилагательными с auf: stolz darauf — гордый этим, sich darauf freuen — ждать этого с радостью, warten darauf — ждать этого. Значение «потом»: bald darauf — вскоре после этого, ein Jahr darauf — через год. Разговорно: drauf.",
-    "usage_note_en": "Replaces auf + a thing; for people use auf + pronoun (auf ihn). With verbs and adjectives taking auf: stolz darauf — proud of it, sich darauf freuen — to look forward to it, warten darauf — to wait for it. Meaning ‘afterwards’: bald darauf — soon after, ein Jahr darauf — a year later. Colloquially: drauf."
+    "usage_note_en": "Replaces auf + a thing; for people use auf + pronoun (auf ihn). With verbs and adjectives taking auf: stolz darauf — proud of it, sich darauf freuen — to look forward to it, warten darauf — to wait for it. Meaning ‘afterwards’: bald darauf — soon after, ein Jahr darauf — a year later. Colloquially: drauf.",
+    "sense_marks": [
+      {
+        "rule": "temporal-sign",
+        "meaning_ru": "после этого, потом",
+        "meaning_en": "after that, afterwards"
+      }
+    ]
   },
   {
     "id": "adverb-436",
@@ -5432,7 +5460,7 @@
     "id": "adverb-456",
     "word": "weniger",
     "translation_ru": "меньше; менее",
-    "translation_en": "less; fewer",
+    "translation_en": "less, fewer; less (+ adjective)",
     "comparative_of": "wenig",
     "example_de": "Heute habe ich weniger Zeit als gestern.",
     "example_ru": "Сегодня у меня меньше времени, чем вчера.",

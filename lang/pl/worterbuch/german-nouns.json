@@ -972,8 +972,8 @@
  "noun-157": {
   "translation_pl": "nauka zawodu; szkolenie",
   "example_pl": "Po szkole uczy się zawodu kucharza.",
-  "_src": "a3338019",
-  "_src_reader": "8a486434"
+  "_src": "873b92eb",
+  "_src_reader": "44d7e16e"
  },
  "noun-158": {
   "translation_pl": "podanie; aplikacja (o pracę)",
@@ -1180,8 +1180,8 @@
  "noun-186": {
   "translation_pl": "wstęp; bilet wstępu",
   "example_pl": "Wstęp kosztuje osiem euro.",
-  "_src": "8c1d522e",
-  "_src_reader": "ef8f0beb"
+  "_src": "4eaf285c",
+  "_src_reader": "c5c4d9b1"
  },
  "noun-187": {
   "translation_pl": "spóźnienie; opóźnienie",
@@ -1840,7 +1840,7 @@
   "_src_reader": "86b4d303"
  },
  "noun-279": {
-  "translation_pl": "umowa; kontrakt",
+  "translation_pl": "umowa, kontrakt; traktat, umowa międzynarodowa",
   "example_pl": "Proszę dokładnie przeczytać umowę.",
   "_src": "c403edf4",
   "_src_reader": "4b65e66b"
@@ -1885,8 +1885,8 @@
     "note_pl": "porozumienie w sprawie czegoś"
    }
   ],
-  "_src": "afadaeb4",
-  "_src_reader": "365cc5bd"
+  "_src": "7da51490",
+  "_src_reader": "191bd659"
  },
  "noun-285": {
   "plural_note_pl": "W znaczeniu „negocjacje” zwykle w lm.",
@@ -2305,8 +2305,8 @@
  "noun-348": {
   "translation_pl": "przeprosiny; „przepraszam”; pisemne usprawiedliwienie nieobecności",
   "example_pl": "Przepraszam, która jest godzina?",
-  "_src": "57d835a4",
-  "_src_reader": "1ed86153"
+  "_src": "8c02aa62",
+  "_src_reader": "d102e045"
  },
  "noun-349": {
   "plural_note_pl": "W znaczeniu „ogień, płomień” zwykle bez liczby mnogiej; Feuer w liczbie mnogiej — pojedyncze ogniska lub pożary.",
@@ -2319,8 +2319,8 @@
   "plural_note_pl": "Zwykle występuje bez liczby mnogiej; forma die Fieber jest rzadka.",
   "translation_pl": "gorączka, temperatura",
   "example_pl": "Dziecko ma wysoką gorączkę.",
-  "_src": "bbecfa53",
-  "_src_reader": "f6ba4bce"
+  "_src": "013d2007",
+  "_src_reader": "ccb730fe"
  },
  "noun-351": {
   "translation_pl": "formularz, druk; kwestionariusz",
@@ -2338,8 +2338,8 @@
   "plural_note_pl": "W znaczeniu „piłka nożna (gra)” występuje bez liczby mnogiej; Fußbälle — piłki futbolowe.",
   "translation_pl": "piłka nożna; piłka futbolowa",
   "example_pl": "W weekendy dzieci grają w piłkę nożną.",
-  "_src": "0028b9a3",
-  "_src_reader": "a09a1ff8"
+  "_src": "e28f5e19",
+  "_src_reader": "dc50899c"
  },
  "noun-354": {
   "translation_pl": "gratulacje, życzenia",
@@ -2353,7 +2353,7 @@
   "_src_reader": "eeb9b4d8"
  },
  "noun-355": {
-  "translation_pl": "pozdrowienie; powitanie",
+  "translation_pl": "powitanie; pozdrowienie",
   "example_pl": "Serdeczne pozdrowienia dla twoich rodziców!",
   "_src": "dc19c9b7",
   "_src_reader": "746b7363"
@@ -2367,8 +2367,8 @@
  "noun-357": {
   "translation_pl": "ojczyzna; strony rodzinne",
   "example_pl": "Tęskni za ojczyzną.",
-  "_src": "66009c05",
-  "_src_reader": "dff12a57"
+  "_src": "336b4b59",
+  "_src_reader": "c8c1efeb"
  },
  "noun-358": {
   "translation_pl": "informacja; punkt informacyjny",
@@ -3510,8 +3510,13 @@
   "translation_pl": "urząd celny, odprawa celna; cło; cal",
   "example_pl": "Na lotnisku musimy przejść odprawę celną.",
   "usage_note_pl": "Cal (≈ 2,54 cm) — lm bez zmian: zehn Zoll hoch — o wysokości dziesięciu cali; ein 27-Zoll-Monitor.",
-  "_src": "8a0203e0",
-  "_src_reader": "24242c5c"
+  "sense_marks": [
+   {
+    "meaning_pl": "cal"
+   }
+  ],
+  "_src": "8958c845",
+  "_src_reader": "593b2fb1"
  },
  "noun-533": {
   "translation_pl": "dzień tygodnia; dzień powszedni",
@@ -3594,8 +3599,8 @@
  "noun-546": {
   "translation_pl": "zagadka; krzyżówka",
   "example_pl": "W niedziele dziadek lubi rozwiązywać krzyżówki.",
-  "_src": "604423b6",
-  "_src_reader": "78fbfbba"
+  "_src": "0770114e",
+  "_src_reader": "bf166de2"
  },
  "noun-547": {
   "translation_pl": "aktor",
@@ -3864,8 +3869,8 @@
  "noun-587": {
   "translation_pl": "ilość; mnóstwo; tłum",
   "example_pl": "Ma mnóstwo pracy.",
-  "_src": "3f322a2b",
-  "_src_reader": "703cc199"
+  "_src": "0fab66e1",
+  "_src_reader": "d70942ef"
  },
  "noun-588": {
   "translation_pl": "pracownik",
@@ -3913,8 +3918,8 @@
  "noun-595": {
   "translation_pl": "garnek; doniczka",
   "example_pl": "Zupa gotuje się w dużym garnku.",
-  "_src": "7e5ff33d",
-  "_src_reader": "e411b44d"
+  "_src": "d280c53f",
+  "_src_reader": "350d398f"
  },
  "noun-596": {
   "translation_pl": "nieszczęśliwy wypadek; wypadek (drogowy)",
@@ -4531,8 +4536,8 @@
   "plural_note_pl": "W znaczeniu „konkurencja (na rynku)” występuje bez liczby mnogiej.",
   "translation_pl": "konkurs, zawody; konkurencja",
   "example_pl": "Zdobyła pierwszą nagrodę w konkursie.",
-  "_src": "34ab9cbc",
-  "_src_reader": "277d637c"
+  "_src": "41abb1cf",
+  "_src_reader": "68072d0f"
  },
  "noun-691": {
   "plural_note_pl": "W znaczeniu „dowcipność” występuje bez liczby mnogiej.",
@@ -4938,8 +4943,8 @@
  "noun-754": {
   "translation_pl": "obchód; spacer, zwiedzanie (miasta, muzeum)",
   "example_pl": "Po obiedzie pójdziemy na spacer po starówce.",
-  "_src": "803ff5c8",
-  "_src_reader": "7172d902"
+  "_src": "ffdeef50",
+  "_src_reader": "03c3a01a"
  },
  "noun-755": {
   "translation_pl": "Szwajcaria",
@@ -5012,8 +5017,8 @@
  "noun-766": {
   "translation_pl": "śmieci; odpady",
   "example_pl": "Proszę nie rzucać śmieci na ziemię.",
-  "_src": "34e08e3c",
-  "_src_reader": "82ffbc65"
+  "_src": "4fe1cede",
+  "_src_reader": "a032fda3"
  },
  "noun-767": {
   "translation_pl": "kosz na śmieci",
@@ -5202,8 +5207,8 @@
     "note_pl": "prawo, roszczenie do czegoś"
    }
   ],
-  "_src": "93984736",
-  "_src_reader": "a88b88c7"
+  "_src": "a16a2ba0",
+  "_src_reader": "60d6c351"
  },
  "noun-795": {
   "translation_pl": "wniosek; podanie",
@@ -5732,8 +5737,8 @@
   "translation_pl": "pierś; klatka piersiowa",
   "example_pl": "Od wczoraj boli mnie w piersi.",
   "plural_note_pl": "W znaczeniu „klatka piersiowa” występuje bez liczby mnogiej; Brüste — piersi kobiece.",
-  "_src": "9adbb1df",
-  "_src_reader": "3c915ae3"
+  "_src": "e5b6081f",
+  "_src_reader": "fc63f0a3"
  },
  "noun-878": {
   "translation_pl": "księgarnia",
@@ -6310,8 +6315,8 @@
   "translation_pl": "służba, praca; dyżur; usługa",
   "example_pl": "Dziś w nocy lekarz ma dyżur w szpitalu.",
   "plural_note_pl": "W znaczeniu „służba, praca (jako działalność)” — bez liczby mnogiej; Dienste — usługi.",
-  "_src": "5b7cb0d4",
-  "_src_reader": "68b07d35"
+  "_src": "18b5292a",
+  "_src_reader": "d042e3f5"
  },
  "noun-969": {
   "translation_pl": "dyplom",
@@ -8401,8 +8406,8 @@
  "noun-1279": {
   "translation_pl": "wypowiedzenie umowy; zwolnienie (z pracy); wypowiedzenie (złożone przez pracownika)",
   "example_pl": "Wypowiedzenie umowy musi być złożone na piśmie.",
-  "_src": "2de65717",
-  "_src_reader": "0c0546db"
+  "_src": "dac52aca",
+  "_src_reader": "0c12a756"
  },
  "noun-1280": {
   "translation_pl": "wybrzeże",
@@ -9121,7 +9126,7 @@
   "_src_reader": "9d1c355f"
  },
  "noun-1392": {
-  "translation_pl": "sieć; siatka; zasięg (sieci komórkowej)",
+  "translation_pl": "siatka; sieć; zasięg (sieci komórkowej)",
   "example_pl": "W pociągu niestety nie mam zasięgu.",
   "_src": "fff7d654",
   "_src_reader": "010c3a43"
@@ -10147,15 +10152,15 @@
   "translation_pl": "starszy mężczyzna; emeryt",
   "example_pl": "Jako emeryt dostaje w muzeum tańszy bilet wstępu.",
   "plural_note_pl": "Często w liczbie mnogiej: Senioren — starsi ludzie. Jednego mężczyznę można nazwać der Senior.",
-  "_src": "cff6f318",
-  "_src_reader": "1daa3a79"
+  "_src": "cbbefcba",
+  "_src_reader": "e31b7fd7"
  },
  "noun-1548": {
   "translation_pl": "starsza kobieta; emerytka",
   "example_pl": "Starsza kobieta w każdą środę chodzi na kurs komputerowy.",
   "plural_note_pl": "Często w liczbie mnogiej: Seniorinnen — starsze kobiety.",
-  "_src": "8539d831",
-  "_src_reader": "d4679faf"
+  "_src": "243b8589",
+  "_src_reader": "d8f721c7"
  },
  "noun-1549": {
   "translation_pl": "serial; seria, szereg",
@@ -10221,8 +10226,8 @@
  "noun-1557": {
   "translation_pl": "siedzenie; miejsce; siedziba, centrala",
   "example_pl": "Siedzenie w samochodzie można przesunąć do tyłu.",
-  "_src": "2b2d135f",
-  "_src_reader": "0b19fe22"
+  "_src": "2d26e665",
+  "_src_reader": "61cdce1c"
  },
  "noun-1558": {
   "translation_pl": "przekąska",
@@ -10413,7 +10418,7 @@
   "_src_reader": "e8def579"
  },
  "noun-1586": {
-  "translation_pl": "dane statystyczne; statystyka",
+  "translation_pl": "statystyka; dane statystyczne",
   "example_pl": "Dane statystyczne pokazują, ilu ludzi jeździ do pracy rowerem.",
   "plural_note_pl": "Statistiken — pojedyncze raporty lub zestawienia statystyczne. Statystyka jako nauka — bez liczby mnogiej.",
   "_src": "09eb0136",
@@ -10984,8 +10989,8 @@
   "translation_pl": "sukno; tkanina wełniana",
   "example_pl": "Płaszcz jest uszyty z cienkiego sukna.",
   "plural_note_pl": "Tuche — rodzaje sukna. W odniesieniu do chustek i pojedynczych kawałków materiału używa się formy Tücher (osobne hasło).",
-  "_src": "cefb6855",
-  "_src_reader": "5c36d87c"
+  "_src": "507c089b",
+  "_src_reader": "e844bc5e"
  },
  "noun-1672": {
   "translation_pl": "wieża; wieża (w szachach)",
@@ -11121,8 +11126,8 @@
   "translation_pl": "suterena; piwnica",
   "example_pl": "Pralnia znajduje się w suterenie.",
   "usage_note_pl": "W południowych Niemczech i w Austrii pisze się też: Untergeschoß.",
-  "_src": "20e54f55",
-  "_src_reader": "faf00a5a"
+  "_src": "bfe399e9",
+  "_src_reader": "4af4422e"
  },
  "noun-1694": {
   "translation_pl": "rozmowa; rozrywka",
@@ -11763,8 +11768,8 @@
  "noun-1779": {
   "translation_pl": "ciepło; serdeczność",
   "example_pl": "Ciepło pieca sprawia, że pokój jest przytulny.",
-  "_src": "0b3f67c0",
-  "_src_reader": "d8a948e5"
+  "_src": "14a57583",
+  "_src_reader": "18cf21cc"
  },
  "noun-1780": {
   "translation_pl": "płatność, zapłata",
@@ -14828,8 +14833,8 @@
     "meaning_pl": "odrzucenie"
    }
   ],
-  "_src": "32ac3530",
-  "_src_reader": "c7830e01"
+  "_src": "2b48a61d",
+  "_src_reader": "8f03dc10"
  },
  "noun-2236": {
   "translation_pl": "ósma część",
@@ -16719,8 +16724,8 @@
  "noun-2537": {
   "translation_pl": "odmowa; odrzucenie; dezaprobata",
   "example_pl": "Po odrzuceniu swojego wniosku szukała innego rozwiązania.",
-  "_src": "8fcd9c3d",
-  "_src_reader": "69eaab39"
+  "_src": "979710d3",
+  "_src_reader": "441cfbef"
  },
  "noun-2538": {
   "translation_pl": "akapit; obcas; zbyt; występ",
@@ -16795,7 +16800,7 @@
   "_src_reader": "131cc706"
  },
  "noun-2549": {
-  "translation_pl": "przywódczyni; liderka grupy",
+  "translation_pl": "przywódczyni; prowodyrka, herszt (o kobiecie)",
   "example_pl": "Przywódczyni wyjaśniła grupie następny krok.",
   "_src": "2f37f060",
   "_src_reader": "c17d060c"
@@ -16892,8 +16897,8 @@
   "translation_pl": "rozwiązanie (organizacji); zakończenie; rozpuszczenie; rozkład; rozwiązanie zagadki; rozdzielczość obrazu",
   "example_pl": "Po rozwiązaniu stowarzyszenia jego członkowie nadal spotykali się prywatnie.",
   "plural_note_pl": "Lm rzadko używana.",
-  "_src": "84e09fbf",
-  "_src_reader": "35c2e2b2"
+  "_src": "1d17a693",
+  "_src_reader": "fd548c4e"
  },
  "noun-2562": {
   "translation_pl": "wypadek samochodowy",
@@ -16916,7 +16921,7 @@
   "_src_reader": "75792b0e"
  },
  "noun-2565": {
-  "translation_pl": "podstawa; baza; fundament; szeregowi członkowie organizacji",
+  "translation_pl": "podstawa; fundament; baza; szeregowi członkowie organizacji",
   "example_pl": "Wzajemny szacunek jest podstawą naszej współpracy.",
   "_src": "77a48691",
   "_src_reader": "536c4967"
@@ -16980,8 +16985,8 @@
     "meaning_pl": "znajomość"
    }
   ],
-  "_src": "05144056",
-  "_src_reader": "daa0f69a"
+  "_src": "b819b1c8",
+  "_src_reader": "67706548"
  },
  "noun-2574": {
   "translation_pl": "oświetlenie; sprzęt oświetleniowy; naświetlenie sprawy",
@@ -17011,14 +17016,14 @@
  "noun-2578": {
   "translation_pl": "konsultant; doradca",
   "example_pl": "Konsultant wyjaśnia nam zalety i wady obu ofert.",
-  "_src": "89b49239",
-  "_src_reader": "545a5467"
+  "_src": "0684acd9",
+  "_src_reader": "ff2e0a87"
  },
  "noun-2579": {
   "translation_pl": "konsultantka; doradczyni",
   "example_pl": "Konsultantka pomaga mu znaleźć odpowiednią naukę zawodu.",
-  "_src": "59d0c13a",
-  "_src_reader": "48b54a49"
+  "_src": "eb95b8a2",
+  "_src_reader": "7389fe65"
  },
  "noun-2580": {
   "translation_pl": "właściciel; posiadacz",
@@ -17089,8 +17094,8 @@
  "noun-2589": {
   "translation_pl": "bryła; lity blok; blok elektrowni",
   "example_pl": "Ciężka bryła granitu zatarasowała wąską ścieżkę.",
-  "_src": "31934a27",
-  "_src_reader": "db0e04b9"
+  "_src": "85ffbe85",
+  "_src_reader": "ff5885d7"
  },
  "noun-2590": {
   "translation_pl": "notes; kwartał; blok polityczny lub gospodarczy",
@@ -17191,8 +17196,8 @@
  "noun-2605": {
   "translation_pl": "usterka; defekt; uszkodzenie",
   "example_pl": "Usterka lodówki była przyczyną przerwy w dostawie prądu.",
-  "_src": "f83b316d",
-  "_src_reader": "eb543912"
+  "_src": "be42c9ba",
+  "_src_reader": "e1b94a6b"
  },
  "noun-2606": {
   "translation_pl": "design; wygląd; projekt",
@@ -17293,8 +17298,8 @@
   "translation_pl": "oczekiwanie; nadzieja; przypuszczenie",
   "example_pl": "Spodziewałem się, że skończymy przed południem.",
   "plural_note_pl": "Pełne napięcia oczekiwanie — bez liczby mnogiej; nadzieje i przypuszczenia częściej wyraża się formą Erwartungen.",
-  "_src": "f3c133e7",
-  "_src_reader": "d2546571"
+  "_src": "cf1efc7a",
+  "_src_reader": "d06e19a4"
  },
  "noun-2622": {
   "translation_pl": "produkcja; wytwarzanie; tworzenie",
@@ -17330,8 +17335,8 @@
  "noun-2627": {
   "translation_pl": "podsumowanie; wniosek; konkluzja",
   "example_pl": "Mój wniosek po kursie jest taki, że najbardziej pomaga codzienne ćwiczenie.",
-  "_src": "0cb7d459",
-  "_src_reader": "e9e58862"
+  "_src": "a40be47d",
+  "_src_reader": "8b17d4b6"
  },
  "noun-2628": {
   "translation_pl": "wróg; przeciwnik",
@@ -17885,8 +17890,8 @@
  "noun-2714": {
   "translation_pl": "zdolności twórcze; kreatywność; kreatywność językowa",
   "example_pl": "To zadanie zostawia dużo miejsca na kreatywność dzieci.",
-  "_src": "74eea846",
-  "_src_reader": "8f2f9875"
+  "_src": "e6bdeb36",
+  "_src_reader": "0c2653d5"
  },
  "noun-2715": {
   "translation_pl": "wojownik; żołnierz (przestarz.)",
@@ -18060,8 +18065,8 @@
     "note_pl": "litość nad kimś, współczucie dla kogoś"
    }
   ],
-  "_src": "cd8be460",
-  "_src_reader": "422b9333"
+  "_src": "262492a0",
+  "_src_reader": "fa74613b"
  },
  "noun-2740": {
   "translation_pl": "wiadomość; powiadomienie",
@@ -18144,7 +18149,7 @@
   "_src_reader": "6e3205d8"
  },
  "noun-2753": {
-  "translation_pl": "nazista; nazistka (pot., pejor.)",
+  "translation_pl": "nazista; narodowy socjalista (pot., pejor.)",
   "example_pl": "Na lekcji historii czytaliśmy o naziście, który po wojnie stanął przed sądem.",
   "usage_note_pl": "Wyraz potoczny i pejoratywny, może oznaczać osobę dowolnej płci. Forma żeńska Nazistin występuje rzadko.",
   "_src": "2bb84662",
@@ -22323,8 +22328,8 @@
  "noun-3366": {
   "translation_pl": "sprawność, wydolność; wydajność, moc",
   "example_pl": "Wystarczająca ilość snu zwiększa sprawność.",
-  "_src": "fc688936",
-  "_src_reader": "c660c1b3"
+  "_src": "56d8bb5c",
+  "_src_reader": "c1d02999"
  },
  "noun-3367": {
   "translation_pl": "zasady przewodnie, misja (organizacji); wzór, ideał",
@@ -28228,8 +28233,8 @@
  "noun-4254": {
   "translation_pl": "pretendentka (do tytułu); rywalka rzucająca wyzwanie",
   "example_pl": "Młoda pretendentka pokonała obrończynię tytułu w trzech setach.",
-  "_src": "7a4da7f0",
-  "_src_reader": "27d47907"
+  "_src": "3f87fb06",
+  "_src_reader": "3ce15721"
  },
  "noun-4255": {
   "translation_pl": "wydawca (gazety, czasopisma); redaktor (zbioru)",
@@ -30806,8 +30811,8 @@
  "noun-4654": {
   "translation_pl": "przedstawicielka (grupy); rzeczniczka prasowa, oficjalna przedstawicielka; spikerka; użytkowniczka (języka); lektorka, aktorka dubbingowa; mówiąca",
   "example_pl": "Przedstawicielka samorządu uczniowskiego wręczyła dyrektorowi podpisy.",
-  "_src": "eb216963",
-  "_src_reader": "2cf64512"
+  "_src": "72ad44c3",
+  "_src_reader": "f9f2aebc"
  },
  "noun-4655": {
   "translation_pl": "urządzenie wybuchowe, ładunek wybuchowy",

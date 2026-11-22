@@ -165,8 +165,8 @@
   "notes_pl": [
    "Synonim sonst."
   ],
-  "_src": "2bb8c4b6",
-  "_src_reader": "0da5521d"
+  "_src": "9321c422",
+  "_src_reader": "bf1dd4b7"
  },
  "adverb-029": {
   "translation_pl": "poza tym; w dodatku",
@@ -261,15 +261,15 @@
  "adverb-042": {
   "translation_pl": "w międzyczasie; obecnie",
   "example_pl": "Dawniej jeździł do pracy autobusem, obecnie jeździ rowerem.",
-  "_src": "edf8e397",
-  "_src_reader": "99cda74d"
+  "_src": "2dbd988f",
+  "_src_reader": "5d1d0e75"
  },
  "adverb-044": {
   "translation_pl": "w końcu; przecież",
   "example_pl": "Powinniśmy już iść. Gospodyni przecież na nas czeka.",
   "usage_note_pl": "Dwa znaczenia: „w końcu, wreszcie” (Schließlich hat er ja gesagt.) i „przecież, bądź co bądź” — uzasadnienie (jak w przykładzie).",
-  "_src": "5ffec1d9",
-  "_src_reader": "2e1a177a"
+  "_src": "6aeb4ba6",
+  "_src_reader": "44eebd91"
  },
  "adverb-045": {
   "translation_pl": "tym samym; zatem",
@@ -327,8 +327,8 @@
   "notes_pl": [
    "„W takim razie”: Wenn du müde bist, dann schlaf."
   ],
-  "_src": "78c74e23",
-  "_src_reader": "8acffee0"
+  "_src": "91e3a203",
+  "_src_reader": "f0a1affa"
  },
  "adverb-057": {
   "translation_pl": "tam",
@@ -341,8 +341,8 @@
   "translation_pl": "jeden raz; kiedyś, pewnego razu; kiedyś (w przyszłości)",
   "example_pl": "Byłem kiedyś w Wiedniu.",
   "usage_note_pl": "W mowie potocznej często skraca się do mal: Komm mal her! Zob. też noch einmal — jeszcze raz.",
-  "_src": "777a7300",
-  "_src_reader": "7e57c238"
+  "_src": "1dc4ae52",
+  "_src_reader": "4976d27c"
  },
  "adverb-059": {
   "translation_pl": "dawniej, kiedyś; wcześniej (o czasie)",
@@ -430,8 +430,8 @@
   "translation_pl": "tak; taki; no więc",
   "example_pl": "Zrób to, proszę, tak jak ja.",
   "usage_note_pl": "Porównanie: so groß wie ich — taki duży jak ja. Na początku zdania „no więc, no to”: So, jetzt gehen wir.",
-  "_src": "916dd258",
-  "_src_reader": "d6887611"
+  "_src": "c0338a72",
+  "_src_reader": "b2cfef6b"
  },
  "adverb-073": {
   "translation_pl": "później; potem",
@@ -844,8 +844,13 @@
   "notes_pl": [
    "danach = da + nach, zastępuje nach + rzecz: Er fragt nach dem Weg. → Er fragt danach."
   ],
-  "_src": "b721b678",
-  "_src_reader": "4dae855c"
+  "sense_marks": [
+   {
+    "meaning_pl": "(zapytać) o to"
+   }
+  ],
+  "_src": "9591889f",
+  "_src_reader": "49d23a7b"
  },
  "adverb-134": {
   "translation_pl": "dlatego",
@@ -1013,8 +1018,8 @@
   "translation_pl": "za każdym razem; odpowiednio; po (na każdego)",
   "example_pl": "Oba pokoje kosztują po 80 euro za noc.",
   "usage_note_pl": "Rozdziela na każdego („po”): Die Kinder bekommen jeweils zwei Euro. — Dzieci dostają po dwa euro.",
-  "_src": "8638bbdd",
-  "_src_reader": "8c97e863"
+  "_src": "e82d1e81",
+  "_src_reader": "cf32e8e7"
  },
  "adverb-162": {
   "translation_pl": "niedawno; parę dni temu",
@@ -1041,8 +1046,13 @@
   "translation_pl": "no (łagodzi prośbę, polecenie); kiedyś, raz (= einmal); razy (2 mal 3)",
   "example_pl": "Możesz mi pomóc?",
   "usage_note_pl": "Jako partykuła łagodzi prośbę lub polecenie: Komm mal her! — Chodź no tu! Kannst du mir mal helfen? — Pomożesz mi? nun mal — tak już (jest): Das ist nun mal so. Skrót od einmal: Warst du schon mal hier? — Byłeś tu kiedyś? W matematyce: drei mal vier — trzy razy cztery. Rzeczownik: das Mal (raz).",
-  "_src": "ecb30b11",
-  "_src_reader": "6c78a463"
+  "sense_marks": [
+   {
+    "meaning_pl": "razy (2 mal 3)"
+   }
+  ],
+  "_src": "cc96778c",
+  "_src_reader": "f9c56412"
  },
  "adverb-166": {
   "translation_pl": "ze sobą; razem",
@@ -1200,7 +1210,7 @@
   "_src_reader": "ec24bec2"
  },
  "adverb-190": {
-  "translation_pl": "w drodze; po drodze",
+  "translation_pl": "w drodze, po drodze; poza domem, w rozjazdach",
   "example_pl": "Zadzwonię do ciebie, jestem właśnie w drodze.",
   "usage_note_pl": "Często z sein: Wir waren den ganzen Tag unterwegs. — Cały dzień byliśmy w rozjazdach.",
   "_src": "830cef3a",
@@ -1287,8 +1297,8 @@
   "translation_pl": "w ogóle; zupełnie",
   "example_pl": "W ogóle nie mam czasu.",
   "usage_note_pl": "Wzmacnia przeczenie: überhaupt nicht, überhaupt kein. W pytaniu: Hast du überhaupt Hunger? — Jesteś w ogóle głodny?",
-  "_src": "71f76dcb",
-  "_src_reader": "83920e3b"
+  "_src": "e2d6efbf",
+  "_src_reader": "0eab48ef"
  },
  "adverb-205": {
   "translation_pl": "przy okazji; nawiasem mówiąc",
@@ -1333,7 +1343,7 @@
   "_src_reader": "6f2449fd"
  },
  "adverb-211": {
-  "translation_pl": "dalej; nadal; ponadto",
+  "translation_pl": "nadal; dalej; ponadto",
   "example_pl": "Życzę Panu wielu dalszych sukcesów.",
   "usage_note_pl": "Także „ponadto” przy wyliczaniu (oficjalnie): Weiterhin ist zu beachten, dass …",
   "_src": "c7184779",
@@ -1366,8 +1376,8 @@
     "example_pl": "I tak się stało."
    }
   ],
-  "_src": "f082fc3b",
-  "_src_reader": "30425027"
+  "_src": "73f55a94",
+  "_src_reader": "3bd76478"
  },
  "adverb-215": {
   "translation_pl": "na podstawie, opierając się na",
@@ -2822,8 +2832,13 @@
   "translation_pl": "na to, na tym (tutaj); po tym, następnie; wskutek tego",
   "example_pl": "Niestety nie mogę ci dać na to jasnej odpowiedzi.",
   "usage_note_pl": "Zastępuje auf + rzecz (jak darauf, ale z hier — „właśnie na to”); o ludziach — auf + zaimek. W opowiadaniach często: Hierauf ging er fort. — Po tym (następnie) odszedł.",
-  "_src": "f8bbb76d",
-  "_src_reader": "8a83bffa"
+  "sense_marks": [
+   {
+    "meaning_pl": "po tym, następnie"
+   }
+  ],
+  "_src": "673fda65",
+  "_src_reader": "1ff0400a"
  },
  "adverb-424": {
   "translation_pl": "następnie, potem; później",
@@ -2905,8 +2920,13 @@
   "translation_pl": "na to, na niego (na tym, na nim); po tym, potem; w odpowiedzi na to, wskutek tego",
   "example_pl": "Krzesło jest zepsute, proszę, nie siadaj na nim.",
   "usage_note_pl": "Zastępuje auf + rzecz; o ludziach — auf + zaimek (auf ihn). Z czasownikami i przymiotnikami z auf: stolz darauf — dumny z tego, sich darauf freuen — z radością na to czekać, warten darauf — czekać na to. Znaczenie „potem”: bald darauf — wkrótce potem, ein Jahr darauf — rok później. Potocznie: drauf.",
-  "_src": "b53134e0",
-  "_src_reader": "a30dd646"
+  "sense_marks": [
+   {
+    "meaning_pl": "po tym, potem"
+   }
+  ],
+  "_src": "98f8ea09",
+  "_src_reader": "4cafb1e3"
  },
  "adverb-436": {
   "translation_pl": "za dużo",
@@ -3052,8 +3072,8 @@
   "translation_pl": "mniej; w mniejszym stopniu",
   "example_pl": "Dziś mam mniej czasu niż wczoraj.",
   "usage_note_pl": "Stopień wyższy od wenig: wenig — weniger — am wenigsten. Nie odmienia się: weniger Geld, weniger Leute. Przed przymiotnikiem — „mniej”: weniger schön. immer weniger — coraz mniej; nicht weniger als — nie mniej niż. Nie mylić z wenige — nieliczni (wenige Leute). W rachunkach — minus: zehn weniger drei — dziesięć minus trzy.",
-  "_src": "85f4c9da",
-  "_src_reader": "c31d600e"
+  "_src": "90160f54",
+  "_src_reader": "b0c37968"
  },
  "adverb-457": {
   "translation_pl": "długo; dawno",

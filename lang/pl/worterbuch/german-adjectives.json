@@ -38,8 +38,8 @@
  "adjective-017": {
   "translation_pl": "wesoły; zabawny",
   "example_pl": "Film był naprawdę zabawny.",
-  "_src": "6ba8970e",
-  "_src_reader": "b33ec234"
+  "_src": "39e08771",
+  "_src_reader": "8512bf67"
  },
  "adjective-020": {
   "translation_pl": "cierpliwy",
@@ -86,8 +86,8 @@
  "adjective-029": {
   "translation_pl": "przejęty, podekscytowany; pobudzony",
   "example_pl": "Dzieci są podekscytowane wycieczką.",
-  "_src": "18794ffe",
-  "_src_reader": "064eba6e"
+  "_src": "c227e8da",
+  "_src_reader": "c0ec000a"
  },
  "adjective-030": {
   "translation_pl": "głodny",
@@ -134,8 +134,8 @@
  "adjective-040": {
   "translation_pl": "w dobrej formie fizycznej; rześki",
   "example_pl": "Dzięki regularnym treningom utrzymuję dobrą formę.",
-  "_src": "cad72760",
-  "_src_reader": "162a0562"
+  "_src": "f5431e18",
+  "_src_reader": "f7dfd13a"
  },
  "adjective-043": {
   "translation_pl": "drogi",
@@ -146,8 +146,8 @@
  "adjective-044": {
   "translation_pl": "tani; tandetny",
   "example_pl": "Na targu są tanie jabłka.",
-  "_src": "393e0666",
-  "_src_reader": "39ebd17d"
+  "_src": "0e98a12a",
+  "_src_reader": "39a7f3d1"
  },
  "adjective-047": {
   "translation_pl": "czysty; schludny",
@@ -182,8 +182,8 @@
  "adjective-056": {
   "translation_pl": "jasny; jaskrawy",
   "example_pl": "Salon jest duży i jasny.",
-  "_src": "1880558a",
-  "_src_reader": "11810a98"
+  "_src": "118c5eb0",
+  "_src_reader": "db8df86e"
  },
  "adjective-059": {
   "translation_pl": "zamknięty",
@@ -395,11 +395,11 @@
  "adjective-120": {
   "translation_pl": "serdeczny; ciepły; serdecznie",
   "example_pl": "Serdeczne życzenia z okazji urodzin!",
-  "_src": "880895a4",
-  "_src_reader": "784eca71"
+  "_src": "be90635b",
+  "_src_reader": "1edc9ea2"
  },
  "adjective-122": {
-  "translation_pl": "zeszły; ostatni",
+  "translation_pl": "ostatni; zeszły",
   "usage_note_pl": "Zwykle przed rzeczownikiem: der letzte Bus, letzte Woche.",
   "example_pl": "W zeszłym tygodniu mieliśmy dużo pracy.",
   "_src": "1e31744c",
@@ -456,10 +456,10 @@
   "_src_reader": "06309585"
  },
  "adjective-131": {
-  "translation_pl": "drogi; miły; dobry",
+  "translation_pl": "dobry; miły; drogi",
   "example_pl": "Droga Anno, bardzo dziękuję za Twój list!",
-  "_src": "aca740db",
-  "_src_reader": "cd149e9d"
+  "_src": "51f78075",
+  "_src_reader": "22f70e2f"
  },
  "adjective-132": {
   "translation_pl": "szkoda",
@@ -683,8 +683,8 @@
  "adjective-175": {
   "translation_pl": "męczący; wyczerpujący",
   "example_pl": "Przeprowadzka była bardzo męcząca.",
-  "_src": "7de6e5e4",
-  "_src_reader": "fcb548a1"
+  "_src": "8b9db6c7",
+  "_src_reader": "d7000afe"
  },
  "adjective-176": {
   "translation_pl": "obecny",
@@ -775,8 +775,8 @@
  "adjective-191": {
   "translation_pl": "prostokątny lub kwadratowy (nie okrągły); kanciasty",
   "example_pl": "Potrzebujemy prostokątnego albo kwadratowego stołu, a nie okrągłego.",
-  "_src": "e430c452",
-  "_src_reader": "b4053ece"
+  "_src": "1b916906",
+  "_src_reader": "f2ba195a"
  },
  "adjective-192": {
   "translation_pl": "własny; swój",
@@ -1015,10 +1015,10 @@
   "_src_reader": "1785271e"
  },
  "adjective-230": {
-  "translation_pl": "chudy (o mięsie); niskotłuszczowy; chudy (o człowieku)",
+  "translation_pl": "chudy (o człowieku); niskotłuszczowy; chudy (o mięsie)",
   "example_pl": "Mięso jest ładnie chude.",
-  "_src": "7522706d",
-  "_src_reader": "5b25a4d4"
+  "_src": "5aa08b3f",
+  "_src_reader": "57621402"
  },
  "adjective-231": {
   "translation_pl": "maksimum; maksymalny",
@@ -1206,8 +1206,8 @@
  "adjective-267": {
   "translation_pl": "szczególny; specjalny",
   "example_pl": "Czy ma Pan jakieś szczególne życzenie?",
-  "_src": "a2461797",
-  "_src_reader": "48604eba"
+  "_src": "21b3e5bf",
+  "_src_reader": "697452d2"
  },
  "adjective-268": {
   "translation_pl": "stylistyczny",
@@ -1534,8 +1534,8 @@
  "adjective-330": {
   "translation_pl": "nieuprzejmy; niegrzeczny",
   "example_pl": "Nieuprzejmie jest rozmawiać przez telefon podczas jedzenia.",
-  "_src": "fabef3ae",
-  "_src_reader": "071edc7f"
+  "_src": "9f69586a",
+  "_src_reader": "02ce815b"
  },
  "adjective-332": {
   "translation_pl": "nieprzyjemny; niesympatyczny",
@@ -1807,8 +1807,8 @@
  "adjective-376": {
   "translation_pl": "zbędny; niepotrzebny",
   "example_pl": "Ta dyskusja jest zbędna.",
-  "_src": "c6821334",
-  "_src_reader": "ca25921f"
+  "_src": "128d33e2",
+  "_src_reader": "463a996d"
  },
  "adjective-377": {
   "translation_pl": "samotnie wychowujący dziecko",

@@ -1357,7 +1357,7 @@
     "id": "adjective-012",
     "word": "nett",
     "translation_ru": "милый; приятный; любезно",
-    "translation_en": "nice; kind; kindly",
+    "translation_en": "nice, kind; pleasant; kindly",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -3703,7 +3703,7 @@
     "id": "adjective-adverb-096",
     "word": "dauerhaft",
     "translation_ru": "долговременный; надолго; постоянно",
-    "translation_en": "lasting; permanent; permanently",
+    "translation_en": "lasting; for a long time; permanently",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -3771,7 +3771,7 @@
     "id": "adjective-adverb-098",
     "word": "fest",
     "translation_ru": "твёрдый; прочный; крепко; твёрдо",
-    "translation_en": "firm; solid; firmly; tightly",
+    "translation_en": "solid; firm, sturdy; tightly; firmly",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -4650,7 +4650,7 @@
     "id": "adjective-adverb-123",
     "word": "schmal",
     "translation_ru": "узкий; узко; узкого покроя",
-    "translation_en": "narrow; with a narrow cut; slim-cut",
+    "translation_en": "narrow; narrowly (in width); slim-cut",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -4986,8 +4986,8 @@
   {
     "id": "adjective-adverb-131",
     "word": "nachhaltig",
-    "translation_ru": "устойчивый; экологически рациональный; долговременный; надолго",
-    "translation_en": "sustainable; lasting; with a lasting effect; sustainably",
+    "translation_ru": "долговременный; надолго; устойчивый; экологически рациональный",
+    "translation_en": "lasting; with a lasting effect; sustainable; environmentally sound",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -7163,13 +7163,20 @@
         "example_cloze": "Der {{c1::laute}} Verkehr stört mich.",
         "example_usage": "Adjektiv"
       }
+    ],
+    "sense_marks": [
+      {
+        "rule": "laut-adverb",
+        "meaning_ru": "громко",
+        "meaning_en": "loudly"
+      }
     ]
   },
   {
     "id": "adjective-adverb-190",
     "word": "lecker",
     "translation_ru": "вкусный; вкусно",
-    "translation_en": "delicious; tasty",
+    "translation_en": "delicious, tasty; deliciously",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -13547,8 +13554,8 @@
   {
     "id": "adjective-adverb-364",
     "word": "symptomatisch",
-    "translation_ru": "симптоматический; направленный на облегчение симптомов; показательный",
-    "translation_en": "symptomatic; symptomatically; revealing",
+    "translation_ru": "показательный; симптоматический; направленный на облегчение симптомов",
+    "translation_en": "revealing; symptomatic; aimed at relieving symptoms",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -14958,6 +14965,13 @@
         "example_cloze": "Die Häuser stehen {{c1::dicht}} beieinander.",
         "example_usage": "Adverbial"
       }
+    ],
+    "sense_marks": [
+      {
+        "rule": "dicht-before-preposition",
+        "meaning_ru": "близко",
+        "meaning_en": "close together"
+      }
     ]
   },
   {
@@ -15187,7 +15201,7 @@
   {
     "id": "adjective-adverb-406",
     "word": "stellvertretend",
-    "translation_ru": "замещающий; заместитель; от имени другого",
+    "translation_ru": "заместитель; замещающий; от имени другого",
     "translation_en": "deputy; acting; on behalf of another",
     "parts_of_speech": [
       "Adjektiv",
@@ -18855,7 +18869,7 @@
     "id": "adverb-193",
     "word": "voraussichtlich",
     "translation_ru": "предположительно; по прогнозам; ожидаемый",
-    "translation_en": "expected to; probably; expected",
+    "translation_en": "probably; expected to; expected",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"

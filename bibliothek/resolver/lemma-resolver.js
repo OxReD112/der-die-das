@@ -29,6 +29,15 @@
   // reflexive — reflexive.complements, light — a light record's complements (a pack has no rows for it: the English card)
   const senseMarkOf = (source, mark) => { const list = mark.field === "reflexive" ? source?.reflexive?.complements : source?.complements;
     return {field:mark.field, rows:mark.rows.map(x => (list || []).indexOf(x)).filter(i => i >= 0), mode:mark.mode}; };
+  // (Alena 22.11, advisor 22.11; WN 216) a meaning a rule shows first by the sentence (not by a pair) is marked in the card's data —
+  // sense_marks [{rule, meaning_ru, meaning_en}], a pack's sense_marks with meaning_<code> by the same row numbers — instead of a
+  // piece of the Russian text the rule looked for: the row of rule in item, null without one
+  const senseMarkRow = (item, rule) => { const rows = Array.isArray(item?.sense_marks) ? item.sense_marks : [];
+    const i = rows.findIndex(x => x && x.rule === rule); return i < 0 ? null : {row:rows[i], i}; };
+  // the places of a sense mark in RU and EN (each by its own mark; -1 — none): {ru, en, mark — the senseMark of the display}
+  const senseMarkPlaces = (item, rule) => { const m = senseMarkRow(item, rule); if (!m) return null;
+    const at = language => { const k = meaningPartsOf(item?.[`translation_${language}`]).indexOf(String(m.row[`meaning_${language}`] || "").trim()); return k; };
+    return {ru:at("ru"), en:at("en"), mark:{field:"sense", rows:[m.i], mode:"first"}}; };
   // Lists cleanup step 2 (25.10.2026): word lists that several rules share — one constant per meaning, not per set of words
   // (two rules that only happen to use the same words keep two constants, so changing one rule never changes the other).
   // Each holds the same words as the copies it replaced — in the same order wherever the order could matter (an
@@ -5940,12 +5949,13 @@ function apostropheText(text) {
       const lemma = norm(String(candidate.lemma || ""));
       if (!lemma || /^sich\s/u.test(lemma)) return null;
       const own = candidate.item?.complements || [];
-      const meanings = String(candidate.item?.translation_ru || "").split(";").map(x => x.trim()).filter(Boolean);
+      // (advisor 22.11: by the English meanings and their marks — meaning_en; the same cards as by the Russian ones)
+      const meanings = meaningPartsOf(candidate.item?.translation_en);
       // (advisor 14.11, data scheme: an element «+ Akk / + Dat» = the meaning takes the object; required: true = it needs it — only that is
       // a requirement: Ich fasse kurz zusammen keeps zusammenfassen once its optional accusative has no required)
       const ownRequired = own.filter(c => c && c.required === true && /^(?:Dativ|Akkusativ|Dativ \+ Akkusativ)$/u.test(String(c.pattern || "").trim()));
-      // (our field: the card needs the object only when every meaning does — a required complement without meaning_ru, or one per meaning)
-      if (ownRequired.length && (ownRequired.some(c => !c.meaning_ru) || meanings.length && meanings.every(m => ownRequired.some(c => String(c.meaning_ru || "").trim() === m))))
+      // (our field: the card needs the object only when every meaning does — a required complement without meaning_en, or one per meaning)
+      if (ownRequired.length && (ownRequired.some(c => !c.meaning_en) || meanings.length && meanings.every(m => ownRequired.some(c => String(c.meaning_en || "").trim() === m))))
         return /Dativ/u.test(ownRequired[0].pattern) && !/Akkusativ/u.test(ownRequired[0].pattern) ? "Dativ" : "Akkusativ";
       if (typeof process !== "undefined" && process.env?.REQUIRED_OWN_ONLY === "1" || !fallback.lookupFacts) return null;
       if (!requiredObjectFacts.has(lemma)) requiredObjectFacts.set(lemma, (async () => {
@@ -22196,11 +22206,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const concession = /(?:\b(?:wie|was|so viel|so oft|als|wer)\s+(?:\p{L}+\s+){0,2}(?:woll\p{L}*|will|lust)\b|\boder nicht\b|\bnoch so\b|\bauch immer\b|\bwas immer\b)/iu.test(sentence);
       const impersonal = part.some((t, n) => /^(?:es|man|dies)$/u.test(w(t)) || w(t) === "das" && !/^\p{Lu}/u.test(part[n+1]?.[0] ?? "") && /^\p{Ll}|^\p{Lu}/u.test(t[0]) && !(n+1 < part.length && /^\p{Lu}/u.test(part[n+1][0])));
       if (!stateVerb && !question && !concession && !impersonal) return result;
-      const ru = String(sel.translation?.ru ?? sel.item?.translation_ru ?? "").split(";").map(x => x.trim());
-      const k = ru.findIndex(m => /\(с инфинитивом\)/u.test(m));
-      if (k <= 0) return result;
-      const en = String(sel.translation?.en ?? sel.item?.translation_en ?? "").split(";").map(x => x.trim());
-      const selected = {...sel, senseFirst:k, senseFirstEn:en.length === ru.length ? k : 0, senseEvidence:"modal-infinitive"};
+      // (Alena 22.11, WN 216: the meaning by the card's sense mark «modal-infinitive», each language by its own mark)
+      const marked = senseMarkPlaces(sel.item, "modal-infinitive");
+      if (!marked || marked.ru <= 0 && marked.en <= 0) return result;
+      const selected = {...sel, senseFirst:Math.max(marked.ru, 0), senseFirstEn:Math.max(marked.en, 0), senseEvidence:"modal-infinitive", senseMark:marked.mark};
       return {...result, selected, preferred:result.preferred === sel ? selected : result.preferred, candidates:(result.candidates || []).map(c => c === sel ? selected : c)};
     }
     // (advisor 20.11, Goethe C1 — deferred: entsetzt und beeindruckt zugleich) a window of a participle and its own adjective card, joined
@@ -22399,7 +22408,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // потом», hierauf) shows that meaning first only with an explicit sign: a time word right before it (bald, gleich,
     // kurz, nicht lange, tags, am Morgen, ein paar Tage darauf) when no verb of the clause governs auf (seit Jahren
     // darauf wartet). The card is not changed.
-    const TEMPORAL_PART = /^(?:после этого|затем|потом)/u;
     const TIME_WORD = /^(?:bald|gleich|kurz|wenig|alsbald|sogleich|tags)$/u;
     // A time noun counts after a count or an article (ein paar Tage darauf, am Morgen darauf), not after seit (seit Jahren darauf wartet).
     const TIME_NOUN = /^(?:tage|tagen|jahre|wochen|monate|stunden|minuten|augenblicke?|augenblick|morgen|abend|nacht|tag|woche|jahr)$/u;
@@ -22409,8 +22417,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!c || c.source !== "main" || !c.item || canonicalPos(c.pos) !== "Adverb" || !context || !Number.isInteger(context.tokenOffset)) return result;
       if (norm(word) === "danach") return danachSense(word, context, result);
       if (!/^(?:da|hier)r?auf$/u.test(norm(word))) return result;
-      const parts = String(c.item.translation_ru || "").split(/;\s*/u), index = parts.findIndex(part => TEMPORAL_PART.test(part.trim()));
-      if (index <= 0) return result;
+      // (Alena 22.11, WN 216: the time meaning by the card's sense mark «temporal-sign», each language by its own mark — the English one no
+      // longer by the Russian number)
+      const marked = senseMarkPlaces(c.item, "temporal-sign");
+      if (!marked || marked.ru <= 0 && marked.en <= 0) return result;
+      const index = Math.max(marked.ru, 0);
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'temporalSense');
       const at = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (at < 0) return result;
@@ -22461,7 +22472,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const verbSign = !sign && verbFirst && !dataGoverns && !fallbackGoverns;
       if (verbFirst && !sign) { (console.__cheap = console.__cheap || []).push(dataGoverns ? "darauf-governs-data" : fallbackGoverns ? "darauf-governs-fallback" : "darauf-verb-first"); }
       if (!(sign || verbSign) || sign && governsAuf) return result;
-      const selected = {...c, senseFirst:index, senseEvidence:"temporal-sign"};
+      const selected = {...c, senseFirst:index, senseFirstEn:Math.max(marked.en, 0), senseEvidence:"temporal-sign", senseMark:marked.mark};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
         candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
@@ -22471,8 +22482,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const NACH_FALLBACK = /^(?:frag\p{L}*|gefragt|sehn\p{L}*|gesehnt|such\p{L}*|gesucht|streb\p{L}*|gestrebt|sieht|sah|sahen|aussehen|aussah|aus|klang|klingt|klingen|griff|greif\p{L}*|gegriffen|verlang\p{L}*|verlangt)$/u;
     function danachSense(word, context, result) {
       const c = result.selected;
-      const parts = String(c.item.translation_ru || "").split(/;\s*/u), index = parts.findIndex(part => /об этом|о нём|по этому/u.test(part));
-      if (index <= 0) return result;
+      // (Alena 22.11, WN 216: «about it» by the card's sense mark «governed-preposition», each language by its own mark)
+      const marked = senseMarkPlaces(c.item, "governed-preposition");
+      if (!marked || marked.ru <= 0 && marked.en <= 0) return result;
+      const index = Math.max(marked.ru, 0);
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'danachSense');
       const at = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (at < 0) return result;
@@ -22488,9 +22501,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const byFallback = !byData && tokens.slice(begin,end).some((t,i) => begin+i !== at && NACH_FALLBACK.test(norm(t[0])) && !(norm(t[0]) === "aus" && !tokens.slice(begin,end).some(u => /^(?:sieht|sah|sahen|aussehen)$/u.test(norm(u[0])))));
       if (!byData && !byFallback) return result;
       (console.__cheap = console.__cheap || []).push(byData ? "danach-governs-data" : "danach-governs-fallback");
-      // (the English line may cut the meanings otherwise — afterwards; after that; about it: its own place of «about it»)
-      const indexEn = String(c.item.translation_en || "").split(/;\s*/u).findIndex(part => /\babout (?:it|that|this|him|her|them)\b/u.test(part));
-      const selected = {...c, senseFirst:index, ...(indexEn >= 0 ? {senseFirstEn:indexEn} : {}), senseEvidence:"governed-preposition"};
+      const selected = {...c, senseFirst:index, ...(marked.en >= 0 ? {senseFirstEn:marked.en} : {}), senseEvidence:"governed-preposition", senseMark:marked.mark};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
         candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
@@ -23533,13 +23544,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const own = (pos,lemma) => (result.candidates || []).find(c => c.source === "main" && norm(c.lemma) === lemma && canonicalPos(c.item?.type || c.pos) === pos) ||
         (() => { const e = (lemmas.get(lemma) || []).find(x => canonicalPos(x.type) === pos || (pos === "Adjektiv" && /^adjective/u.test(String(x.id || "")))); return e ? mainCandidate(e) : null; })();
       const choose = (c, rule, sense) => { if (!c) return result;
-        const ru = String(c.item?.translation_ru || "").split(";").map(x => x.trim()), en = String(c.item?.translation_en || "").split(";").map(x => x.trim());
-        const k = sense ? ru.findIndex(m => sense.test(m)) : -1;
-        const picked = k > 0 ? {...c, senseFirst:k, ...(en.length === ru.length ? {senseFirstEn:k} : {}), senseEvidence:rule} : c;
+        // (Alena 22.11, WN 216: the meaning by the card's sense mark of the rule, each language by its own mark)
+        const marked = sense ? senseMarkPlaces(c.item, rule) : null;
+        const picked = marked && (marked.ru > 0 || marked.en > 0) ? {...c, senseFirst:Math.max(marked.ru, 0), ...(marked.en >= 0 ? {senseFirstEn:marked.en} : {}),
+          senseEvidence:rule, senseMark:marked.mark} : c;
         return keepDecision(result,{...result,candidates:[picked,...(result.candidates || []).filter(x => x !== c && !(x.source === picked.source && norm(x.lemma) === norm(picked.lemma) && x.item === picked.item))],
           selected:picked,preferred:picked,status:'resolved',evidence:rule},{outcome:'selected',rule,reason:rule}); };
       if (w === "dicht" && next && (prepositions.has(norm(next)) || /^(?:am|im|beim|ans|ins|vors|hinters|übers|unters|nebeneinander|hintereinander|beieinander|zusammen)$/u.test(norm(next))) && !/^(?:zu|zum|zur)$/u.test(norm(next)))
-        return choose(own("Adjektiv","dicht"),'dicht-before-preposition',/^близко/u);
+        return choose(own("Adjektiv","dicht"),'dicht-before-preposition',true);
       // (advisor 16.11: «громко» after a degree word — so / sehr / ganz … (so laut sie konnte) — or before a verb / at the end of its part
       // (schrie laut auf, begann laut zu weinen, sagte er laut.); before a pronoun or a noun of the same part without a degree word it is
       // the preposition «согласно» (laut ihm, laut Polizei). After a preposition it is no preposition either (Mit laut pochendem Herzen).
@@ -23555,7 +23567,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         (verbAnalyses.get(norm(next)) || []).length > 0 && !DETERMINER_WORD.test(norm(next)) && !/^(?:ich|du|er|sie|es|wir|ihr|man|ihm|ihnen|mir|dir|uns|euch)$/u.test(norm(next)));
       if (w === "laut" && !/^\.[\p{L}\p{M}]/u.test(sentence.slice(tokens[at].index + w.length)) &&
           (prev && (/^(?:so|zu|wie|sehr|ganz|recht|ziemlich|besonders|allzu)$/u.test(prev) || prepositions.has(prev)) || lautEnd || lautVerb))
-        return choose(own("Adjektiv","laut"),'laut-adverb',/^громко/u);
+        return choose(own("Adjektiv","laut"),'laut-adverb',true);
       // (4) the outside «Adjektiv · on» of ein / «Adjektiv · closed» of zu is no reading before a noun group: ein before a capital word
       // is the article (fand sie ein Fläschchen), zu before a determiner the preposition (zu ihrem großen Verdruss) — only when the
       // outside adjective was chosen
@@ -23574,9 +23586,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const numberWord = x => NUMBER_WORD.test(x) || /^\p{L}*(?:eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zig|ßig|hundert|tausend)(?:einhalb|einviertel|dreiviertel)?$/u.test(x) && /(?:zehn|zig|ßig|hundert|tausend|einhalb|einviertel|dreiviertel)$|^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|elf|zwölf)$/u.test(x);
       if (w === "Zoll" && (prev && (numberWord(prev) || /^(?:halben|halbe|paar|einige|wenige|viele|mehrere|anderthalb|eineinhalb)$/u.test(prev)) ||
           /\d[\d.,]*(?:[ \t]+|-)$/u.test(sentence.slice(0, tokens[at].index))))
-        return choose(own("Nomen","zoll"),'zoll-inch',/^дюйм/u);
+        return choose(own("Nomen","zoll"),'zoll-inch',true);
       if (w === "mal" && prev && next && NUMBER_WORD.test(prev) && NUMBER_WORD.test(norm(next)))
-        return choose(own("Adverb","mal"),'mal-times',/^умножить/u);
+        return choose(own("Adverb","mal"),'mal-times',true);
       return result;
     }
     // («Астронавт», advisor 17.11) a word broken off with «…» in lower case — Eins … zwei … dr… — is no abbreviation with its point

@@ -69,10 +69,11 @@
   // the pack's text of an own card in the order its own marks give; '' — no place in the pack (the English card, with the mark)
   const packByMarks = (candidate, language) => {
     const m = candidate.senseMark, pack = candidate.packItem?.[language];
-    if (!m || m.field !== 'item' || !pack || !ownCard(candidate)) return '';
+    // (field item — complements; sense — sense_marks, WN 216: a meaning a rule shows first by the sentence)
+    if (!m || !['item','sense'].includes(m.field) || !pack || !ownCard(candidate)) return '';
     const text = String(pack[`translation_${language}`] || '').trim(), mine = String(candidate.translation?.[language] || '').trim();
     if (!text || text !== mine) return '';
-    const at = markedSenses(text, (m.rows || []).map(i => (pack.complements || [])[i]), m.mode, language);
+    const at = markedSenses(text, (m.rows || []).map(i => ((m.field === 'sense' ? pack.sense_marks : pack.complements) || [])[i]), m.mode, language);
     if (!at) return '';
     const parts = meaningParts(text), order = at.several || (Number.isInteger(at.first) ? [at.first] : []);
     return [...order.map(i => parts[i]), ...parts.filter((_, i) => !order.includes(i))].join('; ');
@@ -325,7 +326,9 @@
     // when they are counted alike, byNumber; otherwise the English card, as before — advisor 17.11 / 19.11)
     if (isPack(language) && (provenSense(candidate) || candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb')) {
       // (Alena 22.11: a meaning proved by a pair — by the pack's own marks, no number from English)
-      if (candidate.senseMark && candidate.senseMark.field !== 'reflexive') { const text = packByMarks(candidate, language); return text ? fit(text).text : ''; }
+      // (as many meanings as the English card shows — the cut the number path had)
+      if (candidate.senseMark && candidate.senseMark.field !== 'reflexive') { const text = packByMarks(candidate, language); if (!text) return '';
+        return fit(meaningParts(text).slice(0, meaningParts(brief(candidate, 'en', inline)).length).join('; ')).text; }
       if (!byNumber(candidate, language)) return '';
       const order = meaningParts(brief(candidate, 'en', inline)).map(m => m.trim()), en = meaningParts(candidate.translation.en).map(m => m.trim());
       const mine = meaningParts(candidate.translation[language]).map(m => m.trim()), at = order.map(m => en.indexOf(m));

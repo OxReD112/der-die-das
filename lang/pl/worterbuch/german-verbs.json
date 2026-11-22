@@ -158,8 +158,8 @@
   "translation_pl": "móc; umieć",
   "usage_note_pl": "Z innym bezokolicznikiem w czasie Perfekt zwykle używa się formy Ersatzinfinitiv: Ich habe arbeiten können.",
   "example_pl": "Bardzo dobrze umie pływać.",
-  "_src": "217fd9c2",
-  "_src_reader": "8a1446a5"
+  "_src": "15c4b6e9",
+  "_src_reader": "f71a563a"
  },
  "verb-018": {
   "translation_pl": "musieć; być zmuszonym",
@@ -241,8 +241,8 @@
     "note_pl": "zapisywać się na coś"
    }
   ],
-  "_src": "5d65b767",
-  "_src_reader": "cfbfef7e"
+  "_src": "ee8b4fbb",
+  "_src_reader": "b8a26fe6"
  },
  "verb-026": {
   "translation_pl": "dzwonić (do kogoś)",
@@ -358,8 +358,8 @@
  "verb-039": {
   "translation_pl": "kupować; robić zakupy",
   "example_pl": "W soboty robimy zakupy w supermarkecie.",
-  "_src": "f60363f1",
-  "_src_reader": "02b1f4f6"
+  "_src": "65805c9a",
+  "_src_reader": "a1a73509"
  },
  "verb-040": {
   "translation_pl": "zapraszać",
@@ -583,8 +583,8 @@
  "verb-062": {
   "translation_pl": "poznawać",
   "example_pl": "Chciałbym / Chciałabym poznać nowych ludzi.",
-  "_src": "6bf0af20",
-  "_src_reader": "49184131"
+  "_src": "664ac070",
+  "_src_reader": "5a375c71"
  },
  "verb-063": {
   "translation_pl": "posyłać; wysyłać",
@@ -913,8 +913,8 @@
    "example_pl": "Spróbowała swoich sił jako malarka.",
    "note_pl": "sich in / an etwas (D) versuchen: Er versuchte sich an einem Roman. — Spróbował napisać powieść."
   },
-  "_src": "0487aefa",
-  "_src_reader": "d4691e38"
+  "_src": "ef0088c0",
+  "_src_reader": "80b3082e"
  },
  "verb-089": {
   "translation_pl": "proponować",
@@ -998,8 +998,8 @@
     "note_pl": "mówić o czymś"
    }
   ],
-  "_src": "17b9e784",
-  "_src_reader": "1dbd2ba6"
+  "_src": "7f08e734",
+  "_src_reader": "4d2918b6"
  },
  "verb-097": {
   "translation_pl": "otrzymywać; zachowywać",
@@ -1010,8 +1010,8 @@
  "verb-098": {
   "translation_pl": "wykonywać; załatwiać",
   "example_pl": "Dziś wykonam to zadanie.",
-  "_src": "a2aed454",
-  "_src_reader": "c08d8edc"
+  "_src": "7740bfec",
+  "_src_reader": "47eef634"
  },
  "verb-099": {
   "translation_pl": "składać podanie; ubiegać się",
@@ -1531,8 +1531,8 @@
    "example_pl": "Pójdę po kawę (wezmę sobie kawę).",
    "note_pl": "sich (D) etwas holen: Er hat sich eine Erkältung geholt. — Nabawił się przeziębienia."
   },
-  "_src": "78a48ae1",
-  "_src_reader": "b80bd5f7"
+  "_src": "2478ec6e",
+  "_src_reader": "16654868"
  },
  "verb-151": {
   "translation_pl": "wspinać się; wdrapywać się; uprawiać wspinaczkę",
@@ -1597,8 +1597,8 @@
     "note_pl": "troszczyć się o kogoś lub o coś; zajmować się czymś"
    }
   ],
-  "_src": "871475b6",
-  "_src_reader": "e1456787"
+  "_src": "1710cd42",
+  "_src_reader": "aa6ae1f9"
  },
  "verb-156": {
   "translation_pl": "śmiać się",
@@ -1763,11 +1763,16 @@
     "note_pl": "kogoś / coś"
    }
   ],
-  "_src": "c175a93c",
-  "_src_reader": "1187a228"
+  "sense_marks": [
+   {
+    "meaning_pl": "(z bezokolicznikiem) być może, możliwe"
+   }
+  ],
+  "_src": "1923f635",
+  "_src_reader": "0fe2e3f7"
  },
  "verb-169": {
-  "translation_pl": "pasować, odpowiadać; pasować (o rozmiarze)",
+  "translation_pl": "pasować (o rozmiarze); pasować, odpowiadać",
   "example_pl": "Te spodnie już na mnie nie pasują.",
   "complements": [
    {
@@ -1859,8 +1864,8 @@
    "example_pl": "Na chwilę zamknęła oczy, żeby zebrać myśli.",
    "note_pl": "Die Schüler sammeln sich auf dem Hof. — Uczniowie zbierają się na podwórku. Im Keller sammelt sich Wasser. — W piwnicy gromadzi się woda."
   },
-  "_src": "6a864342",
-  "_src_reader": "679a16a6"
+  "_src": "690a8722",
+  "_src_reader": "c292f066"
  },
  "verb-179": {
   "translation_pl": "świecić; wydawać się",
@@ -1948,8 +1953,8 @@
   "translation_pl": "mieć (coś zrobić); powinien",
   "usage_note_pl": "Z innym bezokolicznikiem w czasie Perfekt zwykle używa się Ersatzinfinitiv: Ich habe früher kommen sollen.",
   "example_pl": "Lekarz mówi, że mam pić więcej wody.",
-  "_src": "cafe5711",
-  "_src_reader": "d1655031"
+  "_src": "51a9bfb5",
+  "_src_reader": "b7adbd09"
  },
  "verb-188": {
   "translation_pl": "stać; być napisanym",
@@ -2028,7 +2033,7 @@
   "_src_reader": "33b1eb90"
  },
  "verb-193": {
-  "translation_pl": "trenować, ćwiczyć; trenować (kogoś, coś)",
+  "translation_pl": "trenować (kogoś, coś); trenować, ćwiczyć",
   "example_pl": "Trenuję na siłowni trzy razy w tygodniu.",
   "complements": [
    {
@@ -2305,8 +2310,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "c89fa78e",
-  "_src_reader": "49cebadf"
+  "_src": "dc4dab61",
+  "_src_reader": "67e99f58"
  },
  "verb-216": {
   "translation_pl": "zamykać (na klucz); kończyć; zawierać (umowę)",
@@ -2341,8 +2346,8 @@
    "example_pl": "Długo na siebie patrzyli.",
    "note_pl": "Na siebie: Schaut euch nur an! — Popatrzcie tylko na siebie! Nie mylić: sich (Dativ) etwas anschauen — obejrzeć coś (osobne hasło)."
   },
-  "_src": "5a308472",
-  "_src_reader": "43aa8d05"
+  "_src": "1de40ffc",
+  "_src_reader": "2f1ec023"
  },
  "verb-2746": {
   "translation_pl": "obejrzeć",
@@ -2376,8 +2381,8 @@
    "example_pl": "W milczeniu popatrzyli na siebie.",
    "note_pl": "Na siebie: Sieh dich nur an! — Popatrz tylko na siebie! Nie mylić: sich (Dativ) etwas ansehen — obejrzeć coś, przyjrzeć się czemuś (osobne hasło)."
   },
-  "_src": "bb82b0fb",
-  "_src_reader": "84c26871"
+  "_src": "1ade8421",
+  "_src_reader": "9a0a0f6b"
  },
  "verb-2745": {
   "translation_pl": "obejrzeć, przyjrzeć się",
@@ -2529,8 +2534,8 @@
  "verb-237": {
   "translation_pl": "uzasadniać; podawać powód",
   "example_pl": "Możesz uzasadnić swoje zdanie?",
-  "_src": "429ef4d6",
-  "_src_reader": "4f9b3db9"
+  "_src": "c99d7812",
+  "_src_reader": "5cf98ee9"
  },
  "verb-238": {
   "translation_pl": "obciążać; obarczać; przytłaczać",
@@ -2739,7 +2744,7 @@
   "_src_reader": "5566d1ba"
  },
  "verb-255": {
-  "translation_pl": "opakowywać; pakować (do torby)",
+  "translation_pl": "pakować (do torby); opakowywać",
   "example_pl": "Nie zapomnij spakować kremu do opalania!",
   "_src": "97777ddb",
   "_src_reader": "0e6c6e39"
@@ -3257,8 +3262,8 @@
  "verb-310": {
   "translation_pl": "rezerwować",
   "example_pl": "Czy mogę zarezerwować stolik dla czterech osób?",
-  "_src": "5d259b57",
-  "_src_reader": "5e293a4b"
+  "_src": "0965d147",
+  "_src_reader": "a443ab6b"
  },
  "verb-311": {
   "translation_pl": "wołać; krzyczeć; wzywać",
@@ -3356,8 +3361,8 @@
     "note_pl": "dokąd? — kierunek: Wechselpräposition z Akkusativem"
    }
   ],
-  "_src": "58abb2c5",
-  "_src_reader": "1f1ad3c8"
+  "_src": "44ac97b1",
+  "_src_reader": "46c05624"
  },
  "verb-320": {
   "translation_pl": "siadać",
@@ -3455,8 +3460,8 @@
     "note_pl": "kłócić się o coś"
    }
   ],
-  "_src": "cddd4b21",
-  "_src_reader": "9403958c"
+  "_src": "a136ea71",
+  "_src_reader": "72aa6b34"
  },
  "verb-2761": {
   "translation_pl": "kłócić się, sprzeczać się",
@@ -3508,8 +3513,8 @@
    "example_pl": "Za mostem droga się rozdziela.",
    "note_pl": "na co — in + Akk.: Die Klasse teilte sich in zwei Gruppen. — Klasa podzieliła się na dwie grupy. Nie mylić: sich (Dativ) etwas teilen — dzielić coś z kimś (zob. uwagę w haśle)."
   },
-  "_src": "68660cab",
-  "_src_reader": "d53b1a92"
+  "_src": "2dfb8595",
+  "_src_reader": "01782cf0"
  },
  "verb-332": {
   "translation_pl": "przewozić; transportować",
@@ -3600,8 +3605,8 @@
  "verb-337": {
   "translation_pl": "podejmować (działania); robić (coś)",
   "example_pl": "Co będziemy robić w weekend?",
-  "_src": "e573b713",
-  "_src_reader": "3582deb1"
+  "_src": "e03f999d",
+  "_src_reader": "e89c4f03"
  },
  "verb-338": {
   "translation_pl": "badać (o lekarzu); oglądać; badać (naukowo), analizować",
@@ -3818,8 +3823,8 @@
     "note_pl": "współpracować z kimś"
    }
   ],
-  "_src": "41560eae",
-  "_src_reader": "33db1875"
+  "_src": "df93f632",
+  "_src_reader": "3bf6df91"
  },
  "verb-363": {
   "translation_pl": "zależeć",
@@ -4153,8 +4158,8 @@
     "note_pl": "wzywać, prosić (kogoś, żeby coś zrobił)"
    }
   ],
-  "_src": "7d287f71",
-  "_src_reader": "91fc22df"
+  "_src": "9a2e4bec",
+  "_src_reader": "57dbb026"
  },
  "verb-394": {
   "translation_pl": "wystawiać (spektakl); wykonywać",
@@ -4163,8 +4168,8 @@
    "translation_pl": "zachowywać się (zwykle źle)",
    "example_pl": "Dzieci zachowywały się okropnie."
   },
-  "_src": "9152e62e",
-  "_src_reader": "e0908790"
+  "_src": "233bad4e",
+  "_src_reader": "cb52e678"
  },
  "verb-395": {
   "translation_pl": "rzucać (np. palenie); poddawać się; nadawać (paczkę); nadawać (bagaż)",
@@ -4438,8 +4443,8 @@
  "verb-424": {
   "translation_pl": "witać; witać się",
   "example_pl": "Gospodarz osobiście wita każdego gościa.",
-  "_src": "51d4607b",
-  "_src_reader": "27571eaf"
+  "_src": "747a9bb3",
+  "_src_reader": "52847807"
  },
  "verb-425": {
   "translation_pl": "zatrzymywać (sobie); zachowywać; zapamiętywać",
@@ -4473,8 +4478,8 @@
  "verb-429": {
   "translation_pl": "urażać; obrażać",
   "example_pl": "Nie chcę nikogo urazić.",
-  "_src": "9a3cb582",
-  "_src_reader": "2e4bbb41"
+  "_src": "c9be138c",
+  "_src_reader": "c4181a67"
  },
  "verb-430": {
   "translation_pl": "zauważać; nadmieniać (w wypowiedzi)",
@@ -4637,14 +4642,14 @@
  "verb-446": {
   "translation_pl": "pilnować; opiekować się; obsługiwać (klientów)",
   "example_pl": "Popołudniami naszych dzieci pilnuje studentka.",
-  "_src": "2dc8bb2c",
-  "_src_reader": "99738817"
+  "_src": "486a54b6",
+  "_src_reader": "273b5e05"
  },
  "verb-447": {
   "translation_pl": "oszukiwać; zdradzać (partnera)",
   "example_pl": "Sprzedawca nas oszukał.",
-  "_src": "4e0179de",
-  "_src_reader": "bfd22830"
+  "_src": "06b6bd5b",
+  "_src_reader": "30b33ed5"
  },
  "verb-448": {
   "translation_pl": "udowadniać",
@@ -5371,15 +5376,15 @@
   "_src_reader": "5c1b8796"
  },
  "verb-526": {
-  "translation_pl": "wykrywać; ustalać; stwierdzać",
+  "translation_pl": "ustalać; zauważać, wykrywać; stwierdzać",
   "example_pl": "Lekarz nie wykrył niczego poważnego.",
   "complements": [
    {
     "note_pl": "wykrywać, ustalać coś"
    }
   ],
-  "_src": "51cefd16",
-  "_src_reader": "f93436a8"
+  "_src": "5bb7383f",
+  "_src_reader": "dd07c5f9"
  },
  "verb-527": {
   "translation_pl": "finansować; opłacać",
@@ -5488,8 +5493,8 @@
     "note_pl": "czymś (przedsiębiorstwem, grupą)"
    }
   ],
-  "_src": "efbf7206",
-  "_src_reader": "f2bbb6cd"
+  "_src": "b9f43849",
+  "_src_reader": "6e8c0280"
  },
  "verb-538": {
   "translation_pl": "bać się",
@@ -5662,17 +5667,17 @@
   "_src_reader": "3b76a09c"
  },
  "verb-555": {
-  "translation_pl": "patrzeć; spoglądać",
-  "usage_note_pl": "Wyraz potoczny (zwłaszcza w północnych i środkowych Niemczech).",
+  "translation_pl": "patrzeć, spoglądać; oglądać (film, telewizję), przeglądać (obrazki, czasopisma)",
+  "usage_note_pl": "Wyraz potoczny (zwłaszcza w północnych i środkowych Niemczech). Finster gucken — patrzeć ponuro. Das Taschentuch guckt aus der Tasche — chusteczka wygląda, wystaje z kieszeni.",
   "example_pl": "Patrz, pada śnieg!",
   "complements": [
    {
-    "meaning_pl": "patrzeć",
-    "note_pl": "na coś / na kogoś"
+    "meaning_pl": "oglądać (film, telewizję), przeglądać (obrazki, czasopisma)",
+    "note_pl": "coś: einen Film gucken, Fernsehen gucken, Bilder gucken"
    }
   ],
-  "_src": "7f9276e3",
-  "_src_reader": "6ddda338"
+  "_src": "27b24cb0",
+  "_src_reader": "57ea674f"
  },
  "verb-556": {
   "translation_pl": "padać (o gradzie)",
@@ -5859,8 +5864,8 @@
     "note_pl": "coś (gdzieś)"
    }
   ],
-  "_src": "1631209d",
-  "_src_reader": "c5bd7c32"
+  "_src": "fd784995",
+  "_src_reader": "07403a26"
  },
  "verb-576": {
   "translation_pl": "brzmieć",
@@ -6537,7 +6542,7 @@
   "_src_reader": "f777aa86"
  },
  "verb-643": {
-  "translation_pl": "wywodzić się; pochodzić",
+  "translation_pl": "pochodzić; wywodzić się",
   "usage_note_pl": "Perfekt prawie nie jest używany; w czasie przeszłym zwykle stammte.",
   "example_pl": "Moja rodzina pochodzi z Polski.",
   "complements": [
@@ -6548,8 +6553,8 @@
     "note_pl": "wywodzić się od kogoś"
    }
   ],
-  "_src": "665f883e",
-  "_src_reader": "fca76722"
+  "_src": "7fb1eae5",
+  "_src_reader": "6ce40837"
  },
  "verb-644": {
   "translation_pl": "odkurzać",
@@ -6787,8 +6792,8 @@
     "note_pl": "rozstawać się z kimś"
    }
   ],
-  "_src": "1abcefbe",
-  "_src_reader": "d4af5906"
+  "_src": "2fe2a94e",
+  "_src_reader": "e285ff20"
  },
  "verb-661": {
   "translation_pl": "stąpać, stawiać kroki; podchodzić",
@@ -6863,8 +6868,8 @@
  "verb-669": {
   "translation_pl": "brać na siebie; przejmować",
   "example_pl": "Możesz w przyszłym tygodniu wziąć moją zmianę?",
-  "_src": "356c45ba",
-  "_src_reader": "62765105"
+  "_src": "8fc6732b",
+  "_src_reader": "17c827cc"
  },
  "verb-670": {
   "translation_pl": "sprawdzać",
@@ -7610,8 +7615,8 @@
     "note_pl": "sprzeciwiać się komuś; przeczyć czemuś"
    }
   ],
-  "_src": "bbd3c717",
-  "_src_reader": "19904041"
+  "_src": "88976ae7",
+  "_src_reader": "25cad055"
  },
  "verb-739": {
   "translation_pl": "ponownie jednoczyć",
@@ -7852,8 +7857,8 @@
   "translation_pl": "kończyć (naukę); odbywać (kurs, praktykę)",
   "usage_note_pl": "ein Praktikum, eine Prüfung absolvieren — odbyć praktykę, zdać egzamin.",
   "example_pl": "Ukończyła studia w Wiedniu.",
-  "_src": "054883c2",
-  "_src_reader": "6176c700"
+  "_src": "9a70dc40",
+  "_src_reader": "092b6942"
  },
  "verb-760": {
   "translation_pl": "odejmować, potrącać (z kwoty), ściągać (skórę, pościel); odchodzić, ulatniać się (o wojsku, dymie)",
@@ -8514,7 +8519,7 @@
   "_src_reader": "292de8f8"
  },
  "verb-828": {
-  "translation_pl": "tworzyć, stanowić; kształtować",
+  "translation_pl": "tworzyć, kształtować; stanowić",
   "usage_note_pl": "sich (Dativ) eine Meinung bilden — wyrobić sobie zdanie. Tworzyć się — sich bilden (osobne hasło).",
   "example_pl": "Uczniowie tworzą krąg wokół nauczycielki.",
   "_src": "b381e5eb",
@@ -14070,8 +14075,8 @@
    "translation_pl": "udzielać się, przenosić się (o nastroju, chorobie)",
    "note_pl": "sich übertragen (auf + Akk.)"
   },
-  "_src": "b5c09402",
-  "_src_reader": "2f52d9c3"
+  "_src": "8d671a19",
+  "_src_reader": "5d2daf76"
  },
  "verb-1401": {
   "translation_pl": "nadzorować, monitorować, kontrolować",
@@ -15955,7 +15960,7 @@
  },
  "verb-1589": {
   "translation_pl": "wyjaśniać, rozwiązywać (przestępstwo, nieporozumienie); uświadamiać, informować",
-  "usage_note_pl": "sich aufklären — wyjaśniać się, przejaśniać się (o nieporozumieniu; o niebie). Uświadamiać dzieci (w sprawach seksu). (wojsk.) prowadzić rozpoznanie. die Aufklärung — wyjaśnienie; uświadamianie; epoka oświecenia.",
+  "usage_note_pl": "sich aufklären — wyjaśniać się (o nieporozumieniu), przejaśniać się (o niebie). Uświadamiać dzieci (w sprawach seksu). (wojsk.) prowadzić rozpoznanie. die Aufklärung — wyjaśnienie; uświadamianie; epoka oświecenia.",
   "example_pl": "Dopiero po dwóch latach policji udało się wyjaśnić sprawę włamania do szkoły.",
   "complements": [
    {
@@ -16981,8 +16986,8 @@
     "note_pl": "zawracać komuś głowę czymś"
    }
   ],
-  "_src": "d8163029",
-  "_src_reader": "27d1bfc1"
+  "_src": "7f1cdbbd",
+  "_src_reader": "36aee53d"
  },
  "verb-1703": {
   "translation_pl": "podsłuchiwać (kogoś, czyjąś rozmowę)",
@@ -24755,8 +24760,8 @@
   "reflexive": {
    "translation_pl": "hamować się, pozostawać w cieniu"
   },
-  "_src": "97c6c206",
-  "_src_reader": "fd950026"
+  "_src": "9270bfd2",
+  "_src_reader": "dcb91e36"
  },
  "verb-2438": {
   "translation_pl": "oddawać (cios), uderzać w odpowiedzi; odpierać (atak, przeciwnika); odrzucać (kołdrę)",
@@ -27724,8 +27729,8 @@
   "translation_pl": "ładować (towar); ładować (akumulator, broń); wczytywać (dane); zapraszać",
   "usage_note_pl": "Czasownik mocny: lädt, lud, hat geladen. Das Laden dauert zwei Stunden. — Ładowanie trwa dwie godziny. Seite wird geladen … — Strona się wczytuje … „Zapraszać” — książkowo, zwykle einladen; vor Gericht laden — wzywać do sądu. (pot.) geladen sein — być wściekłym. Por. der Laden — sklep.",
   "example_pl": "Załadowaliśmy meble do furgonetki.",
-  "_src": "14146f6f",
-  "_src_reader": "b5929650"
+  "_src": "4473b06b",
+  "_src_reader": "1d23eb04"
  },
  "verb-2806": {
   "translation_pl": "przetykać, przeplatać, przesycać (czymś)",

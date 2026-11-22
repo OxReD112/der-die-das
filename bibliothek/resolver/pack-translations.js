@@ -166,8 +166,9 @@
   const owns = new Map(), ownFailedAt = new Map(), ownStarted = new Map(), ownMissing = new Map();
   // (22.11.2026, links chat; Alena + advisor 22.11: a pair tied to a meaning finds it by the pack's own mark) complements — only
   // their meaning_<code>, by the card's row numbers (meaning-display.js packByMarks); a row without it is kept empty
-  const KEEP = code => [`translation_${code}`, "extra_meanings", "reflexive", "form_translations", "collective", "_src_reader", "complements"];
-  const keepField = (code, k, v) => k === "complements" && Array.isArray(v) ? v.map(x => x && typeof x === "object" && x[`meaning_${code}`] ? {[`meaning_${code}`]:x[`meaning_${code}`]} : {}) : v;
+  // (22.11, WN 216) sense_marks — the same: only meaning_<code>, by the card's row numbers
+  const KEEP = code => [`translation_${code}`, "extra_meanings", "reflexive", "form_translations", "collective", "_src_reader", "complements", "sense_marks"];
+  const keepField = (code, k, v) => (k === "complements" || k === "sense_marks") && Array.isArray(v) ? v.map(x => x && typeof x === "object" && x[`meaning_${code}`] ? {[`meaning_${code}`]:x[`meaning_${code}`]} : {}) : v;
   // one card file: {id: fields} with only the fields the popup reads, into map; false when it could not be read
   function readOwnFile(code, file, version, map) {
     return dataFetch(new URL(`../../lang/${code}/${file}${version ? `?v=${encodeURIComponent(version)}` : ""}`, script))

@@ -144,11 +144,11 @@
   "_src_reader": "7f8d7dd7"
  },
  "pronoun-021": {
-  "_src": "f09e7d0e",
+  "_src": "f1badd86",
   "translation_pl": "ktoś",
   "example_pl": "Czy ktoś jest w domu?",
   "forms_note_pl": "W Akkusativie i Dativie możliwe są formy z końcówką i bez niej.",
-  "_src_reader": "82f0a726"
+  "_src_reader": "2e5a608e"
  },
  "pronoun-022": {
   "_src": "07250b3b",
@@ -158,11 +158,11 @@
   "_src_reader": "e8e53bf0"
  },
  "pronoun-023": {
-  "_src": "9e4b4150",
+  "_src": "b8d74f36",
   "translation_pl": "coś; trochę",
   "example_pl": "Chcesz się czegoś napić?",
   "usage_note_pl": "Nie odmienia się. Przed przymiotnikiem: etwas Neues („coś nowego”). O niewielkiej ilości: etwas Wasser.",
-  "_src_reader": "27f84b86"
+  "_src_reader": "acd5fd4c"
  },
  "pronoun-024": {
   "_src": "120b3644",
@@ -373,11 +373,11 @@
   "_src_reader": "126c0051"
  },
  "pronoun-049": {
-  "_src": "17f4cb8a",
+  "_src": "d943c5fa",
   "translation_pl": "wielu, wiele; dużo (rzeczy policzalnych)",
   "example_pl": "Wielu ludzi jeździ do pracy rowerem.",
   "usage_note_pl": "Liczba mnoga przy rzeczach policzalnych: viele Bücher. Po die: die vielen Bücher, den vielen Büchern.",
-  "_src_reader": "f49fe4cd"
+  "_src_reader": "583ed19d"
  },
  "pronoun-050": {
   "_src": "73c93326",
@@ -387,11 +387,11 @@
   "_src_reader": "aed298bd"
  },
  "pronoun-051": {
-  "_src": "1185fa37",
+  "_src": "1bc8a795",
   "translation_pl": "nieliczni; mało (rzeczy policzalnych)",
   "example_pl": "Tylko nieliczni poprawnie odpowiedzieli na pytanie.",
   "usage_note_pl": "Liczba mnoga przy rzeczach policzalnych: wenige Bücher. Po die: die wenigen Bücher, den wenigen Büchern.",
-  "_src_reader": "fe266803"
+  "_src_reader": "fc293981"
  },
  "pronoun-052": {
   "_src": "841873f1",
