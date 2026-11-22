@@ -19772,7 +19772,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             auxiliaryOfOther.set(k, j);
         }
       }
-      let best = null;
+      let best = null, personalAt = new Map(), personalNeed = new Set();
       for (const {entry, m} of constructionAnchors.get(keys[index]) || []) {
         const occ = [];
         // (only in expression records: so … dass, damit-pairs of conjunction records keep their conjunction parts)
@@ -19797,9 +19797,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // immer liest, …), a question has it inside (Wo warst du auch immer?, Was machst du auch immer für Sachen?). Any lowercase form
             // with a finite analysis counts, also one with a card of another kind (independent review 18.11: Was weiß ich auch immer! —
             // weiß has an adjective card); wie + a degree word that is also a verb form (Wie lange es auch immer dauert) is a pattern of its own.
-            // (21.11.2026, advisor 21.11: a person form of a verb by the resolver's shared personalVerbForm — indicative, Konjunktiv I / II,
-            // the imperative of a word without a card of another kind; a lowercase word, as before)
-            const personalHere = k => /^\p{Ll}/u.test(tokens[k][0]) && personalVerbForm(tokens[k][0]);
+            // (22.11.2026, advisor 21.11 / 22.11: «a person form of a verb» by the shared personalVerbFormExternal — own cards, then the
+            // external dictionary: brummelte, knurrt. Asked only for the words of the stretch a key checks, and only once the pattern has
+            // matched by its parts: a word not asked yet is noted in `personalNeed` and the search of this pattern is run again after the
+            // answers — see below. A lowercase word, as before.)
+            const personalHere = k => {
+              if (!/^\p{Ll}/u.test(tokens[k][0])) return false;
+              if (personalAt.has(k)) return personalAt.get(k);
+              personalNeed.add(k); return false;
+            };
             if (m.no_finite_between) for (let k = flat[0] + 1; k < flat.at(-1); k++) {
               if (!flat.includes(k) && clause[k] === clause[flat[0]] && personalHere(k)) return;
             }
@@ -19964,7 +19970,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (prev) break;
           }
         };
-        search(0, null, []);
+        // (22.11.2026) a pattern with no_finite_between / no_finite_after: the first search notes the words its keys need; they are asked
+        // (in one go), and the search of this pattern is run again with the answers — until nothing new is needed.
+        if (m.no_finite_between || m.no_finite_after) {
+          const before = best;
+          // (independent review 22.11: two rounds are enough — the first notes every word a candidate's keys check; after the last
+          // answers the search always runs once more, so a pattern is never dropped by the bound)
+          for (let round = 0; ; round++) {
+            personalNeed = new Set();
+            search(0, null, []);
+            if (!personalNeed.size || round === 4) break;
+            const need = [...personalNeed];
+            const answers = await Promise.all(need.map(k => personalVerbFormExternal(tokens[k][0], tokens, k).catch(() => false)));
+            need.forEach((k,j) => personalAt.set(k, answers[j]));
+            best = before;
+          }
+        } else search(0, null, []);
       }
       const span = i => ({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index + tokens[i][0].length});
       // E6 (links chat, 23.10.2026; user decision): in an expression record the word that satisfies `clause_has` is shown with it (geht … ein
