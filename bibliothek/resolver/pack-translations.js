@@ -98,7 +98,7 @@
   // gender (optional): m / f / n of the card (der / die / das) — records of another gender of the same word are left out when the
   // dictionary marks genders (die Heide «wrzosowisko», not der Heide «poganin»; Ч3); a weak hint (the article linked in the sentence:
   // «Ist das Tau …» links a demonstrative das — review A 17.11) only puts the records of that gender first. Without it — all records.
-  async function lookup(lemma, partOfSpeech, code, gender = null, weak = false) {
+  async function lookup(lemma, partOfSpeech, code, gender = null, weak = false, strict = false, homonyms = null) {
     if (!valid(code)) return null;
     const word = String(lemma || "").normalize("NFC").trim(), pos = posOf(partOfSpeech);
     if (!word || !pos) return null;
@@ -110,6 +110,12 @@
       if (gender && matched.some(fits))
         matched = weak ? [...matched.filter(fits), ...matched.filter(row => !fits(row))]
           : matched.filter(row => !Array.isArray(row.gender) || !row.gender.length || fits(row));
+      // (advisor 22.11) the gender the resolver chose by the determiner (strict): no record of it — no text in this language (the card shows
+      // the English meanings of that gender, or «перевод не найден»), not the records of the other gender
+      // (a record of a gender with no meanings of its own in the English dictionary is the same word in another gender: it stays, 22.11)
+      else if (gender && strict && matched.some(row => Array.isArray(row.gender) && row.gender.length) &&
+        !(Array.isArray(homonyms) && !matched.some(row => Array.isArray(row.gender) && row.gender.some(g => homonyms.includes(g)))))
+        matched = matched.filter(row => !Array.isArray(row.gender) || !row.gender.length);
       const hidden = matched.length ? await hiddenParts(code) : new Map();
       // `labels` [gloss index, cut, codes]: the codes of a gloss; `shown` [text per gloss]: the gloss as the card shows it (the
       // stored gloss keeps the source text); `reflexive` [gloss index, acc / dat / opt, …]; `name_like` — a name sense.
@@ -432,20 +438,17 @@
     // explains; the dictionary's own record of «im» is a form note, «in dem». As the Russian dictionary: lemma-resolver.js enriches
     // the candidates without an explanation only.)
     await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.explanation && !c.translation?.[code]).map(async candidate => {
-      // (the gender of the card: its article — the resolver's G16 nounArticle — or its noun phrase when it names one gender (sure);
-      // otherwise the article linked to it in the sentence when that article has one gender only — eine; der / die / das / ein … are
-      // not used — they also stand for other cases, genders, the plural or a demonstrative)
+      // (the gender of the card: its article — the resolver's G16 nounArticle — or its noun phrase when it names one gender (sure))
       const genders = [...new Set((candidate.nounPhrase || []).map(p => p?.gender).filter(Boolean))];
       const sure = {der:"m", die:"f", das:"n"}[candidate.nounArticle] ||
         (genders.length === 1 ? {masculine:"m", feminine:"f", neuter:"n"}[genders[0]] : null) || null;
-      // (the link must be this word's own: an alternative of another lemma — Alt under «das Alter» — takes no hint; review B 17.11)
-      const link = candidate.nounArticleLink, own = link && String(link.noun || "").toLowerCase() === String(candidate.lemma || "").toLowerCase();
-      // (eine before its noun is always feminine — a sure sign; a linked das may be a demonstrative — «Ist das Tau oder Regen?» would
-      // lose «rosa» — so it is not used; reviewer C 17.11)
-      const linked = sure || !own ? null : {eine:"f"}[String(link.article || "").toLowerCase()] || null;
-      const gender = sure || linked, weak = false;
-      const key = JSON.stringify([candidate.lemma, posOf(candidate.pos), gender, weak]);
-      if (!pending.has(key)) pending.set(key, lookup(candidate.lemma, candidate.pos, code, gender, weak));
+      // (advisor 22.11) the gender the resolver chose by the determiner (genderChoice — one choice for every language) comes first; the
+      // linked eine of 17.11 was such a choice of its own and is now the resolver's (externalGenderAgreement)
+      const strict = /^[mfn]$/u.test(String(candidate.genderChoice || ""));
+      const gender = strict ? candidate.genderChoice : sure, weak = false;
+      const homonyms = strict && Array.isArray(candidate.genderHomonyms) ? candidate.genderHomonyms : null;
+      const key = JSON.stringify([candidate.lemma, posOf(candidate.pos), gender, weak, strict, homonyms]);
+      if (!pending.has(key)) pending.set(key, lookup(candidate.lemma, candidate.pos, code, gender, weak, strict, homonyms));
       try {
         const result = await pending.get(key);
         if (!result) return;

@@ -42,7 +42,9 @@
     // (reviewer 27.10: only for a noun-like spelling — a capital and lower-case letters; runden, schüppeln, BESITZEN are no noun taps)
     if (!/^\p{Lu}\p{Ll}/u.test(String(word || ''))) return {};
     return n ? {...(n.article ? {nounArticle:n.article} : {}),...(Array.isArray(n.articles) && n.articles.length > 1 ? {nounArticles:n.articles} : {}),...(Array.isArray(n.plural) && n.plural.length ? {externalPluralKnown:true} : {}),...(n.plural.includes(w) && !n.singular.includes(w) ? {externalPlural:true} : {}),
-      ...(n.plural.includes(w) && n.singular.includes(w) ? {externalPluralAlso:true} : {})} : {};
+      ...(n.plural.includes(w) && n.singular.includes(w) ? {externalPluralAlso:true} : {}),
+      // (advisor 22.11) the gender of each meaning of a noun of several genders (fallback-dictionary: meaningGenders)
+      ...(group.meaningGenders ? {meaningGenders:group.meaningGenders} : {}),...(n.cases ? {nounCases:n.cases} : {})} : {};
   };
   // G50 step 3 (advisor 01.11): the class of determiners and pronominal adjectives — words that stand after an article and are
   // declined like an adjective (der andere, die beiden, das viele Geld, die meisten, der eine, die seinigen, das bißchen, die übrigen):
@@ -13911,6 +13913,120 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // modifiers, case from a preposition before it) or, without one, a plural
     // signal (ein paar, hunderte von, zwei …) or a following finite verb that
     // is plural only (Nevilles Kiefer waren). Otherwise the choice stays.
+    // (advisor 22.11, claude: GENDER_IN_DICTIONARIES_2026-11-22_RU.md) one choice by gender for every source: the genders of an external
+    // noun — of its English meanings (meaningGenders) and its record (nounArticles) — against
+    // the determiner / contraction before it (agreeingFeatures, as nounHomonymAgreement for our own cards). Exactly one gender agrees — that
+    // gender (genderChoice: the meanings of that gender in every language); two agree (a plural, die Heiden) — as before; none, or a
+    // capital word right after (den Wiener Dichter — a place adjective) — the rule does not apply. Our card of another gender that does not
+    // agree gives way to the external noun that does (im Persischen Golf — der Golf «gulf», not das Golf).
+    const GENDER_ARTICLE = {m:"der",f:"die",n:"das"};
+    const GENDER_POINTER = /\b(?:form|spelling|equivalent|plural|singular|synonym|diminutive|abbreviation|agent noun|feminine|masculine|variant|inflection|participle)\s+of\b/iu;
+    async function externalNounGenders(c) {
+      const out = new Set();
+      for (const g of Object.values(c.meaningGenders || {})) String(g).split(":").forEach(x => /^[mfn]$/u.test(x) && out.add(x));
+      for (const a of [...(c.nounArticles || []),...(c.nounArticle ? [c.nounArticle] : [])]) { const g = Object.keys(GENDER_ARTICLE).find(k => GENDER_ARTICLE[k] === a); if (g) out.add(g); }
+      // (the choice is the same in every interface language and asks nothing of the Russian dictionary — an English reader downloads no
+      // Russian part: the genders of the English meanings and of the record; the Russian / pack records only follow the choice)
+      return out;
+    }
+    async function externalGenderAgreement(word, context, candidates) {
+      if (!Number.isInteger(context?.tokenOffset) || !/^\p{Lu}\p{Ll}/u.test(word) || word.length > 1 && word === word.toUpperCase()) return null;
+      const s = norm(word);
+      const external = candidates.filter(c => c.source === "fallback" && c.pos === "noun" && !c.explanation && !c.formation && !c.usage && !c.compound);
+      if (!external.length) return null;
+      const own = candidates.filter(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && c.item?.article);
+      if (own.some(c => adjectivalNounStem(c.item))) return null;
+      const ownGenders = new Set(own.map(c => Object.keys(GENDER_ARTICLE).find(k => GENDER_ARTICLE[k] === c.item.article)).filter(Boolean));
+      const options = [];
+      for (const c of external) for (const g of await externalNounGenders(c)) if (!ownGenders.has(g)) options.push({card:c,gender:g});
+      // (an external noun of one gender only, with no card of ours of another gender — nothing to choose)
+      if (!options.length || new Set(options.map(o => o.gender)).size + ownGenders.size < 2) return null;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,"externalGenderAgreement");
+      const index = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (index < 1) return null;
+      const boundary = /[,;:.!?()„“”"«»–—]/u;
+      const gap = (a,b) => sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index);
+      const joined = (a,b) => a >= 0 && tokens[b] && !boundary.test(gap(a,b));
+      const before = sentence.slice(0,tokens[index].index);
+      if (/[.!?…:]\s*[«„“"‘»”]*\s*(?:[–—-]\s*)?$/u.test(before) || /[«„“"‘–—-]\s*$/u.test(before)) return null;
+      // (-er before a capital word: the adjective of a place — den Wiener Dichter, dem Frankfurter Flughafen; das Erbe Europas, die Heide
+      // Lüneburgs stay; digits right after: in den Top 10)
+      // (a hyphen right after: the first part of a compound — den Ex-Konzernchef, das Diesel-Fahrverbot, ein Lama - Kloster)
+      const after = sentence.slice(tokens[index].index + tokens[index][0].length);
+      if (/er$/u.test(s) && joined(index,index+1) && /^\p{Lu}/u.test(tokens[index+1][0]) || /^\s*\d/u.test(after) || /^\s*[-‐‑–]/u.test(after)) return null;
+      const morph = await tokenMorphology(tokens[index],{discoverModifiers:false},"externalGenderAgreement");
+      if (morph.errors.length) return null;
+      // (an adjective form — der gute Alte, des Bösen, ins Grüne: the nominalized adjective keeps its own rules, adjectivalNounAgreement)
+      if (morph.candidates.some(c => canonicalPos(c.pos) === "Adjektiv") || (forms.get(s) || []).some(e => e.type === "Adjektiv")) return null;
+      let m = index-1;
+      const mods = [];
+      // (a preposition ends the group: aus dem mit Würfeln … gespielten Spiel — «dem» belongs to Spiel, not to Würfeln)
+      while (m >= 0 && joined(m,m+1) && index-m <= 3 && /^[a-zäöüß]/u.test(tokens[m][0]) && !determinerFeatures(tokens[m][0]) && !contractionArticle(tokens[m][0]) &&
+        !prepositionCardsByForm.get(norm(tokens[m][0]))) {
+        const endings = await modifierEndings(tokens[m],"externalGenderAgreement");
+        if (!endings) break;
+        mods.unshift(endings); m--;
+      }
+      const raw = m >= 0 && joined(m,m+1) ? tokens[m][0] : null;
+      // (a number before the noun: the measure stays unchanged in the plural — eine 300 Euro teuere Torte is der Euro, not die Euro
+      // «European championship»; the number says nothing of the gender)
+      if (raw && /\d/u.test(sentence.slice(tokens[m].index,tokens[index].index))) return null;
+      const article = raw ? contractionArticle(raw) : null;
+      const features = raw ? determinerFeatures(article || raw) : null;
+      if (!features) return null;
+      const governed = !article && m > 0 && joined(m-1,m) && prepositionCardsByForm.get(norm(tokens[m-1][0])) ? governedCases(prepositionCardsByForm.get(norm(tokens[m-1][0]))) : null;
+      const agrees = readings => agreeingFeatures(features,{readings,modifiers:mods},governed).length > 0;
+      const rows = [];
+      for (const c of own) {
+        const readings = nounReadings(word,{...morph,candidates:morph.candidates.filter(x => x.item && x.item.id === c.item.id)});
+        if (readings.length && agrees(readings)) rows.push({card:c,gender:Object.keys(GENDER_ARTICLE).find(k => GENDER_ARTICLE[k] === c.item.article)});
+      }
+      for (const o of options) {
+        const article = GENDER_ARTICLE[o.gender], gender = nounGenders[article];
+        // (the cases of the form in that gender's declension, when the record has it: eines Dachs — no genitive of der Dachs)
+        const table = o.card.nounCases?.[o.gender]?.[s];
+        const readings = o.card.nounCases?.[o.gender] ? (table ? [
+          ...(table.singular.length ? [{number:"singular",gender,cases:new Set(table.singular)}] : []),
+          ...(table.plural.length ? [{number:"plural",gender:null,cases:new Set(table.plural)}] : [])] : [])
+          : nounReadings(word,{...morph,candidates:[{...o.card,nounArticle:article,nounArticles:undefined,meaningGenders:undefined}]})
+            .filter(r => r.gender === gender || r.number === "plural" && r.gender == null);
+        if (readings.length && agrees(readings))
+          rows.push({...o,pluralOnly:!agrees(readings.filter(r => r.number !== "plural"))});
+      }
+      const genders = new Set(rows.map(r => r.gender));
+      if (genders.size !== 1) return null;
+      const chosen = rows.filter(r => r.card.source === "fallback");
+      // (only our card agrees and the external noun of another gender does not — am Rand eines Dachs: das Dach, not der Dachs «badger»)
+      if (!chosen.length) return rows.length === 1 ? {candidate:rows[0].card,gender:rows[0].gender,own:true} : null;
+      if (new Set(chosen.map(r => r.card)).size !== 1) return null;
+      // (over our card only an external noun whose base form is this very word — ein Dachs «badger»; a form of another external word does
+      // not take our card's place: die eisernen Kasten — Grimm's old plural of der Kasten, not die Kaste «caste»; the window stays,
+      // advisor 05.11)
+      if (own.length && norm(chosen[0].card.lemma) !== s) return null;
+      // (only a plural agrees: a plural article says nothing of the gender — südlich der Alpen; the form alone is no ground to show
+      // «перевод не найден» of die Alp, so the choice is made only when that gender has a meaning)
+      if (chosen.every(r => r.pluralOnly) && !genderMeanings(chosen[0].card,chosen[0].gender).kept.length) return null;
+      return {candidate:chosen[0].card,gender:chosen[0].gender,overOwn:own.length > 0};
+    }
+    // the meanings of the chosen gender (advisor 22.11): the English meanings of that gender — a pointer («alternative form of Elster») is
+    // no meaning; the article of that gender; the Russian records and a pack's records of that gender (russian-translations /
+    // pack-translations, genderChoice). A language with none of them shows the English ones («английский: …»); none in English either —
+    // «перевод не найден» (the article ruled the other gender out: an der Alster, am Bache). Not the meanings of the other gender.
+    function genderMeanings(c, gender) {
+      const mg = c.meaningGenders || {};
+      const meanings = (c.meanings || String(c.translation?.en || "").split(/;\s*/u)).filter(Boolean);
+      return {meanings,kept:meanings.filter(x => (!mg[x] || String(mg[x]).split(":").includes(gender)) && !GENDER_POINTER.test(x))};
+    }
+    function applyGenderChoice(c, gender) {
+      const {meanings,kept} = genderMeanings(c,gender);
+      // (the other genders with meanings of their own — a homonym, die Heide / der Heide; a gender that only shares the meanings of the
+      // chosen one is a variant spelling of the same word — der / das Kehricht: the Russian record «das Kehricht» stays, 22.11)
+      const mg = c.meaningGenders || {};
+      const genderHomonyms = [...new Set(meanings.filter(x => mg[x] && !GENDER_POINTER.test(x)).map(x => String(mg[x]).split(":"))
+        .filter(gs => !gs.includes(gender)).flat())];
+      return {...c,genderChoice:gender,genderHomonyms,nounArticle:GENDER_ARTICLE[gender],nounArticles:undefined,
+        ...(kept.length < meanings.length ? {meanings:kept,translation:{...c.translation,en:kept.join("; ")}} : {})};
+    }
     async function nounHomonymAgreement(word, context, candidates) {
       if (!Number.isInteger(context?.tokenOffset) || !/^[A-ZÄÖÜ]/u.test(word)) return null;
       const own = candidates.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen' && c.item?.article);
@@ -17202,6 +17318,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (selection.canFill('noun-homonym-agreement',resolution)) {
         const homonym = await nounHomonymAgreement(word,context,resolution.candidates);
         if (homonym) selection.fill(resolution,'noun-homonym-agreement',homonym.candidate,homonym.evidence);
+      }
+      // (advisor 22.11) one choice by gender for the external nouns: externalGenderAgreement / applyGenderChoice
+      {
+        const choice = await externalGenderAgreement(word,context,resolution.candidates).catch(() => null);
+        if (choice?.own) {
+          // (the selection already is this noun — das Warten auf den Bus: the nominalized infinitive with its link auf + Akkusativ stays)
+          if (resolution.selected !== choice.candidate && !(resolution.selected && canonicalPos(resolution.selected.pos) === 'Nomen' &&
+            norm(resolution.selected.lemma) === norm(choice.candidate.lemma)))
+            selection.override(resolution,'external-gender-agreement',{selected:choice.candidate,candidates:[choice.candidate,...resolution.candidates.filter(c => c !== choice.candidate)],evidence:'external-gender-agreement'});
+        } else if (choice) {
+          const chosen = applyGenderChoice(choice.candidate, choice.gender);
+          resolution.candidates = resolution.candidates.map(c => c === choice.candidate ? chosen : c);
+          if (resolution.selected === choice.candidate || resolution.preferred === choice.candidate || choice.overOwn || !resolution.selected)
+            selection.override(resolution,'external-gender-agreement',{selected:chosen,candidates:[chosen,...resolution.candidates.filter(c => c !== chosen)],evidence:'external-gender-agreement'});
+        }
       }
       if (selection.canFill('adjectival-noun-agreement',resolution)) {
         const agreement = await adjectivalNounAgreement(word,context,resolution.candidates);

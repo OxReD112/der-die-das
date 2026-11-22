@@ -334,6 +334,10 @@
       const labels = Object.fromEntries(meanings.filter(m => all[m]).map(m => [m,all[m]]));
       const marks = reflexiveByPos.get(pos) || {}, reflexive = Object.fromEntries(meanings.filter(m => marks[m]).map(m => [m,marks[m]]));
       const noun = pos === "noun" ? nounFacts(word, data, meanings.map(m => genderByPos.get(pos)[m])) : null;
+      // (advisor 22.11, one choice by gender) the gender of each noun meaning, when the meanings have more than one gender (die Heide «heath»,
+      // der Heide «heathen»): the resolver keeps the meanings of the gender its determiner agrees with
+      const meaningGenders = pos === "noun" ? Object.fromEntries(meanings.map(m => [m,genderByPos.get(pos)[m]]).filter(([,g]) => typeof g === "string" && /^[mfn](?::[mfn])*$/u.test(g))) : {};
+      const genderSet = new Set(Object.values(meaningGenders).flatMap(g => g.split(":")));
       // (advisor 20.11: the heading keeps the dictionary's own spelling — EU-Kommission, DNA-Test, SUV, not Eu-kommission / Suv) the written
       // form of the entry (entries[i][4].w), when it is this very word with capitals inside
       const fitsWord = w => typeof w === "string" && w.toLowerCase() === String(word).toLowerCase() && /\p{Lu}/u.test(w.slice(1));
@@ -342,7 +346,7 @@
       // the text uses; the entry may join two words (der Gau «shire» and der GAU)
       const spellings = written ? [...new Set([written,...(entry[4].alt || []).map(a => a?.[2]).filter(a => typeof a === "string" && a && a.toLowerCase() === written.toLowerCase())])] : [];
       return {word,pos,meanings,formNotes:notes,...(written ? {written} : {}),...(spellings.length > 1 ? {spellings} : {}),...(Object.keys(labels).length ? {labels} : {}),...(Object.keys(reflexive).length ? {reflexive} : {}),
-        ...(noun ? {noun} : {}),...(transitivityByPos.get(pos)?.size ? {transitivity:[...transitivityByPos.get(pos)].sort()} : {}),
+        ...(noun ? {noun} : {}),...(genderSet.size > 1 ? {meaningGenders} : {}),...(transitivityByPos.get(pos)?.size ? {transitivity:[...transitivityByPos.get(pos)].sort()} : {}),
         ...(transitivityOfByPos.get(pos) ? {transitivityOf:Object.fromEntries(meanings.filter(m => m in transitivityOfByPos.get(pos)).map(m => [m,transitivityOfByPos.get(pos)[m]]))} : {})};
     });
   }
@@ -361,6 +365,16 @@
       return (n ? lower.slice(0, -n) : lower) + m[2]; });
     const singular = new Set(), plural = new Set();
     for (const d of decls) d.split("|").forEach((cell, i) => spell(cell).forEach(f => (i < 4 ? singular : plural).add(f)));
+    // (advisor 22.11, the choice by gender) the cases of each form by gender, from the declension of each gender (the slots: nominative,
+    // accusative, dative, genitive — singular, then plural): eines Dachs is das Dach, not der Dachs «badger» (des Dachses)
+    const CASES = ["nominative","accusative","dative","genitive"];
+    const cases = {};
+    const byGender = facts.flatMap(f => [...(typeof f.decl === "string" && /^[mfn]$/u.test(String(f.g || "")) ? [[f.g, f.decl]] : []),
+      ...(Array.isArray(f.alt) ? f.alt.filter(a => /^[mfn]$/u.test(String(a?.[0] || "")) && typeof a?.[1] === "string") : [])]);
+    for (const [g, d] of byGender) if (d.split("|").length === 8) d.split("|").forEach((cell, i) => spell(cell).forEach(f => {
+      const slot = ((cases[g] ||= {})[f] ||= {singular:[], plural:[]})[i < 4 ? "singular" : "plural"];
+      if (!slot.includes(CASES[i % 4])) slot.push(CASES[i % 4]);
+    }));
     const adjectival = decls.some(d => d.split("|").slice(0, 4).some(cell => { const alts = cell.split("/").map(a => a.replace(/^\d+/u, ""));
       return alts.length > 1 && alts.some(a => /[rm]$/u.test(a)) && alts.some(a => /n$/u.test(a)); }));
     const marked = meaningGenders.filter(Boolean);
@@ -372,7 +386,7 @@
     const closed = (data?.senses || []).some(s => ["intj","pron","article","prep","conj","character","det","particle","postp","num"].includes(s[2]));
     const nominalized = (data?.senses || []).some(s => s[2] === "noun" && /^nominalization of\b/iu.test(String(s[3] || "")));
     const article = !adjectival && !closed && !nominalized && lower.length > 2 && gender ? {m:"der",f:"die",n:"das"}[gender] : null;
-    return article || singular.size || plural.size ? {article, singular:[...singular], plural:[...plural]} : null;
+    return article || singular.size || plural.size ? {article, singular:[...singular], plural:[...plural], ...(Object.keys(cases).length ? {cases} : {})} : null;
   }
   // Evidence belongs to the clicked spelling, not to permanent dictionary cards.
   function noteReferencesLemma(note,lemma) {
@@ -670,6 +684,7 @@
         if (group.transitivity) target.transitivity = [...new Set([...(target.transitivity || []),...group.transitivity])].sort();
         if (group.transitivityOf) target.transitivityOf = {...(target.transitivityOf || {}),...group.transitivityOf};
         if (group.noun && !target.noun) target.noun = group.noun;
+        if (group.meaningGenders) target.meaningGenders = {...(target.meaningGenders || {}),...group.meaningGenders};
         if (group.written && !target.written) target.written = group.written;
         if (group.spellings && !target.spellings) target.spellings = group.spellings;
       }
