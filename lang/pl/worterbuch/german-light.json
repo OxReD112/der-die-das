@@ -426,8 +426,8 @@
     "meaning_pl": "robić aluzję"
    }
   ],
-  "_src": "dcb9b8b1",
-  "_src_reader": "dcb9b8b1"
+  "_src": "270be25f",
+  "_src_reader": "270be25f"
  },
  "light-0124": {
   "complements": [
@@ -453,8 +453,8 @@
     "meaning_pl": "odstęp czasu, interwał"
    }
   ],
-  "_src": "fe76c99f",
-  "_src_reader": "fe76c99f"
+  "_src": "6e9e9677",
+  "_src_reader": "6e9e9677"
  },
  "light-0126": {
   "translation_pl": "atak, napaść, natarcie; atak (w sporcie); napaści, ostra krytyka",
@@ -474,8 +474,8 @@
     "meaning_pl": "nadzór, kontrola, opieka"
    }
   ],
-  "_src": "65fb0ceb",
-  "_src_reader": "65fb0ceb"
+  "_src": "a6902caa",
+  "_src_reader": "a6902caa"
  },
  "light-0128": {
   "complements": [
@@ -505,8 +505,8 @@
     "meaning_pl": "pogoń"
    }
   ],
-  "_src": "4f219335",
-  "_src_reader": "4f219335"
+  "_src": "8e0c8711",
+  "_src_reader": "8e0c8711"
  },
  "light-0130": {
   "translation_pl": "skarga; pozew, powództwo; lament, narzekanie",
@@ -524,8 +524,8 @@
     "meaning_pl": "pozew, powództwo"
    }
   ],
-  "_src": "2c93d1f5",
-  "_src_reader": "2c93d1f5"
+  "_src": "3a0e10c6",
+  "_src_reader": "3a0e10c6"
  },
  "light-0131": {
   "translation_pl": "sympatia, życzliwość; poparcie, aprobata",
@@ -548,7 +548,7 @@
   "_src_reader": "9ee6fe8c"
  },
  "light-0133": {
-  "translation_pl": "apel, wezwanie; apel, zbiórka",
+  "translation_pl": "apel, wezwanie; apel, zbiórka, przegląd",
   "complements": [
    {
     "note_pl": "apel do kogoś, czegoś: ein Appell an die Vernunft"
@@ -583,8 +583,8 @@
     "meaning_pl": "powołanie na stanowisko"
    }
   ],
-  "_src": "f41a20d3",
-  "_src_reader": "f41a20d3"
+  "_src": "7f5bcd49",
+  "_src_reader": "7f5bcd49"
  },
  "light-0136": {
   "translation_pl": "rezygnacja, odejście, wyrzeczenie się",
@@ -606,7 +606,7 @@
   "_src_reader": "bf072f41"
  },
  "light-0138": {
-  "translation_pl": "prawo, uprawnienie; abonament, karnet",
+  "translation_pl": "prawo, roszczenie; abonament, karnet",
   "complements": [
    {
     "note_pl": "prawo do czegoś: ein Anrecht auf Urlaub"
@@ -626,7 +626,7 @@
   "_src_reader": "52fcf65c"
  },
  "light-0140": {
-  "translation_pl": "napór, parcie; popęd, pęd, impuls",
+  "translation_pl": "napór, parcie; dążenie, pęd, impuls",
   "complements": [
    {
     "note_pl": "dążenie, pęd do czegoś: der Drang nach Freiheit"
@@ -721,26 +721,26 @@
   "_src_reader": "b2cea9e3"
  },
  "light-0150": {
-  "translation_pl": "obrzydzenie, wstręt; obrzydliwiec, wstręciuch",
   "complements": [
    {
     "note_pl": "wstręt do kogoś, czegoś",
     "meaning_pl": "obrzydzenie, wstręt"
    }
   ],
-  "_src": "b4a38031",
-  "_src_reader": "b4a38031"
+  "translation_pl": "obrzydzenie, wstręt; obrzydliwiec, wstręciuch",
+  "_src": "59748c76",
+  "_src_reader": "59748c76"
  },
  "light-0151": {
-  "translation_pl": "odpowiedzialność, odpowiedzialność materialna; przyczepność, przyleganie",
   "complements": [
    {
     "note_pl": "odpowiedzialność za coś: keine Haftung für Schäden",
     "meaning_pl": "odpowiedzialność, odpowiedzialność materialna"
    }
   ],
-  "_src": "c9847ff1",
-  "_src_reader": "c9847ff1"
+  "translation_pl": "odpowiedzialność, odpowiedzialność materialna; przyczepność, przyleganie",
+  "_src": "e3e7c91c",
+  "_src_reader": "e3e7c91c"
  },
  "light-0152": {
   "translation_pl": "dymisja, ustąpienie ze stanowiska; rezygnacja, odstąpienie od umowy",
@@ -769,8 +769,8 @@
     "meaning_pl": "dostęp"
    }
   ],
-  "_src": "e212c41a",
-  "_src_reader": "e212c41a"
+  "_src": "d159895f",
+  "_src_reader": "d159895f"
  },
  "light-0155": {
   "translation_pl": "dotacja, subwencja, dopłata",
@@ -1077,13 +1077,18 @@
   "_src": "e5761fdb",
   "_src_reader": "e5761fdb"
  },
+ "light-0217": {
+  "translation_pl": "bliskoznaczny, synonimiczny",
+  "_src": "1a4d455c",
+  "_src_reader": "1a4d455c"
+ },
  "light-0218": {
-  "translation_pl": "niegnący się, sztywny; nieugięty, bezkompromisowy, niezłomny",
-  "_src": "784f79b9",
-  "_src_reader": "784f79b9"
+  "translation_pl": "nieugięty, niezłomny",
+  "_src": "8dbba245",
+  "_src_reader": "8dbba245"
  },
  "light-0220": {
-  "translation_pl": "przeżycie emocjonalne, emocja, afekt",
+  "translation_pl": "wzruszenie, przeżycie emocjonalne, emocja",
   "_src": "97296be7",
   "_src_reader": "97296be7"
  },
@@ -1153,7 +1158,7 @@
   "_src_reader": "bac0e426"
  },
  "light-0234": {
-  "translation_pl": "środek wymiotny",
+  "translation_pl": "med. środek wymiotny",
   "_src": "8d5eb200",
   "_src_reader": "8d5eb200"
  },
@@ -1168,9 +1173,9 @@
   "_src_reader": "e4faa1c1"
  },
  "light-0237": {
-  "translation_pl": "prawo patronatu; patronat, auspicje",
-  "_src": "85e41398",
-  "_src_reader": "85e41398"
+  "translation_pl": "hist. patronat; patronat, opieka; rel. prawo patronatu",
+  "_src": "c32d3c16",
+  "_src_reader": "c32d3c16"
  },
  "light-0238": {
   "translation_pl": "krzyż przydrożny",
@@ -1201,5 +1206,210 @@
   "translation_pl": "przestarz. podkręcone wąsy z bródką w szpic",
   "_src": "7ffd8ec3",
   "_src_reader": "7ffd8ec3"
+ },
+ "light-0246": {
+  "translation_pl": "wysoki, wysoko postawiony; podniosły, książkowy; radosny, odświętny",
+  "_src": "0cb2e5c5",
+  "_src_reader": "0cb2e5c5"
+ },
+ "light-0247": {
+  "translation_pl": "oświecony",
+  "_src": "8d1c595a",
+  "_src_reader": "8d1c595a"
+ },
+ "light-0248": {
+  "translation_pl": "poruszony, wzruszony; burzliwy, obfitujący w wydarzenia; poruszający się",
+  "_src": "d89714e6",
+  "_src_reader": "d89714e6"
+ },
+ "light-0250": {
+  "translation_pl": "zadbany, schludny; wytworny, kulturalny",
+  "_src": "3a12930d",
+  "_src_reader": "3a12930d"
+ },
+ "light-0251": {
+  "translation_pl": "przeklęty; cholerny, diabelny",
+  "_src": "140138b6",
+  "_src_reader": "140138b6"
+ },
+ "light-0252": {
+  "translation_pl": "złamany; łamany, z błędami; załamany, złamany; ułamkowy",
+  "_src": "0d47e8d1",
+  "_src_reader": "0d47e8d1"
+ },
+ "light-0253": {
+  "translation_pl": "zgubiony, stracony; stracony, beznadziejny; zagubiony, samotny",
+  "_src": "edec58dd",
+  "_src_reader": "edec58dd"
+ },
+ "light-0254": {
+  "translation_pl": "zrównoważony, spokojny; wyrównany, zrównoważony",
+  "_src": "332df937",
+  "_src_reader": "332df937"
+ },
+ "light-0255": {
+  "translation_pl": "wykwalifikowany, dyplomowany; wyuczony",
+  "_src": "181b5304",
+  "_src_reader": "181b5304"
+ },
+ "light-0256": {
+  "translation_pl": "stosowany; stosowany, zastosowany",
+  "_src": "96f080fb",
+  "_src_reader": "96f080fb"
+ },
+ "light-0257": {
+  "translation_pl": "kręty; zawiły, wymijający",
+  "_src": "9072c6b3",
+  "_src_reader": "9072c6b3"
+ },
+ "light-0258": {
+  "translation_pl": "podkreślony, demonstracyjny; akcentowany",
+  "_src": "31ce0fff",
+  "_src_reader": "31ce0fff"
+ },
+ "light-0259": {
+  "translation_pl": "modny, popularny; zapowiedziany, ogłoszony",
+  "_src": "5e0e2c33",
+  "_src_reader": "5e0e2c33"
+ },
+ "light-0260": {
+  "translation_pl": "ograniczony; niezbyt bystry, tępawy",
+  "_src": "2a28f63e",
+  "_src_reader": "2a28f63e"
+ },
+ "light-0261": {
+  "translation_pl": "błogosławiony; pokaźny, znakomity",
+  "_src": "39a27f34",
+  "_src_reader": "39a27f34"
+ },
+ "light-0262": {
+  "translation_pl": "wymarły; wyludniony, opustoszały",
+  "_src": "05fa3617",
+  "_src_reader": "05fa3617"
+ },
+ "light-0263": {
+  "translation_pl": "równać się, być równym; być podobnym, przypominać; przestarz. wyrównywać, sprawdzać",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0264": {
+  "translation_pl": "kopulacja, parzenie się; bot. szczepienie; przestarz. zaślubiny, ślub kościelny",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0265": {
+  "translation_pl": "kopulować, spółkować; bot. szczepić; przestarz. udzielać ślubu",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0266": {
+  "translation_pl": "uwaga; przedmiot szczególnej uwagi; przestarz. cel, tarcza",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0267": {
+  "translation_pl": "decydować się niechętnie, raczyć; przestarz. zadowalać się; przestarz. dostosowywać; przestarz. skłaniać, zmuszać",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0268": {
+  "translation_pl": "przestarz. przychodzić do głowy; przestarz. zgadzać się, przyłączać się",
+  "_src": "fafed2a9",
+  "_src_reader": "fafed2a9"
+ },
+ "light-0269": {
+  "translation_pl": "lżyć, szkalować, oczerniać; przestarz. ogłaszać heretykiem",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0270": {
+  "translation_pl": "zabiegać, ubiegać się, przypochlebiać się; przestarz. zalecać się, umizgać się; przestarz. czulić się, flirtować",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0271": {
+  "translation_pl": "potępiać, odrzucać; przestarz. zakazywać pod groźbą kary",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0272": {
+  "translation_pl": "gospodarka, ekonomia; ekonomia, teoria ekonomii; oszczędność, gospodarność; austr., przestarz. majątek ziemski, posiadłość",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0273": {
+  "translation_pl": "żart. wywiadywać się, ustalać; szwajc. wojsk. rozpoznawać teren; przestarz. poświadczać, uznawać za autentyczny",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0274": {
+  "translation_pl": "opłacać, wypłacać honorarium; wynagradzać, doceniać; bank. honorować weksel, czek",
+  "_src": "fee31406",
+  "_src_reader": "fee31406"
+ },
+ "light-0275": {
+  "translation_pl": "marnować czas; przestarz. sprzedawać za bezcen",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0276": {
+  "translation_pl": "pot. działać, funkcjonować; przestarz. świecić lampą oliwną",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0277": {
+  "translation_pl": "nagrywać, czytać do nagrania; namawiać, przekonywać; przestarz. sprzeciwiać się; przestarz. wstępować, odwiedzać",
+  "_src": "eae08e7b",
+  "_src_reader": "eae08e7b"
+ },
+ "light-0278": {
+  "translation_pl": "olśniewająco, jasno, promiennie",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0279": {
+  "translation_pl": "jasny, słoneczny; promienny, rozpromieniony; fiz. promieniujący, promieniotwórczy",
+  "_src": "9b5c5462",
+  "_src_reader": "9b5c5462"
+ },
+ "light-0280": {
+  "translation_pl": "uczestniczący, zaangażowany; mający udział; zainteresowany",
+  "complements": [
+   {
+    "meaning_pl": "uczestniczący, zaangażowany",
+    "note_pl": "uczestniczący w czymś, zaangażowany w coś: Er war an dem Projekt beteiligt."
+   },
+   {
+    "meaning_pl": "mający udział",
+    "note_pl": "mający udział w czymś: Er ist am Gewinn beteiligt."
+   }
+  ],
+  "_src": "fdce0916",
+  "_src_reader": "fdce0916"
+ },
+ "light-0281": {
+  "translation_pl": "austr. były, dawny",
+  "_src": "0010bf03",
+  "_src_reader": "0010bf03"
+ },
+ "light-0282": {
+  "translation_pl": "uznany, renomowany; oznaczony, wskazany; wydalony",
+  "_src": "6626fa71",
+  "_src_reader": "6626fa71"
+ },
+ "light-0283": {
+  "translation_pl": "otwarty, zdeklarowany; wyraźny, uznany",
+  "_src": "40180c29",
+  "_src_reader": "40180c29"
+ },
+ "light-0284": {
+  "translation_pl": "dial. ona, oni, one, ją, ich, je",
+  "_src": "28357316",
+  "_src_reader": "28357316"
+ },
+ "light-0285": {
+  "translation_pl": "dial. jemu, jego",
+  "_src": "0bdd1f6d",
+  "_src_reader": "0bdd1f6d"
  }
 }

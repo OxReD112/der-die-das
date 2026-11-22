@@ -1084,8 +1084,8 @@
     "meaning_pl": "podstawa"
    }
   ],
-  "_src": "5dbfc6fb",
-  "_src_reader": "d1bfef7d"
+  "_src": "2558dca9",
+  "_src_reader": "600b8943"
  },
  "noun-172": {
   "translation_pl": "cel; miejsce docelowe",
@@ -1230,10 +1230,10 @@
   "_src_reader": "86ce545c"
  },
  "noun-193": {
-  "translation_pl": "społeczeństwo; spółka (firma), towarzystwo (krąg ludzi)",
+  "translation_pl": "społeczeństwo; spółka (firma); towarzystwo (krąg ludzi)",
   "example_pl": "Społeczeństwo ciągle się zmienia.",
-  "_src": "792811af",
-  "_src_reader": "8d952e32"
+  "_src": "ccf29db7",
+  "_src_reader": "55dd0232"
  },
  "noun-194": {
   "translation_pl": "gospodarka; gospoda, karczma",
@@ -1610,8 +1610,8 @@
     "meaning_pl": "rozwiązanie"
    }
   ],
-  "_src": "3ceef4de",
-  "_src_reader": "c5eb1980"
+  "_src": "34c6b59d",
+  "_src_reader": "6827fd0f"
  },
  "noun-248": {
   "translation_pl": "apteka",
@@ -2118,8 +2118,8 @@
     "meaning_pl": "oferta, propozycja"
    }
   ],
-  "_src": "1dd1c2de",
-  "_src_reader": "b7f87e0b"
+  "_src": "2152e163",
+  "_src_reader": "05c4b2a2"
  },
  "noun-320": {
   "translation_pl": "przybycie, przyjazd",
@@ -2193,16 +2193,12 @@
   "example_pl": "Czy może mi Pan, proszę, udzielić informacji?",
   "complements": [
    {
-    "note_pl": "informacja o kimś, czymś",
-    "meaning_pl": "informacja"
-   },
-   {
-    "note_pl": "informacja o kimś, czymś",
-    "meaning_pl": "informacja"
+    "meaning_pl": "informacja",
+    "note_pl": "informacja o kimś, czymś: Auskunft über die Abfahrtszeiten"
    }
   ],
-  "_src": "a96d3081",
-  "_src_reader": "fdb22b84"
+  "_src": "7dae2702",
+  "_src_reader": "6d32df27"
  },
  "noun-332": {
   "translation_pl": "łazienka; kąpiel w wannie; kąpiel (w morzu, jeziorze); basen, pływalnia",
@@ -2387,8 +2383,8 @@
     "meaning_pl": "informacja"
    }
   ],
-  "_src": "24ba26de",
-  "_src_reader": "d55f28d6"
+  "_src": "5cc54c1b",
+  "_src_reader": "476a9583"
  },
  "noun-359": {
   "translation_pl": "internet",
@@ -2642,8 +2638,8 @@
     "meaning_pl": "przyjemność"
    }
   ],
-  "_src": "a03e44e5",
-  "_src_reader": "1d78dfc2"
+  "_src": "4094d1df",
+  "_src_reader": "245d0bb0"
  },
  "noun-399": {
   "translation_pl": "obiad (pot.)",
@@ -2678,8 +2674,8 @@
     "meaning_pl": "zawiadomienie (na policję)"
    }
   ],
-  "_src": "432332ad",
-  "_src_reader": "f05d0015"
+  "_src": "04733136",
+  "_src_reader": "a55accf2"
  },
  "noun-404": {
   "plural_note_pl": "Zwykle występuje bez liczby mnogiej; forma die Appetite jest rzadko spotykana.",
@@ -4609,8 +4605,8 @@
     "meaning_pl": "szacunek"
    }
   ],
-  "_src": "963d2df3",
-  "_src_reader": "63323f2f"
+  "_src": "0ca1ec4e",
+  "_src_reader": "8bc5d7a6"
  },
  "noun-702": {
   "translation_pl": "forma zwracania się, zwrot grzecznościowy",
@@ -4652,8 +4648,8 @@
   "translation_pl": "arkusz (papieru); łuk, wygięcie; łuk (w architekturze); smyczek; łuk (broń)",
   "example_pl": "Proszę wziąć arkusz papieru i napisać na górze swoje imię.",
   "plural_note_pl": "Zwykła forma — Bogen; Bögen używa się zwłaszcza w południowych Niemczech, w Austrii i Szwajcarii.",
-  "_src": "b8149617",
-  "_src_reader": "93d07bed"
+  "_src": "0d49dd11",
+  "_src_reader": "5be22013"
  },
  "noun-708": {
   "translation_pl": "stan cywilny",
@@ -5304,8 +5300,8 @@
     "meaning_pl": "przyjęcie (do organizacji, do szpitala)"
    }
   ],
-  "_src": "3f9bb50c",
-  "_src_reader": "115a8293"
+  "_src": "8d4926fa",
+  "_src_reader": "46d431a1"
  },
  "noun-814": {
   "translation_pl": "zadanie, polecenie; zamówienie",
@@ -6674,8 +6670,8 @@
     "meaning_pl": "wyjaśnienie"
    }
   ],
-  "_src": "f83edeef",
-  "_src_reader": "df2835ee"
+  "_src": "c573b9f7",
+  "_src_reader": "a82b0e46"
  },
  "noun-1023": {
   "translation_pl": "przeziębienie",
@@ -7208,8 +7204,8 @@
     "meaning_pl": "myśl"
    }
   ],
-  "_src": "b07ce4d5",
-  "_src_reader": "bfae8c04"
+  "_src": "b9cc9277",
+  "_src_reader": "7b08f38e"
  },
  "noun-1102": {
   "translation_pl": "wiersz",
@@ -7250,8 +7246,8 @@
     "meaning_pl": "uczucie, poczucie"
    }
   ],
-  "_src": "1135a2ff",
-  "_src_reader": "a440854f"
+  "_src": "51331cb3",
+  "_src_reader": "3f4093ed"
  },
  "noun-1107": {
   "translation_pl": "okolica, rejon",
@@ -7372,8 +7368,8 @@
     "meaning_pl": "przemoc"
    }
   ],
-  "_src": "4bb2b2d4",
-  "_src_reader": "0da539eb"
+  "_src": "d704e6aa",
+  "_src_reader": "2b6ebab1"
  },
  "noun-1124": {
   "translation_pl": "związek zawodowy",
@@ -7483,8 +7479,8 @@
     "meaning_pl": "granica"
    }
   ],
-  "_src": "1acf7e65",
-  "_src_reader": "aaa3faa8"
+  "_src": "d77f7e54",
+  "_src_reader": "58006f39"
  },
  "noun-1140": {
   "translation_pl": "Grek",
@@ -8320,8 +8316,8 @@
     "meaning_pl": "krytyka"
    }
   ],
-  "_src": "6d802664",
-  "_src_reader": "f8670d45"
+  "_src": "88157b70",
+  "_src_reader": "a67a6c01"
  },
  "noun-1266": {
   "translation_pl": "krokodyl",
@@ -8698,8 +8694,8 @@
     "meaning_pl": "brak, niedobór"
    }
   ],
-  "_src": "8636de9c",
-  "_src_reader": "f285ee50"
+  "_src": "d1d9ebcb",
+  "_src_reader": "b9e09ee9"
  },
  "noun-1325": {
   "translation_pl": "teczka (na dokumenty); aktówka",
@@ -8901,11 +8897,11 @@
   "_src_reader": "63adb6eb"
  },
  "noun-1357": {
-  "translation_pl": "szkoła średnia I stopnia (typ szkoły; w Bawarii — dawna Hauptschule)",
+  "translation_pl": "szkoła średnia I stopnia (typ szkoły, w Bawarii — dawna Hauptschule)",
   "example_pl": "W Bawarii chodzi do szkoły średniej I stopnia (Mittelschule).",
   "usage_note_pl": "W Szwajcarii Mittelschule — liceum (Kantonsschule).",
-  "_src": "44a05d61",
-  "_src_reader": "bd1c16d1"
+  "_src": "2e02ad8e",
+  "_src_reader": "e9fc8d9e"
  },
  "noun-1358": {
   "translation_pl": "północ",
@@ -9412,10 +9408,10 @@
   "_src_reader": "25249806"
  },
  "noun-1437": {
-  "translation_pl": "platforma (podest; platforma internetowa)",
+  "translation_pl": "platforma, podest; platforma (internetowa, komputerowa)",
   "example_pl": "Na tej platformie można sprzedawać używane rzeczy.",
-  "_src": "e1341151",
-  "_src_reader": "bd7dffb8"
+  "_src": "3efd2127",
+  "_src_reader": "b71858f6"
  },
  "noun-1438": {
   "translation_pl": "polityka",
@@ -10073,8 +10069,8 @@
     "meaning_pl": "wina"
    }
   ],
-  "_src": "75e19c6d",
-  "_src_reader": "758a7a0b"
+  "_src": "14248d06",
+  "_src_reader": "6447cf98"
  },
  "noun-1537": {
   "translation_pl": "ramię",
@@ -10219,8 +10215,8 @@
     "meaning_pl": "zmysł, zdolność postrzegania"
    }
   ],
-  "_src": "296a0cf5",
-  "_src_reader": "f64dc649"
+  "_src": "8ab1564e",
+  "_src_reader": "68b3f4fe"
  },
  "noun-1557": {
   "translation_pl": "siedzenie; miejsce; siedziba, centrala",
@@ -10709,8 +10705,8 @@
     "meaning_pl": "talent, zdolność"
    }
   ],
-  "_src": "945e22ba",
-  "_src_reader": "c7cecce3"
+  "_src": "465fa24f",
+  "_src_reader": "887cf376"
  },
  "noun-1629": {
   "translation_pl": "stacja benzynowa",
@@ -11285,8 +11281,8 @@
     "meaning_pl": "porównanie"
    }
   ],
-  "_src": "a3f5c0b4",
-  "_src_reader": "1a1dd5a4"
+  "_src": "05615147",
+  "_src_reader": "c55408a1"
  },
  "noun-1713": {
   "translation_pl": "przyjemność; rozrywka",
@@ -11324,8 +11320,8 @@
     "meaning_pl": "stosunki"
    }
   ],
-  "_src": "2ce3a3b1",
-  "_src_reader": "9091cba1"
+  "_src": "844a5db7",
+  "_src_reader": "bf2f980f"
  },
  "noun-1716": {
   "translation_pl": "znak drogowy",
@@ -11537,8 +11533,8 @@
     "meaning_pl": "wyobrażenie, obraz w myślach"
    }
   ],
-  "_src": "7a246d93",
-  "_src_reader": "17bf53fa"
+  "_src": "c9d6320f",
+  "_src_reader": "c16dd1be"
  },
  "noun-1747": {
   "translation_pl": "rozmowa kwalifikacyjna",
@@ -11577,8 +11573,8 @@
     "meaning_pl": "wybór (na stanowisko)"
    }
   ],
-  "_src": "21a8d467",
-  "_src_reader": "a59391dc"
+  "_src": "895d2762",
+  "_src_reader": "7afa978d"
  },
  "noun-1751": {
   "translation_pl": "prawda",
@@ -11704,8 +11700,8 @@
     "meaning_pl": "świadomość"
    }
   ],
-  "_src": "73cbf5bc",
-  "_src_reader": "b270e519"
+  "_src": "1fc11fba",
+  "_src_reader": "f2d0e3eb"
  },
  "noun-1770": {
   "translation_pl": "nauka",
@@ -11885,8 +11881,8 @@
     "meaning_pl": "dostęp"
    }
   ],
-  "_src": "c41955a6",
-  "_src_reader": "b63a1f3d"
+  "_src": "5c29615f",
+  "_src_reader": "27d5d416"
  },
  "noun-1796": {
   "translation_pl": "dom rodzinny; dom, miejsce zamieszkania",
@@ -12016,8 +12012,8 @@
     "meaning_pl": "kłopoty"
    }
   ],
-  "_src": "39b216f3",
-  "_src_reader": "1927fe2b"
+  "_src": "a2859d1b",
+  "_src_reader": "4b644e43"
  },
  "noun-1813": {
   "translation_pl": "opinia publiczna; jawność",
@@ -12424,8 +12420,8 @@
     "meaning_pl": "słabość (do czegoś)"
    }
   ],
-  "_src": "8d585c2c",
-  "_src_reader": "3b5797ba"
+  "_src": "6403164d",
+  "_src_reader": "be06a58f"
  },
  "noun-1876": {
   "translation_pl": "szampon",
@@ -13233,8 +13229,8 @@
     "meaning_pl": "argument"
    }
   ],
-  "_src": "839941ac",
-  "_src_reader": "868e87b7"
+  "_src": "f2235f85",
+  "_src_reader": "49bc43bc"
  },
  "noun-1998": {
   "translation_pl": "atmosfera, nastrój; gazowa powłoka ciała niebieskiego; jednostka ciśnienia",
@@ -13380,8 +13376,8 @@
     "meaning_pl": "zaangażowanie, poświęcenie"
    }
   ],
-  "_src": "c3db2862",
-  "_src_reader": "9d3bf018"
+  "_src": "31e7ef82",
+  "_src_reader": "b04734f8"
  },
  "noun-2020": {
   "translation_pl": "relaks; odprężenie (w polityce)",
@@ -13781,8 +13777,8 @@
     "meaning_pl": "odporność na wpływy zewnętrzne"
    }
   ],
-  "_src": "9dbecd25",
-  "_src_reader": "c0ec7ce2"
+  "_src": "72b8acf0",
+  "_src_reader": "efeeec15"
  },
  "noun-2081": {
   "translation_pl": "przejście na inny system, zmiana; przestawienie; okrążenie",
@@ -14183,8 +14179,8 @@
     "meaning_pl": "wiara religijna"
    }
   ],
-  "_src": "43ceeda2",
-  "_src_reader": "8ef1e206"
+  "_src": "ed3e48cd",
+  "_src_reader": "fff4cdff"
  },
  "noun-2140": {
   "translation_pl": "równouprawnienie, zrównanie w prawach i pozycji",
@@ -14407,8 +14403,8 @@
     "meaning_pl": "władza, wpływ"
    }
   ],
-  "_src": "d0a94cd4",
-  "_src_reader": "ab5073f1"
+  "_src": "5de51a89",
+  "_src_reader": "70d9b896"
  },
  "noun-2173": {
   "translation_pl": "otwarcie granicy NRD z RFN, upadek muru berlińskiego",
@@ -14832,8 +14828,8 @@
     "meaning_pl": "odrzucenie"
    }
   ],
-  "_src": "7a74bf4b",
-  "_src_reader": "39857e0a"
+  "_src": "32ac3530",
+  "_src_reader": "c7830e01"
  },
  "noun-2236": {
   "translation_pl": "ósma część",
@@ -16889,8 +16885,8 @@
     "meaning_pl": "rozumienie"
    }
   ],
-  "_src": "68e85d57",
-  "_src_reader": "eeb55d0b"
+  "_src": "dfcc669a",
+  "_src_reader": "5524871c"
  },
  "noun-2561": {
   "translation_pl": "rozwiązanie (organizacji); zakończenie; rozpuszczenie; rozkład; rozwiązanie zagadki; rozdzielczość obrazu",
@@ -16984,8 +16980,8 @@
     "meaning_pl": "znajomość"
    }
   ],
-  "_src": "5c8d73f8",
-  "_src_reader": "acc37878"
+  "_src": "05144056",
+  "_src_reader": "daa0f69a"
  },
  "noun-2574": {
   "translation_pl": "oświetlenie; sprzęt oświetleniowy; naświetlenie sprawy",
@@ -17073,8 +17069,8 @@
     "meaning_pl": "związek"
    }
   ],
-  "_src": "b12568d2",
-  "_src_reader": "d40135be"
+  "_src": "d3c2fc89",
+  "_src_reader": "05742b01"
  },
  "noun-2587": {
   "translation_pl": "edukacja; wykształcenie; tworzenie, kształtowanie; tworzenie wyrazu lub formy",
@@ -18707,8 +18703,8 @@
     "meaning_pl": "żal, smutek"
    }
   ],
-  "_src": "02c8ab4c",
-  "_src_reader": "0b8934e0"
+  "_src": "3577a470",
+  "_src_reader": "a3127124"
  },
  "noun-2837": {
   "translation_pl": "smutek; smutne wydarzenie",
@@ -18764,8 +18760,8 @@
     "meaning_pl": "obchodzenie się z kimś lub czymś"
    }
   ],
-  "_src": "f79fdf07",
-  "_src_reader": "81604904"
+  "_src": "ae0a2fb1",
+  "_src_reader": "a9579c9e"
  },
  "noun-2844": {
   "translation_pl": "realizacja; przeniesienie; przesadzenie rośliny; przekształcenie; artystyczne przetworzenie",
@@ -19137,8 +19133,8 @@
     "meaning_pl": "przejście do nowego stanu"
    }
   ],
-  "_src": "31d6aee0",
-  "_src_reader": "4c478851"
+  "_src": "49c6cfac",
+  "_src_reader": "5a2a9c65"
  },
  "noun-2899": {
   "translation_pl": "namysł; przemyślenie",
@@ -19401,8 +19397,8 @@
     "meaning_pl": "pogląd"
    }
   ],
-  "_src": "2305d28a",
-  "_src_reader": "4815b4d7"
+  "_src": "b0de405a",
+  "_src_reader": "d69e317b"
  },
  "noun-2937": {
   "translation_pl": "krótkie przemówienie; opis celu; zwracanie się do kogoś; uwaga, kontakt z ludźmi; oddźwięk; działanie leczenia; czułość instrumentu muzycznego",
@@ -19525,8 +19521,8 @@
     "meaning_pl": "uwaga"
    }
   ],
-  "_src": "afb152c1",
-  "_src_reader": "7b1a836a"
+  "_src": "c7057042",
+  "_src_reader": "8ec416cd"
  },
  "noun-2955": {
   "translation_pl": "zdenerwowanie, podekscytowanie; zamieszanie",
@@ -19544,8 +19540,8 @@
     "meaning_pl": "wyjaśnienie, informacje"
    }
   ],
-  "_src": "073687ec",
-  "_src_reader": "6672c118"
+  "_src": "e01ea586",
+  "_src_reader": "c3441758"
  },
  "noun-2957": {
   "translation_pl": "powszechne zainteresowanie, sensacja",
@@ -19850,8 +19846,8 @@
     "meaning_pl": "ciężar"
    }
   ],
-  "_src": "e82c0ab6",
-  "_src_reader": "9236b9cd"
+  "_src": "15c77135",
+  "_src_reader": "b20bac10"
  },
  "noun-3002": {
   "translation_pl": "wysiłek, staranie; usługa specjalisty ujęta w rachunku",
@@ -19882,8 +19878,8 @@
     "meaning_pl": "gotowość"
    }
   ],
-  "_src": "ac392789",
-  "_src_reader": "3c07a82f"
+  "_src": "477a48e2",
+  "_src_reader": "388592f4"
  },
  "noun-3006": {
   "translation_pl": "uwzględnienie, wzięcie pod uwagę",
@@ -20566,8 +20562,8 @@
     "meaning_pl": "nastawienie, stosunek"
    }
   ],
-  "_src": "959a93fa",
-  "_src_reader": "45676599"
+  "_src": "2ba1503f",
+  "_src_reader": "fda73dfa"
  },
  "noun-3109": {
   "translation_pl": "zastrzeżenie, krytyczna uwaga",
@@ -21457,8 +21453,8 @@
     "meaning_pl": "skłonność, upodobanie"
    }
   ],
-  "_src": "764a4c87",
-  "_src_reader": "7a4fdd51"
+  "_src": "9911e7c6",
+  "_src_reader": "e22b2788"
  },
  "noun-3242": {
   "translation_pl": "niepohamowanie, brak zahamowań",
@@ -22185,8 +22181,8 @@
     "meaning_pl": "koncentracja (sił, kapitału)"
    }
   ],
-  "_src": "98aab693",
-  "_src_reader": "1afceaa6"
+  "_src": "6e207ccd",
+  "_src_reader": "ad694848"
  },
  "noun-3347": {
   "translation_pl": "zepsucie moralne, demoralizacja; przekupywanie",
@@ -22243,8 +22239,8 @@
     "meaning_pl": "smutek, żal"
    }
   ],
-  "_src": "07c64b5b",
-  "_src_reader": "c0f87c53"
+  "_src": "34119b43",
+  "_src_reader": "a5e74d0b"
  },
  "noun-3355": {
   "translation_pl": "krótkowzroczność; brak dalekowzroczności",
@@ -24339,8 +24335,8 @@
     "meaning_pl": "obowiązek, zobowiązanie"
    }
   ],
-  "_src": "bde02b46",
-  "_src_reader": "e11d1677"
+  "_src": "a5cf39e0",
+  "_src_reader": "0251e51d"
  },
  "noun-3663": {
   "translation_pl": "zatajenie, maskowanie, zawoalowanie",
@@ -24398,8 +24394,8 @@
     "meaning_pl": "odsyłacz (do innego miejsca w tekście)"
    }
   ],
-  "_src": "cbe2f943",
-  "_src_reader": "a416133d"
+  "_src": "404fe686",
+  "_src_reader": "ebd52e0e"
  },
  "noun-3671": {
   "translation_pl": "zawiłość, zagmatwanie",
@@ -24574,11 +24570,11 @@
   "_src_reader": "9a0e9103"
  },
  "noun-3697": {
-  "translation_pl": "kobieta (przestarz.; dziś — posp., lekcew.); żona (przestarz., żart.)",
+  "translation_pl": "kobieta (przestarz., dziś — posp., lekcew.); żona (przestarz., żart.)",
   "example_pl": "W starych baśniach często pojawia się wyrażenie „Mann und Weib” — mężczyzna i kobieta.",
   "usage_note_pl": "Dziś brzmi grubiańsko lub lekceważąco; neutralnie — Frau. W dawnych tekstach — neutralne słowo „kobieta”.",
-  "_src": "29b594af",
-  "_src_reader": "e3340a9f"
+  "_src": "9dc02b6c",
+  "_src_reader": "0b7a78bc"
  },
  "noun-3698": {
   "translation_pl": "samica",
@@ -24656,8 +24652,8 @@
     "meaning_pl": "opór, przeciwdziałanie"
    }
   ],
-  "_src": "30f37aac",
-  "_src_reader": "40f8e195"
+  "_src": "cf3141c6",
+  "_src_reader": "6e317ca3"
  },
  "noun-3709": {
   "translation_pl": "skuteczność, efektywność",
@@ -25679,8 +25675,8 @@
     "meaning_pl": "powód, przyczyna"
    }
   ],
-  "_src": "29b94f3d",
-  "_src_reader": "61b42aca"
+  "_src": "f5d984d4",
+  "_src_reader": "8953f087"
  },
  "noun-3864": {
   "translation_pl": "próba; rozbieg; początek, rozruch",
@@ -25745,8 +25741,8 @@
     "meaning_pl": "zamach, atak terrorystyczny"
    }
   ],
-  "_src": "8cab064e",
-  "_src_reader": "9291a57c"
+  "_src": "9bfaaa8e",
+  "_src_reader": "ce37063c"
  },
  "noun-3873": {
   "translation_pl": "adres",
@@ -25796,8 +25792,8 @@
     "meaning_pl": "bodziec, impuls, zachęta"
    }
   ],
-  "_src": "f5e7d2f6",
-  "_src_reader": "82c66003"
+  "_src": "8078531f",
+  "_src_reader": "6d5025b8"
  },
  "noun-3880": {
   "translation_pl": "obecność; występowanie",
@@ -26039,8 +26035,8 @@
     "meaning_pl": "apel, odezwa"
    }
   ],
-  "_src": "d038bf3f",
-  "_src_reader": "5209841a"
+  "_src": "28da1c6b",
+  "_src_reader": "79676a16"
  },
  "noun-3916": {
   "translation_pl": "rebelia, bunt; wzburzenie, poruszenie",
@@ -26558,8 +26554,8 @@
     "meaning_pl": "zobowiązanie"
    }
   ],
-  "_src": "583edb06",
-  "_src_reader": "2aef8759"
+  "_src": "bb2859c8",
+  "_src_reader": "73dc5a93"
  },
  "noun-3996": {
   "translation_pl": "kontakt wzrokowy",
@@ -26999,8 +26995,8 @@
     "meaning_pl": "widok (do wnętrza)"
    }
   ],
-  "_src": "35b8b6f0",
-  "_src_reader": "db056eda"
+  "_src": "01579ada",
+  "_src_reader": "9d5b923c"
  },
  "noun-4062": {
   "translation_pl": "odwołanie, sprzeciw (od decyzji); zastrzeżenie, protest",
@@ -27063,8 +27059,8 @@
     "meaning_pl": "oburzenie, wzburzenie"
    }
   ],
-  "_src": "becef8f8",
-  "_src_reader": "81695dbe"
+  "_src": "a2577830",
+  "_src_reader": "d95d1506"
  },
  "noun-4071": {
   "translation_pl": "wynik końcowy, ostateczny rezultat",
@@ -30951,8 +30947,8 @@
     "meaning_pl": "stanowisko, stosunek (do czegoś)"
    }
   ],
-  "_src": "7a733331",
-  "_src_reader": "bb913845"
+  "_src": "35d23b64",
+  "_src_reader": "56051292"
  },
  "noun-4676": {
   "translation_pl": "prawa burta",
@@ -31961,8 +31957,8 @@
     "meaning_pl": "przewaga"
    }
   ],
-  "_src": "94edcf8d",
-  "_src_reader": "94acb1f6"
+  "_src": "c9a1f7fa",
+  "_src_reader": "17e9e383"
  },
  "noun-4829": {
   "translation_pl": "(wcześniejsze) ostrzeżenie",
@@ -32631,8 +32627,8 @@
     "meaning_pl": "uzdolnienie, talent, zdolności"
    }
   ],
-  "_src": "e8cc86aa",
-  "_src_reader": "7a45c5d5"
+  "_src": "644c7b2d",
+  "_src_reader": "e8691ce8"
  },
  "noun-4932": {
   "translation_pl": "ułaskawienie",

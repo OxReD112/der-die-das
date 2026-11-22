@@ -72,22 +72,22 @@
  "function-011": {
   "translation_pl": "aha!, ach tak!",
   "example_pl": "Aha, teraz rozumiem!",
-  "usage_note_pl": "",
-  "_src": "85c394bd",
+  "usage_note_pl": "Zrozumienie, olśnienie: Aha, jetzt verstehe ich! — Aha, teraz rozumiem! Ironicznie: Aha, so ist das also! — Aha, więc to tak!",
+  "_src": "1d549932",
   "_src_reader": "02970b99"
  },
  "function-012": {
   "translation_pl": "a!, ach! (zdziwienie, zrozumienie, przyjemność)",
   "example_pl": "A, tu jesteś!",
-  "usage_note_pl": "",
-  "_src": "15b04902",
+  "usage_note_pl": "Zdziwienie, zrozumienie, przyjemność: Ah, da bist du ja! — A, tu jesteś! Ah, wie schön! — Ach, jak pięknie!",
+  "_src": "1d31b51e",
   "_src_reader": "ef21c6af"
  },
  "function-013": {
   "translation_pl": "no tak; no cóż (począć)",
   "example_pl": "No tak, nic się na to nie poradzi.",
-  "usage_note_pl": "",
-  "_src": "edff50db",
+  "usage_note_pl": "Wahanie, rezygnacja: Tja, da kann man nichts machen. — No cóż, nic się na to nie poradzi.",
+  "_src": "b57d3441",
   "_src_reader": "d7e1b7ff"
  },
  "function-014": {
@@ -100,16 +100,16 @@
  "function-015": {
   "translation_pl": "au!, aj! (z bólu)",
   "example_pl": "Au, boli!",
-  "usage_note_pl": "",
-  "_src": "d8ac37d8",
+  "usage_note_pl": "Nagły ból: Autsch, das tut weh! — Au, boli!",
+  "_src": "a80f88d0",
   "_src_reader": "d28c0301"
  },
  "function-016": {
-  "translation_pl": "uuu!, uch!, fuj! (strach, zimno, obrzydzenie; żeby kogoś przestraszyć)",
+  "translation_pl": "uch!, uuu!, fuj! (strach, zimno, obrzydzenie); bu! (żeby kogoś przestraszyć)",
   "example_pl": "Uch, ale tu zimno!",
   "usage_note_pl": "Hu, eine Spinne! — Fuj, pająk! Hu! — żeby kogoś przestraszyć (jak polskie „uuu!”). W baśniach — także pohukiwanie sowy: »schuh, hu, hu, hu«.",
-  "_src": "383205a8",
-  "_src_reader": "5c37a6ae"
+  "_src": "ba2a11d5",
+  "_src_reader": "aa9ad637"
  },
  "function-017": {
   "translation_pl": "centymetr (der Zentimeter)",
@@ -252,101 +252,101 @@
   "_src_reader": "a3970596"
  },
  "function-37": {
-  "_src": "2177d373",
   "translation_pl": "kilogram (das Kilogramm)",
   "example_pl": "Walizka waży 23 kg.",
   "usage_note_pl": "Skrót od das Kilogramm.",
+  "_src": "2177d373",
   "_src_reader": "a934ff47"
  },
  "function-38": {
-  "_src": "02982b34",
   "translation_pl": "kilometr (der Kilometer)",
   "example_pl": "Do najbliższej wsi jest jeszcze 5 km.",
   "usage_note_pl": "Skrót od der Kilometer. km/h — kilometrów na godzinę, km/s — kilometrów na sekundę.",
+  "_src": "02982b34",
   "_src_reader": "0495ac60"
  },
  "function-39": {
-  "_src": "07f1dc24",
   "translation_pl": "yyy (zawahanie w mowie)",
   "example_pl": "To, yyy, nie jest takie proste.",
   "usage_note_pl": "Także: ähm. Rzadko — okrzyk obrzydzenia „fuj” (częściej: igitt, bäh).",
+  "_src": "07f1dc24",
   "_src_reader": "7c7aefce"
  },
  "function-40": {
-  "_src": "cd6aaf04",
   "translation_pl": "hm (namysł, wątpliwość); hmm; mhm (zgoda)",
   "example_pl": "Hm, muszę to jeszcze przemyśleć.",
   "usage_note_pl": "Pisze się też hmm. Por. ähm — yyy.",
+  "_src": "cd6aaf04",
   "_src_reader": "cc33ba56"
  },
  "function-41": {
-  "_src": "c1975d04",
   "translation_pl": "gram (das Gramm); g (przyspieszenie ziemskie)",
   "example_pl": "Do ciasta potrzeba 250 g cukru.",
   "usage_note_pl": "Skrót od das Gramm. W fizyce g — oznaczenie przyspieszenia ziemskiego: eine Beschleunigung von 3 g — przeciążenie 3 g.",
+  "_src": "c1975d04",
   "_src_reader": "27775209"
  },
  "function-42": {
-  "_src": "e6166294",
   "translation_pl": "sekunda (die Sekunde)",
   "example_pl": "Biegaczowi wystarczyło na 100 m zaledwie 10,2 s.",
   "usage_note_pl": "Skrót od die Sekunde (w zwykłym tekście częściej Sek.). km/s — kilometrów na sekundę. Nie mylić: s. — siehe (zob.), S. — Seite (s.).",
+  "_src": "e6166294",
   "_src_reader": "7192271d"
  },
  "function-43": {
-  "_src": "cd10128b",
   "translation_pl": "metr (der Meter)",
   "example_pl": "Wieża ma 120 m wysokości.",
   "usage_note_pl": "Skrót od der (das) Meter. m² — metr kwadratowy, m³ — metr sześcienny, m/s — metrów na sekundę. Nie mylić: min — minuta.",
+  "_src": "cd10128b",
   "_src_reader": "68642c52"
  },
  "function-44": {
-  "_src": "7a30bb4c",
   "translation_pl": "godzina (die Stunde)",
   "example_pl": "Czas pracy akumulatora wynosi około 10 h.",
   "usage_note_pl": "Oznaczenie godziny (od łac. hora). km/h — kilometrów na godzinę. W zwykłym tekście częściej Std.",
+  "_src": "7a30bb4c",
   "_src_reader": "88ea70d3"
  },
  "function-45": {
-  "_src": "2382f954",
   "translation_pl": "milion (die Million)",
   "example_pl": "W zeszłym roku firma osiągnęła 3 mln euro zysku.",
   "usage_note_pl": "Skrót od die Million. Por. Mrd. — miliard, Tsd. — tysiąc.",
+  "_src": "2382f954",
   "_src_reader": "81fb67e2"
  },
  "function-46": {
-  "_src": "4dc207d5",
   "translation_pl": "tysiąc (das Tausend)",
   "example_pl": "Używany samochód kosztuje 25 tys. euro.",
   "usage_note_pl": "Skrót od das Tausend; częściej w tabelach i ogłoszeniach, w zwykłym tekście — 25.000 Euro. Por. Mio. — milion.",
+  "_src": "4dc207d5",
   "_src_reader": "a3b83f2a"
  },
  "function-47": {
-  "_src": "cd4fa1ff",
   "translation_pl": "godzina (die Stunde)",
   "example_pl": "Podróż do Berlina trwa około 3 godz.",
   "usage_note_pl": "Skrót od die Stunde; w technice i nauce — h (km/h).",
+  "_src": "cd4fa1ff",
   "_src_reader": "88ea70d3"
  },
  "function-48": {
-  "_src": "3da87061",
   "translation_pl": "minuta (die Minute)",
   "example_pl": "Autobus jeździ co 10 min.",
   "usage_note_pl": "Skrót od die Minute; w technice i nauce — min (bez kropki).",
+  "_src": "3da87061",
   "_src_reader": "6069aaca"
  },
  "function-49": {
-  "_src": "7a543e63",
   "translation_pl": "sekunda (die Sekunde)",
   "example_pl": "Przebiegła 100 metrów w 11,2 sek.",
   "usage_note_pl": "Skrót od die Sekunde; w technice i nauce — s (bez kropki).",
+  "_src": "7a543e63",
   "_src_reader": "7192271d"
  },
  "function-50": {
-  "_src": "d05b089d",
   "translation_pl": "milimetr (der Millimeter)",
   "example_pl": "Śruba ma 6 mm grubości.",
   "usage_note_pl": "Skrót od der Millimeter. Por. cm — centymetr.",
+  "_src": "d05b089d",
   "_src_reader": "a9eb0dfc"
  }
 }

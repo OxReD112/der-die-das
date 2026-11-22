@@ -35,8 +35,8 @@
     "note_pl": "es kommt zu etw. — dochodzi do czegoś, coś się dzieje: Es kam zu einem Streit."
    }
   ],
-  "_src": "1b60f7f8",
-  "_src_reader": "4a492202"
+  "_src": "ce2364a7",
+  "_src_reader": "07a78037"
  },
  "verb-006": {
   "translation_pl": "robić",
@@ -1467,7 +1467,7 @@
    }
   ],
   "reflexive": {
-   "translation_pl": "trzymać się (dzielnie; czegoś), utrzymywać się; trzymać się (zasad, faktów); nie psuć się (o żywności)",
+   "translation_pl": "trzymać się (dzielnie, czegoś), utrzymywać się; trzymać się (zasad, faktów); nie psuć się (o żywności)",
    "note_pl": "sich halten an + Akk. — trzymać się (zasad, faktów)"
   },
   "_src": "cda6c64e",
@@ -1483,8 +1483,8 @@
     "note_pl": "stać po czyjejś stronie, pozostawać wiernym komuś"
    }
   ],
-  "_src": "3b538678",
-  "_src_reader": "f12c92fa"
+  "_src": "5c3abeea",
+  "_src_reader": "d0842910"
  },
  "verb-147": {
   "translation_pl": "uważać (za kogoś, za coś); być (jakiegoś) zdania",
@@ -1763,8 +1763,8 @@
     "note_pl": "kogoś / coś"
    }
   ],
-  "_src": "e468927b",
-  "_src_reader": "49580a9f"
+  "_src": "c175a93c",
+  "_src_reader": "1187a228"
  },
  "verb-169": {
   "translation_pl": "pasować, odpowiadać; pasować (o rozmiarze)",
@@ -1995,8 +1995,8 @@
     "note_pl": "występować przeciw czemuś"
    }
   ],
-  "_src": "9c19f720",
-  "_src_reader": "aeefee35"
+  "_src": "4e936510",
+  "_src_reader": "87089b65"
  },
  "verb-190": {
   "translation_pl": "studiować (na uczelni); studiować, badać",
@@ -2036,8 +2036,8 @@
     "note_pl": "kogoś / coś"
    }
   ],
-  "_src": "fec47ae1",
-  "_src_reader": "c87b556e"
+  "_src": "debb8445",
+  "_src_reader": "9130986a"
  },
  "verb-194": {
   "translation_pl": "robić",
@@ -2239,8 +2239,8 @@
     "note_pl": "komuś coś"
    }
   ],
-  "_src": "58ff0dfe",
-  "_src_reader": "2406aba6"
+  "_src": "ac77d1a3",
+  "_src_reader": "2e15c05b"
  },
  "verb-2749": {
   "translation_pl": "pokazać się, pojawić się; okazać się, wyjść na jaw; wykazać się (czymś)",
@@ -2714,12 +2714,12 @@
     "note_pl": "dyskutować z kimś"
    },
    {
-    "meaning_pl": "omawiać",
+    "meaning_pl": "omawiać, dyskutować",
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "b3805976",
-  "_src_reader": "426c3e95"
+  "_src": "9060b0fc",
+  "_src_reader": "3adff7bb"
  },
  "verb-253": {
   "translation_pl": "zwracać się do kogoś na ty",
@@ -2917,8 +2917,8 @@
     "note_pl": "sprowadzać kogoś w dół"
    }
   ],
-  "_src": "a73defce",
-  "_src_reader": "57e93570"
+  "_src": "880f5f9d",
+  "_src_reader": "ca335185"
  },
  "verb-270": {
   "translation_pl": "kaszleć",
@@ -3416,8 +3416,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "a2144100",
-  "_src_reader": "272cd7a9"
+  "_src": "0f0be887",
+  "_src_reader": "be05b222"
  },
  "verb-325": {
   "translation_pl": "odbywać się; mieć miejsce",
@@ -3525,12 +3525,12 @@
     "note_pl": "marzyć o czymś; śnić o czymś"
    },
    {
-    "meaning_pl": "widzieć we śnie",
-    "note_pl": "coś / kogoś"
+    "meaning_pl": "śnić",
+    "note_pl": "coś (np. sen); ktoś / coś się komuś śni"
    }
   ],
-  "_src": "25f3d3b9",
-  "_src_reader": "8eb97532"
+  "_src": "2812484a",
+  "_src_reader": "6f90f09f"
  },
  "verb-334": {
   "translation_pl": "tłumaczyć (tekst)",
@@ -3931,8 +3931,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "cfaa2e23",
-  "_src_reader": "32b16e3a"
+  "_src": "82c13340",
+  "_src_reader": "500663e9"
  },
  "verb-372": {
   "translation_pl": "zmywać naczynia; zmywać (brud)",
@@ -3957,8 +3957,8 @@
     "note_pl": "kogoś / coś"
    }
   ],
-  "_src": "d2283c7c",
-  "_src_reader": "cd25a8b0"
+  "_src": "709f1917",
+  "_src_reader": "f86ed14b"
  },
  "verb-374": {
   "translation_pl": "przyjmować; uznawać",
@@ -4019,8 +4019,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "58331394",
-  "_src_reader": "32429a17"
+  "_src": "d69c2253",
+  "_src_reader": "afbc29e8"
  },
  "verb-381": {
   "translation_pl": "mieć na sobie",
@@ -4125,10 +4125,10 @@
   "_src_reader": "9f2dcc7b"
  },
  "verb-391": {
-  "translation_pl": "zgłaszać (na policję), zawiadamiać, ogłaszać (zaręczyny, narodziny); pokazywać (o przyrządzie, tablicy; na ekranie)",
+  "translation_pl": "zgłaszać (na policję), zawiadamiać, ogłaszać (zaręczyny, narodziny); pokazywać (o przyrządzie, tablicy, na ekranie)",
   "example_pl": "Zgłosiła kradzież na policję.",
-  "_src": "a040a0b9",
-  "_src_reader": "4f67f9d9"
+  "_src": "6dc9b7c0",
+  "_src_reader": "4675d2e0"
  },
  "verb-392": {
   "translation_pl": "rzucać się w oczy; zwracać na siebie uwagę",
@@ -4186,8 +4186,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "3b988e66",
-  "_src_reader": "878ff2cb"
+  "_src": "61867487",
+  "_src_reader": "b793e79e"
  },
  "verb-396": {
   "translation_pl": "przytrzymywać (drzwi); zatrzymywać",
@@ -4673,8 +4673,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "a4a2da4a",
-  "_src_reader": "39d52591"
+  "_src": "1b49d21e",
+  "_src_reader": "86a1ce4d"
  },
  "verb-451": {
   "translation_pl": "prowadzić bloga",
@@ -5285,8 +5285,8 @@
     }
    ]
   },
-  "_src": "25099948",
-  "_src_reader": "bbb840c9"
+  "_src": "27195265",
+  "_src_reader": "5e91709e"
  },
  "verb-519": {
   "translation_pl": "leniuchować; lenić się",
@@ -5488,8 +5488,8 @@
     "note_pl": "czymś (przedsiębiorstwem, grupą)"
    }
   ],
-  "_src": "842e5b14",
-  "_src_reader": "49a1d8f3"
+  "_src": "efbf7206",
+  "_src_reader": "f2bbb6cd"
  },
  "verb-538": {
   "translation_pl": "bać się",
@@ -5634,7 +5634,7 @@
   "_src_reader": "c6710543"
  },
  "verb-552": {
-  "translation_pl": "sięgać (po coś); chwytać; łapać (za coś)",
+  "translation_pl": "sięgać (po coś); chwytać; chwytać (za coś), uciekać się (do czegoś)",
   "example_pl": "Dziecko sięga po zabawkę.",
   "complements": [
    {
@@ -5645,8 +5645,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "a8bd1e9f",
-  "_src_reader": "1fc7d1f4"
+  "_src": "5d4ed848",
+  "_src_reader": "398b84dd"
  },
  "verb-553": {
   "translation_pl": "zakładać",
@@ -5667,12 +5667,12 @@
   "example_pl": "Patrz, pada śnieg!",
   "complements": [
    {
-    "meaning_pl": "oglądać",
-    "note_pl": "coś / kogoś"
+    "meaning_pl": "patrzeć",
+    "note_pl": "na coś / na kogoś"
    }
   ],
-  "_src": "ac8c89e0",
-  "_src_reader": "4de8ceeb"
+  "_src": "7f9276e3",
+  "_src_reader": "6ddda338"
  },
  "verb-556": {
   "translation_pl": "padać (o gradzie)",
@@ -5859,8 +5859,8 @@
     "note_pl": "coś (gdzieś)"
    }
   ],
-  "_src": "ee9e4d46",
-  "_src_reader": "b0601751"
+  "_src": "1631209d",
+  "_src_reader": "c5bd7c32"
  },
  "verb-576": {
   "translation_pl": "brzmieć",
@@ -6231,8 +6231,8 @@
     "note_pl": "komuś coś"
    }
   ],
-  "_src": "a2027244",
-  "_src_reader": "54496f65"
+  "_src": "acd70b61",
+  "_src_reader": "8de3c300"
  },
  "verb-616": {
   "translation_pl": "biec; pędzić",
@@ -6294,8 +6294,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "859c64b6",
-  "_src_reader": "92a677bc"
+  "_src": "b5c143fa",
+  "_src_reader": "db9b8cd0"
  },
  "verb-622": {
   "translation_pl": "myśleć (szacować); cenić; oceniać",
@@ -6514,8 +6514,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "0652aa9f",
-  "_src_reader": "cda694e4"
+  "_src": "0042ddd1",
+  "_src_reader": "fefb1eae"
  },
  "verb-640": {
   "translation_pl": "skakać",
@@ -6582,8 +6582,8 @@
     "note_pl": "coś dokądś"
    }
   ],
-  "_src": "dd61962a",
-  "_src_reader": "35ff623f"
+  "_src": "cdcbffa5",
+  "_src_reader": "483748d8"
  },
  "verb-647": {
   "translation_pl": "kraść",
@@ -6660,8 +6660,8 @@
     "note_pl": "(książk.) odepchnąć się od czegoś (vom Boden); zwykle — sich abstoßen"
    }
   ],
-  "_src": "43240286",
-  "_src_reader": "2ca7008f"
+  "_src": "4f7d8764",
+  "_src_reader": "11c65ead"
  },
  "verb-2559": {
   "translation_pl": "popychać, szturchać; uderzać (nogą, łokciem); wbijać, wtykać",
@@ -6763,8 +6763,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "48918ba3",
-  "_src_reader": "7d8c1b37"
+  "_src": "81c800e2",
+  "_src_reader": "c63427aa"
  },
  "verb-2773": {
   "translation_pl": "płynąć z prądem, dryfować (dokądś); zostać zniesionym (przez prąd, wiatr)",
@@ -7152,8 +7152,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "88c50cf1",
-  "_src_reader": "fdcb5cbf"
+  "_src": "011c3720",
+  "_src_reader": "80e5eb40"
  },
  "verb-696": {
   "translation_pl": "bawić się",
@@ -7211,8 +7211,8 @@
     "meaning_pl": "żądać"
    }
   ],
-  "_src": "21291065",
-  "_src_reader": "97060caf"
+  "_src": "4856a467",
+  "_src_reader": "4a85735d"
  },
  "verb-703": {
   "translation_pl": "przedłużać; wydłużać",
@@ -7274,8 +7274,8 @@
     "note_pl": "komuś coś / kogoś"
    }
   ],
-  "_src": "7c98ddaa",
-  "_src_reader": "b22e7014"
+  "_src": "10de17d3",
+  "_src_reader": "4eb917a7"
  },
  "verb-708": {
   "translation_pl": "przypuszczać",
@@ -7487,8 +7487,8 @@
    }
   ],
   "usage_note_pl": "Czuć się (jakimś) — sich (Dativ) vorkommen (osobne hasło): Ich komme mir dumm vor.",
-  "_src": "7c4367cf",
-  "_src_reader": "3869453b"
+  "_src": "78075d95",
+  "_src_reader": "cb80a519"
  },
  "verb-2621": {
   "translation_pl": "czuć się (jakimś), wydawać się sobie",
@@ -7639,8 +7639,8 @@
   "reflexive": {
    "translation_pl": "ważyć się"
   },
-  "_src": "3cddc61b",
-  "_src_reader": "f25bf1e8"
+  "_src": "b30a1ea7",
+  "_src_reader": "3f73e704"
  },
  "verb-741": {
   "translation_pl": "machać (ręką)",
@@ -7693,8 +7693,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "e858faf4",
-  "_src_reader": "3e1a1a2a"
+  "_src": "85baac8b",
+  "_src_reader": "fbc04ebf"
  },
  "verb-745": {
   "translation_pl": "mieszkać pod namiotem; jeździć pod namiot",
@@ -7788,8 +7788,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "fda180c3",
-  "_src_reader": "81c0f535"
+  "_src": "bb1b0a56",
+  "_src_reader": "85638036"
  },
  "verb-754": {
   "translation_pl": "streszczać; podsumowywać; uogólniać",
@@ -7868,8 +7868,8 @@
     "note_pl": "coś (z czegoś)"
    }
   ],
-  "_src": "82944684",
-  "_src_reader": "9bc2dae0"
+  "_src": "6345cc8d",
+  "_src_reader": "0c2bc94b"
  },
  "verb-761": {
   "translation_pl": "aktualizować",
@@ -7993,8 +7993,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "635fe4ec",
-  "_src_reader": "b5687501"
+  "_src": "4a9138ab",
+  "_src_reader": "2211595c"
  },
  "verb-774": {
   "translation_pl": "upływać (o terminie); przebiegać, odbywać się (o wydarzeniu); spływać (o wodzie)",
@@ -8189,8 +8189,8 @@
     "note_pl": "kogoś"
    }
   ],
-  "_src": "e6091ada",
-  "_src_reader": "105ade14"
+  "_src": "afe62ce8",
+  "_src_reader": "038ac7aa"
  },
  "verb-795": {
   "translation_pl": "składać, rozstawiać (namiot, meble); budować (firmę)",
@@ -8658,8 +8658,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "f25fba34",
-  "_src_reader": "3e284707"
+  "_src": "84a7e84b",
+  "_src_reader": "40b6f8a2"
  },
  "verb-842": {
   "translation_pl": "przeszukiwać",
@@ -8701,8 +8701,8 @@
     "note_pl": "coś (ein Risiko, eine Ehe, ein Bündnis)"
    }
   ],
-  "_src": "4048faf3",
-  "_src_reader": "06dcb369"
+  "_src": "cab4878a",
+  "_src_reader": "004bd016"
  },
  "verb-845": {
   "translation_pl": "zgadzać się (na coś); szczegółowo omawiać (coś), odpowiadać (na pytanie)",
@@ -8788,8 +8788,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "29c6fd72",
-  "_src_reader": "98fc4adc"
+  "_src": "1433268c",
+  "_src_reader": "af869cf2"
  },
  "verb-854": {
   "translation_pl": "dodawać otuchy, zachęcać",
@@ -9266,8 +9266,8 @@
     "note_pl": "coś (piłkę)"
    }
   ],
-  "_src": "f0f97f88",
-  "_src_reader": "581e7ab2"
+  "_src": "97611f8a",
+  "_src_reader": "211a2f54"
  },
  "verb-905": {
   "translation_pl": "wylewać, wysypywać; przechylać, przewracać; uchylać (okno)",
@@ -9345,8 +9345,8 @@
    "translation_pl": "przytrzasnąć sobie palec; wziąć pod pachę",
    "note_pl": "sich (D) den Finger klemmen — przytrzasnąć sobie palec; sich (D) etwas unter den Arm klemmen — wziąć pod pachę"
   },
-  "_src": "00db474d",
-  "_src_reader": "817d2677"
+  "_src": "a01a3b01",
+  "_src_reader": "a7141493"
  },
  "verb-912": {
   "translation_pl": "łupać, rozłupywać (orzechy); łamać (kod); trzeszczeć",
@@ -9362,8 +9362,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "e19683cd",
-  "_src_reader": "99c00c0a"
+  "_src": "e978dfc1",
+  "_src_reader": "46ad8d8a"
  },
  "verb-913": {
   "translation_pl": "trzaskać, huczeć; (pot.) przywalić, walnąć (jemandem eine knallen); (pot.) ciskać",
@@ -9382,8 +9382,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "034c145c",
-  "_src_reader": "70f0aaf4"
+  "_src": "e6bff32a",
+  "_src_reader": "1fd59b76"
  },
  "verb-2775": {
   "translation_pl": "(pot.) walnąć, z impetem uderzyć (w coś)",
@@ -9415,8 +9415,8 @@
     "note_pl": "coś (z czymś)"
    }
   ],
-  "_src": "725b2657",
-  "_src_reader": "6bf678c1"
+  "_src": "4eae17c3",
+  "_src_reader": "d9e2aaf5"
  },
  "verb-916": {
   "translation_pl": "(książk.) komunikować się, utrzymywać kontakt; przekazywać",
@@ -9431,8 +9431,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "91d772de",
-  "_src_reader": "b19c1904"
+  "_src": "0ec49235",
+  "_src_reader": "2af3fbcb"
  },
  "verb-917": {
   "translation_pl": "przecinać; krzyżować (ręce, nogi, odmiany)",
@@ -9464,8 +9464,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "65190d08",
-  "_src_reader": "1c1e6ab3"
+  "_src": "c8a1b885",
+  "_src_reader": "392847a8"
  },
  "verb-920": {
   "translation_pl": "opierać; stać oparty",
@@ -10492,8 +10492,8 @@
     "note_pl": "mydlić komuś oczy, oszukiwać kogoś (czymś)"
    }
   ],
-  "_src": "96d52133",
-  "_src_reader": "e0c65cc0"
+  "_src": "11506755",
+  "_src_reader": "e866bdee"
  },
  "verb-1023": {
   "translation_pl": "odnosić, odwozić, zabierać (stąd)",
@@ -10732,8 +10732,8 @@
     "note_pl": "spajać coś, trzymać coś razem"
    }
   ],
-  "_src": "f6aeef03",
-  "_src_reader": "686b27eb"
+  "_src": "30f6b6b2",
+  "_src_reader": "58ea4a7c"
  },
  "verb-1045": {
   "translation_pl": "żyć razem, mieszkać razem",
@@ -10878,8 +10878,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "8e8808b4",
-  "_src_reader": "3f8bb4c3"
+  "_src": "9998d294",
+  "_src_reader": "f5f89d63"
  },
  "verb-1059": {
   "translation_pl": "zabezpieczyć, ubezpieczyć; odgrodzić (niebezpieczne miejsce)",
@@ -11401,8 +11401,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "8b5f5e07",
-  "_src_reader": "b899968e"
+  "_src": "77240f9b",
+  "_src_reader": "15712564"
  },
  "verb-1113": {
   "translation_pl": "(książk.) opierać się, bazować (na czymś)",
@@ -11587,8 +11587,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "04ae639c",
-  "_src_reader": "0b5180dc"
+  "_src": "1f87dbce",
+  "_src_reader": "b26ee978"
  },
  "verb-1134": {
   "translation_pl": "upiększać (rzeczywistość)",
@@ -11797,8 +11797,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "ee09cc85",
-  "_src_reader": "0ea41ccf"
+  "_src": "f2c9c82c",
+  "_src_reader": "3f0d827a"
  },
  "verb-1157": {
   "translation_pl": "demontować, rozbierać",
@@ -11845,8 +11845,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "6235fa3c",
-  "_src_reader": "9c593448"
+  "_src": "dd106da3",
+  "_src_reader": "79d27357"
  },
  "verb-1163": {
   "translation_pl": "dramatyzować, wyolbrzymiać; inscenizować",
@@ -11895,8 +11895,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "d4c7f37f",
-  "_src_reader": "485d5326"
+  "_src": "25a58b62",
+  "_src_reader": "3564d3f3"
  },
  "verb-1168": {
   "translation_pl": "(pot.) przeżywać, przechodzić (przez trudności); nie spać całą noc, bawić się do rana",
@@ -11907,8 +11907,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "2adaa27a",
-  "_src_reader": "044b9b8b"
+  "_src": "c3411219",
+  "_src_reader": "23a68586"
  },
  "verb-1169": {
   "translation_pl": "osadzać, wstawiać, wpisywać (w kontekst)",
@@ -12348,15 +12348,15 @@
   "_src_reader": "ca21efe7"
  },
  "verb-1216": {
-  "translation_pl": "nabywać (kupować; wiedzę, doświadczenie)",
+  "translation_pl": "nabywać, kupować; zdobywać (wiedzę, doświadczenie)",
   "usage_note_pl": "Wiedza, doświadczenie: In dem Praktikum habe ich viel praktische Erfahrung erworben. sich (Dat.) etwas erwerben — zdobyć (szacunek, zaufanie).",
   "example_pl": "Bilet można nabyć przez aplikację bezpośrednio w autobusie.",
   "reflexive": {
    "translation_pl": "uzyskać (wiedzę, obywatelstwo, stopień); zdobyć (szacunek, zaufanie)",
    "note_pl": "sich (D) etwas erwerben — uzyskać (wiedzę, obywatelstwo, stopień)"
   },
-  "_src": "9b072f01",
-  "_src_reader": "9ae171fe"
+  "_src": "370a4524",
+  "_src_reader": "bb85a459"
  },
  "verb-1217": {
   "translation_pl": "produkować, wytwarzać; wywoływać (uczucie)",
@@ -12413,8 +12413,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "10af12f4",
-  "_src_reader": "2faf984b"
+  "_src": "abe8b321",
+  "_src_reader": "362860a0"
  },
  "verb-1224": {
   "translation_pl": "przykuwać (uwagę), wciągać; związywać (ręce), przykuwać (łańcuchem)",
@@ -12446,8 +12446,8 @@
     "note_pl": "coś (dokądś)"
    }
   ],
-  "_src": "5cdc55ac",
-  "_src_reader": "6a7a6dec"
+  "_src": "ca7558dd",
+  "_src_reader": "ba4a17e9"
  },
  "verb-1227": {
   "translation_pl": "(książk.) inscenizować, symulować, fingować",
@@ -12532,8 +12532,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "4e7d8418",
-  "_src_reader": "0048723a"
+  "_src": "28a3d51e",
+  "_src_reader": "3fd7f5e0"
  },
  "verb-1235": {
   "translation_pl": "dogotowywać, gotować (na wolnym ogniu, na parze)",
@@ -12893,8 +12893,8 @@
     "note_pl": "inwestować w coś"
    }
   ],
-  "_src": "e0a85b73",
-  "_src_reader": "f79a0ba9"
+  "_src": "c9cebb72",
+  "_src_reader": "db0bb4d8"
  },
  "verb-1271": {
   "translation_pl": "ocieplać, izolować (od zimna, prądu); izolować (ludzi)",
@@ -13031,8 +13031,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "f37a131f",
-  "_src_reader": "51abb233"
+  "_src": "f813b7e2",
+  "_src_reader": "3e65f9da"
  },
  "verb-1288": {
   "translation_pl": "konstruować; budować (zdanie, fabułę)",
@@ -13115,8 +13115,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "e3d7f490",
-  "_src_reader": "a6d3bab1"
+  "_src": "e56f3637",
+  "_src_reader": "86305116"
  },
  "verb-1297": {
   "translation_pl": "ciążyć, spoczywać",
@@ -13418,8 +13418,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "6553596f",
-  "_src_reader": "68602ba8"
+  "_src": "b2ad6213",
+  "_src_reader": "b5c40bcc"
  },
  "verb-1329": {
   "translation_pl": "łomotać, stukać",
@@ -13444,8 +13444,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "f95a3fb8",
-  "_src_reader": "e64d99d6"
+  "_src": "aa497ecb",
+  "_src_reader": "05420c6b"
  },
  "verb-1332": {
   "translation_pl": "prowokować",
@@ -13916,8 +13916,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "231f42a1",
-  "_src_reader": "4b305979"
+  "_src": "abf1627d",
+  "_src_reader": "411b9a65"
  },
  "verb-1384": {
   "translation_pl": "(książk.) czynić tematem tabu, tabuizować",
@@ -14167,8 +14167,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "ec126b37",
-  "_src_reader": "1e27a24b"
+  "_src": "56ec5e7e",
+  "_src_reader": "dee56c9a"
  },
  "verb-1413": {
   "translation_pl": "uogólniać",
@@ -14845,8 +14845,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "38dbc7e3",
-  "_src_reader": "f8191b9f"
+  "_src": "a91c7c80",
+  "_src_reader": "32510882"
  },
  "verb-1479": {
   "translation_pl": "rozpraszać, rozwiewać (wątpliwości, tłum); zabawiać",
@@ -14917,8 +14917,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "9a0c0054",
-  "_src_reader": "61e218b1"
+  "_src": "af780850",
+  "_src_reader": "ac4432fd"
  },
  "verb-1485": {
   "translation_pl": "wywodzić (od czegoś), tłumaczyć (czymś)",
@@ -15182,8 +15182,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "e32627b6",
-  "_src_reader": "0461fadb"
+  "_src": "73d1d6a7",
+  "_src_reader": "3c65fc80"
  },
  "verb-1508": {
   "translation_pl": "burzyć (budynek); odrywać",
@@ -15245,8 +15245,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "faa26e34",
-  "_src_reader": "6dab3a90"
+  "_src": "4535c5ad",
+  "_src_reader": "f8ba2221"
  },
  "verb-1515": {
   "translation_pl": "wysyłać",
@@ -15355,8 +15355,8 @@
     "note_pl": "kogoś (zwierzę)"
    }
   ],
-  "_src": "eefb0a22",
-  "_src_reader": "652dfa51"
+  "_src": "97453e19",
+  "_src_reader": "c50db7b2"
  },
  "verb-1527": {
   "translation_pl": "sterczeć, odstawać; odklejać się (od powierzchni)",
@@ -15535,8 +15535,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "4d8a934d",
-  "_src_reader": "499d6e7e"
+  "_src": "e9ba2cce",
+  "_src_reader": "ecce30b1"
  },
  "verb-1549": {
   "translation_pl": "wykonywać, robić; sporządzać (dokument)",
@@ -15622,8 +15622,8 @@
     "note_pl": "kogoś"
    }
   ],
-  "_src": "a7c36d6c",
-  "_src_reader": "6f08d391"
+  "_src": "872f248b",
+  "_src_reader": "85a3f2ec"
  },
  "verb-1558": {
   "translation_pl": "walczyć (z czymś)",
@@ -15702,8 +15702,8 @@
    "translation_pl": "uderzyć się w kolano",
    "note_pl": "sich (D) das Knie anschlagen"
   },
-  "_src": "eeab6eb5",
-  "_src_reader": "e2067bea"
+  "_src": "d43d03bd",
+  "_src_reader": "450797d2"
  },
  "verb-1565": {
   "translation_pl": "podżegać, namawiać (do czegoś); wszczynać (coś złego)",
@@ -15963,10 +15963,10 @@
    }
   ],
   "reflexive": {
-   "translation_pl": "wyjaśniać się, przejaśniać się (o nieporozumieniu; o niebie)"
+   "translation_pl": "wyjaśniać się (o nieporozumieniu); przejaśniać się (o niebie)"
   },
-  "_src": "2e39d291",
-  "_src_reader": "a9976713"
+  "_src": "71d90066",
+  "_src_reader": "a430e658"
  },
  "verb-1590": {
   "translation_pl": "(pot.) zjawiać się, pojawiać się niespodziewanie",
@@ -16458,8 +16458,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "8f645b9c",
-  "_src_reader": "2d42e27a"
+  "_src": "2086bdf3",
+  "_src_reader": "60591005"
  },
  "verb-1646": {
   "translation_pl": "odpoczywać, odprężać się (od pracy); (pot.) odbijać (partnera)",
@@ -16471,8 +16471,8 @@
     "note_pl": "komuś kogoś"
    }
   ],
-  "_src": "764706a5",
-  "_src_reader": "bb1a41b5"
+  "_src": "f48a08ff",
+  "_src_reader": "7390a3ef"
  },
  "verb-1647": {
   "translation_pl": "napuszczać (ludzi na siebie); (karc.) wychodzić (kartą), rozgrywać",
@@ -16517,8 +16517,8 @@
     "note_pl": "kogoś / coś"
    }
   ],
-  "_src": "2cc616f4",
-  "_src_reader": "b776096b"
+  "_src": "2877768e",
+  "_src_reader": "788d6295"
  },
  "verb-1651": {
   "translation_pl": "wymierać, zanikać",
@@ -17674,8 +17674,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "c43cc83c",
-  "_src_reader": "a987c919"
+  "_src": "05c3d50d",
+  "_src_reader": "0810d0e2"
  },
  "verb-1768": {
   "translation_pl": "układać (wiersze), pisać wiersze",
@@ -18146,8 +18146,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "adbb6427",
-  "_src_reader": "17890c2e"
+  "_src": "b48f717c",
+  "_src_reader": "ade3b965"
  },
  "verb-1812": {
   "translation_pl": "przemycać, przerzucać, wprowadzać (ludzi, szpiega, wirusa)",
@@ -18221,8 +18221,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "6960724d",
-  "_src_reader": "394c00fa"
+  "_src": "538c206a",
+  "_src_reader": "c4222bc9"
  },
  "verb-1818": {
   "translation_pl": "brać ze sobą, wkładać do kieszeni; wkładać (wtyczkę do gniazdka); znosić, przełykać (obrazę, cios)",
@@ -18329,8 +18329,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "a7618b96",
-  "_src_reader": "6d57374e"
+  "_src": "dd3f447e",
+  "_src_reader": "bf15d366"
  },
  "verb-1827": {
   "translation_pl": "zwalniać (z obowiązku, obietnicy); odbierać poród; rodzić",
@@ -18349,8 +18349,8 @@
     "note_pl": "u kogoś"
    }
   ],
-  "_src": "ee5aa4a3",
-  "_src_reader": "a67297c3"
+  "_src": "72988a16",
+  "_src_reader": "cb3c1200"
  },
  "verb-1828": {
   "translation_pl": "obnażać, odsłaniać",
@@ -20476,8 +20476,8 @@
     "note_pl": "w coś"
    }
   ],
-  "_src": "b0f31d79",
-  "_src_reader": "9c0a3a2a"
+  "_src": "34d6b385",
+  "_src_reader": "5f7625e6"
  },
  "verb-2029": {
   "translation_pl": "negować (winę, fakt), wypierać się",
@@ -20573,8 +20573,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "daade46f",
-  "_src_reader": "6e2e0a85"
+  "_src": "4291192c",
+  "_src_reader": "76922e36"
  },
  "verb-2040": {
   "translation_pl": "radzić sobie (z trudnościami), opanowywać, pokonywać",
@@ -20626,8 +20626,8 @@
     "note_pl": "kogoś, coś"
    }
   ],
-  "_src": "f5dcf9c5",
-  "_src_reader": "f5abde91"
+  "_src": "9b17f4bb",
+  "_src_reader": "f0f6d063"
  },
  "verb-2046": {
   "translation_pl": "mobilizować; podrywać (ludzi do działania), angażować (siły, środki)",
@@ -20663,8 +20663,8 @@
     "note_pl": "czemuś (Dat.): einem Geheimnis nachforschen — dociekać tajemnicy"
    }
   ],
-  "_src": "cef9b5aa",
-  "_src_reader": "62e6a4c3"
+  "_src": "defc7c16",
+  "_src_reader": "78131a67"
  },
  "verb-2049": {
   "translation_pl": "pomagać, popychać (żeby coś szło lepiej); poganiać (kogoś)",
@@ -20703,8 +20703,8 @@
     "note_pl": "coś (kwotę)"
    }
   ],
-  "_src": "abc0666f",
-  "_src_reader": "b379b9cf"
+  "_src": "f62c5f1b",
+  "_src_reader": "2f77aa7b"
  },
  "verb-2052": {
   "translation_pl": "sprawdzać (jeszcze raz), weryfikować",
@@ -20951,8 +20951,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "5858a445",
-  "_src_reader": "3da2da4a"
+  "_src": "060bc8a5",
+  "_src_reader": "8febe86a"
  },
  "verb-2074": {
   "translation_pl": "stosować (w praktyce), praktykować; (o lekarzu, prawniku) praktykować, prowadzić praktykę",
@@ -20964,8 +20964,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "c5d94061",
-  "_src_reader": "66021b20"
+  "_src": "fe4fd6fa",
+  "_src_reader": "ead3acc3"
  },
  "verb-2075": {
   "translation_pl": "głosić, wygłaszać kazanie; (pot.) pouczać, powtarzać (w kółko to samo)",
@@ -21175,8 +21175,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "f1353080",
-  "_src_reader": "f21ca17e"
+  "_src": "0bd5a52b",
+  "_src_reader": "6796089d"
  },
  "verb-2094": {
   "translation_pl": "regenerować się, odzyskiwać siły (po wysiłku); (książk.) odtwarzać, odnawiać; (biol.) regenerować",
@@ -21191,8 +21191,8 @@
   "reflexive": {
    "translation_pl": "regenerować się"
   },
-  "_src": "8f64a145",
-  "_src_reader": "b63706fd"
+  "_src": "e87280b0",
+  "_src_reader": "880b2e04"
  },
  "verb-2095": {
   "translation_pl": "trzeć, rozcierać; trzeć, ścierać (na tarce)",
@@ -22026,8 +22026,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "35bff441",
-  "_src_reader": "e0cd7139"
+  "_src": "f44e25b0",
+  "_src_reader": "197e854c"
  },
  "verb-2178": {
   "translation_pl": "zwodzić, wprowadzać w błąd (o wrażeniu, uczuciu)",
@@ -22921,11 +22921,11 @@
   "_src_reader": "2a7e23c9"
  },
  "verb-2264": {
-  "translation_pl": "przelewać, wylewać, rozlewać (łzy, krew; płyn)",
+  "translation_pl": "przelewać, wylewać (łzy, krew); rozlewać, wylewać (płyn)",
   "usage_note_pl": "Czasownik mocny: vergoss, hat vergossen. Także przypadkiem rozlać (kawę, mleko); Blut vergießen — przelewać krew. (techn.) zalewać (do formy).",
   "example_pl": "Gdy spotkały się znowu po dziesięciu latach, obie siostry wylewały łzy radości.",
-  "_src": "d4157862",
-  "_src_reader": "3954fd12"
+  "_src": "d53cc545",
+  "_src_reader": "58efd67f"
  },
  "verb-2265": {
   "translation_pl": "zakopywać, zagrzebywać; chować (twarz w dłoniach, ręce w kieszeniach)",
@@ -23035,8 +23035,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "523e1795",
-  "_src_reader": "de5b2e4a"
+  "_src": "f393c04c",
+  "_src_reader": "b781403f"
  },
  "verb-2277": {
   "translation_pl": "(książk.) ogłaszać, obwieszczać (publicznie, uroczyście)",
@@ -23205,8 +23205,8 @@
    "translation_pl": "odmówić sobie czegoś",
    "note_pl": "sich (D) etwas versagen"
   },
-  "_src": "8f98ef77",
-  "_src_reader": "8765d6d0"
+  "_src": "074b10c7",
+  "_src_reader": "e1b02320"
  },
  "verb-2293": {
   "translation_pl": "zdobywać, załatwiać; zapewniać (coś komuś lub sobie)",
@@ -23320,8 +23320,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "ba4b598d",
-  "_src_reader": "b90ce357"
+  "_src": "2dd7afc2",
+  "_src_reader": "f819b0d4"
  },
  "verb-2304": {
   "translation_pl": "odstraszać, straszyć",
@@ -23483,8 +23483,8 @@
     "note_pl": "kogoś"
    }
   ],
-  "_src": "502b3468",
-  "_src_reader": "3fede1b3"
+  "_src": "2d1b054d",
+  "_src_reader": "b57cda34"
  },
  "verb-2320": {
   "translation_pl": "(książk.) wplątywać, wciągać (w coś nieprzyjemnego)",
@@ -23919,8 +23919,8 @@
     "note_pl": "przewodzić czemuś"
    }
   ],
-  "_src": "529f0333",
-  "_src_reader": "6858a20e"
+  "_src": "7ba353fb",
+  "_src_reader": "d57fb776"
  },
  "verb-2359": {
   "translation_pl": "symulować, udawać, pozorować",
@@ -24215,8 +24215,8 @@
     "note_pl": "kogoś (klientów, zwolenników)"
    }
   ],
-  "_src": "7256eb43",
-  "_src_reader": "54559f03"
+  "_src": "1b65f438",
+  "_src_reader": "cfc8cb70"
  },
  "verb-2387": {
   "translation_pl": "oceniać, traktować (jako coś); zaliczać (wynik w zawodach)",
@@ -24364,8 +24364,8 @@
     "note_pl": "coś / kogoś"
    }
   ],
-  "_src": "39b174e0",
-  "_src_reader": "db4c9ada"
+  "_src": "1947f9a7",
+  "_src_reader": "5b7cd6fd"
  },
  "verb-2400": {
   "translation_pl": "roić się, kłębić się; es wimmelt von … — aż się roi, aż się mrowi (od kogoś, czegoś)",
@@ -24441,8 +24441,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "3649faad",
-  "_src_reader": "72d9ea53"
+  "_src": "9cfdc485",
+  "_src_reader": "cb72722b"
  },
  "verb-2407": {
   "translation_pl": "rozpadać się, niszczeć, rozsypywać się; (na części) dzielić się",
@@ -24553,8 +24553,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "e8c53fad",
-  "_src_reader": "f36f7fdf"
+  "_src": "6a0962b8",
+  "_src_reader": "01f30e0a"
  },
  "verb-2420": {
   "translation_pl": "cytować; wzywać (do przełożonego, do sądu — w celu złożenia wyjaśnień)",
@@ -24888,8 +24888,8 @@
     "note_pl": "coś (drzwi, książkę)"
    }
   ],
-  "_src": "dafa6601",
-  "_src_reader": "3cf865ba"
+  "_src": "cb81e171",
+  "_src_reader": "b6f06aca"
  },
  "verb-2450": {
   "translation_pl": "dawać się we znaki (komuś), wyczerpywać; dokuczać, naprzykrzać się (komuś); dodawać (do substancji)",
@@ -24907,8 +24907,8 @@
   "reflexive": {
    "translation_pl": "zatykać się (o filtrze, rurze)"
   },
-  "_src": "8ec7aae2",
-  "_src_reader": "f8eeb999"
+  "_src": "10399dfb",
+  "_src_reader": "98bfaba8"
  },
  "verb-2451": {
   "translation_pl": "należeć się, przysługiwać (komuś); przystoić (komuś)",
@@ -24955,8 +24955,8 @@
     "note_pl": "czemuś (zapobiec)"
    }
   ],
-  "_src": "af23edf6",
-  "_src_reader": "c8b5e6be"
+  "_src": "8ebccf21",
+  "_src_reader": "78227e95"
  },
  "verb-2455": {
   "translation_pl": "zwracać się (ku czemuś), zająć się (czymś); obracać się (do kogoś)",
@@ -25096,8 +25096,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "df0db8f6",
-  "_src_reader": "be6cf830"
+  "_src": "9d98069b",
+  "_src_reader": "c96e5d93"
  },
  "verb-2468": {
   "translation_pl": "nadmuchiwać (balonik, materac); (pot. pejor.) rozdmuchiwać (przesadzać)",
@@ -25230,8 +25230,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "9c221fa7",
-  "_src_reader": "20c4d3e9"
+  "_src": "624134bd",
+  "_src_reader": "5bbeaa37"
  },
  "verb-2483": {
   "translation_pl": "(książk.) rozczarowywać, pozbawiać złudzeń",
@@ -25422,8 +25422,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "d5aec901",
-  "_src_reader": "148ce001"
+  "_src": "b60d6c01",
+  "_src_reader": "7a000101"
  },
  "verb-2501": {
   "translation_pl": "(książk.) implikować, zakładać, zawierać w sobie",
@@ -26470,7 +26470,7 @@
   "_src_reader": "f24e2a08"
  },
  "verb-2641": {
-  "translation_pl": "pokrywać, nakrywać (czymś; dach, koszty); nakrywać (do stołu); kryć (kogoś)",
+  "translation_pl": "pokrywać, nakrywać (czymś), kryć (dach); pokrywać (koszty); nakrywać (do stołu); kryć (kogoś)",
   "usage_note_pl": "Den Tisch decken — nakrywać do stołu: Kannst du bitte den Tisch decken?",
   "example_pl": "Śnieg pokrył pola.",
   "reflexive": {
@@ -26478,8 +26478,8 @@
    "example_pl": "Nasze wyniki pokrywają się z wynikami innego badania.",
    "note_pl": "Z czym — mit + Dativ."
   },
-  "_src": "6e467fbb",
-  "_src_reader": "6dc88c5f"
+  "_src": "20de08d6",
+  "_src_reader": "31fdafb6"
  },
  "verb-2642": {
   "translation_pl": "okrywać, przykrywać",
@@ -26566,8 +26566,8 @@
     "note_pl": "coś"
    }
   ],
-  "_src": "19d92d39",
-  "_src_reader": "b818acaa"
+  "_src": "ec9965a2",
+  "_src_reader": "cd92efb7"
  },
  "verb-2648": {
   "translation_pl": "regulować, przestawiać (siedzenie, lusterko); zastawiać (przejście); przestawiać (w złe miejsce); zmieniać (głos)",
@@ -26931,8 +26931,8 @@
     "note_pl": "za kimś, czymś (uganiać się)"
    }
   ],
-  "_src": "54908c8d",
-  "_src_reader": "1139b9da"
+  "_src": "2e6a1979",
+  "_src_reader": "4f7f8bfe"
  },
  "verb-2695": {
   "translation_pl": "nadal korzystać (z czegoś), dalej używać",
@@ -27110,8 +27110,8 @@
     "note_pl": "komuś (dobrze)"
    }
   ],
-  "_src": "c0743aa3",
-  "_src_reader": "cfaea9f8"
+  "_src": "18a1ee31",
+  "_src_reader": "642498ba"
  },
  "verb-2714": {
   "translation_pl": "obrażać się (na kogoś, o coś), mieć za złe (komuś)",
@@ -27275,8 +27275,8 @@
     "note_pl": "coś (stronę, kołnierz)"
    }
   ],
-  "_src": "285b966f",
-  "_src_reader": "6fb5c826"
+  "_src": "45f52020",
+  "_src_reader": "b14c9299"
  },
  "verb-2733": {
   "translation_pl": "uchylać się (od płacenia podatków)",
@@ -27340,7 +27340,7 @@
   "_src_reader": "078f25d0"
  },
  "verb-2743": {
-  "translation_pl": "spuszczać, wypuszczać (wodę, powietrze, parę); opuścić, zejść (z ceny); (książk.; von + Dat.) odstąpić (od czegoś), dać spokój (komuś)",
+  "translation_pl": "spuszczać, wypuszczać (wodę, powietrze, parę); opuścić, zejść (z ceny); (książk., von + Dat.) odstąpić (od czegoś), dać spokój (komuś)",
   "usage_note_pl": "Rozdzielny: lässt ab, ließ ab, hat abgelassen. Spuszczać — Akkusativ: das Wasser aus der Wanne ablassen. Z ceny: Er hat mir zehn Euro abgelassen. — Opuścił mi dziesięć euro. Dampf ablassen — wypuścić parę (także przen.: odreagować, wyładować złość). Dać spokój (książk.) — von + Dativ: Er ließ nicht von ihr ab. — Nie dawał jej spokoju.",
   "example_pl": "Zanim wyczyścisz wannę, musisz spuścić wodę.",
   "complements": [
@@ -27362,8 +27362,8 @@
     "note_pl": "komuś ileś (z ceny)"
    }
   ],
-  "_src": "11436629",
-  "_src_reader": "583716ad"
+  "_src": "8ca50359",
+  "_src_reader": "fa793b91"
  },
  "verb-2744": {
   "translation_pl": "mówić dalej",
@@ -27458,7 +27458,7 @@
   "_src_reader": "502077d5"
  },
  "verb-2771": {
-  "translation_pl": "pędzić, przemykać (o wietrze, burzy; o człowieku)",
+  "translation_pl": "pędzić, przemykać (o wietrze, burzy, człowieku)",
   "usage_note_pl": "O ruchu Perfekt z sein: Er ist um die Ecke gefegt. „Zamiatać” — fegen z haben (osobne hasło).",
   "example_pl": "Nad pustymi polami przemknął zimny wiatr.",
   "complements": [
@@ -27466,8 +27466,8 @@
     "note_pl": "przemknąć nad czymś (über das Land), przez coś (durch die Straßen) lub za coś (um die Ecke)"
    }
   ],
-  "_src": "0d77b09a",
-  "_src_reader": "46a89784"
+  "_src": "3908d65c",
+  "_src_reader": "f3f6e1e8"
  },
  "verb-2780": {
   "translation_pl": "zwalić z nóg (potrącając)",
@@ -27525,8 +27525,8 @@
     "note_pl": "spełnić coś (żądanie, obowiązek, prośbę)"
    }
   ],
-  "_src": "916577b0",
-  "_src_reader": "07cdcfea"
+  "_src": "249393c9",
+  "_src_reader": "b2fb4567"
  },
  "verb-2788": {
   "translation_pl": "ciągnąć za sobą; dokręcać (śruby); obrysowywać, podkreślać (linię, brwi); (pot.) pójść (za przykładem)",
@@ -27546,8 +27546,8 @@
     "note_pl": "obrysować, podkreślić coś (Linie, Lippen, Augenbrauen)"
    }
   ],
-  "_src": "a9d4f1c4",
-  "_src_reader": "db995a34"
+  "_src": "0ffa8590",
+  "_src_reader": "50474c80"
  },
  "verb-2789": {
   "translation_pl": "pójść, ruszyć (za kimś); przeprowadzić się (za kimś)",
@@ -27578,8 +27578,8 @@
     "note_pl": "coś (ziemię, ziemniaki)"
    }
   ],
-  "_src": "e0fdd6cb",
-  "_src_reader": "9a8209f2"
+  "_src": "2da965b1",
+  "_src_reader": "7c9f2520"
  },
  "verb-2791": {
   "translation_pl": "ruszyć, rozpocząć się; poczerwienieć, pociemnieć, zaparować; brać rozbieg; zawijać (do portu)",
@@ -27594,8 +27594,8 @@
     "note_pl": "występować przeciwko czemuś"
    }
   ],
-  "_src": "9aed8afa",
-  "_src_reader": "f6e96adc"
+  "_src": "a013e024",
+  "_src_reader": "425ad6a2"
  },
  "verb-2792": {
   "translation_pl": "(książk.) pokrzepić się, orzeźwić się; uraczyć się, delektować się (czymś)",
@@ -27614,16 +27614,20 @@
  },
  "verb-2793": {
   "translation_pl": "przeprowadzać, wprowadzać w życie (ustawę, decyzję); przeforsowywać, narzucać",
-  "usage_note_pl": "seinen Willen durchsetzen — postawić na swoim; eine Reform gegen Widerstände durchsetzen — przeprowadzić reformę wbrew oporowi; seine Forderungen durchsetzen — doprowadzić do spełnienia swoich żądań. Czasownik zwrotny sich durchsetzen (przebić się, wziąć górę) — zob. osobne hasło. Nie mylić z nierozdzielnym durchsetzen (Partizip II durchsetzt): mit etwas durchsetzt — przesycony, przemieszany z czymś.",
+  "usage_note_pl": "seinen Willen durchsetzen — postawić na swoim; eine Reform gegen Widerstände durchsetzen — przeprowadzić reformę wbrew oporowi; seine Forderungen durchsetzen — doprowadzić do spełnienia swoich żądań. Czasownik zwrotny sich durchsetzen (przebić się, wziąć górę) — zob. osobne hasło. Nie mylić: durchsetzen (nierozdzielny: durchsetzt, hat durchsetzt) — przetykać (osobne hasło).",
   "example_pl": "Rząd chce przeprowadzić nową ustawę jeszcze w tym roku.",
   "complements": [
    {
-    "meaning_pl": "przeprowadzać, wprowadzać w życie (ustawę, decyzję); przeforsowywać, narzucać",
-    "note_pl": "coś (ein Gesetz, seinen Willen, eine Forderung)"
+    "meaning_pl": "przeprowadzać, wprowadzać w życie (ustawę, decyzję)",
+    "note_pl": "coś: ein Gesetz durchsetzen"
+   },
+   {
+    "meaning_pl": "przeforsowywać, narzucać",
+    "note_pl": "coś: seinen Willen durchsetzen"
    }
   ],
-  "_src": "0285735b",
-  "_src_reader": "8fa7ea31"
+  "_src": "abb5d51c",
+  "_src_reader": "0b03ae19"
  },
  "verb-2794": {
   "translation_pl": "wrzucać (list); wtrącać (uwagę), zauważać; wybijać (okno)",
@@ -27722,5 +27726,20 @@
   "example_pl": "Załadowaliśmy meble do furgonetki.",
   "_src": "14146f6f",
   "_src_reader": "b5929650"
+ },
+ "verb-2806": {
+  "translation_pl": "przetykać, przeplatać, przesycać (czymś)",
+  "usage_note_pl": "Nierozdzielny: durchsetzt, durchsetzte, hat durchsetzt. Także o ludziach: einen Betrieb mit Spitzeln durchsetzen — naszpikować zakład szpiclami. Zwykle jako imiesłów: mit etwas, von etwas durchsetzt sein — być przetkanym czymś, przemieszanym z czymś: Der Text ist mit Fehlern durchsetzt. Nie mylić: durchsetzen (rozdzielny: setzt durch, hat durchgesetzt) — przeprowadzać, przeforsowywać (osobne hasło).",
+  "example_pl": "Skała jest przetkana cienkimi żyłkami złota.",
+  "complements": [
+   {
+    "note_pl": "coś: einen Prosatext mit Versen durchsetzen"
+   },
+   {
+    "note_pl": "czymś: einen Betrieb mit Spitzeln durchsetzen, mit Fehlern durchsetzt"
+   }
+  ],
+  "_src": "92b1f72d",
+  "_src_reader": "501fca66"
  }
 }

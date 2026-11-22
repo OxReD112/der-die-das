@@ -2354,8 +2354,8 @@
  "adjective-464": {
   "translation_pl": "płaski, równy; przebity (o oponie); banalny, płaski (o dowcipie, słowach); osłupiały; wykończony, bez sił",
   "example_pl": "Okolica jest tu zupełnie płaska, idealna do jazdy na rowerze.",
-  "usage_note_pl": "„Banalny” — pejoratywnie. platt sein (pot.): 1) być osłupiałym; 2) być wykończonym. einen Platten haben — złapać gumę.",
-  "_src": "5cfb0549",
+  "usage_note_pl": "„Banalny” — pejoratywnie. platt sein (pot.): (1) być osłupiałym; (2) być wykończonym. einen Platten haben — złapać gumę.",
+  "_src": "1908594f",
   "_src_reader": "7478e9b2"
  },
  "adjective-465": {
@@ -7366,11 +7366,11 @@
   "_src_reader": "ff20ddf5"
  },
  "adjective-1238": {
-  "translation_pl": "organiczny (o przyrodzie ożywionej, substancjach; w chemii); organiczny, somatyczny (o narządach, chorobie); organiczny, naturalny, harmonijny",
+  "translation_pl": "organiczny (o przyrodzie ożywionej, substancjach, w chemii); organiczny, somatyczny (o narządach, chorobie); organiczny, naturalny, harmonijny",
   "example_pl": "Odpady organiczne, takie jak obierki z owoców, trafiają u nas do brązowego pojemnika.",
   "usage_note_pl": "O przyrodzie ożywionej i w znaczeniu „naturalny, harmonijny” — książkowo. O żywności ekologicznej mówi się Bio-, a nie organisch.",
-  "_src": "e7d7a58a",
-  "_src_reader": "e2ca475c"
+  "_src": "55ee3305",
+  "_src_reader": "2ce7d973"
  },
  "adjective-1239": {
   "translation_pl": "zorganizowany, dobrze przygotowany, zaplanowany; zrzeszony (w związku zawodowym, partii)",

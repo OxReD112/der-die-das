@@ -2124,25 +2124,29 @@
         "pattern": "für + Akkusativ",
         "note_ru": "причина, основание чего-либо: der Grund für die Verspätung",
         "note_en": "reason for something: der Grund für die Verspätung",
-        "meaning_ru": "причина"
+        "meaning_ru": "причина",
+        "meaning_en": "reason"
       },
       {
         "pattern": "für + Akkusativ",
         "note_ru": "причина, основание чего-либо: der Grund für die Verspätung",
         "note_en": "reason for something: der Grund für die Verspätung",
-        "meaning_ru": "основание"
+        "meaning_ru": "основание",
+        "meaning_en": "basis"
       },
       {
         "pattern": "zu + Dativ",
         "note_ru": "повод, основание для чего-либо: kein Grund zur Panik, Grund zur Annahme",
         "note_en": "reason, grounds for something: kein Grund zur Panik, Grund zur Annahme",
-        "meaning_ru": "причина"
+        "meaning_ru": "причина",
+        "meaning_en": "reason"
       },
       {
         "pattern": "zu + Dativ",
         "note_ru": "повод, основание для чего-либо: kein Grund zur Panik, Grund zur Annahme",
         "note_en": "reason, grounds for something: kein Grund zur Panik, Grund zur Annahme",
-        "meaning_ru": "основание"
+        "meaning_ru": "основание",
+        "meaning_en": "basis"
       }
     ]
   },
@@ -3166,7 +3170,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "решение чего-либо: проблемы, задачи",
         "note_en": "solution to something",
-        "meaning_ru": "решение"
+        "meaning_ru": "решение",
+        "meaning_en": "solution"
       }
     ]
   },
@@ -4154,7 +4159,8 @@
         "pattern": "an + Dativ",
         "note_ru": "предложение чего-либо, выбор: das Angebot an Wohnungen",
         "note_en": "supply of, range of: das Angebot an Wohnungen",
-        "meaning_ru": "предложение"
+        "meaning_ru": "предложение",
+        "meaning_en": "offer"
       }
     ]
   },
@@ -4307,6 +4313,7 @@
       {
         "pattern": "über + Akkusativ",
         "meaning_ru": "справка, информация",
+        "meaning_en": "information",
         "note_ru": "справка, сведения о ком-либо, чём-либо: Auskunft über die Abfahrtszeiten",
         "note_en": "information about someone, something: Auskunft über die Abfahrtszeiten"
       }
@@ -4662,13 +4669,15 @@
         "pattern": "über + Akkusativ",
         "note_ru": "информация о чём-либо",
         "note_en": "information about something",
-        "meaning_ru": "информация"
+        "meaning_ru": "информация",
+        "meaning_en": "information"
       },
       {
         "pattern": "zu + Dativ",
         "note_ru": "информация по чему-либо",
         "note_en": "information on something",
-        "meaning_ru": "информация"
+        "meaning_ru": "информация",
+        "meaning_en": "information"
       }
     ]
   },
@@ -5174,7 +5183,8 @@
         "pattern": "an + Dativ",
         "note_ru": "удовольствие от чего-либо",
         "note_en": "fun in, enjoyment of something",
-        "meaning_ru": "удовольствие"
+        "meaning_ru": "удовольствие",
+        "meaning_en": "fun"
       }
     ]
   },
@@ -5242,7 +5252,8 @@
         "pattern": "gegen + Akkusativ",
         "note_ru": "заявление в полицию на кого-либо",
         "note_en": "criminal complaint against someone",
-        "meaning_ru": "заявление (в полицию)"
+        "meaning_ru": "заявление (в полицию)",
+        "meaning_en": "report to the police"
       }
     ]
   },
@@ -9091,7 +9102,8 @@
         "pattern": "vor + Dativ",
         "note_ru": "уважение к кому-либо, чему-либо",
         "note_en": "respect for someone, something",
-        "meaning_ru": "уважение"
+        "meaning_ru": "уважение",
+        "meaning_en": "respect"
       }
     ]
   },
@@ -10474,7 +10486,8 @@
         "pattern": "in + Akkusativ",
         "note_ru": "приём, принятие во что-либо: die Aufnahme in die EU",
         "note_en": "admission to something: die Aufnahme in die EU",
-        "meaning_ru": "приём (в организацию, в больницу)"
+        "meaning_ru": "приём (в организацию, в больницу)",
+        "meaning_en": "admission"
       }
     ]
   },
@@ -13221,7 +13234,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "объяснение чего-либо",
         "note_en": "explanation for something",
-        "meaning_ru": "объяснение"
+        "meaning_ru": "объяснение",
+        "meaning_en": "explanation"
       }
     ]
   },
@@ -14265,7 +14279,8 @@
         "pattern": "an + Akkusativ",
         "note_ru": "мысль о ком-либо, чём-либо: der Gedanke an den Urlaub",
         "note_en": "thought of someone, something: der Gedanke an den Urlaub",
-        "meaning_ru": "мысль"
+        "meaning_ru": "мысль",
+        "meaning_en": "thought"
       }
     ]
   },
@@ -14342,7 +14357,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "чувство чего-либо: ein Gefühl für Rhythmus",
         "note_en": "feel for, sense of something: ein Gefühl für Rhythmus",
-        "meaning_ru": "чувство"
+        "meaning_ru": "чувство",
+        "meaning_en": "feeling"
       }
     ]
   },
@@ -14576,7 +14592,8 @@
         "pattern": "gegen + Akkusativ",
         "note_ru": "насилие в отношении кого-либо: Gewalt gegen Frauen",
         "note_en": "violence against someone: Gewalt gegen Frauen",
-        "meaning_ru": "насилие"
+        "meaning_ru": "насилие",
+        "meaning_en": "violence"
       }
     ]
   },
@@ -14786,13 +14803,15 @@
         "pattern": "zu + Dativ",
         "note_ru": "граница с чем-либо: die Grenze zu Polen",
         "note_en": "border with something: die Grenze zu Polen",
-        "meaning_ru": "граница"
+        "meaning_ru": "граница",
+        "meaning_en": "border"
       },
       {
         "pattern": "zwischen + Dativ",
         "note_ru": "граница между чем-либо",
         "note_en": "border between",
-        "meaning_ru": "граница"
+        "meaning_ru": "граница",
+        "meaning_en": "border"
       }
     ]
   },
@@ -16446,7 +16465,8 @@
         "pattern": "an + Dativ",
         "note_ru": "критика кого-либо, чего-либо",
         "note_en": "criticism of someone, something",
-        "meaning_ru": "критика"
+        "meaning_ru": "критика",
+        "meaning_en": "criticism"
       }
     ]
   },
@@ -17195,7 +17215,8 @@
         "pattern": "an + Dativ",
         "note_ru": "нехватка, недостаток чего-либо",
         "note_en": "lack of something",
-        "meaning_ru": "нехватка, недостаток"
+        "meaning_ru": "нехватка, недостаток",
+        "meaning_en": "lack, shortage"
       }
     ]
   },
@@ -19913,7 +19934,8 @@
         "pattern": "an + Dativ",
         "note_ru": "вина в чём-либо: Schuld am Unfall",
         "note_en": "blame for something: Schuld am Unfall",
-        "meaning_ru": "вина"
+        "meaning_ru": "вина",
+        "meaning_en": "fault, guilt"
       }
     ]
   },
@@ -20194,7 +20216,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "чувство чего-либо: Sinn für Humor",
         "note_en": "sense of something: Sinn für Humor",
-        "meaning_ru": "чувство, способность восприятия"
+        "meaning_ru": "чувство, способность восприятия",
+        "meaning_en": "sense"
       }
     ]
   },
@@ -21166,7 +21189,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "талант к чему-либо",
         "note_en": "talent for something",
-        "meaning_ru": "талант, способность"
+        "meaning_ru": "талант, способность",
+        "meaning_en": "talent"
       }
     ]
   },
@@ -22303,7 +22327,8 @@
         "pattern": "zwischen + Dativ",
         "note_ru": "сравнение между чем-либо: ein Vergleich zwischen den beiden Ländern",
         "note_en": "comparison between: ein Vergleich zwischen den beiden Ländern",
-        "meaning_ru": "сравнение"
+        "meaning_ru": "сравнение",
+        "meaning_en": "comparison"
       }
     ]
   },
@@ -22353,25 +22378,29 @@
         "pattern": "zu + Dativ",
         "note_ru": "отношение к чему-либо: ein entspanntes Verhältnis zum Geld; отношения с кем-либо: sein Verhältnis zum Chef",
         "note_en": "attitude to something: ein entspanntes Verhältnis zum Geld; relationship with someone: sein Verhältnis zum Chef",
-        "meaning_ru": "отношение, соотношение"
+        "meaning_ru": "отношение, соотношение",
+        "meaning_en": "ratio"
       },
       {
         "pattern": "zu + Dativ",
         "note_ru": "отношение к чему-либо: ein entspanntes Verhältnis zum Geld; отношения с кем-либо: sein Verhältnis zum Chef",
         "note_en": "attitude to something: ein entspanntes Verhältnis zum Geld; relationship with someone: sein Verhältnis zum Chef",
-        "meaning_ru": "отношения"
+        "meaning_ru": "отношения",
+        "meaning_en": "relationship"
       },
       {
         "pattern": "zwischen + Dativ",
         "note_ru": "соотношение между чем-либо: das Verhältnis zwischen Preis und Leistung; отношения между кем-либо: das Verhältnis zwischen den Brüdern",
         "note_en": "ratio between: das Verhältnis zwischen Preis und Leistung; relationship between: das Verhältnis zwischen den Brüdern",
-        "meaning_ru": "отношение, соотношение"
+        "meaning_ru": "отношение, соотношение",
+        "meaning_en": "ratio"
       },
       {
         "pattern": "zwischen + Dativ",
         "note_ru": "соотношение между чем-либо: das Verhältnis zwischen Preis und Leistung; отношения между кем-либо: das Verhältnis zwischen den Brüdern",
         "note_en": "ratio between: das Verhältnis zwischen Preis und Leistung; relationship between: das Verhältnis zwischen den Brüdern",
-        "meaning_ru": "отношения"
+        "meaning_ru": "отношения",
+        "meaning_en": "relationship"
       }
     ]
   },
@@ -22786,7 +22815,8 @@
         "pattern": "von + Dativ",
         "note_ru": "представление о чём-либо",
         "note_en": "idea of something",
-        "meaning_ru": "представление, мысленный образ"
+        "meaning_ru": "представление, мысленный образ",
+        "meaning_en": "idea, mental image"
       }
     ]
   },
@@ -22851,13 +22881,15 @@
         "pattern": "zu + Dativ",
         "note_ru": "выборы во что-либо: die Wahl zum Bundestag; избрание кем-либо: die Wahl zum Präsidenten",
         "note_en": "election to something: die Wahl zum Bundestag; being elected as: die Wahl zum Präsidenten",
-        "meaning_ru": "выборы"
+        "meaning_ru": "выборы",
+        "meaning_en": "election"
       },
       {
         "pattern": "zu + Dativ",
         "note_ru": "выборы во что-либо: die Wahl zum Bundestag; избрание кем-либо: die Wahl zum Präsidenten",
         "note_en": "election to something: die Wahl zum Bundestag; being elected as: die Wahl zum Präsidenten",
-        "meaning_ru": "избрание (на должность)"
+        "meaning_ru": "избрание (на должность)",
+        "meaning_en": "election to an office"
       }
     ]
   },
@@ -23107,7 +23139,8 @@
         "pattern": "um + Akkusativ",
         "note_ru": "знание, осознание чего-либо: das Wissen um die Gefahr",
         "note_en": "awareness of something: das Wissen um die Gefahr",
-        "meaning_ru": "осведомлённость"
+        "meaning_ru": "осведомлённость",
+        "meaning_en": "awareness"
       }
     ]
   },
@@ -23454,13 +23487,15 @@
         "pattern": "zu + Dativ",
         "note_ru": "вход, проход куда-либо: der Zugang zum Garten; доступ к чему-либо: Zugang zum Internet",
         "note_en": "way in, entrance to something: der Zugang zum Garten; access to something: Zugang zum Internet",
-        "meaning_ru": "вход, проход"
+        "meaning_ru": "вход, проход",
+        "meaning_en": "entrance"
       },
       {
         "pattern": "zu + Dativ",
         "note_ru": "вход, проход куда-либо: der Zugang zum Garten; доступ к чему-либо: Zugang zum Internet",
         "note_en": "way in, entrance to something: der Zugang zum Garten; access to something: Zugang zum Internet",
-        "meaning_ru": "доступ"
+        "meaning_ru": "доступ",
+        "meaning_en": "access"
       }
     ]
   },
@@ -23701,13 +23736,15 @@
         "pattern": "über + Akkusativ",
         "note_ru": "досада из-за чего-либо",
         "note_en": "anger about something",
-        "meaning_ru": "досада, раздражение"
+        "meaning_ru": "досада, раздражение",
+        "meaning_en": "annoyance"
       },
       {
         "pattern": "mit + Dativ",
         "note_ru": "неприятности с кем-либо, чем-либо: Ärger mit dem Chef",
         "note_en": "trouble with someone, something: Ärger mit dem Chef",
-        "meaning_ru": "неприятности"
+        "meaning_ru": "неприятности",
+        "meaning_en": "trouble"
       }
     ]
   },
@@ -24521,7 +24558,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "слабость к чему-либо, кому-либо: eine Schwäche für Süßes",
         "note_en": "weakness for something, someone: eine Schwäche für Süßes",
-        "meaning_ru": "особое пристрастие"
+        "meaning_ru": "особое пристрастие",
+        "meaning_en": "soft spot"
       }
     ]
   },
@@ -26127,13 +26165,15 @@
         "pattern": "für + Akkusativ",
         "note_ru": "аргумент за что-либо",
         "note_en": "argument for something",
-        "meaning_ru": "аргумент, довод"
+        "meaning_ru": "аргумент, довод",
+        "meaning_en": "argument, reason"
       },
       {
         "pattern": "gegen + Akkusativ",
         "note_ru": "аргумент против чего-либо",
         "note_en": "argument against something",
-        "meaning_ru": "аргумент, довод"
+        "meaning_ru": "аргумент, довод",
+        "meaning_en": "argument, reason"
       }
     ]
   },
@@ -26433,7 +26473,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "активное участие в чём-либо, приверженность чему-либо",
         "note_en": "commitment to something",
-        "meaning_ru": "активное участие, самоотдача"
+        "meaning_ru": "активное участие, самоотдача",
+        "meaning_en": "commitment, dedication"
       }
     ]
   },
@@ -27233,13 +27274,15 @@
         "pattern": "gegenüber + Dativ",
         "note_ru": "терпимость к кому-либо, чему-либо: Toleranz gegenüber Andersdenkenden; переносимость чего-либо: die Toleranz gegenüber Alkohol",
         "note_en": "tolerance of someone, something: Toleranz gegenüber Andersdenkenden; tolerance to something: die Toleranz gegenüber Alkohol",
-        "meaning_ru": "терпимость"
+        "meaning_ru": "терпимость",
+        "meaning_en": "tolerance"
       },
       {
         "pattern": "gegenüber + Dativ",
         "note_ru": "терпимость к кому-либо, чему-либо: Toleranz gegenüber Andersdenkenden; переносимость чего-либо: die Toleranz gegenüber Alkohol",
         "note_en": "tolerance of someone, something: Toleranz gegenüber Andersdenkenden; tolerance to something: die Toleranz gegenüber Alkohol",
-        "meaning_ru": "переносимость внешних воздействий"
+        "meaning_ru": "переносимость внешних воздействий",
+        "meaning_en": "resistance to external influences"
       }
     ]
   },
@@ -28046,13 +28089,15 @@
         "pattern": "an + Akkusativ",
         "note_ru": "вера в кого-либо, что-либо",
         "note_en": "belief in someone, something",
-        "meaning_ru": "убеждённость, вера"
+        "meaning_ru": "убеждённость, вера",
+        "meaning_en": "belief"
       },
       {
         "pattern": "an + Akkusativ",
         "note_ru": "вера в кого-либо, что-либо",
         "note_en": "belief in someone, something",
-        "meaning_ru": "религиозная вера"
+        "meaning_ru": "религиозная вера",
+        "meaning_en": "religious faith"
       }
     ]
   },
@@ -28506,7 +28551,8 @@
         "pattern": "über + Akkusativ",
         "note_ru": "власть над кем-либо, чем-либо",
         "note_en": "power over someone, something",
-        "meaning_ru": "власть, влияние"
+        "meaning_ru": "власть, влияние",
+        "meaning_en": "power, influence"
       }
     ]
   },
@@ -29402,7 +29448,8 @@
         "pattern": "an + Akkusativ",
         "note_ru": "отказ от чего-либо: eine klare Absage an Gewalt",
         "note_en": "rejection of something: eine klare Absage an Gewalt",
-        "meaning_ru": "отклонение"
+        "meaning_ru": "отклонение",
+        "meaning_en": "refusal"
       }
     ]
   },
@@ -33521,19 +33568,22 @@
         "pattern": "von + Dativ",
         "note_ru": "понимание чего-либо, взгляд на что-либо",
         "note_en": "view of something",
-        "meaning_ru": "мнение"
+        "meaning_ru": "мнение",
+        "meaning_en": "opinion"
       },
       {
         "pattern": "von + Dativ",
         "note_ru": "понимание чего-либо, взгляд на что-либо",
         "note_en": "view of something",
-        "meaning_ru": "взгляд"
+        "meaning_ru": "взгляд",
+        "meaning_en": "view"
       },
       {
         "pattern": "von + Dativ",
         "note_ru": "понимание чего-либо, взгляд на что-либо",
         "note_en": "view of something",
-        "meaning_ru": "понимание"
+        "meaning_ru": "понимание",
+        "meaning_en": "understanding"
       }
     ]
   },
@@ -33716,7 +33766,8 @@
         "pattern": "mit + Dativ",
         "note_ru": "знакомство с кем-либо, чем-либо",
         "note_en": "acquaintance with someone, something",
-        "meaning_ru": "знакомство"
+        "meaning_ru": "знакомство",
+        "meaning_en": "acquaintance"
       }
     ]
   },
@@ -33890,7 +33941,8 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "связь, отношение к чему-либо: in Bezug auf die Frage",
         "note_en": "relation to something: in Bezug auf die Frage",
-        "meaning_ru": "связь"
+        "meaning_ru": "связь",
+        "meaning_en": "connection"
       }
     ]
   },
@@ -37161,7 +37213,8 @@
         "pattern": "um + Akkusativ",
         "note_ru": "скорбь по кому-либо",
         "note_en": "mourning for someone",
-        "meaning_ru": "горе, скорбь"
+        "meaning_ru": "горе, скорбь",
+        "meaning_en": "grief"
       }
     ]
   },
@@ -37263,13 +37316,15 @@
         "pattern": "mit + Dativ",
         "note_ru": "общение с кем-либо: der Umgang mit Kollegen; обращение с чем-либо: der Umgang mit Geld",
         "note_en": "dealings with someone: der Umgang mit Kollegen; handling of something: der Umgang mit Geld",
-        "meaning_ru": "общение"
+        "meaning_ru": "общение",
+        "meaning_en": "social contact"
       },
       {
         "pattern": "mit + Dativ",
         "note_ru": "общение с кем-либо: der Umgang mit Kollegen; обращение с чем-либо: der Umgang mit Geld",
         "note_en": "dealings with someone: der Umgang mit Kollegen; handling of something: der Umgang mit Geld",
-        "meaning_ru": "обращение с кем-либо или чем-либо"
+        "meaning_ru": "обращение с кем-либо или чем-либо",
+        "meaning_en": "handling or treatment"
       }
     ]
   },
@@ -38015,7 +38070,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "переход к чему-либо: der Übergang zur Demokratie",
         "note_en": "transition to something: der Übergang zur Demokratie",
-        "meaning_ru": "переход к новому состоянию"
+        "meaning_ru": "переход к новому состоянию",
+        "meaning_en": "transition"
       }
     ]
   },
@@ -38535,7 +38591,8 @@
         "pattern": "über + Akkusativ",
         "note_ru": "взгляд на что-либо, мнение о чём-либо",
         "note_en": "view on something",
-        "meaning_ru": "мнение"
+        "meaning_ru": "мнение",
+        "meaning_en": "opinion"
       }
     ]
   },
@@ -38779,7 +38836,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "внимание к чему-либо",
         "note_en": "attention to something",
-        "meaning_ru": "внимание"
+        "meaning_ru": "внимание",
+        "meaning_en": "attention"
       }
     ]
   },
@@ -38813,7 +38871,8 @@
         "pattern": "über + Akkusativ",
         "note_ru": "разъяснение, сведения о чём-либо: Aufschluss über etwas geben",
         "note_en": "insight into, information about something: Aufschluss über etwas geben",
-        "meaning_ru": "разъяснение, сведения"
+        "meaning_ru": "разъяснение, сведения",
+        "meaning_en": "clarification, information"
       }
     ]
   },
@@ -39410,13 +39469,15 @@
         "pattern": "für + Akkusativ",
         "note_ru": "нагрузка, бремя для кого-либо, чего-либо",
         "note_en": "burden on someone, something",
-        "meaning_ru": "нагрузка"
+        "meaning_ru": "нагрузка",
+        "meaning_en": "load"
       },
       {
         "pattern": "für + Akkusativ",
         "note_ru": "нагрузка, бремя для кого-либо, чего-либо",
         "note_en": "burden on someone, something",
-        "meaning_ru": "тягота"
+        "meaning_ru": "тягота",
+        "meaning_en": "strain or burden"
       }
     ]
   },
@@ -39476,7 +39537,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "готовность к чему-либо",
         "note_en": "willingness to, readiness for something",
-        "meaning_ru": "готовность"
+        "meaning_ru": "готовность",
+        "meaning_en": "readiness, willingness"
       }
     ]
   },
@@ -40834,7 +40896,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "отношение к чему-либо, кому-либо",
         "note_en": "attitude towards something, someone",
-        "meaning_ru": "настрой, отношение"
+        "meaning_ru": "настрой, отношение",
+        "meaning_en": "attitude"
       }
     ]
   },
@@ -42615,7 +42678,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "склонность к чему-либо: ein Hang zur Faulheit",
         "note_en": "tendency to something: ein Hang zur Faulheit",
-        "meaning_ru": "склонность, пристрастие"
+        "meaning_ru": "склонность, пристрастие",
+        "meaning_en": "inclination or penchant"
       }
     ]
   },
@@ -44053,13 +44117,15 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "сосредоточение на чём-либо",
         "note_en": "concentration on something",
-        "meaning_ru": "сосредоточенность, концентрация (внимания)"
+        "meaning_ru": "сосредоточенность, концентрация (внимания)",
+        "meaning_en": "concentration (of attention)"
       },
       {
         "pattern": "auf + Akkusativ",
         "note_ru": "сосредоточение на чём-либо",
         "note_en": "concentration on something",
-        "meaning_ru": "сосредоточение (сил, капитала)"
+        "meaning_ru": "сосредоточение (сил, капитала)",
+        "meaning_en": "concentration (of power, capital)"
       }
     ]
   },
@@ -44171,7 +44237,8 @@
         "pattern": "über + Akkusativ",
         "note_ru": "горе, печаль из-за чего-либо: Kummer über den Verlust",
         "note_en": "grief over something: Kummer über den Verlust",
-        "meaning_ru": "горе, печаль"
+        "meaning_ru": "горе, печаль",
+        "meaning_en": "grief, sorrow"
       }
     ]
   },
@@ -48338,7 +48405,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "обязательство сделать, соблюдать что-либо: die Verpflichtung zur Verschwiegenheit",
         "note_en": "obligation to something: die Verpflichtung zur Verschwiegenheit",
-        "meaning_ru": "обязанность, обязательство"
+        "meaning_ru": "обязанность, обязательство",
+        "meaning_en": "obligation, commitment"
       }
     ]
   },
@@ -48452,7 +48520,8 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "ссылка на что-либо",
         "note_en": "reference to something",
-        "meaning_ru": "ссылка (на другое место текста)"
+        "meaning_ru": "ссылка (на другое место текста)",
+        "meaning_en": "cross-reference"
       }
     ]
   },
@@ -48974,7 +49043,8 @@
         "pattern": "gegen + Akkusativ",
         "note_ru": "сопротивление чему-либо, кому-либо",
         "note_en": "resistance to something, someone",
-        "meaning_ru": "сопротивление, противодействие"
+        "meaning_ru": "сопротивление, противодействие",
+        "meaning_en": "resistance"
       }
     ]
   },
@@ -51348,13 +51418,15 @@
         "pattern": "zu + Dativ",
         "note_ru": "повод для чего-либо: kein Anlass zur Sorge",
         "note_en": "reason for, cause for: kein Anlass zur Sorge",
-        "meaning_ru": "повод, причина"
+        "meaning_ru": "повод, причина",
+        "meaning_en": "reason, cause, occasion"
       },
       {
         "pattern": "für + Akkusativ",
         "note_ru": "повод для чего-либо",
         "note_en": "reason for something",
-        "meaning_ru": "повод, причина"
+        "meaning_ru": "повод, причина",
+        "meaning_en": "reason, cause, occasion"
       }
     ]
   },
@@ -51482,7 +51554,8 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "покушение на кого-либо, теракт против чего-либо",
         "note_en": "attack on someone, something",
-        "meaning_ru": "покушение, теракт"
+        "meaning_ru": "покушение, теракт",
+        "meaning_en": "attack, assassination attempt"
       }
     ]
   },
@@ -51580,7 +51653,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "толчок к чему-либо: den Anstoß zur Reform geben",
         "note_en": "impetus for something: den Anstoß zur Reform geben",
-        "meaning_ru": "толчок, импульс, стимул"
+        "meaning_ru": "толчок, импульс, стимул",
+        "meaning_en": "impetus, stimulus, impulse"
       }
     ]
   },
@@ -52066,7 +52140,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "призыв к чему-либо: ein Aufruf zum Streik",
         "note_en": "call for something: ein Aufruf zum Streik",
-        "meaning_ru": "призыв, воззвание"
+        "meaning_ru": "призыв, воззвание",
+        "meaning_en": "appeal, call"
       }
     ]
   },
@@ -53096,13 +53171,15 @@
         "pattern": "an + Akkusativ",
         "note_ru": "привязанность к кому-либо, чему-либо: die Bindung an die Familie; обязательство, связанность чем-либо: die Bindung an den Vertrag",
         "note_en": "attachment to someone, something: die Bindung an die Familie; commitment, being bound by: die Bindung an den Vertrag",
-        "meaning_ru": "привязанность, связь"
+        "meaning_ru": "привязанность, связь",
+        "meaning_en": "bond, attachment, tie"
       },
       {
         "pattern": "an + Akkusativ",
         "note_ru": "привязанность к кому-либо, чему-либо: die Bindung an die Familie; обязательство, связанность чем-либо: die Bindung an den Vertrag",
         "note_en": "attachment to someone, something: die Bindung an die Familie; commitment, being bound by: die Bindung an den Vertrag",
-        "meaning_ru": "обязательство"
+        "meaning_ru": "обязательство",
+        "meaning_en": "commitment"
       }
     ]
   },
@@ -53961,19 +54038,22 @@
         "pattern": "in + Akkusativ",
         "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
         "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
-        "meaning_ru": "понимание, осознание"
+        "meaning_ru": "понимание, осознание",
+        "meaning_en": "insight, realization"
       },
       {
         "pattern": "in + Akkusativ",
         "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
         "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
-        "meaning_ru": "ознакомление (с документами)"
+        "meaning_ru": "ознакомление (с документами)",
+        "meaning_en": "inspection (of documents)"
       },
       {
         "pattern": "in + Akkusativ",
         "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
         "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
-        "meaning_ru": "вид (внутрь)"
+        "meaning_ru": "вид (внутрь)",
+        "meaning_en": "view (into)"
       }
     ]
   },
@@ -54097,7 +54177,8 @@
         "pattern": "über + Akkusativ",
         "note_ru": "возмущение чем-либо",
         "note_en": "outrage at something",
-        "meaning_ru": "возмущение, негодование"
+        "meaning_ru": "возмущение, негодование",
+        "meaning_en": "indignation, outrage"
       }
     ]
   },
@@ -61927,7 +62008,8 @@
         "pattern": "zu + Dativ",
         "note_ru": "позиция по чему-либо: Stellung zu einer Frage nehmen",
         "note_en": "position on something: Stellung zu einer Frage nehmen",
-        "meaning_ru": "позиция, отношение (к чему-л.)"
+        "meaning_ru": "позиция, отношение (к чему-л.)",
+        "meaning_en": "stance, attitude"
       }
     ]
   },
@@ -63955,7 +64037,8 @@
         "pattern": "vor + Dativ",
         "note_ru": "преимущество, отрыв от кого-либо",
         "note_en": "lead over someone",
-        "meaning_ru": "преимущество, отрыв"
+        "meaning_ru": "преимущество, отрыв",
+        "meaning_en": "lead, head start"
       }
     ]
   },
@@ -65296,7 +65379,8 @@
         "pattern": "für + Akkusativ",
         "note_ru": "талант, способности к чему-либо",
         "note_en": "talent for something",
-        "meaning_ru": "дарование, талант, способности"
+        "meaning_ru": "дарование, талант, способности",
+        "meaning_en": "gift, talent, aptitude"
       }
     ]
   },

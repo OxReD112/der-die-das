@@ -4,6 +4,31 @@
   // Speed (24.10.2026): toLowerCase() / toUpperCase() instead of toLocale…Case("de-DE") everywhere — the same result for every
   // string (German has no tailored casing; checked on all Unicode code points and all dictionary strings), many times faster in browsers.
   const norm = value => String(value || "").normalize("NFC").trim().toLowerCase();
+  // (Alena 22.11, advisor 22.11: «пара, привязанная к значению, находит значение в каждом языке по своей пометке») a pair of
+  // complements tied to a meaning marks that meaning in every language by its own text — meaning_ru in translation_ru, meaning_en in
+  // translation_en, meaning_<code> in the pack's translation_<code>; no number is carried from one language to another. A line is
+  // cut into meanings at «;» outside brackets. The rule that proved the meaning keeps the rows it used (senseMark: the field, the
+  // rows' numbers and how they place the meaning — first: the first meaning a row marks comes first; free: the first meaning no row
+  // marks comes first after the marked ones before it; all: every marked meaning first, in the card's order); each language finds its
+  // place from its own marks. A row without the mark of a language — that language keeps its order (a pack: the English card).
+  const meaningPartsOf = text => { const out = []; let depth = 0, cur = "";
+    for (const ch of String(text || "")) { if (ch === "(" || ch === "[") depth++; if ((ch === ")" || ch === "]") && depth > 0) depth--;
+      if (ch === ";" && depth === 0) { out.push(cur.trim()); cur = ""; } else cur += ch; }
+    if (cur.trim()) out.push(cur.trim()); return out.filter(Boolean); };
+  // the place(s) of a senseMark in one language: {first} / {several} / {} (the order stays) / null (a row without this language's mark)
+  const markedSenses = (text, rows, mode, language) => {
+    const key = `meaning_${language}`, marks = (rows || []).map(x => String(x?.[key] || "").trim());
+    if (!marks.length || marks.some(m => !m)) return null;
+    const parts = meaningPartsOf(text), marked = parts.map(m => marks.includes(m));
+    if (mode === "all") { const at = parts.map((m, i) => marked[i] ? i : -1).filter(i => i >= 0);
+      return !at.length || at.every((i, n) => i === n) ? {} : at.length === 1 ? {first:at[0]} : {several:at}; }
+    const k = mode === "free" ? marked.findIndex(x => !x) : marked.findIndex(x => x);
+    return k > 0 && (mode !== "free" || marked.slice(0, k).every(Boolean)) ? {first:k} : {};
+  };
+  // the rows of a senseMark by their numbers in the card's field (a pack's rows have the same numbers): field item — complements,
+  // reflexive — reflexive.complements, light — a light record's complements (a pack has no rows for it: the English card)
+  const senseMarkOf = (source, mark) => { const list = mark.field === "reflexive" ? source?.reflexive?.complements : source?.complements;
+    return {field:mark.field, rows:mark.rows.map(x => (list || []).indexOf(x)).filter(i => i >= 0), mode:mark.mode}; };
   // Lists cleanup step 2 (25.10.2026): word lists that several rules share — one constant per meaning, not per set of words
   // (two rules that only happen to use the same words keep two constants, so changing one rule never changes the other).
   // Each holds the same words as the copies it replaced — in the same order wherever the order could matter (an
@@ -6241,7 +6266,7 @@ function apostropheText(text) {
       const of = (x, m) => !x.meaning_ru || String(x.meaning_ru).trim() === m;
       const isDat = x => /Dativ/u.test(x.pattern) && !/Akkusativ/u.test(x.pattern);
       const env = typeof process !== "undefined" ? process.env || {} : {};
-      let at = -1;
+      let at = -1, mark = null;
       for (const need of ["Dativ","Akkusativ"]) {
         const ofCase = marks.filter(x => need === "Dativ" ? isDat(x) : !isDat(x));
         if (!ofCase.length) continue;
@@ -6259,18 +6284,18 @@ function apostropheText(text) {
         const present = strictPresent === true ? true : separatedObjectInPart(c, sentence, tokens, need) === false || need === "Akkusativ" && noAccusativeInPart(c, sentence, tokens) ? false : null;
         if (present === true && !(need === "Akkusativ" && env.REQUIRED_AKK_RAISE === "0")) {
           const k = ru.findIndex(takes);
-          if (k > 0 && !ru.slice(0, k).some(takes)) { at = k; break; }
+          if (k > 0 && !ru.slice(0, k).some(takes)) { at = k; mark = {field:"item", rows:ofCase, mode:"first"}; break; }
         } else if (present === false) {
           const k = ru.findIndex(m => !needs(m));
-          if (k > 0 && ru.slice(0, k).every(needs)) { at = k; break; }
+          if (k > 0 && ru.slice(0, k).every(needs)) { at = k; mark = {field:"item", rows:ofCase.filter(x => x.required === true), mode:"free"}; break; }
         }
       }
       if (at <= 0) return;
       c.senseFirst = at;
-      const en = String(c.item?.translation_en || "").split(";").map(x => x.trim()).filter(Boolean);
-      // (advisor 15.11: an English line cut otherwise than the Russian one keeps its order — aufgeben «to give up; to send» has three
-      // meanings for four Russian ones; the Russian index would raise «to send»)
-      c.senseFirstEn = en.length === ru.length ? at : 0;
+      // (Alena 22.11: the English place by the rows' own marks — meaning_en; a row without one keeps the English order, as an English
+      // line cut otherwise did before — aufgeben «to give up; to send», advisor 15.11)
+      c.senseFirstEn = markedSenses(c.item?.translation_en, mark.rows, mark.mode, "en")?.first ?? 0;
+      c.senseMark = senseMarkOf(c.item, mark);
     }
     // (TODO п. 98, advisor 14.11) an external separated verb with an object in its part: in the English line a meaning that the external
     // dictionary tags «transitive» («may take an accusative») comes before the meanings tagged «intransitive» in front of it. The Russian
@@ -17496,8 +17521,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // the noun; its own pairs first, else its verb's)
       const nounOwn = !isVerb && !isPreposition && type === 'Nomen' && /^\p{Lu}/u.test(String(word)) ? (card.item?.complements || card.complements ||
         (card.source === 'fallback' ? lightByWordPos.get(`${norm(card.lemma || '')}|${card.pos}`)?.complements : null) || [])
-        .map(x => [/^(\S+)\s*\+\s*(Akkusativ|Dativ|Genitiv)$/u.exec(String(x?.pattern || '').trim()), String(x?.meaning_ru || '').trim()]).filter(([m]) => m)
-        .map(([m, meaning]) => [norm(m[1]), m[2], meaning]) : [];
+        .map(x => [/^(\S+)\s*\+\s*(Akkusativ|Dativ|Genitiv)$/u.exec(String(x?.pattern || '').trim()), String(x?.meaning_ru || '').trim(), x]).filter(([m]) => m)
+        .map(([m, meaning, row]) => [norm(m[1]), m[2], meaning, row]) : [];
       // (advisor 21.11 (1): the pair is a meaning's — complements[].meaning_ru as the verbs have it (governedSenseFirst); a pair
       // without it is the whole word's. With the pair's preposition in the text its meaning comes first and the pair is in the grammar;
       // the other meanings stay on the card — our cards and the light records alike)
@@ -17619,7 +17644,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           /^(?:nächsten|anderen)$/u.test(norm(tokens[selected+3][0])) && !(selected + 4 <= clause.end && /^\p{Lu}/u.test(tokens[selected+4][0]));
         const loneDeterminer = selected + 2 <= clause.end && DETERMINER_WORD.test(norm(tokens[selected+2][0])) && (selected + 3 > clause.end || /[,;:.!?]/u.test(clause.sentence.slice(tokens[selected+2].index + tokens[selected+2][0].length, tokens[selected+3]?.index ?? clause.sentence.length)));
         if (rows.length && prep !== 'von' && !obj.some(t => /\d/u.test(t[0]) || CALENDAR.test(norm(t[0]))) && !laterPair && !loneDeterminer && !oneAfterAnother)
-          links.push({v:selected, p:selected + 1, verbBase:nounLink, rows, senses:pairSenses(ownRows)});
+          links.push({v:selected, p:selected + 1, verbBase:nounLink, rows, senses:pairSenses(ownRows), senseRows:ownRows.map(r => r[3])});
       }
       // (the particle verb with its particle closing the part wins over the bare verb of the same form — dachte über … nach: nachdenken,
       // not denken über; wies auf … hin: hinweisen)
@@ -17766,9 +17791,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 21.11 (1)) the meaning of the noun's pair first, as governedSenseFirst does for a verb; the English line only when it
       // has as many meanings
       const senses = nounLink && v === selected ? chosen[0].senses || [] : [];
+      // (Alena 22.11: the English places by the rows' own marks — meaning_en; a row without one keeps the English order)
+      const senseRows = nounLink && v === selected ? chosen[0].senseRows || [] : [];
+      const enMarked = senses.length ? markedSenses(card.item?.translation_en || lightRecord?.translation_en || card.translation?.en, senseRows, 'all', 'en') : null;
+      const enAt = enMarked?.several || (Number.isInteger(enMarked?.first) ? [enMarked.first] : null);
       const sensed = senses.length && senses.length < nounMeanings.length && !(senses.length === 1 && senses[0] === 0) ? {
-        ...(senses.length === 1 ? {senseFirst:senses[0], senseFirstEn:nounMeaningsEn.length === nounMeanings.length ? senses[0] : 0}
-          : {sensesFirst:senses, ...(nounMeaningsEn.length === nounMeanings.length ? {sensesFirstEn:senses} : {})}), senseEvidence:'government'} : {};
+        ...(senses.length === 1 ? {senseFirst:senses[0], senseFirstEn:enAt?.length === 1 ? enAt[0] : 0}
+          : {sensesFirst:senses, ...(enAt?.length > 1 ? {sensesFirstEn:enAt} : {})}), senseEvidence:'government',
+        senseMark:senseMarkOf(card.item?.complements ? card.item : lightRecord || card, {field:card.item?.complements ? 'item' : 'light', rows:senseRows, mode:'all'})} : {};
       const marked = {...card,...sensed,prepositionLink:link}, id = window.BibliothekVocabulary.identity(card);
       resolution.candidates = resolution.candidates.map(c => window.BibliothekVocabulary.identity(c) === id ? marked : c);
       if (resolution.preferred === card) resolution.preferred = marked;
@@ -22800,9 +22830,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
       }
       if (!sure) return result;
-      const en = String(c.item?.translation_en || "").split(";").map(x => x.trim()).filter(Boolean);
-      const selected = {...c, senseFirst:index, sensesFirst:indices, senseFirstEn:en.length === ru.length ? index : 0,
-        ...(en.length === ru.length ? {sensesFirstEn:indices} : {}), senseEvidence:"dative-object"};
+      // (Alena 22.11: the English places by the rows' own marks — meaning_en)
+      const enMarked = markedSenses(c.item?.translation_en, marks, "all", "en");
+      const enAt = enMarked?.several || (Number.isInteger(enMarked?.first) ? [enMarked.first] : null);
+      const selected = {...c, senseFirst:index, sensesFirst:indices, senseFirstEn:enAt ? enAt[0] : 0,
+        ...(enAt ? {sensesFirstEn:enAt} : {}), senseEvidence:"dative-object", senseMark:senseMarkOf(c.item, {field:"item", rows:marks, mode:"all"})};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
         candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
@@ -22880,29 +22912,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'governedSenseFirst');
       const at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
+      let row = null;
       const pick = (text, rows) => {
         const ru = String(text || "").split(";").map(x => x.trim()).filter(Boolean);
         if (ru.length < 2) return -1;
         const marks = (rows || []).filter(x => x && x.meaning_ru && GOV_PATTERN.test(String(x.pattern || "").trim()));
         for (const x of marks) {
           const k = ru.indexOf(String(x.meaning_ru).trim());
-          if (k > 0 && (impersonalComplement(c.lemma, x) ? esInPart(sentence, tokens, at) && governedGroupInPart(sentence, tokens, at, x.pattern, true) : governedGroupInPart(sentence, tokens, at, x.pattern))) return k;
+          if (k > 0 && (impersonalComplement(c.lemma, x) ? esInPart(sentence, tokens, at) && governedGroupInPart(sentence, tokens, at, x.pattern, true) : governedGroupInPart(sentence, tokens, at, x.pattern))) { row = x; return k; }
         }
         return -1;
       };
+      // (Alena 22.11: the English place by the row's own mark — meaning_en; the first English meaning it marks, as the Russian one)
+      const enOf = text => markedSenses(text, [row], "first", "en")?.first ?? 0;
       const field = c.construction?.id === "reflexive-verb" && c.item?.reflexive && typeof c.item.reflexive === "object" ? c.item.reflexive : null;
       if (field && Array.isArray(field.complements)) {
         const k = pick(field.translation_ru, field.complements);
         if (k > 0) {
-          const en = String(field.translation_en || "").split(";").map(x => x.trim()).filter(Boolean), ru = String(field.translation_ru).split(";").map(x => x.trim()).filter(Boolean);
-          const selected = {...c, fieldSenseFirst:k, fieldSenseFirstEn:en.length === ru.length ? k : 0, senseEvidence:"government"};
+          const selected = {...c, fieldSenseFirst:k, fieldSenseFirstEn:enOf(field.translation_en), senseEvidence:"government",
+            senseMark:senseMarkOf(c.item, {field:"reflexive", rows:[row], mode:"first"})};
           return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
         }
       }
       const k = pick(c.item?.translation_ru, c.item?.complements);
       if (k <= 0) return result;
-      const ru = String(c.item.translation_ru).split(";").map(x => x.trim()).filter(Boolean), en = String(c.item?.translation_en || "").split(";").map(x => x.trim()).filter(Boolean);
-      const selected = {...c, senseFirst:k, senseFirstEn:en.length === ru.length ? k : 0, senseEvidence:"government"};
+      const selected = {...c, senseFirst:k, senseFirstEn:enOf(c.item?.translation_en), senseEvidence:"government",
+        senseMark:senseMarkOf(c.item, {field:"item", rows:[row], mode:"first"})};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
     async function stateAlternative(word, context, result) {

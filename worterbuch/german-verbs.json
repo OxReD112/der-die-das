@@ -216,6 +216,7 @@
       {
         "pattern": "zu + Dativ",
         "meaning_ru": "доходить (до чего-либо), происходить",
+        "meaning_en": "to come to, to happen",
         "note_ru": "es kommt zu etw. — дело доходит до чего-либо, происходит что-либо: Es kam zu einem Streit.",
         "note_en": "es kommt zu etw. — it comes to something, something happens: Es kam zu einem Streit."
       }
@@ -7183,6 +7184,7 @@
       {
         "pattern": "zu + Dativ",
         "meaning_ru": "быть на (чьей-либо) стороне",
+        "meaning_en": "to stand by, to side with (someone)",
         "note_ru": "быть на чьей-либо стороне, оставаться верным кому-либо",
         "note_en": "to stand by someone, to stick by someone"
       }
@@ -8503,6 +8505,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "любить, нравиться",
+        "meaning_en": "to like",
         "note_ru": "кого-либо / что-либо",
         "note_en": "someone / something"
       }
@@ -9465,13 +9468,15 @@
         "pattern": "Dativ",
         "note_ru": "сдаться кому-либо (der Polizei)",
         "note_en": "to give oneself up to someone (der Polizei)",
-        "meaning_ru": "сдаться (полиции)"
+        "meaning_ru": "сдаться (полиции)",
+        "meaning_en": "to give oneself up"
       },
       {
         "pattern": "Dativ",
         "note_ru": "принять (вызов), ответить (на вопросы) — einer Herausforderung, den Fragen",
         "note_en": "to face (a challenge), to answer (questions) — einer Herausforderung, den Fragen",
-        "meaning_ru": "принять (вызов), ответить (на вопросы)"
+        "meaning_ru": "принять (вызов), ответить (на вопросы)",
+        "meaning_en": "to face (a challenge, questions)"
       },
       {
         "pattern": "gegen + Akkusativ",
@@ -9691,6 +9696,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "тренировать",
+        "meaning_en": "to train",
         "note_ru": "кого-либо / что-либо",
         "note_en": "someone / something"
       }
@@ -10636,6 +10642,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "показывать",
+        "meaning_en": "to show",
         "note_ru": "кому-либо что-либо",
         "note_en": "someone something"
       }
@@ -12873,6 +12880,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "обсуждать",
+        "meaning_en": "to discuss",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -13832,6 +13840,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "вести (свести) вниз (к говорящему)",
+        "meaning_en": "to lead down (towards the speaker)",
         "note_ru": "вести вниз кого-либо",
         "note_en": "to lead someone down"
       }
@@ -16256,6 +16265,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "запускать",
+        "meaning_en": "to launch",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -16699,6 +16709,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "видеть сон",
+        "meaning_en": "to dream (in one's sleep)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -18605,6 +18616,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "согласовывать",
+        "meaning_en": "to coordinate",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -18710,6 +18722,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "уважать",
+        "meaning_en": "to respect",
         "note_ru": "кого-либо / что-либо",
         "note_en": "someone / something"
       }
@@ -19046,6 +19059,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "указывать",
+        "meaning_en": "to give, to state",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -19810,6 +19824,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "бросать",
+        "meaning_en": "to give up (a habit)",
         "note_ru": "что-либо",
         "note_en": "something"
       },
@@ -19817,6 +19832,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "отправлять (посылку)",
+        "meaning_en": "to send",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -19824,6 +19840,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сдавать (багаж)",
+        "meaning_en": "to check in",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -22304,6 +22321,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "засечь камерой (о превышении скорости)",
+        "meaning_en": "to catch speeding",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -25344,6 +25362,7 @@
         {
           "pattern": "an / bei + Dativ",
           "meaning_ru": "(bei / an den Händen) взяться (за руки)",
+          "meaning_en": "(bei / an den Händen) to join hands",
           "note_ru": "взяться за руки: sich an / bei den Händen fassen",
           "note_en": "to join hands: sich an / bei den Händen fassen"
         }
@@ -26208,6 +26227,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "вести",
+        "meaning_en": "to lead",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -26215,6 +26235,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "руководить",
+        "meaning_en": "to run",
         "note_ru": "чем-либо (предприятием, группой)",
         "note_en": "something (a business, a group)"
       }
@@ -26913,6 +26934,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "хватать",
+        "meaning_en": "to grab",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -27052,6 +27074,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "смотреть",
+        "meaning_en": "to watch",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -27975,6 +27998,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "клеить",
+        "meaning_en": "to glue",
         "note_ru": "что-либо (куда-либо)",
         "note_en": "something (somewhere)"
       }
@@ -29789,6 +29813,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "передавать (подавать)",
+        "meaning_en": "to pass",
         "note_ru": "кому-либо что-либо",
         "note_en": "something to someone"
       }
@@ -30070,6 +30095,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "включать",
+        "meaning_en": "to switch",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -31022,12 +31048,14 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "нести чушь (разг.)",
+        "meaning_en": "to talk nonsense (colloquial)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
       {
         "pattern": "Akkusativ",
         "meaning_ru": "прясть",
+        "meaning_en": "to spin",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -31326,6 +31354,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "вставлять, засовывать, втыкать",
+        "meaning_en": "to put, to stick, to insert",
         "note_ru": "что-либо куда-либо",
         "note_en": "something somewhere"
       }
@@ -31651,12 +31680,14 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "удариться, ушибить (руку, голову)",
+        "meaning_en": "to bump oneself, to hurt (one's hand, head)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
       {
         "pattern": "von + Dativ",
         "meaning_ru": "(книжн.) оттолкнуться (от чего-либо)",
+        "meaning_en": "(literary) to push off (from something)",
         "note_ru": "(книжн.) оттолкнуться от чего-либо (vom Boden); обычно — sich abstoßen",
         "note_en": "(literary) to push off from something (vom Boden); usually sich abstoßen"
       }
@@ -32136,6 +32167,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "заниматься (спортом)",
+        "meaning_en": "to do (sport)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -32143,6 +32175,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "гнать",
+        "meaning_en": "to drive",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -34006,6 +34039,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сжигать",
+        "meaning_en": "to burn (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -34295,7 +34329,8 @@
         "pattern": "nach + Dativ",
         "note_ru": "требовать, просить чего-либо; спрашивать кого-либо: Der Kranke verlangte nach Wasser.",
         "note_en": "to ask for, to call for: Der Kranke verlangte nach Wasser.",
-        "meaning_ru": "требовать"
+        "meaning_ru": "требовать",
+        "meaning_en": "to demand"
       }
     ],
     "lookup_forms": {
@@ -34596,6 +34631,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "передавать (знания)",
+        "meaning_en": "to convey, to teach",
         "note_ru": "что-либо (кому-либо)",
         "note_en": "something (to someone)"
       },
@@ -34603,6 +34639,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "устраивать (работу)",
+        "meaning_en": "to find (someone a job)",
         "note_ru": "кому-либо что-либо / кого-либо",
         "note_en": "something to someone / someone"
       }
@@ -35591,6 +35628,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "казаться",
+        "meaning_en": "to seem",
         "note_ru": "казаться кому-либо: Er kommt mir bekannt vor.",
         "note_en": "to seem to someone: Er kommt mir bekannt vor."
       }
@@ -36283,6 +36321,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "взвешивать",
+        "meaning_en": "to weigh (something)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -36462,6 +36501,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "считать",
+        "meaning_en": "to count",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -36883,12 +36923,14 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "подтверждать участие, принимать (приглашение)",
+        "meaning_en": "to accept (an invitation)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
       {
         "pattern": "Akkusativ",
         "meaning_ru": "обещать",
+        "meaning_en": "to promise",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -37246,6 +37288,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "вычитать, удерживать (из суммы), снимать (шкуру, постельное бельё)",
+        "meaning_en": "to subtract, to deduct, to strip (a skin, a bed)",
         "note_ru": "что-либо (из чего-либо)",
         "note_en": "something (from something)"
       }
@@ -37854,6 +37897,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "отрубать (ветку, сук)",
+        "meaning_en": "to chop off (a branch)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -38812,6 +38856,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "толкать",
+        "meaning_en": "to nudge",
         "note_ru": "кого-либо",
         "note_en": "someone"
       }
@@ -41017,6 +41062,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "просматривать, проходить (по пунктам)",
+        "meaning_en": "to go through (a text, a list)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -41206,6 +41252,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "идти на (риск), заключать (договор, брак), вступать (в связь)",
+        "meaning_en": "to take (a risk), to enter into (a marriage, an alliance, a bond)",
         "note_ru": "что-либо (ein Risiko, eine Ehe, ein Bündnis)",
         "note_en": "something (ein Risiko, eine Ehe, ein Bündnis)"
       }
@@ -41603,6 +41650,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "выяснять, устанавливать",
+        "meaning_en": "to determine, to find out",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -43996,6 +44044,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "пинать",
+        "meaning_en": "to kick",
         "note_ru": "что-либо (мяч)",
         "note_en": "something (a ball)"
       }
@@ -44325,6 +44374,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "зажимать, прищемлять",
+        "meaning_en": "to wedge, to trap",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -44382,6 +44432,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "колоть, раскалывать (орехи)",
+        "meaning_en": "to crack (nuts)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -44389,6 +44440,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "взламывать (код)",
+        "meaning_en": "to crack (a code)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -44444,6 +44496,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(разг.) влепить, врезать (jemandem eine knallen)",
+        "meaning_en": "(colloquial) to smack, to clout (jemandem eine knallen)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -44451,6 +44504,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(разг.) швырять",
+        "meaning_en": "(colloquial) to slam, to bang down",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -44566,6 +44620,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "комбинировать, сочетать",
+        "meaning_en": "to combine, to match",
         "note_ru": "что-либо (с чем-либо)",
         "note_en": "something (with something)"
       }
@@ -44621,6 +44676,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сообщать",
+        "meaning_en": "to communicate, to convey (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -44786,6 +44842,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "хранить (на складе)",
+        "meaning_en": "to store",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -49610,6 +49667,7 @@
       {
         "pattern": "Dativ + Akkusativ",
         "meaning_ru": "морочить голову, обманывать",
+        "meaning_en": "to fool",
         "note_ru": "морочить голову кому-либо, обманывать кого-либо (чем-либо)",
         "note_en": "to fool someone, to kid someone (about something)"
       }
@@ -50713,6 +50771,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "скреплять",
+        "meaning_en": "to hold together",
         "note_ru": "скреплять что-либо, держать что-либо вместе",
         "note_en": "to hold something together"
       }
@@ -51373,6 +51432,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "предвидеть",
+        "meaning_en": "to foresee",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -53887,6 +53947,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "удерживать в равновесии",
+        "meaning_en": "to balance (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -54801,6 +54862,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "ускорять",
+        "meaning_en": "to speed up, to accelerate (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -55809,6 +55871,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "демонстрировать, показывать",
+        "meaning_en": "to show, to display",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -56086,6 +56149,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "доминировать (над чем-либо), господствовать",
+        "meaning_en": "to dominate",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -56320,6 +56384,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "выдерживать",
+        "meaning_en": "to endure, to stand (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -56369,6 +56434,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(разг.) переживать, проходить (через трудности)",
+        "meaning_en": "(colloquial) to go through (difficulties)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -58872,6 +58938,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "подрессоривать (обычно gefedert — на пружинах, с подвеской)",
+        "meaning_en": "to fit with springs (mostly gefedert — sprung)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -59000,12 +59067,14 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(разг.) увольнять",
+        "meaning_en": "(colloquial) to fire, to sack",
         "note_ru": "кого-либо",
         "note_en": "someone"
       },
       {
         "pattern": "Akkusativ",
         "meaning_ru": "топить (печь)",
+        "meaning_en": "to stoke (a stove)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -59013,6 +59082,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(разг.) швырять",
+        "meaning_en": "(colloquial) to fling",
         "note_ru": "что-либо (куда-либо)",
         "note_en": "something (somewhere)"
       }
@@ -59388,6 +59458,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "передавать по радио",
+        "meaning_en": "to radio, to transmit",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -61785,6 +61856,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сгущать",
+        "meaning_en": "to condense, to thicken (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -62158,6 +62230,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сцеплять (вагоны, прицеп)",
+        "meaning_en": "to couple (carriages, a trailer)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -63614,6 +63687,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "политизировать",
+        "meaning_en": "to politicize",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -63744,6 +63818,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "ранжировать по важности",
+        "meaning_en": "to rank by priority",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -66058,6 +66133,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "напевать (без слов)",
+        "meaning_en": "to hum",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -67312,6 +67388,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "варьировать, видоизменять",
+        "meaning_en": "to modify (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -70427,6 +70504,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(перен.) сотворить (как по волшебству)",
+        "meaning_en": "to conjure up",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -70712,6 +70790,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "запускать (фейерверк, ракету, двигатель)",
+        "meaning_en": "to set off (fireworks), to fire (an engine, a rocket)",
         "note_ru": "что-либо",
         "note_en": "something"
       },
@@ -70719,6 +70798,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "поджигать, взрывать (заряд)",
+        "meaning_en": "to ignite, to detonate (a charge)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -71872,6 +71952,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "отчитываться (о расходах), рассчитываться",
+        "meaning_en": "to claim (expenses), to settle up",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -72189,6 +72270,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "выключать",
+        "meaning_en": "to switch off",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -72729,6 +72811,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "закалывать (скот)",
+        "meaning_en": "to stick (an animal)",
         "note_ru": "кого-либо (животное)",
         "note_en": "an animal"
       }
@@ -73680,6 +73763,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "подключать, присоединять",
+        "meaning_en": "to connect, to dock (a device)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -74129,6 +74213,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(разг.) нанимать",
+        "meaning_en": "(colloquial) to hire, to take on",
         "note_ru": "кого-либо",
         "note_en": "someone"
       }
@@ -74467,6 +74552,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "вывешивать (объявление)",
+        "meaning_en": "to put up (a notice)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -78208,6 +78294,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "бросать, оставлять (животное, ребёнка)",
+        "meaning_en": "to abandon (an animal, a child)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -78215,6 +78302,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "подвергать (воздействию)",
+        "meaning_en": "to expose (to)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -78293,6 +78381,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(фам.) отбивать (партнёра)",
+        "meaning_en": "(slang) to steal (someone's partner)",
         "note_ru": "кому-либо кого-либо",
         "note_en": "someone (from someone)"
       }
@@ -78488,6 +78577,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "терпеть, выносить (обычно: nicht ausstehen können — терпеть не мочь)",
+        "meaning_en": "to stand, to bear (usually: nicht ausstehen können — cannot stand)",
         "note_ru": "кого-либо / что-либо",
         "note_en": "someone / something"
       }
@@ -83805,6 +83895,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "толковать, истолковывать",
+        "meaning_en": "to interpret",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -86020,6 +86111,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "разбивать (окно, дверь), бить, колотить (кого-либо)",
+        "meaning_en": "to smash (a window, a door), to beat, to rain blows on (someone)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       },
@@ -86027,6 +86119,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "выбирать (путь, курс, направление), пойти (по дороге)",
+        "meaning_en": "to take (a path, a course, a direction), to set off (along a road)",
         "note_ru": "что-либо",
         "note_en": "something"
       },
@@ -86034,6 +86127,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "вбивать (гвоздь)",
+        "meaning_en": "to knock in (a nail)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -86338,6 +86432,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "прокалывать, накалывать",
+        "meaning_en": "to prick, to pierce",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -86763,6 +86858,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "обходиться без (чего-либо), испытывать недостаток",
+        "meaning_en": "to do without, to spare",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -86835,6 +86931,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "освобождать (от обязанности, обещания)",
+        "meaning_en": "to release (from an obligation)",
         "note_ru": "кого-либо",
         "note_en": "someone"
       },
@@ -86842,6 +86939,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "принимать роды",
+        "meaning_en": "to deliver (a baby)",
         "note_ru": "кого-либо",
         "note_en": "someone"
       }
@@ -96381,6 +96479,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "звонить (в колокол, в дверь)",
+        "meaning_en": "to ring (a bell, the doorbell)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -96869,6 +96968,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "класть (кирпич), возводить (стену)",
+        "meaning_en": "to build (with bricks)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -97135,6 +97235,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "считать (вместе с другими), включать в подсчёт",
+        "meaning_en": "to count (in), to include (in a count)",
         "note_ru": "кого-либо, что-либо",
         "note_en": "someone, something"
       }
@@ -97255,6 +97356,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "(книжн.) исследовать (что-либо)",
+        "meaning_en": "(elevated) to inquire into",
         "note_ru": "чему-либо (дат. п.): einem Geheimnis nachforschen — докапываться до тайны",
         "note_en": "+ dative (elevated): einem Geheimnis nachforschen — to look into a mystery"
       }
@@ -97449,6 +97551,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(торг.) уступать, сбавлять (цену)",
+        "meaning_en": "(commerce) to knock off (from the price)",
         "note_ru": "что-либо (сумму)",
         "note_en": "something (an amount)"
       }
@@ -98498,6 +98601,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(жарг.) активно продвигать (что-либо)",
+        "meaning_en": "(jargon) to push, to hype (something)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -98548,6 +98652,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "применять (на практике), практиковать",
+        "meaning_en": "to practise (AmE: practice), to put into practice",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -99445,6 +99550,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "выяснять",
+        "meaning_en": "to find out",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -99494,6 +99600,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "(книжн.) восстанавливать, обновлять",
+        "meaning_en": "(formal) to regenerate, to restore",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -103303,6 +103410,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "бить в барабан, играть на барабане",
+        "meaning_en": "to drum, to play the drums",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -107958,6 +108066,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(с hat) уродовать, калечить",
+        "meaning_en": "(with hat) to cripple, to deform",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -108707,6 +108816,7 @@
         "pattern": "Dativ + Akkusativ",
         "required": true,
         "meaning_ru": "(книжн.) отказывать (в чём-либо)",
+        "meaning_en": "(elevated) to deny, to refuse",
         "note_ru": "кому-либо что-либо",
         "note_en": "something to someone"
       }
@@ -109229,6 +109339,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "(с hat) сплавлять, объединять",
+        "meaning_en": "(with hat) to fuse, to blend",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -109967,6 +110078,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "изгонять, отрекаться (от кого-либо)",
+        "meaning_en": "to cast out, to disown",
         "note_ru": "кого-либо",
         "note_en": "someone"
       }
@@ -111874,6 +111986,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "(книжн.) возглавлять, руководить (учреждением, организацией)",
+        "meaning_en": "(elevated) to head, to preside over",
         "note_ru": "возглавлять что-либо",
         "note_en": "to head something"
       }
@@ -113251,6 +113364,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "вербовать, привлекать (клиентов, сторонников)",
+        "meaning_en": "to recruit, to attract (customers, supporters)",
         "note_ru": "кого-либо (клиентов, сторонников)",
         "note_en": "someone (customers, supporters)"
       }
@@ -113872,6 +113986,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "браконьерствовать, незаконно охотиться",
+        "meaning_en": "to poach",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
@@ -114213,6 +114328,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "разбить, сломать (что-либо)",
+        "meaning_en": "to break, to smash (something)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -114803,6 +114919,7 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "(сердито) прошипеть",
+        "meaning_en": "to hiss (words)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -116298,6 +116415,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "захлопывать (дверь, книгу)",
+        "meaning_en": "to slam (shut)",
         "note_ru": "что-либо (дверь, книгу)",
         "note_en": "something (a door, a book)"
       }
@@ -116327,6 +116445,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "добавлять (к веществу)",
+        "meaning_en": "to add (to a substance)",
         "note_ru": "чему-либо что-либо (добавку)",
         "note_en": "something (to a substance)"
       }
@@ -116534,6 +116653,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "опережать (кого-либо)",
+        "meaning_en": "to beat (someone) to it, to get in first",
         "note_ru": "опередить кого-либо",
         "note_en": "to beat someone to it"
       },
@@ -116541,6 +116661,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "предупреждать, предотвращать (что-либо)",
+        "meaning_en": "to forestall, to pre-empt",
         "note_ru": "чему-либо (предотвратить)",
         "note_en": "something (to forestall)"
       }
@@ -117154,6 +117275,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "травить (кислотой), вытравливать (узор)",
+        "meaning_en": "to etch",
         "note_ru": "что-либо",
         "note_en": "something"
       },
@@ -117161,6 +117283,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "прижигать",
+        "meaning_en": "to cauterize",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -117790,6 +117913,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "датировать (определять время создания)",
+        "meaning_en": "to date (determine the age of)",
         "note_ru": "что-либо",
         "note_en": "something"
       },
@@ -117797,6 +117921,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "ставить дату",
+        "meaning_en": "to date, to put a date on",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -118659,6 +118784,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "протягивать, подавать",
+        "meaning_en": "to hand, to pass",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -124156,6 +124282,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "стягивать, сдвигать",
+        "meaning_en": "to pull together, to draw together",
         "note_ru": "что-либо",
         "note_en": "something"
       },
@@ -124163,6 +124290,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сосредоточивать (войска)",
+        "meaning_en": "to concentrate (troops)",
         "note_ru": "что-либо",
         "note_en": "something"
       }
@@ -126075,6 +126203,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "(перен.) гоняться (за чем-либо)",
+        "meaning_en": "(fig.) to chase (after)",
         "note_ru": "за кем-либо, чем-либо (гоняться)",
         "note_en": "after someone, something (to chase)"
       }
@@ -126957,6 +127086,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "(es geht jemandem gut) кому-либо хорошо, всё в порядке",
+        "meaning_en": "(es geht jemandem gut) someone is well, all is fine",
         "note_ru": "кому-либо (хорошо)",
         "note_en": "someone (is doing well)"
       }
@@ -127684,6 +127814,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "перевернуть",
+        "meaning_en": "to turn over",
         "note_ru": "что-либо (страницу, воротник)",
         "note_en": "something (a page, a collar)"
       }
@@ -128009,6 +128140,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сливать, спускать (воду, воздух, пар)",
+        "meaning_en": "to drain, to let out (water, air, steam)",
         "note_ru": "что-либо (откуда-либо)",
         "note_en": "something (out of somewhere)"
       },
@@ -128016,6 +128148,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "уступить, сбросить (с цены)",
+        "meaning_en": "to knock off (the price)",
         "note_ru": "кому-либо сколько-то (с цены)",
         "note_en": "(an amount) off the price for someone"
       }
@@ -128848,6 +128981,7 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "(книжн.) выполнить (требование)",
+        "meaning_en": "(formal) to comply with (a demand)",
         "note_ru": "выполнить что-либо (требование, обязанность, просьбу)",
         "note_en": "to comply with something (a demand, a duty, a request)"
       }
@@ -128900,6 +129034,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "тащить за собой",
+        "meaning_en": "to drag (behind)",
         "note_ru": "тащить, волочить что-либо за собой (das Bein)",
         "note_en": "to drag something behind (das Bein)"
       },
@@ -128907,6 +129042,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "подтягивать (винты)",
+        "meaning_en": "to tighten (screws)",
         "note_ru": "подтянуть что-либо (Schrauben, Muttern)",
         "note_en": "to tighten something (Schrauben, Muttern)"
       },
@@ -128914,6 +129050,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "обводить, подводить (линию, брови)",
+        "meaning_en": "to go over, to pencil in (a line, eyebrows)",
         "note_ru": "обвести, подвести что-либо (Linie, Lippen, Augenbrauen)",
         "note_en": "to go over, to pencil in something (Linie, Lippen, Augenbrauen)"
       }
@@ -129020,6 +129157,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "накричать (на кого-либо)",
+        "meaning_en": "to snap at, to tell off",
         "note_ru": "кого-либо",
         "note_en": "someone"
       },
@@ -129027,6 +129165,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "подъезжать, заходить (в порт)",
+        "meaning_en": "to stop at, to call at",
         "note_ru": "что-либо (остановку, порт)",
         "note_en": "something (a stop, a port)"
       },
@@ -129034,6 +129173,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "сбить (машиной), задеть",
+        "meaning_en": "to drive into, to hit",
         "note_ru": "кого-либо, что-либо",
         "note_en": "someone, something"
       },
@@ -129041,6 +129181,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "подвозить, доставлять",
+        "meaning_en": "to deliver",
         "note_ru": "что-либо (землю, картофель)",
         "note_en": "something (soil, potatoes)"
       }
@@ -129101,6 +129242,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "заходить (в порт)",
+        "meaning_en": "to call at (a port)",
         "note_ru": "что-либо (den Hafen, eine Insel)",
         "note_en": "something (den Hafen, eine Insel)"
       },
@@ -129191,6 +129333,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "проводить, осуществлять (закон, решение)",
+        "meaning_en": "to enforce, to push through, to carry through",
         "note_ru": "что-либо: ein Gesetz durchsetzen",
         "note_en": "something: ein Gesetz durchsetzen"
       },
@@ -129198,6 +129341,7 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "добиваться (осуществления), навязывать",
+        "meaning_en": "to get accepted, to impose",
         "note_ru": "что-либо: seinen Willen durchsetzen",
         "note_en": "something: seinen Willen durchsetzen"
       }

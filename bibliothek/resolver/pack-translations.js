@@ -164,14 +164,17 @@
   // when the candidate's text is the card's own (translation.en = translation_en of the card); a text the resolver chose for this
   // place (a sense, a form) stays English. A pack without them (not downloaded, an older pack): the card stays English.
   const owns = new Map(), ownFailedAt = new Map(), ownStarted = new Map(), ownMissing = new Map();
-  const KEEP = code => [`translation_${code}`, "extra_meanings", "reflexive", "form_translations", "collective", "_src_reader"];
+  // (22.11.2026, links chat; Alena + advisor 22.11: a pair tied to a meaning finds it by the pack's own mark) complements — only
+  // their meaning_<code>, by the card's row numbers (meaning-display.js packByMarks); a row without it is kept empty
+  const KEEP = code => [`translation_${code}`, "extra_meanings", "reflexive", "form_translations", "collective", "_src_reader", "complements"];
+  const keepField = (code, k, v) => k === "complements" && Array.isArray(v) ? v.map(x => x && typeof x === "object" && x[`meaning_${code}`] ? {[`meaning_${code}`]:x[`meaning_${code}`]} : {}) : v;
   // one card file: {id: fields} with only the fields the popup reads, into map; false when it could not be read
   function readOwnFile(code, file, version, map) {
     return dataFetch(new URL(`../../lang/${code}/${file}${version ? `?v=${encodeURIComponent(version)}` : ""}`, script))
       .then(r => { if (!r.ok) throw new Error("Pack card texts unavailable"); return r.json(); })
       .then(part => { if (!part || typeof part !== "object" || Array.isArray(part)) return false;
         for (const [id, fields] of Object.entries(part))
-          if (fields && typeof fields === "object") map.set(id, Object.fromEntries(KEEP(code).filter(k => k in fields).map(k => [k, fields[k]])));
+          if (fields && typeof fields === "object") map.set(id, Object.fromEntries(KEEP(code).filter(k => k in fields).map(k => [k, keepField(code, k, fields[k])])));
         return true; })
       .catch(() => false);
   }

@@ -1281,14 +1281,14 @@
   "_src_reader": "105abe03"
  },
  "expression-130": {
-  "translation_pl": "przerosnąć (kogoś), przytłoczyć, wymknąć się spod kontroli (o sprawach, problemach; o dzieciach — przestać słuchać); (dosł.) przerosnąć (kogoś wzrostem)",
+  "translation_pl": "przerosnąć (kogoś), przytłoczyć, wymknąć się spod kontroli (o sprawach, problemach), przestać słuchać (o dzieciach); (dosł.) przerosnąć (kogoś wzrostem)",
   "example_pl": "Natłok pracy powoli mnie przerasta.",
   "notes_pl": [
    "Komu — Dativ. Perfekt z sein: Die Probleme sind ihr über den Kopf gewachsen.",
    "Dosłownie: Der Sohn ist dem Vater über den Kopf gewachsen — syn przerósł ojca."
   ],
-  "_src": "979421fe",
-  "_src_reader": "23255b91"
+  "_src": "a5853d6e",
+  "_src_reader": "fd8ad9a9"
  },
  "expression-131": {
   "translation_pl": "zostawić (kogoś) w potrzebie, zawieść; (o pamięci, sprzęcie) odmówić posłuszeństwa, zawieść",
@@ -2320,9 +2320,9 @@
   "translation_pl": "już po kimś, (ktoś) przepadł; (ktoś) zakochał się bez pamięci",
   "example_pl": "Kiedy most się zawalił, wędrowiec pomyślał: teraz już po mnie.",
   "notes_pl": [
-   "Zwykle z ist's / es ist: Nun ist's um uns geschehen! — Teraz już po nas! Duden: 1) ktoś jest stracony, zrujnowany, bez szans; 2) ktoś beznadziejnie się zakochał: Als er sie sah, war es um ihn geschehen. Także o rzeczach: Da war es um seine Ruhe geschehen — i na tym skończył się jego spokój."
+   "Zwykle z ist's / es ist: Nun ist's um uns geschehen! — Teraz już po nas! Duden: (1) ktoś jest stracony, zrujnowany, bez szans; (2) ktoś beznadziejnie się zakochał: Als er sie sah, war es um ihn geschehen. Także o rzeczach: Da war es um seine Ruhe geschehen — i na tym skończył się jego spokój."
   ],
-  "_src": "ab4a2999",
+  "_src": "4c57e45b",
   "_src_reader": "467642f3"
  },
  "expression-246": {
@@ -3316,7 +3316,7 @@
   "_src_reader": "63bdc33c"
  },
  "expression-361": {
-  "translation_pl": "pozwolić sobie (finansowo; na coś)",
+  "translation_pl": "pozwolić sobie (na coś, finansowo)",
   "example_pl": "Na tak drogi samochód nie mogę sobie pozwolić.",
   "notes_pl": [
    "Także sich einen Fehler leisten — pozwolić sobie na błąd. Nie mylić: Hilfe leisten — udzielić pomocy."
@@ -3661,9 +3661,9 @@
   "translation_pl": "już tylko, jedynie; zostało tylko, jeszcze tylko",
   "example_pl": "Od urlopu pije już tylko herbatę.",
   "notes_pl": [
-   "Neutralne. 1) „już nic poza”: Er isst nur noch Gemüse. 2) „zostało tylko”: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. Ze stopniem wyższym — co innego: Das macht es nur noch schlimmer — „tylko jeszcze gorzej”. (Nur noch) Haut und Knochen sein — osobne wyrażenie."
+   "Neutralne. (1) „już nic poza”: Er isst nur noch Gemüse. (2) „zostało tylko”: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. Ze stopniem wyższym — co innego: Das macht es nur noch schlimmer — „tylko jeszcze gorzej”. (Nur noch) Haut und Knochen sein — osobne wyrażenie."
   ],
-  "_src": "f1f02b62",
+  "_src": "1234f534",
   "_src_reader": "7d163f54"
  },
  "expression-400": {

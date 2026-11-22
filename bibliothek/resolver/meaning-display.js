@@ -54,6 +54,29 @@
     parts.push(current);
     return [...new Set(parts.map(value => value.replace(/\s+/g, ' ').trim()).filter(Boolean))];
   }
+  // (Alena 22.11, advisor 22.11) a meaning the resolver proved by a pair tied to it (candidate.senseMark: the field, the rows' numbers,
+  // the mode — lemma-resolver markedSenses) is found in a language by that language's own marks: meaning_<code> of the same rows
+  // (a pack's rows have the card's numbers) in translation_<code>. null — a row without the mark: that language has no place for it.
+  const markedSenses = (text, rows, mode, language) => {
+    const key = `meaning_${language}`, marks = (rows || []).map(x => String(x?.[key] || '').trim());
+    if (!marks.length || marks.some(m => !m)) return null;
+    const parts = meaningParts(text), marked = parts.map(m => marks.includes(m));
+    if (mode === 'all') { const at = parts.map((m, i) => marked[i] ? i : -1).filter(i => i >= 0);
+      return !at.length || at.every((i, n) => i === n) ? {} : at.length === 1 ? {first:at[0]} : {several:at}; }
+    const k = mode === 'free' ? marked.findIndex(x => !x) : marked.findIndex(x => x);
+    return k > 0 && (mode !== 'free' || marked.slice(0, k).every(Boolean)) ? {first:k} : {};
+  };
+  // the pack's text of an own card in the order its own marks give; '' — no place in the pack (the English card, with the mark)
+  const packByMarks = (candidate, language) => {
+    const m = candidate.senseMark, pack = candidate.packItem?.[language];
+    if (!m || m.field !== 'item' || !pack || !ownCard(candidate)) return '';
+    const text = String(pack[`translation_${language}`] || '').trim(), mine = String(candidate.translation?.[language] || '').trim();
+    if (!text || text !== mine) return '';
+    const at = markedSenses(text, (m.rows || []).map(i => (pack.complements || [])[i]), m.mode, language);
+    if (!at) return '';
+    const parts = meaningParts(text), order = at.several || (Number.isInteger(at.first) ? [at.first] : []);
+    return [...order.map(i => parts[i]), ...parts.filter((_, i) => !order.includes(i))].join('; ');
+  };
   function fit(text) {
     const parts = meaningParts(text), shown = [];
     let length = 0;
@@ -89,7 +112,7 @@
     if (!mine || mine !== String(c.packItem?.[language]?.[`translation_${language}`] || '').trim()) return false;
     const n = meaningParts(c.translation?.en || '').length, ru = String(c.translation?.ru || '').trim();
     return n > 1 && meaningParts(mine).length === n && (!ru || meaningParts(ru).length === n); };
-  const packText = (c, language) => !!c && (!provenSense(c) || byNumber(c, language)) && !!(String(c.translation?.[language] || '').trim() ||
+  const packText = (c, language) => !!c && (!provenSense(c) || (c.senseMark && c.senseMark.field !== 'reflexive' ? !!packByMarks(c, language) : byNumber(c, language))) && !!(String(c.translation?.[language] || '').trim() ||
     c.reflexiveMarks?.[language] || String(c.packItem?.[language]?.reflexive?.[`translation_${language}`] || '').trim() || String(c.formTranslation?.[language] || '').trim());
   // the language a card is built in: a pack language only when this candidate has a text in it
   // (18.11.2026) a word read by its parts (not a name) is built in the pack language: its lines say, part by part, which is in the
@@ -301,6 +324,8 @@
     // (a pack language: the order the resolver proved is the English one's, applied to the pack's meanings with the same numbers — only
     // when they are counted alike, byNumber; otherwise the English card, as before — advisor 17.11 / 19.11)
     if (isPack(language) && (provenSense(candidate) || candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb')) {
+      // (Alena 22.11: a meaning proved by a pair — by the pack's own marks, no number from English)
+      if (candidate.senseMark && candidate.senseMark.field !== 'reflexive') { const text = packByMarks(candidate, language); return text ? fit(text).text : ''; }
       if (!byNumber(candidate, language)) return '';
       const order = meaningParts(brief(candidate, 'en', inline)).map(m => m.trim()), en = meaningParts(candidate.translation.en).map(m => m.trim());
       const mine = meaningParts(candidate.translation[language]).map(m => m.trim()), at = order.map(m => en.indexOf(m));
@@ -1519,13 +1544,19 @@
     // (19.11.2026: a candidate of the external dictionary whose field is its own card's — that card's pack texts, candidate.packOwnVerb)
     const packField = !isPack(language) || !field ? null : ownItem === candidate.item ? candidate.packItem?.[language]?.reflexive :
       ownItem && candidate.packOwnVerb?.[language]?.id === ownItem.id ? candidate.packOwnVerb[language].fields?.reflexive : null;
-    const fieldLanguage = isPack(language) && !String(packField?.[`translation_${language}`] || '').trim() ? 'en' : language;
+    // (Alena 22.11: a meaning of the field proved by its pair — the pack's place by the pack's own marks; a pack row without its mark —
+    // the English field, with the mark)
+    const fieldMark = candidate.senseMark?.field === 'reflexive' ? candidate.senseMark : null;
+    const packMarked = isPack(language) && fieldMark && String(packField?.[`translation_${language}`] || '').trim() ?
+      markedSenses(packField[`translation_${language}`], (fieldMark.rows || []).map(i => (packField.complements || [])[i]), fieldMark.mode, language) : undefined;
+    const fieldLanguage = isPack(language) && (!String(packField?.[`translation_${language}`] || '').trim() || packMarked === null) ? 'en' : language;
     const fieldSource = fieldLanguage === language && isPack(language) ? packField : field;
     // (links chat 19.11, advisor 19.11: a meaning of the field proved by its government — the resolver's fieldSenseFirst — comes first)
     // (20.11.2026, chat «languages in the reader», advisor 19.11 «по номеру»: a pack text of the field with as many meanings as the English
     // one — the English number; another count — the field's own order, as before)
     const count = t => String(t || '').split(';').map(x => x.trim()).filter(Boolean).length;
     const fieldFirst = fieldLanguage === 'en' ? candidate.fieldSenseFirstEn : fieldLanguage === 'ru' ? candidate.fieldSenseFirst :
+      packMarked ? packMarked.first ?? null :
       isPack(fieldLanguage) && count(fieldSource?.[`translation_${fieldLanguage}`]) === count(field?.translation_en) ? candidate.fieldSenseFirstEn : null;
     const fieldRaw = String(fieldSource?.[`translation_${fieldLanguage}`] || '');
     const fieldText = Number.isInteger(fieldFirst) && fieldFirst > 0 ? (() => { const parts = fieldRaw.split(';').map(x => x.trim()).filter(Boolean);
