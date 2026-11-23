@@ -4264,52 +4264,9 @@ function apostropheText(text) {
         usage:{role:"nominalized",kind:"adjective",base:definition.base,baseDictionaryId:ownBase?.id || null,form:word,marker:definition.marker},
         item:{word,type:"Nomen",translation_en:translation.en,translation_ru:translation.ru}};
     }
-    const nominalizedPeople = {
-      // (#64, 15.11: the masculine heading after der is -e — der Reisende, der Arbeitslose, as der Bekannte; a verb base says «aus Verb»)
-      reisend:{male:["Reisende","traveller","путешественник"],female:["Reisende","female traveller","путешественница"],base:"reisen",verb:true},
-      arbeitslos:{male:["Arbeitslose","unemployed person","безработный"],female:["Arbeitslose","unemployed woman","безработная"],base:"arbeitslos"},
-      bekannt:{male:["Bekannte","acquaintance","знакомый"],female:["Bekannte","female acquaintance","знакомая"],base:"bekannt"}
-    };
-    const nominalizedPeopleForm = new RegExp(`^(${Object.keys(nominalizedPeople).join("|")})(e|en|er|em|es)$`,"u");
-    function personNouns(word, context) {
-      const match = nominalizedPeopleForm.exec(norm(word));
-      if (!match || !/^[A-ZÄÖÜ]/u.test(word) || !context || !Number.isInteger(context.tokenOffset)) return null;
-      const slot = nominalSlot(word,context,'personNouns',{headModifiers:true});
-      if (!slot || slot.separateHead) return null;
-      const {tokens,index,joined} = slot;
-      const determiner = norm(tokens[index-1][0]);
-      const definite = ["der","die","den","dem","des"].includes(determiner);
-      const mixed = /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)(e|en|em|er|es)?$/u.exec(determiner);
-      if (!definite && !mixed) return null;
-      const tail = mixed?.[1] || "";
-      const table = {
-        male:[["der","","er","e"],["den","en","en","en"],["dem","em","em","en"],["des","es","en","en"]],
-        female:[["die","e","e","e"],["die","e","e","e"],["der","er","er","en"],["der","er","er","en"]],
-        plural:[["die","e","e","en"],["die","e","e","en"],["den","en","en","en"],["der","er","er","en"]]
-      };
-      const prep = index > 1 && joined(index-2,index-1) ? norm(tokens[index-2][0]) : "";
-      const governed = PREPOSITION_CASE_CODE[prep];
-      const analyses = [];
-      for (const [gender,rows] of Object.entries(table)) rows.forEach(([article,mixedTail,strong,weak],caseIndex) => {
-        if (governed !== undefined && governed !== caseIndex || definite && article !== determiner || mixed && mixedTail !== tail) return;
-        if (gender === "plural" && mixed && determiner.startsWith("ein")) return;
-        const ending = definite || mixed && tail ? weak : strong;
-        if (match[2] === ending) analyses.push({gender,caseIndex});
-      });
-      if (!analyses.length) return null;
-      const definition = nominalizedPeople[match[1]];
-      return ["male","female"].flatMap(gender => {
-        const compatible = analyses.filter(a => a.gender === gender || a.gender === "plural");
-        if (!compatible.length) return [];
-        const [lemma,en,ru] = definition[gender], article = gender === "male" ? "der" : "die";
-        const own = (lemmas.get(norm(lemma)) || []).find(e => e.type === "Nomen" && e.article === article);
-        const usage = {role:"nominalized",kind:"person",base:definition.base,form:word,...(definition.verb ? {verb:true} : {}),
-          number:compatible.every(a=>a.gender === "plural") ? "plural" : compatible.every(a=>a.gender !== "plural") ? "singular" : "ambiguous"};
-        const candidate = own ? mainCandidate(own) : {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation:{en,ru},
-          item:{word:lemma,article,type:"Nomen",translation_en:en,translation_ru:ru}};
-        return [{...candidate,usage}];
-      });
-    }
+    // (advisor 23.11, source audit A3) the hard-coded list of three person nouns (reisend, arbeitslos, bekannt) is gone: these words go
+    // through the general nominalization (generalAdjectiveNoun) — one gender by the form, the English entry of that gender
+    function personNouns(word, context) { return null; }
     // General nominalized infinitive (L03): a capitalised spelling inside the
     // utterance, a neuter determiner right before it (optionally with modifiers),
     // no separate noun head after it, a dictionary verb whose infinitive is this
@@ -4568,6 +4525,18 @@ function apostropheText(text) {
       // «nominalization of gut» is no meaning. The Russian record is added in russian-translations (enrich).
       const strip = t => String(t || "").replace(/^(?:(?:female|male) equivalent|nominali[sz]ation) of [^:;]*(?::\s*|$)/iu,"").trim();
       const noun = nouns[0] && strip(nouns[0].translation?.en) ? {lemma:nouns[0].lemma,translation:{en:strip(nouns[0].translation.en)}} : null;
+      // (advisor 23.11, source audit A3) one gender by the determiner and the ending (adjectiveNounGenders: der Obdachlose, ein
+      // Obdachloser — masculine; die / eine Obdachlose — feminine; das Neue — neuter) and an English-dictionary entry of this very
+      // nominalization of that gender (Obdachloser «homeless person (male …)»; Obdachlose «female equivalent of Obdachloser»): that entry,
+      // the external noun card as it is. Plural or an open form (die / den Obdachlosen, der Obdachlosen, a bare Obdachlose) — as before.
+      const singleGender = article && genders.size === 1 && !genders.has("plural") ? [...genders][0] : null;
+      // (a participle base too — der Reisende, die Bedienstete: the entry of the nominalized participle)
+      const genderEntry = singleGender ? (() => {
+        const want = {male:stem0+"er",female:stem0+"e",neuter:stem0+"es"}[singleGender];
+        const entries = others.filter(c => c.source === "fallback" && canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === want && (marked(c) || femalePair(c)) &&
+          (singleGender !== "female" || /^female equivalent of\b|\(female\b/iu.test(String(c.meanings?.[0] || c.translation?.en || ""))) &&
+          (singleGender !== "male" || !/^female equivalent of\b/iu.test(String(c.meanings?.[0] || c.translation?.en || ""))));
+        return entries.length === 1 ? entries[0] : null; })() : null;
       // (advisor 20.11, der Zehnte) an ordinal with a noun record of the same stem (ours, light or outside: Zehnt «tithe», Erster «winner»)
       // whose gender the form confirms — an article or ending of one gender in the singular (der Erste, ein Erster, den Zehnten); another
       // gender (das Erste, die Zweite) or the plural only (zu den Ersten) — no second reading. The record is the window's second reading.
@@ -4590,9 +4559,16 @@ function apostropheText(text) {
         translation.en = `nominalized participle of “${verbBase}”${meaning.en ? `: ${meaning.en}` : ""}`;
         translation.ru = `субстантивированное причастие от «${verbBase}»${meaning.ru ? `: ${meaning.ru}` : ""}`;
       }
-      return {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation,
+      // (the existing card of a nominalization; one gender by the form — its article in the heading, as our own nominalized cards have it:
+      // der / die Obdachlose, das Gute; the meaning from the English entry of that gender)
+      const genderArticle = singleGender && !ordinal ? {male:"der",female:"die",neuter:"das"}[singleGender] : null;
+      const genderNoun = genderArticle && genderEntry && strip(genderEntry.translation?.en || genderEntry.meanings?.[0]) ?
+        {lemma:genderEntry.lemma,translation:{en:strip(genderEntry.translation?.en || genderEntry.meanings?.[0])}} : null;
+      return {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation,...(genderArticle ? {nounArticle:genderArticle} : {}),
         usage:{role:"nominalized",kind:participleVerb ? "participle" : ordinal ? "ordinal" : "adjective",base:participleVerb ? norm(participleVerb.lemma) : base,
-          baseDictionaryId:adjective.dictionaryId || null,form:word,general:true,...(noun ? {noun} : {}),...(ordinalNoun ? {ordinalNoun} : {}),
+          // (a form both genders fit — der / den Reisenden — takes no meaning of a female entry: the unspecified one or none, count 23.11)
+          baseDictionaryId:adjective.dictionaryId || null,form:word,general:true,...(genderNoun ? {noun:genderNoun} : genderArticle ? {} : noun && !(genders.has("male") && genders.has("female") || genders.has("plural")) || noun && !/^female equivalent of\b|\(female\b/iu.test(String(nouns[0].translation?.en || nouns[0].meanings?.[0] || "")) ? {noun} : {}),
+          ...(genderArticle ? {gender:singleGender} : {}),...(ordinalNoun ? {ordinalNoun} : {}),
           // #89 (advisor 16.11, Alice P566 der Schwächste): the form is the superlative stem + ending — «Superlativ», «самый …»
           // (not am Schönsten — the adverbial superlative, advisor 16.11: not touched)
           // (nor a superlative the card names as its own meaning — nah «следующий (nächst-)»: als Nächstes)
@@ -14761,23 +14737,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // determiner — the modifiers and the noun take the strong endings, as with no word before them)
       const strongQuantifier = det >= 0 && det !== index-1 && /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\d+|viele|einige|mehrere|wenige|zahlreiche|etliche|manche)$/u.test(norm(tokens[det][0]));
       if (!features && (det !== index-1 && det >= 0) && !strongQuantifier) return null;
-      // Intermediate modifiers stay unchecked only without a determiner; with one they must agree too.
+      // (advisor 23.11, source audit A3: one function for the gender / number by the determiner and the ending — adjectiveNounGenders,
+      // as the general nominalization; the modifiers between share the ending of the word: die beiden Kranken)
       const between = features ? tokens.slice(det+1,index) : [];
-      const rows = [];
-      if (features) {
-        for (const f of features) {
-          if (governed?.size && !governed.has(f.case)) continue;
-          const expected = expectedEnding(f.declension,f);
-          if (expected !== ending || between.some(t => !(modifiers.get(norm(t[0])) || []).some(r => r.ending === expected))) continue;
-          rows.push(f.number === 'plural' ? 'plural' : f.gender);
-        }
-      } else {
-        for (const [key,table] of Object.entries(strongEndings)) for (const [grammaticalCase,expected] of Object.entries(table)) {
-          if (governed?.size && !governed.has(grammaticalCase)) continue;
-          if (expected === ending) rows.push(key);
-        }
-      }
-      const readings = new Set(rows.filter(r => ['masculine','feminine','plural'].includes(r)));
+      if (between.some(t => !(modifiers.get(norm(t[0])) || []).some(r => r.ending === ending))) return null;
+      const determinerWord = features ? norm(tokens[det][0]) : '';
+      const prepositionWord = preposition ? norm(tokens[prepAt][0]) : '';
+      const readings = new Set([...adjectiveNounGenders(determinerWord,ending,prepositionWord)].map(g => ({male:'masculine',female:'feminine'})[g] || g)
+        .filter(r => ['masculine','feminine','plural'].includes(r)));
       if (!readings.size) return null;
       // (c) a feminine singular reading only (auf diese Weise): our feminine ordinary noun; any other reading: no decision here
       if (homographForm) { return readings.size === 1 && readings.has('feminine') && homograph.length === 1 ? {candidate:homograph[0],evidence:'adjectival-noun-agreement'} : null; }
