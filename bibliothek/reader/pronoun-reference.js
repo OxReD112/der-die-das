@@ -91,14 +91,27 @@
     const pos={personal:possessive?'Possessivpronomen':'Personalpronomen',reflexive:'Reflexivpronomen',demonstrative:'Demonstrativpronomen',relative:'Relativpronomen',impersonal:'Pronomen'}[kind];
     const title=say(titles[kind]);
     root.append(text('p','dictionary-pos',pos),text('h3','pronoun-reference-title',title));
-    function table(title,columns,rows) {
+    // 23.11 (Alena): the tapped form lit in the tables, as «war» in a verb's table — by form, not by meaning: every cell
+    // with that form (ihr — «вы» and «ей»; sie / Sie — four); a possessive (ihre, seinen) — only its stem in the
+    // Possessiv column («ihr-», «sein-»); the table of endings is not lit. Only the look: the cells keep their text.
+    const tapped=String(clickedWord||'').normalize('NFC').trim().toLowerCase();
+    const possessiveStem=value=>{ const stem=value.replace(/-$/u,''); return possessive&&value.endsWith('-')&&tapped.startsWith(stem)&&tapped.length-stem.length<=3; };
+    function lit(cell,value) {
+      if(!tapped||Array.isArray(value)){return false;}
+      const parts=String(value).split(/(\s*\/\s*)/u);
+      if(!parts.some(part=>part.toLowerCase()===tapped||possessiveStem(part.toLowerCase())))return false;
+      cell.replaceChildren(...parts.map(part=>{ if(part.toLowerCase()!==tapped&&!possessiveStem(part.toLowerCase()))return document.createTextNode(part);
+        const mark=document.createElement('mark');mark.className='dictionary-form-match';mark.textContent=part;return mark; }));
+      return true;
+    }
+    function table(title,columns,rows,mark=true) {
       const section=text('section','dictionary-pronoun-forms','');
       if(title)section.append(text('h3','',title));
       const scroll=text('div','pronoun-reference-scroll','');scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label',(Array.isArray(title)?title[0]:title) || say(titles[kind])[0]);
       const table=text('table','dictionary-table',''),thead=document.createElement('thead'),header=document.createElement('tr');
       for(const column of columns){const cell=text('th','',column);cell.scope='col';header.append(cell);}thead.append(header);
       const tbody=document.createElement('tbody');
-      for(const values of rows){const row=document.createElement('tr');values.forEach((value,index)=>{const cell=text(index ? 'td' : 'th','',value);if(!index)cell.scope='row';row.append(cell);});tbody.append(row);}
+      for(const values of rows){const row=document.createElement('tr');values.forEach((value,index)=>{const cell=text(index ? 'td' : 'th','',value);if(!index)cell.scope='row';if(mark&&!(index===0&&/^(?:Nom|Akk|Dat|Gen)\.?$/u.test(String(value))))lit(cell,value);row.append(cell);});tbody.append(row);}
       table.append(thead,tbody);scroll.append(table);section.append(scroll);root.append(section);
     }
     function example(de,translation) { const node=text('p','dictionary-example',de);node.lang='de';const tr=text('span','dictionary-example-translation',translation[0]);tr.lang=translation[1]||lang;node.append(tr);root.append(node); }
@@ -107,7 +120,7 @@
       // 10.11 (Alena): the endings only for mein / dein / sein … — for ich, ihm, sie the table was beside the point
       if(possessive){
       root.append(text('p','dictionary-detail',say(['Притяжательное местоимение = основа + окончание: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren','Possessive pronoun = stem + ending: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren'])));
-      table(say(['Притяжательные окончания','Possessive endings']),['Kasus','Mask.','Neutr.','Fem.','Plural'],ENDINGS);
+      table(say(['Притяжательные окончания','Possessive endings']),['Kasus','Mask.','Neutr.','Fem.','Plural'],ENDINGS,false);
       }
     } else if(kind==='reflexive') {
       table('', ['Personal','Akkusativ','Dativ'],REFLEXIVE);

@@ -3152,3 +3152,43 @@ html.library-editing .library-invite { display: none; }
 }
 .library-edit-bar::after { height: 14px; }
 .library-edit-bar + .book-list { padding-top: 6px; }
+
+/* 23.11 (Alena, the native description of Bibliothek, parts 1–4): the site as the app will be.
+   The shelf on iPad: the caption under the book one step up — author 16, its line 14, «1 / 3» 14. */
+@media (min-width: 700px) and (min-height: 740px) {
+  body .library-bookshelf .caption-author { font-size: 16px; }
+  body .library-bookshelf .details { font-size: 14px; }
+  body .library-bookshelf .count { font-size: 14px; }
+}
+/* A text without chapters: a thin line under the book's bar where a book has its chapter line (same height, 2). */
+.reading-view:has(#chapter-progress-track[hidden]) > .reading-toolbar { min-height: 57px; border-bottom: 2px solid var(--hairline); }
+/* …and its title as the title of a chapter in a book: the page's font, 1.35 × the text, centred, the gap under it 0.8 of itself. */
+.page-flow .book-headline {
+  margin: 0 0 0.8em;
+  font-family: var(--reader-font, var(--serif));
+  font-size: calc(clamp(18px, 4.8vw, 21px) * var(--reader-text-scale, 1) * 1.35);
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+/* iPad: «Словарная справка», the pronoun reference and the card on Meine Wörter's second screen one step up;
+   the word in the popover 24. */
+@media (min-width: 700px) and (min-height: 740px) {
+  #word-popover #popover-word { font-size: 24px; line-height: 1.2; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-headword { font-size: 24px; line-height: 1.2; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-pos { font-size: 14px; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-translation { font-size: 18px; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-detail { font-size: 16px; }
+  :is(#dictionary-card, #vocabulary-detail-card) :is(.dictionary-pronoun-forms, .dictionary-verb-forms) h3 { font-size: 14px; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-table { font-size: 16px; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-table thead th { font-size: 14px; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-example { font-size: 18px; }
+  :is(#dictionary-card, #vocabulary-detail-card) .dictionary-example-translation { font-size: 16px; }
+  :is(#dictionary-card, #vocabulary-detail-card) .pronoun-reference-title { font-size: 20px; }
+}
+/* Meine Wörter: «+ N zum Wortschatz» under the list, not over its last word; nothing marked — no select / copy line,
+   the note in the middle at 14 (as «Dein Leseraum»). */
+.vocabulary-dialog .vocabulary-actions { position: static; padding: 0; }
+.vocabulary-dialog .vocabulary-actions:has(#vocabulary-add:not([hidden])) { padding-top: 12px; }
+.vocabulary-dialog .vocabulary-list { padding-bottom: 12px; scroll-padding-bottom: 12px; }
+.vocabulary-dialog:has(#vocabulary-empty:not([hidden])) :is(.vocabulary-controls, .vocabulary-list) { display: none; }
+.vocabulary-dialog .vocabulary-empty:not([hidden]) { flex: 1; display: grid; place-content: center; margin: 0; font-size: 14px; }

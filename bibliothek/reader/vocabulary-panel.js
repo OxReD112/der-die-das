@@ -48,7 +48,11 @@
     const partOfSpeech = pos => PARTS[pos] || PARTS[String(pos || "").toLowerCase()] || pos;
     const wordOf = record => {
       const item = record.dictionaryId != null ? currentResolver?.entry?.(record.dictionaryId) : null;
-      return `${item?.article ? item.article + " " : /^(?:der|die|das)$/u.test(record.article || "") ? record.article + " " : ""}${record.lemma || record.occurrences[0].form}`;
+      // 23.11 (Alena): a noun always with its capital letter — a word only Wiktionary knows was stored as «geiß»
+      const base = record.lemma || record.occurrences[0].form;
+      const noun = !!item?.article || /^(?:noun|nomen)$/iu.test(record.pos || "");
+      const shown = noun ? base.charAt(0).toLocaleUpperCase("de-DE") + base.slice(1) : base;
+      return `${item?.article ? item.article + " " : /^(?:der|die|das)$/u.test(record.article || "") ? record.article + " " : ""}${shown}`;
     };
     function selection() {
       const locked = busy;
