@@ -100,9 +100,14 @@
       if (data.classes && (typeof data.classes !== "object" || !Object.values(data.classes).every(v => words(v) || polar(v)))) throw new Error("Invalid verb preposition list");
       const classes = Object.fromEntries(Object.entries(data.classes || {}).map(([k,v]) => [k, polar(v) ? [...v.pos,...v.neg] : v]));
       const polarity = Object.fromEntries(Object.entries(data.classes || {}).filter(([,v]) => polar(v)).map(([k,v]) => [k, {neg:v.neg}]));
+      // (links chat 23.11, advisor: a pair's frame in the data) «no_object»: the case of an object the pair's verb never takes with it —
+      // folgen auf: no dative, treffen auf: no accusative
+      const requires = v => words(v) || typeof v === "string" && words(classes[v]);
+      const options = o => (o.requires_any !== undefined || o.no_object !== undefined) && (o.requires_any === undefined || requires(o.requires_any)) &&
+        (o.no_object === undefined || ["Dativ","Akkusativ"].includes(o.no_object)) && Object.keys(o).every(k => ["requires_any","no_object"].includes(k));
       if (data.format_version !== 1 || !Array.isArray(data.entries) || typeof classes !== "object" || !Object.values(classes).every(words) ||
           data.entries.some(r => !Array.isArray(r) || r.length < 3 || r.length > 4 || r.slice(0,3).some(v => typeof v !== "string") ||
-            r.length === 4 && (!r[3] || typeof r[3] !== "object" || !(words(r[3].requires_any) || typeof r[3].requires_any === "string" && words(classes[r[3].requires_any])))))
+            r.length === 4 && (!r[3] || typeof r[3] !== "object" || !options(r[3]))))
         throw new Error("Invalid verb preposition list");
       return {classes, polarity, entries:data.entries.map(r => r.length === 4 && typeof r[3].requires_any === "string" ? [r[0],r[1],r[2],{...r[3],requires_any:classes[r[3].requires_any]}] : r)};
     }).catch(error => { verbPrepositionPromise = null; throw error; });

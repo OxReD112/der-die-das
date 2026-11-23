@@ -9603,20 +9603,72 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     async function warmPhraseNouns(sentence) {
       if (verbPrepositionRows === null && fallback.verbPrepositions) { try { verbPrepositionRows = await fallback.verbPrepositions(); } catch (_) { /* no list — no condition */ } }
       const tokens = sharedTokens(String(sentence || ""),'warmPhraseNouns');
-      for (let i = 0; i + 2 < tokens.length; i++) {
-        if (!TWO_WAY_PREPOSITION.test(norm(tokens[i][0])) || !PHRASE_EN_DET.test(norm(tokens[i+1][0]))) continue;
-        let k = i+2; while (k < tokens.length && /^\p{Ll}/u.test(tokens[k][0])) k++;
-        if (k >= tokens.length) continue;
+      for (let i = 0; i + 1 < tokens.length; i++) {
+        const prep = norm(tokens[i][0]);
+        // (links chat 23.11: any preposition before an -en determiner — mit seinen Freunden is a dative plural, not an accusative; and a
+        // bare noun after a two-way preposition — auf Felsvorsprüngen, plural + -n, is a dative plural)
+        if (!(TWO_WAY_PREPOSITION.test(prep) || ANY_PREPOSITION.test(prep))) continue;
+        const enDet = PHRASE_EN_DET_ANY.test(norm(tokens[i+1][0]));
+        if (!enDet && !(TWO_WAY_PREPOSITION.test(prep) && /^\p{Lu}\p{Ll}+n$/u.test(tokens[i+1][0]))) continue;
+        let k = enDet ? phraseHead(tokens,i+2) : i+1;
+        if (k < 0 || k >= tokens.length) continue;
         const n = norm(tokens[k][0]);
+        if (!enDet) {
+          if (phraseBareDative.has(n) || (forms.get(n) || []).some(e => e.type === "Nomen")) continue;
+          let facts = null;
+          try { facts = await lexicalLookup(tokens[k][0],'warmPhraseNouns'); } catch (_) { continue; }
+          const nouns = (facts || []).filter(g => !g.kind && g.pos === "noun" && g.noun);
+          if (phraseBareDative.size >= 2048) phraseBareDative.delete(phraseBareDative.keys().next().value);
+          phraseBareDative.set(n, bareDativePluralOf(n, nouns.map(g => ({word:g.word, plural:g.noun.plural || []}))));
+          continue;
+        }
         if (!/[ns]$/u.test(n) || phraseNounNumber.has(n) || (forms.get(n) || []).some(e => e.type === "Nomen")) continue;
         let facts = null;
         try { facts = await lexicalLookup(tokens[k][0],'warmPhraseNouns'); } catch (_) { continue; }
         const nouns = (facts || []).filter(g => !g.kind && g.pos === "noun" && g.noun);
-        const weak = g => g.noun.article === "der" && [norm(g.word) + "n", norm(g.word) + "en"].includes(n) && (g.noun.plural || []).map(norm).includes(n);
+        // (links chat 23.11: a weak masculine has only -(e)n plurals — Mensch / Menschen; Nordwind lists Nordwinde and the dative
+        // Nordwinden: no weak noun, Nordwinden is the dative plural)
+        const weak = g => g.noun.article === "der" && [norm(g.word) + "n", norm(g.word) + "en"].includes(n) && (g.noun.plural || []).map(norm).includes(n) &&
+          (g.noun.plural || []).every(x => /n$/u.test(norm(x)));
         const number = nouns.some(g => g.noun.article === "der" && norm(g.word) === n || weak(g)) ? "singular" : nouns.some(g => (g.noun.plural || []).map(norm).includes(n)) ? "plural" : null;
         if (phraseNounNumber.size >= 2048) phraseNounNumber.delete(phraseNounNumber.keys().next().value);
         phraseNounNumber.set(n,number);
       }
+    }
+    // (links chat 23.11, advisor: the case a phrase shows must not contradict the pair) -en determiners — den, meinen, seinen, keinen,
+    // diesen, welchen … — are an accusative singular or a dative plural: the noun's number decides (enDeterminerCase), after any
+    // preposition; attributes before the noun — lower-case words and 1960er — are skipped
+    const PHRASE_EN_DET_ANY = /^(?:den|meinen|deinen|seinen|ihren|unseren|euren|keinen|diesen|jenen|welchen|solchen|manchen)$/u;
+    const PHRASE_ATTRIBUTE = /^(?:\p{Ll}|\d+er$)/u;
+    // The head noun of a group from k on: attributes skipped (a preposition among them — den folgenden nur zum Teil … — leaves the head
+    // unknown), the last of consecutive capitals (den Deutschen Meisterschaften, den Game Boy Advance Spielen); -1 when none
+    function phraseHead(tokens, k) {
+      while (k < tokens.length && PHRASE_ATTRIBUTE.test(tokens[k][0])) { if (ANY_PREPOSITION.test(norm(tokens[k][0])) || TWO_WAY_PREPOSITION.test(norm(tokens[k][0])) || /^(?:zum|zur|im|am|vom|beim|ins|ans)$/u.test(norm(tokens[k][0]))) return -1; k++; }
+      if (k >= tokens.length || !/^\p{Lu}/u.test(tokens[k][0])) return -1;
+      // (past a capital only when it is no noun of ours or an adjective as a name's part — den Deutschen Meisterschaften, den Game Boy
+      // Advance Spielen; not past a noun — vor den Schülern, Angst vor …; auf den linken Ohr Stimmen — and not past punctuation)
+      const nounOfOurs = w => (forms.get(norm(w)) || []).some(e => e.type === "Nomen");
+      const adjectiveOfOurs = w => (forms.get(norm(w)) || []).some(e => e.type === "Adjektiv");
+      while (k+1 < tokens.length && /^\p{Lu}/u.test(tokens[k+1][0]) && (!nounOfOurs(tokens[k][0]) || adjectiveOfOurs(tokens[k][0])) &&
+        !(typeof tokens[k].input === "string" && Number.isInteger(tokens[k].index) && /[,;:.!?()«»„“"–—]/u.test(tokens[k].input.slice(tokens[k].index + tokens[k][0].length, tokens[k+1].index)))) k++;
+      return k;
+    }
+    const ANY_PREPOSITION = /^(?:mit|von|zu|aus|bei|nach|seit|für|gegen|ohne|um|durch|bis|als|gegenüber)$/u;
+    // A bare noun that is only a dative plural: plural + -n (Ländern, Felsvorsprüngen), not a singular form, not a plural that ends in
+    // -n itself (Frauen is accusative or dative)
+    const phraseBareDative = new Map();
+    function bareDativePluralOf(n, entries) {
+      if (!entries.length || entries.some(e => norm(e.word) === n)) return false;
+      return entries.some(e => [].concat(e.plural || []).some(pl => { const q = norm(String(pl)); return q && !/[ns]$/u.test(q) && q + "n" === n; }));
+    }
+    function bareDativePlural(noun) {
+      const n = norm(noun);
+      const cards = (forms.get(n) || []).filter(e => e.type === "Nomen");
+      if (cards.length) return bareDativePluralOf(n, cards.map(e => ({word:e.word, plural:e.plural})));
+      // (a card stored under its plural form: forms of the dative plural are looked up by the plural)
+      const viaPlural = (forms.get(n.slice(0,-1)) || []).filter(e => e.type === "Nomen");
+      if (viaPlural.length && /n$/u.test(n)) return bareDativePluralOf(n, viaPlural.map(e => ({word:e.word, plural:e.plural})));
+      return phraseBareDative.get(n) === true;
     }
     // (WN batch 95, advisor 12.11) Signs of a direction / path in a stretch of tokens — shared by the card choice of a card with
     // «direction_required» and the modal + direction group (links chat item 89): an adverb of direction (heim, fort, hinaus, dahin,
@@ -9671,6 +9723,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     function sameInfinitiveSense(word, context, cards) {
       const found = sameInfinitiveSenseFrame(word, context, cards);
+      if (found?.window) return found;
       if (!(cards || []).some(c => c.item?.direction_required === true)) return found;
       const allowed = cards.filter(c => directionRequirementMet(word, context, c, cards));
       if (found && allowed.includes(found.candidate)) return found;
@@ -10059,14 +10112,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const nounAfterFor = k => { const w1 = norm(tokens[k+1]?.[0] ?? ""); if (PERSONAL.test(w1) || NUMERAL.test(w1)) return false;
         const j = DET_WORD.test(w1) || /^(?:mein|dein|sein|ihr|unser|euer|eure[mnrs]?(?![\p{L}])|kein)/u.test(w1) ? nounAfter(k+2) : nounAt(k+1) ? k+1 : -1;
         return j > 0 && !OBJ_TIME.test(norm(tokens[j][0])) && !MEASURE.test(norm(tokens[j][0])) && !/^(?:fall|fälle|zweck)$/u.test(norm(tokens[j][0])); };
-      const forPredicate = c => words.some(x => accPrep(c).includes(x.w) && (predicateAfter(x.i) && (accusativeBefore(x.i) || pronounObject) || pronounObject && nounAfterFor(x.i))) ||
+      const forPredicate = c => words.some(x => accPrep(c).includes(x.w) && (predicateAfter(x.i) && (accusativeBefore(x.i) || pronounObject) || pronounObject && nounAfterFor(x.i) && !(x.w === "für" && nounAt(x.i+1)))) ||
         accPrep(c).some(p => daPreps.includes(p)) && free.some(x => OBJ_PRON.test(x.w));
       // für + a bare noun after a noun object (Seine Gäste hielt er für Freunde / hielt eine Rede für Studenten): undecided.
-      const forOpen = cards.some(c => accPrep(c).includes("für")) && !pronounObject && words.some(x => x.w === "für" && nounAt(x.i+1) && !OBJ_TIME.test(norm(tokens[x.i+1][0])));
+      // (advisor 23.11: also after a pronoun object — hält sie für Idioten ↔ hält Trinkwasser für Brisbane: für + a name or a bare noun
+      // is «считать» or «для» by meaning only — the window of the two cards, not «считать»; für + a determiner and a noun with a pronoun
+      // object stays «считать» — hielt ihn für den Dieb)
+      const forOpen = cards.some(c => accPrep(c).includes("für")) && words.some(x => x.w === "für" && nounAt(x.i+1) && !OBJ_TIME.test(norm(tokens[x.i+1][0])) && !MEASURE.test(norm(tokens[x.i+1][0])));
       const prepWithObject = cards.filter(c => c !== accusativeCard() && c.item.auxiliary !== "sein" && accusativeCard()?.item.auxiliary !== "sein" &&
         !patterns(c).some(p => /^Akkusativ$/u.test(p.trim())) && forPredicate(c));
       if (prepWithObject.length === 1) return {candidate:prepWithObject[0],evidence:'complement-preposition'};
-      if (forOpen && accusative) return null;
+      // (advisor 23.11: the window of the two cards only — «держать» (the accusative card) and «считать» (für) — not the intransitive
+      // «останавливаться»: there is an accusative object)
+      if (forOpen && accusative) { const two = cards.filter(c => c === accusativeCard() || accPrep(c).includes("für"));
+        return two.length >= 2 && two.length < cards.length ? {window:two,evidence:'for-open'} : null; }
       // (für after an insertion: hielt sie, die schöne Müllerstochter, für eine Hexe — the object may belong to «считать»)
       const restOfSentence = sentence.slice(tokens[end].index + tokens[end][0].length).split(/[.!?]/u)[0];
       if (accusative && /^\s*,/u.test(restOfSentence) && /(?:^|[\s,])für\s/u.test(restOfSentence) && cards.some(c => accPrep(c).includes("für"))) return null;
@@ -17655,8 +17714,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       })();
       const verbNominal = particleTap && ((forms.get(norm(particleTap.text)) || []).some(e => ["Nomen","Adjektiv","Adverb"].includes(e.type)) ||
         /^\p{Lu}/u.test(particleTap.text) && !clauseInitial(context.sentence, particleTap.start));
-      const sense = twins.length > 1 && !(particleTap ? verbNominal : nominalWord)
+      let sense = twins.length > 1 && !(particleTap ? verbNominal : nominalWord)
         ? (await warmPhraseNouns(context.sentence), sameInfinitiveSense(particleTap ? particleTap.text : word,particleTap ? {...context,tokenOffset:particleTap.start} : context,twins)) : null;
+      // (advisor 23.11) a window of some of the twins (halten: «держать» / «считать» — für + a name or a bare noun): the others leave
+      if (sense?.window) { const keep = sense.window; candidates = candidates.filter(c => !twins.some(t => same(t,c)) || keep.some(k => same(k,c))); sense = null; }
       // A particle that is also a pronoun (ging … ein) keeps its whole window without evidence: the reader shows
       // the pronoun summary for a window without an article.
       if (particleTap && (sense || !candidates.some(c => ["Pronomen","pronoun"].includes(c.item?.type))))
@@ -18106,6 +18167,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const determinedCase = {der:'Dativ',einer:'Dativ',keiner:'Dativ',meiner:'Dativ',deiner:'Dativ',seiner:'Dativ',ihrer:'Dativ',unserer:'Dativ',
       eurer:'Dativ',dieser:'Dativ',jener:'Dativ',jeder:'Dativ',die:'Akkusativ',das:'Akkusativ',eine:'Akkusativ',keine:'Akkusativ',meine:'Akkusativ',
       deine:'Akkusativ',seine:'Akkusativ',ihre:'Akkusativ',unsere:'Akkusativ',eure:'Akkusativ',diese:'Akkusativ',jene:'Akkusativ',jedes:'Akkusativ'};
+    // (links chat 23.11) words for the pair's «no_object» and the direction sign
+    const PREPOSITION_TOKEN = /^(?:an|auf|in|über|unter|vor|hinter|neben|zwischen|mit|von|zu|aus|bei|nach|seit|für|gegen|ohne|um|durch|bis|ab|außer|gegenüber|wegen|trotz|während|statt|am|im|ans|ins|aufs|beim|vom|zum|zur|fürs|ums|übers|vors|durchs|als|wie)$/u;
+    const DIRECTION_BEFORE_PREPOSITION = /^(?:hinaus|hinauf|hinunter|hinein|hinüber|hinab|heraus|herauf|herunter|herein|herüber|herab|empor)$/u;
+    const OBJECT_PRONOUN_CASE = {mir:'Dativ',dir:'Dativ',ihm:'Dativ',ihnen:'Dativ',mich:'Akkusativ',dich:'Akkusativ',ihn:'Akkusativ'};
     async function verbPrepositionLink(word, context, resolution) {
       // (advisor 21.11, Goethe C1: the pair of a verb also on its participle used as an adjective and on its state — sein + Partizip II:
       // waren an der Studie beteiligt (sich beteiligen an), war an Spinnen gewöhnt (sich gewöhnen an); a window between the verb's state
@@ -18301,8 +18366,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // The checks of one pair; gives its case or null.
       // (A2 (б2), advisor 16.11: a case shown right after the preposition — an article, a pronoun, a contraction)
       // (den / meinen … + a noun by the shared prepositionPhraseCase — advisor 16.11: auf den Zug Akkusativ, in den Autos / den Hotels Dativ)
-      const shownCase = q => contractionCase[norm(tokens[q][0])] || (tokens[q+1] && (objectCase[norm(tokens[q+1][0])] || determinedCase[norm(tokens[q+1][0])])) ||
-        prepositionPhraseCase(tokens,q,clause.end) || null;
+      // (links chat 23.11: an -en determiner — den, seinen, keinen … — by its noun's number, after any preposition)
+      const enNounAt = d => { const k = phraseHead(tokens,d+1); return k >= 0 ? enDeterminerCase(tokens[k][0]) : null; };
+      const shownCase = q => contractionCase[norm(tokens[q][0])] || (tokens[q+1] && (PHRASE_EN_DET_ANY.test(norm(tokens[q+1][0])) ? enNounAt(q+1) :
+        objectCase[norm(tokens[q+1][0])] || determinedCase[norm(tokens[q+1][0])])) || prepositionPhraseCase(tokens,q,clause.end) || null;
+      // (links chat 23.11) the object case a word of the part shows by its form alone: mir / ihm / dem / einem … — Dativ; mich / ihn /
+      // einen — Akkusativ; den / seinen / keinen … by the noun's number (enDeterminerCase); else none
+      const shownObjectCase = i => {
+        const w = norm(tokens[i][0]);
+        if (OBJECT_PRONOUN_CASE[w]) return OBJECT_PRONOUN_CASE[w];
+        if (w === 'einen') return 'Akkusativ';
+        if (PHRASE_EN_DET_ANY.test(w)) return enNounAt(i);
+        return objectCase[w] === 'Dativ' ? 'Dativ' : null;
+      };
+      // (links chat 23.11) a noun of our data — its card or its light record — with its own pair «prep + Kasus» (complements); the
+      // inflected form by the card's forms, else the stem without a case ending (Verstoßes, Streits)
+      const nounOwnPairOn = (noun, prep) => {
+        const n = norm(noun);
+        const stems = [n, ...['es','s','en','n','e'].filter(x => n.endsWith(x) && n.length - x.length >= 3).map(x => n.slice(0, -x.length))];
+        const has = list => (list || []).some(x => norm(String(x?.pattern || '').split(/\s*\+\s*/u)[0]) === prep);
+        return stems.some(st => (forms.get(st) || []).some(e => e.type === 'Nomen' && has(e.complements)) || has(lightByWordPos.get(`${st}|noun`)?.complements));
+      };
       const pairCase = ({v,p,rows,verbBase}) => {
         // (б2: the preposition twice in the part — the link goes to the one whose shown case agrees with the pair, when every other one
         // shows another case: Er wartete auf dem Bahnsteig auf den Zug / auf dich; mit dem Mann mit dem Hut — no link, as before)
@@ -18326,17 +18410,28 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (only in the «считать» frame: a manner phrase — sprach mit zornigem Blick — and von after a noun stay without a pair)
         const adjectiveNoun = regardFrame(verbBase,prepositionAt(p)) && /^\p{Ll}+(?:e|en|er|es|em)$/u.test(object[0]) && [p+2,p+3].some(k => k <= clause.end && /^\p{Lu}/u.test(tokens[k][0]) &&
           tokens.slice(p+1,k).every(t => /^\p{Ll}+(?:e|en|er|es|em)$/u.test(t[0])));
-        if (!nominalObject && !adjectiveNoun) return null;
+        // (advisor 23.11, approved: «считать» by the form after für — an adjective, a noun with its article, a pronoun; not a name, not a
+        // bare noun — hält Lizenzen für Linien, Trinkwasser für Brisbane: für is «для»; hält ihn für klug — the adjective is the frame's)
+        const regardFuer = prepositionAt(p) === 'für' && regardFrame(verbBase,'für');
+        const predicateAdjective = regardFuer && /^\p{Ll}/u.test(object[0]) && !(p+2 <= clause.end && /^\p{Lu}/u.test(tokens[p+2][0])) &&
+          (forms.get(objectWord) || []).some(e => e.type === 'Adjektiv');
+        if (regardFuer && /^\p{Lu}/u.test(object[0]) && !determinerFeatures(object[0]) && !objectCase[objectWord] && !/^(?:Sie|Ihnen|Ihr)$/u.test(object[0])) return null;
+        if (!nominalObject && !adjectiveNoun && !predicateAdjective) return null;
         // (c) A preposition right after a standalone der / die / das belongs to it (der mit dem Hütchen).
         // A relative der after a comma is the subject of its own clause (…, der an nichts Böses dachte).
-        if (p > 0 && DER_PRONOUNS.includes(norm(tokens[p-1][0])) && p-1 !== v &&
+        // (advisor 23.11: not das / die … as the object of a «считать» frame — Ich halte das für eine gute Idee, dass er das für richtig hält)
+        if (p > 0 && DER_PRONOUNS.includes(norm(tokens[p-1][0])) && p-1 !== v && !regardFrame(verbBase,prepositionAt(p)) &&
             !(p > 1 && /,\s*[»«"„“‚‘]?\s*$/u.test(clause.sentence.slice(tokens[p-2].index+tokens[p-2][0].length,tokens[p-1].index)))) return null;
         // (d) A detached particle closing the clause makes it another verb (hält … von … zurück).
         const last = tokens[clause.end];
         // (batch 142: not the particle of the pair's own verb — sah ihn für einen Dieb an → ansehen)
         // (not for a noun's pair: a particle closing the part is the sentence verb's — Die Beteiligung an der Studie war hoch)
         if (!(nounLink && v === selected) && clause.end > v && clause.end !== p && clause.end !== p+1 && /^\p{Ll}/u.test(last[0]) && !(verbBase.startsWith(norm(last[0])) && detachedParticleAt(v) === norm(last[0])) &&
-            ['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder','hoch','fern','frei','kennen','statt','teil'].includes(norm(last[0]))) return null;
+            (['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder','hoch','fern','frei','kennen','statt','teil'].includes(norm(last[0])) ||
+            // (advisor 23.11: any word that makes a verb of our dictionary with the verb's base — hält sich für die Kinder bereit: bereithalten)
+            // (not the pronominal adverb of the pair's own preposition — gehört zu dieser Jahreszeit dazu: gehören zu)
+            !new RegExp(`^dar?${prepositionAt(p)}$`,'u').test(norm(last[0])) &&
+            (lemmas.get(norm(last[0]) + verbBase.replace(/^sich\s+/u,'')) || []).some(e => e.type === 'Verb'))) return null;
         // (batch 142, advisor 17.11: für + a stretch of time is no «принимать за» — sah ihn für einen Augenblick an, für fünf Minuten)
         if (prepositionAt(p) === 'für' && tokens.slice(p+1,Math.min(p+4,clause.end+1)).some(t =>
           /^(?:augenblick|moment|weile|zeit|minute|minuten|sekunde|sekunden|stunde|stunden|tag|tage|woche|wochen|monat|monate|jahr|jahre|immer|kurzem|lange|ewig)$/u.test(norm(t[0])))) return null;
@@ -18358,12 +18453,50 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // der Straße; not was — Was Xi davon hält)
         const partWords = new Set(indices.filter(i => norm(tokens[i][0]) === 'was' || !(indices.includes(i+1) && /^\p{Lu}/u.test(tokens[i+1][0]) && !/^(?:Sie|Ihnen|Ihr)$/u.test(tokens[i+1][0]))).map(i => norm(tokens[i][0])));
         if (rows.some(r => Array.isArray(r[3]?.requires_any) && !r[3].requires_any.some(w => partWords.has(norm(w))))) return null;
+        // (links chat 23.11, advisor: the case a phrase shows must not contradict the pair — also the verb's own object) a pair whose verb
+        // takes no object of a case in it (data «no_object»: folgen auf — no dative, treffen auf — no accusative): such an object of the
+        // part, shown by its form and not inside a prepositional group, makes it another verb (folgte einem Ruf auf den Lehrstuhl, folgt
+        // mir auf Schritt und Tritt, traf seinen Gaul auf den Kopf)
+        const noObject = new Set(rows.map(r => r[3]?.no_object).filter(Boolean));
+        if (noObject.size && indices.some(i => i !== p+1 && !(i > 0 && PREPOSITION_TOKEN.test(norm(tokens[i-1][0]))) && noObject.has(shownObjectCase(i)))) return null;
+        // (links chat 23.11, advisor: an adverb of direction right before the preposition is the direction — folgte Hagrid hinaus auf den
+        // Felsen; not darüber hinaus, not the verb's own particle; bis zu is «до» — bis zu den frühen Jahren)
+        const before = p > 0 ? norm(tokens[p-1][0]) : '';
+        if (DIRECTION_BEFORE_PREPOSITION.test(before) && !(p > 1 && /^dar/u.test(norm(tokens[p-2][0]))) && !verbBase.startsWith(before)) return null;
+        if (before === 'bis' && prepositionAt(p) === 'zu') return null;
+        // (links chat 23.11, the rest one by one) a participle II opening the part before the phrase takes it — Angesprochen auf die
+        // Besucherzahl zeigt sich … ernüchtert: the participle's group, not the finite verb's; zu + a bare noun of a point in time
+        // (Beginn, Anfang, Ende, Schluss and their compounds — zu Saisonbeginn) is a time
+        if (p > clause.start && p < v && clause.start !== v && /^\p{Lu}/u.test(tokens[clause.start][0]) &&
+            (verbAnalyses.get(norm(tokens[clause.start][0])) || []).some(a => a.kind === 'participle') &&
+            tokens.slice(clause.start+1,p).every(t => /^\p{Ll}/u.test(t[0]))) return null;
+        if (prepositionAt(p) === 'zu' && norm(tokens[p][0]) === 'zu' && /^\p{Lu}/u.test(object[0]) && /(?:beginn|anfang|ende|schluss)$/u.test(objectWord)) return null;
+        // (links chat 23.11, the 174 false marks) a participle as an attribute — den verlangten Berufen, die erwarteten Spitzen — takes
+        // only a phrase inside its own noun group, between its determiner and itself (die von ihm verlangten Preise); a phrase before
+        // that determiner or after the noun is another's (die Anzahl von Lernenden in den verlangten Berufen)
+        if (/^\p{Ll}+(?:e|en|er|es|em)$/u.test(tokens[v][0]) && indices.includes(v+1) && /^\p{Lu}/u.test(tokens[v+1][0])) {
+          let k = v-1; while (k >= 0 && /^\p{Ll}+(?:e|en|er|es|em)$/u.test(tokens[k][0]) && !DETERMINER_WORD.test(norm(tokens[k][0]))) k--;
+          if (k >= 0 && indices.includes(k) && (DETERMINER_WORD.test(norm(tokens[k][0])) || PREPOSITION_TOKEN.test(norm(tokens[k][0]))) && (p > v || p < k)) return null;
+        }
+        // (links chat 23.11, advisor: «a noun's pair or the verb's pair» — the preposition right after a noun with its own pair on it in our
+        // data — beginnt … Streit mit ihm, ein Attentat auf Hitler ausüben, wegen Verstoßes gegen das Waffengesetz ermittelt —: by the
+        // form either may be meant, so the verb's pair is not shown (the window of A-17 part 2 is the place to offer both); not a noun
+        // of the pair's own verb — Angst vor … haben)
+        if (!(nounLink && v === selected) && p > 0 && p-1 !== v && indices.includes(p-1) && /^\p{Lu}/u.test(tokens[p-1][0]) &&
+            !rows.some(r => norm(r[0]).split(/\s+/u).includes(norm(tokens[p-1][0]))) && nounOwnPairOn(tokens[p-1][0], prepositionAt(p)) &&
+            // (advisor 21.11 (3): not when the verb's detached particle closes the part — schlägt … vor Wut auf Gegenstände ein)
+            !(detachedParticleAt(v) && verbBase.replace(/^sich\s+/u,'').startsWith(detachedParticleAt(v)))) return null;
         const cases = [...new Set(rows.map(r => r[2]))];
         if (cases.length !== 1) return null;
         // (advisor 22.11, step (1): the case its determiner shows after a two-way preposition — auf der anderen Seite is Dativ, no pair with
         // + Akkusativ; den + a noun stays without a case here: in den Autos / auf den Willen need the noun's number)
-        const seen = contractionCase[norm(tokens[p][0])] || objectCase[norm(object[0])] || determinedCase[norm(object[0])] ||
-          (TWO_WAY_PREPOSITION.test(prepositionAt(p)) ? (PHRASE_DATIVE_DET.test(norm(object[0])) ? 'Dativ' : PHRASE_ACCUSATIVE_DET.test(norm(object[0])) ? 'Akkusativ' : null) : null);
+        // (links chat 23.11, advisor: den / seinen / keinen … by the noun's number after a two-way preposition — in den meisten Ländern is
+        // a dative plural; after a preposition of one case they show nothing against it — mit seinen Kollegen, an -en word read as an
+        // accusative before; a bare plural + -n after a two-way preposition — auf Felsvorsprüngen — is a dative too)
+        const twoWay = TWO_WAY_PREPOSITION.test(prepositionAt(p));
+        const seen = contractionCase[norm(tokens[p][0])] || (PHRASE_EN_DET_ANY.test(norm(object[0])) ? (twoWay ? enNounAt(p+1) : null) : objectCase[norm(object[0])] || determinedCase[norm(object[0])] ||
+          (twoWay ? (PHRASE_DATIVE_DET.test(norm(object[0])) ? 'Dativ' : PHRASE_ACCUSATIVE_DET.test(norm(object[0])) ? 'Akkusativ' :
+            /^\p{Lu}/u.test(object[0]) && bareDativePlural(object[0]) ? 'Dativ' : null) : null));
         if (seen && seen !== cases[0]) return null;
         return cases[0];
       };
