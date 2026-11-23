@@ -14352,6 +14352,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const prep = det > 0 && adjacent(det-1,det) ? norm(tokens[det-1][0]) : '';
       const twoWay = new Set(['in','an','auf','unter','über','vor','hinter','neben','zwischen']);
       const result = [];
+      // (advisor 22.11, source audit B3) a head with no noun card of ours: its gender / number / cases from nounFactsAt — the light
+      // record, the English dictionary — and the same agreement checks (the article form by gender / number, the case of a preposition,
+      // the modifier endings). Marked external: they decide the article, the card display stays as before.
+      if (!nouns.length) {
+        const facts = await nounFactsAt(tokens,head,'nounPhrase');
+        for (const r of facts?.rows || []) {
+          if (r.card?.source === 'main' && r.card?.item) continue;
+          const key = r.number === 'plural' ? 'plural' : {masculine:'der',feminine:'die',neuter:'das'}[r.gender];
+          if (!table[key]) continue;
+          let cases = table[key].flatMap((form,i) => form === norm(tokens[det][0]) ? [i] : []);
+          if (governed[prep] !== undefined) cases = cases.filter(i => i === governed[prep]);
+          if (twoWay.has(prep)) cases = cases.filter(i => i === 1 || i === 2);
+          if (r.cases?.size) cases = cases.filter(i => r.cases.has(caseNames[i]));
+          cases = cases.filter(i => {
+            const ending = i >= 2 || key === 'plural' || key === 'der' && i === 1 ? 'en' : 'e';
+            for (let m=det+1;m<head;m++) if (!(modifiers.get(norm(tokens[m][0])) || []).some(row => row.ending === ending)) return false;
+            return true;
+          });
+          if (cases.length) result.push({dictionaryId:null,external:true,lemma:r.card?.lemma || tokens[head][0],baseArticle:key,
+            gender:key === 'plural' ? null : ARTICLE_GENDER[key],number:key === 'plural' ? 'plural' : 'singular',
+            cases:cases.map(i => caseNames[i]),article:tokens[det][0],noun:tokens[head][0],spans:[span(det),span(head)]});
+        }
+        return result;
+      }
       for (const noun of [...new Map(nouns.map(e => [e.id,e])).values()]) {
         if (!table[noun.article]) continue;
         // A noun declined like an adjective (der Kranke, ein Kranker) shows the
@@ -17834,8 +17858,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // the noun either way, so it stays the article)
       const articlePhrase = phrases.length && (new Set(phrases.map(p => `${p.lemma}:${p.baseArticle}`)).size === 1 ||
         resolution.candidates.some(c => c.pos === 'article') && new Set(phrases.map(p => norm(p.lemma))).size === 1);
-      const phrasesFor = c => canonicalPos(c.pos) === 'Nomen' ? phrases.filter(p => p.dictionaryId === c.dictionaryId) :
+      // (source audit B3: phrases of a head with no card of ours decide the article only; the display keeps its own link)
+      const phrasesFor = c => canonicalPos(c.pos) === 'Nomen' ? phrases.filter(p => !p.external && p.dictionaryId === c.dictionaryId) :
         c.pos === 'article' && articlePhrase ? phrases : [];
+      const ownPhrasesFor = c => phrasesFor(c).filter(p => !p.external);
       if (articlePhrase && selection.canFill('article-noun-agreement',resolution)) {
         const linked = resolution.candidates.filter(c => phrasesFor(c).length);
         // B12 (15.10.2026): a plural article (den Studien) fits a noun of any
@@ -17943,7 +17969,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             selection.override(resolution,'copula-or-attributive-card',{selected:c,candidates:[c,...resolution.candidates],evidence:'copula-or-attributive-card'}); } } }
       selection.finish(resolution);
       observe('stage', {stage:'grammar-complete',selected:resolution.selected?.lemma || null});
-      await presentResolution(word,context,resolution,phrasesFor);
+      await presentResolution(word,context,resolution,ownPhrasesFor);
       // (advisor 06.11, fresh sample item 3 (в), DRAFT): an external noun / adjective known only in English — its composition from our
       // parts as a line under the English text («состав: Spiel — игра · Tag — день»); a hint, not a translation.
       { const sel = resolution.selected;
