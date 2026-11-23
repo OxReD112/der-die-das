@@ -16095,6 +16095,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     };
     // Object evidence for a perfect participle: an accusative pronoun or
     // determiner + singular noun outside a prepositional phrase, or a dative pronoun.
+    // (source audit (b), 23.11) the noun is a feminine singular by its rows (nounFactsAt): every row that knows something — a gender or
+    // the plural — is feminine singular; a singular row with no gender and no case (a reading that knows nothing) does not count
+    function feminineSingularRows(rows) {
+      const known = (rows || []).filter(r => r.gender || r.number === "plural" || (r.cases && (r.cases.size ?? r.cases.length)));
+      return known.length > 0 && known.every(r => r.number === "singular" && r.gender === "feminine");
+    }
     function participleObject(f) {
       const {tokens,index,start} = f;
       const prepositions = new Set(["in","an","auf","über","unter","vor","hinter","neben","zwischen","für","durch","gegen","ohne","um","mit","bei","von","zu","aus","nach","seit"]);
@@ -16120,7 +16126,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const DATIVE_DET = /^(?:dem|einem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|keinem|jedem)$/u;
       const POSTPOSITION = /^(?:nach|zufolge|gegenüber|gemäß|entsprechend|zuliebe|entgegen|trotz|zum)$/u;
       // (der + a feminine-only noun is the dative or the genitive; the genitive only right after a noun — der der Partei angehört hatte)
-      const feminineOnly = n => { const es = (forms.get(norm(tokens[n][0])) || []).filter(e => e.type === "Nomen");
+      // (advisor 22.11, source audit (b): the noun's gender / number from the facts prepared in the async stage — nounFactsAt: our card,
+      // the light record, the English dictionary; a singular feminine only)
+      const feminineOnly = n => { const rows = f.nounFacts ? f.nounFacts(n) : null;
+        if (rows) return feminineSingularRows(rows);
+        const es = (forms.get(norm(tokens[n][0])) || []).filter(e => e.type === "Nomen");
         return es.length > 0 && es.every(e => /^die\b/u.test(String(e.article || "")) && !e.plural_only); };
       const dativeGroup = i => { const w = norm(tokens[i][0]), femDer = w === "der" && !(i > 0 && /^\p{Lu}/u.test(tokens[i-1][0]) && i-1 >= start);
         if (!DATIVE_DET.test(w) && !femDer || i > start && prepositions.has(norm(tokens[i-1][0]))) return false;
@@ -23486,8 +23496,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           let n = k + 1; while (n < end && /^\p{Ll}/u.test(tokens[n][0]) && /(?:e|en)$/u.test(norm(tokens[n][0])) && !DETERMINER_WORD.test(norm(tokens[n][0]))) n++;
           if (n >= end || !/^\p{Lu}/u.test(tokens[n][0])) continue;
           if (DAT_DET.test(t)) { sure = true; break; }
-          const own = (forms.get(norm(tokens[n][0])) || []).filter(e => e.type === "Nomen");
-          if (own.length && own.every(e => e.article === "die")) sure = true;
+          // (advisor 22.11, source audit (b): der + a feminine singular noun is the dative here — the noun's gender / number from
+          // nounFactsAt: our card, the light record, the English dictionary, one logic; a plural reading — der Frauen — is the genitive)
+          if (feminineSingularRows((await nounFactsAt(tokens,n,'dativeSenseFirst'))?.rows || [])) sure = true;
         }
       }
       if (!sure) return result;
