@@ -3719,5 +3719,32 @@
   ],
   "_src": "a07f9391",
   "_src_reader": "0af191b3"
+ },
+ "expression-406": {
+  "translation_pl": "na to wygląda, wygląda na to, że tak",
+  "example_pl": "Będzie dziś padać? — Bardzo na to wygląda.",
+  "notes_pl": [
+   "Pot. Także ze zdaniem podrzędnym: Es sieht danach aus, dass / als ob … — wygląda na to, że … Tak samo z rzeczownikiem: Es sieht nach Regen aus — zanosi się na deszcz (aussehen nach + Dat.). Nie mylić: Danach sah er aus dem Fenster. — Potem wyjrzał przez okno (danach „potem”); Er sieht danach müde aus — potem wygląda na zmęczonego."
+  ],
+  "_src": "0d1853ed",
+  "_src_reader": "c1965792"
+ },
+ "expression-407": {
+  "translation_pl": "na to wygląda",
+  "example_pl": "Złożył wypowiedzenie? — Na to wygląda.",
+  "notes_pl": [
+   "Pot. O tym, co słychać albo co ktoś powiedział. Z rzeczownikiem: Das klingt nach einer guten Idee — brzmi jak dobry pomysł (klingen nach + Dat.). Nie mylić: Es klingt danach, als ob … — danach wprowadza tu zdanie podrzędne („brzmi tak, jakby …”); Danach klang die Musik anders. — Potem muzyka brzmiała inaczej."
+  ],
+  "_src": "ca8b2c70",
+  "_src_reader": "293b9c16"
+ },
+ "expression-408": {
+  "translation_pl": "nie mieć czego szukać (gdzieś), tu nie miejsce (na coś)",
+  "example_pl": "Nie masz tu czego szukać!",
+  "notes_pl": [
+   "Pot., często ostro. Także o rzeczach: Hier hat das Handy nichts zu suchen. — Tu nie miejsce na telefon. Pytanie: Was hast du hier zu suchen? — Czego tu szukasz? Nie mylić: Ich habe den Schlüssel zu suchen. — Muszę szukać klucza (haben + zu); Er hat nichts zu essen. — On nie ma nic do jedzenia."
+  ],
+  "_src": "6cbf9401",
+  "_src_reader": "2c841b43"
  }
 }

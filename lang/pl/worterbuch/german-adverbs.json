@@ -839,18 +839,21 @@
   "_src_reader": "3fb085f5"
  },
  "adverb-132": {
-  "translation_pl": "następnie, potem; (zapytać) o to",
+  "translation_pl": "po tym, potem; (czasownik + nach) o to, do tego, według tego; (es sieht danach aus / es klingt danach) na to wygląda",
   "example_pl": "Pójdziemy do kina, a potem coś zjemy.",
   "notes_pl": [
    "danach = da + nach, zastępuje nach + rzecz: Er fragt nach dem Weg. → Er fragt danach."
   ],
   "sense_marks": [
    {
-    "meaning_pl": "(zapytać) o to"
+    "meaning_pl": "(czasownik + nach) o to, do tego, według tego"
+   },
+   {
+    "meaning_pl": "(es sieht danach aus / es klingt danach) na to wygląda"
    }
   ],
-  "_src": "9591889f",
-  "_src_reader": "49d23a7b"
+  "_src": "b5fe1afc",
+  "_src_reader": "ba0999e0"
  },
  "adverb-134": {
   "translation_pl": "dlatego",

@@ -14926,8 +14926,8 @@
   {
     "id": "adjective-adverb-399",
     "word": "dicht",
-    "translation_ru": "густой; плотный; герметичный; плотно; близко",
-    "translation_en": "dense; tightly packed; watertight; tightly; close together",
+    "translation_ru": "густой; плотный; герметичный; плотно; совсем близко (к), вплотную",
+    "translation_en": "dense; tightly packed; watertight; tightly; close (to), close together",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -14969,8 +14969,8 @@
     "sense_marks": [
       {
         "rule": "dicht-before-preposition",
-        "meaning_ru": "близко",
-        "meaning_en": "close together"
+        "meaning_ru": "совсем близко (к), вплотную",
+        "meaning_en": "close (to), close together"
       }
     ]
   },

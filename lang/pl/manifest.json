@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "d408f617a1bf",
+ "version": "071a766f9fe1",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -249,7 +249,7 @@
   },
   "worterbuch/german-adverbs.json": {
    "items": 434,
-   "texts": 1267,
+   "texts": 1268,
    "done": 434
   },
   "worterbuch/german-articles.json": {
@@ -263,9 +263,9 @@
    "done": 58
   },
   "worterbuch/german-expressions.json": {
-   "items": 405,
-   "texts": 1335,
-   "done": 405
+   "items": 408,
+   "texts": 1344,
+   "done": 408
   },
   "worterbuch/german-function-words.json": {
    "items": 50,

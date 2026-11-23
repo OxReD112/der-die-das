@@ -7442,6 +7442,20 @@ function apostropheText(text) {
           // (links chat п. 10, advisor 12.11: als + a noun phrase is no comparison — war … als Außenläufer zu finden, ist … als Fresko zu sehen)
           !alsNounPhrase(tokens,i,tail))) continue;
         const modal = lexical.word === "haben";
+        // (reference chat 22.11, advisor 22.11: haben + a word of indefinite quantity as the infinitive's object — Ich habe nichts zu
+        // verlieren, Er hat viel zu tun, Hast du was zu essen? — «есть что / нечего (сделать)», not «должен»; the class indefinite-quantity;
+        // not a word right before a noun — its attribute (Er hat viel Geld zu verdienen), not was opening the part — the question word
+        // (Was hast du zu tun?))
+        // (advisor 23.11: a word of the class — or kein — right before a noun cannot be told from «должен» by its form: viel Geld zu
+        // verlieren, keine Zeit zu verlieren, viel Arbeit zu erledigen — a window «должен / есть что»; einen Brief zu schreiben stays «должен»)
+        // (pool 23.11: a nominalized adjective in -es is the word's own object, not a noun it qualifies — etwas Wichtiges, was Besseres, nichts
+        // Neues zu sagen: «есть что / нечего»)
+        const beforeNoun = i => i + 1 <= end && /^\p{Lu}/u.test(tokens[i+1][0]) && !/^(?:Sie|Ihnen|Ihr)$/u.test(tokens[i+1][0]) &&
+          !(/^(?:etwas|was|nichts|nix|viel|wenig|allerhand|manches|einiges|mehr|weniger)$/u.test(norm(tokens[i][0])) && /^\p{Lu}\p{Ll}+es$/u.test(tokens[i+1][0]) && (forms.get(norm(tokens[i+1][0])) || []).every(e => e.type !== "Nomen"));
+        const quantityWord = i => indefiniteQuantity?.has(norm(tokens[i][0])) && i < tail && !(norm(tokens[i][0]) === "was" && i === start);
+        const quantity = modal ? other.find(i => quantityWord(i) && !beforeNoun(i)) : undefined;
+        const quantityNoun = modal && quantity === undefined ? other.find(i => (quantityWord(i) || /^kein(?:e|en|em|er)?$/u.test(norm(tokens[i][0])) && i < tail) && beforeNoun(i)) : undefined;
+        if (quantity !== undefined) linked.push(quantity); else if (quantityNoun !== undefined) linked.push(quantityNoun);
         const tense = participleIndex !== null ? finiteIn(head.e,head.i,"Präteritum") ? "Plusquamperfekt · " : "Perfekt · " : "";
         // A recognised connection does not establish obligation (e.g. nichts zu tun).
         const note = modal ? {en:`${tense}haben + zu + infinitive`,ru:`${tense}haben + zu + инфинитив`} :
@@ -7451,6 +7465,8 @@ function apostropheText(text) {
         const simple = ["Präsens","Präteritum","Konjunktiv II","Konjunktiv I"].filter(t=>finiteIn(head.e,head.i,t) || t === "Konjunktiv I" && konj1Sein(head.e,head.i));
         const groupTense = participleIndex !== null ? tense.replace(/ · $/u, "") : simple.length === 1 && simple[0] !== "Präsens" ? simple[0] : null;
         result.push({id:modal ? "haben-zu" : "sein-zu",note,lemma:main[0].word,...(groupTense ? {tense:groupTense} : {}),
+          ...(quantity !== undefined ? {quantity:negativeQuantity.has(norm(tokens[quantity][0])) ? "nothing" : "something"} :
+            quantityNoun !== undefined ? {quantity:"window"} : {}),
           meaningLemma:lexical.word,meaning:modal || selected !== (participleIndex ?? head.i) ? null : {en:"can / must be",ru:"можно / нужно"},
           // (links chat 09.11, Mac run w103: a separable verb known only from the external index — anzutreffen — has no forms to check
           // against the tapped word, so on sein / haben it stood as a second card and opened a window with die Ware: Damals waren
@@ -8613,7 +8629,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const lassenHistoricalForms = new Map([['läßt','lässt'],['laß','lass'],['laßt','lasst'],['mußten','mussten']]);
     const lassenForm = word => lassenHistoricalForms.get(norm(word)) || word;
     async function lassenGroup(word, context, candidates, heads = LASSEN_GROUP_HEADS) {
-      if (!context || !Number.isInteger(context.tokenOffset) || (!candidates.some(c=>canonicalPos(c.pos)==='Verb') && !lassenHistoricalForms.has(norm(word)) && norm(word)!==LASSEN_LET_US_PRONOUN)) return null;
+      // (reference chat 22.11, F12-B5d, advisor 22.11: sich of «sich … lassen + infinitive» «можно» is not translated separately — the tap on
+      // sich finds the group as the tap on lässt does; only the sense canBeDone, only that sich)
+      const sichTap=heads===LASSEN_GROUP_HEADS&&norm(word)==='sich';
+      if (!context || !Number.isInteger(context.tokenOffset) || (!sichTap && !candidates.some(c=>canonicalPos(c.pos)==='Verb') && !lassenHistoricalForms.has(norm(word)) && norm(word)!==LASSEN_LET_US_PRONOUN)) return null;
       const sentence=String(context.sentence || ""),tokens=sharedTokens(sentence,'lassenGroup');
       if(!tokens.some(t=>(forms.get(norm(lassenForm(t[0])))||[]).some(e=>e.type==='Verb'&&heads.has(e.word))))return null;
       const clicked=clickedTokenIndex(tokens,context.tokenOffset,word);
@@ -8869,7 +8888,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if(letUs!==null&&!(letUs<part&&letUs<=end))letUs=null;
           if(letUs!==null)linked.push(letUs);
         }
-        if(!linked.includes(clicked))continue;
+        if(!linked.includes(clicked)&&!sichTap)continue;
         const ownNoun=i=>/^[A-ZÄÖÜ]/u.test(tokens[i][0])&&(forms.get(words(i))||[]).some(e=>e.type==='Nomen');
         const possessive=i=>POSSESSIVE_WORD.test(words(i))&&i+1<=end&&ownNoun(i+1);
         const attributive=async i=>{
@@ -9142,6 +9161,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (the two-word card wins unless the group proved «сам (упал)» — Hans ließ sich das Glas fallen: fallenlassen «уронить»)
         if(twoWordWins&&sense!=='self'&&!(sense==='letUs'&&letUsShape))continue;
         if(sense&&sense!=='letUs')linked.push(reflexiveIndex);
+        if(sichTap&&!(sense==='canBeDone'&&reflexiveIndex===clicked))continue;
         groups.push({id:'lassen-infinitive',...(H!=='lassen'?{head:H}:{}),...(conditionalReplacement?{conditionalPerfect:true}:{}),...(sense?{sense}:{}),...(outer!==null&&modalLemmas.has(head.base)?{outerModal:true}:{}),...(coordinated?{coordinated:coordinated.rows[0].base}:{}),label:replacement?tense+' · '+H:tense==='Futur I'||tense==='Konjunktiv II'?tense+' · '+H:H+' + Infinitiv',tense,lemma:coordinated?(secondBefore?`${coordinated.rows[0].base} und ${inner[0].base}`:`${inner[0].base} und ${coordinated.rows[0].base}`):inner[0].base,roles:[...lassen,...lexical,...helpers,...(sense==='letUs'?(forms.get(LASSEN_LET_US_PRONOUN)||[]).filter(e=>e.type==='Pronomen'&&e.word===LASSEN_LET_US_CARD):[])],
           note:{ru:(replacement?tense+' · haben + Infinitiv + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + инфинитив')+(H==='lassen'?' · значение определяется контекстом':'')+(moechteHead?' · möchte: форма Konjunktiv II от mögen; отдельная карточка möchten':''),en:(replacement?tense+' · haben + infinitive + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + infinitive')+(H==='lassen'?' · meaning depends on context':'')+(moechteHead?' · möchte: Konjunktiv II form of mögen; separate möchten card':'')},
           spans:[...new Set(linked)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
@@ -9507,6 +9527,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if ((c.reflexiveUnconfirmed && !["werden-future-perfect","werden-conditional-perfect"].includes(group.id)) || c.construction?.id === "reflexive-verb" && !(group.id==='lassen-infinitive'&&(c.construction.attachmentOnly||norm(c.lemma)==='lassen'))) return c;
       if (group.marker && c.lemma === "zu" && canonicalPos(c.pos) === "particle")
         return {...c,construction,translation:{en:"infinitive marker",ru:"частица инфинитива"}};
+      // (reference chat 22.11, F12-B5d: sich of «sich … lassen + infinitive» «можно» takes the group — not translated separately, as zu)
+      if (group.id === "lassen-infinitive" && group.sense === "canBeDone" && norm(c.lemma) === "sich" && canonicalPos(c.pos) === "Pronomen") return {...c,construction};
       // C14 (17.10.2026): with two own cards of one verb the group's role names the card it proved (ist gefahren:
       // fahren «ехать», auxiliary sein — not «водить»); an own role without an id still matches by word.
       const twinRoles = roles.filter(e => e.id && norm(e.word) === norm(c.lemma) && e.type === canonicalPos(c.pos));
@@ -9568,6 +9590,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (advisor 22.11, A-17 п. 5) the list of pairs, read before the choice of two own cards of one infinitive (sameInfinitiveSense is
     // always preceded by warmPhraseNouns): a pair's «requires_any» there too
     let verbPrepositionRows = null;
+    // (advisor 22.11: one list of indefinite words of quantity — the class «indefinite-quantity» of the list of pairs; halten von, haben +
+    // zu and the card choice of halten (L36) read it; warmed on every tap, before any rule)
+    let indefiniteQuantity = null, negativeQuantity = new Set();
+    async function warmWordClasses() {
+      if (indefiniteQuantity === null && fallback.wordClasses) { try { indefiniteQuantity = new Set(((await fallback.wordClasses())["indefinite-quantity"] || []).map(norm));
+        // (advisor 23.11: the class's polarity in the data — neg: nichts, nix, wenig, kaum, weniger …)
+        negativeQuantity = new Set((((fallback.wordClassPolarity ? await fallback.wordClassPolarity() : {})["indefinite-quantity"] || {}).neg || []).map(norm)); } catch (_) { /* no list — no rule */ } }
+    }
     async function warmPhraseNouns(sentence) {
       if (verbPrepositionRows === null && fallback.verbPrepositions) { try { verbPrepositionRows = await fallback.verbPrepositions(); } catch (_) { /* no list — no condition */ } }
       const tokens = sharedTokens(String(sentence || ""),'warmPhraseNouns');
@@ -10038,9 +10068,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (für after an insertion: hielt sie, die schöne Müllerstochter, für eine Hexe — the object may belong to «считать»)
       const restOfSentence = sentence.slice(tokens[end].index + tokens[end][0].length).split(/[.!?]/u)[0];
       if (accusative && /^\s*,/u.test(restOfSentence) && /(?:^|[\s,])für\s/u.test(restOfSentence) && cards.some(c => accPrep(c).includes("für"))) return null;
-      // L36: a pronoun object (was / nichts / etwas / viel) with a pronominal adverb or von of a haben card's own preposition
+      // L36: a pronoun object (was / nichts / etwas / viel — the class indefinite-quantity, advisor 22.11) with a pronominal adverb or von of a haben card's own preposition
       // (Was er von mir hält, Ich halte nichts davon, Davon halte ich viel) — the preposition decides.
-      const QUANT = /^(?:was|nichts|etwas|viel|wenig|alles|einiges|manches)$/u;
+      const QUANT = {test:w => !!indefiniteQuantity?.has(w)};
       const prepOfPronoun = cards.filter(c => c.item.auxiliary !== "sein" && c !== accusativeCard() && !patterns(c).some(p => /^Akkusativ$/u.test(p.trim())) &&
         [...preps(c)].some(p => daPreps.includes(p) || p === "von" && words.some(x => x.w === "von")) &&
         // (tests chat 22.11: not a word right before a noun — its attribute: Er hielt viel Abstand von der Straße; not was)
@@ -22939,15 +22969,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
     // (cheap signs, advisor 08.11): danach «после этого, потом» stays first; a verb or word of the part that governs nach — by the cards'
-    // complements, a short fallback list (aussehen, klingen … are not in them) — puts «об этом» first: fragte danach, sehnten sich danach,
-    // es sieht danach aus.
-    const NACH_FALLBACK = /^(?:frag\p{L}*|gefragt|sehn\p{L}*|gesehnt|such\p{L}*|gesucht|streb\p{L}*|gestrebt|sieht|sah|sahen|aussehen|aussah|aus|klang|klingt|klingen|griff|greif\p{L}*|gegriffen|verlang\p{L}*|verlangt)$/u;
+    // complements, a short fallback list (fragen, sich sehnen, suchen, streben, greifen, verlangen) — puts «об этом» first: fragte danach,
+    // sehnten sich danach.
+    // (advisor 23.11: not aussehen / klingen and their forms, not aus — Danach sah er aus dem Fenster is «потом»: aus is the preposition;
+    // Es sieht danach aus «похоже на то» is an expression entry, the expressions chat's; after the pairs transfer the rule takes its verbs
+    // from the pairs only and this list goes)
+    const NACH_FALLBACK = /^(?:frag\p{L}*|gefragt|sehn\p{L}*|gesehnt|such\p{L}*|gesucht|streb\p{L}*|gestrebt|griff|greif\p{L}*|gegriffen|verlang\p{L}*|verlangt)$/u;
     function danachSense(word, context, result) {
       const c = result.selected;
       // (Alena 22.11, WN 216: «about it» by the card's sense mark «governed-preposition», each language by its own mark)
       const marked = senseMarkPlaces(c.item, "governed-preposition");
-      if (!marked || marked.ru <= 0 && marked.en <= 0) return result;
-      const index = Math.max(marked.ru, 0);
+      if ((!marked || marked.ru <= 0 && marked.en <= 0) && !senseMarkPlaces(c.item, "looks-like")) return result;
+      const index = Math.max(marked?.ru ?? 0, 0);
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'danachSense');
       const at = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (at < 0) return result;
@@ -22955,13 +22988,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let begin = at; while (begin > 0 && !/[,;:.!?»«„“"–—]/u.test(sentence.slice(tokens[begin-1].index + tokens[begin-1][0].length, tokens[begin].index))) begin--;
       // (nach + Dativ as the object only — not a direction «nach / in + …»; a particle closing the part makes another verb: richteten
       // sich … ein, machten sich … auf, zog … aus)
+      // (tests chat 23.11, advisor 23.11: aussehen — a form of sehen with aus in the part — or klingen with danach not opening its part:
+      // «похоже на то» first, by the card's sense mark «looks-like» (es sah nicht danach aus, wobei es gar nicht danach klang); danach
+      // opening the part stays «потом» (Danach sah es anders aus); the expressions es sieht danach aus / es klingt danach come first)
+      { const looks = senseMarkPlaces(c.item, "looks-like"), part = tokens.slice(begin,end).map(t => norm(t[0]));
+        const lookVerb = part.some(w => /^(?:klingt|klang|klangen|klingen|klinge|klänge|geklungen)$/u.test(w)) ||
+          part.includes("aus") && part.some(w => /^(?:sieht|sah|sahen|sähe|sehe|siehst|seht|sehen|aussehen|aussah|ausgesehen)$/u.test(w));
+        if (lookVerb && at !== begin && looks && (looks.ru >= 0 || looks.en >= 0)) {
+          const selected = {...c, senseFirst:Math.max(looks.ru, 0), ...(looks.en >= 0 ? {senseFirstEn:looks.en} : {}), senseEvidence:"looks-like", senseMark:looks.mark};
+          return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
+        } }
       const nachCard = e => (e?.complements || []).some(x => /^nach\s*\+/u.test(String(x.pattern || "").trim()));
       const partWords = tokens.slice(begin,end).map(t => norm(t[0]));
       const closing = WORD_FORMATION_PARTICLES.has(partWords.at(-1) || "") || /^(?:ein|auf|zu|an|aus|ab|mit|vor|weg|fort|zurück|her|hin)$/u.test(partWords.at(-1) || "");
       const byData = tokens.slice(begin,end).some((t,i) => begin+i !== at && ((forms.get(norm(t[0])) || []).some(e => e.type === "Verb" && nachCard(e) && !closing) ||
         (verbAnalyses.get(norm(t[0])) || []).some(a => nachCard(a.entry) && (a.detached ? partWords.includes(norm(a.prefix || "")) : !closing))));
-      const byFallback = !byData && tokens.slice(begin,end).some((t,i) => begin+i !== at && NACH_FALLBACK.test(norm(t[0])) && !(norm(t[0]) === "aus" && !tokens.slice(begin,end).some(u => /^(?:sieht|sah|sahen|aussehen)$/u.test(norm(u[0])))));
-      if (!byData && !byFallback) return result;
+      const byFallback = !byData && tokens.slice(begin,end).some((t,i) => begin+i !== at && NACH_FALLBACK.test(norm(t[0])));
+      if (!byData && !byFallback || !marked || marked.ru <= 0 && marked.en <= 0) return result;
       (console.__cheap = console.__cheap || []).push(byData ? "danach-governs-data" : "danach-governs-fallback");
       const selected = {...c, senseFirst:index, ...(marked.en >= 0 ? {senseFirstEn:marked.en} : {}), senseEvidence:"governed-preposition", senseMark:marked.mark};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
@@ -25009,6 +25052,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return whole;
     }
     async function resolvePublic(word, context) {
+      await warmWordClasses();
       // C21b: zu of «zu dritt / zu dreien» opens the card of the numeral after it.
       if (norm(word) === "zu" && Number.isInteger(context?.tokenOffset)) {
         const sentence = String(context.sentence || ""), m = /^[ \t]+([\p{L}\p{M}]+)/u.exec(sentence.slice(context.tokenOffset+word.length));

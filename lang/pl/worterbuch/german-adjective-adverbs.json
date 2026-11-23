@@ -4416,7 +4416,7 @@
   "_src_reader": "fb2b69d1"
  },
  "adjective-adverb-399": {
-  "translation_pl": "gęsty; zwarty; szczelny; ciasno; blisko",
+  "translation_pl": "gęsty; zwarty; szczelny; ciasno; tuż (przy), blisko siebie",
   "example_pl": "Idziemy przez gęsty las.",
   "additional_examples": [
    {
@@ -4425,11 +4425,11 @@
   ],
   "sense_marks": [
    {
-    "meaning_pl": "blisko"
+    "meaning_pl": "tuż (przy), blisko siebie"
    }
   ],
-  "_src": "a9b7bfe2",
-  "_src_reader": "63268f4c"
+  "_src": "3c69f892",
+  "_src_reader": "11d7d6cc"
  },
  "adjective-adverb-400": {
   "translation_pl": "decydujący; w decydującym stopniu",

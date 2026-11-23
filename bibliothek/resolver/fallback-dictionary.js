@@ -84,19 +84,33 @@
     return separablePromise;
   }
   // A2 (15.10.2026): agreed verb + preposition pairs (exercise list, reference 4.9).
-  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261122-a17-halten-von-3", document.currentScript.src);
+  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261123-c1-quant-2", document.currentScript.src);
   let verbPrepositionPromise = null;
-  function verbPrepositions() {
+  // (advisor 22.11) «classes»: named closed lists of words that several rules share — one notion, one list (indefinite-quantity: halten
+  // von, haben + zu, the card choice of halten). A row's requires_any is a list of words or the name of a class; the rows come with the
+  // class's words.
+  function verbPrepositionFile() {
     if (!verbPrepositionPromise) verbPrepositionPromise = dataFetch(verbPrepositionUrl).then(response => {
       if (!response.ok) throw new Error("Verb preposition list unavailable");
       return response.json();
     }).then(data => {
-      if (data.format_version !== 1 || !Array.isArray(data.entries) || data.entries.some(r => !Array.isArray(r) || r.length < 3 || r.length > 4 || r.slice(0,3).some(v => typeof v !== "string") || r.length === 4 && (!r[3] || typeof r[3] !== "object" || !Array.isArray(r[3].requires_any) || r[3].requires_any.some(v => typeof v !== "string"))))
+      const words = v => Array.isArray(v) && v.every(w => typeof w === "string");
+      // (advisor 23.11: a class may carry its polarity — {pos, neg}; its words are both)
+      const polar = v => v && typeof v === "object" && !Array.isArray(v) && words(v.pos) && words(v.neg);
+      if (data.classes && (typeof data.classes !== "object" || !Object.values(data.classes).every(v => words(v) || polar(v)))) throw new Error("Invalid verb preposition list");
+      const classes = Object.fromEntries(Object.entries(data.classes || {}).map(([k,v]) => [k, polar(v) ? [...v.pos,...v.neg] : v]));
+      const polarity = Object.fromEntries(Object.entries(data.classes || {}).filter(([,v]) => polar(v)).map(([k,v]) => [k, {neg:v.neg}]));
+      if (data.format_version !== 1 || !Array.isArray(data.entries) || typeof classes !== "object" || !Object.values(classes).every(words) ||
+          data.entries.some(r => !Array.isArray(r) || r.length < 3 || r.length > 4 || r.slice(0,3).some(v => typeof v !== "string") ||
+            r.length === 4 && (!r[3] || typeof r[3] !== "object" || !(words(r[3].requires_any) || typeof r[3].requires_any === "string" && words(classes[r[3].requires_any])))))
         throw new Error("Invalid verb preposition list");
-      return data.entries;
+      return {classes, polarity, entries:data.entries.map(r => r.length === 4 && typeof r[3].requires_any === "string" ? [r[0],r[1],r[2],{...r[3],requires_any:classes[r[3].requires_any]}] : r)};
     }).catch(error => { verbPrepositionPromise = null; throw error; });
     return verbPrepositionPromise;
   }
+  function verbPrepositions() { return verbPrepositionFile().then(d => d.entries); }
+  function wordClasses() { return verbPrepositionFile().then(d => d.classes); }
+  function wordClassPolarity() { return verbPrepositionFile().then(d => d.polarity); }
   const superlativeUrl=new URL('data/superlative-index.json?v=20261008-l07-1',document.currentScript.src);
   let superlativePromise=null;
   async function superlativeEntries(word) {
@@ -947,5 +961,5 @@
     for (const hypothesis of weakHypotheses(word)) if (await mayBeVerb(hypothesis.lemma)) return true;
     return false;
   }
-  window.DeutschFallbackDictionary = {strongEnPlural,mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,meaningsOf,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup,lookupEntry,separableEntries,mayBeVerb,spellingTranslation,superlativeEntries};
+  window.DeutschFallbackDictionary = {strongEnPlural,mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,meaningsOf,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,wordClasses,wordClassPolarity,separableFormEvidence,auxiliaryInflections,lookup,lookupEntry,separableEntries,mayBeVerb,spellingTranslation,superlativeEntries};
 })();

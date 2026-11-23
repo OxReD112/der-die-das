@@ -523,7 +523,14 @@
     // Reference (user decision 20.10, F12-B9b): sollen + perfect infinitive.
     hearsay:{ru:'здесь: говорят, будто', en:'here: is said to'},
     haveTo:{ru:'нужно / должен', en:'have to'},
+    // (reference chat 22.11, advisor 22.11) haben + a word of indefinite quantity + zu-infinitive: Ich habe nichts zu verlieren, Er hat viel zu tun
+    haveSomething:{ru:'здесь: есть что (сделать)', en:'here: to have something to do'},
+    haveNothing:{ru:'здесь: нечего / мало что (сделать)', en:'here: to have nothing / little to do'},
+    // (advisor 23.11) a word of quantity right before a noun — viel Geld zu verlieren, keine Zeit zu verlieren: the form does not tell
+    haveToOrSomething:{ru:'здесь: нужно / должен или есть что (сделать)', en:'here: to have to or to have something to do'},
     infinitiveParticle:{ru:'Отдельно не переводится', en:'Not translated separately'},
+    // (reference F12-B5d: sich of «sich … lassen» «можно» — the same text, its own type stays Reflexivpronomen)
+    notTranslated:{ru:'Отдельно не переводится', en:'Not translated separately'},
     // L15 steps 2 / 3 (reference B5 addition 19.10, advisor 29.10): lassen with sich where the form proves the sense.
     lassen_canBeDone:{ru:'здесь: можно (сделать)', en:'here: can be done'},
     lassen_canOrAllow:{ru:'здесь: можно (сделать) / позволить (себя)', en:'here: can be done / let oneself be …'},
@@ -733,6 +740,8 @@
         // (links chat 14.11: the same group with a verb of perception / helfen as its head — sah ihn kommen, lösen helfen)
         const headVerb = k.head || 'lassen';
         if (own === headVerb) return {marks:[ownTense ? `${ownTense} mit ${name}` : `mit ${name}`], role:k.sense ? `lassen_${k.sense}` : null, spans};
+        // (reference chat 22.11, F12-B5d: sich of «можно» is not translated separately, as zu — Das lässt sich leicht machen)
+        if (k.sense === 'canBeDone' && own === 'sich') return {marks:[], role:'notTranslated', spans};
         // (L15 step 4, reference F12-B5j: uns of lass uns keeps its own card «нас» with a line under it — see cardCore)
         if (k.sense === 'letUs' && candidate.item?.type === 'Pronomen') return {marks:[], role:null, spans};
         // (advisor 29.10, reference F12-B5a / B5c: the infinitive under lassen shows «mit lassen» — a simple tense only on ließ / lässt,
@@ -784,7 +793,7 @@
         if (k.inner?.id === 'zu-chain') return {...constructionMarks({...candidate, construction:{...k.inner, spans}}, confirmed, language), spans};
         return {marks:[`mit ${k.verb}`], role:null, spans};
       }
-      case 'haben-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'haben + zu' : `haben + zu mit ${name}`}`], role:isMain ? null : 'haveTo', spans};
+      case 'haben-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'haben + zu' : `haben + zu mit ${name}`}`], role:isMain ? null : k.quantity === 'nothing' ? 'haveNothing' : k.quantity === 'something' ? 'haveSomething' : k.quantity === 'window' ? 'haveToOrSomething' : 'haveTo', spans};
       // C14 step 1: the resolver gives Perfekt / Plusquamperfekt in the note (gesprochen worden war).
       // F12-G1b / G22 (user decision 18.10): tense first, then Passiv. gestohlen «Perfekt · Passiv»,
       // ist «Perfekt · Passiv mit stehlen» (auxiliary text), worden the same with the passive text.

@@ -1494,8 +1494,8 @@
   {
     "id": "adverb-132",
     "word": "danach",
-    "translation_ru": "после этого, потом; (спросить) об этом",
-    "translation_en": "afterwards, after that; about it",
+    "translation_ru": "после этого, потом; (глагол + nach) об этом, к этому, по этому; (es sieht danach aus / es klingt danach) похоже на то",
+    "translation_en": "afterwards, after that; (verb + nach) about it, for it; (es sieht danach aus / es klingt danach) it looks / sounds like it",
     "word_order_pattern": "danach · **Verb** · Subjekt · …",
     "example_de": "Wir gehen ins Kino und danach essen wir etwas.",
     "example_ru": "Мы пойдём в кино, а потом что-нибудь поедим.",
@@ -1510,8 +1510,13 @@
     "sense_marks": [
       {
         "rule": "governed-preposition",
-        "meaning_ru": "(спросить) об этом",
-        "meaning_en": "about it"
+        "meaning_ru": "(глагол + nach) об этом, к этому, по этому",
+        "meaning_en": "(verb + nach) about it, for it"
+      },
+      {
+        "rule": "looks-like",
+        "meaning_ru": "(es sieht danach aus / es klingt danach) похоже на то",
+        "meaning_en": "(es sieht danach aus / es klingt danach) it looks / sounds like it"
       }
     ]
   },

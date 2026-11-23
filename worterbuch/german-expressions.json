@@ -65824,5 +65824,552 @@
         "Das hat an sich nichts mit Geld zu tun."
       ]
     }
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "es sieht danach aus",
+    "translation_ru": "похоже на то, похоже, что так",
+    "translation_en": "it looks like it",
+    "example_de": "Wird es heute regnen? – Es sieht ganz danach aus.",
+    "example_ru": "Сегодня будет дождь? — Очень похоже на то.",
+    "example_en": "Will it rain today? – It looks very much like it.",
+    "notes_ru": [
+      "Разг. Также с придаточным: Es sieht danach aus, dass / als ob … — похоже, что … То же с существительным: Es sieht nach Regen aus — похоже на дождь (aussehen nach + Dat.). Не путать: Danach sah er aus dem Fenster. — Потом он выглянул в окно (danach «потом»); Er sieht danach müde aus — после этого он выглядит усталым."
+    ],
+    "notes_en": [
+      "Colloquial. Also with a clause: Es sieht danach aus, dass / als ob … — it looks as if … The same with a noun: Es sieht nach Regen aus — it looks like rain (aussehen nach + dative). Do not confuse: Danach sah er aus dem Fenster. — Then he looked out of the window (danach “then”); Er sieht danach müde aus — he looks tired after that."
+    ],
+    "related_ids": [
+      "adverb-132",
+      "verb-031"
+    ],
+    "source_url": "https://en.wiktionary.org/wiki/aussehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "sieht",
+              "sah",
+              "sähe",
+              "sehe",
+              "sehen",
+              "sahen",
+              "sähen"
+            ]
+          },
+          {
+            "form": "danach aus",
+            "not_next": [
+              "der",
+              "die",
+              "das",
+              "den",
+              "dem",
+              "des",
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "eines",
+              "mein",
+              "meinem",
+              "meiner",
+              "meinen",
+              "dein",
+              "deinem",
+              "deiner",
+              "sein",
+              "seinem",
+              "seiner",
+              "ihrem",
+              "ihrer",
+              "unserem",
+              "unserer",
+              "eurem",
+              "eurer",
+              "diesem",
+              "dieser",
+              "jedem",
+              "jeder",
+              "allen",
+              "allem"
+            ],
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "sieht",
+              "sah",
+              "sähe",
+              "sehe",
+              "sehen",
+              "sahen",
+              "sähen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": "danach aus",
+            "not_next": [
+              "der",
+              "die",
+              "das",
+              "den",
+              "dem",
+              "des",
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "eines",
+              "mein",
+              "meinem",
+              "meiner",
+              "meinen",
+              "dein",
+              "deinem",
+              "deiner",
+              "sein",
+              "seinem",
+              "seiner",
+              "ihrem",
+              "ihrer",
+              "unserem",
+              "unserer",
+              "eurem",
+              "eurer",
+              "diesem",
+              "dieser",
+              "jedem",
+              "jeder",
+              "allen",
+              "allem"
+            ],
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "danach"
+          },
+          {
+            "form": [
+              "sieht",
+              "sah",
+              "sähe",
+              "sehe",
+              "sehen",
+              "sahen",
+              "sähen"
+            ]
+          },
+          {
+            "form": [
+              "es aus",
+              "'s aus",
+              "’s aus"
+            ],
+            "not_next": [
+              "der",
+              "die",
+              "das",
+              "den",
+              "dem",
+              "des",
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "eines",
+              "mein",
+              "meinem",
+              "meiner",
+              "meinen",
+              "dein",
+              "deinem",
+              "deiner",
+              "sein",
+              "seinem",
+              "seiner",
+              "ihrem",
+              "ihrer",
+              "unserem",
+              "unserer",
+              "eurem",
+              "eurer",
+              "diesem",
+              "dieser",
+              "jedem",
+              "jeder",
+              "allen",
+              "allem"
+            ],
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "danach aussieht",
+              "danach aussah",
+              "danach aussähe",
+              "danach aussehe",
+              "danach aussehen",
+              "danach aussahen",
+              "danach aussähen",
+              "danach ausgesehen",
+              "danach auszusehen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wird es heute regnen? – Es sieht ganz danach aus.",
+        "Es sieht danach aus.",
+        "Es sah nicht danach aus.",
+        "Sieht es danach aus?",
+        "Ich glaube schon, weil es danach aussieht.",
+        "Es sieht ganz danach aus, als ob er recht hätte.",
+        "Danach sieht es aus.",
+        "Es hat lange danach ausgesehen."
+      ],
+      "negative": [
+        "Danach sah er aus dem Fenster.",
+        "Er sieht danach müde aus.",
+        "Danach sah sie besser aus.",
+        "Danach sah es aus dem Fenster und lachte.",
+        "Das Kind sieht danach aus dem Fenster.",
+        "Es sah danach schlimm aus.",
+        "Danach sah es schlimm aus.",
+        "Es hat danach ganz anders ausgesehen."
+      ]
+    },
+    "id": "expression-406"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "es klingt danach",
+    "translation_ru": "похоже на то",
+    "translation_en": "it sounds like it",
+    "example_de": "Hat er gekündigt? – Es klingt danach.",
+    "example_ru": "Он уволился? — Похоже на то.",
+    "example_en": "Has he quit? – It sounds like it.",
+    "notes_ru": [
+      "Разг. О том, что слышно или сказано. С существительным: Das klingt nach einer guten Idee — звучит как хорошая идея (klingen nach + Dat.). Не путать: Es klingt danach, als ob … — danach здесь вводит придаточное («звучит так, будто …»); Danach klang die Musik anders. — Потом музыка звучала иначе."
+    ],
+    "notes_en": [
+      "Colloquial. Of what one hears or is told. With a noun: Das klingt nach einer guten Idee — that sounds like a good idea (klingen nach + dative). Do not confuse: Es klingt danach, als ob … — here danach introduces the clause (“it sounds as if …”); Danach klang die Musik anders. — Afterwards the music sounded different."
+    ],
+    "related_ids": [
+      "adverb-132",
+      "verb-576"
+    ],
+    "source_url": "https://www.dwds.de/wb/wdw/klingen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": [
+              "klingt",
+              "klang",
+              "klänge",
+              "klinge",
+              "klingen",
+              "klangen",
+              "klängen"
+            ]
+          },
+          {
+            "form": "danach",
+            "next_mark": [
+              ".",
+              "!",
+              "?",
+              "…",
+              "»",
+              "«",
+              "\"",
+              "“",
+              "–"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "klingt",
+              "klang",
+              "klänge",
+              "klinge",
+              "klingen",
+              "klangen",
+              "klängen"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ]
+          },
+          {
+            "form": "danach",
+            "next_mark": [
+              ".",
+              "!",
+              "?",
+              "…",
+              "»",
+              "«",
+              "\"",
+              "“",
+              "–"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Hat er gekündigt? – Es klingt danach.",
+        "Es klingt danach.",
+        "Es klang ganz danach!",
+        "Klingt es danach?",
+        "»Es klingt danach«, sagte sie."
+      ],
+      "negative": [
+        "Es klingt danach, als ob er recht hätte.",
+        "Danach klang die Musik anders.",
+        "Es klingt danach ganz anders.",
+        "Der Name klingt danach."
+      ]
+    },
+    "id": "expression-407"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "nichts zu suchen haben",
+    "translation_ru": "нечего делать (где-либо), тут не место",
+    "translation_en": "to have no business (somewhere)",
+    "example_de": "Du hast hier nichts zu suchen!",
+    "example_ru": "Тебе здесь нечего делать!",
+    "example_en": "You have no business being here!",
+    "notes_ru": [
+      "Разг., часто резко. О вещах тоже: Hier hat das Handy nichts zu suchen. — Телефону здесь не место. Вопрос: Was hast du hier zu suchen? — Что ты тут забыл? Не путать: Ich habe den Schlüssel zu suchen. — Мне надо искать ключ (haben + zu); Er hat nichts zu essen. — Ему нечего есть."
+    ],
+    "notes_en": [
+      "Colloquial, often sharp. Also of things: Hier hat das Handy nichts zu suchen. — Phones don't belong here. Question: Was hast du hier zu suchen? — What are you doing here? Do not confuse: Ich habe den Schlüssel zu suchen. — I have to look for the key (haben + zu); Er hat nichts zu essen. — He has nothing to eat."
+    ],
+    "related_ids": [],
+    "source_url": "https://en.wiktionary.org/wiki/nichts_zu_suchen_haben",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet"
+            ]
+          },
+          {
+            "form": "nichts"
+          },
+          {
+            "form": "zu suchen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "nichts"
+          },
+          {
+            "form": "zu suchen"
+          },
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Was",
+              "was"
+            ]
+          },
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet"
+            ]
+          },
+          {
+            "form": "zu suchen",
+            "clause_has": [
+              "hier",
+              "da",
+              "dort",
+              "drin",
+              "drinnen",
+              "draußen",
+              "oben",
+              "unten",
+              "in",
+              "im",
+              "ins",
+              "bei",
+              "beim",
+              "auf",
+              "an",
+              "am",
+              "unter",
+              "hinter",
+              "neben",
+              "zwischen",
+              "vor"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Du hast hier nichts zu suchen!",
+        "Hier hat das Handy nichts zu suchen.",
+        "Er hatte dort nichts zu suchen.",
+        "Ich weiß, dass er dort nichts zu suchen hat.",
+        "Er wird hier nichts zu suchen haben.",
+        "Was hast du in meinem Zimmer zu suchen?",
+        "Für uns ist klar, dass in unseren Innenstädten Messer nichts zu suchen haben.",
+        "Wir haben hier nichts mehr zu suchen, gehen wir.",
+        "Was hast du hier zu suchen?"
+      ],
+      "negative": [
+        "Ich habe den Schlüssel zu suchen.",
+        "Wir haben nichts gefunden.",
+        "Er hat nichts zu essen.",
+        "Wir haben nichts zu verlieren.",
+        "Was hatte er zu suchen? Den Schlüssel.",
+        "Was hast du noch zu suchen?"
+      ]
+    },
+    "id": "expression-408"
   }
 ]
