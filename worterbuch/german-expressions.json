@@ -53059,34 +53059,6 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 2
-      },
-      {
-        "parts": [
-          {
-            "form": "an"
-          },
-          {
-            "form": "die"
-          },
-          {
-            "form": "Reihe",
-            "not_next": [
-              "der",
-              "des",
-              "von",
-              "vom",
-              "dieser",
-              "seiner",
-              "ihrer",
-              "alter",
-              "kleiner",
-              "hoher"
-            ]
-          }
-        ],
-        "order": "fixed",
-        "scope": "adjacent",
-        "anchor": 2
       }
     ],
     "tests": {
@@ -53097,7 +53069,8 @@
       ],
       "negative": [
         "Sie standen an der Reihe der Häuser.",
-        "Er arbeitet an der Reihe von Bildern."
+        "Er arbeitet an der Reihe von Bildern.",
+        "Jetzt kommst du an die Reihe."
       ]
     }
   },
@@ -66371,5 +66344,2492 @@
       ]
     },
     "id": "expression-408"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zu dem Schluss kommen",
+    "translation_ru": "прийти к выводу",
+    "translation_en": "to come to the conclusion",
+    "example_de": "Nach langem Überlegen kamen wir zu dem Schluss, dass wir umziehen.",
+    "example_ru": "После долгих раздумий мы пришли к выводу, что переедем.",
+    "example_en": "After thinking it over for a long time, we came to the conclusion that we would move.",
+    "notes_ru": [
+      "Обычно с придаточным: zu dem Schluss kommen, dass … Только zu dem: zum Schluss kommen — перейти к концу (zum Schluss — «в конце»). Ср. einen Schluss ziehen — сделать вывод."
+    ],
+    "notes_en": [
+      "Usually with a clause: zu dem Schluss kommen, dass … Only zu dem: zum Schluss kommen means to come to the end (zum Schluss — “at the end”). Cf. einen Schluss ziehen — to draw a conclusion."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Schluss",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zu dem Schluss"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zu dem Schluss"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach langem Überlegen kamen wir zu dem Schluss, dass wir umziehen.",
+        "Die Ärzte sind zu dem Schluss gekommen, dass er gesund ist.",
+        "Ich komme immer wieder zu dem Schluss, dass sie recht hat."
+      ],
+      "negative": [
+        "Damit komme ich zum Schluss.",
+        "Zum Schluss kamen alle Gäste in den Garten.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-409"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zu Wort kommen",
+    "translation_ru": "получить слово, высказаться",
+    "translation_en": "to get a chance to speak, to have one's say",
+    "example_de": "In der Diskussion kam sie kaum zu Wort.",
+    "example_ru": "В дискуссии ей почти не удалось высказаться.",
+    "example_en": "She hardly got a word in during the discussion.",
+    "notes_ru": [
+      "Часто с отрицанием: nicht zu Wort kommen — не получить возможности высказаться. jemanden zu Wort kommen lassen — дать кому-либо слово."
+    ],
+    "notes_en": [
+      "Often negated: nicht zu Wort kommen — not to get a word in. jemanden zu Wort kommen lassen — to let someone speak."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Wort",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": [
+              "zu Wort",
+              "zu Worte"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "zu Wort",
+              "zu Worte"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "In der Diskussion kam sie kaum zu Wort.",
+        "Jetzt sollen auch die Schüler zu Wort kommen.",
+        "Ist der Minister schon zu Wort gekommen?"
+      ],
+      "negative": [
+        "Er kam ohne ein Wort zur Tür.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-410"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. zu Ohren kommen",
+    "translation_ru": "дойти до (чьих-либо) ушей",
+    "translation_en": "to come to someone's ears",
+    "example_de": "Mir ist zu Ohren gekommen, dass du umziehen willst.",
+    "example_ru": "До меня дошли слухи, что ты хочешь переехать.",
+    "example_en": "It has come to my ears that you want to move.",
+    "notes_ru": [
+      "Обычно о неприятном или о том, что не должно было стать известно. Кому — в дательном: mir, ihm, dem Chef."
+    ],
+    "notes_en": [
+      "Usually of something unpleasant or something that was not meant to become known. To whom — in the dative: mir, ihm, dem Chef."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Ohr",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zu Ohren"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zu Ohren"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mir ist zu Ohren gekommen, dass du umziehen willst.",
+        "Das ist auch dem Chef zu Ohren gekommen.",
+        "Kam dir nichts davon zu Ohren?"
+      ],
+      "negative": [
+        "Er hielt sich die Hände an die Ohren.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-411"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. zu Hilfe kommen",
+    "translation_ru": "прийти на помощь (кому-либо)",
+    "translation_en": "to come to someone's aid",
+    "example_de": "Die Nachbarn kamen uns sofort zu Hilfe.",
+    "example_ru": "Соседи сразу пришли нам на помощь.",
+    "example_en": "The neighbours came to our aid at once.",
+    "notes_ru": [
+      "Кому — в дательном: dem Verletzten zu Hilfe kommen. Так же zu Hilfe eilen — поспешить на помощь."
+    ],
+    "notes_en": [
+      "To whom — in the dative: dem Verletzten zu Hilfe kommen. Likewise zu Hilfe eilen — to rush to help."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Hilfe",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zu Hilfe"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zu Hilfe"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Nachbarn kamen uns sofort zu Hilfe.",
+        "Niemand ist dem Verletzten zu Hilfe gekommen.",
+        "Wer kommt mir zu Hilfe?"
+      ],
+      "negative": [
+        "Er kam mit Hilfe eines Freundes nach Hause.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-412"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "an die Reihe kommen",
+    "translation_ru": "дождаться (своей) очереди; быть рассмотренным следующим (о теме, деле)",
+    "translation_en": "to be someone's turn; to be dealt with next",
+    "example_de": "Jetzt kommst du an die Reihe.",
+    "example_ru": "Теперь твоя очередь.",
+    "example_en": "Now it's your turn.",
+    "notes_ru": [
+      "О теме, деле: Dieser Punkt kommt morgen an die Reihe — этот пункт рассмотрят завтра. Ср. die Reihe ist an jemandem — очередь за кем-либо. Не путать: an der Reihe sein — быть на очереди (сейчас); [wieder] in die Reihe kommen (разг.) — поправиться; наладиться."
+    ],
+    "notes_en": [
+      "Of a topic or matter: Dieser Punkt kommt morgen an die Reihe — this item will be dealt with tomorrow. Cf. die Reihe ist an jemandem — it is someone's turn. Do not confuse: an der Reihe sein — to be someone's turn (now); [wieder] in die Reihe kommen (colloquial) — to get well again; to get back on track."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Reihe",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "an die Reihe"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "an die Reihe"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "die Reihe",
+              "Die Reihe"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "an",
+            "not_next": [
+              "der",
+              "dem",
+              "den"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "die Reihe"
+          },
+          {
+            "form": "an",
+            "not_next": [
+              "der",
+              "dem",
+              "den"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Jetzt kommst du an die Reihe.",
+        "Wann komme ich endlich an die Reihe?",
+        "Dieser Punkt kommt morgen an die Reihe.",
+        "Die Reihe kam an ihn.",
+        "Danach kam die Reihe an mich."
+      ],
+      "negative": [
+        "Du bist jetzt an der Reihe.",
+        "Sie stellte sich hinten in die Reihe.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-413"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "an die Macht kommen",
+    "translation_ru": "прийти к власти",
+    "translation_en": "to come to power",
+    "example_de": "Die Partei kam nach der Wahl an die Macht.",
+    "example_ru": "После выборов партия пришла к власти.",
+    "example_en": "The party came to power after the election.",
+    "notes_ru": [
+      "Так же zur Macht kommen. Ср. an der Macht sein — быть у власти."
+    ],
+    "notes_en": [
+      "Likewise zur Macht kommen. Cf. an der Macht sein — to be in power."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Macht",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": [
+              "an die Macht",
+              "zur Macht"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "an die Macht",
+              "zur Macht"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Partei kam nach der Wahl an die Macht.",
+        "Der General ist durch einen Putsch an die Macht gekommen.",
+        "Wie kam er zur Macht?"
+      ],
+      "negative": [
+        "Die Regierung ist seit zehn Jahren an der Macht.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-414"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zur Sprache kommen",
+    "translation_ru": "быть затронутым (в разговоре), обсуждаться",
+    "translation_en": "to come up (in a discussion)",
+    "example_de": "Das Thema kam bei der Sitzung nicht zur Sprache.",
+    "example_ru": "Эта тема на заседании не обсуждалась.",
+    "example_en": "The topic did not come up at the meeting.",
+    "notes_ru": [
+      "Ср. etw. zur Sprache bringen — поднять вопрос, заговорить о чём-либо."
+    ],
+    "notes_en": [
+      "Cf. etw. zur Sprache bringen — to raise a matter, to bring something up."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Sprache",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zur Sprache"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zur Sprache"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Das Thema kam bei der Sitzung nicht zur Sprache.",
+        "Auch die Kosten sind zur Sprache gekommen.",
+        "Wann kommt das Problem zur Sprache?"
+      ],
+      "negative": [
+        "Er brachte das Thema zur Sprache.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-415"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zur Ruhe kommen",
+    "translation_ru": "успокоиться, обрести покой",
+    "translation_en": "to calm down, to find peace",
+    "example_de": "Nach dem Umzug kommen wir endlich zur Ruhe.",
+    "example_ru": "После переезда мы наконец можем перевести дух.",
+    "example_en": "After the move we can finally settle down.",
+    "notes_ru": [
+      "nicht zur Ruhe kommen — не знать покоя. Не путать: jemanden in Ruhe lassen (разг.) — оставить в покое."
+    ],
+    "notes_en": [
+      "nicht zur Ruhe kommen — to get no rest. Do not confuse: jemanden in Ruhe lassen (colloquial) — to leave someone alone."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Ruhe",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zur Ruhe"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zur Ruhe"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem Umzug kommen wir endlich zur Ruhe.",
+        "Die Stadt kam auch in der Nacht nicht zur Ruhe.",
+        "Ist das Kind endlich zur Ruhe gekommen?"
+      ],
+      "negative": [
+        "Lass mich in Ruhe!",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-416"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zum Ausdruck kommen",
+    "translation_ru": "выразиться, проявиться",
+    "translation_en": "to be expressed, to come across",
+    "example_de": "In dem Brief kommt seine Enttäuschung deutlich zum Ausdruck.",
+    "example_ru": "В письме ясно сквозит его разочарование.",
+    "example_en": "His disappointment comes across clearly in the letter.",
+    "notes_ru": [
+      "О чувстве, мысли: в чём-либо проявляется. Ср. etw. zum Ausdruck bringen — выразить что-либо."
+    ],
+    "notes_en": [
+      "Of a feeling or idea: it shows in something. Cf. etw. zum Ausdruck bringen — to express something."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Ausdruck_Bezeichnung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zum Ausdruck"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zum Ausdruck"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "In dem Brief kommt seine Enttäuschung deutlich zum Ausdruck.",
+        "Darin ist ihre Verbitterung zum Ausdruck gekommen.",
+        "Kommt das im Text zum Ausdruck?"
+      ],
+      "negative": [
+        "Er brachte seinen Dank zum Ausdruck.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-417"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zur Geltung kommen",
+    "translation_ru": "выигрышно смотреться, проявиться",
+    "translation_en": "to show to advantage, to come into its own",
+    "example_de": "Vor der weißen Wand kommt das Bild gut zur Geltung.",
+    "example_ru": "На белой стене картина хорошо смотрится.",
+    "example_en": "The picture shows to good advantage against the white wall.",
+    "notes_ru": [
+      "Ср. etw. zur Geltung bringen — подчеркнуть, выгодно показать."
+    ],
+    "notes_en": [
+      "Cf. etw. zur Geltung bringen — to bring out, to set off."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Geltung",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zur Geltung"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zur Geltung"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Vor der weißen Wand kommt das Bild gut zur Geltung.",
+        "In diesem Licht kommen die Farben besser zur Geltung.",
+        "Ihre Stimme ist im kleinen Saal gut zur Geltung gekommen."
+      ],
+      "negative": [
+        "Der Rahmen bringt das Bild zur Geltung.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-418"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zum Stehen kommen",
+    "translation_ru": "остановиться",
+    "translation_en": "to come to a stop",
+    "example_de": "Der Zug kam kurz vor dem Bahnhof zum Stehen.",
+    "example_ru": "Поезд остановился незадолго до вокзала.",
+    "example_en": "The train came to a stop just before the station.",
+    "notes_ru": [
+      "О транспорте, движении. Ср. etw. zum Stehen bringen — остановить."
+    ],
+    "notes_en": [
+      "Of vehicles, movement. Cf. etw. zum Stehen bringen — to bring something to a stop."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.dwds.de/wb/stehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zum Stehen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zum Stehen"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Zug kam kurz vor dem Bahnhof zum Stehen.",
+        "Nach dreißig Metern ist der Wagen zum Stehen gekommen.",
+        "Der Ball kam am Rand zum Stehen."
+      ],
+      "negative": [
+        "Der Fahrer brachte den Bus zum Stehen.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-419"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zum Erliegen kommen",
+    "translation_ru": "замереть, остановиться (полностью)",
+    "translation_en": "to come to a standstill",
+    "example_de": "Wegen des Schnees kam der Verkehr völlig zum Erliegen.",
+    "example_ru": "Из-за снега движение полностью встало.",
+    "example_en": "Because of the snow, traffic came to a complete standstill.",
+    "notes_ru": [
+      "О движении, работе, торговле. Ср. etw. zum Erliegen bringen — парализовать."
+    ],
+    "notes_en": [
+      "Of traffic, work, trade. Cf. etw. zum Erliegen bringen — to paralyse something."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/erliegen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zum Erliegen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zum Erliegen"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wegen des Schnees kam der Verkehr völlig zum Erliegen.",
+        "Der Handel ist fast zum Erliegen gekommen.",
+        "Die Produktion kommt nächste Woche zum Erliegen."
+      ],
+      "negative": [
+        "Der Streik brachte die Arbeit zum Erliegen.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-420"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zu Fall kommen",
+    "translation_ru": "упасть; потерпеть крах",
+    "translation_en": "to fall; to come to grief",
+    "example_de": "Auf dem Eis kam sie zu Fall.",
+    "example_ru": "На льду она упала.",
+    "example_en": "She fell on the ice.",
+    "notes_ru": [
+      "«Упасть» — книжн. Переносно: о человеке или плане — потерпеть крах, лишиться должности. Ср. jemanden / etwas zu Fall bringen — свалить; провалить (закон, план)."
+    ],
+    "notes_en": [
+      "“To fall” — formal. Figuratively, of a person or a plan: to come to grief, to lose one's post. Cf. jemanden / etwas zu Fall bringen — to bring down; to defeat (a law, a plan)."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Fall_Sache",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zu Fall"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zu Fall"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Auf dem Eis kam sie zu Fall.",
+        "Der Minister ist über die Affäre zu Fall gekommen.",
+        "Wie kam das Gesetz zu Fall?"
+      ],
+      "negative": [
+        "Die Affäre brachte den Minister zu Fall.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-421"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "infrage / in Frage kommen",
+    "translation_ru": "подходить, рассматриваться (как вариант)",
+    "translation_en": "to be possible, to come into consideration",
+    "example_de": "Für die Stelle kommen nur zwei Bewerber infrage.",
+    "example_ru": "На это место подходят только два кандидата.",
+    "example_en": "Only two applicants are being considered for the job.",
+    "notes_ru": [
+      "Das kommt nicht infrage! — Об этом не может быть и речи! Пишется слитно (infrage) или раздельно (in Frage)."
+    ],
+    "notes_en": [
+      "Das kommt nicht infrage! — That's out of the question! Written as one word (infrage) or two (in Frage)."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/infrage",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": [
+              "infrage",
+              "in Frage"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "infrage",
+              "in Frage"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Für die Stelle kommen nur zwei Bewerber infrage.",
+        "Das kommt überhaupt nicht in Frage!",
+        "Kommt dieser Termin für Sie infrage?",
+        "Ein Umzug ist für uns nie infrage gekommen."
+      ],
+      "negative": [
+        "Das stellt alles infrage.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-422"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "zu kurz kommen",
+    "translation_ru": "остаться обделённым, оказаться в проигрыше",
+    "translation_en": "to lose out, to get a raw deal",
+    "example_de": "Bei so vielen Geschwistern kam er oft zu kurz.",
+    "example_ru": "Среди стольких братьев и сестёр он часто оставался обделённым.",
+    "example_en": "With so many brothers and sisters he often lost out.",
+    "notes_ru": [
+      "Также о деле: Der Sport kommt in der Schule zu kurz — спорту в школе уделяют слишком мало внимания."
+    ],
+    "notes_en": [
+      "Also of a thing: Der Sport kommt in der Schule zu kurz — sport gets too little attention at school."
+    ],
+    "related_ids": [
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/kurz",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          },
+          {
+            "form": "zu kurz",
+            "not_next": [
+              "vor",
+              "nach",
+              "hinter"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zu kurz",
+            "not_next": [
+              "vor",
+              "nach",
+              "hinter"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "kommet",
+              "gekommen",
+              "zu kommen",
+              "kommend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Bei so vielen Geschwistern kam er oft zu kurz.",
+        "Die Kinder dürfen nicht zu kurz kommen.",
+        "Ist dabei die Freizeit zu kurz gekommen?"
+      ],
+      "negative": [
+        "Er kam zu kurz vor dem Ende ins Stadion.",
+        "Er kam zu ihr.",
+        "Sie kam an die Tür.",
+        "Er kam zu dem Turm.",
+        "Zum Schluss kam er nach Hause.",
+        "Er kam aus dem Haus.",
+        "Sie kam mit ihrer Mutter.",
+        "Er kam zu Besuch."
+      ]
+    },
+    "id": "expression-423"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "abgesehen von",
+    "translation_ru": "кроме, не считая (чего-либо), за исключением",
+    "translation_en": "apart from, except for",
+    "example_de": "Abgesehen vom Regen war der Urlaub schön.",
+    "example_ru": "Не считая дождя, отпуск был прекрасным.",
+    "example_en": "Apart from the rain, the holiday was lovely.",
+    "notes_ru": [
+      "Так же abgesehen davon / davon abgesehen — не считая этого; abgesehen davon, dass … — не считая того, что …",
+      "Бывает и обратный порядок: von wenigen Ausnahmen abgesehen — за немногими исключениями.",
+      "Не путать: von etwas absehen — отказаться от чего-либо (Er hat von einer Anzeige abgesehen); es auf jemanden / etwas abgesehen haben — нацелиться на кого-либо / что-либо; придираться к кому-либо."
+    ],
+    "notes_en": [
+      "Likewise abgesehen davon / davon abgesehen — apart from that; abgesehen davon, dass … — apart from the fact that …",
+      "The order can also be reversed: von wenigen Ausnahmen abgesehen — with a few exceptions.",
+      "Do not confuse: von etwas absehen — to refrain from something (Er hat von einer Anzeige abgesehen); es auf jemanden / etwas abgesehen haben — to have one's eye on someone / something; to have it in for someone."
+    ],
+    "related_ids": [
+      "verb-1058"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/absehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "abgesehen von",
+              "abgesehen vom",
+              "abgesehen davon"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "davon abgesehen",
+            "clause_start": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "von",
+              "vom"
+            ]
+          },
+          {
+            "form": "abgesehen",
+            "not_next": [
+              "haben",
+              "hat",
+              "habe",
+              "hatte",
+              "hätte",
+              "worden",
+              "wird",
+              "wurde",
+              "zu"
+            ],
+            "not_clause_has": [
+              "haben",
+              "hat",
+              "habe",
+              "hast",
+              "habt",
+              "hatte",
+              "hatten",
+              "hattest",
+              "hattet",
+              "hätte",
+              "hätten",
+              "hättest",
+              "hättet",
+              "werden",
+              "wird",
+              "wirst",
+              "werde",
+              "werdet",
+              "wurde",
+              "wurden",
+              "wurdest",
+              "wurdet",
+              "würde",
+              "würden",
+              "worden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Abgesehen vom Regen war der Urlaub schön.",
+        "Von wenigen Ausnahmen abgesehen, sind alle zufrieden.",
+        "Vom Wetter abgesehen war die Reise schön.",
+        "Abgesehen davon hat er recht.",
+        "Davon abgesehen ist alles in Ordnung.",
+        "Abgesehen davon, dass es regnete, war es ein schöner Tag.",
+        "Alle waren da, abgesehen vom Chef.",
+        "Abgesehen von dem Lärm, der nachts kam, war das Hotel gut.",
+        "Das Haus ist, abgesehen von der Küche, fast fertig."
+      ],
+      "negative": [
+        "Er hat von dem Plan abgesehen.",
+        "Sie hat davon abgesehen, ihn anzuzeigen.",
+        "Er hat es auf mich abgesehen.",
+        "Wir haben von einer Strafe abgesehen.",
+        "Das war nicht abzusehen.",
+        "Von dem Plan hat er abgesehen.",
+        "Ich weiß, dass er von dem Plan abgesehen hat.",
+        "Es wurde von einer Strafe abgesehen.",
+        "Von einer Anzeige wurde abgesehen."
+      ]
+    },
+    "id": "expression-424"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "in Höhe von",
+    "translation_ru": "в размере (о сумме, величине)",
+    "translation_en": "in the amount of, amounting to",
+    "example_de": "Er bekam eine Rechnung in Höhe von 300 Euro.",
+    "example_ru": "Он получил счёт в размере 300 евро.",
+    "example_en": "He got a bill in the amount of 300 euros.",
+    "notes_ru": [
+      "Обычно о деньгах: Schulden, eine Strafe in Höhe von … О высоте — обычно с артиклем: in einer Höhe von 3000 Metern — на высоте 3000 метров; der Turm hat eine Höhe von 100 Metern — высота башни 100 метров."
+    ],
+    "notes_en": [
+      "Usually of money: Schulden, eine Strafe in Höhe von … For height — usually with an article: in einer Höhe von 3000 Metern — at a height of 3,000 metres; der Turm hat eine Höhe von 100 Metern — the tower is 100 metres high."
+    ],
+    "related_ids": [
+      "noun-1178"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Hoehe",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "in Höhe von",
+            "not_clause_has": [
+              "Meter",
+              "Metern",
+              "Meters",
+              "Kilometer",
+              "Kilometern",
+              "Zentimeter",
+              "Zentimetern",
+              "Millimeter",
+              "Millimetern",
+              "Fuß",
+              "m",
+              "km",
+              "cm",
+              "mm"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er bekam eine Rechnung in Höhe von 300 Euro.",
+        "Die Firma zahlte eine Strafe in Höhe von einer Million Euro.",
+        "Schulden in Höhe von 5000 Euro sind kein Problem."
+      ],
+      "negative": [
+        "Das Flugzeug flog in einer Höhe von 3000 Metern.",
+        "In einer Höhe von drei Metern hing ein Bild.",
+        "Das Flugzeug flog in Höhe von 3000 Metern.",
+        "Die Höhe des Turms ist beeindruckend."
+      ]
+    },
+    "id": "expression-425"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf einen Streich",
+    "translation_ru": "одним махом, разом",
+    "translation_en": "at one stroke, at one go",
+    "example_de": "Er hat alle Probleme auf einen Streich gelöst.",
+    "example_ru": "Он решил все проблемы одним махом.",
+    "example_en": "He solved all the problems at one stroke.",
+    "notes_ru": [
+      "Помета Duden — veraltend (устаревающее). Известно по сказке братьев Гримм: Sieben auf einen Streich — «Семерых одним ударом».",
+      "Не путать: auf einen Streich hereinfallen — попасться на шутку, на проделку (der Streich — шалость, проделка)."
+    ],
+    "notes_en": [
+      "Duden label: veraltend (dated). Known from the Grimms' tale: Sieben auf einen Streich — “Seven at one blow”.",
+      "Do not confuse: auf einen Streich hereinfallen — to fall for a prank (der Streich — prank, trick)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Streich",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "auf einen Streich",
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "dieses",
+              "dieser",
+              "jenes",
+              "jener",
+              "meines",
+              "meiner",
+              "deines",
+              "deiner",
+              "seines",
+              "seiner",
+              "ihres",
+              "ihrer",
+              "unseres",
+              "unserer",
+              "eures",
+              "eurer",
+              "Ihres",
+              "Ihrer",
+              "von",
+              "vom"
+            ],
+            "not_clause_has": [
+              "herein",
+              "rein",
+              "hereinfallen",
+              "hereingefallen",
+              "hereinzufallen",
+              "reinfallen",
+              "reingefallen",
+              "reinzufallen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er hat alle Probleme auf einen Streich gelöst.",
+        "Sieben auf einen Streich!",
+        "Damit erledigen wir zwei Aufgaben auf einen Streich."
+      ],
+      "negative": [
+        "Er fiel auf einen Streich seines Bruders herein.",
+        "Sie ist auf einen Streich hereingefallen.",
+        "Die Kinder freuten sich auf einen Streich von Max."
+      ]
+    },
+    "id": "expression-426"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "an jds. Stelle treten",
+    "translation_ru": "занять (чьё-либо) место, заменить (кого-либо, что-либо)",
+    "translation_en": "to take someone's place, to replace someone or something",
+    "example_de": "Nach ihrem Rücktritt trat ihr Stellvertreter an ihre Stelle.",
+    "example_ru": "После её отставки её место занял заместитель.",
+    "example_en": "After her resignation her deputy took her place.",
+    "notes_ru": [
+      "Так же an die Stelle von etwas / einer Sache treten: An die Stelle des alten Gesetzes trat ein neues.",
+      "Ср. an jemandes Stelle (в дательном) — на чьём-либо месте: An deiner Stelle würde ich warten.",
+      "Не путать: auf der Stelle treten (разг.) — топтаться на месте."
+    ],
+    "notes_en": [
+      "Likewise an die Stelle von etwas / einer Sache treten: An die Stelle des alten Gesetzes trat ein neues.",
+      "Cf. an jemandes Stelle (dative) — in someone's place: An deiner Stelle würde ich warten.",
+      "Do not confuse: auf der Stelle treten (colloquial) — to mark time, to make no progress."
+    ],
+    "related_ids": [
+      "verb-661",
+      "noun-385"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Stelle",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "trete",
+              "tret",
+              "trittst",
+              "tritt",
+              "treten",
+              "tretet",
+              "trat",
+              "tratst",
+              "traten",
+              "tratet",
+              "träte",
+              "trätest",
+              "träten",
+              "trätet",
+              "getreten",
+              "zu treten",
+              "tretend"
+            ]
+          },
+          {
+            "form": [
+              "an seine Stelle",
+              "an ihre Stelle",
+              "an meine Stelle",
+              "an deine Stelle",
+              "an unsere Stelle",
+              "an eure Stelle",
+              "an Ihre Stelle",
+              "an dessen Stelle",
+              "an deren Stelle",
+              "an die Stelle des",
+              "an die Stelle der",
+              "an die Stelle eines",
+              "an die Stelle einer",
+              "an die Stelle dieses",
+              "an die Stelle dieser",
+              "an die Stelle jenes",
+              "an die Stelle jener",
+              "an die Stelle meines",
+              "an die Stelle meiner",
+              "an die Stelle deines",
+              "an die Stelle deiner",
+              "an die Stelle seines",
+              "an die Stelle seiner",
+              "an die Stelle ihres",
+              "an die Stelle ihrer",
+              "an die Stelle unseres",
+              "an die Stelle unserer",
+              "an die Stelle eures",
+              "an die Stelle eurer",
+              "an die Stelle Ihres",
+              "an die Stelle Ihrer",
+              "an die Stelle von",
+              "an die Stelle vom"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "an seine Stelle",
+              "an ihre Stelle",
+              "an meine Stelle",
+              "an deine Stelle",
+              "an unsere Stelle",
+              "an eure Stelle",
+              "an Ihre Stelle",
+              "an dessen Stelle",
+              "an deren Stelle",
+              "an die Stelle des",
+              "an die Stelle der",
+              "an die Stelle eines",
+              "an die Stelle einer",
+              "an die Stelle dieses",
+              "an die Stelle dieser",
+              "an die Stelle jenes",
+              "an die Stelle jener",
+              "an die Stelle meines",
+              "an die Stelle meiner",
+              "an die Stelle deines",
+              "an die Stelle deiner",
+              "an die Stelle seines",
+              "an die Stelle seiner",
+              "an die Stelle ihres",
+              "an die Stelle ihrer",
+              "an die Stelle unseres",
+              "an die Stelle unserer",
+              "an die Stelle eures",
+              "an die Stelle eurer",
+              "an die Stelle Ihres",
+              "an die Stelle Ihrer",
+              "an die Stelle von",
+              "an die Stelle vom"
+            ]
+          },
+          {
+            "form": [
+              "trete",
+              "tret",
+              "trittst",
+              "tritt",
+              "treten",
+              "tretet",
+              "trat",
+              "tratst",
+              "traten",
+              "tratet",
+              "träte",
+              "trätest",
+              "träten",
+              "trätet",
+              "getreten",
+              "zu treten",
+              "tretend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach ihrem Rücktritt trat ihr Stellvertreter an ihre Stelle.",
+        "An die Stelle des alten Gesetzes trat ein neues.",
+        "Wer wird an seine Stelle treten?",
+        "An deren Stelle ist ein Parkplatz getreten.",
+        "Ein neuer Trainer trat an die Stelle von Herrn Müller."
+      ],
+      "negative": [
+        "An seiner Stelle stand ein Baum.",
+        "Er trat an die Stelle, an der sie gestanden hatte.",
+        "Sie trat auf der Stelle.",
+        "An deiner Stelle würde ich warten.",
+        "Er trat an die Stelle am Fluss."
+      ]
+    },
+    "id": "expression-427"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "nach allen Seiten",
+    "translation_ru": "во все стороны; (обдумать) со всех сторон, всесторонне",
+    "translation_en": "in all directions; (consider) from every angle",
+    "example_de": "Nach dem Knall liefen die Leute nach allen Seiten auseinander.",
+    "example_ru": "После хлопка люди разбежались во все стороны.",
+    "example_en": "After the bang people ran off in all directions.",
+    "notes_ru": [
+      "Так же nach allen Seiten hin. Со всех сторон (всесторонне): etwas nach allen Seiten prüfen — проверить со всех сторон. Ср. von allen Seiten — отовсюду, со всех сторон."
+    ],
+    "notes_en": [
+      "Likewise nach allen Seiten hin. On all sides (thoroughly): etwas nach allen Seiten prüfen — to examine something from every angle. Cf. von allen Seiten — from everywhere, from all sides."
+    ],
+    "related_ids": [
+      "noun-477"
+    ],
+    "source_url": "https://www.dwds.de/wb/Seite",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "nach allen Seiten",
+            "not_next": [
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "dieses",
+              "dieser",
+              "jenes",
+              "jener",
+              "meines",
+              "meiner",
+              "deines",
+              "deiner",
+              "seines",
+              "seiner",
+              "ihres",
+              "ihrer",
+              "unseres",
+              "unserer",
+              "eures",
+              "eurer",
+              "Ihres",
+              "Ihrer",
+              "von",
+              "vom",
+              "die",
+              "denen",
+              "deren",
+              "welche",
+              "welchen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem Knall liefen die Leute nach allen Seiten auseinander.",
+        "Der Hund sah sich nach allen Seiten um.",
+        "Das Licht strahlte nach allen Seiten.",
+        "Ich habe es mir nach allen Seiten hin überlegt."
+      ],
+      "negative": [
+        "Sie fragte nach allen Seiten des Vertrags, die noch fehlten.",
+        "Er suchte nach allen Seiten, die fehlten."
+      ]
+    },
+    "id": "expression-428"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf Deutsch, auf Englisch …",
+    "translation_ru": "на (каком-либо) языке: по-немецки, по-английски …",
+    "translation_en": "in (a language): in German, in English …",
+    "example_de": "Kannst du das auf Englisch sagen?",
+    "example_ru": "Можешь сказать это по-английски?",
+    "example_en": "Can you say that in English?",
+    "notes_ru": [
+      "Название языка — без артикля: auf Deutsch, auf Französisch, auf Latein. Так же in Deutsch: der Brief ist in Deutsch geschrieben.",
+      "Разг. auf Deutsch — также «прямо, без обиняков» (как auf gut Deutsch).",
+      "Ср. zu Deutsch — по-немецки (это значит), то есть."
+    ],
+    "notes_en": [
+      "The language name has no article: auf Deutsch, auf Französisch, auf Latein. Likewise in Deutsch: der Brief ist in Deutsch geschrieben.",
+      "Colloquially auf Deutsch also means “plainly, bluntly” (like auf gut Deutsch).",
+      "Cf. zu Deutsch — in German (that means), i.e."
+    ],
+    "related_ids": [
+      "noun-5379",
+      "noun-206"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auf_Praeposition",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "auf Deutsch",
+              "auf Englisch",
+              "auf Französisch",
+              "auf Italienisch",
+              "auf Spanisch",
+              "auf Portugiesisch",
+              "auf Katalanisch",
+              "auf Baskisch",
+              "auf Galicisch",
+              "auf Rumänisch",
+              "auf Latein",
+              "auf Lateinisch",
+              "auf Griechisch",
+              "auf Altgriechisch",
+              "auf Neugriechisch",
+              "auf Russisch",
+              "auf Ukrainisch",
+              "auf Belarussisch",
+              "auf Weißrussisch",
+              "auf Polnisch",
+              "auf Tschechisch",
+              "auf Slowakisch",
+              "auf Slowenisch",
+              "auf Kroatisch",
+              "auf Serbisch",
+              "auf Bosnisch",
+              "auf Serbokroatisch",
+              "auf Bulgarisch",
+              "auf Mazedonisch",
+              "auf Makedonisch",
+              "auf Albanisch",
+              "auf Ungarisch",
+              "auf Finnisch",
+              "auf Estnisch",
+              "auf Lettisch",
+              "auf Litauisch",
+              "auf Niederländisch",
+              "auf Holländisch",
+              "auf Flämisch",
+              "auf Dänisch",
+              "auf Schwedisch",
+              "auf Norwegisch",
+              "auf Isländisch",
+              "auf Irisch",
+              "auf Gälisch",
+              "auf Walisisch",
+              "auf Bretonisch",
+              "auf Türkisch",
+              "auf Arabisch",
+              "auf Hebräisch",
+              "auf Jiddisch",
+              "auf Persisch",
+              "auf Kurdisch",
+              "auf Armenisch",
+              "auf Georgisch",
+              "auf Aserbaidschanisch",
+              "auf Kasachisch",
+              "auf Usbekisch",
+              "auf Mongolisch",
+              "auf Chinesisch",
+              "auf Japanisch",
+              "auf Koreanisch",
+              "auf Vietnamesisch",
+              "auf Thailändisch",
+              "auf Indonesisch",
+              "auf Malaiisch",
+              "auf Tagalog",
+              "auf Hindi",
+              "auf Urdu",
+              "auf Bengalisch",
+              "auf Tamil",
+              "auf Suaheli",
+              "auf Swahili",
+              "auf Afrikaans",
+              "auf Esperanto",
+              "auf Sanskrit",
+              "auf Hochdeutsch",
+              "auf Plattdeutsch",
+              "auf Niederdeutsch",
+              "auf Schweizerdeutsch",
+              "auf Mittelhochdeutsch",
+              "auf Althochdeutsch",
+              "auf Amerikanisch",
+              "auf Mandarin",
+              "auf Kantonesisch",
+              "auf Farsi",
+              "auf deutsch",
+              "auf englisch",
+              "auf französisch",
+              "auf italienisch",
+              "auf spanisch",
+              "auf portugiesisch",
+              "auf katalanisch",
+              "auf baskisch",
+              "auf galicisch",
+              "auf rumänisch",
+              "auf lateinisch",
+              "auf griechisch",
+              "auf altgriechisch",
+              "auf neugriechisch",
+              "auf russisch",
+              "auf ukrainisch",
+              "auf belarussisch",
+              "auf weißrussisch",
+              "auf polnisch",
+              "auf tschechisch",
+              "auf slowakisch",
+              "auf slowenisch",
+              "auf kroatisch",
+              "auf serbisch",
+              "auf bosnisch",
+              "auf serbokroatisch",
+              "auf bulgarisch",
+              "auf mazedonisch",
+              "auf makedonisch",
+              "auf albanisch",
+              "auf ungarisch",
+              "auf finnisch",
+              "auf estnisch",
+              "auf lettisch",
+              "auf litauisch",
+              "auf niederländisch",
+              "auf holländisch",
+              "auf flämisch",
+              "auf dänisch",
+              "auf schwedisch",
+              "auf norwegisch",
+              "auf isländisch",
+              "auf irisch",
+              "auf gälisch",
+              "auf walisisch",
+              "auf bretonisch",
+              "auf türkisch",
+              "auf arabisch",
+              "auf hebräisch",
+              "auf jiddisch",
+              "auf persisch",
+              "auf kurdisch",
+              "auf armenisch",
+              "auf georgisch",
+              "auf aserbaidschanisch",
+              "auf kasachisch",
+              "auf usbekisch",
+              "auf mongolisch",
+              "auf chinesisch",
+              "auf japanisch",
+              "auf koreanisch",
+              "auf vietnamesisch",
+              "auf thailändisch",
+              "auf indonesisch",
+              "auf malaiisch",
+              "auf bengalisch",
+              "auf hochdeutsch",
+              "auf plattdeutsch",
+              "auf niederdeutsch",
+              "auf schweizerdeutsch",
+              "auf mittelhochdeutsch",
+              "auf althochdeutsch",
+              "auf amerikanisch",
+              "auf kantonesisch"
+            ],
+            "not_next": [
+              "und",
+              "oder",
+              "-"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Kannst du das auf Englisch sagen?",
+        "Der Brief ist auf Deutsch geschrieben.",
+        "Wie heißt das auf Französisch?",
+        "Sie sprachen auf Russisch miteinander.",
+        "Das Buch erschien auf deutsch."
+      ],
+      "negative": [
+        "Er saß auf dem Rasen im Englischen Garten.",
+        "Sie standen auf deutschem Boden.",
+        "Er ist stolz auf Deutschland.",
+        "Er wartete auf Englands Antwort."
+      ]
+    },
+    "id": "expression-429"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf gut Deutsch",
+    "translation_ru": "попросту говоря, без обиняков",
+    "translation_en": "in plain language, to put it bluntly",
+    "example_de": "Auf gut Deutsch heißt das: Wir haben verloren.",
+    "example_ru": "Попросту говоря, это значит: мы проиграли.",
+    "example_en": "In plain language, that means we lost.",
+    "notes_ru": [
+      "Помета Duden — umgangssprachlich (разг.). Так же просто auf Deutsch."
+    ],
+    "notes_en": [
+      "Duden label: umgangssprachlich (colloquial). Likewise just auf Deutsch."
+    ],
+    "related_ids": [
+      "noun-5379"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Deutsch",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "auf gut Deutsch",
+              "auf gut deutsch"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Auf gut Deutsch heißt das: Wir haben verloren.",
+        "Er hat, auf gut Deutsch gesagt, gelogen."
+      ],
+      "negative": [
+        "Er spricht gut Deutsch.",
+        "Das ist auf Deutsch gut erklärt."
+      ]
+    },
+    "id": "expression-430"
   }
 ]

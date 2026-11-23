@@ -82,7 +82,7 @@
     { file: "german-pronouns.json", version: "20261122-wn-x215-align-1", type: "pronoun" },
     { file: "german-adjective-adverbs.json", version: "20261122-wn-x218-dicht-danach-1", type: "adjective" },
     // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-    { file: "german-expressions.json", version: "20261122-wn-x220-expr-1", type: "expression", optional: true }
+    { file: "german-expressions.json", version: "20261123-wn-x224-expr-1", type: "expression", optional: true }
   ].map(Object.freeze));
 
   const ORDER = ["german-nouns.json", "german-verbs.json", "german-adjectives.json", "german-adverbs.json", "german-adjective-adverbs.json", "german-conjunctions.json", "german-pronouns.json", "german-expressions.json"];

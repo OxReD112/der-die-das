@@ -16635,6 +16635,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     function windowByForm(word, context, result) {
       const list = result?.candidates || [];
       if (!result || result.status !== 'ambiguous' || list.length < 2 || !Number.isInteger(context?.tokenOffset)) return result;
+      // (advisor 23.11) the window of an expression and the word's own reading by its pair / form stays a window (auf Deutsch)
+      if (['expression-or-verb-pair','expression-or-verb'].includes(result.evidence)) return result;
       const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'windowByForm');
       const i = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (i < 0) return result;
@@ -17920,6 +17922,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       { const found = await adjectiveFormBeforeNoun(word,context,resolution).catch(() => null);
         if (found) selection.override(resolution,'adjective-form-before-noun',{selected:found.selected,candidates:found.candidates,evidence:'adjective-form-before-noun'}); }
       await participleUsage(word,context,resolution);
+      // (advisor 23.11: a verb's pair and an expression on the same preposition — Er freut sich auf Englisch —: the verb's own complement
+      // is not lit either; the window is on the preposition)
+      { const sel = resolution?.selected, c = sel?.construction;
+        if (c?.complement && Array.isArray(c.spans) && Number.isInteger(context?.tokenOffset)) {
+          const prep = norm(String(c.complement.pattern || "").split(/\s+/u)[0]);
+          const sp = c.spans.find(x => norm(x.text) === prep && x.start !== context.tokenOffset);
+          let ex = null;
+          if (sp) { try { ex = await constructionAt(sp.text, {...context, tokenOffset:sp.start}); } catch (_) { ex = null; } }
+          if (ex?.entry?.type === "Ausdruck" && (ex.spans || []).some(x => x.start === sp.start)) {
+            const {complement, ...rest} = c, plain = {...sel, construction:{...rest, spans:c.spans.filter(x => x !== sp)}};
+            resolution.candidates = (resolution.candidates || []).map(x => x === sel ? plain : x);
+            if (resolution.preferred === sel) resolution.preferred = plain;
+            resolution.selected = plain;
+          }
+        } }
       await verbPrepositionLink(word,context,resolution);
       // Noun-phrase facts feed one agreement row. Attaching them to the cards is
       // presentation (presentResolution), so the row reads the facts directly.
@@ -18480,7 +18497,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (caseOf.some(c => !c)) return;
       const {v,p,verbBase,rows} = chosen[0];
       // (advisor 21.11 (2): an expression comes before the noun's pair — Zugang zum Beispiel über …)
-      if (nounLink && v === selected && await inExpression(p)) return;
+      // (advisor 23.11: also the verb's pair — a preposition of an expression is not lit as a pair: Er freut sich auf Englisch; the window
+      // of the preposition / the expression is on the preposition's tap)
+      if (await inExpression(p)) return;
       // (L24: als of a chain verb — Märchen werden als Mythen angesehen — stays with the chain: in the passive the als group is no
       // accusative)
       if (chainVerb && chosen.some(l => prepositionAt(l.p) === 'als')) return;
@@ -21444,6 +21463,46 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // parts count as present. Only a pre-check: when no pattern of an expression passes it, the full search cannot find it either.
     const patternWordsPresent = (m, present) => Array.isArray(m?.parts) && m.parts.every(part => part.optional || part.reflexive || part.zu_infinitive ||
       !part.form || partList(part,"alternatives").some(({words}) => words.every(w => present.has(w))));
+    // (advisor 23.11: a verb's pair and an expression claim the same preposition — Er freut sich auf Englisch: sich freuen auf + Akk /
+    // the expression «auf Englisch» — a window, not either for sure) Does a verb of the part around the token at `at` have a pair on
+    // its preposition: a row of the list of pairs or a complement of its own card (a reflexive pair with sich / mich … in the part)?
+    // The case is not asked: the group of an expression shows none (auf Englisch). Read by form, as the pair's own search.
+    async function verbPairOnPreposition(sentence, at, skip = new Set(), shown = null) {
+      const tokens = sharedTokens(String(sentence || ""), 'pairExpression');
+      if (!tokens[at]) return false;
+      const prep = norm(tokens[at][0]);
+      if (!prepositions.has(prep)) return false;
+      let rows = verbPrepositionRows;
+      if (rows === null && fallback.verbPrepositions) { try { rows = verbPrepositionRows = await fallback.verbPrepositions(); } catch (_) { rows = []; } }
+      const gap = (i, j) => String(sentence).slice(tokens[i].index + tokens[i][0].length, tokens[j].index);
+      let from = at, to = at;
+      while (from > 0 && !clauseGaps.plain.test(gap(from-1, from))) from--;
+      while (to < tokens.length - 1 && !clauseGaps.plain.test(gap(to, to+1))) to++;
+      const words = tokens.slice(from, to+1).map(t => norm(t[0]));
+      const sich = words.some(w => reflexivePronouns.has(w));
+      // (the same preposition again in the part outside the expression takes the pair — wirkt auf einen Betrachter auf keinen Fall …)
+      if (tokens.some((t, i) => i >= from && i <= to && i !== at && !skip.has(i) && norm(t[0]) === prep)) return false;
+      // (a particle closing the part makes another verb of a plain form — fällt … weg: wegfallen, not fallen auf)
+      const last = words[words.length - 1];
+      const plain = v => norm(v).replace(/^sich\s+/u, "");
+      const reflexiveRow = v => /^sich\s/u.test(norm(v));
+      for (let i = from; i <= to; i++) {
+        if (i === at || skip.has(i)) continue;
+        for (const a of verbAnalyses.get(norm(tokens[i][0])) || []) {
+          const b = norm(a.base || a.entry?.word || "");
+          if (!b) continue;
+          // (a detached form only with its particle in the part — schreibt is no umschreiben without um)
+          if (a.detached && a.prefix && !words.includes(norm(a.prefix))) continue;
+          if (!a.detached && last && last !== norm(tokens[i][0]) && (lemmas.get(last + b) || []).some(e => e.type === "Verb")) continue;
+          // (a case the group shows against the pair's — auf der Stelle, a pair with the accusative — is no claim)
+          const caseOk = c => !shown || !c || c === shown;
+          if ((rows || []).some(r => plain(r[0]) === plain(b) && norm(r[1]) === prep && (!reflexiveRow(r[0]) || sich) && caseOk(r[2]))) return true;
+          if ([...(lemmas.get(b) || []), ...(lemmas.get("sich " + plain(b)) || [])].some(e => e.type === "Verb" && (!/^sich\s/u.test(norm(e.word)) || sich) &&
+            (e.complements || []).some(c => { const m = /^(\S+)\s*\+\s*(Akkusativ|Dativ|Genitiv)\b/u.exec(String(c.pattern || "").trim()); return m && norm(m[1]) === prep && caseOk(m[2]); }))) return true;
+        }
+      }
+      return false;
+    }
     async function applyConstruction(word, context, resolution) {
       // (the card of an expression's verb, read without expressions: expressionVerb)
       if (context?.noExpression) return resolution;
@@ -21481,6 +21540,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             }
             found = {...found, spans};
           } else found = null;
+        }
+      }
+      // (advisor 23.11, batch 224: von … abgesehen right before a finite haben / werden at the start of the sentence — Von wenigen
+      // Ausnahmen abgesehen hat er recht — is the expression «кроме» or the perfect of absehen (Von dem Plan abgesehen hat er nicht) by
+      // form alike: the window of the word's own reading and the expression. The expression is found as with the comma the
+      // expression's own examples have after abgesehen and another finite verb; its spans stand before it, the same in the sentence.)
+      if (!found && !contracted && Number.isInteger(context?.tokenOffset)) {
+        const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, 'abgesehenWindow');
+        const at = tokens.findIndex(t => t.index === context.tokenOffset);
+        const opener = tokens.findIndex((t, i) => /^(?:von|vom)$/u.test(norm(t[0])) && (i === 0 || /[.!?;:»«"„“]\s*$/u.test(sentence.slice(tokens[i-1].index + tokens[i-1][0].length, t.index))));
+        const ab = opener >= 0 ? tokens.findIndex((t, i) => i > opener && norm(t[0]) === "abgesehen") : -1;
+        const nextFinite = ab >= 0 && ab + 1 < tokens.length ? (verbAnalyses.get(norm(tokens[ab+1][0])) || []).some(a => a.kind === "finite" && ["haben","werden"].includes(norm(a.base || ""))) : false;
+        if (ab > opener && at >= opener && at <= ab && nextFinite && /^\s+$/u.test(sentence.slice(tokens[ab].index + tokens[ab][0].length, tokens[ab+1].index))) {
+          // (the finite haben / werden after it is the expression's not_next: in the probe it stands as «ist», after the comma)
+          const cut = tokens[ab].index + tokens[ab][0].length, withComma = sentence.slice(0, cut) + ", ist" + sentence.slice(tokens[ab+1].index + tokens[ab+1][0].length);
+          let other = null;
+          try { other = await constructionAt(word, {...context, sentence:withComma}); } catch (_) { other = null; }
+          if (other?.entry?.type === "Ausdruck" && (other.spans || []).every(x => x.end <= cut)) found = {...other, choice:"own-or-expression"};
         }
       }
       // 17.11.2026 (expressions chat; advisor 17.11 (2)): the heading verb / nicht that an expression takes outside its parts
@@ -21550,9 +21627,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         delete candidate.expressionExtraSpans;
       }
       const rest = (resolution.candidates || []).filter(c => c.dictionaryId !== found.entry.id);
+      // (advisor 23.11) an expression whose preposition a verb of the part claims as its pair — Er freut sich auf Englisch —: the window
+      // of the word's own reading and the expression, the word's reading first (as split_choice); Er schreibt auf Englisch — no such pair,
+      // the expression
+      if (found.entry.type === "Ausdruck" && rest.length && !contracted && Number.isInteger(context?.tokenOffset)) {
+        const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, 'pairExpression');
+        const spanAt = found.spans.map(x => tokens.findIndex(t => t.index === x.start)).filter(i => i >= 0);
+        const prepAt = spanAt.find(i => prepositions.has(norm(tokens[i][0])));
+        // (only an expression of a preposition and a noun group — auf Englisch, nach allen Seiten, auf der Stelle; not auf einmal, auf und
+        // ab, nor an expression with its own verb — sich auf den Weg machen, zu sich nehmen, dazu bringen: its verb is no other reading)
+        const ownVerb = spanAt.some(i => /^\p{Ll}/u.test(tokens[i][0]) && !prepositions.has(norm(tokens[i][0])) &&
+          (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => ["finite","infinitive","participle"].includes(a.kind)));
+        const head = prepAt !== undefined && spanAt.includes(prepAt + 1) ? tokens[prepAt + 1][0] : "";
+        const group = /^\p{Lu}/u.test(head) || DETERMINER_WORD.test(norm(head)) || !!objectCase[norm(head)];
+        const shown = group ? (contractionCase[norm(tokens[prepAt][0])] || objectCase[norm(head)] || determinedCase[norm(head)] || null) : null;
+        // (the expression's own words are not the verb: von … abgesehen)
+        if (prepAt !== undefined && !ownVerb && group && await verbPairOnPreposition(sentence, prepAt, new Set(spanAt), shown))
+          return {...resolution, preferred:rest[0], selected:null, status:"ambiguous", evidence:"expression-or-verb-pair", candidates:[rest[0], candidate]};
+      }
       // G65: a construction the form does not make sure (split_choice / adjacent_choice) is offered in a choice, the word's own reading first.
       if (found.choice === "preposition-first" && rest.length)
         return {...resolution, preferred:rest[0], selected:null, status:"ambiguous", candidates:[...rest.slice(0,1), candidate, ...rest.slice(1)]};
+      // (the window of two: the word's own reading — the verb / the preposition — and the expression)
+      if (found.choice === "own-or-expression" && rest.length)
+        return {...resolution, preferred:rest[0], selected:null, status:"ambiguous", evidence:"expression-or-verb", candidates:[rest[0], candidate]};
       const candidates = [candidate, ...rest];
       if (found.choice === true) {
         // Both readings in the window: the expression and the separable verb of the same words (not a bare geben).
