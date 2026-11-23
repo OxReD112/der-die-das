@@ -1,5 +1,8 @@
 (() => {
-  const STORAGE_KEY = "deutschNotebookV1";
+  /* 23.11.2026: the rules live in notebook-model.js (NotebookModel, no page — the app runs the same file); this page
+     reads the input, asks the model, stores what comes back and draws it. */
+  const NB = window.NotebookModel, T = NB.TEXT;
+  const STORAGE_KEY = NB.KEY;
   const $ = id => document.getElementById(id);
   const app = $("notebook");
   if (!app) return;
@@ -11,17 +14,13 @@
     chips: $("topic-chips"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
   };
   let state = readState(), view = "all", selectedTopic = "", query = "", editingId = null, openedId = null, pendingDeleteId = null, pendingTopic = null, pendingMerge = null, statusTimer = 0, searchOpen = false;
-  function readState() {
-    try {
-      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-      if (!raw || raw.version !== 1) return { version: 1, topics: [], notes: [] };
-      return { version: 1, topics: Array.isArray(raw.topics) ? raw.topics.filter(x => typeof x === "string") : [], notes: Array.isArray(raw.notes) ? raw.notes.filter(x => x && typeof x.id === "string" && typeof x.title === "string") : [] };
-    } catch (_) { return { version: 1, topics: [], notes: [] }; }
-  }
+  function readState() { let text = null; try { text = localStorage.getItem(STORAGE_KEY); } catch (_) {} return NB.read(text); }
   function persist() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; }
-    catch (_) { notify("Speichern nicht möglich. Bitte prüfe den Speicherplatz auf diesem Gerät."); return false; }
+    try { localStorage.setItem(STORAGE_KEY, NB.write(state)); return true; }
+    catch (_) { notify(T.storageFull); return false; }
   }
+  // a change from the model: keep it if it is stored, else put the old state back
+  function commit(next) { const before = state; state = next; if (persist()) return true; state = before; return false; }
   /* notify(message) — short status line (3 s). With an action ({ label, run }) it gets a tappable button and stays 5 s
      (Notizbuch v19: "Thema gelöscht · Rückgängig"). */
   function notify(message, action = null) {
@@ -57,30 +56,24 @@
     els.scroll.scrollTop = 0;
     animateContent(direction, screen === "detail" ? els.detail : screen === "edit" ? els.edit : null);
   }
-  function renderCategories() {
-    const categories = [...new Set([...state.topics, ...state.notes.map(note => note.category).filter(Boolean)])];
-    const entries = allEntries();
-    els.list.innerHTML = categories.map(name => {
-      const count = entries.filter(entry => entry.category === name).length;
-      return `<button class="nb-row" type="button" data-topic="${esc(name)}"><span class="nb-row-copy"><strong>${esc(name)}</strong><small>${count} ${count === 1 ? "Eintrag" : "Einträge"}</small></span><span class="nb-arrow ui-chev ui-chev-lone" aria-hidden="true"></span></button>`;
-    }).join("") || '<p class="nb-empty">Lege beim Schreiben dein erstes Thema an.</p>';
+  function renderCategories(model) {
+    els.list.innerHTML = model.rows.map(row => `<button class="nb-row" type="button" data-topic="${esc(row.name)}"><span class="nb-row-copy"><strong>${esc(row.name)}</strong><small>${esc(row.countText)}</small></span><span class="nb-arrow ui-chev ui-chev-lone" aria-hidden="true"></span></button>`).join("")
+      || `<p class="nb-empty">${esc(model.emptyText)}</p>`;
     els.list.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => { selectedTopic = button.dataset.topic; renderList("forward"); }));
   }
   function renderList(direction = "none") {
-    if (view === "topics" && !selectedTopic && !query) { app.classList.remove("in-topic"); renderCategories(); animateContent(direction, direction === "forward" ? els.list : null); return; }
-    let entries = allEntries();
-    if (view === "topics" && selectedTopic) entries = entries.filter(entry => entry.category === selectedTopic);
-    if (query) { const q = query.toLocaleLowerCase(); entries = entries.filter(entry => [entry.title, entry.sub, entry.body, entry.category].join(" ").toLocaleLowerCase().includes(q)); }
-    const inTopic = view === "topics" && !!selectedTopic && !query;
+    const model = NB.list(state, { view, topic: selectedTopic, query });
+    if (model.kind === "topics") { app.classList.remove("in-topic"); renderCategories(model); animateContent(direction, direction === "forward" ? els.list : null); return; }
+    const inTopic = model.inTopic, count = model.head ? model.head.count : 0;
     app.classList.toggle("in-topic", inTopic);
     /* Topic heading (Notizbuch v20): "‹ Grammatik 2" = back to all topics; pencil = rename, trash = delete. Pinned like the
        edit screen's heading. Inside a topic the rows don't repeat the topic name. */
     const back = inTopic ? `<div class="nb-topic-head" id="topic-head">
-        <button class="nb-topic-title" type="button" id="topic-back" aria-label="Zurück zu allen Themen"><span class="nb-topic-chevron ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span><span class="nb-topic-name">${esc(selectedTopic)}</span><span class="nb-topic-count" aria-label="${entries.length} ${entries.length === 1 ? "Notiz" : "Notizen"}">${entries.length}</span></button>
+        <button class="nb-topic-title" type="button" id="topic-back" aria-label="Zurück zu allen Themen"><span class="nb-topic-chevron ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span><span class="nb-topic-name">${esc(selectedTopic)}</span><span class="nb-topic-count" aria-label="${esc(model.head?.countText || "")}">${count}</span></button>
         <div class="nb-topic-tools"><button class="nb-icon-action" id="rename-topic" type="button" aria-label="Thema umbenennen">${pencilSvg}</button><button class="nb-icon-action" id="delete-topic" type="button" aria-label="Thema „${esc(selectedTopic)}“ löschen">${trashSvg}</button></div>
       </div>` : "";
-    const rows = entries.map(entry => `<button class="nb-row" type="button" data-entry="${esc(entry.id)}"><span class="nb-row-copy">${entry.category && !inTopic ? `<small class="nb-row-category">${esc(entry.category)}</small>` : ""}<strong>${esc(entry.title)}</strong>${entry.sub ? `<small>${esc(entry.sub)}</small>` : ""}</span><span class="nb-arrow ui-chev ui-chev-lone" aria-hidden="true"></span></button>`).join("");
-    els.list.innerHTML = back + (rows || '<p class="nb-empty">Hier ist noch nichts gespeichert.</p>');
+    const rows = model.rows.map(row => `<button class="nb-row" type="button" data-entry="${esc(row.id)}"><span class="nb-row-copy">${row.category ? `<small class="nb-row-category">${esc(row.category)}</small>` : ""}<strong>${esc(row.title)}</strong>${row.sub ? `<small>${esc(row.sub)}</small>` : ""}</span><span class="nb-arrow ui-chev ui-chev-lone" aria-hidden="true"></span></button>`).join("");
+    els.list.innerHTML = back + (rows || `<p class="nb-empty">${esc(model.emptyText)}</p>`);
     $("topic-back")?.addEventListener("click", () => { selectedTopic = ""; renderList("back"); });
     $("delete-topic")?.addEventListener("click", event => askDeleteTopic(selectedTopic, event.detail === 0));
     $("rename-topic")?.addEventListener("click", startRenameTopic);
@@ -92,16 +85,16 @@
   function openEntry(id) {
     const entry = allEntries().find(item => item.id === id); if (!entry) return;
     openedId = id; $("detail-topic").textContent = entry.category || ""; $("detail-title").textContent = entry.title;
-    $("detail-sub").textContent = entry.sub || ""; $("detail-sub").hidden = !entry.sub; if (entry.bodyHtml) $("detail-body").innerHTML = cleanNoteHtml(entry.bodyHtml);
+    $("detail-sub").textContent = entry.sub || ""; $("detail-sub").hidden = !entry.sub; if (entry.bodyHtml) $("detail-body").innerHTML = NB.cleanHtml(entry.bodyHtml);
     else $("detail-body").textContent = entry.body || "";
     renderTaskButtons();
     /* 04.11 (Alena): pencil + trash pinned at the bottom (two 36 circles), so a long note needn't be scrolled to the end. */
     $("detail-actions").innerHTML = `<button class="nb-icon-action" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button><button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
     setScreen("detail", "forward");
-    $("edit-entry")?.addEventListener("click", () => openEditor(entry));
+    $("edit-entry")?.addEventListener("click", () => openEditor(allEntries().find(item => item.id === id) || entry)); // the note as it is now (a ticked task is a new copy)
     $("delete-entry")?.addEventListener("click", event => {
       pendingDeleteId = id; pendingTopic = null; pendingMerge = null;
-      showDeleteConfirm("Notiz löschen?", "Diese Notiz wird von diesem Gerät entfernt.", event.detail === 0, true);
+      const ask = NB.askDeleteNote(); showDeleteConfirm(ask.title, ask.text, event.detail === 0, true);
     });
   }
   /* 04.11 (Alena, iPhone): with the keyboard open, the text being typed must stay in sight — the page itself never
@@ -135,10 +128,8 @@
      with "Rückgängig" for 5 s. Undo puts the topic and exactly those notes back, keeping anything added meanwhile. */
   function askDeleteTopic(name, keyboard) {
     if (!name) return;
-    const count = state.notes.filter(note => note.category === name).length;
     pendingTopic = name; pendingDeleteId = null; pendingMerge = null;
-    const text = count ? `„${name}“ und ${count === 1 ? "die Notiz" : `die ${count} Notizen`} darin werden von diesem Gerät entfernt.` : `Das Thema „${name}“ wird von diesem Gerät entfernt.`;
-    showDeleteConfirm("Thema löschen?", text, keyboard);
+    const ask = NB.askDeleteTopic(state, name); showDeleteConfirm(ask.title, ask.text, keyboard);
   }
   /* Rename a topic in place (Notizbuch v20): pencil → the name becomes a text field, the pencil a mint tick, the trash
      hides. Fertig / tick / tapping elsewhere saves, Escape or empty cancels. A name that already exists (any capitals)
@@ -155,15 +146,12 @@
     let done = false;
     const finish = keep => {
       if (done) return; done = true;
-      const name = keep ? input.value.trim().replace(/\s+/g, " ") : "";
-      if (!name || name === old) { renderList(); return; }
-      const others = [...new Set(state.topics.concat(state.notes.map(note => note.category).filter(Boolean)))].filter(topic => topic !== old);
-      const existing = others.find(topic => topic.toLocaleLowerCase() === name.toLocaleLowerCase());
+      const answer = NB.renameTopic(state, old, keep ? input.value : "");
       renderList();
-      if (existing) {
-        pendingMerge = { from: old, to: existing }; pendingTopic = null; pendingDeleteId = null;
-        showDeleteConfirm("Themen zusammenführen?", `„${existing}“ gibt es schon. Die Notizen aus „${old}“ werden dorthin verschoben.`, false, false, "Zusammenführen");
-      } else renameTopic(old, name, false);
+      if (answer.kind === "ask") {
+        pendingMerge = { from: old, to: answer.to }; pendingTopic = null; pendingDeleteId = null;
+        showDeleteConfirm(answer.title, answer.text, false, false, answer.confirm);
+      } else if (answer.kind === "done") applyTopicMove(answer);
     };
     tick.addEventListener("pointerdown", event => event.preventDefault()); // keep the field focused: the tick saves, not the blur
     tick.addEventListener("click", () => finish(true));
@@ -174,40 +162,27 @@
     input.addEventListener("blur", () => finish(true));
     input.focus(); input.select();
   }
-  function renameTopic(from, to, merge) {
-    const before = { notes: state.notes, topics: state.topics };
-    state.notes = state.notes.map(note => note.category === from ? { ...note, category: to } : note);
-    const index = state.topics.indexOf(from);
-    if (merge) state.topics = state.topics.filter(topic => topic !== from);
-    else if (index >= 0) { state.topics = [...state.topics]; state.topics[index] = to; }
-    if (!state.topics.includes(to) && !state.notes.some(note => note.category === to)) state.topics = [...state.topics, to]; // empty topic keeps existing
-    if (!persist()) { state.notes = before.notes; state.topics = before.topics; renderList(); return; }
-    selectedTopic = to; renderList(); notify(merge ? "Zusammengeführt." : "Umbenannt.");
+  function applyTopicMove(result) { // a rename or a merge from the model
+    if (!commit(result.state)) { renderList(); return; }
+    selectedTopic = result.topic; renderList(); notify(result.status);
   }
   function deleteTopic() {
     const name = pendingTopic; if (!name) return;
-    const before = { notes: state.notes, topics: state.topics };
-    const removed = state.notes.filter(note => note.category === name), removedIds = new Set(removed.map(note => note.id));
-    const topicIndex = state.topics.indexOf(name);
-    state.notes = state.notes.filter(note => !removedIds.has(note.id)); state.topics = state.topics.filter(topic => topic !== name);
-    if (!persist()) { state.notes = before.notes; state.topics = before.topics; closeDeleteConfirm(); return; }
+    const result = NB.deleteTopic(state, name);
+    if (!commit(result.state)) { closeDeleteConfirm(); return; }
     closeDeleteConfirm(); selectedTopic = ""; renderList("back");
-    notify("Thema gelöscht.", { label:"Rückgängig", run: () => {
-      const order = new Map(before.notes.map((note, i) => [note.id, i]));
-      const prevNotes = state.notes, prevTopics = state.topics;
-      state.notes = state.notes.concat(removed.filter(note => !state.notes.some(item => item.id === note.id)))
-        .sort((a, b) => (order.has(a.id) ? order.get(a.id) : -1) - (order.has(b.id) ? order.get(b.id) : -1));
-      if (!state.topics.includes(name)) { state.topics = [...state.topics]; state.topics.splice(topicIndex < 0 ? state.topics.length : Math.min(topicIndex, state.topics.length), 0, name); }
-      if (!persist()) { state.notes = prevNotes; state.topics = prevTopics; return; }
-      renderList(); notify("Wiederhergestellt.");
+    notify(result.status, { label: result.action, run: () => {
+      const back = NB.undoDeleteTopic(state, result.undo);
+      if (!commit(back.state)) return;
+      renderList(); notify(back.status);
     } });
   }
   function fillCategories(selected = "") {
-    const categories = [...new Set(state.topics.concat(state.notes.map(note => note.category).filter(Boolean)))];
+    const categories = NB.topics(state);
     els.category.value = categories.includes(selected) ? selected : "";
     const chip = (name, label) => `<button class="nb-chip" type="button" role="radio" aria-checked="${els.category.value === name}" data-topic="${esc(name)}">${esc(label)}</button>`;
-    els.chips.innerHTML = chip("", "Ohne Thema") + categories.map(name => chip(name, name)).join("")
-      + '<button class="nb-chip nb-chip-new" type="button" id="topic-new">＋ Neu</button>';
+    els.chips.innerHTML = chip("", T.noTopic) + categories.map(name => chip(name, name)).join("")
+      + `<button class="nb-chip nb-chip-new" type="button" id="topic-new">${esc(T.newTopicChip)}</button>`;
   }
   /* Topic pills (Notizbuch v18): tap a pill to choose it; "+ Neu" turns into a small text box in place —
      Fertig / Enter or tapping elsewhere adds the topic and selects it, Escape or an empty box cancels. */
@@ -224,11 +199,10 @@
     const fit = () => { input.style.width = `${Math.max(9, input.value.length + 1)}ch`; };
     const finish = keep => {
       if (done) return; done = true;
-      const name = keep ? input.value.trim() : "";
-      if (!name) { fillCategories(els.category.value); return; }
-      const existing = state.topics.concat(state.notes.map(note => note.category).filter(Boolean)).find(topic => topic.toLocaleLowerCase() === name.toLocaleLowerCase());
-      if (!existing) { state.topics.push(name); if (!persist()) { state.topics.pop(); fillCategories(els.category.value); return; } }
-      fillCategories(existing || name);
+      const added = NB.addTopic(state, keep ? input.value : "");
+      if (!added.name) { fillCategories(els.category.value); return; }
+      if (added.added && !commit(added.state)) { fillCategories(els.category.value); return; }
+      fillCategories(added.name);
     };
     input.addEventListener("input", fit);
     input.addEventListener("keydown", event => {
@@ -238,32 +212,8 @@
     input.addEventListener("blur", () => finish(true));
     fit(); pill.replaceWith(box); input.focus(); // same tap → the iPhone keyboard opens
   }
-  // Only text, paragraphs, line breaks, bold, italic and checklist state survive storage/rendering.
-  // Keep body as plain text as well, so existing search and older notes remain compatible.
-  function cleanNoteHtml(html) {
-    const template = document.createElement("template"); template.innerHTML = String(html);
-    const output = document.createElement("div");
-    function copy(node, target) {
-      if (node.nodeType === Node.TEXT_NODE) { target.append(document.createTextNode(node.textContent)); return; }
-      if (node.nodeType !== Node.ELEMENT_NODE || ["SCRIPT", "STYLE", "IFRAME", "OBJECT", "SVG", "MATH", "IMG", "BUTTON", "INPUT"].includes(node.tagName)) return;
-      const tags = { B:"strong", STRONG:"strong", I:"em", EM:"em", BR:"br", DIV:"div", P:"p", UL:"ul", LI:"li" };
-      let destination = target;
-      if (tags[node.tagName]) { destination = document.createElement(tags[node.tagName]); target.append(destination);
-        if (node.tagName === "UL") destination.setAttribute("data-checklist", "");
-        if (node.tagName === "LI") destination.setAttribute("data-checked", node.getAttribute("data-checked") === "true" ? "true" : "false");
-      }
-      // Safari may express commands as styled spans; retain only these two marks.
-      if (!['B','STRONG'].includes(node.tagName) && (node.style.fontWeight === "bold" || Number(node.style.fontWeight) >= 600)) {
-        const bold = document.createElement("strong"); destination.append(bold); destination = bold;
-      }
-      if (!['I','EM'].includes(node.tagName) && node.style.fontStyle === "italic") {
-        const italic = document.createElement("em"); destination.append(italic); destination = italic;
-      }
-      for (const child of node.childNodes) copy(child, destination);
-    }
-    for (const child of template.content.childNodes) copy(child, output);
-    return output.innerHTML;
-  }
+  // Only text, paragraphs, line breaks, bold, italic and checklist state survive storage / rendering — NotebookModel.cleanHtml
+  // (23.11: was cleanNoteHtml here, through <template>; the same result without a document). body keeps the plain text.
   function currentTask() {
     const node = window.getSelection()?.anchorNode;
     const task = (node?.nodeType === Node.ELEMENT_NODE ? node : node?.parentElement)?.closest("li");
@@ -289,18 +239,15 @@
     }
   });
   function renderTaskButtons() {
-    $("detail-body").querySelectorAll("ul[data-checklist] li").forEach(task => {
+    $("detail-body").querySelectorAll("ul[data-checklist] li").forEach((task, index) => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "nb-task-check"; button.setAttribute("role", "checkbox");
       button.setAttribute("aria-checked", String(task.getAttribute("data-checked") === "true"));
       button.setAttribute("aria-label", task.textContent.trim() || "Aufgabe");
       task.prepend(button);
       button.addEventListener("click", () => {
-        const note = state.notes.find(item => item.id === openedId); if (!note) return;
-        const before = { ...note }, checked = task.getAttribute("data-checked") === "true";
-        task.setAttribute("data-checked", String(!checked));
-        note.bodyHtml = cleanNoteHtml($("detail-body").innerHTML); note.updatedAt = Date.now();
-        if (!persist()) { Object.assign(note, before); task.setAttribute("data-checked", String(checked)); }
+        const result = NB.toggleTask(state, openedId, index, Date.now());
+        if (result.ok && commit(result.state)) task.setAttribute("data-checked", String(result.checked));
         button.setAttribute("aria-checked", task.getAttribute("data-checked"));
       });
     });
@@ -360,8 +307,8 @@
     rememberNoteSelection();
   });
   function openEditor(note = null) {
-    editingId = note?.id || null; $("form-title").textContent = note ? "Notiz bearbeiten" : "Neue Notiz";
-    els.title.value = note?.title || ""; els.sub.value = note?.sub || ""; if (note?.bodyHtml) els.body.innerHTML = cleanNoteHtml(note.bodyHtml);
+    editingId = note?.id || null; $("form-title").textContent = note ? T.editNote : T.newNote;
+    els.title.value = note?.title || ""; els.sub.value = note?.sub || ""; if (note?.bodyHtml) els.body.innerHTML = NB.cleanHtml(note.bodyHtml);
     else els.body.textContent = note?.body || "";
     normalizeTasks();
     savedNoteRange = null; fillCategories(note?.category || "");
@@ -403,7 +350,7 @@
   $("cancel-edit").addEventListener("click", goBack);
   function closeDeleteConfirm() { pendingDeleteId = null; pendingTopic = null; pendingMerge = null; $("delete-confirm").hidden = true; }
   function confirmDelete() {
-    if (pendingMerge) { const { from, to } = pendingMerge; closeDeleteConfirm(); renameTopic(from, to, true); }
+    if (pendingMerge) { const { from, to } = pendingMerge; closeDeleteConfirm(); applyTopicMove(NB.mergeTopics(state, from, to)); }
     else if (pendingTopic) deleteTopic(); else deletePending();
   }
   function deleteButtonFocus() { (pendingMerge ? $("rename-topic") : pendingTopic ? $("delete-topic") : $("delete-entry"))?.focus({ preventScroll:true }); }
@@ -411,32 +358,18 @@
   $("confirm-delete").addEventListener("click", confirmDelete);
   function deletePending() {
     if (!pendingDeleteId) return;
-    const previous = state.notes;
-    const previousTopics = state.topics;
-    const deletedNote = state.notes.find(note => note.id === pendingDeleteId);
-    state.notes = previous.filter(note => note.id !== pendingDeleteId);
-    if (deletedNote?.category && !state.notes.some(note => note.category === deletedNote.category)) {
-      state.topics = state.topics.filter(topic => topic !== deletedNote.category);
-    }
-    if (!persist()) { state.notes = previous; state.topics = previousTopics; closeDeleteConfirm(); return; }
-    closeDeleteConfirm(); openedId = null; setScreen("list", "back"); renderList(); notify("Notiz gelöscht.");
+    const result = NB.deleteNote(state, pendingDeleteId);
+    if (!commit(result.state)) { closeDeleteConfirm(); return; }
+    closeDeleteConfirm(); openedId = null; setScreen("list", "back"); renderList(); notify(result.status);
   }
   els.form.addEventListener("submit", event => {
-    event.preventDefault(); const note = { title:els.title.value.trim(), sub:els.sub.value.trim(), body:els.body.innerText.trim(), bodyHtml:cleanNoteHtml(els.body.innerHTML), category:els.category.value };
-    if (!note.title) { els.title.focus(); return; }
-    const previousNotes = state.notes.map(item => ({ ...item }));
-    const previousTopics = [...state.topics];
-    if (editingId) {
-      const existing = state.notes.find(item => item.id === editingId);
-      const previousCategory = existing?.category;
-      if (existing) Object.assign(existing, note, { updatedAt:Date.now() });
-      if (previousCategory && previousCategory !== note.category && !state.notes.some(item => item.category === previousCategory)) {
-        state.topics = state.topics.filter(topic => topic !== previousCategory);
-      }
-    }
-    else state.notes.unshift({ id:`note-${Date.now()}-${Math.random().toString(36).slice(2,7)}`, ...note, updatedAt:Date.now() });
-    if (persist()) { openedId = null; setScreen("list", "back"); renderList(); notify("Gespeichert."); }
-    else { state.notes = previousNotes; state.topics = previousTopics; }
+    event.preventDefault();
+    // body (the plain text) from the model too — the same as the editor's innerText.trim() (checked 23.11), so the site
+    // and the app store the same note
+    const isNew = !editingId && !!els.title.value.trim(); // a random part for the id only when a new note is really saved
+    const result = NB.saveNote(state, editingId, { title:els.title.value, sub:els.sub.value, html:els.body.innerHTML, category:els.category.value }, Date.now(), isNew ? Math.random().toString(36).slice(2,7) : "");
+    if (!result.ok) { els.title.focus(); return; }
+    if (commit(result.state)) { openedId = null; setScreen("list", "back"); renderList(); notify(result.status); }
   });
   window.addEventListener("message", event => {
     if (event.origin === location.origin && event.data?.type === "deutsch-notebook-delete-answer") {
