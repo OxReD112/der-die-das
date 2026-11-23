@@ -8630,8 +8630,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const lassenForm = word => lassenHistoricalForms.get(norm(word)) || word;
     async function lassenGroup(word, context, candidates, heads = LASSEN_GROUP_HEADS) {
       // (reference chat 22.11, F12-B5d, advisor 22.11: sich of «sich … lassen + infinitive» «можно» is not translated separately — the tap on
-      // sich finds the group as the tap on lässt does; only the sense canBeDone, only that sich)
-      const sichTap=heads===LASSEN_GROUP_HEADS&&norm(word)==='sich';
+      // sich finds the group as the tap on lässt does; only the sense canBeDone — and canOrAllow, the double reading (advisor 23.11) —, only that sich)
+      // (not sich's = sich + es — read as «sich es»: es is the object, sich the dative — ließen sich's wohlschmecken)
+      const sichTap=heads===LASSEN_GROUP_HEADS&&norm(word)==='sich'&&!/^(?:['’]s\b|\s+es\b)/u.test(String(context?.sentence||'').slice((context?.tokenOffset??0)+String(word).length));
       if (!context || !Number.isInteger(context.tokenOffset) || (!sichTap && !candidates.some(c=>canonicalPos(c.pos)==='Verb') && !lassenHistoricalForms.has(norm(word)) && norm(word)!==LASSEN_LET_US_PRONOUN)) return null;
       const sentence=String(context.sentence || ""),tokens=sharedTokens(sentence,'lassenGroup');
       if(!tokens.some(t=>(forms.get(norm(lassenForm(t[0])))||[]).some(e=>e.type==='Verb'&&heads.has(e.word))))return null;
@@ -9161,7 +9162,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (the two-word card wins unless the group proved «сам (упал)» — Hans ließ sich das Glas fallen: fallenlassen «уронить»)
         if(twoWordWins&&sense!=='self'&&!(sense==='letUs'&&letUsShape))continue;
         if(sense&&sense!=='letUs')linked.push(reflexiveIndex);
-        if(sichTap&&!(sense==='canBeDone'&&reflexiveIndex===clicked))continue;
+        // (advisor 23.11: the reading of sich follows the verb's — «можно» and the double «можно / позволить (себя)»)
+        if(sichTap&&!(['canBeDone','canOrAllow'].includes(sense)&&reflexiveIndex===clicked))continue;
         groups.push({id:'lassen-infinitive',...(H!=='lassen'?{head:H}:{}),...(conditionalReplacement?{conditionalPerfect:true}:{}),...(sense?{sense}:{}),...(outer!==null&&modalLemmas.has(head.base)?{outerModal:true}:{}),...(coordinated?{coordinated:coordinated.rows[0].base}:{}),label:replacement?tense+' · '+H:tense==='Futur I'||tense==='Konjunktiv II'?tense+' · '+H:H+' + Infinitiv',tense,lemma:coordinated?(secondBefore?`${coordinated.rows[0].base} und ${inner[0].base}`:`${inner[0].base} und ${coordinated.rows[0].base}`):inner[0].base,roles:[...lassen,...lexical,...helpers,...(sense==='letUs'?(forms.get(LASSEN_LET_US_PRONOUN)||[]).filter(e=>e.type==='Pronomen'&&e.word===LASSEN_LET_US_CARD):[])],
           note:{ru:(replacement?tense+' · haben + Infinitiv + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + инфинитив')+(H==='lassen'?' · значение определяется контекстом':'')+(moechteHead?' · möchte: форма Konjunktiv II от mögen; отдельная карточка möchten':''),en:(replacement?tense+' · haben + infinitive + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + infinitive')+(H==='lassen'?' · meaning depends on context':'')+(moechteHead?' · möchte: Konjunktiv II form of mögen; separate möchten card':'')},
           spans:[...new Set(linked)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
@@ -9528,7 +9530,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (group.marker && c.lemma === "zu" && canonicalPos(c.pos) === "particle")
         return {...c,construction,translation:{en:"infinitive marker",ru:"частица инфинитива"}};
       // (reference chat 22.11, F12-B5d: sich of «sich … lassen + infinitive» «можно» takes the group — not translated separately, as zu)
-      if (group.id === "lassen-infinitive" && group.sense === "canBeDone" && norm(c.lemma) === "sich" && canonicalPos(c.pos) === "Pronomen") return {...c,construction};
+      if (group.id === "lassen-infinitive" && ["canBeDone","canOrAllow"].includes(group.sense) && norm(c.lemma) === "sich" && canonicalPos(c.pos) === "Pronomen") return {...c,construction};
       // C14 (17.10.2026): with two own cards of one verb the group's role names the card it proved (ist gefahren:
       // fahren «ехать», auxiliary sein — not «водить»); an own role without an id still matches by word.
       const twinRoles = roles.filter(e => e.id && norm(e.word) === norm(c.lemma) && e.type === canonicalPos(c.pos));

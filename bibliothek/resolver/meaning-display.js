@@ -531,6 +531,7 @@
     infinitiveParticle:{ru:'Отдельно не переводится', en:'Not translated separately'},
     // (reference F12-B5d: sich of «sich … lassen» «можно» — the same text, its own type stays Reflexivpronomen)
     notTranslated:{ru:'Отдельно не переводится', en:'Not translated separately'},
+    notTranslatedOrSelf:{ru:'Отдельно не переводится / себя', en:'Not translated separately / oneself'},
     // L15 steps 2 / 3 (reference B5 addition 19.10, advisor 29.10): lassen with sich where the form proves the sense.
     lassen_canBeDone:{ru:'здесь: можно (сделать)', en:'here: can be done'},
     lassen_canOrAllow:{ru:'здесь: можно (сделать) / позволить (себя)', en:'here: can be done / let oneself be …'},
@@ -741,7 +742,9 @@
         const headVerb = k.head || 'lassen';
         if (own === headVerb) return {marks:[ownTense ? `${ownTense} mit ${name}` : `mit ${name}`], role:k.sense ? `lassen_${k.sense}` : null, spans};
         // (reference chat 22.11, F12-B5d: sich of «можно» is not translated separately, as zu — Das lässt sich leicht machen)
+        // (advisor 23.11: the reading of sich follows the verb's — the double «можно / позволить (себя)» gives the double one)
         if (k.sense === 'canBeDone' && own === 'sich') return {marks:[], role:'notTranslated', spans};
+        if (k.sense === 'canOrAllow' && own === 'sich') return {marks:[], role:'notTranslatedOrSelf', spans};
         // (L15 step 4, reference F12-B5j: uns of lass uns keeps its own card «нас» with a line under it — see cardCore)
         if (k.sense === 'letUs' && candidate.item?.type === 'Pronomen') return {marks:[], role:null, spans};
         // (advisor 29.10, reference F12-B5a / B5c: the infinitive under lassen shows «mit lassen» — a simple tense only on ließ / lässt,
