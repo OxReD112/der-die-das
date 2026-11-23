@@ -5184,6 +5184,26 @@ function apostropheText(text) {
         clauseNounFacts.set(key,facts.rows.map(r => ({number:r.number,gender:r.gender,cases:[...(r.cases || [])]})));
       }));
     }
+    // (advisor 23.11, source audit A5) the participle facts of the tapped word for the sync row participle-adjective, prepared in
+    // the async stage like the noun facts: which external verbs the word is the past participle of (externalParticipleLemmas — the
+    // English dictionary «past participle of …», never a present form: bedeckt «covers») and each such verb's Perfekt auxiliaries from
+    // the dictionary (perfectAuxiliaries: Kaikki and the light records). Only when our adjective card of that spelling meets an
+    // external verb reading; the key is the word — the facts do not depend on the sentence. A failed load is not kept.
+    const participleVerbFacts = new Map();
+    async function grammarParticipleFacts(word, candidates) {
+      const key = norm(word);
+      if (participleVerbFacts.has(key) || !candidates.some(c => c.source === "main" && canonicalPos(c.pos) === "Adjektiv" && norm(c.lemma) === key) ||
+          !candidates.some(c => c.source !== "main" && canonicalPos(c.pos) === "Verb")) return;
+      let facts;
+      try { facts = await lexicalLookup(word,'participleFacts'); } catch (_) { return; }
+      const lemmas = await externalParticipleLemmas(word,facts,'participleFacts');
+      const auxiliaries = new Map();
+      for (const lemma of lemmas) {
+        try { auxiliaries.set(lemma,((await fallback.perfectAuxiliaries?.(lemma)) || []).map(norm)); } catch (_) { return; }
+      }
+      if (participleVerbFacts.size > 4096) participleVerbFacts.clear();
+      participleVerbFacts.set(key,auxiliaries);
+    }
     let preparation = null;
     const DA_PARTICLES = ["darüber","darunter","davor","dahinter","daran","darauf","darin","daraus","dazwischen","davon","dahin","daher","dabei","dafür","dagegen","daneben"];
     function prepareSeparable() {
@@ -15952,7 +15972,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // or a possible finite reading in a clause without another finite verb.
       'participle-adjective'(f) {
         const {tokens,index,word} = f;
-        const participleOf = c => c.item && norm(String(c.item.perfect_form || "").split(/\s+/u).pop()) === norm(word);
+        // (advisor 23.11, source audit A5) every verb reading needs a known participle and a known auxiliary, from any source: our card —
+        // perfect_form and auxiliary; an external verb — the facts of the async stage (externalParticipleLemmas, perfectAuxiliaries).
+        // An external verb whose dictionary gives no auxiliary or both (haben and sein) is not decided here: the reading stays open.
+        const externalFacts = participleVerbFacts.get(norm(word));
+        const auxiliaryOf = c => {
+          if (c.source === "main") return c.item && norm(String(c.item.perfect_form || "").split(/\s+/u).pop()) === norm(word) ? (c.item.auxiliary === "sein" ? "sein" : "haben") : null;
+          const aux = externalFacts?.get(norm(c.lemma).replace(/^sich\s+/u,""));
+          return aux && aux.length === 1 ? aux[0] : null;
+        };
+        const participleOf = c => auxiliaryOf(c) !== null;
         const adjectives = f.adjectives.filter(c => c.source === "main" && norm(c.lemma) === norm(word));
         const verbs = f.candidates.filter(c => canonicalPos(c.pos) === "Verb");
         // L27 (links to-do, 20.10.2026): an external noun reading of a lowercase word inside the sentence (gelassen —
@@ -15977,8 +16006,28 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // L27: sein right at the participle is its own auxiliary (so gut ausgelernt hatten und so geschickt waren) — a haben
         // form of the other verb in the segment does not prove a Perfekt of this one.
         const seinAt = i => i >= 0 && i < tokens.length && SEIN_FINITE_OR_GEWESEN.test(norm(tokens[i][0]));
-        if (verbs.some(c => c.item?.auxiliary !== "sein") && !seinAt(index+1) &&
+        if (verbs.some(c => auxiliaryOf(c) !== "sein") && !seinAt(index+1) &&
             tokens.slice(left,right+1).some((t,k) => left+k !== index && haben.test(norm(t[0])))) return undefined;
+        // (advisor 23.11, source audit A5) the same for a sein-verb: a finite sein form in the part may close its Perfekt (Daraus ist ein
+        // Streit erwachsen — erwachsen, sein) — not decided here, as a haben form for a haben-verb.
+        // (A5, Mac run w256: deren Türen von dekorierten Trumeaus getrennt sind) an agent von / vom before the participle in its part is a
+        // sign of the passive (sein + participle: the state of a passive) — not decided here, the reading stays open.
+        // (regression l34: von Natur aus geschickt) von … aus is the circumposition of origin (von Natur aus, von Haus aus, von sich aus),
+        // never the agent: a von closed by aus before the participle is not the sign.
+        // An adjective card that takes the agent (von_agent_ok: von allen geachtet, L34) keeps it.
+        // The sign: a von after the finite sein (war von allen …), in a verb-final part (deren Türen von … getrennt sind) or opening a
+        // verb-second clause (Von seinen Eltern war er getrennt); a von-group right after a noun before that sein belongs to the noun.
+        const isSein = k => SEIN_FINITE_WORD.test(norm(tokens[k][0]));
+        if (adjectives.every(c => !c.item?.von_agent_ok) && tokens.slice(left,index).some((t,d) => {
+          const k = left+d;
+          if (!/^(?:von|vom)$/u.test(norm(t[0])) || tokens.slice(k+1,index).some(u => norm(u[0]) === "aus")) return false;
+          // (advisor 23.11) before the finite sein of a verb-second clause only a von-group right after a noun is no sign — it belongs to that
+          // noun (Die Rede vom Präsidenten war …); a von-group opening the clause is (Von seinen Eltern war er getrennt — the window)
+          if (tokens.slice(k+1,index).some((_,e) => isSein(k+1+e))) return !(k > left && /^\p{Lu}/u.test(tokens[k-1][0]));
+          return tokens.slice(left,k).some((_,e) => isSein(left+e)) || tokens.slice(index+1,right+1).some((_,e) => isSein(index+1+e));
+        })) return undefined;
+        if (verbs.some(c => auxiliaryOf(c) === "sein") &&
+            tokens.slice(left,right+1).some((t,k) => left+k !== index && SEIN_FINITE_WORD.test(norm(t[0])))) return undefined;
         // The other finite verb must stand inside the same comma segment
         // (…, das Arbeitgeber zur Lohnfortzahlung verpflichtet.).
         // A word right before a capital is attributive (bei berechtigten Zweifeln).
@@ -17714,6 +17763,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
       await grammarHeads(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       await grammarNounFacts(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
+      await grammarParticipleFacts(word,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const roleRank = await sharedRoleRank(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const grammatical = roleRank || grammarRank(word, context, candidates.filter(c => !c.reflexiveUnconfirmed), inflections);
       const ranked = contextualRank(word, context, grammatical.candidates);
