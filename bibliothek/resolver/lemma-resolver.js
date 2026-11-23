@@ -16517,7 +16517,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (advisor 19.11, trap of the chat of tests: das Rote Meer) a capital word inside the sentence with an adjective ending, right before a
     // capital noun, is the attributive adjective of a name (das Rote Meer, das Schwarze Brett, der Alte Fritz) — our adjective card, not an
     // external noun of the spelling; alone it stays the noun (das Rote, der Stille)
-    function capitalAttributive(word, context, result) {
+    async function capitalAttributive(word, context, result) {
       const w = String(word || ""), list = result?.candidates || [];
       if (!result || !/^\p{Lu}\p{Ll}+(?:e|en|er|es|em)$/u.test(w) || !midSentenceCapital(w, context)) return result;
       const adjective = list.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Adjektiv' && !c.construction);
@@ -16525,22 +16525,54 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const stem = norm(adjective[0].lemma);
       if (!/^(?:e|en|er|es|em)$/u.test(norm(w).slice(stem.length)) || !norm(w).startsWith(stem)) return result;
       const next = /^\s+(\p{Lu}\p{Ll}+)(?![\p{L}\p{M}-])/u.exec(String(context.sentence || '').slice(context.tokenOffset + w.length));
-      if (!next || !(forms.get(norm(next[1])) || []).some(e => e.type === 'Nomen')) return result;
+      if (!next) return result;
+      // (advisor 22.11, source audit B5) the noun after it — its gender / number from nounFactsAt: our card, the light record, the English
+      // dictionary, one logic (was forms.get, our cards only)
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'capitalAttributive');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,w);
+      if (at < 0 || !tokens[at+1] || tokens[at+1][0] !== next[1]) return result;
+      const facts = await nounFactsAt(tokens,at+1,'capitalAttributive');
+      if (!facts?.rows.length) return result;
       // (count 19.11) not an expression or a group the word belongs to (im Stillen Recht); the determiner before it, or without one the strong
       // ending, agrees with the noun after it — dem Kleinen Angst, den Betroffenen Orientierung, eine Halbe Wein, sich Kriminelle Zugang are
       // a noun and its object
       if (list.some(c => c.construction || ['Ausdruck','expression'].includes(c.pos)) || result.selected && ['Ausdruck','expression'].includes(result.selected.pos)) return result;
-      const nounKinds = new Set((forms.get(norm(next[1])) || []).filter(e => e.type === 'Nomen').flatMap(e => {
-        const plural = String(e.plural || '').split(/\s*,\s*/u).map(norm).includes(norm(next[1])) && norm(e.word) !== norm(next[1]);
-        const singular = norm(e.word) === norm(next[1]) || !plural;
-        return [...(singular ? String(e.article || '').split(/\s*\/\s*/u).map(a => ({der:'m',die:'f',das:'n'})[a.trim()]).filter(Boolean) : []), ...(plural ? ['pl'] : [])];
-      }));
+      const nounKinds = new Set(facts.rows.map(r => r.number === 'plural' ? 'pl' : {masculine:'m',feminine:'f',neuter:'n'}[r.gender]).filter(Boolean));
       const before = (/([\p{L}]+)\s+$/u.exec(String(context.sentence || '').slice(0, context.tokenOffset)) || [])[1] || '';
       const DET = {der:['m','f','pl'],die:['f','pl'],das:['n'],dem:['m','n'],den:['m','pl'],des:['m','n'],im:['m','n'],am:['m','n'],zum:['m','n'],vom:['m','n'],
         beim:['m','n'],zur:['f'],ins:['n'],ein:['m','n'],eine:['f'],einem:['m','n'],einen:['m'],einer:['f'],eines:['m','n']};
       const STRONG = {e:['f','pl'],er:['m','f','pl'],es:['n'],en:['m','n','pl'],em:['m','n']};
-      const ending = norm(w).slice(stem.length), det = DET[norm(before)];
+      // (B5, count 23.11: a declined word before it that is no determiner — den Kaiserlichen Wachen Befehl gab, den beiden Kleinen
+      // Kreuzern — puts the determiner further back; then the word may as well be a noun of the group (die Wachen) with the noun after it
+      // its object: by form both, no decision)
+      if (!DET[norm(before)] && /^\p{L}+(?:e|en|er|es|em)$/u.test(before) && !/^(?:der|die|das|dem|den|des|ein\p{Ll}*|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|eure?\p{Ll}*|dies\p{Ll}*|jen\p{Ll}*|jede\p{Ll}*|alle\p{Ll}*)$/u.test(norm(before))) return result;
+      const ending = norm(w).slice(stem.length);
+      // (B5, the weak ending after a definite article: -e only in the singular — die Alte Koffer is not the plural die Alten Koffer)
+      const det = DET[norm(before)] && (ending === 'e' && /^(?:der|die|das|dem|den|des|im|am|zum|vom|beim|zur|ins)$/u.test(norm(before)) ?
+        DET[norm(before)].filter(k => k !== 'pl') : DET[norm(before)]);
       const fits = kinds => [...nounKinds].some(k => kinds.includes(k));
+      // (B5, tests chat / advisor 23.11, variant A) without a preposition before the determiner a dative determiner may be the case of the
+      // word itself as a noun with the noun after it its object — Er gab dem Alten Brot, Sie gab der Kleinen Milch, Sie zeigte der Kleinen
+      // Blumen: dem / einem / -em, den / -en + a plural noun → no decision; der / einer / -er (dative or genitive) → the name only right
+      // after a noun (a genitive attribute: Vollzug der Heiligen Messe) or, for der, before a masculine singular noun (only the nominative:
+      // Der Kleine Sauerampfer wächst, der Heilige Geist kam). After a preposition the noun after the word is the head of its group — as before.
+      const dIndex = at-1, determinerWord = norm(before);
+      const afterPreposition = dIndex > 0 && !!prepositionCardsByForm.get(norm(tokens[dIndex-1][0])) && /^\s+$/u.test(sentence.slice(tokens[dIndex-1].index+tokens[dIndex-1][0].length,tokens[dIndex].index));
+      const contraction = /^(?:im|am|zum|vom|beim|zur|ins)$/u.test(determinerWord);
+      if (before && !afterPreposition && !contraction) {
+        const possessive = /^(?:mein|dein|sein|ihr|unser|eur|euer)(?:e|en|em|er|es)?$/u.test(determinerWord) || /^(?:kein|dies|jen|jed|all)(?:e|en|em|er|es)$/u.test(determinerWord);
+        const tail = possessive ? (determinerWord.match(/(em|en|er)$/u) || [])[1] : null;
+        if (['dem','einem'].includes(determinerWord) || tail === 'em') return result;
+        if ((determinerWord === 'den' || tail === 'en') && nounKinds.has('pl')) return result;
+        if (['der','einer'].includes(determinerWord) || tail === 'er') {
+          const prev = dIndex > 0 ? tokens[dIndex-1][0] : '';
+          const gap = dIndex > 0 ? sentence.slice(tokens[dIndex-1].index+tokens[dIndex-1][0].length,tokens[dIndex].index) : '';
+          const afterNoun = /^\p{Lu}/u.test(prev) && /^\s+$/u.test(gap) && dIndex-1 > 0 && !/[.!?:»«"“„]\s*$/u.test(sentence.slice(0,tokens[dIndex-1].index)) &&
+            !/^(?:der|die|das|dem|den|des)$/u.test(norm(prev));
+          const nominative = determinerWord === 'der' && nounKinds.has('m') && ending === 'e';
+          if (!afterNoun && !nominative) return result;
+        }
+      }
       if (det ? !fits(det) : !/^(?:der|die|das|dem|den|des|ein\p{Ll}*|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|eure?\p{Ll}*|dies\p{Ll}*|jen\p{Ll}*|jede\p{Ll}*|alle\p{Ll}*)$/u.test(norm(before)) && !fits(STRONG[ending] || [])) return result;
       const chosen = adjective[0];
       return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',
