@@ -83,6 +83,8 @@
           ...(nominalUsage(input.usage) ? {usage:nominalUsage(input.usage)} : {}),
           // a compound by parts (no dictionary entry): the article of its last part, as in the popup (advisor 03.11)
           ...(input.dictionaryId == null && input.formation?.kind === "compound" && /^(?:der|die|das)$/u.test(input.formation.gender || "") ? {article:input.formation.gender} : {}),
+          // 23.11 (Alena): a noun only Wiktionary knows keeps the article the popup shows («die Geiß», meaning-display.js)
+          ...(input.dictionaryId == null && input.source === "fallback" && input.pos === "noun" && /^(?:der|die|das)$/u.test(input.headingArticle || input.nounArticle || "") ? {article:input.headingArticle || input.nounArticle} : {}),
           createdAt:now, occurrences:[]
         };
         const existing = record.occurrences.findIndex(o => o.chapterIndex === encountered.chapterIndex && o.paragraphIndex === encountered.paragraphIndex && o.tokenOffset === encountered.tokenOffset);

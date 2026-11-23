@@ -956,7 +956,14 @@
       const kind = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphKinds?.[i] : "p";
       const p = document.createElement(/^h[1-6]$/.test(kind || "") ? kind : "p");
       p.dataset.paragraph = String(i);
-      const layout = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphLayout?.[i] : null;
+      let layout = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphLayout?.[i] : null;
+      // 23.11 (Alena): a pasted text keeps its single line breaks (a letter, a poem) the way an EPUB keeps <br>: the
+      // newline becomes a space (same length — offsets, highlights and marks stay) and a <br> follows it. TXT files
+      // do not: their lines are often cut every ~70 characters.
+      if (!hasChapters(book) && book.name === "Pasted text" && paragraph.includes("\n")) {
+        const lineBreaks = [...paragraph.matchAll(/\n/gu)].map(match => match.index);
+        paragraph = paragraph.replace(/\n/gu, " "); layout = { lineBreaks };
+      }
       if (layout?.align === "center" || layout?.align === "right") p.classList.add(`book-align-${layout.align}`);
       // Paragraph layout from the EPUB (D23 step 2): scene break, quotation / letter, verse lines of a poem.
       for (const [field, name] of [["gapBefore", "book-gap-before"], ["quote", "book-quote"], ["quoteEnd", "book-quote-end"], ["verse", "book-verse-line"], ["stanzaStart", "book-stanza-start"], ["verseEnd", "book-verse-end"], ["pre", "book-pre"], ["note", "book-note"], ["noteStart", "book-note-start"]]) if (layout?.[field] === true) p.classList.add(name);
@@ -2087,6 +2094,11 @@
     closePopups();
     if (currentBook) {
       clearTimeout(window.__readingSaveTimer);
+      // 23.11 (Alena): a text without chapters on one page is seen whole when opened — it is «Gelesen» once you go
+      // back to the library from it (a longer one, as before, on reaching its last page)
+      if (!hasChapters(currentBook) && pagination.count === 1 && $text.querySelector("[data-paragraph]") && !currentBook.completed) {
+        currentBook.readingStarted = true; currentBook.completed = true;
+      }
       await updateProgress(currentBook, restoringPosition ? currentBook.position : visibleParagraph());
     }
     vocabularyHighlights.cancel();

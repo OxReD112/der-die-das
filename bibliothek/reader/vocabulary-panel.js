@@ -330,7 +330,7 @@
           review.addEventListener("click", () => open(review));
           $("chapter-end").prepend(review);
           $("chapter-end").hidden = false;
-        } else if (!book.chapters?.length) $("chapter-end").hidden = true;
+        } // 23.11 (Alena): a text without chapters keeps its end («Ende») without marked words too — no else branch here
         if (dialog.open) render();
       } catch (error) {
         if (request === countRun) {

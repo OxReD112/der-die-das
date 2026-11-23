@@ -4,7 +4,10 @@
   const PENDING = "deutschWortschatzPendingReadingWordsV2";
   function display(record, resolver) {
     const item=record.dictionaryId != null ? resolver.entry(record.dictionaryId) : null;
-    return `${item?.article ? item.article+' ' : ''}${record.lemma || record.occurrences[0].form}`;
+    // 23.11 (Alena): as in Meine Wörter — a noun with its capital letter and its article (also one only Wiktionary knows)
+    const base=record.lemma || record.occurrences[0].form, noun=!!item?.article || /^(?:noun|nomen)$/iu.test(record.pos || '');
+    const article=item?.article || (/^(?:der|die|das)$/u.test(record.article || '') ? record.article : '');
+    return `${article ? article+' ' : ''}${noun ? base.charAt(0).toLocaleUpperCase('de-DE')+base.slice(1) : base}`;
   }
   function copyText(records,resolver,lang,title) {
     const lines = [title,'',...records.map(record=>{
