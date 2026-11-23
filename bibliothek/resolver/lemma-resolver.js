@@ -23411,18 +23411,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // stands after the reflexive pronoun in the same part: mir / dir / ihm / ihnen; dem / einem / meinem … + noun; der / einer / meiner …
     // + a noun of an own feminine card (der Polizei — a feminine noun after der is no subject) — not inside a prepositional group, not a
     // genitive right after a noun. Er stellte sich der Polizei → «сдаться»; Er stellte sich ans Fenster → «встать», as before.
+    // (advisor 22.11, audit A6) where the pairs' marks of a selected candidate live: our card (item), or our light record laid over an
+    // external reading (complements, reflexive and both lines of the record); Kaikki alone — none
+    function ourPairSource(c) {
+      if (!c) return null;
+      if (c.source === "main") return c.item || null;
+      if (c.light == null || !Array.isArray(c.complements) && !(c.reflexive && typeof c.reflexive === "object")) return null;
+      const rec = lightByWordPos.get(`${norm(c.lemma || "")}|${c.pos}`) || null;
+      return {complements:c.complements || [], reflexive:c.reflexive, translation_ru:rec?.translation_ru || c.translation?.ru || "",
+        translation_en:rec?.translation_en || c.translation?.en || ""};
+    }
     async function dativeSenseFirst(word, context, result) {
-      const c = result?.selected;
-      if (!c || c.source !== "main" || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || c.construction?.id !== "reflexive-verb") return result;
-      const marks = (c.item?.complements || []).filter(x => x && String(x.pattern || "").trim() === "Dativ" && x.meaning_ru);
+      const c = result?.selected, item = ourPairSource(c);
+      // (advisor 22.11, audit A6: a light record's dative marks too)
+      if (!c || !item || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || c.construction?.id !== "reflexive-verb") return result;
+      const marks = (item.complements || []).filter(x => x && String(x.pattern || "").trim() === "Dativ" && x.meaning_ru);
       if (!marks.length) return result;
-      const ru = String(c.item?.translation_ru || "").split(";").map(x => x.trim()).filter(Boolean);
+      const ru = String(item.translation_ru || "").split(";").map(x => x.trim()).filter(Boolean);
       // (advisor 16.11: every dative meaning comes first, in the card's order — «сдаться (полиции); принять (вызов), ответить (на вопросы)»;
       // the meanings are not reordered by frequency, user's decision)
       const indices = ru.map((m, i) => marks.some(x => String(x.meaning_ru).trim() === m) ? i : -1).filter(i => i >= 0);
       const index = indices[0];
       // (22.11, Alena: every language by its own marks — the English marked meanings not first move even when the Russian ones are)
-      const enMarkedEarly = markedSenses(c.item?.translation_en, marks, "all", "en");
+      const enMarkedEarly = markedSenses(item.translation_en, marks, "all", "en");
       if (!indices.length || indices.every((i, n) => i === n) && !(enMarkedEarly?.first > 0 || enMarkedEarly?.several)) return result;
       const sentence = String(context?.sentence || ""), tokens = sharedTokens(sentence,'dativeSenseFirst');
       const pronoun = c.construction.pronoun, p = tokens.findIndex(t => t.index === pronoun?.start);
@@ -23449,10 +23460,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       if (!sure) return result;
       // (Alena 22.11: the English places by the rows' own marks — meaning_en)
-      const enMarked = markedSenses(c.item?.translation_en, marks, "all", "en");
+      const enMarked = markedSenses(item.translation_en, marks, "all", "en");
       const enAt = enMarked?.several || (Number.isInteger(enMarked?.first) ? [enMarked.first] : null);
       const selected = {...c, senseFirst:index, sensesFirst:indices, senseFirstEn:enAt ? enAt[0] : 0,
-        ...(enAt ? {sensesFirstEn:enAt} : {}), senseEvidence:"dative-object", senseMark:senseMarkOf(c.item, {field:"item", rows:marks, mode:"all"})};
+        ...(enAt ? {sensesFirstEn:enAt} : {}), senseEvidence:"dative-object", senseMark:senseMarkOf(item, {field:c.source === "main" ? "item" : "light", rows:marks, mode:"all"})};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
         candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
@@ -23525,7 +23536,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     async function governedSenseFirst(word, context, result) {
       const c = result?.selected;
-      if (!c || c.source !== "main" || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || !Number.isInteger(context?.tokenOffset)) return result;
+      // (advisor 22.11, audit A6: the pairs' marks of a light record — our dictionary — too, by the same path as the cards' meaning marks;
+      // Kaikki has no pairs by meaning — nothing for it)
+      const item = ourPairSource(c);
+      if (!c || !item || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || !Number.isInteger(context?.tokenOffset)) return result;
       await loadImpersonalPairs();
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'governedSenseFirst');
       const at = clickedTokenIndex(tokens, context.tokenOffset, word);
@@ -23546,19 +23560,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       };
       // (Alena 22.11: the English place by the row's own mark — meaning_en; the first English meaning it marks, as the Russian one)
       const enOf = text => markedSenses(text, [row], "first", "en")?.first ?? 0;
-      const field = c.construction?.id === "reflexive-verb" && c.item?.reflexive && typeof c.item.reflexive === "object" ? c.item.reflexive : null;
+      const field = c.construction?.id === "reflexive-verb" && item.reflexive && typeof item.reflexive === "object" ? item.reflexive : null;
       if (field && Array.isArray(field.complements)) {
         const k = pick(field.translation_ru, field.complements, field.translation_en);
         if (k >= 0) {
           const selected = {...c, fieldSenseFirst:k, fieldSenseFirstEn:enOf(field.translation_en), senseEvidence:"government",
-            senseMark:senseMarkOf(c.item, {field:"reflexive", rows:[row], mode:"first"})};
+            senseMark:senseMarkOf(item, {field:"reflexive", rows:[row], mode:"first"})};
           return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
         }
       }
-      const k = pick(c.item?.translation_ru, c.item?.complements, c.item?.translation_en);
+      const k = pick(item.translation_ru, item.complements, item.translation_en);
       if (k < 0) return result;
-      const selected = {...c, senseFirst:k, senseFirstEn:enOf(c.item?.translation_en), senseEvidence:"government",
-        senseMark:senseMarkOf(c.item, {field:"item", rows:[row], mode:"first"})};
+      const selected = {...c, senseFirst:k, senseFirstEn:enOf(item.translation_en), senseEvidence:"government",
+        senseMark:senseMarkOf(item, {field:c.source === "main" ? "item" : "light", rows:[row], mode:"first"})};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
     async function stateAlternative(word, context, result) {
