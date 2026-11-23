@@ -1344,6 +1344,15 @@
     "pattern": "nach + Dativ",
     "note_ru": "стремление, тяга к чему-либо: der Drang nach Freiheit",
     "note_en": "urge for something: der Drang nach Freiheit"
+   },
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS: „Es gibt keinen inwendigen Drang an sich, etwas zu erfinden.“; „außer dem Drang, Reize zu suchen“",
+    "source_kind": "dwds",
+    "meaning_ru": "стремление, тяга, порыв",
+    "meaning_en": "urge, drive, impulse",
+    "note_ru": "+ инфинитив с zu: Sie hatte den Drang, etwas zu sagen. — Её так и тянуло что-то сказать.",
+    "note_en": "+ zu-infinitive: Sie hatte den Drang, etwas zu sagen. — She had the urge to say something."
    }
   ],
   "translation_ru": "напор, натиск; стремление, тяга, порыв"
@@ -2574,5 +2583,216 @@
   "pos": "pron",
   "translation_ru": "диал. ему, его",
   "translation_en": "dial. him"
+ },
+ {
+  "id": "light-0286",
+  "word": "Befehl",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS (1, bindender Auftrag): sie hatten den Befehl, die Stadt zu verteidigen",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Die Soldaten hatten den Befehl, die Brücke zu bewachen. — У солдат был приказ охранять мост.",
+    "note_en": "+ zu-infinitive: Die Soldaten hatten den Befehl, die Brücke zu bewachen. — The soldiers had orders to guard the bridge."
+   }
+  ]
+ },
+ {
+  "id": "light-0287",
+  "word": "Ehre",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS (1): ich habe noch nicht die Ehre gehabt, ihn persönlich kennenzulernen; (3) es ist mir eine Ehre, Sie begleiten zu dürfen",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Ich hatte die Ehre, ihn persönlich kennenzulernen. — Мне выпала честь познакомиться с ним лично.",
+    "note_en": "+ zu-infinitive: Ich hatte die Ehre, ihn persönlich kennenzulernen. — I had the honour of meeting him in person."
+   }
+  ]
+ },
+ {
+  "id": "light-0288",
+  "word": "Trieb",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS 2 („Antrieb, Verlangen, etw. zu tun“): „er fühlte einen (starken) Trieb, den Notleidenden zu helfen“",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Er folgte dem Trieb, zu helfen. — Он последовал порыву помочь.",
+    "note_en": "+ zu-infinitive: Er folgte dem Trieb, zu helfen. — He followed the impulse to help."
+   }
+  ]
+ },
+ {
+  "id": "light-0289",
+  "word": "Courage",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS: „jmdm. fehlt die (richtige) Courage, etw. zu tun“",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Ihr fehlte die Courage, Nein zu sagen. — Ей не хватило смелости сказать «нет».",
+    "note_en": "+ zu-infinitive: Ihr fehlte die Courage, Nein zu sagen. — She lacked the nerve to say no."
+   }
+  ]
+ },
+ {
+  "id": "light-0290",
+  "word": "Dreistigkeit",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS (Die Zeit 2013): Es ist eigentlich eine Dreistigkeit, uns in diese Ecke zu drängen.",
+    "source_kind": "dwds",
+    "source_weak": "es ist eine Dreistigkeit, … zu (сказуемое с es)",
+    "note_ru": "+ инфинитив с zu: Es ist eine Dreistigkeit, so etwas zu behaupten. — Утверждать такое — наглость.",
+    "note_en": "+ zu-infinitive: Es ist eine Dreistigkeit, so etwas zu behaupten. — It's a cheek to claim such a thing."
+   }
+  ]
+ },
+ {
+  "id": "light-0291",
+  "word": "Weisung",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS: er hatte (die) Weisung, niemanden durchzulassen; mit der Weisung, in ihren Dienst zurückzukehren",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Der Wächter hatte die Weisung, niemanden hereinzulassen. — У охранника было указание никого не впускать.",
+    "note_en": "+ zu-infinitive: Der Wächter hatte die Weisung, niemanden hereinzulassen. — The guard had instructions to let nobody in."
+   }
+  ]
+ },
+ {
+  "id": "light-0292",
+  "word": "Auflage",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS (3, Bedingung): er wurde mit der Auflage entlassen, sich alle drei Tage zu melden",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Er bekam die Auflage, sich jede Woche zu melden. — Ему предписали отмечаться каждую неделю.",
+    "note_en": "+ zu-infinitive: Er bekam die Auflage, sich jede Woche zu melden. — He was required to report every week."
+   }
+  ]
+ },
+ {
+  "id": "light-0293",
+  "word": "Befugnis",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS (1): jmd. hat, erhält, nimmt sich die Befugnis, etw. zu tun",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Er hat nicht die Befugnis, das zu entscheiden. — Он не уполномочен это решать.",
+    "note_en": "+ zu-infinitive: Er hat nicht die Befugnis, das zu entscheiden. — He has no authority to decide that."
+   }
+  ]
+ },
+ {
+  "id": "light-0294",
+  "word": "Vollmacht",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS (1): sie hat von ihm Vollmacht bekommen, etw. zu tun; Def.: Ermächtigung, etw. an seiner Stelle zu tun",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Sie hat die Vollmacht, den Vertrag zu unterschreiben. — У неё есть доверенность на подписание договора.",
+    "note_en": "+ zu-infinitive: Sie hat die Vollmacht, den Vertrag zu unterschreiben. — She has power of attorney to sign the contract."
+   }
+  ]
+ },
+ {
+  "id": "light-0295",
+  "word": "Order",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "Kaikki (пример): Der Chef telefoniert mit seiner Frau. Ich habe strenge Order, keinen ins Büro zu lassen.",
+    "source_kind": "kaikki",
+    "note_ru": "+ инфинитив с zu: Ich habe Order, niemanden hereinzulassen. — У меня приказ никого не впускать.",
+    "note_en": "+ zu-infinitive: Ich habe Order, niemanden hereinzulassen. — I have orders to let nobody in."
+   }
+  ]
+ },
+ {
+  "id": "light-0296",
+  "word": "Wink",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "Kaikki (пример): […] so gab er mir einen Wink, dem gnädigen Fräulein den Vorfall zu rapportieren.",
+    "source_kind": "kaikki",
+    "note_ru": "+ инфинитив с zu: Er gab mir einen Wink, zu schweigen. — Он сделал мне знак молчать.",
+    "note_en": "+ zu-infinitive: Er gab mir einen Wink, zu schweigen. — He gave me a sign to keep quiet."
+   }
+  ]
+ },
+ {
+  "id": "light-0297",
+  "word": "Brauch",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "DWDS (Korpus): Uralt ist daher auch der Brauch seefahrender Völker, ihre Toten ins Meer zu versenken.",
+    "source_kind": "dwds",
+    "note_ru": "+ инфинитив с zu: Der Brauch, zu Ostern Eier zu bemalen, ist sehr alt. — Обычай расписывать яйца на Пасху очень древний.",
+    "note_en": "+ zu-infinitive: Der Brauch, zu Ostern Eier zu bemalen, ist sehr alt. — The custom of painting eggs at Easter is very old."
+   }
+  ]
+ },
+ {
+  "id": "light-0298",
+  "word": "Manie",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "Kaikki (пример): Er hat diese Manie, immer alle Fenster zu überprüfen, bevor er nach draußen geht.",
+    "source_kind": "kaikki",
+    "note_ru": "+ инфинитив с zu: Er hat die Manie, alles aufzuschreiben. — У него мания всё записывать.",
+    "note_en": "+ zu-infinitive: Er hat die Manie, alles aufzuschreiben. — He has a mania for writing everything down."
+   }
+  ]
+ },
+ {
+  "id": "light-0299",
+  "word": "Entscheid",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "Kaikki (пример): Meinen Entscheid, Skilehrer in Zermatt zu werden, habe ich nie bereut.",
+    "source_kind": "kaikki",
+    "note_ru": "+ инфинитив с zu: Der Entscheid, die Schule zu schließen, kam überraschend. — Решение закрыть школу было неожиданным.",
+    "note_en": "+ zu-infinitive: Der Entscheid, die Schule zu schließen, kam überraschend. — The decision to close the school came as a surprise."
+   }
+  ]
+ },
+ {
+  "id": "light-0300",
+  "word": "Prokura",
+  "pos": "noun",
+  "complements": [
+   {
+    "pattern": "zu + Infinitiv",
+    "source": "Kaikki (пример): Beobachter, die es gut mit Boer meinen, sagen, sie bekomme damit endlich die Prokura, den Laden vollends auf den Kopf zu stellen.",
+    "source_kind": "kaikki",
+    "note_ru": "+ инфинитив с zu: Sie hat Prokura, Verträge zu unterschreiben. — У неё есть полномочия (прокура) подписывать договоры.",
+    "note_en": "+ zu-infinitive: Sie hat Prokura, Verträge zu unterschreiben. — She has power of procuration to sign contracts."
+   }
+  ]
  }
 ]

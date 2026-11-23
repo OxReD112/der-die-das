@@ -7348,9 +7348,16 @@ function apostropheText(text) {
       // ändern war, und suchte …; was sie zu tun hatten, und hingen …)
       if (COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[end+1]?.[0])) && !/[,;:.!?…–—]/u.test(clause.sentence.slice(tokens[end].index + tokens[end][0].length, tokens[end+1]?.index ?? 0)) && (verbs(end+2).length && !DERIVED_KONJ1.has(norm(tokens[end+2]?.[0] ?? "")) || norm(tokens[end+2]?.[0]) === "zu")) return null;
       const heads = indices.flatMap(i=>verbs(i).filter(e=>ZU_CONSTRUCTION_HEADS.includes(e.word) && finite(e,i)).map(e=>({i,e})));
-      const nounComplements = new Set(["lust","zeit","angst","gelegenheit","möglichkeit","recht","grund","chance","mut","erlaubnis","plan","absicht","wunsch","interesse","freude","problem","schwierigkeit","geld",
-        // (review 03.11, item 4: noun + zu-infinitive with sein too — im Begriff sein, meine Aufgabe ist, die Pflicht haben)
-        "pflicht","aufgabe","ahnung","begriff"]);
+      // (WN 222, advisor 23.11: the nouns with their own zu-infinitive are data — «zu + Infinitiv» in the complements of our noun card or
+      // light record (Lust, Zeit, Angst, Gelegenheit, Recht, Pflicht, Aufgabe … 80 pairs); the word list of the code is gone. The inflected
+      // form by the card's forms, else the stem without a case ending — the old dative in -e too (im Begriffe, im Grabe))
+      const zuInfinitiveOf = list => (list || []).some(c => /^zu\s*\+\s*Infinitiv\b/u.test(String(c?.pattern || "").trim()));
+      const nounZuInfinitive = i => {
+        if (!/^\p{Lu}/u.test(tokens[i][0]) || /^(?:Sie|Ihnen|Ihr)$/u.test(tokens[i][0])) return false;
+        const n = norm(tokens[i][0]);
+        const stems = [n, ...["es","s","en","n","e"].filter(x => n.endsWith(x) && n.length - x.length >= 3).map(x => n.slice(0, -x.length))];
+        return stems.some(st => (forms.get(st) || []).some(e => e.type === "Nomen" && zuInfinitiveOf(e.complements)) || zuInfinitiveOf(lightByWordPos.get(`${st}|noun`)?.complements));
+      };
       const mannerWords = new Set(["leicht","schwer","einfach","gut","schlecht","kaum","unmöglich",
         // Degree and sentence adverbs that are adjectives in the dictionary (Das ist wirklich zu empfehlen).
         "wirklich","echt","absolut","durchaus","eigentlich","ganz","besonders","bestens","wärmstens","weiter","sehr"]);
@@ -7379,18 +7386,41 @@ function apostropheText(text) {
         const linked = [head.i,tail,...(marker !== null ? [marker] : []),...(participleIndex !== null ? [participleIndex] : [])];
         if (!linked.includes(selected)) continue;
         const other = indices.filter(i=>!linked.includes(i));
+        // (WN 222, Mac run 23.11: the place of a noun group by its form — the group is the noun with its determiner and declined
+        // attributes to the left, not across punctuation. In a prepositional group or after als / wie (von dem Versuch, als verbindliche
+        // Entscheidung, auf ihren Höfen), as a genitive attribute after a noun (der Vollzug der Heiligen Messe) the noun is no object of
+        // haben / no predicate of sein and governs no infinitive of the group)
+        const PUNCT_GAP = /[,;:.!?…–—\-"„“”»«()]/u;
+        const gapAt = (a,b) => clause.sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+        const attributeAt = j => j >= start && !linked.includes(j) && /^\p{Ll}|^\d/u.test(tokens[j][0]) && !prepositions.has(norm(tokens[j][0])) &&
+          (DETERMINER_WORD.test(norm(tokens[j][0])) || /^(?:viele?[nmrs]?|wenige?[nmrs]?|einige?[nmrs]?|mehrere[nmr]?|zahlreiche?[nmrs]?)$/u.test(norm(tokens[j][0])) || /^\d/u.test(tokens[j][0]) ||
+            /(?:e|en|er|es|em)$/u.test(norm(tokens[j][0])) && (matches(j).some(e => e.type === "Adjektiv") || ["e","en","er","es","em"].some(x => norm(tokens[j][0]).endsWith(x) && (forms.get(norm(tokens[j][0]).slice(0, -x.length)) || []).some(e => e.type === "Adjektiv" || /[tn]$/u.test(norm(tokens[j][0]).slice(0, -x.length)) && e.type === "Verb")) || verbs(j).length > 0 && /[tn](?:e|en|er|es|em)$/u.test(norm(tokens[j][0]))));
+        const groupFirst = i => { let j = i; while (j - 1 >= start && !PUNCT_GAP.test(gapAt(j-1,j)) && attributeAt(j-1)) j--; return j; };
+        const groupBefore = i => { const f = groupFirst(i); return f - 1 >= start && !PUNCT_GAP.test(gapAt(f-1,f)) ? f - 1 : -1; };
+        const groupDeterminer = i => { const f = groupFirst(i); return f < i && DETERMINER_WORD.test(norm(tokens[f][0])) ? norm(tokens[f][0]) : null; };
+        const inPhrase = i => { const b = groupBefore(i); if (b < 0) return false; const w = norm(tokens[b][0]);
+          return prepositions.has(w) || w === "als" || w === "wie" || /^\p{Lu}/u.test(tokens[b][0]) && /(?:er|es)$/u.test(groupDeterminer(i) || ""); };
+        // a determiner of the dative (dem, einem; der, einer — also the genitive / feminine dative), or a bare declined attribute in -en / -em
+        // of the plural (zufälligen Ursachen): no nominative predicate of sein
+        const dativeLike = (i, bare) => { const d = groupDeterminer(i); if (d) return /em$/u.test(d) || /er$/u.test(d) && !/^(?:unser|euer)$/u.test(d);
+          return bare && groupFirst(i) < i && /(?:en|em)$/u.test(norm(tokens[groupFirst(i)][0])); };
         // A noun/adjective with its own infinitive complement is a different
         // construction: Lust/Zeit zu lesen, bereit/froh zu gehen, etc.
-        if (lexical.word === "haben" && other.some(i=>nounComplements.has(norm(tokens[i][0])) || norm(tokens[i][0]) === "vor")) continue;
+        if (lexical.word === "haben" && other.some(i=>nounZuInfinitive(i) && !inPhrase(i) || norm(tokens[i][0]) === "vor")) continue;
+        // (WN 222: an expression of ours that takes the zu-infinitive itself — its heading says so: im Begriff sein (etwas zu tun), in der
+        // Lage sein (zu) — with its words in the part: the infinitive is the expression's, no sein / haben + zu group; im Begriff was a word
+        // of the list before)
+        const partWords = new Set(indices.map(i => norm(tokens[i][0])));
+        if (other.some(i => (constructionAnchors.get(norm(tokens[i][0])) || []).some(({entry, m}) => /\([^)]*\bzu\b[^)]*\)/u.test(String(entry.word || "")) &&
+          patternWordsPresent(m, partWords)))) continue;
         // (review 03.11: with sein only a noun between sein and the infinitive — Er ist im Begriff zu gehen, Es ist Zeit zu gehen;
         // not the subject before it — Das Problem ist zu lösen)
         // (advisor 06.11, expressions chat: the same noun in the order of a subordinate clause — als er im Begriff war zu gehen, die im
         // Begriffe war heraufzugehen —: a preposition + a noun of the list in the part before sein; and the old dative in -e after a
         // preposition is the same form — Begriffe as im Grabe. No new words in the list; Das Problem ist zu lösen stays sein + zu.)
-        const listNoun = i => { const w = norm(tokens[i][0]), prep = i > 0 && prepositions.has(norm(tokens[i-1][0]));
-          return /^\p{Lu}/u.test(tokens[i][0]) && (nounComplements.has(w) || prep && w.endsWith("e") && nounComplements.has(w.slice(0,-1))); };
+        const listNoun = i => nounZuInfinitive(i);
         const prepositional = i => i > start && prepositions.has(norm(tokens[i-1][0]));
-        if (lexical.word === "sein" && other.some(i=>i > Math.min(head.i,tail) && i < Math.max(head.i,tail) && (nounComplements.has(norm(tokens[i][0])) || prepositional(i) && listNoun(i)))) continue;
+        if (lexical.word === "sein" && other.some(i=>i > Math.min(head.i,tail) && i < Math.max(head.i,tail) && nounZuInfinitive(i) && !inPhrase(i) && !dativeLike(i, true))) continue;
         if (lexical.word === "sein" && other.some(i=>i < Math.min(head.i,tail) && prepositional(i) && listNoun(i))) continue;
         // Only an undeclined (predicative) adjective governs the infinitive (bereit zu gehen);
         // a declined one is attributive inside a phrase (im höchstem Maße weiter zu empfehlen).
@@ -7431,6 +7461,35 @@ function apostropheText(text) {
         const quantityWord = i => indefiniteQuantity?.has(norm(tokens[i][0])) && i < tail && !(norm(tokens[i][0]) === "was" && i === start);
         const quantity = modal ? other.find(i => quantityWord(i) && !beforeNoun(i)) : undefined;
         const quantityNoun = modal && quantity === undefined ? other.find(i => (quantityWord(i) || /^kein(?:e|en|em|er)?$/u.test(norm(tokens[i][0])) && i < tail) && beforeNoun(i)) : undefined;
+        // (WN 222, advisor 23.11: the safeguard by form for a noun object of haben that is no noun of ours with «zu + Infinitiv»:
+        // the infinitive only intransitive — Er hat Hemmungen zu fallen — or with its own object besides the noun — hat Hemmungen den Brief
+        // zu schreiben — : the noun's infinitive, no group; transitive with no object of its own — Ich habe einen Brief zu schreiben —
+        // «должен»; transitivity not known — the window «должен / есть что»)
+        let objectWindow = false;
+        if (modal && quantity === undefined && quantityNoun === undefined) {
+          const lo = Math.min(head.i, tail), hi = Math.max(head.i, tail);
+          // (Mac run 23.11: only a noun that can be the object of haben — not in a prepositional group, no genitive attribute, no dative
+          // determiner (hat dem Nationalrat … Bericht zu erstatten, hatte Wood der Mannschaft eine Nachricht mitzuteilen), and a noun of ours
+          // or one with a determiner / attribute — a bare name is the subject (hatte auch Buarcos …))
+          const knownNoun = i => { const n = norm(tokens[i][0]);
+            return [n, ...["es","s","en","n","e"].filter(x => n.endsWith(x) && n.length - x.length >= 3).map(x => n.slice(0, -x.length))].some(st => (forms.get(st) || []).some(e => e.type === "Nomen")); };
+          const nouns = other.filter(i => i < tail && (head.i < tail ? i > head.i : true) && /^\p{Lu}/u.test(tokens[i][0]) && !/^(?:Sie|Ihnen|Ihr)$/u.test(tokens[i][0]) && i !== start &&
+            !inPhrase(i) && !dativeLike(i, false) && (groupFirst(i) < i || knownNoun(i)));
+          if (nouns.length) {
+            // (Mac run 23.11: «its own object» is a second noun group right before the infinitive, right after the first — hat Hemmungen den
+            // Brief zu schreiben, hat Probleme Arbeit zu finden; groups joined by und / oder are one object — viele Todesopfer und materielle
+            // Schäden zu beklagen)
+            const infinitiveStart = marker !== null ? marker : tail;
+            const second = other.find(i => i + 1 === infinitiveStart && /^\p{Lu}/u.test(tokens[i][0]) && !/^(?:Sie|Ihnen|Ihr)$/u.test(tokens[i][0]) && !inPhrase(i) && !dativeLike(i, false) && !PUNCT_GAP.test(gapAt(i, infinitiveStart)));
+            let firstOfSecond = second !== undefined ? groupFirst(second) : -1;
+            while (firstOfSecond - 2 >= start && /^(?:und|oder)$/u.test(norm(tokens[firstOfSecond-1][0])) && /^\p{Lu}/u.test(tokens[firstOfSecond-2][0]) && !PUNCT_GAP.test(gapAt(firstOfSecond-2, firstOfSecond))) firstOfSecond = groupFirst(firstOfSecond-2);
+            const ownObject = second !== undefined && nouns.includes(firstOfSecond - 1) && !PUNCT_GAP.test(gapAt(firstOfSecond-1, firstOfSecond)) ||
+              other.some(i => i > nouns[0] && i < tail && /^(?:das|dies|es|ihn|diesen|diese|dieses|alles)$/u.test(norm(tokens[i][0])));
+            const t = zuInfinitiveTransitivity.get(norm(main[0].word));
+            if (ownObject || t === "intransitive") continue;
+            if (t !== "transitive") objectWindow = true;
+          }
+        }
         if (quantity !== undefined) linked.push(quantity); else if (quantityNoun !== undefined) linked.push(quantityNoun);
         const tense = participleIndex !== null ? finiteIn(head.e,head.i,"Präteritum") ? "Plusquamperfekt · " : "Perfekt · " : "";
         // A recognised connection does not establish obligation (e.g. nichts zu tun).
@@ -7442,7 +7501,7 @@ function apostropheText(text) {
         const groupTense = participleIndex !== null ? tense.replace(/ · $/u, "") : simple.length === 1 && simple[0] !== "Präsens" ? simple[0] : null;
         result.push({id:modal ? "haben-zu" : "sein-zu",note,lemma:main[0].word,...(groupTense ? {tense:groupTense} : {}),
           ...(quantity !== undefined ? {quantity:negativeQuantity.has(norm(tokens[quantity][0])) ? "nothing" : "something"} :
-            quantityNoun !== undefined ? {quantity:"window"} : {}),
+            quantityNoun !== undefined || objectWindow ? {quantity:"window"} : {}),
           meaningLemma:lexical.word,meaning:modal || selected !== (participleIndex ?? head.i) ? null : {en:"can / must be",ru:"можно / нужно"},
           // (links chat 09.11, Mac run w103: a separable verb known only from the external index — anzutreffen — has no forms to check
           // against the tapped word, so on sein / haben it stood as a second card and opened a window with die Ware: Damals waren
@@ -9571,6 +9630,33 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (advisor 22.11: one list of indefinite words of quantity — the class «indefinite-quantity» of the list of pairs; halten von, haben +
     // zu and the card choice of halten (L36) read it; warmed on every tap, before any rule)
     let indefiniteQuantity = null, negativeQuantity = new Set();
+    // (WN 222, advisor 23.11: the safeguard of haben + zu by form) whether a zu-infinitive of the sentence can take an accusative object:
+    // our card's complements (an «Akkusativ» frame) or the external English dictionary's tags (Kaikki: any transitive sense) —
+    // «transitive»; a card with only sein / every external sense intransitive — «intransitive»; nothing known — null. Warmed per lemma on a
+    // tap whose sentence has a zu-infinitive, read by zuGroupIn (which is not async).
+    const zuInfinitiveTransitivity = new Map();
+    async function warmZuTransitivity(context) {
+      const sentence = String(context?.sentence || "");
+      if (!/\bzu\b|zu\p{Ll}/u.test(sentence)) return;
+      const tokens = sharedTokens(sentence, 'warmZuTransitivity');
+      for (let i = 0; i < tokens.length; i++) {
+        const w = norm(tokens[i][0]);
+        const joined = zuForms.get(w) || [];
+        const bases = joined.length ? joined.map(e => norm(e.word)) : i > 0 && norm(tokens[i-1][0]) === "zu" && /^\p{Ll}/u.test(tokens[i][0]) ? [w] : [];
+        for (const b of bases) {
+          if (zuInfinitiveTransitivity.has(b)) continue;
+          zuInfinitiveTransitivity.set(b, null);
+          const cards = (lemmas.get(b) || []).filter(e => e.type === "Verb");
+          // (a frame of bare cases with the accusative — «Akkusativ», «Dativ + Akkusativ»; not a preposition's — «auf + Akkusativ»)
+          const bareAccusative = c => { const parts = String(c.pattern || "").split("+").map(x => x.trim()); return parts.includes("Akkusativ") && parts.every(x => /^(?:Akkusativ|Dativ|Genitiv|Nominativ)$/u.test(x)); };
+          if (cards.some(e => (e.complements || []).some(bareAccusative))) { zuInfinitiveTransitivity.set(b, "transitive"); continue; }
+          let tags = [];
+          if (fallback.lookupFacts) { try { tags = ((await fallback.lookupFacts(b)).groups || []).filter(g => g.pos === "verb").flatMap(g => [...(g.transitivity || []), ...Object.values(g.transitivityOf || {})]); } catch (_) { tags = []; } }
+          if (tags.some(t => t === "transitive" || t === "both")) zuInfinitiveTransitivity.set(b, "transitive");
+          else if (tags.length && tags.every(t => t === "intransitive") || cards.length && cards.every(e => String(e.auxiliary || "").trim() === "sein")) zuInfinitiveTransitivity.set(b, "intransitive");
+        }
+      }
+    }
     async function warmWordClasses() {
       if (indefiniteQuantity === null && fallback.wordClasses) { try { indefiniteQuantity = new Set(((await fallback.wordClasses())["indefinite-quantity"] || []).map(norm));
         // (advisor 23.11: the class's polarity in the data — neg: nichts, nix, wenig, kaum, weniger …)
@@ -18368,7 +18454,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const nounOwnPairOn = (noun, prep) => {
         const n = norm(noun);
         const stems = [n, ...['es','s','en','n','e'].filter(x => n.endsWith(x) && n.length - x.length >= 3).map(x => n.slice(0, -x.length))];
-        const has = list => (list || []).some(x => norm(String(x?.pattern || '').split(/\s*\+\s*/u)[0]) === prep);
+        // (WN 222: «zu + Infinitiv» is no preposition zu)
+        const has = list => (list || []).some(x => norm(String(x?.pattern || '').split(/\s*\+\s*/u)[0]) === prep && !/\+\s*Infinitiv\b/u.test(String(x?.pattern || '')));
         return stems.some(st => (forms.get(st) || []).some(e => e.type === 'Nomen' && has(e.complements)) || has(lightByWordPos.get(`${st}|noun`)?.complements));
       };
       const pairCase = ({v,p,rows,verbBase}) => {
@@ -25401,6 +25488,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     async function resolvePublic(word, context) {
       await warmWordClasses();
+      await warmZuTransitivity(context);
       // C21b: zu of «zu dritt / zu dreien» opens the card of the numeral after it.
       if (norm(word) === "zu" && Number.isInteger(context?.tokenOffset)) {
         const sentence = String(context.sentence || ""), m = /^[ \t]+([\p{L}\p{M}]+)/u.exec(sentence.slice(context.tokenOffset+word.length));

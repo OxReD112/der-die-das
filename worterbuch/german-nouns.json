@@ -1201,7 +1201,18 @@
     "example_de": "Wir machen einen Plan für die Reise.",
     "example_cloze": "Wir machen einen {{c1::Plan}} für die Reise.",
     "example_ru": "Мы составляем план поездки.",
-    "example_en": "We’re making a plan for the trip."
+    "example_en": "We’re making a plan for the trip.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1 (Vorhaben, Absicht): es tauchte der Plan auf, ein Sportfest zu veranstalten; mit dem Plan umzuziehen",
+        "source_kind": "dwds",
+        "meaning_ru": "план",
+        "meaning_en": "plan",
+        "note_ru": "+ инфинитив с zu: Sie hat den Plan, ein Café zu eröffnen. — У неё есть план открыть кафе.",
+        "note_en": "+ zu-infinitive: Sie hat den Plan, ein Café zu eröffnen. — She plans to open a café."
+      }
+    ]
   },
   {
     "id": "noun-099",
@@ -2039,7 +2050,18 @@
     "example_de": "Diese Fähigkeit ist für den Beruf wichtig.",
     "example_cloze": "Diese {{c1::Fähigkeit}} ist für den Beruf wichtig.",
     "example_ru": "Этот навык важен для этой профессии.",
-    "example_en": "This skill is important for the job."
+    "example_en": "This skill is important for the job.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1a (zu etw. imstande sein): er hat die Fähigkeit, die Zusammenhänge zu sehen; die fatale Fähigkeit, alles zu verwirren",
+        "source_kind": "dwds",
+        "meaning_ru": "способность",
+        "meaning_en": "ability",
+        "note_ru": "+ инфинитив с zu: Sie hat die Fähigkeit, schnell zu lernen. — Она умеет быстро учиться.",
+        "note_en": "+ zu-infinitive: Sie hat die Fähigkeit, schnell zu lernen. — She has the ability to learn quickly."
+      }
+    ]
   },
   {
     "id": "noun-166",
@@ -2051,7 +2073,16 @@
     "example_de": "Die Entscheidung fällt uns nicht leicht.",
     "example_cloze": "Die {{c1::Entscheidung}} fällt uns nicht leicht.",
     "example_ru": "Нам нелегко принять это решение.",
-    "example_en": "The decision is not easy for us."
+    "example_en": "The decision is not easy for us.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1 (Vorgang der Beschlussfassung), Welt 2019: die Entscheidung getroffen, mein Leben und meinen beruflichen Weg nicht mehr zu planen",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Die Entscheidung, umzuziehen, fiel uns schwer. — Решение переехать далось нам тяжело.",
+        "note_en": "+ zu-infinitive: Die Entscheidung, umzuziehen, fiel uns schwer. — The decision to move was hard for us."
+      }
+    ]
   },
   {
     "id": "noun-167",
@@ -2069,6 +2100,15 @@
         "pattern": "zu + Dativ",
         "note_ru": "возможность для чего-либо: die Möglichkeit zur Weiterbildung",
         "note_en": "opportunity for something: die Möglichkeit zur Weiterbildung"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 3 (Gelegenheit, Chance): er hatte die Möglichkeit, Klavier spielen zu lernen; Bed. 2: eine Möglichkeit, die Schwierigkeiten zu überwinden",
+        "source_kind": "dwds",
+        "meaning_ru": "возможность",
+        "meaning_en": "possibility",
+        "note_ru": "+ инфинитив с zu: Es gibt die Möglichkeit, online zu bezahlen. — Есть возможность оплатить онлайн.",
+        "note_en": "+ zu-infinitive: Es gibt die Möglichkeit, online zu bezahlen. — There is the option to pay online."
       }
     ]
   },
@@ -2082,7 +2122,18 @@
     "example_de": "Bei Gelegenheit zeige ich dir die Fotos.",
     "example_cloze": "Bei {{c1::Gelegenheit}} zeige ich dir die Fotos.",
     "example_ru": "При случае я покажу тебе фотографии.",
-    "example_en": "I will show you the photos when I get the chance."
+    "example_en": "I will show you the photos when I get the chance.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1 (günstiges Zusammentreffen von Umständen, Chance): ich hatte keine Gelegenheit, dich anzurufen; Gelegenheit geben, sich zu rechtfertigen",
+        "source_kind": "dwds",
+        "meaning_ru": "удобный случай",
+        "meaning_en": "opportunity",
+        "note_ru": "+ инфинитив с zu: Wir hatten keine Gelegenheit, uns zu verabschieden. — У нас не было случая попрощаться.",
+        "note_en": "+ zu-infinitive: Wir hatten keine Gelegenheit, uns zu verabschieden. — We had no opportunity to say goodbye."
+      }
+    ]
   },
   {
     "id": "noun-169",
@@ -2147,6 +2198,15 @@
         "note_en": "reason, grounds for something: kein Grund zur Panik, Grund zur Annahme",
         "meaning_ru": "основание",
         "meaning_en": "basis"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример): Und da er keinen Grund hatte, ihr seinen Namen zu verhehlen, so stellte er sich in aller Form vor.",
+        "source_kind": "kaikki",
+        "meaning_ru": "причина",
+        "meaning_en": "reason",
+        "note_ru": "+ инфинитив с zu: Es gibt keinen Grund, sich zu beschweren. — Нет причин жаловаться.",
+        "note_en": "+ zu-infinitive: Es gibt keinen Grund, sich zu beschweren. — There is no reason to complain."
       }
     ]
   },
@@ -2160,7 +2220,18 @@
     "example_de": "Unser Ziel ist der Bahnhof.",
     "example_cloze": "Unser {{c1::Ziel}} ist der Bahnhof.",
     "example_ru": "Наша цель — вокзал.",
-    "example_en": "Our destination is the station."
+    "example_en": "Our destination is the station.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1d, Ergebnis des Handelns): er studierte mit dem Ziel, Techniker zu werden",
+        "source_kind": "dwds",
+        "meaning_ru": "цель",
+        "meaning_en": "goal",
+        "note_ru": "+ инфинитив с zu: Wir haben das Ziel, mehr Bäume zu pflanzen. — Наша цель — посадить больше деревьев.",
+        "note_en": "+ zu-infinitive: Wir haben das Ziel, mehr Bäume zu pflanzen. — Our aim is to plant more trees."
+      }
+    ]
   },
   {
     "id": "noun-173",
@@ -2361,7 +2432,19 @@
     "example_de": "Die neue Aufgabe ist eine spannende Herausforderung.",
     "example_cloze": "Die neue Aufgabe ist eine spannende {{c1::Herausforderung}}.",
     "example_ru": "Новое задание — интересный вызов.",
-    "example_en": "The new task is an exciting challenge."
+    "example_en": "The new task is an exciting challenge.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (2b, Korpus): empfindet es als spannende … pädagogische Herausforderung, Schüler … zusammenzuführen",
+        "source_kind": "dwds",
+        "source_weak": "es … als Herausforderung, … zu (соотносительное es)",
+        "meaning_ru": "сложная задача",
+        "meaning_en": "challenge",
+        "note_ru": "+ инфинитив с zu: Es ist eine Herausforderung, drei Sprachen zu lernen. — Учить три языка — серьёзная задача.",
+        "note_en": "+ zu-infinitive: Es ist eine Herausforderung, drei Sprachen zu lernen. — Learning three languages is a challenge."
+      }
+    ]
   },
   {
     "id": "noun-189",
@@ -2528,7 +2611,16 @@
     "example_de": "Hast du heute Abend Zeit?",
     "example_cloze": "Hast du heute Abend {{c1::Zeit}}?",
     "example_ru": "У тебя есть время сегодня вечером?",
-    "example_en": "Do you have time this evening?"
+    "example_en": "Do you have time this evening?",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 2 (Teil von Zeit, über den jmd. verfügen kann): ich habe noch nicht die Zeit gefunden, dir auf deinen Brief zu antworten",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Ich habe keine Zeit, dir zu helfen. — У меня нет времени тебе помочь.",
+        "note_en": "+ zu-infinitive: Ich habe keine Zeit, dir zu helfen. — I have no time to help you."
+      }
+    ]
   },
   {
     "id": "noun-200",
@@ -3379,7 +3471,16 @@
     "example_de": "Das ist eine gute Idee!",
     "example_cloze": "Das ist eine gute {{c1::Idee}}!",
     "example_ru": "Это хорошая идея!",
-    "example_en": "That's a good idea!"
+    "example_en": "That's a good idea!",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS 1c: „ihm kam die Idee, sein Zimmer durch Blumen zu verschönern“; 1d: „trug sich mit der Idee, das Zelt mit Rädern zu versehen“",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Sie hatte die Idee, ein Picknick zu machen. — Ей пришла в голову идея устроить пикник.",
+        "note_en": "+ zu-infinitive: Sie hatte die Idee, ein Picknick zu machen. — She had the idea of having a picnic."
+      }
+    ]
   },
   {
     "id": "noun-265",
@@ -3459,6 +3560,13 @@
         "pattern": "um + Akkusativ",
         "note_ru": "тревога за кого-либо, что-либо: Angst um die Kinder",
         "note_en": "worry for someone, something: Angst um die Kinder"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример, статья «sitzen bleiben»): Obwohl sie durchaus hübsch war, hatte sie immer Angst, sitzen zu bleiben.",
+        "source_kind": "kaikki",
+        "note_ru": "+ инфинитив с zu: Sie hat Angst, allein nach Hause zu gehen. — Она боится идти домой одна.",
+        "note_en": "+ zu-infinitive: Sie hat Angst, allein nach Hause zu gehen. — She is afraid to walk home alone."
       }
     ]
   },
@@ -4234,7 +4342,18 @@
     "example_de": "Lesen Sie die Aufgabe genau.",
     "example_cloze": "Lesen Sie die {{c1::Aufgabe}} genau.",
     "example_ru": "Внимательно прочитайте задание.",
-    "example_en": "Read the task carefully."
+    "example_en": "Read the task carefully.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 2b (Arbeit, die ausgeführt werden muss, Auftrag): es ist die vornehmste Aufgabe, die Ideale der Humanität zu verwirklichen; DWDS (typische Verbindungen): (die) Aufgabe haben (zu), vor der Aufgabe stehen (zu)",
+        "source_kind": "dwds",
+        "meaning_ru": "задача",
+        "meaning_en": "task",
+        "note_ru": "+ инфинитив с zu: Er hat die Aufgabe, die Gäste zu empfangen. — Его задача — встречать гостей.",
+        "note_en": "+ zu-infinitive: Er hat die Aufgabe, die Gäste zu empfangen. — His task is to receive the guests."
+      }
+    ]
   },
   {
     "id": "noun-326",
@@ -5344,6 +5463,13 @@
         "pattern": "um + Akkusativ",
         "note_ru": "просьба о чём-либо: eine Bitte um Hilfe",
         "note_en": "request for something: eine Bitte um Hilfe"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Verwendungsbeispiele): Er richtete an mich die Bitte, mich an das Land zu wenden.",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Sie richtete an uns die Bitte, leise zu sein. — Она попросила нас вести себя тихо.",
+        "note_en": "+ zu-infinitive: Sie richtete an uns die Bitte, leise zu sein. — She asked us to be quiet."
       }
     ]
   },
@@ -5785,6 +5911,15 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "желание чего-либо, охота к чему-либо: Lust auf Eis",
         "note_en": "desire for something, feel like: Lust auf Eis"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример): Ich habe keine Lust, mich nicht zu hassen",
+        "source_kind": "kaikki",
+        "meaning_ru": "желание, охота",
+        "meaning_en": "wish (to do something)",
+        "note_ru": "+ инфинитив с zu: Ich habe keine Lust, heute zu kochen. — Мне не хочется сегодня готовить.",
+        "note_en": "+ zu-infinitive: Ich habe keine Lust, heute zu kochen. — I don't feel like cooking today."
       }
     ]
   },
@@ -7508,6 +7643,13 @@
         "pattern": "für + Akkusativ",
         "note_ru": "интерес к чему-либо",
         "note_en": "interest in something"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1b „der Wunsch, etw. zu tun“: hat nicht das geringste Interesse, den Kanzler in den Zeugenstand zu rufen",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Wir haben kein Interesse, das Haus zu verkaufen. — Мы не заинтересованы в том, чтобы продавать дом.",
+        "note_en": "+ zu-infinitive: Wir haben kein Interesse, das Haus zu verkaufen. — We have no interest in selling the house."
       }
     ]
   },
@@ -7595,7 +7737,18 @@
     "example_de": "Sie studiert Kunst in Wien.",
     "example_cloze": "Sie studiert {{c1::Kunst}} in Wien.",
     "example_ru": "Она изучает искусство в Вене.",
-    "example_en": "She is studying art in Vienna."
+    "example_en": "She is studying art in Vienna.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (2, Können, Fertigkeit): die Kunst zu lesen, schreiben; er versteht die Kunst, den Meißel zu handhaben",
+        "source_kind": "dwds",
+        "meaning_ru": "умение",
+        "meaning_en": "skill",
+        "note_ru": "+ инфинитив с zu: Er versteht die Kunst, Menschen zu überzeugen. — Он владеет искусством убеждать людей.",
+        "note_en": "+ zu-infinitive: Er versteht die Kunst, Menschen zu überzeugen. — He has mastered the art of persuading people."
+      }
+    ]
   },
   {
     "id": "noun-584",
@@ -7785,6 +7938,13 @@
         "pattern": "nach + Dativ",
         "note_ru": "желание чего-либо",
         "note_en": "wish for something"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1b (Verlangen, Begehren): in ihm regte sich der Wunsch, ein neues Werk zu schaffen; den einen Wunsch, wieder gesund zu werden",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Er hat den Wunsch, Arzt zu werden. — Он хочет стать врачом.",
+        "note_en": "+ zu-infinitive: Er hat den Wunsch, Arzt zu werden. — He wishes to become a doctor."
       }
     ]
   },
@@ -7965,6 +8125,15 @@
         "pattern": "zu + Dativ",
         "note_ru": "разрешение на что-либо: die Erlaubnis zum Parken",
         "note_en": "permission for something: die Erlaubnis zum Parken"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "de.wiktionary [1]: Der Eigentümer des Ackers gab uns die Erlaubnis, unser Kunstwerk dort aufzustellen.",
+        "source_kind": "wiktionary-de",
+        "meaning_ru": "разрешение",
+        "meaning_en": "permission",
+        "note_ru": "+ инфинитив с zu: Wir haben die Erlaubnis, hier zu parken. — У нас есть разрешение парковаться здесь.",
+        "note_en": "+ zu-infinitive: Wir haben die Erlaubnis, hier zu parken. — We have permission to park here."
       }
     ]
   },
@@ -10039,7 +10208,16 @@
     "example_cloze": "Entschuldigung, das war keine {{c1::Absicht}}!",
     "example_ru": "Извините, я не нарочно!",
     "example_en": "Sorry, I didn’t do it on purpose!",
-    "id": "noun-774"
+    "id": "noun-774",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1 (das Wollen, der Vorsatz): sich mit der Absicht tragen, etw. zu tun; Ich habe auch gar nicht die Absicht, politisch tätig zu werden.",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Ich habe nicht die Absicht, umzuziehen. — Я не собираюсь переезжать.",
+        "note_en": "+ zu-infinitive: Ich habe nicht die Absicht, umzuziehen. — I have no intention of moving."
+      }
+    ]
   },
   {
     "word": "Affe",
@@ -10475,7 +10653,18 @@
     "example_de": "Er hat eine Aufforderung zur Zahlung bekommen.",
     "example_cloze": "Er hat eine {{c1::Aufforderung}} zur Zahlung bekommen.",
     "example_ru": "Он получил требование об оплате.",
-    "example_en": "He received a demand for payment."
+    "example_en": "He received a demand for payment.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: Definition «Bitte, etw. zu tun»; Nur ein Satz enthält die Aufforderung, sich der katholischen Kirche anzuschließen.",
+        "source_kind": "dwds",
+        "meaning_ru": "требование, призыв",
+        "meaning_en": "request, demand",
+        "note_ru": "+ инфинитив с zu: Er ignorierte die Aufforderung, das Gebäude zu verlassen. — Он проигнорировал требование покинуть здание.",
+        "note_en": "+ zu-infinitive: Er ignorierte die Aufforderung, das Gebäude zu verlassen. — He ignored the demand to leave the building."
+      }
+    ]
   },
   {
     "id": "noun-813",
@@ -10508,7 +10697,18 @@
     "example_de": "Die Firma hat einen großen Auftrag aus China bekommen.",
     "example_cloze": "Die Firma hat einen großen {{c1::Auftrag}} aus China bekommen.",
     "example_ru": "Фирма получила крупный заказ из Китая.",
-    "example_en": "The company has received a big order from China."
+    "example_en": "The company has received a big order from China.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1a, Weisung): ich habe den Auftrag, Sie herzlich zu grüßen",
+        "source_kind": "dwds",
+        "meaning_ru": "задание, поручение",
+        "meaning_en": "task, assignment",
+        "note_ru": "+ инфинитив с zu: Ich habe den Auftrag, Ihnen das Paket zu geben. — Мне поручено передать вам посылку.",
+        "note_en": "+ zu-infinitive: Ich habe den Auftrag, Ihnen das Paket zu geben. — I have been asked to give you the parcel."
+      }
+    ]
   },
   {
     "id": "noun-815",
@@ -10625,6 +10825,15 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "вид на что-либо; перспектива чего-либо: Aussicht auf Erfolg",
         "note_en": "view of something; prospect of something: Aussicht auf Erfolg"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (2, Zukunftshoffnung, Perspektive): er verlor die letzte Aussicht, bald eine neue Anstellung zu finden",
+        "source_kind": "dwds",
+        "meaning_ru": "перспектива, шанс",
+        "meaning_en": "prospect",
+        "note_ru": "+ инфинитив с zu: Er hat gute Aussichten, die Stelle zu bekommen. — У него хорошие шансы получить место.",
+        "note_en": "+ zu-infinitive: Er hat gute Aussichten, die Stelle zu bekommen. — He has good prospects of getting the job."
       }
     ]
   },
@@ -11566,7 +11775,16 @@
     "example_de": "Das ist deine Chance – nutze sie!",
     "example_cloze": "Das ist deine {{c1::Chance}} – nutze sie!",
     "example_ru": "Это твой шанс — воспользуйся им!",
-    "example_en": "This is your chance – take it!"
+    "example_en": "This is your chance – take it!",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример): Frauen haben bessere Chancen, schwerste Unfälle zu überleben, als Männer.",
+        "source_kind": "kaikki",
+        "note_ru": "+ инфинитив с zu: Sie hat die Chance, im Ausland zu studieren. — У неё есть шанс учиться за границей.",
+        "note_en": "+ zu-infinitive: Sie hat die Chance, im Ausland zu studieren. — She has the chance to study abroad."
+      }
+    ]
   },
   {
     "id": "noun-896",
@@ -13930,7 +14148,16 @@
     "example_ru": "Для многих молодых людей первая собственная машина означает свободу.",
     "example_en": "For many young people their first car means freedom.",
     "plural_note_ru": "В значении «свобода» обычно без множественного числа; Freiheiten — права, вольности.",
-    "plural_note_en": "In the sense of freedom it is usually used without a plural; Freiheiten means liberties, privileges."
+    "plural_note_en": "In the sense of freedom it is usually used without a plural; Freiheiten means liberties, privileges.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (2, Möglichkeit, Recht, etw. ungehindert tun zu können): du hast die Freiheit, dich hier so oder so zu entscheiden",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Du hast die Freiheit, selbst zu entscheiden. — Ты волен решать сам.",
+        "note_en": "+ zu-infinitive: Du hast die Freiheit, selbst zu entscheiden. — You are free to decide for yourself."
+      }
+    ]
   },
   {
     "id": "noun-1076",
@@ -13967,6 +14194,14 @@
         "pattern": "über + Akkusativ",
         "note_ru": "радость по поводу чего-либо: die Freude über das Geschenk",
         "note_en": "joy about something: die Freude über das Geschenk"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Gefühl der Hochstimmung): es wird mir eine ganz besondere Freude sein, Ihnen zu helfen; dass es eine wahre Freude war, ihr zuzuhören",
+        "source_kind": "dwds",
+        "source_weak": "es ist (mir) eine Freude, … zu (сказуемое с es) — других примеров в DWDS нет",
+        "note_ru": "+ инфинитив с zu: Es ist mir eine Freude, Sie zu begrüßen. — Мне приятно вас приветствовать.",
+        "note_en": "+ zu-infinitive: Es ist mir eine Freude, Sie zu begrüßen. — It is a pleasure to welcome you."
       }
     ]
   },
@@ -14288,6 +14523,15 @@
         "note_en": "thought of someone, something: der Gedanke an den Urlaub",
         "meaning_ru": "мысль",
         "meaning_en": "thought"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Verwendungsbeispiele): „Der Gedanke, beides miteinander in Verbindung zu bringen, lag also nahe.“",
+        "source_kind": "dwds",
+        "meaning_ru": "мысль",
+        "meaning_en": "thought",
+        "note_ru": "+ инфинитив с zu: Der Gedanke, allein zu reisen, gefällt mir. — Мне нравится мысль путешествовать одному.",
+        "note_en": "+ zu-infinitive: Der Gedanke, allein zu reisen, gefällt mir. — I like the thought of travelling alone."
       }
     ]
   },
@@ -14313,7 +14557,16 @@
     "example_de": "Mit kleinen Kindern braucht man viel Geduld.",
     "example_cloze": "Mit kleinen Kindern braucht man viel {{c1::Geduld}}.",
     "example_ru": "С маленькими детьми нужно много терпения.",
-    "example_en": "You need a lot of patience with small children."
+    "example_en": "You need a lot of patience with small children.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS 2 (Ausdauer): „die Geduld habe ich nicht, stundenlang stillzusitzen“",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Ich habe nicht die Geduld, so lange zu warten. — У меня нет терпения так долго ждать.",
+        "note_en": "+ zu-infinitive: Ich habe nicht die Geduld, so lange zu warten. — I don't have the patience to wait that long."
+      }
+    ]
   },
   {
     "id": "noun-1104",
@@ -14650,7 +14903,16 @@
     "example_de": "Morgens Kaffee zu trinken ist eine alte Gewohnheit von mir.",
     "example_cloze": "Morgens Kaffee zu trinken ist eine alte {{c1::Gewohnheit}} von mir.",
     "example_ru": "Пить кофе по утрам — моя старая привычка.",
-    "example_en": "Drinking coffee in the morning is an old habit of mine."
+    "example_en": "Drinking coffee in the morning is an old habit of mine.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: Das entspräche etwa der Gewohnheit, auf einen unfrisierten Kopf einen pompösen Hut zu stülpen.",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Er hat die Gewohnheit, früh aufzustehen. — У него привычка рано вставать.",
+        "note_en": "+ zu-infinitive: Er hat die Gewohnheit, früh aufzustehen. — He is in the habit of getting up early."
+      }
+    ]
   },
   {
     "id": "noun-1128",
@@ -15204,6 +15466,13 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "надежда на что-либо",
         "note_en": "hope for something"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример): Ich habe immer noch die Hoffnung diesen Arbeitsplatz zu bekommen.",
+        "source_kind": "kaikki",
+        "note_ru": "+ инфинитив с zu: Wir haben die Hoffnung, bald zurückzukommen. — Мы надеемся скоро вернуться.",
+        "note_en": "+ zu-infinitive: Wir haben die Hoffnung, bald zurückzukommen. — We hope to come back soon."
       }
     ]
   },
@@ -16272,7 +16541,18 @@
     "example_de": "Nach der Krankheit hat er noch nicht viel Kraft.",
     "example_cloze": "Nach der Krankheit hat er noch nicht viel {{c1::Kraft}}.",
     "example_ru": "После болезни у него ещё мало сил.",
-    "example_en": "He hasn’t got much strength yet after his illness."
+    "example_en": "He hasn’t got much strength yet after his illness.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (I.1, Stärke, Fähigkeit): ich fand nicht die Kraft, mich zu verteidigen",
+        "source_kind": "dwds",
+        "meaning_ru": "сила",
+        "meaning_en": "strength, power",
+        "note_ru": "+ инфинитив с zu: Ich hatte nicht mehr die Kraft, weiterzulaufen. — У меня уже не было сил бежать дальше.",
+        "note_en": "+ zu-infinitive: Ich hatte nicht mehr die Kraft, weiterzulaufen. — I no longer had the strength to keep running."
+      }
+    ]
   },
   {
     "id": "noun-1252",
@@ -17812,6 +18092,13 @@
         "pattern": "zu + Dativ",
         "note_ru": "смелость на что-либо: der Mut zur Wahrheit",
         "note_en": "courage for something: der Mut zur Wahrheit"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример): Ich wünschte, ich hätte den Mut, auf einer Bühne vor Publikum zu sprechen.",
+        "source_kind": "kaikki",
+        "note_ru": "+ инфинитив с zu: Er hatte nicht den Mut, die Wahrheit zu sagen. — Ему не хватило смелости сказать правду.",
+        "note_en": "+ zu-infinitive: Er hatte nicht den Mut, die Wahrheit zu sagen. — He didn't have the courage to tell the truth."
       }
     ]
   },
@@ -17887,7 +18174,16 @@
     "example_de": "Danke für deine Mühe!",
     "example_cloze": "Danke für deine {{c1::Mühe}}!",
     "example_ru": "Спасибо за твои старания!",
-    "example_en": "Thanks for your trouble!"
+    "example_en": "Thanks for your trouble!",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1d: er hatte Mühe, allen Blicken standzuhalten; 1c: es kostet viel Mühe, ein Kind großzuziehen",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Er hatte Mühe, wach zu bleiben. — Ему было трудно не уснуть.",
+        "note_en": "+ zu-infinitive: Er hatte Mühe, wach zu bleiben. — He had trouble staying awake."
+      }
+    ]
   },
   {
     "id": "noun-1378",
@@ -18549,6 +18845,13 @@
         "pattern": "zu + Dativ",
         "note_ru": "обязанность сделать что-либо: die Pflicht zur Hilfe",
         "note_en": "duty to do something: die Pflicht zur Hilfe"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1 (bindende Anforderung an das Verhalten): die Pflicht, in den Briefkasten zu schauen; Es ist meine Pflicht als Journalist, die Öffentlichkeit … zu informieren.",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Jeder hat die Pflicht, Steuern zu zahlen. — Каждый обязан платить налоги.",
+        "note_en": "+ zu-infinitive: Jeder hat die Pflicht, Steuern zu zahlen. — Everyone has a duty to pay taxes."
       }
     ]
   },
@@ -19158,6 +19461,15 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "право на что-либо: das Recht auf Bildung",
         "note_en": "right to something: das Recht auf Bildung"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki: right, privilege [with zu (+ infinitive) or auf (+ accusative) ‘to something’]",
+        "source_kind": "kaikki",
+        "meaning_ru": "право",
+        "meaning_en": "right",
+        "note_ru": "+ инфинитив с zu: Jeder hat das Recht, seine Meinung zu sagen. — Каждый имеет право высказать своё мнение.",
+        "note_en": "+ zu-infinitive: Jeder hat das Recht, seine Meinung zu sagen. — Everyone has the right to say what they think."
       }
     ]
   },
@@ -20032,7 +20344,18 @@
     "example_ru": "При регистрации возникла техническая трудность.",
     "example_en": "There is a technical difficulty with registration.",
     "plural_note_ru": "Проблемы часто обозначаются множественным числом Schwierigkeiten; сложность как свойство — без множественного числа.",
-    "plural_note_en": "Problems are often referred to in the plural as Schwierigkeiten; difficulty as a property has no plural."
+    "plural_note_en": "Problems are often referred to in the plural as Schwierigkeiten; difficulty as a property has no plural.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример, статья «kongenial»): … warum Philosophen, die kongenial miteinander verbunden waren, so oft Schwierigkeiten hatten, langfristig zusammen zu arbeiten",
+        "source_kind": "kaikki",
+        "meaning_ru": "трудность",
+        "meaning_en": "difficulty",
+        "note_ru": "+ инфинитив с zu: Er hat Schwierigkeiten, sich zu konzentrieren. — Ему трудно сосредоточиться.",
+        "note_en": "+ zu-infinitive: Er hat Schwierigkeiten, sich zu konzentrieren. — He has difficulty concentrating."
+      }
+    ]
   },
   {
     "id": "noun-1543",
@@ -21198,6 +21521,15 @@
         "note_en": "talent for something",
         "meaning_ru": "талант, способность",
         "meaning_en": "talent"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1): er hat das seltene Talent, komplizierte Sachverhalte allgemeinverständlich darzustellen",
+        "source_kind": "dwds",
+        "meaning_ru": "талант, способность",
+        "meaning_en": "talent",
+        "note_ru": "+ инфинитив с zu: Sie hat das Talent, Menschen zu begeistern. — У неё талант увлекать людей.",
+        "note_en": "+ zu-infinitive: Sie hat das Talent, Menschen zu begeistern. — She has a talent for inspiring people."
       }
     ]
   },
@@ -22134,6 +22466,13 @@
         "pattern": "für + Akkusativ",
         "note_ru": "причина чего-либо",
         "note_en": "cause of something"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Bed. „Grund“): „er hatte alle Ursache, mit seinem Arbeitsplatz zufrieden zu sein“",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Du hast keine Ursache, dich zu entschuldigen. — Тебе не за что извиняться.",
+        "note_en": "+ zu-infinitive: Du hast keine Ursache, dich zu entschuldigen. — You have no reason to apologize."
       }
     ]
   },
@@ -22249,7 +22588,18 @@
     "example_de": "Das Verbot gilt für alle Besucher.",
     "example_cloze": "Das {{c1::Verbot}} gilt für alle Besucher.",
     "example_ru": "Запрет действует для всех посетителей.",
-    "example_en": "The ban applies to all visitors."
+    "example_en": "The ban applies to all visitors.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: „das Verbot, Rauschgift zu besitzen oder mit ihm zu handeln“",
+        "source_kind": "dwds",
+        "meaning_ru": "запрет",
+        "meaning_en": "prohibition",
+        "note_ru": "+ инфинитив с zu: Das Verbot, im Gebäude zu rauchen, gilt für alle. — Запрет курить в здании касается всех.",
+        "note_en": "+ zu-infinitive: Das Verbot, im Gebäude zu rauchen, gilt für alle. — The ban on smoking in the building applies to everyone."
+      }
+    ]
   },
   {
     "id": "noun-1708",
@@ -22351,7 +22701,19 @@
     "example_ru": "Читать эту книгу — большое удовольствие.",
     "example_en": "Reading this book is a great pleasure.",
     "plural_note_ru": "Удовольствие как чувство — без множественного числа. Vergnügen в значении отдельных развлечений имеет редкое множественное число той же формы.",
-    "plural_note_en": "Pleasure as a feeling has no plural. Vergnügen meaning individual amusements has a rare plural of the same form."
+    "plural_note_en": "Pleasure as a feeling has no plural. Vergnügen meaning individual amusements has a rare plural of the same form.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1, Freude, Spaß): es war mir ein Vergnügen, Sie kennengelernt zu haben; sich ein Vergnügen daraus machen, … zu überraschen",
+        "source_kind": "dwds",
+        "source_weak": "es ist ein Vergnügen, … zu (сказуемое с es)",
+        "meaning_ru": "удовольствие",
+        "meaning_en": "pleasure",
+        "note_ru": "+ инфинитив с zu: Es war mir ein Vergnügen, Sie kennenzulernen. — Было приятно с вами познакомиться.",
+        "note_en": "+ zu-infinitive: Es war mir ein Vergnügen, Sie kennenzulernen. — It was a pleasure to meet you."
+      }
+    ]
   },
   {
     "id": "noun-1714",
@@ -22562,7 +22924,18 @@
     "example_de": "Beim zweiten Versuch öffnet sich die Tür.",
     "example_cloze": "Beim zweiten {{c1::Versuch}} öffnet sich die Tür.",
     "example_ru": "Со второй попытки дверь открывается.",
-    "example_en": "The door opens on the second attempt."
+    "example_en": "The door opens on the second attempt.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "Kaikki (пример): Ihr Bruder machte keinen Versuch, mit mir zu tanzen, und so blieben wir am Tisch sitzen und hörten der Musik zu.",
+        "source_kind": "kaikki",
+        "meaning_ru": "попытка",
+        "meaning_en": "attempt",
+        "note_ru": "+ инфинитив с zu: Das war ein Versuch, die Lage zu retten. — Это была попытка спасти положение.",
+        "note_en": "+ zu-infinitive: Das war ein Versuch, die Lage zu retten. — That was an attempt to save the situation."
+      }
+    ]
   },
   {
     "id": "noun-1728",
@@ -23666,7 +24039,19 @@
     "example_de": "Welchen Zweck hat dieses Gerät?",
     "example_cloze": "Welchen {{c1::Zweck}} hat dieses Gerät?",
     "example_ru": "Для чего предназначен этот прибор?",
-    "example_en": "What purpose does this device serve?"
+    "example_en": "What purpose does this device serve?",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS 1b (Sinn): „ob es einen Zweck hat, noch länger zu warten?“; „Es hat keinen Zweck, hier mit der Industrie zu rechten.“",
+        "source_kind": "dwds",
+        "source_weak": "es hat keinen Zweck, … zu (es-коррелят; атрибутивного der Zweck, … zu в DWDS нет)",
+        "meaning_ru": "смысл",
+        "meaning_en": "point",
+        "note_ru": "+ инфинитив с zu: Es hat keinen Zweck, länger zu warten. — Нет смысла ждать дольше.",
+        "note_en": "+ zu-infinitive: Es hat keinen Zweck, länger zu warten. — There is no point in waiting any longer."
+      }
+    ]
   },
   {
     "id": "noun-1808",
@@ -28560,6 +28945,15 @@
         "note_en": "power over someone, something",
         "meaning_ru": "власть, влияние",
         "meaning_en": "power, influence"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS 1b (Befugnis): „er hat die Macht zu tun, was er will“",
+        "source_kind": "dwds",
+        "meaning_ru": "власть, влияние",
+        "meaning_en": "power, influence",
+        "note_ru": "+ инфинитив с zu: Er hat nicht die Macht, das zu ändern. — У него нет власти это изменить.",
+        "note_en": "+ zu-infinitive: Er hat nicht die Macht, das zu ändern. — He doesn't have the power to change that."
       }
     ]
   },
@@ -29558,7 +29952,19 @@
     "example_de": "Ich möchte Ihnen mein Anliegen erklären.",
     "example_cloze": "Ich möchte Ihnen mein {{c1::Anliegen}} erklären.",
     "example_ru": "Я хочу объяснить вам свою просьбу.",
-    "example_en": "I would like to explain my request to you."
+    "example_en": "I would like to explain my request to you.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Korpus): Es ist überhaupt nicht Anliegen unseres Buches, die Überlegenheit unseres Systems ... zu demonstrieren.",
+        "source_kind": "dwds",
+        "source_weak": "es ist … Anliegen, … zu (сказуемое)",
+        "meaning_ru": "просьба, пожелание, важный для кого-либо вопрос",
+        "meaning_en": "matter of concern",
+        "note_ru": "+ инфинитив с zu: Es ist mein Anliegen, allen zu danken. — Мне важно поблагодарить всех.",
+        "note_en": "+ zu-infinitive: Es ist mein Anliegen, allen zu danken. — It is important to me to thank everyone."
+      }
+    ]
   },
   {
     "id": "noun-2244",
@@ -32486,7 +32892,18 @@
     "example_ru": "Для доступа нужно иметь соответствующее право.",
     "example_en": "An authorisation is required for access.",
     "plural_note_ru": "Множественное число Berechtigungen встречается редко.",
-    "plural_note_en": "The plural Berechtigungen is rare."
+    "plural_note_en": "The plural Berechtigungen is rare.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1, Recht, Befugnis): der Verkehrspolizist hat die Berechtigung, die Fahrzeuge zu kontrollieren",
+        "source_kind": "dwds",
+        "meaning_ru": "право, полномочие",
+        "meaning_en": "entitlement, authority",
+        "note_ru": "+ инфинитив с zu: Sie hat die Berechtigung, das Labor zu betreten. — У неё есть право входить в лабораторию.",
+        "note_en": "+ zu-infinitive: Sie hat die Berechtigung, das Labor zu betreten. — She is authorized to enter the laboratory."
+      }
+    ]
   },
   {
     "id": "noun-2474",
@@ -33688,6 +34105,15 @@
         "pattern": "nach + Dativ",
         "note_ru": "потребность в чём-либо",
         "note_en": "need for something"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1, Verlangen): er hatte das Bedürfnis zu sprechen; es ist mir (ein) Bedürfnis, dir zu danken",
+        "source_kind": "dwds",
+        "meaning_ru": "потребность",
+        "meaning_en": "need",
+        "note_ru": "+ инфинитив с zu: Sie hatte das Bedürfnis, allein zu sein. — Ей хотелось побыть одной.",
+        "note_en": "+ zu-infinitive: Sie hatte das Bedürfnis, allein zu sein. — She felt the need to be alone."
       }
     ]
   },
@@ -34350,7 +34776,18 @@
     "example_cloze": "Nach ihrem {{c1::Entschluss}}, umzuziehen, begann sie sofort mit der Wohnungssuche.",
     "example_ru": "После того как она решила переехать, она сразу начала искать квартиру.",
     "example_en": "After her decision to move, she immediately started looking for a flat.",
-    "example_de": "Nach ihrem Entschluss, umzuziehen, begann sie sofort mit der Wohnungssuche."
+    "example_de": "Nach ihrem Entschluss, umzuziehen, begann sie sofort mit der Wohnungssuche.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (der nach einer inneren Entscheidung gefasste Vorsatz): es ist mein fester Entschluss, das nicht zu tun",
+        "source_kind": "dwds",
+        "meaning_ru": "решение",
+        "meaning_en": "decision",
+        "note_ru": "+ инфинитив с zu: Sie fasste den Entschluss, mit dem Rauchen aufzuhören. — Она решила бросить курить.",
+        "note_en": "+ zu-infinitive: Sie fasste den Entschluss, mit dem Rauchen aufzuhören. — She made up her mind to stop smoking."
+      }
+    ]
   },
   {
     "id": "noun-2618",
@@ -34620,7 +35057,18 @@
     "example_en": "It is outrageous to simply throw other people's bicycles in front of the door.",
     "example_de": "Es ist eine Frechheit, fremde Fahrräder einfach vor die Tür zu werfen.",
     "plural_note_ru": "Наглость как качество — без множественного числа; Frechheiten — отдельные дерзкие слова или поступки.",
-    "plural_note_en": "Impudence as a quality has no plural; Frechheiten refers to individual insolent remarks or actions."
+    "plural_note_en": "Impudence as a quality has no plural; Frechheiten refers to individual insolent remarks or actions.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: du hast die Frechheit, dich hier noch sehen zu lassen?",
+        "source_kind": "dwds",
+        "meaning_ru": "наглость",
+        "meaning_en": "impudence",
+        "note_ru": "+ инфинитив с zu: Sie hatte die Frechheit, sich vorzudrängeln. — Она имела наглость пролезть без очереди.",
+        "note_en": "+ zu-infinitive: Sie hatte die Frechheit, sich vorzudrängeln. — She had the cheek to jump the queue."
+      }
+    ]
   },
   {
     "id": "noun-2640",
@@ -37825,6 +38273,15 @@
         "pattern": "zu + Dativ",
         "note_ru": "воля к чему-либо: der Wille zum Erfolg",
         "note_en": "will to something: der Wille zum Erfolg"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1): sie hat den festen Willen, sich zu ändern; der Wille zum Leben, zu leben",
+        "source_kind": "dwds",
+        "meaning_ru": "намерение, решимость",
+        "meaning_en": "determination",
+        "note_ru": "+ инфинитив с zu: Sie hat den festen Willen, das Ziel zu erreichen. — Она твёрдо намерена достичь цели.",
+        "note_en": "+ zu-infinitive: Sie hat den festen Willen, das Ziel zu erreichen. — She is determined to reach the goal."
       }
     ]
   },
@@ -37984,7 +38441,18 @@
     "example_en": "He signed the statement only under coercion and later withdrew it.",
     "example_de": "Er unterschrieb die Erklärung nur unter Zwang und widerrief sie später.",
     "usage_note_ru": "Навязчивое побуждение — психологическое значение.",
-    "usage_note_en": "Compulsion is a psychological sense."
+    "usage_note_en": "Compulsion is a psychological sense.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1c, dringende Veranlassung durch Personen, Gruppen, Normen): der Zwang, etw. zu tun, zu unterlassen; der Zwang mitzumachen",
+        "source_kind": "dwds",
+        "meaning_ru": "давление обстоятельств или норм",
+        "meaning_en": "pressure of circumstances or norms",
+        "note_ru": "+ инфинитив с zu: Es gibt keinen Zwang, mitzumachen. — Никто не обязан участвовать.",
+        "note_en": "+ zu-infinitive: Es gibt keinen Zwang, mitzumachen. — There is no obligation to take part."
+      }
+    ]
   },
   {
     "id": "noun-2893",
@@ -39546,6 +40014,15 @@
         "note_en": "willingness to, readiness for something",
         "meaning_ru": "готовность",
         "meaning_en": "readiness, willingness"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS Bed. 1 (der Wille, etw. zu tun), Kollokationen: es mangelt an der Bereitschaft [etw. zu tun]; die Bereitschaft [etw. zu tun] besteht, wächst",
+        "source_kind": "dwds",
+        "meaning_ru": "готовность",
+        "meaning_en": "readiness, willingness",
+        "note_ru": "+ инфинитив с zu: Er zeigte keine Bereitschaft, nachzugeben. — Он не проявил готовности уступить.",
+        "note_en": "+ zu-infinitive: Er zeigte keine Bereitschaft, nachzugeben. — He showed no readiness to give in."
       }
     ]
   },
@@ -39668,7 +40145,18 @@
     "example_cloze": "Sein {{c1::Bestreben}}, die Abläufe zu vereinfachen, fand viel Unterstützung.",
     "example_ru": "Его стремление упростить рабочие процессы получило большую поддержку.",
     "example_en": "His endeavour to simplify the procedures received strong support.",
-    "example_de": "Sein Bestreben, die Abläufe zu vereinfachen, fand viel Unterstützung."
+    "example_de": "Sein Bestreben, die Abläufe zu vereinfachen, fand viel Unterstützung.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: es ist sein Bestreben, dir zu helfen; er hatte nie das Bestreben, sich weiterzubilden",
+        "source_kind": "dwds",
+        "meaning_ru": "стремление, старание",
+        "meaning_en": "endeavour",
+        "note_ru": "+ инфинитив с zu: Er hatte nie das Bestreben, sich weiterzubilden. — Он никогда не стремился повышать свою квалификацию.",
+        "note_en": "+ zu-infinitive: Er hatte nie das Bestreben, sich weiterzubilden. — He never made any endeavour to further his education."
+      }
+    ]
   },
   {
     "id": "noun-3015",
@@ -40598,7 +41086,18 @@
     "example_en": "His ambition motivated him to complete the demanding training.",
     "example_de": "Sein Ehrgeiz motivierte ihn, die schwierige Ausbildung abzuschließen.",
     "plural_note_ru": "Множественное число редко.",
-    "plural_note_en": "The plural is rare."
+    "plural_note_en": "The plural is rare.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Die Zeit 1999): hat offensichtlich keinen Ehrgeiz, von sich aus europäische Symbole zu setzen",
+        "source_kind": "dwds",
+        "meaning_ru": "честолюбие, стремление к успеху",
+        "meaning_en": "ambition",
+        "note_ru": "+ инфинитив с zu: Sie hat den Ehrgeiz, die Beste zu sein. — Она из честолюбия стремится быть лучшей.",
+        "note_en": "+ zu-infinitive: Sie hat den Ehrgeiz, die Beste zu sein. — She has the ambition to be the best."
+      }
+    ]
   },
   {
     "id": "noun-3086",
@@ -44210,7 +44709,18 @@
     "example_ru": "Отвага альпинистов впечатлила всех.",
     "example_en": "The climbers' daring impressed everyone.",
     "plural_note_ru": "Kühnheiten — смелые, дерзкие поступки; смелость как качество — без множественного числа.",
-    "plural_note_en": "Kühnheiten: bold, daring acts; boldness as a quality has no plural."
+    "plural_note_en": "Kühnheiten: bold, daring acts; boldness as a quality has no plural.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: er besitzt die Kühnheit, eigene Bahnen zu gehen; Und ich hatte die Kühnheit, ein Konzert ... anzuzeigen",
+        "source_kind": "dwds",
+        "meaning_ru": "смелость, отвага",
+        "meaning_en": "boldness, daring",
+        "note_ru": "+ инфинитив с zu: Er besaß die Kühnheit, eigene Wege zu gehen. — Ему хватило смелости идти своим путём.",
+        "note_en": "+ zu-infinitive: Er besaß die Kühnheit, eigene Wege zu gehen. — He had the boldness to go his own way."
+      }
+    ]
   },
   {
     "id": "noun-3353",
@@ -45020,7 +45530,18 @@
     "example_ru": "Уже в детстве она проявляла склонность к музыке.",
     "example_en": "Even as a child she showed an inclination towards music.",
     "plural_note_ru": "Склонность к чему-либо (Neigung zu Erkältungen) — без множественного числа; Neigungen — интересы, пристрастия.",
-    "plural_note_en": "A tendency to something (Neigung zu Erkältungen) has no plural; Neigungen: interests, likings."
+    "plural_note_en": "A tendency to something (Neigung zu Erkältungen) has no plural; Neigungen: interests, likings.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Verwendungsbeispiele): Leider hat er die verhängnisvolle Neigung, ehrliche Reden zu halten.",
+        "source_kind": "dwds",
+        "meaning_ru": "склонность, пристрастие",
+        "meaning_en": "inclination, liking",
+        "note_ru": "+ инфинитив с zu: Er hat die Neigung, alles zu übertreiben. — Он склонен всё преувеличивать.",
+        "note_en": "+ zu-infinitive: Er hat die Neigung, alles zu übertreiben. — He has a tendency to exaggerate everything."
+      }
+    ]
   },
   {
     "id": "noun-3412",
@@ -45090,7 +45611,16 @@
     "example_ru": "Я не вижу необходимости переносить встречу.",
     "example_en": "I see no need to postpone the meeting.",
     "plural_note_ru": "Свойство «быть необходимым» — без множественного числа; Notwendigkeiten — то, что необходимо.",
-    "plural_note_en": "The quality of being necessary has no plural; Notwendigkeiten: things that are necessary."
+    "plural_note_en": "The quality of being necessary has no plural; Notwendigkeiten: things that are necessary.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: „So stand ich nun vor der Notwendigkeit, mir eine Arbeit zu suchen.“",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Es besteht keine Notwendigkeit, früher zu kommen. — Нет необходимости приходить раньше.",
+        "note_en": "+ zu-infinitive: Es besteht keine Notwendigkeit, früher zu kommen. — There is no need to come earlier."
+      }
+    ]
   },
   {
     "id": "noun-3417",
@@ -49390,7 +49920,16 @@
     "derived_from": {
       "type": "Verb",
       "word": "versprechen"
-    }
+    },
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: jmdm. das Versprechen geben, abnehmen, etw. zu unternehmen; mit dem Versprechen, den Artikel zu schicken",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Er gab das Versprechen, pünktlich zu sein. — Он пообещал прийти вовремя.",
+        "note_en": "+ zu-infinitive: Er gab das Versprechen, pünktlich zu sein. — He promised to be on time."
+      }
+    ]
   },
   {
     "id": "noun-3733",
@@ -49540,7 +50079,18 @@
     "derived_from": {
       "type": "Verb",
       "word": "verlangen"
-    }
+    },
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS 1: „es war ihr sehnlichstes Verlangen, den Sohn noch einmal zu sehen“; „er hatte das ernste Verlangen, Arzt zu werden“",
+        "source_kind": "dwds",
+        "meaning_ru": "сильное желание, тяга",
+        "meaning_en": "longing, desire",
+        "note_ru": "+ инфинитив с zu: Er spürte das Verlangen, zu schlafen. — Ему страшно хотелось спать.",
+        "note_en": "+ zu-infinitive: Er spürte das Verlangen, zu schlafen. — He felt a craving to sleep."
+      }
+    ]
   },
   {
     "id": "noun-3742",
@@ -50422,7 +50972,18 @@
     "derived_from": {
       "type": "Verb",
       "word": "vermögen"
-    }
+    },
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (1, Fähigkeit): er hatte das Vermögen, stets heiter und gelassen zu sein",
+        "source_kind": "dwds",
+        "meaning_ru": "способность",
+        "meaning_en": "ability",
+        "note_ru": "+ инфинитив с zu: Er hat das Vermögen, ruhig zu bleiben. — Он способен сохранять спокойствие.",
+        "note_en": "+ zu-infinitive: Er hat das Vermögen, ruhig zu bleiben. — He has the ability to stay calm."
+      }
+    ]
   },
   {
     "id": "noun-3795",
@@ -51434,6 +51995,15 @@
         "note_en": "reason for something",
         "meaning_ru": "повод, причина",
         "meaning_en": "reason, cause, occasion"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Verwendungsbeispiele): der heutige Tag ist auch ein Anlass zu danken; Das müßte Anlaß sein, sich … zu äußern",
+        "source_kind": "dwds",
+        "meaning_ru": "повод, причина",
+        "meaning_en": "reason, cause, occasion",
+        "note_ru": "+ инфинитив с zu: Es gibt keinen Anlass, sich Sorgen zu machen. — Нет повода волноваться.",
+        "note_en": "+ zu-infinitive: Es gibt keinen Anlass, sich Sorgen zu machen. — There is no cause to worry."
       }
     ]
   },
@@ -61100,6 +61670,15 @@
         "pattern": "vor + Dativ",
         "note_ru": "робость, боязнь перед кем-либо, чем-либо",
         "note_en": "shyness of, aversion to someone, something"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Verwendungsbeispiele): „eine ausgesprochene Scheu, sich über religiöse Fragen zu äußern“",
+        "source_kind": "dwds",
+        "meaning_ru": "робость, застенчивость",
+        "meaning_en": "shyness, timidity",
+        "note_ru": "+ инфинитив с zu: Er hat keine Scheu, Fragen zu stellen. — Он не стесняется задавать вопросы.",
+        "note_en": "+ zu-infinitive: Er hat keine Scheu, Fragen zu stellen. — He is not shy about asking questions."
       }
     ]
   },
@@ -62788,7 +63367,18 @@
     "example_de": "Seine Unfähigkeit, Nein zu sagen, bringt ihn oft in Schwierigkeiten.",
     "example_cloze": "Seine {{c1::Unfähigkeit}}, Nein zu sagen, bringt ihn oft in Schwierigkeiten.",
     "example_ru": "Неспособность сказать «нет» часто доставляет ему трудности.",
-    "example_en": "His inability to say no often gets him into trouble."
+    "example_en": "His inability to say no often gets him into trouble.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: Seine absolute Unfähigkeit, sich durchzusetzen, …; Def.: das Unfähigsein, etw. zu tun",
+        "source_kind": "dwds",
+        "meaning_ru": "неспособность",
+        "meaning_en": "inability",
+        "note_ru": "+ инфинитив с zu: Seine Unfähigkeit, zuzuhören, stört alle. — Его неумение слушать всем мешает.",
+        "note_en": "+ zu-infinitive: Seine Unfähigkeit, zuzuhören, stört alle. — His inability to listen bothers everyone."
+      }
+    ]
   },
   {
     "id": "noun-4736",
@@ -63046,7 +63636,18 @@
     "example_ru": "Наглость покупателя совершенно лишила продавщицу дара речи.",
     "example_en": "The customer's impudence left the shop assistant completely speechless.",
     "plural_note_ru": "В значении «наглость (свойство)» без мн. ч.",
-    "plural_note_en": "No plural in the sense 'impudence (as a quality)'."
+    "plural_note_en": "No plural in the sense 'impudence (as a quality)'.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS (Korpus): die Unverschämtheit ihres Autors, mich der Lüge zu bezichtigen",
+        "source_kind": "dwds",
+        "meaning_ru": "наглость, бесстыдство",
+        "meaning_en": "impudence, cheek, insolence",
+        "note_ru": "+ инфинитив с zu: Er hatte die Unverschämtheit, mehr Geld zu verlangen. — У него хватило наглости потребовать больше денег.",
+        "note_en": "+ zu-infinitive: Er hatte die Unverschämtheit, mehr Geld zu verlangen. — He had the nerve to ask for more money."
+      }
+    ]
   },
   {
     "id": "noun-4754",
@@ -63653,7 +64254,16 @@
     "example_ru": "У кассы в супермаркете детей поджидает множество маленьких соблазнов.",
     "example_en": "At the supermarket checkout, lots of little temptations await the children.",
     "usage_note_ru": "Устойчиво: jemanden in Versuchung führen — вводить кого-л. в искушение.",
-    "usage_note_en": "Set phrase: jemanden in Versuchung führen — lead someone into temptation."
+    "usage_note_en": "Set phrase: jemanden in Versuchung führen — lead someone into temptation.",
+    "complements": [
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: „Und die Versuchung wird groß sein, dieses Wissen wirtschaftlich zu nutzen.“; „in Versuchung geraten, am falschen Ort zu sparen“",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Die Versuchung, noch ein Stück zu essen, war groß. — Соблазн съесть ещё кусочек был велик.",
+        "note_en": "+ zu-infinitive: Die Versuchung, noch ein Stück zu essen, war groß. — The temptation to eat one more piece was great."
+      }
+    ]
   },
   {
     "id": "noun-4799",
@@ -69133,6 +69743,13 @@
         "pattern": "nach + Dativ",
         "note_ru": "тоска по кому-либо, чему-либо",
         "note_en": "longing for someone, something"
+      },
+      {
+        "pattern": "zu + Infinitiv",
+        "source": "DWDS: „Eine tiefe Sehnsucht entstand in ihm, diese Länder einmal mit eigenen Augen zu sehen.“",
+        "source_kind": "dwds",
+        "note_ru": "+ инфинитив с zu: Sie hatte die Sehnsucht, das Meer noch einmal zu sehen. — Ей страстно хотелось ещё раз увидеть море.",
+        "note_en": "+ zu-infinitive: Sie hatte die Sehnsucht, das Meer noch einmal zu sehen. — She longed to see the sea once more."
       }
     ]
   },
