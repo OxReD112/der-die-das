@@ -12993,6 +12993,28 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (advisor 22.11) is the clause before the comma closed — one sign for the list and the relative rule: it has a finite verb, and
     // that is a full verb, or the frame of a modal / werden is closed by its infinitive / participle (Gab es wirklich Läden, …). Open:
     // no finite verb (Wie nun der Wirt, …) or a modal with no infinitive yet (Im Mittelpunkt sollen der Austausch …, …).
+    // (advisor 22.11 / 23.11, fact 1) what follows a verb in second place at j in a part ending at end: 'none' — the verb ends the part;
+    // 'coordinated' — und / oder right after it (Leute, die Potter hießen und … hatten; fürchteten und mieden); 'tail' — only a
+    // comparison with wie / als or a prepositional group to the end, with no finite verb there (die Augen hatte wie Sterne; der Angst hat
+    // vor Hunden; fürchteten wie die Pest) — a relative clause may go on so; 'continues' — more words: verb second, a main clause (die
+    // Präzession sei gleichmäßig …; der Vertreter …, das … bejubele, sei nicht willkommen). Shared by derRoleByVerbPlace and the list walk
+    // of articleInVerblessPart; rows(i) gives the verb readings of token i.
+    function verbSecondTail(tokens, j, end, rows) {
+      if (j >= end) return 'none';
+      const next = norm(tokens[j+1][0]);
+      if (COORDINATORS_WITHOUT_COMMA.includes(next)) return 'coordinated';
+      if ((['wie','als'].includes(next) || prepositionCardsByForm.get(next) || contractionArticle(tokens[j+1][0])) &&
+        !tokens.slice(j+1,end+1).some((x,i) => /^\p{Ll}/u.test(x[0]) && rows(j+1+i).some(r => r.kind === 'finite'))) return 'tail';
+      return 'continues';
+    }
+    // (advisor 22.11 / 23.11) the part from..end is verb-last: its last word is a finite verb form and not one joined by und / oder to
+    // the clause before (Er nahm den Hut, die Jacke und ging) — the sign of a subordinate / relative clause; shared by the relative rule
+    // (derRoleByVerbPlace) and the list walk of articleInVerblessPart
+    function finiteAtPartEnd(tokens, from, end) {
+      const rows = i => [norm(tokens[i][0]),norm(tokens[i][0]).replace(/ß/gu,'ss')].flatMap(f => verbAnalyses.get(f) || []);
+      if (!/^\p{Ll}/u.test(tokens[end][0]) || !rows(end).some(r => r.kind === 'finite')) return false;
+      return !(end-1 > from && ['und','oder'].includes(norm(tokens[end-1][0])));
+    }
     // (advisor 22.11, fact 5 — one function) the state of the frame in the words of one part: 'none' — no finite verb; 'closed' — a
     // finite full verb, or the frame verb's infinitive / participle is there; 'open' — only a frame verb (of the given list) and nothing
     // closing it yet.
@@ -13187,9 +13209,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let endFiniteMemo;
       const endFinite = async () => {
         if (endFiniteMemo !== undefined) return endFiniteMemo;
-        if (!verbRows(end).some(r => r.kind === 'finite')) return endFiniteMemo = false;
         // (a verb right after und / oder at the end is coordinated with the clause before the comma: Er nahm den Hut, die Jacke und ging)
-        if (end-1 > index && ['und','oder'].includes(norm(tokens[end-1][0]))) return endFiniteMemo = false;
+        if (!finiteAtPartEnd(tokens,index,end)) return endFiniteMemo = false;
         // (advisor 22.11) a subordinating word inside the part opens a clause of its own — and owns the verb at the end — only at the
         // start of a part, i.e. right after und / oder / aber (the part itself begins after the comma): wegen der spannenden Erzählung
         // und weil es ein großes Versäumnis wäre. In the middle of a part it opens no clause: die als Göttin verehrt wird; die älter als
@@ -13267,8 +13288,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         };
         // (a relative clause may go on after its verb with a comparison or a prepositional group: die Augen hatte wie Sterne; der Angst
         // hat vor Hunden)
-        const tailAfter = j => j < end && (['wie','als'].includes(norm(tokens[j+1][0])) || prepositionCardsByForm.get(norm(tokens[j+1][0])) || contractionArticle(tokens[j+1][0])) &&
-          !tokens.slice(j+1,end+1).some((x,i) => /^\p{Ll}/u.test(x[0]) && verbRows(j+1+i).some(r => r.kind === 'finite'));
+        const tailAfter = j => verbSecondTail(tokens,j,end,verbRows) === 'tail';
         for (let j = k + 1; j <= Math.min(k + 2, end); j++) {
           if (/^\p{Lu}/u.test(tokens[j][0])) break;
           // (a verb form after zu is an infinitive: die Hinweise zu verdächtigen Beobachtungen …)
@@ -13292,7 +13312,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const finiteHere = onlyFiniteAt(j) || verbRows(j).some(r => r.kind === 'finite' && FRAME.includes(r.base)) && !verbRows(end).some(r => r.kind === 'finite' && FRAME.includes(r.base)) &&
             j < end && verbRows(end).some(r => r.kind === 'infinitive' || r.kind === 'participle') &&
             !verbRows(end).some(r => r.kind === 'finite' && !verbRows(end).some(q => q.kind === 'infinitive' || q.kind === 'participle'));
-          if (second && j < end && finiteHere && !joinedSeparable(j) && !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[j+1]?.[0] || '')))
+          if (second && j < end && finiteHere && !joinedSeparable(j) && verbSecondTail(tokens,j,end,verbRows) !== 'coordinated')
             return {candidate:article,evidence:'g50-article-by-verb-place'};
           // (and not a verb cluster ending the part: …, die Menschen zerquetschen konnten)
           // (a verb followed by und / oder may end a relative clause that goes on: Leute, die Potter hießen und einen Sohn … hatten —
@@ -13572,7 +13592,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // G50 group 4 (advisor 01.11): after a comma der / die / das / den / dem + a capital noun that fits it, and no verb at all up to the
     // next mark — nor in the part after a following comma (…, die Nüsse, Äpfel und Birnen kaufte) —: a relative or demonstrative
     // needs its own verb, so it is the article of a list member or an apposition (die Hand auf der Türklinke, Fang, den Saurüden, …).
-    function articleInVerblessPart(word, context, candidates) {
+    async function articleInVerblessPart(word, context, candidates) {
       if (!Number.isInteger(context?.tokenOffset)) return null;
       const w = norm(word);
       if (!['der','die','das','den','dem'].includes(w) || (word.length > 1 && word === word.toUpperCase())) return null;
@@ -13583,13 +13603,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (index < 1 || index+1 >= tokens.length) return null;
       const gap = (a,b) => sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index);
       if (!/^\s*[,;]\s*$/u.test(gap(index-1,index)) || !/^\s+$/u.test(gap(index,index+1)) || !/^\p{Lu}/u.test(tokens[index+1][0])) return null;
-      // (the capital word is a noun of ours that fits the article form)
-      const k1 = norm(tokens[index+1][0]), nouns = (forms.get(k1) || []).filter(e => e.type === 'Nomen');
+      // (the capital word is a noun that fits the article form: its gender / number from nounFactsAt — our card, the light record, the
+      // English dictionary; advisor 22.11, source audit B4 — one logic for every source)
       const fit = {der:['m','f','pl'],die:['f','pl'],das:['n'],den:['m','pl'],dem:['m','n']}[w];
-      const gender = {der:'m',die:'f',das:'n'};
-      // (the base form by its gender, a plural form, or another case form of the noun — Rufen, Herzens —: no gender check there)
-      const fits = nouns.some(e => norm(e.word) === k1 ? fit.includes(gender[e.article]) :
-        String(e.plural || '').split(/\s*,\s*/u).some(p => norm(p) === k1) ? fit.includes('pl') : true);
+      const facts = await nounFactsAt(tokens,index+1,'articleInVerblessPart');
+      const fits = (facts?.rows || []).some(r => r.number === 'plural' ? fit.includes('pl') :
+        fit.includes({masculine:'m',feminine:'f',neuter:'n'}[r.gender]));
       if (!fits) return null;
       // (a verb: any verb form of ours, or a lowercase word we do not know with a verb ending — miaute, bind't)
       const verbish = i => { const t = tokens[i][0], k = norm(t); if (!/^\p{Ll}/u.test(t)) return false;
@@ -13597,16 +13616,62 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         return !(forms.get(k) || []).length && /(?:te|ten|tet|test|t|en|st|'t)$/u.test(k); };
       const end = partEnd(sentence,tokens,index);
       for (let i = index+1; i <= end; i++) if (verbish(i)) return null;
+      // (source audit B4, count 23.11: a dot inside a word — a domain, an abbreviation without a space: der Träger der Adi.hn ist — does
+      // not end the part; its verb may follow: no decision)
+      if (end+1 < tokens.length && /^\.\p{L}/u.test(sentence.slice(tokens[end].index+tokens[end][0].length))) return null;
       // (hidden sample 17.11, count: a part cut by a dash or a hyphen may go on to its verb — …, den Herr Holtz per E - Mail genannt
       // hatte; …, die Menschen wie ihn – mit Trisomie 21 – nicht haben will: the article stays, as before, but gives no pair)
       const dashCut = end+1 < tokens.length && !/[,;:.!?()„“”"«»…]/u.test(gap(end,end+1));
-      // (the part after a following comma must not end in a verb: then the comma was inside the relative clause)
       // (hidden sample 17.11, замер 2: not when a w-word or a subordinator opens that part — a clause of its own: …, der Magen aber, worin
       // er lag, …; the relative clause going on after a comma or a dash keeps the guard: …, den Herr Holtz per E - Mail genannt hatte)
-      const ownClause = end+1 < tokens.length && /^(?:wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|weil|als|wenn|dass|daß|ob|nachdem|bevor|obwohl|indem|sobald|falls)$/u.test(tokens[end+1][0]);
-      if (end+1 < tokens.length && /^\s*,\s*$/u.test(gap(end,end+1)) && !ownClause) {
-        const e2 = partEnd(sentence,tokens,end+1);
-        if (verbish(e2)) return null;
+      // (the part after a following comma must not end in a verb: then the comma was inside the relative clause)
+      // (source audit B4, independent review 23.11: the relative clause may go on over several commas of a list to its verb at the end —
+      // Holzmodellen, die Handwerker, Schiffe, aber auch das Haus des Meketre zeigen: the parts after it are followed while they are
+      // bare members with no verb; a part opened by its own determiner, und / oder / sowie, a w-word, a subordinator or an infinitive
+      // opener is a member or a clause of its own and ends the walk (die Hunde im Hofe, die Tauben …; seinem Lebensraum, der Prärie, und
+      // seinen Warnrufen, die …), and so does a list end with und / oder (Österreich, der Schweiz, Italien, Skandinavien und Osteuropa teil);
+      // a verb at the end of a part reached — no decision)
+      const OPENS_OWN = /^(?:der|die|das|den|dem|des|ein\p{Ll}*|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|euer\p{Ll}*|eur\p{Ll}*|und|oder|sowie|sondern|wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|weil|als|wenn|dass|daß|ob|nachdem|bevor|obwohl|indem|sobald|falls|ohne|um|statt|anstatt)$/iu;
+      // (advisor 23.11) an inserted relative clause on the way — a part opened by a lowercase der / die / das / den / dem / denen / deren /
+      // dessen (or a preposition + one of them) and verb-last by finiteAtPartEnd, the sign the relative rule reads — is stepped over:
+      // Kinder, die Hunde, die bellten, fürchteten, … and Kinder, die Hunde, die Harry hatte, fürchteten, … (the walk goes on to
+      // fürchteten — no decision); den Koffer, der neu war, die Uhr und das Buch (the walk goes on to die Uhr — the article)
+      const RELATIVE_WORD = /^(?:der|die|das|den|dem|denen|deren|dessen)$/u;
+      // (a capital word right after the relative word that is a noun the word fits as its article makes the part a list member of its
+      // own with the verb of the clause at its end — Läden, die Zauberbücher, die Besen und Kessel verkauften; …, den Verbänden und der
+      // Politik kommen —: no step over; a name or a noun it does not fit does not — die Harry hatte)
+      const fitsAsArticle = async (r) => {
+        const f = {der:['m','f','pl'],die:['f','pl'],das:['n'],den:['m','pl'],dem:['m','n']}[norm(tokens[r][0])];
+        if (!f || !/^\p{Lu}/u.test(tokens[r+1][0])) return false;
+        const rows = (await nounFactsAt(tokens,r+1,'articleInVerblessPart'))?.rows || [];
+        return rows.some(x => x.number === 'plural' ? f.includes('pl') : f.includes({masculine:'m',feminine:'f',neuter:'n'}[x.gender]));
+      };
+      const insertion = async (a,b) => {
+        const r = RELATIVE_WORD.test(tokens[a][0]) ? a : prepositionCardsByForm.get(norm(tokens[a][0])) && a+1 <= b && RELATIVE_WORD.test(tokens[a+1][0]) ? a+1 : -1;
+        return r >= 0 && r < b && finiteAtPartEnd(tokens,r,b) && !(await fitsAsArticle(r));
+      };
+      let stepped = false;
+      const rowsAt = i => [norm(tokens[i][0]),norm(tokens[i][0]).replace(/ß/gu,'ss')].flatMap(f => verbAnalyses.get(f) || []);
+      for (let e = end, k = 0; k < 6 && e+1 < tokens.length && /^\s*,\s*$/u.test(gap(e,e+1)); k++) {
+        { const e2 = partEnd(sentence,tokens,e+1); if (await insertion(e+1,e2)) { e = e2; stepped = true; continue; } }
+        // (Mac run w249, train; advisor 23.11, fact 1: further on the walk — after a bare member or an inserted relative clause — a part
+        // opened by a finite verb that continues by verbSecondTail is the verb-second continuation of the clause of the word — der
+        // Vertreter eines Regimes, das den Mord an Rabin bejubele, sei nicht willkommen —: the article stays; a lone verb, a verb with
+        // und / oder or with only a wie / als / prepositional group closes the relative clause — die Hunde, die bellten, fürchteten /
+        // fürchteten wie die Pest / fürchteten und mieden —: no decision. Right after the word, as before.)
+        if (k > 0 || stepped) { const e2 = partEnd(sentence,tokens,e+1);
+          if (/^\p{Ll}/u.test(tokens[e+1][0]) && rowsAt(e+1).some(r => r.kind === 'finite') && verbSecondTail(tokens,e+1,e2,rowsAt) === 'continues') break; }
+        if (k > 0 && OPENS_OWN.test(tokens[e+1][0]) || k === 0 && /^(?:wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|weil|als|wenn|dass|daß|ob|nachdem|bevor|obwohl|indem|sobald|falls|ohne|um|statt|anstatt)$/u.test(tokens[e+1][0])) break;
+        const e2 = partEnd(sentence,tokens,e+1);
+        // (a part with und / oder ends the list: the walk stops there; right after the word its verb at the end still decides, as before —
+        // die Nüsse, Äpfel und Birnen kaufte; further on it is the end of the list, not the relative clause — Österreich, der Schweiz,
+        // Italien, Skandinavien und Osteuropa teil; die Zunahme der Agogik, Chromatik und Dominantseptnonakkorde …, die …, unterstrichen wird)
+        const listEnd = tokens.slice(e+1,e2+1).some(t => ['und','oder','sowie'].includes(norm(t[0])));
+        if (verbish(e2) && (k === 0 || !listEnd)) return null;
+        let verb = false;
+        for (let i = e+1; i < e2; i++) if (verbish(i)) { verb = true; break; }
+        if (verb || listEnd) break;
+        e = e2;
       }
       return {candidate:article,evidence:dashCut ? 'g50-article-verbless-part-open' : 'g50-article-verbless-part'};
     }
@@ -17720,7 +17785,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       if (selection.canFill('der-pronoun-role',resolution)) {
         const role = await derPronounRole(word,context,candidates) || await derRoleByVerbPlace(word,context,candidates) || notArticleByNextWord(word,context,candidates) ||
-          articleInVerblessPart(word,context,candidates);
+          await articleInVerblessPart(word,context,candidates);
         if (role?.candidate) selection.fill(resolution,'der-pronoun-role',role.candidate,role.evidence);
         // (G50 step 3: not an article, the role not decided — the window keeps the demonstrative and the relative)
         else if (role?.window) { candidates = candidates.filter(c => !(c.source === 'main' && c.pos === 'article' && c.item?.grammar?.article_kind === 'definite')); resolution.candidates = candidates; }
