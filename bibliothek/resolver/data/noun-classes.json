@@ -1,0 +1,1657 @@
+{
+ "format_version": 1,
+ "note": "Links chat 24.11 (advisor): two grammatical classes of nouns — time and measure — complete by grammar, not by corpus. Read by the measure-after-definite-article rule and the vor/mit + time-word sign; the old MEASURE / OBJ_TIME / TIME_NOUN lists move here in a later step (expect 0 changes). Classes: time.unit — a stretch of time; time.point — a point of a stretch (Anfang, Ende …); time.part_of_day / day / month / season / holiday; measure.* — units of length, area, volume, weight, money, physical units, counts, portions, distance. forms: lowercase spellings (singular, genitive -s / -es, plural, dative plural -n).",
+ "time": {
+  "unit": [
+   {
+    "word": "Sekunde",
+    "forms": [
+     "sekunde",
+     "sekunden"
+    ]
+   },
+   {
+    "word": "Minute",
+    "forms": [
+     "minute",
+     "minuten"
+    ]
+   },
+   {
+    "word": "Stunde",
+    "forms": [
+     "stunde",
+     "stunden"
+    ]
+   },
+   {
+    "word": "Viertelstunde",
+    "forms": [
+     "viertelstunde",
+     "viertelstunden"
+    ]
+   },
+   {
+    "word": "Uhr",
+    "forms": [
+     "uhr"
+    ]
+   },
+   {
+    "word": "Tag",
+    "forms": [
+     "tag",
+     "tage",
+     "tagen",
+     "tages",
+     "tags"
+    ]
+   },
+   {
+    "word": "Woche",
+    "forms": [
+     "woche",
+     "wochen"
+    ]
+   },
+   {
+    "word": "Wochenende",
+    "forms": [
+     "wochenende",
+     "wochenenden",
+     "wochenendes"
+    ]
+   },
+   {
+    "word": "Monat",
+    "forms": [
+     "monat",
+     "monate",
+     "monaten",
+     "monates",
+     "monats"
+    ]
+   },
+   {
+    "word": "Quartal",
+    "forms": [
+     "quartal",
+     "quartale",
+     "quartalen",
+     "quartales",
+     "quartals"
+    ]
+   },
+   {
+    "word": "Semester",
+    "forms": [
+     "semester",
+     "semestern",
+     "semesters"
+    ]
+   },
+   {
+    "word": "Jahr",
+    "forms": [
+     "jahr",
+     "jahre",
+     "jahren",
+     "jahres",
+     "jahrs"
+    ]
+   },
+   {
+    "word": "Halbjahr",
+    "forms": [
+     "halbjahr",
+     "halbjahre",
+     "halbjahren",
+     "halbjahres",
+     "halbjahrs"
+    ]
+   },
+   {
+    "word": "Lebensjahr",
+    "forms": [
+     "lebensjahr",
+     "lebensjahre",
+     "lebensjahren",
+     "lebensjahres",
+     "lebensjahrs"
+    ]
+   },
+   {
+    "word": "Jahrzehnt",
+    "forms": [
+     "jahrzehnt",
+     "jahrzehnte",
+     "jahrzehnten",
+     "jahrzehntes",
+     "jahrzehnts"
+    ]
+   },
+   {
+    "word": "Jahrhundert",
+    "forms": [
+     "jahrhundert",
+     "jahrhunderte",
+     "jahrhunderten",
+     "jahrhundertes",
+     "jahrhunderts"
+    ]
+   },
+   {
+    "word": "Jahrtausend",
+    "forms": [
+     "jahrtausend",
+     "jahrtausende",
+     "jahrtausenden",
+     "jahrtausendes",
+     "jahrtausends"
+    ]
+   },
+   {
+    "word": "Weile",
+    "forms": [
+     "weile"
+    ]
+   },
+   {
+    "word": "Weilchen",
+    "forms": [
+     "weilchen",
+     "weilchens"
+    ]
+   },
+   {
+    "word": "Moment",
+    "forms": [
+     "moment",
+     "momente",
+     "momenten",
+     "momentes",
+     "moments"
+    ]
+   },
+   {
+    "word": "Augenblick",
+    "forms": [
+     "augenblick",
+     "augenblicke",
+     "augenblicken",
+     "augenblickes",
+     "augenblicks"
+    ]
+   },
+   {
+    "word": "Zeit",
+    "forms": [
+     "zeit",
+     "zeiten"
+    ]
+   },
+   {
+    "word": "Zeitraum",
+    "forms": [
+     "zeitraum",
+     "zeitraums",
+     "zeiträume",
+     "zeiträumen"
+    ]
+   },
+   {
+    "word": "Zeitlang",
+    "forms": [
+     "zeitlang"
+    ]
+   },
+   {
+    "word": "Frist",
+    "forms": [
+     "frist",
+     "fristen"
+    ]
+   },
+   {
+    "word": "Ewigkeit",
+    "forms": [
+     "ewigkeit",
+     "ewigkeiten"
+    ]
+   },
+   {
+    "word": "Epoche",
+    "forms": [
+     "epoche",
+     "epochen"
+    ]
+   },
+   {
+    "word": "Zeitalter",
+    "forms": [
+     "zeitalter",
+     "zeitaltern",
+     "zeitalters"
+    ]
+   },
+   {
+    "word": "Mal",
+    "forms": [
+     "mal",
+     "male",
+     "malen",
+     "males",
+     "mals"
+    ]
+   },
+   {
+    "word": "Ära",
+    "forms": [
+     "ära",
+     "ären"
+    ]
+   },
+   {
+    "word": "Periode",
+    "forms": [
+     "periode",
+     "perioden"
+    ]
+   },
+   {
+    "word": "Saison",
+    "forms": [
+     "saison",
+     "saisons"
+    ]
+   }
+  ],
+  "part_of_day": [
+   {
+    "word": "Morgen",
+    "forms": [
+     "morgen",
+     "morgens"
+    ]
+   },
+   {
+    "word": "Vormittag",
+    "forms": [
+     "vormittag",
+     "vormittage",
+     "vormittagen",
+     "vormittages",
+     "vormittags"
+    ]
+   },
+   {
+    "word": "Mittag",
+    "forms": [
+     "mittag",
+     "mittage",
+     "mittagen",
+     "mittages",
+     "mittags"
+    ]
+   },
+   {
+    "word": "Nachmittag",
+    "forms": [
+     "nachmittag",
+     "nachmittage",
+     "nachmittagen",
+     "nachmittages",
+     "nachmittags"
+    ]
+   },
+   {
+    "word": "Abend",
+    "forms": [
+     "abend",
+     "abende",
+     "abenden",
+     "abendes",
+     "abends"
+    ]
+   },
+   {
+    "word": "Nacht",
+    "forms": [
+     "nacht",
+     "nächte",
+     "nächten"
+    ]
+   },
+   {
+    "word": "Mitternacht",
+    "forms": [
+     "mitternacht"
+    ]
+   },
+   {
+    "word": "Mittagszeit",
+    "forms": [
+     "mittagszeit"
+    ]
+   },
+   {
+    "word": "Dämmerung",
+    "forms": [
+     "dämmerung"
+    ]
+   },
+   {
+    "word": "Feierabend",
+    "forms": [
+     "feierabend",
+     "feierabende",
+     "feierabenden",
+     "feierabendes",
+     "feierabends"
+    ]
+   }
+  ],
+  "day": [
+   {
+    "word": "Montag",
+    "forms": [
+     "montag",
+     "montage",
+     "montagen",
+     "montages",
+     "montags"
+    ]
+   },
+   {
+    "word": "Dienstag",
+    "forms": [
+     "dienstag",
+     "dienstage",
+     "dienstagen",
+     "dienstages",
+     "dienstags"
+    ]
+   },
+   {
+    "word": "Mittwoch",
+    "forms": [
+     "mittwoch",
+     "mittwoche",
+     "mittwochen",
+     "mittwoches",
+     "mittwochs"
+    ]
+   },
+   {
+    "word": "Donnerstag",
+    "forms": [
+     "donnerstag",
+     "donnerstage",
+     "donnerstagen",
+     "donnerstages",
+     "donnerstags"
+    ]
+   },
+   {
+    "word": "Freitag",
+    "forms": [
+     "freitag",
+     "freitage",
+     "freitagen",
+     "freitages",
+     "freitags"
+    ]
+   },
+   {
+    "word": "Samstag",
+    "forms": [
+     "samstag",
+     "samstage",
+     "samstagen",
+     "samstages",
+     "samstags"
+    ]
+   },
+   {
+    "word": "Sonntag",
+    "forms": [
+     "sonntag",
+     "sonntage",
+     "sonntagen",
+     "sonntages",
+     "sonntags"
+    ]
+   },
+   {
+    "word": "Feiertag",
+    "forms": [
+     "feiertag",
+     "feiertage",
+     "feiertagen",
+     "feiertages",
+     "feiertags"
+    ]
+   },
+   {
+    "word": "Werktag",
+    "forms": [
+     "werktag",
+     "werktage",
+     "werktagen",
+     "werktages",
+     "werktags"
+    ]
+   },
+   {
+    "word": "Geburtstag",
+    "forms": [
+     "geburtstag",
+     "geburtstage",
+     "geburtstagen",
+     "geburtstages",
+     "geburtstags"
+    ]
+   },
+   {
+    "word": "Sonnabend",
+    "forms": [
+     "sonnabend",
+     "sonnabende",
+     "sonnabenden",
+     "sonnabendes",
+     "sonnabends"
+    ]
+   }
+  ],
+  "month": [
+   {
+    "word": "Januar",
+    "forms": [
+     "januar",
+     "januares",
+     "januars"
+    ]
+   },
+   {
+    "word": "Jänner",
+    "forms": [
+     "jänner",
+     "jänners"
+    ]
+   },
+   {
+    "word": "Februar",
+    "forms": [
+     "februar",
+     "februares",
+     "februars"
+    ]
+   },
+   {
+    "word": "März",
+    "forms": [
+     "märz",
+     "märzes",
+     "märzs"
+    ]
+   },
+   {
+    "word": "April",
+    "forms": [
+     "april",
+     "apriles",
+     "aprils"
+    ]
+   },
+   {
+    "word": "Mai",
+    "forms": [
+     "mai",
+     "mais"
+    ]
+   },
+   {
+    "word": "Juni",
+    "forms": [
+     "juni",
+     "junis"
+    ]
+   },
+   {
+    "word": "Juli",
+    "forms": [
+     "juli",
+     "julis"
+    ]
+   },
+   {
+    "word": "August",
+    "forms": [
+     "august",
+     "augustes",
+     "augusts"
+    ]
+   },
+   {
+    "word": "September",
+    "forms": [
+     "september",
+     "septembers"
+    ]
+   },
+   {
+    "word": "Oktober",
+    "forms": [
+     "oktober",
+     "oktobers"
+    ]
+   },
+   {
+    "word": "November",
+    "forms": [
+     "november",
+     "novembers"
+    ]
+   },
+   {
+    "word": "Dezember",
+    "forms": [
+     "dezember",
+     "dezembers"
+    ]
+   }
+  ],
+  "holiday": [
+   {
+    "word": "Ostern",
+    "forms": [
+     "ostern",
+     "osternes",
+     "osterns"
+    ]
+   },
+   {
+    "word": "Weihnachten",
+    "forms": [
+     "weihnachten",
+     "weihnachtens"
+    ]
+   },
+   {
+    "word": "Pfingsten",
+    "forms": [
+     "pfingsten",
+     "pfingstens"
+    ]
+   },
+   {
+    "word": "Silvester",
+    "forms": [
+     "silvester",
+     "silvesters"
+    ]
+   },
+   {
+    "word": "Neujahr",
+    "forms": [
+     "neujahr",
+     "neujahres",
+     "neujahrs"
+    ]
+   }
+  ],
+  "season": [
+   {
+    "word": "Frühling",
+    "forms": [
+     "frühling",
+     "frühlinge",
+     "frühlingen",
+     "frühlinges",
+     "frühlings"
+    ]
+   },
+   {
+    "word": "Frühjahr",
+    "forms": [
+     "frühjahr",
+     "frühjahre",
+     "frühjahren",
+     "frühjahres",
+     "frühjahrs"
+    ]
+   },
+   {
+    "word": "Sommer",
+    "forms": [
+     "sommer",
+     "sommern",
+     "sommers"
+    ]
+   },
+   {
+    "word": "Herbst",
+    "forms": [
+     "herbst",
+     "herbste",
+     "herbsten",
+     "herbstes",
+     "herbsts"
+    ]
+   },
+   {
+    "word": "Winter",
+    "forms": [
+     "winter",
+     "wintern",
+     "winters"
+    ]
+   }
+  ],
+  "point": [
+   {
+    "word": "Anfang",
+    "forms": [
+     "anfang",
+     "anfanges",
+     "anfangs",
+     "anfänge",
+     "anfängen"
+    ]
+   },
+   {
+    "word": "Beginn",
+    "forms": [
+     "beginn",
+     "beginnes",
+     "beginns"
+    ]
+   },
+   {
+    "word": "Ende",
+    "forms": [
+     "ende",
+     "enden",
+     "endes"
+    ]
+   },
+   {
+    "word": "Mitte",
+    "forms": [
+     "mitte"
+    ]
+   },
+   {
+    "word": "Schluss",
+    "forms": [
+     "schluss",
+     "schlusss"
+    ]
+   },
+   {
+    "word": "Ausgang",
+    "forms": [
+     "ausgang",
+     "ausganges",
+     "ausgangs"
+    ]
+   },
+   {
+    "word": "Zeitpunkt",
+    "forms": [
+     "zeitpunkt",
+     "zeitpunkte",
+     "zeitpunkten",
+     "zeitpunktes",
+     "zeitpunkts"
+    ]
+   },
+   {
+    "word": "Wende",
+    "forms": [
+     "wende"
+    ]
+   },
+   {
+    "word": "Jahreswende",
+    "forms": [
+     "jahreswende"
+    ]
+   },
+   {
+    "word": "Jahresende",
+    "forms": [
+     "jahresende",
+     "jahresendes"
+    ]
+   },
+   {
+    "word": "Jahresbeginn",
+    "forms": [
+     "jahresbeginn",
+     "jahresbeginnes",
+     "jahresbeginns"
+    ]
+   },
+   {
+    "word": "Jahresanfang",
+    "forms": [
+     "jahresanfang",
+     "jahresanfanges",
+     "jahresanfangs"
+    ]
+   },
+   {
+    "word": "Monatsende",
+    "forms": [
+     "monatsende",
+     "monatsendes"
+    ]
+   },
+   {
+    "word": "Monatsanfang",
+    "forms": [
+     "monatsanfang",
+     "monatsanfanges",
+     "monatsanfangs"
+    ]
+   },
+   {
+    "word": "Wochenbeginn",
+    "forms": [
+     "wochenbeginn",
+     "wochenbeginnes",
+     "wochenbeginns"
+    ]
+   }
+  ]
+ },
+ "measure": {
+  "length": [
+   {
+    "word": "Millimeter",
+    "forms": [
+     "millimeter",
+     "millimetern",
+     "millimeters"
+    ]
+   },
+   {
+    "word": "Zentimeter",
+    "forms": [
+     "zentimeter",
+     "zentimetern",
+     "zentimeters"
+    ]
+   },
+   {
+    "word": "Dezimeter",
+    "forms": [
+     "dezimeter",
+     "dezimetern",
+     "dezimeters"
+    ]
+   },
+   {
+    "word": "Meter",
+    "forms": [
+     "meter",
+     "metern",
+     "meters"
+    ]
+   },
+   {
+    "word": "Kilometer",
+    "forms": [
+     "kilometer",
+     "kilometern",
+     "kilometers"
+    ]
+   },
+   {
+    "word": "Meile",
+    "forms": [
+     "meile",
+     "meilen"
+    ]
+   },
+   {
+    "word": "Seemeile",
+    "forms": [
+     "seemeile",
+     "seemeilen"
+    ]
+   },
+   {
+    "word": "Zoll",
+    "forms": [
+     "zoll",
+     "zolles",
+     "zolln",
+     "zolls"
+    ]
+   },
+   {
+    "word": "Fuß",
+    "forms": [
+     "fuß",
+     "fußn",
+     "fußs"
+    ]
+   },
+   {
+    "word": "Elle",
+    "forms": [
+     "elle",
+     "ellen"
+    ]
+   },
+   {
+    "word": "Klafter",
+    "forms": [
+     "klafter",
+     "klaftern",
+     "klafters"
+    ]
+   },
+   {
+    "word": "Yard",
+    "forms": [
+     "yard",
+     "yardes",
+     "yards"
+    ]
+   },
+   {
+    "word": "Lichtjahr",
+    "forms": [
+     "lichtjahr",
+     "lichtjahre",
+     "lichtjahren",
+     "lichtjahres",
+     "lichtjahrs"
+    ]
+   },
+   {
+    "word": "Schritt",
+    "forms": [
+     "schritt",
+     "schritte",
+     "schritten",
+     "schrittes",
+     "schritts"
+    ]
+   },
+   {
+    "word": "Handbreit",
+    "forms": [
+     "handbreit"
+    ]
+   },
+   {
+    "word": "Spanne",
+    "forms": [
+     "spanne",
+     "spannen"
+    ]
+   }
+  ],
+  "area": [
+   {
+    "word": "Quadratmeter",
+    "forms": [
+     "quadratmeter",
+     "quadratmetern",
+     "quadratmeters"
+    ]
+   },
+   {
+    "word": "Quadratkilometer",
+    "forms": [
+     "quadratkilometer",
+     "quadratkilometern",
+     "quadratkilometers"
+    ]
+   },
+   {
+    "word": "Hektar",
+    "forms": [
+     "hektar",
+     "hektares",
+     "hektarn",
+     "hektars"
+    ]
+   },
+   {
+    "word": "Ar",
+    "forms": [
+     "ar",
+     "ares",
+     "arn",
+     "ars"
+    ]
+   }
+  ],
+  "volume": [
+   {
+    "word": "Milliliter",
+    "forms": [
+     "milliliter",
+     "millilitern",
+     "milliliters"
+    ]
+   },
+   {
+    "word": "Zentiliter",
+    "forms": [
+     "zentiliter",
+     "zentilitern",
+     "zentiliters"
+    ]
+   },
+   {
+    "word": "Deziliter",
+    "forms": [
+     "deziliter",
+     "dezilitern",
+     "deziliters"
+    ]
+   },
+   {
+    "word": "Liter",
+    "forms": [
+     "liter",
+     "litern",
+     "liters"
+    ]
+   },
+   {
+    "word": "Hektoliter",
+    "forms": [
+     "hektoliter",
+     "hektolitern",
+     "hektoliters"
+    ]
+   },
+   {
+    "word": "Kubikmeter",
+    "forms": [
+     "kubikmeter",
+     "kubikmetern",
+     "kubikmeters"
+    ]
+   },
+   {
+    "word": "Kubikzentimeter",
+    "forms": [
+     "kubikzentimeter",
+     "kubikzentimetern",
+     "kubikzentimeters"
+    ]
+   }
+  ],
+  "weight": [
+   {
+    "word": "Milligramm",
+    "forms": [
+     "milligramm",
+     "milligrammes",
+     "milligrammn",
+     "milligramms"
+    ]
+   },
+   {
+    "word": "Gramm",
+    "forms": [
+     "gramm",
+     "grammes",
+     "grammn",
+     "gramms"
+    ]
+   },
+   {
+    "word": "Kilogramm",
+    "forms": [
+     "kilogramm",
+     "kilogrammes",
+     "kilogrammn",
+     "kilogramms"
+    ]
+   },
+   {
+    "word": "Kilo",
+    "forms": [
+     "kilo",
+     "kilon",
+     "kilos"
+    ]
+   },
+   {
+    "word": "Pfund",
+    "forms": [
+     "pfund",
+     "pfundes",
+     "pfundn",
+     "pfunds"
+    ]
+   },
+   {
+    "word": "Zentner",
+    "forms": [
+     "zentner",
+     "zentnern",
+     "zentners"
+    ]
+   },
+   {
+    "word": "Tonne",
+    "forms": [
+     "tonne",
+     "tonnen"
+    ]
+   },
+   {
+    "word": "Unze",
+    "forms": [
+     "unze",
+     "unzen"
+    ]
+   },
+   {
+    "word": "Karat",
+    "forms": [
+     "karat",
+     "karates",
+     "karatn",
+     "karats"
+    ]
+   }
+  ],
+  "money": [
+   {
+    "word": "Euro",
+    "forms": [
+     "euro",
+     "euron",
+     "euros"
+    ]
+   },
+   {
+    "word": "Cent",
+    "forms": [
+     "cent",
+     "centes",
+     "centn",
+     "cents"
+    ]
+   },
+   {
+    "word": "Mark",
+    "forms": [
+     "mark",
+     "markn"
+    ]
+   },
+   {
+    "word": "Pfennig",
+    "forms": [
+     "pfennig",
+     "pfennige",
+     "pfennigen",
+     "pfenniges",
+     "pfennigs"
+    ]
+   },
+   {
+    "word": "Dollar",
+    "forms": [
+     "dollar",
+     "dollares",
+     "dollarn",
+     "dollars"
+    ]
+   },
+   {
+    "word": "Franken",
+    "forms": [
+     "franken",
+     "frankens"
+    ]
+   },
+   {
+    "word": "Rappen",
+    "forms": [
+     "rappen",
+     "rappens"
+    ]
+   },
+   {
+    "word": "Groschen",
+    "forms": [
+     "groschen",
+     "groschens"
+    ]
+   },
+   {
+    "word": "Schilling",
+    "forms": [
+     "schilling",
+     "schillinges",
+     "schillingn",
+     "schillings"
+    ]
+   },
+   {
+    "word": "Taler",
+    "forms": [
+     "taler",
+     "talern",
+     "talers"
+    ]
+   },
+   {
+    "word": "Gulden",
+    "forms": [
+     "gulden",
+     "guldens"
+    ]
+   },
+   {
+    "word": "Kreuzer",
+    "forms": [
+     "kreuzer",
+     "kreuzern",
+     "kreuzers"
+    ]
+   },
+   {
+    "word": "Heller",
+    "forms": [
+     "heller",
+     "hellern",
+     "hellers"
+    ]
+   },
+   {
+    "word": "Rubel",
+    "forms": [
+     "rubel",
+     "rubeln",
+     "rubels"
+    ]
+   },
+   {
+    "word": "Kopeke",
+    "forms": [
+     "kopeke",
+     "kopeken"
+    ]
+   },
+   {
+    "word": "Krone",
+    "forms": [
+     "krone",
+     "kronen"
+    ]
+   },
+   {
+    "word": "Yen",
+    "forms": [
+     "yen",
+     "yens"
+    ]
+   },
+   {
+    "word": "Pfund Sterling",
+    "forms": [
+     "pfund sterling",
+     "pfund sterlinges",
+     "pfund sterlings"
+    ]
+   }
+  ],
+  "physical": [
+   {
+    "word": "Grad",
+    "forms": [
+     "grad",
+     "grades",
+     "gradn",
+     "grads"
+    ]
+   },
+   {
+    "word": "Prozent",
+    "forms": [
+     "prozent",
+     "prozentes",
+     "prozentn",
+     "prozents"
+    ]
+   },
+   {
+    "word": "Promille",
+    "forms": [
+     "promille",
+     "promillen",
+     "promilles"
+    ]
+   },
+   {
+    "word": "Watt",
+    "forms": [
+     "watt",
+     "wattes",
+     "wattn",
+     "watts"
+    ]
+   },
+   {
+    "word": "Kilowatt",
+    "forms": [
+     "kilowatt",
+     "kilowattes",
+     "kilowattn",
+     "kilowatts"
+    ]
+   },
+   {
+    "word": "Volt",
+    "forms": [
+     "volt",
+     "voltes",
+     "voltn",
+     "volts"
+    ]
+   },
+   {
+    "word": "Ampere",
+    "forms": [
+     "ampere",
+     "amperen",
+     "amperes"
+    ]
+   },
+   {
+    "word": "PS",
+    "forms": [
+     "ps",
+     "pses",
+     "psn",
+     "pss"
+    ]
+   },
+   {
+    "word": "Kalorie",
+    "forms": [
+     "kalorie",
+     "kalorien"
+    ]
+   },
+   {
+    "word": "Kilokalorie",
+    "forms": [
+     "kilokalorie",
+     "kilokalorien"
+    ]
+   },
+   {
+    "word": "Joule",
+    "forms": [
+     "joule",
+     "joulen",
+     "joules"
+    ]
+   },
+   {
+    "word": "Hertz",
+    "forms": [
+     "hertz",
+     "hertzes",
+     "hertzn",
+     "hertzs"
+    ]
+   },
+   {
+    "word": "Bar",
+    "forms": [
+     "bar",
+     "bares",
+     "barn",
+     "bars"
+    ]
+   },
+   {
+    "word": "Byte",
+    "forms": [
+     "byte",
+     "bytes"
+    ]
+   },
+   {
+    "word": "Kilobyte",
+    "forms": [
+     "kilobyte",
+     "kilobytes"
+    ]
+   },
+   {
+    "word": "Megabyte",
+    "forms": [
+     "megabyte",
+     "megabytes"
+    ]
+   },
+   {
+    "word": "Gigabyte",
+    "forms": [
+     "gigabyte",
+     "gigabytes"
+    ]
+   },
+   {
+    "word": "Knoten",
+    "forms": [
+     "knoten",
+     "knotens"
+    ]
+   }
+  ],
+  "count": [
+   {
+    "word": "Stück",
+    "forms": [
+     "stück",
+     "stücke",
+     "stücken",
+     "stückes",
+     "stücks"
+    ]
+   },
+   {
+    "word": "Paar",
+    "forms": [
+     "paar",
+     "paare",
+     "paaren",
+     "paares",
+     "paars"
+    ]
+   },
+   {
+    "word": "Dutzend",
+    "forms": [
+     "dutzend",
+     "dutzende",
+     "dutzenden",
+     "dutzendes",
+     "dutzends"
+    ]
+   },
+   {
+    "word": "Hundert",
+    "forms": [
+     "hundert",
+     "hunderte",
+     "hunderten",
+     "hundertes",
+     "hunderts"
+    ]
+   },
+   {
+    "word": "Tausend",
+    "forms": [
+     "tausend",
+     "tausende",
+     "tausenden",
+     "tausendes",
+     "tausends"
+    ]
+   },
+   {
+    "word": "Million",
+    "forms": [
+     "million",
+     "millionen"
+    ]
+   },
+   {
+    "word": "Milliarde",
+    "forms": [
+     "milliarde",
+     "milliarden"
+    ]
+   },
+   {
+    "word": "Hälfte",
+    "forms": [
+     "hälfte",
+     "hälften"
+    ]
+   },
+   {
+    "word": "Drittel",
+    "forms": [
+     "drittel",
+     "dritteln",
+     "drittels"
+    ]
+   },
+   {
+    "word": "Viertel",
+    "forms": [
+     "viertel",
+     "vierteln",
+     "viertels"
+    ]
+   }
+  ],
+  "portion": [
+   {
+    "word": "Glas",
+    "forms": [
+     "glas",
+     "glass",
+     "gläser",
+     "gläsern"
+    ]
+   },
+   {
+    "word": "Tasse",
+    "forms": [
+     "tasse",
+     "tassen"
+    ]
+   },
+   {
+    "word": "Becher",
+    "forms": [
+     "becher",
+     "bechern",
+     "bechers"
+    ]
+   },
+   {
+    "word": "Flasche",
+    "forms": [
+     "flasche",
+     "flaschen"
+    ]
+   },
+   {
+    "word": "Kanne",
+    "forms": [
+     "kanne",
+     "kannen"
+    ]
+   },
+   {
+    "word": "Eimer",
+    "forms": [
+     "eimer",
+     "eimern",
+     "eimers"
+    ]
+   },
+   {
+    "word": "Fass",
+    "forms": [
+     "fass",
+     "fasss",
+     "fässer",
+     "fässern"
+    ]
+   },
+   {
+    "word": "Kiste",
+    "forms": [
+     "kiste",
+     "kisten"
+    ]
+   },
+   {
+    "word": "Kasten",
+    "forms": [
+     "kasten",
+     "kastens",
+     "kästen"
+    ]
+   },
+   {
+    "word": "Sack",
+    "forms": [
+     "sack",
+     "sackes",
+     "sacks",
+     "säcke",
+     "säcken"
+    ]
+   },
+   {
+    "word": "Löffel",
+    "forms": [
+     "löffel",
+     "löffeln",
+     "löffels"
+    ]
+   },
+   {
+    "word": "Teelöffel",
+    "forms": [
+     "teelöffel",
+     "teelöffeln",
+     "teelöffels"
+    ]
+   },
+   {
+    "word": "Esslöffel",
+    "forms": [
+     "esslöffel",
+     "esslöffeln",
+     "esslöffels"
+    ]
+   },
+   {
+    "word": "Prise",
+    "forms": [
+     "prise",
+     "prisen"
+    ]
+   },
+   {
+    "word": "Schluck",
+    "forms": [
+     "schluck",
+     "schlucke",
+     "schlucken",
+     "schluckes",
+     "schlucks"
+    ]
+   },
+   {
+    "word": "Bissen",
+    "forms": [
+     "bissen",
+     "bissens"
+    ]
+   },
+   {
+    "word": "Scheibe",
+    "forms": [
+     "scheibe",
+     "scheiben"
+    ]
+   },
+   {
+    "word": "Portion",
+    "forms": [
+     "portion",
+     "portionen"
+    ]
+   },
+   {
+    "word": "Packung",
+    "forms": [
+     "packung",
+     "packungen"
+    ]
+   },
+   {
+    "word": "Schachtel",
+    "forms": [
+     "schachtel",
+     "schachteln"
+    ]
+   },
+   {
+    "word": "Handvoll",
+    "forms": [
+     "handvoll"
+    ]
+   },
+   {
+    "word": "Tropfen",
+    "forms": [
+     "tropfen",
+     "tropfens"
+    ]
+   }
+  ],
+  "distance": [
+   {
+    "word": "Weg",
+    "forms": [
+     "weg",
+     "wege",
+     "wegen",
+     "weges",
+     "wegs"
+    ]
+   },
+   {
+    "word": "Umweg",
+    "forms": [
+     "umweg",
+     "umwege",
+     "umwegen",
+     "umweges",
+     "umwegs"
+    ]
+   },
+   {
+    "word": "Strecke",
+    "forms": [
+     "strecke",
+     "strecken"
+    ]
+   },
+   {
+    "word": "Runde",
+    "forms": [
+     "runde",
+     "runden"
+    ]
+   }
+  ]
+ }
+}

@@ -84,7 +84,7 @@
     return separablePromise;
   }
   // A2 (15.10.2026): agreed verb + preposition pairs (exercise list, reference 4.9).
-  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261123-c1-quant-2", document.currentScript.src);
+  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261124-pairs-ours-2-clean", document.currentScript.src);
   let verbPrepositionPromise = null;
   // (advisor 22.11) «classes»: named closed lists of words that several rules share — one notion, one list (indefinite-quantity: halten
   // von, haben + zu, the card choice of halten). A row's requires_any is a list of words or the name of a class; the rows come with the
@@ -100,16 +100,11 @@
       if (data.classes && (typeof data.classes !== "object" || !Object.values(data.classes).every(v => words(v) || polar(v)))) throw new Error("Invalid verb preposition list");
       const classes = Object.fromEntries(Object.entries(data.classes || {}).map(([k,v]) => [k, polar(v) ? [...v.pos,...v.neg] : v]));
       const polarity = Object.fromEntries(Object.entries(data.classes || {}).filter(([,v]) => polar(v)).map(([k,v]) => [k, {neg:v.neg}]));
-      // (links chat 23.11, advisor: a pair's frame in the data) «no_object»: the case of an object the pair's verb never takes with it —
-      // folgen auf: no dative, treffen auf: no accusative
-      const requires = v => words(v) || typeof v === "string" && words(classes[v]);
-      const options = o => (o.requires_any !== undefined || o.no_object !== undefined) && (o.requires_any === undefined || requires(o.requires_any)) &&
-        (o.no_object === undefined || ["Dativ","Akkusativ"].includes(o.no_object)) && Object.keys(o).every(k => ["requires_any","no_object"].includes(k));
-      if (data.format_version !== 1 || !Array.isArray(data.entries) || typeof classes !== "object" || !Object.values(classes).every(words) ||
-          data.entries.some(r => !Array.isArray(r) || r.length < 3 || r.length > 4 || r.slice(0,3).some(v => typeof v !== "string") ||
-            r.length === 4 && (!r[3] || typeof r[3] !== "object" || !options(r[3]))))
+      // (code review chat 24.11, М5: since 24.11 the pairs live in our records — their conditions in the elements, read by the resolver
+      // (lemma-resolver.js complementFact); this file keeps the classes only, entries: [])
+      if (data.format_version !== 1 || !Array.isArray(data.entries) || typeof classes !== "object" || !Object.values(classes).every(words))
         throw new Error("Invalid verb preposition list");
-      return {classes, polarity, entries:data.entries.map(r => r.length === 4 && typeof r[3].requires_any === "string" ? [r[0],r[1],r[2],{...r[3],requires_any:classes[r[3].requires_any]}] : r)};
+      return {classes, polarity, entries:data.entries};
     }).catch(error => { verbPrepositionPromise = null; throw error; });
     return verbPrepositionPromise;
   }
@@ -163,6 +158,19 @@
         const step=((Math.imul(h^0x9e3779b9,2246822519)>>>0)>>>13)|1;for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(bitmap[bit>>>3]&(1<<(bit&7))))return false;}return true;}});
     }).catch(e=>{wordPartsPromise=null;throw e;});
     return wordPartsPromise;
+  }
+  // Links chat 24.11 (advisor): two grammatical classes of nouns — time and measure — complete by grammar, not by corpus
+  // (data/noun-classes.json, dev/bibliothek/scripts/build-noun-classes.py): {time: Set, timeUnit: Set, timePoint: Set, measure: Set}
+  // of lowercase spellings. Missing or invalid file: empty classes (no time / measure sign).
+  const nounClassesUrl=new URL('data/noun-classes.json?v=20261124-links-1',document.currentScript.src);
+  let nounClassesPromise=null;
+  function nounClasses() {
+    if(!nounClassesPromise)nounClassesPromise=dataFetch(nounClassesUrl).then(r=>{if(!r.ok)throw Error('Noun classes unavailable');return r.json();}).then(d=>{
+      if(d.format_version!==1||!d.time||!d.measure)throw Error('Invalid noun classes');
+      const set=groups=>new Set(groups.flatMap(g=>(g||[]).flatMap(e=>e.forms||[])));
+      return Object.freeze({time:set(Object.values(d.time)),timeUnit:set([d.time.unit]),timePoint:set([d.time.point]),measure:set(Object.values(d.measure)),money:set([d.measure.money])});
+    }).catch(e=>{nounClassesPromise=null;throw e;});
+    return nounClassesPromise;
   }
   // The gender of an external noun (export 2.0.0: entries[i][4].g — m / f / n; p = plural only): der / die / das, '?' for
   // several genders (homonyms: Leiter, Heide), null when none is recorded.
@@ -966,5 +974,5 @@
     for (const hypothesis of weakHypotheses(word)) if (await mayBeVerb(hypothesis.lemma)) return true;
     return false;
   }
-  window.DeutschFallbackDictionary = {strongEnPlural,mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,meaningsOf,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,wordClasses,wordClassPolarity,separableFormEvidence,auxiliaryInflections,lookup,lookupEntry,separableEntries,mayBeVerb,spellingTranslation,superlativeEntries};
+  window.DeutschFallbackDictionary = {nounClasses,strongEnPlural,mayBeVerbForm,wordParts,hasRecord,diminutiveBase,formOfLink,meaningsOf,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,wordClasses,wordClassPolarity,separableFormEvidence,auxiliaryInflections,lookup,lookupEntry,separableEntries,mayBeVerb,spellingTranslation,superlativeEntries};
 })();

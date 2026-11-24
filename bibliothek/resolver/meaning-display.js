@@ -1591,6 +1591,13 @@
     // (18.11.2026: a pack language keeps the mark «English: » of an English meaning — the line is the plain verb's, in English)
     // (advisor 20.11: any language shown — a meaning not in the language shown keeps its mark «английский: » / «English: »)
     const other = meaning && meaning.language && meaning.language !== language;
+    // (links chat 24.11: a light record that is reflexive as a whole — reflexive: true, gesellen «присоединяться» — has the meaning of
+    // «sich X» as its own translation: shown as it is, no «(без sich)»)
+    if (meaning && !other && candidate.light && candidate.reflexive === true) {
+      const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
+      const shown = fit(String(meaning.text || ''));
+      if (shown.text) return {...rest, heading:`sich ${lemma}`, text:shown.text, textLanguage:language, missing:false, derived:true, note:rest.note || '', more:shown.rest};
+    }
     const lines = meaning ? [{...namedLine(`${lemma} ${L(language, '(без sich)', '(without sich)')}`, other ? meaning.text : bare(meaning), meaning.more || 0), helpEntry:candidate.item || null,
       ...(other ? {language:meaning.language} : {})}]
       : [{text:say(NO_TRANSLATION, language), more:0, helpEntry:null}];

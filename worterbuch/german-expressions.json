@@ -5126,7 +5126,16 @@
         "Sie hatte vor Angst geweint.",
         "Er hat Angst bekommen."
       ]
-    }
+    },
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "source": "учебный список",
+        "source_kind": "учебный список",
+        "note_ru": "бояться кого-, чего-либо: Sie hat Angst vor Spinnen.",
+        "note_en": "to be afraid of someone or something: Sie hat Angst vor Spinnen."
+      }
+    ]
   },
   {
     "id": "expression-033",
@@ -9204,7 +9213,18 @@
         "Der Wein macht mich lustig.",
         "Das Bier wird dich lustig machen."
       ]
-    }
+    },
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "source": "учебный список",
+        "source_kind": "учебный список",
+        "meaning_ru": "насмехаться, потешаться (над кем-, чем-либо)",
+        "meaning_en": "to make fun (of someone, something)",
+        "note_ru": "насмехаться над кем-, чем-либо: Mach dich nicht über mich lustig!",
+        "note_en": "to make fun of someone or something: Mach dich nicht über mich lustig!"
+      }
+    ]
   },
   {
     "id": "expression-051",
@@ -10523,7 +10543,16 @@
         "Er machte sich trotz großer Sorgen auf den Weg.",
         "Er machte sich über die kleinen Sorgen der Nachbarn lustig."
       ]
-    }
+    },
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "source": "учебный список",
+        "source_kind": "учебный список",
+        "note_ru": "беспокоиться о ком-, чём-либо: Mach dir keine Sorgen um mich!",
+        "note_en": "to worry about someone or something: Mach dir keine Sorgen um mich!"
+      }
+    ]
   },
   {
     "id": "expression-059",
@@ -10727,7 +10756,18 @@
         "Er wusste nichts vom Bescheid des Amtes.",
         "Woher weißt du von seinem neuen Bescheid?"
       ]
-    }
+    },
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "source": "учебный список",
+        "source_kind": "учебный список",
+        "meaning_ru": "знать, быть в курсе (о чём-либо)",
+        "meaning_en": "to know (about something), to be informed",
+        "note_ru": "знать о чём-либо, быть в курсе чего-либо: Weißt du über den Termin Bescheid?",
+        "note_en": "to know about something: Weißt du über den Termin Bescheid?"
+      }
+    ]
   },
   {
     "id": "expression-060",
@@ -29181,7 +29221,16 @@
         "Die Bedienung war sehr aufmerksam und schnell.",
         "Sie hörte aufmerksam zu."
       ]
-    }
+    },
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "source": "учебный список",
+        "source_kind": "учебный список",
+        "note_ru": "обратить внимание на что-либо: Er machte mich auf den Fehler aufmerksam.",
+        "note_en": "to draw attention to something: Er machte mich auf den Fehler aufmerksam."
+      }
+    ]
   },
   {
     "id": "expression-124",
@@ -42083,7 +42132,16 @@
         "Die Vase ist zerbrochen.",
         "Er zerbrach den Teller über seinem Kopf."
       ]
-    }
+    },
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "source": "учебный список",
+        "source_kind": "учебный список",
+        "note_ru": "ломать голову над чем-либо: Sie zerbricht sich den Kopf über die Aufgabe.",
+        "note_en": "to rack one's brains over something: Sie zerbricht sich den Kopf über die Aufgabe."
+      }
+    ]
   },
   {
     "id": "expression-205",
@@ -68140,6 +68198,24 @@
         "scope": "clause",
         "anchor": 1,
         "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "abgesehen",
+            "clause_start": true
+          },
+          {
+            "form": [
+              "von",
+              "vom"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "no_finite_between": true
       }
     ],
     "tests": {
@@ -68152,7 +68228,12 @@
         "Abgesehen davon, dass es regnete, war es ein schöner Tag.",
         "Alle waren da, abgesehen vom Chef.",
         "Abgesehen von dem Lärm, der nachts kam, war das Hotel gut.",
-        "Das Haus ist, abgesehen von der Küche, fast fertig."
+        "Das Haus ist, abgesehen von der Küche, fast fertig.",
+        "Abgesehen vielleicht von meinem Bruder sind alle gekommen.",
+        "Alle waren pünktlich, abgesehen vielleicht vom Fahrer.",
+        "Abgesehen vielleicht vom Fahrer hatten alle ein Ticket.",
+        "Abgesehen natürlich von meiner Schwester hat jeder ein Auto.",
+        "Alle hatten abgesehen vom Fahrer ein Ticket."
       ],
       "negative": [
         "Er hat von dem Plan abgesehen.",
@@ -68831,5 +68912,2079 @@
       ]
     },
     "id": "expression-430"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "an jemandem, etwas Anteil nehmen",
+    "translation_ru": "участвовать (в чём-либо); проявлять интерес (к кому-, чему-либо); сочувствовать (кому-, чему-либо)",
+    "translation_en": "to take part (in something); to take an interest (in someone, something); to sympathize (with someone, something)",
+    "example_de": "Die ganze Stadt nahm Anteil an ihrem Schicksal.",
+    "example_ru": "Весь город сочувствовал её судьбе.",
+    "example_en": "The whole town sympathized with her fate.",
+    "notes_ru": [
+      "Так же Anteil zeigen (устаревающ.), Anteil bekunden (книжн.). Не путать: seinen Anteil nehmen — взять свою долю."
+    ],
+    "notes_en": [
+      "Likewise Anteil zeigen (becoming dated), Anteil bekunden (elevated). Do not confuse: seinen Anteil nehmen — to take one's share."
+    ],
+    "related_ids": [
+      "noun-2100",
+      "verb-015"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Anteil",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "Anteil",
+            "not_after": [
+              "der",
+              "die",
+              "das",
+              "den",
+              "dem",
+              "des",
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "kein",
+              "keinen",
+              "sein",
+              "seinen",
+              "seinem",
+              "ihr",
+              "ihren",
+              "ihrem",
+              "mein",
+              "meinen",
+              "meinem",
+              "dein",
+              "deinen",
+              "unseren",
+              "euren",
+              "Ihren",
+              "jeden",
+              "diesen"
+            ],
+            "clause_has": [
+              "nehme",
+              "nimmst",
+              "nimmt",
+              "nehmen",
+              "nehmt",
+              "nahm",
+              "nahmst",
+              "nahmen",
+              "nahmt",
+              "nähme",
+              "nähmen",
+              "genommen",
+              "nimm"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "source": "Duden: «Anteil an jemandem, etwas nehmen»",
+        "source_kind": "duden",
+        "note_ru": "участвовать в чём-либо; проявлять интерес к кому-, чему-либо; сочувствовать кому-, чему-либо: Sie nimmt regen Anteil an der Politik.",
+        "note_en": "to take part in, to take an interest in, to sympathize with someone or something: Sie nimmt regen Anteil an der Politik."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die ganze Stadt nahm Anteil an ihrem Schicksal.",
+        "Sie nimmt regen Anteil an der Politik.",
+        "Wir haben großen Anteil an seinem Kummer genommen."
+      ],
+      "negative": [
+        "Er nahm seinen Anteil und ging.",
+        "Sein Anteil am Gewinn ist hoch.",
+        "Jeder nimmt den Anteil, der ihm zusteht."
+      ]
+    },
+    "id": "expression-431"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "für etwas ein Händchen haben",
+    "translation_ru": "(разг.) иметь сноровку, чутьё (к чему-либо), уметь обращаться (с чем-либо)",
+    "translation_en": "(colloquial) to have a knack (for something), to have a way (with something)",
+    "example_de": "Sie hat ein Händchen für Pflanzen.",
+    "example_ru": "Она умеет обращаться с растениями.",
+    "example_en": "She has a way with plants.",
+    "notes_ru": [
+      "Так же ein feines Händchen für etwas haben; kein Händchen für etwas haben — не уметь обращаться с чем-либо."
+    ],
+    "notes_en": [
+      "Likewise ein feines Händchen für etwas haben; kein Händchen für etwas haben — to have no knack for something."
+    ],
+    "related_ids": [
+      "noun-2685",
+      "verb-002"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Haendchen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "ein Händchen",
+              "ein feines Händchen",
+              "kein Händchen",
+              "ein gutes Händchen",
+              "ein glückliches Händchen"
+            ],
+            "clause_has": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hab"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "source": "Duden: «für etwas ein [feines] Händchen haben»",
+        "source_kind": "duden",
+        "note_ru": "уметь обращаться с чем-либо: Er hat ein Händchen für Kinder.",
+        "note_en": "to have a knack for something: Er hat ein Händchen für Kinder."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Sie hat ein Händchen für Pflanzen.",
+        "Er hat kein Händchen für Technik.",
+        "Mein Vater hatte schon immer ein feines Händchen für gute Weine."
+      ],
+      "negative": [
+        "Das Baby hob sein Händchen.",
+        "Im Kino hielten sie Händchen."
+      ]
+    },
+    "id": "expression-432"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit jemandem ein Hühnchen zu rupfen haben",
+    "translation_ru": "(разг.) иметь счёты (с кем-либо), иметь (неприятный) разговор (к кому-либо)",
+    "translation_en": "(colloquial) to have a bone to pick (with someone)",
+    "example_de": "Mit dir habe ich noch ein Hühnchen zu rupfen!",
+    "example_ru": "У меня к тебе ещё есть разговор!",
+    "example_en": "I still have a bone to pick with you!",
+    "notes_ru": [],
+    "notes_en": [],
+    "related_ids": [
+      "verb-002"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Huehnchen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "ein Hühnchen"
+          },
+          {
+            "form": "zu rupfen",
+            "clause_has": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hab"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden: «mit jemandem [noch] ein Hühnchen zu rupfen haben»",
+        "source_kind": "duden",
+        "note_ru": "иметь счёты с кем-либо: Er hat mit seinem Chef ein Hühnchen zu rupfen.",
+        "note_en": "to have a bone to pick with someone: Er hat mit seinem Chef ein Hühnchen zu rupfen."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mit dir habe ich noch ein Hühnchen zu rupfen!",
+        "Sie hatte mit ihm noch ein Hühnchen zu rupfen."
+      ],
+      "negative": [
+        "Die Bäuerin rupfte ein Hühnchen.",
+        "Zum Abendessen gab es ein Hühnchen."
+      ]
+    },
+    "id": "expression-433"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "von etwas ein Lied singen können",
+    "translation_ru": "знать не понаслышке (о чём-либо), знать (что-либо) по горькому опыту",
+    "translation_en": "to know all about (something) from bitter experience",
+    "example_de": "Von Bürokratie kann ich ein Lied singen.",
+    "example_ru": "О бюрократии я знаю не понаслышке.",
+    "example_en": "I can tell you all about bureaucracy.",
+    "notes_ru": [
+      "Так же ein Lied davon zu singen wissen. Чаще всего — с davon: Davon kann ich ein Lied singen."
+    ],
+    "notes_en": [
+      "Likewise ein Lied davon zu singen wissen. Most often with davon: Davon kann ich ein Lied singen."
+    ],
+    "related_ids": [
+      "noun-365",
+      "verb-053",
+      "verb-017"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Lied",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "ein Lied",
+            "clause_has": [
+              "davon",
+              "darüber"
+            ]
+          },
+          {
+            "form": [
+              "singen",
+              "zu singen"
+            ],
+            "clause_has": [
+              "kann",
+              "kannst",
+              "können",
+              "könnt",
+              "konnte",
+              "konntest",
+              "konnten",
+              "konntet",
+              "könnte",
+              "könntest",
+              "könnten",
+              "könntet",
+              "weiß",
+              "weißt",
+              "wissen",
+              "wisst",
+              "wusste",
+              "wussten",
+              "wüsste",
+              "wüssten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "von"
+          },
+          {
+            "form": "ein Lied"
+          },
+          {
+            "form": [
+              "singen",
+              "zu singen"
+            ],
+            "clause_has": [
+              "kann",
+              "kannst",
+              "können",
+              "könnt",
+              "konnte",
+              "konntest",
+              "konnten",
+              "konntet",
+              "könnte",
+              "könntest",
+              "könnten",
+              "könntet",
+              "weiß",
+              "weißt",
+              "wissen",
+              "wisst",
+              "wusste",
+              "wussten",
+              "wüsste",
+              "wüssten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "source": "Duden: «von etwas ein Lied singen können/zu singen wissen»",
+        "source_kind": "duden",
+        "note_ru": "знать о чём-либо по горькому опыту: Davon kann ich ein Lied singen.",
+        "note_en": "to know all about something from bitter experience: Davon kann ich ein Lied singen."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Von Bürokratie kann ich ein Lied singen.",
+        "Davon kann ich ein Lied singen.",
+        "Die Nachbarn wissen ein Lied davon zu singen."
+      ],
+      "negative": [
+        "Kannst du ein Lied singen?",
+        "Sie konnte ein Lied auf Französisch singen.",
+        "Die Kinder können ein Lied von den Beatles singen."
+      ]
+    },
+    "id": "expression-434"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich von etwas eine Scheibe abschneiden",
+    "translation_ru": "(разг.) брать пример (с кого-, чего-либо)",
+    "translation_en": "(colloquial) to take a leaf out of (someone's) book",
+    "example_de": "Davon kannst du dir eine Scheibe abschneiden.",
+    "example_ru": "С этого тебе стоит взять пример.",
+    "example_en": "You could take a leaf out of that book.",
+    "notes_ru": [
+      "Местоимение в дательном (sich, dir, mir …). Не путать: sich eine Scheibe Brot abschneiden — отрезать себе ломоть хлеба."
+    ],
+    "notes_en": [
+      "The pronoun is dative (sich, dir, mir …). Do not confuse: sich eine Scheibe Brot abschneiden — to cut oneself a slice of bread."
+    ],
+    "related_ids": [
+      "noun-1518",
+      "verb-776"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Scheibe_Platte_Flaeche_Stueck",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "davon",
+              "von ihm",
+              "von ihr",
+              "von dir",
+              "von mir",
+              "von euch",
+              "von uns",
+              "von Ihnen",
+              "von ihnen"
+            ]
+          },
+          {
+            "form": "eine Scheibe",
+            "not_next_capital": true,
+            "not_next": [
+              "vom"
+            ],
+            "clause_has": [
+              "schneide",
+              "schneidest",
+              "schneidet",
+              "schneiden",
+              "schneid",
+              "schnitt",
+              "schnittst",
+              "schnitten",
+              "schnittet",
+              "abschneiden",
+              "abgeschnitten",
+              "abzuschneiden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "eine Scheibe",
+            "not_next_capital": true,
+            "clause_has": [
+              "schneide",
+              "schneidest",
+              "schneidet",
+              "schneiden",
+              "schneid",
+              "schnitt",
+              "schnittst",
+              "schnitten",
+              "schnittet",
+              "abschneiden",
+              "abgeschnitten",
+              "abzuschneiden"
+            ]
+          },
+          {
+            "form": [
+              "davon",
+              "von ihm",
+              "von ihr",
+              "von dir",
+              "von mir",
+              "von euch",
+              "von uns",
+              "von Ihnen",
+              "von ihnen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "source": "Duden: «sich <Dativ> von etwas eine Scheibe abschneiden»",
+        "source_kind": "duden",
+        "note_ru": "брать пример с кого-, чего-либо: Von ihr kannst du dir eine Scheibe abschneiden.",
+        "note_en": "to take a leaf out of someone's book: Von ihr kannst du dir eine Scheibe abschneiden."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Davon kannst du dir eine Scheibe abschneiden.",
+        "Von ihr kannst du dir eine Scheibe abschneiden.",
+        "Er sollte sich davon eine Scheibe abschneiden."
+      ],
+      "negative": [
+        "Er schnitt sich eine Scheibe Brot ab.",
+        "Schneid dir eine Scheibe vom Kuchen ab!",
+        "Sie schnitt eine Scheibe Käse ab."
+      ]
+    },
+    "id": "expression-435"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "einen guten Draht zu jemandem haben",
+    "translation_ru": "(разг.) хорошо ладить, быть на одной волне (с кем-либо), иметь хороший контакт (с кем-либо)",
+    "translation_en": "(colloquial) to get on well (with someone), to have a good connection (with someone)",
+    "example_de": "Sie hat einen guten Draht zu ihren Schülern.",
+    "example_ru": "Она хорошо ладит со своими учениками.",
+    "example_en": "She gets on well with her pupils.",
+    "notes_ru": [
+      "Так же einen Draht zu jemandem haben. Не путать: der heiße Draht — горячая линия, прямая связь."
+    ],
+    "notes_en": [
+      "Likewise einen Draht zu jemandem haben. Do not confuse: der heiße Draht — hotline, direct line."
+    ],
+    "related_ids": [
+      "verb-002"
+    ],
+    "source_url": "https://www.dwds.de/wb/einen%20Draht%20zu%20jmdm.%20haben",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "einen guten Draht",
+              "einen besseren Draht",
+              "einen sehr guten Draht",
+              "keinen guten Draht",
+              "einen direkten Draht"
+            ],
+            "clause_has": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hab"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "einen Draht zu",
+              "einen Draht zum",
+              "einen Draht zur",
+              "keinen Draht zu",
+              "keinen Draht zum",
+              "keinen Draht zur"
+            ],
+            "clause_has": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hab"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "source": "DWDS: «einen guten Draht zu jmdm. haben»",
+        "source_kind": "dwds",
+        "note_ru": "иметь хороший контакт с кем-либо: Er hat einen direkten Draht zum Minister.",
+        "note_en": "to have a good connection with someone: Er hat einen direkten Draht zum Minister."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Sie hat einen guten Draht zu ihren Schülern.",
+        "Er hat einen direkten Draht zum Minister.",
+        "Zu ihrem Vater hatte sie nie einen guten Draht."
+      ],
+      "negative": [
+        "Er hat einen Draht in der Hand.",
+        "Sie hat den Draht durchgeschnitten.",
+        "Der Elektriker hatte einen dicken Draht dabei."
+      ]
+    },
+    "id": "expression-436"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit jemandem gemeinsame Sache machen",
+    "translation_ru": "действовать заодно, быть в сговоре (с кем-либо)",
+    "translation_en": "to make common cause, to be in league (with someone)",
+    "example_de": "Der Wächter machte gemeinsame Sache mit den Dieben.",
+    "example_ru": "Сторож действовал заодно с ворами.",
+    "example_en": "The guard was in league with the thieves.",
+    "notes_ru": [
+      "Часто о сомнительном деле."
+    ],
+    "notes_en": [
+      "Often of something dubious."
+    ],
+    "related_ids": [
+      "noun-469",
+      "verb-006"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Sache",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "gemeinsame Sache",
+            "clause_has": [
+              "mache",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "mach",
+              "gemacht"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden: «[mit jemandem] gemeinsame Sache machen»",
+        "source_kind": "duden",
+        "note_ru": "действовать заодно с кем-либо: Er hat mit den Betrügern gemeinsame Sache gemacht.",
+        "note_en": "to be in league with someone: Er hat mit den Betrügern gemeinsame Sache gemacht."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Wächter machte gemeinsame Sache mit den Dieben.",
+        "Er hat mit den Betrügern gemeinsame Sache gemacht."
+      ],
+      "negative": [
+        "Das ist unsere gemeinsame Sache.",
+        "Sie kämpfen für eine gemeinsame Sache."
+      ]
+    },
+    "id": "expression-437"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "bei jemandem in der Kreide stehen",
+    "translation_ru": "(разг.) быть в долгу (у кого-либо), задолжать (кому-либо)",
+    "translation_en": "(colloquial) to be in debt (to someone), to owe (someone) money",
+    "example_de": "Er steht bei seinem Bruder tief in der Kreide.",
+    "example_ru": "Он сильно задолжал брату.",
+    "example_en": "He owes his brother a lot of money.",
+    "notes_ru": [
+      "Так же in der Kreide sein / sitzen. Не путать: in die Kreide geraten — влезть в долги."
+    ],
+    "notes_en": [
+      "Likewise in der Kreide sein / sitzen. Do not confuse: in die Kreide geraten — to run up debts."
+    ],
+    "related_ids": [
+      "verb-188"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Kreide",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "in der Kreide",
+              "tief in der Kreide"
+            ],
+            "clause_has": [
+              "stehe",
+              "stehst",
+              "steht",
+              "stehen",
+              "stand",
+              "standst",
+              "standen",
+              "standet",
+              "stünde",
+              "stände",
+              "stünden",
+              "ständen",
+              "gestanden",
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "gewesen",
+              "sein",
+              "sitze",
+              "sitzt",
+              "sitzen",
+              "saß",
+              "saßen",
+              "säße",
+              "gesessen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "bei + Dativ",
+        "source": "Duden: «bei jemandem [tief] in der Kreide stehen/sein/sitzen»",
+        "source_kind": "duden",
+        "note_ru": "быть в долгу у кого-либо: Sie steht bei der Bank in der Kreide.",
+        "note_en": "to be in debt to someone: Sie steht bei der Bank in der Kreide."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Er steht bei seinem Bruder tief in der Kreide.",
+        "Sie steht bei der Bank in der Kreide.",
+        "Wir sind bei allen Nachbarn in der Kreide."
+      ],
+      "negative": [
+        "Er schrieb mit Kreide an die Tafel.",
+        "In der Kreide stecken viele Fossilien."
+      ]
+    },
+    "id": "expression-438"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit etwas, jemandem Schluss machen",
+    "translation_ru": "закончить работу (на сегодня); (разг.) уволиться; покончить (с чем-либо), прекратить (что-либо); (разг.) покончить с собой; порвать, расстаться (с кем-либо)",
+    "translation_en": "to call it a day; (colloquial) to quit one's job; to put an end (to something), to stop (something); (colloquial) to end one's life; to break up (with someone)",
+    "example_de": "Sie hat mit ihrem Freund Schluss gemacht.",
+    "example_ru": "Она рассталась со своим парнем.",
+    "example_en": "She broke up with her boyfriend.",
+    "notes_ru": [
+      "mit dem Rauchen Schluss machen — бросить курить; mit sich / mit dem Leben Schluss machen — покончить с собой (разг.); Für heute machen wir Schluss. — На сегодня всё."
+    ],
+    "notes_en": [
+      "mit dem Rauchen Schluss machen — to quit smoking; mit sich / mit dem Leben Schluss machen — to end one's life (colloquial); Für heute machen wir Schluss. — Let's call it a day."
+    ],
+    "related_ids": [
+      "noun-472",
+      "verb-006"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Schluss",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "Schluss",
+            "not_after": [
+              "am",
+              "zum",
+              "bis",
+              "zu",
+              "vor",
+              "nach",
+              "kurz",
+              "den",
+              "der",
+              "dem",
+              "des",
+              "einen",
+              "einem",
+              "keinen",
+              "diesen",
+              "seinen",
+              "ihren",
+              "Am",
+              "Zum"
+            ],
+            "clause_has": [
+              "mache",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "mach",
+              "gemacht"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden: «[mit etwas] Schluss machen; [mit jemandem] Schluss machen; [mit sich, mit dem Leben] Schluss machen»",
+        "source_kind": "duden",
+        "meaning_ru": "покончить (с чем-либо), прекратить (что-либо)",
+        "meaning_en": "to put an end (to something), to stop (something)",
+        "note_ru": "покончить с чем-либо: Er hat mit dem Rauchen Schluss gemacht.",
+        "note_en": "to put an end to something: Er hat mit dem Rauchen Schluss gemacht."
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden: «[mit etwas] Schluss machen; [mit jemandem] Schluss machen; [mit sich, mit dem Leben] Schluss machen»",
+        "source_kind": "duden",
+        "meaning_ru": "(разг.) покончить с собой",
+        "meaning_en": "(colloquial) to end one's life",
+        "note_ru": "(разг.) покончить с собой: Er wollte mit dem Leben Schluss machen.",
+        "note_en": "(colloquial) to end one's life: Er wollte mit dem Leben Schluss machen."
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden: «[mit etwas] Schluss machen; [mit jemandem] Schluss machen; [mit sich, mit dem Leben] Schluss machen»",
+        "source_kind": "duden",
+        "meaning_ru": "порвать, расстаться (с кем-либо)",
+        "meaning_en": "to break up (with someone)",
+        "note_ru": "расстаться с кем-либо: Sie hat mit ihrem Freund Schluss gemacht.",
+        "note_en": "to break up with someone: Sie hat mit ihrem Freund Schluss gemacht."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Sie hat mit ihrem Freund Schluss gemacht.",
+        "Er hat mit dem Rauchen Schluss gemacht.",
+        "Für heute machen wir Schluss."
+      ],
+      "negative": [
+        "Zum Schluss machte er eine Pause.",
+        "Am Schluss machten alle mit.",
+        "Er zog den Schluss, dass alles stimmte."
+      ]
+    },
+    "id": "expression-439"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "das / sein Auslangen finden",
+    "translation_ru": "(австр.) обходиться, сводить концы с концами",
+    "translation_en": "(Austrian) to get by, to make ends meet",
+    "example_de": "Mit dieser Pension findet sie kaum ihr Auslangen.",
+    "example_ru": "На эту пенсию она едва сводит концы с концами.",
+    "example_en": "She can hardly get by on this pension.",
+    "notes_ru": [
+      "Так же das / sein Auslangen haben. Чем — mit + Dativ (в Duden предлог не указан, поэтому без пары)."
+    ],
+    "notes_en": [
+      "Likewise das / sein Auslangen haben. On what — mit + dative (Duden gives no preposition, so no pair)."
+    ],
+    "related_ids": [
+      "verb-041"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auslangen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "das Auslangen",
+              "sein Auslangen",
+              "ihr Auslangen",
+              "mein Auslangen",
+              "dein Auslangen",
+              "unser Auslangen",
+              "euer Auslangen",
+              "Ihr Auslangen"
+            ],
+            "clause_has": [
+              "finde",
+              "findest",
+              "findet",
+              "finden",
+              "fand",
+              "fandst",
+              "fanden",
+              "fandet",
+              "fände",
+              "fänden",
+              "gefunden",
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hab"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mit dieser Pension findet sie kaum ihr Auslangen.",
+        "Wir finden mit dem Geld nicht unser Auslangen."
+      ],
+      "negative": [
+        "Das Geld langt aus.",
+        "Sie fand ihren Schlüssel."
+      ]
+    },
+    "id": "expression-440"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit etwas, jemandem zurande kommen",
+    "translation_ru": "(разг.) справляться (с чем-либо); (разг.) ладить (с кем-либо)",
+    "translation_en": "(colloquial) to cope (with something), to manage; (colloquial) to get along (with someone)",
+    "example_de": "Kommst du mit der neuen Software zurande?",
+    "example_ru": "Ты справляешься с новой программой?",
+    "example_en": "Are you coping with the new software?",
+    "notes_ru": [
+      "Написание: zurande (рекомендуемое) и zu Rande."
+    ],
+    "notes_en": [
+      "Spelling: zurande (recommended) and zu Rande."
+    ],
+    "related_ids": [
+      "noun-1465",
+      "verb-005"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zurande",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "zurande",
+              "zu Rande"
+            ],
+            "clause_has": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämen",
+              "komm",
+              "gekommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden: «mit etwas zurande/zu Rande kommen; mit jemandem zurande/zu Rande kommen»",
+        "source_kind": "duden",
+        "note_ru": "справляться с чем-либо; ладить с кем-либо: Mit ihm komme ich nicht zu Rande.",
+        "note_en": "to cope with something; to get along with someone: Mit ihm komme ich nicht zu Rande."
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Kommst du mit der neuen Software zurande?",
+        "Mit ihm komme ich nicht zu Rande.",
+        "Sie ist mit der Arbeit gut zurande gekommen."
+      ],
+      "negative": [
+        "Er stand am Rande der Straße.",
+        "Sie kam zum Rand des Waldes."
+      ]
+    },
+    "id": "expression-441"
+  },
+  {
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "zu jemandes Gunsten",
+    "translation_ru": "в чью-либо пользу, к чьей-либо выгоде; к чести (кого-либо), отдавая должное (кому-либо)",
+    "translation_en": "in someone's favour, to someone's advantage; to someone's credit, in fairness to someone",
+    "example_de": "Der Schiedsrichter entschied zu unseren Gunsten.",
+    "example_ru": "Судья решил в нашу пользу.",
+    "example_en": "The referee decided in our favour.",
+    "notes_ru": [
+      "С притяжательным местоимением или родительным: zu seinen Gunsten, zu seines Freundes Gunsten. Das muss zu ihren Gunsten gesagt werden. — Это надо сказать к её чести.",
+      "Не путать: предлог zugunsten (zu Gunsten) + Genitiv — в пользу кого-, чего-либо: zugunsten der Kinder."
+    ],
+    "notes_en": [
+      "With a possessive or a genitive: zu seinen Gunsten, zu seines Freundes Gunsten. Das muss zu ihren Gunsten gesagt werden. — It must be said to her credit.",
+      "Do not confuse: the preposition zugunsten (zu Gunsten) + genitive — in favour of someone or something: zugunsten der Kinder."
+    ],
+    "related_ids": [
+      "preposition-055"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Gunst",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "zu meinen Gunsten",
+              "zu deinen Gunsten",
+              "zu seinen Gunsten",
+              "zu ihren Gunsten",
+              "zu unseren Gunsten",
+              "zu unsren Gunsten",
+              "zu euren Gunsten",
+              "zu Ihren Gunsten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Schiedsrichter entschied zu unseren Gunsten.",
+        "Er hat die Lage zu seinen Gunsten gewendet.",
+        "Das muss man zu ihren Gunsten sagen.",
+        "Der Fehler ging zu meinen Gunsten aus."
+      ],
+      "negative": [
+        "Das Geld wurde zugunsten der Kinder gesammelt.",
+        "Zu Gunsten der Opfer fand ein Konzert statt.",
+        "Er verzichtete zugunsten seines Bruders."
+      ]
+    },
+    "id": "expression-442"
+  },
+  {
+    "id": "expression-443",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "(wieder) auf die Beine kommen",
+    "translation_ru": "подняться (на ноги), встать; поправиться, выздороветь; встать на ноги (материально), оправиться",
+    "translation_en": "to get to one's feet, to get up; to get back on one's feet, to recover; to get back on one's feet (financially), to recover",
+    "example_de": "Nach der langen Krankheit kam er langsam wieder auf die Beine.",
+    "example_ru": "После долгой болезни он понемногу поправился.",
+    "example_en": "After the long illness he slowly got back on his feet.",
+    "notes_ru": [
+      "Duden даёт три значения: встать, подняться; выздороветь; оправиться материально, крепко встать на ноги.",
+      "Ср. jdn., sich auf die Beine bringen / stellen — поднять (кого-либо, себя) на ноги; jdm. auf die Beine helfen — помочь (кому-либо) подняться; wieder auf den Beinen sein — снова быть на ногах.",
+      "Не путать: sich auf die Beine machen — отправиться в путь; etw. auf die Beine stellen — организовать; es kommt auf die Beine an — всё зависит от ног (ankommen auf)."
+    ],
+    "notes_en": [
+      "Duden gives three senses: to get up, to rise; to recover (one's health); to recover financially, to get established.",
+      "Cf. jdn., sich auf die Beine bringen / stellen — to get someone, oneself back on one's feet; jdm. auf die Beine helfen — to help someone up; wieder auf den Beinen sein — to be up and about again.",
+      "Do not confuse: sich auf die Beine machen — to set off; etw. auf die Beine stellen — to organize; es kommt auf die Beine an — it depends on the legs (ankommen auf)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Bein",
+    "source": "Duden: «[wieder] auf die Beine kommen (sich aufrichten, aufstehen; [wieder] gesund werden …)»",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kommet",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm"
+            ]
+          },
+          {
+            "form": "auf die Beine",
+            "not_next": [
+              "an",
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "seiner",
+              "ihres",
+              "ihrer",
+              "meines",
+              "meiner",
+              "deines",
+              "deiner",
+              "dieses",
+              "dieser",
+              "von",
+              "vom"
+            ],
+            "not_clause_has": [
+              "sprechen",
+              "stehen",
+              "liegen",
+              "sitzen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "auf die Beine",
+            "not_next": [
+              "an",
+              "des",
+              "der",
+              "eines",
+              "einer",
+              "seines",
+              "seiner",
+              "ihres",
+              "ihrer",
+              "meines",
+              "meiner",
+              "deines",
+              "deiner",
+              "dieses",
+              "dieser",
+              "von",
+              "vom"
+            ],
+            "not_clause_has": [
+              "sprechen",
+              "stehen",
+              "liegen",
+              "sitzen"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kommet",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämst",
+              "kämen",
+              "kämet",
+              "komm",
+              "gekommen",
+              "zu kommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach der langen Krankheit kam er langsam wieder auf die Beine.",
+        "Der Boxer kam nach dem Schlag nur mühsam auf die Beine.",
+        "Ich hoffe, dass die Firma bald wieder auf die Beine kommt.",
+        "Sie ist nach der Operation schnell wieder auf die Beine gekommen.",
+        "Er braucht Zeit, um wieder auf die Beine zu kommen.",
+        "Wieder auf die Beine kam das Dorf erst nach Jahren."
+      ],
+      "negative": [
+        "Sie hat ein großes Fest auf die Beine gestellt.",
+        "Er kam herein und half ihr auf die Beine.",
+        "Beim Laufen kommt es auf die Beine an.",
+        "Der Arzt kam auf die Beine des Patienten zu sprechen.",
+        "Nach einer Woche war er wieder auf den Beinen."
+      ]
+    }
+  },
+  {
+    "id": "expression-444",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdn. (wieder) in Gnaden aufnehmen",
+    "translation_ru": "(книжн.) простить (кого-либо) и снова принять (в свой круг), вернуть (кому-либо) своё расположение",
+    "translation_en": "(elevated) to forgive someone and take them back (into the fold), to restore someone to favour",
+    "example_de": "Nach seiner Entschuldigung nahm ihn die Familie wieder in Gnaden auf.",
+    "example_ru": "После его извинений семья простила его и снова приняла.",
+    "example_en": "After his apology the family took him back into the fold.",
+    "notes_ru": [
+      "Обычно с wieder; часто в пассиве: Er wurde wieder in Gnaden aufgenommen.",
+      "Ср. in Gnaden — милостиво, благосклонно; bei jdm. in (hohen) Gnaden stehen (книжн., устар.) — быть в (большой) милости у кого-либо."
+    ],
+    "notes_en": [
+      "Usually with wieder; often in the passive: Er wurde wieder in Gnaden aufgenommen.",
+      "Cf. in Gnaden — graciously, with goodwill; bei jdm. in (hohen) Gnaden stehen (elevated, dated) — to be in someone's (high) favour."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Gnade",
+    "source": "Duden: «jemanden wieder in Gnaden aufnehmen (gehoben: jemandem etwas nachsehen und ihn … wieder aufnehmen)»",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "nehme",
+              "nimmst",
+              "nimmt",
+              "nehmen",
+              "nehmt",
+              "nahm",
+              "nahmst",
+              "nahmen",
+              "nahmt",
+              "nähme",
+              "nähmest",
+              "nähmen",
+              "nähmet",
+              "nimm"
+            ]
+          },
+          {
+            "form": "in Gnaden"
+          },
+          {
+            "form": "auf",
+            "not_next": [
+              "den",
+              "die",
+              "das",
+              "der",
+              "dem",
+              "des",
+              "einen",
+              "eine",
+              "ein",
+              "einem",
+              "einer"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "in Gnaden"
+          },
+          {
+            "form": [
+              "aufnehmen",
+              "aufnehme",
+              "aufnimmst",
+              "aufnimmt",
+              "aufnehmt",
+              "aufnahm",
+              "aufnahmst",
+              "aufnahmen",
+              "aufnahmt",
+              "aufnähme",
+              "aufnähmen",
+              "aufgenommen",
+              "aufzunehmen",
+              "aufnehmend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach seiner Entschuldigung nahm ihn die Familie wieder in Gnaden auf.",
+        "Der König nahm den treuen Diener wieder in Gnaden auf.",
+        "Er wurde wieder in Gnaden aufgenommen.",
+        "Sie hofft, dass der Vater sie wieder in Gnaden aufnimmt.",
+        "Wird sie ihn je wieder in Gnaden aufnehmen?"
+      ],
+      "negative": [
+        "Der Ritter stand beim König in hohen Gnaden.",
+        "Sie nahm das Kind in ihr Haus auf.",
+        "Er nahm in Gnaden Abschied und stieg auf das Pferd.",
+        "Der Fürst entließ ihn in Gnaden."
+      ]
+    }
+  },
+  {
+    "id": "expression-445",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "an jds. Stelle",
+    "translation_ru": "на чьём-либо месте (будь я тобой, им …); вместо кого-либо",
+    "translation_en": "in someone's place, (if I were) in someone's shoes; instead of someone",
+    "example_de": "An deiner Stelle würde ich zum Arzt gehen.",
+    "example_ru": "На твоём месте я бы пошёл к врачу.",
+    "example_en": "If I were you, I would go to the doctor.",
+    "notes_ru": [
+      "Дательный падеж: an meiner / deiner / seiner / ihrer … Stelle — обычно с сослагательным (würde, wäre, hätte, möchte …): Ich möchte nicht an seiner Stelle sein. — Не хотел бы я оказаться на его месте.",
+      "Не путать: an jds. Stelle treten (винительный: an seine Stelle treten) — занять чьё-либо место (отдельная запись); anstelle / an Stelle von — вместо; auf der Stelle — немедленно."
+    ],
+    "notes_en": [
+      "Dative: an meiner / deiner / seiner / ihrer … Stelle — usually with the subjunctive (würde, wäre, hätte, möchte …): Ich möchte nicht an seiner Stelle sein. — I wouldn't want to be in his shoes.",
+      "Do not confuse: an jds. Stelle treten (accusative: an seine Stelle treten) — to take someone's place (separate record); anstelle / an Stelle von — instead of; auf der Stelle — at once."
+    ],
+    "related_ids": [
+      "noun-385"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Stelle",
+    "source": "Duden: «ich an deiner Stelle würde das nicht machen (wenn ich du wäre …)»",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "an deiner Stelle",
+              "an meiner Stelle",
+              "an seiner Stelle",
+              "an ihrer Stelle",
+              "an unserer Stelle",
+              "an unsrer Stelle",
+              "an eurer Stelle",
+              "an Ihrer Stelle"
+            ],
+            "clause_has": [
+              "würde",
+              "würdest",
+              "würden",
+              "würdet",
+              "wäre",
+              "wärest",
+              "wärst",
+              "wären",
+              "wäret",
+              "wärt",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "möchte",
+              "möchtest",
+              "möchten",
+              "möchtet",
+              "könnte",
+              "könntest",
+              "könnten",
+              "könntet",
+              "sollte",
+              "solltest",
+              "sollten",
+              "solltet",
+              "müsste",
+              "müsstest",
+              "müssten",
+              "müsstet",
+              "müßte",
+              "müßten",
+              "dürfte",
+              "dürftest",
+              "dürften",
+              "dürftet",
+              "wüsste",
+              "wüsstest",
+              "wüssten",
+              "wüßte",
+              "täte",
+              "tätest",
+              "täten",
+              "ginge",
+              "gingest",
+              "gingen",
+              "käme",
+              "kämest",
+              "kämen",
+              "bliebe",
+              "bliebest",
+              "blieben",
+              "nähme",
+              "nähmen",
+              "ließe",
+              "ließen",
+              "gäbe",
+              "gäben",
+              "sähe",
+              "hielte",
+              "hielten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "An deiner Stelle würde ich zum Arzt gehen.",
+        "Ich an deiner Stelle würde das nicht machen.",
+        "Was hättest du an meiner Stelle getan?",
+        "Ich möchte nicht an seiner Stelle sein.",
+        "Wenn ich an Ihrer Stelle wäre, würde ich sofort kündigen."
+      ],
+      "negative": [
+        "Nach ihrem Rücktritt trat ihr Stellvertreter an ihre Stelle.",
+        "An seiner Stelle stand ein Baum.",
+        "An dessen Stelle würde heute ein Parkplatz stehen.",
+        "Das Buch steht wieder an seiner Stelle.",
+        "An der Stelle würde ich nicht parken."
+      ]
+    }
+  },
+  {
+    "id": "expression-446",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "in sich versunken",
+    "translation_ru": "погружённый в себя, ушедший в себя",
+    "translation_en": "lost in thought, absorbed in oneself, withdrawn",
+    "example_de": "Der alte Mann saß in sich versunken am Fenster.",
+    "example_ru": "Старик сидел у окна, погружённый в себя.",
+    "example_en": "The old man sat at the window, lost in thought.",
+    "notes_ru": [
+      "Так же in sich selbst versunken; глагол: in sich (selbst) versinken — уйти в себя: Er versank in sich selbst.",
+      "Ср. in Gedanken versunken — погружённый в размышления; in etw. versunken sein — быть поглощённым чем-либо (in sein Spiel versunken).",
+      "Не путать: im Meer versunken — затонувший (буквально); in sich stimmig, in sich geschlossen — сам по себе, внутренне."
+    ],
+    "notes_en": [
+      "Likewise in sich selbst versunken; verb: in sich (selbst) versinken — to withdraw into oneself: Er versank in sich selbst.",
+      "Cf. in Gedanken versunken — lost in thought; in etw. versunken sein — to be absorbed in something (in sein Spiel versunken).",
+      "Do not confuse: im Meer versunken — sunk (literally); in sich stimmig, in sich geschlossen — in itself, internally."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/versinken",
+    "source": "DWDS: «er war tief in sich versunken (= in sich gekehrt)»",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "in"
+          },
+          {
+            "form": "sich"
+          },
+          {
+            "form": [
+              "versunken",
+              "versunkene",
+              "versunkenen",
+              "versunkener",
+              "versunkenes",
+              "versunkenem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "in"
+          },
+          {
+            "form": "sich"
+          },
+          {
+            "form": "selbst"
+          },
+          {
+            "form": [
+              "versunken",
+              "versunkene",
+              "versunkenen",
+              "versunkener",
+              "versunkenes",
+              "versunkenem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "versinke",
+              "versinkst",
+              "versinkt",
+              "versinken",
+              "versank",
+              "versankst",
+              "versanken",
+              "versankt",
+              "versänke",
+              "versänken"
+            ]
+          },
+          {
+            "form": "in sich selbst"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "in sich selbst"
+          },
+          {
+            "form": [
+              "versinke",
+              "versinkst",
+              "versinkt",
+              "versinken",
+              "versank",
+              "versankst",
+              "versanken",
+              "versankt",
+              "versänke",
+              "versänken"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der alte Mann saß in sich versunken am Fenster.",
+        "Sie war ganz in sich versunken und hörte uns nicht.",
+        "In sich versunken ging er durch den Park.",
+        "Das in sich versunkene Kind malte still.",
+        "Nach dem Streit versank er in sich selbst.",
+        "Ich sah, wie sie immer mehr in sich selbst versank."
+      ],
+      "negative": [
+        "Das Schiff ist im Meer versunken.",
+        "Er war tief in Gedanken versunken.",
+        "Die Geschichte ist in sich stimmig.",
+        "Das Boot versank in sich auftürmenden Wellen.",
+        "Er versank im Schnee, der in sich selbst zusammenfiel."
+      ]
+    }
+  },
+  {
+    "id": "expression-447",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "von Angesicht zu Angesicht",
+    "translation_ru": "лицом к лицу (вживую); лицом к лицу (по видеосвязи, видя друг друга на экране)",
+    "translation_en": "face to face (in person); face to face (by video, seeing each other on screen)",
+    "example_de": "Das sollten wir lieber von Angesicht zu Angesicht besprechen.",
+    "example_ru": "Это нам лучше обсудить лицом к лицу.",
+    "example_en": "We had better discuss this face to face.",
+    "notes_ru": [
+      "Angesicht — книжн. «лицо» (Duden: gehoben); часто jdm. von Angesicht zu Angesicht gegenüberstehen — стоять лицом к лицу с кем-либо.",
+      "Не путать: jdn. von Angesicht kennen — знать кого-либо в лицо; im Angesicht (+ Gen.) — перед лицом (чего-либо), ввиду."
+    ],
+    "notes_en": [
+      "Angesicht — elevated 'face' (Duden: gehoben); often jdm. von Angesicht zu Angesicht gegenüberstehen — to stand face to face with someone.",
+      "Do not confuse: jdn. von Angesicht kennen — to know someone by sight; im Angesicht (+ genitive) — in the face of, in view of."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/von%20Angesicht%20zu%20Angesicht",
+    "source": "DWDS: «von Angesicht zu Angesicht: einander in der realen Welt gegenüberstehend, gegenübersitzend»",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "von"
+          },
+          {
+            "form": "Angesicht"
+          },
+          {
+            "form": "zu"
+          },
+          {
+            "form": "Angesicht"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Das sollten wir lieber von Angesicht zu Angesicht besprechen.",
+        "Endlich standen sie sich von Angesicht zu Angesicht gegenüber.",
+        "Von Angesicht zu Angesicht wirkt er ganz anders.",
+        "Ich möchte ihn einmal von Angesicht zu Angesicht sehen.",
+        "Per Video sprechen wir von Angesicht zu Angesicht miteinander."
+      ],
+      "negative": [
+        "Ich kenne ihn nur von Angesicht.",
+        "Im Angesicht der Gefahr blieb er ruhig.",
+        "Sie wandte ihr Angesicht zu ihm.",
+        "Nach seinem Angesicht zu urteilen, war er müde."
+      ]
+    }
+  },
+  {
+    "id": "expression-448",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "keinen Rat wissen",
+    "translation_ru": "(устаревающ.) не знать, что делать; не видеть выхода",
+    "translation_en": "(becoming dated) to be at a loss (what to do); to see no way out",
+    "example_de": "In dieser Lage wusste ich keinen Rat mehr.",
+    "example_ru": "В этом положении я уже не знал, что делать.",
+    "example_en": "In this situation I was at a loss what to do.",
+    "notes_ru": [
+      "Так же sich (Dativ) keinen Rat (mehr) wissen: Sie wusste sich keinen Rat mehr. Утвердительно: (sich) Rat wissen — знать выход.",
+      "Близко: weder aus noch ein wissen, ratlos sein. Не путать: jdm. keinen Rat geben — не дать совета; der Rat — также совет (орган): Der Rat weiß noch nichts."
+    ],
+    "notes_en": [
+      "Likewise sich (Dativ) keinen Rat (mehr) wissen: Sie wusste sich keinen Rat mehr. Affirmative: (sich) Rat wissen — to know a way out.",
+      "Similar: weder aus noch ein wissen, ratlos sein. Do not confuse: jdm. keinen Rat geben — to give someone no advice; der Rat — also council: Der Rat weiß noch nichts."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Rat",
+    "source": "Duden: «[sich <Dativ>] [keinen] Rat wissen (… [k]einen Ausweg wissen: ich wusste [mir] keinen Rat mehr)»",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "weiß",
+              "weißt",
+              "wisst",
+              "wissen",
+              "wusste",
+              "wusstest",
+              "wussten",
+              "wusstet",
+              "wüsste",
+              "wüsstest",
+              "wüssten",
+              "wüsstet",
+              "wisse",
+              "wissest",
+              "wisset",
+              "weiss",
+              "weisst",
+              "wußte",
+              "wußten",
+              "wüßte",
+              "wüßten"
+            ]
+          },
+          {
+            "form": "keinen Rat"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "keinen Rat"
+          },
+          {
+            "form": [
+              "weiß",
+              "weißt",
+              "wisst",
+              "wissen",
+              "wusste",
+              "wusstest",
+              "wussten",
+              "wusstet",
+              "wüsste",
+              "wüsstest",
+              "wüssten",
+              "wüsstet",
+              "wisse",
+              "wissest",
+              "wisset",
+              "weiss",
+              "weisst",
+              "wußte",
+              "wußten",
+              "wüßte",
+              "wüßten",
+              "gewusst",
+              "gewußt",
+              "zu wissen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "In dieser Lage wusste ich keinen Rat mehr.",
+        "Sie wusste sich keinen Rat.",
+        "Wenn ich keinen Rat mehr weiß, rufe ich dich an.",
+        "Keinen Rat wusste auch der Arzt.",
+        "Er hat sich keinen Rat mehr gewusst."
+      ],
+      "negative": [
+        "Ich weiß, dass er keinen Rat braucht.",
+        "Er gab mir keinen Rat, weil er selbst nichts wusste.",
+        "Wir wissen, du hast keinen Rat bekommen.",
+        "Ich weiß einen guten Rat für dich.",
+        "Der Rat weiß noch nichts davon."
+      ]
+    }
+  },
+  {
+    "id": "expression-449",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "in alle (vier) Winde",
+    "translation_ru": "во все стороны, повсюду",
+    "translation_en": "to the four winds, in all directions",
+    "example_de": "Nach dem Studium wurden die Freunde in alle Winde zerstreut.",
+    "example_ru": "После учёбы друзья разъехались кто куда.",
+    "example_en": "After university the friends were scattered to the four winds.",
+    "notes_ru": [
+      "Чаще с zerstreut, verstreut, verweht: in alle Winde zerstreut sein — разъехаться кто куда.",
+      "Реже: in alle vier Winde.",
+      "Форма nach allen (vier) Winden в современных словарях (Duden, DWDS) не дана; встречается в старых текстах (Deutsches Wörterbuch Гриммов)."
+    ],
+    "notes_en": [
+      "Mostly with zerstreut, verstreut, verweht: in alle Winde zerstreut sein — to be scattered far and wide.",
+      "Less often: in alle vier Winde.",
+      "The form nach allen (vier) Winden is not given in current dictionaries (Duden, DWDS); it occurs in older texts (the Grimms' Deutsches Wörterbuch)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Wind",
+    "source": "Duden (Wind): in alle Winde (überallhin, in alle Himmelsrichtungen); DWDS 2: <in alle (vier) Winde> überallhin",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "in alle Winde",
+              "in alle vier Winde"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem Studium wurden die Freunde in alle Winde zerstreut.",
+        "Die Familie ist in alle vier Winde verstreut.",
+        "Die Bilder wurden im Krieg in alle Winde verweht.",
+        "Die Schüler liefen in alle Winde davon."
+      ],
+      "negative": [
+        "Der Wind wehte aus allen Richtungen.",
+        "Die Fahnen flatterten im Wind.",
+        "Alle Winden im Hafen waren kaputt.",
+        "Er hat die Warnung in den Wind geschlagen."
+      ]
+    }
+  },
+  {
+    "id": "expression-450",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit einem blauen Auge davonkommen",
+    "translation_ru": "(разг.) отделаться лёгким испугом, легко отделаться",
+    "translation_en": "(colloquial) to get off lightly, to escape without serious harm",
+    "example_de": "Bei dem Unfall ist er mit einem blauen Auge davongekommen.",
+    "example_ru": "В аварии он отделался лёгким испугом.",
+    "example_en": "He got off lightly in the accident.",
+    "notes_ru": [
+      "Глагол с отделяемой частицей: Er kam mit einem blauen Auge davon.",
+      "Ср. ein blaues Auge haben — иметь синяк под глазом (буквально)."
+    ],
+    "notes_en": [
+      "Separable verb: Er kam mit einem blauen Auge davon.",
+      "Cf. ein blaues Auge haben — to have a black eye (literally)."
+    ],
+    "related_ids": [
+      "verb-1759"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Auge",
+    "source": "Duden (Auge): mit einem blauen Auge davonkommen (umgangssprachlich: ohne großen Schaden, glimpflich davonkommen)",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämen",
+              "kämet",
+              "komm"
+            ]
+          },
+          {
+            "form": "mit einem blauen Auge"
+          },
+          {
+            "form": "davon",
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "mit einem blauen Auge"
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämest",
+              "kämen",
+              "kämet",
+              "komm"
+            ]
+          },
+          {
+            "form": "davon",
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "mit einem blauen Auge"
+          },
+          {
+            "form": [
+              "davonkommen",
+              "davonkomme",
+              "davonkommst",
+              "davonkommt",
+              "davonkam",
+              "davonkamen",
+              "davonkäme",
+              "davonkämen",
+              "davongekommen",
+              "davonzukommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Bei dem Unfall ist er mit einem blauen Auge davongekommen.",
+        "Er kam mit einem blauen Auge davon.",
+        "Mit einem blauen Auge kam die Firma noch einmal davon.",
+        "Ich hoffe, dass wir mit einem blauen Auge davonkommen.",
+        "Diesmal sind wir mit einem blauen Auge davongekommen."
+      ],
+      "negative": [
+        "Er hatte nach der Schlägerei ein blaues Auge.",
+        "Er kam mit einem blauen Auge nach Hause.",
+        "Sie kam mit dem Schrecken davon.",
+        "Mit einem blauen Auge ging er zur Schule."
+      ]
+    }
+  },
+  {
+    "id": "expression-451",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "(jdm. etw.) zu Gnaden halten",
+    "translation_ru": "(устар.) простить, не взыскать (кому-либо что-либо); не прогневайтесь",
+    "translation_en": "(archaic) to pardon (someone something); with all due respect",
+    "example_de": "Halten zu Gnaden, Majestät, aber ich muss widersprechen.",
+    "example_ru": "Не прогневайтесь, ваше величество, но я должен возразить.",
+    "example_en": "With all due respect, Your Majesty, I must object.",
+    "notes_ru": [
+      "Устаревшая формула вежливости (XVIII в.), в обращении к высокопоставленному лицу: Halten zu Gnaden!"
+    ],
+    "notes_en": [
+      "A dated formula of politeness (18th century), addressing a person of high rank: Halten zu Gnaden!"
+    ],
+    "related_ids": [
+      "expression-444"
+    ],
+    "source_url": "https://www.dwds.de/wb/gn%C3%A4dig",
+    "source": "DWDS (Etymologisches Wörterbuch, gnädig): zu Gnaden halten ‘gnädig sein’ (18. Jh.); DWB (gnade): mit Dativ der Person — halte mir … zu gnaden, halt zu gnaden",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "halte",
+              "hältst",
+              "hält",
+              "halten",
+              "haltet",
+              "halt",
+              "haltens",
+              "hielt",
+              "hieltest",
+              "hielten",
+              "hieltet",
+              "hielte"
+            ]
+          },
+          {
+            "form": "zu Gnaden"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "zu Gnaden"
+          },
+          {
+            "form": [
+              "halten",
+              "gehalten",
+              "zu halten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Halten zu Gnaden, Majestät, aber ich muss widersprechen.",
+        "Euer Gnaden halten zu Gnaden, ich bin nur ein einfacher Bauer.",
+        "Der Fürst möge mir meine Kühnheit zu Gnaden halten.",
+        "Er hielt dem Diener den Fehler zu Gnaden.",
+        "Haltens mir zu Gnaden, Herr, ich wusste es nicht.",
+        "Halt zu Gnaden, Herr Graf, das war ein Versehen."
+      ],
+      "negative": [
+        "Der Ritter stand beim König in hohen Gnaden.",
+        "Sie hielt den Hund an der Leine.",
+        "Der Graf ist von Gottes Gnaden.",
+        "Er hielt zu seinem Freund."
+      ]
+    }
   }
 ]

@@ -8280,7 +8280,16 @@
     "example_de": "Die Zeitung hat ein Interview mit dem Bürgermeister gemacht.",
     "example_cloze": "Die Zeitung hat ein {{c1::Interview}} mit dem Bürgermeister gemacht.",
     "example_ru": "Газета взяла интервью у мэра.",
-    "example_en": "The newspaper did an interview with the mayor."
+    "example_en": "The newspaper did an interview with the mayor.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (1): «… mit einer meist bekannten Persönlichkeit geführtes Gespräch»; «ein Interview mit jemandem führen»",
+        "source_kind": "duden",
+        "note_ru": "интервью с кем-либо: Sie führte ein Interview mit dem Minister.",
+        "note_en": "interview with someone: Sie führte ein Interview mit dem Minister."
+      }
+    ]
   },
   {
     "id": "noun-619",
