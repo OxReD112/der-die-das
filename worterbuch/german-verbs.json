@@ -10437,7 +10437,16 @@
         "ihr": "wisst",
         "Sie": "wissen Sie"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "source": "DWDS (1a): «ich weiß genug von ihm, über ihn, um ihn beurteilen zu können»",
+        "source_kind": "dwds",
+        "note_ru": "знать о ком-либо, о чём-либо: Was weißt du über ihn?",
+        "note_en": "to know about someone or something: Was weißt du über ihn?"
+      }
+    ]
   },
   {
     "id": "verb-209",

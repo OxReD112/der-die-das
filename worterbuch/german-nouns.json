@@ -1959,7 +1959,16 @@
     "example_de": "Ihre Bewerbung ist gestern bei uns angekommen.",
     "example_cloze": "Ihre {{c1::Bewerbung}} ist gestern bei uns angekommen.",
     "example_ru": "Ваше заявление поступило к нам вчера.",
-    "example_en": "Your application arrived yesterday."
+    "example_en": "Your application arrived yesterday.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "заявление, отклик на что-либо: eine Bewerbung um die Stelle",
+        "note_en": "application for something: eine Bewerbung um die Stelle"
+      }
+    ]
   },
   {
     "id": "noun-159",
@@ -2081,6 +2090,20 @@
         "source_kind": "dwds",
         "note_ru": "+ инфинитив с zu: Die Entscheidung, umzuziehen, fiel uns schwer. — Решение переехать далось нам тяжело.",
         "note_en": "+ zu-infinitive: Die Entscheidung, umzuziehen, fiel uns schwer. — The decision to move was hard for us."
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "решение в пользу чего-либо: die Entscheidung für den Job",
+        "note_en": "decision in favour of something: die Entscheidung für den Job"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "source": "DWDS: «eine Entscheidung über die Zukunft [einer Person, einer Sache]»",
+        "source_kind": "dwds",
+        "note_ru": "решение о чём-либо: die Entscheidung über den Haushalt",
+        "note_en": "decision on something: die Entscheidung über den Haushalt"
       }
     ]
   },
@@ -3821,7 +3844,25 @@
     "example_de": "Die Verhandlungen dauern schon zwei Wochen.",
     "example_cloze": "Die {{c1::Verhandlungen}} dauern schon zwei Wochen.",
     "example_ru": "Переговоры идут уже две недели.",
-    "example_en": "The negotiations have been going on for two weeks."
+    "example_en": "The negotiations have been going on for two weeks.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "source": "Duden: «die Verhandlungen über die Finanzierung des Projekts laufen noch»",
+        "source_kind": "duden",
+        "note_ru": "переговоры о чём-либо: Verhandlungen über den Lohn; судебное заседание по чему-либо: die Verhandlung über die Klage",
+        "note_en": "negotiations about something: Verhandlungen über den Lohn; hearing on something: die Verhandlung über die Klage"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden: «mit jemandem in Verhandlung stehen»",
+        "source_kind": "duden",
+        "meaning_ru": "переговоры",
+        "meaning_en": "negotiation",
+        "note_ru": "переговоры с кем-либо: Verhandlungen mit der Gewerkschaft",
+        "note_en": "negotiations with someone: Verhandlungen mit der Gewerkschaft"
+      }
+    ]
   },
   {
     "id": "noun-286",
@@ -4649,7 +4690,27 @@
     "example_de": "Entschuldigung, wie spät ist es?",
     "example_cloze": "{{c1::Entschuldigung}}, wie spät ist es?",
     "example_ru": "Извините, который час?",
-    "example_en": "Excuse me, what time is it?"
+    "example_en": "Excuse me, what time is it?",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "source": "DWDS: «als Entschuldigung für mein Zuspätkommen möchte ich sagen, dass …»",
+        "source_kind": "dwds",
+        "meaning_ru": "извинение",
+        "meaning_en": "apology",
+        "note_ru": "извинение за что-либо: eine Entschuldigung für die Verspätung",
+        "note_en": "apology for something: eine Entschuldigung für die Verspätung"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "source": "DWDS: «als Entschuldigung für mein Zuspätkommen möchte ich sagen, dass …»",
+        "source_kind": "dwds",
+        "meaning_ru": "записка с объяснением причины отсутствия",
+        "meaning_en": "excuse (note)",
+        "note_ru": "извинение за что-либо: eine Entschuldigung für die Verspätung",
+        "note_en": "apology for something: eine Entschuldigung für die Verspätung"
+      }
+    ]
   },
   {
     "id": "noun-349",
@@ -10663,6 +10724,13 @@
         "meaning_en": "request, demand",
         "note_ru": "+ инфинитив с zu: Er ignorierte die Aufforderung, das Gebäude zu verlassen. — Он проигнорировал требование покинуть здание.",
         "note_en": "+ zu-infinitive: Er ignorierte die Aufforderung, das Gebäude zu verlassen. — He ignored the demand to leave the building."
+      },
+      {
+        "pattern": "zu + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "призыв, приглашение к чему-либо: eine Aufforderung zum Tanz",
+        "note_en": "request, invitation to something: eine Aufforderung zum Tanz"
       }
     ]
   },
@@ -11200,7 +11268,18 @@
     "example_ru": "Чтение — моё любимое занятие по выходным.",
     "example_en": "Reading is my favourite activity at the weekend.",
     "plural_note_ru": "В значении «занятость (работников)» употребляется без множественного числа.",
-    "plural_note_en": "In the sense of employment (of workers), it is used without a plural."
+    "plural_note_en": "In the sense of employment (of workers), it is used without a plural.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "занятие",
+        "meaning_en": "activity, occupation",
+        "note_ru": "занятие чем-либо: die Beschäftigung mit Kunst",
+        "note_en": "engagement with something: die Beschäftigung mit Kunst"
+      }
+    ]
   },
   {
     "id": "noun-850",
@@ -13417,7 +13496,16 @@
     "example_de": "Nach der Operation braucht sie viel Erholung.",
     "example_cloze": "Nach der Operation braucht sie viel {{c1::Erholung}}.",
     "example_ru": "После операции ей нужно много отдыха.",
-    "example_en": "After the operation she needs plenty of rest."
+    "example_en": "After the operation she needs plenty of rest.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "source": "DWDS: «ein halbes Jahr Erholung von jeglicher politischer Arbeit gegönnt»",
+        "source_kind": "dwds",
+        "note_ru": "отдых, восстановление после чего-либо: die Erholung vom Stress",
+        "note_en": "recovery from something: die Erholung vom Stress"
+      }
+    ]
   },
   {
     "id": "noun-1020",
@@ -13441,7 +13529,16 @@
     "example_de": "An meine Kindheit habe ich schöne Erinnerungen.",
     "example_cloze": "An meine Kindheit habe ich schöne {{c1::Erinnerungen}}.",
     "example_ru": "У меня прекрасные воспоминания о детстве.",
-    "example_en": "I have lovely memories of my childhood."
+    "example_en": "I have lovely memories of my childhood.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "воспоминание о чём-либо; напоминание о чём-либо: die Erinnerung an die Kindheit; zur Erinnerung an den Termin",
+        "note_en": "memory of something; reminder of something: die Erinnerung an die Kindheit; zur Erinnerung an den Termin"
+      }
+    ]
   },
   {
     "id": "noun-1022",
@@ -22436,7 +22533,27 @@
     "example_ru": "При подаче заявления я получаю помощь от консультационного центра.",
     "example_en": "I get support from an advice centre with my application.",
     "plural_note_ru": "Unterstützungen может обозначать отдельные денежные пособия. Помощь в целом обычно употребляется в единственном числе.",
-    "plural_note_en": "Unterstützungen can refer to individual financial allowances. Help in general is usually singular."
+    "plural_note_en": "Unterstützungen can refer to individual financial allowances. Help in general is usually singular.",
+    "complements": [
+      {
+        "pattern": "bei + Dativ",
+        "source": "DWDS: «Er honoriert die Unterstützung Bushs beim Zustandekommen der deutschen Einheit.»",
+        "source_kind": "dwds",
+        "meaning_ru": "поддержка",
+        "meaning_en": "support",
+        "note_ru": "поддержка, помощь в чём-либо: Unterstützung bei der Suche",
+        "note_en": "support, help with something: Unterstützung bei der Suche"
+      },
+      {
+        "pattern": "bei + Dativ",
+        "source": "DWDS: «Er honoriert die Unterstützung Bushs beim Zustandekommen der deutschen Einheit.»",
+        "source_kind": "dwds",
+        "meaning_ru": "помощь",
+        "meaning_en": "assistance",
+        "note_ru": "поддержка, помощь в чём-либо: Unterstützung bei der Suche",
+        "note_en": "support, help with something: Unterstützung bei der Suche"
+      }
+    ]
   },
   {
     "id": "noun-1699",
@@ -22575,6 +22692,24 @@
         "pattern": "zwischen + Dativ",
         "note_ru": "связь, сообщение между чем-либо",
         "note_en": "connection between"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "связь",
+        "meaning_en": "connection",
+        "note_ru": "связь, соединение с чем-либо: Er steht in Verbindung mit der Polizei.",
+        "note_en": "connection with something: Er steht in Verbindung mit der Polizei."
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "соединение",
+        "meaning_en": "link",
+        "note_ru": "связь, соединение с чем-либо: Er steht in Verbindung mit der Polizei.",
+        "note_en": "connection with something: Er steht in Verbindung mit der Polizei."
       }
     ]
   },
@@ -23137,7 +23272,16 @@
     "example_de": "Die Vorbereitung auf die Prüfung dauert mehrere Wochen.",
     "example_cloze": "Die {{c1::Vorbereitung}} auf die Prüfung dauert mehrere Wochen.",
     "example_ru": "Подготовка к экзамену занимает несколько недель.",
-    "example_en": "Preparation for the exam takes several weeks."
+    "example_en": "Preparation for the exam takes several weeks.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "подготовка к чему-либо: die Vorbereitung auf die Prüfung",
+        "note_en": "preparation for something: die Vorbereitung auf die Prüfung"
+      }
+    ]
   },
   {
     "id": "noun-1743",
@@ -23477,7 +23621,16 @@
     "example_de": "Die Wirkung des Medikaments setzt nach einer Stunde ein.",
     "example_cloze": "Die {{c1::Wirkung}} des Medikaments setzt nach einer Stunde ein.",
     "example_ru": "Действие лекарства начинается через час.",
-    "example_en": "The medication takes effect after an hour."
+    "example_en": "The medication takes effect after an hour.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "действие, влияние на что-либо: die Wirkung auf den Körper",
+        "note_en": "effect on something: die Wirkung auf den Körper"
+      }
+    ]
   },
   {
     "id": "noun-1767",
@@ -23521,6 +23674,13 @@
         "note_en": "awareness of something: das Wissen um die Gefahr",
         "meaning_ru": "осведомлённость",
         "meaning_en": "awareness"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "source": "DWDS: «Zum Wissen über das Datum gesellt sich sogleich die Imagination.»",
+        "source_kind": "dwds",
+        "note_ru": "знания о чём-либо: Wissen über Pflanzen",
+        "note_en": "knowledge about something: Wissen über Pflanzen"
       }
     ]
   },
@@ -27867,7 +28027,18 @@
     "example_de": "Die Abstimmung findet am Ende der Sitzung statt.",
     "example_cloze": "Die {{c1::Abstimmung}} findet am Ende der Sitzung statt.",
     "example_ru": "Голосование состоится в конце заседания.",
-    "example_en": "The vote takes place at the end of the meeting."
+    "example_en": "The vote takes place at the end of the meeting.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "source": "Duden: «Volksbefragung: … im Rahmen einer Abstimmung über eine bestimmte politische Frage»",
+        "source_kind": "duden",
+        "meaning_ru": "голосование",
+        "meaning_en": "vote",
+        "note_ru": "голосование по чему-либо: die Abstimmung über das Gesetz",
+        "note_en": "vote on something: die Abstimmung über das Gesetz"
+      }
+    ]
   },
   {
     "id": "noun-2096",
@@ -32902,6 +33073,15 @@
         "meaning_en": "entitlement, authority",
         "note_ru": "+ инфинитив с zu: Sie hat die Berechtigung, das Labor zu betreten. — У неё есть право входить в лабораторию.",
         "note_en": "+ zu-infinitive: Sie hat die Berechtigung, das Labor zu betreten. — She is authorized to enter the laboratory."
+      },
+      {
+        "pattern": "zu + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "право, полномочие",
+        "meaning_en": "entitlement, authority",
+        "note_ru": "право на что-либо: die Berechtigung zum Studium",
+        "note_en": "entitlement to something: die Berechtigung zum Studium"
       }
     ]
   },
@@ -33903,7 +34083,18 @@
     "example_cloze": "Die {{c1::Anwendung}} dieser Methode spart uns bei der Auswertung viel Zeit.",
     "example_ru": "Применение этого метода экономит нам много времени при анализе результатов.",
     "example_en": "Using this method saves us a lot of time when analysing the results.",
-    "example_de": "Die Anwendung dieser Methode spart uns bei der Auswertung viel Zeit."
+    "example_de": "Die Anwendung dieser Methode spart uns bei der Auswertung viel Zeit.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "применение",
+        "meaning_en": "application",
+        "note_ru": "применение к чему-либо: die Anwendung der Regel auf diesen Fall",
+        "note_en": "application to something: die Anwendung der Regel auf diesen Fall"
+      }
+    ]
   },
   {
     "id": "noun-2555",
@@ -34141,7 +34332,16 @@
     "example_cloze": "Die {{c1::Begeisterung}} der Kinder war groß, als sie das Baumhaus sahen.",
     "example_ru": "Дети пришли в восторг, когда увидели домик на дереве.",
     "example_en": "The children were very excited when they saw the tree house.",
-    "example_de": "Die Begeisterung der Kinder war groß, als sie das Baumhaus sahen."
+    "example_de": "Die Begeisterung der Kinder war groß, als sie das Baumhaus sahen.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "source": "Duden: «begeistern: … Begeisterung für etwas erwecken»",
+        "source_kind": "duden",
+        "note_ru": "увлечение чем-либо, воодушевление: seine Begeisterung für Fußball",
+        "note_en": "enthusiasm for something: seine Begeisterung für Fußball"
+      }
+    ]
   },
   {
     "id": "noun-2570",
@@ -34342,7 +34542,27 @@
     "example_en": "The exact name of the product is printed on the packaging.",
     "example_de": "Auf der Verpackung steht die genaue Bezeichnung des Produkts.",
     "plural_note_ru": "В значении «маркировка, нанесение обозначений» — без множественного числа.",
-    "plural_note_en": "The sense of marking something has no plural."
+    "plural_note_en": "The sense of marking something has no plural.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "source": "Duden (2): «eine charakteristische, [un]genaue Bezeichnung [für etwas]»",
+        "source_kind": "duden",
+        "meaning_ru": "название",
+        "meaning_en": "name",
+        "note_ru": "название, обозначение чего-либо: eine treffende Bezeichnung für das Gerät",
+        "note_en": "name, term for something: eine treffende Bezeichnung für das Gerät"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "source": "Duden (2): «eine charakteristische, [un]genaue Bezeichnung [für etwas]»",
+        "source_kind": "duden",
+        "meaning_ru": "обозначение",
+        "meaning_en": "designation",
+        "note_ru": "название, обозначение чего-либо: eine treffende Bezeichnung für das Gerät",
+        "note_en": "name, term for something: eine treffende Bezeichnung für das Gerät"
+      }
+    ]
   },
   {
     "id": "noun-2585",
@@ -38201,7 +38421,16 @@
     "example_cloze": "Die {{c1::Warnung}} vor dem Sturm erreichte uns noch am Nachmittag.",
     "example_ru": "Предупреждение о буре пришло к нам ещё днём.",
     "example_en": "The storm warning reached us that afternoon.",
-    "example_de": "Die Warnung vor dem Sturm erreichte uns noch am Nachmittag."
+    "example_de": "Die Warnung vor dem Sturm erreichte uns noch am Nachmittag.",
+    "complements": [
+      {
+        "pattern": "vor + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "предупреждение о чём-либо, об опасности: eine Warnung vor Sturm",
+        "note_en": "warning of something: eine Warnung vor Sturm"
+      }
+    ]
   },
   {
     "id": "noun-2876",
@@ -39022,7 +39251,16 @@
     "example_en": "The children adapted to the new surroundings more easily than expected.",
     "example_de": "Die Anpassung an die neue Umgebung fiel den Kindern leichter als erwartet.",
     "plural_note_ru": "Множественное число редко.",
-    "plural_note_en": "The plural is rare."
+    "plural_note_en": "The plural is rare.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "приспособление к чему-либо: die Anpassung an das Klima",
+        "note_en": "adaptation to something: die Anpassung an das Klima"
+      }
+    ]
   },
   {
     "id": "noun-2934",
@@ -39425,7 +39663,45 @@
     "example_en": "The in-depth examination of the topic took several weeks.",
     "example_de": "Die Auseinandersetzung mit dem Thema nahm mehrere Wochen in Anspruch.",
     "usage_note_ru": "Раздел общего имущества — юридическое значение; спортивное соревнование — переносное.",
-    "usage_note_en": "Division of jointly owned property is a legal sense; sporting contest is figurative."
+    "usage_note_en": "Division of jointly owned property is a legal sense; sporting contest is figurative.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "подробное рассмотрение",
+        "meaning_en": "in-depth examination",
+        "note_ru": "разбор, обсуждение чего-либо; спор, столкновение с кем-либо: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn",
+        "note_en": "engagement with something; dispute, clash with someone: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "обсуждение, спор",
+        "meaning_en": "discussion or dispute",
+        "note_ru": "разбор, обсуждение чего-либо; спор, столкновение с кем-либо: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn",
+        "note_en": "engagement with something; dispute, clash with someone: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "физическое столкновение, драка",
+        "meaning_en": "physical clash or fight",
+        "note_ru": "разбор, обсуждение чего-либо; спор, столкновение с кем-либо: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn",
+        "note_en": "engagement with something; dispute, clash with someone: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "вооружённый конфликт",
+        "meaning_en": "armed conflict",
+        "note_ru": "разбор, обсуждение чего-либо; спор, столкновение с кем-либо: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn",
+        "note_en": "engagement with something; dispute, clash with someone: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+      }
+    ]
   },
   {
     "id": "noun-2963",
@@ -39968,7 +40244,18 @@
     "example_en": "Despite considerable efforts, we did not manage to reach all the guests.",
     "example_de": "Trotz großer Bemühungen gelang es uns nicht, alle Gäste zu erreichen.",
     "plural_note_ru": "Усилия обычно выражаются во множественном числе; профессиональные услуги в счёте — только Plural.",
-    "plural_note_en": "Efforts are usually expressed in the plural; professional services on a bill use only the plural."
+    "plural_note_en": "Efforts are usually expressed in the plural; professional services on a bill use only the plural.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "source": "Duden: «Bemühen: Mühe, Anstrengung, Bemühung (um etwas)»",
+        "source_kind": "duden",
+        "meaning_ru": "усилие, старание",
+        "meaning_en": "effort",
+        "note_ru": "усилия ради чего-либо: die Bemühungen um Frieden",
+        "note_en": "efforts towards something: die Bemühungen um Frieden"
+      }
+    ]
   },
   {
     "id": "noun-3003",
@@ -40194,7 +40481,36 @@
     "example_cloze": "Die rege {{c1::Beteiligung}} an der Diskussion überraschte die Veranstalter.",
     "example_ru": "Активное участие в обсуждении удивило организаторов.",
     "example_en": "The lively participation in the discussion surprised the organizers.",
-    "example_de": "Die rege Beteiligung an der Diskussion überraschte die Veranstalter."
+    "example_de": "Die rege Beteiligung an der Diskussion überraschte die Veranstalter.",
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "участие",
+        "meaning_en": "participation",
+        "note_ru": "участие в чём-либо: die Beteiligung an der Wahl; доля в предприятии: eine Beteiligung an der Firma",
+        "note_en": "participation in something: die Beteiligung an der Wahl; stake in a company: eine Beteiligung an der Firma"
+      },
+      {
+        "pattern": "an + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "финансовое участие, доля в предприятии",
+        "meaning_en": "financial participation or stake in a company",
+        "note_ru": "участие в чём-либо: die Beteiligung an der Wahl; доля в предприятии: eine Beteiligung an der Firma",
+        "note_en": "participation in something: die Beteiligung an der Wahl; stake in a company: eine Beteiligung an der Firma"
+      },
+      {
+        "pattern": "an + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "привлечение к участию",
+        "meaning_en": "involvement",
+        "note_ru": "участие в чём-либо: die Beteiligung an der Wahl; доля в предприятии: eine Beteiligung an der Firma",
+        "note_en": "participation in something: die Beteiligung an der Wahl; stake in a company: eine Beteiligung an der Firma"
+      }
+    ]
   },
   {
     "id": "noun-3018",
@@ -41197,7 +41513,23 @@
     "example_cloze": "Die {{c1::Eignung}} des Materials für den Außenbereich wurde geprüft.",
     "example_ru": "Пригодность материала для использования на улице проверили.",
     "example_en": "The material’s suitability for outdoor use was tested.",
-    "example_de": "Die Eignung des Materials für den Außenbereich wurde geprüft."
+    "example_de": "Die Eignung des Materials für den Außenbereich wurde geprüft.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "пригодность к чему-либо: die Eignung für den Beruf",
+        "note_en": "suitability for something: die Eignung für den Beruf"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "пригодность к чему-либо: die Eignung zum Lehrerberuf",
+        "note_en": "aptitude for something: die Eignung zum Lehrerberuf"
+      }
+    ]
   },
   {
     "id": "noun-3094",
@@ -41320,7 +41652,18 @@
     "example_cloze": "Nach langen Gesprächen gelang eine {{c1::Einigung}} über die Kostenverteilung.",
     "example_ru": "После долгих переговоров удалось договориться о распределении расходов.",
     "example_en": "After lengthy talks, an agreement was reached on sharing the costs.",
-    "example_de": "Nach langen Gesprächen gelang eine Einigung über die Kostenverteilung."
+    "example_de": "Nach langen Gesprächen gelang eine Einigung über die Kostenverteilung.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "достижение согласия",
+        "meaning_en": "reaching agreement",
+        "note_ru": "соглашение о чём-либо: eine Einigung über den Preis",
+        "note_en": "agreement on something: eine Einigung über den Preis"
+      }
+    ]
   },
   {
     "id": "noun-3103",
@@ -45540,6 +45883,24 @@
         "meaning_en": "inclination, liking",
         "note_ru": "+ инфинитив с zu: Er hat die Neigung, alles zu übertreiben. — Он склонен всё преувеличивать.",
         "note_en": "+ zu-infinitive: Er hat die Neigung, alles zu übertreiben. — He has a tendency to exaggerate everything."
+      },
+      {
+        "pattern": "zu + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "склонность, пристрастие",
+        "meaning_en": "inclination, liking",
+        "note_ru": "склонность к чему-либо: eine Neigung zur Übertreibung; симпатия к кому-либо: ihre Neigung zu ihm",
+        "note_en": "tendency to something: eine Neigung zur Übertreibung; affection for someone: ihre Neigung zu ihm"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "симпатия",
+        "meaning_en": "affection",
+        "note_ru": "склонность к чему-либо: eine Neigung zur Übertreibung; симпатия к кому-либо: ihre Neigung zu ihm",
+        "note_en": "tendency to something: eine Neigung zur Übertreibung; affection for someone: ihre Neigung zu ihm"
       }
     ]
   },
@@ -50089,6 +50450,15 @@
         "meaning_en": "longing, desire",
         "note_ru": "+ инфинитив с zu: Er spürte das Verlangen, zu schlafen. — Ему страшно хотелось спать.",
         "note_en": "+ zu-infinitive: Er spürte das Verlangen, zu schlafen. — He felt a craving to sleep."
+      },
+      {
+        "pattern": "nach + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "meaning_ru": "сильное желание, тяга",
+        "meaning_en": "longing, desire",
+        "note_ru": "сильное желание чего-либо: das Verlangen nach Rache",
+        "note_en": "craving for something: das Verlangen nach Rache"
       }
     ]
   },
@@ -51031,7 +51401,16 @@
     "derived_from": {
       "type": "Verb",
       "word": "streben"
-    }
+    },
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "source": "DWDS: «Seine Motive waren nicht persönliches Streben nach Macht und Ansehen»",
+        "source_kind": "dwds",
+        "note_ru": "стремление к чему-либо: das Streben nach Glück",
+        "note_en": "pursuit of something: das Streben nach Glück"
+      }
+    ]
   },
   {
     "id": "noun-3798",
@@ -52172,7 +52551,16 @@
     "example_de": "Ihre Anspielung auf sein Alter fand er gar nicht lustig.",
     "example_cloze": "Ihre {{c1::Anspielung}} auf sein Alter fand er gar nicht lustig.",
     "example_ru": "Её намёк на его возраст он совсем не счёл смешным.",
-    "example_en": "He didn't find her allusion to his age funny at all."
+    "example_en": "He didn't find her allusion to his age funny at all.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "source": "Duden: «Andeutung: [versteckter] Hinweis, Anspielung auf etwas»",
+        "source_kind": "duden",
+        "note_ru": "намёк на что-либо: eine Anspielung auf seinen Fehler",
+        "note_en": "allusion to something: eine Anspielung auf seinen Fehler"
+      }
+    ]
   },
   {
     "id": "noun-3876",
@@ -53238,7 +53626,16 @@
     "example_de": "Nach der Befreiung der Geiseln feierten die Menschen auf der Straße.",
     "example_cloze": "Nach der {{c1::Befreiung}} der Geiseln feierten die Menschen auf der Straße.",
     "example_ru": "После освобождения заложников люди праздновали на улицах.",
-    "example_en": "After the release of the hostages people celebrated in the streets."
+    "example_en": "After the release of the hostages people celebrated in the streets.",
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "освобождение от чего-либо: die Befreiung von Steuern",
+        "note_en": "exemption, liberation from something: die Befreiung von Steuern"
+      }
+    ]
   },
   {
     "id": "noun-3957",
@@ -54425,7 +54822,16 @@
     "example_de": "Nach mehreren Drohungen ging sie zur Polizei.",
     "example_cloze": "Nach mehreren {{c1::Drohungen}} ging sie zur Polizei.",
     "example_ru": "После нескольких угроз она обратилась в полицию.",
-    "example_en": "After several threats she went to the police."
+    "example_en": "After several threats she went to the police.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "угроза чем-либо: die Drohung mit Gewalt",
+        "note_en": "threat of something: die Drohung mit Gewalt"
+      }
+    ]
   },
   {
     "id": "noun-4048",
@@ -54646,7 +55052,16 @@
     "example_ru": "Это решение можно обжаловать в течение месяца.",
     "example_en": "You can lodge an objection to the decision within one month.",
     "usage_note_ru": "В значении «обжалование» — официальный и юридический язык.",
-    "usage_note_en": "Official and legal language in the sense 'appeal'."
+    "usage_note_en": "Official and legal language in the sense 'appeal'.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "source": "Duden (статья слова)",
+        "source_kind": "duden",
+        "note_ru": "возражение, протест против чего-либо: Einspruch gegen den Bescheid",
+        "note_en": "objection to something: Einspruch gegen den Bescheid"
+      }
+    ]
   },
   {
     "id": "noun-4063",
@@ -64147,7 +64562,16 @@
     "example_de": "Der König ahnte nicht, dass seine Berater eine Verschwörung planten.",
     "example_cloze": "Der König ahnte nicht, dass seine Berater eine {{c1::Verschwörung}} planten.",
     "example_ru": "Король не подозревал, что его советники готовят заговор.",
-    "example_en": "The king had no idea that his advisers were planning a conspiracy."
+    "example_en": "The king had no idea that his advisers were planning a conspiracy.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "source": "Duden: «gemeinsame Planung eines Unternehmens gegen jemanden oder etwas (besonders gegen die staatliche Ordnung)»",
+        "source_kind": "duden",
+        "note_ru": "заговор против кого-либо, чего-либо: eine Verschwörung gegen den König",
+        "note_en": "conspiracy against someone or something: eine Verschwörung gegen den König"
+      }
+    ]
   },
   {
     "id": "noun-4791",

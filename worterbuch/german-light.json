@@ -2794,5 +2794,125 @@
     "note_en": "+ zu-infinitive: Sie hat Prokura, Verträge zu unterschreiben. — She has power of procuration to sign contracts."
    }
   ]
+ },
+ {
+  "word": "Erkundigung",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Erkundigungen",
+  "translation_ru": "наведение справок, расспросы",
+  "translation_en": "inquiry",
+  "complements": [
+   {
+    "pattern": "nach + Dativ",
+    "source": "DWDS: «auf seine erkundigung nach dem herrn pfarrer zeigte sie (²DWB, C. F. Meyer)» — слабое, принято советником 21.11",
+    "source_kind": "dwds",
+    "note_ru": "наведение справок о ком-либо, о чём-либо: Erkundigungen nach dem Weg",
+    "note_en": "inquiry about something: Erkundigungen nach dem Weg"
+   }
+  ],
+  "id": "light-0301"
+ },
+ {
+  "word": "Gewöhnung",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Gewöhnungen",
+  "translation_ru": "привыкание",
+  "translation_en": "habituation, getting used to",
+  "complements": [
+   {
+    "pattern": "an + Akkusativ",
+    "source": "DWDS: «die Gewöhnung an eine neue Umgebung»",
+    "source_kind": "dwds",
+    "note_ru": "привыкание к чему-либо: die Gewöhnung an das Klima",
+    "note_en": "getting used to something: die Gewöhnung an das Klima"
+   }
+  ],
+  "id": "light-0302"
+ },
+ {
+  "word": "Hinwendung",
+  "pos": "noun",
+  "gender": "f",
+  "plural": "Hinwendungen",
+  "translation_ru": "обращение (к чему-либо), поворот (к чему-либо)",
+  "translation_en": "turn (towards), turning (to)",
+  "complements": [
+   {
+    "pattern": "zu + Dativ",
+    "source": "DWDS: «eine Hinwendung zu historischen Themen festzustellen»",
+    "source_kind": "dwds",
+    "note_ru": "обращение к чему-либо: die Hinwendung zur Religion",
+    "note_en": "turning to something: die Hinwendung zur Religion"
+   }
+  ],
+  "id": "light-0303"
+ },
+ {
+  "word": "Disput",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Dispute",
+  "forms": [
+   "Disputs",
+   "Disputes",
+   "Disputen"
+  ],
+  "translation_ru": "спор, диспут",
+  "translation_en": "dispute, argument",
+  "complements": [
+   {
+    "pattern": "über + Akkusativ",
+    "source": "Duden: «ein langer, endloser Disput [über etwas]»",
+    "source_kind": "duden",
+    "note_ru": "спор о чём-либо: ein langer Disput über die Methode",
+    "note_en": "dispute about something: ein langer Disput über die Methode"
+   }
+  ],
+  "id": "light-0304"
+ },
+ {
+  "word": "Einstieg",
+  "pos": "noun",
+  "gender": "m",
+  "plural": "Einstiege",
+  "forms": [
+   "Einstiegs",
+   "Einstieges",
+   "Einstiegen"
+  ],
+  "translation_ru": "посадка (в транспорт), вход; дверь для входа; подход (к сложной теме), вникание; начало, вступление (во что-либо)",
+  "translation_en": "getting in, boarding; entrance door; way into, access (to a difficult subject); start, entry (into something)",
+  "complements": [
+   {
+    "pattern": "in + Akkusativ",
+    "source": "Duden (3): «der späte Einstieg ins Berufsleben»; «der Einstieg in den europäischen Markt»",
+    "source_kind": "duden",
+    "meaning_ru": "посадка (в транспорт), вход",
+    "meaning_en": "getting in, boarding",
+    "note_ru": "посадка, вход во что-либо: der Einstieg in den Bus; подход к теме: der Einstieg in diese Problematik; начало, вступление: der Einstieg ins Berufsleben, der Einstieg in den Markt",
+    "note_en": "getting into something: der Einstieg in den Bus; way into a subject: der Einstieg in diese Problematik; start, entry: der Einstieg ins Berufsleben, der Einstieg in den Markt"
+   },
+   {
+    "pattern": "in + Akkusativ",
+    "source": "Duden (3): «der späte Einstieg ins Berufsleben»; «der Einstieg in den europäischen Markt»",
+    "source_kind": "duden",
+    "meaning_ru": "подход (к сложной теме), вникание",
+    "meaning_en": "way into, access (to a difficult subject)",
+    "note_ru": "посадка, вход во что-либо: der Einstieg in den Bus; подход к теме: der Einstieg in diese Problematik; начало, вступление: der Einstieg ins Berufsleben, der Einstieg in den Markt",
+    "note_en": "getting into something: der Einstieg in den Bus; way into a subject: der Einstieg in diese Problematik; start, entry: der Einstieg ins Berufsleben, der Einstieg in den Markt"
+   },
+   {
+    "pattern": "in + Akkusativ",
+    "source": "Duden (3): «der späte Einstieg ins Berufsleben»; «der Einstieg in den europäischen Markt»",
+    "source_kind": "duden",
+    "meaning_ru": "начало, вступление (во что-либо)",
+    "meaning_en": "start, entry (into something)",
+    "note_ru": "посадка, вход во что-либо: der Einstieg in den Bus; подход к теме: der Einstieg in diese Problematik; начало, вступление: der Einstieg ins Berufsleben, der Einstieg in den Markt",
+    "note_en": "getting into something: der Einstieg in den Bus; way into a subject: der Einstieg in diese Problematik; start, entry: der Einstieg ins Berufsleben, der Einstieg in den Markt"
+   }
+  ],
+  "id": "light-0305"
  }
 ]

@@ -20026,6 +20026,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const list = records.map(e => lightCandidate(e, word));
           resolution.candidates = list; resolution.selected = list.length === 1 ? list[0] : null; resolution.preferred = resolution.selected;
           resolution.status = list.length === 1 ? "resolved" : "ambiguous"; resolution.evidence = "light-record";
+          // (batch 225: the record's own pairs — die Erkundigung nach dem Weg, die Hinwendung zu der Kunst —: the link runs again on the
+          // record, which only stands here, after the earlier stage)
+          if (resolution.selected && !resolution.selected.prepositionLink) { try { await verbPrepositionLink(word, context, resolution); } catch (_) { /* the card stays */ } }
         }
       }
       // The feminine personal pronoun's dative form means her, not she.
