@@ -4240,8 +4240,17 @@ function apostropheText(text) {
       if (index < 1 || !joined(index-1,index)) return null;
       const next = tokens[index+1];
       // A separate noun head is capitalised (das Lesen macht: macht is no head).
+      // (advisor 24.11, TODO after group (a): sein Vollständiges bremisches Münz Cabinet) a second attribute before the head: a lower-case word
+      // with the same adjective ending as the tapped one and a capital word right after it — the tapped word is the first attribute of that
+      // group, whichever dictionary knows the second (bremisch is in none); not a determiner / pronoun (das Gute meines Vaters) and not a
+      // word our dictionary knows only as something else (a verb, an adverb)
+      const ending = /(?:e|en|em|er|es)$/u.exec(norm(word))?.[0];
+      const second = next && headModifiers && ending && joined(index,index+1) && /^\p{Ll}+$/u.test(next[0]) && norm(next[0]).endsWith(ending) &&
+        !determinerFeatures(next[0]) && !ARTICLE_OR_POSSESSIVE_WORD.test(norm(next[0])) &&
+        !((forms.get(norm(next[0])) || []).length && !(forms.get(norm(next[0])) || []).some(e => e.type === "Adjektiv") && !modifiers.has(norm(next[0]))) &&
+        tokens[index+2] && joined(index+1,index+2) && /^\p{Lu}/u.test(tokens[index+2][0]);
       const separateHead = !!next && joined(index,index+1) &&
-        (/^[A-ZÄÖÜ]/u.test(next[0]) && (forms.get(norm(next[0])) || []).some(e => e.type === "Nomen") || headModifiers && modifiers.has(norm(next[0])));
+        (/^[A-ZÄÖÜ]/u.test(next[0]) && (forms.get(norm(next[0])) || []).some(e => e.type === "Nomen") || headModifiers && modifiers.has(norm(next[0])) || !!second);
       return {sentence,tokens,index,joined,marker:norm(tokens[index-1][0]),separateHead};
     }
     // Reviewed action nouns have their own identity; never borrow a verb ID.
