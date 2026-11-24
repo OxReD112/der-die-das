@@ -15148,6 +15148,28 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       while (end+1 < tokens.length && connected(end,end+1) && (!boundaries.has(norm(tokens[end+1][0])) || midClauseDoch(sentence,tokens,end+1))) end++;
       return {start,end};
     }
+    // (advisor 24.11, one notion — one function) a finite form of a verb at token i, for a person or any: our card's person forms
+    // (ownFiniteAt), the English dictionary's inflection rows of that form (importedFiniteRow). Shared by the grammar rows (candidateFinite
+    // of finite-verb-with-noun-subject, B2) and the twins (twinGenderByForm: the finite verb of the subject).
+    function ownFiniteAt(entry, tokens, i, person) {
+      return ["Präsens","Präteritum","Konjunktiv II",...konj1At(tokens,i)].some(tense => {
+        const group = formsOf(entry)[tense] || {};
+        return (person ? formIn(group,person) : Object.values(group)).some(form => {
+          if (!form) return false;
+          const parts = norm(form).split(/\s+/);
+          // (an own card of several words — heiße willkommen — has its person form apart in every clause; the tap checked the first part)
+          return norm(tokens[i][0]) === (parts.length === 2 ? (phraseFirst(entry) ? parts[0] : parts[1]+parts[0]) : norm(form));
+        });
+      });
+    }
+    function importedFiniteRow(inflections, form, lemma, person) {
+      return (inflections || []).some(row =>
+        norm(row.form) === norm(form) && norm(row.lemma) === norm(lemma) &&
+        (posMap[row.pos] || row.pos) === "Verb" &&
+        !(row.tags || []).some(tag => ["infinitive","participle","imperative"].includes(tag)) &&
+        row.person && row.number && (row.tense || /^subjunctive/u.test(row.mood || "")) &&
+        (!person || ({ich:"first-person:singular",du:"second-person:singular","er/sie/es":"third-person:singular",wir:"first-person:plural",ihr:"second-person:plural",sie:"third-person:plural"})[person] === `${row.person}:${row.number}`));
+    }
     function grammarClause(word, context, candidates, inflections) {
       if (!context || !Number.isInteger(context.tokenOffset)) return null;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'grammarRank');
@@ -15209,22 +15231,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         (norm(c.lemma) !== norm(word) ||
           (c.meanings || []).length > 0 && (c.meanings || []).every(m => norm(m).split(/[^\p{L}]+/u).filter(x => x.length > 2 && !STOP.test(x)).every(x => ownNounWords.has(x))));
       const nouns = candidates.filter(c => (posMap[c.pos] || c.pos) === "Nomen" && !coveredExternalNoun(c));
-      const finite = (entry,i,person) => ["Präsens","Präteritum","Konjunktiv II",...konj1At(tokens,i)].some(tense => {
-        const group = formsOf(entry)[tense] || {};
-        return (person ? formIn(group,person) : Object.values(group)).some(form => {
-          if (!form) return false;
-          const parts = norm(form).split(/\s+/);
-          // (an own card of several words — heiße willkommen — has its person form apart in every clause; the tap checked the first part)
-          return norm(tokens[i][0]) === (parts.length === 2 ? (phraseFirst(entry) ? parts[0] : parts[1]+parts[0]) : norm(form));
-        });
-      });
-      const importedFinite = (candidate,person) => inflections.some(row =>
-        norm(row.form) === norm(word) && norm(row.lemma) === norm(candidate.lemma) &&
-        (posMap[row.pos] || row.pos) === "Verb" &&
-        !row.tags.some(tag => ["infinitive","participle","imperative"].includes(tag)) &&
-        row.person && row.number && (row.tense || /^subjunctive/u.test(row.mood || "")) &&
-        (!person || ({ich:"first-person:singular",du:"second-person:singular","er/sie/es":"third-person:singular",wir:"first-person:plural",ihr:"second-person:plural",sie:"third-person:plural"})[person] === `${row.person}:${row.number}`));
-      const candidateFinite = (candidate,person) => candidate.item && finite(candidate.item,index,person) || importedFinite(candidate,person);
+      const finite = (entry,i,person) => ownFiniteAt(entry,tokens,i,person);
+      const candidateFinite = (candidate,person) => candidate.item && finite(candidate.item,index,person) || importedFiniteRow(inflections,word,candidate.lemma,person);
       const choose = (favoured,evidence) => favoured.length ? {
         candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
         preferred:favoured.length === 1 ? favoured[0] :
@@ -17147,7 +17155,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // with -e (frohe Kunde) — feminine; a bare singular after sein / werden / als (Bin … Kunde, als Kunde) — the counted masculine;
     // der not after a preposition (in erster Linie der Kunde) — masculine nominative. Otherwise the window stays.
     const TWIN_RARE_PLURAL = /^(?:The plural is rare\.|The plural is rarely used\.|Usually singular\.|Usually used in the singular\.)/u;
-    function twinGenderByForm(word, context, result) {
+    async function twinGenderByForm(word, context, result) {
       const list = result?.candidates || [];
       if (!result || result.status !== 'ambiguous' || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
       const twins = list.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen' && c.item?.article);
@@ -17207,9 +17215,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (k1 === 'der') {
         const {start,end} = grammarClauseBounds(sentence,tokens,at);
         const rows = i => [norm(tokens[i][0]),norm(tokens[i][0]).replace(/ß/gu,'ss')].flatMap(x => verbAnalyses.get(x) || []);
-        const finites = [];
-        // (the finite verb of a singular subject: a form of the third person singular — not the infinitive kommen of wird kommen)
-        for (let i = start; i <= end; i++) if (i !== at && i !== at-1 && /^\p{Ll}/u.test(tokens[i][0]) && rows(i).some(r => r.kind === 'finite' && r.person === 'er/sie/es')) finites.push(i);
+        // (advisor 24.11) the finite verb of the subject through the function of B2 (ownFiniteAt / importedFiniteRow — candidateFinite):
+        // a form of the third person singular of our verb card or of the English dictionary's verb — not the infinitive kommen of wird kommen
+        const finiteThird = async i => {
+          if ((forms.get(norm(tokens[i][0])) || []).some(e => e.type === 'Verb' && ownFiniteAt(e,tokens,i,'er/sie/es'))) return true;
+          const morph = await tokenMorphology(tokens[i],{discoverModifiers:false},'twinGenderByForm').catch(() => null);
+          return !!morph && (morph.analyses || []).some(a => a.kind === 'inflection' && canonicalPos(a.pos) === 'Verb' && importedFiniteRow([a],tokens[i][0],a.lemma,'er/sie/es'));
+        };
+        // (speed chat 24.11) the words of the part are looked up together, not one after another
+        const places = [];
+        for (let i = start; i <= end; i++) if (i !== at && i !== at-1 && /^\p{Ll}/u.test(tokens[i][0])) places.push(i);
+        const third = await Promise.all(places.map(finiteThird));
+        const finites = places.filter((_,k) => third[k]);
         const pronoun = tokens.slice(start,end+1).some(t => /^(?:ich|du|er|wir|ihr|man)$/u.test(norm(t[0])));
         // (advisor 24.11, only for the twins) werden + a participle in the part — a passive may have no subject at all (Der Kunde wurde
         // nicht geglaubt — the feminine dative): der does not decide (Der Kunde wurde sofort bedient — the window, an accepted loss;
