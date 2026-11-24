@@ -16923,7 +16923,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const OLD_DATIVE_DETERMINERS = 'dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|unserm|eurem|euerm|diesem|jenem|jedem|welchem|solchem|manchem';
     const caseFree = list => list.split('|').map(w => `[${w[0]}${w[0].toUpperCase()}]${w.slice(1)}`).join('|');
     // adjectives between (an ending; not der / sich / seiner … — mit einem seiner Blicke, einem der wichtigsten Orte are plurals)
-    const OLD_DATIVE_ADJ = '(?:\\s+(?!(?:der|des|sich|seiner|ihrer|meiner|deiner|unserer|eurer|einer|keiner|dieser|jener|welcher|aller)\\s)\\p{Ll}+(?:e|en|em|er|es))*';
+    // (A4, Mac count 24.11: in dem salzhaltige Braunkohle — a relative dem; after a dative singular determiner or contraction an adjective ends
+    // in -en: dem kühlen Grunde, im tiefen Walde)
+    const OLD_DATIVE_ADJ = '(?:\\s+(?!(?:der|des|sich|seiner|ihrer|meiner|deiner|unserer|eurer|einer|keiner|dieser|jener|welcher|aller)\\s)\\p{Ll}+en)*';
     const OLD_DATIVE_BEFORE = new RegExp(`(?:^|[\\s(„»"'])(?:(?:${caseFree('im|am|vom|zum|beim')})${OLD_DATIVE_ADJ}|(?:${caseFree(OLD_DATIVE_PREPOSITIONS)})\\s+(?:${OLD_DATIVE_DETERMINERS})${OLD_DATIVE_ADJ}|${caseFree('bei|zu')})\\s+$`, 'u');
     // G60 / part 1 (advisor 08.11, claude/TITLE_NAME_P8_COUNT_2026-11-08_RU.md): a capital word after a title is a name.
     // After Dr. / Prof. / St. (a chain of titles is passed: Prof. Dr. Müller, Dr. med. Weber) always «Name». After Herr / Herrn / Frau /
@@ -17214,16 +17216,53 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return result;
     }
-    function oldDativeE(word, context, result) {
+    // (advisor 24.11, source audit A4) one logic for every source. The stem: the one noun of the word without the -e, our card or the
+    // English dictionary's, masculine or neuter by the dictionary (no gender — no decision). A rival — another noun — counts only when
+    // the tapped form stands in its own table (our dictionary's forms; the external case table): der Graben has no Grabe (im Grabe →
+    // das Grab). A rival of ours spelled so — the window, as before; an external feminine / plural-only reading of the form (die Herde)
+    // is ruled out only by a dative singular masculine / neuter determiner or contraction before it (am Herde), not by bare bei / zu
+    // (bei Herde — the window); an external masculine / neuter reading of the form — the window. The sign: the stem's table has the form
+    // as its dative singular (Kaikki, often «dated»: Grabe, Mahle), or — where the table says nothing — the preposition / determiner
+    // before it (OLD_DATIVE_BEFORE).
+    async function oldDativeE(word, context, result) {
       const list = result?.candidates || [];
       if (!result || result.status !== 'ambiguous' || list.length < 2 || !/^\p{Lu}\p{Ll}+e$/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
-      const stem = norm(word).slice(0, -1);
-      if ((lemmas.get(norm(word)) || []).some(e => e.type === 'Nomen' && norm(e.word) === norm(word))) return result;
-      const own = list.filter(c => c.source === 'main' && c.pos === 'Nomen' && norm(c.lemma) === stem && /^(der|das)$/i.test(String(c.item?.article || '')));
-      if (own.length !== 1 || list.some(c => c !== own[0] && c.source === 'main' && c.pos === 'Nomen')) return result;
+      const w = norm(word), stem = w.slice(0, -1);
+      if ((lemmas.get(w) || []).some(e => e.type === 'Nomen' && norm(e.word) === w)) return result;
+      const nouns = list.filter(c => canonicalPos(c.pos) === 'Nomen');
+      const genderKeys = c => c.source === 'main' ? [{der:'m',die:'f',das:'n'}[String(c.item?.article || '').toLowerCase()]].filter(Boolean) :
+        c.nounArticle ? [{der:'m',die:'f',das:'n'}[c.nounArticle]].filter(Boolean) : Object.keys(c.nounCases || {}).filter(g => /^[mfn]$/u.test(g));
+      const stems = nouns.filter(c => norm(c.lemma) === stem && !c.construction && !c.formation && !c.compound);
+      if (stems.length !== 1) return result;
+      const stemCard = stems[0], stemGenders = genderKeys(stemCard);
+      if (!stemGenders.length || stemGenders.some(g => g === 'f')) return result;
       const before = context.sentence.slice(Math.max(0, context.tokenOffset - 80), context.tokenOffset);
-      if (!OLD_DATIVE_BEFORE.test(before)) return result;
-      const chosen = own[0];
+      const sign = OLD_DATIVE_BEFORE.test(before), bare = /(?:^|[\s(„»"'])[bBzZ](?:ei|u)\s+$/u.test(before), detSign = sign && !bare;
+      // (a determiner before it that is no dative singular masculine / neuter — die Alte, der Alte, eine — rules the old dative out)
+      if (!sign && /(?:^|[\s(„»"'])(?:[dD](?:er|ie|as|en|es)|[eE]in(?:e|en|er|es)?|[kK]ein(?:e|en|er|es)?|[mdsMDS]ein(?:e|en|er|es)?|[iI]hr(?:e|en|er|es)?|[uU]nser(?:e|en|er|es)?|[dD]ies(?:e|er|en|es))(?:\s+\p{Ll}+(?:e|en|em|er|es))*\s+$/u.test(before)) return result;
+      // (without a preposition / determiner sign only nouns may compete: Gebrauche ihn klug — the imperative)
+      if (!sign && list.some(c => canonicalPos(c.pos) !== 'Nomen')) return result;
+      for (const c of nouns) {
+        if (c === stemCard) continue;
+        if (c.source === 'main') { if ((forms.get(w) || []).some(e => e.id === c.item?.id)) return result; continue; }
+        const rows = Object.entries(c.nounCases || {}).map(([g,t]) => [g,t?.[w]]).filter(([,r]) => r);
+        // (a reading of the word itself without a case table — a nominalization, a compound: die Alte, Braunkohle — the window)
+        if (!rows.length) { if (norm(c.lemma) === w) return result; continue; }
+        // (a reading of the form that a dative singular masculine / neuter determiner or contraction allows — another word: the window;
+        // without such a determiner every reading of the form competes: bei Herde)
+        if (detSign ? rows.some(([g,r]) => g !== 'f' && (r.singular || []).includes('dative')) : true) return result;
+      }
+      // (a capital word right after that no dictionary knows — ours or the English one — is part of a foreign name: am Pole Day; asked
+      // only here, when the rule would decide)
+      const after = context.sentence.slice(context.tokenOffset + String(word).length);
+      const nextWord = /^ (\p{Lu}\p{L}*)/u.exec(after)?.[1];
+      if (nextWord && !(forms.get(norm(nextWord)) || lemmas.get(norm(nextWord)) || []).length) {
+        const groups = await lexicalLookup(nextWord,'oldDativeE').catch(() => null);
+        if (!groups || !groups.some(g => g.meanings?.length || g.kind === 'form-note')) return result;
+      }
+      const tableDative = stemCard.source !== 'main' && stemGenders.some(g => (stemCard.nounCases?.[g]?.[w]?.singular || []).includes('dative'));
+      if (!tableDative && !sign) return result;
+      const chosen = stemCard;
       return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'old-dative-e'},{outcome:'selected',rule:'old-dative-e',reason:'old-dative-e'});
     }
     // Advisor 08.11 (claude/MIT_AND_4_RECOUNT_2026-11-08_RU.md): a window of our preposition mit and our adverb mit «тоже,
