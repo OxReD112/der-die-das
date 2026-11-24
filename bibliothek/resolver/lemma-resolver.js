@@ -15096,6 +15096,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // is the grammar group of selectionRules (one table); a rule returns
     // undefined to pass, a result to settle the group (preference, ordering of
     // candidates, or an explicit stop/block without a preference).
+    // (advisor 22.11 / 24.11, source audits B2 / A2 — one function) the places of the subject in a German part start..end with its
+    // finite verb at `finite`, for a group «determiner + noun» whose determiner stands at `det`: (a) right before the finite verb at the
+    // start of the part (Das Thema erhitzt …); (b) right after the finite verb of a verb-second part, whatever stands first (Heute
+    // erhitzt das Thema …); (c) the first group after a subordinating word in a verb-last part (weil das Thema die Gemüter erhitzt).
+    // Other groups are objects or attributes (der Inhalt der Kunde).
+    function subordinateOpener(tokens, start) {
+      return start > 0 && ((forms.get(norm(tokens[start-1][0])) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
+        ['weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','falls','sobald'].includes(norm(tokens[start-1][0])));
+    }
+    function subjectGroupPlaced(det, finite, start, end, subordinate) {
+      return det === start && det + 2 === finite || det === finite + 1 || subordinate && finite === end && det === start;
+    }
     // The part of the sentence the grammar rows read: cut at punctuation and at und / oder / aber / denn / sondern / doch and the
     // subordinating words. One function for the rows and for their async preparation (grammarNounFacts).
     function grammarClauseBounds(sentence, tokens, index) {
@@ -16165,9 +16177,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // Kuchen isst der Junge); (c) the first group after a subordinating word in a verb-last part (weil das Thema die Gemüter erhitzt —
         // the group right before the verb is an object). Other noun groups are objects; with several candidates only the one whose person
         // the verb form takes
-        const subordinate=index===end&&start>0&&((f.matches(start-1)||[]).some(e=>e.type==='Konjunktion'&&conjunctionKind(e)==='subordinating')||
-          ['weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','falls','sobald'].includes(norm(tokens[start-1][0])));
-        const placed=nounSubjects.filter(s=>s.index===index-1&&s.index-1===start||s.index===index+2||subordinate&&s.index-1===start);
+        const subordinate=index===end&&subordinateOpener(tokens,start);
+        const placed=nounSubjects.filter(s=>subjectGroupPlaced(s.index-1,index,start,end,subordinate));
         const fits=placed.map(s=>({s,agreed:f.verbs.filter(c=>f.candidateFinite(c,s.person))})).filter(x=>x.agreed.length);
         if(placed.length>1&&new Set(fits.map(x=>x.s.person)).size!==1)return undefined;
         return fits.length ? f.choose(fits[0].agreed,'finite-verb-with-noun-subject') : undefined;
@@ -17140,8 +17151,46 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!/^\p{Ll}/u.test(tokens[i][0]) || determinerFeatures(tokens[i][0]) || WORD_FORMATION_DET.test(t) || (lemmas.get(t) || []).some(e => e.type === 'Adjektiv' && !(lemmas.get(t) || []).some(x => x.type === 'Adverb'))) break;
       }
       if (!det2 && /^\p{Ll}{3,}e$/u.test(p1) && !determinerFeatures(p1) && !WORD_FORMATION_DET.test(k1) && !(lemmas.get(k1) || []).some(e => e.type === 'Adverb')) return choose(byArticle('die'), 'twin-adjective-e');
-      // (not after a preposition: von der Kunde — the feminine dative)
-      if (k1 === 'der' && !(p2 && (lemmas.get(p2) || []).some(e => e.type === 'preposition'))) return choose(masc, 'twin-der-nominative');
+      // (advisor 24.11, source audit A2) only the gender: a determiner right before the word that fits one twin's gender alone — die
+      // (the singular: the word is no plural of either twin) the feminine; den / einen the masculine; dem / des / einem / eines the
+      // masculine or the neuter (one of them among the twins)
+      const genderSets = {die:['die'],den:['der'],einen:['der'],dem:['der','das'],des:['der','das'],einem:['der','das'],eines:['der','das'],das:['das']};
+      const pluralOfTwin = twins.some(c => String(c.item.plural || '').split(/\s*,\s*/u).map(norm).includes(w));
+      // (an inflected adjective may stand between: die frohe Kunde, den neuen Kunden)
+      const detWord = genderSets[k1] ? k1 : /^\p{Ll}+(?:e|en|er|es|em)$/u.test(p1) && !determinerFeatures(p1) && genderSets[p2] ? p2 : null;
+      if (detWord && !(detWord === 'die' && pluralOfTwin)) {
+        const fit = twins.filter(c => genderSets[detWord].includes(c.item.article));
+        return fit.length === 1 ? choose(fit[0], 'twin-determiner-gender') : result;
+      }
+      // der + the singular — the masculine nominative only where the group is the subject (subjectGroupPlaced, the function of
+      // finite-verb-with-noun-subject): the part's one finite verb of the third person singular, the group at a subject place, no
+      // nominative pronoun in the part (Der Kunde schenkte er keinen Glauben — the dative). Otherwise der is the feminine genitive /
+      // dative as well (der Inhalt der Kunde, mit der Kunde): no decision, the window.
+      // (advisor 24.11, tests chat) der right after a preposition is never the nominative — not the masculine: the feminine twin
+      // (mit der Kunde, von der Kunde); not when the form is a plural of a twin (wegen der Kunden is no singular)
+      if (k1 === 'der' && p2 && (lemmas.get(p2) || []).some(e => e.type === 'preposition') && !pluralOfTwin) {
+        const fem = byArticle('die');
+        return fem ? choose(fem, 'twin-der-after-preposition') : result;
+      }
+      if (k1 === 'der') {
+        const {start,end} = grammarClauseBounds(sentence,tokens,at);
+        const rows = i => [norm(tokens[i][0]),norm(tokens[i][0]).replace(/ß/gu,'ss')].flatMap(x => verbAnalyses.get(x) || []);
+        const finites = [];
+        // (the finite verb of a singular subject: a form of the third person singular — not the infinitive kommen of wird kommen)
+        for (let i = start; i <= end; i++) if (i !== at && i !== at-1 && /^\p{Ll}/u.test(tokens[i][0]) && rows(i).some(r => r.kind === 'finite' && r.person === 'er/sie/es')) finites.push(i);
+        const pronoun = tokens.slice(start,end+1).some(t => /^(?:ich|du|er|wir|ihr|man)$/u.test(norm(t[0])));
+        // (advisor 24.11, only for the twins) werden + a participle in the part — a passive may have no subject at all (Der Kunde wurde
+        // nicht geglaubt — the feminine dative): der does not decide (Der Kunde wurde sofort bedient — the window, an accepted loss;
+        // werden without a participle keeps it: Der Kunde wird kommen)
+        const passive = finites.some(i => rows(i).some(r => r.kind === 'finite' && r.base === 'werden')) &&
+          tokens.slice(start,end+1).some((t,d) => start+d !== at && /^\p{Ll}/u.test(t[0]) && rows(start+d).some(r => r.kind === 'participle'));
+        // (advisor 24.11) the predicate nominative: right after a finite sein / bleiben and closing the part (Er ist der Kunde, Das bleibt
+        // der Kunde) — a nominative even with another subject; not with a word after it (Er ist der Kunde treu — the dative)
+        if (finites.length === 1 && !passive && at === end && at-1 === finites[0]+1 && rows(finites[0]).some(r => r.kind === 'finite' && ['sein','bleiben'].includes(r.base)))
+          return choose(masc, 'twin-der-predicate');
+        if (finites.length === 1 && !pronoun && !passive &&
+            subjectGroupPlaced(at-1,finites[0],start,end,subordinateOpener(tokens,start))) return choose(masc, 'twin-der-nominative');
+      }
       return result;
     }
     function oldDativeE(word, context, result) {
