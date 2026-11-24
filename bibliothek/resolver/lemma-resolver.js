@@ -2000,6 +2000,8 @@ function apostropheText(text) {
     // (G70 books 25.10: a detached particle of a verb card — trug sich … zu, stell dir … vor — may close a reflexive link; its tap asks for it)
     const verbParticles = new Set();
     const verbAnalyses = new Map(), phraseAnalyses = new Map(), separableBases = new Map();
+    // (A2 step 2) the external meanings of another gender of our noun's word, by «spelling|our card id» (candidateFor)
+    const otherGenderNouns = new Map();
     const modalLemmas = new Set(["können","müssen","dürfen","sollen","wollen","mögen"]);
     // (reflexive review 24.10.2026, user: the old spelling — muß, mußte, müßte, wußte, laßt, gewußt — is the same verb form:
     // ss at the end of a word or before a consonant was ß before 1996. Grimm and Kafka are printed in it; without these
@@ -2775,10 +2777,23 @@ function apostropheText(text) {
       const lexical = groups.filter(g => !g.kind && !g.unresolved && g.meanings?.length);
       const candidateFor = group => {
         const own = (lemmas.get(norm(group.word)) || []).filter(e => e.type === canonicalPos(group.pos));
+        // (advisor 24.11, source audit A2 step 2) our noun card replaces the external noun of its word; the external meanings of a
+        // gender none of our cards has (der Tor «fool» beside our das Tor) ride on our card as otherGenderNoun — no candidate of its
+        // own, so no window; externalGenderAgreement chooses it only when the form rules our card's gender out (Der Tor lachte)
+        const ownArticles = new Set(own.filter(e => e.type === 'Nomen').map(e => e.article).filter(Boolean));
+        const otherGenders = own.length && canonicalPos(group.pos) === 'Nomen' && group.meaningGenders && /^\p{Lu}\p{Ll}/u.test(String(word || '')) ?
+          [...new Set(Object.entries(group.meaningGenders).filter(([m]) => !/^(?:obsolete|archaic)\b/iu.test(m) &&
+            !(group.labels?.[m] || []).some(l => /^(?:obsolete|archaic)$/iu.test(l))).flatMap(([,g]) => String(g).split(':')))]
+            .filter(g => /^[mfn]$/u.test(g) && !ownArticles.has({m:'der',f:'die',n:'das'}[g])) : [];
+        const otherGenderNoun = otherGenders.length ? {source:'fallback',lemma:group.word,pos:group.pos,posLabel:'Nomen',meanings:[...group.meanings],
+          translation:{en:group.meanings.join('; '),ru:''},...(group.labels ? {meaningLabels:{en:group.labels}} : {}),...externalNounFacts(group, word),
+          otherGenders} : null;
         const found = own.length ? own.map(mainCandidate) : [{source:'fallback',lemma:group.word,
           pos:group.pos,posLabel:canonicalPos(group.pos),meanings:[...group.meanings],
           translation:{en:group.meanings.join('; '),ru:''},...(group.labels ? {meaningLabels:{en:group.labels}} : {}),...externalNounFacts(group, word)}];
         for (const candidate of found) addCandidate(candidate);
+        // (kept by the spelling and our card's id: the candidates of a resolution are rebuilt from the dictionary index)
+        if (otherGenderNoun) for (const e of own) if (e.type === 'Nomen') otherGenderNouns.set(norm(word) + '|' + e.id, otherGenderNoun);
         return found;
       };
       for (const group of lexical) {
@@ -14616,13 +14631,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     async function externalGenderAgreement(word, context, candidates) {
       if (!Number.isInteger(context?.tokenOffset) || !/^\p{Lu}\p{Ll}/u.test(word) || word.length > 1 && word === word.toUpperCase()) return null;
       const s = norm(word);
-      const external = candidates.filter(c => c.source === "fallback" && c.pos === "noun" && !c.explanation && !c.formation && !c.usage && !c.compound);
-      if (!external.length) return null;
       const own = candidates.filter(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && c.item?.article);
+      // (A2 step 2) the external meanings of another gender that ride on our card (otherGenderNoun) are options too
+      const hidden = [...new Set(own.map(c => otherGenderNouns.get(s + '|' + c.item.id)).filter(Boolean))];
+      const external = [...candidates.filter(c => c.source === "fallback" && c.pos === "noun" && !c.explanation && !c.formation && !c.usage && !c.compound),...hidden];
+      if (!external.length) return null;
       if (own.some(c => adjectivalNounStem(c.item))) return null;
       const ownGenders = new Set(own.map(c => Object.keys(GENDER_ARTICLE).find(k => GENDER_ARTICLE[k] === c.item.article)).filter(Boolean));
       const options = [];
-      for (const c of external) for (const g of await externalNounGenders(c)) if (!ownGenders.has(g)) options.push({card:c,gender:g});
+      for (const c of external) for (const g of await externalNounGenders(c)) if (!ownGenders.has(g) && (!hidden.includes(c) || c.otherGenders.includes(g))) options.push({card:c,gender:g});
       // (an external noun of one gender only, with no card of ours of another gender — nothing to choose)
       if (!options.length || new Set(options.map(o => o.gender)).size + ownGenders.size < 2) return null;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,"externalGenderAgreement");
@@ -14686,10 +14703,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (over our card only an external noun whose base form is this very word — ein Dachs «badger»; a form of another external word does
       // not take our card's place: die eisernen Kasten — Grimm's old plural of der Kasten, not die Kaste «caste»; the window stays,
       // advisor 05.11)
-      if (own.length && norm(chosen[0].card.lemma) !== s) return null;
+      // (A2 step 2: the other gender of our own word itself — dem Toren, a form of der Tor — is no form of another word)
+      if (own.length && norm(chosen[0].card.lemma) !== s && !(hidden.includes(chosen[0].card) && own.some(c => norm(c.lemma) === norm(chosen[0].card.lemma)))) return null;
       // (only a plural agrees: a plural article says nothing of the gender — südlich der Alpen; the form alone is no ground to show
       // «перевод не найден» of die Alp, so the choice is made only when that gender has a meaning)
       if (chosen.every(r => r.pluralOnly) && !genderMeanings(chosen[0].card,chosen[0].gender).kept.length) return null;
+      // (A2 step 2: the other gender of our word wins only by its singular — a plural article says nothing of the gender, and a plural
+      // may belong to a third word: die Laden — die Lade)
+      if (hidden.includes(chosen[0].card) && chosen.every(r => r.pluralOnly)) return null;
       return {candidate:chosen[0].card,gender:chosen[0].gender,overOwn:own.length > 0};
     }
     // the meanings of the chosen gender (advisor 22.11): the English meanings of that gender — a pointer («alternative form of Elster») is
@@ -18190,6 +18211,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (resolution.selected !== choice.candidate && !(resolution.selected && canonicalPos(resolution.selected.pos) === 'Nomen' &&
             norm(resolution.selected.lemma) === norm(choice.candidate.lemma)))
             selection.override(resolution,'external-gender-agreement',{selected:choice.candidate,candidates:[choice.candidate,...resolution.candidates.filter(c => c !== choice.candidate)],evidence:'external-gender-agreement'});
+        } else if (choice && choice.candidate.otherGenders && !resolution.candidates.includes(choice.candidate)) {
+          // (A2 step 2) the external noun of another gender of our word, chosen by the form: shown in place of our card; an expression card
+          // of ours the word belongs to stays (auf der Hut sein)
+          // (advisor 24.11) a light record of the word is laid over it only when its gender is the chosen one (lightOver skips light: false)
+          const rec = lightByWordPos.get(`${norm(choice.candidate.lemma)}|${choice.candidate.pos}`);
+          const recGenders = rec ? (Array.isArray(rec.gender) ? rec.gender : rec.gender != null ? [rec.gender] : []).map(String) : [];
+          const chosen = applyGenderChoice({...choice.candidate,otherGenders:undefined,...(rec && !recGenders.includes(choice.gender) ? {light:false} : {})}, choice.gender);
+          if (!(resolution.selected && canonicalPos(resolution.selected.pos) === 'Ausdruck'))
+            selection.override(resolution,'external-gender-agreement',{selected:chosen,candidates:[chosen,...resolution.candidates],evidence:'external-gender-other'});
         } else if (choice) {
           const chosen = applyGenderChoice(choice.candidate, choice.gender);
           resolution.candidates = resolution.candidates.map(c => c === choice.candidate ? chosen : c);
@@ -18369,7 +18399,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // without it is the whole word's. With the pair's preposition in the text its meaning comes first and the pair is in the grammar;
       // the other meanings stay on the card — our cards and the light records alike)
       // (the light record's text is the one shown — presentResolution puts it over the external reading)
-      const lightRecord = card.source === 'fallback' ? lightByWordPos.get(`${norm(card.lemma || '')}|${card.pos}`) : null;
+      const lightRecord = card.source === 'fallback' && card.light !== false ? lightByWordPos.get(`${norm(card.lemma || '')}|${card.pos}`) : null;
       const nounMeanings = String(card.item?.translation_ru || lightRecord?.translation_ru || card.translation?.ru || '').split(';').map(x => x.trim()).filter(Boolean);
       const nounMeaningsEn = String(card.item?.translation_en || lightRecord?.translation_en || card.translation?.en || '').split(';').map(x => x.trim()).filter(Boolean);
       const pairSenses = own => own.some(([,, meaning]) => !meaning) ? [] : [...new Set(own.map(([,, meaning]) => nounMeanings.indexOf(meaning)))].filter(i => i >= 0).sort((a,b) => a-b);
