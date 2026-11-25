@@ -75,14 +75,14 @@
   // The data files; a new batch of cards changes the version here (and this file's ?v= in index.html).
   const FILES = Object.freeze([
     { file: "german-nouns.json", version: "20261124-wn-x229-pairs-1", type: "noun" },
-    { file: "german-verbs.json", version: "20261124-wn-x235-pairs-data-3", type: "verb" },
+    { file: "german-verbs.json", version: "20261124-wn-x237-regard-frame-1", type: "verb" },
     { file: "german-adjectives.json", version: "20261122-wn-x217-lieb-1", type: "adjective" },
     { file: "german-adverbs.json", version: "20261123-wn-x221-danach-mark-1", type: "adverb" },
     { file: "german-conjunctions.json", version: "20261122-wn-x215-align-1", type: "conjunction" },
     { file: "german-pronouns.json", version: "20261122-wn-x215-align-1", type: "pronoun" },
     { file: "german-adjective-adverbs.json", version: "20261122-wn-x218-dicht-danach-1", type: "adjective" },
     // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-    { file: "german-expressions.json", version: "20261124-wn-x235-pairs-data-3-links424", type: "expression", optional: true }
+    { file: "german-expressions.json", version: "20261124-wn-x237-regard-frame-1-links-match", type: "expression", optional: true }
   ].map(Object.freeze));
 
   const ORDER = ["german-nouns.json", "german-verbs.json", "german-adjectives.json", "german-adverbs.json", "german-adjective-adverbs.json", "german-conjunctions.json", "german-pronouns.json", "german-expressions.json"];

@@ -70986,5 +70986,310 @@
         "Er hielt zu seinem Freund."
       ]
     }
+  },
+  {
+    "id": "expression-452",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit sich reden lassen",
+    "translation_ru": "быть сговорчивым, идти на уступки",
+    "translation_en": "to be open to negotiation, to be willing to compromise",
+    "example_de": "Über den Preis lässt der Verkäufer sicher mit sich reden.",
+    "example_ru": "С продавцом наверняка можно будет договориться о цене.",
+    "example_en": "The seller will surely be open to negotiation on the price.",
+    "notes_ru": [
+      "Местоимение в дательном падеже по лицу подлежащего: Ich lasse mit mir reden. Lässt du mit dir reden?"
+    ],
+    "notes_en": [
+      "The pronoun is dative and agrees with the subject: Ich lasse mit mir reden. Lässt du mit dir reden?"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/reden",
+    "source": "Duden (reden 5): mit sich <Dativ> reden lassen (zu Zugeständnissen bereit sein)",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "lasse",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließest",
+              "ließen",
+              "ließt",
+              "ließe",
+              "lass",
+              "laß"
+            ]
+          },
+          {
+            "form": "mit"
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "reden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "mit"
+          },
+          {
+            "form": [
+              "mir",
+              "dir",
+              "sich",
+              "uns",
+              "euch"
+            ],
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "reden"
+            ]
+          },
+          {
+            "form": [
+              "lasse",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließest",
+              "ließen",
+              "ließt",
+              "ließe",
+              "lass",
+              "laß",
+              "gelassen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Über den Preis lässt er mit sich reden.",
+        "Ich lasse mit mir reden.",
+        "Sie hat nicht mit sich reden lassen."
+      ],
+      "negative": [
+        "Er lässt mich mit ihm reden.",
+        "Ich will mit dir reden."
+      ]
+    }
+  },
+  {
+    "id": "expression-453",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "(jdn.) zu Gevatter bitten",
+    "translation_ru": "(устар.) просить (кого-либо) стать крёстным",
+    "translation_en": "(archaic) to ask (someone) to be a godparent",
+    "example_de": "Der Müller bat seinen Nachbarn zu Gevatter.",
+    "example_ru": "Мельник попросил соседа стать крёстным.",
+    "example_en": "The miller asked his neighbour to be godfather.",
+    "notes_ru": [
+      "Устаревшее. Ещё одно выражение: Gevatter stehen — быть крёстным.",
+      "Словари дают только bitten. Вариантов с laden или einladen нет ни в Duden, ни в DWDS."
+    ],
+    "notes_en": [
+      "Archaic. Another expression: Gevatter stehen — to be a godparent.",
+      "The dictionaries give only bitten. Neither Duden nor DWDS has variants with laden or einladen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Gevatter",
+    "source": "Duden (Gevatter 1, veraltet): jemanden zu Gevatter bitten (jemanden bitten, das Amt des Taufpaten zu übernehmen); DWDS (eWDG): jmdn. zu Gevatter bitten",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bitte",
+              "bittest",
+              "bittet",
+              "bitten",
+              "bat",
+              "batest",
+              "baten",
+              "batet",
+              "bäte",
+              "bäten",
+              "gebeten"
+            ]
+          },
+          {
+            "form": "zu Gevatter"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "zu Gevatter"
+          },
+          {
+            "form": [
+              "bitte",
+              "bittest",
+              "bittet",
+              "bitten",
+              "bat",
+              "batest",
+              "baten",
+              "batet",
+              "bäte",
+              "bäten",
+              "gebeten",
+              "zu bitten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Müller bat seinen Nachbarn zu Gevatter."
+      ],
+      "negative": [
+        "Er bat seinen Nachbarn um Hilfe."
+      ]
+    }
+  },
+  {
+    "id": "expression-454",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "von Glück sagen / reden können",
+    "translation_ru": "(кому-либо) повезло, (кто-либо) может считать себя счастливчиком",
+    "translation_en": "to count oneself lucky, to be lucky",
+    "example_de": "Du kannst von Glück reden, dass dir nichts passiert ist.",
+    "example_ru": "Тебе повезло, что с тобой ничего не случилось.",
+    "example_en": "You can count yourself lucky that nothing happened to you.",
+    "notes_ru": [
+      "Чаще всего с придаточным dass или wenn: Wir können von Glück sagen, wenn wir den Zug noch erreichen."
+    ],
+    "notes_en": [
+      "Usually with a dass or wenn clause: Wir können von Glück sagen, wenn wir den Zug noch erreichen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Glueck",
+    "source": "Duden (Glück 1): von Glück sagen/reden können (etwas einem glücklichen Umstand verdanken)",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "kann",
+              "kannst",
+              "können",
+              "könnt",
+              "konnte",
+              "konntest",
+              "konnten",
+              "konntet",
+              "könnte",
+              "könntest",
+              "könnten",
+              "könntet",
+              "gekonnt"
+            ]
+          },
+          {
+            "form": "von Glück"
+          },
+          {
+            "form": [
+              "sagen",
+              "reden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "no_finite_between": true
+      },
+      {
+        "parts": [
+          {
+            "form": "von Glück"
+          },
+          {
+            "form": [
+              "sagen",
+              "reden"
+            ]
+          },
+          {
+            "form": [
+              "kann",
+              "kannst",
+              "können",
+              "könnt",
+              "konnte",
+              "konntest",
+              "konnten",
+              "konntet",
+              "könnte",
+              "könntest",
+              "könnten",
+              "könntet",
+              "gekonnt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Du kannst von Glück reden, dass dir nichts passiert ist.",
+        "Wir können von Glück sagen, wenn wir den Zug noch erreichen.",
+        "Er meint, dass er von Glück reden kann."
+      ],
+      "negative": [
+        "Er redete lange von seinem Glück.",
+        "Sie kann von ihrem Glück erzählen."
+      ]
+    }
   }
 ]

@@ -7526,7 +7526,8 @@
         "note_ru": "считать кого-либо или что-либо кем-либо или чем-либо",
         "note_en": "to consider someone or something (to be) …",
         "meaning_ru": "считать (кем-либо, чем-либо)",
-        "meaning_en": "to consider"
+        "meaning_en": "to consider",
+        "frame": "regard"
       }
     ],
     "lookup_forms": {
@@ -11626,14 +11627,16 @@
         "note_ru": "считать кем-либо или чем-либо",
         "note_en": "to regard as someone or something",
         "meaning_ru": "считать (кем-либо, чем-либо), принимать за",
-        "meaning_en": "to regard (as), to take for"
+        "meaning_en": "to regard (as), to take for",
+        "frame": "regard"
       },
       {
         "pattern": "für + Akkusativ",
         "note_ru": "считать кем-либо или чем-либо; принимать за кого-либо или что-либо",
         "note_en": "to consider (to be) …, to take for …",
         "meaning_ru": "считать (кем-либо, чем-либо), принимать за",
-        "meaning_en": "to regard (as), to take for"
+        "meaning_en": "to regard (as), to take for",
+        "frame": "regard"
       }
     ],
     "separable_prefix": "an",
@@ -27386,7 +27389,8 @@
       {
         "pattern": "als + Nominativ",
         "note_ru": "считаться кем-либо или чем-либо",
-        "note_en": "to be considered (to be) …"
+        "note_en": "to be considered (to be) …",
+        "frame": "regard"
       },
       {
         "pattern": "für + Akkusativ",
@@ -41378,7 +41382,8 @@
       {
         "pattern": "als + Akkusativ",
         "note_ru": "считать кем-либо или чем-либо",
-        "note_en": "to regard as someone or something"
+        "note_en": "to regard as someone or something",
+        "frame": "regard"
       }
     ],
     "lookup_forms": {
@@ -47677,8 +47682,13 @@
       },
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "быть направленным на кого-, что-либо",
-        "note_en": "to be directed at someone or something"
+        "meaning_ru": "быть направленным, обращённым (на кого-, что-либо)",
+        "meaning_en": "to be directed (at someone, something)",
+        "note_ru": "быть направленным на кого-, что-либо: Sein ganzer Ärger richtete sich auf den Nachbarn. Подсвечивается только с коррелятом; Alle Blicke richteten sich auf die Bühne / zur Tür — направление, та же форма.",
+        "note_en": "to be directed at someone or something: Sein ganzer Ärger richtete sich auf den Nachbarn. Highlighted only with a correlative; Alle Blicke richteten sich auf die Bühne / zur Tür is direction, the same form.",
+        "source": "Duden (richten 2.1, sich richten): (von Sachen) sich in eine bestimmte Richtung wenden — ihre Augen richteten sich auf mich; die Scheinwerfer richteten sich plötzlich alle auf einen Punkt; sein ganzer Hass richtete sich auf sie",
+        "source_kind": "duden",
+        "correlative_only": true
       },
       {
         "pattern": "an + Akkusativ",
@@ -85674,8 +85684,8 @@
   {
     "id": "verb-1767",
     "infinitive": "deuten",
-    "translation_ru": "толковать, истолковывать; указывать (на что-либо)",
-    "translation_en": "to interpret; to point (to, at)",
+    "translation_ru": "толковать, истолковывать; указывать, показывать (на кого-, что-либо); свидетельствовать, говорить (о чём-либо), предвещать (что-либо)",
+    "translation_en": "to interpret; to point (to, at); to indicate, to suggest (something)",
     "auxiliary": "haben",
     "usage_note_ru": "auf etwas deuten — указывать на что-либо (пальцем; перен. — свидетельствовать о чём-либо). Ср. hindeuten: Alles deutet darauf hin, dass … — всё указывает на то, что … Träume deuten — толковать сны. die Deutung — толкование.",
     "usage_note_en": "auf etwas deuten — to point at something (with a finger; figuratively — to indicate). Cf. hindeuten: Alles deutet darauf hin, dass … — everything suggests that … Träume deuten — to interpret dreams. die Deutung — interpretation.",
@@ -85688,10 +85698,13 @@
     "complements": [
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "указывать на что-либо",
-        "note_en": "to point to something",
-        "meaning_ru": "указывать (на что-либо)",
-        "meaning_en": "to point (to, at)"
+        "meaning_ru": "свидетельствовать, говорить (о чём-либо), предвещать (что-либо)",
+        "meaning_en": "to indicate, to suggest (something)",
+        "note_ru": "свидетельствовать о чём-либо, предвещать что-либо: Alle Zeichen deuten auf einen baldigen Wechsel. Подсвечивается только с коррелятом: Alles deutet darauf, dass … Указать на кого-, что-либо (Er deutete auf das Fenster.) — направление, без пары: можно и zum Fenster, nach Süden.",
+        "note_en": "to indicate, to suggest something: Alle Zeichen deuten auf einen baldigen Wechsel. Highlighted only with a correlative: Alles deutet darauf, dass … Pointing at someone or something (Er deutete auf das Fenster.) is direction, not a pair: zum Fenster, nach Süden are also possible.",
+        "source": "Duden (deuten 2): etwas erkennen, erwarten lassen; auf etwas hinweisen, hindeuten — die Zeichen deuten auf einen Umschwung, eine Änderung; Duden 1 (direction): mit dem Finger auf jemanden, etwas deuten; er deutete nach Süden",
+        "source_kind": "duden",
+        "correlative_only": true
       },
       {
         "pattern": "als + Akkusativ",
