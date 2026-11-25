@@ -600,8 +600,14 @@
  "noun-098": {
   "translation_pl": "plan; plan (miasta), schemat, rysunek techniczny",
   "example_pl": "Układamy plan podróży.",
-  "_src": "463d9684",
-  "_src_reader": "b5fc85cd"
+  "complements": [
+   {
+    "meaning_pl": "plan",
+    "note_pl": "+ bezokolicznik z zu: Sie hat den Plan, ein Café zu eröffnen. — Ma plan otworzyć kawiarnię."
+   }
+  ],
+  "_src": "fd620095",
+  "_src_reader": "27f8cbbc"
  },
  "noun-099": {
   "translation_pl": "cena; nagroda",
@@ -978,8 +984,13 @@
  "noun-158": {
   "translation_pl": "podanie; aplikacja (o pracę)",
   "example_pl": "Pana podanie wpłynęło do nas wczoraj.",
-  "_src": "adeaf80e",
-  "_src_reader": "afe605fd"
+  "complements": [
+   {
+    "note_pl": "podanie, aplikacja o coś: eine Bewerbung um die Stelle"
+   }
+  ],
+  "_src": "fc4a1078",
+  "_src_reader": "f990f7d3"
  },
  "noun-159": {
   "translation_pl": "życiorys, CV",
@@ -1025,14 +1036,31 @@
  "noun-165": {
   "translation_pl": "zdolność; umiejętność",
   "example_pl": "Ta umiejętność jest ważna w tym zawodzie.",
-  "_src": "e62abffc",
-  "_src_reader": "af45b4d3"
+  "complements": [
+   {
+    "meaning_pl": "zdolność",
+    "note_pl": "+ bezokolicznik z zu: Sie hat die Fähigkeit, schnell zu lernen. — Ma zdolność szybkiego uczenia się."
+   }
+  ],
+  "_src": "288fde82",
+  "_src_reader": "31bc6425"
  },
  "noun-166": {
   "translation_pl": "decyzja",
   "example_pl": "Nie jest nam łatwo podjąć tę decyzję.",
-  "_src": "4f8ba29f",
-  "_src_reader": "f74024eb"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Die Entscheidung, umzuziehen, fiel uns schwer. — Decyzja o przeprowadzce nie była dla nas łatwa."
+   },
+   {
+    "note_pl": "decyzja o wyborze czegoś: die Entscheidung für den Job"
+   },
+   {
+    "note_pl": "decyzja w sprawie czegoś: die Entscheidung über den Haushalt"
+   }
+  ],
+  "_src": "0dc0347d",
+  "_src_reader": "edbf2669"
  },
  "noun-167": {
   "translation_pl": "możliwość",
@@ -1040,16 +1068,26 @@
   "complements": [
    {
     "note_pl": "możliwość czegoś: die Möglichkeit zur Weiterbildung"
+   },
+   {
+    "meaning_pl": "możliwość",
+    "note_pl": "+ bezokolicznik z zu: Es gibt die Möglichkeit, online zu bezahlen. — Jest możliwość zapłaty online."
    }
   ],
-  "_src": "a68870c8",
-  "_src_reader": "22769afb"
+  "_src": "bb371dfc",
+  "_src_reader": "aa77ab1f"
  },
  "noun-168": {
   "translation_pl": "okazja; możliwość",
   "example_pl": "Przy okazji pokażę ci zdjęcia.",
-  "_src": "d3903348",
-  "_src_reader": "5f9f2800"
+  "complements": [
+   {
+    "meaning_pl": "okazja",
+    "note_pl": "+ bezokolicznik z zu: Wir hatten keine Gelegenheit, uns zu verabschieden. — Nie mieliśmy okazji się pożegnać."
+   }
+  ],
+  "_src": "adb8eecd",
+  "_src_reader": "368128e5"
  },
  "noun-169": {
   "translation_pl": "zaleta, przewaga",
@@ -1082,16 +1120,26 @@
    {
     "note_pl": "powód, podstawa do czegoś: kein Grund zur Panik, Grund zur Annahme",
     "meaning_pl": "podstawa"
+   },
+   {
+    "meaning_pl": "powód",
+    "note_pl": "+ bezokolicznik z zu: Es gibt keinen Grund, sich zu beschweren. — Nie ma powodu się skarżyć."
    }
   ],
-  "_src": "2558dca9",
-  "_src_reader": "600b8943"
+  "_src": "b98699ff",
+  "_src_reader": "7f305fc1"
  },
  "noun-172": {
   "translation_pl": "cel; miejsce docelowe",
   "example_pl": "Naszym celem jest dworzec.",
-  "_src": "94eae44d",
-  "_src_reader": "877ea77f"
+  "complements": [
+   {
+    "meaning_pl": "cel",
+    "note_pl": "+ bezokolicznik z zu: Wir haben das Ziel, mehr Bäume zu pflanzen. — Naszym celem jest posadzić więcej drzew."
+   }
+  ],
+  "_src": "fdd39a14",
+  "_src_reader": "3667b4ee"
  },
  "noun-173": {
   "translation_pl": "sukces",
@@ -1192,8 +1240,14 @@
  "noun-188": {
   "translation_pl": "trudne zadanie; wyzwanie",
   "example_pl": "Nowe zadanie to ciekawe wyzwanie.",
-  "_src": "00bc392c",
-  "_src_reader": "5c9cfd3c"
+  "complements": [
+   {
+    "meaning_pl": "trudne zadanie",
+    "note_pl": "+ bezokolicznik z zu: Es ist eine Herausforderung, drei Sprachen zu lernen. — Nauka trzech języków to trudne zadanie."
+   }
+  ],
+  "_src": "e5e80003",
+  "_src_reader": "11ea406d"
  },
  "noun-189": {
   "translation_pl": "przesłanka; warunek",
@@ -1282,8 +1336,13 @@
  "noun-199": {
   "translation_pl": "czas",
   "example_pl": "Masz dziś wieczorem czas?",
-  "_src": "a2c98561",
-  "_src_reader": "3ead040a"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Ich habe keine Zeit, dir zu helfen. — Nie mam czasu ci pomóc."
+   }
+  ],
+  "_src": "40dce2bf",
+  "_src_reader": "436697f8"
  },
  "noun-200": {
   "plural_note_pl": "W zwykłym znaczeniu występuje bez liczby mnogiej. Wässer — rodzaje wody (np. Mineralwässer), Wasser — masy wody (np. die Wasser des Flusses).",
@@ -1713,8 +1772,13 @@
  "noun-264": {
   "translation_pl": "pomysł, idea",
   "example_pl": "To dobry pomysł!",
-  "_src": "54aea338",
-  "_src_reader": "750c6130"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Sie hatte die Idee, ein Picknick zu machen. — Wpadła na pomysł, żeby urządzić piknik."
+   }
+  ],
+  "_src": "7b907d2b",
+  "_src_reader": "3bcdda07"
  },
  "noun-265": {
   "translation_pl": "zdanie, opinia",
@@ -1757,10 +1821,13 @@
    },
    {
     "note_pl": "niepokój o kogoś, coś: Angst um die Kinder"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Sie hat Angst, allein nach Hause zu gehen. — Boi się iść sama do domu."
    }
   ],
-  "_src": "91b5a554",
-  "_src_reader": "75fdc5e1"
+  "_src": "ac76a6ed",
+  "_src_reader": "0159d844"
  },
  "noun-269": {
   "plural_note_pl": "Zwykle występuje bez liczby mnogiej; forma die Glücke jest rzadka.",
@@ -1892,8 +1959,17 @@
   "plural_note_pl": "W znaczeniu „negocjacje” zwykle w lm.",
   "translation_pl": "negocjacje; rozprawa sądowa",
   "example_pl": "Negocjacje trwają już dwa tygodnie.",
-  "_src": "f1172942",
-  "_src_reader": "972465cd"
+  "complements": [
+   {
+    "note_pl": "negocjacje w sprawie czegoś: Verhandlungen über den Lohn; rozprawa sądowa w sprawie czegoś: die Verhandlung über die Klage"
+   },
+   {
+    "meaning_pl": "negocjacje",
+    "note_pl": "negocjacje z kimś: Verhandlungen mit der Gewerkschaft"
+   }
+  ],
+  "_src": "8351e54e",
+  "_src_reader": "32f927c9"
  },
  "noun-286": {
   "translation_pl": "pracodawca",
@@ -2152,10 +2228,16 @@
   "_src_reader": "1dffb241"
  },
  "noun-325": {
-  "translation_pl": "zadanie, polecenie; obowiązek",
+  "translation_pl": "zadanie, polecenie; zadanie, rola; obowiązek",
   "example_pl": "Proszę dokładnie przeczytać zadanie.",
-  "_src": "765c69c4",
-  "_src_reader": "e62d111c"
+  "complements": [
+   {
+    "meaning_pl": "zadanie, rola",
+    "note_pl": "+ bezokolicznik z zu: Er hat die Aufgabe, die Gäste zu empfangen. — Jego zadaniem jest witać gości."
+   }
+  ],
+  "_src": "90dda77f",
+  "_src_reader": "fe19450d"
  },
  "noun-326": {
   "translation_pl": "winda",
@@ -2305,8 +2387,18 @@
  "noun-348": {
   "translation_pl": "przeprosiny; „przepraszam”; pisemne usprawiedliwienie nieobecności",
   "example_pl": "Przepraszam, która jest godzina?",
-  "_src": "8c02aa62",
-  "_src_reader": "d102e045"
+  "complements": [
+   {
+    "meaning_pl": "przeprosiny",
+    "note_pl": "przeprosiny za coś: eine Entschuldigung für die Verspätung"
+   },
+   {
+    "meaning_pl": "pisemne usprawiedliwienie nieobecności",
+    "note_pl": "pisemne usprawiedliwienie nieobecności (w szkole itp.): Die Mutter schrieb ihm eine Entschuldigung für die Schule."
+   }
+  ],
+  "_src": "7e72266f",
+  "_src_reader": "c88b2eb0"
  },
  "noun-349": {
   "plural_note_pl": "W znaczeniu „ogień, płomień” zwykle bez liczby mnogiej; Feuer w liczbie mnogiej — pojedyncze ogniska lub pożary.",
@@ -2720,10 +2812,13 @@
   "complements": [
    {
     "note_pl": "prośba o coś: eine Bitte um Hilfe"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Sie richtete an uns die Bitte, leise zu sein. — Zwróciła się do nas z prośbą, żebyśmy byli cicho."
    }
   ],
-  "_src": "7c6f5200",
-  "_src_reader": "fbf41467"
+  "_src": "6a2bdeab",
+  "_src_reader": "2638c260"
  },
  "noun-410": {
   "translation_pl": "ołówek",
@@ -2945,10 +3040,14 @@
   "complements": [
    {
     "note_pl": "chęć, ochota na coś: Lust auf Eis"
+   },
+   {
+    "meaning_pl": "chęć, ochota",
+    "note_pl": "+ bezokolicznik z zu: Ich habe keine Lust, heute zu kochen. — Nie mam dziś ochoty gotować."
    }
   ],
-  "_src": "2b6f95e7",
-  "_src_reader": "b3819935"
+  "_src": "9f7b80a1",
+  "_src_reader": "76c6c6e3"
  },
  "noun-444": {
   "translation_pl": "płaszcz; powłoka (kabla), opona",
@@ -3797,10 +3896,13 @@
    },
    {
     "note_pl": "zainteresowanie czymś"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Wir haben kein Interesse, das Haus zu verkaufen. — Nie jesteśmy zainteresowani sprzedażą domu."
    }
   ],
-  "_src": "068640bf",
-  "_src_reader": "d1f1f3bb"
+  "_src": "f866a28a",
+  "_src_reader": "9609ca56"
  },
  "noun-578": {
   "translation_pl": "dom towarowy",
@@ -3844,8 +3946,14 @@
  "noun-583": {
   "translation_pl": "sztuka; umiejętność",
   "example_pl": "Studiuje sztukę w Wiedniu.",
-  "_src": "390fa9b3",
-  "_src_reader": "42094e88"
+  "complements": [
+   {
+    "meaning_pl": "umiejętność",
+    "note_pl": "+ bezokolicznik z zu: Er versteht die Kunst, Menschen zu überzeugen. — Zna sztukę przekonywania ludzi."
+   }
+  ],
+  "_src": "c75b3c35",
+  "_src_reader": "3e0dd4d2"
  },
  "noun-584": {
   "translation_pl": "krajobraz, pejzaż",
@@ -3939,10 +4047,13 @@
   "complements": [
    {
     "note_pl": "pragnienie czegoś"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Er hat den Wunsch, Arzt zu werden. — Chce zostać lekarzem."
    }
   ],
-  "_src": "ea96fda0",
-  "_src_reader": "2f61e706"
+  "_src": "64170207",
+  "_src_reader": "6f300d35"
  },
  "noun-599": {
   "translation_pl": "liczba; cyfra",
@@ -4028,10 +4139,14 @@
   "complements": [
    {
     "note_pl": "pozwolenie, zezwolenie na coś: die Erlaubnis zum Parken"
+   },
+   {
+    "meaning_pl": "pozwolenie, zezwolenie",
+    "note_pl": "+ bezokolicznik z zu: Wir haben die Erlaubnis, hier zu parken. — Mamy pozwolenie, żeby tu parkować."
    }
   ],
-  "_src": "fcec9b4e",
-  "_src_reader": "39b8e805"
+  "_src": "fcbc13db",
+  "_src_reader": "a50171e8"
  },
  "noun-612": {
   "translation_pl": "zniżka, ulga",
@@ -4072,8 +4187,13 @@
  "noun-618": {
   "translation_pl": "wywiad",
   "example_pl": "Gazeta przeprowadziła wywiad z burmistrzem.",
-  "_src": "f6f69daf",
-  "_src_reader": "4bfb8cda"
+  "complements": [
+   {
+    "note_pl": "wywiad z kimś: Sie führte ein Interview mit dem Minister."
+   }
+  ],
+  "_src": "2caff978",
+  "_src_reader": "fa99b5ef"
  },
  "noun-619": {
   "translation_pl": "dziennikarz",
@@ -5077,8 +5197,13 @@
  "noun-774": {
   "translation_pl": "zamiar",
   "example_pl": "Przepraszam, to nie było celowe!",
-  "_src": "bfafa7da",
-  "_src_reader": "b92e156f"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Ich habe nicht die Absicht, umzuziehen. — Nie mam zamiaru się przeprowadzać."
+   }
+  ],
+  "_src": "bf0cbed1",
+  "_src_reader": "71da7cb0"
  },
  "noun-775": {
   "translation_pl": "małpa",
@@ -5293,8 +5418,17 @@
  "noun-812": {
   "translation_pl": "żądanie, wezwanie; zaproszenie",
   "example_pl": "Dostał wezwanie do zapłaty.",
-  "_src": "49c616fb",
-  "_src_reader": "8aa8d755"
+  "complements": [
+   {
+    "meaning_pl": "żądanie, wezwanie",
+    "note_pl": "+ bezokolicznik z zu: Er ignorierte die Aufforderung, das Gebäude zu verlassen. — Zignorował wezwanie do opuszczenia budynku."
+   },
+   {
+    "note_pl": "wezwanie, zaproszenie do czegoś: eine Aufforderung zum Tanz"
+   }
+  ],
+  "_src": "57e5fb2b",
+  "_src_reader": "62e73285"
  },
  "noun-813": {
   "translation_pl": "przyjęcie (do organizacji, do szpitala); zdjęcie; nagranie",
@@ -5311,8 +5445,14 @@
  "noun-814": {
   "translation_pl": "zadanie, polecenie; zamówienie",
   "example_pl": "Firma dostała duże zamówienie z Chin.",
-  "_src": "25910e92",
-  "_src_reader": "c5fb01c0"
+  "complements": [
+   {
+    "meaning_pl": "zadanie, polecenie",
+    "note_pl": "+ bezokolicznik z zu: Ich habe den Auftrag, Ihnen das Paket zu geben. — Polecono mi przekazać Panu paczkę."
+   }
+  ],
+  "_src": "3ae65127",
+  "_src_reader": "1c1da5c7"
  },
  "noun-815": {
   "translation_pl": "występ; pojawienie się",
@@ -5371,10 +5511,14 @@
   "complements": [
    {
     "note_pl": "widok na coś; perspektywa czegoś: Aussicht auf Erfolg"
+   },
+   {
+    "meaning_pl": "perspektywa, szansa",
+    "note_pl": "+ bezokolicznik z zu: Er hat gute Aussichten, die Stelle zu bekommen. — Ma duże szanse na otrzymanie tej posady."
    }
   ],
-  "_src": "3a596947",
-  "_src_reader": "a6bc45b5"
+  "_src": "aa192172",
+  "_src_reader": "45f0fbf8"
  },
  "noun-823": {
   "translation_pl": "wymowa; szczera rozmowa",
@@ -5560,8 +5704,14 @@
   "translation_pl": "zajęcie; praca, zatrudnienie",
   "example_pl": "Czytanie to moje ulubione zajęcie w weekendy.",
   "plural_note_pl": "W znaczeniu „zatrudnienie (pracowników)” występuje bez liczby mnogiej.",
-  "_src": "4da5762b",
-  "_src_reader": "52ae34d5"
+  "complements": [
+   {
+    "meaning_pl": "zajęcie",
+    "note_pl": "zajmowanie się czymś: die Beschäftigung mit Kunst"
+   }
+  ],
+  "_src": "338d57ad",
+  "_src_reader": "04a5cec3"
  },
  "noun-850": {
   "translation_pl": "poprawa; wyzdrowienie",
@@ -5849,8 +5999,13 @@
  "noun-895": {
   "translation_pl": "szansa, możliwość",
   "example_pl": "To twoja szansa — wykorzystaj ją!",
-  "_src": "56b4f7f4",
-  "_src_reader": "dece5800"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Sie hat die Chance, im Ausland zu studieren. — Ma szansę studiować za granicą."
+   }
+  ],
+  "_src": "863b4ff0",
+  "_src_reader": "529ee92c"
  },
  "noun-896": {
   "translation_pl": "chipsy; mikrochip; żeton (w kasynie)",
@@ -6651,8 +6806,13 @@
  "noun-1019": {
   "translation_pl": "odpoczynek, regeneracja sił",
   "example_pl": "Po operacji potrzebuje dużo odpoczynku.",
-  "_src": "7f5c96fb",
-  "_src_reader": "b2226736"
+  "complements": [
+   {
+    "note_pl": "odpoczynek od czegoś, regeneracja po czymś: die Erholung vom Stress"
+   }
+  ],
+  "_src": "59e9a69e",
+  "_src_reader": "1d41cc9b"
  },
  "noun-1020": {
   "translation_pl": "podwyżka, zwiększenie",
@@ -6663,8 +6823,13 @@
  "noun-1021": {
   "translation_pl": "wspomnienie; pamięć; przypomnienie",
   "example_pl": "Mam piękne wspomnienia z dzieciństwa.",
-  "_src": "3e05af96",
-  "_src_reader": "11274247"
+  "complements": [
+   {
+    "note_pl": "wspomnienie o czymś; przypomnienie o czymś: die Erinnerung an die Kindheit; zur Erinnerung an den Termin"
+   }
+  ],
+  "_src": "29c16424",
+  "_src_reader": "f7955f15"
  },
  "noun-1022": {
   "translation_pl": "wyjaśnienie; oświadczenie",
@@ -7023,8 +7188,13 @@
   "translation_pl": "wolność",
   "example_pl": "Dla wielu młodych ludzi pierwszy własny samochód oznacza wolność.",
   "plural_note_pl": "W znaczeniu „wolność” zwykle występuje bez liczby mnogiej; Freiheiten — prawa, swobody.",
-  "_src": "a01567d3",
-  "_src_reader": "4e8b2d01"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Du hast die Freiheit, selbst zu entscheiden. — Masz swobodę samodzielnego decydowania."
+   }
+  ],
+  "_src": "bd0aebec",
+  "_src_reader": "076b3d78"
  },
  "noun-1076": {
   "translation_pl": "język obcy",
@@ -7042,10 +7212,13 @@
    },
    {
     "note_pl": "radość z powodu czegoś: die Freude über das Geschenk"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Es ist mir eine Freude, Sie zu begrüßen. — Miło mi Państwa powitać."
    }
   ],
-  "_src": "935a3f9f",
-  "_src_reader": "7f52dbfd"
+  "_src": "049cea84",
+  "_src_reader": "ec44d91e"
  },
  "noun-1078": {
   "translation_pl": "przyjaźń",
@@ -7207,10 +7380,14 @@
    {
     "note_pl": "myśl o kimś, czymś: der Gedanke an den Urlaub",
     "meaning_pl": "myśl"
+   },
+   {
+    "meaning_pl": "myśl",
+    "note_pl": "+ bezokolicznik z zu: Der Gedanke, allein zu reisen, gefällt mir. — Podoba mi się myśl o podróżowaniu w pojedynkę."
    }
   ],
-  "_src": "b9cc9277",
-  "_src_reader": "7b08f38e"
+  "_src": "cbeb2cc9",
+  "_src_reader": "d715d8c8"
  },
  "noun-1102": {
   "translation_pl": "wiersz",
@@ -7221,8 +7398,13 @@
  "noun-1103": {
   "translation_pl": "cierpliwość",
   "example_pl": "Z małymi dziećmi potrzeba dużo cierpliwości.",
-  "_src": "fe43353c",
-  "_src_reader": "d23f6304"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Ich habe nicht die Geduld, so lange zu warten. — Nie mam cierpliwości tak długo czekać."
+   }
+  ],
+  "_src": "73ff4460",
+  "_src_reader": "2d406208"
  },
  "noun-1104": {
   "translation_pl": "niebezpieczeństwo",
@@ -7397,8 +7579,13 @@
  "noun-1127": {
   "translation_pl": "przyzwyczajenie",
   "example_pl": "Picie kawy rano to moje stare przyzwyczajenie.",
-  "_src": "455726d8",
-  "_src_reader": "ad24c505"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er hat die Gewohnheit, früh aufzustehen. — Ma zwyczaj wcześnie wstawać."
+   }
+  ],
+  "_src": "72927dc0",
+  "_src_reader": "77a3149d"
  },
  "noun-1128": {
   "translation_pl": "przyprawa",
@@ -7679,10 +7866,13 @@
   "complements": [
    {
     "note_pl": "nadzieja na coś"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Wir haben die Hoffnung, bald zurückzukommen. — Mamy nadzieję wkrótce wrócić."
    }
   ],
-  "_src": "caebaff0",
-  "_src_reader": "8737e118"
+  "_src": "6e6e917f",
+  "_src_reader": "5422c323"
  },
  "noun-1170": {
   "translation_pl": "drewno; drwa",
@@ -8223,8 +8413,14 @@
  "noun-1251": {
   "translation_pl": "siła; pracownik",
   "example_pl": "Po chorobie nie ma jeszcze zbyt wiele sił.",
-  "_src": "361c52bb",
-  "_src_reader": "820bfbae"
+  "complements": [
+   {
+    "meaning_pl": "siła",
+    "note_pl": "+ bezokolicznik z zu: Ich hatte nicht mehr die Kraft, weiterzulaufen. — Brakowało mi już sił, żeby biec dalej."
+   }
+  ],
+  "_src": "d3bcec4d",
+  "_src_reader": "e9b693ec"
  },
  "noun-1252": {
   "translation_pl": "pojazd mechaniczny",
@@ -8992,10 +9188,13 @@
   "complements": [
    {
     "note_pl": "odwaga do czegoś: der Mut zur Wahrheit"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Er hatte nicht den Mut, die Wahrheit zu sagen. — Nie miał odwagi powiedzieć prawdy."
    }
   ],
-  "_src": "344ee3e0",
-  "_src_reader": "eac3afb8"
+  "_src": "8f732d46",
+  "_src_reader": "829782c2"
  },
  "noun-1372": {
   "translation_pl": "język ojczysty",
@@ -9031,8 +9230,13 @@
  "noun-1377": {
   "translation_pl": "trud, wysiłek",
   "example_pl": "Dziękuję za trud!",
-  "_src": "778a16f2",
-  "_src_reader": "22abe524"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er hatte Mühe, wach zu bleiben. — Trudno mu było nie zasnąć."
+   }
+  ],
+  "_src": "28aa994b",
+  "_src_reader": "5ef75d6f"
  },
  "noun-1378": {
   "translation_pl": "wywóz śmieci; służba wywozu śmieci, śmieciarze",
@@ -9363,10 +9567,13 @@
   "complements": [
    {
     "note_pl": "obowiązek zrobienia czegoś: die Pflicht zur Hilfe"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Jeder hat die Pflicht, Steuern zu zahlen. — Każdy ma obowiązek płacić podatki."
    }
   ],
-  "_src": "3c32a05e",
-  "_src_reader": "47bc72f4"
+  "_src": "33da5081",
+  "_src_reader": "820e1d41"
  },
  "noun-1430": {
   "translation_pl": "piknik",
@@ -9672,10 +9879,14 @@
   "complements": [
    {
     "note_pl": "prawo do czegoś: das Recht auf Bildung"
+   },
+   {
+    "meaning_pl": "prawo",
+    "note_pl": "+ bezokolicznik z zu: Jeder hat das Recht, seine Meinung zu sagen. — Każdy ma prawo wyrazić swoje zdanie."
    }
   ],
-  "_src": "d247fda5",
-  "_src_reader": "f300c939"
+  "_src": "803f9955",
+  "_src_reader": "a2d2b089"
  },
  "noun-1477": {
   "translation_pl": "przemówienie, wystąpienie",
@@ -10120,8 +10331,14 @@
   "translation_pl": "trudność; problem",
   "example_pl": "Przy rejestracji pojawia się trudność techniczna.",
   "plural_note_pl": "Problemy często określa się liczbą mnogą Schwierigkeiten; trudność jako cecha — bez liczby mnogiej.",
-  "_src": "3b718a85",
-  "_src_reader": "f7982dee"
+  "complements": [
+   {
+    "meaning_pl": "trudność",
+    "note_pl": "+ bezokolicznik z zu: Er hat Schwierigkeiten, sich zu konzentrieren. — Ma trudności z koncentracją."
+   }
+  ],
+  "_src": "12ae857f",
+  "_src_reader": "d37a0ca4"
  },
  "noun-1543": {
   "translation_pl": "miska; salaterka",
@@ -10708,10 +10925,14 @@
    {
     "note_pl": "talent do czegoś",
     "meaning_pl": "talent, zdolność"
+   },
+   {
+    "meaning_pl": "talent, zdolność",
+    "note_pl": "+ bezokolicznik z zu: Sie hat das Talent, Menschen zu begeistern. — Ma talent do zarażania ludzi entuzjazmem."
    }
   ],
-  "_src": "465fa24f",
-  "_src_reader": "887cf376"
+  "_src": "7f44cfb8",
+  "_src_reader": "8918362d"
  },
  "noun-1629": {
   "translation_pl": "stacja benzynowa",
@@ -11159,8 +11380,18 @@
   "translation_pl": "wsparcie; pomoc; zasiłek",
   "example_pl": "Przy ubieganiu się o pracę dostaję pomoc od poradni.",
   "plural_note_pl": "Unterstützungen może oznaczać pojedyncze zasiłki pieniężne. Pomoc w ogóle zwykle występuje w liczbie pojedynczej.",
-  "_src": "2051ab4d",
-  "_src_reader": "b712369e"
+  "complements": [
+   {
+    "meaning_pl": "wsparcie",
+    "note_pl": "wsparcie, pomoc w czymś: Unterstützung bei der Suche"
+   },
+   {
+    "meaning_pl": "pomoc",
+    "note_pl": "wsparcie, pomoc w czymś: Unterstützung bei der Suche"
+   }
+  ],
+  "_src": "553b5602",
+  "_src_reader": "72f8a603"
  },
  "noun-1699": {
   "translation_pl": "dyplom; dokument urzędowy",
@@ -11174,10 +11405,13 @@
   "complements": [
    {
     "note_pl": "przyczyna czegoś"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Du hast keine Ursache, dich zu entschuldigen. — Nie masz powodu przepraszać."
    }
   ],
-  "_src": "56896e3e",
-  "_src_reader": "afb6ecb8"
+  "_src": "67f6fc0a",
+  "_src_reader": "b0b5e53c"
  },
  "noun-1701": {
   "translation_pl": "wyrok; orzeczenie sądowe; osąd",
@@ -11230,16 +11464,30 @@
    },
    {
     "note_pl": "związek, połączenie między czymś a czymś"
+   },
+   {
+    "meaning_pl": "związek",
+    "note_pl": "związek, połączenie z czymś: Er steht in Verbindung mit der Polizei."
+   },
+   {
+    "meaning_pl": "połączenie",
+    "note_pl": "związek, połączenie z czymś: Er steht in Verbindung mit der Polizei."
    }
   ],
-  "_src": "669ada89",
-  "_src_reader": "5fb46018"
+  "_src": "f047a44d",
+  "_src_reader": "60fdd034"
  },
  "noun-1707": {
   "translation_pl": "zakaz",
   "example_pl": "Zakaz obowiązuje wszystkich odwiedzających.",
-  "_src": "fcae721a",
-  "_src_reader": "9d0f99c6"
+  "complements": [
+   {
+    "meaning_pl": "zakaz",
+    "note_pl": "+ bezokolicznik z zu: Das Verbot, im Gebäude zu rauchen, gilt für alle. — Zakaz palenia w budynku dotyczy wszystkich."
+   }
+  ],
+  "_src": "181f0ff6",
+  "_src_reader": "bb2f203a"
  },
  "noun-1708": {
   "translation_pl": "przestępca",
@@ -11293,8 +11541,14 @@
   "translation_pl": "przyjemność; rozrywka",
   "example_pl": "Czytanie tej książki to wielka przyjemność.",
   "plural_note_pl": "Przyjemność jako uczucie — bez liczby mnogiej. Vergnügen w znaczeniu pojedynczych rozrywek ma rzadką liczbę mnogą o tej samej formie.",
-  "_src": "c5a92ca3",
-  "_src_reader": "5dfbef76"
+  "complements": [
+   {
+    "meaning_pl": "przyjemność",
+    "note_pl": "+ bezokolicznik z zu: Es war mir ein Vergnügen, Sie kennenzulernen. — Miło było Pana poznać."
+   }
+  ],
+  "_src": "83b30611",
+  "_src_reader": "80a18e90"
  },
  "noun-1714": {
   "translation_pl": "zachowanie",
@@ -11403,8 +11657,14 @@
  "noun-1727": {
   "translation_pl": "próba; doświadczenie, eksperyment",
   "example_pl": "Za drugą próbą drzwi się otwierają.",
-  "_src": "0da02c24",
-  "_src_reader": "af2b7060"
+  "complements": [
+   {
+    "meaning_pl": "próba",
+    "note_pl": "+ bezokolicznik z zu: Das war ein Versuch, die Lage zu retten. — To była próba ratowania sytuacji."
+   }
+  ],
+  "_src": "a746bbf1",
+  "_src_reader": "c2fe3145"
  },
  "noun-1728": {
   "translation_pl": "zaufanie",
@@ -11506,8 +11766,13 @@
  "noun-1742": {
   "translation_pl": "przygotowanie",
   "example_pl": "Przygotowanie do egzaminu trwa kilka tygodni.",
-  "_src": "e981560e",
-  "_src_reader": "ce67b940"
+  "complements": [
+   {
+    "note_pl": "przygotowanie do czegoś: die Vorbereitung auf die Prüfung"
+   }
+  ],
+  "_src": "6d89fc80",
+  "_src_reader": "d46172b2"
  },
  "noun-1743": {
   "translation_pl": "pierwszeństwo przejazdu",
@@ -11681,8 +11946,13 @@
  "noun-1766": {
   "translation_pl": "działanie, efekt",
   "example_pl": "Działanie leku zaczyna się po godzinie.",
-  "_src": "f90f8739",
-  "_src_reader": "1c32b5fa"
+  "complements": [
+   {
+    "note_pl": "działanie, wpływ na coś: die Wirkung auf den Körper"
+   }
+  ],
+  "_src": "d03231b9",
+  "_src_reader": "719e617a"
  },
  "noun-1767": {
   "translation_pl": "właściciel restauracji lub hotelu; wynajmujący; żywiciel",
@@ -11703,10 +11973,13 @@
    {
     "note_pl": "wiedza o czymś, świadomość czegoś: das Wissen um die Gefahr",
     "meaning_pl": "świadomość"
+   },
+   {
+    "note_pl": "wiedza o czymś: Wissen über Pflanzen"
    }
   ],
-  "_src": "1fc11fba",
-  "_src_reader": "f2d0e3eb"
+  "_src": "df6001ea",
+  "_src_reader": "e62caddb"
  },
  "noun-1770": {
   "translation_pl": "nauka",
@@ -11970,8 +12243,14 @@
  "noun-1807": {
   "translation_pl": "cel, przeznaczenie; sens",
   "example_pl": "Do czego służy to urządzenie?",
-  "_src": "0adae538",
-  "_src_reader": "1be3f842"
+  "complements": [
+   {
+    "meaning_pl": "sens",
+    "note_pl": "+ bezokolicznik z zu: Es hat keinen Zweck, länger zu warten. — Nie ma sensu dłużej czekać."
+   }
+  ],
+  "_src": "acaa5726",
+  "_src_reader": "3a4595c8"
  },
  "noun-1808": {
   "translation_pl": "wątpliwość",
@@ -13879,8 +14158,14 @@
  "noun-2095": {
   "translation_pl": "głosowanie; uzgodnienie",
   "example_pl": "Głosowanie odbywa się pod koniec posiedzenia.",
-  "_src": "31a5e660",
-  "_src_reader": "fa3cb145"
+  "complements": [
+   {
+    "meaning_pl": "głosowanie",
+    "note_pl": "głosowanie nad czymś: die Abstimmung über das Gesetz"
+   }
+  ],
+  "_src": "8e87e0f0",
+  "_src_reader": "801cb6d5"
  },
  "noun-2096": {
   "translation_pl": "oskarżony",
@@ -14406,10 +14691,14 @@
    {
     "note_pl": "władza nad kimś, czymś",
     "meaning_pl": "władza, wpływ"
+   },
+   {
+    "meaning_pl": "władza, wpływ",
+    "note_pl": "+ bezokolicznik z zu: Er hat nicht die Macht, das zu ändern. — Nie ma władzy, żeby to zmienić."
    }
   ],
-  "_src": "5de51a89",
-  "_src_reader": "70d9b896"
+  "_src": "da36273e",
+  "_src_reader": "93345ac7"
  },
  "noun-2173": {
   "translation_pl": "otwarcie granicy NRD z RFN, upadek muru berlińskiego",
@@ -14883,8 +15172,14 @@
  "noun-2243": {
   "translation_pl": "prośba, życzenie, ważna dla kogoś sprawa",
   "example_pl": "Chciałbym / Chciałabym przedstawić Panu swoją prośbę.",
-  "_src": "dc13f8da",
-  "_src_reader": "6c1ecef9"
+  "complements": [
+   {
+    "meaning_pl": "prośba, życzenie, ważna dla kogoś sprawa",
+    "note_pl": "+ bezokolicznik z zu: Es ist mein Anliegen, allen zu danken. — Zależy mi na tym, żeby wszystkim podziękować."
+   }
+  ],
+  "_src": "83bdd1e1",
+  "_src_reader": "89c9c220"
  },
  "noun-2244": {
   "translation_pl": "forma zwracania się",
@@ -16333,8 +16628,18 @@
   "translation_pl": "prawo, uprawnienie; zasadność, uzasadnienie",
   "example_pl": "Aby uzyskać dostęp, trzeba mieć uprawnienie.",
   "plural_note_pl": "Liczba mnoga Berechtigungen występuje rzadko.",
-  "_src": "e5a292d5",
-  "_src_reader": "13019c9f"
+  "complements": [
+   {
+    "meaning_pl": "prawo, uprawnienie",
+    "note_pl": "+ bezokolicznik z zu: Sie hat die Berechtigung, das Labor zu betreten. — Ma prawo wchodzić do laboratorium."
+   },
+   {
+    "meaning_pl": "prawo, uprawnienie",
+    "note_pl": "prawo do czegoś: die Berechtigung zum Studium"
+   }
+  ],
+  "_src": "1f7bbfa2",
+  "_src_reader": "357d6e8a"
  },
  "noun-2474": {
   "translation_pl": "kwalifikacja zawodowa uzyskana po ukończeniu nauki",
@@ -16833,8 +17138,14 @@
  "noun-2554": {
   "translation_pl": "zastosowanie; użycie; zabieg leczniczy; aplikacja (komputerowa)",
   "example_pl": "Zastosowanie tej metody oszczędza nam dużo czasu przy analizie wyników.",
-  "_src": "b225c5f5",
-  "_src_reader": "9bbe27a0"
+  "complements": [
+   {
+    "meaning_pl": "zastosowanie",
+    "note_pl": "zastosowanie do czegoś: die Anwendung der Regel auf diesen Fall"
+   }
+  ],
+  "_src": "5ae3da9f",
+  "_src_reader": "44c1dc8e"
  },
  "noun-2555": {
   "translation_pl": "oznaka; objaw; zapowiedź",
@@ -16933,15 +17244,19 @@
   "_src_reader": "2d40a55a"
  },
  "noun-2567": {
-  "translation_pl": "potrzeba; pragnienie",
+  "translation_pl": "potrzeba; zapotrzebowanie; pragnienie",
   "example_pl": "Po długim dniu pracy poczuła potrzebę, żeby przez chwilę pobyć sama.",
   "complements": [
    {
     "note_pl": "potrzeba czegoś"
+   },
+   {
+    "meaning_pl": "potrzeba",
+    "note_pl": "+ bezokolicznik z zu: Sie hatte das Bedürfnis, allein zu sein. — Czuła potrzebę, żeby pobyć sama."
    }
   ],
-  "_src": "bf2a0190",
-  "_src_reader": "46c2e031"
+  "_src": "af82fee9",
+  "_src_reader": "c54c68a6"
  },
  "noun-2568": {
   "translation_pl": "pośpiech; „pospiesz się!” (wezwanie)",
@@ -16953,8 +17268,13 @@
  "noun-2569": {
   "translation_pl": "zachwyt; zapał; entuzjazm",
   "example_pl": "Dzieci wpadły w wielki zachwyt, kiedy zobaczyły domek na drzewie.",
-  "_src": "62caadf7",
-  "_src_reader": "8bfafd7d"
+  "complements": [
+   {
+    "note_pl": "zamiłowanie do czegoś, zapał: seine Begeisterung für Fußball"
+   }
+  ],
+  "_src": "5614080e",
+  "_src_reader": "381d5fa2"
  },
  "noun-2570": {
   "translation_pl": "twierdzenie; stwierdzenie; utrzymanie swoich pozycji",
@@ -17055,8 +17375,18 @@
   "translation_pl": "nazwa; oznaczenie; oznakowanie",
   "example_pl": "Na opakowaniu podana jest dokładna nazwa produktu.",
   "plural_note_pl": "W znaczeniu „oznakowanie, nanoszenie oznaczeń” — bez liczby mnogiej.",
-  "_src": "3f90f2d2",
-  "_src_reader": "3a95a6e6"
+  "complements": [
+   {
+    "meaning_pl": "nazwa",
+    "note_pl": "nazwa, oznaczenie czegoś: eine treffende Bezeichnung für das Gerät"
+   },
+   {
+    "meaning_pl": "oznaczenie",
+    "note_pl": "nazwa, oznaczenie czegoś: eine treffende Bezeichnung für das Gerät"
+   }
+  ],
+  "_src": "48d70ae0",
+  "_src_reader": "5e97c9d8"
  },
  "noun-2585": {
   "translation_pl": "dzielnica; okręg; obszar",
@@ -17273,8 +17603,14 @@
  "noun-2617": {
   "translation_pl": "decyzja; postanowienie",
   "example_pl": "Po podjęciu decyzji o przeprowadzce od razu zaczęła szukać mieszkania.",
-  "_src": "f5386059",
-  "_src_reader": "787fce9a"
+  "complements": [
+   {
+    "meaning_pl": "decyzja",
+    "note_pl": "+ bezokolicznik z zu: Sie fasste den Entschluss, mit dem Rauchen aufzuhören. — Podjęła decyzję o rzuceniu palenia."
+   }
+  ],
+  "_src": "2470c3fe",
+  "_src_reader": "efade451"
  },
  "noun-2618": {
   "translation_pl": "wynalazca; twórca",
@@ -17408,8 +17744,14 @@
   "translation_pl": "bezczelność; zuchwałość; zuchwały wybryk",
   "example_pl": "To bezczelność po prostu rzucać cudze rowery pod drzwi.",
   "plural_note_pl": "Bezczelność jako cecha — bez liczby mnogiej; Frechheiten — poszczególne zuchwałe słowa lub czyny.",
-  "_src": "8034c4b1",
-  "_src_reader": "6d18081b"
+  "complements": [
+   {
+    "meaning_pl": "bezczelność",
+    "note_pl": "+ bezokolicznik z zu: Sie hatte die Frechheit, sich vorzudrängeln. — Miała czelność wepchnąć się bez kolejki."
+   }
+  ],
+  "_src": "3a9774c1",
+  "_src_reader": "e0ae73ab"
  },
  "noun-2640": {
   "translation_pl": "ochotnik; wolontariusz",
@@ -18970,8 +19312,13 @@
  "noun-2875": {
   "translation_pl": "ostrzeżenie; przestroga",
   "example_pl": "Ostrzeżenie przed wichurą dotarło do nas jeszcze po południu.",
-  "_src": "5846903f",
-  "_src_reader": "5012c77d"
+  "complements": [
+   {
+    "note_pl": "ostrzeżenie przed czymś, przed niebezpieczeństwem: eine Warnung vor Sturm"
+   }
+  ],
+  "_src": "5d5edae1",
+  "_src_reader": "65e518bb"
  },
  "noun-2876": {
   "translation_pl": "mądrość; mądra sentencja lub rada",
@@ -19006,10 +19353,14 @@
   "complements": [
    {
     "note_pl": "wola czegoś: der Wille zum Erfolg"
+   },
+   {
+    "meaning_pl": "zamiar, zdecydowanie",
+    "note_pl": "+ bezokolicznik z zu: Sie hat den festen Willen, das Ziel zu erreichen. — Jest mocno zdecydowana osiągnąć cel."
    }
   ],
-  "_src": "3dc1c84c",
-  "_src_reader": "0bdbc3a9"
+  "_src": "d620f6ec",
+  "_src_reader": "9174da09"
  },
  "noun-2881": {
   "translation_pl": "wdowa, kobieta, której zmarł małżonek lub małżonka",
@@ -19087,8 +19438,14 @@
   "translation_pl": "przymus; silny wewnętrzny popęd; skrępowanie; presja okoliczności lub norm; natręctwo",
   "example_pl": "Podpisał oświadczenie tylko pod przymusem, a później je odwołał.",
   "usage_note_pl": "Natręctwo — znaczenie psychologiczne.",
-  "_src": "eca45a8f",
-  "_src_reader": "db807c7b"
+  "complements": [
+   {
+    "meaning_pl": "presja okoliczności lub norm",
+    "note_pl": "+ bezokolicznik z zu: Es gibt keinen Zwang, mitzumachen. — Nie ma przymusu uczestnictwa."
+   }
+  ],
+  "_src": "f199f76a",
+  "_src_reader": "aefb7278"
  },
  "noun-2893": {
   "translation_pl": "międzyczas; międzyczas (na części trasy)",
@@ -19377,8 +19734,13 @@
   "translation_pl": "przystosowanie; dostosowanie, korekta",
   "example_pl": "Przystosowanie się do nowego otoczenia przyszło dzieciom łatwiej, niż się spodziewano.",
   "plural_note_pl": "Lm rzadko używana.",
-  "_src": "e8e658f5",
-  "_src_reader": "3c7b1869"
+  "complements": [
+   {
+    "note_pl": "przystosowanie do czegoś: die Anpassung an das Klima"
+   }
+  ],
+  "_src": "54b778c8",
+  "_src_reader": "db6dc6c0"
  },
  "noun-2934": {
   "translation_pl": "bodziec, zachęta",
@@ -19583,8 +19945,26 @@
   "translation_pl": "szczegółowe rozpatrzenie; dyskusja, spór; starcie fizyczne, bójka; konflikt zbrojny; zawody sportowe; podział majątku wspólnego",
   "example_pl": "Szczegółowe rozpatrzenie tematu zajęło kilka tygodni.",
   "usage_note_pl": "Podział majątku wspólnego — znaczenie prawnicze; zawody sportowe — przenośne.",
-  "_src": "b00510cc",
-  "_src_reader": "302e51a3"
+  "complements": [
+   {
+    "meaning_pl": "szczegółowe rozpatrzenie",
+    "note_pl": "analiza, omówienie czegoś; spór, starcie z kimś: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+   },
+   {
+    "meaning_pl": "dyskusja, spór",
+    "note_pl": "analiza, omówienie czegoś; spór, starcie z kimś: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+   },
+   {
+    "meaning_pl": "starcie fizyczne, bójka",
+    "note_pl": "analiza, omówienie czegoś; spór, starcie z kimś: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+   },
+   {
+    "meaning_pl": "konflikt zbrojny",
+    "note_pl": "analiza, omówienie czegoś; spór, starcie z kimś: die Auseinandersetzung mit der Vergangenheit; eine Auseinandersetzung mit dem Nachbarn"
+   }
+  ],
+  "_src": "51f76731",
+  "_src_reader": "35df687a"
  },
  "noun-2963": {
   "translation_pl": "wymówka, pretekst; uchylanie się, ucieczka",
@@ -19858,8 +20238,14 @@
   "translation_pl": "wysiłek, staranie; usługa specjalisty ujęta w rachunku",
   "example_pl": "Mimo dużych starań nie udało nam się skontaktować ze wszystkimi gośćmi.",
   "plural_note_pl": "W znaczeniu „wysiłek” zwykle używa się liczby mnogiej; usługi specjalisty ujęte w rachunku — tylko Plural.",
-  "_src": "559adb44",
-  "_src_reader": "54b508ef"
+  "complements": [
+   {
+    "meaning_pl": "wysiłek, staranie",
+    "note_pl": "wysiłki na rzecz czegoś: die Bemühungen um Frieden"
+   }
+  ],
+  "_src": "10f53b1a",
+  "_src_reader": "d40e3ac1"
  },
  "noun-3003": {
   "translation_pl": "obserwator",
@@ -19881,10 +20267,14 @@
    {
     "note_pl": "gotowość do czegoś",
     "meaning_pl": "gotowość"
+   },
+   {
+    "meaning_pl": "gotowość",
+    "note_pl": "+ bezokolicznik z zu: Er zeigte keine Bereitschaft, nachzugeben. — Nie okazał żadnej gotowości, by ustąpić."
    }
   ],
-  "_src": "477a48e2",
-  "_src_reader": "388592f4"
+  "_src": "e9a53b78",
+  "_src_reader": "c84f1f0a"
  },
  "noun-3006": {
   "translation_pl": "uwzględnienie, wzięcie pod uwagę",
@@ -19945,8 +20335,14 @@
  "noun-3014": {
   "translation_pl": "dążenie, staranie",
   "example_pl": "Jego dążenie do uproszczenia procedur spotkało się z dużym poparciem.",
-  "_src": "f59096cb",
-  "_src_reader": "ad1e0d8b"
+  "complements": [
+   {
+    "meaning_pl": "dążenie, staranie",
+    "note_pl": "+ bezokolicznik z zu: Er hatte nie das Bestreben, sich weiterzubilden. — Nigdy nie dążył do podnoszenia swoich kwalifikacji."
+   }
+  ],
+  "_src": "25f1be7a",
+  "_src_reader": "b7055196"
  },
  "noun-3015": {
   "translation_pl": "stałość; odporność; stopień odporności",
@@ -19964,8 +20360,22 @@
  "noun-3017": {
   "translation_pl": "udział; udział finansowy, udziały w przedsiębiorstwie; włączenie do udziału",
   "example_pl": "Aktywny udział w dyskusji zaskoczył organizatorów.",
-  "_src": "c86624b5",
-  "_src_reader": "5b15714d"
+  "complements": [
+   {
+    "meaning_pl": "udział",
+    "note_pl": "udział w czymś: die Beteiligung an der Wahl; udział w przedsiębiorstwie: eine Beteiligung an der Firma"
+   },
+   {
+    "meaning_pl": "udział finansowy, udziały w przedsiębiorstwie",
+    "note_pl": "udział w czymś: die Beteiligung an der Wahl; udział w przedsiębiorstwie: eine Beteiligung an der Firma"
+   },
+   {
+    "meaning_pl": "włączenie do udziału",
+    "note_pl": "udział w czymś: die Beteiligung an der Wahl; udział w przedsiębiorstwie: eine Beteiligung an der Firma"
+   }
+  ],
+  "_src": "b5f4c3f6",
+  "_src_reader": "4a7fbcb8"
  },
  "noun-3018": {
   "translation_pl": "zachowanie, maniery",
@@ -20410,8 +20820,14 @@
   "translation_pl": "ambicja, dążenie do sukcesu",
   "example_pl": "Jego ambicja motywowała go do ukończenia trudnego szkolenia zawodowego.",
   "plural_note_pl": "Lm rzadko używana.",
-  "_src": "de04bf3c",
-  "_src_reader": "2250bc81"
+  "complements": [
+   {
+    "meaning_pl": "ambicja, dążenie do sukcesu",
+    "note_pl": "+ bezokolicznik z zu: Sie hat den Ehrgeiz, die Beste zu sein. — Ma ambicję być najlepszą."
+   }
+  ],
+  "_src": "9c2bf8f9",
+  "_src_reader": "1b33f12a"
  },
  "noun-3086": {
   "translation_pl": "zazdrość",
@@ -20460,8 +20876,16 @@
  "noun-3093": {
   "translation_pl": "przydatność, spełnianie wymagań",
   "example_pl": "Sprawdzono przydatność materiału do użytku na zewnątrz.",
-  "_src": "4d763581",
-  "_src_reader": "5c88eabb"
+  "complements": [
+   {
+    "note_pl": "przydatność do czegoś: die Eignung für den Beruf"
+   },
+   {
+    "note_pl": "przydatność do czegoś: die Eignung zum Lehrerberuf"
+   }
+  ],
+  "_src": "7594f0cc",
+  "_src_reader": "1f167af8"
  },
  "noun-3094": {
   "translation_pl": "osadzenie; umieszczenie w ośrodku lub podłożu",
@@ -20523,8 +20947,14 @@
  "noun-3102": {
   "translation_pl": "osiągnięcie porozumienia; zjednoczenie",
   "example_pl": "Po długich rozmowach udało się osiągnąć porozumienie w sprawie podziału kosztów.",
-  "_src": "a6eabe6f",
-  "_src_reader": "2bff553e"
+  "complements": [
+   {
+    "meaning_pl": "osiągnięcie porozumienia",
+    "note_pl": "porozumienie w sprawie czegoś: eine Einigung über den Preis"
+   }
+  ],
+  "_src": "a3fa6796",
+  "_src_reader": "8a2c6f2f"
  },
  "noun-3103": {
   "translation_pl": "klasyfikacja, uporządkowanie; wpasowanie się w grupę",
@@ -22224,8 +22654,14 @@
   "translation_pl": "śmiałość, odwaga; zuchwałość; śmiały czyn",
   "example_pl": "Śmiałość alpinistów zaimponowała wszystkim.",
   "plural_note_pl": "Kühnheiten — śmiałe, zuchwałe czyny; śmiałość jako cecha — bez liczby mnogiej.",
-  "_src": "74ba3a2c",
-  "_src_reader": "b9ff1ffe"
+  "complements": [
+   {
+    "meaning_pl": "śmiałość, odwaga",
+    "note_pl": "+ bezokolicznik z zu: Er besaß die Kühnheit, eigene Wege zu gehen. — Miał odwagę chodzić własnymi drogami."
+   }
+  ],
+  "_src": "c8b3f066",
+  "_src_reader": "662819e4"
  },
  "noun-3353": {
   "translation_pl": "kultura osobista, wyrafinowanie, dobre wychowanie",
@@ -22635,8 +23071,22 @@
   "translation_pl": "skłonność, upodobanie; nachylenie, spadek; sympatia",
   "example_pl": "Już jako dziecko przejawiała skłonność do muzyki.",
   "plural_note_pl": "Skłonność do czegoś (Neigung zu Erkältungen) — bez liczby mnogiej; Neigungen — zainteresowania, upodobania.",
-  "_src": "08d71f03",
-  "_src_reader": "c102b75f"
+  "complements": [
+   {
+    "meaning_pl": "skłonność, upodobanie",
+    "note_pl": "+ bezokolicznik z zu: Er hat die Neigung, alles zu übertreiben. — Ma skłonność do przesadzania we wszystkim."
+   },
+   {
+    "meaning_pl": "skłonność, upodobanie",
+    "note_pl": "skłonność do czegoś: eine Neigung zur Übertreibung; sympatia do kogoś: ihre Neigung zu ihm"
+   },
+   {
+    "meaning_pl": "sympatia",
+    "note_pl": "skłonność do czegoś: eine Neigung zur Übertreibung; sympatia do kogoś: ihre Neigung zu ihm"
+   }
+  ],
+  "_src": "24609139",
+  "_src_reader": "df9ab355"
  },
  "noun-3412": {
   "translation_pl": "neutralność",
@@ -22670,8 +23120,13 @@
   "translation_pl": "konieczność",
   "example_pl": "Nie widzę konieczności przekładania spotkania.",
   "plural_note_pl": "Konieczność jako cecha — bez liczby mnogiej; Notwendigkeiten — rzeczy konieczne.",
-  "_src": "52d1525c",
-  "_src_reader": "e3170bdd"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Es besteht keine Notwendigkeit, früher zu kommen. — Nie ma potrzeby przychodzić wcześniej."
+   }
+  ],
+  "_src": "a6a3c4ca",
+  "_src_reader": "c620bbef"
  },
  "noun-3417": {
   "translation_pl": "pułkownik",
@@ -24813,8 +25268,13 @@
  "noun-3732": {
   "translation_pl": "obietnica",
   "example_pl": "Na krótko przed wyborami słyszy się wiele pięknych obietnic.",
-  "_src": "a3303173",
-  "_src_reader": "72f47178"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er gab das Versprechen, pünktlich zu sein. — Złożył obietnicę, że będzie punktualny."
+   }
+  ],
+  "_src": "70359952",
+  "_src_reader": "ce7249d3"
  },
  "noun-3733": {
   "translation_pl": "chodzenie; chód sportowy",
@@ -24870,8 +25330,18 @@
   "translation_pl": "silne pragnienie, pociąg (do czegoś); żądanie",
   "example_pl": "Po długiej podróży bardzo pragnęła spokoju.",
   "usage_note_pl": "Wyraz podniosły. Stałe wyrażenie: auf Verlangen — na żądanie.",
-  "_src": "aca99632",
-  "_src_reader": "c399c93b"
+  "complements": [
+   {
+    "meaning_pl": "silne pragnienie, pociąg (do czegoś)",
+    "note_pl": "+ bezokolicznik z zu: Er spürte das Verlangen, zu schlafen. — Strasznie chciało mu się spać."
+   },
+   {
+    "meaning_pl": "silne pragnienie, pociąg (do czegoś)",
+    "note_pl": "silne pragnienie czegoś: das Verlangen nach Rache"
+   }
+  ],
+  "_src": "f01010bb",
+  "_src_reader": "20a0e92e"
  },
  "noun-3742": {
   "translation_pl": "spotkanie; zawody (w sporcie)",
@@ -25207,8 +25677,14 @@
   "example_pl": "Dzięki swojej firmie dorobił się dużego majątku.",
   "plural_note_pl": "W znaczeniu „zdolność” — bez liczby mnogiej.",
   "usage_note_pl": "W znaczeniu „zdolność” — podniośle.",
-  "_src": "43b4b091",
-  "_src_reader": "7a81ab2e"
+  "complements": [
+   {
+    "meaning_pl": "zdolność",
+    "note_pl": "+ bezokolicznik z zu: Er hat das Vermögen, ruhig zu bleiben. — Ma zdolność zachowania spokoju."
+   }
+  ],
+  "_src": "712cbe2a",
+  "_src_reader": "8204031d"
  },
  "noun-3795": {
   "translation_pl": "dobrostan, dobre samopoczucie",
@@ -25227,8 +25703,13 @@
   "translation_pl": "dążenie",
   "example_pl": "Dążenie do niezależności ukształtowało całe jej życie.",
   "usage_note_pl": "Wyraz podniosły. Zwykle: Streben nach + Dativ.",
-  "_src": "74d4b534",
-  "_src_reader": "7a59ab90"
+  "complements": [
+   {
+    "note_pl": "dążenie do czegoś: das Streben nach Glück"
+   }
+  ],
+  "_src": "1f4f6373",
+  "_src_reader": "197986d9"
  },
  "noun-3798": {
   "translation_pl": "odczucie, uczucie; wyczucie",
@@ -25678,10 +26159,14 @@
    {
     "note_pl": "powód czegoś, do czegoś",
     "meaning_pl": "powód, przyczyna"
+   },
+   {
+    "meaning_pl": "powód, przyczyna",
+    "note_pl": "+ bezokolicznik z zu: Es gibt keinen Anlass, sich Sorgen zu machen. — Nie ma powodu się martwić."
    }
   ],
-  "_src": "f5d984d4",
-  "_src_reader": "8953f087"
+  "_src": "f9596ab9",
+  "_src_reader": "2a88e4b6"
  },
  "noun-3864": {
   "translation_pl": "próba; rozbieg; początek, rozruch",
@@ -25765,8 +26250,13 @@
  "noun-3875": {
   "translation_pl": "aluzja",
   "example_pl": "Jej aluzji do swojego wieku wcale nie uznał za zabawną.",
-  "_src": "a38bf7df",
-  "_src_reader": "54fe4344"
+  "complements": [
+   {
+    "note_pl": "aluzja do czegoś: eine Anspielung auf seinen Fehler"
+   }
+  ],
+  "_src": "349a492e",
+  "_src_reader": "131708e7"
  },
  "noun-3876": {
   "translation_pl": "instytucja, zakład; szpital (psychiatryczny)",
@@ -26299,8 +26789,13 @@
  "noun-3956": {
   "translation_pl": "uwolnienie, wyzwolenie; wybawienie, ulga; zwolnienie (z obowiązku)",
   "example_pl": "Po uwolnieniu zakładników ludzie świętowali na ulicach.",
-  "_src": "59fb69b8",
-  "_src_reader": "ffb1dccf"
+  "complements": [
+   {
+    "note_pl": "uwolnienie od czegoś, zwolnienie z czegoś: die Befreiung von Steuern"
+   }
+  ],
+  "_src": "e73df8bc",
+  "_src_reader": "263ccfb3"
  },
  "noun-3957": {
   "translation_pl": "satysfakcja, zadowolenie; zaspokojenie (potrzeb, żądań)",
@@ -26894,8 +27389,13 @@
  "noun-4047": {
   "translation_pl": "groźba",
   "example_pl": "Po kilku groźbach zgłosiła się na policję.",
-  "_src": "9afd94eb",
-  "_src_reader": "b582f8e1"
+  "complements": [
+   {
+    "note_pl": "groźba użycia czegoś: die Drohung mit Gewalt"
+   }
+  ],
+  "_src": "b7ef32d1",
+  "_src_reader": "2a747cf7"
  },
  "noun-4048": {
   "translation_pl": "drukarnia",
@@ -27007,8 +27507,13 @@
   "translation_pl": "odwołanie, sprzeciw (od decyzji); zastrzeżenie, protest",
   "example_pl": "Od tej decyzji można wnieść sprzeciw w ciągu miesiąca.",
   "usage_note_pl": "W znaczeniu „odwołanie” — język urzędowy i prawniczy.",
-  "_src": "d93a50e2",
-  "_src_reader": "cc25170a"
+  "complements": [
+   {
+    "note_pl": "sprzeciw wobec czegoś, protest przeciwko czemuś: Einspruch gegen den Bescheid"
+   }
+  ],
+  "_src": "3126aae9",
+  "_src_reader": "6fd0faff"
  },
  "noun-4063": {
   "translation_pl": "zgoda, aprobata; porozumienie, jednomyślność",
@@ -30490,10 +30995,14 @@
   "complements": [
    {
     "note_pl": "nieśmiałość wobec kogoś, lęk przed kimś, czymś"
+   },
+   {
+    "meaning_pl": "nieśmiałość, lękliwość",
+    "note_pl": "+ bezokolicznik z zu: Er hat keine Scheu, Fragen zu stellen. — Nie krępuje się zadawać pytań."
    }
   ],
-  "_src": "b8373e53",
-  "_src_reader": "efd34531"
+  "_src": "b1d404a0",
+  "_src_reader": "9fa92fb8"
  },
  "noun-4606": {
   "translation_pl": "los, dola; przeznaczenie, fatum",
@@ -31337,8 +31846,14 @@
  "noun-4735": {
   "translation_pl": "niezdolność; niekompetencja",
   "example_pl": "Jego niezdolność do powiedzenia „nie” często przysparza mu kłopotów.",
-  "_src": "cc7d0230",
-  "_src_reader": "4d2a0f51"
+  "complements": [
+   {
+    "meaning_pl": "niezdolność",
+    "note_pl": "+ bezokolicznik z zu: Seine Unfähigkeit, zuzuhören, stört alle. — Jego nieumiejętność słuchania wszystkim przeszkadza."
+   }
+  ],
+  "_src": "50645543",
+  "_src_reader": "de4aab88"
  },
  "noun-4736": {
   "translation_pl": "miejsce wypadku",
@@ -31459,8 +31974,14 @@
   "translation_pl": "bezczelność, bezwstyd; zuchwalstwo (czyn, słowa)",
   "example_pl": "Bezczelność klienta całkowicie odebrała sprzedawczyni mowę.",
   "plural_note_pl": "W znaczeniu „bezczelność (cecha)” bez lm.",
-  "_src": "c6dfa5d9",
-  "_src_reader": "e2c194cc"
+  "complements": [
+   {
+    "meaning_pl": "bezczelność, bezwstyd",
+    "note_pl": "+ bezokolicznik z zu: Er hatte die Unverschämtheit, mehr Geld zu verlangen. — Miał czelność zażądać więcej pieniędzy."
+   }
+  ],
+  "_src": "a5706f1c",
+  "_src_reader": "5c946a15"
  },
  "noun-4754": {
   "translation_pl": "niepogoda, wichura, nawałnica",
@@ -31707,8 +32228,13 @@
  "noun-4790": {
   "translation_pl": "spisek",
   "example_pl": "Król nie podejrzewał, że jego doradcy planują spisek.",
-  "_src": "de15d8e5",
-  "_src_reader": "88463d59"
+  "complements": [
+   {
+    "note_pl": "spisek przeciwko komuś, czemuś: eine Verschwörung gegen den König"
+   }
+  ],
+  "_src": "1ff4b0f5",
+  "_src_reader": "0573e9a9"
  },
  "noun-4791": {
   "translation_pl": "przeniesienie (na inne stanowisko, w inne miejsce); promocja do następnej klasy; przemieszczenie",
@@ -31762,8 +32288,13 @@
   "translation_pl": "pokusa",
   "example_pl": "Przy kasie w supermarkecie na dzieci czeka wiele małych pokus.",
   "usage_note_pl": "Stałe wyrażenie: jemanden in Versuchung führen — wodzić kogoś na pokuszenie.",
-  "_src": "a78a0346",
-  "_src_reader": "90729839"
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Die Versuchung, noch ein Stück zu essen, war groß. — Pokusa, żeby zjeść jeszcze kawałek, była wielka."
+   }
+  ],
+  "_src": "d2e8030b",
+  "_src_reader": "7ee86af4"
  },
  "noun-4799": {
   "translation_pl": "obrońca (ten, kto broni); obrońca (w sporcie); adwokat, obrońca (w sądzie)",
@@ -34507,10 +35038,13 @@
   "complements": [
    {
     "note_pl": "tęsknota za kimś, czymś"
+   },
+   {
+    "note_pl": "+ bezokolicznik z zu: Sie hatte die Sehnsucht, das Meer noch einmal zu sehen. — Gorąco pragnęła jeszcze raz zobaczyć morze."
    }
   ],
-  "_src": "ce6ef3a1",
-  "_src_reader": "9a2025d3"
+  "_src": "bac8a93a",
+  "_src_reader": "01da3e62"
  },
  "noun-5214": {
   "translation_pl": "sekcja, dział, oddział; sekcja zwłok; sekcja (gotowy segment, zwłaszcza statku)",

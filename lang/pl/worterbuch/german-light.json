@@ -399,24 +399,10 @@
   "_src": "e815f495",
   "_src_reader": "e815f495"
  },
- "light-0121": {
-  "complements": [
-   {
-    "note_pl": "widok na coś: die Sicht auf die Berge"
-   }
-  ],
-  "_src": "c64a2d17",
-  "_src_reader": "c64a2d17"
- },
  "light-0122": {
   "translation_pl": "zwracać, kierować (ku czemuś)",
-  "complements": [
-   {
-    "note_pl": "sich hinwenden zu — obracać się, zwracać się do kogoś, czegoś: Sie wandte sich zu ihm hin."
-   }
-  ],
-  "_src": "726f6b71",
-  "_src_reader": "726f6b71"
+  "_src": "fef39c8d",
+  "_src_reader": "fef39c8d"
  },
  "light-0123": {
   "translation_pl": "robić aluzję; rozpoczynać grę, wychodzić (w kartach); podawać (piłkę)",
@@ -561,11 +547,11 @@
   "translation_pl": "zamach (na czyjeś życie); zamach terrorystyczny",
   "complements": [
    {
-    "note_pl": "zamach na kogoś"
+    "note_pl": "zamach na kogoś: Das Attentat auf den Präsidenten wurde vereitelt."
    }
   ],
-  "_src": "b3bf616f",
-  "_src_reader": "b3bf616f"
+  "_src": "e4a8d32a",
+  "_src_reader": "e4a8d32a"
  },
  "light-0135": {
   "translation_pl": "krzyk, zawołanie, wołanie; reputacja, sława; wezwanie, żądanie; powołanie na stanowisko",
@@ -577,14 +563,10 @@
    {
     "note_pl": "krzyk, wołanie o coś: der Ruf nach Hilfe; wezwanie do czegoś, żądanie: der Ruf nach Reformen",
     "meaning_pl": "wezwanie, żądanie"
-   },
-   {
-    "note_pl": "powołanie na stanowisko w jakiejś instytucji: einen Ruf an die Universität Bonn erhalten",
-    "meaning_pl": "powołanie na stanowisko"
    }
   ],
-  "_src": "7f5bcd49",
-  "_src_reader": "7f5bcd49"
+  "_src": "4848b1bf",
+  "_src_reader": "4848b1bf"
  },
  "light-0136": {
   "translation_pl": "rezygnacja, odejście, wyrzeczenie się",
@@ -630,10 +612,14 @@
   "complements": [
    {
     "note_pl": "dążenie, pęd do czegoś: der Drang nach Freiheit"
+   },
+   {
+    "meaning_pl": "dążenie, pęd, impuls",
+    "note_pl": "+ bezokolicznik z zu: Sie hatte den Drang, etwas zu sagen. — Aż ją korciło, żeby coś powiedzieć."
    }
   ],
-  "_src": "5bcb5742",
-  "_src_reader": "5bcb5742"
+  "_src": "95dbffc1",
+  "_src_reader": "95dbffc1"
  },
  "light-0141": {
   "translation_pl": "chciwość, zachłanność, żądza",
@@ -784,8 +770,13 @@
  },
  "light-0156": {
   "translation_pl": "owijać, bandażować; oprawiać; angażować, włączać",
-  "_src": "281b375b",
-  "_src_reader": "281b375b"
+  "complements": [
+   {
+    "note_pl": "oprawiać w coś; włączać w coś: ein Buch in Leder einbinden; die Eltern in die Planung einbinden"
+   }
+  ],
+  "_src": "3d0d8151",
+  "_src_reader": "3d0d8151"
  },
  "light-0157": {
   "translation_pl": "bez telefonów komórkowych; gdzie nie wolno korzystać z telefonu",
@@ -1323,9 +1314,23 @@
   "_src_reader": "811c9dc5"
  },
  "light-0270": {
-  "translation_pl": "zabiegać, ubiegać się, przypochlebiać się; przestarz. zalecać się, umizgać się; przestarz. czulić się, flirtować",
-  "_src": "811c9dc5",
-  "_src_reader": "811c9dc5"
+  "translation_pl": "zabiegać, ubiegać się, przypochlebiać się; przestarz. czulić się, flirtować; przestarz. zalecać się, umizgać się",
+  "complements": [
+   {
+    "note_pl": "zabiegać o coś (pejor.): Die Parteien buhlen um die Gunst der Wähler.",
+    "meaning_pl": "zabiegać, ubiegać się, przypochlebiać się"
+   },
+   {
+    "note_pl": "(przestarz.) zalecać się, zabiegać o czyjąś miłość: Zwei Ritter buhlten um die schöne Gräfin.",
+    "meaning_pl": "przestarz. zalecać się, umizgać się"
+   },
+   {
+    "note_pl": "(przestarz.) flirtować, czulić się z kimś: Sie buhlte mit dem jungen Grafen.",
+    "meaning_pl": "przestarz. czulić się, flirtować"
+   }
+  ],
+  "_src": "7e5cadd0",
+  "_src_reader": "7e5cadd0"
  },
  "light-0271": {
   "translation_pl": "potępiać, odrzucać; przestarz. zakazywać pod groźbą kary",
@@ -1411,5 +1416,2274 @@
   "translation_pl": "dial. jemu, jego",
   "_src": "0bdd1f6d",
   "_src_reader": "0bdd1f6d"
+ },
+ "light-0286": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Die Soldaten hatten den Befehl, die Brücke zu bewachen. — Żołnierze mieli rozkaz pilnować mostu."
+   }
+  ],
+  "_src": "175a9fdd",
+  "_src_reader": "175a9fdd"
+ },
+ "light-0287": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Ich hatte die Ehre, ihn persönlich kennenzulernen. — Spotkał mnie zaszczyt poznania go osobiście."
+   }
+  ],
+  "_src": "53151bc4",
+  "_src_reader": "53151bc4"
+ },
+ "light-0288": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er folgte dem Trieb, zu helfen. — Poszedł za impulsem, żeby pomóc."
+   }
+  ],
+  "_src": "c59c4475",
+  "_src_reader": "c59c4475"
+ },
+ "light-0289": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Ihr fehlte die Courage, Nein zu sagen. — Zabrakło jej odwagi, żeby powiedzieć „nie”."
+   }
+  ],
+  "_src": "69fd18d7",
+  "_src_reader": "69fd18d7"
+ },
+ "light-0290": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Es ist eine Dreistigkeit, so etwas zu behaupten. — Twierdzić coś takiego to bezczelność."
+   }
+  ],
+  "_src": "64b6b628",
+  "_src_reader": "64b6b628"
+ },
+ "light-0291": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Der Wächter hatte die Weisung, niemanden hereinzulassen. — Strażnik miał polecenie nikogo nie wpuszczać."
+   }
+  ],
+  "_src": "ec072486",
+  "_src_reader": "ec072486"
+ },
+ "light-0292": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er bekam die Auflage, sich jede Woche zu melden. — Nakazano mu meldować się co tydzień."
+   }
+  ],
+  "_src": "79c71d5b",
+  "_src_reader": "79c71d5b"
+ },
+ "light-0293": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er hat nicht die Befugnis, das zu entscheiden. — Nie jest upoważniony, żeby o tym decydować."
+   }
+  ],
+  "_src": "cd20109a",
+  "_src_reader": "cd20109a"
+ },
+ "light-0294": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Sie hat die Vollmacht, den Vertrag zu unterschreiben. — Ma pełnomocnictwo do podpisania umowy."
+   }
+  ],
+  "_src": "c4ebf832",
+  "_src_reader": "c4ebf832"
+ },
+ "light-0295": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Ich habe Order, niemanden hereinzulassen. — Mam rozkaz nikogo nie wpuszczać."
+   }
+  ],
+  "_src": "531bfb66",
+  "_src_reader": "531bfb66"
+ },
+ "light-0296": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er gab mir einen Wink, zu schweigen. — Dał mi znak, że mam milczeć."
+   }
+  ],
+  "_src": "5abe22b6",
+  "_src_reader": "5abe22b6"
+ },
+ "light-0297": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Der Brauch, zu Ostern Eier zu bemalen, ist sehr alt. — Zwyczaj malowania jajek na Wielkanoc jest bardzo stary."
+   }
+  ],
+  "_src": "c4e2969d",
+  "_src_reader": "c4e2969d"
+ },
+ "light-0298": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Er hat die Manie, alles aufzuschreiben. — Ma manię zapisywania wszystkiego."
+   }
+  ],
+  "_src": "58b13988",
+  "_src_reader": "58b13988"
+ },
+ "light-0299": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Der Entscheid, die Schule zu schließen, kam überraschend. — Decyzja o zamknięciu szkoły była niespodziewana."
+   }
+  ],
+  "_src": "86749ec1",
+  "_src_reader": "86749ec1"
+ },
+ "light-0300": {
+  "complements": [
+   {
+    "note_pl": "+ bezokolicznik z zu: Sie hat Prokura, Verträge zu unterschreiben. — Ma uprawnienia (prokurę) do podpisywania umów."
+   }
+  ],
+  "_src": "9db8767d",
+  "_src_reader": "9db8767d"
+ },
+ "light-0301": {
+  "translation_pl": "zasięganie informacji, wypytywanie",
+  "complements": [
+   {
+    "note_pl": "zasięganie informacji o kimś, o czymś: Erkundigungen nach dem Weg"
+   }
+  ],
+  "_src": "18284209",
+  "_src_reader": "18284209"
+ },
+ "light-0302": {
+  "translation_pl": "przyzwyczajanie się",
+  "complements": [
+   {
+    "note_pl": "przyzwyczajanie się do czegoś: die Gewöhnung an das Klima"
+   }
+  ],
+  "_src": "44a7ef53",
+  "_src_reader": "44a7ef53"
+ },
+ "light-0303": {
+  "translation_pl": "zwrócenie się (ku czemuś), zwrot (ku czemuś)",
+  "complements": [
+   {
+    "note_pl": "zwrócenie się ku czemuś: die Hinwendung zur Religion"
+   }
+  ],
+  "_src": "27b35aeb",
+  "_src_reader": "27b35aeb"
+ },
+ "light-0304": {
+  "translation_pl": "spór, dysputa",
+  "complements": [
+   {
+    "note_pl": "spór o coś: ein langer Disput über die Methode"
+   }
+  ],
+  "_src": "5f1323b6",
+  "_src_reader": "5f1323b6"
+ },
+ "light-0305": {
+  "translation_pl": "wsiadanie (do pojazdu), wejście; drzwi wejściowe; podejście (do trudnego tematu), zgłębianie; początek, wejście (w coś)",
+  "complements": [
+   {
+    "meaning_pl": "podejście (do trudnego tematu), zgłębianie",
+    "note_pl": "wsiadanie, wejście do czegoś: der Einstieg in den Bus; podejście do tematu: der Einstieg in diese Problematik; początek, wejście: der Einstieg ins Berufsleben, der Einstieg in den Markt"
+   },
+   {
+    "meaning_pl": "początek, wejście (w coś)",
+    "note_pl": "wsiadanie, wejście do czegoś: der Einstieg in den Bus; podejście do tematu: der Einstieg in diese Problematik; początek, wejście: der Einstieg ins Berufsleben, der Einstieg in den Markt"
+   }
+  ],
+  "_src": "838badb1",
+  "_src_reader": "838badb1"
+ },
+ "light-0306": {
+  "translation_pl": "puszczać farbę, farbować; wpływać, udzielać się",
+  "complements": [
+   {
+    "meaning_pl": "puszczać farbę, farbować",
+    "note_pl": "farbować coś: Das rote Hemd hat auf die weiße Wäsche abgefärbt."
+   },
+   {
+    "meaning_pl": "wpływać, udzielać się",
+    "note_pl": "udzielać się komuś, wpływać na kogoś: Seine gute Laune färbt auf die Kollegen ab."
+   }
+  ],
+  "_src": "c693ab13",
+  "_src_reader": "c693ab13"
+ },
+ "light-0307": {
+  "translation_pl": "pochodzić, być potomkiem",
+  "complements": [
+   {
+    "note_pl": "pochodzić od kogoś: Er stammt von einer alten Bauernfamilie ab."
+   }
+  ],
+  "_src": "d0eb8c6a",
+  "_src_reader": "d0eb8c6a"
+ },
+ "light-0308": {
+  "translation_pl": "odchodzić, opuszczać (miejsce), schodzić ze sceny; ustępować (ze stanowiska), wycofywać się z działalności; (pot.) umierać; odstępować, oddawać; przekazywać (prawa, roszczenia); wycierać (buty), zeskrobywać (błoto z butów); zdzierać, wydeptywać, niszczyć (chodzeniem); odłamywać, odbijać (nogą)",
+  "reflexive": {
+   "translation_pl": "zdzierać się, wycierać się (od chodzenia)"
+  },
+  "complements": [
+   {
+    "meaning_pl": "odstępować, oddawać",
+    "note_pl": "odstępować coś komuś: Er tritt sein Zimmer an den jüngeren Bruder ab."
+   },
+   {
+    "meaning_pl": "przekazywać (prawa, roszczenia)",
+    "note_pl": "przekazywać (prawa) komuś: Sie tritt ihre Forderung an die Bank ab."
+   }
+  ],
+  "_src": "553312f5",
+  "_src_reader": "553312f5"
+ },
+ "light-0309": {
+  "translation_pl": "następować na przemian, przeplatać się; zmieniać się, wymieniać się (przy czymś)",
+  "reflexive": {
+   "translation_pl": "następować na przemian, przeplatać się; zmieniać się, wymieniać się (przy czymś)",
+   "complements": [
+    {
+     "meaning_pl": "następować na przemian, przeplatać się",
+     "note_pl": "przeplatać się z czymś: Regen wechselt sich mit Sonnenschein ab."
+    },
+    {
+     "meaning_pl": "zmieniać się, wymieniać się (przy czymś)",
+     "note_pl": "zmieniać się z kimś: Ich wechsle mich beim Fahren mit meinem Bruder ab."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "następować na przemian, przeplatać się",
+    "note_pl": "przeplatać się z czymś: Regen wechselt sich mit Sonnenschein ab."
+   },
+   {
+    "meaning_pl": "zmieniać się, wymieniać się (przy czymś)",
+    "note_pl": "zmieniać się z kimś: Ich wechsle mich beim Fahren mit meinem Bruder ab."
+   }
+  ],
+  "_src": "e01fa747",
+  "_src_reader": "e01fa747"
+ },
+ "light-0310": {
+  "translation_pl": "być skierowanym, mieć na celu, celować",
+  "complements": [
+   {
+    "note_pl": "być skierowanym na coś: Die Kampagne zielt auf junge Wähler ab."
+   }
+  ],
+  "_src": "34940914",
+  "_src_reader": "34940914"
+ },
+ "light-0311": {
+  "translation_pl": "pilnować, doglądać, dbać; uważać, wystrzegać się",
+  "complements": [
+   {
+    "meaning_pl": "pilnować, doglądać, dbać",
+    "note_pl": "pilnować czegoś, dbać o coś: Gib gut auf deine Tasche acht!"
+   }
+  ],
+  "_src": "de568fe8",
+  "_src_reader": "de568fe8"
+ },
+ "light-0312": {
+  "translation_pl": "zaprzyjaźnić się; oswoić się, przywyknąć",
+  "complements": [
+   {
+    "meaning_pl": "zaprzyjaźnić się",
+    "note_pl": "zaprzyjaźnić się z kimś: Sie hat sich mit der neuen Nachbarin angefreundet."
+   },
+   {
+    "meaning_pl": "oswoić się, przywyknąć",
+    "note_pl": "oswoić się z czymś: Ich kann mich mit dem Gedanken nicht anfreunden."
+   }
+  ],
+  "_src": "fe4e535b",
+  "_src_reader": "fe4e535b"
+ },
+ "light-0313": {
+  "translation_pl": "przypominać, nawiązywać; pobrzmiewać, przebijać, być wyczuwalnym",
+  "complements": [
+   {
+    "meaning_pl": "przypominać, nawiązywać",
+    "note_pl": "przypominać coś: Das Lied klingt an einen alten Schlager an."
+   }
+  ],
+  "_src": "4ee40b82",
+  "_src_reader": "4ee40b82"
+ },
+ "light-0314": {
+  "translation_pl": "powstawać, pojawiać się, zrywać się, wchodzić w modę; płacić, pokrywać (koszty); odpowiadać, ponosić odpowiedzialność; radzić sobie, mierzyć się; dorównywać, wybijać się (przy kimś); podnosić się, wstawać; (książk.) wracać do zdrowia, zdrowieć; (reg.) wychodzić na jaw, ujawniać się; lądować; odrabiać straty, nasilać atak (w sporcie); ukazywać się na horyzoncie (o statku)",
+  "complements": [
+   {
+    "meaning_pl": "płacić, pokrywać (koszty)",
+    "note_pl": "płacić za coś: Die Versicherung kommt für den Schaden auf."
+   },
+   {
+    "meaning_pl": "odpowiadać, ponosić odpowiedzialność",
+    "note_pl": "odpowiadać za coś: Der Staat kommt für die Sicherheit der Bürger auf."
+   },
+   {
+    "meaning_pl": "radzić sobie, mierzyć się",
+    "note_pl": "radzić sobie z kimś, czymś: Gegen diesen Gegner kommt er nicht auf."
+   },
+   {
+    "meaning_pl": "dorównywać, wybijać się (przy kimś)",
+    "note_pl": "dorównywać komuś: Gegen ihn kommt im Team niemand auf."
+   }
+  ],
+  "_src": "9bae66c4",
+  "_src_reader": "9bae66c4"
+ },
+ "light-0315": {
+  "translation_pl": "demonstrować przewagę, błysnąć; dawać o sobie znać, uparcie obstawać przy swoim",
+  "complements": [
+   {
+    "meaning_pl": "demonstrować przewagę, błysnąć",
+    "note_pl": "błysnąć czymś: Sie trumpft mit ihren Sprachkenntnissen auf."
+   }
+  ],
+  "_src": "0a7ad5bb",
+  "_src_reader": "0a7ad5bb"
+ },
+ "light-0316": {
+  "translation_pl": "(książk.) częstować, raczyć; oferować, prezentować, mieć się czym pochwalić; (przestarz.) usługiwać, obsługiwać (gości); (przestarz.) składać wizytę kurtuazyjną",
+  "complements": [
+   {
+    "meaning_pl": "(książk.) częstować, raczyć",
+    "note_pl": "częstować kogoś czymś: Die Gastgeberin wartet den Gästen mit einem Kuchen auf."
+   },
+   {
+    "meaning_pl": "oferować, prezentować, mieć się czym pochwalić",
+    "note_pl": "prezentować coś: Der Verein wartet mit einer Überraschung auf."
+   }
+  ],
+  "_src": "3a167917",
+  "_src_reader": "3a167917"
+ },
+ "light-0317": {
+  "translation_pl": "zwiększać objętość, rozciągać; poszerzać (granice); rozszerzać; przedłużać, przeciągać (w czasie)",
+  "reflexive": {
+   "translation_pl": "rozszerzać się, zwiększać objętość; rozprzestrzeniać się; przeciągać się, trwać; rozciągać się",
+   "complements": [
+    {
+     "meaning_pl": "rozprzestrzeniać się",
+     "note_pl": "rozprzestrzeniać się na coś: Das Feuer dehnte sich auf das Nachbarhaus aus."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "rozszerzać",
+    "note_pl": "rozszerzać coś na coś: Die Firma dehnt ihr Angebot auf ganz Europa aus."
+   }
+  ],
+  "_src": "05eb0d85",
+  "_src_reader": "05eb0d85"
+ },
+ "light-0318": {
+  "translation_pl": "(książk.) awansować, robić karierę; stawać się, wybijać się; (przestarz.) posuwać się naprzód, nacierać",
+  "complements": [
+   {
+    "meaning_pl": "(książk.) awansować, robić karierę",
+    "note_pl": "awansować na jakieś stanowisko: Sie avancierte zur Abteilungsleiterin."
+   },
+   {
+    "meaning_pl": "stawać się, wybijać się",
+    "note_pl": "stać się kimś, czymś: Der Film avancierte zum Kassenschlager."
+   }
+  ],
+  "_src": "a4c9e139",
+  "_src_reader": "a4c9e139"
+ },
+ "light-0319": {
+  "translation_pl": "umożliwiać, czynić zdolnym",
+  "complements": [
+   {
+    "note_pl": "czynić kogoś zdolnym do czegoś: Die Ausbildung befähigt ihn zu einem Studium."
+   }
+  ],
+  "_src": "a76e4432",
+  "_src_reader": "a76e4432"
+ },
+ "light-0320": {
+  "translation_pl": "obchodzić, przemierzać (teren); (reg.) często odwiedzać, tłumnie oblegać (o gościach); (reg.) zaparowywać",
+  "reflexive": {
+   "translation_pl": "wynosić, sięgać (jakiejś kwoty)",
+   "complements": [
+    {
+     "note_pl": "wynosić jakąś sumę: Die Kosten belaufen sich auf 500 Euro."
+    }
+   ]
+  },
+  "_src": "57a382c5",
+  "_src_reader": "57a382c5"
+ },
+ "light-0321": {
+  "translation_pl": "zaopatrywać, dostarczać",
+  "complements": [
+   {
+    "note_pl": "zaopatrywać kogoś w coś: Die Firma beliefert die Läden mit frischem Obst."
+   }
+  ],
+  "_src": "576fb95f",
+  "_src_reader": "576fb95f"
+ },
+ "light-0322": {
+  "translation_pl": "obsadzać",
+  "complements": [
+   {
+    "note_pl": "obsadzać coś czymś: Wir bepflanzen das Beet mit Tulpen."
+   }
+  ],
+  "_src": "722c80fe",
+  "_src_reader": "722c80fe"
+ },
+ "light-0323": {
+  "translation_pl": "obciągać, naciągać (tkaninę, struny); zaprzęgać",
+  "complements": [
+   {
+    "meaning_pl": "obciągać, naciągać (tkaninę, struny)",
+    "note_pl": "obciągać coś czymś: Er bespannt den Rahmen mit Leinwand."
+   },
+   {
+    "meaning_pl": "zaprzęgać",
+    "note_pl": "zaprzęgać zwierzęta do wozu: Man bespannte den Wagen mit zwei Pferden."
+   }
+  ],
+  "_src": "31ff42a7",
+  "_src_reader": "31ff42a7"
+ },
+ "light-0324": {
+  "translation_pl": "powierzać, zlecać (sprawę)",
+  "complements": [
+   {
+    "note_pl": "powierzać komuś coś: Man betraute sie mit der Leitung des Projekts."
+   }
+  ],
+  "_src": "e5ecc79d",
+  "_src_reader": "e5ecc79d"
+ },
+ "light-0325": {
+  "translation_pl": "chwalić się, chełpić się",
+  "complements": [
+   {
+    "note_pl": "chwalić się czymś: Er brüstet sich mit seinem neuen Auto."
+   }
+  ],
+  "_src": "42a5fe88",
+  "_src_reader": "42a5fe88"
+ },
+ "light-0326": {
+  "translation_pl": "wysiadywać (pisklęta), siedzieć na jajach; (książk.) zalegać, prażyć (o upale); rozmyślać, łamać sobie głowę, ślęczeć; knuć, obmyślać (coś złego); (fiz.) powielać (paliwo jądrowe)",
+  "complements": [
+   {
+    "meaning_pl": "rozmyślać, łamać sobie głowę, ślęczeć",
+    "note_pl": "ślęczeć nad czymś: Er brütet über der Mathematikaufgabe."
+   }
+  ],
+  "_src": "fc256dc1",
+  "_src_reader": "fc256dc1"
+ },
+ "light-0327": {
+  "translation_pl": "(książk.) odczuwać pragnienie, chcieć pić; (książk.) łaknąć, gorąco pragnąć",
+  "complements": [
+   {
+    "note_pl": "łaknąć czegoś: Das Volk dürstet nach Freiheit."
+   }
+  ],
+  "_src": "e1c4a354",
+  "_src_reader": "e1c4a354"
+ },
+ "light-0328": {
+  "translation_pl": "wkradać się w łaski, podlizywać się, przymilać się",
+  "complements": [
+   {
+    "note_pl": "wkradać się w czyjeś łaski: Sie schmeichelt sich bei der Lehrerin ein."
+   }
+  ],
+  "_src": "c51bb58f",
+  "_src_reader": "c51bb58f"
+ },
+ "light-0329": {
+  "translation_pl": "stroić (instrument); włączać się (do śpiewu), przyłączać się; nastrajać (na coś), wprowadzać w nastrój; (przestarz.) zgadzać się",
+  "reflexive": {
+   "translation_pl": "nastrajać się",
+   "complements": [
+    {
+     "note_pl": "nastrajać się na coś: Wir stimmen uns auf den Urlaub ein."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "stroić (instrument)",
+    "note_pl": "stroić do jakiegoś tonu: Sie stimmt die Geige auf den Kammerton ein."
+   },
+   {
+    "meaning_pl": "nastrajać (na coś), wprowadzać w nastrój",
+    "note_pl": "nastrajać kogoś na coś: Der Lehrer stimmt die Klasse auf die Prüfung ein."
+   },
+   {
+    "meaning_pl": "włączać się (do śpiewu), przyłączać się",
+    "note_pl": "włączać się do czegoś: Alle stimmen in das Lied ein."
+   },
+   {
+    "meaning_pl": "(przestarz.) zgadzać się",
+    "note_pl": "zgadzać się na coś: Er stimmte in den Vorschlag ein."
+   }
+  ],
+  "_src": "aee04d8d",
+  "_src_reader": "aee04d8d"
+ },
+ "light-0330": {
+  "translation_pl": "dzielić, rozdzielać; rozplanowywać, wydzielać (zapasy, czas); przydzielać (do pracy, na dyżur)",
+  "complements": [
+   {
+    "meaning_pl": "dzielić, rozdzielać",
+    "note_pl": "dzielić coś na coś: Wir teilen die Klasse in drei Gruppen ein."
+   }
+  ],
+  "_src": "2687578c",
+  "_src_reader": "2687578c"
+ },
+ "light-0331": {
+  "translation_pl": "unosić się, zapalać się, gorączkować się",
+  "complements": [
+   {
+    "note_pl": "unosić się z powodu czegoś: Er ereifert sich über die neuen Steuern."
+   }
+  ],
+  "_src": "b462a7f8",
+  "_src_reader": "b462a7f8"
+ },
+ "light-0332": {
+  "translation_pl": "zachorować",
+  "complements": [
+   {
+    "note_pl": "zachorować na coś: Sie ist an Masern erkrankt."
+   }
+  ],
+  "_src": "c131e19d",
+  "_src_reader": "c131e19d"
+ },
+ "light-0333": {
+  "translation_pl": "dodawać otuchy, zachęcać, skłaniać; (rzad.) ożywiać, orzeźwiać",
+  "complements": [
+   {
+    "meaning_pl": "dodawać otuchy, zachęcać, skłaniać",
+    "note_pl": "zachęcać do czegoś: Die Trainerin ermuntert ihn zum Weitermachen."
+   }
+  ],
+  "_src": "4d089701",
+  "_src_reader": "4d089701"
+ },
+ "light-0334": {
+  "translation_pl": "przyłapywać, łapać (na gorącym uczynku)",
+  "reflexive": {
+   "translation_pl": "łapać się (na myśli, pragnieniu)",
+   "complements": [
+    {
+     "note_pl": "łapać się na czymś: Ich ertappe mich bei dem Wunsch, alles hinzuwerfen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_pl": "przyłapać kogoś na czymś: Die Mutter ertappt ihn beim Naschen."
+   }
+  ],
+  "_src": "b2b8b447",
+  "_src_reader": "b2b8b447"
+ },
+ "light-0335": {
+  "translation_pl": "ogrzewać, podgrzewać; zjednywać (dla czegoś), przekonywać, zapalać",
+  "reflexive": {
+   "translation_pl": "nagrzewać się, ocieplać się; nabierać sympatii, zapalać się",
+   "complements": [
+    {
+     "meaning_pl": "nabierać sympatii, zapalać się",
+     "note_pl": "nabrać sympatii do czegoś: Ich kann mich für dieses Hobby nicht erwärmen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "zjednywać (dla czegoś), przekonywać, zapalać",
+    "note_pl": "przekonywać kogoś do czegoś, zapalić kogoś do czegoś: Er versuchte, die Partei für seine Ideen zu erwärmen."
+   }
+  ],
+  "_src": "0fb03c28",
+  "_src_reader": "0fb03c28"
+ },
+ "light-0336": {
+  "translation_pl": "piłować, obrabiać pilnikiem; (przen.) szlifować, dopracowywać",
+  "complements": [
+   {
+    "meaning_pl": "(przen.) szlifować, dopracowywać",
+    "note_pl": "szlifować coś: Sie feilt noch an ihrer Rede."
+   },
+   {
+    "meaning_pl": "piłować, obrabiać pilnikiem",
+    "note_pl": "piłować coś: Er feilt an dem neuen Schlüssel."
+   }
+  ],
+  "_src": "98a4b682",
+  "_src_reader": "98a4b682"
+ },
+ "light-0337": {
+  "translation_pl": "opierać się, bazować; (łow.) siadać (o ptakach drapieżnych)",
+  "complements": [
+   {
+    "meaning_pl": "opierać się, bazować",
+    "note_pl": "opierać się na czymś: Der Roman fußt auf einer wahren Geschichte."
+   }
+  ],
+  "_src": "40b325f8",
+  "_src_reader": "40b325f8"
+ },
+ "light-0338": {
+  "translation_pl": "przyłączać się; dochodzić, dołączać",
+  "complements": [
+   {
+    "note_pl": "przyłączać się do kogoś: Nach dem Konzert gesellte er sich zu uns."
+   }
+  ],
+  "_src": "af10d3c4",
+  "_src_reader": "af10d3c4"
+ },
+ "light-0339": {
+  "translation_pl": "(książk.) martwić, smucić",
+  "reflexive": {
+   "translation_pl": "(książk.) smucić się, rozpaczać, zamartwiać się",
+   "complements": [
+    {
+     "note_pl": "smucić się z powodu czegoś: Sie grämt sich über den Tod ihres Hundes."
+    }
+   ]
+  },
+  "_src": "180f1a83",
+  "_src_reader": "180f1a83"
+ },
+ "light-0340": {
+  "translation_pl": "zbliżać się, podchodzić; nadchodzić, zbliżać się (o czasie); sięgać, dosięgać, (przen.) dorównywać; docierać, uzyskiwać dostęp, zdobywać; graniczyć, zakrawać",
+  "complements": [
+   {
+    "meaning_pl": "sięgać, dosięgać, (przen.) dorównywać",
+    "note_pl": "dosięgnąć czegoś: Das Kind kommt nicht an den Lichtschalter heran."
+   },
+   {
+    "meaning_pl": "docierać, uzyskiwać dostęp, zdobywać",
+    "note_pl": "uzyskać dostęp do czegoś: Wie bist du an die Eintrittskarten herangekommen?"
+   },
+   {
+    "meaning_pl": "graniczyć, zakrawać",
+    "note_pl": "graniczyć z czymś: Das kommt schon nahe an Betrug heran."
+   }
+  ],
+  "_src": "72053963",
+  "_src_reader": "72053963"
+ },
+ "light-0341": {
+  "translation_pl": "napadać, rzucać się; ostro krytykować, naskakiwać; rzucać się (na jedzenie)",
+  "complements": [
+   {
+    "note_pl": "rzucać się na kogoś, coś: Die Kinder fielen über den Kuchen her."
+   }
+  ],
+  "_src": "1012580b",
+  "_src_reader": "1012580b"
+ },
+ "light-0342": {
+  "translation_pl": "(pot.) robić wrażenie, prezentować się; (pot.) rozdmuchiwać, wychwalać",
+  "reflexive": {
+   "translation_pl": "(pot.) brać się, zabierać się, rzucać się (do pracy, na jedzenie); (pot.) rzucać się, napadać",
+   "complements": [
+    {
+     "note_pl": "rzucić się na coś, na kogoś: Er machte sich gleich über die Pizza her."
+    }
+   ]
+  },
+  "_src": "6300bff4",
+  "_src_reader": "6300bff4"
+ },
+ "light-0343": {
+  "translation_pl": "pochodzić, wynikać, brać się",
+  "complements": [
+   {
+    "note_pl": "pochodzić od czegoś: Der Fleck rührt von dem Rotwein her."
+   }
+  ],
+  "_src": "7bc977a4",
+  "_src_reader": "7bc977a4"
+ },
+ "light-0344": {
+  "translation_pl": "(pot.) przysuwać, przyciągać (do siebie); ciągnąć za sobą; iść, maszerować (z przodu, z tyłu, obok); przeprowadzać się tutaj; (pot.) obgadywać, wieszać psy (na kimś)",
+  "complements": [
+   {
+    "meaning_pl": "(pot.) obgadywać, wieszać psy (na kimś)",
+    "note_pl": "obgadywać kogoś: Sie ziehen ständig über ihre Nachbarn her."
+   }
+  ],
+  "_src": "6189708d",
+  "_src_reader": "6189708d"
+ },
+ "light-0345": {
+  "translation_pl": "osaczać, gonić, ścigać; szczuć, napuszczać; spieszyć się; pędzić, gnać; (pejor.) prowadzić nagonkę, siać nienawiść; (pejor.) podżegać",
+  "complements": [
+   {
+    "meaning_pl": "(pejor.) prowadzić nagonkę, siać nienawiść",
+    "note_pl": "prowadzić nagonkę na kogoś: Die Zeitung hetzt gegen die Flüchtlinge."
+   },
+   {
+    "meaning_pl": "szczuć, napuszczać",
+    "note_pl": "napuszczać na kogoś: Er hetzte den Hund auf den Einbrecher."
+   }
+  ],
+  "_src": "78b03763",
+  "_src_reader": "78b03763"
+ },
+ "light-0346": {
+  "translation_pl": "wychodzić (na zewnątrz); być wysyłanym, rozsyłanym (na zewnątrz); prowadzić na zewnątrz (o wyjściu); prowadzić, ciągnąć się (o drodze); wychodzić (na coś), być zwróconym (o oknie, pokoju); wykraczać poza granice, przekraczać",
+  "complements": [
+   {
+    "meaning_pl": "wykraczać poza granice, przekraczać",
+    "note_pl": "wykraczać poza coś: Die Kosten gehen über das Budget hinaus."
+   }
+  ],
+  "_src": "e9becc5d",
+  "_src_reader": "e9becc5d"
+ },
+ "light-0347": {
+  "translation_pl": "(pot.) chcieć wyjść, chcieć wyjechać (na zewnątrz); (pot.) zmierzać (do czegoś), dążyć (do czegoś)",
+  "complements": [
+   {
+    "meaning_pl": "(pot.) zmierzać (do czegoś), dążyć (do czegoś)",
+    "note_pl": "zmierzać do czegoś: Er will auf eine Gehaltserhöhung hinaus."
+   }
+  ],
+  "_src": "686dca8c",
+  "_src_reader": "686dca8c"
+ },
+ "light-0348": {
+  "translation_pl": "nasłuchiwać, podsłuchiwać; słuchać, wsłuchiwać się; (reg.) słuchać się",
+  "complements": [
+   {
+    "note_pl": "nasłuchiwać czegoś, słuchać czegoś; (reg.) słuchać się kogoś: Sie horcht auf das Geräusch im Flur."
+   }
+  ],
+  "_src": "7acd8244",
+  "_src_reader": "7acd8244"
+ },
+ "light-0349": {
+  "translation_pl": "zaciskać, obejmować (palcami, ręką); spinać klamrami (ranę); przypinać (spinaczem, klipsem); wchodzić w klincz (w boksie)",
+  "reflexive": {
+   "translation_pl": "czepiać się, chwytać się, kurczowo się trzymać",
+   "complements": [
+    {
+     "note_pl": "czepiać się kogoś, czegoś: Das Kind klammert sich an den Vater."
+    }
+   ]
+  },
+  "_src": "20e7c998",
+  "_src_reader": "20e7c998"
+ },
+ "light-0350": {
+  "translation_pl": "zawiązywać (krawat, sznurowadło, węzeł); (przen.) nawiązywać, zawierać (przyjaźń, kontakty); przywiązywać (nitkę do nitki); wiązać, pleść (sieci, dywany); wiązać (nadzieje, warunki z czymś), pokładać (nadzieje)",
+  "reflexive": {
+   "translation_pl": "wiązać się (z czymś)",
+   "complements": [
+    {
+     "note_pl": "wiązać się z czymś: An dieses Haus knüpfen sich viele Erinnerungen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "wiązać (nadzieje, warunki z czymś), pokładać (nadzieje)",
+    "note_pl": "wiązać coś z czymś: Die Bank knüpft den Kredit an strenge Bedingungen."
+   }
+  ],
+  "_src": "d04f9640",
+  "_src_reader": "d04f9640"
+ },
+ "light-0351": {
+  "translation_pl": "(książk.) korelować, pozostawać we wzajemnym związku; (książk.) zestawiać, ustalać korelację",
+  "complements": [
+   {
+    "note_pl": "korelować z czymś: Der Preis korreliert mit der Nachfrage."
+   }
+  ],
+  "_src": "e7196aad",
+  "_src_reader": "e7196aad"
+ },
+ "light-0352": {
+  "translation_pl": "(książk.) wybierać, obierać (na zaszczytne miejsce, do zaszczytnego tytułu)",
+  "complements": [
+   {
+    "note_pl": "wybrać kogoś, coś kimś, czymś: Die Jury kürte den Film zum besten Werk des Festivals."
+   }
+  ],
+  "_src": "7560a275",
+  "_src_reader": "7560a275"
+ },
+ "light-0353": {
+  "translation_pl": "wyruszać, ruszać (w drogę), odchodzić; kierować się (ku czemuś); napadać, rzucać się (na kogoś); (pot.) zaczynać się; (pot.) odpadać, odchodzić; wypalać (o broni); wybuchać",
+  "complements": [
+   {
+    "meaning_pl": "napadać, rzucać się (na kogoś)",
+    "note_pl": "napadać na kogoś: Der Hund geht auf den Briefträger los."
+   }
+  ],
+  "_src": "70639f2e",
+  "_src_reader": "70639f2e"
+ },
+ "light-0354": {
+  "translation_pl": "zrywać, odrywać",
+  "reflexive": {
+   "translation_pl": "wyrywać się, odrywać się",
+   "complements": [
+    {
+     "note_pl": "odrywać się od czegoś: Er kann sich nicht von dem Film losreißen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_pl": "odrywać coś od czegoś: Der Sturm riss das Boot von der Kette los."
+   }
+  ],
+  "_src": "96368c0f",
+  "_src_reader": "96368c0f"
+ },
+ "light-0355": {
+  "translation_pl": "wyrzekać się, wypierać się (kogoś, czegoś), zrywać (z kimś)",
+  "complements": [
+   {
+    "note_pl": "wyrzekać się kogoś, czegoś: Er sagt sich von seiner Partei los."
+   }
+  ],
+  "_src": "cfa55f32",
+  "_src_reader": "cfa55f32"
+ },
+ "light-0356": {
+  "translation_pl": "plotkować, mówić źle (o kimś); (przestarz.) bluźnić, lżyć",
+  "complements": [
+   {
+    "meaning_pl": "plotkować, mówić źle (o kimś)",
+    "note_pl": "mówić źle o kimś: Die Nachbarn lästern über den neuen Mieter."
+   }
+  ],
+  "_src": "f179b14b",
+  "_src_reader": "f179b14b"
+ },
+ "light-0357": {
+  "translation_pl": "nawoływać, usilnie nakłaniać (do czegoś); przypominać (o zobowiązaniu), wzywać do zapłaty (długu); (książk.) przypominać (o czymś)",
+  "complements": [
+   {
+    "meaning_pl": "przypominać (o zobowiązaniu), wzywać do zapłaty (długu)",
+    "note_pl": "przypominać komuś o czymś (o zobowiązaniu): Sie mahnt ihn an seine Schulden."
+   },
+   {
+    "meaning_pl": "(książk.) przypominać (o czymś)",
+    "note_pl": "przypominać o czymś: Das alte Denkmal mahnt an den Krieg."
+   },
+   {
+    "meaning_pl": "nawoływać, usilnie nakłaniać (do czegoś)",
+    "note_pl": "nawoływać do czegoś: Der Lehrer mahnt die Klasse zur Ruhe."
+   }
+  ],
+  "_src": "107decea",
+  "_src_reader": "107decea"
+ },
+ "light-0358": {
+  "translation_pl": "współpracować, uczestniczyć (w pracy); brać udział, występować (w spektaklu, koncercie); przyczyniać się, odgrywać rolę",
+  "complements": [
+   {
+    "note_pl": "uczestniczyć w czymś: Sie wirkt bei dem Projekt mit."
+   },
+   {
+    "note_pl": "uczestniczyć w czymś: Sie hat an dem Projekt mitgewirkt."
+   }
+  ],
+  "_src": "628b9af3",
+  "_src_reader": "628b9af3"
+ },
+ "light-0359": {
+  "translation_pl": "(książk.) naśmiewać się, drwić, podkpiwać",
+  "complements": [
+   {
+    "note_pl": "naśmiewać się z kogoś, czegoś: Sie mokiert sich über seinen Akzent."
+   }
+  ],
+  "_src": "055e1826",
+  "_src_reader": "055e1826"
+ },
+ "light-0360": {
+  "translation_pl": "(książk.) rozmyślać, zastanawiać się; wracać myślami (do czegoś), oddawać się rozmyślaniom (o czymś)",
+  "complements": [
+   {
+    "meaning_pl": "(książk.) rozmyślać, zastanawiać się",
+    "note_pl": "rozmyślać nad czymś: Er sinnt über die Frage nach."
+   }
+  ],
+  "_src": "799f4048",
+  "_src_reader": "799f4048"
+ },
+ "light-0361": {
+  "translation_pl": "oszukiwać, podstępnie pozbawiać (czegoś); nie płacić (rachunku), wychodzić bez płacenia; uderzać się (o coś); mocno uderzać, obijać; podrzucać (lisa) na rozciągniętej płachcie (dawna rozrywka myśliwska); kozłować (piłkę); odbijać (piłkę) pięścią (w prellballu)",
+  "complements": [
+   {
+    "meaning_pl": "oszukiwać, podstępnie pozbawiać (czegoś)",
+    "note_pl": "podstępnie pozbawiać kogoś czegoś: Der Händler prellt die Kunden um ihr Wechselgeld."
+   }
+  ],
+  "_src": "f06e95f5",
+  "_src_reader": "f06e95f5"
+ },
+ "light-0362": {
+  "translation_pl": "(pot.) mocować się, siłować się, przepychać się; (pot., przen.) walczyć, rywalizować (o coś)",
+  "complements": [
+   {
+    "meaning_pl": "(pot.) mocować się, siłować się, przepychać się",
+    "note_pl": "przepychać się, walczyć o coś: Die Kinder rangeln um den Ball."
+   },
+   {
+    "meaning_pl": "(pot., przen.) walczyć, rywalizować (o coś)",
+    "note_pl": "rywalizować o coś: Die Parteien rangeln um die Posten."
+   }
+  ],
+  "_src": "23235b67",
+  "_src_reader": "23235b67"
+ },
+ "light-0363": {
+  "translation_pl": "(książk.) rywalizować, konkurować",
+  "complements": [
+   {
+    "note_pl": "rywalizować z kimś: Die Firma rivalisiert mit ihrem größten Konkurrenten."
+   },
+   {
+    "note_pl": "rywalizować o coś: Die Städte rivalisieren um den Titel."
+   }
+  ],
+  "_src": "c8c64bec",
+  "_src_reader": "c8c64bec"
+ },
+ "light-0364": {
+  "translation_pl": "trząść, wstrząsać; szarpać, trząść (drzwiami, kratą); (przen.) podważać, godzić (w coś); trząść się, pracować nierówno (o silniku); trząść się, podskakiwać (na drodze); zawisać w powietrzu, trzepocząc skrzydłami (o ptaku drapieżnym)",
+  "complements": [
+   {
+    "meaning_pl": "szarpać, trząść (drzwiami, kratą)",
+    "note_pl": "szarpać za coś: Er rüttelt an der Tür."
+   },
+   {
+    "meaning_pl": "(przen.) podważać, godzić (w coś)",
+    "note_pl": "godzić w coś: Niemand darf an diesem Gesetz rütteln."
+   }
+  ],
+  "_src": "e061705a",
+  "_src_reader": "e061705a"
+ },
+ "light-0365": {
+  "translation_pl": "unikać, bać się, lękać się (czegoś); płoszyć się, uskakiwać (o koniu)",
+  "reflexive": {
+   "translation_pl": "bać się, krępować się, wahać się",
+   "complements": [
+    {
+     "note_pl": "bać się czegoś, nie odważać się na coś: Er scheut sich vor der Verantwortung."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "płoszyć się, uskakiwać (o koniu)",
+    "note_pl": "płoszyć się przed czymś: Das Pferd scheut vor dem Traktor."
+   }
+  ],
+  "_src": "5fd317a9",
+  "_src_reader": "5fd317a9"
+ },
+ "light-0366": {
+  "translation_pl": "zezować, mieć zeza; (pot.) podglądać, zaglądać; (pot.) zerkać, ukradkiem spoglądać, mieć chrapkę",
+  "_src": "0f28ebd3",
+  "_src_reader": "0f28ebd3"
+ },
+ "light-0367": {
+  "translation_pl": "(książk.) cierpieć, omdlewać (z pragnienia, głodu, upału); (książk.) tęsknić, usychać z tęsknoty",
+  "complements": [
+   {
+    "meaning_pl": "(książk.) tęsknić, usychać z tęsknoty",
+    "note_pl": "tęsknić za kimś, czymś, łaknąć czegoś: Sie schmachtet nach einem Glas Wasser."
+   }
+  ],
+  "_src": "aaa8186c",
+  "_src_reader": "aaa8186c"
+ },
+ "light-0368": {
+  "translation_pl": "roić się; latać rojem, krążyć rojem; zachwycać się, uwielbiać, szaleć (za kimś); opowiadać z zachwytem, rozpływać się (nad czymś)",
+  "complements": [
+   {
+    "meaning_pl": "zachwycać się, uwielbiać, szaleć (za kimś)",
+    "note_pl": "szaleć za kimś, czymś: Sie schwärmt für den neuen Lehrer."
+   },
+   {
+    "meaning_pl": "opowiadać z zachwytem, rozpływać się (nad czymś)",
+    "note_pl": "opowiadać z zachwytem o kimś, czymś: Er schwärmt von dem Urlaub."
+   }
+  ],
+  "_src": "c5cfa581",
+  "_src_reader": "c5cfa581"
+ },
+ "light-0369": {
+  "translation_pl": "otrzeć, zedrzeć (skórę); szurać, sunąć ze zgrzytem (po czymś); (bud.) zdejmować wierzchnią warstwę gruntu; (górn.) prowadzić poszukiwania, szukać (kopalin); (górn.) wydobywać (metodą odkrywkową)",
+  "reflexive": {
+   "translation_pl": "zedrzeć sobie skórę, obetrzeć się"
+  },
+  "complements": [
+   {
+    "meaning_pl": "(górn.) prowadzić poszukiwania, szukać (kopalin)",
+    "note_pl": "szukać czegoś, prowadzić poszukiwania czegoś: Sie schürfen in Alaska nach Gold."
+   }
+  ],
+  "_src": "76ea0f44",
+  "_src_reader": "76ea0f44"
+ },
+ "light-0370": {
+  "translation_pl": "naśmiewać się, drwić, szydzić; (książk.) lekceważyć, nie liczyć się (z czymś); (książk.) wymykać się (opisowi, wyobraźni); (zool.) naśladować dźwięki (o ptakach)",
+  "complements": [
+   {
+    "meaning_pl": "naśmiewać się, drwić, szydzić",
+    "note_pl": "naśmiewać się z kogoś, czegoś: Sie spotten über seinen Hut."
+   }
+  ],
+  "_src": "f5943fab",
+  "_src_reader": "f5943fab"
+ },
+ "light-0371": {
+  "translation_pl": "opowiadać się (za kimś, czymś), wstawiać się, popierać",
+  "complements": [
+   {
+    "note_pl": "opowiadać się za kimś, czymś: Sie macht sich für den Plan stark."
+   }
+  ],
+  "_src": "636852b3",
+  "_src_reader": "636852b3"
+ },
+ "light-0372": {
+  "translation_pl": "współczuć, sympatyzować, podzielać poglądy",
+  "complements": [
+   {
+    "note_pl": "sympatyzować z kimś, czymś: Viele sympathisieren mit den Streikenden."
+   }
+  ],
+  "_src": "adccde3f",
+  "_src_reader": "adccde3f"
+ },
+ "light-0373": {
+  "translation_pl": "macać, obmacywać, szperać (rękami); wymacywać, szukać po omacku; badać dotykiem, wyczuwać dotykiem; (specj.) obsługiwać urządzenie z klawiaturą; (specj.) wpisywać, przesyłać (za pomocą klawiszy)",
+  "reflexive": {
+   "translation_pl": "posuwać się po omacku"
+  },
+  "complements": [
+   {
+    "meaning_pl": "wymacywać, szukać po omacku",
+    "note_pl": "wymacywać coś, szukać czegoś po omacku: Er tastet nach dem Schalter."
+   }
+  ],
+  "_src": "26c0a6cf",
+  "_src_reader": "26c0a6cf"
+ },
+ "light-0374": {
+  "translation_pl": "(książk.) dążyć, zabiegać",
+  "complements": [
+   {
+    "note_pl": "dążyć do czegoś: Er trachtet nach Ruhm."
+   }
+  ],
+  "_src": "bc1988bc",
+  "_src_reader": "bc1988bc"
+ },
+ "light-0375": {
+  "translation_pl": "gwarantować, zapewniać; potwierdzać, poświadczać (autentyczność)",
+  "reflexive": {
+   "translation_pl": "ręczyć, poręczyć",
+   "complements": [
+    {
+     "note_pl": "ręczyć za kogoś, za coś: Ich verbürge mich für meinen Bruder."
+    }
+   ]
+  },
+  "_src": "1c1cd768",
+  "_src_reader": "1c1cd768"
+ },
+ "light-0376": {
+  "translation_pl": "nie trafić (ręką), zagrać fałszywą nutę; pomylić się (w wyborze), wybrać coś niewłaściwego; przywłaszczyć sobie, sięgnąć (po cudze); podnieść rękę, użyć przemocy",
+  "complements": [
+   {
+    "meaning_pl": "przywłaszczyć sobie, sięgnąć (po cudze)",
+    "note_pl": "sięgnąć po coś (cudzego), przywłaszczyć sobie coś: Er hat sich an der Kasse vergriffen."
+   },
+   {
+    "meaning_pl": "podnieść rękę, użyć przemocy",
+    "note_pl": "podnieść rękę na kogoś: Er vergreift sich an einem Schwächeren."
+   },
+   {
+    "meaning_pl": "pomylić się (w wyborze), wybrać coś niewłaściwego",
+    "note_pl": "pomylić się w czymś (w tonie, wyrażeniu): Er hat sich im Ton vergriffen."
+   }
+  ],
+  "_src": "d8e47f16",
+  "_src_reader": "d8e47f16"
+ },
+ "light-0377": {
+  "translation_pl": "wydawać za mąż, żenić",
+  "reflexive": {
+   "translation_pl": "ożenić się, wyjść za mąż, zawrzeć związek małżeński",
+   "complements": [
+    {
+     "note_pl": "zawrzeć związek małżeński z kimś: Er hat sich mit einer Lehrerin verheiratet."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_pl": "wydać kogoś za mąż za kogoś, ożenić kogoś z kimś: Sie verheiraten die Tochter mit einem Arzt."
+   }
+  ],
+  "_src": "af9d6e88",
+  "_src_reader": "af9d6e88"
+ },
+ "light-0378": {
+  "translation_pl": "(książk.) kłaniać się, ukłonić się",
+  "complements": [
+   {
+    "note_pl": "kłaniać się komuś: Er verneigt sich vor dem Publikum."
+   }
+  ],
+  "_src": "9828209b",
+  "_src_reader": "9828209b"
+ },
+ "light-0379": {
+  "translation_pl": "zaliczać, uwzględniać (przy rozliczeniu), potrącać (z należności); (austr.) naliczać, wystawiać rachunek",
+  "reflexive": {
+   "translation_pl": "pomylić się w obliczeniach, przeliczyć się; pomylić się, zawieść się (na kimś)"
+  },
+  "complements": [
+   {
+    "meaning_pl": "zaliczać, uwzględniać (przy rozliczeniu), potrącać (z należności)",
+    "note_pl": "zaliczać coś na poczet czegoś: Die Bank verrechnet die Gutschrift mit der Rechnung."
+   }
+  ],
+  "_src": "9a1b413b",
+  "_src_reader": "9a1b413b"
+ },
+ "light-0380": {
+  "translation_pl": "połknąć (niechcący), połykać (słowa), tłumić (dźwięki); stłumić, powstrzymać (nie wypowiedzieć)",
+  "reflexive": {
+   "translation_pl": "zakrztusić się, zadławić się",
+   "complements": [
+    {
+     "note_pl": "zakrztusić się czymś: Das Kind verschluckt sich an der Suppe."
+    }
+   ]
+  },
+  "_src": "fa983786",
+  "_src_reader": "fa983786"
+ },
+ "light-0381": {
+  "translation_pl": "pomylić, (przez pomyłkę) wziąć cudze zamiast swojego; zmieniać, zamieniać, wymieniać; zmienić (jedno zajęcie na inne)",
+  "complements": [
+   {
+    "meaning_pl": "zmieniać, zamieniać, wymieniać",
+    "note_pl": "zamieniać coś na coś: Er vertauscht den Mantel gegen eine Jacke."
+   },
+   {
+    "meaning_pl": "zmienić (jedno zajęcie na inne)",
+    "note_pl": "zmienić jedno zajęcie na inne: Sie vertauschte das Büro gegen das Atelier."
+   },
+   {
+    "note_pl": "zamieniać coś na coś: Er vertauscht den Mantel mit einer Jacke."
+   }
+  ],
+  "_src": "77c258d1",
+  "_src_reader": "77c258d1"
+ },
+ "light-0382": {
+  "translation_pl": "goić się, zabliźniać się (o ranie, bliźnie); zrastać się, stapiać się (w jedną całość); zarastać (roślinami); (reg.) wyrastać (z ubrania)",
+  "reflexive": {
+   "translation_pl": "(pot.) wyrównać się z wiekiem, wyrosnąć"
+  },
+  "complements": [
+   {
+    "meaning_pl": "zrastać się, stapiać się (w jedną całość)",
+    "note_pl": "zrastać się z czymś, (przen.) zżyć się z kimś, czymś: Sie ist mit ihrer Arbeit verwachsen."
+   }
+  ],
+  "_src": "a9c79468",
+  "_src_reader": "a9c79468"
+ },
+ "light-0383": {
+  "translation_pl": "przechowywać, chować (bezpiecznie); (reg.) zachować, odłożyć (na później); (przestarz.) trzymać w areszcie; (książk., przestarz.) strzec, zabezpieczać",
+  "reflexive": {
+   "translation_pl": "(książk.) protestować, stanowczo odrzucać",
+   "complements": [
+    {
+     "note_pl": "protestować przeciwko czemuś: Er verwahrt sich gegen den Vorwurf."
+    }
+   ]
+  },
+  "_src": "f902af6d",
+  "_src_reader": "f902af6d"
+ },
+ "light-0384": {
+  "translation_pl": "zadziwiać, zdumiewać",
+  "reflexive": {
+   "translation_pl": "dziwić się, zdumiewać się",
+   "complements": [
+    {
+     "note_pl": "dziwić się czemuś: Wir verwundern uns über seine Entscheidung."
+    }
+   ]
+  },
+  "_src": "09db6388",
+  "_src_reader": "09db6388"
+ },
+ "light-0385": {
+  "translation_pl": "wychodzić naprzód; (pot.) iść przodem (przed kimś); wychodzić wcześniej (niż inni); spieszyć się (o zegarze); działać, podejmować kroki (przeciwko komuś); postępować, działać (w określony sposób); dziać się, odbywać się; być ważniejszym, mieć pierwszeństwo",
+  "complements": [
+   {
+    "meaning_pl": "działać, podejmować kroki (przeciwko komuś)",
+    "note_pl": "podejmować kroki przeciwko komuś: Die Polizei ging gegen die Demonstranten vor."
+   }
+  ],
+  "_src": "434ae181",
+  "_src_reader": "434ae181"
+ },
+ "light-0386": {
+  "translation_pl": "zadowalać się (tym, co jest)",
+  "complements": [
+   {
+    "note_pl": "zadowalać się czymś: Wir nehmen mit dem kleinen Zimmer vorlieb."
+   }
+  ],
+  "_src": "b1a8d413",
+  "_src_reader": "b1a8d413"
+ },
+ "light-0387": {
+  "translation_pl": "(książk.) czuwać, nie spać; dyżurować (przy łóżku), nie spać (opiekując się kimś); pilnować, strzec (kogoś, czegoś)",
+  "complements": [
+   {
+    "meaning_pl": "pilnować, strzec (kogoś, czegoś)",
+    "note_pl": "czuwać nad kimś, czymś: Die Mutter wacht über die Kinder."
+   }
+  ],
+  "_src": "d15ea641",
+  "_src_reader": "d15ea641"
+ },
+ "light-0388": {
+  "translation_pl": "machać (czymś), merdać (ogonem); strzepywać (czymś); wachlować (czymś), owiewać (chłodem); kołysać się, chwiać się (tam i z powrotem); jechać (na nartach) wedlem",
+  "complements": [
+   {
+    "meaning_pl": "machać (czymś), merdać (ogonem)",
+    "note_pl": "machać czymś: Der Hund wedelt mit dem Schwanz."
+   },
+   {
+    "meaning_pl": "strzepywać (czymś)",
+    "note_pl": "strzepywać czymś: Er wedelt mit der Serviette die Krümel vom Tisch."
+   },
+   {
+    "meaning_pl": "wachlować (czymś), owiewać (chłodem)",
+    "note_pl": "wachlować czymś: Sie wedelt sich mit der Zeitung Kühlung."
+   }
+  ],
+  "_src": "fad975cd",
+  "_src_reader": "fad975cd"
+ },
+ "light-0389": {
+  "translation_pl": "uciekać; (pot.) odejść (z domu), porzucić (kogoś); wyciekać, spływać",
+  "complements": [
+   {
+    "meaning_pl": "uciekać",
+    "note_pl": "uciekać przed kimś, czymś: Das Kind läuft vor dem Hund weg."
+   }
+  ],
+  "_src": "f96f3671",
+  "_src_reader": "f96f3671"
+ },
+ "light-0390": {
+  "translation_pl": "żyć (z czegoś), żywić się (czymś); wyczerpywać, wycieńczać; nadszarpywać, wykańczać",
+  "complements": [
+   {
+    "meaning_pl": "nadszarpywać, wykańczać",
+    "note_pl": "nadszarpywać coś: Der Stress zehrt an ihren Nerven."
+   },
+   {
+    "meaning_pl": "żyć (z czegoś), żywić się (czymś)",
+    "note_pl": "żyć z czegoś: Sie zehren von ihren Ersparnissen."
+   }
+  ],
+  "_src": "6be1ba57",
+  "_src_reader": "6be1ba57"
+ },
+ "light-0391": {
+  "translation_pl": "przesuwać (coś) w kierunku (kogoś, czegoś)",
+  "reflexive": {
+   "translation_pl": "poruszać się w kierunku (kogoś, czegoś), zbliżać się",
+   "complements": [
+    {
+     "note_pl": "poruszać się w kierunku kogoś, czegoś: Das Schiff bewegt sich auf den Hafen zu."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_pl": "przesuwać coś w kierunku kogoś, czegoś: Er bewegt die Hand langsam auf den Hund zu."
+   }
+  ],
+  "_src": "e96d0c31",
+  "_src_reader": "e96d0c31"
+ },
+ "light-0392": {
+  "translation_pl": "pociągać (lekko), skubać; wyskubywać, wyrywać; szarpać (struny)",
+  "reflexive": {
+   "translation_pl": "(austr., pot.) zmywać się, wynosić się; (austr., pot.) wymigiwać się (od czegoś)"
+  },
+  "complements": [
+   {
+    "meaning_pl": "pociągać (lekko), skubać",
+    "note_pl": "skubać coś: Er zupft nervös an seinem Ärmel."
+   },
+   {
+    "meaning_pl": "szarpać (struny)",
+    "note_pl": "szarpać struny: Sie zupft an den Saiten der Gitarre."
+   }
+  ],
+  "_src": "781a250a",
+  "_src_reader": "781a250a"
+ },
+ "light-0393": {
+  "translation_pl": "cofać się, odsuwać się; uchylać się, wycofywać się (przed czymś); ustępować",
+  "complements": [
+   {
+    "meaning_pl": "cofać się, odsuwać się",
+    "note_pl": "cofnąć się przed kimś, czymś: Sie weicht erschrocken vor dem Hund zurück."
+   },
+   {
+    "meaning_pl": "uchylać się, wycofywać się (przed czymś)",
+    "note_pl": "cofać się przed czymś: Er weicht vor keiner Schwierigkeit zurück."
+   }
+  ],
+  "_src": "8e5c36f2",
+  "_src_reader": "8e5c36f2"
+ },
+ "light-0394": {
+  "translation_pl": "spotykać się; zbiegać się (w czasie)",
+  "complements": [
+   {
+    "meaning_pl": "spotykać się",
+    "note_pl": "spotykać się z kimś: Er trifft im Café mit seinen Freunden zusammen."
+   },
+   {
+    "meaning_pl": "zbiegać się (w czasie)",
+    "note_pl": "zbiegać się z czymś: Der Feiertag trifft mit dem Sonntag zusammen."
+   }
+  ],
+  "_src": "e72dddd8",
+  "_src_reader": "e72dddd8"
+ },
+ "light-0395": {
+  "translation_pl": "podchodzić, zbliżać się (do kogoś, czegoś); kopać",
+  "complements": [
+   {
+    "meaning_pl": "podchodzić, zbliżać się (do kogoś, czegoś)",
+    "note_pl": "podchodzić do kogoś, czegoś: Der Lehrer tritt auf den Schüler zu."
+   }
+  ],
+  "_src": "d0a9c06b",
+  "_src_reader": "d0a9c06b"
+ },
+ "light-0396": {
+  "translation_pl": "(bezosob.) strach bierze, ogarnia groza (kogoś); (książk.) świtać, dnieć; (rzad.) siwieć",
+  "reflexive": {
+   "translation_pl": "bać się, lękać się (czegoś)",
+   "complements": [
+    {
+     "note_pl": "bać się czegoś: Sie graut sich vor der Dunkelheit."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "(bezosob.) strach bierze, ogarnia groza (kogoś)",
+    "note_pl": "ktoś czuje lęk przed czymś: Mir graut vor der Prüfung."
+   }
+  ],
+  "_src": "56845585",
+  "_src_reader": "56845585"
+ },
+ "light-0397": {
+  "translation_pl": "hartować",
+  "complements": [
+   {
+    "note_pl": "hartować (się), uodparniać (się) na coś: Er härtet sich gegen die Kälte ab."
+   }
+  ],
+  "_src": "0a412836",
+  "_src_reader": "0a412836"
+ },
+ "light-0398": {
+  "translation_pl": "(pot.) do woli obgadywać, wieszać psy (na kimś)",
+  "complements": [
+   {
+    "note_pl": "obgadywać kogoś, coś: Sie lästern über den neuen Kollegen ab."
+   }
+  ],
+  "_src": "df61976c",
+  "_src_reader": "df61976c"
+ },
+ "light-0399": {
+  "translation_pl": "odsuwać; odsuwać się; odcinać się, dystansować się (od kogoś, czegoś); odmaszerowywać, wyruszać (w szyku); (pot.) odchodzić, oddalać się",
+  "complements": [
+   {
+    "meaning_pl": "odcinać się, dystansować się (od kogoś, czegoś)",
+    "note_pl": "odcinać się od czegoś: Die Partei rückt von ihrem Plan ab."
+   }
+  ],
+  "_src": "f308aa21",
+  "_src_reader": "f308aa21"
+ },
+ "light-0400": {
+  "translation_pl": "(przestarz.) bardzo się niepokoić, zadręczać się strachem",
+  "complements": [
+   {
+    "note_pl": "zadręczać się niepokojem o kogoś: Die Mutter ängstigt sich um ihren Sohn ab."
+   }
+  ],
+  "_src": "d50ffcfc",
+  "_src_reader": "d50ffcfc"
+ },
+ "light-0401": {
+  "translation_pl": "(reg., pot.) nawiązywać romans, flirtować (z kimś); (pot.) wszczynać kłótnię, zaczepiać (kogoś)",
+  "complements": [
+   {
+    "meaning_pl": "(reg., pot.) nawiązywać romans, flirtować (z kimś)",
+    "note_pl": "flirtować z kimś: Er bändelt mit der neuen Nachbarin an."
+   },
+   {
+    "meaning_pl": "(pot.) wszczynać kłótnię, zaczepiać (kogoś)",
+    "note_pl": "wszczynać kłótnię z kimś: Er bändelt mit dem Türsteher an."
+   }
+  ],
+  "_src": "09e1af70",
+  "_src_reader": "09e1af70"
+ },
+ "light-0402": {
+  "translation_pl": "zawadzać (o coś), wpadać (na coś); (pot.) wywoływać niezadowolenie, narażać się",
+  "complements": [
+   {
+    "meaning_pl": "(pot.) wywoływać niezadowolenie, narażać się",
+    "note_pl": "wywoływać czyjeś niezadowolenie: Mit seiner Art eckt er bei seinem Chef an."
+   }
+  ],
+  "_src": "6be24271",
+  "_src_reader": "6be24271"
+ },
+ "light-0403": {
+  "translation_pl": "(pot.) dawać radę, mierzyć się (z kimś, czymś)",
+  "complements": [
+   {
+    "note_pl": "mierzyć się z kimś: Gegen den Champion kann er nicht an."
+   }
+  ],
+  "_src": "e29db026",
+  "_src_reader": "e29db026"
+ },
+ "light-0404": {
+  "translation_pl": "przybiegać, przygnać; biec (pod wiatr itp.); (pot.) wpadać, uderzać (z rozpędu); atakować, rzucać się (na kogoś, coś); (reg.) potrącać, zawadzać (kogoś)",
+  "reflexive": {
+   "translation_pl": "(pot.) uderzyć się (kolanem itp.)"
+  },
+  "complements": [
+   {
+    "meaning_pl": "atakować, rzucać się (na kogoś, coś)",
+    "note_pl": "atakować kogoś, coś, walczyć przeciwko czemuś: Die Soldaten rennen gegen die Festung an."
+   }
+  ],
+  "_src": "3e828c85",
+  "_src_reader": "3e828c85"
+ },
+ "light-0405": {
+  "translation_pl": "(książk.) wdać się (w kogoś), udać się (w kogoś)",
+  "complements": [
+   {
+    "note_pl": "wdać się w kogoś: Die Tochter artet ganz nach dem Vater."
+   }
+  ],
+  "_src": "15cf49be",
+  "_src_reader": "15cf49be"
+ },
+ "light-0406": {
+  "translation_pl": "wliczać w rachunek, doliczać (komuś); zaliczać (jedno na poczet drugiego), dokonywać potrącenia",
+  "complements": [
+   {
+    "meaning_pl": "zaliczać (jedno na poczet drugiego), dokonywać potrącenia",
+    "note_pl": "zaliczać na poczet czegoś: Sie rechnet ihre Auslagen gegen die Miete auf."
+   }
+  ],
+  "_src": "799acdff",
+  "_src_reader": "799acdff"
+ },
+ "light-0407": {
+  "translation_pl": "podżegać, podburzać, namawiać (do czegoś); dopingować, pobudzać, podsycać (ambicję)",
+  "complements": [
+   {
+    "meaning_pl": "podżegać, podburzać, namawiać (do czegoś)",
+    "note_pl": "podburzać przeciwko komuś: Er stachelt die Leute gegen den Nachbarn auf."
+   },
+   {
+    "meaning_pl": "podżegać, podburzać, namawiać (do czegoś)",
+    "note_pl": "podburzać do czegoś: Sie stacheln die Arbeiter zum Streik auf."
+   },
+   {
+    "meaning_pl": "dopingować, pobudzać, podsycać (ambicję)",
+    "note_pl": "pobudzać do czegoś: Der Trainer stachelt die Mannschaft zu größerem Einsatz auf."
+   }
+  ],
+  "_src": "f4e3da6b",
+  "_src_reader": "f4e3da6b"
+ },
+ "light-0408": {
+  "translation_pl": "(książk.) wypatrywać, wyglądać (kogoś, czegoś)",
+  "complements": [
+   {
+    "note_pl": "wypatrywać kogoś, czegoś: Sie blickte sehnsüchtig nach dem Boot aus."
+   }
+  ],
+  "_src": "f17816a8",
+  "_src_reader": "f17816a8"
+ },
+ "light-0409": {
+  "translation_pl": "godzić, jednać (zwaśnionych)",
+  "reflexive": {
+   "translation_pl": "pojednać się, pogodzić się (z kimś), pogodzić się (z czymś)",
+   "complements": [
+    {
+     "note_pl": "pogodzić się z kimś: Er hat sich mit seinem Bruder ausgesöhnt."
+    }
+   ]
+  },
+  "_src": "2abb2466",
+  "_src_reader": "2abb2466"
+ },
+ "light-0410": {
+  "translation_pl": "zaprzyjaźnić się (z kimś); oswoić się, zżyć się (z czymś), pogodzić się (z myślą)",
+  "complements": [
+   {
+    "meaning_pl": "zaprzyjaźnić się (z kimś)",
+    "note_pl": "zaprzyjaźnić się z kimś: Sie hat sich mit der neuen Kollegin befreundet."
+   },
+   {
+    "meaning_pl": "oswoić się, zżyć się (z czymś), pogodzić się (z myślą)",
+    "note_pl": "oswoić się z czymś: Mit dem neuen System kann er sich nicht befreunden."
+   }
+  ],
+  "_src": "f4160457",
+  "_src_reader": "f4160457"
+ },
+ "light-0411": {
+  "translation_pl": "(książk.) obdarzać (czymś)",
+  "complements": [
+   {
+    "note_pl": "obdarzać czymś: Die Natur hat ihn mit großem Talent begabt."
+   }
+  ],
+  "_src": "baded4b2",
+  "_src_reader": "baded4b2"
+ },
+ "light-0412": {
+  "translation_pl": "zadowalać się (czymś, niewielkim), poprzestawać (na czymś); ograniczać się (do czegoś)",
+  "complements": [
+   {
+    "note_pl": "zadowalać się czymś: Er begnügt sich mit einem kleinen Zimmer."
+   }
+  ],
+  "_src": "4fa2bea9",
+  "_src_reader": "4fa2bea9"
+ },
+ "light-0413": {
+  "translation_pl": "obwieszać, przystrajać (czymś), zasłaniać; (pot.) nadmiernie stroić, obwieszać (świecidełkami, orderami)",
+  "complements": [
+   {
+    "note_pl": "obwieszać czymś: Wir behängen den Baum mit bunten Kugeln."
+   }
+  ],
+  "_src": "629f51e4",
+  "_src_reader": "629f51e4"
+ },
+ "light-0414": {
+  "translation_pl": "stanąć dęba, gwałtownie się wyprostować; (książk.) buntować się, występować (przeciw czemuś)",
+  "complements": [
+   {
+    "meaning_pl": "(książk.) buntować się, występować (przeciw czemuś)",
+    "note_pl": "buntować się przeciw czemuś: Er bäumte sich gegen das Urteil."
+   }
+  ],
+  "_src": "02f4ece8",
+  "_src_reader": "02f4ece8"
+ },
+ "light-0415": {
+  "translation_pl": "wczuwać się, wżywać się (w kogoś, w coś), współodczuwać",
+  "complements": [
+   {
+    "note_pl": "wczuwać się w kogoś, w coś: Sie kann sich gut in ihre Patienten einfühlen."
+   }
+  ],
+  "_src": "98045849",
+  "_src_reader": "98045849"
+ },
+ "light-0416": {
+  "translation_pl": "(książk.) kroczyć, przechadzać się, iść (w określony sposób); iść w parze, wiązać się (z czymś)",
+  "complements": [
+   {
+    "meaning_pl": "iść w parze, wiązać się (z czymś)",
+    "note_pl": "wiązać się z czymś: Die Krankheit geht oft mit hohem Fieber einher."
+   }
+  ],
+  "_src": "b45ef52e",
+  "_src_reader": "b45ef52e"
+ },
+ "light-0417": {
+  "translation_pl": "(rzad.) wbijać (młotkiem); wybijać, wykuwać (młotkiem); okładać, walić (w coś), zasypywać ciosami; wbijać do głowy, wpajać (komuś)",
+  "complements": [
+   {
+    "meaning_pl": "okładać, walić (w coś), zasypywać ciosami",
+    "note_pl": "okładać kogoś, coś: Der Boxer hämmerte auf seinen Gegner ein."
+   }
+  ],
+  "_src": "af9a82f2",
+  "_src_reader": "af9a82f2"
+ },
+ "light-0418": {
+  "translation_pl": "niszczyć ostrzałem; przystrzeliwać (broń); wbijać, wpędzać (za pomocą narzędzia); (sport.) wbijać (piłkę do bramki); (poligr.) przekładać (arkusze); (włók.) przerzucać (wątek); wkładać, wnosić (pieniądze); wdzierać się, napływać (o wodzie), przybywać (o mleku matki); (reg.) wsadzać (chleb do pieca)",
+  "reflexive": {
+   "translation_pl": "wstrzeliwać się; brać na celownik (kogoś), obierać za cel (ataków)",
+   "complements": [
+    {
+     "meaning_pl": "wstrzeliwać się",
+     "note_pl": "wstrzeliwać się w coś: Die Schützen schießen sich auf die Scheibe ein."
+    },
+    {
+     "meaning_pl": "brać na celownik (kogoś), obierać za cel (ataków)",
+     "note_pl": "brać kogoś na celownik: Die Presse hat sich auf den Minister eingeschossen."
+    }
+   ]
+  },
+  "_src": "c1faf597",
+  "_src_reader": "c1faf597"
+ },
+ "light-0419": {
+  "translation_pl": "zaprzysięgać, wiązać przysięgą wierności; zobowiązywać (do przestrzegania czegoś), nastawiać, jednoczyć (wokół czegoś)",
+  "complements": [
+   {
+    "meaning_pl": "zaprzysięgać, wiązać przysięgą wierności",
+    "note_pl": "zaprzysięgać na wierność czemuś: Die Rekruten wurden auf die Verfassung eingeschworen."
+   },
+   {
+    "meaning_pl": "zobowiązywać (do przestrzegania czegoś), nastawiać, jednoczyć (wokół czegoś)",
+    "note_pl": "zobowiązywać do przestrzegania czegoś: Der Chef schwor das Team auf den neuen Kurs ein."
+   }
+  ],
+  "_src": "78254abe",
+  "_src_reader": "78254abe"
+ },
+ "light-0420": {
+  "translation_pl": "zastępować, wyręczać (kogoś), ratować sytuację; (sport.) rozpoczynać ćwiczenie skokiem; zatrzaskiwać się; cofać się w głąb, być cofniętym (o ścianie)",
+  "reflexive": {
+   "translation_pl": "(sport.) rozgrzewać się próbnymi skokami"
+  },
+  "complements": [
+   {
+    "meaning_pl": "zastępować, wyręczać (kogoś), ratować sytuację",
+    "note_pl": "zastępować kogoś: Ich springe heute für meine kranke Kollegin ein."
+   }
+  ],
+  "_src": "ec4acaa1",
+  "_src_reader": "ec4acaa1"
+ },
+ "light-0421": {
+  "translation_pl": "(bezosob.) być wstrętnym, budzić obrzydzenie (es ekelt mich — brzydzi mnie); napawać wstrętem, brzydzić (kogoś)",
+  "reflexive": {
+   "translation_pl": "czuć wstręt, brzydzić się (kogoś, czegoś)",
+   "complements": [
+    {
+     "note_pl": "czuć wstręt do kogoś, czegoś: Sie ekelt sich vor Spinnen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "(bezosob.) być wstrętnym, budzić obrzydzenie (es ekelt mich — brzydzi mnie)",
+    "note_pl": "kogoś brzydzi coś: Es ekelt mich vor Spinnen."
+   }
+  ],
+  "_src": "46255768",
+  "_src_reader": "46255768"
+ },
+ "light-0422": {
+  "translation_pl": "dowiadywać się, wnioskować, widzieć (z czegoś); (rzad.) dostrzegać, upatrywać (możliwość); (przestarz.) wybierać, przeznaczać",
+  "complements": [
+   {
+    "meaning_pl": "dowiadywać się, wnioskować, widzieć (z czegoś)",
+    "note_pl": "dowiadywać się z czegoś: Aus dem Brief ersehe ich, dass du kommst."
+   }
+  ],
+  "_src": "aba558b3",
+  "_src_reader": "aba558b3"
+ },
+ "light-0423": {
+  "translation_pl": "(książk.) prosić (o coś), oficjalnie prosić, wzywać",
+  "complements": [
+   {
+    "note_pl": "prosić o coś: Wir ersuchen Sie um eine schnelle Antwort."
+   }
+  ],
+  "_src": "7321370f",
+  "_src_reader": "7321370f"
+ },
+ "light-0424": {
+  "translation_pl": "targować się (o coś)",
+  "complements": [
+   {
+    "note_pl": "targować się o coś: Er feilscht auf dem Markt um jeden Euro."
+   }
+  ],
+  "_src": "b9422d8d",
+  "_src_reader": "b9422d8d"
+ },
+ "light-0425": {
+  "translation_pl": "(pot.) radzić sobie, dawać sobie radę (z kimś), brać górę (nad kimś); (pot.) radzić sobie, uporać się (z czymś), przeboleć (coś)",
+  "complements": [
+   {
+    "note_pl": "radzić sobie z kimś, czymś: Sie ist mit dem Verlust nie fertiggeworden."
+   }
+  ],
+  "_src": "e699f87d",
+  "_src_reader": "e699f87d"
+ },
+ "light-0426": {
+  "translation_pl": "wgryzać się, wczepiać się zębami; utykać (na czymś), zapętlać się, nie odpuszczać",
+  "complements": [
+   {
+    "note_pl": "wczepiać się w coś, utykać na czymś: Er hat sich an der Aufgabe festgebissen.",
+    "meaning_pl": "utykać (na czymś), zapętlać się, nie odpuszczać"
+   }
+  ],
+  "_src": "30be18b5",
+  "_src_reader": "30be18b5"
+ },
+ "light-0427": {
+  "translation_pl": "stronić od obcych, bać się obcych; (przen.) czuć się obco, nie akceptować",
+  "complements": [
+   {
+    "meaning_pl": "(przen.) czuć się obco, nie akceptować",
+    "note_pl": "nie akceptować czegoś, czuć się obco w czyimś towarzystwie: Die Partei fremdelt mit dem neuen Kurs."
+   }
+  ],
+  "_src": "09f9e776",
+  "_src_reader": "09f9e776"
+ },
+ "light-0428": {
+  "translation_pl": "(książk.) brakować, nie starczać",
+  "complements": [
+   {
+    "note_pl": "komuś brakuje czegoś: Es gebricht ihm an Geduld."
+   }
+  ],
+  "_src": "3c3e1207",
+  "_src_reader": "3c3e1207"
+ },
+ "light-0429": {
+  "translation_pl": "odpowiadać (za coś), ponosić odpowiedzialność",
+  "complements": [
+   {
+    "note_pl": "odpowiadać za coś: Du musst für deinen Fehler geradestehen."
+   }
+  ],
+  "_src": "62fd9c46",
+  "_src_reader": "62fd9c46"
+ },
+ "light-0430": {
+  "translation_pl": "zrównać się, dogonić",
+  "complements": [
+   {
+    "note_pl": "zrównać się z kimś: Die Mannschaft hat mit dem Tabellenführer gleichgezogen."
+   }
+  ],
+  "_src": "4f58d867",
+  "_src_reader": "4f58d867"
+ },
+ "light-0431": {
+  "translation_pl": "przerażać, budzić grozę",
+  "reflexive": {
+   "translation_pl": "przerażać się, odczuwać grozę",
+   "complements": [
+    {
+     "note_pl": "przerażać się czymś: Sie graust sich vor Spinnen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_pl": "kogoś przeraża coś: Mir graust vor dem Winter."
+   }
+  ],
+  "_src": "a251c02a",
+  "_src_reader": "a251c02a"
+ },
+ "light-0432": {
+  "translation_pl": "(książk.) czekać, oczekiwać",
+  "complements": [
+   {
+    "note_pl": "czekać na kogoś, na coś: Wir harrten auf seine Rückkehr."
+   }
+  ],
+  "_src": "7a4b7c68",
+  "_src_reader": "7a4b7c68"
+ },
+ "light-0433": {
+  "translation_pl": "oszczędnie gospodarować, rozważnie obchodzić się; (przestarz.) prowadzić gospodarstwo domowe",
+  "complements": [
+   {
+    "meaning_pl": "oszczędnie gospodarować, rozważnie obchodzić się",
+    "note_pl": "oszczędnie gospodarować czymś: Wir müssen mit dem Wasser haushalten."
+   }
+  ],
+  "_src": "d0cab832",
+  "_src_reader": "d0cab832"
+ },
+ "light-0434": {
+  "translation_pl": "(pot.) zabierać się, brać się; (pot.) podrywać, przystawiać się",
+  "complements": [
+   {
+    "note_pl": "zabierać się do czegoś, przystawiać się do kogoś: Er machte sich an die Arbeit heran."
+   }
+  ],
+  "_src": "c225900c",
+  "_src_reader": "c225900c"
+ },
+ "light-0435": {
+  "translation_pl": "podchodzić, zbliżać się; stawać (przed kimś), pojawiać się; zwracać się (do kogoś); podchodzić (do sprawy), zabierać się",
+  "complements": [
+   {
+    "note_pl": "stawać przed kimś, pojawiać się (o problemach, pytaniach): Nach der Wahl traten neue Fragen an die Regierung heran.",
+    "meaning_pl": "stawać (przed kimś), pojawiać się"
+   },
+   {
+    "note_pl": "zwracać się do kogoś (z prośbą, pytaniem): Sie trat mit einer Frage an den Lehrer heran.",
+    "meaning_pl": "zwracać się (do kogoś)"
+   },
+   {
+    "note_pl": "podchodzić do czegoś, zabierać się do czegoś: Sie trat mit viel Erfahrung an die Aufgabe heran.",
+    "meaning_pl": "podchodzić (do sprawy), zabierać się"
+   }
+  ],
+  "_src": "418d1b6a",
+  "_src_reader": "418d1b6a"
+ },
+ "light-0436": {
+  "translation_pl": "(pot.) rąbać, dziobać, stukać; (pot.) czepiać się, przyczepiać się",
+  "complements": [
+   {
+    "note_pl": "czepiać się kogoś: Alle hacken auf dem neuen Kollegen herum.",
+    "meaning_pl": "(pot.) czepiać się, przyczepiać się"
+   }
+  ],
+  "_src": "c9f6746a",
+  "_src_reader": "c9f6746a"
+ },
+ "light-0437": {
+  "translation_pl": "(książk.) odgrywać rolę, wchodzić w grę, wpływać; (sport.) zagrywać (piłkę do środka), podawać",
+  "reflexive": {
+   "translation_pl": "przebijać się (dzięki dobrej grze)"
+  },
+  "complements": [
+   {
+    "note_pl": "wpływać na coś: In die Entscheidung spielen viele Faktoren hinein.",
+    "meaning_pl": "(książk.) odgrywać rolę, wchodzić w grę, wpływać"
+   }
+  ],
+  "_src": "2edc7cb0",
+  "_src_reader": "2edc7cb0"
+ },
+ "light-0438": {
+  "translation_pl": "pomijać, zbywać milczeniem; przechodzić, przetaczać się (nad czymś)",
+  "complements": [
+   {
+    "note_pl": "nie zwracać uwagi na coś: Sie ging über seine Bemerkung hinweg.",
+    "meaning_pl": "pomijać, zbywać milczeniem"
+   }
+  ],
+  "_src": "8d696e6b",
+  "_src_reader": "8d696e6b"
+ },
+ "light-0439": {
+  "translation_pl": "szczepić; wprowadzać bakterie (do gleby); zaszczepiać (pożywkę mikroorganizmami)",
+  "complements": [
+   {
+    "meaning_pl": "szczepić",
+    "note_pl": "szczepić przeciw czemuś: Der Arzt impft das Kind gegen Masern."
+   }
+  ],
+  "_src": "4fb96331",
+  "_src_reader": "4fb96331"
+ },
+ "light-0440": {
+  "translation_pl": "(przestarz.) chorować, niedomagać; cierpieć (na brak czegoś), kuleć",
+  "complements": [
+   {
+    "note_pl": "cierpieć na coś: Das Projekt krankt an zu wenig Geld."
+   }
+  ],
+  "_src": "6fabecd8",
+  "_src_reader": "6fabecd8"
+ },
+ "light-0441": {
+  "translation_pl": "(książk.) łaknąć, usychać (z pragnienia)",
+  "complements": [
+   {
+    "note_pl": "łaknąć czegoś: Die Wanderer lechzen nach Wasser."
+   }
+  ],
+  "_src": "7bd40709",
+  "_src_reader": "7bd40709"
+ },
+ "light-0442": {
+  "translation_pl": "przymierzać się (do czegoś), zerkać (na coś); flirtować, robić słodkie oczy",
+  "complements": [
+   {
+    "note_pl": "przymierzać się do czegoś, flirtować z kimś: Er liebäugelt mit einem neuen Auto."
+   }
+  ],
+  "_src": "f20ede26",
+  "_src_reader": "f20ede26"
+ },
+ "light-0443": {
+  "translation_pl": "czepiać się, grymasić, zrzędzić; (rzad.) trudnić się maklerstwem",
+  "complements": [
+   {
+    "meaning_pl": "czepiać się, grymasić, zrzędzić",
+    "note_pl": "czepiać się czegoś: Er mäkelt ständig an meiner Arbeit."
+   }
+  ],
+  "_src": "1cc08fd1",
+  "_src_reader": "1cc08fd1"
+ },
+ "light-0444": {
+  "translation_pl": "skubać, gmerać (palcami); wyjmować, wydobywać (gmerając palcami)",
+  "complements": [
+   {
+    "meaning_pl": "skubać, gmerać (palcami)",
+    "note_pl": "skubać coś: Sie nestelt nervös an ihrem Schal."
+   }
+  ],
+  "_src": "109d9bee",
+  "_src_reader": "109d9bee"
+ },
+ "light-0445": {
+  "translation_pl": "parzyć się (o zającach, królikach); (posp.) spółkować; (pot.) pchać, popychać; (pot.) walić, trząść, dobijać się",
+  "reflexive": {
+   "translation_pl": "(pot.) mocować się, siłować się; (pot.) uderzyć się"
+  },
+  "complements": [
+   {
+    "meaning_pl": "(pot.) walić, trząść, dobijać się",
+    "note_pl": "walić w coś, trząść czymś: Jemand rammelt an der Tür."
+   }
+  ],
+  "_src": "136f19ed",
+  "_src_reader": "136f19ed"
+ },
+ "light-0446": {
+  "translation_pl": "wyrywać, rwać (len, chwasty, włosy z głowy); bić się, walczyć (wręcz)",
+  "reflexive": {
+   "translation_pl": "bić się, walczyć (wręcz)",
+   "complements": [
+    {
+     "note_pl": "bić się z kimś: Die Kinder raufen sich mit den Nachbarskindern."
+    },
+    {
+     "note_pl": "bić się o coś: Die Kinder raufen sich um den Ball."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_pl": "bić się, walczyć (wręcz)",
+    "note_pl": "bić się z kimś: Der Junge rauft mit seinem Bruder."
+   },
+   {
+    "meaning_pl": "bić się, walczyć (wręcz)",
+    "note_pl": "bić się o coś: Die Hunde raufen um den Knochen."
+   }
+  ],
+  "_src": "a026cf25",
+  "_src_reader": "a026cf25"
+ },
+ "light-0447": {
+  "translation_pl": "(pot.) wpadać (do środka), dawać się nabrać, być oszukanym",
+  "complements": [
+   {
+    "note_pl": "dać się nabrać na coś: Er ist auf den Trick reingefallen."
+   }
+  ],
+  "_src": "6d4ab7f5",
+  "_src_reader": "6d4ab7f5"
+ },
+ "light-0448": {
+  "translation_pl": "skrobać, drapać, trzeć (na tarce); ocierać się, zawadzać, drapać się (o coś); zeskrobywać, zdrapywać",
+  "complements": [
+   {
+    "meaning_pl": "ocierać się, zawadzać, drapać się (o coś)",
+    "note_pl": "ocierać się o coś: Die Kuh schabt sich am Zaun."
+   }
+  ],
+  "_src": "847e4b30",
+  "_src_reader": "847e4b30"
+ },
+ "light-0449": {
+  "translation_pl": "(posp.) srać, wypróżniać się; (posp.) pierdzieć, puszczać bąki; (posp.) mieć w dupie (coś), olewać (coś)",
+  "complements": [
+   {
+    "meaning_pl": "(posp.) mieć w dupie (coś), olewać (coś)",
+    "note_pl": "olewać coś: Ich scheiße auf seine Meinung."
+   }
+  ],
+  "_src": "a9ef3e15",
+  "_src_reader": "a9ef3e15"
+ },
+ "light-0450": {
+  "translation_pl": "wąchać, obwąchiwać, węszyć; wdychać (zapach); (pot.) próbować, zapoznawać się (na zajęciach próbnych)",
+  "complements": [
+   {
+    "meaning_pl": "wąchać, obwąchiwać, węszyć",
+    "note_pl": "obwąchiwać coś: Der Hund schnuppert an der Tür."
+   }
+  ],
+  "_src": "7cbe6508",
+  "_src_reader": "7cbe6508"
+ },
+ "light-0451": {
+  "translation_pl": "(pot.) z trudem sobie radzić, męczyć się (z czymś)",
+  "complements": [
+   {
+    "note_pl": "z trudem radzić sobie z czymś: Er tut sich mit der Grammatik schwer."
+   }
+  ],
+  "_src": "6736e029",
+  "_src_reader": "6736e029"
+ },
+ "light-0452": {
+  "translation_pl": "żartować, przekomarzać się, wygłupiać się; kokietować, flirtować",
+  "complements": [
+   {
+    "note_pl": "żartować, flirtować z kimś: Sie schäkert mit dem Kellner."
+   }
+  ],
+  "_src": "2d2c31be",
+  "_src_reader": "2d2c31be"
+ },
+ "light-0453": {
+  "translation_pl": "tryskać, być przepełnionym (czymś); obfitować (w coś), roić się (od czegoś)",
+  "complements": [
+   {
+    "note_pl": "tryskać czymś, obfitować w coś: Er strotzt von Gesundheit."
+   }
+  ],
+  "_src": "0b696cdf",
+  "_src_reader": "0b696cdf"
+ },
+ "light-0454": {
+  "translation_pl": "(książk.) skłaniać się, ciążyć, mieć tendencję",
+  "complements": [
+   {
+    "note_pl": "skłaniać się ku czemuś: Er tendiert zu einer anderen Lösung."
+   }
+  ],
+  "_src": "429aab7a",
+  "_src_reader": "429aab7a"
+ },
+ "light-0455": {
+  "translation_pl": "trenować, doprowadzać do formy; (pot.) musztrować, przyzwyczajać (do czegoś), stylizować (na coś); trymować, strzyc (psa); wyczesywać (martwą sierść); przycinać, podcinać; trymować, wyważać (statek, samolot); rozmieszczać, sztauować (ładunek na statku); podawać węgiel (z bunkrów do palenisk); dostrajać, stroić (częstotliwość); kompensować odchylenia (w reaktorze jądrowym)",
+  "complements": [
+   {
+    "meaning_pl": "(pot.) musztrować, przyzwyczajać (do czegoś), stylizować (na coś)",
+    "note_pl": "przyzwyczajać do czegoś: Sie trimmt ihre Kinder auf Ordnung."
+   }
+  ],
+  "_src": "3209dbe9",
+  "_src_reader": "3209dbe9"
+ },
+ "light-0456": {
+  "translation_pl": "kłócić się, poróżnić się, stać się wrogami",
+  "complements": [
+   {
+    "note_pl": "poróżnić się z kimś: Er hat sich mit seinem Nachbarn verfeindet."
+   }
+  ],
+  "_src": "6954515c",
+  "_src_reader": "6954515c"
+ },
+ "light-0457": {
+  "translation_pl": "(wojsk., przestarz.) instruować (wartę przy zaciąganiu), zobowiązywać (do przestrzegania regulaminu); (pot.) zobowiązywać, zlecać; ogradzać (kratą)",
+  "complements": [
+   {
+    "meaning_pl": "(wojsk., przestarz.) instruować (wartę przy zaciąganiu), zobowiązywać (do przestrzegania regulaminu)",
+    "note_pl": "zobowiązywać do czegoś (wartę): Der Offizier vergattert die Soldaten zum Wachdienst."
+   },
+   {
+    "meaning_pl": "(pot.) zobowiązywać, zlecać",
+    "note_pl": "zobowiązywać do czegoś: Die Mutter vergattert ihn zum Abwaschen."
+   }
+  ],
+  "_src": "8b70561e",
+  "_src_reader": "8b70561e"
+ },
+ "light-0458": {
+  "translation_pl": "napompowywać, napełniać (pompując)",
+  "complements": [
+   {
+    "note_pl": "napełniać czymś: Er pumpt den Tank mit Wasser voll."
+   }
+  ],
+  "_src": "9d6b9acc",
+  "_src_reader": "9d6b9acc"
+ },
+ "light-0459": {
+  "translation_pl": "(książk.) uzbrajać, wyposażać (kogoś na trudną sytuację)",
+  "reflexive": {
+   "translation_pl": "(książk.) przygotować się, nastawić się (na coś nieprzyjemnego); (książk.) uzbroić się (w cierpliwość, odwagę)",
+   "complements": [
+    {
+     "meaning_pl": "(książk.) przygotować się, nastawić się (na coś nieprzyjemnego)",
+     "note_pl": "przygotowywać się na coś: Wir wappnen uns für den Winter."
+    },
+    {
+     "meaning_pl": "(książk.) przygotować się, nastawić się (na coś nieprzyjemnego)",
+     "note_pl": "przygotować się na coś, zabezpieczyć się przed czymś: Sie wappnete sich gegen die Kritik."
+    },
+    {
+     "meaning_pl": "(książk.) uzbroić się (w cierpliwość, odwagę)",
+     "note_pl": "uzbroić się w coś: Er wappnete sich mit Geduld."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_pl": "przygotować kogoś do czegoś: Die lange Ausbildung hat ihn für das Amt gewappnet."
+   },
+   {
+    "note_pl": "uzbrajać kogoś w coś: Die Trainerin wappnete das Team mit Selbstvertrauen."
+   }
+  ],
+  "_src": "b7cdc388",
+  "_src_reader": "b7cdc388"
+ },
+ "light-0460": {
+  "translation_pl": "wspominać, przypominać sobie (przeszłość)",
+  "complements": [
+   {
+    "note_pl": "wspominać coś: Ich erinnere mich gern an den Sommer zurück."
+   }
+  ],
+  "_src": "443456a1",
+  "_src_reader": "443456a1"
+ },
+ "light-0461": {
+  "translation_pl": "oddziaływać zwrotnie, odbijać się (na czymś)",
+  "complements": [
+   {
+    "note_pl": "oddziaływać zwrotnie na coś: Die Krise wirkt auf die Politik zurück."
+   }
+  ],
+  "_src": "0904ec90",
+  "_src_reader": "0904ec90"
+ },
+ "light-0462": {
+  "translation_pl": "(książk.) wyprzedzać, przewyższać (kogoś w czymś)",
+  "complements": [
+   {
+    "note_pl": "przewyższać w czymś: Sie tut es allen an Fleiß zuvor."
+   }
+  ],
+  "_src": "72176e9d",
+  "_src_reader": "72176e9d"
+ },
+ "light-0463": {
+  "translation_pl": "objadać się, przejadać się",
+  "complements": [
+   {
+    "note_pl": "objadać się czymś: Er hat sich von dem Kuchen übergessen."
+   }
+  ],
+  "_src": "efca225b",
+  "_src_reader": "efca225b"
+ },
+ "light-0464": {
+  "translation_pl": "obsypywać, zasypywać (prezentami, wyrzutami), zawalać (pracą); zawalać, zagracać (powierzchnię)",
+  "complements": [
+   {
+    "note_pl": "obsypywać czymś: Sie überhäuft ihn mit Lob."
+   }
+  ],
+  "_src": "bfeb406a",
+  "_src_reader": "bfeb406a"
+ },
+ "light-0465": {
+  "translation_pl": "odłączać, odcinać, odpruwać (coś przyszytego); rozpruwać (szew, sukienkę); rozdzielać (mieszaninę na składniki); oddzielać (jedną substancję od drugiej); (techn.) przecinać (materiał); rozłączać; oddzielać, izolować (od innych); rozgraniczać, odróżniać (pojęcia); dzielić, oddalać (o różnicach między ludźmi); dzielić, oddzielać (stanowić granicę); przerywać, rozłączać (połączenie); (radiotechn.) być selektywnym; przenosić (wyraz, dzieląc go na sylaby)",
+  "complements": [
+   {
+    "meaning_pl": "odłączać, odcinać, odpruwać (coś przyszytego)",
+    "note_pl": "odpruwać coś od czegoś: Sie trennte den Kragen vom Mantel."
+   },
+   {
+    "meaning_pl": "oddzielać (jedną substancję od drugiej)",
+    "note_pl": "oddzielać coś od czegoś: Man muss das Eigelb vom Eiweiß trennen."
+   },
+   {
+    "meaning_pl": "rozłączać",
+    "note_pl": "rozłączać kogoś z kimś: Der Krieg trennte die Kinder von den Eltern."
+   },
+   {
+    "meaning_pl": "oddzielać, izolować (od innych)",
+    "note_pl": "oddzielać kogoś, coś od innych: Die kranken Tiere wurden von der Herde getrennt."
+   },
+   {
+    "meaning_pl": "rozgraniczać, odróżniać (pojęcia)",
+    "note_pl": "oddzielać jedno od drugiego (w myślach): Man muss das Wichtige vom Unwichtigen trennen."
+   },
+   {
+    "meaning_pl": "dzielić, oddalać (o różnicach między ludźmi)",
+    "note_pl": "oddalać kogoś od kogoś: Sein Hochmut trennte ihn von den Kollegen."
+   },
+   {
+    "meaning_pl": "dzielić, oddzielać (stanowić granicę)",
+    "note_pl": "oddzielać coś od czegoś (o granicy): Ein schmaler Fluss trennt das Dorf vom Wald."
+   }
+  ],
+  "_src": "e1263cb4",
+  "_src_reader": "e1263cb4"
  }
 }

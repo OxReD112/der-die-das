@@ -321,8 +321,13 @@
    "keine Angst haben — nie bać się: Keine Angst! — Nie bój się!",
    "Nie mylić: jemandem Angst machen — straszyć kogoś; Angst bekommen — przestraszyć się."
   ],
-  "_src": "7497b5f4",
-  "_src_reader": "ab57a2ea"
+  "complements": [
+   {
+    "note_pl": "bać się kogoś, czegoś: Sie hat Angst vor Spinnen."
+   }
+  ],
+  "_src": "7ad62a3c",
+  "_src_reader": "2831b222"
  },
  "expression-033": {
   "translation_pl": "zostawić (kogoś) w spokoju",
@@ -531,8 +536,14 @@
    "Z kogo, czego — über + Akk.: Mach dich nicht über mich lustig! — Nie śmiej się ze mnie!",
    "(przestarz.) weselić się: Sie aßen, tranken und machten sich lustig bis in die Nacht."
   ],
-  "_src": "402cef73",
-  "_src_reader": "d314d6b8"
+  "complements": [
+   {
+    "meaning_pl": "naśmiewać się, drwić (z kogoś, czegoś)",
+    "note_pl": "naśmiewać się z kogoś, czegoś: Mach dich nicht über mich lustig!"
+   }
+  ],
+  "_src": "58906822",
+  "_src_reader": "cca5b8a1"
  },
  "expression-051": {
   "translation_pl": "mieć nadzieję (na coś), robić sobie nadzieje",
@@ -607,8 +618,13 @@
    "Zaimek w Dativie. O kogo, o co — um + Akk.: Mach dir keine Sorgen! — Nie martw się!",
    "Nie mylić: jemandem Sorgen machen — niepokoić, martwić kogoś: Das macht mir Sorgen. — To mnie niepokoi."
   ],
-  "_src": "112db082",
-  "_src_reader": "306cc705"
+  "complements": [
+   {
+    "note_pl": "martwić się o kogoś, coś: Mach dir keine Sorgen um mich!"
+   }
+  ],
+  "_src": "1b686856",
+  "_src_reader": "fb4a8889"
  },
  "expression-059": {
   "translation_pl": "wiedzieć, być poinformowanym (o czymś); orientować się (w czymś)",
@@ -617,8 +633,14 @@
    "O czym — über + Akk.: Weißt du darüber Bescheid? W czym — in + Dat.: In der Stadt weiß ich am besten Bescheid. — W mieście orientuję się najlepiej ze wszystkich.",
    "Nie mylić: Bescheid sagen / geben — powiadomić, dać znać: Sag mir Bescheid! der Bescheid — oficjalna odpowiedź, zawiadomienie."
   ],
-  "_src": "d37bad30",
-  "_src_reader": "435a60cf"
+  "complements": [
+   {
+    "meaning_pl": "wiedzieć, być poinformowanym (o czymś)",
+    "note_pl": "wiedzieć o czymś, być poinformowanym o czymś: Weißt du über den Termin Bescheid?"
+   }
+  ],
+  "_src": "26b9b420",
+  "_src_reader": "975af2bf"
  },
  "expression-060": {
   "translation_pl": "chodzi (o kogoś, coś); rzecz (w tym, że …)",
@@ -1219,8 +1241,13 @@
   "notes_pl": [
    "Kogo — Akk., na co — auf + Akk.: jemanden auf etwas aufmerksam machen; na siebie — auf sich aufmerksam machen. Bez auf — przymiotnik: Sie hörte aufmerksam zu. — Uważnie słuchała."
   ],
-  "_src": "9eb3797a",
-  "_src_reader": "c7c650a4"
+  "complements": [
+   {
+    "note_pl": "zwrócić czyjąś uwagę na coś: Er machte mich auf den Fehler aufmerksam."
+   }
+  ],
+  "_src": "8c5454eb",
+  "_src_reader": "ab23fa91"
  },
  "expression-124": {
   "translation_pl": "cofnąć to, co się stało, odwrócić bieg wydarzeń",
@@ -1939,8 +1966,13 @@
   "notes_pl": [
    "Nad czym — über + Akk. lub darüber, … (Er zerbrach sich den Kopf darüber, wie …). Lm: sie zerbrachen sich die Köpfe."
   ],
-  "_src": "5cf3e417",
-  "_src_reader": "a3935913"
+  "complements": [
+   {
+    "note_pl": "łamać sobie głowę nad czymś: Sie zerbricht sich den Kopf über die Aufgabe."
+   }
+  ],
+  "_src": "64212d2c",
+  "_src_reader": "2dbaaf22"
  },
  "expression-205": {
   "translation_pl": "zamierzać (coś zrobić); mieć właśnie (coś zrobić)",
@@ -3139,7 +3171,7 @@
   "translation_pl": "pora, nadszedł czas",
   "example_pl": "Pora, żebyśmy coś zmienili.",
   "notes_pl": [
-   "Także es ist (höchste) Zeit — (najwyższa) pora."
+   "Także es ist (höchste) Zeit — (najwyższa) pora, (najwyższy) czas."
   ],
   "_src": "4a16ce44",
   "_src_reader": "a8dca4f1"
@@ -3746,5 +3778,495 @@
   ],
   "_src": "6cbf9401",
   "_src_reader": "2c841b43"
+ },
+ "expression-409": {
+  "translation_pl": "dojść do wniosku",
+  "example_pl": "Po długim namyśle doszliśmy do wniosku, że się przeprowadzimy.",
+  "notes_pl": [
+   "Zwykle ze zdaniem podrzędnym: zu dem Schluss kommen, dass … Tylko zu dem: zum Schluss kommen — przejść do zakończenia (zum Schluss — „na koniec”). Por. einen Schluss ziehen — wyciągnąć wniosek."
+  ],
+  "_src": "0c179f75",
+  "_src_reader": "5d7360f9"
+ },
+ "expression-410": {
+  "translation_pl": "dojść do głosu, wypowiedzieć się",
+  "example_pl": "W dyskusji prawie nie doszła do głosu.",
+  "notes_pl": [
+   "Często z przeczeniem: nicht zu Wort kommen — nie mieć okazji się wypowiedzieć. jemanden zu Wort kommen lassen — dopuścić kogoś do głosu."
+  ],
+  "_src": "0e569d0b",
+  "_src_reader": "5a7d4a42"
+ },
+ "expression-411": {
+  "translation_pl": "dojść do (czyichś) uszu",
+  "example_pl": "Doszły mnie słuchy, że chcesz się przeprowadzić.",
+  "notes_pl": [
+   "Zwykle o czymś nieprzyjemnym lub o czymś, co nie miało wyjść na jaw. Komu — w Dativie: mir, ihm, dem Chef."
+  ],
+  "_src": "a1935e6c",
+  "_src_reader": "fda6d51a"
+ },
+ "expression-412": {
+  "translation_pl": "przyjść (komuś) z pomocą",
+  "example_pl": "Sąsiedzi od razu przyszli nam z pomocą.",
+  "notes_pl": [
+   "Komu — w Dativie: dem Verletzten zu Hilfe kommen. Także zu Hilfe eilen — pospieszyć z pomocą."
+  ],
+  "_src": "e818eb9c",
+  "_src_reader": "b159a8d5"
+ },
+ "expression-413": {
+  "translation_pl": "doczekać się (swojej) kolei; być rozpatrywanym w następnej kolejności (o temacie, sprawie)",
+  "example_pl": "Teraz twoja kolej.",
+  "notes_pl": [
+   "O temacie, sprawie: Dieser Punkt kommt morgen an die Reihe — ten punkt zostanie rozpatrzony jutro. Por. die Reihe ist an jemandem — kolej na kogoś. Nie mylić: an der Reihe sein — mieć swoją kolej (teraz); [wieder] in die Reihe kommen (pot.) — wyzdrowieć; wrócić do normy."
+  ],
+  "_src": "beaa21f3",
+  "_src_reader": "0fb78410"
+ },
+ "expression-414": {
+  "translation_pl": "dojść do władzy",
+  "example_pl": "Po wyborach partia doszła do władzy.",
+  "notes_pl": [
+   "Także zur Macht kommen. Por. an der Macht sein — być u władzy."
+  ],
+  "_src": "10af5bc5",
+  "_src_reader": "eb25c8e6"
+ },
+ "expression-415": {
+  "translation_pl": "zostać poruszonym (w rozmowie), być omawianym",
+  "example_pl": "Ten temat nie był omawiany na posiedzeniu.",
+  "notes_pl": [
+   "Por. etw. zur Sprache bringen — poruszyć sprawę, zacząć mówić o czymś."
+  ],
+  "_src": "81d04707",
+  "_src_reader": "daf43ac4"
+ },
+ "expression-416": {
+  "translation_pl": "uspokoić się, odnaleźć spokój",
+  "example_pl": "Po przeprowadzce wreszcie możemy odetchnąć.",
+  "notes_pl": [
+   "nicht zur Ruhe kommen — nie zaznać spokoju. Nie mylić: jemanden in Ruhe lassen (pot.) — zostawić kogoś w spokoju."
+  ],
+  "_src": "90a1b4a7",
+  "_src_reader": "b1c596f9"
+ },
+ "expression-417": {
+  "translation_pl": "znaleźć wyraz, przejawić się",
+  "example_pl": "W liście wyraźnie widać jego rozczarowanie.",
+  "notes_pl": [
+   "O uczuciu, myśli: przejawia się w czymś. Por. etw. zum Ausdruck bringen — wyrazić coś."
+  ],
+  "_src": "8519d5a1",
+  "_src_reader": "acf7fd5e"
+ },
+ "expression-418": {
+  "translation_pl": "korzystnie się prezentować, uwydatnić się",
+  "example_pl": "Na tle białej ściany obraz dobrze się prezentuje.",
+  "notes_pl": [
+   "Por. etw. zur Geltung bringen — podkreślić, korzystnie wyeksponować."
+  ],
+  "_src": "f85d9fbe",
+  "_src_reader": "a862f180"
+ },
+ "expression-419": {
+  "translation_pl": "zatrzymać się",
+  "example_pl": "Pociąg zatrzymał się tuż przed dworcem.",
+  "notes_pl": [
+   "O pojazdach, ruchu. Por. etw. zum Stehen bringen — zatrzymać."
+  ],
+  "_src": "b6ea1783",
+  "_src_reader": "7c64119c"
+ },
+ "expression-420": {
+  "translation_pl": "zamrzeć, zatrzymać się (całkowicie)",
+  "example_pl": "Z powodu śniegu ruch całkowicie zamarł.",
+  "notes_pl": [
+   "O ruchu, pracy, handlu. Por. etw. zum Erliegen bringen — sparaliżować."
+  ],
+  "_src": "10c5a3b6",
+  "_src_reader": "913fd8aa"
+ },
+ "expression-421": {
+  "translation_pl": "upaść; ponieść klęskę",
+  "example_pl": "Upadła na lodzie.",
+  "notes_pl": [
+   "„Upaść” — książk. W przenośni: o człowieku lub planie — ponieść klęskę, stracić stanowisko. Por. jemanden / etwas zu Fall bringen — obalić; storpedować (ustawę, plan)."
+  ],
+  "_src": "ac37281f",
+  "_src_reader": "ba67c7d5"
+ },
+ "expression-422": {
+  "translation_pl": "wchodzić w grę, być branym pod uwagę (jako możliwość)",
+  "example_pl": "Na to stanowisko w grę wchodzi tylko dwóch kandydatów.",
+  "notes_pl": [
+   "Das kommt nicht infrage! — Nie ma mowy! Pisze się łącznie (infrage) lub rozdzielnie (in Frage)."
+  ],
+  "_src": "5c5f6118",
+  "_src_reader": "2fe785b3"
+ },
+ "expression-423": {
+  "translation_pl": "zostać pokrzywdzonym, być stratnym",
+  "example_pl": "Przy tak licznym rodzeństwie często bywał pokrzywdzony.",
+  "notes_pl": [
+   "Także o sprawie: Der Sport kommt in der Schule zu kurz — w szkole poświęca się sportowi za mało uwagi."
+  ],
+  "_src": "42e40890",
+  "_src_reader": "464de051"
+ },
+ "expression-424": {
+  "translation_pl": "oprócz, nie licząc (czegoś), z wyjątkiem",
+  "example_pl": "Nie licząc deszczu, urlop był piękny.",
+  "notes_pl": [
+   "Także abgesehen davon / davon abgesehen — nie licząc tego; abgesehen davon, dass … — nie licząc tego, że …",
+   "Bywa też odwrotny szyk: von wenigen Ausnahmen abgesehen — z nielicznymi wyjątkami.",
+   "Nie mylić: von etwas absehen — zrezygnować z czegoś (Er hat von einer Anzeige abgesehen); es auf jemanden / etwas abgesehen haben — upatrzyć sobie kogoś / coś; czepiać się kogoś."
+  ],
+  "_src": "cee7fe3c",
+  "_src_reader": "e5809295"
+ },
+ "expression-425": {
+  "translation_pl": "w wysokości (o kwocie, wielkości)",
+  "example_pl": "Dostał rachunek w wysokości 300 euro.",
+  "notes_pl": [
+   "Zwykle o pieniądzach: Schulden, eine Strafe in Höhe von … O wysokości — zwykle z rodzajnikiem: in einer Höhe von 3000 Metern — na wysokości 3000 metrów; der Turm hat eine Höhe von 100 Metern — wieża ma 100 metrów wysokości."
+  ],
+  "_src": "7aa2f484",
+  "_src_reader": "c6f2edf1"
+ },
+ "expression-426": {
+  "translation_pl": "za jednym zamachem, naraz",
+  "example_pl": "Rozwiązał wszystkie problemy za jednym zamachem.",
+  "notes_pl": [
+   "Kwalifikator w Dudenie — veraltend (wychodzące z użycia). Znane z baśni braci Grimm: Sieben auf einen Streich — „Siedmiu za jednym zamachem”.",
+   "Nie mylić: auf einen Streich hereinfallen — dać się nabrać na żart, na psikusa (der Streich — psota, psikus)."
+  ],
+  "_src": "917b7b05",
+  "_src_reader": "9372bc19"
+ },
+ "expression-427": {
+  "translation_pl": "zająć (czyjeś) miejsce, zastąpić (kogoś, coś)",
+  "example_pl": "Po jej rezygnacji jej miejsce zajął zastępca.",
+  "notes_pl": [
+   "Także an die Stelle von etwas / einer Sache treten: An die Stelle des alten Gesetzes trat ein neues.",
+   "Por. an jemandes Stelle (w Dativie) — na czyimś miejscu: An deiner Stelle würde ich warten.",
+   "Nie mylić: auf der Stelle treten (pot.) — dreptać w miejscu."
+  ],
+  "_src": "a2c74a40",
+  "_src_reader": "86f59aae"
+ },
+ "expression-428": {
+  "translation_pl": "we wszystkie strony; (rozważyć) ze wszystkich stron, wszechstronnie",
+  "example_pl": "Po huku ludzie rozbiegli się we wszystkie strony.",
+  "notes_pl": [
+   "Także nach allen Seiten hin. Ze wszystkich stron (wszechstronnie): etwas nach allen Seiten prüfen — sprawdzić coś ze wszystkich stron. Por. von allen Seiten — zewsząd, ze wszystkich stron."
+  ],
+  "_src": "a508c29d",
+  "_src_reader": "ec1dd3ee"
+ },
+ "expression-429": {
+  "translation_pl": "w (jakimś) języku: po niemiecku, po angielsku …",
+  "example_pl": "Możesz to powiedzieć po angielsku?",
+  "notes_pl": [
+   "Nazwa języka — bez rodzajnika: auf Deutsch, auf Französisch, auf Latein. Także in Deutsch: der Brief ist in Deutsch geschrieben.",
+   "Pot. auf Deutsch — także „wprost, bez ogródek” (jak auf gut Deutsch).",
+   "Por. zu Deutsch — po niemiecku (to znaczy), czyli."
+  ],
+  "_src": "850da586",
+  "_src_reader": "18cc4a5e"
+ },
+ "expression-430": {
+  "translation_pl": "mówiąc wprost, bez ogródek",
+  "example_pl": "Mówiąc wprost, to znaczy: przegraliśmy.",
+  "notes_pl": [
+   "Kwalifikator w Dudenie — umgangssprachlich (pot.). Także po prostu auf Deutsch."
+  ],
+  "_src": "36998892",
+  "_src_reader": "81380301"
+ },
+ "expression-431": {
+  "translation_pl": "uczestniczyć (w czymś); wykazywać zainteresowanie (kimś, czymś); współczuć (komuś), przejmować się (czymś)",
+  "example_pl": "Całe miasto przejmowało się jej losem.",
+  "notes_pl": [
+   "Także Anteil zeigen (przestarz.), Anteil bekunden (książk.). Nie mylić: seinen Anteil nehmen — wziąć swoją część."
+  ],
+  "complements": [
+   {
+    "note_pl": "uczestniczyć w czymś; wykazywać zainteresowanie kimś, czymś; współczuć komuś, przejmować się czymś: Sie nimmt regen Anteil an der Politik."
+   }
+  ],
+  "_src": "b37dbb5c",
+  "_src_reader": "d72cf0f1"
+ },
+ "expression-432": {
+  "translation_pl": "(pot.) mieć smykałkę, wyczucie (do czegoś), umieć obchodzić się (z czymś)",
+  "example_pl": "Ma rękę do roślin.",
+  "notes_pl": [
+   "Także ein feines Händchen für etwas haben; kein Händchen für etwas haben — nie umieć obchodzić się z czymś."
+  ],
+  "complements": [
+   {
+    "note_pl": "umieć obchodzić się z czymś: Er hat ein Händchen für Kinder."
+   }
+  ],
+  "_src": "63d0d756",
+  "_src_reader": "4519c427"
+ },
+ "expression-433": {
+  "translation_pl": "(pot.) mieć rachunki do wyrównania (z kimś), mieć (nieprzyjemną) sprawę (do kogoś)",
+  "example_pl": "Mam jeszcze z tobą do pogadania!",
+  "complements": [
+   {
+    "note_pl": "mieć z kimś rachunki do wyrównania: Er hat mit seinem Chef ein Hühnchen zu rupfen."
+   }
+  ],
+  "_src": "2b4de7b3",
+  "_src_reader": "bcc04fdc"
+ },
+ "expression-434": {
+  "translation_pl": "znać (coś) z autopsji, wiedzieć (coś) z gorzkiego doświadczenia",
+  "example_pl": "Biurokrację znam z autopsji.",
+  "notes_pl": [
+   "Także ein Lied davon zu singen wissen. Najczęściej z davon: Davon kann ich ein Lied singen."
+  ],
+  "complements": [
+   {
+    "note_pl": "wiedzieć o czymś z gorzkiego doświadczenia: Davon kann ich ein Lied singen."
+   }
+  ],
+  "_src": "9fb3b5f8",
+  "_src_reader": "6f17c84a"
+ },
+ "expression-435": {
+  "translation_pl": "(pot.) brać przykład (z kogoś, czegoś)",
+  "example_pl": "Możesz wziąć z tego przykład.",
+  "notes_pl": [
+   "Zaimek w Dativie (sich, dir, mir …). Nie mylić: sich eine Scheibe Brot abschneiden — ukroić sobie kromkę chleba."
+  ],
+  "complements": [
+   {
+    "note_pl": "brać przykład z kogoś, czegoś: Von ihr kannst du dir eine Scheibe abschneiden."
+   }
+  ],
+  "_src": "8eba1c55",
+  "_src_reader": "de514af5"
+ },
+ "expression-436": {
+  "translation_pl": "(pot.) dobrze się dogadywać, nadawać na tych samych falach (z kimś), mieć dobry kontakt (z kimś)",
+  "example_pl": "Dobrze dogaduje się ze swoimi uczniami.",
+  "notes_pl": [
+   "Także einen Draht zu jemandem haben. Nie mylić: der heiße Draht — gorąca linia, bezpośredni kontakt."
+  ],
+  "complements": [
+   {
+    "note_pl": "mieć dobry kontakt z kimś: Er hat einen direkten Draht zum Minister."
+   }
+  ],
+  "_src": "feb90875",
+  "_src_reader": "77afc852"
+ },
+ "expression-437": {
+  "translation_pl": "działać wspólnie, być w zmowie (z kimś)",
+  "example_pl": "Stróż był w zmowie ze złodziejami.",
+  "notes_pl": [
+   "Często o podejrzanej sprawie."
+  ],
+  "complements": [
+   {
+    "note_pl": "działać wspólnie z kimś: Er hat mit den Betrügern gemeinsame Sache gemacht."
+   }
+  ],
+  "_src": "a1ad8aa8",
+  "_src_reader": "a78e1e51"
+ },
+ "expression-438": {
+  "translation_pl": "(pot.) być zadłużonym (u kogoś), być dłużnym (komuś)",
+  "example_pl": "Jest mocno zadłużony u brata.",
+  "notes_pl": [
+   "Także in der Kreide sein / sitzen. Nie mylić: in die Kreide geraten — popaść w długi."
+  ],
+  "complements": [
+   {
+    "note_pl": "być zadłużonym u kogoś: Sie steht bei der Bank in der Kreide."
+   }
+  ],
+  "_src": "7d6e740b",
+  "_src_reader": "0664ae5b"
+ },
+ "expression-439": {
+  "translation_pl": "skończyć pracę (na dziś); (pot.) rzucić pracę; skończyć (z czymś), przestać (coś robić); (pot.) skończyć ze sobą; zerwać, rozstać się (z kimś)",
+  "example_pl": "Zerwała ze swoim chłopakiem.",
+  "notes_pl": [
+   "mit dem Rauchen Schluss machen — rzucić palenie; mit sich / mit dem Leben Schluss machen — skończyć ze sobą (pot.); Für heute machen wir Schluss. — Na dziś koniec."
+  ],
+  "complements": [
+   {
+    "meaning_pl": "skończyć (z czymś), przestać (coś robić)",
+    "note_pl": "skończyć z czymś: Er hat mit dem Rauchen Schluss gemacht."
+   },
+   {
+    "meaning_pl": "(pot.) skończyć ze sobą",
+    "note_pl": "(pot.) skończyć ze sobą: Er wollte mit dem Leben Schluss machen."
+   },
+   {
+    "meaning_pl": "zerwać, rozstać się (z kimś)",
+    "note_pl": "rozstać się z kimś: Sie hat mit ihrem Freund Schluss gemacht."
+   }
+  ],
+  "_src": "cce212c9",
+  "_src_reader": "03e06f54"
+ },
+ "expression-440": {
+  "translation_pl": "(austr.) radzić sobie, wiązać koniec z końcem",
+  "example_pl": "Przy tej emeryturze ledwo wiąże koniec z końcem.",
+  "notes_pl": [
+   "Także das / sein Auslangen haben. Z czym — mit + Dativ (w Dudenie przyimka nie podano, dlatego bez pary)."
+  ],
+  "_src": "98d4dee5",
+  "_src_reader": "ed12838b"
+ },
+ "expression-441": {
+  "translation_pl": "(pot.) radzić sobie (z czymś); (pot.) dogadywać się (z kimś)",
+  "example_pl": "Radzisz sobie z nowym programem?",
+  "notes_pl": [
+   "Pisownia: zurande (zalecana) i zu Rande."
+  ],
+  "complements": [
+   {
+    "note_pl": "radzić sobie z czymś; dogadywać się z kimś: Mit ihm komme ich nicht zu Rande."
+   }
+  ],
+  "_src": "0ffd067b",
+  "_src_reader": "10fd46cd"
+ },
+ "expression-442": {
+  "translation_pl": "na czyjąś korzyść, z korzyścią (dla kogoś); na (czyjąś) obronę, oddając (komuś) sprawiedliwość",
+  "example_pl": "Sędzia rozstrzygnął na naszą korzyść.",
+  "notes_pl": [
+   "Z zaimkiem dzierżawczym lub z Genitivem: zu seinen Gunsten, zu seines Freundes Gunsten. Das muss zu ihren Gunsten gesagt werden. — Trzeba jej oddać sprawiedliwość.",
+   "Nie mylić: przyimek zugunsten (zu Gunsten) + Genitiv — na korzyść kogoś, czegoś: zugunsten der Kinder."
+  ],
+  "_src": "184f6554",
+  "_src_reader": "4a5726ad"
+ },
+ "expression-443": {
+  "translation_pl": "podnieść się (na nogi), wstać; wyzdrowieć, wrócić do zdrowia; stanąć na nogi (finansowo), podźwignąć się",
+  "example_pl": "Po długiej chorobie powoli wrócił do zdrowia.",
+  "notes_pl": [
+   "Duden podaje trzy znaczenia: wstać, podnieść się; wyzdrowieć; podźwignąć się finansowo, mocno stanąć na nogi.",
+   "Por. jdn., sich auf die Beine bringen / stellen — postawić (kogoś, siebie) na nogi; jdm. auf die Beine helfen — pomóc (komuś) wstać; wieder auf den Beinen sein — znów być na nogach.",
+   "Nie mylić: sich auf die Beine machen — wyruszyć w drogę; etw. auf die Beine stellen — zorganizować; es kommt auf die Beine an — wszystko zależy od nóg (ankommen auf)."
+  ],
+  "_src": "e53d2d3b",
+  "_src_reader": "4646c9ba"
+ },
+ "expression-444": {
+  "translation_pl": "(książk.) wybaczyć (komuś) i ponownie przyjąć (do swojego grona), przywrócić (kogoś) do łask",
+  "example_pl": "Po jego przeprosinach rodzina wybaczyła mu i ponownie go przyjęła.",
+  "notes_pl": [
+   "Zwykle z wieder; często w stronie biernej: Er wurde wieder in Gnaden aufgenommen.",
+   "Por. in Gnaden — łaskawie, życzliwie; bei jdm. in (hohen) Gnaden stehen (książk., przestarz.) — być w (wielkich) łaskach u kogoś."
+  ],
+  "_src": "b813065e",
+  "_src_reader": "6da5f7ec"
+ },
+ "expression-445": {
+  "translation_pl": "na czyimś miejscu (gdybym był / była tobą, nim …); zamiast kogoś",
+  "example_pl": "Na twoim miejscu poszedłbym do lekarza.",
+  "notes_pl": [
+   "Dativ: an meiner / deiner / seiner / ihrer … Stelle — zwykle z trybem przypuszczającym (würde, wäre, hätte, möchte …): Ich möchte nicht an seiner Stelle sein. — Nie chciałbym być na jego miejscu.",
+   "Nie mylić: an jds. Stelle treten (Akkusativ: an seine Stelle treten) — zająć czyjeś miejsce (osobne hasło); anstelle / an Stelle von — zamiast; auf der Stelle — natychmiast."
+  ],
+  "_src": "a63058ea",
+  "_src_reader": "2a903a70"
+ },
+ "expression-446": {
+  "translation_pl": "pogrążony w sobie, zatopiony w sobie",
+  "example_pl": "Stary człowiek siedział przy oknie, pogrążony w sobie.",
+  "notes_pl": [
+   "Także in sich selbst versunken; czasownik: in sich (selbst) versinken — zamknąć się w sobie: Er versank in sich selbst.",
+   "Por. in Gedanken versunken — pogrążony w myślach; in etw. versunken sein — być pochłoniętym czymś (in sein Spiel versunken).",
+   "Nie mylić: im Meer versunken — zatopiony (dosłownie); in sich stimmig, in sich geschlossen — sam w sobie, wewnętrznie."
+  ],
+  "_src": "4e770892",
+  "_src_reader": "204f3c3e"
+ },
+ "expression-447": {
+  "translation_pl": "twarzą w twarz (osobiście); twarzą w twarz (przez wideo, widząc się na ekranie)",
+  "example_pl": "Lepiej będzie omówić to twarzą w twarz.",
+  "notes_pl": [
+   "Angesicht — książk. „twarz” (Duden: gehoben); często jdm. von Angesicht zu Angesicht gegenüberstehen — stać z kimś twarzą w twarz.",
+   "Nie mylić: jdn. von Angesicht kennen — znać kogoś z widzenia; im Angesicht (+ Gen.) — w obliczu (czegoś), wobec."
+  ],
+  "_src": "89d4fef6",
+  "_src_reader": "8adf0935"
+ },
+ "expression-448": {
+  "translation_pl": "(przestarz.) nie wiedzieć, co robić; nie widzieć wyjścia",
+  "example_pl": "W tej sytuacji nie wiedziałem już, co robić.",
+  "notes_pl": [
+   "Także sich (Dativ) keinen Rat (mehr) wissen: Sie wusste sich keinen Rat mehr. Twierdząco: (sich) Rat wissen — znać wyjście.",
+   "Podobnie: weder aus noch ein wissen, ratlos sein. Nie mylić: jdm. keinen Rat geben — nie udzielić komuś rady; der Rat — także rada (organ): Der Rat weiß noch nichts."
+  ],
+  "_src": "0bf6c847",
+  "_src_reader": "0023efb1"
+ },
+ "expression-449": {
+  "translation_pl": "we wszystkie strony, wszędzie",
+  "example_pl": "Po studiach przyjaciele rozjechali się na cztery strony świata.",
+  "notes_pl": [
+   "Częściej z zerstreut, verstreut, verweht: in alle Winde zerstreut sein — rozjechać się na cztery strony świata.",
+   "Rzadziej: in alle vier Winde.",
+   "Forma nach allen (vier) Winden nie występuje we współczesnych słownikach (Duden, DWDS); spotyka się ją w starych tekstach (Deutsches Wörterbuch braci Grimm)."
+  ],
+  "_src": "1b66324b",
+  "_src_reader": "1192e72e"
+ },
+ "expression-450": {
+  "translation_pl": "(pot.) wyjść (z czegoś) bez większego szwanku, wykpić się tanim kosztem",
+  "example_pl": "Z wypadku wyszedł bez większego szwanku.",
+  "notes_pl": [
+   "Czasownik z przedrostkiem rozdzielnym: Er kam mit einem blauen Auge davon.",
+   "Por. ein blaues Auge haben — mieć podbite oko (dosłownie)."
+  ],
+  "_src": "6969367c",
+  "_src_reader": "7b6ac506"
+ },
+ "expression-451": {
+  "translation_pl": "(przestarz.) wybaczyć, darować (komuś coś); raczcie wybaczyć",
+  "example_pl": "Wasza Królewska Mość raczy wybaczyć, ale muszę się sprzeciwić.",
+  "notes_pl": [
+   "Przestarzała formuła grzecznościowa (XVIII w.), w zwracaniu się do osoby wysoko postawionej: Halten zu Gnaden!"
+  ],
+  "_src": "caf2a50a",
+  "_src_reader": "b7577745"
+ },
+ "expression-452": {
+  "translation_pl": "być ugodowym, iść na ustępstwa",
+  "example_pl": "Ze sprzedawcą na pewno da się dogadać co do ceny.",
+  "notes_pl": [
+   "Zaimek w Dativie, zgodny z osobą podmiotu: Ich lasse mit mir reden. Lässt du mit dir reden?"
+  ],
+  "_src": "e3e2e3b8",
+  "_src_reader": "b3f3f6da"
+ },
+ "expression-453": {
+  "translation_pl": "(przestarz.) prosić (kogoś) na chrzestnego",
+  "example_pl": "Młynarz poprosił sąsiada, żeby został chrzestnym.",
+  "notes_pl": [
+   "Przestarzałe. Jeszcze jedno wyrażenie: Gevatter stehen — być chrzestnym.",
+   "Słowniki podają tylko bitten. Wariantów z laden ani einladen nie ma ani w Dudenie, ani w DWDS."
+  ],
+  "_src": "e76fe898",
+  "_src_reader": "d46c9383"
+ },
+ "expression-454": {
+  "translation_pl": "(ktoś) miał szczęście, (ktoś) może mówić o szczęściu",
+  "example_pl": "Możesz mówić o szczęściu, że nic ci się nie stało.",
+  "notes_pl": [
+   "Najczęściej ze zdaniem podrzędnym z dass lub wenn: Wir können von Glück sagen, wenn wir den Zug noch erreichen."
+  ],
+  "_src": "dbe0bba3",
+  "_src_reader": "e99cce41"
  }
 }
