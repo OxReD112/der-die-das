@@ -4703,12 +4703,12 @@
       },
       {
         "pattern": "für + Akkusativ",
-        "source": "DWDS: «als Entschuldigung für mein Zuspätkommen möchte ich sagen, dass …»",
+        "source": "DWDS (WDG 1, umg.): «der Vater schrieb dem Sohn eine E. (Entschuldigungsschreiben) für die Schule»",
         "source_kind": "dwds",
         "meaning_ru": "записка с объяснением причины отсутствия",
         "meaning_en": "excuse (note)",
-        "note_ru": "извинение за что-либо: eine Entschuldigung für die Verspätung",
-        "note_en": "apology for something: eine Entschuldigung für die Verspätung"
+        "note_ru": "записка (в школу и т. п.) о причине отсутствия: Die Mutter schrieb ihm eine Entschuldigung für die Schule.",
+        "note_en": "a note (for school etc.) excusing an absence: Die Mutter schrieb ihm eine Entschuldigung für die Schule."
       }
     ]
   },

@@ -26652,8 +26652,8 @@
   {
     "id": "verb-530",
     "infinitive": "folgen",
-    "translation_ru": "следовать; идти (за кем-либо)",
-    "translation_en": "to follow",
+    "translation_ru": "следовать, идти (за кем-либо); следить (за мыслью, рассказом), понимать (кого-либо); следовать (совету, приказу), слушаться (кого-либо); следовать (за кем-, чем-либо по времени), наступать (после чего-либо); следовать, вытекать (из чего-либо)",
+    "translation_en": "to follow, to go after (someone); to follow (an argument, a story), to understand (someone); to follow (advice, orders), to obey (someone); to follow, to come after (someone or something in time); to follow, to result (from something)",
     "auxiliary": "sein",
     "usage_note_ru": "В значении «слушаться» (Der Hund folgt aufs Wort) Perfekt с haben.",
     "usage_note_en": "In the sense “to obey” (Der Hund folgt aufs Wort) the perfect takes haben.",
@@ -26674,11 +26674,21 @@
         "source": "DWDS: ⟨jmd., etw. folgt (… auf jmdn., etw.)⟩; Auf die Volksbefragung … folgte der Einspruch",
         "source_kind": "dwds",
         "source_meaning": "Duden: 3. zeitlich nach jemandem, etwas kommen, sich anschließen: dem Winter, auf den Winter folgte ein nasses Frühjahr",
-        "meaning_ru": "следовать",
-        "meaning_en": "to follow",
-        "note_ru": "следовать за чем-либо (по времени): Auf den Winter folgt der Frühling.",
-        "note_en": "to follow something (in time): Auf den Winter folgt der Frühling.",
+        "meaning_ru": "следовать (за кем-, чем-либо по времени), наступать (после чего-либо)",
+        "meaning_en": "to follow, to come after (someone or something in time)",
+        "note_ru": "следовать за кем-, чем-либо (по времени): Auf den Winter folgt der Frühling.",
+        "note_en": "to follow someone or something (in time): Auf den Winter folgt der Frühling.",
         "no_object": "Dativ"
+      },
+      {
+        "pattern": "aus + Dativ",
+        "meaning_ru": "следовать, вытекать (из чего-либо)",
+        "meaning_en": "to follow, to result (from something)",
+        "note_ru": "вытекать из чего-либо: Daraus folgt, dass wir mehr Zeit brauchen. Подсвечивается только с коррелятом: er folgte ihr aus dem Zimmer — направление, та же форма.",
+        "note_en": "to follow from something: Daraus folgt, dass wir mehr Zeit brauchen. Highlighted only with a correlative: er folgte ihr aus dem Zimmer is direction, the same form.",
+        "source": "Duden (4): sich mit logischer Konsequenz ergeben — daraus, aus seinen Darlegungen folgt, dass er im Recht war",
+        "source_kind": "duden",
+        "correlative_only": true
       }
     ],
     "lookup_forms": {
@@ -40493,8 +40503,8 @@
   {
     "id": "verb-806",
     "infinitive": "auskommen",
-    "translation_ru": "ладить (с кем-либо); обходиться (чем-либо)",
-    "translation_en": "to get on (with someone); to manage, to get by (with something)",
+    "translation_ru": "обходиться (чем-либо, без кого-, чего-либо); ладить (с кем-либо)",
+    "translation_en": "to manage, to get by (with something, without someone or something); to get on (with someone)",
     "auxiliary": "sein",
     "usage_note_ru": "ohne etwas auskommen — обходиться без чего-либо: Ich komme ohne Auto aus.",
     "usage_note_en": "ohne etwas auskommen — to do without something: Ich komme ohne Auto aus.",
@@ -40524,18 +40534,31 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
-        "note_ru": "ладить с кем-либо; обходиться чем-либо",
-        "note_en": "to get on with someone; to get by on something"
+        "meaning_ru": "обходиться (чем-либо, без кого-, чего-либо)",
+        "meaning_en": "to manage, to get by (with something, without someone or something)",
+        "note_ru": "обходиться чем-либо: Wir müssen mit 500 Euro im Monat auskommen.",
+        "note_en": "to get by on something: Wir müssen mit 500 Euro im Monat auskommen.",
+        "source": "Duden (1): mit dem Haushaltsgeld auszukommen versuchen",
+        "source_kind": "duden"
       },
       {
         "pattern": "ohne + Akkusativ",
         "source": "DWDS: ⟨ohne jmdn., etw. auskommen⟩ wir kommen nicht ohne Maschinen aus",
         "source_kind": "dwds",
-        "source_meaning": "Duden: in einer gegebenen Situation, Lage zurechtkommen; er kommt nicht ohne seine Frau aus",
-        "meaning_ru": "обходиться (чем-либо)",
-        "meaning_en": "to manage, to get by (with something)",
+        "source_meaning": "Duden (2): in einer gegebenen Situation, Lage zurechtkommen; er kommt nicht ohne seine Frau aus",
+        "meaning_ru": "обходиться (чем-либо, без кого-, чего-либо)",
+        "meaning_en": "to manage, to get by (with something, without someone or something)",
         "note_ru": "обходиться без кого-либо, чего-либо: Ich komme ohne mein Handy nicht aus.",
         "note_en": "to manage, to get by without someone or something: Ich komme ohne mein Handy nicht aus."
+      },
+      {
+        "pattern": "mit + Dativ",
+        "meaning_ru": "ладить (с кем-либо)",
+        "meaning_en": "to get on (with someone)",
+        "note_ru": "ладить с кем-либо: Mit meinen Kollegen komme ich gut aus.",
+        "note_en": "to get on with someone: Mit meinen Kollegen komme ich gut aus.",
+        "source": "Duden (3): sich vertragen, verstehen — sie kommen glänzend miteinander aus",
+        "source_kind": "duden"
       }
     ],
     "separable_prefix": "aus",
@@ -44880,8 +44903,8 @@
   {
     "id": "verb-897",
     "infinitive": "jagen",
-    "translation_ru": "охотиться (на кого-либо); гнаться (за кем-либо), гнать",
-    "translation_en": "to hunt; to chase",
+    "translation_ru": "охотиться (на кого-либо); гнаться (за кем-либо), гнать; гоняться (за чем-либо: славой, деньгами)",
+    "translation_en": "to hunt; to chase, to drive; to chase after, to strive for (fame, money)",
     "auxiliary": "haben",
     "usage_note_ru": "Мчаться — jagen с sein (отдельная карточка): Der Wagen ist durch die Stadt gejagt. in die Luft jagen — взорвать. (разг.) jemanden ins Bockshorn jagen — запугать кого-либо; sich nicht ins Bockshorn jagen lassen — не дать себя запугать.",
     "usage_note_en": "To race, to rush is jagen with sein (separate card): Der Wagen ist durch die Stadt gejagt. in die Luft jagen — to blow up. (colloquial) jemanden ins Bockshorn jagen — to intimidate someone; sich nicht ins Bockshorn jagen lassen — not to let oneself be intimidated.",
@@ -44901,18 +44924,21 @@
       },
       {
         "pattern": "Akkusativ",
-        "note_ru": "охотиться на кого-либо (по-русски — на + вин. п.)",
-        "note_en": "to hunt someone or something",
+        "note_ru": "гнаться за кем-либо, гнать кого-либо: Der Hund jagt die Katze durch den Garten.",
+        "note_en": "to chase someone or something: Der Hund jagt die Katze durch den Garten.",
         "meaning_ru": "гнаться (за кем-либо), гнать",
-        "meaning_en": "to chase"
+        "meaning_en": "to chase, to drive"
       },
       {
         "pattern": "nach + Dativ",
-        "note_ru": "гоняться за чем-либо (за славой, деньгами)",
-        "note_en": "to chase after (fame, money)",
-        "meaning_ru": "гнаться (за кем-либо), гнать",
-        "meaning_en": "to chase",
-        "no_object": "Akkusativ"
+        "note_ru": "гоняться за чем-либо: Er jagt nur nach Geld und Erfolg.",
+        "note_en": "to chase after something: Er jagt nur nach Geld und Erfolg.",
+        "meaning_ru": "гоняться (за чем-либо: славой, деньгами)",
+        "meaning_en": "to chase after, to strive for (fame, money)",
+        "no_object": "Akkusativ",
+        "source": "Duden: gierig streben — nach Abenteuern, Glück, Ruhm, Geld jagen",
+        "source_kind": "duden",
+        "correlative_only": true
       }
     ],
     "lookup_forms": {
@@ -52917,8 +52943,8 @@
   {
     "id": "verb-1059",
     "infinitive": "absichern",
-    "translation_ru": "обезопасить, застраховать; оградить (опасное место)",
-    "translation_en": "to secure, to safeguard, to protect",
+    "translation_ru": "оградить (опасное место); обезопасить, застраховать; подкреплять, обосновывать (научно)",
+    "translation_en": "to secure, to cordon off (a dangerous place); to secure, to safeguard, to protect; to back up, to substantiate (scientifically)",
     "auxiliary": "haben",
     "usage_note_ru": "sich absichern — подстраховаться.",
     "usage_note_en": "sich absichern — to cover oneself.",
@@ -78046,22 +78072,22 @@
     "complements": [
       {
         "pattern": "Akkusativ",
-        "note_ru": "открывать что-либо (книгу, глаза); разбивать что-либо (яйцо; лагерь, палатку)",
-        "note_en": "to open something (a book, one's eyes); to crack something (an egg); to pitch something (a tent, a camp)",
+        "note_ru": "открывать что-либо (книгу, глаза): Sie schlug das Buch auf.",
+        "note_en": "to open something (a book, one's eyes): Sie schlug das Buch auf.",
         "meaning_ru": "открывать (книгу, глаза)",
         "meaning_en": "to open (a book, one's eyes)"
       },
       {
         "pattern": "Akkusativ",
-        "note_ru": "открывать что-либо (книгу, глаза); разбивать что-либо (яйцо; лагерь, палатку)",
-        "note_en": "to open something (a book, one's eyes); to crack something (an egg); to pitch something (a tent, a camp)",
+        "note_ru": "разбивать что-либо (яйцо): Er schlug zwei Eier auf und verquirlte sie.",
+        "note_en": "to crack something (an egg): Er schlug zwei Eier auf und verquirlte sie.",
         "meaning_ru": "разбивать (яйцо)",
         "meaning_en": "to crack (an egg)"
       },
       {
         "pattern": "Akkusativ",
-        "note_ru": "открывать что-либо (книгу, глаза); разбивать что-либо (яйцо; лагерь, палатку)",
-        "note_en": "to open something (a book, one's eyes); to crack something (an egg); to pitch something (a tent, a camp)",
+        "note_ru": "разбивать что-либо (лагерь, палатку): Wir schlugen das Zelt am See auf.",
+        "note_en": "to pitch something (a tent, a camp): Wir schlugen das Zelt am See auf.",
         "meaning_ru": "разбивать (лагерь, палатку)",
         "meaning_en": "to pitch (a tent, a camp)"
       },
@@ -87560,8 +87586,8 @@
   {
     "id": "verb-1805",
     "infinitive": "einliefern",
-    "translation_ru": "доставлять (в больницу, тюрьму)",
-    "translation_en": "to take (to hospital), to admit; to commit (to prison)",
+    "translation_ru": "доставлять (в больницу, тюрьму); сдавать (посылку, письмо на почту)",
+    "translation_en": "to take (to hospital), to admit, to commit (to prison); to hand in, to post (a parcel, a letter)",
     "auxiliary": "haben",
     "usage_note_ru": "Чаще в пассиве: ins Krankenhaus eingeliefert werden. Также: сдавать (письма, посылки на почту).",
     "usage_note_en": "Mostly in the passive: ins Krankenhaus eingeliefert werden. Also: to hand in (letters, parcels at the post office).",
@@ -87838,8 +87864,8 @@
   {
     "id": "verb-1811",
     "infinitive": "einschlagen",
-    "translation_ru": "разбивать (окно, дверь), бить, колотить (кого-либо); выбирать (путь, курс, направление), пойти (по дороге); вбивать (гвоздь); ударять, попадать (о молнии, снаряде)",
-    "translation_en": "to smash (a window, a door), to beat, to rain blows on (someone); to take (a path, a course, a direction), to set off (along a road); to knock in (a nail); to strike (lightning, a shell)",
+    "translation_ru": "вбивать (гвоздь); разбивать (окно, дверь); ударять, попадать (о молнии, снаряде); бить, колотить (кого-либо); выбирать (путь, курс, направление), пойти (по дороге)",
+    "translation_en": "to knock in (a nail); to smash (a window, a door); to strike (lightning, a shell); to beat, to rain blows on (someone); to take (a path, a course, a direction), to set off (along a road)",
     "auxiliary": "haben",
     "usage_note_ru": "Формы как у schlagen: schlägt ein, schlug ein, hat eingeschlagen. Der Blitz hat in die Scheune eingeschlagen — молния ударила в сарай. eine Laufbahn einschlagen — выбрать карьеру. (разг.) иметь большой успех (о фильме, идее). Заворачивать (в бумагу); выворачивать (руль).",
     "usage_note_en": "Forms as for schlagen: schlägt ein, schlug ein, hat eingeschlagen. Der Blitz hat in die Scheune eingeschlagen — lightning struck the barn. eine Laufbahn einschlagen — to embark on a career. (colloquial) to be a big hit (a film, an idea). To wrap (in paper); to turn (the steering wheel).",
@@ -87882,17 +87908,19 @@
     "complements": [
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "колотить кого-либо",
-        "note_en": "to rain blows on someone",
-        "meaning_ru": "разбивать (окно, дверь), бить, колотить (кого-либо)",
-        "meaning_en": "to smash (a window, a door), to beat, to rain blows on (someone)"
+        "note_ru": "колотить кого-либо: Die Angreifer schlugen auf den am Boden liegenden Mann ein.",
+        "note_en": "to rain blows on someone: Die Angreifer schlugen auf den am Boden liegenden Mann ein.",
+        "meaning_ru": "бить, колотить (кого-либо)",
+        "meaning_en": "to beat, to rain blows on (someone)",
+        "source": "Duden (4): jemanden, ein Tier längere Zeit ungehemmt schlagen — mit der Peitsche auf das Pferd einschlagen",
+        "source_kind": "duden"
       },
       {
         "pattern": "Akkusativ",
-        "meaning_ru": "разбивать (окно, дверь), бить, колотить (кого-либо)",
-        "meaning_en": "to smash (a window, a door), to beat, to rain blows on (someone)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "meaning_ru": "разбивать (окно, дверь)",
+        "meaning_en": "to smash (a window, a door)",
+        "note_ru": "что-либо (окно, дверь)",
+        "note_en": "something (a window, a door)"
       },
       {
         "pattern": "Akkusativ",
@@ -89852,8 +89880,8 @@
     "translation_ru": "лишать (чего-либо), отнимать, отзывать (права, лицензию)",
     "translation_en": "to withdraw, to take away, to revoke",
     "auxiliary": "haben",
-    "usage_note_ru": "Формы как у ziehen: entzog, hat entzogen. Кому — в дательном падеже. sich einer Sache (dat.) entziehen — уклоняться от чего-либо (от ответственности, обязанностей). der Entzug — лишение; отвыкание (от наркотиков).",
-    "usage_note_en": "Forms as for ziehen: entzog, hat entzogen. The person is in the dative. sich einer Sache (dat.) entziehen — to evade something (responsibility, duties). der Entzug — withdrawal (also from drugs).",
+    "usage_note_ru": "Формы как у ziehen: entzog, hat entzogen. Кому — в дательном падеже. sich einer Sache (D) entziehen — уклоняться от чего-либо (от ответственности, обязанностей). der Entzug — лишение; отвыкание (от наркотиков).",
+    "usage_note_en": "Forms as for ziehen: entzog, hat entzogen. The person is in the dative. sich einer Sache (D) entziehen — to evade something (responsibility, duties). der Entzug — withdrawal (also from drugs).",
     "example_de": "Nach mehreren Hygieneverstößen hat die Behörde dem Imbiss die Genehmigung entzogen.",
     "example_cloze": "Nach mehreren Hygieneverstößen hat die Behörde dem Imbiss die Genehmigung {{c1::entzogen}}.",
     "example_ru": "После нескольких нарушений санитарных норм власти отозвали у закусочной разрешение.",
@@ -94849,7 +94877,7 @@
     "complements": [
       {
         "pattern": "Dativ",
-        "note_ru": "сердиться на кого-либо (дат. п.)",
+        "note_ru": "сердиться на кого-либо",
         "note_en": "to bear a grudge against someone"
       },
       {
@@ -96650,7 +96678,7 @@
     "id": "verb-1995",
     "infinitive": "infiltrieren",
     "translation_ru": "внедряться, проникать (в организацию); (мед.) инфильтрировать",
-    "translation_en": "to infiltrate",
+    "translation_en": "to infiltrate (an organisation); (medicine) to infiltrate",
     "auxiliary": "haben",
     "usage_note_ru": "С прямым дополнением (вин. п.): eine Organisation infiltrieren. die Infiltration — проникновение, внедрение.",
     "usage_note_en": "Takes a direct object: eine Organisation infiltrieren. die Infiltration — infiltration.",
@@ -98104,8 +98132,8 @@
   {
     "id": "verb-2026",
     "infinitive": "lauern",
-    "translation_ru": "подстерегать, поджидать (в засаде); таиться (об опасности)",
-    "translation_en": "to lurk, to lie in wait (for)",
+    "translation_ru": "подстерегать, поджидать (в засаде); таиться (об опасности); (разг.) нетерпеливо ждать (чего-либо)",
+    "translation_en": "to lie in wait (for), to lurk (in ambush); to lurk (of danger); (colloquial) to wait impatiently (for something)",
     "auxiliary": "haben",
     "usage_note_ru": "auf jemanden / etwas lauern — подкарауливать кого-либо, что-либо; (разг.) с нетерпением ждать. Im Internet lauern viele Gefahren — в интернете подстерегает много опасностей.",
     "usage_note_en": "auf jemanden / etwas lauern — to lie in wait for someone, something; (colloquial) to wait impatiently for. Im Internet lauern viele Gefahren — many dangers lurk on the internet.",
@@ -98121,7 +98149,16 @@
         "note_ru": "подстерегать кого-либо, что-либо",
         "note_en": "to lie in wait for",
         "meaning_ru": "подстерегать, поджидать (в засаде)",
-        "meaning_en": "to lurk, to lie in wait (for)"
+        "meaning_en": "to lie in wait (for), to lurk (in ambush)"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "meaning_ru": "(разг.) нетерпеливо ждать (чего-либо)",
+        "meaning_en": "(colloquial) to wait impatiently (for something)",
+        "note_ru": "(разг.) нетерпеливо ждать чего-либо: Die Kinder lauerten schon auf das Pausenklingeln.",
+        "note_en": "(colloquial) to wait impatiently for something: Die Kinder lauerten schon auf das Pausenklingeln.",
+        "source": "Duden (2, umgangssprachlich): angespannt, begierig, voller Ungeduld auf jemanden, etwas warten — er lauerte auf das Klingelzeichen",
+        "source_kind": "duden"
       }
     ],
     "lookup_forms": {
@@ -103771,8 +103808,8 @@
   {
     "id": "verb-2148",
     "infinitive": "spekulieren",
-    "translation_ru": "гадать, строить догадки (о чём-либо); спекулировать (на бирже); (разг.) рассчитывать (на что-либо)",
-    "translation_en": "to speculate (about); to speculate (on the stock market); (colloquial) to count (on)",
+    "translation_ru": "(разг.) рассчитывать (на что-либо); спекулировать (на бирже); гадать, строить догадки (о чём-либо)",
+    "translation_en": "(colloquial) to count (on); to speculate (on the stock market); to speculate (about)",
     "auxiliary": "haben",
     "usage_note_ru": "Спекулировать акциями, недвижимостью — mit Aktien, Immobilien. (разг.) auf etwas spekulieren — рассчитывать на что-либо: auf einen Fehler des Gegners spekulieren. die Spekulation — догадка; спекуляция.",
     "usage_note_en": "To speculate in shares, property — mit Aktien, Immobilien. (colloquial) auf etwas spekulieren — to count on something: auf einen Fehler des Gegners spekulieren. die Spekulation — speculation.",
@@ -103784,14 +103821,40 @@
     "forms": null,
     "complements": [
       {
-        "pattern": "über + Akkusativ",
-        "note_ru": "гадать о чём-либо",
-        "note_en": "to speculate about"
+        "pattern": "auf + Akkusativ",
+        "meaning_ru": "(разг.) рассчитывать (на что-либо)",
+        "meaning_en": "(colloquial) to count (on)",
+        "note_ru": "(разг.) рассчитывать на что-либо: Er spekuliert auf eine Erbschaft.",
+        "note_en": "(colloquial) to count on something: Er spekuliert auf eine Erbschaft.",
+        "source": "Duden (1, umgangssprachlich): etwas zu erreichen, zu erlangen hoffen; auf etwas rechnen — auf eine Stelle, eine Erbschaft spekulieren",
+        "source_kind": "duden"
       },
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "(разг.) рассчитывать на что-либо",
-        "note_en": "(colloquial) to count on"
+        "meaning_ru": "спекулировать (на бирже)",
+        "meaning_en": "to speculate (on the stock market)",
+        "note_ru": "делать ставку на что-либо (на бирже): Viele Anleger spekulieren auf steigende Kurse.",
+        "note_en": "to bet on something (on the stock market): Viele Anleger spekulieren auf steigende Kurse.",
+        "source": "Duden (2): durch Spekulationen Gewinne zu erzielen suchen — auf Hausse, auf Baisse spekulieren",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "meaning_ru": "спекулировать (на бирже)",
+        "meaning_en": "to speculate (on the stock market)",
+        "note_ru": "играть на чём-либо, спекулировать чем-либо: Er spekuliert mit Aktien und Immobilien.",
+        "note_en": "to speculate in something: Er spekuliert mit Aktien und Immobilien.",
+        "source": "DWDS: mit Grundstücken, Wertpapieren spekulieren; Duden (2): mit … Kaffee, Weizen, Grundstücken spekulieren",
+        "source_kind": "dwds"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "meaning_ru": "гадать, строить догадки (о чём-либо)",
+        "meaning_en": "to speculate (about)",
+        "note_ru": "гадать о чём-либо: Die Zeitungen spekulieren über die Gründe für den Rücktritt.",
+        "note_en": "to speculate about something: Die Zeitungen spekulieren über die Gründe für den Rücktritt.",
+        "source": "Duden (3): (über etwas) Spekulationen anstellen; mutmaßen — es lohnt sich nicht, über diese Sache lange zu spekulieren",
+        "source_kind": "duden"
       }
     ],
     "lookup_forms": {
@@ -107647,8 +107710,8 @@
   {
     "id": "verb-2229",
     "infinitive": "unterstellen",
-    "translation_ru": "приписывать (кому-либо намерения, вину), предполагать; подчинять (кому-либо); утверждать без доказательств",
-    "translation_en": "to insinuate, to impute, to assume; to subordinate (to someone); to allege (without proof)",
+    "translation_ru": "подчинять (кому-либо); предполагать, допускать; приписывать (кому-либо намерения, вину), утверждать без доказательств",
+    "translation_en": "to subordinate (to someone); to assume, to suppose; to insinuate, to impute, to allege (without proof)",
     "auxiliary": "haben",
     "usage_note_ru": "Неотделяемый, без ge-: unterstellte, hat unterstellt. Предполагать: Unterstellen wir einmal, dass … — допустим, что … Подчинять: jemandem unterstellt sein — быть в подчинении у кого-либо. die Unterstellung — инсинуация.",
     "usage_note_en": "Inseparable, no ge-: unterstellte, hat unterstellt. To assume: Unterstellen wir einmal, dass … — let's assume that … To put under: jemandem unterstellt sein — to report to someone. die Unterstellung — insinuation.",
@@ -107661,8 +107724,21 @@
     "complements": [
       {
         "pattern": "Dativ + Akkusativ",
-        "note_ru": "приписать кому-либо что-либо",
-        "note_en": "to impute something to someone"
+        "meaning_ru": "подчинять (кому-либо)",
+        "meaning_en": "to subordinate (to someone)",
+        "note_ru": "подчинять кого-либо, что-либо кому-либо: Man unterstellte ihr die neue Abteilung.",
+        "note_en": "to place someone or something under someone: Man unterstellte ihr die neue Abteilung.",
+        "source": "Duden (1b): jemandem die Leitung von etwas übertragen — er hat ihr mehrere Abteilungen unterstellt",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Dativ + Akkusativ",
+        "note_ru": "приписывать кому-либо что-либо: Man unterstellte ihm böse Absichten.",
+        "note_en": "to impute something to someone: Man unterstellte ihm böse Absichten.",
+        "meaning_ru": "приписывать (кому-либо намерения, вину), утверждать без доказательств",
+        "meaning_en": "to insinuate, to impute, to allege (without proof)",
+        "source": "Duden (2b): man hat mir die übelsten Absichten unterstellt",
+        "source_kind": "duden"
       }
     ],
     "lookup_forms": {
@@ -110367,7 +110443,7 @@
     "id": "verb-2287",
     "infinitive": "vernehmen",
     "translation_ru": "допрашивать (свидетеля, обвиняемого); (книжн.) слышать, узнавать",
-    "translation_en": "to question, to interrogate (a witness, a suspect); (elevated) to hear, to learn",
+    "translation_en": "to question, to interrogate (a witness, the accused); (elevated) to hear, to learn",
     "auxiliary": "haben",
     "usage_note_ru": "Формы как у nehmen: vernimmt, vernahm, hat vernommen. (книжн.) слышать: Aus dem Keller vernahm sie leise Stimmen. die Vernehmung — допрос. Ср. verhören — допрашивать.",
     "usage_note_en": "Forms as nehmen: vernimmt, vernahm, hat vernommen. (elevated) to hear: Aus dem Keller vernahm sie leise Stimmen. die Vernehmung — questioning. Cf. verhören — to interrogate.",
@@ -113476,8 +113552,8 @@
     "translation_ru": "намереваться, решать (сделать что-либо), ставить себе цель; (разг.) заняться (чем-либо), засесть (за книгу, документы); (разг.) взяться (за кого-либо), отчитать, устроить разнос",
     "translation_en": "to resolve, to make up one's mind (to do something); (colloquial) to get down to, to tackle (something); (colloquial) to take (someone) to task, to give (someone) a dressing-down",
     "auxiliary": "haben",
-    "usage_note_ru": "Возвратное местоимение в дательном падеже: ich nehme mir vor. Засесть: Ich würde mir die Bücher vornehmen. — Я бы засел за книги. Отчитать: Dann nahm er sich Harry und Ron vor. — Потом он взялся за Гарри и Рона. Сильный, отделяемый: nimmt vor, nahm vor, hat vorgenommen. der Vorsatz — намерение. Без sich — проводить (см. отдельную карточку).",
-    "usage_note_en": "The reflexive pronoun is in the dative: ich nehme mir vor. To get down to: Ich würde mir die Bücher vornehmen. — I'd get stuck into the books. To take to task: Dann nahm er sich Harry und Ron vor. — Then he took Harry and Ron to task. Strong, separable: nimmt vor, nahm vor, hat vorgenommen. der Vorsatz — resolution. Without sich — to carry out (see the separate card).",
+    "usage_note_ru": "Возвратное местоимение в дательном падеже: ich nehme mir vor. Засесть: Ich würde mir die Bücher vornehmen. — Я бы засел за книги. Отчитать: Dann nahm sich der Chef die beiden Praktikanten vor. — Потом начальник устроил разнос обоим практикантам. Сильный, отделяемый: nimmt vor, nahm vor, hat vorgenommen. der Vorsatz — твёрдое намерение, решение. Без sich — проводить (см. отдельную карточку).",
+    "usage_note_en": "The reflexive pronoun is in the dative: ich nehme mir vor. To get down to: Ich würde mir die Bücher vornehmen. — I'd get stuck into the books. To take to task: Dann nahm sich der Chef die beiden Praktikanten vor. — Then the boss took both interns to task. Strong, separable: nimmt vor, nahm vor, hat vorgenommen. der Vorsatz — resolution. Without sich — to carry out (see the separate card).",
     "example_de": "Meine Schwester nimmt sich jedes Jahr vor, weniger Süßes zu essen – und hält es nie lange durch.",
     "example_cloze": "Meine Schwester {{c1::nimmt}} sich jedes Jahr {{c1::vor}}, weniger Süßes zu essen – und hält es nie lange durch.",
     "example_ru": "Моя сестра каждый год решает есть меньше сладкого — и никогда долго не выдерживает.",
@@ -117903,7 +117979,7 @@
     "id": "verb-2442",
     "infinitive": "sich zurückziehen",
     "translation_ru": "удаляться, уходить, уединяться; отступать (о войсках); отходить (от дел, общественной жизни)",
-    "translation_en": "to withdraw, to retreat, to retire",
+    "translation_en": "to withdraw, to go away, to seclude oneself; to retreat (of troops); to withdraw, to retire (from business, public life)",
     "auxiliary": "haben",
     "usage_note_ru": "Откуда — aus + Dat.; куда — in + Akk. zurückgezogen leben — жить уединённо. Отделяемый, сильный: zog sich zurück, hat sich zurückgezogen. der Rückzug — отступление; уход.",
     "usage_note_en": "From where — aus + dative; where to — in + accusative. zurückgezogen leben — to live a secluded life. Separable, strong: zog sich zurück, hat sich zurückgezogen. der Rückzug — retreat; withdrawal.",
@@ -117954,7 +118030,7 @@
     "id": "verb-2443",
     "infinitive": "zusammenbrechen",
     "translation_ru": "обрушиваться; (о человеке) падать без сил, не выдерживать; рушиться, останавливаться (о системе, движении)",
-    "translation_en": "to collapse, to break down; to cave in",
+    "translation_en": "to collapse, to cave in; (of a person) to collapse, to break down; to break down, to come to a standstill (of a system, traffic)",
     "auxiliary": "sein",
     "usage_note_ru": "Также о человеке — упасть без сил; сломаться (нервно); о системах — рухнуть, отказать. Отделяемый, сильный: bricht zusammen, brach zusammen, ist zusammengebrochen. der Zusammenbruch — крах, срыв.",
     "usage_note_en": "Also of a person — to collapse; to break down (emotionally); of systems — to collapse, to fail. Separable, strong: bricht zusammen, brach zusammen, ist zusammengebrochen. der Zusammenbruch — collapse, breakdown.",
@@ -120180,8 +120256,8 @@
       "example_de": "Alle entsetzten sich über die Nachricht.",
       "example_ru": "Все ужаснулись этому известию.",
       "example_en": "Everyone was horrified at the news.",
-      "note_ru": "чему / от чего — über + Akk., vor + Dat.",
-      "note_en": "at what — über + accusative, vor + dative."
+      "note_ru": "ужаснуться чему-либо — über + Akk.; прийти в ужас от чего-либо — vor + Dat.",
+      "note_en": "to be horrified at something — über + accusative; to be horrified by something — vor + dative."
     }
   },
   {
@@ -121390,7 +121466,7 @@
   {
     "id": "verb-2516",
     "infinitive": "simplifizieren",
-    "translation_ru": "(книжн.) (чрезмерно) упрощать",
+    "translation_ru": "(книжн.) упрощать (чрезмерно)",
     "translation_en": "(formal) to oversimplify, to simplify",
     "auxiliary": "haben",
     "usage_note_ru": "Слабый: simplifizierte, hat simplifiziert. Нейтрально — vereinfachen. simplifizierend — упрощенческий.",
@@ -124048,11 +124124,11 @@
   {
     "id": "verb-2601",
     "infinitive": "uraufführen",
-    "translation_ru": "впервые ставить, исполнять (давать премьеру)",
-    "translation_en": "to premiere, to perform for the first time",
+    "translation_ru": "впервые ставить, исполнять, показывать (новое произведение)",
+    "translation_en": "to premiere, to perform, to show (a new work) for the first time",
     "auxiliary": "haben",
-    "usage_note_ru": "Обычно в инфинитиве и Partizip II: uraufgeführt. Личные формы редки: uraufführte (также führte … ur auf); инфинитив с zu: uraufzuführen. die Uraufführung — премьера.",
-    "usage_note_en": "Usually in the infinitive and the past participle: uraufgeführt. Finite forms are rare: uraufführte (also führte … ur auf); infinitive with zu: uraufzuführen. die Uraufführung — premiere.",
+    "usage_note_ru": "Обычно в инфинитиве и Partizip II: uraufgeführt. Личные формы редки: uraufführte (также führte … ur auf); инфинитив с zu: uraufzuführen. die Uraufführung — первое исполнение (нового произведения), мировая премьера.",
+    "usage_note_en": "Usually in the infinitive and the past participle: uraufgeführt. Finite forms are rare: uraufführte (also führte … ur auf); infinitive with zu: uraufzuführen. die Uraufführung — first performance (of a new work), world premiere.",
     "example_de": "Das Stück wurde 1928 in Berlin uraufgeführt.",
     "example_cloze": "Das Stück wurde 1928 in Berlin {{c1::uraufgeführt}}.",
     "example_ru": "Пьеса была впервые поставлена в Берлине в 1928 году.",
