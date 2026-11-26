@@ -858,8 +858,8 @@
     "id": "preposition-022",
     "type": "preposition",
     "word": "über",
-    "translation_ru": "над; через (пересекая); о, об (тема); более, свыше",
-    "translation_en": "above, over; across; about (a topic); more than",
+    "translation_ru": "над; через (пересекая); о, об (тема); более, свыше; в течение, на протяжении",
+    "translation_en": "above, over; across; about (a topic); more than; throughout, during",
     "example_de": "Die Lampe hängt über dem Tisch.",
     "example_ru": "Лампа висит над столом.",
     "example_en": "The lamp is hanging above the table.",
@@ -882,19 +882,20 @@
         "case": "Akkusativ",
         "position": "before",
         "status": "standard",
-        "note_ru": "Wohin? — куда (направление); через что-либо; тема: о чём",
-        "note_en": "Wohin? — where to (direction); across something; topic: about",
+        "note_ru": "Wohin? — куда (направление); через что-либо; время: в течение (über die Feiertage); тема: о чём",
+        "note_en": "Wohin? — where to (direction); across something; time: over, during (über die Feiertage); topic: about",
         "example_de": "über den Tisch"
       }
     ],
     "contractions": {
+      "überm": "über dem",
       "übers": "über das"
     },
     "forms": null,
-    "forms_note_ru": "Разговорная слитная форма: übers = über das.",
-    "forms_note_en": "Colloquial contracted form: übers = über das.",
-    "usage_note_ru": "Тема — всегда Akkusativ: sprechen über das Wetter. Через: über die Straße gehen. Маршрут: über Köln nach Berlin — через Кёльн. Количество: über 100 Leute — более ста человек.",
-    "usage_note_en": "A topic always takes Akkusativ: sprechen über das Wetter. Across: über die Straße gehen. Route: über Köln nach Berlin — via Cologne. Amount: über 100 Leute — more than a hundred people.",
+    "forms_note_ru": "Разговорные слитные формы: überm = über dem, übers = über das.",
+    "forms_note_en": "Colloquial contracted forms: überm = über dem, übers = über das.",
+    "usage_note_ru": "Тема — всегда Akkusativ: sprechen über das Wetter. Через: über die Straße gehen. Маршрут: über Köln nach Berlin — через Кёльн. Время: über die Feiertage — на праздники, в течение праздников; die ganze Nacht über — всю ночь. Количество: über 100 Leute — более ста человек.",
+    "usage_note_en": "A topic always takes Akkusativ: sprechen über das Wetter. Across: über die Straße gehen. Route: über Köln nach Berlin — via Cologne. Time: über die Feiertage — over the holidays; die ganze Nacht über — all night long. Amount: über 100 Leute — more than a hundred people.",
     "search_forms": [
       "über"
     ],

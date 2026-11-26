@@ -633,7 +633,7 @@
   // stand before an ordinal (am 3. Mai, ins 21. Jahrhundert, fürs 1. Mal) or open a sentence. A copy, not read from the cards: the
   // reader splits the text into sentences (abbreviationEnd, calendarDateLength) before the cards are loaded. The regression test
   // contraction-forms-qa fails when it differs from the cards.
-  const CONTRACTION_FORMS = Object.freeze(["beim","vom","zum","zur","durchs","fürs","ums","am","ans","aufs","hinterm","hinters","im","ins","übers","unterm","unters","vorm","vors"]);
+  const CONTRACTION_FORMS = Object.freeze(["beim","vom","zum","zur","durchs","fürs","ums","am","ans","aufs","hinterm","hinters","im","ins","übers","überm","unterm","unters","vorm","vors"]);
   const ABBREVIATION_NEVER_END = new Set(["dr","prof","nr","z","u","d","ca","vgl","bzw","bzgl","inkl","zzgl","hl","v","od"]);
   const ABBREVIATION_MAY_END = new Set(["sog","evtl","ggf","usw","etc","chr","ff","mio","mrd","jh","jhd","inc","ltd","engl","lat","frz","griech","a","s","o","g","h","hrsg"]);
   const ABBREVIATION_BEFORE_NAME = new Set(["st","co"]);
@@ -2001,7 +2001,7 @@ function apostropheText(text) {
     function vpRows(list, key) { if (!list) return []; let m = vpIndexCache.get(list); if (!m) { m = new Map(); for (const r of list) { const k = norm(String(r[0])).replace(/^sich\s+/u,''); let a = m.get(k); if (!a) m.set(k, a = []); a.push(r); } vpIndexCache.set(list, m); } return m.get(key) || []; }
     // complementFact — the one source of the facts of a pair: an element of `complements` (a card of ours — verb, noun, adjective,
     // expression —, its field reflexive, a light record) read once — its pattern and its conditions (correlative_only, direction,
-    // requires_any, no_object, impersonal, frame: "regard", meaning_ru / meaning_en). The pattern is read once: gov — «prep + Kasus» or
+    // requires_any, no_object, impersonal, frame: "regard", prep_required, meaning_ru / meaning_en). The pattern is read once: gov — «prep + Kasus» or
     // «prep / prep + Kasus» (the meaning of the pair first: sich fassen «an / bei + Dativ»); pair — gov with one preposition (every pair
     // rule: the list of pairs, a noun's, an adjective's, an expression's pair; a pattern with two prepositions names places or ways — in
     // / auf schießen — and is no pair); first — the first word (the reflexive construction, the verb that blocks a noun's pair, the
@@ -2021,7 +2021,7 @@ function apostropheText(text) {
         // (the part before the first «+» — «in / auf» of «in / auf + Akkusativ» —, and a zu-infinitive: a noun with its own pair)
         head:norm(pattern.split(/\s*\+\s*/u)[0]), infinitive:/\+\s*Infinitiv\b/u.test(pattern),
         meaningRu:x.meaning_ru ? String(x.meaning_ru).trim() : "", meaningEn:x.meaning_en ? String(x.meaning_en).trim() : "",
-        correlativeOnly:x.correlative_only === true, direction:x.direction === true, regard:x.frame === "regard",
+        correlativeOnly:x.correlative_only === true, direction:x.direction === true, regard:x.frame === "regard", prepRequired:x.prep_required === true,
         requiresAny:x.requires_any, noObject:x.no_object,
         impersonal:typeof x.impersonal === "string" && x.impersonal.trim() ? x.impersonal.trim() : null});
       complementFactCache.set(x, f);
@@ -2888,6 +2888,10 @@ function apostropheText(text) {
     // Preposition spellings (and their contractions) come from the preposition cards.
     const prepositions = new Set([...entries.filter(e => e.type === "preposition").flatMap(e => [e.word,...(e.search_forms || [])].map(norm)),
       ...Object.keys(contractionForms)]);
+    // The preposition inside a da(r)- / wo(r)- form of any preposition card (damit → mit, darauf → auf, worüber → über); null otherwise.
+    // (r before a vowel only — dabei, daran; no darmit)
+    const pronominalPreposition = form => { const m = /^(?:da|wo)(r(?=[aeiouäöü]))?(\p{Ll}+)$/u.exec(norm(form));
+      return m && prepositions.has(m[2]) && !contractionArticle(m[2]) ? m[2] : null; };
     const grammarCache = new Map();
     // clause / subject facts per sentence — sentenceSubjectFacts
     const subjectFactsCache = new Map();
@@ -4329,8 +4333,9 @@ function apostropheText(text) {
             let complement=null;
             for(let i=pronoun+1;i<clause.end;i++) {
               // (not an element kept for its correlate only, nor one that asks for a word of the part — requires_any: verstehen von «знать толк» with
-              // viel / nichts … — without such a word: Das versteht sich von selbst is sich verstehen)
-              const f=complementFacts(a.entry?.complements).find(f=>f.first===words[i]&&!f.correlativeOnly&&!f.direction&&
+              // viel / nichts … — without such a word: Das versteht sich von selbst is sich verstehen; a pair of one preposition only — in / auf
+              // schießen names places: sich in die Umlaufbahn schießen has no pair; zu + Infinitiv by its zu)
+              const f=complementFacts(a.entry?.complements).find(f=>(f.pair?.prep===words[i]||f.infinitive&&f.first===words[i])&&!f.correlativeOnly&&!f.direction&&
                 (f.requiresAny===undefined||(need=>!!need&&words.slice(clause.start,clause.end+1).some(w=>need.has(w)))(requiredWords(f))));
               const c=f?f.element:undefined;
               // a two-way preposition with no case shown — an Hagrid — keeps the pair, its case not written
@@ -19415,6 +19420,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // direction-adverb — before the preposition or closing the part; without the list — no word of the class
     const wordClass = name => ({test:w => !!wordClassSets?.get(name)?.has(norm(String(w)))});
     const DIRECTION_BEFORE_PREPOSITION = wordClass("direction-adverb");
+    // time-before-da-form — with a time noun of data/noun-classes.json: the word that makes the da(r)- form after it an adverb of time
+    const timeBeforeDaForm = w => wordClass("time-before-da-form").test(w) || !!nounClassSets?.time.has(norm(String(w)));
     const OBJECT_PRONOUN_CASE = {mir:'Dativ',dir:'Dativ',ihm:'Dativ',ihnen:'Dativ',mich:'Akkusativ',dich:'Akkusativ',ihn:'Akkusativ'};
     // the forms of verbs with a pair of a light record that no card of ours has: per sentence, the lowercase words of the part
     // that are no form of ours, whose first letters may be such a verb's (its word, or the base after its separable particle) — the
@@ -19630,10 +19637,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (with a subject pronoun in the part — ich, du, er, wir, ihr — das / die / ein / eine + a noun is no subject: the object; wir teilen
       // uns das Zimmer)
       const subjectPronounInPart = indices.some(i => /^(?:ich|du|er|wir|ihr)$/u.test(norm(tokens[i][0])));
-      // Is an accusative object shown in the part besides the word at k (see above)?
+      // Is an accusative object shown in the part besides the word at k (see above)? (einen after die / der is the pronoun «die einen» —
+      // Die einen entscheiden sich für …, the subject —, not the accusative ein)
       const accusativeShown = k => indices.some(i => { if (i === k || afterPreposition(i)) return false; const w = norm(tokens[i][0]);
         const noun = /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? '') && indices.includes(i+1);
-        return w === 'einen' || ['mich','dich','ihn'].includes(w) || w === 'den' && noun && !/n$/u.test(norm(tokens[i+1][0])) ||
+        return w === 'einen' && !/^(?:die|der)$/u.test(norm(tokens[i-1]?.[0] ?? '')) || ['mich','dich','ihn'].includes(w) || w === 'den' && noun && !/n$/u.test(norm(tokens[i+1][0])) ||
           subjectPronounInPart && i > k && noun && /^(?:das|die|ein|eine)$/u.test(w); });
       const sichCases = new Set(indices.filter(i => { const w = norm(tokens[i][0]);
         return !afterPreposition(i) && (w === 'sich' || !!OWN_SUBJECT[w] && indices.some(k => norm(tokens[k][0]) === OWN_SUBJECT[w])); })
@@ -19721,8 +19729,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const prep = prepositionAt(selected + 1);
         const ownRows = nounOwn.filter(([pr]) => pr === prep);
         let rows = ownRows.map(([pr, c]) => [nounLink, pr, c]);
-        if (!rows.length && nounVerb) rows = pairs(nounVerb, prep, selected);
-        if (!rows.length && nounVerb) rows = (lemmas.get(nounVerb) || []).filter(e => e.type === 'Verb').flatMap(e => complementFacts(e.complements || []))
+        // (a noun of the verb takes no pair on durch: after it durch names the doer, as von in the passive — eine Auszeichnung durch die
+        // Initiative; sich auszeichnen durch stays the verb's)
+        if (!rows.length && nounVerb && prep !== 'durch') rows = pairs(nounVerb, prep, selected);
+        if (!rows.length && nounVerb && prep !== 'durch') rows = (lemmas.get(nounVerb) || []).filter(e => e.type === 'Verb').flatMap(e => complementFacts(e.complements || []))
           .filter(f => f.pair && f.pair.case !== 'Nominativ' && f.pair.prep === prep).map(f => [nounVerb, prep, f.pair.case]);
         // not von (mostly the genitive's stand-in: die Erfahrung von CARE, die Befreiung von Paris); not a date or a number
         // (Ziehung am Dienstag, Trennung von 1905, Bewerbungen um 11 Prozent); not a lone determiner (seine Rechnung mit ein); not a
@@ -20170,8 +20180,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       // The span of token i: {text, start, end}.
       const span = (i) => tokenSpan(tokens,i);
+      // (a reflexive pair — «sich X + preposition» — lights its reflexive pronoun too: the same group as on the verb)
+      const sichAt = /^sich\s/u.test(norm(verbName)) ? indices.find(i => reflexivePronouns.has(norm(tokens[i][0])) && !prepositionOf(i)) : undefined;
       const link = {verb:verbName,preposition:prepositionAt(p),case:cases[0],pattern:chosen[0].caseShown === false ? prepositionAt(p) : `${prepositionAt(p)} + ${cases[0]}`,
-        spans:[v,p,...(nounRow ? [nounAt(nounRow[0])] : [])].sort((a,b) => a-b).map(span)};
+        spans:[v,p,...(nounRow ? [nounAt(nounRow[0])] : []),...(sichAt !== undefined ? [sichAt] : [])].sort((a,b) => a-b).map(span)};
       // (both pairs on the verb: «mit + Dativ · über + Akkusativ», the verb and both prepositions lit)
       if (chosen.length === 2) Object.assign(link,{pattern:chosen.map((l,n) => l.caseShown === false ? prepositionAt(l.p) : `${prepositionAt(l.p)} + ${caseOf[n]}`).join(' · '),
         pairs:chosen.map((l,n) => ({preposition:prepositionAt(l.p),case:caseOf[n]})),spans:[v,...chosen.map(l => l.p)].sort((a,b) => a-b).map(span)});
@@ -24947,7 +24959,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Release the sentence's shared context (and the partial sources when none is left).
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
       // The pipeline of one tap: the resolution and every step after the card choice, in order (see above).
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>ordinalNounPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>pairWindowChoice(result)).then(result=>coordinatedAdjective(w,c,result,pipeline)).then(result=>twinParticiple(w,c,result)).then(result=>zuSpellingTwin(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>unitAfterNumber(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>ordinalNounPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>singleLetter(w,c,result)).then(result=>lightNounOverOther(w,c,result)).then(result=>brokenOffWord(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>capitalAfterDeterminer(w,c,result)).then(result=>capitalAttributive(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>governedSenseFirst(w,c,result)).then(result=>prepMissingSensesLast(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>verblessPartVerb(w,c,result)).then(result=>pairWindowChoice(result)).then(result=>coordinatedAdjective(w,c,result,pipeline)).then(result=>twinParticiple(w,c,result)).then(result=>zuSpellingTwin(w,c,result)).then(result=>englishByParts(result));
       // the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -25606,6 +25618,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         let p = null, c = null;
         if (contractionArticle(w)) [p, c] = [contractionPrepositionOf(w), contractionCaseOf(w)];
         else if (preps.includes(w)) { p = w; c = TWO_WAY_PREPOSITION.test(w) ? prepositionPhraseCase(tokens, k, b) : GOV_FIXED[w] || null; }
+        // (a da(r)- / wo(r)- form of the preposition stands for its group, of any case — Damit hatte er nicht gerechnet, Worauf wartest du?;
+        // not right after und / oder / aber, where it is the connecting adverb — und damit einen Rekord gebrochen «тем самым»; not right after
+        // a word of time, where it is the adverb of time — Kurz darauf hörten sie einen Schrei, am Tag darauf)
+        else if (preps.includes(pronominalPreposition(w)) && !(k > 0 && ([...COORDINATORS_WITHOUT_COMMA, "aber"].includes(norm(tokens[k-1][0])) || timeBeforeDaForm(tokens[k-1][0])))) { p = pronominalPreposition(w); c = kase; }
         if (!p || !preps.includes(p) || c !== kase || k + 1 > b) continue;
         // (acceptance step (1к): an adverb of direction right before the preposition makes the group a direction —
         // folgte Hagrid hinaus auf den Felsen —, as for the pairs (verbPrepositionLink))
@@ -25671,7 +25687,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Kaikki has no pairs by meaning — nothing for it)
       const item = ourPairSource(c);
       if (!c || !item || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || !Number.isInteger(context?.tokenOffset)) return result;
-      await loadImpersonalPairs();
+      await loadImpersonalPairs(); await loadNounClasses();
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'governedSenseFirst');
       const at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
@@ -25732,6 +25748,31 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       const selected = {...c, senseFirst:k, senseFirstEn:enOf(item.translation_en), senseEvidence:"government",
         senseMark:senseMarkOf(item, {field:c.source === "main" ? "item" : "light", rows:[row], mode:"first"})};
+      return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
+    }
+    // A meaning that never stands without its preposition (prep_required on every complements element marked with it — rechnen
+    // «рассчитывать» mit, zählen «причислять» zu) goes down, behind «ещё N значений», when the sentence holds none of its prepositions:
+    // neither the preposition, nor its contraction (zum, beim …), nor a da(r)- / wo(r)- form (damit, worauf), nor its -einander form
+    // (miteinander, aufeinander). The whole sentence is
+    // searched — a preposition in another part keeps the meaning in place. sensesLast / sensesLastEn: the numbers of the meanings in the
+    // Russian / English text (a pack language follows by number); a meaning raised by its pair (senseFirst) is never moved.
+    async function prepMissingSensesLast(word, context, result) {
+      const c = result?.selected, item = ourPairSource(c);
+      if (!c || !item || !Array.isArray(item.complements)) return result;
+      const tokens = sharedTokens(String(context?.sentence || ""), 'prepMissingSensesLast');
+      const present = new Set(tokens.map(t => basePreposition(t[0])));
+      const prepAt = prep => present.has(prep) || tokens.some(t => pronominalPreposition(t[0]) === prep || norm(t[0]) === `${prep}einander`);
+      const facts = complementFacts(item.complements);
+      const down = (text, key, raised) => {
+        const parts = String(text || "").split(";").map(x => x.trim()).filter(Boolean);
+        const at = parts.map((m, i) => { const own = facts.filter(f => String(f.element[key] || "").trim() === m);
+          return own.length && own.every(f => f.prepRequired && f.gov) && !own.some(f => f.gov.preps.some(prepAt)) && !raised.has(i) ? i : -1; })
+          .filter(i => i >= 0);
+        return at.length && at.length < parts.length ? at : null; };
+      const ru = down(item.translation_ru, "meaning_ru", new Set([c.senseFirst, ...(c.sensesFirst || [])]));
+      const en = down(item.translation_en, "meaning_en", new Set([c.senseFirstEn, ...(c.sensesFirstEn || [])]));
+      if (!ru && !en) return result;
+      const selected = {...c, ...(ru ? {sensesLast:ru} : {}), ...(en ? {sensesLastEn:en} : {})};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred, candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
     // The small steps after the choice (most of them one word or one form): unitAfterNumber (a unit card after a number), weitereCard,

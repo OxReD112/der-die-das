@@ -9222,7 +9222,8 @@
         "meaning_ru": "насмехаться, потешаться (над кем-, чем-либо)",
         "meaning_en": "to make fun (of someone, something)",
         "note_ru": "насмехаться над кем-, чем-либо: Mach dich nicht über mich lustig!",
-        "note_en": "to make fun of someone or something: Mach dich nicht über mich lustig!"
+        "note_en": "to make fun of someone or something: Mach dich nicht über mich lustig!",
+        "prep_required": true
       }
     ]
   },
@@ -71291,5 +71292,54 @@
         "Sie kann von ihrem Glück erzählen."
       ]
     }
+  },
+  {
+    "id": "expression-455",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "alle Hände voll zu tun haben",
+    "translation_ru": "(разг.) быть очень занятым, иметь кучу дел; (разг.) с трудом справляться (с чем-либо)",
+    "translation_en": "(colloquial) to have one's hands full, to be very busy; (colloquial) to have a hard time (with something)",
+    "example_de": "Vor Weihnachten haben wir in der Bäckerei alle Hände voll zu tun.",
+    "example_ru": "Перед Рождеством у нас в пекарне работы невпроворот.",
+    "example_en": "Before Christmas we have our hands full at the bakery.",
+    "notes_ru": [
+      "Также beide Hände voll zu tun haben. С чем — mit + Dat.: Mit den Zwillingen hat sie alle Hände voll zu tun. — С близнецами ей приходится нелегко."
+    ],
+    "notes_en": [
+      "Also beide Hände voll zu tun haben. With what — mit + dative: Mit den Zwillingen hat sie alle Hände voll zu tun. — She has her hands full with the twins."
+    ],
+    "related_ids": [
+      "noun-064",
+      "adjective-091",
+      "verb-194",
+      "verb-002"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Hand",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "expression-456",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Flagge zeigen",
+    "translation_ru": "открыто заявлять свою позицию",
+    "translation_en": "to show one's colours, to take a clear stand",
+    "example_de": "In der Debatte über das neue Gesetz hat die Partei endlich Flagge gezeigt.",
+    "example_ru": "В споре о новом законе партия наконец открыто заявила свою позицию.",
+    "example_en": "In the debate on the new law the party finally showed its colours.",
+    "notes_ru": [
+      "Флаг здесь — не настоящий: «Flagge zeigen» значит ясно и твёрдо показать, на чьей ты стороне. Буквально — «показать флаг» (по английскому to show the flag)."
+    ],
+    "notes_en": [
+      "Not a real flag: «Flagge zeigen» means to make clear and firmly where one stands. Literally “to show the flag” (after English to show the flag)."
+    ],
+    "related_ids": [
+      "noun-3159",
+      "verb-212"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Flagge",
+    "source": "Duden (Flagge, Wendungen): Flagge zeigen — seine Meinung oder Erwartung mit Nachdruck und deutlich zu erkennen geben; nach englisch to show the flag",
+    "wortschatz_excluded": true
   }
 ]

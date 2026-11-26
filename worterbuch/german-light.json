@@ -1031,7 +1031,8 @@
     "note_ru": "намекать на что-либо: Er spielte auf ihren Fehler an.",
     "note_en": "to allude to something: Er spielte auf ihren Fehler an.",
     "meaning_ru": "намекать",
-    "meaning_en": "to allude, to insinuate"
+    "meaning_en": "to allude, to insinuate",
+    "prep_required": true
    }
   ]
  },
@@ -2454,8 +2455,8 @@
   "id": "light-0270",
   "word": "buhlen",
   "pos": "verb",
-  "translation_ru": "добиваться, домогаться, заискивать; устар. миловаться, любезничать; устар. ухаживать, волочиться",
-  "translation_en": "to vie (for), to court (favour); archaic to make love, to have an affair (with); archaic to woo, to court",
+  "translation_ru": "добиваться, домогаться, заискивать; устар. ухаживать, волочиться; устар. миловаться, любезничать",
+  "translation_en": "to vie (for), to court (favour); archaic to woo, to court; archaic to make love, to have an affair (with)",
   "complements": [
    {
     "pattern": "um + Akkusativ",
@@ -2464,7 +2465,8 @@
     "note_ru": "добиваться чего-либо (неодобр.): Die Parteien buhlen um die Gunst der Wähler.",
     "note_en": "to vie for something (pejorative): Die Parteien buhlen um die Gunst der Wähler.",
     "meaning_ru": "добиваться, домогаться, заискивать",
-    "meaning_en": "to vie (for), to court (favour)"
+    "meaning_en": "to vie (for), to court (favour)",
+    "prep_required": true
    },
    {
     "pattern": "um + Akkusativ",
@@ -3159,7 +3161,8 @@
     "meaning_en": "to be reminiscent, to echo",
     "note_ru": "напоминать что-либо: Das Lied klingt an einen alten Schlager an.",
     "note_en": "to be reminiscent of something: Das Lied klingt an einen alten Schlager an.",
-    "source_meaning": "Duden (1): die Melodie klingt an ein altes Volkslied an"
+    "source_meaning": "Duden (1): die Melodie klingt an ein altes Volkslied an",
+    "prep_required": true
    }
   ]
  },
@@ -3167,7 +3170,7 @@
   "id": "light-0314",
   "word": "aufkommen",
   "pos": "verb",
-  "translation_ru": "возникать, появляться, подниматься, входить в моду; оплачивать, возмещать (расходы); отвечать, нести ответственность; справляться, тягаться; сравниться, выдвинуться (рядом с кем-либо); подниматься, вставать; (книжн.) поправляться, выздоравливать; (регион.) обнаруживаться, раскрываться; приземляться; наверстывать, усиливать натиск (в спорте); показываться на горизонте (о судне)",
+  "translation_ru": "возникать, появляться, подниматься, входить в моду; оплачивать, возмещать (расходы); отвечать, нести ответственность; справляться, тягаться; равняться (с кем-либо), быть под стать; подниматься, вставать; (книжн.) поправляться, выздоравливать; (регион.) обнаруживаться, раскрываться; приземляться; наверстывать, усиливать натиск (в спорте); показываться на горизонте (о судне)",
   "translation_en": "to arise, to come up, to spring up, to come into fashion; to pay for, to cover (costs); to be responsible, to answer for; to prevail, to hold one's own; to match, to measure up (to someone); to get up, to rise; (elevated) to recover, to get well; (regional) to come to light, to be discovered; to land; to catch up, to come back (in sport); to come into sight (of a ship)",
   "auxiliary": "sein",
   "separable_prefix": "auf",
@@ -3180,7 +3183,8 @@
     "meaning_en": "to pay for, to cover (costs)",
     "note_ru": "оплачивать что-либо: Die Versicherung kommt für den Schaden auf.",
     "note_en": "to pay for something: Die Versicherung kommt für den Schaden auf.",
-    "source_meaning": "Duden (2a): für den entstandenen Sachschaden aufkommen"
+    "source_meaning": "Duden (2a): für den entstandenen Sachschaden aufkommen",
+    "prep_required": true
    },
    {
     "pattern": "für + Akkusativ",
@@ -3190,7 +3194,8 @@
     "meaning_en": "to be responsible, to answer for",
     "note_ru": "отвечать за что-либо: Der Staat kommt für die Sicherheit der Bürger auf.",
     "note_en": "to be responsible for something: Der Staat kommt für die Sicherheit der Bürger auf.",
-    "source_meaning": "Duden (2b): für die Sicherheit Berlins aufkommen"
+    "source_meaning": "Duden (2b): für die Sicherheit Berlins aufkommen",
+    "prep_required": true
    },
    {
     "pattern": "gegen + Akkusativ",
@@ -3199,16 +3204,18 @@
     "meaning_ru": "справляться, тягаться",
     "meaning_en": "to prevail, to hold one's own",
     "note_ru": "справляться с кем-либо, чем-либо: Gegen diesen Gegner kommt er nicht auf.",
-    "note_en": "to hold one's own against someone/something: Gegen diesen Gegner kommt er nicht auf."
+    "note_en": "to hold one's own against someone/something: Gegen diesen Gegner kommt er nicht auf.",
+    "prep_required": true
    },
    {
     "pattern": "gegen + Akkusativ",
     "source": "DWDS (3): ⟨gegen jmdn., etw. aufkommen⟩ sich gegenüber jmdm., etw. durchsetzen",
     "source_kind": "dwds",
-    "meaning_ru": "сравниться, выдвинуться (рядом с кем-либо)",
+    "meaning_ru": "равняться (с кем-либо), быть под стать",
     "meaning_en": "to match, to measure up (to someone)",
     "note_ru": "сравниться с кем-либо: Gegen ihn kommt im Team niemand auf.",
-    "note_en": "to match someone: Gegen ihn kommt im Team niemand auf."
+    "note_en": "to match someone: Gegen ihn kommt im Team niemand auf.",
+    "prep_required": true
    }
   ]
  },
@@ -3250,7 +3257,8 @@
     "meaning_en": "(elevated) to treat, to serve up",
     "note_ru": "угощать кого-либо чем-либо: Die Gastgeberin wartet den Gästen mit einem Kuchen auf.",
     "note_en": "to treat someone to something: Die Gastgeberin wartet den Gästen mit einem Kuchen auf.",
-    "source_meaning": "Duden (1a): den Gästen mit einer Flasche Champagner, mit einem fünfgängigen Menü aufwarten"
+    "source_meaning": "Duden (1a): den Gästen mit einer Flasche Champagner, mit einem fünfgängigen Menü aufwarten",
+    "prep_required": true
    },
    {
     "pattern": "mit + Dativ",
@@ -3260,7 +3268,8 @@
     "meaning_en": "to offer, to come up with, to boast",
     "note_ru": "преподносить что-либо: Der Verein wartet mit einer Überraschung auf.",
     "note_en": "to come up with something: Der Verein wartet mit einer Überraschung auf.",
-    "source_meaning": "Duden (1b): mit großen Neuigkeiten, Verbesserungen aufwarten [können]"
+    "source_meaning": "Duden (1b): mit großen Neuigkeiten, Verbesserungen aufwarten [können]",
+    "prep_required": true
    }
   ]
  },
@@ -3327,7 +3336,8 @@
     "meaning_en": "to become, to rise",
     "note_ru": "стать кем-чем-либо: Der Film avancierte zum Kassenschlager.",
     "note_en": "to become something, to rise to something: Der Film avancierte zum Kassenschlager.",
-    "source_meaning": "Duden (2): er ist zum besten Spieler der Mannschaft, zum einflussreichsten Politiker avanciert"
+    "source_meaning": "Duden (2): er ist zum besten Spieler der Mannschaft, zum einflussreichsten Politiker avanciert",
+    "prep_required": true
    }
   ]
  },
@@ -3494,7 +3504,8 @@
     "note_ru": "корпеть над чем-либо: Er brütet über der Mathematikaufgabe.",
     "note_en": "to pore over something: Er brütet über der Mathematikaufgabe.",
     "source_meaning": "Duden (3a): er brütet über seinen Plänen",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -3577,7 +3588,8 @@
     "meaning_en": "to put in the mood, to attune",
     "note_ru": "настраивать кого-либо на что-либо: Der Lehrer stimmt die Klasse auf die Prüfung ein.",
     "note_en": "to put someone in the mood for something: Der Lehrer stimmt die Klasse auf die Prüfung ein.",
-    "source_meaning": "Duden (2): das Publikum durch einführende Worte auf den Theaterabend einstimmen"
+    "source_meaning": "Duden (2): das Publikum durch einführende Worte auf den Theaterabend einstimmen",
+    "prep_required": true
    },
    {
     "pattern": "in + Akkusativ",
@@ -3730,7 +3742,8 @@
      "meaning_en": "to warm to, to take to",
      "note_ru": "проникнуться симпатией к чему-либо: Ich kann mich für dieses Hobby nicht erwärmen.",
      "note_en": "to warm to something: Ich kann mich für dieses Hobby nicht erwärmen.",
-     "source_meaning": "Duden (2a): sich für eine Idee erwärmen"
+     "source_meaning": "Duden (2a): sich für eine Idee erwärmen",
+     "prep_required": true
     }
    ]
   },
@@ -3964,7 +3977,8 @@
     "meaning_en": "(colloquial) to run down, to badmouth",
     "note_ru": "злословить о ком-либо: Sie ziehen ständig über ihre Nachbarn her.",
     "note_en": "to badmouth someone: Sie ziehen ständig über ihre Nachbarn her.",
-    "source_meaning": "Duden (4): die Nachbarn zogen in übler Weise über das Mädchen her"
+    "source_meaning": "Duden (4): die Nachbarn zogen in übler Weise über das Mädchen her",
+    "prep_required": true
    }
   ]
  },
@@ -4018,7 +4032,8 @@
     "meaning_en": "to go beyond, to exceed",
     "note_ru": "выходить за рамки чего-либо: Die Kosten gehen über das Budget hinaus.",
     "note_en": "to go beyond something: Die Kosten gehen über das Budget hinaus.",
-    "source_meaning": "Duden (4): dies geht über meine Kräfte, meine Befugnisse hinaus"
+    "source_meaning": "Duden (4): dies geht über meine Kräfte, meine Befugnisse hinaus",
+    "prep_required": true
    }
   ]
  },
@@ -4040,7 +4055,8 @@
     "note_ru": "клонить к чему-либо: Er will auf eine Gehaltserhöhung hinaus.",
     "note_en": "to be driving at something: Er will auf eine Gehaltserhöhung hinaus.",
     "source_meaning": "Duden (2): auf einen Kompromiss hinauswollen",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -4116,7 +4132,8 @@
     "note_ru": "связывать что-либо с чем-либо: Die Bank knüpft den Kredit an strenge Bedingungen.",
     "note_en": "to make something conditional on something: Die Bank knüpft den Kredit an strenge Bedingungen.",
     "source_meaning": "Duden (3a): große Hoffnungen, Erwartungen an etwas knüpfen; Bedingungen an etwas knüpfen",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -4174,7 +4191,8 @@
     "note_ru": "нападать на кого-либо: Der Hund geht auf den Briefträger los.",
     "note_en": "to go for someone: Der Hund geht auf den Briefträger los.",
     "source_meaning": "Duden (2b): aufeinander losgehen",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -4260,8 +4278,8 @@
   "complements": [
    {
     "pattern": "an + Akkusativ",
-    "source": "DWDS (gehoben): ⟨etw., jmd. mahnt (jmdn.) an etw., jmdn.⟩; der Vorfall mahnt mich an ein früheres Erlebnis",
-    "source_kind": "dwds",
+    "source": "Duden (2a): jemanden an sein Versprechen, an eine Schuld mahnen",
+    "source_kind": "duden",
     "meaning_ru": "напоминать (об обязательстве), требовать уплаты (долга)",
     "meaning_en": "to remind (of an obligation), to send a payment reminder",
     "note_ru": "напоминать кому-либо о чём-либо (обязательстве): Sie mahnt ihn an seine Schulden.",
@@ -4276,7 +4294,8 @@
     "meaning_en": "(elevated) to remind (of something), to be reminiscent (of something)",
     "note_ru": "напоминать о чём-либо: Das alte Denkmal mahnt an den Krieg.",
     "note_en": "to be a reminder of something: Das alte Denkmal mahnt an den Krieg.",
-    "source_meaning": "Duden (2b): gemahnen (b), gehoben"
+    "source_meaning": "Duden (2b): gemahnen (b), gehoben",
+    "prep_required": true
    },
    {
     "pattern": "zu + Dativ",
@@ -4454,7 +4473,8 @@
     "meaning_en": "to rattle, to shake (a door, bars)",
     "note_ru": "дёргать что-либо: Er rüttelt an der Tür.",
     "note_en": "to rattle something: Er rüttelt an der Tür.",
-    "source_meaning": "Duden (1b): an der Tür, am Gitter rütteln"
+    "source_meaning": "Duden (1b): an der Tür, am Gitter rütteln",
+    "prep_required": true
    },
    {
     "pattern": "an + Dativ",
@@ -4560,7 +4580,8 @@
     "meaning_en": "to rave, to gush",
     "note_ru": "восторженно рассказывать о ком-либо/чём-либо: Er schwärmt von dem Urlaub.",
     "note_en": "to rave about someone/something: Er schwärmt von dem Urlaub.",
-    "source_meaning": "Duden (2b): von dem Konzert schwärmt er heute noch"
+    "source_meaning": "Duden (2b): von dem Konzert schwärmt er heute noch",
+    "prep_required": true
    }
   ]
  },
@@ -4714,7 +4735,7 @@
   "id": "light-0376",
   "word": "vergreifen",
   "pos": "verb",
-  "translation_ru": "промахнуться (рукой), взять фальшивую ноту; ошибиться (в выборе), выбрать неподходящее; присвоить, посягнуть (на чужое); поднять руку, применить насилие",
+  "translation_ru": "промахиваться (рукой), брать фальшивую ноту; ошибаться (в выборе), выбирать неподходящее; присваивать, посягать (на чужое); поднимать руку, применять насилие",
   "translation_en": "to miss one's grip, to hit a wrong note; to choose wrongly, to pick the wrong thing; to misappropriate, to lay hands on (property); to assault, to lay hands on (someone)",
   "auxiliary": "haben",
   "reflexive": true,
@@ -4723,27 +4744,29 @@
     "pattern": "an + Dativ",
     "source": "Kaikki (en.wiktionary): (reflexive) to misappropriate [with an (+ dative) ‘something’]",
     "source_kind": "kaikki",
-    "meaning_ru": "присвоить, посягнуть (на чужое)",
+    "meaning_ru": "присваивать, посягать (на чужое)",
     "meaning_en": "to misappropriate, to lay hands on (property)",
-    "note_ru": "посягнуть на что-либо (чужое), присвоить что-либо: Er hat sich an der Kasse vergriffen.",
-    "note_en": "to misappropriate something, to help oneself to something: Er hat sich an der Kasse vergriffen.",
-    "source_meaning": "Duden (2): sich an fremdem Eigentum, Besitz vergreifen; er hat sich an der Kasse vergriffen"
+    "note_ru": "посягать на что-либо (чужое), присваивать что-либо: Der Verwalter vergriff sich an den Spendengeldern.",
+    "note_en": "to misappropriate something, to help oneself to something: Der Verwalter vergriff sich an den Spendengeldern.",
+    "source_meaning": "Duden (2): sich an fremdem Eigentum, Besitz vergreifen; er hat sich an der Kasse vergriffen",
+    "prep_required": true
    },
    {
     "pattern": "an + Dativ",
     "source": "Kaikki (en.wiktionary): (reflexive) to misappropriate [with an (+ dative) ‘something’]",
     "source_kind": "kaikki",
-    "meaning_ru": "поднять руку, применить насилие",
+    "meaning_ru": "поднимать руку, применять насилие",
     "meaning_en": "to assault, to lay hands on (someone)",
     "note_ru": "поднять руку на кого-либо: Er vergreift sich an einem Schwächeren.",
     "note_en": "to assault someone: Er vergreift sich an einem Schwächeren.",
-    "source_meaning": "Duden (3): sich an einem Schwächeren vergreifen"
+    "source_meaning": "Duden (3): sich an einem Schwächeren vergreifen",
+    "prep_required": true
    },
    {
     "pattern": "in + Dativ",
     "source": "DWDS: sich im Ausdruck, in der Wahl der Worte … vergreifen; sich im Ton vergreifen",
     "source_kind": "dwds",
-    "meaning_ru": "ошибиться (в выборе), выбрать неподходящее",
+    "meaning_ru": "ошибаться (в выборе), выбирать неподходящее",
     "meaning_en": "to choose wrongly, to pick the wrong thing",
     "note_ru": "ошибиться в чём-либо (в тоне, выражении): Er hat sich im Ton vergriffen.",
     "note_en": "to choose the wrong something (tone, expression): Er hat sich im Ton vergriffen.",
@@ -4822,7 +4845,7 @@
     "meaning_en": "to offset, to set off, to include in a settlement",
     "note_ru": "засчитывать что-либо в счёт чего-либо: Die Bank verrechnet die Gutschrift mit der Rechnung.",
     "note_en": "to offset something against something: Die Bank verrechnet die Gutschrift mit der Rechnung.",
-    "source_meaning": "Duden (1): würden Sie bitte den Gutschein mit verrechnen"
+    "source_meaning": "DWDS (1): diesen Betrag verrechnen wir später mit der ganzen Summe"
    }
   ]
  },
@@ -4852,7 +4875,7 @@
   "id": "light-0381",
   "word": "vertauschen",
   "pos": "verb",
-  "translation_ru": "перепутать, (по ошибке) взять чужое вместо своего; менять, заменять, обменивать; сменить (одно занятие на другое)",
+  "translation_ru": "путать, (по ошибке) брать чужое вместо своего; менять, заменять, обменивать; сменять (одно занятие на другое)",
   "translation_en": "to mix up, to swap (by mistake); to exchange, to replace, to swap; to give up (for), to trade (one occupation for another)",
   "auxiliary": "haben",
   "complements": [
@@ -4864,17 +4887,17 @@
     "meaning_en": "to exchange, to replace, to swap",
     "note_ru": "менять что-либо на что-либо: Er vertauscht den Mantel gegen eine Jacke.",
     "note_en": "to exchange something for something: Er vertauscht den Mantel gegen eine Jacke.",
-    "source_meaning": "Duden (1a): die Uniform gegen einen, mit einem Straßenanzug vertauschen"
+    "source_meaning": "Duden (1b): die Uniform gegen einen, mit einem Straßenanzug vertauschen"
    },
    {
     "pattern": "gegen + Akkusativ",
     "source": "de.wiktionary: und nun vertauschte Gudbrand das Schaf gegen die Gans",
     "source_kind": "wiktionary-de",
-    "meaning_ru": "сменить (одно занятие на другое)",
+    "meaning_ru": "сменять (одно занятие на другое)",
     "meaning_en": "to give up (for), to trade (one occupation for another)",
     "note_ru": "сменить одно занятие на другое: Sie vertauschte das Büro gegen das Atelier.",
     "note_en": "to trade one occupation for another: Sie vertauschte das Büro gegen das Atelier.",
-    "source_meaning": "Duden (1a): die Uniform gegen einen, mit einem Straßenanzug vertauschen"
+    "source_meaning": "Duden (2): eine Tätigkeit o. Ä. aufgeben und dafür etwas anderes tun, an die Stelle setzen"
    },
    {
     "pattern": "mit + Dativ",
@@ -5013,7 +5036,8 @@
     "meaning_en": "to watch over, to supervise",
     "note_ru": "следить за кем-либо, чем-либо: Die Mutter wacht über die Kinder.",
     "note_en": "to watch over someone or something: Die Mutter wacht über die Kinder.",
-    "source_meaning": "Duden (3): streng, eifersüchtig über etwas wachen"
+    "source_meaning": "Duden (3): streng, eifersüchtig über etwas wachen",
+    "prep_required": true
    }
   ]
  },
@@ -5097,7 +5121,8 @@
     "meaning_en": "to wear on, to gnaw at, to take a toll on",
     "note_ru": "подтачивать что-либо: Der Stress zehrt an ihren Nerven.",
     "note_en": "to wear on something: Der Stress zehrt an ihren Nerven.",
-    "source_meaning": "Duden (2.2): die Krankheit zehrt an seinen Kräften"
+    "source_meaning": "Duden (2.2): die Krankheit zehrt an seinen Kräften",
+    "prep_required": true
    },
    {
     "pattern": "von + Dativ",
@@ -5227,16 +5252,6 @@
     "note_ru": "встречаться с кем-либо: Er trifft im Café mit seinen Freunden zusammen.",
     "note_en": "to meet someone: Er trifft im Café mit seinen Freunden zusammen.",
     "source_meaning": "Duden (1): ich traf im Theater mit Bekannten zusammen"
-   },
-   {
-    "pattern": "mit + Dativ",
-    "source": "Kaikki (en.wiktionary): (intransitive) to encounter; to meet [with mit ‘with’]",
-    "source_kind": "kaikki",
-    "meaning_ru": "совпадать (по времени)",
-    "meaning_en": "to coincide",
-    "note_ru": "совпадать с чем-либо: Der Feiertag trifft mit dem Sonntag zusammen.",
-    "note_en": "to coincide with something: Der Feiertag trifft mit dem Sonntag zusammen.",
-    "source_meaning": "Duden (2): hier treffen zwei ungünstige Umstände zusammen"
    }
   ]
  },
@@ -5260,7 +5275,8 @@
     "meaning_en": "to step up (to), to approach",
     "note_ru": "подходить к кому-либо, чему-либо: Der Lehrer tritt auf den Schüler zu.",
     "note_en": "to step up to someone or something: Der Lehrer tritt auf den Schüler zu.",
-    "source_meaning": "Duden (1): auf jemanden zutreten"
+    "source_meaning": "Duden (1): auf jemanden zutreten",
+    "prep_required": true
    }
   ]
  },
@@ -5356,7 +5372,8 @@
     "note_ru": "отмежёвываться от чего-либо: Die Partei rückt von ihrem Plan ab.",
     "note_en": "to distance oneself from something: Die Partei rückt von ihrem Plan ab.",
     "source_meaning": "Duden (3): er ist von seinen Äußerungen abgerückt",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -5397,7 +5414,8 @@
     "meaning_en": "(regional, colloquial) to start a flirtation, to flirt (with someone)",
     "note_ru": "заигрывать с кем-либо: Er bändelt mit der neuen Nachbarin an.",
     "note_en": "to flirt with someone: Er bändelt mit der neuen Nachbarin an.",
-    "source_meaning": "Duden (1): er wollte mit ihr anbandeln"
+    "source_meaning": "Duden (1): er wollte mit ihr anbandeln",
+    "prep_required": true
    },
    {
     "pattern": "mit + Dativ",
@@ -5407,7 +5425,8 @@
     "meaning_en": "(colloquial) to pick a quarrel (with someone)",
     "note_ru": "затевать ссору с кем-либо: Er bändelt mit dem Türsteher an.",
     "note_en": "to pick a quarrel with someone: Er bändelt mit dem Türsteher an.",
-    "source_meaning": "Duden (2): mit jemandem Streit anfangen"
+    "source_meaning": "Duden (2): mit jemandem Streit anfangen",
+    "prep_required": true
    }
   ]
  },
@@ -5476,7 +5495,8 @@
     "note_ru": "атаковать кого-либо, что-либо, бороться против чего-либо: Die Soldaten rennen gegen die Festung an.",
     "note_en": "to charge against someone or something: Die Soldaten rennen gegen die Festung an.",
     "source_meaning": "Duden (3.2): gegen feindliche Stellungen anrennen; gegen die Zeit anrennen",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -5606,7 +5626,7 @@
   "id": "light-0410",
   "word": "befreunden",
   "pos": "verb",
-  "translation_ru": "подружиться (с кем-либо); свыкнуться, сжиться (с чем-либо), примириться (с мыслью)",
+  "translation_ru": "подружиться (с кем-либо); свыкаться, сживаться (с чем-либо), примиряться (с мыслью)",
   "translation_en": "to make friends (with someone), to become friends; to get used (to something), to warm (to an idea)",
   "auxiliary": "haben",
   "reflexive": true,
@@ -5625,11 +5645,12 @@
     "pattern": "mit + Dativ",
     "source": "DWDS: „sich mit jmdm. schnell befreunden“; „Dort befreundete er sich mit dem in Weimar wirkenden J. S. Bach.“",
     "source_kind": "dwds",
-    "meaning_ru": "свыкнуться, сжиться (с чем-либо), примириться (с мыслью)",
+    "meaning_ru": "свыкаться, сживаться (с чем-либо), примиряться (с мыслью)",
     "meaning_en": "to get used (to something), to warm (to an idea)",
     "note_ru": "свыкнуться с чем-либо: Mit dem neuen System kann er sich nicht befreunden.",
     "note_en": "to get used to something: Mit dem neuen System kann er sich nicht befreunden.",
-    "source_meaning": "Duden (2): sich mit einem Gedanken befreunden"
+    "source_meaning": "Duden (2): sich mit einem Gedanken befreunden",
+    "prep_required": true
    }
   ]
  },
@@ -5746,7 +5767,8 @@
     "meaning_en": "to be accompanied (by), to go hand in hand (with)",
     "note_ru": "сопровождаться чем-либо: Die Krankheit geht oft mit hohem Fieber einher.",
     "note_en": "to be accompanied by something: Die Krankheit geht oft mit hohem Fieber einher.",
-    "source_meaning": "Duden (2): die Krankheit geht meist mit Fieber einher"
+    "source_meaning": "Duden (2): die Krankheit geht meist mit Fieber einher",
+    "prep_required": true
    }
   ]
  },
@@ -5767,7 +5789,8 @@
     "meaning_en": "to hammer (on), to pound (on), to rain blows (on)",
     "note_ru": "колотить по кому-либо, чему-либо: Der Boxer hämmerte auf seinen Gegner ein.",
     "note_en": "to hammer on someone or something: Der Boxer hämmerte auf seinen Gegner ein.",
-    "source_meaning": "Duden (2): er hämmerte auf den Stein ein; unaufhörlich hämmert Lärm auf uns ein"
+    "source_meaning": "Duden (2): er hämmerte auf den Stein ein; unaufhörlich hämmert Lärm auf uns ein",
+    "prep_required": true
    }
   ]
  },
@@ -5804,7 +5827,8 @@
      "meaning_en": "to zero in (on someone), to make someone a target (of attacks)",
      "note_ru": "нацеливаться на кого-либо: Die Presse hat sich auf den Minister eingeschossen.",
      "note_en": "to zero in on someone: Die Presse hat sich auf den Minister eingeschossen.",
-     "source_meaning": "Duden (2c): die Medien hatten sich auf den Verteidigungsminister eingeschossen"
+     "source_meaning": "Duden (2c): die Medien hatten sich auf den Verteidigungsminister eingeschossen",
+     "prep_required": true
     }
    ]
   }
@@ -5818,16 +5842,6 @@
   "auxiliary": "haben",
   "separable_prefix": "ein",
   "complements": [
-   {
-    "pattern": "auf + Akkusativ",
-    "source": "DWDS: ⟨jmd. schwört jmdn. (auf etw.) ein⟩ ⟨jmd. schwört sich auf etw. ein⟩ seine Partei auf einen Kurs der programmatischen Erneuerung eingeschworen",
-    "source_kind": "dwds",
-    "meaning_ru": "приводить к присяге, связывать клятвой верности",
-    "meaning_en": "to swear in, to bind by an oath of allegiance",
-    "note_ru": "приводить к присяге на верность чему-либо: Die Rekruten wurden auf die Verfassung eingeschworen.",
-    "note_en": "to bind someone by oath to something: Die Rekruten wurden auf die Verfassung eingeschworen.",
-    "source_meaning": "Duden (1): durch einen Treueschwur binden, verpflichten; vereidigen"
-   },
    {
     "pattern": "auf + Akkusativ",
     "source": "DWDS: ⟨jmd. schwört jmdn. (auf etw.) ein⟩ ⟨jmd. schwört sich auf etw. ein⟩ seine Partei auf einen Kurs der programmatischen Erneuerung eingeschworen",
@@ -5892,7 +5906,7 @@
   "complements": [
    {
     "pattern": "vor + Dativ",
-    "source": "DWDS: ⟨sich ekeln⟩ er ekelte sich vor dieser Unsauberkeit, diesem Anblick",
+    "source": "DWDS (2): ⟨jmdn., jmdm. ekelt (es) vor etw., jmdm.⟩",
     "source_kind": "dwds",
     "meaning_ru": "(безл.) быть противным, вызывать отвращение (es ekelt mich — мне противно)",
     "meaning_en": "(impersonal) to feel disgust (es ekelt mich — I am disgusted)",
@@ -6231,7 +6245,8 @@
     "source_meaning": "Duden (2): der Trainer hackt dauernd auf ihr herum",
     "meaning_ru": "(разг.) придираться, цепляться",
     "meaning_en": "(colloquial) to pick on, to keep criticizing",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -6276,10 +6291,11 @@
     "source_kind": "dwds",
     "note_ru": "не обращать внимания на что-либо: Sie ging über seine Bemerkung hinweg.",
     "note_en": "to pass over something: Sie ging über seine Bemerkung hinweg.",
-    "source_meaning": "Duden (1): über eine Anspielung taktvoll hinweggehen; Duden (2): ein Sturm ist über das Land hinweggegangen",
+    "source_meaning": "Duden (1): über eine Anspielung taktvoll hinweggehen",
     "meaning_ru": "оставлять без внимания, обходить молчанием",
     "meaning_en": "to pass over, to ignore",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -6417,7 +6433,8 @@
     "meaning_en": "(colloquial) to rattle, to bang",
     "note_ru": "колотить во что-либо, трясти что-либо: Jemand rammelt an der Tür.",
     "note_en": "to rattle, to bang on something: Jemand rammelt an der Tür.",
-    "source_meaning": "Duden (4): an der Tür rammeln"
+    "source_meaning": "Duden (4): an der Tür rammeln",
+    "prep_required": true
    }
   ]
  },
@@ -6527,7 +6544,8 @@
     "note_ru": "плевать на что-либо: Ich scheiße auf seine Meinung.",
     "note_en": "to not give a shit about something: Ich scheiße auf seine Meinung.",
     "source_meaning": "Duden (2): ich scheiße auf dein Geld",
-    "correlative_only": true
+    "correlative_only": true,
+    "prep_required": true
    }
   ]
  },
@@ -6721,14 +6739,14 @@
   "translation_en": "(elevated) to arm, to equip (someone for a difficult situation)",
   "auxiliary": "haben",
   "reflexive": {
-   "translation_ru": "(книжн.) приготовиться, подготовиться (к чему-либо неприятному); (книжн.) вооружаться (терпением, мужеством)",
+   "translation_ru": "(книжн.) готовиться, подготавливаться (к чему-либо неприятному); (книжн.) вооружаться (терпением, мужеством)",
    "translation_en": "(elevated) to brace oneself, to prepare (for something unpleasant); (elevated) to arm oneself (with patience, courage)",
    "complements": [
     {
      "pattern": "für + Akkusativ",
      "source": "DWDS: ⟨sich gegen, für etw. wappnen⟩ sich gegen Vorwürfe, drohende Gefahr, für den Winter wappnen",
      "source_kind": "dwds",
-     "meaning_ru": "(книжн.) приготовиться, подготовиться (к чему-либо неприятному)",
+     "meaning_ru": "(книжн.) готовиться, подготавливаться (к чему-либо неприятному)",
      "meaning_en": "(elevated) to brace oneself, to prepare (for something unpleasant)",
      "note_ru": "готовиться к чему-либо: Wir wappnen uns für den Winter.",
      "note_en": "to brace oneself for something: Wir wappnen uns für den Winter.",
@@ -6738,7 +6756,7 @@
      "pattern": "gegen + Akkusativ",
      "source": "DWDS (a): ⟨sich gegen, für etw. wappnen⟩ sich vorsorglich auf etw. vorbereiten, einrichten",
      "source_kind": "dwds",
-     "meaning_ru": "(книжн.) приготовиться, подготовиться (к чему-либо неприятному)",
+     "meaning_ru": "(книжн.) готовиться, подготавливаться (к чему-либо неприятному)",
      "meaning_en": "(elevated) to brace oneself, to prepare (for something unpleasant)",
      "note_ru": "приготовиться к чему-либо, защититься от чего-либо: Sie wappnete sich gegen die Kritik.",
      "note_en": "to brace oneself against something: Sie wappnete sich gegen die Kritik."
@@ -6750,7 +6768,8 @@
      "meaning_ru": "(книжн.) вооружаться (терпением, мужеством)",
      "meaning_en": "(elevated) to arm oneself (with patience, courage)",
      "note_ru": "вооружиться чем-либо: Er wappnete sich mit Geduld.",
-     "note_en": "to arm oneself with something: Er wappnete sich mit Geduld."
+     "note_en": "to arm oneself with something: Er wappnete sich mit Geduld.",
+     "prep_required": true
     }
    ]
   },
@@ -6877,7 +6896,7 @@
   "complements": [
    {
     "pattern": "von + Dativ",
-    "source": "Duden (3.2): «absondern, von [einem] anderen scheiden»; «das Kind von der Mutter trennen»",
+    "source": "Duden (1.1): die Knöpfe vom Mantel, den Kragen vom Kleid trennen",
     "source_kind": "duden",
     "meaning_ru": "отделять, отрезать, отпарывать (пришитое)",
     "meaning_en": "to detach, to cut off (something sewn on)",
@@ -6886,17 +6905,18 @@
    },
    {
     "pattern": "von + Dativ",
-    "source": "Duden (3.2): «absondern, von [einem] anderen scheiden»; «das Kind von der Mutter trennen»",
+    "source": "Duden (2.2): das Erz vom Gestein trennen; das Eigelb vom Eiweiß trennen",
     "source_kind": "duden",
     "meaning_ru": "отделять (одно вещество от другого)",
     "meaning_en": "to separate, to isolate (one substance from another)",
     "note_ru": "отделять что-либо от чего-либо: Man muss das Eigelb vom Eiweiß trennen.",
-    "note_en": "to separate something from something: Man muss das Eigelb vom Eiweiß trennen."
+    "note_en": "to separate something from something: Man muss das Eigelb vom Eiweiß trennen.",
+    "prep_required": true
    },
    {
     "pattern": "von + Dativ",
-    "source": "Duden (3.2): «absondern, von [einem] anderen scheiden»; «das Kind von der Mutter trennen»",
-    "source_kind": "duden",
+    "source": "DWDS (1d): ⟨etw. von etw., jmdn. von jmdm. trennen⟩",
+    "source_kind": "dwds",
     "meaning_ru": "разлучать",
     "meaning_en": "to separate, to part (people)",
     "note_ru": "разлучать кого-либо с кем-либо: Der Krieg trennte die Kinder von den Eltern.",
@@ -6909,11 +6929,12 @@
     "meaning_ru": "отделять, обособлять (от других)",
     "meaning_en": "to separate, to segregate (from others)",
     "note_ru": "отделять кого-, что-либо от других: Die kranken Tiere wurden von der Herde getrennt.",
-    "note_en": "to separate someone or something from others: Die kranken Tiere wurden von der Herde getrennt."
+    "note_en": "to separate someone or something from others: Die kranken Tiere wurden von der Herde getrennt.",
+    "prep_required": true
    },
    {
     "pattern": "von + Dativ",
-    "source": "Duden (3.2): «absondern, von [einem] anderen scheiden»; «das Kind von der Mutter trennen»",
+    "source": "Duden (5): man muss die Person von der Sache trennen",
     "source_kind": "duden",
     "meaning_ru": "разграничивать, различать (понятия)",
     "meaning_en": "to distinguish, to differentiate (concepts)",
@@ -6922,8 +6943,8 @@
    },
    {
     "pattern": "von + Dativ",
-    "source": "Duden (3.2): «absondern, von [einem] anderen scheiden»; «das Kind von der Mutter trennen»",
-    "source_kind": "duden",
+    "source": "DWDS (1d): ⟨etw. von etw., jmdn. von jmdm. trennen⟩",
+    "source_kind": "dwds",
     "meaning_ru": "разделять, отдалять (о различиях между людьми)",
     "meaning_en": "to divide, to set apart (people)",
     "note_ru": "отдалять кого-либо от кого-либо: Sein Hochmut trennte ihn von den Kollegen.",
@@ -6931,7 +6952,7 @@
    },
    {
     "pattern": "von + Dativ",
-    "source": "Duden (3.2): «absondern, von [einem] anderen scheiden»; «das Kind von der Mutter trennen»",
+    "source": "Duden (7.2): der Kanal trennt England vom Kontinent",
     "source_kind": "duden",
     "meaning_ru": "разделять, отделять (служить границей)",
     "meaning_en": "to divide, to separate (as a boundary)",

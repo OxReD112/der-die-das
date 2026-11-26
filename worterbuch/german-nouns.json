@@ -4700,15 +4700,6 @@
         "meaning_en": "apology",
         "note_ru": "извинение за что-либо: eine Entschuldigung für die Verspätung",
         "note_en": "apology for something: eine Entschuldigung für die Verspätung"
-      },
-      {
-        "pattern": "für + Akkusativ",
-        "source": "DWDS (WDG 1, umg.): «der Vater schrieb dem Sohn eine E. (Entschuldigungsschreiben) für die Schule»",
-        "source_kind": "dwds",
-        "meaning_ru": "записка с объяснением причины отсутствия",
-        "meaning_en": "excuse (note)",
-        "note_ru": "записка (в школу и т. п.) о причине отсутствия: Die Mutter schrieb ihm eine Entschuldigung für die Schule.",
-        "note_en": "a note (for school etc.) excusing an absence: Die Mutter schrieb ihm eine Entschuldigung für die Schule."
       }
     ]
   },
@@ -7976,8 +7967,8 @@
     "word": "Weg",
     "article": "der",
     "plural": "Wege",
-    "translation_ru": "дорога, путь",
-    "translation_en": "way; path",
+    "translation_ru": "дорога, тропа; путь; способ, метод",
+    "translation_en": "path, track; way, route; way, method, means",
     "example_de": "Können Sie mir den Weg zum Bahnhof zeigen?",
     "example_cloze": "Können Sie mir den {{c1::Weg}} zum Bahnhof zeigen?",
     "example_ru": "Не подскажете, как пройти к вокзалу?",
@@ -11270,8 +11261,8 @@
     "word": "Beschäftigung",
     "article": "die",
     "plural": "Beschäftigungen",
-    "translation_ru": "занятие; работа, занятость",
-    "translation_en": "activity, occupation; employment",
+    "translation_ru": "занятие; работа; занятость; занятие (чем-либо)",
+    "translation_en": "activity, occupation; job, work; employment; engagement (with something)",
     "example_de": "Lesen ist meine liebste Beschäftigung am Wochenende.",
     "example_cloze": "Lesen ist meine liebste {{c1::Beschäftigung}} am Wochenende.",
     "example_ru": "Чтение — моё любимое занятие по выходным.",
@@ -11281,10 +11272,10 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
-        "source": "Duden (статья слова)",
+        "source": "Duden (Beschäftigung 2): das Sichbeschäftigen (2a) — Beschäftigung mit Fragen der Politik",
         "source_kind": "duden",
-        "meaning_ru": "занятие",
-        "meaning_en": "activity, occupation",
+        "meaning_ru": "занятие (чем-либо)",
+        "meaning_en": "engagement (with something)",
         "note_ru": "занятие чем-либо: die Beschäftigung mit Kunst",
         "note_en": "engagement with something: die Beschäftigung mit Kunst"
       }
@@ -14712,8 +14703,8 @@
     "word": "Gefühl",
     "article": "das",
     "plural": "Gefühle",
-    "translation_ru": "чувство; ощущение",
-    "translation_en": "feeling; sensation",
+    "translation_ru": "чувство; ощущение; чувство (ритма, юмора), чутьё",
+    "translation_en": "feeling; sensation; sense (of rhythm, of humour), feel (for)",
     "example_de": "Ich habe das Gefühl, dass wir uns schon kennen.",
     "example_cloze": "Ich habe das {{c1::Gefühl}}, dass wir uns schon kennen.",
     "example_ru": "У меня такое чувство, что мы уже знакомы.",
@@ -14721,10 +14712,12 @@
     "complements": [
       {
         "pattern": "für + Akkusativ",
-        "note_ru": "чувство чего-либо: ein Gefühl für Rhythmus",
-        "note_en": "feel for, sense of something: ein Gefühl für Rhythmus",
-        "meaning_ru": "чувство",
-        "meaning_en": "feeling"
+        "note_ru": "чутьё к чему-либо: Sie hat ein gutes Gefühl für Farben.",
+        "note_en": "a feel for something: Sie hat ein gutes Gefühl für Farben.",
+        "meaning_ru": "чувство (ритма, юмора), чутьё",
+        "meaning_en": "sense (of rhythm, of humour), feel (for)",
+        "source": "DWDS (Gefühl 2): ⟨ein Gefühl für etw. haben⟩ (= Sinn, Verständnis für etw. haben); Duden (Gefühl 3.2): Fähigkeit, etwas gefühlsmäßig zu erfassen; Gespür — ein Gefühl für Rhythmus, für Recht und Unrecht",
+        "source_kind": "duden"
       }
     ]
   },
@@ -45909,7 +45902,8 @@
         "meaning_ru": "симпатия",
         "meaning_en": "affection",
         "note_ru": "склонность к чему-либо: eine Neigung zur Übertreibung; симпатия к кому-либо: ihre Neigung zu ihm",
-        "note_en": "tendency to something: eine Neigung zur Übertreibung; affection for someone: ihre Neigung zu ihm"
+        "note_en": "tendency to something: eine Neigung zur Übertreibung; affection for someone: ihre Neigung zu ihm",
+        "prep_required": true
       }
     ]
   },
@@ -55028,22 +55022,22 @@
     "complements": [
       {
         "pattern": "in + Akkusativ",
-        "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
-        "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
+        "note_ru": "понимание чего-либо: Er kam zur Einsicht in seine Fehler.",
+        "note_en": "insight into something: Er kam zur Einsicht in seine Fehler.",
         "meaning_ru": "понимание, осознание",
         "meaning_en": "insight, realization"
       },
       {
         "pattern": "in + Akkusativ",
-        "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
-        "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
+        "note_ru": "ознакомление с чем-либо: Sie bat um Einsicht in die Unterlagen.",
+        "note_en": "access to something (documents): Sie bat um Einsicht in die Unterlagen.",
         "meaning_ru": "ознакомление (с документами)",
         "meaning_en": "inspection (of documents)"
       },
       {
         "pattern": "in + Akkusativ",
-        "note_ru": "понимание чего-либо: die Einsicht in die Notwendigkeit; ознакомление с чем-либо: Einsicht in die Akten; вид внутрь: die Einsicht in den Garten",
-        "note_en": "insight into something: die Einsicht in die Notwendigkeit; inspection of something: Einsicht in die Akten; view into: die Einsicht in den Garten",
+        "note_ru": "вид внутрь чего-либо: Der Zaun verhindert die Einsicht in den Hof.",
+        "note_en": "view into something: Der Zaun verhindert die Einsicht in den Hof.",
         "meaning_ru": "вид (внутрь)",
         "meaning_en": "view (into)"
       }

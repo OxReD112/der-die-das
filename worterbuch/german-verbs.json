@@ -173,8 +173,8 @@
   {
     "id": "verb-005",
     "infinitive": "kommen",
-    "translation_ru": "приходить; приезжать; (разг.) приставать, являться (к кому-либо с чем-либо); доходить (до чего-либо), происходить; раздобыть, добыть (что-либо), добраться (до чего-либо); быть родом (откуда-либо); додуматься (до чего-либо), вспомнить",
-    "translation_en": "to come; to arrive; (colloquial) to come (to someone) with, to pester (someone) with (something); to come to, to happen; to get hold of, to get at (something); to be from (a place); to hit on (something), to think of (something)",
+    "translation_ru": "приходить; приезжать; доходить (до чего-либо), происходить; (разг.) приставать, являться (к кому-либо с чем-либо); доставать, добывать (что-либо), добираться (до чего-либо); быть родом (откуда-либо); додумываться (до чего-либо), вспоминать; поступать, попадать (в школу, больницу и т. п.)",
+    "translation_en": "to come; to arrive; to come to, to happen; (colloquial) to come (to someone) with, to pester (someone) with (something); to get hold of, to get at (something); to be from (a place); to hit on (something), to think of (something); to go, to be admitted (to school, hospital, etc.)",
     "auxiliary": "sein",
     "example_de": "Der Zug kommt pünktlich.",
     "example_cloze": "Der Zug {{c1::kommt}} pünktlich.",
@@ -209,17 +209,6 @@
     },
     "complements": [
       {
-        "pattern": "auf + Akkusativ",
-        "note_ru": "додуматься до чего-либо, вспомнить что-либо: Wie bist du auf diese Idee gekommen? Ich komme nicht auf seinen Namen.",
-        "note_en": "to hit on something, to think of something: Wie bist du auf diese Idee gekommen? Ich komme nicht auf seinen Namen.",
-        "meaning_ru": "додуматься (до чего-либо), вспомнить",
-        "meaning_en": "to hit on (something), to think of (something)",
-        "source": "DWDS (14a): ⟨auf, hinter etw. kommen (= (mit den Gedanken) auf etw. stoßen)⟩; ich kann nicht auf seinen Namen kommen",
-        "source_kind": "dwds",
-        "source_meaning": "Duden (14.1): wie kommst du darauf? (woher hast du diesen Gedanken, diese Vermutung?)",
-        "correlative_only": true
-      },
-      {
         "pattern": "zu + Dativ",
         "meaning_ru": "доходить (до чего-либо), происходить",
         "meaning_en": "to come to, to happen",
@@ -227,6 +216,18 @@
         "note_en": "es kommt zu etw. — it comes to something, something happens: Es kam zu einem Streit.",
         "impersonal": "es kommt",
         "correlative_only": true
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "додуматься до чего-либо, вспомнить что-либо: Wie bist du auf diese Idee gekommen? Ich komme nicht auf seinen Namen.",
+        "note_en": "to hit on something, to think of something: Wie bist du auf diese Idee gekommen? Ich komme nicht auf seinen Namen.",
+        "meaning_ru": "додумываться (до чего-либо), вспоминать",
+        "meaning_en": "to hit on (something), to think of (something)",
+        "source": "DWDS (14a): ⟨auf, hinter etw. kommen (= (mit den Gedanken) auf etw. stoßen)⟩; ich kann nicht auf seinen Namen kommen",
+        "source_kind": "dwds",
+        "source_meaning": "Duden (14.1): wie kommst du darauf? (woher hast du diesen Gedanken, diese Vermutung?)",
+        "correlative_only": true,
+        "prep_required": true
       }
     ]
   },
@@ -1181,7 +1182,8 @@
         "meaning_en": "to depend (on), to matter",
         "source": "Duden (7): von jemandem, etwas abhängen; es kommt aufs Wetter an, ob …",
         "source_kind": "duden",
-        "source_meaning": "Duden (8): [für jemanden] wichtig, von Bedeutung sein; es kommt ihr auf gutes Benehmen an"
+        "source_meaning": "Duden (8): [für jemanden] wichtig, von Bedeutung sein; es kommt ihr auf gutes Benehmen an",
+        "prep_required": true
       }
     ],
     "usage_note_ru": "Безлично: Es kommt auf den Preis an. — Всё зависит от цены. Es kommt mir darauf an, dass … — Мне важно, чтобы …",
@@ -1495,8 +1497,8 @@
   {
     "id": "verb-031",
     "infinitive": "aussehen",
-    "translation_ru": "выглядеть",
-    "translation_en": "to look; to appear",
+    "translation_ru": "выглядеть; (редк.) высматривать (кого-либо); обстоять (о делах)",
+    "translation_en": "to look, to appear; (rare) to look out (for); (of affairs) to stand, to be",
     "auxiliary": "haben",
     "example_de": "Du siehst heute sehr gut aus.",
     "example_cloze": "Du {{c1::siehst}} heute sehr gut {{c1::aus}}.",
@@ -1538,11 +1540,31 @@
     "complements": [
       {
         "pattern": "nach + Dativ",
-        "source": "Kaikki (en.wiktionary): (copulative) to look, seem [with adjective ‘in a given state’ or wie (+ nominative) ‘like someone/something’] (to point to, to be suggestive or indicative of) [ …]",
-        "source_kind": "kaikki",
-        "source_meaning": "Duden: es sieht nach Gewitter aus",
-        "note_ru": "быть похожим на что-либо, предвещать что-либо: Es sieht nach Regen aus.",
-        "note_en": "to look like something, to suggest something: Es sieht nach Regen aus."
+        "source": "DWDS (aussehen 2b): ⟨etw., jmd. sieht nach etw. aus⟩ etw., jmd. lässt etw. vermuten — es sieht nach Regen aus",
+        "source_kind": "dwds",
+        "note_ru": "быть похожим на что-либо, предвещать что-либо: Der Himmel sieht nach Gewitter aus.",
+        "note_en": "to look like something, to suggest something: Der Himmel sieht nach Gewitter aus.",
+        "meaning_ru": "выглядеть",
+        "meaning_en": "to look, to appear"
+      },
+      {
+        "pattern": "nach + Dativ",
+        "meaning_ru": "(редк.) высматривать (кого-либо)",
+        "meaning_en": "(rare) to look out (for)",
+        "note_ru": "высматривать кого-либо: Sie sah am Fenster nach ihrem Sohn aus.",
+        "note_en": "to look out for someone: Sie sah am Fenster nach ihrem Sohn aus.",
+        "source": "DWDS (aussehen 1): nach jmdm., etw. erwartend sehen, Ausschau halten; Duden (2, selten): ausschauen, Ausschau halten",
+        "source_kind": "dwds"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "meaning_ru": "обстоять (о делах)",
+        "meaning_en": "(of affairs) to stand, to be",
+        "note_ru": "обстоять с чем-либо (безличное es): Wie sieht es mit deinen Hausaufgaben aus? Подсвечивается только с коррелятом (damit); mit der Brille gut aussehen — «выглядеть», та же форма.",
+        "note_en": "how things stand with something (impersonal es): Wie sieht es mit deinen Hausaufgaben aus? Highlighted only with a correlative (damit); mit der Brille gut aussehen is “to look”, the same form.",
+        "source": "DWDS (aussehen 3): ⟨mit jmdm., etw. sieht es gut, schlecht aus⟩ mit jmdm., etw. steht es gut, schlecht; Duden (1.2, unpersönlich): in einer bestimmten Weise um jemanden, um etwas bestellt sein",
+        "source_kind": "dwds",
+        "correlative_only": true
       }
     ]
   },
@@ -2139,7 +2161,8 @@
         "meaning_ru": "слушаться (кого-либо), прислушиваться (к чему-либо)",
         "meaning_en": "to heed, to obey, to listen to (advice)",
         "note_ru": "слушаться кого-либо, прислушиваться к чему-либо: Er hört nie auf den Rat seiner Eltern.",
-        "note_en": "to listen to someone or something, to heed, to obey: Er hört nie auf den Rat seiner Eltern."
+        "note_en": "to listen to someone or something, to heed, to obey: Er hört nie auf den Rat seiner Eltern.",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -4899,8 +4922,8 @@
   {
     "id": "verb-095",
     "infinitive": "rechnen",
-    "translation_ru": "считать; причислять (к кому-, чему-либо), относить (к), относиться (к); рассчитывать",
-    "translation_en": "to calculate; to count (among), to include (among), to be counted (among); to expect",
+    "translation_ru": "считать; рассчитывать; причислять (к кому-, чему-либо), относить (к), относиться (к)",
+    "translation_en": "to calculate; to expect; to count (among), to include (among), to be counted (among)",
     "auxiliary": "haben",
     "example_de": "Wir rechnen mit einer Antwort morgen.",
     "example_cloze": "Wir {{c1::rechnen}} mit einer Antwort morgen.",
@@ -4914,7 +4937,8 @@
         "note_ru": "ожидать чего-либо, считаться с чем-либо",
         "note_en": "to expect, to reckon with something",
         "meaning_ru": "рассчитывать",
-        "meaning_en": "to expect"
+        "meaning_en": "to expect",
+        "prep_required": true
       },
       {
         "pattern": "auf + Akkusativ",
@@ -5155,8 +5179,8 @@
   {
     "id": "verb-100",
     "infinitive": "vereinbaren",
-    "translation_ru": "договариваться; согласовывать",
-    "translation_en": "to arrange; to agree on",
+    "translation_ru": "договариваться, согласовывать; совмещать (с чем-либо)",
+    "translation_en": "to arrange, to agree on; to reconcile (with)",
     "auxiliary": "haben",
     "example_de": "Wir vereinbaren einen Termin für Montag.",
     "example_cloze": "Wir {{c1::vereinbaren}} einen Termin für Montag.",
@@ -5193,11 +5217,21 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
-        "source": "DWDS: etw. (mit jmdm.) vereinbaren; etw. mit etw. vereinbaren; sie kann das mit ihrem Gewissen nicht vereinbaren",
-        "source_kind": "dwds",
-        "source_meaning": "Duden: ein Treffen, einen Termin [mit jemandem] vereinbaren; das kann ich schwerlich mit meinem Gewissen vereinbaren",
+        "meaning_ru": "договариваться, согласовывать",
+        "meaning_en": "to arrange, to agree on",
         "note_ru": "договариваться о чём-либо с кем-либо: Ich vereinbare einen Termin mit dem Arzt.",
-        "note_en": "to arrange something with someone: Ich vereinbare einen Termin mit dem Arzt."
+        "note_en": "to arrange something with someone: Ich vereinbare einen Termin mit dem Arzt.",
+        "source": "Duden (vereinbaren 1): abmachen, verabreden — ein Treffen, einen Termin [mit jemandem] vereinbaren; DWDS: etw. (mit jmdm.) vereinbaren",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "meaning_ru": "совмещать (с чем-либо)",
+        "meaning_en": "to reconcile (with)",
+        "note_ru": "совмещать что-либо с чем-либо: Sie kann den Job nicht mit der Familie vereinbaren.",
+        "note_en": "to reconcile something with something: Sie kann den Job nicht mit der Familie vereinbaren.",
+        "source": "DWDS: etw. mit etw. vereinbaren; Duden (vereinbaren 2): in Übereinstimmung, in Einklang bringen — das kann ich schwerlich mit meinem Gewissen vereinbaren",
+        "source_kind": "dwds"
       }
     ]
   },
@@ -5836,8 +5870,8 @@
   {
     "id": "verb-113",
     "infinitive": "ausgehen",
-    "translation_ru": "ходить куда-нибудь (развлекаться); исходить (от кого-либо, чего-либо), исходить (из чего-либо), предполагать; гаснуть (о свете)",
-    "translation_en": "to go out; to come from, to emanate from, to start from, to proceed from, to assume; to go off (of a light)",
+    "translation_ru": "ходить куда-нибудь (развлекаться); гаснуть (о свете); исходить (от кого-либо, чего-либо), исходить (из чего-либо), предполагать",
+    "translation_en": "to go out; to go off (of a light); to come from, to emanate from, to start from, to proceed from, to assume",
     "auxiliary": "sein",
     "example_de": "Am Freitagabend gehen wir oft aus.",
     "example_cloze": "Am Freitagabend {{c1::gehen}} wir oft {{c1::aus}}.",
@@ -5882,7 +5916,8 @@
         "meaning_ru": "исходить (от кого-либо, чего-либо), исходить (из чего-либо), предполагать",
         "meaning_en": "to come from, to emanate from, to start from, to proceed from, to assume",
         "note_ru": "исходить от кого-либо, чего-либо: Von diesem Platz gehen fünf Straßen aus. / исходить из чего-либо, предполагать: Wir gehen von falschen Zahlen aus.",
-        "note_en": "to come from, to start from: Von diesem Platz gehen fünf Straßen aus. / to proceed from, to assume: Wir gehen von falschen Zahlen aus."
+        "note_en": "to come from, to start from: Von diesem Platz gehen fünf Straßen aus. / to proceed from, to assume: Wir gehen von falschen Zahlen aus.",
+        "prep_required": true
       }
     ]
   },
@@ -6164,7 +6199,8 @@
         "meaning_en": "to tinker (with), to work (on)",
         "note_ru": "возиться с чем-либо, дорабатывать что-либо: Er bastelt an seinem Fahrrad.",
         "note_en": "to tinker with something, to work on something: Er bastelt an seinem Fahrrad.",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       }
     ]
   },
@@ -6660,7 +6696,7 @@
       }
     },
     "reflexive": {
-      "translation_ru": "прижаться (к чему-либо); пробраться, прошмыгнуть; (разг.) увильнуть, отлынить (от чего-либо)",
+      "translation_ru": "прижиматься (к чему-либо); пробираться, проскальзывать; (разг.) увиливать, отлынивать (от чего-либо)",
       "translation_en": "to press (against something); to slip, to creep; (colloquial) to dodge, to shirk (something)",
       "example_de": "Er drückt sich immer vor dem Abwasch.",
       "example_ru": "Он всегда увиливает от мытья посуды.",
@@ -6672,10 +6708,11 @@
           "pattern": "vor + Dativ",
           "source": "Kaikki (en.wiktionary): (reflexive) to shirk, to avoid [with vor (+ dative) ‘work or responsibility’]",
           "source_kind": "kaikki",
-          "meaning_ru": "(разг.) увильнуть, отлынить (от чего-либо)",
+          "meaning_ru": "(разг.) увиливать, отлынивать (от чего-либо)",
           "meaning_en": "(colloquial) to dodge, to shirk (something)",
           "note_ru": "увиливать от чего-либо: Er drückt sich vor der Arbeit.",
-          "note_en": "to dodge something: Er drückt sich vor der Arbeit."
+          "note_en": "to dodge something: Er drückt sich vor der Arbeit.",
+          "prep_required": true
         }
       ]
     }
@@ -7424,8 +7461,8 @@
   {
     "id": "verb-2565",
     "infinitive": "halten",
-    "translation_ru": "останавливаться (о транспорте); держаться, не портиться (о цветах, обуви, погоде); быть на (чьей-либо) стороне",
-    "translation_en": "to stop (of a vehicle); to last, to hold (of flowers, shoes, the weather); to stand by, to side with (someone)",
+    "translation_ru": "останавливаться (о транспорте); держаться, не портиться (о цветах, обуви, погоде); быть на (чьей-либо) стороне; придавать значение (чему-либо), следить (за чем-либо)",
+    "translation_en": "to stop (of a vehicle); to last, to hold (of flowers, shoes, the weather); to stand by, to side with (someone); to set store (by something), to be particular (about something)",
     "auxiliary": "haben",
     "usage_note_ru": "Без прямого дополнения. Der Bus hält vor dem Haus. — Автобус останавливается у дома. Halt! — Стой! zu jemandem halten — быть на чьей-либо стороне, оставаться верным (кому-либо): Egal, was passiert, ich halte zu dir. — Что бы ни случилось, я на твоей стороне. Держать что-либо — отдельная карточка halten.",
     "usage_note_en": "Without a direct object. Der Bus hält vor dem Haus. — The bus stops in front of the house. Halt! — Stop! zu jemandem halten — to stand by someone, to stick by someone: Egal, was passiert, ich halte zu dir. — Whatever happens, I'm on your side. To hold something — separate card halten.",
@@ -7471,7 +7508,19 @@
         "meaning_ru": "быть на (чьей-либо) стороне",
         "meaning_en": "to stand by, to side with (someone)",
         "note_ru": "быть на чьей-либо стороне, оставаться верным кому-либо",
-        "note_en": "to stand by someone, to stick by someone"
+        "note_en": "to stand by someone, to stick by someone",
+        "prep_required": true
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "meaning_ru": "придавать значение (чему-либо), следить (за чем-либо)",
+        "meaning_en": "to set store (by something), to be particular (about something)",
+        "note_ru": "придавать значение чему-либо: In dieser Familie hält man auf Pünktlichkeit.",
+        "note_en": "to set store by something: In dieser Familie hält man auf Pünktlichkeit.",
+        "source": "Duden (halten 10): auf etwas besonderen Wert legen; auf etwas besonders achten; um etwas bemüht sein — sehr, streng auf Ordnung, Anstand, Sitte halten; er hielt sehr genau darauf, dass alles seinen geregelten Gang ging",
+        "source_kind": "duden",
+        "correlative_only": true,
+        "prep_required": true
       }
     ]
   },
@@ -10299,8 +10348,8 @@
   {
     "id": "verb-199",
     "infinitive": "verkaufen",
-    "translation_ru": "продавать",
-    "translation_en": "to sell",
+    "translation_ru": "продавать; (разг.) преподносить, подавать (в выгодном свете)",
+    "translation_en": "to sell; (colloquial) to present (in a good light), to pitch",
     "auxiliary": "haben",
     "example_de": "Wir verkaufen unser altes Auto.",
     "example_cloze": "Wir {{c1::verkaufen}} unser altes Auto.",
@@ -10340,9 +10389,31 @@
         "source": "учебный список",
         "source_kind": "учебный список",
         "note_ru": "продавать что-либо кому-либо: Er hat sein Auto an einen Nachbarn verkauft.",
-        "note_en": "to sell something to someone: Er hat sein Auto an einen Nachbarn verkauft."
+        "note_en": "to sell something to someone: Er hat sein Auto an einen Nachbarn verkauft.",
+        "meaning_ru": "продавать",
+        "meaning_en": "to sell"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "продаваться (о товаре); продаваться (кому-либо), продавать себя; (разг.) подавать себя, преподносить себя",
+      "translation_en": "to sell (of goods); to sell oneself (to), to sell out (to); (colloquial) to present oneself, to come across (well)",
+      "example_de": "Dieses Buch verkauft sich sehr gut.",
+      "example_ru": "Эта книга очень хорошо продаётся.",
+      "example_en": "This book sells very well.",
+      "note_ru": "Продаваться кому-либо — Dativ или an + Akk.: Er hat sich an die Konkurrenz verkauft.",
+      "note_en": "To sell oneself to someone — dative or an + accusative: Er hat sich an die Konkurrenz verkauft.",
+      "complements": [
+        {
+          "pattern": "an + Akkusativ",
+          "meaning_ru": "продаваться (кому-либо), продавать себя",
+          "meaning_en": "to sell oneself (to), to sell out (to)",
+          "note_ru": "продаваться кому-либо: Er hat sich an die Konkurrenz verkauft.",
+          "note_en": "to sell oneself to someone: Er hat sich an die Konkurrenz verkauft.",
+          "source": "DWDS (verkaufen 3): ⟨jmd. verkauft sich, jmdn. (an jmdn.)⟩; Duden (3, sich verkaufen): für Geld oder Gewährung anderer Vorteile jemandem seine Dienste zur Verfügung stellen",
+          "source_kind": "dwds"
+        }
+      ]
+    }
   },
   {
     "id": "verb-200",
@@ -10979,14 +11050,11 @@
       {
         "pattern": "Dativ + Akkusativ",
         "note_ru": "показывать что-либо кому-либо",
-        "note_en": "to show someone something"
-      },
-      {
-        "pattern": "auf + Akkusativ",
-        "note_ru": "указывать на что-либо: Er zeigte auf das Haus.",
-        "note_en": "to point at something: Er zeigte auf das Haus.",
-        "meaning_ru": "указывать (на что-либо)",
-        "meaning_en": "to point (at)"
+        "note_en": "to show someone something",
+        "meaning_ru": "показывать",
+        "meaning_en": "to show",
+        "source": "Duden (zeigen 2.1): jemandem etwas mit Hinweisen, Erläuterungen, Gesten o. Ä. deutlich machen; (2.2) jemanden etwas ansehen, betrachten lassen",
+        "source_kind": "duden"
       },
       {
         "pattern": "Akkusativ",
@@ -10995,6 +11063,16 @@
         "meaning_en": "to show",
         "note_ru": "кому-либо что-либо",
         "note_en": "someone something"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "meaning_ru": "указывать (на что-либо)",
+        "meaning_en": "to point (at)",
+        "note_ru": "указывать на кого-, что-либо: Sie zeigt auf die Karte. Подсвечивается только с коррелятом; Er zeigte auf das Haus / zur Tür — направление, та же форма.",
+        "note_en": "to point at someone or something: Sie zeigt auf die Karte. Highlighted only with a correlative; Er zeigte auf das Haus / zur Tür is direction, the same form.",
+        "source": "Duden (zeigen 1): mit dem Finger, Arm eine bestimmte Richtung angeben — mit dem Schirm auf etwas zeigen; sie zeigte auf den Täter; der Wegweiser zeigte nach Süden; DWDS (zeigen 1): ⟨auf etw. zeigen⟩",
+        "source_kind": "duden",
+        "correlative_only": true
       }
     ],
     "lookup_forms": {
@@ -11641,13 +11719,25 @@
     ],
     "separable_prefix": "an",
     "reflexive": {
-      "translation_ru": "посмотреть друг на друга; посмотреть на себя",
-      "translation_en": "to look at each other; to look at oneself",
+      "translation_ru": "смотреть друг на друга; смотреть на себя; считать себя (кем-, чем-либо); выглядеть (каким-либо образом)",
+      "translation_en": "to look at each other; to look at oneself; to regard oneself (as), to consider oneself; to look, to appear (in a certain way)",
       "example_de": "Die beiden sahen sich schweigend an.",
       "example_ru": "Они молча посмотрели друг на друга.",
       "example_en": "The two looked at each other in silence.",
-      "note_ru": "На себя: Sieh dich nur an! — Посмотри-ка на себя! Не путать: sich (Dativ) etwas ansehen — посмотреть, рассмотреть что-либо (отдельная карточка).",
-      "note_en": "At oneself: Sieh dich nur an! — Just look at yourself! Do not confuse: sich (dative) etwas ansehen — to look at, to have a look at something (separate card)."
+      "note_ru": "На себя: Sieh dich nur an! — Посмотри-ка на себя! Считать себя кем-либо — als + Nominativ: Er sieht sich als Opfer. Не путать: sich (Dativ) etwas ansehen — посмотреть, рассмотреть что-либо (отдельная карточка). Выглядеть: Von außen sieht sich das Haus ganz nett an.",
+      "note_en": "At oneself: Sieh dich nur an! — Just look at yourself! To regard oneself as someone — als + nominative: Er sieht sich als Opfer. Do not confuse: sich (dative) etwas ansehen — to look at, to have a look at something (separate card). To look (in a certain way): Von außen sieht sich das Haus ganz nett an.",
+      "complements": [
+        {
+          "pattern": "als + Nominativ",
+          "meaning_ru": "считать себя (кем-, чем-либо)",
+          "meaning_en": "to regard oneself (as), to consider oneself",
+          "note_ru": "считать себя кем-, чем-либо: Er sieht sich als Opfer.",
+          "note_en": "to regard oneself as someone or something: Er sieht sich als Opfer.",
+          "source": "Duden (ansehen 5.2): als etwas betrachten, auffassen; für jemanden, etwas halten — sich als Held, (veraltend:) als Helden ansehen",
+          "source_kind": "duden",
+          "frame": "regard"
+        }
+      ]
     }
   },
   {
@@ -12131,7 +12221,27 @@
       "example_ru": "После курса мы часто обмениваемся опытом.",
       "example_en": "After the course we often share our experiences.",
       "note_ru": "о чём — über + Akkusativ; с кем — mit + Dativ.",
-      "note_en": "about what — über + accusative; with whom — mit + dative."
+      "note_en": "about what — über + accusative; with whom — mit + dative.",
+      "complements": [
+        {
+          "pattern": "mit + Dativ",
+          "meaning_ru": "обмениваться (мнениями, опытом)",
+          "meaning_en": "to share views, to exchange ideas",
+          "note_ru": "обмениваться мнениями с кем-либо: Ich tausche mich oft mit meinen Kollegen aus.",
+          "note_en": "to exchange views with someone: Ich tausche mich oft mit meinen Kollegen aus.",
+          "source": "Duden (austauschen 2, sich austauschen; Beispiel): sich mit jemandem austauschen",
+          "source_kind": "duden"
+        },
+        {
+          "pattern": "über + Akkusativ",
+          "meaning_ru": "обмениваться (мнениями, опытом)",
+          "meaning_en": "to share views, to exchange ideas",
+          "note_ru": "обмениваться мнениями о чём-либо: Wir tauschen uns über das Buch aus.",
+          "note_en": "to exchange views about something: Wir tauschen uns über das Buch aus.",
+          "source": "Duden (2.2): sie haben sich [über die gemachten Erfahrungen] ausgetauscht; DWDS (2): ⟨sich austauschen⟩",
+          "source_kind": "duden"
+        }
+      ]
     },
     "complements": [
       {
@@ -13037,7 +13147,8 @@
         "note_ru": "состоять из чего-либо",
         "note_en": "to consist of something",
         "meaning_ru": "состоять (из)",
-        "meaning_en": "to consist of"
+        "meaning_en": "to consist of",
+        "prep_required": true
       },
       {
         "pattern": "auf + Dativ",
@@ -13045,7 +13156,8 @@
         "note_en": "to insist on something",
         "meaning_ru": "настаивать (на)",
         "meaning_en": "to insist on",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -13605,8 +13717,8 @@
   {
     "id": "verb-2736",
     "infinitive": "einziehen",
-    "translation_ru": "втягивать (голову, когти); призывать (на военную службу); взимать (налоги, долги); изымать (из обращения); ставить (стену, перегородку)",
-    "translation_en": "to pull in, to retract; to conscript, to draft; to collect (taxes, debts); to withdraw, to confiscate; to put in (a wall, a partition)",
+    "translation_ru": "втягивать (голову, когти); призывать (на военную службу); взимать (налоги, долги); изымать (из обращения); ставить (стену, перегородку); вдыхать (воздух, запах)",
+    "translation_en": "to pull in, to retract; to conscript, to draft; to collect (taxes, debts); to withdraw, to confiscate; to put in (a wall, a partition); to breathe in, to inhale",
     "auxiliary": "haben",
     "usage_note_ru": "Переходный, Perfekt с haben: hat eingezogen. Призывать: jemanden zum Militär / zum Wehrdienst einziehen; чаще в пассиве: Er wurde eingezogen. — Его призвали. den Kopf einziehen — втянуть голову (в плечи). Въезжать (в квартиру) — einziehen с sein (отдельная карточка). Erkundigungen (über jdn.) einziehen — наводить справки (о ком-либо); einen Faden einziehen — вдеть нитку.",
     "usage_note_en": "Transitive, perfect with haben: hat eingezogen. To conscript: jemanden zum Militär / zum Wehrdienst einziehen; often passive: Er wurde eingezogen. — He was drafted. den Kopf einziehen — to duck one's head. To move in (to a flat) is einziehen with sein (separate card). Erkundigungen (über jdn.) einziehen — to make inquiries (about someone); einen Faden einziehen — to thread a needle.",
@@ -13652,8 +13764,8 @@
       {
         "pattern": "Akkusativ",
         "required": true,
-        "note_ru": "втягивать, призывать, взимать что-, кого-либо",
-        "note_en": "to pull in, to draft, to collect something, someone"
+        "note_ru": "втягивать, вдыхать, призывать, взимать что-, кого-либо",
+        "note_en": "to pull in, to breathe in, to draft, to collect something, someone"
       },
       {
         "pattern": "zu + Dativ",
@@ -14939,7 +15051,8 @@
         "meaning_ru": "посмеиваться, насмехаться (над кем-, чем-либо)",
         "meaning_en": "to laugh at, to make fun of",
         "note_ru": "посмеиваться над кем-, чем-либо: Sie lächelt über seine Ungeschicklichkeit.",
-        "note_en": "to laugh at, to make fun of someone or something: Sie lächelt über seine Ungeschicklichkeit."
+        "note_en": "to laugh at, to make fun of someone or something: Sie lächelt über seine Ungeschicklichkeit.",
+        "prep_required": true
       }
     ]
   },
@@ -16319,7 +16432,8 @@
         "note_ru": "ворчать, ругаться на что-либо",
         "note_en": "to grumble about something",
         "meaning_ru": "ворчать",
-        "meaning_en": "to grumble"
+        "meaning_en": "to grumble",
+        "prep_required": true
       },
       {
         "pattern": "auf + Akkusativ",
@@ -16339,7 +16453,8 @@
         "meaning_ru": "ворчать",
         "meaning_en": "to grumble",
         "note_ru": "ругаться, ворчать на кого-либо, что-либо: Er schimpft auf die Regierung.",
-        "note_en": "to grumble, to rail at someone or something: Er schimpft auf die Regierung."
+        "note_en": "to grumble, to rail at someone or something: Er schimpft auf die Regierung.",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -16608,8 +16723,8 @@
   {
     "id": "verb-322",
     "infinitive": "sparen",
-    "translation_ru": "экономить; копить",
-    "translation_en": "to save",
+    "translation_ru": "экономить; копить, откладывать (деньги)",
+    "translation_en": "to economize, to save (on); to save (up) (money)",
     "auxiliary": "haben",
     "example_de": "Wir sparen für ein neues Auto.",
     "example_cloze": "Wir {{c1::sparen}} für ein neues Auto.",
@@ -16620,13 +16735,21 @@
     "complements": [
       {
         "pattern": "für + Akkusativ",
-        "note_ru": "копить на что-либо",
-        "note_en": "to save up for something"
+        "meaning_ru": "копить, откладывать (деньги)",
+        "meaning_en": "to save (up) (money)",
+        "note_ru": "копить на что-либо: Wir sparen für eine neue Wohnung.",
+        "note_en": "to save up for something: Wir sparen für eine neue Wohnung.",
+        "source": "Duden (sparen 1.1): auf, für ein Haus sparen",
+        "source_kind": "duden"
       },
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "копить на что-либо",
-        "note_en": "to save up for something"
+        "meaning_ru": "копить, откладывать (деньги)",
+        "meaning_en": "to save (up) (money)",
+        "note_ru": "копить на что-либо: Sie spart auf ein neues Fahrrad.",
+        "note_en": "to save up for something: Sie spart auf ein neues Fahrrad.",
+        "source": "Duden (sparen 1.1): auf, für ein Haus sparen",
+        "source_kind": "duden"
       }
     ],
     "lookup_forms": {
@@ -19794,8 +19917,8 @@
   {
     "id": "verb-385",
     "infinitive": "anschließen",
-    "translation_ru": "подключать",
-    "translation_en": "to connect",
+    "translation_ru": "подключать; следовать (за чем-либо), примыкать (к чему-либо)",
+    "translation_en": "to connect; to follow (something), to adjoin (something)",
     "auxiliary": "haben",
     "example_de": "Kannst du den Drucker an den Laptop anschließen?",
     "example_cloze": "Kannst du den Drucker an den Laptop {{c1::anschließen}}?",
@@ -19824,7 +19947,18 @@
       {
         "pattern": "an + Akkusativ",
         "note_ru": "подключать к чему-либо",
-        "note_en": "to connect to something"
+        "note_en": "to connect to something",
+        "meaning_ru": "подключать",
+        "meaning_en": "to connect"
+      },
+      {
+        "pattern": "an + Akkusativ",
+        "meaning_ru": "следовать (за чем-либо), примыкать (к чему-либо)",
+        "meaning_en": "to follow (something), to adjoin (something)",
+        "note_ru": "следовать за чем-либо: An das Essen schließt eine kurze Pause an.",
+        "note_en": "to follow something: An das Essen schließt eine kurze Pause an.",
+        "source": "Duden (anschließen 4, auch sich anschließen): räumlich oder zeitlich unmittelbar folgen, sich anreihen — an das Haus schließen [sich] im Norden Stallungen an; an den Vortrag schließt [sich] eine Diskussion an",
+        "source_kind": "duden"
       }
     ],
     "separable_prefix": "an",
@@ -19839,13 +19973,33 @@
       }
     },
     "reflexive": {
-      "translation_ru": "присоединиться (к кому-, чему-либо)",
-      "translation_en": "to join (someone, something)",
+      "translation_ru": "присоединяться (к кому-, чему-либо); следовать (за чем-либо), примыкать (к чему-либо)",
+      "translation_en": "to join (someone, something); to follow (something), to adjoin (something)",
       "example_de": "Darf ich mich euch anschließen?",
       "example_ru": "Можно мне к вам присоединиться?",
       "example_en": "May I join you?",
-      "note_ru": "к кому, чему — Dativ: sich einer Gruppe anschließen; sich einer Meinung anschließen — присоединиться к мнению.",
-      "note_en": "to whom, what — dative: sich einer Gruppe anschließen; sich einer Meinung anschließen — to agree with an opinion."
+      "note_ru": "за чем, к чему — an + Akk.: An den Film schließt sich ein Gespräch an. К кому, чему — Dativ: sich einer Gruppe anschließen; sich einer Meinung anschließen — присоединиться к мнению.",
+      "note_en": "after / next to what — an + accusative: An den Film schließt sich ein Gespräch an. To whom, what — dative: sich einer Gruppe anschließen; sich einer Meinung anschließen — to agree with an opinion.",
+      "complements": [
+        {
+          "pattern": "Dativ",
+          "meaning_ru": "присоединяться (к кому-, чему-либо)",
+          "meaning_en": "to join (someone, something)",
+          "note_ru": "присоединиться к кому-, чему-либо: Nach dem Konzert schlossen wir uns den anderen an.",
+          "note_en": "to join someone or something: Nach dem Konzert schlossen wir uns den anderen an.",
+          "source": "Duden (anschließen 5.1, sich anschließen): sich zugesellen — sich jemandem, einer Reisegesellschaft anschließen",
+          "source_kind": "duden"
+        },
+        {
+          "pattern": "an + Akkusativ",
+          "meaning_ru": "следовать (за чем-либо), примыкать (к чему-либо)",
+          "meaning_en": "to follow (something), to adjoin (something)",
+          "note_ru": "следовать за чем-либо, примыкать к чему-либо: An den Film schließt sich ein Gespräch an.",
+          "note_en": "to follow or adjoin something: An den Film schließt sich ein Gespräch an.",
+          "source": "Duden (anschließen 4, auch sich anschließen): räumlich oder zeitlich unmittelbar folgen, sich anreihen — an das Haus schließen [sich] im Norden Stallungen an; an den Vortrag schließt [sich] eine Diskussion an",
+          "source_kind": "duden"
+        }
+      ]
     }
   },
   {
@@ -20611,8 +20765,8 @@
   {
     "id": "verb-400",
     "infinitive": "aufnehmen",
-    "translation_ru": "записывать; принимать; поднимать (с пола)",
-    "translation_en": "to record; to take in; to admit; to pick up",
+    "translation_ru": "записывать; принимать (у себя); принимать (в члены); поднимать (с пола); включать (во что-либо); впитывать, поглощать",
+    "translation_en": "to record; to take in; to admit; to pick up; to include (in); to absorb",
     "auxiliary": "haben",
     "example_de": "Wir nehmen das Konzert mit dem Handy auf.",
     "example_cloze": "Wir {{c1::nehmen}} das Konzert mit dem Handy {{c1::auf}}.",
@@ -20656,13 +20810,24 @@
     "complements": [
       {
         "pattern": "in + Akkusativ",
-        "source": "Kaikki (en.wiktionary): Nach einem kurzen Ritual wurde ich in den Stamm aufgenommen.",
-        "source_kind": "kaikki",
-        "source_meaning": "Duden: die Mitgliedschaft gewähren, ein-, beitreten lassen; sie wurde in den Verein aufgenommen; einen Punkt in die Tagesordnung aufnehmen",
-        "meaning_ru": "принимать",
+        "source": "Duden (aufnehmen 4.1): die Mitgliedschaft gewähren, ein-, beitreten lassen — sie wurde in den Verein aufgenommen; DWDS (3a): jmdn. als Mitglied in eine Organisation, Partei, in einen Verein aufnehmen",
+        "source_kind": "duden",
+        "meaning_ru": "принимать (в члены)",
         "meaning_en": "to admit",
-        "note_ru": "принимать кого-либо куда-либо (в члены); включать что-либо во что-либо: Sie wurde in den Verein aufgenommen.",
-        "note_en": "to admit someone to something; to include something in something: Sie wurde in den Verein aufgenommen."
+        "note_ru": "принимать кого-либо куда-либо (в члены): Der Chor hat ihn gern in seine Reihen aufgenommen. Подсвечивается только с коррелятом; ins Krankenhaus aufgenommen werden — «принимать (у себя)», та же форма.",
+        "note_en": "to admit someone to something: Der Chor hat ihn gern in seine Reihen aufgenommen. Highlighted only with a correlative; ins Krankenhaus aufgenommen werden is «to take in», the same form.",
+        "correlative_only": true
+      },
+      {
+        "pattern": "in + Akkusativ",
+        "meaning_ru": "включать (во что-либо)",
+        "meaning_en": "to include (in)",
+        "note_ru": "включать что-либо во что-либо: Das Theater nimmt ein neues Stück in den Spielplan auf. Подсвечивается только с коррелятом; ins Krankenhaus aufgenommen werden — «принимать (у себя)», та же форма.",
+        "note_en": "to include something in something: Das Theater nimmt ein neues Stück in den Spielplan auf. Highlighted only with a correlative; ins Krankenhaus aufgenommen werden is «to take in», the same form.",
+        "source": "Duden (aufnehmen 4.3): in etwas mit hineinnehmen, [mit] einbeziehen — einen Punkt in die Tagesordnung aufnehmen",
+        "source_kind": "duden",
+        "correlative_only": true,
+        "prep_required": true
       }
     ]
   },
@@ -22016,7 +22181,8 @@
         "note_ru": "добиваться чего-либо",
         "note_en": "to try to get something",
         "meaning_ru": "добиваться (чего-либо), хлопотать (о чём-либо), заботиться (о ком-либо)",
-        "meaning_en": "to try to obtain, to seek, to look after, to attend to"
+        "meaning_en": "to try to obtain, to seek, to look after, to attend to",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -22382,8 +22548,8 @@
   {
     "id": "verb-439",
     "infinitive": "besetzen",
-    "translation_ru": "отделывать, обшивать (чем-либо); занимать (место); замещать (должность), распределять (роли), укомплектовывать (кем-либо); захватывать",
-    "translation_en": "to trim, to edge (with); to occupy; to fill (a post, a role), to cast, to staff; to take",
+    "translation_ru": "занимать (место); захватывать; отделывать, обшивать (чем-либо); замещать (должность), распределять (роли), укомплектовывать (кем-либо)",
+    "translation_en": "to occupy; to take; to trim, to edge (with); to fill (a post, a role), to cast, to staff",
     "auxiliary": "haben",
     "usage_note_ru": "besetzt — занято (о месте, телефоне, туалете).",
     "usage_note_en": "besetzt — taken, engaged (a seat, a phone line, a toilet).",
@@ -22424,31 +22590,23 @@
         "pattern": "mit + Dativ",
         "source": "учебный список",
         "source_kind": "учебный список",
-        "source_meaning": "Duden: an jemanden vergeben: die Oper, der Film ist hervorragend, mit guten Leuten besetzt",
+        "source_meaning": "Duden (1): mit etwas verzieren, was aufgenäht, aufgeklebt o. Ä. wird; einen Mantel mit Pelz besetzen",
         "meaning_ru": "отделывать, обшивать (чем-либо)",
         "meaning_en": "to trim, to edge (with)",
         "note_ru": "отделывать что-либо чем-либо: Sie besetzt den Kragen mit Pelz.",
-        "note_en": "to trim something with something: Sie besetzt den Kragen mit Pelz."
+        "note_en": "to trim something with something: Sie besetzt den Kragen mit Pelz.",
+        "prep_required": true
       },
       {
         "pattern": "mit + Dativ",
-        "source": "учебный список",
-        "source_kind": "учебный список",
-        "source_meaning": "Duden: an jemanden vergeben: die Oper, der Film ist hervorragend, mit guten Leuten besetzt",
+        "source": "DWDS (4): ⟨eine Stelle mit jmdm. besetzen⟩; ⟨eine Rolle, ein Stück mit jmdm. besetzen⟩",
+        "source_kind": "dwds",
+        "source_meaning": "Duden (3): an jemanden vergeben; die Oper, der Film ist hervorragend, mit guten Leuten besetzt",
         "meaning_ru": "замещать (должность), распределять (роли), укомплектовывать (кем-либо)",
         "meaning_en": "to fill (a post, a role), to cast, to staff",
         "note_ru": "замещать что-либо кем-либо: Die Stelle wurde mit einer jungen Ärztin besetzt.",
-        "note_en": "to fill something with someone: Die Stelle wurde mit einer jungen Ärztin besetzt."
-      },
-      {
-        "pattern": "mit + Dativ",
-        "source": "учебный список",
-        "source_kind": "учебный список",
-        "source_meaning": "Duden: an jemanden vergeben: die Oper, der Film ist hervorragend, mit guten Leuten besetzt",
-        "note_ru": "занимать что-либо кем-либо (войсками, полицией): Das Gebiet wurde mit Truppen besetzt.",
-        "note_en": "to occupy something with someone (troops, police): Das Gebiet wurde mit Truppen besetzt.",
-        "meaning_ru": "захватывать",
-        "meaning_en": "to take"
+        "note_en": "to fill something with someone: Die Stelle wurde mit einer jungen Ärztin besetzt.",
+        "prep_required": true
       }
     ]
   },
@@ -23075,8 +23233,8 @@
   {
     "id": "verb-454",
     "infinitive": "brechen",
-    "translation_ru": "ломать; порывать (с кем-либо, чем-либо); нарушать (обещание, правило); (разг.) рвать (о рвоте)",
-    "translation_en": "to break; to break (with someone, something); to break (a promise, a rule); (colloquial) to vomit, to be sick",
+    "translation_ru": "ломать; нарушать (обещание, правило); порывать (с кем-либо, чем-либо); (разг.) рвать (о рвоте)",
+    "translation_en": "to break; to break (a promise, a rule); to break (with someone, something); (colloquial) to vomit, to be sick",
     "auxiliary": "haben",
     "usage_note_ru": "Ломаться — Perfekt с sein (отдельная карточка). Себе что-либо сломать — Dativ: Ich habe mir den Arm gebrochen. Порывать: mit einer Gewohnheit, mit der Vergangenheit brechen (Duden 5). Рвать (разг.): Nach dem Essen musste er brechen (Duden 8.1).",
     "usage_note_en": "To break (by itself) takes sein (separate card). To break a part of your body, use the dative: Ich habe mir den Arm gebrochen. To break with: mit einer Gewohnheit, mit der Vergangenheit brechen (Duden 5). To vomit (colloquial): Nach dem Essen musste er brechen (Duden 8.1).",
@@ -23127,6 +23285,17 @@
         "note_en": "to break something (a promise, a rule)",
         "meaning_ru": "нарушать (обещание, правило)",
         "meaning_en": "to break (a promise, a rule)"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "meaning_ru": "порывать (с кем-либо, чем-либо)",
+        "meaning_en": "to break (with someone, something)",
+        "note_ru": "порвать с кем-либо, чем-либо: Sie hat mit ihrer alten Clique gebrochen.",
+        "note_en": "to break with someone or something: Sie hat mit ihrer alten Clique gebrochen.",
+        "source": "DWDS (brechen): ⟨jmd. bricht mit jmdm., etw.⟩ die Verbindung zu jmdm., etw. zerreißen; Duden (5): die bisherige Verbindung, Beziehung aufgeben, abbrechen",
+        "source_kind": "dwds",
+        "no_object": "Akkusativ",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -24146,7 +24315,7 @@
       }
     },
     "reflexive": {
-      "translation_ru": "обустроиться; настроиться, приготовиться (к чему-либо)",
+      "translation_ru": "обустраиваться; настраиваться, готовиться (к чему-либо)",
       "translation_en": "to settle in, to furnish one's home; to prepare (for something)",
       "example_de": "Wir haben uns in der neuen Wohnung gut eingerichtet.",
       "example_ru": "Мы хорошо обустроились в новой квартире.",
@@ -24158,10 +24327,11 @@
           "pattern": "auf + Akkusativ",
           "source": "DWDS: ⟨sich auf etw., jmdn. einrichten⟩ = vorbereiten; ich hatte mich nicht auf einen längeren Besuch eingerichtet",
           "source_kind": "dwds",
-          "meaning_ru": "настроиться, приготовиться (к чему-либо)",
+          "meaning_ru": "настраиваться, готовиться (к чему-либо)",
           "meaning_en": "to prepare (for something)",
           "note_ru": "настраиваться, готовиться к чему-либо: Wir richten uns auf einen langen Winter ein.",
-          "note_en": "to prepare for something: Wir richten uns auf einen langen Winter ein."
+          "note_en": "to prepare for something: Wir richten uns auf einen langen Winter ein.",
+          "prep_required": true
         }
       ]
     }
@@ -24297,19 +24467,20 @@
       }
     },
     "reflexive": {
-      "translation_ru": "настроиться на что-либо; наступать, появляться (об успехе, последствиях)",
+      "translation_ru": "настраиваться на что-либо; наступать, появляться (об успехе, последствиях)",
       "translation_en": "to prepare oneself for something; to set in, to arise",
       "note_ru": "sich einstellen auf — настроиться на что-либо",
       "note_en": "sich einstellen auf — to prepare oneself for something",
       "complements": [
         {
           "pattern": "auf + Akkusativ",
-          "meaning_ru": "настроиться на что-либо",
+          "meaning_ru": "настраиваться на что-либо",
           "meaning_en": "to prepare oneself for something",
           "note_ru": "sich auf etwas einstellen — настроиться на что-либо, подготовиться к чему-либо: Wir müssen uns auf kaltes Wetter einstellen.",
           "note_en": "sich auf etwas einstellen — to prepare oneself for something: Wir müssen uns auf kaltes Wetter einstellen.",
-          "source": "Duden 6a: «sich auf die neue Situation einstellen»; 3a: «das Radio … auf einen bestimmten Sender einstellen»",
-          "source_kind": "duden"
+          "source": "Duden (6a): sich auf die neue Situation einstellen; DWDS (6): ⟨sich auf etw. einstellen⟩",
+          "source_kind": "duden",
+          "prep_required": true
         }
       ]
     },
@@ -24387,7 +24558,8 @@
         "meaning_ru": "выступать, заступаться (за кого-либо, что-либо), отстаивать",
         "meaning_en": "to stand up for, to advocate, to champion",
         "note_ru": "выступать за кого-либо, что-либо, отстаивать: Sie tritt für die Rechte der Kinder ein.",
-        "note_en": "to stand up for someone or something, to advocate: Sie tritt für die Rechte der Kinder ein."
+        "note_en": "to stand up for someone or something, to advocate: Sie tritt für die Rechte der Kinder ein.",
+        "prep_required": true
       }
     ],
     "separable_prefix": "ein"
@@ -26083,22 +26255,14 @@
       }
     },
     "reflexive": {
-      "translation_ru": "взять себя в руки, успокоиться; (kurz) выражаться кратко, говорить коротко; (bei / an den Händen) взяться (за руки)",
+      "translation_ru": "брать себя в руки, успокаиваться; (kurz) выражаться кратко, говорить коротко; (bei / an den Händen) браться (за руки)",
       "translation_en": "to compose oneself, to pull oneself together; (kurz) to be brief; (bei / an den Händen) to join hands",
       "example_de": "Nach dem ersten Schreck fasste sie sich schnell.",
       "example_ru": "После первого испуга она быстро взяла себя в руки.",
       "example_en": "After the first shock she quickly composed herself.",
       "note_ru": "Fass dich kurz! — Говори короче! Взяться за руки — an / bei + D: Sie hatten sich bei den Händen gefasst. — Они взялись за руки.",
       "note_en": "Fass dich kurz! — Keep it short! To join hands — an / bei + dative: Sie hatten sich bei den Händen gefasst. — They had joined hands.",
-      "complements": [
-        {
-          "pattern": "an / bei + Dativ",
-          "meaning_ru": "(bei / an den Händen) взяться (за руки)",
-          "meaning_en": "(bei / an den Händen) to join hands",
-          "note_ru": "взяться за руки: sich an / bei den Händen fassen",
-          "note_en": "to join hands: sich an / bei den Händen fassen"
-        }
-      ]
+      "complements": []
     }
   },
   {
@@ -26189,8 +26353,8 @@
   {
     "id": "verb-521",
     "infinitive": "festhalten",
-    "translation_ru": "держать; удерживать; фиксировать (записывать); придерживаться (чего-либо), не отступать (от чего-либо)",
-    "translation_en": "to hold (on to); to record; to stick (to), to adhere (to)",
+    "translation_ru": "держать; удерживать, задерживать; фиксировать (записывать); придерживаться (чего-либо), не отступать (от чего-либо); констатировать",
+    "translation_en": "to hold (on to); to detain, to hold (back); to record; to stick (to), to adhere (to); to state, to note",
     "auxiliary": "haben",
     "example_de": "Halt bitte die Leiter fest!",
     "example_cloze": "{{c1::Halt}} bitte die Leiter {{c1::fest}}!",
@@ -26250,24 +26414,24 @@
     "complements": [
       {
         "pattern": "Akkusativ",
-        "note_ru": "держать, удерживать кого-либо, что-либо; фиксировать что-либо",
-        "note_en": "to hold someone, something; to record something",
         "meaning_ru": "держать",
-        "meaning_en": "to hold (on to)"
+        "meaning_en": "to hold (on to)",
+        "note_ru": "держать кого-либо, что-либо: Halt bitte die Leiter fest.",
+        "note_en": "to hold someone, something: Halt bitte die Leiter fest."
       },
       {
         "pattern": "Akkusativ",
-        "note_ru": "держать, удерживать кого-либо, что-либо; фиксировать что-либо",
-        "note_en": "to hold someone, something; to record something",
-        "meaning_ru": "удерживать",
-        "meaning_en": "to hold (on to)"
+        "meaning_ru": "удерживать, задерживать",
+        "meaning_en": "to detain, to hold (back)",
+        "note_ru": "задерживать кого-либо: Die Polizei hält den Mann am Flughafen fest.",
+        "note_en": "to detain someone: Die Polizei hält den Mann am Flughafen fest."
       },
       {
         "pattern": "Akkusativ",
-        "note_ru": "держать, удерживать кого-либо, что-либо; фиксировать что-либо",
-        "note_en": "to hold someone, something; to record something",
         "meaning_ru": "фиксировать (записывать)",
-        "meaning_en": "to record"
+        "meaning_en": "to record",
+        "note_ru": "фиксировать, записывать что-либо: Wir halten die Ergebnisse im Protokoll fest.",
+        "note_en": "to record something: Wir halten die Ergebnisse im Protokoll fest."
       },
       {
         "pattern": "an + Dativ",
@@ -26277,7 +26441,17 @@
         "meaning_en": "to stick (to), to adhere (to)",
         "note_ru": "придерживаться чего-либо: Sie hält an ihrem Plan fest.",
         "note_en": "to stick to something: Sie hält an ihrem Plan fest.",
-        "no_object": "Akkusativ"
+        "no_object": "Akkusativ",
+        "prep_required": true
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "констатировать",
+        "meaning_en": "to state, to note",
+        "note_ru": "констатировать что-либо: Halten wir fest, dass alle einverstanden sind.",
+        "note_en": "to state, to note something: Halten wir fest, dass alle einverstanden sind.",
+        "source": "Duden (festhalten 2.2): feststellen, konstatieren — halten wir fest, der Vorfall ereignete sich um Mitternacht",
+        "source_kind": "duden"
       }
     ]
   },
@@ -26688,7 +26862,8 @@
         "note_en": "to follow from something: Daraus folgt, dass wir mehr Zeit brauchen. Highlighted only with a correlative: er folgte ihr aus dem Zimmer is direction, the same form.",
         "source": "Duden (4): sich mit logischer Konsequenz ergeben — daraus, aus seinen Darlegungen folgt, dass er im Recht war",
         "source_kind": "duden",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -27008,7 +27183,8 @@
         "note_en": "to lead to something",
         "meaning_ru": "приводить (к чему-либо)",
         "meaning_en": "to lead (to), to result in",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       },
       {
         "pattern": "Akkusativ",
@@ -27735,7 +27911,8 @@
         "meaning_ru": "браться (за что-либо), прибегать (к чему-либо)",
         "meaning_en": "to take up, to resort to (something)",
         "note_ru": "браться за что-либо, прибегать к чему-либо: Am Abend greift er gern zu einem Buch.",
-        "note_en": "to reach for something, to resort to something: Am Abend greift er gern zu einem Buch."
+        "note_en": "to reach for something, to resort to something: Am Abend greift er gern zu einem Buch.",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -27752,8 +27929,8 @@
   {
     "id": "verb-553",
     "infinitive": "gründen",
-    "translation_ru": "основывать; основывать, строить (на чём-либо), основываться (на чём-либо)",
-    "translation_en": "to found; to set up; to base (on), to be based (on), to rest (on)",
+    "translation_ru": "основывать; основывать, строить (на чём-либо); основываться (на чём-либо)",
+    "translation_en": "to found; to base (on); to be based (on), to rest (on)",
     "auxiliary": "haben",
     "usage_note_ru": "eine Familie gründen — создать семью.",
     "usage_note_en": "eine Familie gründen — to start a family.",
@@ -27795,8 +27972,8 @@
         "source": "DWDS: Seine Festigkeit gründete er nicht auf die Amtsehre, sondern auf das Pflichtgefühl. [2: ⟨etw. auf eine Sache, auf einer Sache gründen⟩ etw. auf etw. aufbauen (transi] …)",
         "source_kind": "dwds",
         "source_meaning": "Duden: 2.1: auf etwas aufbauen, mit etwas untermauern; er gründete seine Hoffnung auf ihre Aussage",
-        "meaning_ru": "основывать, строить (на чём-либо), основываться (на чём-либо)",
-        "meaning_en": "to base (on), to be based (on), to rest (on)",
+        "meaning_ru": "основывать, строить (на чём-либо)",
+        "meaning_en": "to base (on)",
         "note_ru": "основывать что-либо на чём-либо: Er gründet seine Meinung auf die Fakten.",
         "note_en": "to base something on something: Er gründet seine Meinung auf die Fakten."
       },
@@ -27805,12 +27982,30 @@
         "source": "DWDS: Die tiefe Ehrfurcht vor der Sprache … gründet auf der kernfesten Glaubensüberzeugung des Verfassers. [2 (transitiv, gleiche Bedeutung, Variante; bes. im Partizip) und 2b: ⟨auf, in et] …⟩",
         "source_kind": "dwds",
         "source_meaning": "Duden: 2.2: in etwas seine Grundlage, seinen Grund, seine Stütze haben; ihre Sicherheit gründet auf Erfahrung",
-        "meaning_ru": "основывать, строить (на чём-либо), основываться (на чём-либо)",
-        "meaning_en": "to base (on), to be based (on), to rest (on)",
+        "meaning_ru": "основываться (на чём-либо)",
+        "meaning_en": "to be based (on), to rest (on)",
         "note_ru": "основываться на чём-либо: Die Theorie gründet auf genauen Beobachtungen.",
         "note_en": "to be based on something: Die Theorie gründet auf genauen Beobachtungen."
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "основываться (на чём-либо)",
+      "translation_en": "to be based (on)",
+      "note_ru": "на чём — auf + Akk.: Ihr Urteil gründet sich auf genaue Beobachtungen.",
+      "note_en": "on what — auf + accusative: Ihr Urteil gründet sich auf genaue Beobachtungen.",
+      "complements": [
+        {
+          "pattern": "auf + Akkusativ",
+          "meaning_ru": "основываться (на чём-либо)",
+          "meaning_en": "to be based (on)",
+          "note_ru": "основываться на чём-либо: Ihr Urteil gründet sich auf genaue Beobachtungen.",
+          "note_en": "to be based on something: Ihr Urteil gründet sich auf genaue Beobachtungen.",
+          "source": "Duden (gründen 2.3, sich gründen): sich auf etwas stützen; auf etwas beruhen, aufbauen, fußen — die Sache gründet sich auf den Verdacht, dass er Bescheid gewusst habe",
+          "source_kind": "duden",
+          "prep_required": true
+        }
+      ]
+    }
   },
   {
     "id": "verb-554",
@@ -27949,13 +28144,6 @@
         "note_en": "to trade in something"
       },
       {
-        "pattern": "von + Dativ",
-        "note_ru": "повествовать о чём-либо (о книге, фильме)",
-        "note_en": "to be about something (a book, a film)",
-        "meaning_ru": "повествовать (о чём-либо), быть посвящённым (чему-либо)",
-        "meaning_en": "to be about, to deal with"
-      },
-      {
         "pattern": "um + Akkusativ",
         "source": "DWDS (2): «(um etw.) verhandeln, feilschen»; «um den Preis einer Ware handeln»",
         "source_kind": "dwds",
@@ -27964,6 +28152,13 @@
         "source_meaning": "Duden (3): über den Preis einer zum Kauf angebotenen Ware verhandeln",
         "note_ru": "торговаться из-за чего-либо: Auf dem Markt handelt sie immer um den Preis.",
         "note_en": "to haggle over something: Auf dem Markt handelt sie immer um den Preis."
+      },
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "повествовать о чём-либо (о книге, фильме)",
+        "note_en": "to be about something (a book, a film)",
+        "meaning_ru": "повествовать (о чём-либо), быть посвящённым (чему-либо)",
+        "meaning_en": "to be about, to deal with"
       }
     ],
     "lookup_forms": {
@@ -28853,7 +29048,8 @@
         "meaning_en": "(colloquial, figurative) to cling (to something), to be unable to let go (of something)",
         "note_ru": "(разг., перен.) цепляться за что-либо, не мочь расстаться с чем-либо: Er klebt an seinem Geld.",
         "note_en": "(colloquial, figurative) to cling to something, to be unable to let go of it: Er klebt an seinem Geld.",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       }
     ]
   },
@@ -31137,8 +31333,8 @@
   {
     "id": "verb-626",
     "infinitive": "schießen",
-    "translation_ru": "стрелять; подстрелить (дичь); бить (по мячу), забивать (гол); (разг.) делать (снимки)",
-    "translation_en": "to shoot (a gun); to shoot (game); to shoot (a ball), to score (a goal); (colloquial) to take (photos)",
+    "translation_ru": "стрелять; бить (по мячу), забивать (гол); подстрелить (дичь); (разг.) делать (снимки)",
+    "translation_en": "to shoot (a gun); to shoot (a ball), to score (a goal); to shoot (game); (colloquial) to take (photos)",
     "auxiliary": "haben",
     "usage_note_ru": "«Мчаться, вылетать» — schießen с sein (отдельная карточка): Er ist um die Ecke geschossen.",
     "usage_note_en": "“To shoot past, to dash” is schießen with sein (separate card): Er ist um die Ecke geschossen.",
@@ -31177,12 +31373,12 @@
     },
     "complements": [
       {
-        "pattern": "Akkusativ",
-        "meaning_ru": "подстрелить (дичь)",
-        "meaning_en": "to shoot (game)",
-        "note_ru": "подстрелить кого-либо: Er hat einen Hasen geschossen.",
-        "note_en": "to shoot an animal: Er hat einen Hasen geschossen.",
-        "source": "Duden (1.11): Jagdwild erlegen, töten; Hasen schießen",
+        "pattern": "in / auf + Akkusativ",
+        "meaning_ru": "стрелять",
+        "meaning_en": "to shoot (a gun)",
+        "note_ru": "стрелять куда-либо, в кого-либо, по чему-либо: in die Menge, auf das Ziel schießen",
+        "note_en": "to shoot somewhere, at someone or something: in die Menge, auf das Ziel schießen",
+        "source": "Duden (1): in die Menschenmenge, auf jemanden schießen",
         "source_kind": "duden"
       },
       {
@@ -31192,6 +31388,15 @@
         "note_ru": "бить по мячу, забивать гол: Er schießt den Ball ins Tor. Sie hat zwei Tore geschossen.",
         "note_en": "to shoot a ball, to score a goal: Er schießt den Ball ins Tor. Sie hat zwei Tore geschossen.",
         "source": "Duden (2): den Ball mit dem Fuß anstoßen oder werfen …; ein Tor schießen",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "подстрелить (дичь)",
+        "meaning_en": "to shoot (game)",
+        "note_ru": "подстрелить кого-либо: Er hat einen Hasen geschossen.",
+        "note_en": "to shoot an animal: Er hat einen Hasen geschossen.",
+        "source": "Duden (1.11): Jagdwild erlegen, töten; Hasen schießen",
         "source_kind": "duden"
       },
       {
@@ -31208,15 +31413,6 @@
         "note_ru": "стрелять по чему-либо (nach der Scheibe)",
         "note_en": "to shoot at something (nach der Scheibe)",
         "direction": true
-      },
-      {
-        "pattern": "in / auf + Akkusativ",
-        "meaning_ru": "стрелять",
-        "meaning_en": "to shoot (a gun)",
-        "note_ru": "стрелять куда-либо, в кого-либо, по чему-либо: in die Menge, auf das Ziel schießen",
-        "note_en": "to shoot somewhere, at someone or something: in die Menge, auf das Ziel schießen",
-        "source": "Duden (1): in die Menschenmenge, auf jemanden schießen",
-        "source_kind": "duden"
       }
     ]
   },
@@ -31816,8 +32012,8 @@
   {
     "id": "verb-637",
     "infinitive": "sorgen",
-    "translation_ru": "заботиться; обеспечивать",
-    "translation_en": "to take care of; to provide for",
+    "translation_ru": "заботиться; обеспечивать; вызывать (что-либо)",
+    "translation_en": "to take care of; to see to, to ensure; to cause, to create",
     "auxiliary": "haben",
     "usage_note_ru": "sich sorgen um + Akkusativ — беспокоиться о ком-либо.",
     "usage_note_en": "sich sorgen um + accusative — to worry about someone.",
@@ -31830,8 +32026,32 @@
     "complements": [
       {
         "pattern": "für + Akkusativ",
-        "note_ru": "заботиться о ком-либо или чём-либо",
-        "note_en": "to take care of someone or something"
+        "meaning_ru": "заботиться",
+        "meaning_en": "to take care of",
+        "note_ru": "заботиться о ком-, чём-либо: Sie sorgt für ihre alte Mutter.",
+        "note_en": "to take care of someone or something: Sie sorgt für ihre alte Mutter.",
+        "source": "Duden (sorgen 2.1): gut, vorbildlich, schlecht für jemanden sorgen; DWDS (2): ⟨für etw., jmdn. sorgen⟩",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "meaning_ru": "обеспечивать",
+        "meaning_en": "to see to, to ensure",
+        "note_ru": "обеспечивать что-либо: Der Lehrer sorgt für Ruhe in der Klasse.",
+        "note_en": "to see to something: Der Lehrer sorgt für Ruhe in der Klasse.",
+        "source": "Duden (sorgen 2.2): für das Essen, für Ruhe und Ordnung sorgen",
+        "source_kind": "duden",
+        "prep_required": true
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "meaning_ru": "вызывать (что-либо)",
+        "meaning_en": "to cause, to create",
+        "note_ru": "вызывать что-либо: Die Nachricht sorgte für große Aufregung.",
+        "note_en": "to cause something: Die Nachricht sorgte für große Aufregung.",
+        "source": "Duden (sorgen 2.3, verblasst): bewirken, zur Folge haben, hervorrufen — sein Auftritt sorgte für eine Sensation",
+        "source_kind": "duden",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -32554,11 +32774,11 @@
   {
     "id": "verb-652",
     "infinitive": "sich stoßen",
-    "translation_ru": "удариться, ушибить (руку, голову); (перен.) возмущаться, коробить (чем-либо); (книжн.) оттолкнуться (от чего-либо)",
-    "translation_en": "to bump oneself, to hurt (one's hand, head); to take offence (at); (literary) to push off (from something)",
+    "translation_ru": "ударяться, ушибать (руку, голову); (перен.) возмущаться, коробить (чем-либо)",
+    "translation_en": "to bump oneself, to hurt (one's hand, head); to take offence (at)",
     "auxiliary": "haben",
-    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Перен. — an + Dativ: Sie stößt sich an seinem Ton. — Её коробит его тон. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки. Оттолкнуться — обычно sich abstoßen: Er stieß sich vom Beckenrand ab. Реже, книжн., без ab с направлением: Er stieß sich vom Boden in die Höhe.",
-    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Figuratively — an + dative: Sie stößt sich an seinem Ton. — She takes offence at his tone. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards. To push off — usually sich abstoßen: Er stieß sich vom Beckenrand ab. Less often, literary, without ab and with a direction: Er stieß sich vom Boden in die Höhe.",
+    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Перен. — an + Dativ: Sie stößt sich an seinem Ton. — Её коробит его тон. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки. Оттолкнуться — sich abstoßen (другой глагол): Er stieß sich vom Beckenrand ab.",
+    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Figuratively — an + dative: Sie stößt sich an seinem Ton. — She takes offence at his tone. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards. To push off is sich abstoßen (another verb): Er stieß sich vom Beckenrand ab.",
     "example_de": "Pass auf, dass du dich nicht am Kopf stößt!",
     "example_cloze": "Pass auf, dass du dich nicht am Kopf {{c1::stößt}}!",
     "example_ru": "Смотри не ударься головой!",
@@ -32598,18 +32818,10 @@
       },
       {
         "pattern": "Akkusativ",
-        "meaning_ru": "удариться, ушибить (руку, голову)",
+        "meaning_ru": "ударяться, ушибать (руку, голову)",
         "meaning_en": "to bump oneself, to hurt (one's hand, head)",
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
-      },
-      {
-        "pattern": "von + Dativ",
-        "meaning_ru": "(книжн.) оттолкнуться (от чего-либо)",
-        "meaning_en": "(literary) to push off (from something)",
-        "note_ru": "(книжн.) оттолкнуться от чего-либо (vom Boden); обычно — sich abstoßen",
-        "note_en": "(literary) to push off from something (vom Boden); usually sich abstoßen",
-        "direction": true
       }
     ],
     "lookup_forms": {
@@ -32693,11 +32905,11 @@
   {
     "id": "verb-2560",
     "infinitive": "stoßen",
-    "translation_ru": "наткнуться, натолкнуться (на что-либо); неожиданно встретить (кого-либо); налететь, стукнуться (обо что-либо)",
-    "translation_en": "to come across, to stumble upon; to run into (someone); to bang into, to knock against (something)",
+    "translation_ru": "натыкаться, наталкиваться (на что-либо); неожиданно встречать (кого-либо); налететь, стукнуться (обо что-либо); граничить (с чем-либо)",
+    "translation_en": "to come across, to stumble upon; to run into (someone); to bang into, to knock against (something); to border (on something), to adjoin (something)",
     "auxiliary": "sein",
-    "usage_note_ru": "Толкать (кого-либо) — Perfekt с haben (отдельная карточка). Устойчиво: auf Kritik / auf Ablehnung stoßen — встретить критику / отказ; zu jemandem stoßen — присоединиться к кому-либо.",
-    "usage_note_en": "To push (someone) takes haben (separate card). Set phrases: auf Kritik / auf Ablehnung stoßen — to meet with criticism / rejection; zu jemandem stoßen — to join someone.",
+    "usage_note_ru": "Толкать (кого-либо) — Perfekt с haben (отдельная карточка). Устойчиво: auf Kritik / auf Ablehnung stoßen — встретить критику / отказ; zu jemandem stoßen — присоединиться к кому-либо. Граничить (an + Akk.) — Perfekt с haben.",
+    "usage_note_en": "To push (someone) takes haben (separate card). Set phrases: auf Kritik / auf Ablehnung stoßen — to meet with criticism / rejection; zu jemandem stoßen — to join someone. To border on (an + accusative) takes haben.",
     "example_de": "Bei unserer Wanderung sind wir mitten im Wald auf eine alte Ruine gestoßen.",
     "example_cloze": "Bei unserer Wanderung sind wir mitten im Wald auf eine alte Ruine {{c1::gestoßen}}.",
     "example_ru": "Во время похода мы посреди леса наткнулись на старые развалины.",
@@ -32731,25 +32943,37 @@
     },
     "complements": [
       {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "налететь, стукнуться обо что-либо",
+        "note_en": "to bang into, to knock against something",
+        "no_object": "Akkusativ",
+        "direction": true
+      },
+      {
         "pattern": "auf + Akkusativ",
         "note_ru": "наткнуться на что-либо, неожиданно встретить кого-либо",
         "note_en": "to come across something, to run into someone",
-        "meaning_ru": "наткнуться, натолкнуться (на что-либо)",
+        "meaning_ru": "натыкаться, наталкиваться (на что-либо)",
         "meaning_en": "to come across, to stumble upon"
       },
       {
         "pattern": "auf + Akkusativ",
         "note_ru": "наткнуться на что-либо, неожиданно встретить кого-либо",
         "note_en": "to come across something, to run into someone",
-        "meaning_ru": "неожиданно встретить (кого-либо)",
-        "meaning_en": "to run into (someone)"
+        "meaning_ru": "неожиданно встречать (кого-либо)",
+        "meaning_en": "to run into (someone)",
+        "prep_required": true
       },
       {
-        "pattern": "gegen + Akkusativ",
-        "note_ru": "налететь, стукнуться обо что-либо",
-        "note_en": "to bang into, to knock against something",
-        "no_object": "Akkusativ",
-        "direction": true
+        "pattern": "an + Akkusativ",
+        "meaning_ru": "граничить (с чем-либо)",
+        "meaning_en": "to border (on something), to adjoin (something)",
+        "note_ru": "граничить с чем-либо: Das Hotel stößt direkt an den Strand.",
+        "note_en": "to border on something: Das Hotel stößt direkt an den Strand.",
+        "source": "DWDS (stoßen 8): ⟨etw. stößt an etw.⟩ etw. grenzt an etw. an; Duden (stoßen 6): an etwas grenzen — das Grundstück stößt unmittelbar an den Wald",
+        "source_kind": "dwds",
+        "correlative_only": true,
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -32843,7 +33067,7 @@
   {
     "id": "verb-2583",
     "infinitive": "sich stürzen",
-    "translation_ru": "броситься, наброситься (на кого-, что-либо); броситься, окунуться (во что-либо)",
+    "translation_ru": "бросаться, набрасываться (на кого-, что-либо); бросаться, окунаться (во что-либо)",
     "translation_en": "to throw oneself, to pounce (on); to plunge (into)",
     "auxiliary": "haben",
     "usage_note_ru": "Perfekt с haben (без sich stürzen — с sein). sich in die Arbeit stürzen — с головой уйти в работу. Без sich: stürzen — падать (отдельная карточка).",
@@ -32859,9 +33083,10 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "броситься на кого-, что-либо",
         "note_en": "to pounce on someone or something",
-        "meaning_ru": "броситься, наброситься (на кого-, что-либо)",
+        "meaning_ru": "бросаться, набрасываться (на кого-, что-либо)",
         "meaning_en": "to throw oneself, to pounce (on)",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       },
       {
         "pattern": "in + Akkusativ",
@@ -33280,8 +33505,8 @@
   {
     "id": "verb-662",
     "infinitive": "treten",
-    "translation_ru": "пинать; наступать (на что-либо)",
-    "translation_en": "to kick; to tread on",
+    "translation_ru": "пинать; наступать (на что-либо); нажимать (педаль, тормоз); (спорт.) бить, пробивать (угловой, штрафной, пенальти)",
+    "translation_en": "to kick; to tread on; to press, to step on (a pedal, the brake); (sport) to take (a corner, a free kick, a penalty)",
     "auxiliary": "haben",
     "usage_note_ru": "Наступить нечаянно — чаще с sein: Ich bin in eine Pfütze getreten.",
     "usage_note_en": "Stepping in something by accident usually takes sein: Ich bin in eine Pfütze getreten.",
@@ -33323,6 +33548,24 @@
         "note_en": "to kick someone or something",
         "meaning_ru": "пинать",
         "meaning_en": "to kick"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "нажимать (педаль, тормоз)",
+        "meaning_en": "to press, to step on (a pedal, the brake)",
+        "note_ru": "нажимать что-либо (педаль, тормоз): Vor der Kurve trat sie kurz die Kupplung.",
+        "note_en": "to press something (a pedal, the brake): Vor der Kurve trat sie kurz die Kupplung.",
+        "source": "Duden (treten 4): einen mit dem Fuß, den Füßen zu bedienenden Mechanismus o. Ä. durch [wiederholtes] Niederdrücken in Gang setzen bzw. halten — die Bremse treten",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "(спорт.) бить, пробивать (угловой, штрафной, пенальти)",
+        "meaning_en": "(sport) to take (a corner, a free kick, a penalty)",
+        "note_ru": "пробивать что-либо (угловой, пенальти): Den Strafstoß tritt heute der Kapitän.",
+        "note_en": "to take something (a corner, a penalty): Den Strafstoß tritt heute der Kapitän.",
+        "source": "Duden (treten 6, Fußball): durch einen Schuss (2a) ausführen — eine Ecke, einen Freistoß, einen Elfmeter treten",
+        "source_kind": "duden"
       }
     ],
     "lookup_forms": {
@@ -34107,7 +34350,8 @@
         "note_ru": "обращаться с кем-либо или чем-либо",
         "note_en": "to deal with someone or something",
         "meaning_ru": "обращаться (с кем-либо, чем-либо)",
-        "meaning_en": "to deal with, to handle"
+        "meaning_en": "to deal with, to handle",
+        "prep_required": true
       }
     ],
     "separable_prefix": "um",
@@ -34220,8 +34464,8 @@
   {
     "id": "verb-681",
     "infinitive": "umstellen",
-    "translation_ru": "переставлять; переходить (на что-либо)",
-    "translation_en": "to rearrange; to switch",
+    "translation_ru": "переставлять; переводить, переходить (на что-либо); переключать, переводить (часы, рычаг)",
+    "translation_en": "to rearrange; to convert, to switch (to); to reset, to switch over (a clock, a lever)",
     "auxiliary": "haben",
     "usage_note_ru": "Отделяемый (umgestellt). sich umstellen auf + Akkusativ — привыкать к новому. Не путать: неотделяемый umstellen (umstellte, hat umstellt) — окружить, оцепить (отдельная карточка).",
     "usage_note_en": "Separable (umgestellt). sich umstellen auf + accusative — to adjust to something new. Do not confuse: the inseparable umstellen (umstellte, hat umstellt) — to surround (separate card).",
@@ -34234,10 +34478,12 @@
     "complements": [
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "переходить на что-либо",
-        "note_en": "to switch to something",
-        "meaning_ru": "переходить (на что-либо)",
-        "meaning_en": "to switch"
+        "meaning_ru": "переводить, переходить (на что-либо)",
+        "meaning_en": "to convert, to switch (to)",
+        "note_ru": "переводить что-либо на что-либо; переходить на что-либо: Wir stellen die Heizung auf Gas um.",
+        "note_en": "to convert something to something; to switch to something: Wir stellen die Heizung auf Gas um.",
+        "source": "Duden (umstellen 3a): auf etwas anderes einstellen; zu etwas anderem übergehen — die Produktion auf Spielwaren umstellen",
+        "source_kind": "duden"
       },
       {
         "pattern": "Akkusativ",
@@ -34274,18 +34520,18 @@
     },
     "reading_frequency": 3.78,
     "reflexive": {
-      "translation_ru": "привыкать к новому",
-      "translation_en": "to adjust to something new",
+      "translation_ru": "перестраиваться, привыкать (к новому)",
+      "translation_en": "to adjust, to get used to (something new)",
       "note_ru": "sich umstellen auf + Akkusativ",
       "note_en": "sich umstellen auf + accusative",
       "complements": [
         {
           "pattern": "auf + Akkusativ",
-          "meaning_ru": "привыкать к новому",
-          "meaning_en": "to adjust to something new",
-          "note_ru": "переводить, переходить на что-либо: Wir stellen die Heizung auf Gas um. С sich — привыкать: Er stellt sich auf das neue Klima um.",
-          "note_en": "to switch to: Wir stellen die Heizung auf Gas um. With sich — to adjust to: Er stellt sich auf das neue Klima um.",
-          "source": "Duden 3.1: „die Heizung [von Öl] auf Erdgas umstellen“; 3.2: „sich auf ein anderes Klima umstellen“",
+          "meaning_ru": "перестраиваться, привыкать (к новому)",
+          "meaning_en": "to adjust, to get used to (something new)",
+          "note_ru": "перестраиваться, привыкать к чему-либо: Er stellt sich auf das neue Klima um.",
+          "note_en": "to adjust, to get used to something: Er stellt sich auf das neue Klima um.",
+          "source": "Duden (umstellen 3b, sich umstellen): auf veränderte Verhältnisse einstellen — sich auf ein anderes Klima umstellen; DWDS (3b): ⟨sich (auf etw.) umstellen⟩",
           "source_kind": "duden"
         }
       ]
@@ -34578,8 +34824,8 @@
   {
     "id": "verb-687",
     "infinitive": "unterscheiden",
-    "translation_ru": "различать; отличать",
-    "translation_en": "to distinguish; to tell apart",
+    "translation_ru": "различать; отличать, выделять (о признаке: от кого-, чего-либо)",
+    "translation_en": "to distinguish, to tell apart; to set apart (from)",
     "auxiliary": "haben",
     "usage_note_ru": "sich unterscheiden von + Dativ — отличаться от.",
     "usage_note_en": "sich unterscheiden von + dative — to differ from.",
@@ -34634,43 +34880,30 @@
     "complements": [
       {
         "pattern": "von + Dativ",
-        "source": "учебный список",
-        "source_kind": "учебный список",
-        "source_meaning": "Duden: Weizen von Roggen nicht unterscheiden können; ihre Musikalität unterscheidet sie von ihrer Schwester",
-        "meaning_ru": "отличать",
-        "meaning_en": "to tell apart",
-        "note_ru": "отличать кого-либо, что-либо от кого-либо, чего-либо: Er kann eine Ente nicht von einer Gans unterscheiden.",
-        "note_en": "to tell someone or something apart from, to distinguish from someone or something: Er kann eine Ente nicht von einer Gans unterscheiden."
-      },
-      {
-        "pattern": "von + Dativ",
-        "source": "учебный список",
-        "source_kind": "учебный список",
-        "source_meaning": "Duden: Weizen von Roggen nicht unterscheiden können; ihre Musikalität unterscheidet sie von ihrer Schwester",
-        "note_ru": "отличать кого-либо, что-либо от кого-либо, чего-либо: Er kann eine Ente nicht von einer Gans unterscheiden.",
-        "note_en": "to tell someone or something apart from, to distinguish from someone or something: Er kann eine Ente nicht von einer Gans unterscheiden.",
+        "source": "Duden (unterscheiden 1.3): Weizen von Roggen nicht unterscheiden können",
+        "source_kind": "duden",
+        "note_ru": "различать, отличать кого-, что-либо от кого-, чего-либо: Er kann eine Ente nicht von einer Gans unterscheiden.",
+        "note_en": "to tell someone or something apart from someone or something: Er kann eine Ente nicht von einer Gans unterscheiden.",
         "meaning_ru": "различать",
-        "meaning_en": "to distinguish"
+        "meaning_en": "to distinguish, to tell apart"
       },
       {
         "pattern": "zwischen + Dativ",
-        "source": "учебный список",
-        "source_kind": "учебный список",
-        "source_meaning": "Duden: es wird unterschieden zwischen dem alten und dem neuen Mittelstand",
+        "source": "Duden (unterscheiden 1.3): zwischen zwei oder mehreren Dingen, Erscheinungen o. Ä. einen Unterschied feststellen, wahrnehmen",
+        "source_kind": "duden",
         "meaning_ru": "различать",
-        "meaning_en": "to distinguish",
+        "meaning_en": "to distinguish, to tell apart",
         "note_ru": "различать что-либо и что-либо, проводить различие между: Man muss zwischen Theorie und Praxis unterscheiden.",
         "note_en": "to distinguish between something and something: Man muss zwischen Theorie und Praxis unterscheiden."
       },
       {
-        "pattern": "zwischen + Dativ",
-        "source": "учебный список",
-        "source_kind": "учебный список",
-        "source_meaning": "Duden: es wird unterschieden zwischen dem alten und dem neuen Mittelstand",
-        "note_ru": "различать что-либо и что-либо, проводить различие между: Man muss zwischen Theorie und Praxis unterscheiden.",
-        "note_en": "to distinguish between something and something: Man muss zwischen Theorie und Praxis unterscheiden.",
-        "meaning_ru": "отличать",
-        "meaning_en": "to tell apart"
+        "pattern": "von + Dativ",
+        "source": "Duden (unterscheiden 3): das besondere Merkmal sein, worin jemand, etwas von jemandem, etwas abweicht — ihre Musikalität unterscheidet sie von ihrer Schwester; DWDS (3): ⟨etw. unterscheidet jmdn., etw. von jmdm., einer Sache⟩",
+        "source_kind": "duden",
+        "meaning_ru": "отличать, выделять (о признаке: от кого-, чего-либо)",
+        "meaning_en": "to set apart (from)",
+        "note_ru": "отличать кого-, что-либо от кого-, чего-либо (о признаке): Ihr Mut unterscheidet sie von den anderen.",
+        "note_en": "to set someone or something apart from someone or something: Ihr Mut unterscheidet sie von den anderen."
       }
     ]
   },
@@ -35343,8 +35576,8 @@
   {
     "id": "verb-702",
     "infinitive": "verlangen",
-    "translation_ru": "требовать; просить (цену)",
-    "translation_en": "to demand; to ask for",
+    "translation_ru": "требовать; просить (цену); (книжн.) звать (кого-либо), просить (чего-либо), тосковать, жаждать (чего-либо)",
+    "translation_en": "to demand; to ask (a price); (elevated) to call for, to ask for, to long for (something)",
     "auxiliary": "haben",
     "example_de": "Der Kunde verlangt sein Geld zurück.",
     "example_cloze": "Der Kunde {{c1::verlangt}} sein Geld zurück.",
@@ -35360,10 +35593,13 @@
       },
       {
         "pattern": "nach + Dativ",
-        "note_ru": "требовать, просить чего-либо; спрашивать кого-либо: Der Kranke verlangte nach Wasser.",
-        "note_en": "to ask for, to call for: Der Kranke verlangte nach Wasser.",
-        "meaning_ru": "требовать",
-        "meaning_en": "to demand"
+        "note_ru": "(книжн.) звать кого-либо, просить чего-либо, тосковать по чему-либо: Das Kind verlangte nach seiner Mutter. Требовать чего-либо — без предлога: Er verlangt sofort eine Antwort.",
+        "note_en": "(elevated) to call for, to ask for, to long for someone or something: Das Kind verlangte nach seiner Mutter. To demand something takes no preposition: Er verlangt sofort eine Antwort.",
+        "meaning_ru": "(книжн.) звать (кого-либо), просить (чего-либо), тосковать, жаждать (чего-либо)",
+        "meaning_en": "(elevated) to call for, to ask for, to long for (something)",
+        "source": "Duden (verlangen 6.1–6.3, gehoben): nach einem Arzt verlangen; nach Brot, einer Zigarette verlangen; sich nach jemandem, etwas sehnen; DWDS (4, 5): ⟨jmd. verlangt nach jmdm., etw.⟩",
+        "source_kind": "duden",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -36964,11 +37200,11 @@
   {
     "id": "verb-733",
     "infinitive": "wenden",
-    "translation_ru": "разворачиваться (на машине); переворачивать",
-    "translation_en": "to turn (round); to turn over",
+    "translation_ru": "разворачивать(ся) (о машине); переворачивать; тратить (на что-либо)",
+    "translation_en": "to turn (round); to turn over; to spend (on), to devote (to)",
     "auxiliary": "haben",
-    "usage_note_ru": "В этих значениях только wendete, gewendet: das Steak wenden — перевернуть стейк. Bitte wenden! — см. на обороте. «Обращаться к кому-либо» — sich wenden (отдельная карточка).",
-    "usage_note_en": "In these senses only wendete, gewendet: das Steak wenden — to turn the steak. Bitte wenden! — please turn over. “To contact someone” is sich wenden (separate card).",
+    "usage_note_ru": "В значениях «переворачивать» и «разворачивать(ся)» только wendete, gewendet: das Steak wenden — перевернуть стейк. Bitte wenden! — см. на обороте. «Тратить» — чаще wandte, gewandt: viel Mühe an / auf etwas wenden. «Обращаться к кому-либо» — sich wenden (отдельная карточка).",
+    "usage_note_en": "In the senses “to turn over” and “to turn (round)” only wendete, gewendet: das Steak wenden — to turn the steak. Bitte wenden! — please turn over. “To spend” more often takes wandte, gewandt: viel Mühe an / auf etwas wenden. “To contact someone” is sich wenden (separate card).",
     "example_de": "Der Fahrer hat mitten auf der Straße gewendet.",
     "example_cloze": "Der Fahrer hat mitten auf der Straße {{c1::gewendet}}.",
     "example_ru": "Водитель развернулся посреди улицы.",
@@ -37004,8 +37240,30 @@
     "complements": [
       {
         "pattern": "Akkusativ",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "meaning_ru": "разворачивать(ся) (о машине)",
+        "meaning_en": "to turn (round)",
+        "note_ru": "что-либо (машину, лодку); также без дополнения: Auf der engen Straße musste der Bus wenden.",
+        "note_en": "something (a car, a boat); also without an object: Auf der engen Straße musste der Bus wenden.",
+        "source": "Duden (wenden 2.1): in die entgegengesetzte Richtung bringen — das Auto wenden; (2.2) drehen und die entgegengesetzte Richtung einschlagen — hier kann ich nicht wenden",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "переворачивать",
+        "meaning_en": "to turn over",
+        "note_ru": "что-либо: Vor dem Winter wendet er die Matratze.",
+        "note_en": "something: Vor dem Winter wendet er die Matratze.",
+        "source": "Duden (wenden 1.1): auf die andere Seite drehen, herumdrehen, umwenden",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "тратить (на что-либо)",
+        "meaning_en": "to spend (on), to devote (to)",
+        "note_ru": "что-либо (время, силы, деньги): Sie hat viel Zeit auf das Projekt gewandt.",
+        "note_en": "something (time, effort, money): Sie hat viel Zeit auf das Projekt gewandt.",
+        "source": "Duden (wenden 5): (für jemanden, etwas) aufwenden, benötigen, verbrauchen — viel Kraft, Sorgfalt, Geld, Arbeit auf etwas wenden",
+        "source_kind": "duden"
       }
     ]
   },
@@ -37525,8 +37783,8 @@
   {
     "id": "verb-744",
     "infinitive": "zählen",
-    "translation_ru": "считать; причислять (к кому-, чему-либо); относиться (к числу); рассчитывать (на кого-либо)",
-    "translation_en": "to count; to count (among), to rank (among); to be one of; to count on",
+    "translation_ru": "считать; рассчитывать (на кого-либо); относиться (к числу); причислять (к кому-, чему-либо)",
+    "translation_en": "to count; to count on; to be one of; to count (among), to rank (among)",
     "auxiliary": "haben",
     "example_de": "Mein Sohn kann schon bis hundert zählen.",
     "example_cloze": "Mein Sohn kann schon bis hundert {{c1::zählen}}.",
@@ -37536,11 +37794,19 @@
     "forms": null,
     "complements": [
       {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone",
+        "meaning_ru": "считать",
+        "meaning_en": "to count"
+      },
+      {
         "pattern": "auf + Akkusativ",
         "note_ru": "рассчитывать на кого-либо",
         "note_en": "to count on someone",
         "meaning_ru": "рассчитывать (на кого-либо)",
-        "meaning_en": "to count on"
+        "meaning_en": "to count on",
+        "prep_required": true
       },
       {
         "pattern": "zu + Dativ",
@@ -37555,13 +37821,6 @@
         "note_en": "to count among: Ich zähle ihn zu meinen Freunden.",
         "meaning_ru": "причислять (к кому-, чему-либо)",
         "meaning_en": "to count (among), to rank (among)"
-      },
-      {
-        "pattern": "Akkusativ",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone",
-        "meaning_ru": "считать",
-        "meaning_en": "to count"
       },
       {
         "pattern": "Akkusativ",
@@ -38348,8 +38607,8 @@
   {
     "id": "verb-760",
     "infinitive": "abziehen",
-    "translation_ru": "вычитать, удерживать (из суммы), снимать (шкуру, постельное бельё); уходить, удаляться (о войсках, дыме)",
-    "translation_en": "to subtract, to deduct, to strip (a skin, a bed); to withdraw, to leave (of troops, smoke)",
+    "translation_ru": "вычитать, удерживать (из суммы); снимать (шкуру, постельное бельё); уходить, удаляться (о войсках, дыме)",
+    "translation_en": "to subtract, to deduct; to strip (a skin, a bed); to withdraw, to leave (of troops, smoke)",
     "auxiliary": [
       "haben",
       "sein"
@@ -38382,19 +38641,29 @@
     "complements": [
       {
         "pattern": "von + Dativ",
-        "note_ru": "вычитать из чего-либо",
-        "note_en": "to deduct from something",
-        "meaning_ru": "вычитать, удерживать (из суммы), снимать (шкуру, постельное бельё)",
-        "meaning_en": "to subtract, to deduct, to strip (a skin, a bed)",
-        "correlative_only": true
+        "note_ru": "вычитать из чего-либо: Er zieht 20 Euro von der Rechnung ab.",
+        "note_en": "to deduct from something: Er zieht 20 Euro von der Rechnung ab.",
+        "meaning_ru": "вычитать, удерживать (из суммы)",
+        "meaning_en": "to subtract, to deduct",
+        "correlative_only": true,
+        "source": "Duden (abziehen 14.1): von etwas abrechnen, durch Subtraktion wegnehmen, subtrahieren — 20 von 100 abziehen",
+        "source_kind": "duden"
       },
       {
         "pattern": "Akkusativ",
         "required": true,
-        "meaning_ru": "вычитать, удерживать (из суммы), снимать (шкуру, постельное бельё)",
-        "meaning_en": "to subtract, to deduct, to strip (a skin, a bed)",
-        "note_ru": "что-либо (из чего-либо)",
-        "note_en": "something (from something)"
+        "meaning_ru": "вычитать, удерживать (из суммы)",
+        "meaning_en": "to subtract, to deduct",
+        "note_ru": "что-либо (из чего-либо): Die Firma zieht die Kosten ab.",
+        "note_en": "something (from something): Die Firma zieht die Kosten ab."
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "снимать (шкуру, постельное бельё)",
+        "meaning_en": "to strip (a skin, a bed)",
+        "note_ru": "снимать что-либо: Nach dem Besuch ziehe ich das Gästebett ab.",
+        "note_en": "to strip something: Nach dem Besuch ziehe ich das Gästebett ab."
       }
     ],
     "separable_prefix": "ab",
@@ -38906,8 +39175,8 @@
   {
     "id": "verb-772",
     "infinitive": "abgehen",
-    "translation_ru": "уходить (со сцены, из школы); отрываться, отходить (о пуговице, краске); отступать, отказываться (от чего-либо)",
-    "translation_en": "to leave (the stage, school); to come off (of a button, paint); to depart, to deviate (from something)",
+    "translation_ru": "отрываться, отходить (о пуговице, краске); уходить (со сцены, из школы); отступать, отказываться (от чего-либо)",
+    "translation_en": "to come off (of a button, paint); to leave (the stage, school); to depart, to deviate (from something)",
     "auxiliary": "sein",
     "usage_note_ru": "Разг.: Was geht ab? — Что происходит? Как дела?",
     "usage_note_en": "Colloquial: Was geht ab? — What's going on? What's up?",
@@ -38954,7 +39223,8 @@
         "note_ru": "отступать от чего-либо: von einer Gewohnheit, einem Grundsatz abgehen",
         "note_en": "to depart from something: von einer Gewohnheit, einem Grundsatz abgehen",
         "source": "Duden (12): von etwas Abstand nehmen; von einer Gewohnheit, einem Grundsatz abgehen",
-        "source_kind": "duden"
+        "source_kind": "duden",
+        "prep_required": true
       }
     ]
   },
@@ -39321,11 +39591,11 @@
   {
     "id": "verb-781",
     "infinitive": "angehen",
-    "translation_ru": "касаться (кого-либо); браться (за что-либо), решать (проблему)",
-    "translation_en": "to concern (someone); to tackle (a problem)",
+    "translation_ru": "касаться (кого-либо); браться (за что-либо), решать (проблему); нападать (на кого-либо); просить (кого-либо о чём-либо), обращаться (к кому-либо с просьбой)",
+    "translation_en": "to concern (someone); to tackle (a problem); to attack (someone), to go for (someone); to ask (someone for something), to approach (someone with a request)",
     "auxiliary": "sein",
-    "usage_note_ru": "was … angeht — что касается …: Was mich angeht, bin ich einverstanden. das geht nicht an — так не годится, это недопустимо. Браться за что-либо (ein Problem angehen) — Perfekt с haben: Wir haben das Problem sofort angegangen.",
-    "usage_note_en": "was … angeht — as far as … is concerned: Was mich angeht, bin ich einverstanden. das geht nicht an — that won't do, that is not acceptable. To tackle something (ein Problem angehen) takes haben: Wir haben das Problem sofort angegangen.",
+    "usage_note_ru": "was … angeht — что касается …: Was mich angeht, bin ich einverstanden. das geht nicht an — так не годится, это недопустимо. Нападать, браться, просить — Perfekt с haben (на юге Германии, в Австрии и Швейцарии — и с sein): Wir haben das Problem sofort angegangen. Касаться — с sein.",
+    "usage_note_en": "was … angeht — as far as … is concerned: Was mich angeht, bin ich einverstanden. das geht nicht an — that won't do, that is not acceptable. To attack, to tackle, to ask take haben (in southern Germany, Austria and Switzerland also sein): Wir haben das Problem sofort angegangen. To concern takes sein.",
     "example_de": "Wo ich gestern war, geht dich nichts an.",
     "example_cloze": "Wo ich gestern war, {{c1::geht}} dich nichts {{c1::an}}.",
     "example_ru": "Где я была вчера, тебя не касается.",
@@ -39353,7 +39623,47 @@
       {
         "pattern": "Akkusativ",
         "note_ru": "касаться кого-либо (по-русски — кого?)",
-        "note_en": "to concern someone"
+        "note_en": "to concern someone",
+        "meaning_ru": "касаться (кого-либо)",
+        "meaning_en": "to concern (someone)",
+        "source": "Duden (angehen 8): jemandes Sache sein — das geht ihn nichts an",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "браться (за что-либо), решать (проблему)",
+        "meaning_en": "to tackle (a problem)",
+        "note_ru": "браться за что-либо: Wir gehen das Problem morgen an.",
+        "note_en": "to tackle something: Wir gehen das Problem morgen an.",
+        "source": "Duden (angehen 5): anpacken, in Angriff nehmen, zu bewältigen suchen",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "нападать (на кого-либо)",
+        "meaning_en": "to attack (someone), to go for (someone)",
+        "note_ru": "нападать на кого-либо: Der Hund ging den Briefträger an.",
+        "note_en": "to attack someone: Der Hund ging den Briefträger an.",
+        "source": "Duden (angehen 4): gegen jemanden vorgehen, ihn angreifen",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "просить (кого-либо о чём-либо), обращаться (к кому-либо с просьбой)",
+        "meaning_en": "to ask (someone for something), to approach (someone with a request)",
+        "note_ru": "просить кого-либо: Ich gehe meinen Bruder um Hilfe an.",
+        "note_en": "to ask someone: Ich gehe meinen Bruder um Hilfe an.",
+        "source": "Duden (angehen 7): jemanden um etwas bitten, sich mit einer Bitte an jemanden wenden",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "um + Akkusativ",
+        "meaning_ru": "просить (кого-либо о чём-либо), обращаться (к кому-либо с просьбой)",
+        "meaning_en": "to ask (someone for something), to approach (someone with a request)",
+        "note_ru": "просить о чём-либо: Sie ging den Lehrer um Rat an.",
+        "note_en": "to ask for something: Sie ging den Lehrer um Rat an.",
+        "source": "Duden (angehen 7): jemanden um etwas bitten — jemanden um [seinen] Rat angehen",
+        "source_kind": "duden"
       }
     ],
     "separable_prefix": "an",
@@ -39886,16 +40196,6 @@
         "meaning_en": "to begin (to speak)",
         "note_ru": "начинать что-либо, приготовиться к чему-либо: Er setzt zum Sprung an.",
         "note_en": "to begin, to get ready to do something: Er setzt zum Sprung an."
-      },
-      {
-        "pattern": "auf + Akkusativ",
-        "source": "DWDS (Bed. 2): „Spürhunde (auf eine Fährte) ansetzen“; „eine Schlägertruppe auf den Sex-Erpresser an[setzen]“",
-        "source_kind": "dwds",
-        "source_meaning": "Duden: für etwas vorsehen, einsetzen, mit etwas beauftragen; Hunde [auf eine Spur] ansetzen; einen Ermittler auf einen Fall ansetzen",
-        "meaning_ru": "назначать (срок, встречу)",
-        "meaning_en": "to schedule, to set (a date)",
-        "note_ru": "назначать на какой-либо срок: Die Sitzung wurde auf Montag angesetzt.",
-        "note_en": "to schedule for a date: Die Sitzung wurde auf Montag angesetzt."
       },
       {
         "pattern": "auf + Akkusativ",
@@ -40503,8 +40803,8 @@
   {
     "id": "verb-806",
     "infinitive": "auskommen",
-    "translation_ru": "обходиться (чем-либо, без кого-, чего-либо); ладить (с кем-либо)",
-    "translation_en": "to manage, to get by (with something, without someone or something); to get on (with someone)",
+    "translation_ru": "ладить (с кем-либо); обходиться (чем-либо, без кого-, чего-либо)",
+    "translation_en": "to get on (with someone); to manage, to get by (with something, without someone or something)",
     "auxiliary": "sein",
     "usage_note_ru": "ohne etwas auskommen — обходиться без чего-либо: Ich komme ohne Auto aus.",
     "usage_note_en": "ohne etwas auskommen — to do without something: Ich komme ohne Auto aus.",
@@ -40534,6 +40834,16 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
+        "meaning_ru": "ладить (с кем-либо)",
+        "meaning_en": "to get on (with someone)",
+        "note_ru": "ладить с кем-либо: Mit meinen Kollegen komme ich gut aus.",
+        "note_en": "to get on with someone: Mit meinen Kollegen komme ich gut aus.",
+        "source": "Duden (3): sich vertragen, verstehen — sie kommen glänzend miteinander aus",
+        "source_kind": "duden",
+        "prep_required": true
+      },
+      {
+        "pattern": "mit + Dativ",
         "meaning_ru": "обходиться (чем-либо, без кого-, чего-либо)",
         "meaning_en": "to manage, to get by (with something, without someone or something)",
         "note_ru": "обходиться чем-либо: Wir müssen mit 500 Euro im Monat auskommen.",
@@ -40550,15 +40860,6 @@
         "meaning_en": "to manage, to get by (with something, without someone or something)",
         "note_ru": "обходиться без кого-либо, чего-либо: Ich komme ohne mein Handy nicht aus.",
         "note_en": "to manage, to get by without someone or something: Ich komme ohne mein Handy nicht aus."
-      },
-      {
-        "pattern": "mit + Dativ",
-        "meaning_ru": "ладить (с кем-либо)",
-        "meaning_en": "to get on (with someone)",
-        "note_ru": "ладить с кем-либо: Mit meinen Kollegen komme ich gut aus.",
-        "note_en": "to get on with someone: Mit meinen Kollegen komme ich gut aus.",
-        "source": "Duden (3): sich vertragen, verstehen — sie kommen glänzend miteinander aus",
-        "source_kind": "duden"
       }
     ],
     "separable_prefix": "aus",
@@ -41317,8 +41618,8 @@
   {
     "id": "verb-823",
     "infinitive": "bestimmen",
-    "translation_ru": "решать, распоряжаться; назначать, предназначать (кем-либо, для чего-либо); определять; склонять (к чему-либо)",
-    "translation_en": "to decide; to designate, to destine (as, for); to determine; to induce (to)",
+    "translation_ru": "решать, распоряжаться; определять; назначать, предназначать (кем-либо, для чего-либо); склонять (к чему-либо)",
+    "translation_en": "to decide; to determine; to designate, to destine (as, for); to induce (to)",
     "auxiliary": "haben",
     "usage_note_ru": "Не путать с наречием bestimmt — наверняка: Er kommt bestimmt.",
     "usage_note_en": "Not to be confused with the adverb bestimmt — certainly: Er kommt bestimmt.",
@@ -41330,16 +41631,16 @@
     "forms": null,
     "complements": [
       {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
         "pattern": "über + Akkusativ",
         "note_ru": "распоряжаться чем-либо, решать за кого-либо",
         "note_en": "to decide on something, to have a say over",
         "meaning_ru": "решать, распоряжаться",
         "meaning_en": "to decide"
-      },
-      {
-        "pattern": "Akkusativ",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
       },
       {
         "pattern": "zu + Dativ",
@@ -41359,7 +41660,8 @@
         "meaning_ru": "склонять (к чему-либо)",
         "meaning_en": "to induce (to)",
         "note_ru": "склонять к чему-либо: Was hat ihn zu diesem Schritt bestimmt?",
-        "note_en": "to induce to something: Was hat ihn zu diesem Schritt bestimmt?"
+        "note_en": "to induce to something: Was hat ihn zu diesem Schritt bestimmt?",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -41536,7 +41838,7 @@
   {
     "id": "verb-827",
     "infinitive": "bezeichnen",
-    "translation_ru": "называть; обозначать",
+    "translation_ru": "называть (кем-, чем-либо); обозначать",
     "translation_en": "to call, to describe (as); to mark, to label",
     "auxiliary": "haben",
     "example_de": "Sie bezeichnet ihren Hund als ihren besten Freund.",
@@ -41550,7 +41852,7 @@
         "pattern": "als + Akkusativ",
         "note_ru": "называть кем-либо или чем-либо",
         "note_en": "to describe as someone or something",
-        "meaning_ru": "называть",
+        "meaning_ru": "называть (кем-, чем-либо)",
         "meaning_en": "to call, to describe (as)"
       }
     ],
@@ -42419,8 +42721,8 @@
   {
     "id": "verb-844",
     "infinitive": "eingehen",
-    "translation_ru": "входить (во что-либо), находить место (в истории, в сознании); поступать (о письме, заявлении, деньгах); идти на (риск), заключать (договор, брак), вступать (в связь); засыхать, погибать (о растениях); закрываться (о газете, фирме)",
-    "translation_en": "to enter (into), to find its way into, to go down (in history); to arrive, to be received (of mail, an application, money); to take (a risk), to enter into (a marriage, an alliance, a bond); to die, to wither (of plants); to fold, to close down (of a newspaper, a firm)",
+    "translation_ru": "поступать (о письме, заявлении, деньгах); идти на (риск), заключать (договор, брак), вступать (в связь); засыхать, погибать (о растениях); закрываться (о газете, фирме); входить (во что-либо), находить место (в истории, в сознании)",
+    "translation_en": "to arrive, to be received (of mail, an application, money); to take (a risk), to enter into (a marriage, an alliance, a bond); to die, to wither (of plants); to fold, to close down (of a newspaper, a firm); to enter (into), to find its way into, to go down (in history)",
     "auxiliary": "sein",
     "usage_note_ru": "С дополнением: ein Risiko eingehen — пойти на риск, eine Ehe / ein Bündnis / eine Verpflichtung / eine Wette eingehen — вступить в брак, заключить союз, взять на себя обязательство, заключить пари (Perfekt тоже с sein: Er ist ein großes Risiko eingegangen). Die Blumen sind eingegangen — цветы засохли. Das Kleid ist bei der Wäsche eingegangen — платье село при стирке. Соглашаться, откликаться (auf + Akkusativ) — см. вторую карточку.",
     "usage_note_en": "With an object: ein Risiko eingehen — to take a risk, eine Ehe / ein Bündnis / eine Verpflichtung / eine Wette eingehen — to enter into a marriage, an alliance, to take on an obligation, to make a bet (perfect also with sein: Er ist ein großes Risiko eingegangen). Die Blumen sind eingegangen — the flowers have died. Das Kleid ist bei der Wäsche eingegangen — the dress shrank in the wash. To agree to, to respond to (auf + Akkusativ) — see the second card.",
@@ -44938,7 +45240,8 @@
         "no_object": "Akkusativ",
         "source": "Duden: gierig streben — nach Abenteuern, Glück, Ruhm, Geld jagen",
         "source_kind": "duden",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -45319,11 +45622,11 @@
   {
     "id": "verb-905",
     "infinitive": "kippen",
-    "translation_ru": "выливать, высыпать; наклонять, опрокидывать; откидывать (окно)",
-    "translation_en": "to tip out, to pour; to tip, to tilt (a window)",
+    "translation_ru": "выливать, высыпать; наклонять, опрокидывать, откидывать (окно); (разг.) опрокидывать (рюмку), пить залпом; (разг.) отменять (закон, решение), проваливать; (разг.) смещать (с должности), свергать",
+    "translation_en": "to tip out, to pour; to tip, to tilt (a window); (colloquial) to knock back (a drink); (colloquial) to overturn, to scrap (a law, a decision); (colloquial) to oust, to topple (from office)",
     "auxiliary": "haben",
-    "usage_note_ru": "ein Fenster kippen — откинуть створку окна (для проветривания). (разг.) отменить, провалить: Das Gericht hat das Verbot gekippt. — Суд отменил запрет. Опрокидываться — Perfekt с sein (отдельная карточка).",
-    "usage_note_en": "ein Fenster kippen — to tilt a window open. (colloquial) to overturn, to scrap: Das Gericht hat das Verbot gekippt. — The court overturned the ban. To tip over takes sein (separate card).",
+    "usage_note_ru": "ein Fenster kippen — откинуть створку окна (для проветривания). Опрокидываться — Perfekt с sein (отдельная карточка).",
+    "usage_note_en": "ein Fenster kippen — to tilt a window open. To tip over takes sein (separate card).",
     "example_de": "Er hat den kalten Kaffee ins Waschbecken gekippt.",
     "example_cloze": "Er hat den kalten Kaffee ins Waschbecken {{c1::gekippt}}.",
     "example_ru": "Он вылил холодный кофе в раковину.",
@@ -45360,8 +45663,42 @@
       {
         "pattern": "Akkusativ",
         "required": true,
-        "note_ru": "выливать, высыпать что-либо; наклонять, опрокидывать что-либо",
-        "note_en": "to tip out, to pour something; to tip, to tilt something"
+        "meaning_ru": "выливать, высыпать",
+        "meaning_en": "to tip out, to pour",
+        "note_ru": "выливать, высыпать что-либо: Er kippt das Wasser in den Garten.",
+        "note_en": "to tip out, to pour something: Er kippt das Wasser in den Garten."
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "наклонять, опрокидывать, откидывать (окно)",
+        "meaning_en": "to tip, to tilt (a window)",
+        "note_ru": "наклонять, откидывать что-либо: Kannst du bitte das Fenster kippen?",
+        "note_en": "to tip, to tilt something: Kannst du bitte das Fenster kippen?"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) опрокидывать (рюмку), пить залпом",
+        "meaning_en": "(colloquial) to knock back (a drink)",
+        "note_ru": "выпить залпом что-либо: Nach dem Essen kippte er noch einen Kräuterlikör.",
+        "note_en": "to knock back something: Nach dem Essen kippte er noch einen Kräuterlikör."
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) отменять (закон, решение), проваливать",
+        "meaning_en": "(colloquial) to overturn, to scrap (a law, a decision)",
+        "note_ru": "отменить что-либо: Das Gericht hat das Verbot gekippt.",
+        "note_en": "to overturn something: Das Gericht hat das Verbot gekippt."
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) смещать (с должности), свергать",
+        "meaning_en": "(colloquial) to oust, to topple (from office)",
+        "note_ru": "сместить кого-либо: Die Mitglieder haben ihren Vorsitzenden gekippt.",
+        "note_en": "to oust someone: Die Mitglieder haben ihren Vorsitzenden gekippt."
       }
     ]
   },
@@ -46720,7 +47057,8 @@
         "meaning_ru": "(разг.) плевать (на кого-либо, что-либо), не интересоваться",
         "meaning_en": "(colloquial) not to give a damn (about), not to care (about)",
         "note_ru": "(разг.) плевать на кого-либо, что-либо: Ich pfeife auf sein Geld.",
-        "note_en": "(colloquial) not to give a damn about someone, something: Ich pfeife auf sein Geld."
+        "note_en": "(colloquial) not to give a damn about someone, something: Ich pfeife auf sein Geld.",
+        "prep_required": true
       }
     ]
   },
@@ -47508,8 +47846,8 @@
   {
     "id": "verb-950",
     "infinitive": "reißen",
-    "translation_ru": "рвать, разрывать; срывать, вырывать; дёргать (за что-либо)",
-    "translation_en": "to tear, to rip; to tear off, to pull off; to tug, to yank (at something)",
+    "translation_ru": "срывать, вырывать; рвать, разрывать; дёргать (за что-либо)",
+    "translation_en": "to tear off, to pull off; to tear, to rip; to tug, to yank (at something)",
     "auxiliary": "haben",
     "usage_note_ru": "Рваться, обрываться — Perfekt с sein (отдельная карточка). (разг.) sich um etwas reißen — рваться к чему-либо: Um diesen Job reißt sich keiner.",
     "usage_note_en": "To tear, to snap takes sein (separate card). (colloquial) sich um etwas reißen — to scramble for something: Um diesen Job reißt sich keiner.",
@@ -47549,15 +47887,15 @@
     "complements": [
       {
         "pattern": "Akkusativ",
-        "note_ru": "срывать, вырывать что-либо; рвать что-либо",
-        "note_en": "to tear off, to pull off something; to tear something",
+        "note_ru": "срывать, вырывать что-либо",
+        "note_en": "to tear off, to pull off something",
         "meaning_ru": "срывать, вырывать",
         "meaning_en": "to tear off, to pull off"
       },
       {
         "pattern": "Akkusativ",
-        "note_ru": "срывать, вырывать что-либо; рвать что-либо",
-        "note_en": "to tear off, to pull off something; to tear something",
+        "note_ru": "рвать, разрывать что-либо",
+        "note_en": "to tear, to rip something",
         "meaning_ru": "рвать, разрывать",
         "meaning_en": "to tear, to rip"
       },
@@ -47567,18 +47905,29 @@
         "note_en": "to tug at something: Der Hund riss an seiner Leine.",
         "no_object": "Akkusativ",
         "meaning_ru": "дёргать (за что-либо)",
-        "meaning_en": "to tug, to yank (at something)"
+        "meaning_en": "to tug, to yank (at something)",
+        "prep_required": true
       }
     ],
     "reflexive": {
-      "translation_ru": "поцарапаться, пораниться (обо что-либо); (разг.) рваться (к чему-либо)",
-      "translation_en": "to scratch oneself, to cut oneself (on something); (colloquial) to scramble (for something)",
+      "translation_ru": "(разг.) рваться (к чему-либо); оцарапываться, раниться (обо что-либо)",
+      "translation_en": "(colloquial) to scramble (for something); to scratch oneself, to cut oneself (on something)",
       "note_ru": "sich [am Stacheldraht] reißen — поцарапаться о колючую проволоку (Duden 4a); (разг.) sich um etwas reißen — рваться к чему-либо: Um diesen Job reißt sich keiner (Duden 10).",
       "note_en": "sich [am Stacheldraht] reißen — to scratch oneself on barbed wire (Duden 4a); (colloquial) sich um etwas reißen — to scramble for something: Um diesen Job reißt sich keiner (Duden 10).",
       "complements": [
         {
+          "pattern": "um + Akkusativ",
+          "meaning_ru": "(разг.) рваться (к чему-либо)",
+          "meaning_en": "(colloquial) to scramble (for something)",
+          "note_ru": "(разг.) рваться к чему-либо, драться за что-либо: Alle reißen sich um die neuen Turnschuhe.",
+          "note_en": "(colloquial) to scramble for something: Alle reißen sich um die neuen Turnschuhe.",
+          "source": "Duden (reißen 10, ugs., sich reißen): sich heftig darum bemühen, etwas Bestimmtes zu erreichen, zu bekommen — die Fans rissen sich um den Sänger, um die Eintrittskarten",
+          "source_kind": "duden",
+          "prep_required": true
+        },
+        {
           "pattern": "an + Dativ",
-          "meaning_ru": "поцарапаться, пораниться (обо что-либо)",
+          "meaning_ru": "оцарапываться, раниться (обо что-либо)",
           "meaning_en": "to scratch oneself, to cut oneself (on something)",
           "note_ru": "sich an etwas reißen — поцарапаться обо что-либо: Ich habe mich an einem Nagel gerissen.",
           "note_en": "sich an etwas reißen — to scratch oneself on something: Ich habe mich an einem Nagel gerissen.",
@@ -47689,8 +48038,8 @@
   {
     "id": "verb-953",
     "infinitive": "sich richten",
-    "translation_ru": "быть направленным, обращённым (на кого-, что-либо); зависеть (от чего-либо); ориентироваться (на что-либо), подстраиваться; обращаться (к кому-либо); (in die Höhe) подняться, выпрямиться",
-    "translation_en": "to be directed (at someone, something); to depend on; to go by, to fit in with; to turn (to someone), to address oneself (to someone); (in die Höhe) to rise, to straighten up",
+    "translation_ru": "быть направленным, обращённым (на кого-, что-либо); зависеть (от чего-либо); ориентироваться (на что-либо), подстраиваться; обращаться (к кому-либо); (in die Höhe) подниматься, выпрямляться; быть направленным против (кого-, чего-либо), выступать (против кого-, чего-либо)",
+    "translation_en": "to be directed (at someone, something); to depend on; to go by, to fit in with; to turn (to someone), to address oneself (to someone); (in die Höhe) to rise, to straighten up; to be directed against (someone, something), to oppose",
     "auxiliary": "haben",
     "usage_note_ru": "Im Urlaub richten wir uns nach dem Rhythmus der Kinder. — В отпуске мы подстраиваемся под режим детей. Быть направленным: Aller Blicke richteten sich auf ihn. — Все взгляды обратились на него. Обращаться: Mit Fragen richten Sie sich bitte an die Rezeption. — С вопросами обращайтесь, пожалуйста, на ресепшен. Die Frage richtet sich an alle. — Вопрос обращён ко всем.",
     "usage_note_en": "Im Urlaub richten wir uns nach dem Rhythmus der Kinder. — On holiday we fit in with the children's routine. To be directed: Aller Blicke richteten sich auf ihn. — All eyes turned to him. To turn to: Mit Fragen richten Sie sich bitte an die Rezeption. — Please address any questions to reception. Die Frage richtet sich an alle. — The question is addressed to everyone.",
@@ -47702,11 +48051,6 @@
     "forms": null,
     "complements": [
       {
-        "pattern": "nach + Dativ",
-        "note_ru": "ориентироваться на что-либо, зависеть от чего-либо",
-        "note_en": "to go by, to depend on something"
-      },
-      {
         "pattern": "auf + Akkusativ",
         "meaning_ru": "быть направленным, обращённым (на кого-, что-либо)",
         "meaning_en": "to be directed (at someone, something)",
@@ -47717,19 +48061,43 @@
         "correlative_only": true
       },
       {
+        "pattern": "nach + Dativ",
+        "meaning_ru": "зависеть (от чего-либо)",
+        "meaning_en": "to depend on",
+        "note_ru": "зависеть от чего-либо: Der Preis richtet sich nach der Größe.",
+        "note_en": "to depend on something: Der Preis richtet sich nach der Größe.",
+        "source": "DWDS (richten 1fδ): das richtet sich ganz nach dem Wetter; Duden (3.2): abhängen",
+        "source_kind": "dwds",
+        "prep_required": true
+      },
+      {
+        "pattern": "nach + Dativ",
+        "meaning_ru": "ориентироваться (на что-либо), подстраиваться",
+        "meaning_en": "to go by, to fit in with",
+        "note_ru": "ориентироваться на кого-, что-либо: Ich richte mich nach deinem Plan.",
+        "note_en": "to go by, to fit in with someone or something: Ich richte mich nach deinem Plan.",
+        "source": "DWDS (richten 1fδ): ⟨sich nach jmdm., etw. richten⟩ sich vom Verhalten oder von der Anschauung eines anderen leiten lassen; Duden (3.1): sich nach jemandem richten",
+        "source_kind": "dwds",
+        "prep_required": true
+      },
+      {
         "pattern": "an + Akkusativ",
+        "meaning_ru": "обращаться (к кому-либо)",
+        "meaning_en": "to turn (to someone), to address oneself (to someone)",
         "note_ru": "обращаться к кому-либо",
-        "note_en": "to turn to someone, to be addressed to someone"
+        "note_en": "to turn to someone, to be addressed to someone",
+        "source": "DWDS (richten 1fα): dieser Aufruf richtet sich an alle; Duden (richten 1.2, transitive etwas an jemanden richten): sich mit einer mündlichen oder schriftlichen Äußerung an jemanden wenden",
+        "source_kind": "dwds"
       },
       {
         "pattern": "gegen + Akkusativ",
-        "source": "Kaikki (en.wiktionary): (reflexive) to be directed (at) (of emotions, words, etc.); to turn (toward) (of a look, one's eyes, gaze, etc.) [with auf (+ accusative) or gegen (+ accusative) ‘someone’]",
-        "source_kind": "kaikki",
-        "source_meaning": "Duden: sich (in kritisierender Absicht) gegen jemanden, etwas wenden; gegen wen richtet sich Ihr Verdacht?",
-        "meaning_ru": "быть направленным, обращённым (на кого-, что-либо)",
-        "meaning_en": "to be directed (at someone, something)",
-        "note_ru": "быть направленным против кого-либо, чего-либо: Die Kritik richtet sich gegen die Regierung.",
-        "note_en": "to be directed against someone or something: Die Kritik richtet sich gegen die Regierung."
+        "meaning_ru": "быть направленным против (кого-, чего-либо), выступать (против кого-, чего-либо)",
+        "meaning_en": "to be directed against (someone, something), to oppose",
+        "note_ru": "быть направленным против кого-, чего-либо: Die Kritik richtet sich gegen die Regierung.",
+        "note_en": "to be directed against someone or something: Die Kritik richtet sich gegen die Regierung.",
+        "source": "Duden (richten 2.2, sich richten): sich (in kritisierender Absicht) gegen jemanden, etwas wenden — gegen wen richtet sich Ihr Verdacht?",
+        "source_kind": "duden",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -47885,8 +48253,8 @@
   {
     "id": "verb-957",
     "infinitive": "rühren",
-    "translation_ru": "мешать, размешивать; (книжн.) касаться, затрагивать (что-либо); трогать (до слёз)",
-    "translation_en": "to stir; (elevated) to touch, to touch on; to move, to touch (emotionally)",
+    "translation_ru": "мешать, размешивать; трогать (до слёз); (книжн.) касаться, затрагивать (что-либо)",
+    "translation_en": "to stir; to move, to touch (emotionally); (elevated) to touch, to touch on",
     "auxiliary": "haben",
     "usage_note_ru": "Ihre Rede hat alle gerührt. — Её речь всех растрогала. Шевелиться, давать о себе знать — sich rühren (отдельная карточка).",
     "usage_note_en": "Ihre Rede hat alle gerührt. — Her speech moved everyone. To move, to get in touch — sich rühren (separate card).",
@@ -49311,7 +49679,8 @@
         "note_en": "to border on something, to come close to it: Seine Ordnungsliebe streift schon an Pedanterie.",
         "source": "DWDS (1d): ⟨etw. streift an etw.⟩ etw. grenzt an etw., kommt einer Sache fast gleich",
         "source_kind": "dwds",
-        "no_object": "Akkusativ"
+        "no_object": "Akkusativ",
+        "prep_required": true
       }
     ]
   },
@@ -49489,8 +49858,8 @@
   {
     "id": "verb-992",
     "infinitive": "stützen",
-    "translation_ru": "поддерживать, подпирать; основывать (на чём-либо)",
-    "translation_en": "to support, to prop up; to base (on)",
+    "translation_ru": "поддерживать, подпирать; опирать, упирать (на что-либо, во что-либо)",
+    "translation_en": "to support, to prop up; to rest, to prop (on, in)",
     "auxiliary": "haben",
     "example_de": "Nach der Knieoperation musste ich meinen Vater beim Gehen stützen.",
     "example_cloze": "Nach der Knieoperation musste ich meinen Vater beim Gehen {{c1::stützen}}.",
@@ -49545,19 +49914,9 @@
         }
       ]
     },
-    "complements": [
-      {
-        "pattern": "auf + Akkusativ",
-        "source": "учебный список",
-        "source_kind": "учебный список",
-        "source_meaning": "Duden: auf etwas beruhen; etwas zur Grundlage haben; das Urteil stützt sich auf Indizien",
-        "meaning_ru": "основывать (на чём-либо)",
-        "meaning_en": "to base (on)",
-        "note_ru": "основывать что-либо на чём-либо: Das Gericht stützt das Urteil auf Indizien.",
-        "note_en": "to base something on something: Das Gericht stützt das Urteil auf Indizien.",
-        "correlative_only": true
-      }
-    ]
+    "complements": [],
+    "usage_note_ru": "Основываться на чём-либо — возвратное: sich auf etw. stützen (см. возвратное): Seine Theorie stützt sich auf neue Messungen.",
+    "usage_note_en": "To be based on something is reflexive: sich auf etw. stützen (see reflexive): Seine Theorie stützt sich auf neue Messungen."
   },
   {
     "id": "verb-993",
@@ -49827,7 +50186,7 @@
       }
     },
     "reflexive": {
-      "translation_ru": "утешиться",
+      "translation_ru": "утешаться",
       "translation_en": "to console oneself",
       "example_de": "Sie konnte sich gar nicht trösten.",
       "example_ru": "Она никак не могла утешиться.",
@@ -49837,11 +50196,20 @@
       "complements": [
         {
           "pattern": "über + Akkusativ",
-          "meaning_ru": "утешиться",
+          "meaning_ru": "утешаться",
           "meaning_en": "to console oneself",
           "note_ru": "утешать кого-либо в чём-либо / утешиться: Sie tröstet ihn über die Niederlage. Er tröstet sich über den Verlust mit Musik.",
           "note_en": "to comfort someone over something / to console oneself over something: Sie tröstet ihn über die Niederlage. Er tröstet sich über den Verlust mit Musik.",
           "source": "Duden 1: «jemanden … [über einen Verlust] trösten»; 2.2 sich: «über die Niederlage … sich mit einem Kognak getröstet»",
+          "source_kind": "duden"
+        },
+        {
+          "pattern": "mit + Dativ",
+          "meaning_ru": "утешаться",
+          "meaning_en": "to console oneself",
+          "note_ru": "утешиться чем-либо: Nach dem Streit tröstete sie sich mit Schokolade.",
+          "note_en": "to console oneself with something: Nach dem Streit tröstete sie sich mit Schokolade.",
+          "source": "Duden (trösten 2.1): sich über etwas Negatives mit etwas beruhigen; (2.2): sich für einen Verlust o. Ä. mit jemandem, etwas einen Ersatz schaffen",
           "source_kind": "duden"
         }
       ]
@@ -50914,8 +51282,8 @@
   {
     "id": "verb-1019",
     "infinitive": "sich vertragen",
-    "translation_ru": "ладить, уживаться; (разг.) мириться",
-    "translation_en": "to get on; (colloquial) to make up",
+    "translation_ru": "ладить, уживаться; (разг.) мириться; (перен.) сочетаться, быть совместимым (с чем-либо)",
+    "translation_en": "to get on; (colloquial) to make up; (figurative) to go together, to be compatible (with)",
     "auxiliary": "haben",
     "usage_note_ru": "Vertragt euch wieder! — Помиритесь!",
     "usage_note_en": "Vertragt euch wieder! — Make up!",
@@ -50958,8 +51326,22 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
-        "note_ru": "ладить с кем-либо",
-        "note_en": "to get on with someone"
+        "meaning_ru": "ладить, уживаться",
+        "meaning_en": "to get on",
+        "note_ru": "ладить с кем-либо: Ich vertrage mich gut mit meiner Schwester.",
+        "note_en": "to get on with someone: Ich vertrage mich gut mit meiner Schwester.",
+        "source": "DWDS (vertragen 2): ⟨sich mit jmdm. gut vertragen⟩ mit jmdm. gut auskommen",
+        "source_kind": "dwds"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "meaning_ru": "(перен.) сочетаться, быть совместимым (с чем-либо)",
+        "meaning_en": "(figurative) to go together, to be compatible (with)",
+        "note_ru": "сочетаться с чем-либо: Rotwein verträgt sich gut mit Käse.",
+        "note_en": "to go together with something: Rotwein verträgt sich gut mit Käse.",
+        "source": "DWDS (vertragen 3): ⟨etw. verträgt sich mit etw.⟩ etw. passt gut zu etw., ist mit etw. vereinbar; Duden (2, übertragen): ist nicht damit vereinbar",
+        "source_kind": "dwds",
+        "prep_required": true
       }
     ]
   },
@@ -51077,14 +51459,16 @@
         "note_ru": "ссылаться на что-либо",
         "note_en": "to refer to something",
         "meaning_ru": "ссылаться, отсылать (к чему-либо)",
-        "meaning_en": "to refer (to)"
+        "meaning_en": "to refer (to)",
+        "prep_required": true
       },
       {
         "pattern": "an + Akkusativ",
         "note_ru": "направлять к кому-либо",
         "note_en": "to refer to someone",
         "meaning_ru": "направлять (к кому-либо)",
-        "meaning_en": "to direct, to refer (someone to someone)"
+        "meaning_en": "to direct, to refer (someone to someone)",
+        "prep_required": true
       },
       {
         "pattern": "Akkusativ",
@@ -51216,8 +51600,8 @@
   {
     "id": "verb-1024",
     "infinitive": "wegkommen",
-    "translation_ru": "(разг.) уходить, уезжать (откуда-либо); (разг.) избавляться, отвыкать (от чего-либо); пропадать",
-    "translation_en": "(colloquial) to get away; (colloquial) to get off, to break free (from something); to go missing",
+    "translation_ru": "(разг.) уходить, уезжать (откуда-либо); пропадать; (разг.) избавляться, отвыкать (от чего-либо)",
+    "translation_en": "(colloquial) to get away; to go missing; (colloquial) to get off, to break free (from something)",
     "auxiliary": "sein",
     "usage_note_ru": "Пропадать: Auf dem Flohmarkt ist meiner Schwester das Portemonnaie weggekommen. von etwas wegkommen — избавиться (от привычки). gut / schlecht wegkommen — хорошо / плохо отделаться.",
     "usage_note_en": "To go missing: Auf dem Flohmarkt ist meiner Schwester das Portemonnaie weggekommen. von etwas wegkommen — to get away from (a habit). gut / schlecht wegkommen — to come off well / badly.",
@@ -52918,7 +53302,8 @@
         "meaning_ru": "(es auf jemanden, etwas abgesehen haben) иметь виды (на кого-, что-либо), зариться (на что-либо)",
         "meaning_en": "(es auf jemanden, etwas abgesehen haben) to be after, to have designs on",
         "note_ru": "(es auf jemanden, etwas abgesehen haben) иметь виды на кого-либо, что-либо; придираться к кому-либо: Er hat es auf ihr Geld abgesehen.",
-        "note_en": "(es auf jemanden, etwas abgesehen haben) to be after someone or something; to have it in for someone: Er hat es auf ihr Geld abgesehen."
+        "note_en": "(es auf jemanden, etwas abgesehen haben) to be after someone or something; to have it in for someone: Er hat es auf ihr Geld abgesehen.",
+        "prep_required": true
       },
       {
         "pattern": "auf + Akkusativ",
@@ -52928,7 +53313,8 @@
         "meaning_ru": "(es auf jemanden abgesehen haben) придираться (к кому-либо)",
         "meaning_en": "(es auf jemanden abgesehen haben) to have it in for (someone)",
         "note_ru": "(es auf jemanden, etwas abgesehen haben) иметь виды на кого-либо, что-либо; придираться к кому-либо: Er hat es auf ihr Geld abgesehen.",
-        "note_en": "(es auf jemanden, etwas abgesehen haben) to be after someone or something; to have it in for someone: Er hat es auf ihr Geld abgesehen."
+        "note_en": "(es auf jemanden, etwas abgesehen haben) to be after someone or something; to have it in for someone: Er hat es auf ihr Geld abgesehen.",
+        "prep_required": true
       }
     ],
     "separable_prefix": "ab",
@@ -52943,8 +53329,8 @@
   {
     "id": "verb-1059",
     "infinitive": "absichern",
-    "translation_ru": "оградить (опасное место); обезопасить, застраховать; подкреплять, обосновывать (научно)",
-    "translation_en": "to secure, to cordon off (a dangerous place); to secure, to safeguard, to protect; to back up, to substantiate (scientifically)",
+    "translation_ru": "обезопасить, застраховать; оградить (опасное место); подкреплять, обосновывать (научно)",
+    "translation_en": "to secure, to safeguard, to protect; to secure, to cordon off (a dangerous place); to back up, to substantiate (scientifically)",
     "auxiliary": "haben",
     "usage_note_ru": "sich absichern — подстраховаться.",
     "usage_note_en": "sich absichern — to cover oneself.",
@@ -52989,12 +53375,12 @@
       }
     },
     "reflexive": {
-      "translation_ru": "подстраховаться",
+      "translation_ru": "подстраховываться",
       "translation_en": "to cover oneself",
       "complements": [
         {
           "pattern": "gegen + Akkusativ",
-          "meaning_ru": "подстраховаться",
+          "meaning_ru": "подстраховываться",
           "meaning_en": "to cover oneself",
           "note_ru": "защитить что-либо от чего-либо / подстраховаться от чего-либо: Wir sichern das Haus gegen Einbruch ab. Ich sichere mich gegen Risiken ab.",
           "note_en": "to protect something against something / to cover oneself against something: Wir sichern das Haus gegen Einbruch ab. Ich sichere mich gegen Risiken ab.",
@@ -54333,7 +54719,8 @@
         "note_ru": "смотреть снизу вверх на кого-либо, благоговеть перед кем-либо: Die Kinder sehen zu ihrem großen Bruder auf.",
         "note_en": "to look up to someone, to revere someone: Die Kinder sehen zu ihrem großen Bruder auf.",
         "source": "Duden (2): aufblicken (2); [ehrfürchtig] zu jemandem aufsehen",
-        "source_kind": "duden"
+        "source_kind": "duden",
+        "prep_required": true
       }
     ]
   },
@@ -54829,7 +55216,8 @@
         "note_ru": "вымещать (злость) на ком-либо",
         "note_en": "to take out on someone",
         "meaning_ru": "вымещать (злость)",
-        "meaning_en": "to take out (anger)"
+        "meaning_en": "to take out (anger)",
+        "prep_required": true
       }
     ],
     "separable_prefix": "aus",
@@ -55204,13 +55592,6 @@
     "example_en": "The small family firm wants to expand its business across Europe.",
     "perfect_form": "haben ausgeweitet",
     "forms": null,
-    "complements": [
-      {
-        "pattern": "auf + Akkusativ",
-        "note_ru": "расширять на что-либо",
-        "note_en": "to expand to something"
-      }
-    ],
     "separable_prefix": "aus",
     "lookup_forms": {
       "Präsens": {
@@ -55239,8 +55620,20 @@
       }
     },
     "reflexive": {
-      "translation_ru": "расширяться, разрастаться",
-      "translation_en": "to spread, to expand"
+      "translation_ru": "расширяться, разрастаться; перерастать (во что-либо)",
+      "translation_en": "to spread, to expand; to develop into, to escalate into (something)",
+      "complements": [
+        {
+          "pattern": "zu + Dativ",
+          "meaning_ru": "перерастать (во что-либо)",
+          "meaning_en": "to develop into, to escalate into (something)",
+          "note_ru": "перерасти во что-либо: Der kleine Streit hat sich zu einem großen Konflikt ausgeweitet.",
+          "note_en": "to escalate into something: Der kleine Streit hat sich zu einem großen Konflikt ausgeweitet.",
+          "source": "Duden (ausweiten 2.3, sich ausweiten): sich zu etwas Bestimmten entwickeln — sich zu einem Skandal ausweiten",
+          "source_kind": "duden",
+          "prep_required": true
+        }
+      ]
     }
   },
   {
@@ -55391,7 +55784,18 @@
       "translation_ru": "отличаться чем-либо",
       "translation_en": "to stand out for something",
       "note_ru": "sich durch etwas auszeichnen",
-      "note_en": "sich durch etwas auszeichnen"
+      "note_en": "sich durch etwas auszeichnen",
+      "complements": [
+        {
+          "pattern": "durch + Akkusativ",
+          "meaning_ru": "отличаться чем-либо",
+          "meaning_en": "to stand out for something",
+          "note_ru": "отличаться чем-либо: Das Hotel zeichnet sich durch seine ruhige Lage aus.",
+          "note_en": "to stand out for something: Das Hotel zeichnet sich durch seine ruhige Lage aus.",
+          "source": "Duden (auszeichnen 3b, sich auszeichnen = sich hervortun): sich durch Ausdauer auszeichnen; dieser Kunststoff zeichnet sich durch große Härte aus",
+          "source_kind": "duden"
+        }
+      ]
     }
   },
   {
@@ -55820,8 +56224,8 @@
   {
     "id": "verb-1121",
     "infinitive": "beharren",
-    "translation_ru": "настаивать (на чём-либо), упорствовать",
-    "translation_en": "to insist (on), to persist",
+    "translation_ru": "настаивать (на чём-либо), упорствовать; (редк.) оставаться (где-либо); упрямо твердить (в прямой речи)",
+    "translation_en": "to insist (on), to persist; (rare) to remain, to stay; to maintain, to insist (with direct speech)",
     "auxiliary": "haben",
     "example_de": "Der Trainer beharrt auf zwei Stunden Training pro Tag.",
     "example_cloze": "Der Trainer {{c1::beharrt}} auf zwei Stunden Training pro Tag.",
@@ -55833,7 +56237,9 @@
       {
         "pattern": "auf + Dativ",
         "note_ru": "настаивать на чём-либо",
-        "note_en": "to insist on something"
+        "note_en": "to insist on something",
+        "meaning_ru": "настаивать (на чём-либо), упорствовать",
+        "meaning_en": "to insist (on), to persist"
       },
       {
         "pattern": "bei + Dativ",
@@ -55841,15 +56247,20 @@
         "source_kind": "dwds",
         "source_meaning": "Duden: 1.1 auf etwas bestehen, an etwas festhalten; bei seiner Meinung beharren",
         "note_ru": "настаивать на чём-либо: Er beharrt bei seiner Meinung.",
-        "note_en": "to insist on something: Er beharrt bei seiner Meinung."
+        "note_en": "to insist on something: Er beharrt bei seiner Meinung.",
+        "meaning_ru": "настаивать (на чём-либо), упорствовать",
+        "meaning_en": "to insist (on), to persist"
       },
       {
         "pattern": "in + Dativ",
         "source": "DWDS: ⟨in etw. beharren⟩ im Glauben beharren; in einer einmal begonnenen Bewegung zu beharren",
         "source_kind": "dwds",
-        "source_meaning": "Duden: 1.2 bleiben, verharren (selten); sie beharrte im Dunkeln",
-        "note_ru": "упорствовать в чём-либо: Sie beharrt in ihrem Glauben.",
-        "note_en": "to persist in something: Sie beharrt in ihrem Glauben."
+        "source_meaning": "Duden: 1.1 auf etwas bestehen, an etwas festhalten",
+        "note_ru": "упорствовать в чём-либо: Sie beharrt in ihrem Glauben. Подсвечивается только с коррелятом; im Dunkeln beharren — место, та же форма.",
+        "note_en": "to persist in something: Sie beharrt in ihrem Glauben. Highlighted only with a correlative; im Dunkeln beharren is place, the same form.",
+        "meaning_ru": "настаивать (на чём-либо), упорствовать",
+        "meaning_en": "to insist (on), to persist",
+        "correlative_only": true
       }
     ],
     "lookup_forms": {
@@ -57125,8 +57536,9 @@
         "meaning_ru": "соотносить (с чем-либо), относить (к кому-, чему-либо)",
         "meaning_en": "to relate (to), to apply (to), to take (as referring to)",
         "source_meaning": "Duden (4c): in Zusammenhang bringen; gedanklich verknüpfen; «er bezieht immer alles auf sich»",
-        "note_ru": "относить что-либо к кому-, чему-либо: Er bezieht immer alles auf sich.",
-        "note_en": "to take something as referring to someone or something: Er bezieht immer alles auf sich."
+        "note_ru": "относить что-либо к кому-, чему-либо: Sie bezog die Kritik nicht auf ihre eigene Arbeit.",
+        "note_en": "to relate something to someone or something: Sie bezog die Kritik nicht auf ihre eigene Arbeit.",
+        "prep_required": true
       }
     ]
   },
@@ -57771,8 +58183,8 @@
   {
     "id": "verb-1164",
     "infinitive": "drängen",
-    "translation_ru": "торопить, подгонять, настаивать; толкаться, тесниться",
-    "translation_en": "to press, to urge; to push, to crowd",
+    "translation_ru": "торопить, подгонять; настаивать (на чём-либо); толкаться, тесниться; оттеснять (кого-либо куда-либо)",
+    "translation_en": "to hurry, to urge; to press (for), to insist (on); to push, to crowd; to push aside, to force (someone somewhere)",
     "auxiliary": "haben",
     "usage_note_ru": "Die Zeit drängt. — Время поджимает.",
     "usage_note_en": "Die Zeit drängt. — Time is pressing.",
@@ -57785,19 +58197,32 @@
     "complements": [
       {
         "pattern": "zu + Dativ",
-        "note_ru": "подгонять к чему-либо",
-        "note_en": "to urge to do something",
-        "meaning_ru": "торопить, подгонять, настаивать",
-        "meaning_en": "to press, to urge",
-        "correlative_only": true
+        "note_ru": "торопить, подгонять к чему-либо: Der Trainer drängt die Mannschaft zu mehr Tempo.",
+        "note_en": "to urge to something: Der Trainer drängt die Mannschaft zu mehr Tempo.",
+        "meaning_ru": "торопить, подгонять",
+        "meaning_en": "to hurry, to urge",
+        "correlative_only": true,
+        "source": "Duden (drängen 4.1): ungeduldig, nachdrücklich antreiben, etwas zu tun — zum Aufbruch, zur Eile drängen",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Akkusativ + zu + Infinitiv",
+        "meaning_ru": "торопить, подгонять",
+        "meaning_en": "to hurry, to urge",
+        "note_ru": "торопить кого-либо что-либо сделать: Die Kinder drängten den Vater, endlich loszufahren.",
+        "note_en": "to urge someone to do something: Die Kinder drängten den Vater, endlich loszufahren.",
+        "source": "Duden (drängen 4.1): ungeduldig, nachdrücklich antreiben, etwas zu tun — jemanden drängen, seine Schulden zu bezahlen",
+        "source_kind": "duden"
       },
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "настаивать на чём-либо",
-        "note_en": "to press for something",
-        "meaning_ru": "торопить, подгонять, настаивать",
-        "meaning_en": "to press, to urge",
-        "correlative_only": true
+        "note_ru": "настаивать на чём-либо: Die Bürger drängen auf eine schnelle Lösung.",
+        "note_en": "to press for something: Die Bürger drängen auf eine schnelle Lösung.",
+        "meaning_ru": "настаивать (на чём-либо)",
+        "meaning_en": "to press (for), to insist (on)",
+        "correlative_only": true,
+        "source": "Duden (drängen 4.2): etwas mit Nachdruck fordern — auf Lösung der Probleme drängen",
+        "source_kind": "duden"
       }
     ],
     "lookup_forms": {
@@ -58541,7 +58966,8 @@
         "note_ru": "связываться с кем-либо",
         "note_en": "to get involved with someone",
         "meaning_ru": "(неодобр.) связываться (с кем-либо)",
-        "meaning_en": "(derogatory) to get involved with (someone)"
+        "meaning_en": "(derogatory) to get involved with (someone)",
+        "prep_required": true
       }
     ],
     "separable_prefix": "ein",
@@ -60823,14 +61249,14 @@
       }
     },
     "reflexive": {
-      "translation_ru": "сосредоточиться на чём-либо",
+      "translation_ru": "сосредоточиваться на чём-либо",
       "translation_en": "to focus on something",
       "note_ru": "sich auf etwas fokussieren",
       "note_en": "sich auf etwas fokussieren",
       "complements": [
         {
           "pattern": "auf + Akkusativ",
-          "meaning_ru": "сосредоточиться на чём-либо",
+          "meaning_ru": "сосредоточиваться на чём-либо",
           "meaning_en": "to focus on something",
           "note_ru": "сосредоточивать на чём-либо: Wir fokussieren unsere Arbeit auf ein Thema. С sich: Ich fokussiere mich auf die Prüfung.",
           "note_en": "to focus on: Wir fokussieren unsere Arbeit auf ein Thema. With sich: Ich fokussiere mich auf die Prüfung.",
@@ -68497,8 +68923,8 @@
   {
     "id": "verb-1400",
     "infinitive": "übertragen",
-    "translation_ru": "транслировать; (книжн.) переводить (художественный текст); переносить; передавать (данные, полномочия, болезнь)",
-    "translation_en": "to broadcast; (elevated) to translate (a literary text); to apply (to), to carry over; to transfer, to pass on, to transmit",
+    "translation_ru": "транслировать; передавать (данные, полномочия, болезнь); переносить; (книжн.) переводить (художественный текст)",
+    "translation_en": "to broadcast; to transfer, to pass on, to transmit; to apply (to), to carry over; (elevated) to translate (a literary text)",
     "auxiliary": "haben",
     "usage_note_ru": "Неотделяемый: überträgt, übertrug, hat übertragen. Поручать: jemandem eine Aufgabe übertragen. Переносить, передавать на что-либо (auf + Akk.). sich übertragen (auf + Akk.) — передаваться (о настроении, болезни).",
     "usage_note_en": "Not separable: überträgt, übertrug, hat übertragen. To entrust: jemandem eine Aufgabe übertragen. To transfer, to apply to something (auf + acc.). sich übertragen (auf + acc.) — to spread to (a mood, an illness).",
@@ -68538,7 +68964,7 @@
         "pattern": "auf + Akkusativ",
         "source": "DWDS: ⟨jmd. überträgt etw. auf etw.⟩; die Ideale des Ehrenamts auf den Nachwuchs übertragen",
         "source_kind": "dwds",
-        "source_meaning": "Duden: 4. auf etwas anderes, ein anderes Gebiet anwenden; bestimmte Rechte auf die Tochtergesellschaft übertragen",
+        "source_meaning": "Duden (5.3): bestimmte Rechte auf die Tochtergesellschaft übertragen; (6.1): diese Insekten übertragen die Krankheit [auf den Menschen]",
         "meaning_ru": "передавать (данные, полномочия, болезнь)",
         "meaning_en": "to transfer, to pass on, to transmit",
         "note_ru": "передавать что-либо кому-, чему-либо; переносить что-либо на что-либо: Er überträgt die Rechte auf seine Tochter.",
@@ -68548,11 +68974,11 @@
         "pattern": "auf + Akkusativ",
         "source": "DWDS: ⟨jmd. überträgt etw. auf etw.⟩; die Ideale des Ehrenamts auf den Nachwuchs übertragen",
         "source_kind": "dwds",
-        "source_meaning": "Duden: 4. auf etwas anderes, ein anderes Gebiet anwenden; bestimmte Rechte auf die Tochtergesellschaft übertragen",
+        "source_meaning": "Duden (4): man kann diese Maßstäbe nicht auf die dortige Situation übertragen",
         "meaning_ru": "переносить",
         "meaning_en": "to apply (to), to carry over",
-        "note_ru": "передавать что-либо кому-, чему-либо; переносить что-либо на что-либо: Er überträgt die Rechte auf seine Tochter.",
-        "note_en": "to transfer something to someone or something; to apply something to something: Er überträgt die Rechte auf seine Tochter."
+        "note_ru": "переносить что-либо на что-либо: Man kann diese Regel nicht auf jeden Fall übertragen.",
+        "note_en": "to apply something to something: Man kann diese Regel nicht auf jeden Fall übertragen."
       }
     ],
     "reflexive": {
@@ -68567,7 +68993,7 @@
           "meaning_en": "to spread to (a mood, an illness)",
           "note_ru": "передать что-либо кому-/чему-либо / передаться кому-либо: Er überträgt das Haus auf seinen Sohn. Ihre gute Laune überträgt sich auf alle.",
           "note_en": "to transfer something to someone / to spread to someone: Er überträgt das Haus auf seinen Sohn. Ihre gute Laune überträgt sich auf alle.",
-          "source": "Duden 5.3 «Rechte auf die Tochtergesellschaft übertragen»; 7.1 sich: «Stimmung übertrug sich auf die Kinder»",
+          "source": "Duden (7.1, sich übertragen): ihre Nervosität, Stimmung übertrug sich auf die Kinder; (6.2): die Krankheit überträgt sich nur auf anfällige Personen",
           "source_kind": "duden"
         }
       ]
@@ -69322,11 +69748,11 @@
   {
     "id": "verb-1418",
     "infinitive": "verderben",
-    "translation_ru": "портиться (о продуктах)",
-    "translation_en": "to go off, to go bad",
+    "translation_ru": "портиться (о продуктах); (книжн., устар.) гибнуть",
+    "translation_en": "to go off, to go bad; (elevated, dated) to perish",
     "auxiliary": "sein",
-    "usage_note_ru": "Портить (что-либо) — с haben (отдельная карточка). (книжн., устар.) погибать.",
-    "usage_note_en": "To spoil something takes haben (separate card). (elevated, dated) to perish.",
+    "usage_note_ru": "Портить (что-либо) — с haben (отдельная карточка).",
+    "usage_note_en": "To spoil something takes haben (separate card).",
     "example_de": "Wenn der Strom länger ausfällt, verdirbt alles, was in der Tiefkühltruhe liegt.",
     "example_cloze": "Wenn der Strom länger ausfällt, {{c1::verdirbt}} alles, was in der Tiefkühltruhe liegt.",
     "example_ru": "Если электричество отключат надолго, испортится всё, что лежит в морозилке.",
@@ -69532,7 +69958,7 @@
       }
     },
     "reflexive": {
-      "translation_ru": "объединиться; слиться (о реках)",
+      "translation_ru": "объединяться; сливаться (о реках)",
       "translation_en": "to unite, to join together; to merge (of rivers)",
       "example_de": "Bei Koblenz vereinigen sich Rhein und Mosel.",
       "example_ru": "У Кобленца Рейн и Мозель сливаются.",
@@ -69540,12 +69966,12 @@
       "complements": [
         {
           "pattern": "mit + Dativ",
-          "meaning_ru": "объединиться",
+          "meaning_ru": "объединяться",
           "meaning_en": "to unite, to join together",
           "note_ru": "объединиться с кем-, чем-либо: Unser Verein vereinigt sich mit dem Nachbarverein.",
           "note_en": "to unite with someone or something: Unser Verein vereinigt sich mit dem Nachbarverein.",
-          "source": "Duden vereinigen 2 (sich): „dort vereinigt sich die Fulda mit der Werra“; DWDS: ⟨etw. mit etw. vereinigen⟩, ⟨sich mit etw. vereinigen⟩",
-          "source_kind": "duden"
+          "source": "DWDS (1a): ⟨sich vereinigen⟩; sich mit jmdm., gegen jmdn. vereinigen",
+          "source_kind": "dwds"
         }
       ]
     },
@@ -70503,7 +70929,8 @@
         "note_ru": "снабжать чем-либо",
         "note_en": "to provide with something",
         "meaning_ru": "снабжать (чем-либо)",
-        "meaning_en": "to provide, to equip (with)"
+        "meaning_en": "to provide, to equip (with)",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -70514,8 +70941,22 @@
       }
     },
     "reflexive": {
-      "translation_ru": "ошибиться (при чтении, счёте)",
-      "translation_en": "to make a slip (reading, counting)"
+      "translation_ru": "ошибаться (при чтении, счёте); запасаться (чем-либо)",
+      "translation_en": "to make a slip (reading, counting); to provide oneself (with), to stock up (on)",
+      "note_ru": "чем — mit + Dativ: sich mit Wasser versehen.",
+      "note_en": "with what — mit + dative: sich mit Wasser versehen.",
+      "complements": [
+        {
+          "pattern": "mit + Dativ",
+          "meaning_ru": "запасаться (чем-либо)",
+          "meaning_en": "to provide oneself (with), to stock up (on)",
+          "note_ru": "запасаться чем-либо: Wir versehen uns mit Brot für die Reise.",
+          "note_en": "to stock up on something: Wir versehen uns mit Brot für die Reise.",
+          "source": "Duden (versehen 1.1): dafür sorgen, dass jemand etwas bekommt, hat; versorgen — jemanden, sich für die Reise mit Proviant, mit Geld versehen",
+          "source_kind": "duden",
+          "prep_required": true
+        }
+      ]
     }
   },
   {
@@ -72162,7 +72603,8 @@
         "note_en": "to be rooted in something",
         "meaning_ru": "корениться (в чём-либо)",
         "meaning_en": "to be rooted (in), to stem (from)",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -72559,7 +73001,8 @@
         "note_ru": "возводить к чему-либо; объяснять чем-либо",
         "note_en": "to trace back to something; to attribute to something",
         "meaning_ru": "возводить (к чему-либо), объяснять (чем-либо)",
-        "meaning_en": "to trace back (to), to attribute (to)"
+        "meaning_en": "to trace back (to), to attribute (to)",
+        "prep_required": true
       },
       {
         "pattern": "Akkusativ",
@@ -75902,7 +76345,8 @@
         "meaning_ru": "(устар.) просить руки (кого-либо)",
         "meaning_en": "(dated) to ask for someone's hand (in marriage), to propose",
         "note_ru": "(устар.) просить руки кого-либо: Er hielt um ihre Hand an.",
-        "note_en": "(dated) to ask for someone's hand (in marriage): Er hielt um ihre Hand an."
+        "note_en": "(dated) to ask for someone's hand (in marriage): Er hielt um ihre Hand an.",
+        "prep_required": true
       }
     ]
   },
@@ -78032,8 +78476,8 @@
   {
     "id": "verb-1600",
     "infinitive": "aufschlagen",
-    "translation_ru": "разбивать (яйцо); (спорт.) подавать (мяч); открывать (книгу, глаза); разбивать (лагерь, палатку); повышать (цены)",
-    "translation_en": "to crack (an egg); (sport) to serve (the ball); to open (a book, one's eyes); to pitch (a tent, a camp); to raise (prices)",
+    "translation_ru": "открывать (книгу, глаза); разбивать (яйцо); разбивать (лагерь, палатку); (спорт.) подавать (мяч); повышать (цены)",
+    "translation_en": "to open (a book, one's eyes); to crack (an egg); to pitch (a tent, a camp); (sport) to serve (the ball); to raise (prices)",
     "auxiliary": "haben",
     "usage_note_ru": "sich (Dat.) das Knie aufschlagen — разбить колено. Удариться при падении — с sein (отдельная карточка).",
     "usage_note_en": "sich (dat.) das Knie aufschlagen — to cut one's knee open (in a fall). To hit the ground when falling takes sein (separate card).",
@@ -78095,8 +78539,8 @@
         "pattern": "Akkusativ",
         "meaning_ru": "повышать (цены)",
         "meaning_en": "to raise (prices)",
-        "note_ru": "повышать что-либо (цены): Die Händler haben die Preise aufgeschlagen.",
-        "note_en": "to raise something (prices): Die Händler haben die Preise aufgeschlagen.",
+        "note_ru": "повышать что-либо (цены): Nach dem kalten Frühjahr haben die Bauern die Preise für Erdbeeren aufgeschlagen.",
+        "note_en": "to raise something (prices): Nach dem kalten Frühjahr haben die Bauern die Preise für Erdbeeren aufgeschlagen.",
         "source": "Duden (12.1): (den Preis) erhöhen, heraufsetzen",
         "source_kind": "duden"
       }
@@ -79761,8 +80205,8 @@
   {
     "id": "verb-1638",
     "infinitive": "ausreißen",
-    "translation_ru": "отрываться (о рукаве, ручке), расползаться (о петлях); (разг.) сбегать, удирать (из дома); (спорт.) отрываться (от соперников)",
-    "translation_en": "to come off, to tear (of a sleeve, a handle, buttonholes); (colloquial) to run away; (sport) to break away (from the field)",
+    "translation_ru": "(разг.) сбегать, удирать (из дома); отрываться (о рукаве, ручке), расползаться (о петлях); (спорт.) отрываться (от соперников)",
+    "translation_en": "(colloquial) to run away; to come off, to tear (of a sleeve, a handle, buttonholes); (sport) to break away (from the field)",
     "auxiliary": "sein",
     "usage_note_ru": "der Ausreißer — беглец; (спорт.) лидер отрыва; (стат.) выброс.",
     "usage_note_en": "der Ausreißer — runaway; (sport) breakaway rider; (statistics) outlier.",
@@ -79908,8 +80352,8 @@
   {
     "id": "verb-1641",
     "infinitive": "ausscheiden",
-    "translation_ru": "уходить (с должности, из фирмы); выбывать (из соревнования); отпадать, не подходить (о варианте, кандидате)",
-    "translation_en": "to leave, to retire (from a post, a company); to be knocked out, to be eliminated; to be ruled out (of an option, a candidate)",
+    "translation_ru": "выбывать (из соревнования); уходить (с должности, из фирмы); отпадать, не подходить (о варианте, кандидате)",
+    "translation_en": "to be knocked out, to be eliminated; to leave, to retire (from a post, a company); to be ruled out (of an option, a candidate)",
     "auxiliary": "sein",
     "usage_note_ru": "aus + Dativ: aus dem Amt ausscheiden. Отпадать: Diese Möglichkeit scheidet aus (Duden 2). Выделять — с haben (отдельная карточка).",
     "usage_note_en": "aus + dative: aus dem Amt ausscheiden. To be ruled out: Diese Möglichkeit scheidet aus (Duden 2). To excrete takes haben (separate card).",
@@ -85723,6 +86167,14 @@
     "forms": null,
     "complements": [
       {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "толковать, истолковывать",
+        "meaning_en": "to interpret",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      },
+      {
         "pattern": "auf + Akkusativ",
         "meaning_ru": "свидетельствовать, говорить (о чём-либо), предвещать (что-либо)",
         "meaning_en": "to indicate, to suggest (something)",
@@ -85730,20 +86182,13 @@
         "note_en": "to indicate, to suggest something: Alle Zeichen deuten auf einen baldigen Wechsel. Highlighted only with a correlative: Alles deutet darauf, dass … Pointing at someone or something (Er deutete auf das Fenster.) is direction, not a pair: zum Fenster, nach Süden are also possible.",
         "source": "Duden (deuten 2): etwas erkennen, erwarten lassen; auf etwas hinweisen, hindeuten — die Zeichen deuten auf einen Umschwung, eine Änderung; Duden 1 (direction): mit dem Finger auf jemanden, etwas deuten; er deutete nach Süden",
         "source_kind": "duden",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       },
       {
         "pattern": "als + Akkusativ",
         "note_ru": "истолковать как что-либо",
         "note_en": "to interpret as"
-      },
-      {
-        "pattern": "Akkusativ",
-        "required": true,
-        "meaning_ru": "толковать, истолковывать",
-        "meaning_en": "to interpret",
-        "note_ru": "что-либо",
-        "note_en": "something"
       }
     ],
     "lookup_forms": {
@@ -87712,8 +88157,8 @@
   {
     "id": "verb-1808",
     "infinitive": "einreden",
-    "translation_ru": "внушать, уговаривать (кого-либо поверить во что-либо)",
-    "translation_en": "to talk (someone) into believing, to persuade",
+    "translation_ru": "внушать, уговаривать (кого-либо поверить во что-либо); наседать (на кого-либо), донимать (кого-либо) разговорами",
+    "translation_en": "to talk (someone) into believing, to persuade; to keep on at (someone), to talk insistently (to someone)",
     "auxiliary": "haben",
     "usage_note_ru": "Кому — в дательном падеже: jemandem etwas einreden. sich (dat.) etwas einreden — внушать себе, убеждать себя (часто о том, что не соответствует действительности). auf jemanden einreden — настойчиво уговаривать кого-либо.",
     "usage_note_en": "The person is in the dative: jemandem etwas einreden. sich (dat.) etwas einreden — to talk oneself into believing something (often something untrue). auf jemanden einreden — to keep on at someone.",
@@ -87731,8 +88176,13 @@
       },
       {
         "pattern": "auf + Akkusativ",
-        "note_ru": "настойчиво уговаривать кого-либо",
-        "note_en": "to keep on at someone"
+        "meaning_ru": "наседать (на кого-либо), донимать (кого-либо) разговорами",
+        "meaning_en": "to keep on at (someone), to talk insistently (to someone)",
+        "note_ru": "наседать на кого-либо, донимать разговорами: Sie redet seit Stunden auf ihn ein.",
+        "note_en": "to keep on at someone: Sie redet seit Stunden auf ihn ein.",
+        "source": "Duden (einreden 2): jemandem mit Worten zusetzen; ständig und eindringlich zu jemandem sprechen — dauernd auf jemanden einreden; DWDS (einreden 2): ⟨auf jmdn. einreden⟩ jmdn. mit Reden bestürmen",
+        "source_kind": "duden",
+        "prep_required": true
       }
     ],
     "separable_prefix": "ein",
@@ -87864,8 +88314,8 @@
   {
     "id": "verb-1811",
     "infinitive": "einschlagen",
-    "translation_ru": "вбивать (гвоздь); разбивать (окно, дверь); ударять, попадать (о молнии, снаряде); бить, колотить (кого-либо); выбирать (путь, курс, направление), пойти (по дороге)",
-    "translation_en": "to knock in (a nail); to smash (a window, a door); to strike (lightning, a shell); to beat, to rain blows on (someone); to take (a path, a course, a direction), to set off (along a road)",
+    "translation_ru": "разбивать (окно, дверь); бить, колотить (кого-либо); выбирать (путь, курс, направление), идти (по дороге); вбивать (гвоздь); ударять, попадать (о молнии, снаряде)",
+    "translation_en": "to smash (a window, a door); to beat, to rain blows on (someone); to take (a path, a course, a direction), to set off (along a road); to knock in (a nail); to strike (lightning, a shell)",
     "auxiliary": "haben",
     "usage_note_ru": "Формы как у schlagen: schlägt ein, schlug ein, hat eingeschlagen. Der Blitz hat in die Scheune eingeschlagen — молния ударила в сарай. eine Laufbahn einschlagen — выбрать карьеру. (разг.) иметь большой успех (о фильме, идее). Заворачивать (в бумагу); выворачивать (руль).",
     "usage_note_en": "Forms as for schlagen: schlägt ein, schlug ein, hat eingeschlagen. Der Blitz hat in die Scheune eingeschlagen — lightning struck the barn. eine Laufbahn einschlagen — to embark on a career. (colloquial) to be a big hit (a film, an idea). To wrap (in paper); to turn (the steering wheel).",
@@ -87907,15 +88357,6 @@
     },
     "complements": [
       {
-        "pattern": "auf + Akkusativ",
-        "note_ru": "колотить кого-либо: Die Angreifer schlugen auf den am Boden liegenden Mann ein.",
-        "note_en": "to rain blows on someone: Die Angreifer schlugen auf den am Boden liegenden Mann ein.",
-        "meaning_ru": "бить, колотить (кого-либо)",
-        "meaning_en": "to beat, to rain blows on (someone)",
-        "source": "Duden (4): jemanden, ein Tier längere Zeit ungehemmt schlagen — mit der Peitsche auf das Pferd einschlagen",
-        "source_kind": "duden"
-      },
-      {
         "pattern": "Akkusativ",
         "meaning_ru": "разбивать (окно, дверь)",
         "meaning_en": "to smash (a window, a door)",
@@ -87923,9 +88364,19 @@
         "note_en": "something (a window, a door)"
       },
       {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "колотить кого-либо: Die Angreifer schlugen auf den am Boden liegenden Mann ein.",
+        "note_en": "to rain blows on someone: Die Angreifer schlugen auf den am Boden liegenden Mann ein.",
+        "meaning_ru": "бить, колотить (кого-либо)",
+        "meaning_en": "to beat, to rain blows on (someone)",
+        "source": "Duden (4): jemanden, ein Tier längere Zeit ungehemmt schlagen — mit der Peitsche auf das Pferd einschlagen",
+        "source_kind": "duden",
+        "prep_required": true
+      },
+      {
         "pattern": "Akkusativ",
         "required": true,
-        "meaning_ru": "выбирать (путь, курс, направление), пойти (по дороге)",
+        "meaning_ru": "выбирать (путь, курс, направление), идти (по дороге)",
         "meaning_en": "to take (a path, a course, a direction), to set off (along a road)",
         "note_ru": "что-либо",
         "note_en": "something"
@@ -88902,7 +89353,8 @@
         "note_ru": "приходиться на кого-либо",
         "note_en": "to be allotted to",
         "meaning_ru": "приходиться (на кого-либо, что-либо) (как доля)",
-        "meaning_en": "to be allotted to, to fall to (as a share)"
+        "meaning_en": "to be allotted to, to fall to (as a share)",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -92920,8 +93372,8 @@
   {
     "id": "verb-1920",
     "infinitive": "fortfahren",
-    "translation_ru": "уезжать, отъезжать; увозить (что-либо); продолжать (делать что-либо)",
-    "translation_en": "to leave, to drive away; to drive away, to take away (something); to continue, to go on",
+    "translation_ru": "продолжать (делать что-либо); уезжать, отъезжать; увозить (что-либо)",
+    "translation_en": "to continue, to go on; to leave, to drive away; to drive away, to take away (something)",
     "auxiliary": [
       "sein",
       "haben"
@@ -98158,7 +98610,8 @@
         "note_ru": "(разг.) нетерпеливо ждать чего-либо: Die Kinder lauerten schon auf das Pausenklingeln.",
         "note_en": "(colloquial) to wait impatiently for something: Die Kinder lauerten schon auf das Pausenklingeln.",
         "source": "Duden (2, umgangssprachlich): angespannt, begierig, voller Ungeduld auf jemanden, etwas warten — er lauerte auf das Klingelzeichen",
-        "source_kind": "duden"
+        "source_kind": "duden",
+        "prep_required": true
       }
     ],
     "lookup_forms": {
@@ -99934,7 +100387,7 @@
       }
     },
     "reflexive": {
-      "translation_ru": "жертвовать собой (ради кого-либо); (разг., шутл.) взять на себя неприятное",
+      "translation_ru": "жертвовать собой (ради кого-либо); (разг., шутл.) брать на себя неприятное",
       "translation_en": "to sacrifice oneself (for someone); (colloquial, jocular) to take one for the team",
       "note_ru": "sich opfern (für + Akk.) — жертвовать собой (ради кого-либо)",
       "note_en": "sich opfern (für + accusative) — to sacrifice oneself (for someone)",
@@ -103808,8 +104261,8 @@
   {
     "id": "verb-2148",
     "infinitive": "spekulieren",
-    "translation_ru": "(разг.) рассчитывать (на что-либо); спекулировать (на бирже); гадать, строить догадки (о чём-либо)",
-    "translation_en": "(colloquial) to count (on); to speculate (on the stock market); to speculate (about)",
+    "translation_ru": "гадать, строить догадки (о чём-либо); спекулировать (на бирже); (разг.) рассчитывать (на что-либо)",
+    "translation_en": "to speculate (about); to speculate (on the stock market); (colloquial) to count (on)",
     "auxiliary": "haben",
     "usage_note_ru": "Спекулировать акциями, недвижимостью — mit Aktien, Immobilien. (разг.) auf etwas spekulieren — рассчитывать на что-либо: auf einen Fehler des Gegners spekulieren. die Spekulation — догадка; спекуляция.",
     "usage_note_en": "To speculate in shares, property — mit Aktien, Immobilien. (colloquial) auf etwas spekulieren — to count on something: auf einen Fehler des Gegners spekulieren. die Spekulation — speculation.",
@@ -103821,12 +104274,12 @@
     "forms": null,
     "complements": [
       {
-        "pattern": "auf + Akkusativ",
-        "meaning_ru": "(разг.) рассчитывать (на что-либо)",
-        "meaning_en": "(colloquial) to count (on)",
-        "note_ru": "(разг.) рассчитывать на что-либо: Er spekuliert auf eine Erbschaft.",
-        "note_en": "(colloquial) to count on something: Er spekuliert auf eine Erbschaft.",
-        "source": "Duden (1, umgangssprachlich): etwas zu erreichen, zu erlangen hoffen; auf etwas rechnen — auf eine Stelle, eine Erbschaft spekulieren",
+        "pattern": "über + Akkusativ",
+        "meaning_ru": "гадать, строить догадки (о чём-либо)",
+        "meaning_en": "to speculate (about)",
+        "note_ru": "гадать о чём-либо: Die Zeitungen spekulieren über die Gründe für den Rücktritt.",
+        "note_en": "to speculate about something: Die Zeitungen spekulieren über die Gründe für den Rücktritt.",
+        "source": "Duden (3): (über etwas) Spekulationen anstellen; mutmaßen — es lohnt sich nicht, über diese Sache lange zu spekulieren",
         "source_kind": "duden"
       },
       {
@@ -103848,12 +104301,12 @@
         "source_kind": "dwds"
       },
       {
-        "pattern": "über + Akkusativ",
-        "meaning_ru": "гадать, строить догадки (о чём-либо)",
-        "meaning_en": "to speculate (about)",
-        "note_ru": "гадать о чём-либо: Die Zeitungen spekulieren über die Gründe für den Rücktritt.",
-        "note_en": "to speculate about something: Die Zeitungen spekulieren über die Gründe für den Rücktritt.",
-        "source": "Duden (3): (über etwas) Spekulationen anstellen; mutmaßen — es lohnt sich nicht, über diese Sache lange zu spekulieren",
+        "pattern": "auf + Akkusativ",
+        "meaning_ru": "(разг.) рассчитывать (на что-либо)",
+        "meaning_en": "(colloquial) to count (on)",
+        "note_ru": "(разг.) рассчитывать на что-либо: Er spekuliert auf eine Erbschaft.",
+        "note_en": "(colloquial) to count on something: Er spekuliert auf eine Erbschaft.",
+        "source": "Duden (1, umgangssprachlich): etwas zu erreichen, zu erlangen hoffen; auf etwas rechnen — auf eine Stelle, eine Erbschaft spekulieren",
         "source_kind": "duden"
       }
     ],
@@ -103982,13 +104435,22 @@
       }
     },
     "reflexive": {
-      "translation_ru": "противиться, упираться (gegen); запереться (in + Akk.)",
-      "translation_en": "to resist, to balk (gegen); to lock oneself in (in + accusative)",
+      "translation_ru": "противиться, упираться (gegen)",
+      "translation_en": "to resist, to balk (gegen)",
       "example_de": "Die Partei sperrt sich gegen die Reform.",
       "example_ru": "Партия противится реформе.",
       "example_en": "The party is resisting the reform.",
-      "note_ru": "Запереться: Nach dem Streit sperrte sie sich in ihr Zimmer. — После ссоры она заперлась в своей комнате.",
-      "note_en": "To lock oneself in: Nach dem Streit sperrte sie sich in ihr Zimmer. — After the argument she locked herself in her room."
+      "complements": [
+        {
+          "pattern": "gegen + Akkusativ",
+          "meaning_ru": "противиться, упираться (gegen)",
+          "meaning_en": "to resist, to balk (gegen)",
+          "note_ru": "противиться чему-либо: Mein Vater sperrt sich gegen jede Veränderung.",
+          "note_en": "to resist something: Mein Vater sperrt sich gegen jede Veränderung.",
+          "source": "Duden (sperren 7, sich sperren): für einen Plan, Vorschlag o. Ä. nicht zugänglich sein — ich sperrte mich gegen dieses Vorhaben; sie sperrt sich gegen alles",
+          "source_kind": "duden"
+        }
+      ]
     }
   },
   {
@@ -106457,8 +106919,8 @@
   {
     "id": "verb-2205",
     "infinitive": "übertreten",
-    "translation_ru": "нарушать (закон, запрет, правило)",
-    "translation_en": "to break, to violate, to infringe (a law, a ban, a rule)",
+    "translation_ru": "нарушать (закон, запрет, правило); пересекать (границу)",
+    "translation_en": "to break, to violate, to infringe (a law, a ban, a rule); to cross (a border)",
     "auxiliary": "haben",
     "usage_note_ru": "Неотделяемый: übertritt, übertrat, hat übertreten (Partizip совпадает с инфинитивом). die Übertretung — нарушение. (рег.) sich (Dativ) den Fuß übertreten — подвернуть ногу (обычно: sich den Fuß vertreten). Ср. отделяемое übertreten (ist übergetreten) — переходить (в другую партию).",
     "usage_note_en": "Inseparable: übertritt, übertrat, hat übertreten (Partizip same as the infinitive). die Übertretung — violation. (regional) sich (dative) den Fuß übertreten — to twist one's ankle (usually: sich den Fuß vertreten). Cf. the separable übertreten (ist übergetreten) — to go over (to another party).",
@@ -106497,8 +106959,8 @@
       {
         "pattern": "Akkusativ",
         "required": true,
-        "note_ru": "нарушать что-либо (закон, запрет, правило)",
-        "note_en": "to break, to violate something (a law, a ban, a rule)"
+        "note_ru": "пересекать что-либо (границу); нарушать что-либо (закон, запрет, правило)",
+        "note_en": "to cross something (a border); to break, to violate something (a law, a ban, a rule)"
       }
     ],
     "lookup_forms": {
@@ -107710,8 +108172,8 @@
   {
     "id": "verb-2229",
     "infinitive": "unterstellen",
-    "translation_ru": "подчинять (кому-либо); предполагать, допускать; приписывать (кому-либо намерения, вину), утверждать без доказательств",
-    "translation_en": "to subordinate (to someone); to assume, to suppose; to insinuate, to impute, to allege (without proof)",
+    "translation_ru": "приписывать (кому-либо намерения, вину), утверждать без доказательств; предполагать, допускать; подчинять (кому-либо)",
+    "translation_en": "to insinuate, to impute, to allege (without proof); to assume, to suppose; to subordinate (to someone)",
     "auxiliary": "haben",
     "usage_note_ru": "Неотделяемый, без ge-: unterstellte, hat unterstellt. Предполагать: Unterstellen wir einmal, dass … — допустим, что … Подчинять: jemandem unterstellt sein — быть в подчинении у кого-либо. die Unterstellung — инсинуация.",
     "usage_note_en": "Inseparable, no ge-: unterstellte, hat unterstellt. To assume: Unterstellen wir einmal, dass … — let's assume that … To put under: jemandem unterstellt sein — to report to someone. die Unterstellung — insinuation.",
@@ -107724,20 +108186,20 @@
     "complements": [
       {
         "pattern": "Dativ + Akkusativ",
-        "meaning_ru": "подчинять (кому-либо)",
-        "meaning_en": "to subordinate (to someone)",
-        "note_ru": "подчинять кого-либо, что-либо кому-либо: Man unterstellte ihr die neue Abteilung.",
-        "note_en": "to place someone or something under someone: Man unterstellte ihr die neue Abteilung.",
-        "source": "Duden (1b): jemandem die Leitung von etwas übertragen — er hat ihr mehrere Abteilungen unterstellt",
-        "source_kind": "duden"
-      },
-      {
-        "pattern": "Dativ + Akkusativ",
         "note_ru": "приписывать кому-либо что-либо: Man unterstellte ihm böse Absichten.",
         "note_en": "to impute something to someone: Man unterstellte ihm böse Absichten.",
         "meaning_ru": "приписывать (кому-либо намерения, вину), утверждать без доказательств",
         "meaning_en": "to insinuate, to impute, to allege (without proof)",
         "source": "Duden (2b): man hat mir die übelsten Absichten unterstellt",
+        "source_kind": "duden"
+      },
+      {
+        "pattern": "Dativ + Akkusativ",
+        "meaning_ru": "подчинять (кому-либо)",
+        "meaning_en": "to subordinate (to someone)",
+        "note_ru": "подчинять кого-либо, что-либо кому-либо: Man unterstellte ihr die neue Abteilung.",
+        "note_en": "to place someone or something under someone: Man unterstellte ihr die neue Abteilung.",
+        "source": "Duden (1b): jemandem die Leitung von etwas übertragen — er hat ihr mehrere Abteilungen unterstellt",
         "source_kind": "duden"
       }
     ],
@@ -108515,7 +108977,8 @@
           "meaning_en": "(often derogatory) to hold forth (on something)",
           "note_ru": "пространно рассуждать о чём-либо: Er verbreitete sich stundenlang über seine Reisen.",
           "note_en": "to hold forth on something: Er verbreitete sich stundenlang über seine Reisen.",
-          "correlative_only": true
+          "correlative_only": true,
+          "prep_required": true
         }
       ]
     }
@@ -108962,7 +109425,7 @@
   {
     "id": "verb-2256",
     "infinitive": "verfallen",
-    "translation_ru": "приходить в упадок, разрушаться, ветшать; истекать (о сроке), терять силу; впадать (в состояние); додуматься, напасть (на что-либо странное)",
+    "translation_ru": "приходить в упадок, разрушаться, ветшать; истекать (о сроке), терять силу; впадать (в состояние); додумываться, набредать (на что-либо странное)",
     "translation_en": "to fall into disrepair, to decay; to expire; to lapse (into a state); to hit upon, to come up with (something odd)",
     "auxiliary": "sein",
     "usage_note_ru": "Истекать: Der Gutschein verfällt Ende des Jahres. in alte Gewohnheiten verfallen — вернуться к старым привычкам. jemandem / einer Sache verfallen sein — быть во власти кого-либо / чего-либо. auf eine Idee verfallen — додуматься. Сильный: verfällt, verfiel, ist verfallen.",
@@ -109004,14 +109467,15 @@
         "note_ru": "впасть (в состояние)",
         "note_en": "to lapse into",
         "meaning_ru": "впадать (в состояние)",
-        "meaning_en": "to lapse (into a state)"
+        "meaning_en": "to lapse (into a state)",
+        "prep_required": true
       },
       {
         "pattern": "auf + Akkusativ",
         "source": "DWDS: ⟨auf etw. verfallen⟩; auf einen Ausweg, ein einfaches Mittel verfallen",
         "source_kind": "dwds",
         "source_meaning": "Duden: auf etwas kommen, sich etwas Merkwürdiges, Ungewöhnliches ausdenken … auf eine abwegige Idee, einen teuflischen Plan verfallen",
-        "meaning_ru": "додуматься, напасть (на что-либо странное)",
+        "meaning_ru": "додумываться, набредать (на что-либо странное)",
         "meaning_en": "to hit upon, to come up with (something odd)",
         "note_ru": "додуматься до чего-либо (странного): Wie bist du nur auf diese Idee verfallen?",
         "note_en": "to hit upon something (odd): Wie bist du nur auf diese Idee verfallen?"
@@ -110078,14 +110542,14 @@
       }
     },
     "reflexive": {
-      "translation_ru": "позволить себя втянуть во что-либо",
+      "translation_ru": "позволять втянуть себя во что-либо",
       "translation_en": "to let oneself be drawn into something",
       "note_ru": "sich zu etwas verleiten lassen",
       "note_en": "sich zu etwas verleiten lassen",
       "complements": [
         {
           "pattern": "zu + Dativ",
-          "meaning_ru": "позволить себя втянуть во что-либо",
+          "meaning_ru": "позволять втянуть себя во что-либо",
           "meaning_en": "to let oneself be drawn into something",
           "note_ru": "поддаться и сделать что-либо: Ich lasse mich nicht zu einem Streit verleiten.",
           "note_en": "to let oneself be drawn into something: Ich lasse mich nicht zu einem Streit verleiten.",
@@ -111968,7 +112432,8 @@
         "note_ru": "нарушать что-либо",
         "note_en": "to violate",
         "meaning_ru": "нарушать (правило, закон)",
-        "meaning_en": "to violate, to break (a rule, a law)"
+        "meaning_en": "to violate, to break (a rule, a law)",
+        "prep_required": true
       },
       {
         "pattern": "Akkusativ",
@@ -112035,19 +112500,20 @@
       }
     },
     "reflexive": {
-      "translation_ru": "запутаться (во что-либо)",
+      "translation_ru": "запутываться (в чём-либо)",
       "translation_en": "to become entangled (in)",
       "note_ru": "во что — in + Akkusativ: sich in Widersprüche verstricken — запутаться в противоречиях. Также — ошибиться при вязании.",
       "note_en": "in what — in + accusative: sich in Widersprüche verstricken — to get tangled up in contradictions. Also — to make a mistake in knitting.",
       "complements": [
         {
           "pattern": "in + Akkusativ",
-          "meaning_ru": "запутаться (во что-либо)",
+          "meaning_ru": "запутываться (в чём-либо)",
           "meaning_en": "to become entangled (in)",
           "note_ru": "втянуть кого-либо во что-либо / запутаться в чём-либо: Man hat ihn in einen Streit verstrickt. Sie verstrickt sich in Widersprüche.",
           "note_en": "to draw someone into something / to get entangled in something: Man hat ihn in einen Streit verstrickt. Sie verstrickt sich in Widersprüche.",
           "source": "Duden 2.2 (sich verstricken): «sich in ein Lügennetz, in Widersprüche verstricken»",
-          "source_kind": "duden"
+          "source_kind": "duden",
+          "prep_required": true
         }
       ]
     }
@@ -112512,19 +112978,20 @@
       }
     },
     "reflexive": {
-      "translation_ru": "запутываться (о нитях, шнуре); запутаться (в противоречиях)",
+      "translation_ru": "запутываться (о нитях, шнуре); запутываться (в противоречиях)",
       "translation_en": "to get tangled; to get caught up (in contradictions)",
       "note_ru": "sich in Widersprüche verwickeln — запутаться в противоречиях.",
       "note_en": "sich in Widersprüche verwickeln — to get caught up in contradictions.",
       "complements": [
         {
           "pattern": "in + Akkusativ",
-          "meaning_ru": "запутаться (в противоречиях)",
+          "meaning_ru": "запутываться (в противоречиях)",
           "meaning_en": "to get caught up (in contradictions)",
           "note_ru": "втягивать во что-либо: Man hat ihn in einen Streit verwickelt. С sich: Sie verwickelt sich in Widersprüche.",
           "note_en": "to involve in: Man hat ihn in einen Streit verwickelt. With sich: Sie verwickelt sich in Widersprüche.",
           "source": "Duden 3: „jemanden in eine Affäre … verwickeln“; 1.2: „sie hat sich in Widersprüche verwickelt“",
-          "source_kind": "duden"
+          "source_kind": "duden",
+          "prep_required": true
         }
       ]
     }
@@ -117850,7 +118317,8 @@
         "note_en": "to withdraw from; to resign from",
         "meaning_ru": "отказываться (от договора, права)",
         "meaning_en": "to withdraw (from a contract)",
-        "correlative_only": true
+        "correlative_only": true,
+        "prep_required": true
       },
       {
         "pattern": "von + Dativ",
@@ -123222,7 +123690,8 @@
         "note_ru": "(перен.) на кого-что рассчитан (auf jemanden zugeschnitten sein)",
         "note_en": "(figurative) tailored to (auf jemanden zugeschnitten sein)",
         "meaning_ru": "(перен.) приспосабливать, рассчитывать (на кого-что)",
-        "meaning_en": "(figurative) to tailor (to something)"
+        "meaning_en": "(figurative) to tailor (to something)",
+        "prep_required": true
       }
     ],
     "separable_prefix": "zu",
@@ -128590,7 +129059,7 @@
   {
     "id": "verb-2704",
     "infinitive": "drankommen",
-    "translation_ru": "(разг.) дойти (до чего-либо), добраться, дотянуться; (чья-то) очередь; (школ.) быть вызванным (к доске)",
+    "translation_ru": "(разг.) доходить (до чего-либо), добираться, дотягиваться; (чья-то) очередь; (школ.) быть вызванным (к доске)",
     "translation_en": "(colloquial) to get at (something), to reach; to have one's turn; (school) to be called on",
     "auxiliary": "sein",
     "usage_note_ru": "Разг. (= darankommen). Отделяемый: kommt dran, kam dran, ist drangekommen. Wer kommt als Nächster dran? — Чья следующая очередь?",
@@ -128633,7 +129102,7 @@
         "source": "DWDS: ⟨jmd. kommt an etw. dran⟩ an die Waren im obersten Lebensmittelregal dranzukommen; da [an das Stromkabel] drankommst",
         "source_kind": "dwds",
         "source_meaning": "DWDS: ⟨jmd. kommt an etw. dran⟩ an die Waren im obersten Lebensmittelregal dranzukommen",
-        "meaning_ru": "(разг.) дойти (до чего-либо), добраться, дотянуться",
+        "meaning_ru": "(разг.) доходить (до чего-либо), добираться, дотягиваться",
         "meaning_en": "(colloquial) to get at (something), to reach",
         "note_ru": "добраться до чего-либо, дотянуться до чего-либо: Das Kind kommt nicht an den Schrank dran.",
         "note_en": "to get at something, to reach something: Das Kind kommt nicht an den Schrank dran."
@@ -130056,7 +130525,7 @@
   {
     "id": "verb-2743",
     "infinitive": "ablassen",
-    "translation_ru": "сливать, спускать (воду, воздух, пар); уступить, сбросить (с цены); (книжн., von + Dat.) отказаться, отстать (от кого-, чего-либо)",
+    "translation_ru": "сливать, спускать (воду, воздух, пар); уступать, сбрасывать (с цены); (книжн., von + Dat.) отказываться, отставать (от кого-, чего-либо)",
     "translation_en": "to drain, to let out (water, air, steam); to knock off (the price); (formal, von) to desist from, to leave alone",
     "auxiliary": "haben",
     "usage_note_ru": "Отделяемый: lässt ab, ließ ab, hat abgelassen. Сливать — Akkusativ: das Wasser aus der Wanne ablassen. С цены: Er hat mir zehn Euro abgelassen. — Он уступил мне десять евро. Dampf ablassen — выпустить пар (и перен.: разрядиться, сорвать злость). Отстать (книжн.) — von + Dativ: Er ließ nicht von ihr ab. — Он не отставал от неё.",
@@ -130108,8 +130577,9 @@
         "pattern": "von + Dativ",
         "note_ru": "(книжн.) отказаться от чего-либо, отстать от кого-либо",
         "note_en": "(formal) to desist from something, to leave someone alone",
-        "meaning_ru": "(книжн., von + Dat.) отказаться, отстать (от кого-, чего-либо)",
-        "meaning_en": "(formal, von) to desist from, to leave alone"
+        "meaning_ru": "(книжн., von + Dat.) отказываться, отставать (от кого-, чего-либо)",
+        "meaning_en": "(formal, von) to desist from, to leave alone",
+        "prep_required": true
       },
       {
         "pattern": "Akkusativ",
@@ -130122,7 +130592,7 @@
       {
         "pattern": "Akkusativ",
         "required": true,
-        "meaning_ru": "уступить, сбросить (с цены)",
+        "meaning_ru": "уступать, сбрасывать (с цены)",
         "meaning_en": "to knock off (the price)",
         "note_ru": "кому-либо сколько-то (с цены)",
         "note_en": "(an amount) off the price for someone"
@@ -131182,8 +131652,8 @@
   {
     "id": "verb-2791",
     "infinitive": "anlaufen",
-    "translation_ru": "налетать, натыкаться (на бегу); выступать, бороться (против чего-либо); разбегаться; заходить (в порт); заработать, начаться; покраснеть, потускнеть, запотеть",
-    "translation_en": "to run into, to bump into (while running); to take action, to fight (against something); to take a run-up; to call at (a port); to start up, to begin; to turn red, to blush, to tarnish, to steam up",
+    "translation_ru": "заработать, начаться; покраснеть, потускнеть, запотеть; разбегаться; заходить (в порт); налетать, натыкаться (на бегу); выступать, бороться (против чего-либо)",
+    "translation_en": "to start up, to begin; to turn red, to blush, to tarnish, to steam up; to take a run-up; to call at (a port); to run into, to bump into (while running); to take action, to fight (against something)",
     "auxiliary": [
       "sein",
       "haben"
@@ -131238,7 +131708,8 @@
         "note_ru": "выступать, бороться против чего-либо: gegen Vorurteile anlaufen",
         "note_en": "to take action against something, to fight it: gegen Vorurteile anlaufen",
         "source": "Duden (2.2): angehen, Schritte unternehmen; gegen Vorurteile anlaufen",
-        "source_kind": "duden"
+        "source_kind": "duden",
+        "prep_required": true
       }
     ],
     "separable_prefix": "an",

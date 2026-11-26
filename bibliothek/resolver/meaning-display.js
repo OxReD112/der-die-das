@@ -116,7 +116,8 @@
   // A meaning the resolver proved from the sentence picks a place in the Russian / English text (senseFirst …): a pack text has no
   // such place, so the card stays English (the choice is the same in every language).
   const provenSense = c => Number.isInteger(c?.senseFirst) || Number.isInteger(c?.senseFirstEn) ||
-    Array.isArray(c?.sensesFirst) && c.sensesFirst.length > 0 || Array.isArray(c?.sensesFirstEn) && c.sensesFirstEn.length > 0;
+    Array.isArray(c?.sensesFirst) && c.sensesFirst.length > 0 || Array.isArray(c?.sensesFirstEn) && c.sensesFirstEn.length > 0 ||
+    Array.isArray(c?.sensesLastEn) && c.sensesLastEn.length > 0;
   // (by the number of the meaning) an own card whose pack text has as many meanings as its English (and Russian)
   // one: the meaning the resolver proved has the same number in the pack — the pack's card is built, its meanings in that order
   const byNumber = (c, language) => { if (!isPack(language) || !c || !ownCard(c)) return false;
@@ -352,7 +353,8 @@
     if (isPack(language) && (provenSense(candidate) || candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb')) {
       // (a meaning proved by a pair — by the pack's own marks, no number from English)
       // (as many meanings as the English card shows — the cut the number path had)
-      if (candidate.senseMark && candidate.senseMark.field !== 'reflexive') { const text = packByMarks(candidate, language); if (!text) return '';
+      // (meanings sent down — sensesLastEn — by number only: the pack follows the English order)
+      if (candidate.senseMark && candidate.senseMark.field !== 'reflexive' && !candidate.sensesLastEn?.length) { const text = packByMarks(candidate, language); if (!text) return '';
         return fit(meaningParts(text).slice(0, meaningParts(brief(candidate, 'en', inline)).length).join('; ')).text; }
       if (!byNumber(candidate, language)) return '';
       const order = meaningParts(brief(candidate, 'en', inline)).map(m => m.trim()), en = meaningParts(candidate.translation.en).map(m => m.trim());
@@ -371,10 +373,15 @@
     const first = language === 'en' && Number.isInteger(candidate.senseFirstEn) ? candidate.senseFirstEn : candidate.senseFirst;
     // (sich stellen + dative: several proved meanings — sensesFirst / sensesFirstEn — come first in the card's order)
     const several = language === 'en' ? candidate.sensesFirstEn : candidate.sensesFirst;
-    if (Array.isArray(several) && several.length > 1) { const parts = meaningParts(text); if (several.every(i => Number.isInteger(i) && i < parts.length))
-      text = [...several.map(i => parts[i]), ...parts.filter((_, i) => !several.includes(i))].map(p => p.trim()).join('; '); }
-    else if (Number.isInteger(first)) { const parts = meaningParts(text); if (first < parts.length)
-      text = [parts[first], ...parts.filter((_, i) => i !== first)].map(p => p.trim()).join('; '); }
+    // (a meaning that never stands without its preposition, the preposition missing — sensesLast / sensesLastEn — goes behind
+    // «ещё N значений»: after every other meaning, out of the short card)
+    const last = (language === 'en' ? candidate.sensesLastEn : candidate.sensesLast) || [];
+    const parts = meaningParts(text);
+    let order = parts.map((_, i) => i);
+    if (Array.isArray(several) && several.length > 1 && several.every(i => Number.isInteger(i) && i < parts.length)) order = [...several, ...order.filter(i => !several.includes(i))];
+    else if (Number.isInteger(first) && first < parts.length) order = [first, ...order.filter(i => i !== first)];
+    const down = last.filter(i => Number.isInteger(i) && i < parts.length);
+    if (order.some((i, n) => i !== n) || down.length) text = [...order.filter(i => !down.includes(i)), ...down].map(i => parts[i].trim()).join('; ');
     if (language === 'en' && /^gerund of anrufen$/i.test(text.trim())) return 'the act of calling';
     if (language === 'en' && /^gerund of /i.test(text.trim())) return 'verbal noun';
     // A confirmed lassen bracket does not pick permission versus causation.
@@ -392,6 +399,7 @@
       }
       return text.trim();
     }
+    if (!ALL && down.length && ownCard(candidate)) return fit(meaningParts(text).slice(0, parts.length - down.length).join('; ')).text;
     return ownCard(candidate) ? fit(text).text : compactIn(text, language);
   }
   // old meanings of an own card (`extra_meanings` {ru, en, register}) are never in the
@@ -421,6 +429,9 @@
   function hiddenMeanings(candidate, language) {
     if (!ownCard(candidate)) return 0;
     if (candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb') return 0;
+    // (meanings sent down — sensesLast — are hidden: all meanings but the shown ones)
+    if ((language === 'en' ? candidate.sensesLastEn : candidate.sensesLast)?.length || isPack(language) && candidate.sensesLastEn?.length)
+      return Math.max(0, meaningParts(candidate.translation?.[language] || '').length - meaningParts(brief(candidate, language)).length);
     return fit(candidate.translation?.[language] || '').rest;
   }
   // The meanings the other rows of a group add to the own row (no repeats).
