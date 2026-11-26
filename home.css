@@ -2733,6 +2733,37 @@ html.home-wide-layout body {
 .dictionary-entry-hints .dictionary-entry-note { margin-top: 4px; }
 .dictionary-entry-hints .dictionary-entry-label + .dictionary-entry-note { margin-top: 0; }
 
+/* Wörterbuch · a link inside a note (see_also): the word in the note's own colour with a dotted underline, like a
+   footnote word in the book; the tap area is 44 px high around the word, the line keeps its height. */
+.dictionary-entry-link {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.12s ease;
+}
+.dictionary-entry-link::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  top: 50%;
+  height: 44px;
+  transform: translateY(-50%);
+}
+.dictionary-entry-link:active { opacity: 0.6; }
+.dictionary-entry-link:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+
 /* Notizbuch: same full-screen slide-up motion as Settings. */
 .notebook-layer { position:fixed; inset:0; z-index:33; pointer-events:none; }
 .notebook-panel { position:absolute; inset:0; display:flex; background:var(--bg); transform:translateY(100%); transition:transform .42s cubic-bezier(.22,.61,.36,1); will-change:transform; overflow:hidden; pointer-events:none; }

@@ -54,7 +54,8 @@
     reflexive: "dictionary-entry-reflexive-section",
     verbForms: "dictionary-verb-forms",
     imperative: "dictionary-verb-imperative",
-    expressions: "dictionary-entry-expressions"
+    expressions: "dictionary-entry-expressions",
+    seeAlso: "dictionary-entry-see-also"
   };
   const LINE_CLASS = {
     detail: "dictionary-entry-plural dictionary-entry-detail",
@@ -98,7 +99,44 @@
     return scroll;
   }
 
+  function openCard(card) {
+    selected = card;
+    render();
+    results.scrollIntoView?.({ block: "start" });
+  }
+
+  // a note; a part with a card (see_also) is a link that opens that card
+  function makeNote(className, line) {
+    if (!line.parts) return node("p", className, line.text);
+    const note = node("p", className);
+    line.parts.forEach(part => {
+      if (!part.card) return note.append(document.createTextNode(part.text));
+      const link = node("button", "dictionary-entry-link", part.text);
+      link.type = "button";
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        openCard(part.card);
+      });
+      note.append(link);
+    });
+    return note;
+  }
+
+  // a row that opens a card: «Ausdrücke» and «Siehe auch»
+  function makeCardRow(line) {
+    const button = node("button", "dictionary-match dictionary-entry-expression");
+    button.type = "button";
+    button.append(node("span", "dictionary-match-word", line.word));
+    button.append(node("span", "dictionary-match-translation", line.translation));
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      openCard(line.card);
+    });
+    return button;
+  }
+
   function makeLine(line) {
+    if (line.kind === "note") return makeNote(LINE_CLASS.note, line);
     if (LINE_CLASS[line.kind]) return node("p", LINE_CLASS[line.kind], line.text);
     if (line.kind === "pattern") {
       // „**Verb**“ in the pattern is shown in bold.
@@ -121,20 +159,7 @@
       });
       return formsLine;
     }
-    if (line.kind === "expression") {
-      // Wörterbuch quality A7 (user 27.10.2026): «Ausdrücke» — each opens its card.
-      const button = node("button", "dictionary-match dictionary-entry-expression");
-      button.type = "button";
-      button.append(node("span", "dictionary-match-word", line.word));
-      button.append(node("span", "dictionary-match-translation", line.translation));
-      button.addEventListener("click", event => {
-        event.preventDefault();
-        selected = line.card;
-        render();
-        results.scrollIntoView?.({ block: "start" });
-      });
-      return button;
-    }
+    if (line.kind === "expression" || line.kind === "cardLink") return makeCardRow(line);
     return document.createTextNode("");
   }
 
@@ -145,9 +170,10 @@
     // of the „‹ Zurück zur Suche“ row; home.css hides that one when this label is there)
     if (data.pos) entry.append(node("p", "dictionary-entry-pos", data.pos));
     entry.append(node("h3", "dictionary-entry-headword", data.headword));
-    data.blocks.forEach(block => {
+    data.blocks.forEach((block, index) => {
+      if (index === data.addToWortschatzAt && data.addToWortschatz) entry.append(makeAddToWortschatz(item));
       if (block.kind === "detail") entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", block.text));
-      else if (block.kind === "note") entry.append(node("p", "dictionary-entry-note", block.text));
+      else if (block.kind === "note") entry.append(makeNote("dictionary-entry-note", block));
       else if (block.kind === "translation") entry.append(node("p", "dictionary-entry-translation", block.text));
       else if (block.kind === "reflexive") {
         const line = node("p", "dictionary-entry-translation dictionary-entry-reflexive");
@@ -161,15 +187,18 @@
         entry.append(section);
       }
     });
-    if (data.addToWortschatz) {
-      const addToWortschatz = node("button", "dictionary-add-wortschatz ui-quiet", M.TEXT.addToWortschatz); // the shared quiet wide button (06.11)
-      addToWortschatz.type = "button";
-      addToWortschatz.addEventListener("click", () => {
-        if (typeof window.openWortschatzForDictionary === "function") window.openWortschatzForDictionary(item);
-      });
-      entry.append(addToWortschatz);
-    }
+    if (data.addToWortschatz && data.addToWortschatzAt >= data.blocks.length) entry.append(makeAddToWortschatz(item));
     return entry;
+  }
+
+  // «＋ Zum Wortschatz» — the shared quiet wide button
+  function makeAddToWortschatz(item) {
+    const button = node("button", "dictionary-add-wortschatz ui-quiet", M.TEXT.addToWortschatz);
+    button.type = "button";
+    button.addEventListener("click", () => {
+      if (typeof window.openWortschatzForDictionary === "function") window.openWortschatzForDictionary(item);
+    });
+    return button;
   }
 
   function showMatches(matches) {

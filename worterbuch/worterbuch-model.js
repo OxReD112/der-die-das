@@ -33,15 +33,18 @@
      list(matches) → { rows: [{ word, translation, card }] (at most MAX_ROWS = 12), more: n (0 when none),
                      moreText: "Weitere Treffer: n" or "" }; word = «der Hund», «sich drehen», …
      typeLabel(card) → the part of speech for the label above the word and for the «Zurück» row («Nomen», …)
-     entry(card)   → { pos, headword, blocks: […], addToWortschatz: true / false }
+     entry(card)   → { pos, headword, blocks: […], addToWortschatz: true / false, addToWortschatzAt }
+                     addToWortschatzAt — the index in blocks before which the «＋ Zum Wortschatz» button stands: after
+                     the card's own parts, before «Ausdrücke» and «Siehe auch» (blocks.length when they are none)
        blocks, in the order of the card:
          { kind: "detail", text }                 Plural / Perfekt / Steigerung line
-         { kind: "note", text }                   a note
+         { kind: "note", text, parts? }           a note; parts — in the card's own note when the text of a see_also
+                                                  link stands in it (below)
          { kind: "translation", text }
          { kind: "reflexive", sich, text }        «sich X — …» (sich X bold)
          { kind: "section", type, label, lines }  a labelled section; type:
              wordOrder, example, hints, pronounForms, declension, complements, reflexive, verbForms, imperative,
-             expressions
+             expressions, seeAlso
            lines:
              { kind: "detail", text }             { kind: "pattern", parts: [{ text, bold }] }
              { kind: "example", text }            { kind: "reflexiveExample", text }
@@ -51,7 +54,15 @@
                                                   pronoun tables scroll sideways (scroll: true, label for VoiceOver),
                                                   the verb table does not
              { kind: "imperative", parts: [{ person, form }] }   «du: geh · ihr: geht · Sie: gehen Sie»
-             { kind: "expression", word, translation, card }      opens that card
+             { kind: "expression", word, translation, card }      opens that card («Ausdrücke»)
+             { kind: "cardLink", word, translation, card }        opens that card («Siehe auch», the same row)
+       Links (see_also: [{ id, text?, field?, at?: { <lang>: n } }] — related cards; the definition is the README of
+       card batch 245, «Как найти место ссылки»): the note fields usage_note, plural_note, forms_note, notes.<i>,
+       reflexive.note of the shown language; the field is `field`, or else the only one that holds text; in it the places
+       of text — a plain search, left to right, without overlaps, also inside longer words; with at[lang] place n
+       (1 = the first), without it the only place. That note has parts: [{ text } | { text, card }]; the { text, card }
+       part opens that card, text stays the whole note. Any other linked card → the section «Siehe auch» at the end of
+       the card (not repeated when already among «Ausdrücke»).
      All texts are already in the person's language (DeutschTranslation.field); German stays German.
 
    TEXT — the texts of the panel: hint under the field (TEXT.intro(), in the person's language; TEXT.introLines() — the
@@ -113,6 +124,7 @@
 
   let entries = null;
   let expressionsByCard = new Map();
+  let cardsById = new Map();
   let loadPromise = null;
 
   function language() {
@@ -206,6 +218,7 @@
         // Wörterbuch quality A4 (user 27.10.2026): a card with `worterbuch_hidden: true` is for the book reader only — not shown here.
         // the order of the cards as always: nouns, verbs, adjectives, adverbs, adjective-adverbs, conjunctions, pronouns, expressions
         entries = ORDER.flatMap(file => cards[file]).filter(item => item.worterbuch_hidden !== true);
+        cardsById = new Map(entries.map(item => [item.id, item]));
         // A7: the expressions of a word («Ausdrücke» on its card) — every expression lists its words in related_ids.
         expressionsByCard = new Map();
         for (const item of entries) {
@@ -290,22 +303,104 @@
     return item.parts_of_speech?.join(" / ") || TYPE_LABEL[item.type] || "";
   }
 
-  // Wörterbuch quality A7 (user 27.10.2026): «Ausdrücke» — expressions with this word (their related_ids), each opens its card.
-  function expressionsSection(item) {
-    const found = item.type === "expression" ? [] : (expressionsByCard.get(item.id) || []).slice().sort((a, b) => a.word.localeCompare(b.word, "de"));
-    if (!found.length) return null;
-    return { kind: "section", type: "expressions", label: "Ausdrücke", lines: found.map(expression => ({ kind: "expression", word: expression.word, translation: translatedField(expression, "translation"), card: expression })) };
+  // A row that opens another card: its headword (with the article) and its translation.
+  function cardRow(kind, card) {
+    return { kind, word: (card.article ? card.article + " " : "") + card.word, translation: translatedField(card, "translation"), card };
   }
 
-  function hintsSection(item) {
+  // «Ausdrücke» — the expressions with this word (their related_ids), each opens its card.
+  function expressionsOf(item) {
+    return item.type === "expression" ? [] : (expressionsByCard.get(item.id) || []).slice().sort((a, b) => a.word.localeCompare(b.word, "de"));
+  }
+
+  function expressionsSection(item) {
+    const found = expressionsOf(item);
+    if (!found.length) return null;
+    return { kind: "section", type: "expressions", label: "Ausdrücke", lines: found.map(expression => cardRow("expression", expression)) };
+  }
+
+  // see_also: [{ id, text? }] → the links that are shown: { card, text } (text "" when none); the card itself and cards
+  // not shown in the Wörterbuch (unknown id, worterbuch_hidden) are left out.
+  function seeAlsoLinks(item) {
+    const seen = new Set();
+    return (item.see_also || []).flatMap(link => {
+      const card = link && link.id !== item.id && !seen.has(link.id) ? cardsById.get(link.id) : null;
+      if (!card) return [];
+      seen.add(link.id);
+      return [{ card, text: String(link.text || ""), at: link.at || null, field: link.field || "" }];
+    });
+  }
+
+  // The places of `text` in one note, word for word: a plain search, left to right, without overlaps (the next search
+  // starts at the end of the last place; a place inside a longer word counts too) → [{ note, start, end }].
+  function placesIn(note, text) {
+    const places = [];
+    for (let at = note.text.indexOf(text); at >= 0; at = note.text.indexOf(text, at + text.length)) places.push({ note, start: at, end: at + text.length });
+    return places;
+  }
+
+  // The place that becomes the link, or null (then the card is in «Siehe auch»). The field: link.field, or else the only
+  // note field of the shown language that holds text. In it: with link.at[lang] that place (1 = the first), without it
+  // the only place.
+  function linkPlace(link, notes, lang) {
+    if (!link.text) return null;
+    const fields = notes.filter(entry => link.field ? entry.field === link.field : entry.note.text.includes(link.text));
+    if (fields.length !== 1) return null;
+    const places = placesIn(fields[0].note, link.text);
+    const at = link.at ? link.at[lang] : undefined;
+    if (at !== undefined) return places[at - 1] || null;
+    return places.length === 1 ? places[0] : null;
+  }
+
+  // A note and the places of the links in it → its parts: plain text and { text, card }. Where two places overlap the
+  // longer one wins.
+  function linkedParts(note, places, used) {
+    const parts = [];
+    let at = 0;
+    for (const place of places.slice().sort((a, b) => a.start - b.start || b.end - a.end)) {
+      if (place.start < at) continue;
+      if (place.start > at) parts.push({ text: note.text.slice(at, place.start) });
+      parts.push({ text: note.text.slice(place.start, place.end), card: place.card });
+      used.add(place.card);
+      at = place.end;
+    }
+    if (at < note.text.length) parts.push({ text: note.text.slice(at) });
+    return parts;
+  }
+
+  // see_also: the link's place in the card's notes (in the shown language; linkPlace) becomes a link part of that note;
+  // the other linked cards (no text, no such place) are rows of «Siehe auch» at the end. A card already among «Ausdrücke»
+  // is not repeated.
+  function linkSeeAlso(item, blocks, notes) {
+    const links = seeAlsoLinks(item);
+    if (!links.length) return;
+    const used = new Set(expressionsOf(item));
+    const lang = T()?.getDisplayLang?.() || language();
+    const placesByNote = new Map();
+    for (const link of links) {
+      const place = linkPlace(link, notes, lang);
+      if (!place) continue;
+      if (!placesByNote.has(place.note)) placesByNote.set(place.note, []);
+      placesByNote.get(place.note).push({ ...place, card: link.card });
+    }
+    for (const [note, places] of placesByNote) note.parts = linkedParts(note, places, used);
+    const rest = links.map(link => link.card).filter(card => !used.has(card));
+    if (rest.length) blocks.push({ kind: "section", type: "seeAlso", label: "Siehe auch", lines: rest.map(card => cardRow("cardLink", card)) });
+  }
+
+  function hintsSection(item, cardNote) {
     const lines = noteLines(item);
     if (!Array.isArray(lines) || !lines.length) return null;
-    return { kind: "section", type: "hints", label: "Hinweise", lines: lines.map(text => ({ kind: "note", text })) };
+    return { kind: "section", type: "hints", label: "Hinweise", lines: lines.map((text, i) => cardNote(text, "notes." + i)) };
   }
 
   function entry(item) {
     const blocks = [];
     const push = block => { if (block) blocks.push(block); };
+    // the card's notes that can hold a link of see_also, with the name of their field: usage_note, plural_note, forms_note,
+    // notes.<i>, reflexive.note (not the notes of a complement, the declension or the imperative)
+    const cardNotes = [];
+    const cardNote = (text, field) => { const note = { kind: "note", text }; cardNotes.push({ note, field }); return note; };
 
     if (item.type === "verb") {
       if (item.perfect_form) push({ kind: "detail", text: "Perfekt: " + item.perfect_form });
@@ -327,7 +422,7 @@
       push({ kind: "detail", text });
     }
     const pluralNote = translatedField(item, "plural_note");
-    if (pluralNote) push({ kind: "note", text: pluralNote });
+    if (pluralNote) push(cardNote(pluralNote, "plural_note"));
     const usageNote = translatedField(item, "usage_note");
     // Cards with a word-order rule (conjunctions, linking adverbs): translation → „Wortstellung“ (rule, pattern) → „Beispiel“ → „Hinweise“.
     const hasWordOrder = Boolean(item.word_order_rule || item.word_order_pattern);
@@ -335,7 +430,7 @@
     // Wörterbuch quality A2 (user 26.10.2026): the note of a verb, noun or adjective stands right under its translation (and the
     // «sich X» line), as WOERTERBUCH_VERBS asks; the Plural line and its plural note stay above the translation.
     const noteUnderTranslation = ["verb", "noun", "adjective"].includes(item.type);
-    if (usageNote && !noteAfterTranslation && !noteUnderTranslation) push({ kind: "note", text: usageNote });
+    if (usageNote && !noteAfterTranslation && !noteUnderTranslation) push(cardNote(usageNote, "usage_note"));
 
     push({ kind: "translation", text: translatedField(item, "translation") });
     // G70 step 2 (WN reflexive batch, user 24.10.2026): the field `reflexive` — the meaning of the verb with an accusative sich — is a line
@@ -343,7 +438,7 @@
     const reflexive = item.type === "verb" && item.reflexive && item.reflexive.worterbuch_hidden !== true
       ? translatedField(item.reflexive, "translation") : "";
     if (reflexive) push({ kind: "reflexive", sich: "sich " + item.word, text: reflexive });
-    if (usageNote && noteUnderTranslation) push({ kind: "note", text: usageNote });
+    if (usageNote && noteUnderTranslation) push(cardNote(usageNote, "usage_note"));
     if (hasWordOrder) {
       const lines = [];
       // A line break („\n“) in the rule or pattern starts a new line (je … / desto …).
@@ -359,9 +454,9 @@
       const orderExampleTranslation = translatedField(item, "example");
       if (orderExampleTranslation) orderExample.push({ kind: "exampleTranslation", text: orderExampleTranslation });
       push({ kind: "section", type: "example", label: item.example_usage ? "Beispiel · " + item.example_usage : "Beispiel", lines: orderExample });
-      push(hintsSection(item));
+      push(hintsSection(item, cardNote));
     }
-    if (usageNote && noteAfterTranslation && item.type !== "pronoun") push({ kind: "note", text: usageNote });
+    if (usageNote && noteAfterTranslation && item.type !== "pronoun") push(cardNote(usageNote, "usage_note"));
 
     if (item.type === "pronoun") {
       (item.forms || []).forEach(group => {
@@ -372,8 +467,8 @@
         }] });
       });
       const formsNote = translatedField(item, "forms_note");
-      if (formsNote) push({ kind: "note", text: formsNote });
-      if (usageNote) push({ kind: "note", text: usageNote });
+      if (formsNote) push(cardNote(formsNote, "forms_note"));
+      if (usageNote) push(cardNote(usageNote, "usage_note"));
     }
 
     const declensionNote = translatedField(item, "declension_note");
@@ -410,12 +505,11 @@
           const reflexiveExample = translatedField(item.reflexive, "example");
           if (reflexiveExample) lines.push({ kind: "exampleTranslation", text: reflexiveExample });
         }
-        if (reflexiveNote) lines.push({ kind: "note", text: reflexiveNote });
+        if (reflexiveNote) lines.push(cardNote(reflexiveNote, "reflexive.note"));
         push({ kind: "section", type: "reflexive", label: (item.reflexive.example_de ? "Beispiel · " : "") + "sich " + item.word, lines });
       }
     }
 
-    if (item.type === "verb") push(expressionsSection(item));
     if (item.type === "verb" && item.forms) {
       const forms = item.forms;
       const konjunktivII = forms["Konjunktiv II"];
@@ -450,20 +544,25 @@
     if (item.type !== "verb" && !hasWordOrder) push(example);
     // E1: an expression card — translation, example, then its notes («Hinweise», one line each); the type line «Ausdruck»
     // (TYPE_LABEL); no Wortschatz button (wortschatz_excluded, user 22.10).
-    if (item.type === "expression") push(hintsSection(item));
+    if (item.type === "expression") push(hintsSection(item, cardNote));
     for (const extra of item.additional_examples || []) {
       push({ kind: "section", type: "example", label: "Beispiel · " + (extra.example_usage || ""), lines: [
         { kind: "example", text: extra.example_de },
         { kind: "exampleTranslation", text: translatedField(extra, "example") }
       ] });
     }
-    if (item.type !== "verb") push(expressionsSection(item));
+    // the card's own parts end here; the sections of other cards («Ausdrücke», «Siehe auch») follow
+    const ownEnd = blocks.length;
+    push(expressionsSection(item));
+    linkSeeAlso(item, blocks, cardNotes);
     return {
       pos: typeLabel(item),
       headword: (item.article ? item.article + " " : "") + item.word,
       blocks,
-      // Wörterbuch quality (user 27.10.2026): the button speaks German, like the rest of the window.
-      addToWortschatz: item.wortschatz_excluded !== true
+      // the button speaks German, like the rest of the window; it stands at addToWortschatzAt — before the sections of
+      // other cards, so it reads as the button of this word
+      addToWortschatz: item.wortschatz_excluded !== true,
+      addToWortschatzAt: ownEnd
     };
   }
 
