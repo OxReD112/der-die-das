@@ -52890,7 +52890,7 @@
       "Also jemandem zu Gefallen — to please someone. Do not confuse: jemandem einen Gefallen tun — to do someone a favour."
     ],
     "related_ids": [],
-    "source_url": "https://www.duden.de/rechtschreibung/Gefallen_Gefaelligkeit",
+    "source_url": "https://www.duden.de/rechtschreibung/Gefallen_Wohlgefallen",
     "wortschatz_excluded": true,
     "match": [
       {
@@ -71341,5 +71341,98 @@
     "source_url": "https://www.duden.de/rechtschreibung/Flagge",
     "source": "Duden (Flagge, Wendungen): Flagge zeigen — seine Meinung oder Erwartung mit Nachdruck und deutlich zu erkennen geben; nach englisch to show the flag",
     "wortschatz_excluded": true
+  },
+  {
+    "id": "expression-457",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "immer der Nase nach",
+    "translation_ru": "(разг.) прямо, никуда не сворачивая",
+    "translation_en": "(colloquial) straight ahead, following one's nose",
+    "example_de": "Vom Marktplatz gehst du einfach immer der Nase nach, dann siehst du die Kirche.",
+    "example_ru": "С рыночной площади просто иди прямо, никуда не сворачивая, и увидишь церковь.",
+    "example_en": "From the market square just keep going straight ahead and you'll see the church.",
+    "notes_ru": [
+      "Буквально — «всё время за носом». Бывает и без immer, с притяжательным словом вместо артикля: seiner Nase nach. Nase здесь в дательном падеже, nach стоит после него (как в meiner Meinung nach)."
+    ],
+    "notes_en": [
+      "Literally “always after the nose”. Also without immer and with a possessive instead of the article: seiner Nase nach. Nase is dative here, with nach after it (as in meiner Meinung nach)."
+    ],
+    "related_ids": [
+      "noun-1388",
+      "preposition-004"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Nase",
+    "source": "Duden (Nase 1, Wendungen): immer der Nase nach (umgangssprachlich: immer geradeaus)",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "Nase nach",
+          "not_next": [
+            "der",
+            "die",
+            "das",
+            "dem",
+            "den",
+            "des",
+            "ein",
+            "eine",
+            "einem",
+            "einen",
+            "einer",
+            "eines",
+            "mein",
+            "meinem",
+            "meinen",
+            "meiner",
+            "dein",
+            "deinem",
+            "deinen",
+            "deiner",
+            "sein",
+            "seinem",
+            "seinen",
+            "seiner",
+            "ihr",
+            "ihrem",
+            "ihren",
+            "ihrer",
+            "unser",
+            "unserem",
+            "unseren",
+            "unserer",
+            "euer",
+            "eurem",
+            "euren",
+            "eurer",
+            "diesem",
+            "diesen",
+            "dieser",
+            "jedem",
+            "jeden",
+            "jeder"
+          ],
+          "not_next_capital": true,
+          "not_next_number": true
+        }
+      ],
+      "order": "fixed",
+      "scope": "clause",
+      "anchor": 0
+    },
+    "tests": {
+      "positive": [
+        "Das Schneiderlein zog weiter, immer seiner spitzen Nase nach.",
+        "Geh einfach immer der Nase nach.",
+        "Wir liefen der Nase nach bis zum Bahnhof."
+      ],
+      "negative": [
+        "Meiner Meinung nach ist das falsch.",
+        "Er schaute nach der Nase des Hundes.",
+        "Er rümpfte die Nase.",
+        "Er griff sich an die Nase nach dem Essen."
+      ]
+    }
   }
 ]

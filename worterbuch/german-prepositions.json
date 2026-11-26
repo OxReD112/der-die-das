@@ -885,6 +885,15 @@
         "note_ru": "Wohin? — куда (направление); через что-либо; время: в течение (über die Feiertage); тема: о чём",
         "note_en": "Wohin? — where to (direction); across something; time: over, during (über die Feiertage); topic: about",
         "example_de": "über den Tisch"
+      },
+      {
+        "pattern": "Akkusativ + über",
+        "case": "Akkusativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "о времени: в течение, на протяжении; стоит после существительного",
+        "note_en": "of time: during, throughout; follows the noun",
+        "example_de": "die ganze Woche über"
       }
     ],
     "contractions": {
@@ -1865,10 +1874,11 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Часто в документах и правилах: gemäß § 5. Прилагательное gemäß «соответствующий» (eine dem Alter gemäße Aufgabe) — не эта карточка.",
-    "usage_note_en": "Common in documents and regulations: gemäß § 5. The adjective gemäß 'appropriate' (eine dem Alter gemäße Aufgabe) is not this card.",
+    "usage_note_ru": "Часто в документах и правилах: gemäß § 5. Прилагательное gemäß «соответствующий» (eine dem Alter gemäße Aufgabe) — не эта карточка. В Швейцарии пишется gemäss.",
+    "usage_note_en": "Common in documents and regulations: gemäß § 5. The adjective gemäß 'appropriate' (eine dem Alter gemäße Aufgabe) is not this card. In Switzerland it is spelled gemäss.",
     "search_forms": [
-      "gemäß"
+      "gemäß",
+      "gemäss"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/gemaesz_bezueglich_laut",
     "wortschatz_excluded": true
@@ -2327,7 +2337,8 @@
     "usage_note_ru": "Также раздельно: zu Gunsten (Duden рекомендует zugunsten).",
     "usage_note_en": "Also written zu Gunsten (Duden recommends zugunsten).",
     "search_forms": [
-      "zugunsten"
+      "zugunsten",
+      "zu Gunsten"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zugunsten_fuer",
     "wortschatz_excluded": true
@@ -2522,5 +2533,276 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/gen",
     "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-061",
+    "type": "preposition",
+    "word": "entgegen",
+    "translation_ru": "вопреки",
+    "translation_en": "contrary to",
+    "example_de": "Entgegen der Wettervorhersage blieb es den ganzen Tag trocken.",
+    "example_ru": "Вопреки прогнозу погоды весь день было сухо.",
+    "example_en": "Contrary to the weather forecast, it stayed dry all day.",
+    "cases": [
+      "Dativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "entgegen + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вопреки чему-либо",
+        "note_en": "contrary to something",
+        "example_de": "entgegen allen Erwartungen"
+      },
+      {
+        "pattern": "Dativ + entgegen",
+        "case": "Dativ",
+        "position": "after",
+        "status": "also_correct",
+        "note_ru": "редко: после существительного",
+        "note_en": "rare: after the noun",
+        "example_de": "allen Erwartungen entgegen"
+      },
+      {
+        "pattern": "entgegen + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "во множественном числе иногда Genitiv",
+        "note_en": "in the plural sometimes genitive",
+        "example_de": "entgegen anderslautender Berichte"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Наречие и приставка entgegen «навстречу» (jemandem entgegenkommen) — не эта карточка.",
+    "usage_note_en": "The adverb and prefix entgegen 'towards' (jemandem entgegenkommen) is not this card.",
+    "search_forms": [
+      "entgegen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/entgegen_gegenueber_trotz",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-062",
+    "type": "preposition",
+    "word": "entsprechend",
+    "translation_ru": "согласно, в соответствии с",
+    "translation_en": "according to, in accordance with",
+    "example_de": "Den Anweisungen entsprechend haben wir die Tür abgeschlossen.",
+    "example_ru": "Согласно указаниям, мы заперли дверь.",
+    "example_en": "In accordance with the instructions, we locked the door.",
+    "cases": [
+      "Dativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "entsprechend + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "в соответствии с чем-либо",
+        "note_en": "in accordance with something",
+        "example_de": "entsprechend dem Plan"
+      },
+      {
+        "pattern": "Dativ + entsprechend",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "может стоять и после существительного",
+        "note_en": "it can also follow the noun",
+        "example_de": "dem Plan entsprechend"
+      },
+      {
+        "pattern": "entsprechend + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "реже",
+        "note_en": "less common",
+        "example_de": "entsprechend des Plans"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Прилагательное и наречие entsprechend «соответствующий; соответственно» (eine entsprechende Antwort) — не эта карточка.",
+    "usage_note_en": "The adjective and adverb entsprechend 'corresponding; accordingly' (eine entsprechende Antwort) is not this card.",
+    "search_forms": [
+      "entsprechend"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/entsprechend_betreffend_laut",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-063",
+    "type": "preposition",
+    "word": "halber",
+    "translation_ru": "ради; из-за",
+    "translation_en": "for the sake of; because of",
+    "example_de": "Der Vollständigkeit halber nenne ich noch eine dritte Möglichkeit.",
+    "example_ru": "Для полноты картины назову ещё третью возможность.",
+    "example_en": "For the sake of completeness, I will mention a third option.",
+    "cases": [
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "Genitiv + halber",
+        "case": "Genitiv",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "(книжн.) стоит после существительного в Genitiv",
+        "note_en": "(formal) follows a genitive noun",
+        "example_de": "der Sicherheit halber"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Только после слова, книжн. Прилагательное halb (ein halber Liter) — не эта карточка.",
+    "usage_note_en": "Only after the word, formal. The adjective halb (ein halber Liter) is not this card.",
+    "search_forms": [
+      "halber"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/halber_aufgrund_fuer_wegen",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-064",
+    "type": "preposition",
+    "word": "zuwider",
+    "translation_ru": "вопреки, наперекор",
+    "translation_en": "contrary to, in defiance of",
+    "example_de": "Allen Warnungen zuwider fuhr er bei Sturm aufs Meer hinaus.",
+    "example_ru": "Вопреки всем предупреждениям он вышел в море в шторм.",
+    "example_en": "Contrary to all warnings, he sailed out to sea in a storm.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "Dativ + zuwider",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "(книжн.) вопреки чему-либо; стоит после слова в Dativ",
+        "note_en": "(formal) contrary to something; follows a dative",
+        "example_de": "dem Verbot zuwider"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Только после слова, книжн. Прилагательное zuwider «противный» (jemandem zuwider sein) — не эта карточка.",
+    "usage_note_en": "Only after the word, formal. The adjective zuwider 'repugnant' (jemandem zuwider sein) is not this card.",
+    "search_forms": [
+      "zuwider"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zuwider_entgegen_trotz_ungeachtet",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-065",
+    "type": "preposition",
+    "word": "betreffend",
+    "translation_ru": "относительно, касательно",
+    "translation_en": "concerning, regarding",
+    "example_de": "Ihre Anfrage betreffend können wir Ihnen leider keine Auskunft geben.",
+    "example_ru": "Относительно вашего запроса мы, к сожалению, не можем дать вам информацию.",
+    "example_en": "Regarding your inquiry, unfortunately we cannot give you any information.",
+    "cases": [
+      "Akkusativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "Akkusativ + betreffend",
+        "case": "Akkusativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "стоит после существительного",
+        "note_en": "follows the noun",
+        "example_de": "die Reise betreffend"
+      },
+      {
+        "pattern": "betreffend + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "может стоять и перед существительным",
+        "note_en": "it can also precede the noun",
+        "example_de": "betreffend die Reise"
+      },
+      {
+        "pattern": "betreffend + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "перед существительным, особенно в Австрии",
+        "note_en": "before the noun, especially in Austria",
+        "example_de": "betreffend der Reise"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Причастие и прилагательное betreffend «соответствующий, данный» (die betreffende Person) — не эта карточка.",
+    "usage_note_en": "The participle and adjective betreffend 'relevant, in question' (die betreffende Person) is not this card.",
+    "search_forms": [
+      "betreffend"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/betreffend_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-066",
+    "type": "preposition",
+    "word": "zum Trotz",
+    "translation_ru": "вопреки, назло (кому-, чему-либо)",
+    "translation_en": "in spite of, in defiance of",
+    "example_de": "Allen Prognosen zum Trotz hat unsere Mannschaft das Spiel gewonnen.",
+    "example_ru": "Вопреки всем прогнозам наша команда выиграла матч.",
+    "example_en": "Defying all predictions, our team won the match.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "Dativ + zum Trotz",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "вопреки кому-, чему-либо; стоит после слова в Dativ",
+        "note_en": "in spite of someone or something; follows a dative",
+        "example_de": "allen Zweifeln zum Trotz"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Оборот из двух слов (Duden: jemandem, einer Sache zum Trotz — trotz, entgegen). Существительное Trotz «упрямство» (aus Trotz) — не эта карточка.",
+    "usage_note_en": "A two-word phrase (Duden: jemandem, einer Sache zum Trotz — trotz, entgegen). The noun Trotz 'defiance' (aus Trotz) is not this card.",
+    "search_forms": [
+      "zum Trotz"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Trotz",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "zum Trotz"
+        }
+      ],
+      "order": "fixed",
+      "scope": "clause",
+      "anchor": 0
+    },
+    "tests": {
+      "positive": [
+        "Dem Gesetz zum Trotz unterlaufen sie das Verbot.",
+        "Dem Regen zum Trotz gingen wir spazieren.",
+        "Der Kälte zum Trotz badeten sie im See."
+      ],
+      "negative": [
+        "Er tat es nur zum Trotz.",
+        "Aus Trotz schwieg er.",
+        "Er ging zum Bahnhof."
+      ]
+    }
   }
 ]

@@ -100,9 +100,6 @@
   const DETERMINER_WORD = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\w*|mein\w*|dein\w*|sein\w*|ihr\w*|unser\w*|eur\w*|dies\w*|jen\w*|jed\w*|all\w*|welch\w*|solch\w*|manch\w*|beide\w*)$/u;
   // A definite, indefinite, negative, possessive or demonstrative (dies-, jen-) determiner form, with its ending.
   const DETERMINER_FORM = /^(?:der|die|das|den|dem|des|(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?|(?:dies|jen)(?:e|en|em|er|es))$/u;
-  // Prepositions that may follow their noun (dem Bericht zufolge, der Reihe nach) — a group before them is no object of the verb.
-  // zum: the first word of zum Trotz (dem Gesetz zum Trotz), no contraction as such — a contraction stands before its noun.
-  const POSTPOSITION_WORD = /^(?:nach|zufolge|gegenüber|gemäß|entsprechend|zuliebe|entgegen|trotz|zum)$/u;
   // Determiners.
   // ein / eine / einen: an indefinite article that may open a predicate noun (… hielt ihn für einen Spitzbuben).
   const INDEFINITE_NOM_ACC = /^(?:ein|eine|einen)$/u;
@@ -2885,8 +2882,10 @@ function apostropheText(text) {
     // (single-case and two-way), read from the cards' government records.
     const dativePrepositions = new Set(entries.filter(e => e.type === "preposition" && (e.government || []).some(g =>
       g.case === "Dativ" && g.position === "before" && g.status === "standard" && !g.combined_with)).map(e => norm(e.word)));
-    // Preposition spellings (and their contractions) come from the preposition cards.
-    const prepositions = new Set([...entries.filter(e => e.type === "preposition").flatMap(e => [e.word,...(e.search_forms || [])].map(norm)),
+    // Preposition spellings (and their contractions) come from the preposition cards — those that open a group before their noun; a card
+    // that only follows its word (halber, zuwider, zum Trotz) opens none (ein halber Meter).
+    const prepositions = new Set([...entries.filter(e => e.type === "preposition" && (e.government || []).some(g => g.position !== "after"))
+      .flatMap(e => [e.word,...(e.search_forms || [])].map(norm)),
       ...Object.keys(contractionForms)]);
     // The preposition inside a da(r)- / wo(r)- form of any preposition card (damit → mit, darauf → auf, worüber → über); null otherwise.
     // (r before a vowel only — dabei, daran; no darmit)
@@ -10980,7 +10979,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // Er zog dem Vater nach: nachziehen, not dem Anschein nach)
         const ownParticleAt = k => !!prefix0 && cards.every(c => norm(c.item.separable_prefix || "") === prefix0) && k === end && norm(tokens[k]?.[0] ?? "") === prefix0;
         // Is the noun at token k not followed by a postposition (or is that word an own particle)?
-        const notPostposed = k => { const n = nounEnd(k); return n > 0 && (!POSTPOSITION_WORD.test(norm(tokens[n+1]?.[0] ?? "")) || ownParticleAt(n+1)); };
+        const notPostposed = k => { const n = nounEnd(k); return n > 0 && (!postpositionAt(tokens,n+1,"dative") || ownParticleAt(n+1)); };
         // (die / das / diese + noun outside a prepositional phrase may be the accusative object — die Regeln, das Verbot:
         // then the dative noun phrase decides nothing)
         const looseDieDas = free.some(x => /^(?:die|das|diese|dieses)$/u.test(x.w) && nounEnd(x.i+1) > 0);
@@ -10989,10 +10988,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // unterlaufen)
         // (… or before a present participle that governs it: Seinem Rat folgend unterliefen sie die Sanktionen)
         const postposedAt = i => { const n = nounEnd(i+1), w = tokens[n > 0 ? n+1 : i+1]?.[0] ?? "";
-          return POSTPOSITION_WORD.test(norm(w)) && !ownParticleAt(n > 0 ? n+1 : i+1) || /^\p{Ll}\p{L}{3,}end$/u.test(w); };
+          return postpositionAt(tokens,n > 0 ? n+1 : i+1,"dative") && !ownParticleAt(n > 0 ? n+1 : i+1) || /^\p{Ll}\p{L}{3,}end$/u.test(w); };
         const unambiguous = free.some(x => x.i <= end && (DATIVE_SINGULAR_DETERMINERS.includes(x.w) || x.w === "denen") && !postposedAt(x.i));
         const dativeNP = unambiguous || !looseDieDas && free.some(x => x.i <= end && (DATIVE_SINGULAR_DETERMINERS.includes(x.w) && nounNext(x.i+1) && notPostposed(x.i+1) ||
-          /^(?:jedem|niemandem|jemandem)$/u.test(x.w) && !POSTPOSITION_WORD.test(norm(tokens[x.i+1]?.[0] ?? "")) ||
+          /^(?:jedem|niemandem|jemandem)$/u.test(x.w) && !postpositionAt(tokens,x.i+1,"dative") ||
           !nonFinite && x.w === "der" && x.i === index + 1 && feminineNext(x.i+1) && notPostposed(x.i+1)));
         const c = dativeNP ? pick(cards.filter(c => patterns(c).some(p => /^Dativ$/u.test(p.trim())))) || withoutNeededAccusative() : null;
         if (c) return {candidate:c,evidence:'dative-object'};
@@ -13236,7 +13235,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (entry.type === "article") for (const form of entry.search_forms || []) {
         const rows = articleCardsByForm.get(norm(form)) || []; if (!rows.includes(entry)) rows.push(entry); articleCardsByForm.set(norm(form),rows);
       }
-      if (entry.type === "preposition") for (const form of [entry.word,...(entry.search_forms || [])]) prepositionCardsByForm.set(norm(form),entry);
+      // (the prepositions that open a group before their noun; a card that only follows its word — halber, zum Trotz — is in
+      // postpositionForms only: ein halber Meter)
+      if (entry.type === "preposition" && (entry.government || []).some(g => g.position !== "after"))
+        for (const form of [entry.word,...(entry.search_forms || [])]) prepositionCardsByForm.set(norm(form),entry);
     }
     const articleFeatureCache = new WeakMap();
     // The form features of an article card (articleFormFeatures), cached per card.
@@ -13253,6 +13255,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (position === "before" && rows.length && !rows.some(g => g.status === "standard")) return new Set();
       return new Set(rows.map(g => caseNamesDe[g.case]).filter(Boolean));
     };
+    // The preposition cards that may follow their noun — a government element "after" (dem Bericht zufolge, der Reihe nach, dem Gesetz
+    // zum Trotz), each spelling as its words.
+    const postpositionForms = entries.filter(e => e.type === "preposition" && (e.government || []).some(g => g.position === "after"))
+      .flatMap(card => [...new Set([card.word,...(card.search_forms || [])].map(norm))].map(form => ({card,words:form.split(/\s+/u)})));
+    // Does a postposition governing `caseName` start at token i — its one or two words (zum Trotz)? The card or null.
+    function postpositionAt(tokens, i, caseName) {
+      const hit = postpositionForms.find(({card,words}) => words.every((w,k) => tokens[i+k] && norm(tokens[i+k][0]) === w) &&
+        governedCases(card,"after").has(caseName));
+      return hit ? hit.card : null;
+    }
     // Adjective endings after a determiner: weak after der-type, mixed after ein-type.
     function expectedEnding(declension,feature) {
       // (strong — after dessen / deren: an dessen hohem Dach, mit deren kleinen Kindern)
@@ -14296,6 +14308,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       while (end+1 < tokens.length && plain(tokenGap(sentence,tokens,end,end+1))) end++;
       return end;
     }
+    // Does the part stop right after token i: a sentence sign, comma, bracket or quote (partSignBetween), the end of the sentence — not
+    // a number after it (siegten mit 6:4.) — or a clause coordinator with a finite verb right after it (strahlte ihm entgegen und lachte)?
+    // (unlike partStopsAfter: a comma stops it, a dash or an ellipsis does not, a number after the last word is no end, and und + a
+    // finite verb is an end too)
+    function partStopsRightAfter(sentence, tokens, i) {
+      const rest = i+1 < tokens.length ? tokenGap(sentence,tokens,i,i+1) : sentence.slice(tokens[i].index+tokens[i][0].length);
+      if (/^\s*\p{N}/u.test(rest)) return false;
+      if (i+1 >= tokens.length || partSignBetween(sentence,tokens,i,i+1)) return true;
+      return i+2 < tokens.length && CLAUSE_COORDINATOR_WORD.test(norm(tokens[i+1][0])) && joinedTokens(sentence,tokens,i,i+1) &&
+        joinedTokens(sentence,tokens,i+1,i+2) && verbRowsAt(tokens,i+2).some(a => a.kind === 'finite');
+    }
     // The verb analyses of a lower-case spelling, also with ß written ss; a Swiss ss spelling with no analyses of its own is read
     // with ß as a second try (heisst — heißt; wissen, müssen have their own).
     function verbRowsOf(spelling) {
@@ -15098,7 +15121,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // part, the conjunction before a clause (bis er kam, während sie las), a postposition; null when nothing decides.
     async function prepositionChoice(word, context, candidates, separated = []) {
       if (!Number.isInteger(context?.tokenOffset) || candidates.some(c => c.construction || canonicalPos(c.pos) === "Verb")) return null;
-      const card = prepositionCardsByForm.get(norm(word));
+      const card = prepositionCardsByForm.get(norm(word)) || postpositionForms.find(f => f.words.join(' ') === norm(word))?.card;
       const preps = card ? candidates.filter(c => c.source === "main" && c.dictionaryId === card.id) : [];
       if (preps.length !== 1) return null;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'prepositionChoice');
@@ -15240,25 +15263,53 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         return {...prep,evidence:'preposition-before-pronoun'};
       // Postposition after a determiner noun group: des Wetters wegen, die Straße entlang.
       const after = governedCases(card,"after");
-      const clauseEnds = !tokens[index+1] || boundary.test(tokenGap(sentence,tokens,index,index+1)) ||
+      const partEnds = partStopsRightAfter(sentence,tokens,index);
+      const adverbs = candidates.filter(c => c.source === "main" && c.pos === "Adverb");
+      const clauseEnds = partEnds || !!tokens[index+1] &&
         /^[a-zäöüß]/u.test(tokens[index+1][0]) && !determinerFeatures(tokens[index+1][0]) &&
           (await tokenAnalyses(tokens[index+1][0],undefined,'prepositionChoice')).some(a => a.kind === "finite");
       if (after.size && index > 0 && !boundary.test(tokenGap(sentence,tokens,index-1,index)) && clauseEnds) {
         if (particleRisk) return null;
-        const morph = await tokenMorphology(tokens[index-1],{discoverModifiers:false},'prepositionChoice');
-        if (morph.errors.length) return null;
-        const readings = /^[A-ZÄÖÜ]/u.test(tokens[index-1][0]) ? nounReadings(tokens[index-1][0],morph) : [];
-        let det = index-2, mods = [];
-        while (readings.length && det >= 0 && joinedTokens(sentence,tokens,det,det+1) && !determinerFeatures(tokens[det][0]) && mods.length < 3) {
-          const endings = await modifierEndings(tokens[det],'prepositionChoice');
-          if (!endings) break;
-          mods.push(endings); det--;
-        }
-        if (readings.length && det >= 0 && determinerFeatures(tokens[det][0]) &&
-            agreeingFeatures(determinerFeatures(tokens[det][0]),{readings,modifiers:mods},after).length)
-          return {...prep,evidence:'postposition-government-agreement'};
+        // (a light record of the word as a postposition carries its meaning after the noun — den ganzen Tag über «в течение»; the card
+        // lists the meanings before the noun)
+        const postpositionRecord = lightByWordPos.has(`${norm(word)}|postp`) ? candidates.find(c => c.pos === "postp" && norm(c.lemma) === norm(word)) : null;
+        const det = await postposedGroupStart(sentence,tokens,index,card);
+        // at the end of the part a word also known as an adverb is that adverb (below) — unless a group of time stands before it
+        // (Er arbeitete die ganze Woche über)
+        const timeGroup = det >= 0 && (await loadNounClasses()).time.has(norm(tokens[index-1][0]));
+        if (det >= 0 && (!partEnds || adverbs.length !== 1 || timeGroup))
+          return {...prep,...(postpositionRecord ? {candidate:postpositionRecord} : {}),evidence:'postposition-government-agreement'};
       }
+      // At the end of the part a word that our dictionary also knows as an adverb is that adverb — the separated particle of a verb with
+      // no card or the postposition, both its adverb's meaning (raste der Wand entgegen — entgegenrasen; strahlte ihm entgegen —
+      // «навстречу»). Before the finite verb it opens the clause as a postposition (Dem Wunsch entgegen handelte er).
+      if (after.size && partEnds && index > 0 && adverbs.length === 1) return {candidate:adverbs[0],rule:'preposition-government',evidence:'adverb-at-part-end'};
+      // a card that only follows its noun group (zuwider, halber), with no such group before it: the one other reading of the word
+      // (Das ist mir zuwider — the adjective)
+      const others = candidates.filter(c => c !== preps[0] && c.source === "main" && c.pos !== "preposition");
+      if (!governedCases(card).size && others.length === 1 && !(index > 0 && await postposedGroupStart(sentence,tokens,index,card) >= 0))
+        return {candidate:others[0],rule:'preposition-government',evidence:'postposition-without-group'};
       return null;
+    }
+    // The noun group a postposition follows (des Wetters wegen, die Straße entlang, dem Gesetz zum Trotz): the determiner, at most three
+    // modifiers and the noun right before token `index`, agreeing in a case of the card's "after" elements. über after the word — only
+    // with a group of time (die ganze Woche über, den Sommer über; den Mantel über is überziehen). The index of the determiner or -1.
+    async function postposedGroupStart(sentence, tokens, index, card) {
+      const after = governedCases(card,"after");
+      if (!after.size || index < 2 || !joinedTokens(sentence,tokens,index-1,index) || !/^[A-ZÄÖÜ]/u.test(tokens[index-1][0])) return -1;
+      if (norm(card.word) === "über" && !(await loadNounClasses()).time.has(norm(tokens[index-1][0]))) return -1;
+      const morph = await tokenMorphology(tokens[index-1],{discoverModifiers:false},'postposedGroupStart');
+      if (morph.errors.length) return -1;
+      const readings = nounReadings(tokens[index-1][0],morph);
+      let det = index-2;
+      const mods = [];
+      while (readings.length && det >= 0 && joinedTokens(sentence,tokens,det,det+1) && !determinerFeatures(tokens[det][0]) && mods.length < 3) {
+        const endings = await modifierEndings(tokens[det],'postposedGroupStart');
+        if (!endings) break;
+        mods.push(endings); det--;
+      }
+      return readings.length && det >= 0 && determinerFeatures(tokens[det][0]) &&
+        agreeingFeatures(determinerFeatures(tokens[det][0]),{readings,modifiers:mods},after).length ? det : -1;
     }
     // Shared, dictionary-backed attachment for taps on either end of a noun phrase.
     // This is presentation metadata, not a construction or a new vocabulary identity.
@@ -17252,7 +17303,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const dativeGroup = i => { const w = norm(tokens[i][0]), femDer = w === "der" && !(i > 0 && /^\p{Lu}/u.test(tokens[i-1][0]) && i-1 >= start);
         if (!DATIVE_SINGULAR_DETERMINERS.includes(w) && !femDer || i > start && prepositions.has(norm(tokens[i-1][0]))) return false;
         let n = i+1; while (n < index && n-i <= 3 && f.adjective(n)) n++;
-        return n < index && /^\p{Lu}/u.test(tokens[n][0]) && !POSTPOSITION_WORD.test(norm(tokens[n+1]?.[0] ?? "")) && (!femDer || DATIVE_SINGULAR_DETERMINERS.includes(w) || feminineOnly(n)); };
+        return n < index && /^\p{Lu}/u.test(tokens[n][0]) && !postpositionAt(tokens,n+1,"dative") && (!femDer || DATIVE_SINGULAR_DETERMINERS.includes(w) || feminineOnly(n)); };
       // (the dative group only without another noun group that may be the accusative — Er hat dem Mann das Lied angehört
       // stays anhören; the pronoun datives)
       const otherGroup = f.clauseIndices.some(i => i < index && !(i > start && prepositions.has(norm(tokens[i-1][0]))) &&
@@ -22796,6 +22847,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (verdict === "drop") return null;
           if (verdict === "choice") choice = "preposition-first";
         }
+        // a preposition card that only follows its word (zum Trotz): only after its noun group, which is shown with it
+        // (dem Gesetz zum Trotz; Er tat es nur zum Trotz — the noun der Trotz)
+        if (best.entry.type === "preposition" && governedCases(best.entry,"after").size && !governedCases(best.entry).size) {
+          const start = Math.min(...best.tokens), det = await postposedGroupStart(sentence,tokens,start,best.entry);
+          if (det < 0) return null;
+          for (let k = det; k < start; k++) if (!shown.includes(k)) shown.push(k);
+        }
         // (best.choice — the expression or the separable verb of the same words; «preposition-first»)
         return {entry:best.entry, id:"recorded-construction", spans:shown.sort((a,b) => a-b).map(span), ...(choice ? {choice} : best.choice ? {choice:true} : {})};
       }
@@ -26824,7 +26882,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (i === p) continue;
         if (STATE_DATIVE.test(wordAt(tokens,i)) && !afterPrep(i)) {
           const n = /^(?:mir|dir|ihm|ihnen|denen)$/u.test(wordAt(tokens,i)) ? i : phraseEnd(i), next = tokens[n+1]?.[0] ?? "";
-          if (!POSTPOSITION_WORD.test(norm(next)) && !/^\p{Ll}\p{L}{3,}end$/u.test(next)) return true;
+          if (!postpositionAt(tokens,n+1,"dative") && !/^\p{Ll}\p{L}{3,}end$/u.test(next)) return true;
         }
         if ((basePreposition(wordAt(tokens,i)) === "zu" || isDirectionContraction(wordAt(tokens,i))) && i < e) return true;
         if (wordAt(tokens,i) === "nach" && i < e && (wordAt(tokens,(i+1)) === "hause" || /^\p{Lu}/u.test(tokens[i+1][0]) && !(forms.get(wordAt(tokens,(i+1))) || []).length || /^(?:die|das|den)$/u.test(wordAt(tokens,(i+1))))) return true;
