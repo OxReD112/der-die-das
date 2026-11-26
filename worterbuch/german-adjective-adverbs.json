@@ -14376,8 +14376,14 @@
         "example_usage": "Adjektiv"
       }
     ],
-    "usage_note_ru": "Wie spät ist es? — Который час? Сравнительная степень — später (см. карточку später).",
-    "usage_note_en": "Wie spät ist es? — What time is it? Comparative: später (see später)."
+    "usage_note_ru": "Wie spät ist es? — Который час? Сравнительная степень — später.",
+    "usage_note_en": "Wie spät ist es? — What time is it? Comparative: später.",
+    "see_also": [
+      {
+        "id": "adverb-073",
+        "text": "später"
+      }
+    ]
   },
   {
     "id": "adjective-061",
@@ -14425,8 +14431,14 @@
         "example_usage": "Adjektiv"
       }
     ],
-    "usage_note_ru": "Сравнительная степень früher также значит «в прошлом, раньше» (см. карточку früher). Не путать с morgens / am Morgen — утром.",
-    "usage_note_en": "The comparative früher also means “in the past” (see früher). Don't confuse it with morgens / am Morgen — in the morning."
+    "usage_note_ru": "Сравнительная степень früher также значит «в прошлом, раньше». Не путать с morgens / am Morgen — утром.",
+    "usage_note_en": "The comparative früher also means “in the past”. Don't confuse it with morgens / am Morgen — in the morning.",
+    "see_also": [
+      {
+        "id": "adverb-059",
+        "text": "früher"
+      }
+    ]
   },
   {
     "id": "adjective-adverb-386",
@@ -20821,8 +20833,14 @@
         "example_usage": "Adverbial"
       }
     ],
-    "usage_note_ru": "Перед окончанием и в сравнительной степени выпадает е из -euer: ungeheure Kosten, ungeheurer. Существительное das Ungeheuer «чудовище» — отдельная карточка.",
-    "usage_note_en": "The e of -euer drops before an ending and in the comparative: ungeheure Kosten, ungeheurer. The noun das Ungeheuer (“monster”) has its own card."
+    "usage_note_ru": "Перед окончанием и в сравнительной степени выпадает е из -euer: ungeheure Kosten, ungeheurer. Существительное das Ungeheuer «чудовище».",
+    "usage_note_en": "The e of -euer drops before an ending and in the comparative: ungeheure Kosten, ungeheurer. The noun das Ungeheuer (“monster”).",
+    "see_also": [
+      {
+        "id": "noun-4737",
+        "text": "Ungeheuer"
+      }
+    ]
   },
   {
     "id": "adjective-adverb-498",

@@ -1599,13 +1599,13 @@
     "notes_ru": [
       "Was hat das mit mir zu tun? — А я тут при чём?",
       "es mit jemandem zu tun haben — иметь дело с кем-либо: Mit wem habe ich es zu tun?",
-      "Отрицание — отдельная карточка: nichts zu tun haben (mit etw.).",
+      "Отрицание: nichts zu tun haben (mit etw.).",
       "Без mit — другое: Ich habe heute viel zu tun. — У меня сегодня много дел."
     ],
     "notes_en": [
       "Was hat das mit mir zu tun? — What has that got to do with me?",
       "es mit jemandem zu tun haben — to be dealing with someone: Mit wem habe ich es zu tun?",
-      "The negative is a separate card: nichts zu tun haben (mit etw.).",
+      "The negative: nichts zu tun haben (mit etw.).",
       "Without mit it means something else: Ich habe heute viel zu tun. — I have a lot to do today."
     ],
     "related_ids": [
@@ -1751,7 +1751,13 @@
         "Damit hatte er zu kämpfen.",
         "Womit habe ich das verdient?"
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-003",
+        "text": "nichts zu tun haben (mit etw.)"
+      }
+    ]
   },
   {
     "id": "expression-009",
@@ -7980,11 +7986,11 @@
     "example_en": "Finally she plucked up courage and spoke to him.",
     "notes_ru": [
       "Местоимение в дательном: Ich fasste mir ein Herz.",
-      "Ср.: sich fassen — взять себя в руки (карточка fassen)."
+      "Ср.: sich fassen — взять себя в руки."
     ],
     "notes_en": [
       "The pronoun is dative: Ich fasste mir ein Herz.",
-      "Cf.: sich fassen — to compose oneself (card fassen)."
+      "Cf.: sich fassen — to compose oneself."
     ],
     "related_ids": [
       "verb-518",
@@ -8086,7 +8092,13 @@
         "Er fasste sich ans Herz.",
         "Sie fasste sich an das Herz und seufzte."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "verb-518",
+        "text": "fassen"
+      }
+    ]
   },
   {
     "id": "expression-045",
@@ -11697,10 +11709,10 @@
     "example_ru": "Я обязательно приду на твой праздник.",
     "example_en": "I'll definitely come to your party.",
     "notes_ru": [
-      "Также: auf alle Fälle — во всяком случае; jedenfalls — во всяком случае. Противоположное: auf keinen Fall — ни в коем случае (отдельная запись)."
+      "Также: auf alle Fälle — во всяком случае; jedenfalls — во всяком случае. Противоположное: auf keinen Fall — ни в коем случае."
     ],
     "notes_en": [
-      "Also: auf alle Fälle — in any case; jedenfalls — in any case. Opposite: auf keinen Fall — under no circumstances (separate record)."
+      "Also: auf alle Fälle — in any case; jedenfalls — in any case. Opposite: auf keinen Fall — under no circumstances."
     ],
     "related_ids": [
       "noun-1044",
@@ -11737,7 +11749,13 @@
         "Für jeden Fall gibt es eine Regel.",
         "In jedem Fall hast du recht."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-062",
+        "text": "auf keinen Fall"
+      }
+    ]
   },
   {
     "id": "expression-062",
@@ -11750,10 +11768,10 @@
     "example_ru": "Этого ни в коем случае нельзя забывать.",
     "example_en": "You mustn't forget that under any circumstances.",
     "notes_ru": [
-      "Противоположное: auf jeden Fall — в любом случае, обязательно (отдельная запись)."
+      "Противоположное: auf jeden Fall — в любом случае, обязательно."
     ],
     "notes_en": [
-      "Opposite: auf jeden Fall — in any case, definitely (separate record)."
+      "Opposite: auf jeden Fall — in any case, definitely."
     ],
     "related_ids": [
       "noun-1044",
@@ -11790,7 +11808,13 @@
         "In keinem Fall gilt diese Regel.",
         "Für keinen Fall war gesorgt."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-061",
+        "text": "auf jeden Fall"
+      }
+    ]
   },
   {
     "id": "expression-063",
@@ -11951,11 +11975,11 @@
     "example_en": "Come here at once!",
     "notes_ru": [
       "На месте: Zum Aufwärmen laufen wir auf der Stelle. — Для разминки бежим на месте.",
-      "auf der Stelle treten — топтаться на месте (отдельная запись)."
+      "auf der Stelle treten — топтаться на месте."
     ],
     "notes_en": [
       "In place: Zum Aufwärmen laufen wir auf der Stelle. — We run on the spot to warm up.",
-      "auf der Stelle treten — to mark time (separate record)."
+      "auf der Stelle treten — to mark time."
     ],
     "related_ids": [
       "noun-385"
@@ -11993,7 +12017,13 @@
         "An der Stelle steht ein Baum.",
         "Die Stelle ist frei."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-066",
+        "text": "auf der Stelle treten"
+      }
+    ]
   },
   {
     "id": "expression-066",
@@ -12275,16 +12305,16 @@
     "notes_ru": [
       "Wer ist dran? — Чья очередь? Wenn der Lehrer das merkt, bist du dran! — Если учитель заметит, тебе не поздоровится.",
       "У телефона: Wer ist dran? — Кто у телефона? Bist du noch dran? — Ты ещё слушаешь (на связи)?",
-      "Отдельные записи: spät dran sein — опаздывать; gut / schlecht dran sein — быть в хорошем / плохом положении; drauf und dran sein — чуть не (сделать что-либо).",
+      "spät dran sein — опаздывать; gut / schlecht dran sein — быть в хорошем / плохом положении; drauf und dran sein — чуть не (сделать что-либо).",
       "Не путать: an etwas ist etwas dran — в этом что-то есть (правда): An dem Gerücht ist etwas dran.",
-      "an etwas / jemandem dran sein — заниматься чем-либо; приставать к кому-либо (отдельная запись). Wir sind dran (без an) — обычно «наша очередь»."
+      "an etwas / jemandem dran sein — заниматься чем-либо; приставать к кому-либо. Wir sind dran (без an) — обычно «наша очередь»."
     ],
     "notes_en": [
       "Wer ist dran? — Whose turn is it? Wenn der Lehrer das merkt, bist du dran! — If the teacher notices, you're in for it!",
       "On the phone: Wer ist dran? — Who's speaking? Bist du noch dran? — Are you still there?",
-      "Separate records: spät dran sein — to be running late; gut / schlecht dran sein — to be well / badly off; drauf und dran sein — to be on the point of doing something.",
+      "spät dran sein — to be running late; gut / schlecht dran sein — to be well / badly off; drauf und dran sein — to be on the point of doing something.",
       "Do not confuse: an etwas ist etwas dran — there is something in it: An dem Gerücht ist etwas dran.",
-      "an etwas / jemandem dran sein — to be working on something; to be after someone (separate record). Wir sind dran (without an) — usually 'it's our turn'."
+      "an etwas / jemandem dran sein — to be working on something; to be after someone. Wir sind dran (without an) — usually 'it's our turn'."
     ],
     "related_ids": [
       "adverb-443",
@@ -12873,7 +12903,25 @@
         "Ich weiß nicht, wie ich mit ihm dran bin.",
         "Du bist ja dran gewöhnt."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-069",
+        "text": "an etwas / jemandem dran sein"
+      },
+      {
+        "id": "expression-071",
+        "text": "spät dran sein"
+      },
+      {
+        "id": "expression-072",
+        "text": "gut / schlecht dran sein"
+      },
+      {
+        "id": "expression-073",
+        "text": "drauf und dran sein"
+      }
+    ]
   },
   {
     "id": "expression-069",
@@ -12886,11 +12934,11 @@
     "example_ru": "Не волнуйтесь, техники уже занимаются этой проблемой.",
     "example_en": "Don't worry, the technicians are already working on the problem.",
     "notes_ru": [
-      "Разг. Без an — обычно другое: Wir sind dran. — Наша очередь (dran sein, отдельная запись).",
+      "Разг. Без an — обычно другое: Wir sind dran. — Наша очередь (dran sein).",
       "Не путать: an etwas ist etwas dran — в этом что-то есть (правда): An dem Gerücht ist etwas dran."
     ],
     "notes_en": [
-      "Colloquial. Without an — usually something else: Wir sind dran. — It's our turn (dran sein, separate record).",
+      "Colloquial. Without an — usually something else: Wir sind dran. — It's our turn (dran sein).",
       "Do not confuse: an etwas ist etwas dran — there is something in it: An dem Gerücht ist etwas dran."
     ],
     "search_forms": [
@@ -13206,7 +13254,13 @@
         "Wer ist am besten dran?",
         "Mit dem Auto ist man an der Grenze schneller dran."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-068",
+        "text": "dran sein"
+      }
+    ]
   },
   {
     "id": "expression-070",
@@ -13220,11 +13274,11 @@
     "example_en": "Don't give up, we're very close!",
     "notes_ru": [
       "Разг. Также: dicht dran sein. К чему — an + Dativ: Wir sind ganz nah an der Lösung dran. — Мы совсем близко к решению.",
-      "Не путать: dran sein — (чья-то) очередь (отдельная запись)."
+      "Не путать: dran sein — (чья-то) очередь."
     ],
     "notes_en": [
       "Colloquial. Also: dicht dran sein. To what — an + dative: Wir sind ganz nah an der Lösung dran. — We're very close to the solution.",
-      "Do not confuse: dran sein — to be someone's turn (separate record)."
+      "Do not confuse: dran sein — to be someone's turn."
     ],
     "search_forms": [
       "nah dran sein",
@@ -13485,7 +13539,14 @@
         "Die Zeit ist knapp und wir sind dran.",
         "Ich war knapp zwei Stunden dran."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-068",
+        "text": "dran sein",
+        "field": "notes.1"
+      }
+    ]
   },
   {
     "id": "expression-071",
@@ -18489,11 +18550,11 @@
     "example_en": "We only just caught the train.",
     "notes_ru": [
       "Часто: gerade noch rechtzeitig — в самый последний момент; с können: Er konnte gerade noch ausweichen. — Он едва успел увернуться.",
-      "Не путать: gerade noch — «только что»: den er gerade noch geträumt hatte. Das hat mir gerade noch gefehlt! — Только этого не хватало! (отдельная запись)."
+      "Не путать: gerade noch — «только что»: den er gerade noch geträumt hatte. Das hat mir gerade noch gefehlt! — Только этого не хватало!"
     ],
     "notes_en": [
       "Often: gerade noch rechtzeitig — just in the nick of time; with können: Er konnte gerade noch ausweichen. — He only just managed to dodge.",
-      "Do not confuse: gerade noch — 'just now': den er gerade noch geträumt hatte. Das hat mir gerade noch gefehlt! — That's all I needed! (separate record)."
+      "Do not confuse: gerade noch — 'just now': den er gerade noch geträumt hatte. Das hat mir gerade noch gefehlt! — That's all I needed!"
     ],
     "related_ids": [
       "adverb-060",
@@ -18648,7 +18709,13 @@
         "»Das hat mir gerade noch gefehlt«, sagte Harry.",
         "Kannst du mir gerade noch helfen?"
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-084",
+        "text": "Das hat mir gerade noch gefehlt"
+      }
+    ]
   },
   {
     "id": "expression-084",
@@ -18709,10 +18776,10 @@
     "example_ru": "Можешь, пожалуйста, повторить это ещё раз?",
     "example_en": "Could you say that again, please?",
     "notes_ru": [
-      "Разг.: noch mal, nochmal. Не путать: noch nicht einmal — даже не (отдельная запись nicht einmal)."
+      "Разг.: noch mal, nochmal. Не путать: noch nicht einmal — даже не (nicht einmal)."
     ],
     "notes_en": [
-      "Colloquial: noch mal, nochmal. Do not confuse: noch nicht einmal — not even (separate record nicht einmal)."
+      "Colloquial: noch mal, nochmal. Do not confuse: noch nicht einmal — not even (nicht einmal)."
     ],
     "related_ids": [
       "adverb-013",
@@ -18788,7 +18855,13 @@
         "Sein Haus ist noch mal größer.",
         "Das neue Modell kostet noch mal mehr."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-079",
+        "text": "noch nicht einmal"
+      }
+    ]
   },
   {
     "id": "expression-086",
@@ -18947,10 +19020,10 @@
     "example_ru": "Вчера она родила здоровую девочку.",
     "example_en": "Yesterday she gave birth to a healthy baby girl.",
     "notes_ru": [
-      "Родиться — zur Welt kommen (отдельная запись)."
+      "Родиться — zur Welt kommen."
     ],
     "notes_en": [
-      "To be born — zur Welt kommen (separate record)."
+      "To be born — zur Welt kommen."
     ],
     "related_ids": [
       "verb-038",
@@ -19042,7 +19115,13 @@
         "Der Weg zur Welt der Zauberer war lang.",
         "Er brachte das Paket zur Post."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-089",
+        "text": "zur Welt kommen"
+      }
+    ]
   },
   {
     "id": "expression-089",
@@ -19055,10 +19134,10 @@
     "example_ru": "Её сын родился в мае.",
     "example_en": "Her son was born in May.",
     "notes_ru": [
-      "Родить — zur Welt bringen (отдельная запись)."
+      "Родить — zur Welt bringen."
     ],
     "notes_en": [
-      "To give birth — zur Welt bringen (separate record)."
+      "To give birth — zur Welt bringen."
     ],
     "related_ids": [
       "verb-005",
@@ -19149,7 +19228,13 @@
       "negative": [
         "Sie kamen zur Welt der Zauberer."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-088",
+        "text": "zur Welt bringen"
+      }
+    ]
   },
   {
     "id": "expression-090",
@@ -24851,10 +24936,10 @@
     "example_ru": "Полиция уже давно охотится за этим вором.",
     "example_en": "The police have been after the thief for a long time.",
     "notes_ru": [
-      "Разг.; кого, что — Dativ: hinter jemandem her sein. Не путать: hinter jemandem herlaufen — бежать следом (буквально); es ist lange her — это было давно (отдельная запись)."
+      "Разг.; кого, что — Dativ: hinter jemandem her sein. Не путать: hinter jemandem herlaufen — бежать следом (буквально); es ist lange her — это было давно."
     ],
     "notes_en": [
-      "Colloquial; whom, what — dative: hinter jemandem her sein. Do not confuse: hinter jemandem herlaufen — to run after someone (literally); es ist lange her — it was a long time ago (separate entry)."
+      "Colloquial; whom, what — dative: hinter jemandem her sein. Do not confuse: hinter jemandem herlaufen — to run after someone (literally); es ist lange her — it was a long time ago."
     ],
     "related_ids": [
       "preposition-019",
@@ -25065,7 +25150,13 @@
         "Er ritt sein Pferd hinter dem Wagen her.",
         "Hagrid zog hinter sich sein Boot her."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "adverb-098",
+        "text": "lange her"
+      }
+    ]
   },
   {
     "id": "expression-110",
@@ -25312,10 +25403,10 @@
     "example_ru": "Привет, Анна, как дела?",
     "example_en": "Hi, Anna, how are you?",
     "notes_ru": [
-      "Кому — Dativ: Wie geht es Ihnen? Wie geht es deinem Bruder? Разг.: Wie geht’s? Ответ: Danke, gut. / Es geht. — Так себе. Wie geht es weiter? — что дальше? (не о самочувствии). Ответ «хорошо / плохо» — es geht jemandem gut / schlecht (отдельная запись)."
+      "Кому — Dativ: Wie geht es Ihnen? Wie geht es deinem Bruder? Разг.: Wie geht’s? Ответ: Danke, gut. / Es geht. — Так себе. Wie geht es weiter? — что дальше? (не о самочувствии). Ответ «хорошо / плохо» — es geht jemandem gut / schlecht."
     ],
     "notes_en": [
-      "Who — dative: Wie geht es Ihnen? Wie geht es deinem Bruder? Colloquial: Wie geht’s? Answer: Danke, gut. / Es geht. — So-so. Wie geht es weiter? — what next? (not about health). The answer «well / badly» — es geht jemandem gut / schlecht (separate entry)."
+      "Who — dative: Wie geht es Ihnen? Wie geht es deinem Bruder? Colloquial: Wie geht’s? Answer: Danke, gut. / Es geht. — So-so. Wie geht es weiter? — what next? (not about health). The answer «well / badly» — es geht jemandem gut / schlecht."
     ],
     "related_ids": [
       "adverb-079",
@@ -25683,7 +25774,13 @@
         "Wie geht es von hier zum Markt?",
         "Und wie ging es dann?"
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-113",
+        "text": "es geht jemandem gut / schlecht"
+      }
+    ]
   },
   {
     "id": "expression-113",
@@ -25696,10 +25793,10 @@
     "example_ru": "После операции он снова хорошо себя чувствует.",
     "example_en": "After the operation he is well again.",
     "notes_ru": [
-      "Кому — Dativ: Mir geht es gut. Ihm geht’s besser. Старое: es ging ihm wohl — ему жилось хорошо. Вопрос — wie geht es (dir)? (отдельная запись). Не путать: Es geht gut aus — хорошо кончается (ausgehen); Es geht um … — речь идёт о … (отдельная запись)."
+      "Кому — Dativ: Mir geht es gut. Ihm geht’s besser. Старое: es ging ihm wohl — ему жилось хорошо. Вопрос — wie geht es (dir)? Не путать: Es geht gut aus — хорошо кончается (ausgehen); Es geht um … — речь идёт о …"
     ],
     "notes_en": [
-      "Who — dative: Mir geht es gut. Ihm geht’s besser. Old: es ging ihm wohl — he was well off. The question — wie geht es (dir)? (separate entry). Do not confuse: Es geht gut aus — it ends well (ausgehen); Es geht um … — it is about … (separate entry)."
+      "Who — dative: Mir geht es gut. Ihm geht’s besser. Old: es ging ihm wohl — he was well off. The question — wie geht es (dir)? Do not confuse: Es geht gut aus — it ends well (ausgehen); Es geht um … — it is about …"
     ],
     "related_ids": [
       "verb-004",
@@ -26258,7 +26355,17 @@
         "Es ging alles gut.",
         "Es geht besser, wenn du hilfst."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-112",
+        "text": "wie geht es (dir)?"
+      },
+      {
+        "id": "expression-060",
+        "text": "Es geht um"
+      }
+    ]
   },
   {
     "id": "expression-114",
@@ -27774,10 +27881,10 @@
     "example_ru": "Врач обнадёжила его, что он скоро поправится.",
     "example_en": "The doctor gave him hope of a quick recovery.",
     "notes_ru": [
-      "Кому — Dativ; на что — auf + Akk. jemandem falsche Hoffnungen machen — зря обнадёживать. Не путать: sich (Dativ) Hoffnungen machen — надеяться (отдельная запись)."
+      "Кому — Dativ; на что — auf + Akk. jemandem falsche Hoffnungen machen — зря обнадёживать. Не путать: sich (Dativ) Hoffnungen machen — надеяться."
     ],
     "notes_en": [
-      "Whom — dative; of what — auf + accusative. jemandem falsche Hoffnungen machen — to raise someone's hopes in vain. Do not confuse: sich (dative) Hoffnungen machen — to hope (separate entry)."
+      "Whom — dative; of what — auf + accusative. jemandem falsche Hoffnungen machen — to raise someone's hopes in vain. Do not confuse: sich (Dativ) Hoffnungen machen — to hope."
     ],
     "related_ids": [
       "noun-1169",
@@ -28016,7 +28123,13 @@
         "Unter den Fans macht sich Hoffnung breit.",
         "Er machte die Tür voller Hoffnung auf."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-051",
+        "text": "sich (Dativ) Hoffnungen machen"
+      }
+    ]
   },
   {
     "id": "expression-118",
@@ -28029,10 +28142,10 @@
     "example_ru": "Теперь правительство всерьёз взялось за защиту климата.",
     "example_en": "Now the government is getting serious about climate protection.",
     "notes_ru": [
-      "С чем — mit + Dativ. По норме — с большой буквы: Ernst machen (Ernst — существительное); в текстах часто и ernst machen. Принимать всерьёз — ernst nehmen (отдельная запись). Не путать: ein ernstes Gesicht machen — сделать серьёзное лицо."
+      "С чем — mit + Dativ. По норме — с большой буквы: Ernst machen (Ernst — существительное); в текстах часто и ernst machen. Принимать всерьёз — ernst nehmen. Не путать: ein ernstes Gesicht machen — сделать серьёзное лицо."
     ],
     "notes_en": [
-      "With what — mit + dative. Standard spelling: Ernst machen (Ernst is a noun); ernst machen is also common in texts. To take seriously — ernst nehmen (separate entry). Do not confuse: ein ernstes Gesicht machen — to put on a serious face."
+      "With what — mit + dative. Standard spelling: Ernst machen (Ernst is a noun); ernst machen is also common in texts. To take seriously — ernst nehmen. Do not confuse: ein ernstes Gesicht machen — to put on a serious face."
     ],
     "related_ids": [
       "adjective-200",
@@ -28361,7 +28474,13 @@
         "Ich weiß, dass es ihn ernst macht.",
         "Sie macht das ernst gemeinte Angebot rückgängig."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-120",
+        "text": "ernst nehmen"
+      }
+    ]
   },
   {
     "id": "expression-119",
@@ -28710,11 +28829,11 @@
     "example_ru": "Пожалуйста, не обижайся на меня!",
     "example_en": "Please don't hold it against me!",
     "notes_ru": [
-      "Кому — Dativ: jemandem etwas übel nehmen. Пишется и слитно: übelnehmen, übelgenommen (отдельная карточка глагола).",
+      "Кому — Dativ: jemandem etwas übel nehmen. Пишется и слитно: übelnehmen, übelgenommen.",
       "Не путать: mir ist übel — меня тошнит."
     ],
     "notes_en": [
-      "To whom — dative: jemandem etwas übel nehmen. Also written as one word: übelnehmen, übelgenommen (separate verb card).",
+      "To whom — dative: jemandem etwas übel nehmen. Also written as one word: übelnehmen, übelgenommen.",
       "Do not confuse: mir ist übel — I feel sick."
     ],
     "related_ids": [
@@ -28936,7 +29055,13 @@
         "Er nahm die Nachricht übel gelaunt auf.",
         "Er nahm die übel zugerichtete Puppe."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "verb-2714",
+        "text": "übelgenommen"
+      }
+    ]
   },
   {
     "id": "expression-122",
@@ -29772,11 +29897,11 @@
     "example_en": "Yesterday I happened to run into him at the supermarket.",
     "notes_ru": [
       "Кого — Dativ: jemandem über den Weg laufen. Буквально: Die Katze lief über den Weg — кошка перебежала дорогу.",
-      "Не путать: jemandem nicht über den Weg trauen — не доверять кому-либо ни на грош (отдельная запись)."
+      "Не путать: jemandem nicht über den Weg trauen — не доверять кому-либо ни на грош."
     ],
     "notes_en": [
       "Whom — dative: jemandem über den Weg laufen. Literally: Die Katze lief über den Weg — the cat ran across the path.",
-      "Do not confuse: jemandem nicht über den Weg trauen — not to trust someone an inch (separate entry)."
+      "Do not confuse: jemandem nicht über den Weg trauen — not to trust someone an inch."
     ],
     "related_ids": [
       "verb-158",
@@ -29953,7 +30078,13 @@
         "Er ist mit seiner Schwester über den Weg gelaufen.",
         "Dann lief ihr Hund über den Weg."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-128",
+        "text": "jemandem nicht über den Weg trauen"
+      }
+    ]
   },
   {
     "id": "expression-128",
@@ -29967,11 +30098,11 @@
     "example_en": "I don't trust the new neighbour an inch.",
     "notes_ru": [
       "Кому — Dativ; почти всегда с отрицанием: nicht, kaum (разг. keinen Meter).",
-      "Не путать: jemandem über den Weg laufen — случайно встретить (отдельная запись)."
+      "Не путать: jemandem über den Weg laufen — случайно встретить."
     ],
     "notes_en": [
       "Whom — dative; almost always negated: nicht, kaum (colloquial keinen Meter).",
-      "Do not confuse: jemandem über den Weg laufen — to run into someone (separate entry)."
+      "Do not confuse: jemandem über den Weg laufen — to run into someone."
     ],
     "related_ids": [
       "verb-994",
@@ -30134,7 +30265,13 @@
         "Hoffentlich läuft er mir nicht über den Weg.",
         "Sie trauten sich über den Weg."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-127",
+        "text": "jemandem über den Weg laufen"
+      }
+    ]
   },
   {
     "id": "expression-129",
@@ -30654,10 +30791,10 @@
     "example_ru": "Обслуживание в этой гостинице оставляет желать лучшего.",
     "example_en": "The service in this hotel leaves a lot to be desired.",
     "notes_ru": [
-      "Часто с усилением: viel, sehr, einiges zu wünschen übrig lassen. Наоборот: nichts zu wünschen übrig lassen — не оставлять желать лучшего, быть безупречным (не эта запись)."
+      "Часто с усилением: viel, sehr, einiges zu wünschen übrig lassen. Наоборот: nichts zu wünschen übrig lassen — не оставлять желать лучшего, быть безупречным (другое выражение)."
     ],
     "notes_en": [
-      "Often intensified: viel, sehr, einiges zu wünschen übrig lassen. The opposite: nichts zu wünschen übrig lassen — to leave nothing to be desired (not this entry)."
+      "Often intensified: viel, sehr, einiges zu wünschen übrig lassen. The opposite: nichts zu wünschen übrig lassen — to leave nothing to be desired (a different expression)."
     ],
     "related_ids": [
       "verb-157",
@@ -31186,11 +31323,11 @@
     "example_ru": "Если тебе не хочется, тогда просто не делай этого.",
     "example_en": "If you don't feel like it, then just don't do it.",
     "notes_ru": [
-      "Чаще с es / das: Lass das bleiben! — Брось это! Das lässt du schön bleiben! — Даже и не думай! То же: etwas sein lassen (своя карточка seinlassen).",
+      "Чаще с es / das: Lass das bleiben! — Брось это! Das lässt du schön bleiben! — Даже и не думай! То же: etwas sein lassen (seinlassen).",
       "Буквально «позволить остаться»: Er ließ den Hund im Haus bleiben — не выражение."
     ],
     "notes_en": [
-      "Mostly with es / das: Lass das bleiben! — Stop that! Das lässt du schön bleiben! — Don't you dare! Same: etwas sein lassen (own card seinlassen).",
+      "Mostly with es / das: Lass das bleiben! — Stop that! Das lässt du schön bleiben! — Don't you dare! Same: etwas sein lassen (seinlassen).",
       "Literally «to let stay»: Er ließ den Hund im Haus bleiben — not the expression."
     ],
     "related_ids": [
@@ -31503,7 +31640,13 @@
         "Sie ließen ihn noch eine Nacht bleiben.",
         "Lass ihn doch hier bleiben."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "verb-2595",
+        "text": "seinlassen"
+      }
+    ]
   },
   {
     "id": "expression-136",
@@ -32154,10 +32297,10 @@
     "example_ru": "Можешь спокойно подумать над моим предложением до завтра.",
     "example_en": "Feel free to think my offer over until tomorrow.",
     "notes_ru": [
-      "Местоимение в Dativ: ich lasse mir das durch den Kopf gehen. Без lassen: etwas geht jemandem durch den Kopf — (мысль) приходит в голову, не выходит из головы (не эта запись)."
+      "Местоимение в Dativ: ich lasse mir das durch den Kopf gehen. Без lassen: etwas geht jemandem durch den Kopf — (мысль) приходит в голову, не выходит из головы (другое выражение)."
     ],
     "notes_en": [
-      "The pronoun is dative: ich lasse mir das durch den Kopf gehen. Without lassen: etwas geht jemandem durch den Kopf — (a thought) crosses someone's mind (not this entry)."
+      "The pronoun is dative: ich lasse mir das durch den Kopf gehen. Without lassen: etwas geht jemandem durch den Kopf — (a thought) crosses someone's mind (a different expression)."
     ],
     "related_ids": [
       "noun-077",
@@ -32322,10 +32465,10 @@
     "example_ru": "Дедушка непременно хотел сам разрезать торт.",
     "example_en": "Grandfather insisted on cutting the cake himself.",
     "notes_ru": [
-      "Обычно с es и zu + Infinitiv: Sie ließ es sich nicht nehmen, uns abzuholen. Также: Das lasse ich mir nicht nehmen! — Этого у меня никто не отнимет! Без отрицания и es — sich etwas nehmen lassen — позволить взять (у себя): Er ließ sich Blut nehmen (не эта запись)."
+      "Обычно с es и zu + Infinitiv: Sie ließ es sich nicht nehmen, uns abzuholen. Также: Das lasse ich mir nicht nehmen! — Этого у меня никто не отнимет! Без отрицания и es — sich etwas nehmen lassen — позволить взять (у себя): Er ließ sich Blut nehmen (другое выражение)."
     ],
     "notes_en": [
-      "Usually with es and zu + infinitive: Sie ließ es sich nicht nehmen, uns abzuholen. Also: Das lasse ich mir nicht nehmen! — Nobody is going to stop me doing that! Without a negation and es — sich etwas nehmen lassen — to let something be taken: Er ließ sich Blut nehmen (not this entry)."
+      "Usually with es and zu + infinitive: Sie ließ es sich nicht nehmen, uns abzuholen. Also: Das lasse ich mir nicht nehmen! — Nobody is going to stop me doing that! Without a negation and es — sich etwas nehmen lassen — to let something be taken: Er ließ sich Blut nehmen (a different expression)."
     ],
     "related_ids": [
       "verb-015",
@@ -38301,10 +38444,10 @@
     "example_ru": "Без воды растения быстро погибают.",
     "example_en": "Without water the plants quickly die.",
     "notes_ru": [
-      "Также zu Grunde. zugrunde gehen — погибнуть; jemanden / etwas zugrunde richten — погубить. zugrunde liegen — лежать в основе (отдельная карточка)."
+      "Также zu Grunde. zugrunde gehen — погибнуть; jemanden / etwas zugrunde richten — погубить. zugrunde liegen — лежать в основе."
     ],
     "notes_en": [
-      "Also zu Grunde. zugrunde gehen — to perish; jemanden / etwas zugrunde richten — to ruin. zugrunde liegen — to underlie (a separate card)."
+      "Also zu Grunde. zugrunde gehen — to perish; jemanden / etwas zugrunde richten — to ruin. zugrunde liegen — to underlie."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/zugrunde",
@@ -48520,11 +48663,11 @@
     "example_en": "That's it for today. See you tomorrow!",
     "notes_ru": [
       "Также: Bis morgen früh! — до завтрашнего утра; Bis morgen Abend! — до завтрашнего вечера. Не путать: Die Ausstellung läuft bis morgen. — Выставка идёт до завтра; Bis morgen soll alles fertig sein. — К завтрашнему дню всё должно быть готово (по частям).",
-      "В ответе на вопрос «до какого времени?» — обычное «до»: Bis wann bleibst du? — Bis morgen. (Здесь карточка тоже откроется: по одной части их не различить.)"
+      "В ответе на вопрос «до какого времени?» — обычное «до»: Bis wann bleibst du? — Bis morgen. (Это выражение откроется и здесь: по одной части их не различить.)"
     ],
     "notes_en": [
       "Also: Bis morgen früh! — see you tomorrow morning; Bis morgen Abend! — see you tomorrow evening. Do not confuse: Die Ausstellung läuft bis morgen. — The exhibition runs until tomorrow; Bis morgen soll alles fertig sein. — Everything is to be ready by tomorrow (word by word).",
-      "In an answer to «until when?» it is the plain «until»: Bis wann bleibst du? — Bis morgen. (The card opens here too: one part alone cannot tell them apart.)"
+      "In an answer to «until when?» it is the plain «until»: Bis wann bleibst du? — Bis morgen. (This expression opens here too: one part alone cannot tell them apart.)"
     ],
     "related_ids": [
       "expression-017",
@@ -63394,7 +63537,7 @@
     "id": "expression-385",
     "type": "Ausdruck",
     "group": "verbal_expression",
-    "word": "[sich] (vor Angst) in die Hose(n) machen",
+    "word": "(sich) (vor Angst) in die Hose(n) machen",
     "translation_ru": "наделать в штаны (от страха)",
     "translation_en": "to wet / soil one's pants (with fear)",
     "example_de": "Er hat sich vor Angst in die Hose gemacht.",
@@ -63616,7 +63759,7 @@
     "id": "expression-386",
     "type": "Ausdruck",
     "group": "verbal_expression",
-    "word": "[sich] ins Bett machen",
+    "word": "(sich) ins Bett machen",
     "translation_ru": "намочить постель",
     "translation_en": "to wet the bed",
     "example_de": "Der Kleine hat sich wieder ins Bett gemacht.",
@@ -65052,10 +65195,10 @@
     "example_ru": "Будь то лето или зима, он каждый день ездит на велосипеде.",
     "example_en": "Be it summer or winter, he cycles every day.",
     "notes_ru": [
-      "В этой карточке — только перечисление без своего глагола, обычно в начале предложения: Ob jung oder alt – alle machen mit. С глаголом (Ob es regnet oder schneit, wir gehen) — то же значение, но сюда не входит. Не путать с косвенным вопросом: Ich weiß nicht, ob er kommt oder nicht — «ли … или»."
+      "Здесь — только перечисление без своего глагола, обычно в начале предложения: Ob jung oder alt – alle machen mit. С глаголом (Ob es regnet oder schneit, wir gehen) — то же значение, но сюда не входит. Не путать с косвенным вопросом: Ich weiß nicht, ob er kommt oder nicht — «ли … или»."
     ],
     "notes_en": [
-      "This card covers only a list without a verb of its own, usually at the start of a sentence: Ob jung oder alt – alle machen mit. With a verb (Ob es regnet oder schneit, wir gehen) the meaning is the same, but it is not covered here. Not to be confused with an indirect question: Ich weiß nicht, ob er kommt oder nicht — «whether he is coming or not»."
+      "Here: only a list without a verb of its own, usually at the start of a sentence: Ob jung oder alt – alle machen mit. With a verb (Ob es regnet oder schneit, wir gehen) the meaning is the same, but it is not covered here. Not to be confused with an indirect question: Ich weiß nicht, ob er kommt oder nicht — «whether he is coming or not»."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/ob_ob_wohl_obwohl",
@@ -70290,11 +70433,11 @@
     "example_en": "If I were you, I would go to the doctor.",
     "notes_ru": [
       "Дательный падеж: an meiner / deiner / seiner / ihrer … Stelle — обычно с сослагательным (würde, wäre, hätte, möchte …): Ich möchte nicht an seiner Stelle sein. — Не хотел бы я оказаться на его месте.",
-      "Не путать: an jds. Stelle treten (винительный: an seine Stelle treten) — занять чьё-либо место (отдельная запись); anstelle / an Stelle von — вместо; auf der Stelle — немедленно."
+      "Не путать: an jds. Stelle treten (винительный: an seine Stelle treten) — занять чьё-либо место; anstelle / an Stelle von — вместо; auf der Stelle — немедленно."
     ],
     "notes_en": [
       "Dative: an meiner / deiner / seiner / ihrer … Stelle — usually with the subjunctive (würde, wäre, hätte, möchte …): Ich möchte nicht an seiner Stelle sein. — I wouldn't want to be in his shoes.",
-      "Do not confuse: an jds. Stelle treten (accusative: an seine Stelle treten) — to take someone's place (separate record); anstelle / an Stelle von — instead of; auf der Stelle — at once."
+      "Do not confuse: an jds. Stelle treten (accusative: an seine Stelle treten) — to take someone's place; anstelle / an Stelle von — instead of; auf der Stelle — at once."
     ],
     "related_ids": [
       "noun-385"
@@ -70401,7 +70544,13 @@
         "Das Buch steht wieder an seiner Stelle.",
         "An der Stelle würde ich nicht parken."
       ]
-    }
+    },
+    "see_also": [
+      {
+        "id": "expression-427",
+        "text": "an jds. Stelle treten"
+      }
+    ]
   },
   {
     "id": "expression-446",

@@ -554,8 +554,14 @@
       "ausgehender",
       "ausgehendes"
     ],
-    "usage_note_ru": "Отдельная карточка выражения ausgehend von — «исходя из».",
-    "usage_note_en": "The expression ausgehend von (“on the basis of”) has its own card."
+    "usage_note_ru": "ausgehend von — «исходя из».",
+    "usage_note_en": "ausgehend von (“on the basis of”).",
+    "see_also": [
+      {
+        "id": "adverb-215",
+        "text": "ausgehend"
+      }
+    ]
   },
   {
     "id": "adjective-102",
@@ -1422,8 +1428,8 @@
     "word": "besondere",
     "translation_ru": "особый; особенный",
     "translation_en": "special; particular",
-    "usage_note_ru": "Только перед существительным: ein besonderer Tag. Наречие besonders — отдельная карточка.",
-    "usage_note_en": "Only before a noun: ein besonderer Tag. The adverb besonders has its own card.",
+    "usage_note_ru": "Только перед существительным: ein besonderer Tag. Наречие besonders.",
+    "usage_note_en": "Only before a noun: ein besonderer Tag. The adverb besonders.",
     "example_de": "Heute ist ein besonderer Tag.",
     "example_ru": "Сегодня особенный день.",
     "example_en": "Today is a special day.",
@@ -1434,6 +1440,12 @@
       "besonderes",
       "besonderen",
       "besonderem"
+    ],
+    "see_also": [
+      {
+        "id": "adverb-084",
+        "text": "besonders"
+      }
     ]
   },
   {
@@ -1639,13 +1651,21 @@
     "word": "erwachsen",
     "translation_ru": "взрослый",
     "translation_en": "grown-up; adult",
-    "usage_note_ru": "Существительное der / die Erwachsene — отдельная карточка.",
-    "usage_note_en": "The noun der / die Erwachsene has its own card.",
+    "usage_note_ru": "Существительное der / die Erwachsene.",
+    "usage_note_en": "The noun der / die Erwachsene.",
     "example_de": "Unsere Kinder sind schon erwachsen.",
     "example_ru": "Наши дети уже взрослые.",
     "example_en": "Our children are already grown up.",
     "example_cloze": "Unsere Kinder sind schon {{c1::erwachsen}}.",
-    "passive": "none"
+    "passive": "none",
+    "see_also": [
+      {
+        "id": "noun-510"
+      },
+      {
+        "id": "noun-953"
+      }
+    ]
   },
   {
     "id": "adjective-203",
@@ -1960,8 +1980,8 @@
     "word": "linke",
     "translation_ru": "левый",
     "translation_en": "left",
-    "usage_note_ru": "Только перед существительным. Наречие links — отдельная карточка. Разг. link — сомнительный, нечестный.",
-    "usage_note_en": "Only before a noun. The adverb links has its own card. Colloquial link means shady, dishonest.",
+    "usage_note_ru": "Только перед существительным. Наречие links. Разг. link — сомнительный, нечестный.",
+    "usage_note_en": "Only before a noun. The adverb links. Colloquial link means shady, dishonest.",
     "example_de": "Er schreibt mit der linken Hand.",
     "example_ru": "Он пишет левой рукой.",
     "example_en": "He writes with his left hand.",
@@ -1971,6 +1991,12 @@
       "linkes",
       "linken",
       "linkem"
+    ],
+    "see_also": [
+      {
+        "id": "adverb-010",
+        "text": "links"
+      }
     ]
   },
   {
@@ -2157,8 +2183,8 @@
     "word": "rechte",
     "translation_ru": "правый",
     "translation_en": "right",
-    "usage_note_ru": "Только перед существительным. Наречие rechts и прилагательное recht (подходящий) — отдельные карточки.",
-    "usage_note_en": "Only before a noun. The adverb rechts and the adjective recht (suitable) have their own cards.",
+    "usage_note_ru": "Только перед существительным. Наречие rechts и прилагательное recht (подходящий).",
+    "usage_note_en": "Only before a noun. The adverb rechts and the adjective recht (suitable).",
     "example_de": "Mir tut das rechte Knie weh.",
     "example_ru": "У меня болит правое колено.",
     "example_en": "My right knee hurts.",
@@ -2168,6 +2194,20 @@
       "rechtes",
       "rechten",
       "rechtem"
+    ],
+    "see_also": [
+      {
+        "id": "adjective-105",
+        "text": "recht",
+        "at": {
+          "ru": 2,
+          "en": 2
+        }
+      },
+      {
+        "id": "adverb-016",
+        "text": "rechts"
+      }
     ]
   },
   {
@@ -2185,12 +2225,22 @@
     "word": "rein",
     "translation_ru": "чистый",
     "translation_en": "pure; clean",
-    "usage_note_ru": "Не путать с наречием rein = herein (отдельная карточка).",
-    "usage_note_en": "Not to be confused with the adverb rein = herein (separate card).",
+    "usage_note_ru": "Не путать с наречием rein = herein.",
+    "usage_note_en": "Not to be confused with the adverb rein = herein.",
     "example_de": "Der Pullover ist aus reiner Wolle.",
     "example_ru": "Свитер из чистой шерсти.",
     "example_en": "The jumper is made of pure wool.",
-    "example_cloze": "Der Pullover ist aus {{c1::reiner}} Wolle."
+    "example_cloze": "Der Pullover ist aus {{c1::reiner}} Wolle.",
+    "see_also": [
+      {
+        "id": "adverb-101",
+        "text": "rein",
+        "at": {
+          "ru": 1,
+          "en": 1
+        }
+      }
+    ]
   },
   {
     "id": "adjective-252",
@@ -2558,8 +2608,8 @@
     "word": "verwandt",
     "translation_ru": "состоящий в родстве; родственный",
     "translation_en": "related",
-    "usage_note_ru": "mit jemandem (Dativ) verwandt sein. Существительное der / die Verwandte — отдельные карточки.",
-    "usage_note_en": "mit jemandem (dative) verwandt sein. The noun der / die Verwandte has its own cards.",
+    "usage_note_ru": "mit jemandem (Dativ) verwandt sein. Существительное der / die Verwandte.",
+    "usage_note_en": "mit jemandem (dative) verwandt sein. The noun der / die Verwandte.",
     "example_de": "Bist du mit ihm verwandt?",
     "example_ru": "Ты с ним в родстве?",
     "example_en": "Are you related to him?",
@@ -2567,6 +2617,14 @@
     "complements": [
       {
         "pattern": "mit + Dativ"
+      }
+    ],
+    "see_also": [
+      {
+        "id": "noun-955"
+      },
+      {
+        "id": "noun-512"
       }
     ]
   },
@@ -13593,8 +13651,14 @@
       "reichlicher",
       "reichliches"
     ],
-    "usage_note_ru": "Наречные значения (вдоволь, довольно, с лишним) — в отдельной карточке наречия reichlich.",
-    "usage_note_en": "Adverbial senses (plenty, rather, more than) are on the separate adverb card reichlich."
+    "usage_note_ru": "Наречные значения (вдоволь, довольно, с лишним) — у наречия reichlich.",
+    "usage_note_en": "Adverbial senses (plenty, rather, more than) — the adverb reichlich.",
+    "see_also": [
+      {
+        "id": "adverb-401",
+        "text": "reichlich"
+      }
+    ]
   },
   {
     "id": "adjective-1266",
@@ -17171,13 +17235,23 @@
     "example_ru": "У большинства детей в классе есть мобильный телефон.",
     "example_en": "Most of the children in the class have a mobile phone.",
     "example_cloze": "Die {{c1::meisten}} Kinder in der Klasse haben ein Handy.",
-    "usage_note_ru": "Превосходная степень от viel: viel — mehr — am meisten. Почти всегда с артиклем: die meisten (Leute) — большинство (людей); die meisten von uns — большинство из нас; das meiste — большая часть: Das meiste habe ich vergessen. Наречие meist — обычно, чаще всего (отдельная карточка).",
-    "usage_note_en": "Superlative of viel: viel — mehr — am meisten. Almost always with the article: die meisten (Leute) — most (people); die meisten von uns — most of us; das meiste — most of it: Das meiste habe ich vergessen. The adverb meist — usually, mostly (separate card).",
+    "usage_note_ru": "Превосходная степень от viel: viel — mehr — am meisten. Почти всегда с артиклем: die meisten (Leute) — большинство (людей); die meisten von uns — большинство из нас; das meiste — большая часть: Das meiste habe ich vergessen. Наречие meist — обычно, чаще всего.",
+    "usage_note_en": "Superlative of viel: viel — mehr — am meisten. Almost always with the article: die meisten (Leute) — most (people); die meisten von uns — most of us; das meiste — most of it: Das meiste habe ich vergessen. The adverb meist — usually, mostly.",
     "search_forms": [
       "meiste",
       "meisten"
     ],
-    "inflected_only": true
+    "inflected_only": true,
+    "see_also": [
+      {
+        "id": "adverb-427",
+        "text": "meist",
+        "at": {
+          "ru": 6,
+          "en": 6
+        }
+      }
+    ]
   },
   {
     "id": "adjective-1583",

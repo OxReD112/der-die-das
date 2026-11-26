@@ -239,14 +239,19 @@
     "word": "Wort",
     "article": "das",
     "plural": "Worte",
-    "plural_note_ru": "Эта запись относится к слову в значении высказывания или связной речи. Например: ein paar Worte sagen — «сказать несколько слов».",
-    "plural_note_en": "This entry is for Wort meaning an utterance or connected speech. For example: ein paar Worte sagen (“to say a few words”).",
+    "plural_note_ru": "Здесь — слово в значении высказывания или связной речи. Например: ein paar Worte sagen — «сказать несколько слов».",
+    "plural_note_en": "Here: Wort meaning an utterance or connected speech. For example: ein paar Worte sagen (“to say a few words”).",
     "translation_ru": "высказывание; слово в значении «сказанное»",
     "translation_en": "utterance; word as something said",
     "example_de": "Sie fand die richtigen Worte.",
     "example_cloze": "Sie fand die richtigen {{c1::Worte}}.",
     "example_ru": "Она нашла нужные слова.",
-    "example_en": "She found the right words."
+    "example_en": "She found the right words.",
+    "see_also": [
+      {
+        "id": "noun-019"
+      }
+    ]
   },
   {
     "id": "noun-020",
@@ -22180,8 +22185,13 @@
     "example_cloze": "Sie bindet sich ein buntes {{c1::Tuch}} um den Kopf.",
     "example_ru": "Она повязывает на голову пёстрый платок.",
     "example_en": "She ties a colourful scarf around her head.",
-    "plural_note_ru": "Tücher — отдельные платки или куски ткани. Для сукна используется Tuche (отдельная карточка).",
-    "plural_note_en": "Tücher refers to individual scarves or cloths. Woollen cloth uses Tuche (separate entry)."
+    "plural_note_ru": "Tücher — отдельные платки или куски ткани. Для сукна используется Tuche.",
+    "plural_note_en": "Tücher refers to individual scarves or cloths. Woollen cloth uses Tuche.",
+    "see_also": [
+      {
+        "id": "noun-1671"
+      }
+    ]
   },
   {
     "id": "noun-1671",
@@ -22194,8 +22204,13 @@
     "example_cloze": "Der Mantel ist aus feinem {{c1::Tuch}} gefertigt.",
     "example_ru": "Пальто изготовлено из тонкого сукна.",
     "example_en": "The coat is made of fine woollen cloth.",
-    "plural_note_ru": "Tuche — виды сукна. Для платков и отдельных кусков ткани используется Tücher (отдельная карточка).",
-    "plural_note_en": "Tuche refers to types of woollen cloth. Scarves and individual cloths use Tücher (separate entry)."
+    "plural_note_ru": "Tuche — виды сукна. Для платков и отдельных кусков ткани используется Tücher.",
+    "plural_note_en": "Tuche refers to types of woollen cloth. Scarves and individual cloths use Tücher.",
+    "see_also": [
+      {
+        "id": "noun-1670"
+      }
+    ]
   },
   {
     "id": "noun-1672",
@@ -24660,8 +24675,18 @@
     "example_cloze": "Für den Salat brauchen wir eine rote {{c1::Paprika}}.",
     "example_ru": "Для салата нам нужен красный сладкий перец.",
     "example_en": "We need a red bell pepper for the salad.",
-    "usage_note_ru": "Также: der Paprika для этого же овоща. Молотая приправа — der Paprika (отдельная карточка).",
-    "usage_note_en": "Also der Paprika for the same vegetable. The powdered spice is der Paprika (separate entry)."
+    "usage_note_ru": "Также: der Paprika для этого же овоща. Молотая приправа — der Paprika.",
+    "usage_note_en": "Also der Paprika for the same vegetable. The powdered spice is der Paprika.",
+    "see_also": [
+      {
+        "id": "noun-1842",
+        "text": "Paprika",
+        "at": {
+          "ru": 2,
+          "en": 2
+        }
+      }
+    ]
   },
   {
     "id": "noun-1842",
@@ -24674,10 +24699,21 @@
     "example_cloze": "Ich würze die Suppe mit einem Teelöffel {{c1::Paprika}}.",
     "example_ru": "Я приправляю суп чайной ложкой паприки.",
     "example_en": "I season the soup with a teaspoon of paprika.",
-    "usage_note_ru": "Для молотой приправы и растения — der Paprika. Овощ — die или der Paprika (отдельная карточка).",
-    "usage_note_en": "The powdered spice and plant are der Paprika. The vegetable is die or der Paprika (separate entry).",
+    "usage_note_ru": "Для молотой приправы и растения — der Paprika. Овощ — die или der Paprika.",
+    "usage_note_en": "The powdered spice and plant are der Paprika. The vegetable is die or der Paprika.",
     "plural_note_ru": "Формы Paprika и Paprikas могут обозначать отдельные растения. Приправа как вещество обычно употребляется в единственном числе.",
-    "plural_note_en": "Paprika and Paprikas can refer to individual plants. The spice as a substance is usually singular."
+    "plural_note_en": "Paprika and Paprikas can refer to individual plants. The spice as a substance is usually singular.",
+    "see_also": [
+      {
+        "id": "noun-1841",
+        "text": "Paprika",
+        "field": "usage_note",
+        "at": {
+          "ru": 2,
+          "en": 2
+        }
+      }
+    ]
   },
   {
     "id": "noun-1843",
@@ -24930,8 +24966,14 @@
     "example_en": "The degree of pollution is measured regularly.",
     "plural_note_ru": "После числа форма не меняется: zwanzig Grad. Grade — степени, уровни или разные градусы.",
     "plural_note_en": "After a number the form is unchanged: zwanzig Grad. Grade refers to degrees or levels.",
-    "usage_note_ru": "Для степени или угла — der Grad. Для температуры чаще das Grad (отдельная карточка).",
-    "usage_note_en": "A level or angle uses der Grad. Temperature more often uses das Grad (separate entry)."
+    "usage_note_ru": "Для степени или угла — der Grad. Для температуры чаще das Grad.",
+    "usage_note_en": "A level or angle uses der Grad. Temperature more often uses das Grad.",
+    "see_also": [
+      {
+        "id": "noun-1863",
+        "text": "das Grad"
+      }
+    ]
   },
   {
     "id": "noun-1863",
@@ -26362,10 +26404,16 @@
     "example_cloze": "Der {{c1::PC}} steht auf meinem Schreibtisch.",
     "example_ru": "Персональный компьютер стоит на моём письменном столе.",
     "example_en": "The PC is on my desk.",
-    "usage_note_ru": "Сокращение от Personal Computer. Политкорректность — die PC (отдельная карточка).",
-    "usage_note_en": "Abbreviation of Personal Computer. Political correctness is die PC (separate entry).",
+    "usage_note_ru": "Сокращение от Personal Computer. Политкорректность — die PC.",
+    "usage_note_en": "Abbreviation of Personal Computer. Political correctness is die PC.",
     "plural_note_ru": "Обычно PCs; реже неизменяемое PC.",
-    "plural_note_en": "Normally PCs; rarely unchanged PC."
+    "plural_note_en": "Normally PCs; rarely unchanged PC.",
+    "see_also": [
+      {
+        "id": "noun-1971",
+        "text": "die PC"
+      }
+    ]
   },
   {
     "id": "noun-1971",
@@ -26378,8 +26426,14 @@
     "example_cloze": "In der Diskussion geht es um {{c1::PC}} und respektvolle Sprache.",
     "example_ru": "В дискуссии речь идёт о политкорректности и уважительной речи.",
     "example_en": "The discussion is about political correctness and respectful language.",
-    "usage_note_ru": "Сокращение от Political Correctness. Компьютер — der PC (отдельная карточка).",
-    "usage_note_en": "Abbreviation of Political Correctness. A computer is der PC (separate entry)."
+    "usage_note_ru": "Сокращение от Political Correctness. Компьютер — der PC.",
+    "usage_note_en": "Abbreviation of Political Correctness. A computer is der PC.",
+    "see_also": [
+      {
+        "id": "noun-1970",
+        "text": "PC"
+      }
+    ]
   },
   {
     "id": "noun-1972",
@@ -30038,8 +30092,14 @@
     "example_cloze": "Ein {{c1::Achtel}} des Kuchens bleibt übrig.",
     "example_ru": "Остаётся восьмая часть пирога.",
     "example_en": "One eighth of the cake is left.",
-    "usage_note_ru": "В Швейцарии также: der Achtel. Музыкальное значение — отдельная карточка die Achtel.",
-    "usage_note_en": "In Switzerland also der Achtel. The musical sense has a separate entry die Achtel."
+    "usage_note_ru": "В Швейцарии также: der Achtel. Музыкальное значение — die Achtel.",
+    "usage_note_en": "In Switzerland also der Achtel. The musical sense: die Achtel.",
+    "see_also": [
+      {
+        "id": "noun-2237",
+        "text": "die Achtel"
+      }
+    ]
   },
   {
     "id": "noun-2237",
@@ -34906,8 +34966,14 @@
     "example_ru": "Для праздника она купила две дюжины булочек.",
     "example_en": "She bought two dozen bread rolls for the celebration.",
     "example_de": "Für die Feier kaufte sie zwei Dutzend Brötchen.",
-    "plural_note_ru": "После числа форма не меняется: zwei Dutzend. Неопределённо большое количество: Dutzende — отдельная карточка.",
-    "plural_note_en": "The form stays unchanged after a number: zwei Dutzend. An unspecified large number is Dutzende, covered by a separate card."
+    "plural_note_ru": "После числа форма не меняется: zwei Dutzend. Неопределённо большое количество: Dutzende.",
+    "plural_note_en": "The form stays unchanged after a number: zwei Dutzend. An unspecified large number is Dutzende.",
+    "see_also": [
+      {
+        "id": "noun-2611",
+        "text": "Dutzende"
+      }
+    ]
   },
   {
     "id": "noun-2611",

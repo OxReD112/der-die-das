@@ -85,15 +85,15 @@
 
   // The data files; a new batch of cards changes the version here (and this file's ?v= in index.html).
   const FILES = Object.freeze([
-    { file: "german-nouns.json", version: "20261126-wn-x243-restore-order-2", type: "noun" },
-    { file: "german-verbs.json", version: "20261126-wn-x243-restore-order-2", type: "verb" },
-    { file: "german-adjectives.json", version: "20261122-wn-x217-lieb-1", type: "adjective" },
-    { file: "german-adverbs.json", version: "20261126-wn-x243-z241-postpositions-2", type: "adverb" },
-    { file: "german-conjunctions.json", version: "20261122-wn-x215-align-1", type: "conjunction" },
-    { file: "german-pronouns.json", version: "20261122-wn-x215-align-1", type: "pronoun" },
-    { file: "german-adjective-adverbs.json", version: "20261122-wn-x218-dicht-danach-1", type: "adjective" },
+    { file: "german-nouns.json", version: "20261126-wn-x245-see-also-4", type: "noun" },
+    { file: "german-verbs.json", version: "20261126-wn-x245-see-also-4", type: "verb" },
+    { file: "german-adjectives.json", version: "20261126-wn-x245-see-also-4", type: "adjective" },
+    { file: "german-adverbs.json", version: "20261126-wn-x245-see-also-4", type: "adverb" },
+    { file: "german-conjunctions.json", version: "20261126-wn-x245-see-also-4", type: "conjunction" },
+    { file: "german-pronouns.json", version: "20261126-wn-x245-see-also-4", type: "pronoun" },
+    { file: "german-adjective-adverbs.json", version: "20261126-wn-x245-see-also-4", type: "adjective" },
     // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-    { file: "german-expressions.json", version: "20261126-wn-x244-nase-nach-2", type: "expression", optional: true }
+    { file: "german-expressions.json", version: "20261126-wn-x245-see-also-4", type: "expression", optional: true }
   ].map(Object.freeze));
 
   const ORDER = ["german-nouns.json", "german-verbs.json", "german-adjectives.json", "german-adverbs.json", "german-adjective-adverbs.json", "german-conjunctions.json", "german-pronouns.json", "german-expressions.json"];

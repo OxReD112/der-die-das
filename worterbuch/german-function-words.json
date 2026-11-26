@@ -16,7 +16,8 @@
       "auch"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/auch_Adverb",
-    "wortschatz_excluded": false
+    "wortschatz_excluded": false,
+    "worterbuch_hidden": false
   },
   {
     "id": "function-002",
@@ -29,13 +30,22 @@
     "example_en": "I have no time to read.",
     "target_file": null,
     "forms": null,
-    "usage_note_ru": "zu + инфинитив стоит после многих глаголов, существительных и прилагательных: Es ist schwer, Deutsch zu lernen. У глаголов с отделяемой приставкой zu стоит внутри слова: anzurufen. После модальных глаголов zu не нужно: Ich muss lesen. Также: um … zu, ohne … zu, statt … zu. Предлог zu («к») и zu «слишком» — отдельные карточки.",
-    "usage_note_en": "zu + infinitive follows many verbs, nouns and adjectives: Es ist schwer, Deutsch zu lernen. With separable verbs zu goes inside the word: anzurufen. After modal verbs there is no zu: Ich muss lesen. Also in um … zu, ohne … zu, statt … zu. The preposition zu (to) and zu meaning too have separate cards.",
+    "usage_note_ru": "zu + инфинитив стоит после многих глаголов, существительных и прилагательных: Es ist schwer, Deutsch zu lernen. У глаголов с отделяемой приставкой zu стоит внутри слова: anzurufen. После модальных глаголов zu не нужно: Ich muss lesen. Также: um … zu, ohne … zu, statt … zu. Предлог zu («к») и zu «слишком».",
+    "usage_note_en": "zu + infinitive follows many verbs, nouns and adjectives: Es ist schwer, Deutsch zu lernen. With separable verbs zu goes inside the word: anzurufen. After modal verbs there is no zu: Ich muss lesen. Also in um … zu, ohne … zu, statt … zu. The preposition zu (to) and zu meaning too.",
     "search_forms": [
       "zu"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zu_Konjunktion",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "see_also": [
+      {
+        "id": "function-003"
+      },
+      {
+        "id": "preposition-007"
+      }
+    ],
+    "worterbuch_hidden": false
   },
   {
     "id": "function-003",
@@ -53,7 +63,8 @@
       "zu"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zu_Adverb",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": false
   },
   {
     "id": "function-004",
@@ -75,7 +86,8 @@
       "letztem"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/letzte",
-    "wortschatz_excluded": false
+    "wortschatz_excluded": false,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-005",
@@ -93,7 +105,8 @@
       "ach"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/ach",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-006",
@@ -105,13 +118,20 @@
     "example_ru": "Ну, как дела?",
     "example_en": "So, how are you?",
     "target_file": null,
-    "usage_note_ru": "Na also! — Ну вот видишь! Na und? — Ну и что? Na gut. — Ну ладно. Na los! — Ну, давай! na ja — ну, в общем (отдельная запись).",
-    "usage_note_en": "Na also! — There you go! Na und? — So what? Na gut. — All right then. Na los! — Come on! na ja — well (separate record).",
+    "usage_note_ru": "Na also! — Ну вот видишь! Na und? — Ну и что? Na gut. — Ну ладно. Na los! — Ну, давай! na ja — ну, в общем.",
+    "usage_note_en": "Na also! — There you go! Na und? — So what? Na gut. — All right then. Na los! — Come on! na ja — well.",
     "search_forms": [
       "na"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/na",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "see_also": [
+      {
+        "id": "expression-095",
+        "text": "na ja"
+      }
+    ],
+    "worterbuch_hidden": true
   },
   {
     "id": "function-007",
@@ -129,7 +149,8 @@
       "ei"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/ei_Interjektion",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-008",
@@ -147,7 +168,8 @@
       "o"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/o_Interjektion",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-009",
@@ -165,7 +187,8 @@
       "oh"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/oh",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-010",
@@ -183,7 +206,8 @@
       "ähm"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/aehm",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-011",
@@ -201,7 +225,8 @@
       "aha"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/aha",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-012",
@@ -219,7 +244,8 @@
       "ah"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/ah",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-013",
@@ -237,7 +263,8 @@
       "tja"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/tja",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-014",
@@ -255,7 +282,8 @@
       "pfui"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/pfui",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-015",
@@ -273,7 +301,8 @@
       "autsch"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/autsch",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-016",
@@ -291,7 +320,8 @@
       "hu"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/hu",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-017",
@@ -307,7 +337,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от der Zentimeter.",
-    "usage_note_en": "Abbreviation of der Zentimeter."
+    "usage_note_en": "Abbreviation of der Zentimeter.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-018",
@@ -323,7 +354,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от der Doktor. Пишется перед фамилией: Frau Dr. Klein.",
-    "usage_note_en": "Abbreviation of der Doktor. Written before the surname: Frau Dr. Klein."
+    "usage_note_en": "Abbreviation of der Doktor. Written before the surname: Frau Dr. Klein.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-019",
@@ -339,7 +371,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от circa.",
-    "usage_note_en": "Abbreviation of circa."
+    "usage_note_en": "Abbreviation of circa.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-020",
@@ -355,7 +388,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от лат. et cetera; по-немецки чаще usw.",
-    "usage_note_en": "Abbreviation of Latin et cetera; in German usw. is more common."
+    "usage_note_en": "Abbreviation of Latin et cetera; in German usw. is more common.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-021",
@@ -371,7 +405,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение (из англ.) от Television; по-немецки das Fernsehen. Также TV = der Turnverein — спортивное общество (в названиях клубов: TV Musterstadt).",
-    "usage_note_en": "Abbreviation (from English) of television; in German das Fernsehen. Also TV = der Turnverein — gymnastics / sports club (in club names: TV Musterstadt)."
+    "usage_note_en": "Abbreviation (from English) of television; in German das Fernsehen. Also TV = der Turnverein — gymnastics / sports club (in club names: TV Musterstadt).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-022",
@@ -388,7 +423,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от der Mikrometer (тысячная доля миллиметра).",
-    "usage_note_en": "Abbreviation of der Mikrometer (a thousandth of a millimetre)."
+    "usage_note_en": "Abbreviation of der Mikrometer (a thousandth of a millimetre).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-023",
@@ -404,7 +440,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от und so weiter.",
-    "usage_note_en": "Abbreviation of und so weiter."
+    "usage_note_en": "Abbreviation of und so weiter.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-024",
@@ -420,7 +457,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от englisch (в словарях и справках).",
-    "usage_note_en": "Abbreviation of englisch (in dictionaries and references)."
+    "usage_note_en": "Abbreviation of englisch (in dictionaries and references).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-025",
@@ -436,7 +474,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от Christus: vor Christus (v. Chr.) — до нашей эры, nach Christus (n. Chr.) — нашей эры.",
-    "usage_note_en": "Abbreviation of Christus: vor Christus (v. Chr.) — BC, nach Christus (n. Chr.) — AD."
+    "usage_note_en": "Abbreviation of Christus: vor Christus (v. Chr.) — BC, nach Christus (n. Chr.) — AD.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-026",
@@ -452,7 +491,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от eventuell. Также как прилагательное: evtl. Änderungen — возможные изменения.",
-    "usage_note_en": "Abbreviation of eventuell. Also as an adjective: evtl. Änderungen — possible changes."
+    "usage_note_en": "Abbreviation of eventuell. Also as an adjective: evtl. Änderungen — possible changes.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-027",
@@ -468,7 +508,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от bezüglich (+ Genitiv).",
-    "usage_note_en": "Abbreviation of bezüglich (+ genitive)."
+    "usage_note_en": "Abbreviation of bezüglich (+ genitive).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-028",
@@ -484,7 +525,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от italienisch (в словарях и справках).",
-    "usage_note_en": "Abbreviation of italienisch (in dictionaries and references)."
+    "usage_note_en": "Abbreviation of italienisch (in dictionaries and references).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-029",
@@ -500,7 +542,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от der Herr. В косвенных падежах — Hrn. (= Herrn): an Hrn. Schulz. В обычном тексте слово чаще пишут полностью.",
-    "usage_note_en": "Abbreviation of der Herr. In the oblique cases — Hrn. (= Herrn): an Hrn. Schulz. In ordinary text the word is usually written out."
+    "usage_note_en": "Abbreviation of der Herr. In the oblique cases — Hrn. (= Herrn): an Hrn. Schulz. In ordinary text the word is usually written out.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-030",
@@ -516,7 +559,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от die Abkürzung.",
-    "usage_note_en": "Abbreviation of die Abkürzung."
+    "usage_note_en": "Abbreviation of die Abkürzung.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-031",
@@ -532,7 +576,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от gegebenenfalls.",
-    "usage_note_en": "Abbreviation of gegebenenfalls."
+    "usage_note_en": "Abbreviation of gegebenenfalls.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-032",
@@ -548,7 +593,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение (из англ.) от Incorporated; немецкое соответствие — AG.",
-    "usage_note_en": "Abbreviation (from English) of Incorporated; the German equivalent is AG."
+    "usage_note_en": "Abbreviation (from English) of Incorporated; the German equivalent is AG.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-033",
@@ -564,7 +610,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от die Milliarde (тысяча миллионов).",
-    "usage_note_en": "Abbreviation of die Milliarde (a thousand million)."
+    "usage_note_en": "Abbreviation of die Milliarde (a thousand million).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-034",
@@ -580,7 +627,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от das Kilovolt.",
-    "usage_note_en": "Abbreviation of das Kilovolt."
+    "usage_note_en": "Abbreviation of das Kilovolt.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-035",
@@ -596,7 +644,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от das Megawatt. Также MW = die Mittelwelle (средние волны, радио), der Mittelwert (среднее значение).",
-    "usage_note_en": "Abbreviation of das Megawatt. Also MW = die Mittelwelle (medium wave, radio), der Mittelwert (mean value)."
+    "usage_note_en": "Abbreviation of das Megawatt. Also MW = die Mittelwelle (medium wave, radio), der Mittelwert (mean value).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-036",
@@ -612,7 +661,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от Sankt: St. Gallen, St. Pauli. В счетах и списках также St. = das Stück (штука), чаще Stk.",
-    "usage_note_en": "Abbreviation of Sankt: St. Gallen, St. Pauli. In invoices and lists also St. = das Stück (piece), more often Stk."
+    "usage_note_en": "Abbreviation of Sankt: St. Gallen, St. Pauli. In invoices and lists also St. = das Stück (piece), more often Stk.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-37",
@@ -628,7 +678,8 @@
     "search_forms": [
       "kg"
     ],
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-38",
@@ -644,7 +695,8 @@
     "search_forms": [
       "km"
     ],
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-39",
@@ -661,7 +713,8 @@
       "äh"
     ],
     "wortschatz_excluded": true,
-    "source_url": "https://www.duden.de/rechtschreibung/aeh"
+    "source_url": "https://www.duden.de/rechtschreibung/aeh",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-40",
@@ -679,7 +732,8 @@
       "hmm"
     ],
     "wortschatz_excluded": true,
-    "source_url": "https://www.duden.de/rechtschreibung/hm"
+    "source_url": "https://www.duden.de/rechtschreibung/hm",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-41",
@@ -695,7 +749,8 @@
     "search_forms": [
       "g"
     ],
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-42",
@@ -711,7 +766,8 @@
     "search_forms": [
       "s"
     ],
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-43",
@@ -727,7 +783,8 @@
     "search_forms": [
       "m"
     ],
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-44",
@@ -743,7 +800,8 @@
     "search_forms": [
       "h"
     ],
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "worterbuch_hidden": true
   },
   {
     "id": "function-45",
@@ -759,7 +817,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от die Million. Ср. Mrd. — миллиард, Tsd. — тысяча.",
-    "usage_note_en": "Abbreviation of die Million. Cf. Mrd. — billion, Tsd. — thousand."
+    "usage_note_en": "Abbreviation of die Million. Cf. Mrd. — billion, Tsd. — thousand.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-46",
@@ -775,7 +834,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от das Tausend; чаще в таблицах и объявлениях, в обычном тексте — 25.000 Euro. Ср. Mio. — миллион.",
-    "usage_note_en": "Abbreviation of das Tausend; mostly in tables and ads, in running text — 25.000 Euro. Cf. Mio. — million."
+    "usage_note_en": "Abbreviation of das Tausend; mostly in tables and ads, in running text — 25.000 Euro. Cf. Mio. — million.",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-47",
@@ -791,7 +851,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от die Stunde; в технике и науке — h (km/h).",
-    "usage_note_en": "Abbreviation of die Stunde; in technology and science — h (km/h)."
+    "usage_note_en": "Abbreviation of die Stunde; in technology and science — h (km/h).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-48",
@@ -807,7 +868,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от die Minute; в технике и науке — min (без точки).",
-    "usage_note_en": "Abbreviation of die Minute; in technology and science — min (no full stop)."
+    "usage_note_en": "Abbreviation of die Minute; in technology and science — min (no full stop).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-49",
@@ -823,7 +885,8 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от die Sekunde; в технике и науке — s (без точки).",
-    "usage_note_en": "Abbreviation of die Sekunde; in technology and science — s (no full stop)."
+    "usage_note_en": "Abbreviation of die Sekunde; in technology and science — s (no full stop).",
+    "worterbuch_hidden": true
   },
   {
     "id": "function-50",
@@ -839,6 +902,7 @@
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от der Millimeter. Ср. cm — сантиметр.",
-    "usage_note_en": "Abbreviation of der Millimeter. Cf. cm — centimetre."
+    "usage_note_en": "Abbreviation of der Millimeter. Cf. cm — centimetre.",
+    "worterbuch_hidden": true
   }
 ]

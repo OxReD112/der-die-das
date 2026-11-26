@@ -300,7 +300,8 @@
   // Numbers and sowie are not taken.
   const COMMA_LIST_CLOSERS = new Set(["und","oder"]);
   const COMMA_LIST_PARTICIPLE_TAIL = /^(?:werden|worden|sein|haben|gewesen)$/u;
-  const COMMA_PART_OPENERS = new Set(["wenn","weil","dass","daß","ob","bevor","nachdem","obwohl","während","falls","sobald","seit","seitdem","damit","da","wo","wohin","woher","warum","weshalb","wann","sondern","denn","aber","doch","zu"]);
+  // (the words that open a part after a comma are read in create(): commaPartOpener — the subordinators of the cards and these)
+  const COMMA_PART_OPENER_WORDS = new Set(["während","seit","damit","da","wo","wohin","woher","warum","weshalb","wann","sondern","denn","aber","doch","zu"]);
   // what joins a second bare infinitive to a modal + infinitive (kann … probieren und dann aussuchen)
   const MODAL_SECOND_INFINITIVE_JOINERS = new Set(["und","oder"]);
   // words that may open a subject noun phrase after und (nominative-capable determiners, pronouns of quantity)
@@ -314,7 +315,6 @@
   // The same as a whole-word pattern.
   const CLAUSE_COORDINATOR_WORD = new RegExp(`^(?:${CLAUSE_COORDINATORS.join("|")})$`, "u");
   // Words that end a lassen / infinitive group or a frame of one infinitive: the coordinators and the subordinators that open a part.
-  const PART_BOUNDARY_WORDS = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","daß","wenn","ob","als","bevor","nachdem"]);
   // The gloss of an external surname / given-name record (Eichbaum «a surname»): only such a record gives way to an own card or a
   // compound split; a place or a language name (Russland, England, Deutsch «German (language)») keeps its record.
   const SURNAME_GLOSS = /^(?:an?\s+)?(?:(?:common|rare|habitational|occupational)\s+)?(?:surname|family name|(?:male|female)?\s*given name)\b/iu;
@@ -398,7 +398,7 @@
   //   hin) follow the rule of damit: without a mark before them they open a part only by the verb-final sign (Die Ausstattung wurde
   //   während der Gegenreformation ersetzt — no part). Warte, bis er kommt keeps its comma; bis er kam, war es dunkel opens the sentence.
   // The pure conjunctions (wenn, bevor, ob, dass, weil, nachdem …) always open their part; als before a noun phrase is alsNounPhrase.
-  const MID_PART_SUBORDINATORS = new Set(["damit","während","bis"]);
+  // (which subordinators follow the rule of damit is read from the cards in create(): subordinatorKind "sign")
   // words of time after the preposition bis — a closed list
   const BIS_TIME_WORDS = new Set(["heute","morgen","gestern","jetzt","dahin","dato","bald","später","spät","zuletzt","mitternacht","mittag","abend",
     "ende","anfang","mitte","frühjahr","frühling","sommer","herbst","winter","ostern","pfingsten","weihnachten","silvester"]);
@@ -415,15 +415,22 @@
     for (let i = 1; i < n-1; i++) if (!WIE_INSERTION_ADVERBS.has(String(words[i]).toLocaleLowerCase("de-DE"))) return false;
     return /^\p{Ll}/u.test(String(words[n-1])) && isParticiple(words[n-1]);
   }
-  const INSERTED_CLAUSE_OPENERS = new Set(["der","die","das","dem","den","deren","dessen","denen","welcher","welche","welches","welchem","welchen",
-    "wenn","weil","dass","daß","als","ob","obwohl","obgleich","nachdem","während","bevor","ehe","sobald","solange","seit","seitdem","bis","falls",
-    "wo","wie","was","wer","damit","indem","sodass"]);
+  // Conjunction cards whose word order ends in the finite verb are subordinators;
+  // "X · Subjekt · Verb" cards coordinate clauses.
+  const conjunctionKind = entry => /·\s*…\s*·\s*\*\*Verb\*\*\s*$/u.test(entry?.word_order_pattern || "") ? "subordinating" :
+    /^\S+\s*·\s*Subjekt\s*·\s*\*\*Verb\*\*/u.test(entry?.word_order_pattern || "") ? "coordinating" : null;
+  // The question and relative words that open a part of their own (closed classes of the grammar; the subordinators come from the
+  // conjunction cards: subordinatorOpensAt).
+  const QUESTION_WORDS = new Set(["wie","wo","wohin","woher","warum","weshalb","weswegen","wieso","wann","was","wer","wen","wem","wessen"]);
+  // Is the word a question word, a wo(r)- pronominal adverb too (woran, worüber, womit)?
+  const isQuestionWord = w => QUESTION_WORDS.has(w) || /^wor?(?:an|auf|aus|bei|durch|für|gegen|in|mit|nach|über|um|unter|von|vor|zu)$/u.test(w);
+  const RELATIVE_WORDS = new Set(["der","die","das","dem","den","deren","dessen","denen","welcher","welche","welches","welchem","welchen"]);
   // denn inside the part — no punctuation mark before it — is the particle, as doch (Was hat er denn gesagt?, Seid Ihr denn nicht
   // verwundet?); after a mark it stays the conjunction (…, denn er war müde).
   const MID_PART_PARTICLES = new Set(["doch","denn"]);
   // Is token k doch / denn (always) or damit / während / bis (unless damitOpensPart finds the verb-final sign) with no punctuation before
   // it — a word inside the part, not the start of a new one? true / false.
-  const midClauseDochBy = (sentence,tokens,k,damitOpensPart) => k > 0 && tokens[k] && (MID_PART_PARTICLES.has(norm(tokens[k][0])) || MID_PART_SUBORDINATORS.has(norm(tokens[k][0]))) &&
+  const midClauseDochBy = (sentence,tokens,k,damitOpensPart,signSubordinator) => k > 0 && tokens[k] && (MID_PART_PARTICLES.has(norm(tokens[k][0])) || signSubordinator(norm(tokens[k][0]))) &&
     !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(String(sentence).slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index)) &&
     (MID_PART_PARTICLES.has(norm(tokens[k][0])) || !damitOpensPart(sentence,tokens,k));
   // aber inside the part — no punctuation before it, no subject pronoun after it — is the particle, as doch: konnte aber nur einen
@@ -653,14 +660,14 @@
   // A «-» with a space on both sides is a dash (sprechen Menschen mit Du an - aus Respektlosigkeit?) — the gap text gets «–» — except a
   // shortened repetition (Omnibus - und Trolleybuslinien, Feld - oder Rebhuhn, Personaleinsatz und - aufwand: und / oder / bzw. /
   // beziehungsweise / sowie / bis right after it, und / oder right before it), a compound of two capital words or abbreviations
-  // (LfM - Projekt, Preis - Leistungsverhältnis) and a compound adjective — a lowercase part, then a declined adjective right before a
+  // (LfM - Projekt, Preis - Leistungsverhältnis, also after a number: 200m - Freistilstaffel) and a compound adjective — a lowercase part, then a declined adjective right before a
   // capital noun (franko - provenzalischen Dialekten, rheinfränkisch - moselfränkische Mischmundart). A hyphen with no space, or a space
   // after it only, is part of the word. `next` is the word after `after`.
   const SHORTENED_REPETITION_AFTER = /^(?:und|oder|bzw|beziehungsweise|sowie|bis)$/u, SHORTENED_REPETITION_BEFORE = /^(?:und|oder)$/u;
   // A hyphen between spaces used as a dash (not a word hyphen).
   const spacedHyphenDash = (text, before, after, next) => /^\s+-\s+$/u.test(text) &&
     !SHORTENED_REPETITION_AFTER.test(String(after).toLowerCase()) && !SHORTENED_REPETITION_BEFORE.test(String(before).toLowerCase()) &&
-    !(/^\p{Lu}/u.test(String(before)) && /^\p{Lu}/u.test(String(after))) &&
+    !(/^[\p{Lu}\p{N}]/u.test(String(before)) && /^\p{Lu}/u.test(String(after))) &&
     !(/^\p{Ll}/u.test(String(before)) && LOWERCASE_DECLINED_WORD.test(String(after)) && /^\p{Lu}/u.test(String(next ?? "")));
   // Does the text between two tokens close a part (sentence sign, bracket, dash, quote; not a number's point)?
   const clauseGapText = (text, before, after, next) => { const t = String(text).replace(/(\p{N})[.,:](?=\p{N})/gu,'$1');
@@ -761,21 +768,25 @@
   function partBreakBetween(sentence, tokens, a, b) {
     return GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence, tokens, a, b));
   }
-  // Is there a sentence sign, bracket, dash or quote between token a and token b, not counting the points and commas of numbers (3,5)?
-  function signBetweenBesideNumbers(sentence, tokens, a, b) {
-    return GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence, tokens, a, b).replace(/\d+(?:[.,:]\d+)*\.?/gu, ""));
-  }
   // Does a part start at token i: the first token, or a sentence sign, bracket, dash, quote, ellipsis or « - » right before it?
   function partOpensAt(sentence, tokens, i) {
     return i === 0 || /[,;:.!?»«„“”"–—()…]|\s-\s/u.test(tokenGap(sentence, tokens, i-1, i));
   }
-  // The text between token a and token b as clauseGapText reads it (a number's point or comma is no sign).
-  function clauseGapBetween(sentence, tokens, a, b) {
-    return clauseGapText(tokenGap(sentence, tokens, a, b), tokens[a][0], tokens[b][0], tokens[b+1]?.[0]);
+  // The text between token a and token b as a part boundary reads it — one function for every part scanner: clauseGapText without the
+  // punctuation inside a number or a list of numbers (13,5; 26.600; 6:4, 5:7, 6:3), the point inside u. a. / d. h. (two short letter
+  // groups, one a single letter) and the point of an ordinal after its word (am 3. Mai, zum 100. Mal).
+  function partGapText(sentence, tokens, a, b) {
+    const gap = tokenGap(sentence,tokens,a,b);
+    if (b === a+1 && gap === "." && /^\p{L}{1,3}$/u.test(tokens[a][0]) && /^\p{L}{1,3}$/u.test(tokens[b][0]) &&
+        (/^\p{L}$/u.test(tokens[a][0]) || /^\p{L}$/u.test(tokens[b][0]))) return "";
+    if (b === a+1 && ORDINAL_GAP.test(gap) && ORDINAL_BEFORE.test(norm(tokens[a][0]))) return " ";
+    // (a word glued to its number reads as the number: 200m - Freistilstaffel is a compound, not a dash)
+    const before = /\p{N}$/u.test(String(sentence).slice(0,tokens[a].index)) ? "0" + tokens[a][0] : tokens[a][0];
+    return clauseGapText(gap.replace(/\d+(?:[.,:]\d+)*(?:\s*,\s*\d+(?:[.,:]\d+)*)+|\d+(?:[.,:]\d+)+/gu,"0"),before,tokens[b][0],tokens[b+1]?.[0]);
   }
   // The same text after token a (up to token a + 1).
   function clauseGapAfter(sentence, tokens, a) {
-    return clauseGapBetween(sentence, tokens, a, a + 1);
+    return partGapText(sentence, tokens, a, a + 1);
   }
   // Is there only a comma after token i?
   function commaOnlyAfter(sentence, tokens, i) {
@@ -2152,7 +2163,7 @@ function apostropheText(text) {
         !!tokens[k+2] && /^\p{Lu}/u.test(tokens[k+2][0]) && finite(k+3);
     };
     // Is token k a doch / denn / damit / während / bis inside its part (no new part opens there)? true / false.
-    const midClauseDoch = (sentence,tokens,k) => midClauseDochBy(sentence,tokens,k,damitOpensPart) &&
+    const midClauseDoch = (sentence,tokens,k) => midClauseDochBy(sentence,tokens,k,damitOpensPart,w => subordinatorKind(w) === "sign" && w !== "als") &&
       (norm(tokens[k][0]) !== "während" || waehrendPreposition(sentence,tokens,k)) &&
       !(norm(tokens[k][0]) === "denn" && dennOpensClause(tokens,k));
     // Optional observation only. Sink failures must never affect dictionary decisions.
@@ -3385,13 +3396,13 @@ function apostropheText(text) {
       }
       // One finite verb per part: a lowercase word with an own non-verb card loses its finite reading when its part (punctuation, coordinator /
       // subordinator) has a clear finite form.
-      { const STOP=new Set(['und','oder','aber','denn','sondern','weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','bis','der','die','das','wo','wie','was','wer']);
+      { const STOP={at: k => CLAUSE_COORDINATOR_WORD.test(words[k]) || opensSubordinatePartAt(sentence,tokens,k)};
         // Has the word an own card other than a verb (an adjective only when it is the lemma itself)?
         const nonVerbOwn = k => (forms.get(words[k]) || []).some(e => e.type !== "Verb" && !(e.type === "Adjektiv" && norm(e.word) !== words[k]));
         // Is token k a clear finite verb (lower case, only finite / imperative readings, no other own card)?
         const clearFinite = k => /^\p{Ll}/u.test(tokens[k][0]) && analyses[k].length > 0 && analyses[k].some(r => r.kind === "finite") && analyses[k].every(r => ["finite","imperative"].includes(r.kind)) && !(forms.get(words[k]) || []).some(e => e.type !== "Verb" && e.type !== "Nomen") && !(modifiers.get(words[k]) || []).length;
         // Does a part end after token k (a sentence sign, bracket, dash, ellipsis, quote, or a word of STOP)?
-        const cut = k => GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,k,k+1)) || STOP.has(words[k+1]);
+        const cut = k => GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,k,k+1)) || STOP.at(k+1);
         const drop = [];
         for(let i=0;i<tokens.length;i++){ if(!/^\p{Ll}/u.test(tokens[i][0])||!nonVerbOwn(i)||!analyses[i].some(r=>r.kind==='finite'))continue;
           let a=i;while(a>0&&!cut(a-1))a--; let b=i;while(b+1<tokens.length&&!cut(b))b++;
@@ -3409,8 +3420,9 @@ function apostropheText(text) {
     // punctuation, subordinators and coordinators, with the joins listed below (numbers, quoted titles, brackets, inserted clauses, noun
     // enumerations, und / oder / als / aber / denn / damit inside one part).
     function sentenceClauses(sentence,tokens,words,analyses) {
-      const subordinators = new Set(['weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','sobald','damit','bis']);
-      const coordinators = new Set(['und','oder','aber','denn','sondern']);
+      // A subordinator of the cards at token j (subordinatorOpensAt); als, damit, während, bis are read by their own checks below
+      // (alsNounPhrase, adverbialDamit, midClauseDoch).
+      const subordinatorAt = j => subordinatorOpensAt(sentence,tokens,j) || ["als","damit","während","bis"].includes(words[j]);
       // wie right after a detached particle of a verb of the clause starts the comparison, so the particle closes the clause (hörte sich an
       // wie Flügel).
       const comparisonAfterParticle=(i,from)=>words[i]==='wie'&&i>1&&!GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,i-1,i))&&
@@ -3431,13 +3443,13 @@ function apostropheText(text) {
       for (let i=1;i<tokens.length;i++) {
         // A comma, point or colon inside a number (13,5; 26.600; 6:4) is no clause boundary. A list of numbers (6:4, 5:7, 6:3) is one nominal
         // element too.
-        const rawGap = clauseGapText(tokenGap(sentence,tokens,i-1,i).replace(/\d+(?:[.,:]\d+)*(?:\s*,\s*\d+(?:[.,:]\d+)*)+/gu,'0'),tokens[i-1][0],tokens[i][0],tokens[i+1]?.[0]);
+        const rawGap = partGapText(sentence,tokens,i-1,i);
         // the shared commaModifierPair of the chains — eine maßvolle, schrittweise Belastung — is no boundary either
         const gap0 = (parenMarks.has(i-1) ? rawGap.replace(/[()]/gu," ") : rawGap).replace(titleMarks.has(i-1) ? /[„“”"»«]/gu : /$^/u," ");
         const gap = commaModifierPair(sentence,tokens,i-1) ? gap0.replace(/,/u," ") : gap0;
         // als before a noun phrase — the shared alsNounPhrase — is no boundary of the part either (… und die Anerkennung des Russischen als
         // zweite Amtssprache aus — the part after und runs to the particle)
-        const nextBoundary=tokens.findIndex((t,j)=>j>i&&(GAP_SENTENCE_ELLIPSIS.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinators.has(words[j])&&!(words[j]==='als'&&alsNounPhrase(tokens,j,-1))||coordinators.has(words[j])));
+        const nextBoundary=tokens.findIndex((t,j)=>j>i&&(GAP_SENTENCE_ELLIPSIS.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinatorAt(j)&&!(words[j]==='als'&&alsNounPhrase(tokens,j,-1))||CLAUSE_COORDINATOR_WORD.test(words[j])));
         const leftFinite=analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'));
         const rightFinite=analyses.slice(i+1,nextBoundary<0?tokens.length:nextBoundary).some(rows=>rows.some(a=>a.kind==='finite'));
         // und / oder with no verb form at all before it in the clause and the finite verb after it join parts of one clause (die sich für
@@ -3464,7 +3476,7 @@ function apostropheText(text) {
         // imperative that opens the part, without a finite verb)
         const modifierPair=modifierWord(i-1)&&modifierWord(i+1)&&!words.slice(start,i-1).some(w=>(separatedForms.get(w)||[]).some(pair=>pair.prefix===words[i-1]));
         const nominalCoord=['und','oder'].includes(words[i])&&!GAP_SENTENCE.test(gap)&&(!leftFinite||!rightFinite)&&
-          (words[i]==='und'||leftFinite||!(analyses[coordinators.has(words[start])?start+1:start]||[]).some(a=>a.kind==='imperative'))&&(capitalPair||modifierPair||nounPhrasePair(sentence,tokens,i))||partsJoin;
+          (words[i]==='und'||leftFinite||!(analyses[CLAUSE_COORDINATOR_WORD.test(words[start])?start+1:start]||[]).some(a=>a.kind==='imperative'))&&(capitalPair||modifierPair||nounPhrasePair(sentence,tokens,i))||partsJoin;
         // damit without a punctuation mark before it is the pronominal adverb (mühte sich damit ab, stopfte die Löcher damit zu), not the
         // conjunction.
         const adverbialDamit=words[i]==='damit'&&!GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(gap);
@@ -3521,12 +3533,12 @@ function apostropheText(text) {
           // (and no full finite verb before als in the part — versprechen … sich als Freunde wieder zu treffen: two predicates; a modal /
           // haben / sein / werden before it is the verb's own group — konnte sich als einzige Single … platzieren)
           !analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'&&!modalLemmas.has(a.base)&&!TENSE_AUXILIARIES.includes(a.base)));
-        const midSubordinator=subordinators.has(words[i])&&midClauseDoch(sentence,tokens,i);
+        const midSubordinator=subordinatorAt(i)&&midClauseDoch(sentence,tokens,i);
         const alsAttribute=alsInAttributeFrame(tokens,i);
-        if (GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin&&!alsAs&&!midSubordinator&&!alsAttribute || coreOpens&&!bracketJoin || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!aberBracket&&!particleDenn&&!nominalJoin&&!bracketJoin ||
+        if (GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(gap) || subordinatorAt(i)&&!adverbialDamit&&!nominalJoin&&!alsAs&&!midSubordinator&&!alsAttribute || coreOpens&&!bracketJoin || CLAUSE_COORDINATOR_WORD.test(words[i])&&!nominalCoord&&!adverbialAber&&!aberBracket&&!particleDenn&&!nominalJoin&&!bracketJoin ||
           comparisonAfterParticle(i,start)) {
           clauses.push({start,end:i-1,relation});
-          start=i;relation=GAP_SENTENCE_NO_COMMA_ELLIPSIS.test(gap)?'root':subordinators.has(words[i])?'subordinate':coordinators.has(words[i])?'coordinate':/^\s*,\s*$/u.test(gap)?'comma':'boundary';
+          start=i;relation=GAP_SENTENCE_NO_COMMA_ELLIPSIS.test(gap)?'root':subordinatorAt(i)?'subordinate':CLAUSE_COORDINATOR_WORD.test(words[i])?'coordinate':/^\s*,\s*$/u.test(gap)?'comma':'boundary';
         }
       }
       clauses.push({start,end:tokens.length-1,relation});
@@ -3813,8 +3825,6 @@ function apostropheText(text) {
       }
       return subjectFactsCache.get(sentence);
     }
-    // subordinators whose part is no «part before» that lends its subject to the next part (reflexiveAgreesWithSubject)
-    const SUBORDINATORS_FOR_PRIOR = /^(?:als|wenn|weil|da|dass|daß|ob|bevor|nachdem|während|obwohl|sobald|seit|seitdem|bis|falls|damit|indem|wie|wo)$/u;
     const ACCUSATIVE_PERSON_PRONOUNS = {mich:['ich'],dich:['du'],ihn:['er/sie/es'],es:['er/sie/es'],sie:['er/sie/es','sie'],uns:['wir'],euch:['ihr']};
     // A reflexive pronoun agrees with the subject of its part — ich … mir / mich, du … dir / dich, wir … uns, ihr … euch, a third person
     // (er, sie, es, man, Sie, a noun) … sich; the imperative has no subject — its form gives du / ihr (mach dir, macht euch; machen Sie sich
@@ -3870,7 +3880,7 @@ function apostropheText(text) {
       const commaBefore=clause.start>0&&/,\s*$/u.test(String(facts.sentence||'').slice(tokens[clause.start-1].index+tokens[clause.start-1][0].length,tokens[clause.start].index));
       if(prior&&commaBefore&&prior.relation!=='subordinate'&&!words.some((w,k)=>personal(k))&&
         (analyses[clause.start]||[]).some(a=>a.kind==='finite'&&a.person===own)&&
-        !SUBORDINATORS_FOR_PRIOR.test(words[prior.start])&&!/^(?:was|wer|wie|wo)$/u.test(words[prior.start])&&
+        !subordinatorAt(String(facts.sentence||''),tokens,prior.start)&&!isQuestionWord(words[prior.start])&&
         !Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).some(k=>/^(?:einer|eine|jemand|niemand|keiner|keine|jeder|jede|man|alle|beide|wer)$/u.test(words[k])&&
           !subjectFacts.beforePrep(k)&&!/^\p{Lu}/u.test(tokens[k+1]?.[0]??''))&&
         words.some((w,k)=>w===own&&k>=prior.start&&k<=prior.end&&SUBJECT_PRONOUNS.has(w)&&!subjectFacts.beforePrep(k)))return true;
@@ -4198,7 +4208,7 @@ function apostropheText(text) {
             // agreement decides (reflexiveAgreesWithSubject) for mich / mir / dich / dir / uns / euch of the finite verb's person
             // (the part before holds the subject pronoun of that person itself, and is no subordinate part — Was der Hund bewacht, geht euch nichts
             // an; no indefinite subject in the part — leite mich doch einer)
-            const priorOwn=previous&&previous.relation!=='subordinate'&&!SUBORDINATORS_FOR_PRIOR.test(words[previous.start])&&!/^(?:was|wer|wie|wo)$/u.test(words[previous.start])&&
+            const priorOwn=previous&&previous.relation!=='subordinate'&&!subordinatorAt(sentence,tokens,previous.start)&&!isQuestionWord(words[previous.start])&&
               Array.from({length:previous.end-previous.start+1},(_,k)=>previous.start+k).some(k=>words[k]===control.person&&!beforePrep(k));
             const indefiniteSubject=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).some(k=>/^(?:einer|eine|jemand|niemand|keiner|keine|jeder|jede|man|alle|beide|wer)$/u.test(words[k])&&!beforePrep(k)&&
               !(k>clause.start&&prepositions.has(words[k-1]))&&!/^\p{Lu}/u.test(tokens[k+1]?.[0]??''));
@@ -5830,7 +5840,7 @@ function apostropheText(text) {
       if (selected < 0) return [];
       const passable = new Set(["und","oder","aber","als"]);
       // The part-closing text between token a and token b (clauseGapText).
-      const gap = (a, b) => clauseGapBetween(sentence,tokens, a, b);
+      const gap = (a, b) => partGapText(sentence,tokens, a, b);
       // The points of an abbreviation written without spaces (u.a., k.u.k., z.B., d.h.) are no sentence end — a point right between two short
       // letter groups, and the last point of such a chain (wirkte u.a. bei … mit, bildete … die Ballonfahrer der k.u.k. Armee aus).
       const shortLetters = k => /^\p{L}{1,3}$/u.test(tokens[k]?.[0] ?? "");
@@ -5841,7 +5851,7 @@ function apostropheText(text) {
       const compressedAbbreviation = (a,b) => innerPoint(a,b) || /^\.\s+$/u.test(tokenGap(sentence,tokens,a,b)) && a > 0 && innerPoint(a-1,a);
       // (a mid-clause doch is the modal particle — midClauseDoch)
       // (a number with a dot or a colon inside the sentence is no mark — in der 22. Minute, um 8:30 Uhr)
-      const hard = (a,b) => GAP_SENTENCE_NO_COMMA_BRACKETS_ELLIPSIS_QUOTES_ALL.test(compressedAbbreviation(a,b) ? "" : gap(a,b).replace(/\d+(?:[.,:]\d+)*\.?/gu, " ")) || PART_BOUNDARY_WORDS.has(norm(tokens[b][0])) && !midClauseDoch(sentence,tokens,b);
+      const hard = (a,b) => GAP_SENTENCE_NO_COMMA_BRACKETS_ELLIPSIS_QUOTES_ALL.test(compressedAbbreviation(a,b) ? "" : gap(a,b).replace(/\d+(?:[.,:]\d+)*\.?/gu, " ")) || PART_BOUNDARY_WORDS.has(norm(tokens[b][0]),sentence,tokens,b) && !midClauseDoch(sentence,tokens,b);
       // (a comma between two modifiers of one noun — commaModifierPair — is no boundary: gingen in einem lang gezogenen, lauten Rülpser unter)
       const soft = (a,b) => (/,/u.test(gap(a,b)) && !(b === a+1 && commaModifierPair(sentence, tokens, a, true))) || /\s(?:[–—]|--)\s/u.test(gap(a,b));
       // (es gibt: the particle right after the accusative object of es gibt — keinen Weg zurück, den Weg zurück nach Hause — an article group
@@ -6201,8 +6211,8 @@ function apostropheText(text) {
           // after the comma)
           if (i+1 >= tokens.length || GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,i,i+1))) return [];
           // (nor in a subordinate clause — Bevor ich geh mach das Licht aus, Wenn ich komm mach bitte auf without the comma: the verb ends that
-          // clause)
-          if (i >= 2 && norm(tokens[i-1][0]) === "ich" && /^(?:wenn|bevor|als|weil|dass|daß|ob|nachdem|sobald|solange|bis|damit|falls|obwohl|während|wie|wo|was|wer|wann|warum)$/u.test(norm(tokens[i-2][0]))) return [];
+          // clause; a subordinator of any kind — before ich it is no preposition or adverb)
+          if (i >= 2 && norm(tokens[i-1][0]) === "ich" && (isSubordinator(norm(tokens[i-2][0])) || /^(?:wie|wo|was|wer|wann|warum)$/u.test(norm(tokens[i-2][0])))) return [];
           const near = [i-1,i+1].some(k => k >= 0 && k < tokens.length && norm(tokens[k][0]) === "ich" &&
             !GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,Math.min(k,i),Math.max(k,i))));
           return near ? (separatedForms.get(w + "e") || []).filter(p => !(separatedForms.get(w) || []).some(q => q.entry.id === p.entry.id && q.prefix === p.prefix)) : []; })();
@@ -6495,7 +6505,6 @@ function apostropheText(text) {
     // schlossen sich die Handwerker … zusammen, hält sich die Rennläuferin heraus, konnte sich die Siedlung … ausdehnen; the verb first in a
     // part after a comma (the subject shared with the part before) — the group after sich is the object: , schnitt sich ein Stück, , zog sich
     // leichte Verletzungen zu)
-    const SUBORDINATE_OPENERS = /^(?:als|wenn|weil|da|dass|daß|ob|nachdem|bevor|ehe|während|seit|seitdem|sobald|solange|sofern|falls|obwohl|obgleich|damit|bis|indem|wie|wo|wor?(?:an|auf|aus|bei|durch|für|gegen|in|mit|nach|über|um|unter|von|vor|zu)|weshalb|weswegen|warum|wieso|wer|was|der|die|das|dem|den|deren|dessen|welche|welcher|welches)$/u;
     // Is a direct accusative object surely in the part of a reflexive verb whose pronoun starts at pronounStart? true / false.
     function reflexiveDirectAccusative(sentence, tokens, pronounStart) {
       const v = tokens.findIndex(t => t.index === pronounStart);
@@ -6537,7 +6546,7 @@ function apostropheText(text) {
         // sentence is capitalised — Klammern sich die Käferlarven … fest; a capital word right before sich opening the sentence is the verb: a name or
         // a noun is never followed by sich there)
         const finiteBefore = f >= a && (/^\p{Ll}/u.test(tokens[f][0]) || f === 0) &&
-          !prepositions.has(wordAt(tokens,f)) && !DETERMINER_WORD.test(wordAt(tokens,f)) && !SUBORDINATE_OPENERS.test(wordAt(tokens,f)) &&
+          !prepositions.has(wordAt(tokens,f)) && !DETERMINER_WORD.test(wordAt(tokens,f)) && !opensSubordinatePartAt(sentence,tokens,f) &&
           !/^(?:ich|du|er|sie|es|wir|ihr|man|und|oder|aber|zu|um|nicht|auch|noch|schon|nur)$/u.test(wordAt(tokens,f));
         // (the group after sich: adverbs first — natürlich auch die Angst —, then a nominative-capable determiner or none, adjectives, a noun)
         // (a dative pronoun right after the verb leaves the place of the subject to the common count — reichte ihm die Gans hin)
@@ -6577,12 +6586,12 @@ function apostropheText(text) {
             const finiteWord = k => /^\p{Ll}/u.test(tokens[k][0]) && verbRowsAt(tokens,k).some(x => x.kind === "finite") &&
               !(verbAnalyses.get(wordAt(tokens,k)) || []).some(x => x.kind === "participle");
             // (an opener that is also a preposition / article — bis, während, seit, da, der … — needs the verb at the end of its part)
-            const sureOpener = /^(?:als|wenn|weil|dass|daß|ob|nachdem|bevor|ehe|sobald|solange|sofern|falls|obwohl|obgleich|indem|weshalb|weswegen|warum|wieso)$/u.test(opener);
-            if ((sureOpener || (SUBORDINATE_OPENERS.test(opener) || opener === "so" && wordAt(tokens,(b+1)) === "wie") && finiteWord(a-1))) {
+            const sureOpener = (isPureSubordinator(opener) || /^(?:als|ehe|weshalb|weswegen|warum|wieso)$/u.test(opener));
+            if ((sureOpener || (opensSubordinatePartAt(sentence,tokens,b) || opener === "so" && wordAt(tokens,(b+1)) === "wie") && finiteWord(a-1))) {
               if (b === 0) return false;
               let c = b - 1; while (c > 0 && !sign(c-1, c)) c--;
               // (the clause before must be a main clause — Als er sah, dass sie kam, tat sich … die Tür auf: no)
-              const mainBefore = !SUBORDINATE_OPENERS.test(wordAt(tokens,c)) && tokens.slice(c, b).some(t => /^\p{Ll}/u.test(t[0]) && (verbAnalyses.get(norm(t[0])) || []).some(x => x.kind === "finite"));
+              const mainBefore = !opensSubordinatePartAt(sentence,tokens,c) && tokens.slice(c, b).some(t => /^\p{Ll}/u.test(t[0]) && (verbAnalyses.get(norm(t[0])) || []).some(x => x.kind === "finite"));
               if (!mainBefore) return false;
             }
             return true;
@@ -6598,7 +6607,7 @@ function apostropheText(text) {
         }
       }
       // (a number with a dot or a colon is no mark: Gegen 6.45 Uhr ging ein Notruf ein)
-      let a = v; while (a > 0 && !signBetweenBesideNumbers(sentence,tokens,a-1, a) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
+      let a = v; while (a > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(partGapText(sentence,tokens,a-1,a)) && !CLAUSE_COORDINATOR_WORD.test(norm(tokens[a][0]))) a--;
       const sharedSubject = a + 1 === v && /^(?:und|oder|aber|sondern)$/u.test(norm(tokens[a][0]));
       if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
       // The lower-case word at token k.
@@ -6665,8 +6674,7 @@ function apostropheText(text) {
       const v = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
       if (v < 0 || j <= v) return false;
       // (a number with a dot or a colon is no mark: Gegen 6.45 Uhr ging ein Notruf ein)
-      let a = v; while (a > 0 && !signBetweenBesideNumbers(sentence,tokens,a-1, a) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
-      if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
+      let a = partSpanAt(sentence,tokens,v,COORDINATED_MEMBER).start;
       // (a number before the verb is the first member: 2011 trat TuWe in der … Nelonen an)
       const lead = (v > 0 ? tokenGap(sentence,tokens,v-1,v) : sentence.slice(0, tokens[v].index)).split(/[,;:.!?()–—»«„“”"…]\s/u).pop();
       if (a === v && !/^\s*\d[\d.]*\s*$/u.test(lead)) return false;
@@ -6709,8 +6717,7 @@ function apostropheText(text) {
         const v = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
         if (v < 0 || j <= v) return null;
         // the part: from its start (a comma, a mark, und / oder …) to the particle; quotes inside do not end it (einer "kalten Enteignung")
-        let a = v; while (a > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,a-1,a)) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
-        if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
+        let a = partSpanAt(sentence,tokens,v,{marks:GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS, words:CLAUSE_COORDINATOR_WORD, subordinators:false, openerOut:true}).start;
         // nominal groups of the part outside prepositional groups: a pronoun, a noun phrase (determiner … noun / a capital word), a
         // pronominal adverb (darauf, damit — the prepositional object)
         const NOMINAL_PRONOUN = /^(?:ich|du|er|sie|es|wir|ihr|man|mich|dich|ihn|uns|euch|mir|dir|ihm|ihnen|sich|das|dies|was|wer|wen|wem|denen|dessen|deren|jemand\w*|niemand\w*|nichts|etwas|alles|allem|einander|andere\w*|beide\w*|viele\w*|einige\w*|manche\w*)$/u;
@@ -6907,8 +6914,8 @@ function apostropheText(text) {
         const form=norm(tokens[i][0]);
         if(/^[A-ZÄÖÜ]/u.test(tokens[i][0])&&i!==0 || context.separableNominalOffsets?.has(tokens[i].index))continue;
         const particles=tokens.map((t,j)=>({t,j})).filter(({t,j})=>j>i&&prefixes.has(norm(t[0]))&&(selected===i||selected===j)&&
-          (j===tokens.length-1||GAP_SENTENCE_ELLIPSIS.test(clauseGapText(sentence.slice(t.index+t[0].length,tokens[j+1].index),t[0],tokens[j+1][0],tokens[j+1+1]?.[0]))||
-          ['und','oder','aber','denn','sondern','doch','weil','dass','daß','wenn','ob','als','bevor','nachdem'].includes(norm(tokens[j+1][0]))));
+          (j===tokens.length-1||GAP_SENTENCE_ELLIPSIS.test(partGapText(sentence,tokens,j,j+1))||
+          PART_BOUNDARY_WORDS.has(norm(tokens[j+1][0]),sentence,tokens,j+1)));
         if(!particles.length)continue;
         const morphology=tokenMorphology(tokens[i], undefined, 'discoverSeparableCandidates');
         morphology.catch(()=>{});   // a failure is raised by the await below, in the old order
@@ -6953,11 +6960,10 @@ function apostropheText(text) {
     // there).
     async function partInsertionRanges(original, closes, consumer) {
       const ranges = [];
-      const INSERTIONS = /,\s*(?:wie|während|obwohl|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?|als|wenn|weil|dass|daß|ob|nachdem|bevor|sobald|falls|obgleich|wo)\b[^,;:.!?]*,/gu;
       // A closed subordinate insertion owns its predicates and particles. Unmarked comma clauses and unfinished insertions keep their guards.
       // (also a relative clause and a clause of als / wenn / weil / dass … — Er gab das Buch, das er gekauft hatte, zurück; Sie gehen als der
       // erste Mensch, der … Kontakt hatte, in die Geschichte ein: closed by its finite verb)
-      for (const match of observedMatches(original.matchAll(INSERTIONS),consumer)) {
+      for (const match of observedMatches(original.matchAll(INSERTED_CLAUSE_SPAN),consumer)) {
         const inner=rangeTokens(original,match.index,match.index+match[0].length,consumer);
         const tail=inner.at(-1);
         const finite=tail&&(await tokenAnalyses(tail[0], undefined, consumer)).some(a=>a.kind==='finite');
@@ -7022,7 +7028,7 @@ function apostropheText(text) {
       // a verb (stellt sich "einfach umziehen" vor, "Baulöwe, der sozial handelte") keeps its guard.
       const SENTENCE_INSIDE = /[;:!?]|\.\s+\p{Lu}/u;
       const PARENTHESES = /\([^()]*\)/gu, QUOTATIONS = /"[^"\n]{1,80}"|„[^„“”\n]{1,80}[“”]|»[^»«\n]{1,80}«|«[^«»\n]{1,80}»/gu,
-        INSERTIONS = /,\s*(?:wie|während|obwohl|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?|als|wenn|weil|dass|daß|ob|nachdem|bevor|sobald|falls|obgleich|wo)\b[^,;:.!?]*,/gu, CONTINUES = /^[^\p{L}.!?;:,]*\p{L}/u;
+        CONTINUES = /^[^\p{L}.!?;:,]*\p{L}/u;
       // The words of every bracket and quotation are looked up together before the checks below, which still read them one by one in their
       // own order and stop where they stop — the same answer; only the network waits overlap.
       try {
@@ -7031,7 +7037,7 @@ function apostropheText(text) {
         for (const match of original.matchAll(PARENTHESES)) for (const t of rangeTokens(original,match.index,match.index+match[0].length,'separableScope')) warm(t[0]);
         for (const match of original.matchAll(QUOTATIONS)) if (CONTINUES.test(original.slice(match.index + match[0].length)))
           for (const t of rangeTokens(original,match.index,match.index+match[0].length,'separableScope')) warm(t[0]);
-        for (const match of original.matchAll(INSERTIONS)) { const tail = rangeTokens(original,match.index,match.index+match[0].length,'separableScope').at(-1); if (tail) warm(tail[0]); }
+        for (const match of original.matchAll(INSERTED_CLAUSE_SPAN)) { const tail = rangeTokens(original,match.index,match.index+match[0].length,'separableScope').at(-1); if (tail) warm(tail[0]); }
       } catch (_) { /* warming only: the checks below ask again */ }
       for (const match of observedMatches(original.matchAll(PARENTHESES),'separableScope')) {
         if (!await hasPredicate(match.index,match.index+match[0].length) && !SENTENCE_INSIDE.test(match[0])) ranges.push([match.index,match.index+match[0].length]);
@@ -7080,7 +7086,6 @@ function apostropheText(text) {
       // A verified comparative after a finite predicate in the same clause
       // is a modifier, not a second unintroduced finite verb or imperative.
       // Clause-initial comparisons and forms after auxiliaries stay ambiguous.
-      const clauseWords=new Set(['und','oder','aber','denn','sondern','doch','weil','dass','daß','wenn','ob','als','bevor','nachdem']);
       const auxiliaries=new Set(['haben','sein','werden','können','müssen','dürfen','sollen','wollen','mögen','möchten','lassen']);
       for(let i=1;i<scoped.length;i++) {
         const t=scoped[i],key=norm(t[0]);
@@ -7089,7 +7094,7 @@ function apostropheText(text) {
         if(!(await morphologyAt(i)).analyses.some(a=>canonicalPos(a.pos)==='Adjektiv' && a.tags?.includes('comparative'))) continue;
         for(let j=i-1;j>=0;j--) {
           if(GAP_SENTENCE_BRACKETS_ELLIPSIS_QUOTES_ALL.test(sentence.slice(scoped[j].index+scoped[j][0].length,t.index)) ||
-            clauseWords.has(norm(scoped[j][0]))) break;
+            PART_BOUNDARY_WORDS.has(norm(scoped[j][0]),sentence,scoped,j)) break;
           const finite=(await tokenAnalyses(scoped[j][0], undefined, 'separableScope')).filter(a=>a.kind==='finite');
           if(finite.length) {
             if(finite.every(a=>!auxiliaries.has(a.base)) && !nominal.has(scoped[j].index)) nominal.add(t.index);
@@ -7139,12 +7144,19 @@ function apostropheText(text) {
     // (plain, the first try: an ellipsis and » « are no boundary — a pause inside the clause: Er hat … nun ja … das Buch gelesen; dashed,
     // the second try, cuts there too)
     const clauseGaps = Object.freeze({plain:GAP_SENTENCE_BRACKETS_DASHES_QUOTES_HIGH_HIGHCLOSE_LOW_STRAIGHT,dashed:GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL});
-    const clauseBoundaries = Object.freeze({
-      verbGroup:new Set(["und","oder","aber","denn","sondern","doch","weil","dass","daß","wenn","ob","als","bevor","nachdem"]),
-      werden:new Set(["und","oder","aber","denn","sondern","doch","weil","dass","daß","wenn","ob","als","bevor","nachdem","obwohl","während","falls","damit"]),
-      zu:new Set(["und","oder","aber","denn","sondern","doch","weil","dass","daß","wenn","ob","als","bevor","nachdem","obwohl","während","falls","damit","um","ohne","statt","anstatt"]),
-      futurePerfect:new Set(["und","oder","aber","denn","sondern","doch","weil","dass","daß","wenn","ob","als","bevor","nachdem","obwohl","während","falls","damit","sobald"])
-    });
+    // The words that end a part by themselves: the coordinators, doch, als and the subordinators of the conjunction cards that are
+    // nothing else (seit, bis, während, da, damit … are read with their verb-final sign, subordinatorOpensAt; dass also as daß).
+    // (a word set read through subordinatorKind: has(w) — the coordinators, doch, als and the pure subordinators; with the place of the
+    // word, has(w, sentence, tokens, j), a subordinator of another reading too when its verb-final sign holds — seitdem, soviel, bevor, ob)
+    const PART_BOUNDARY_FIXED = new Set([...CLAUSE_COORDINATORS, "doch", "als"]);
+    const partBoundaryWord = (w, sentence, tokens, j) => PART_BOUNDARY_FIXED.has(w) || subordinatorKind(w) === "pure" ||
+      typeof sentence === "string" && tokens?.[j] && subordinatorKind(w) === "sign" && subordinatorReadingsRead.has(w) && subordinatorOpensAt(sentence,tokens,j);
+    const PART_BOUNDARY_WORDS = Object.freeze({has: partBoundaryWord});
+    // (während and damit end a werden / zu / Futur II group by themselves too; um / ohne / statt / anstatt … zu a zu group)
+    const WERDEN_BOUNDARIES = Object.freeze({has: (w, ...at) => PART_BOUNDARY_WORDS.has(w, ...at) || w === "während" || w === "damit"});
+    const ZU_BOUNDARIES = new Set(["um","ohne","statt","anstatt"]);
+    const clauseBoundaries = Object.freeze({verbGroup:PART_BOUNDARY_WORDS, werden:WERDEN_BOUNDARIES, futurePerfect:WERDEN_BOUNDARIES,
+      zu:Object.freeze({has: (w, ...at) => WERDEN_BOUNDARIES.has(w, ...at) || ZU_BOUNDARIES.has(w)})});
     // An own adjective / adverb entry with exactly this form (bestimmt, still, schnell).
     const adjectivalForm = word => (forms.get(norm(word)) || []).some(e => ["Adjektiv","Adverb"].includes(e.type) && norm(e.word) === norm(word));
     // «become»: an own adjective card with passive: "none" — werden + this word is «become», never a passive (berühmt, erwachsen, verliebt …:
@@ -7311,7 +7323,7 @@ function apostropheText(text) {
     function parenthesisSpans(sentence, tokens) {
       const out = new Map();
       // The part-closing text after token a (numbers blanked).
-      const gapAfter = a => clauseGapText(tokenGap(sentence,tokens,a,a+1),tokens[a][0],tokens[a+1][0],tokens[a+1+1]?.[0]).replace(/\d+(?:[.,:]\d+)*/gu, " ");
+      const gapAfter = a => partGapText(sentence,tokens,a,a+1).replace(/\d+(?:[.,:]\d+)*/gu, " ");
       for (let a = 0; a+2 < tokens.length; a++) {
         const g = gapAfter(a).replace(/^\s*[“«”"]/u," ");
         if (!/^\s*\(\s*$/u.test(g) || !/^\s/u.test(g)) continue;
@@ -7367,8 +7379,8 @@ function apostropheText(text) {
         }
         for (let a = 0; a+3 < tokens.length; a++) {
           // (also auch / selbst / gerade before the conjunction: auch wenn, selbst als)
-          const opener = INSERTED_CLAUSE_OPENERS.has(norm(tokens[a+1][0])) || /^(?:auch|selbst|gerade|sogar|noch)$/u.test(norm(tokens[a+1][0])) &&
-            a+2 < tokens.length && /^(?:wenn|als|ob|obwohl|nachdem|während|bevor|weil|dass|daß)$/u.test(norm(tokens[a+2][0]));
+          const opener = insertedClauseOpenerAt(sentence,tokens,a+1) || /^(?:auch|selbst|gerade|sogar|noch)$/u.test(norm(tokens[a+1][0])) &&
+            a+2 < tokens.length && subordinatorKind(norm(tokens[a+2][0])) !== null;
           // (a d- / welch- word before a capital noun is an article — ihre Aufgabe, die Zerstörung … zu überwachen, abgeschlossen)
           const article = /^(?:der|die|das|dem|den|welcher|welche|welches|welchem|welchen)$/u.test(norm(tokens[a+1][0])) && /^\s+$/u.test(clauseGapAfter(sentence,tokens,a+1)) && /^\p{Lu}/u.test(tokens[a+2]?.[0] ?? "");
           if (!commaOnlyAfter(sentence,tokens,a) || !opener || article) continue;
@@ -7393,7 +7405,7 @@ function apostropheText(text) {
           // (not when the part after the second comma is a clause of its own — it opens with a relative / conjunction (…, die ich je gesehen
           // habe), a finite form stands before the verb (…, dann wollen wir den Weg schon finden), or a finite form follows it (…, von welchen sie
           // essen sollten); after the verb only non-finite verbs of the chain: unterstützt werden)
-          if (INSERTED_CLAUSE_OPENERS.has(norm(tokens[b+1][0]))) continue;
+          if (insertedClauseOpenerAt(sentence,tokens,b+1)) continue;
           let v = -1;
           // (the reflexive search: the last word of the part is its verb, finite too — a subordinate clause, verb last: die sich, wenn
           // man … nachdenkt, in der Erinnerung ungeordnet aufhäufen)
@@ -7465,13 +7477,13 @@ function apostropheText(text) {
       // (a quote inside the part does not end it — ein "echtes" Steak essen möchte ist …; a subordinator may stand anywhere before the verb
       // in its part — Das einzig positive was man sagen kann war …; a relative d-word only opening a part after a comma)
       const subordinatePart = a => { let k = a;
-        while (k > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,k-1,k))) k--;
-        if (tokens.slice(k, a).some(t => /^(?:wenn|wer|was|wie|als|dass|daß|ob|weil|nachdem|bevor|obwohl|obgleich|seitdem|sobald|solange|falls|sofern|indem)$/u.test(norm(t[0])))) return true;
-        return k > 0 && /^(?:der|die|das|dem|den|denen|deren|dessen|welche[rsnm]?)$/u.test(norm(tokens[k][0])); };
+        while (k > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS.test(partGapText(sentence,tokens,k-1,k))) k--;
+        if (tokens.slice(k, a).some(t => subordinatorKind(norm(t[0])) || QUESTION_WORDS.has(norm(t[0])))) return true;
+        return k > 0 && RELATIVE_WORDS.has(norm(tokens[k][0])); };
       for (let a = 0; a+1 < tokens.length; a++) if (onlyFinite(a) && onlyFinite(a+1) && !auxiliaryBefore(a) && !attributeAt(a+1) && subordinatePart(a) &&
         /^\s+$/u.test(tokenGap(sentence,tokens,a,a+1))) finiteBoundary.add(a);
       // Are tokens a and b in one clause (no gap mark between, or a joined dash, quote, comma pair, insertion)?
-      const connected = (a,b) => { if (b === a+1 && finiteBoundary.has(a)) return false; const text = clauseGapText(tokenGap(sentence,tokens,a,b),tokens[a][0],tokens[b][0],tokens[b+1]?.[0]).replace(/^\s*\(\s*\d+(?:[.,:\/–-]\d+)*\s*\)\s*$/u," ");
+      const connected = (a,b) => { if (b === a+1 && finiteBoundary.has(a)) return false; const text = partGapText(sentence,tokens,a,b).replace(/^\s*\(\s*\d+(?:[.,:\/–-]\d+)*\s*\)\s*$/u," ");
         return !gap.test(text) || b === a+1 && /^\s*[–—]\s*$/u.test(text) && norm(tokens[a][0]) === norm(tokens[b][0]) || b === a+1 && quoteJoin.has(a) || b === a+1 && commaJoin.has(a); };
       // A dash (– —) ends the clause like a comma (gefeiert – das ist …), but a short insertion between two dashes is skipped (hat – wie immer
       // – gelogen): the clause goes on after it and the words inside never compete. Spaced hyphens ( - ) stay compound spelling (Kavallerie -
@@ -7582,7 +7594,7 @@ function apostropheText(text) {
           if (!finiteAfter) return true;
         }
         const next = norm(tokens[k+1][0]);
-        if (subjectWords.has(next) || ["ob","auch","wenn","dass","daß","wie","wo","wohin","woher","was","wer","warum","weshalb","wann","weil","da","damit","sobald","bevor","nachdem","obwohl","während","sondern","denn"].includes(next)) return false;
+        if (subjectWords.has(next) || (isPureSubordinator(next) || ['auch','wie','wo','wohin','woher','was','wer','warum','weshalb','wann','da','damit','während','sondern','denn'].includes(next))) return false;
         // Two participles joined by und / oder before a closing werden (gequält und getötet werden, begonnen und noch in diesem Jahr
         // abgeschlossen werden, gestürzt und ermordet worden): one passive group, not two clauses.
         // (a word no own card knows with the shape of a participle — particle + ge…t / ge…en, …iert, ge…t of an own verb's stem: modernisiert,
@@ -7591,7 +7603,7 @@ function apostropheText(text) {
         // bewandert)
         const ownParticiple = i => participleLikeWord(tokens[i][0]);
         if (consumer === 'werdenGroup' && (w === "und" || w === "oder") && ownParticiple(p)) {
-          let e = k+1; while (e+1 < tokens.length && connected(e,e+1) && !(boundaries.has(norm(tokens[e+1][0])) && !joinWords.has(norm(tokens[e+1][0])))) e++;
+          let e = k+1; while (e+1 < tokens.length && connected(e,e+1) && !(boundaries.has(norm(tokens[e+1][0]),sentence,tokens,e+1) && !joinWords.has(norm(tokens[e+1][0])))) e++;
           const WERDEN_FORM = /^(?:werden|wird|wurde|wurden|würde|würden|worden|werde|wirst|werdet|wurdest)$/u;
           let w2 = e; while (w2 > k+1 && (WERDEN_FORM.test(norm(tokens[w2][0])) || headVerbs.has(norm(tokens[w2][0])) || MODAL_VERB_SET.has(norm(tokens[w2][0])) ||
             (forms.get(norm(tokens[w2][0])) || []).some(x => x.type === "Verb" && headVerbs.has(x.word)))) w2--;
@@ -7629,7 +7641,7 @@ function apostropheText(text) {
           /^\p{Ll}[\p{L}]*(?:t|en|n)$/u.test(tokens[p-1][0]) && !/^(?:den|einen|keinen|meinen|deinen|seinen|ihren|unseren|euren|diesen|jeden|allen|wen|wann|dann|denn|wenn|nun|schon|nicht|recht|jetzt|erst|oft|selten)$/u.test(norm(tokens[p-1][0])))) return false;
         // The part after it runs to the next stop; a further und / oder / als followed by a possible verb or a
         // subject pronoun starts another predicate (… gekauft und ist gegangen).
-        const stopsBefore = j => boundaries.has(norm(tokens[j][0])) && (!joinWords.has(norm(tokens[j][0])) || !tokens[j+1] ||
+        const stopsBefore = j => boundaries.has(norm(tokens[j][0]),sentence,tokens,j) && (!joinWords.has(norm(tokens[j][0])) || !tokens[j+1] ||
           subjectWords.has(norm(tokens[j+1][0])) || verbish(j+1) && !capitalNounAt(sentence,tokens,(j+1)));
         let r = k+1;
         // (an insertion in brackets / quotes after a word is jumped; its words never count)
@@ -7690,7 +7702,7 @@ function apostropheText(text) {
             (capitalNounAt(sentence,tokens,p) || pairSubject(p) || pairModifier(p)) && (capitalNounAt(sentence,tokens,(k+1)) || prepositions.has(next) || ARTICLE_WORD.test(next) || pairSubject(k+1) || pairModifier(k+1))) {
           // (between the finite verb and und only nominal material — no lowercase verb form: sollen die Schule verlassen und Eltern … informiert
           // werden, die Häuser gesehen die Peter und Maria gebaut haben keep the boundary)
-          let h = p-1; while (h >= 0 && connected(h,h+1) && (!boundaries.has(norm(tokens[h][0])) || ["und","oder"].includes(norm(tokens[h][0]))) &&
+          let h = p-1; while (h >= 0 && connected(h,h+1) && (!boundaries.has(norm(tokens[h][0]),sentence,tokens,h) || ["und","oder"].includes(norm(tokens[h][0]))) &&
             !COMPARISON_PARTICLES.includes(norm(tokens[h][0])) && !headFinite(h) &&
             !(verbish(h) && !capitalNounAt(sentence,tokens,h) && !ownModifierForm(tokens[h][0]) && !(capitalNounAt(sentence,tokens,(h+1)) && /(?:e|en|er|es|em)$/u.test(norm(tokens[h][0]))))) h--;
           // (the cluster must fit the finite verb — a modal takes a passive / perfect infinitive, haben an Ersatzinfinitiv, werden a Futur
@@ -7718,7 +7730,7 @@ function apostropheText(text) {
         const commaAt = a => a+1 < tokens.length && /^\s*-?\s*,\s*$/u.test(clauseGapAfter(sentence,tokens,a));
         // Is the word at i a nominal member of a list (a capital noun, a non-verb word; no pronoun or part opener)?
         const nominalWord = i => { const w = norm(tokens[i][0]);
-          if (SUBJECT_PRONOUNS.has(w) || COMMA_PART_OPENERS.has(w) || boundaries.has(w) && !COMMA_LIST_CLOSERS.has(w) && w !== "als") return false;
+          if (SUBJECT_PRONOUNS.has(w) || commaPartOpener(w) || boundaries.has(w) && !COMMA_LIST_CLOSERS.has(w) && w !== "als") return false;
           if (capitalNounAt(sentence,tokens,i)) return true;
           if (/^\p{Ll}/u.test(tokens[i][0]) && !(forms.get(w) || []).length && REGULAR_INFINITIVE_SHAPE.test(w) && !(i > 0 && DETERMINER_WORD.test(norm(tokens[i-1][0])))) return false;
           return !(verbish(i) && !ownModifierForm(tokens[i][0]) && !(i+1 < tokens.length && capitalNounAt(sentence,tokens,(i+1)) && /^\s+$/u.test(clauseGapAfter(sentence,tokens,i)) && /(?:e|en|er|es|em)$/u.test(w))); };
@@ -7751,15 +7763,15 @@ function apostropheText(text) {
       }
       let start = selected, end = selected;
       for (;;) {
-        if (start > 0 && connected(start-1,start) && (!boundaries.has(norm(tokens[start-1][0])) || midClauseDoch(sentence,tokens,start-1) || midClauseAber(sentence,tokens,start-1) && aberParticle(start-1) || joinable(start-1,insertionBefore.get(start-1) ?? start-2))) { start--; continue; }
+        if (start > 0 && connected(start-1,start) && (!boundaries.has(norm(tokens[start-1][0]),sentence,tokens,start-1) || midClauseDoch(sentence,tokens,start-1) || midClauseAber(sentence,tokens,start-1) && aberParticle(start-1) || joinable(start-1,insertionBefore.get(start-1) ?? start-2))) { start--; continue; }
         const a = insertionBefore.get(start);
-        if (a !== undefined && !boundaries.has(norm(tokens[a][0]))) { skip(a,start); start = a; continue; }
+        if (a !== undefined && !boundaries.has(norm(tokens[a][0]),sentence,tokens,a)) { skip(a,start); start = a; continue; }
         break;
       }
       for (;;) {
-        if (end+1 < tokens.length && connected(end,end+1) && (!boundaries.has(norm(tokens[end+1][0])) || midClauseDoch(sentence,tokens,end+1) || midClauseAber(sentence,tokens,end+1) && aberParticle(end+1) || joinable(end+1))) { end++; continue; }
+        if (end+1 < tokens.length && connected(end,end+1) && (!boundaries.has(norm(tokens[end+1][0]),sentence,tokens,end+1) || midClauseDoch(sentence,tokens,end+1) || midClauseAber(sentence,tokens,end+1) && aberParticle(end+1) || joinable(end+1))) { end++; continue; }
         const b = insertionAfter.get(end);
-        if (b !== undefined && (!boundaries.has(norm(tokens[b][0])) || joinable(b,end))) { skip(end,b); end = b; continue; }
+        if (b !== undefined && (!boundaries.has(norm(tokens[b][0]),sentence,tokens,b) || joinable(b,end))) { skip(end,b); end = b; continue; }
         break;
       }
       // The own cards and old verb forms of token i.
@@ -8383,7 +8395,7 @@ function apostropheText(text) {
     // without als among the boundaries — a passive group only, and als right before a noun phrase.
     // The particles of separable verbs whose participle (auf-ge-stockt) closes a werden group after und.
 const SEPARABLE_PARTICIPLE_PARTICLES = "ab|an|auf|aus|bei|ein|fest|her|hin|mit|nach|vor|weg|zu|zurück|zusammen|weiter|heraus|herein|hinaus|hinein|los|dar|nieder|empor|fort";
-const WERDEN_BOUNDARIES_NO_ALS = new Set([...clauseBoundaries.werden].filter(w => w !== "als"));
+const WERDEN_BOUNDARIES_NO_ALS = Object.freeze({has: (w, ...at) => w !== "als" && clauseBoundaries.werden.has(w, ...at)});
 // A determiner / number that can stand without its noun (Wagen will er einen neuen, Kosten will er keine).
 const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|einen|einem|einer|eines|eins|zwei|drei|vier|fünf|sechs|zehn|viele|wenige|mehrere|einige|welche)$/u;
     // als at token i before a noun phrase that runs up to the verb at token `verb` is «as», no boundary of the part (Er wurde als Held
@@ -9248,7 +9260,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (sehen / hören / fühlen / spüren / helfen + a bare infinitive is the same group with another head verb)
       const headFormWord=w=>heads.has('lassen')?LASSEN_FORM_WORD.test(w):(forms.get(w)||[]).some(e=>e.type==='Verb'&&heads.has(e.word));
       if(clicked<0)return null;
-      const boundaries=new Set(['und','oder','aber','denn','sondern','doch','weil','dass','daß','wenn','ob','bevor','nachdem','obwohl','während','falls','damit','sobald']);
+      const boundaries=WERDEN_BOUNDARIES_NO_ALS;
       // A comma introducing an additive phrase need not close the verbal
       // bracket. But auch wenn introduces a separate subordinate clause;
       // its initial auch must not be pulled into the preceding verbal bracket.
@@ -9257,7 +9269,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Plinianische Eruption, schließen) and short quotations inside the part (lässt "etwas Besseres" für "etwas Teures" … anklingen) do
       // not end the part; a5 — «--» is a dash)
       // (a list of numbers before und / oder: 2, 4, 8 und 16 — not any «N, N», a clause comma before a number stays)
-      const gapOf=(a,b)=>{const g=clauseGapText(tokenGap(sentence,tokens,a,b),tokens[a][0],tokens[b][0],tokens[b+1]?.[0]);
+      const gapOf=(a,b)=>{const g=partGapText(sentence,tokens,a,b);
         return ['und','oder'].includes(norm(tokens[b][0]))?g.replace(/^(\s*)\d+(?:[.,:]\d+)*(?:\s*,\s*\d+(?:[.,:]\d+)*)+(\s*)$/u,'$10$2'):g;};
       // Is the gap only quotes and white space?
       const quoteGap=g=>/^[\s"“”„«»]*$/u.test(g)&&GAP_ONLY_QUOTES_ALL.test(g);
@@ -9345,7 +9357,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const verbWord=k=>{const w=norm(lassenForm(tokens[k][0])),e=forms.get(w)||[];return REGULAR_INFINITIVE_SHAPE.test(w)&&e.some(x=>x.type==='Verb')&&!e.some(x=>['Pronomen','article','preposition'].includes(x.type));};
       // Does um at i open an um … zu group in the same part?
       const umZu=i=>{if(norm(tokens[i]?.[0])!=='um'||i===0)return false;
-        for(let k=i+1;k+1<tokens.length;k++){if(!connected(k-1,k))return false;if(norm(tokens[k][0])==='zu'&&/^\p{Ll}/u.test(tokens[k+1][0])&&connected(k,k+1)&&verbWord(k+1))return k>i+1;if(['und','oder','aber','dass','daß','weil'].includes(norm(tokens[k][0]))&&!(['und','oder'].includes(norm(tokens[k][0]))&&/^\p{Lu}/u.test(tokens[k-1][0])&&/^\p{Lu}/u.test(tokens[k+1][0])))return false;}
+        for(let k=i+1;k+1<tokens.length;k++){if(!connected(k-1,k))return false;if(norm(tokens[k][0])==='zu'&&/^\p{Ll}/u.test(tokens[k+1][0])&&connected(k,k+1)&&verbWord(k+1))return k>i+1;if((isPureSubordinator(norm(tokens[k][0])) || ['und','oder','aber'].includes(norm(tokens[k][0])))&&!(['und','oder'].includes(norm(tokens[k][0]))&&/^\p{Lu}/u.test(tokens[k-1][0])&&/^\p{Lu}/u.test(tokens[k+1][0])))return false;}
         return false;};
       // Does a part boundary of the lassen group stand at token i (um … zu, a boundary word not used inside the part, a clause als)?
       const boundary=i=>umZu(i) || boundaries.has(norm(tokens[i]?.[0])) && !midClauseDoch(sentence,tokens,i) && !nounCoordination(i) && !infinitivePair(i) && !memberCoordination(i) && !adverbDamit(i) || norm(tokens[i]?.[0])==='als'&&!nominalAls(i)&&!roleAls(i);
@@ -9592,7 +9604,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (also under haben / hätte — daß er fast den Spieß hätte fallen lassen und ihm der Angstschweiß … ausbrach:
           // the subject may follow a dative — ihm der Angstschweiß —, the part closes with a finite form that is no infinitive)
           if(!independent && next<tokens.length && words(end+1)==='und' && (outer===null||outer<l) && l===end && connected(end+1,next)) {
-            if(['weil','dass','daß','wenn','ob','obwohl','während','falls','damit','sobald','bevor','nachdem','wo','wie'].includes(words(next)))independent=true;
+            if((isPureSubordinator(words(next)) || ['während','damit','wo','wie'].includes(words(next))))independent=true;
             else {
               let t=next;while(t+1<tokens.length&&connected(t,t+1)&&!['und','oder','aber','denn','sondern'].includes(words(t+1)))t++;
               // Can token j be a subject (a personal pronoun, determiner + capital, a capital word)?
@@ -10415,10 +10427,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'directionRequirementMet');
       const index = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (index < 0) return true;
-      const BOUNDARY = /^(?:und|oder|aber|denn|sondern|weil|dass|daß|wenn|ob|als|bevor|nachdem|während|damit)$/u;
-      let start = index, end = index;
-      while (start > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,start-1,start)) && !BOUNDARY.test(norm(tokens[start-1][0]))) start--;
-      while (end+1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end,end+1)) && !BOUNDARY.test(norm(tokens[end+1][0]))) end++;
+      const BOUNDARY = {test: w => w !== "doch" && clauseBoundaries.werden.has(w)};
+      let {start, end} = partSpanAt(sentence,tokens,index,{marks:GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL, words:BOUNDARY, subordinators:false, openerOut:true});
       // (the prepositions of each complement: «gegen / in + Akkusativ» — gegen and in, both with the accusative)
       const own = cardPatterns(card)
         .flatMap(q => { const m = /^([a-zäöü\s\/]+?)\s*\+\s*(Akkusativ|Dativ)/u.exec(q.trim()); return m ? m[1].split(/\s*\/\s*/u).map(p => [norm(p.trim()),m[2]]) : []; });
@@ -10503,8 +10513,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Is there a lower-case finite verb after token k in the connected words?
       const finiteAfter = k => { for (let j = k+1; j < tokens.length && connected(j-1,j); j++) if (verbRowsAt(tokens,j).some(a => a.kind === "finite") && /^\p{Ll}/u.test(tokens[j][0])) return true; return false; };
       // Is the word at k a boundary word of the part (not inside a set phrase)?
-      const boundary = k => PART_BOUNDARY_WORDS.has(norm(tokens[k][0])) &&
-        !(PARTICLE_CONJ.has(norm(tokens[k][0])) && k > 0 && connected(k-1,k) && !PART_BOUNDARY_WORDS.has(norm(tokens[k-1][0])) && (k > index ? !finiteAfter(k) : !finiteBefore(k)));
+      const boundary = k => PART_BOUNDARY_WORDS.has(norm(tokens[k][0]),sentence,tokens,k) &&
+        !(PARTICLE_CONJ.has(norm(tokens[k][0])) && k > 0 && connected(k-1,k) && !PART_BOUNDARY_WORDS.has(norm(tokens[k-1][0]),sentence,tokens,k-1) && (k > index ? !finiteAfter(k) : !finiteBefore(k)));
       let start = index, end = index;
       while (start > 0 && connected(start-1,start) && !boundary(start-1)) start--;
       while (end+1 < tokens.length && connected(end,end+1) && !boundary(end+1)) end++;
@@ -11082,9 +11092,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const heads = before.filter(x => /^\p{Lu}/u.test(x.t) && x.i > start || SUBJECT_PRONOUNS.has(x.w));
       // A clause of its own: the sentence start or after punctuation, not after a conjunction (und die Augen
       // aufschlug, weil das Eis brach); then a final verb is verb-second too (Das Seil riss).
-      const SUBORD = /^(?:und|oder|aber|dass|daß|weil|wenn|ob|als|bevor|nachdem|bis|während|obwohl|da|damit|falls|sobald|wie|der|die|das|den|dem|deren|dessen|welche[rsnm]?|wer|was|wo)$/u;
-      const ownClause = (start === 0 || GAP_SENTENCE_NO_COMMA.test(tokenGap(sentence,tokens,start-1,start))) && !(start === index - 1 && SUBORD.test(norm(tokens[start][0])) && !/^\p{Lu}/u.test(tokens[index-1]?.[0] ?? "x"));
-      const firstIsSubordinator = before.length && SUBORD.test(before[0].w) && !nounAt(before[0].i+1);
+      const SUBORD = {at: k => /^(?:und|oder|aber)$/u.test(norm(tokens[k][0])) || opensSubordinatePartAt(sentence,tokens,k)};
+      const ownClause = (start === 0 || GAP_SENTENCE_NO_COMMA.test(tokenGap(sentence,tokens,start-1,start))) && !(start === index - 1 && SUBORD.at(start) && !/^\p{Lu}/u.test(tokens[index-1]?.[0] ?? "x"));
+      const firstIsSubordinator = before.length && SUBORD.at(before[0].i) && !nounAt(before[0].i+1);
       // (an imperative has no subject — nothing before it in its part counts as the subject: Fahr vorsichtig! «ехать»)
       const subjectOnly = imperativeTap && !before.length && !heads.length ||
         before.length && before.length <= 4 && heads.length <= 1 && (!finalVerb || ownClause && !firstIsSubordinator);
@@ -11138,10 +11148,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // masculine noun is the subject alone — no object (als / bis der Tag anbrach «наступать»).
       // (by the tokens: a subordinator — als, bis, wenn, weil, dass … — right before der, lowercase modifiers, one masculine noun,
       // then only prepositional phrases up to the verb at the end)
-      const SUB_OPENERS = /^(?:als|bis|wenn|weil|dass|daß|ob|nachdem|bevor|während|sobald|wo|wie|da|obwohl)$/u;
+      const SUB_OPENERS = {at: k => subordinatorAt(sentence,tokens,k) || /^(?:wo|wie)$/u.test(norm(tokens[k][0]))};
       if (finalVerb && !accusative && !dative) {
         let d = -1; for (let k = index-1; k >= Math.max(0,start-1); k--) if (norm(tokens[k][0]) === "der") { d = k; break; }
-        const opener = d > 0 && SUB_OPENERS.test(norm(tokens[d-1][0]));
+        const opener = d > 0 && SUB_OPENERS.at(d-1);
         let n = d+1; while (n < index && /^\p{Ll}/u.test(tokens[n][0]) && LOWERCASE_DECLINED_WORD.test(tokens[n][0])) n++;
         const nounOk = opener && n < index && /^\p{Lu}/u.test(tokens[n][0]) && masculineOwn(n);
         const restOk = nounOk && (n+1 === index || prepositions.has(norm(tokens[n+1][0])) &&
@@ -11156,7 +11166,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Closed: the verb ends its clause, a conjunction or the sentence end follows, or every later comma segment of the sentence is
       // a clause of its own (finite verb or zu + infinitive) or a single word (Harry, nun) — not a bare noun phrase (…, die Prüfung).
       const closed = finalVerb && firstIsSubordinator || end === tokens.length - 1 || /^[\s»«„“"')]*[.!?;:]/u.test(tail) || /^[\s»«„“"')]*[«»„“"]/u.test(tail) ||
-        end + 1 < tokens.length && connected(end,end+1) && PART_BOUNDARY_WORDS.has(norm(tokens[end+1][0])) ||
+        end + 1 < tokens.length && connected(end,end+1) && PART_BOUNDARY_WORDS.has(norm(tokens[end+1][0]),sentence,tokens,end+1) ||
         /^\s*[,–—]\s*(?:und|oder|aber|denn|doch|sondern)\b/iu.test(tail) || (() => {
           if (!/^\s*[,–—]/u.test(tail)) return false;
           let k = end + 1;
@@ -11503,7 +11513,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (sein-state draft, external-perfect-qa: a personal subject pronoun and a noun phrase with an article between sein and the
         // participle — Er ist das Bild betrachtet — is no state: the state's subject is the participle's object, there is no second one)
         const stateWithObject = (h,t) => { const lo = Math.min(h,t), hi = Math.max(h,t);
-          const text = String(context?.sentence || ""); let start = lo; while (start > 0 && !GAP_SENTENCE.test(tokenGap(text,tokens,start-1,start))) start--;
+          const text = String(context?.sentence || ""); let start = partStartAt(text,tokens,lo,byMarks(GAP_SENTENCE));
           const pronoun = tokens.slice(start,hi).some(x => /^(?:ich|du|er|wir|ihr)$/u.test(norm(x[0])));
           const phrase = tokens.slice(lo+1,hi).some((x,n) => /^(?:der|die|das|den|ein|eine|einen)$/u.test(norm(x[0])) && /^\p{Lu}/u.test(tokens[lo+2+n]?.[0] ?? ""));
           return pronoun && phrase; };
@@ -11917,7 +11927,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const MODAL_PREPOSITION = {test:w => /^(?:in|an|auf|über|unter|nach|zu|aus|von|mit|bei|durch|für|gegen|ohne|um|vor|hinter|neben|zwischen|seit|bis|bey)$/u.test(basePreposition(w))};
     const MODAL_PERSONAL = /^(?:ich|du|er|sie|es|wir|ihr|man|mich|dich|ihn|uns|euch|mir|dir|ihm|ihnen|dies|das|was|wer|jemand|niemand|alles|nichts|etwas)$/u;
     const MODAL_OBJECT_ONLY = /^(?:mich|dich|ihn|einen|den|(?:der|die|das|den|dem|des)selben?)$/u;
-    const MODAL_CLAUSE_OPENER = /^(?:als|weil|wenn|da|dass|daß|ob|wo|wohin|woher|aber|sondern|denn|so|und|oder|der|die|das|dem|den|welche[rnms]?|ich|du|er|sie|es|wir|ihr|man|was|wie|damit|bevor|nachdem|während|um|indem|doch|dann|bis|sobald|seit|seitdem|obwohl|falls|sonst|ehe)$/u;
+    const MODAL_CLAUSE_OPENER = {test: w => isPureSubordinator(w) || /^(?:als|da|wo|wohin|woher|aber|sondern|denn|so|und|oder|der|die|das|dem|den|welche[rnms]?|ich|du|er|sie|es|wir|ihr|man|was|wie|damit|während|um|doch|dann|bis|seit|sonst|ehe)$/u.test(w)};
     // A modal with a direction and no infinitive (Ich muss nach Hause, Die Kinder müssen fort, muss ein neuer Berg her): «Modal +
     // Richtung»; null when an infinitive or an object stands in the part.
     async function modalDirectionGroup(word, context, candidates = []) {
@@ -12274,13 +12284,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // mein / unser are also archaic genitives of ich / wir (gedenke mein).
       if (index < 0 || !/^(?:(?:sein|ihr)(?:e|en|em|er|es|s)?|(?:mein|dein|unser|euer|eur)(?:e|en|em|er|es)?)$/u.test(norm(word)))
         return null;
-      // Punctuation blocks clues: do not join separate clauses or quoted phrases.
-      const adjacent = (a,b) => !GAP_SENTENCE_BRACKETS_QUOTES_HIGH_HIGHCLOSE_LOW_STRAIGHT.test(context.sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index));
+      // Punctuation blocks clues: do not join separate clauses or quoted phrases. (the part of the grammar rows: grammarClauseBounds)
+      const adjacent = (a,b) => !GRAMMAR_PART.marks.test(partGapText(context.sentence,tokens,a,b));
       const next = index + 1, previous = index - 1;
-      const boundaryWords = new Set(["und","oder","aber","denn","sondern","weil","dass","daß","wenn","ob","doch"]);
-      let start = index, end = index;
-      while (start > 0 && adjacent(start-1,start) && !boundaryWords.has(norm(tokens[start-1][0]))) start--;
-      while (end + 1 < tokens.length && adjacent(end,end+1) && !boundaryWords.has(norm(tokens[end+1][0]))) end++;
+      const {start, end} = grammarClauseBounds(String(context.sentence || ""),tokens,index);
       // The own cards of token i.
       const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
       // Has the word at i an adjective reading (a card, or an adjective ending of a known stem)?
@@ -12319,8 +12326,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // A name directly before the finite verb is useful evidence, but a
         // dictionary noun may be a fronted object and must not settle the role.
         verbIndex > start && /^[A-ZÄÖÜ]/u.test(tokens[verbIndex-1][0]) && !matches(verbIndex-1).length;
-      let coordinatedStart = Math.max(0,start-2);
-      while (coordinatedStart > 0 && adjacent(coordinatedStart-1,coordinatedStart) && !boundaryWords.has(norm(tokens[coordinatedStart-1][0]))) coordinatedStart--;
+      // (the part before und, when und opens this one)
+      const coordinatedStart = start >= 2 ? grammarClauseBounds(String(context.sentence || ""),tokens,start-2).start : 0;
       const coordinatedFirst = tokens[coordinatedStart]?.[0] || "";
       const inheritedSubject = previous === start && start > 0 && norm(tokens[start-1][0]) === "und" &&
         (personalSubjects.has(norm(coordinatedFirst)) || coordinatedStart < start-2 && /^[A-ZÄÖÜ]/u.test(coordinatedFirst) && !matches(coordinatedStart).length);
@@ -12732,7 +12739,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             (teAdverb(tokens[k+1][0]) || teSeriesAttribute(tokens[k+1][0], ending))) continue;
           return -1;
         }
-        if (["sowie","aber","sondern","wie","dass","daß","ob","weil","wenn"].includes(w)) return -1;
+        if ((isPureSubordinator(w) || ['sowie','aber','sondern','wie'].includes(w))) return -1;
         if (/^\p{Lu}/u.test(t)) { if (grammaticalWords.has(w) && !pending) return -1; pending = true; state.clean = false; continue; }
         // a dative personal pronoun or sich right after the determiner is part of the frame — die ihm bekannten Gegenden,
         // das ihm verhasste Papsttum, eine sich entwickelnde Krankheit, die sich nähernden Schritte; not after a comma (the relative: …,
@@ -13622,10 +13629,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if ((!r.cases?.size || r.cases.has(grammaticalCase)) && group.modifiers.every(m => m.invariant || m.endings.has(ending))) cases.add(grammaticalCase);
       return cases;
     }
-    // Conjunction cards whose word order ends in the finite verb are subordinators;
-    // "X · Subjekt · Verb" cards coordinate clauses.
-    const conjunctionKind = entry => /·\s*…\s*·\s*\*\*Verb\*\*\s*$/u.test(entry?.word_order_pattern || "") ? "subordinating" :
-      /^\S+\s*·\s*Subjekt\s*·\s*\*\*Verb\*\*/u.test(entry?.word_order_pattern || "") ? "coordinating" : null;
     // Features of a determiner that agree with the head and every modifier.
     function agreeingFeatures(features, group, governed) {
       return features.filter(f => (!governed?.size || governed.has(f.case)) &&
@@ -13972,8 +13975,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Do the words open a subordinate clause (a subordinator, a w-word, a relative)?
       const subordinate = words => {
         const a = norm(words[0] || ''), b = norm(words[1] || '');
-        return ['weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','falls','sobald','da','seit','seitdem',
-          'bis','indem','sodass','ehe','solange','wie'].includes(a) || (forms.get(a) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
+        return isSubordinator(a) || a === 'wie' ||
           RELATIVE.includes(a) && /^\p{Ll}/u.test(words[0]) && !(words[1] && /^\p{Lu}/u.test(words[1])) ||
           !!prepositionCardsByForm.get(a) && RELATIVE.includes(b) && !(words[2] && /^\p{Lu}/u.test(words[2]) && !verbish(words[2]));
       };
@@ -14111,7 +14113,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const before = rest.slice(0,rest.length - chunk.length);
           // Is x a subordinating conjunction?
           const subWord = x => (forms.get(x) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
-            ['wie','als','wenn','dass','daß','weil','ob','während','nachdem','bevor','obwohl','sobald','solange','bis','damit','falls','indem','ehe','seit','seitdem'].includes(x);
+            (isPureSubordinator(x) || ['wie','als','während','bis','damit','ehe','seit'].includes(x));
           // (also a two-word opener: so dass, als ob, auch wenn, ohne dass, anstatt dass)
           const subordinating = subWord(first) || /^(?:so|als|auch|ohne|anstatt|statt|selbst)$/u.test(first) && subWord(norm(words[1] || ''));
           // (also a relative clause opened after an earlier comma: ein Fluss, der im Département Oise, in der Region Picardie verläuft)
@@ -14152,7 +14154,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const x = norm(tokens[i][0]);
           if (!['und','oder','aber'].includes(norm(tokens[i-1][0]))) continue;
           if ((forms.get(x) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
-            ['weil','dass','daß','wenn','ob','obwohl','nachdem','während','damit','falls','sobald','bevor','als','wie'].includes(x)) return endFiniteMemo = false;
+            (isPureSubordinator(x) || ['während','damit','als','wie'].includes(x))) return endFiniteMemo = false;
         }
         if (!noun || !verbRows(end).some(r => r.kind === 'infinitive' || r.kind === 'participle')) return endFiniteMemo = true;
         // (a modal / werden before the comma owns an infinitive at the end: Im Mittelpunkt sollen der Austausch von Beschäftigten, die
@@ -14296,28 +14298,117 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     //   window — a finite verb right after the word and then «:» or a quote (…, der sprach: »…«);
     //   «который» — after a comma (or «, preposition»): the part ends with a verb form (…, die es nicht durchbrechen konnte), the
     //           verb right after it is the whole part (…, der fragte, wer …) or a joined separable form (…, der aussah wie …).
-    // Shared: the part that starts at token `start` runs to the
-    // first punctuation mark; partEnd gives its last token, partEndsWithFiniteVerb says whether that token is an own finite verb form
+    // ── The boundary of a part of the sentence: one core, read by every part scanner. A scanner names only what its role needs: which
+    // marks end a part, whether und / oder / aber … cut every member or only a clause of its own, whether subordinators cut (an
+    // expression keeps als ob, so dass in one part). The joins below hold for any text and live here only.
+    // The kind of a subordinator by its cards, read once per word: "pure", "sign" (only with the verb-final sign) or null. A word with
+    // another reading in any source is "sign": an own card of another part of speech, or a reading of the external dictionary
+    // (seitdem, soviel — adverbs there; readSubordinatorReadings before the tap; a noun reading is capitalised and does not count).
+    const subordinatorKinds = new Map(), subordinatorOtherReadings = new Set();
+    function subordinatorKind(w) {
+      if (!subordinatorKinds.has(w)) { const cards = forms.get(w) || forms.get(w.replace(/ß/gu,"ss")) || [];
+        subordinatorKinds.set(w, !cards.some(e => e.type === "Konjunktion" && conjunctionKind(e) === "subordinating") ? null :
+          cards.every(e => e.type === "Konjunktion") && w !== "als" ? "pure" : "sign"); }
+      const kind = subordinatorKinds.get(w);
+      return kind === "pure" && subordinatorOtherReadings.has(w) ? "sign" : kind;
+    }
+    // Read the external readings of the pure subordinators of a sentence once per word (subordinatorKind).
+    const subordinatorReadingsRead = new Set();
+    async function readSubordinatorReadings(sentence) {
+      for (const t of sharedTokens(String(sentence || ""),'readSubordinatorReadings')) {
+        const w = norm(t[0]);
+        if (subordinatorReadingsRead.has(w) || subordinatorKind(w) !== "pure") continue;
+        let groups;
+        try { groups = await lexicalLookup(w,'readSubordinatorReadings'); } catch (_) { continue; }
+        subordinatorReadingsRead.add(w);
+        if ((groups || []).some(g => norm(g.word || "") === w && canonicalPos(g.pos) && !["Konjunktion","Nomen"].includes(canonicalPos(g.pos))))
+          subordinatorOtherReadings.add(w);
+      }
+    }
+    // Is the word a subordinator of the cards (with or without the verb-final sign)?
+    const isSubordinator = w => subordinatorKind(w) !== null;
+    // Does the word open a part after a comma (a pure subordinator of the cards or COMMA_PART_OPENER_WORDS)?
+    const commaPartOpener = w => isPureSubordinator(w) || COMMA_PART_OPENER_WORDS.has(w);
+    // Is the word a subordinator of the cards that is nothing else (dass, weil, wenn, obwohl …)?
+    // (by the own cards: the word lists that read a subordinator without its place — the place-bound sign of another reading is the
+    // core's, subordinatorOpensAt / PART_BOUNDARY_WORDS)
+    const isPureSubordinator = w => (subordinatorKind(w), subordinatorKinds.get(w) === "pure");
+    // Does the word open a subordinate part by itself: a subordinator, a question word or a relative word?
+    const opensSubordinatePart = w => isSubordinator(w) || isQuestionWord(w) || RELATIVE_WORDS.has(w);
+    // A comma-enclosed inserted clause opened by a relative word, wie / wo / als / während or a pure subordinator of the cards
+    // (, wie …, / , der …, / , obwohl …,), for matchAll.
+    const INSERTED_CLAUSE_SPAN = new RegExp(`,\\s*(?:wie|während|als|wo|${[...RELATIVE_WORDS, ...entries.filter(e => e?.type === "Konjunktion" &&
+      conjunctionKind(e) === "subordinating").map(e => norm(e.word)).filter(w => subordinatorKind(w) === "pure").flatMap(w => [w, oldSpelling(w)])].join("|")})\\b[^,;:.!?]*,`, "gu");
+    // The words that open an inserted clause (, der …, / , wenn …,): a relative word, wo / wie / was / wer, a subordinator of the cards.
+    const insertedClauseOpener = w => RELATIVE_WORDS.has(w) || /^(?:wo|wie|was|wer)$/u.test(w) || isSubordinator(w);
+    // The same three at the word's place (token i): a subordinator with another reading only with its sign (subordinatorOpensAt); als
+    // always, as the word lists of main (Da bin ich mir sicher — da is the adverb there).
+    const subordinatorAt = (sentence, tokens, i) => !!tokens[i] && (norm(tokens[i][0]) === "als" || subordinatorOpensAt(sentence,tokens,i));
+    const opensSubordinatePartAt = (sentence, tokens, i) => !!tokens[i] && (isQuestionWord(norm(tokens[i][0])) || RELATIVE_WORDS.has(norm(tokens[i][0])) ||
+      subordinatorAt(sentence,tokens,i));
+    const insertedClauseOpenerAt = (sentence, tokens, i) => !!tokens[i] && (RELATIVE_WORDS.has(norm(tokens[i][0])) ||
+      /^(?:wo|wie|was|wer)$/u.test(norm(tokens[i][0])) || subordinatorAt(sentence,tokens,i));
+    // Does a subordinating word open a part at token i? A conjunction card whose word order ends in the finite verb (conjunctionKind).
+    // A word that is something else too — another card of its own (seit, bis, während: a preposition; da, damit, insofern: an adverb) or
+    // the comparison particle als — only with the verb-final sign of its part (damitOpensPart): seit drei Jahren, bis morgen, größer als
+    // ich, Er war da, Damit hatte er nicht gerechnet stay one part.
+    function subordinatorOpensAt(sentence, tokens, i) {
+      const kind = subordinatorKind(norm(tokens[i][0]));
+      // (the sign of a word with another reading is a finite verb only — seitdem, soviel, bevor, ob, seit, bis …; als, the word of a
+      // comparison or a predicative, keeps the participle at the end as its sign too, as on main: sich … als sehr schlecht informiert)
+      return kind === "pure" || kind === "sign" && damitOpensPart(sentence,tokens,i,{finiteOnly:norm(tokens[i][0]) !== "als"});
+    }
+    // Does a new part start at token i? rule: {marks — the marks between token i-1 and i that end a part (a GAP_ set); coordinators —
+    // "every": und / oder / aber / denn / sondern / doch cut every member of the sentence, an enumeration too (doch inside the part stays
+    // the particle: midClauseDoch), "clause": und / oder only before a clause of its own (coordinatorOpensClause), "clauseAfter": the same
+    // with und / oder left in the part before; words — more words of
+    // the role that always cut; subordinators — false when they do not cut}.
+    function partBreakBefore(sentence, tokens, i, rule) {
+      if (i <= 0 || i >= tokens.length) return true;
+      return rule.marks.test(rule.rawGap ? tokenGap(sentence,tokens,i-1,i) : partGapText(sentence,tokens,i-1,i)) || wordOpensPart(sentence,tokens,i,rule);
+    }
+    // Does the word at token i open a part by itself (a coordinator, a word of the role, a subordinator — the rule's words, not its marks)?
+    function wordOpensPart(sentence, tokens, i, rule) {
+      const w = norm(tokens[i][0]);
+      if (rule.coordinators === "every" && (CLAUSE_COORDINATOR_WORD.test(w) || w === "doch")) return !midClauseDoch(sentence,tokens,i);
+      if (rule.words?.test(w)) return true;
+      if (rule.coordinators === "clause" && i+1 < tokens.length && coordinatorOpensClause(tokens,i+1,sentence,rule.participles)) return true;
+      // ("clauseAfter": the same, but und / oder stays with the part before it — the new part opens with the word after it)
+      if (rule.coordinators === "clauseAfter" && coordinatorOpensClause(tokens,i,sentence,rule.participles)) return true;
+      return rule.subordinators !== false && subordinatorOpensAt(sentence,tokens,i);
+    }
+    // The member of the sentence between two marks or coordinators (und / oder / aber / denn / sondern stay out of it).
+    const COORDINATED_MEMBER = Object.freeze({marks:GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL, words:CLAUSE_COORDINATOR_WORD, subordinators:false, openerOut:true});
+    // The rule of a scanner that only marks end.
+    // (rawGap: the text between the tokens as written, without the joins of partGapText — a spaced hyphen is no dash there: the
+    // participle-modifier spans, Das Dünenrosengebüsch (Roso pimpinellifolii - Salicetum arenariae) besiedelt …)
+    const byMarks = (marks, rawGap = false) => ({marks, subordinators:false, rawGap});
+    // The first token of the part of token at.
+    function partStartAt(sentence, tokens, at, rule) { while (!partBreakBefore(sentence,tokens,at,rule)) at--; return at; }
+    // The last token of the part of token at.
+    function partEndAt(sentence, tokens, at, rule) { while (!partBreakBefore(sentence,tokens,at+1,rule)) at++; return at; }
+    // The part around token at: {start, end, opener} — start is its first token, the word that opens it too (opener: also after a mark or
+    // at the start of the sentence — , weil … / Weil …); with rule.openerOut that word stays out (unless it is the token at itself).
+    function partSpanAt(sentence, tokens, at, rule) {
+      const start = partStartAt(sentence,tokens,at,rule), opener = wordOpensPart(sentence,tokens,start,rule);
+      return {start: rule.openerOut && opener && start < at ? start+1 : start, end: partEndAt(sentence,tokens,at,rule), opener};
+    }
+    // The part that starts at token `start` runs to the
+    // first mark of any kind (only white space inside it); partEnd gives its last token, partEndsWithFiniteVerb says whether that token is an own finite verb form
     // (lowercase, not a detached prefix verb; ß / ss both) — the verb-final sign of a subordinate part. Used for der / die / das
     // by the place of the verb) and meant for damit as well (damit before a verb-final part is the conjunction).
     // (`numbers`: a number between two words is no boundary — bis 3 Leute kommen, bis 1999 auch die Post …)
+    const PART_END_PLAIN = Object.freeze({marks:/\S/u, subordinators:false}), PART_END_NUMBERS = Object.freeze({marks:/[^\s\d%]/u, subordinators:false});
     function partEnd(sentence, tokens, start, {numbers = false} = {}) {
-      let end = start;
-      // Is the gap white space only (with numbers, when they are allowed)?
-      const plain = g => /^\s+$/u.test(g) || numbers && /^\s+[\d%]+(?:\s+[\d%]+)*\s+$/u.test(g.replace(/(\d)[.,:](?=\d)/gu,'$1'));
-      while (end+1 < tokens.length && plain(tokenGap(sentence,tokens,end,end+1))) end++;
-      return end;
+      return partEndAt(sentence,tokens,start,numbers ? PART_END_NUMBERS : PART_END_PLAIN);
     }
-    // Does the part stop right after token i: a sentence sign, comma, bracket or quote (partSignBetween), the end of the sentence — not
-    // a number after it (siegten mit 6:4.) — or a clause coordinator with a finite verb right after it (strahlte ihm entgegen und lachte)?
-    // (unlike partStopsAfter: a comma stops it, a dash or an ellipsis does not, a number after the last word is no end, and und + a
-    // finite verb is an end too)
+    // Does the part stop right after token i: the end of the sentence, a sentence sign, comma, bracket or quote, und / oder before a
+    // clause of its own (strahlte ihm entgegen und lachte) or a subordinator — not a number after it (siegten mit 6:4.)? A dash or an
+    // ellipsis does not stop it (unlike partStopsAfter).
+    const PART_STOP_RIGHT_AFTER = Object.freeze({marks:GAP_SENTENCE_BRACKETS_QUOTES_ALL, coordinators:"clause"});
     function partStopsRightAfter(sentence, tokens, i) {
       const rest = i+1 < tokens.length ? tokenGap(sentence,tokens,i,i+1) : sentence.slice(tokens[i].index+tokens[i][0].length);
-      if (/^\s*\p{N}/u.test(rest)) return false;
-      if (i+1 >= tokens.length || partSignBetween(sentence,tokens,i,i+1)) return true;
-      return i+2 < tokens.length && CLAUSE_COORDINATOR_WORD.test(norm(tokens[i+1][0])) && joinedTokens(sentence,tokens,i,i+1) &&
-        joinedTokens(sentence,tokens,i+1,i+2) && verbRowsAt(tokens,i+2).some(a => a.kind === 'finite');
+      return !/^\s*\p{N}/u.test(rest) && partBreakBefore(sentence,tokens,i+1,PART_STOP_RIGHT_AFTER);
     }
     // The verb analyses of a lower-case spelling, also with ß written ss; a Swiss ss spelling with no analyses of its own is read
     // with ß as a second try (heisst — heißt; wissen, müssen have their own).
@@ -14379,7 +14470,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!alone) return end > start && finiteVerbToken(tokens[end]);
       const inserted = new Set();
       // (the part goes on after it — not with a preposition: bis zwei Meilen von des Königs Hauptstadt, wo eine Mühle war, an dessen Wehr …)
-      for (let b; end+1 < tokens.length && INSERTED_CLAUSE_OPENERS.has(norm(tokens[end+1][0])) && (b = finishedClauseAfter(sentence,tokens,end)) > 0 &&
+      for (let b; end+1 < tokens.length && insertedClauseOpenerAt(sentence,tokens,end+1) && (b = finishedClauseAfter(sentence,tokens,end)) > 0 &&
           !prepositions.has(norm(tokens[b+1][0]));) {
         for (let i = end+1; i <= b; i++) inserted.add(i);
         end = partEnd(sentence,tokens,b+1,{numbers:true});
@@ -14410,7 +14501,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // chain is closed by an infinitive / participle / particle before damit (Er ließ sie warten damit sie nervös werden — conjunction).
     // A joined separable form without its own row counts as the finite verb (particle + own finite form: … damit die Luft hereinkommt).
     // A part before it with neither its own finite verb nor a subordinator (– nur damit du … schreibst) — damit opens the part.
-    const DAMIT_SUBORDINATORS = new Set(['dass','daß','weil','wenn','ob','als','obwohl','obgleich','während','bevor','nachdem','damit','sodass','sodaß','indem','falls','sobald','solange','seit','seitdem','bis','wer','was','wie','wo','wohin','woher','warum','weshalb','wieso','welche','welcher','welches','welchen','welchem']);
     const DAMIT_CHAIN_FINITE = /^(?:wird|wirst|werden|werdet|wurde|wurden|wurdest|ward|würde|würden|würdest|ist|bist|sind|seid|war|waren|warst|wäre|wären|hat|hast|haben|habt|hatte|hatten|hattest|hätte|hätten|kann|kannst|können|könnt|konnte|konnten|könnte|könnten|muss|muß|musst|mußt|müssen|müsst|musste|mußte|mussten|mußten|müsste|müßte|müssten|müßten|soll|sollst|sollen|sollt|sollte|sollten|will|willst|wollen|wollt|wollte|wollten|darf|darfst|dürfen|durfte|durften|dürfte|dürften|mag|magst|mögen|mochte|mochten|möchte|möchten|lässt|läßt|lasst|laßt|lassen|ließ|ließen|ließe|liess|liessen)$/u;
     // während inside the part is the preposition + genitive only before a genitive word (des, der,
     // eines, dieses …, a noun) and with the closing verb of the part after its phrase — the part ends with an infinitive, a
@@ -14424,7 +14514,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!(WAEHREND_GENITIVE.test(norm(next)) || /^\p{Lu}/u.test(next) || LOWERCASE_DECLINED_WORD.test(next) && /^\p{Lu}/u.test(tokens[k+2]?.[0] ?? ""))) return false;
       // (the end of the part: the next punctuation mark — a number between words does not end it, unlike partEnd)
       let end = k;
-      while (end+1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end,end+1))) end++;
+      end = partEndAt(sentence,tokens,end,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       let last = tokens[end];
       if (end <= k+1 || !/^\p{Ll}/u.test(last[0])) return false;
       // The part of a subordinate clause ends with its auxiliary or modal after the participle /
@@ -14432,33 +14522,37 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // with a genitive word right after während (während die Kinder gespielt haben stays the conjunction; a main clause — wurde während
       // des Krieges ruiniert und konnte … verpachtet werden — is not read this way)
       let start = k;
-      while (start > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,start-1,start))) start--;
+      start = partStartAt(sentence,tokens,start,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       if (end > k+2 && start < k && WAEHREND_GENITIVE.test(norm(next)) &&
-          start > 0 && /^(?:wie|ob|dass|daß|weil|wenn|als|obwohl|nachdem|bevor|sobald|da|wo|warum|weshalb|wann|was|wer|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?)$/u.test(norm(tokens[start][0])) && /^\p{Ll}/u.test(tokens[end-1][0]) &&
+          start > 0 && (isPureSubordinator(norm(tokens[start][0])) || /^(?:wie|als|da|wo|warum|weshalb|wann|was|wer|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?)$/u.test(norm(tokens[start][0]))) && /^\p{Ll}/u.test(tokens[end-1][0]) &&
           (verbAnalyses.get(norm(last[0])) || []).some(r => r.kind === 'finite' && AUXILIARY_AND_MODAL_WORD.test(r.base || ''))) last = tokens[end-1];
       const f = norm(last[0]);
       return SEPARABLE_PARTICIPLE_PARTICLES.split('|').includes(f) ||
         verbRowsOf(f).some(r => r.kind === 'infinitive' || r.kind === 'participle');
     }
-    // (`finiteBefore`, bis — only after a finite verb of its own in the part before the word)
-    function damitOpensPart(sentence, tokens, k, {finiteBefore = false} = {}) {
+    // (`finiteBefore`, bis — only after a finite verb of its own in the part before the word; `finiteOnly` — the verb at the end is a
+    // finite verb only, not a participle form: hätte sein Bruder soviel … bekommen, als bester Angreifer ausgezeichnet)
+    function damitOpensPart(sentence, tokens, k, {finiteBefore = false, finiteOnly = false} = {}) {
       // (the part of damit stops before a subordinator without its comma: rechnet damit dass sie kommt, hört damit auf wenn …)
       let end = partEnd(sentence,tokens,k);
-      for (let i = k+1; i <= end; i++) if (DAMIT_SUBORDINATORS.has(norm(tokens[i][0]))) { end = i-1; break; }
+      // (a subordinator, a question word or welche- of its own part)
+      const stopAt = i => isSubordinator(norm(tokens[i][0])) || isQuestionWord(norm(tokens[i][0])) || /^welche[rsnm]?$/u.test(norm(tokens[i][0]));
+      for (let i = k+1; i <= end; i++) if (stopAt(i)) { end = i-1; break; }
       if (!(end > k && (finiteVerbToken(tokens[end]) || joinedFiniteToken(tokens[end])))) return false;
+      if (finiteOnly && verbRowsAt(tokens,end).some(r => r.kind === 'participle')) return false;
       if (norm(tokens[end-1]?.[0] ?? '') === 'zu' && end-1 > k) return false;
-      let start = k;
-      while (start > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,start-1,start))) start--;
+      // (finiteOnly: quotes stay inside the part — obwohl die Bahn von "EDML" sich seit Jahren dort befindet: obwohl opens it)
+      const start = partStartAt(sentence,tokens,k,byMarks(finiteOnly ? GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS : GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       // (the first word of the part may be a capitalised finite verb: Kann man damit wirklich fahren?)
       const finiteAt = i => finiteVerbToken(tokens[i]) || i === start && verbRowsAt(tokens,i).some(r => r.kind === 'finite' && !r.detached);
       const before = [];
       for (let i = start; i < k; i++) before.push(i);
       const finites = before.filter(finiteAt);
       const lastFinite = finites.length ? finites[finites.length-1] : -1;
-      if (before.some(i => i > lastFinite && DAMIT_SUBORDINATORS.has(norm(tokens[i][0])))) return false;
+      if (before.some(i => i > lastFinite && stopAt(i))) return false;
       if (lastFinite < 0) return !finiteBefore;
       // (finiteBefore: no relative pronoun after that verb either — und die ihn bis nach Rostock führte)
-      if (finiteBefore && before.some(i => i > lastFinite && INSERTED_CLAUSE_OPENERS.has(norm(tokens[i][0])) && /^\p{Ll}/u.test(tokens[i][0]) &&
+      if (finiteBefore && before.some(i => i > lastFinite && insertedClauseOpener(norm(tokens[i][0])) && /^\p{Ll}/u.test(tokens[i][0]) &&
         !/^\s+\p{Lu}/u.test(tokenGap(sentence,tokens,i,i+1) + tokens[i+1][0]))) return false;
       // (an auxiliary / modal / lassen chain is still open before damit — no infinitive, participle or detached particle closes it
       // between them: konnte damit … erreicht werden; not ließ sie warten damit …, hat gespart damit …, ließ das Licht an damit …)
@@ -14498,7 +14592,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (an object clause after the verb is no more words of the part: Leute, die fragten wer es wäre)
         // (two verbs joined by und / oder and nothing else — der kam und ging: both may be the end of a relative clause; the window,
         if (end === index+3 && ['und','oder'].includes(norm(tokens[index+2][0])) && verbRowsAt(tokens,end).length) return null;
-        if (end > index+1 && !['wer','was','wie','wo','ob','dass','daß'].includes(norm(tokens[index+2][0]))) return 'demonstrative';
+        if (end > index+1 && !(isPureSubordinator(norm(tokens[index+2][0])) || ['wer','was','wie','wo'].includes(norm(tokens[index+2][0])))) return 'demonstrative';
       }
       // (a part ending (no finite verb right after the word) in zu + infinitive: das is its object — das zu vertuschen; der / die — not sure)
       if (norm(tokens[end-1]?.[0] || '') === 'zu' || verbRowsAt(tokens,end).some(r => r.zu)) return norm(tokens[index][0]) === 'das' ? 'demonstrative' : null;
@@ -14507,7 +14601,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!afterComma) return null;
       if (joinedSeparableOnly(tokens,index+1)) return 'relative';
       // (a verb alone after the comma: a relative only after a noun that fits it — …, der fragte, wer; not Die Potters, das stimmt; ich hoffe nur, das reicht)
-      if (finite(index+1) && (end === index+1 || ['wer','was','wie','wo','ob','dass','daß'].includes(norm(tokens[index+2][0])))) {
+      if (finite(index+1) && (end === index+1 || (isPureSubordinator(norm(tokens[index+2][0])) || ['wer','was','wie','wo'].includes(norm(tokens[index+2][0]))))) {
         let c = index; if (c > 0 && /^\s+$/u.test(tokenGap(sentence,tokens,c-1,c))) c--;
         const head = tokens[c-1]?.[0] || '', hk = norm(head), w = norm(tokens[index][0]);
         const nouns = /^\p{Lu}/u.test(head) ? (forms.get(hk) || []).filter(e => e.type === 'Nomen') : [];
@@ -14610,7 +14704,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // opener is a member or a clause of its own and ends the walk (die Hunde im Hofe, die Tauben …; seinem Lebensraum, der Prärie, und
       // seinen Warnrufen, die …), and so does a list end with und / oder (Österreich, der Schweiz, Italien, Skandinavien und Osteuropa teil);
       // a verb at the end of a part reached — no decision)
-      const OPENS_OWN = /^(?:der|die|das|den|dem|des|ein\p{Ll}*|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|euer\p{Ll}*|eur\p{Ll}*|und|oder|sowie|sondern|wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|weil|als|wenn|dass|daß|ob|nachdem|bevor|obwohl|indem|sobald|falls|ohne|um|statt|anstatt)$/iu;
+      const OPENS_OWN = {test: w => isPureSubordinator(norm(w)) || /^(?:der|die|das|den|dem|des|ein\p{Ll}*|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|euer\p{Ll}*|eur\p{Ll}*|und|oder|sowie|sondern|wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|als|ohne|um|statt|anstatt)$/iu.test(w)};
       // an inserted relative clause on the way — a part opened by a lowercase der / die / das / den / dem / denen / deren /
       // dessen (or a preposition + one of them) and verb-last by finiteAtPartEnd, the sign the relative rule reads — is stepped over:
       // Kinder, die Hunde, die bellten, fürchteten, … and Kinder, die Hunde, die Harry hatte, fürchteten, … (the walk goes on to
@@ -14642,7 +14736,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // fürchteten wie die Pest / fürchteten und mieden —: no decision. Right after the word.)
         if (k > 0 || stepped) { const e2 = partEnd(sentence,tokens,e+1);
           if (/^\p{Ll}/u.test(tokens[e+1][0]) && rowsAt(e+1).some(r => r.kind === 'finite') && verbSecondTail(tokens,e+1,e2,rowsAt) === 'continues') break; }
-        if (k > 0 && OPENS_OWN.test(tokens[e+1][0]) || k === 0 && /^(?:wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|weil|als|wenn|dass|daß|ob|nachdem|bevor|obwohl|indem|sobald|falls|ohne|um|statt|anstatt)$/u.test(tokens[e+1][0])) break;
+        if (k > 0 && OPENS_OWN.test(tokens[e+1][0]) || k === 0 && (isPureSubordinator(tokens[e+1][0]) || /^(?:wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|als|ohne|um|statt|anstatt)$/u.test(tokens[e+1][0]))) break;
         const e2 = partEnd(sentence,tokens,e+1);
         // (a part with und / oder ends the list: the walk stops there; right after the word its verb at the end still decides —
         // die Nüsse, Äpfel und Birnen kaufte; further on it is the end of the list, not the relative clause — Österreich, der Schweiz,
@@ -14712,7 +14806,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // extended attribute — die bereits seit 1861 bestehende Schule, der nun 29-jährige Frenzel), no finite verb closing the part (a
       // relative clause without its comma — der Torte die wir haben wollten), not right after und / oder (… kennenlernte und die ihn …).
       let partLast = index;
-      while (partLast + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,partLast,partLast+1))) partLast++;
+      partLast = partEndAt(sentence,tokens,partLast,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       // Is the word a lower-case finite (not detached) verb form?
       const finiteToken = t => /^\p{Ll}/u.test(t) && verbRowsOf(norm(t)).some(a => a.kind === 'finite' && !a.detached);
       const quietAfter = partLast > index && !tokens.slice(index+1,partLast+1).some(t => /^\p{Lu}/u.test(t[0])) && !finiteToken(tokens[partLast][0]) &&
@@ -15024,8 +15118,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Is token i a coordinating conjunction?
       const coordinator = i => kindOf(i).includes("coordinating");
       let start = index, end = index;
-      while (start > 0 && !boundary.test(clauseGapBetween(sentence,tokens,start-1,start)) && !coordinator(start-1)) start--;
-      while (tokens[end+1] && !boundary.test(clauseGapBetween(sentence,tokens,end,end+1))) end++;
+      while (start > 0 && !boundary.test(partGapText(sentence,tokens,start-1,start)) && !coordinator(start-1)) start--;
+      while (tokens[end+1] && !boundary.test(partGapText(sentence,tokens,end,end+1))) end++;
       // The clause may also end before a coordinator (da ich … hatte und dennoch …).
       let coordinatedEnd = index;
       while (coordinatedEnd < end && !coordinator(coordinatedEnd+1)) coordinatedEnd++;
@@ -15065,7 +15159,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (a subordinator alone in its part opens no clause — »Und seitdem«, sprach der Hutmacher … — the adverb «с тех пор»)
         if (kind === "subordinating" && end === index && tokens[index+1]) return adverbAt('adverb-alone-in-part');
         // Directly before a finite verb (Da kommen …, Damit ist …, Wie kann …): no subordinate clause.
-        if (tokens[index+1] && !boundary.test(clauseGapBetween(sentence,tokens,index,index+1)) && /^[a-zäöüß]/u.test(tokens[index+1][0]) && await finite(index+1))
+        if (tokens[index+1] && !boundary.test(partGapText(sentence,tokens,index,index+1)) && /^[a-zäöüß]/u.test(tokens[index+1][0]) && await finite(index+1))
           return verbNext ? conjunctionAt('conjunction-before-finite-verb') : adverbAt('adverb-before-finite-verb');
         if (kind === "subordinating" && await verbFinalAfter()) return conjunctionAt('conjunction-before-verb-final-clause');
         return null;
@@ -16028,7 +16122,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Other groups are objects or attributes (der Inhalt der Kunde).
     function subordinateOpener(tokens, start) {
       return start > 0 && ((forms.get(norm(tokens[start-1][0])) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
-        ['weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','falls','sobald'].includes(norm(tokens[start-1][0])));
+        (isPureSubordinator(norm(tokens[start-1][0])) || ['als','während','damit'].includes(norm(tokens[start-1][0]))));
     }
     // Does the group at det stand in a place of the subject in its part (start..end) relative to the finite verb?
     function subjectGroupPlaced(det, finite, start, end, subordinate) {
@@ -16036,14 +16130,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     // The part of the sentence the grammar rows read: cut at punctuation and at und / oder / aber / denn / sondern / doch and the
     // subordinating words. One function for the rows and for their async preparation (grammarNounFacts).
-    function grammarClauseBounds(sentence, tokens, index) {
-      // Are token a and token b in one part (no sentence sign, bracket or quote between them)?
-      const connected = (a,b) => !GAP_SENTENCE_BRACKETS_QUOTES_HIGH_HIGHCLOSE_LOW_STRAIGHT.test(tokenGap(sentence,tokens,a,b));
-      let start = index, end = index;
-      while (start > 0 && connected(start-1,start) && (!PART_BOUNDARY_WORDS.has(norm(tokens[start-1][0])) || midClauseDoch(sentence,tokens,start-1))) start--;
-      while (end+1 < tokens.length && connected(end,end+1) && (!PART_BOUNDARY_WORDS.has(norm(tokens[end+1][0])) || midClauseDoch(sentence,tokens,end+1))) end++;
-      return {start,end};
-    }
+    // (every und / oder cuts: a grammar row reads only the tapped word's member — das Buch und das Heft; the word that opens the part
+    // stays out of it; guillemets and dashes are no mark here)
+    const GRAMMAR_PART = Object.freeze({marks:GAP_SENTENCE_BRACKETS_QUOTES_HIGH_HIGHCLOSE_LOW_STRAIGHT, coordinators:"every", openerOut:true});
+    const grammarClauseBounds = (sentence, tokens, index) => partSpanAt(sentence,tokens,index,GRAMMAR_PART);
     // (one notion — one function) a finite form of a verb at token i, for a person or any: our card's person forms
     // (ownFiniteAt), the English dictionary's inflection rows of that form (importedFiniteRow). Shared by the grammar rows (candidateFinite
     // of finite-verb-with-noun-subject) and the twins (twinGenderByForm: the finite verb of the subject).
@@ -16464,7 +16554,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const beforeNoun = /^\p{Lu}/u.test(tokens[index+1]?.[0] ?? "") && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,index,index+1));
         if (cards.some(c => c.item.adjective_after_sein)) {
           let l = index, r = index;
-          while (l > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,l-1,l))) l--;
+          l = partStartAt(sentence,tokens,l,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
           while (r < tokens.length-1 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,r,r+1))) r++;
           const seinNear = Array.from({length:r-l+1},(_,d) => l+d).some(i => i !== index && SEIN_ANY_FORM.test(wordAt(tokens,i)));
           const plain = verbs.filter(c => norm(c.lemma) === lemma);
@@ -16779,7 +16869,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // Is there a comma before token i?
         const commaBefore = i => i > 0 && /,/u.test(f.sentence.slice(f.tokens[i-1].index + f.tokens[i-1][0].length, f.tokens[i].index));
         // Does the word at i open a part (a part opener after a comma, a relative pronoun after a comma)?
-        const opener = i => i >= 0 && i < f.index && (COMMA_PART_OPENERS.has(norm(f.tokens[i][0])) && !["aber","doch","denn","sondern","da"].includes(norm(f.tokens[i][0])) ||
+        const opener = i => i >= 0 && i < f.index && (commaPartOpener(norm(f.tokens[i][0])) && !["aber","doch","denn","sondern","da"].includes(norm(f.tokens[i][0])) ||
           RELATIVE_OPENER.test(norm(f.tokens[i][0])) && commaBefore(i));
         const subordinate = opener(f.start-1) || opener(f.start) || f.start > 0 && opener(f.start+1) && ["in","an","auf","mit","von","zu","bei","aus","nach","für","über","unter"].includes(norm(f.tokens[f.start][0])) && commaBefore(f.start);
         if (ofPlain("finite") && wordsAfter && !subordinate) return f.choose(plain,"zu-infinitive-separability");
@@ -18468,7 +18558,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if(!ownOnlyVerbs.has(norm(word))&&!(forms.get(norm(word))||[]).some(e=>e.type==='Verb'&&ownOnlyVerbs.has(norm(e.word))))lexicalLookup(word,'resolve').catch(()=>{});
       }
       let preparationError = null;
-      if (context) try { await prepareSeparable(); } catch (e) { preparationError = e; }
+      if (context) try { await prepareSeparable(); await readSubordinatorReadings(context.sentence); } catch (e) { preparationError = e; }
       // an own verb card of several words only with its first part in place in the tapped word's comma part
       // (phraseInPlace) — Gut gemacht! is machen, with no choice of rückgängig machen / ernst machen.
       const tapPart = (() => {
@@ -19068,7 +19158,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               const at = clickedTokenIndex(tokens, context.tokenOffset, word);
               // The end of the part from `at` up to the first gap that re matches.
               const close = re => { let end = at;
-                while (end + 1 < tokens.length && !re.test(tokenGap(sentence,tokens,end,end + 1))) end++;
+                end = partEndAt(sentence,tokens,end,byMarks(re));
                 return end; };
               return [...new Set([close(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL), close(GAP_SENTENCE_NO_COMMA_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL)])].map(end => {
                 const p = end > at ? norm(tokens[end][0]) : '';
@@ -19580,7 +19670,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // below still decide)
       if (isVerb && vpRows(list, norm(card.lemma).replace(/^sich\s+/u,'')).some(([verb,prep,c]) => prep === 'als' && c === 'Akkusativ') &&
           clause.tokens.slice(clause.start,clause.end+1).every(t => norm(t[0]) !== 'als')) {
-        const wide = verbalClause(word,context,'verbPrepositionLink',new Set([...clauseBoundaries.verbGroup].filter(w => w !== 'als')));
+        const wide = verbalClause(word,context,'verbPrepositionLink',{has: (w, ...at) => w !== 'als' && clauseBoundaries.verbGroup.has(w, ...at)});
         if (wide) clause = wide;
       }
       const {tokens,selected,indices} = clause;
@@ -19649,7 +19739,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (and a sich before und / oder of the same stretch, no verb form between — die sich etwas sachlicher und differenzierter mit dem
       // Thema befassen: the part was cut at und)
       const reflexiveBefore = (() => { let a = clause.start;
-        while (a > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(clause.sentence,tokens,a-1,a))) a--;
+        a = partStartAt(clause.sentence,tokens,a,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
         const stretch = Array.from({length: clause.start - a}, (_, k) => a + k);
         return stretch.some(i => reflexivePronouns.has(norm(tokens[i][0])) && !prepositionOf(i)) && !stretch.some(i => /^\p{Ll}/u.test(tokens[i][0]) &&
           !reflexivePronouns.has(norm(tokens[i][0])) && verbRowsAt(tokens,i).some(r => ['finite','infinitive','participle'].includes(r.kind))); })();
@@ -20313,8 +20403,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // no word with an adjective card (wurde bekannt, ist veraltet; gewesen / geworden excepted), the part cut at punctuation, und /
     // oder / aber / sondern / denn / sowie, subordinators and der / die / das / welche (hat 170 Einwohner und ist umgeben), the
     // participle in lower case (Verfahren, Begriffen), not zu werden, not werden lassen. Er wird Arzt, Sie ist verheiratet —.
-    const AUX_HINT_CUT = new Set(["und","oder","aber","sondern","denn","sowie","dass","daß","wenn","weil","ob","bis","als","wie","nachdem",
-      "obwohl","damit","während","bevor","sodass","um","ohne","statt","der","die","das","welche","welcher","welches"]);
+    const AUX_HINT_CUT = {has: w => CLAUSE_COORDINATOR_WORD.test(w) || isPureSubordinator(w) ||
+      ["sowie","bis","als","wie","damit","während","um","ohne","statt","der","die","das","welche","welcher","welches"].includes(w)};
     const AUX_HINT_WERDEN = /^(?:werde|wirst|wird|werden|werdet|wurde|wurdest|wurden|wurdet|würde|würdest|würden|würdet|ward)$/u;
     // werden / haben / sein without a link, whose part holds a participle of a matching verb: «auxiliary verb» first (see above). true / false.
     function auxiliaryHint(word, candidate, context) {
@@ -20407,7 +20497,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const gap = (a, b) => sentence.slice(words[a].index + words[a][0].length, words[b].index);
       if (!/^\s*,\s*$/u.test(gap(at, at + 1))) return false;
       const first = words[at + 1][0], f = norm(first);
-      if (/^(?:dass|daß|ob|wenn|als|weil|da|damit|wie|was|wo|wer|und|aber|so|der|die|das|den|dem|denen|deren|dessen)$/u.test(f) && !(/^(?:der|die|das|den|dem)$/u.test(f) && words[at + 2] && /^\p{Lu}/u.test(words[at + 2][0]))) return false;
+      if ((isPureSubordinator(f) || /^(?:als|da|damit|wie|was|wo|wer|und|aber|so|der|die|das|den|dem|denen|deren|dessen)$/u.test(f)) && !(/^(?:der|die|das|den|dem)$/u.test(f) && words[at + 2] && /^\p{Lu}/u.test(words[at + 2][0]))) return false;
       // Is the word at i a finite verb right after (spaces only)?
       const finite = i => words[i] && /^\s+$/u.test(gap(i - 1, i)) && (wollte ? (() => { const rows = (verbAnalyses.get(norm(words[i][0])) || []).filter(r => r.kind === "finite");
         return rows.length > 0 && rows.every(r => r.tense === "Konjunktiv II"); })() : (verbAnalyses.get(norm(words[i][0])) || []).some(r => r.kind === "finite"));
@@ -20840,7 +20930,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const IMPERATIVE_OPENERS = IMPERATIVE_OPENER_WORDS;
         const NOMINATIVE_WORDS = /^(?:ich|du|er|sie|es|wir|ihr|man|der|die|das|ein|eine|kein|keine|mein|meine|dein|deine|sein|seine|ihre|unser|unsere|euer|eure|dieser|diese|dieses|jener|jene|jenes|jeder|jede|jedes|alle|alles|viele|einige|manche|welche|solche|beide|nichts|etwas|jemand|niemand|einer|keiner|was|wer|wenig|genug|mehr|dies|allerlei|vieles|manches|einiges|beides|anderes|folgendes|keins|eins)$/u;
         const IMPERATIVE_CAPITAL_OBJECTS = /^(?:Euch|Eure|Euer|Eurem|Euren|Eurer|Eures|Ihnen|Dir|Dich|Mir|Mich)$/u;
-        const IMPERATIVE_SUBORDINATORS = /^(?:dass|daß|ob|wenn|weil|als|wer|was|wie|wo|wann|warum|obwohl|obgleich|nachdem|bevor|ehe|bis|seit|seitdem|sobald|solange|während|damit|falls|sofern|indem|je|der|die|das|dem|den|deren|dessen|welche|welcher|welches)$/u;
         const IMPERATIVE_FRONTED = /^(?:das|dies|die|den|ihn|darum|drum|deshalb)$/u;
         const SLOT_PREPOSITIONS = {test:w => /^(?:in|an|auf|aus|bei|mit|nach|von|zu|vor|hinter|über|unter|neben|zwischen|durch|für|gegen|ohne|um|bis|seit|wegen|trotz|statt|während|ab)$/u.test(basePreposition(w))};
         // the words from a verb to the end of its part hold no subject: a group after a preposition is skipped (up to its noun / pronoun)
@@ -20946,7 +21035,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const opener = /^(?:so|dann|da|also|nun|jetzt)$/u.test((wordsBefore[0] || "").toLowerCase());
             const parts = before.slice(cutAt(HARD_PART_MARKS), cutAt([",",...HARD_PART_MARKS])).split(",").map(wordsOf).filter(part => part.length);
             for (const part of parts) {
-              if (IMPERATIVE_SUBORDINATORS.test(part[0].toLowerCase())) { if (!opener) return null; continue; }
+              if ((opensSubordinatePart(part[0].toLowerCase()) || part[0].toLowerCase() === 'je')) { if (!opener) return null; continue; }
               if (part.some((w, i) => NOMINATIVE_WORDS.test(w.toLowerCase()) || i > 0 && /^\p{Lu}/u.test(w) && !IMPERATIVE_CAPITAL_OBJECTS.test(w)) &&
                 part.some(w => (verbAnalyses.get(norm(w)) || []).some(r => r.kind === "finite"))) return null;
             }
@@ -21029,7 +21118,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (!fronted) for (const part of stretch.split(",").slice(0, -1).map(wordsOf).filter(p => p.length)) {
             const head = part[0].toLowerCase();
             if (/^(?:wer|was|dass|daß)$/u.test(head)) return false;
-            if (IMPERATIVE_SUBORDINATORS.test(head)) continue;
+            if ((opensSubordinatePart(head) || head === 'je')) continue;
             const finite = part.some(w => (verbAnalyses.get(norm(w)) || []).some(r => r.kind === "finite"));
             const verbFirst = (verbAnalyses.get(norm(part[0])) || []).some(r => ["imperative","finite"].includes(r.kind));
             if (finite && !emptySubjectSlot(verbFirst ? part.slice(1) : part)) return false;
@@ -21149,7 +21238,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // werden morgen kommen
             // (die opens its part — after a comma, at the start, after und / oder / aber / dass …; not inside a preposition group: gegen die
             // Sozialdemokraten ist, über die königlichen Gestüte war)
-            if (k >= 0 && /^die$/iu.test(words[k]) && (k === 0 || /^[,;:(»«„“"–—]$/u.test(words[k-1]) || /^(?:und|oder|aber|sondern|denn|dass|daß|weil|wenn|als|ob|da|doch)$/iu.test(words[k-1]))) {
+            if (k >= 0 && /^die$/iu.test(words[k]) && (k === 0 || /^[,;:(»«„“"–—]$/u.test(words[k-1]) || (isPureSubordinator(norm(words[k-1])) || /^(?:und|oder|aber|sondern|denn|als|da|doch)$/iu.test(words[k-1])))) {
               const after = String(context.sentence || "").slice(context.tokenOffset + String(word).length);
               const part = after.split(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL)[0];
               if (/^\s+(?:sein|werden|bleiben|ist|war|wird|wurde|bleibt|blieb|sei|wäre|würde|gewesen|geworden|geblieben)(?![\p{L}\p{M}])/u.test(part) &&
@@ -22061,7 +22150,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // A degree word after so (so geschwind, so viel, so große Freude): an adjective or adverb, not a finite verb
     // (so steige ich), a pronoun or a preposition (so hinter einem Baum).
     async function degreeToken(token) {
-      if (!token || /^\p{Lu}/u.test(token[0]) || ["wie","als","dass","daß","ob","wenn"].includes(norm(token[0]))) return false;
+      if (!token || /^\p{Lu}/u.test(token[0]) || (isPureSubordinator(norm(token[0])) || ['wie','als'].includes(norm(token[0])))) return false;
       const own = forms.get(norm(token[0])) || [];
       if (own.some(e => ["Verb","Pronomen","preposition","article","Konjunktion"].includes(e.type))) return false;
       if (own.some(e => e.type === "Adjektiv" || e.type === "Adverb") || comparativeForms.has(norm(token[0]))) return true;
@@ -22172,7 +22261,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (COORDINATOR_PARTICLE.test(key) && key !== norm(tokens[i-2][0]) && (!tokens[i+1] || GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(after)) &&
             !(COORDINATOR_PARTICLE.test(norm(tokens[i-2][0])) && adjacentExpressionAt(tokens, i, (x,y) => sentence ? String(sentence).slice(tokens[x].index + tokens[x][0].length, tokens[y].index).replace(/^[-‐‑](?=\s)/u, "") : " ",
               (x,y) => GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(sentence ? String(sentence).slice(tokens[x].index + tokens[x][0].length, tokens[y].index) : "") ||
-                ["und","oder","aber","denn","sondern","weil","dass","daß","wenn","ob","als","bevor","nachdem"].includes(norm(tokens[y][0]))))) return true;
+                norm(tokens[y][0]) !== "doch" && PART_BOUNDARY_WORDS.has(norm(tokens[y][0]),sentence,tokens,y)))) return true;
         // (a word unknown to the own dictionary with a verb ending -t / -te / -ten / -st may be a verb — schrumpelten, grinste; the scan's rule)
         // (not a particle + ge + stem + t that the shared check does not read as a person
         // form — personalVerbFormExternal, prepared for the sentence by clauseParticiples: verflixt und zugenäht; was mich angeht, weil er
@@ -22223,25 +22312,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // The parts of the sentence of the expression search (one number per token; a new number after punctuation or at und / oder
     // before a clause of its own), and whether a token opens its part. One function for constructionAt and
     // for the heading verb outside the parts in expressionGrammar — the same boundary as no_finite_between.
+    // (every mark ends the part, und / oder only before a clause of their own; subordinators do not cut — als ob, so dass stay one part;
+    // a part opens after a sentence sign, colon or quote, not after a comma)
     function expressionClauses(tokens, sentence, participles = clauseParticipleSets.get(sentence) || null) {
-      // The text before token i.
-      const gap = i => i > 0 ? tokenGap(sentence,tokens,i-1,i) : "";
-      const clause = [], opening = [];
-      for (let i = 0, c = 0; i < tokens.length; i++) {
-        // (the point of an abbreviation inside the sentence is no boundary here either — the same
-        // clauseGapText as the verbal groups, and a point without spaces between two short letter groups, one of them
-        // a single letter (as innerPoint of step «boundaries»): u. a. / u.a., d. h. / d.h. become one span for their expression records)
-        const innerPoint = i && gap(i) === "." && /^\p{L}{1,3}$/u.test(tokens[i-1][0]) && /^\p{L}{1,3}$/u.test(tokens[i][0]) &&
-          (/^\p{L}$/u.test(tokens[i-1][0]) || /^\p{L}$/u.test(tokens[i][0]));
-        // (an ordinal in digits after a determiner or a preposition is no boundary either — the same
-        // words as abbreviationEnd joins the reader's segments with: zum 100. Mal, beim 3. Mal, am 3. Mai)
-        const ordinalGap = i && ORDINAL_GAP.test(gap(i)) && ORDINAL_BEFORE.test(norm(tokens[i-1][0]));
-        if (i && !innerPoint && !ordinalGap && GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(clauseGapText(gap(i), tokens[i-1][0], tokens[i][0],tokens[i+1]?.[0]))) c++;
-        else if (coordinatorOpensClause(tokens, i, sentence, participles)) c++;
-        // (the point inside u.a. / d.h. opens nothing — D.H. Lawrence, U.A. Fanthorpe stay names)
-        clause.push(c); opening.push(!i || !innerPoint && !ordinalGap && GAP_SENTENCE_NO_COMMA_SEMICOLON_QUOTES_ALL.test(gap(i)));
-      }
-      return {clause, opening};
+      const rule = {marks:GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL, coordinators:"clauseAfter", subordinators:false, participles}; let c = 0;
+      return {clause: tokens.map((_,i) => i && partBreakBefore(sentence,tokens,i,rule) ? ++c : c),
+        opening: tokens.map((_,i) => !i || GAP_SENTENCE_NO_COMMA_SEMICOLON_QUOTES_ALL.test(partGapText(sentence,tokens,i-1,i)))};
     }
     // The expression of the tapped word: the record, its spans in the sentence and its kind; null when no expression's parts stand there.
     async function constructionAt(word, context) {
@@ -22251,11 +22327,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (index < 0) return null;
       // The text before token i.
       const gap = i => i > 0 ? tokenGap(sentence,tokens,i-1,i) : "";
-      const clause = [], opening = [];
       // und / oder right before a finite verb starts another clause
       // (Die FDP hat erst zugestimmt und will jetzt nichts damit zu tun haben — hat is not a part of the expression).
       const finiteHere = i => /^\p{Ll}/u.test(tokens[i][0]) && verbRowsAt(tokens,i).some(a => a.kind === "finite");
-      { const parts = expressionClauses(tokens, sentence, await clauseParticiples(tokens, sentence)); clause.push(...parts.clause); opening.push(...parts.opening); }
+      const {clause, opening} = expressionClauses(tokens, sentence, await clauseParticiples(tokens, sentence));
       const keys = tokens.map(t => norm(t[0]));
       // in the search of expressions the s of a lone 's / ’s and of a contraction geht's /
       // gibt's / wie's / mir's is es — by the same function as the colloquial expansions (colloquialExpansions); not where they do not read es
@@ -23055,7 +23130,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const tokens = clauseTokens = sharedTokens(sentence,'expressionGrammar'), first = Math.min(...spans.map(x => x.start)), lastAt = Math.max(...spans.map(x => x.end));
         let from = tokens.findIndex(t => t.index >= first), to = tokens.findIndex(t => t.index >= lastAt); if (to < 0) to = tokens.length;
         if (from >= 0) {
-          while (from > 0 && !GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,from-1,from))) from--;
+          from = partStartAt(sentence,tokens,from,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL));
           while (to < tokens.length && !GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,to-1,to))) to++;
           // the parts of the sentence are cut at
           // und / oder by the same function as in constructionAt (coordinatorOpensClause) — the auxiliary of the other part is not the
@@ -23374,8 +23449,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (first >= 0 && last >= first && /^\p{Ll}/u.test(tokens[first][0]) && (verbAnalyses.get(norm(tokens[first][0])) || []).some(a => a.kind === "participle")) {
           // The text between token a and token b; the signs that cut.
           const CUT = GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL;
-          let a = first; while (a > 0 && !CUT.test(tokenGap(sentence,tokens,a-1,a))) a--;
-          let b = last; while (b + 1 < tokens.length && !CUT.test(tokenGap(sentence,tokens,b,b+1))) b++;
+          let a = partStartAt(sentence,tokens,first,byMarks(CUT));
+          let b = partEndAt(sentence,tokens,last,byMarks(CUT));
           const aux = tokens.slice(a, first).some(t => /^\p{Ll}/u.test(t[0]) && (verbAnalyses.get(norm(t[0])) || []).some(x => x.kind === "finite" && TENSE_AUXILIARIES.includes(norm(x.base || ""))));
           const head = last + 1 <= b ? phraseHead(tokens, last + 1) : -1;
           if (aux && head > last && head === b) found = {...found, choice:"own-or-expression"};
@@ -23595,7 +23670,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "separatedDirectional"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
       const BOUND = /[,;:.!?»«„“”"()–—…\n]/u;
-      const JOIN = /^(?:und|oder|aber|sondern|denn|doch|als|wenn|weil|dass|daß|ob|bis|während|nachdem|bevor|damit|wie|wo)$/u;
+      const JOIN = {test: w => PART_BOUNDARY_WORDS.has(w) || /^(?:bis|während|damit|wie|wo)$/u.test(w)};
       let b = at; while (b + 1 < tokens.length && !BOUND.test(tokenGap(sentence,tokens,b,(b + 1))) && !JOIN.test(norm(tokens[b + 1][0]))) b++;
       let a = at; while (a > 0 && !BOUND.test(tokenGap(sentence,tokens,(a - 1),a)) && !JOIN.test(norm(tokens[a][0]))) a--;
       // (the direction particle may stand before a direction group that closes the part — ging hinunter in den
@@ -24218,8 +24293,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "secondPersonAdjective"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
       const EDGE = GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL;
-      let a = at; while (a > 0 && !EDGE.test(tokenGap(sentence,tokens,(a - 1),a))) a--;
-      let b = at; while (b + 1 < tokens.length && !EDGE.test(tokenGap(sentence,tokens,b,(b + 1)))) b++;
+      let a = partStartAt(sentence,tokens,at,byMarks(EDGE));
+      let b = partEndAt(sentence,tokens,at,byMarks(EDGE));
       if (tokens.slice(a, b + 1).some(t => /^(?:du|ihr|dich|dir|euch)$/u.test(norm(t[0])) || (verbal.some(x => x.person === "ich") || (verbAnalyses.get(w + "e") || []).some(x => x.kind === "finite" && x.person === "ich")) && /^(?:ich|mich|mir)$/u.test(norm(t[0])))) return result;
       // an imperative reading at the head of its part — first word, or right after und / oder / aber / doch — is the
       // imperative: So spring … und halt ihn stets in Ehren! (object after it); un weis up den Künig (head of the part); not: und dicht behaart
@@ -24266,7 +24341,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (c.construction?.id === "separable-verb" || norm(c.lemma).replace(/^sich\s+/u, "").startsWith(w) && norm(c.lemma) !== w) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "participleManner"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 2) return result;
-      let begin = at; while (begin > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,(begin - 1),begin))) begin--;
+      let begin = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       if (at + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,at,(at + 1)))) return result;
       // The lower-case word at token k.
       const low = k => norm(tokens[k][0]);
@@ -24303,8 +24378,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context?.sentence || ""), tokens = sharedTokens(sentence, "finiteClauseTense"), at = clickedTokenIndex(tokens, context?.tokenOffset, word);
       if (at < 0 || at + 1 >= tokens.length) return result;
       if (GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,at,(at + 1)))) return result;
-      let a = at; while (a > 0 && !GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,(a - 1),a))) a--;
-      let b = at; while (b + 1 < tokens.length && !GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,b,(b + 1)))) b++;
+      let a = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS));
+      let b = partEndAt(sentence,tokens,at,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS));
       for (let k = a; k <= b; k++) if (k !== at && (SEIN_FINITE_OR_GEWESEN.test(norm(tokens[k][0])) || HABEN_FINITE_WORD.test(norm(tokens[k][0])) ||
         /^(?:werde|wirst|wird|werden|werdet|wurde|wurdest|wurden|wurdet|ward|würde|würdest|würden|würdet|worden|geworden)$/u.test(norm(tokens[k][0])))) return result;
       const f = formFeatures(word, c, result, {...context, finiteClause:true});
@@ -24343,16 +24418,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (a capital only at the start of the sentence: Strahlend hell und kalt zog der Morgen herauf)
       if (/^\p{Lu}/u.test(word) && !(at === 0 || /[.!?:„“”"«»]\s*$/u.test(tokenGap(sentence,tokens,(at - 1),at)))) return result;
       const EDGE = GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL;
-      let begin = at; while (begin > 0 && !EDGE.test(tokenGap(sentence,tokens,(begin - 1),begin))) begin--;
-      let end = at; while (end + 1 < tokens.length && !EDGE.test(tokenGap(sentence,tokens,end,(end + 1)))) end++;
+      let begin = partStartAt(sentence,tokens,at,byMarks(EDGE,true));
+      let end = partEndAt(sentence,tokens,at,byMarks(EDGE,true));
       // The lower-case word at token k.
       const low = k => norm(tokens[k][0]);
       const AUX = /^(?:habe|hab|hast|hat|haben|habt|hatte|hattest|hatten|hattet|hätte|hätten|hättest|hättet|bin|bist|ist|sind|seid|sein|war|warst|waren|wart|wäre|wären|wärst|sei|seien|gewesen|werde|wirst|wird|werden|werdet|wurde|wurden|würde|würden|worden|geworden|ward)$/u;
       const part = []; for (let k = begin; k <= end; k++) part.push(k);
       // (the span for auxiliaries goes past quotes and brackets — wurde die … von "steueroptimierten Anlagestrategien" spezialisierte
       // Bankhaus … gegründet; bekommen / kriegen / erhalten + participle is the bekommen-passive: Er bekam ihn geschickt)
-      let ab = at; while (ab > 0 && !GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,(ab - 1),ab))) ab--;
-      let ae = at; while (ae + 1 < tokens.length && !GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,ae,(ae + 1)))) ae++;
+      let ab = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS,true));
+      let ae = partEndAt(sentence,tokens,at,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS,true));
       const wide = []; for (let k = ab; k <= ae; k++) wide.push(k);
       const RECIPIENT_PASSIVE = new Set(["bekommen","kriegen","erhalten"]);
       if (wide.some(k => k !== at && (verbAnalyses.get(low(k)) || []).some(a => a.kind === "finite" && RECIPIENT_PASSIVE.has(a.base)))) return result;
@@ -24390,10 +24465,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const lead = sentence.slice(ab > 0 ? tokens[ab - 1].index + tokens[ab - 1][0].length : 0, tokens[ab].index).split(GAP_SENTENCE_DASHES_ELLIPSIS).pop();
         let clauseBefore = false;
         if (at === ab && ab > 0 && /,/u.test(tokenGap(sentence,tokens,(ab - 1),ab))) {
-          let q = ab - 1; while (q > 0 && !GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,(q - 1),q))) q--;
+          let q = partStartAt(sentence,tokens,ab - 1,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS,true));
           // (a subordinate clause has a word between the conjunction and its finite verb last: Als die Römer kamen, …; not Da stand er
           // nun, verloren mitten …, not Wie erwartet, entschieden besser …)
-          clauseBefore = (q === 0 || GAP_SENTENCE_NO_COMMA.test(tokenGap(sentence,tokens,(q - 1),q))) && /^(?:als|wenn|weil|da|nachdem|bevor|während|sobald|solange|seit|seitdem|bis|obwohl|obgleich|falls|sofern|wo|wie|dass|daß|ob)$/u.test(low(q)) &&
+          clauseBefore = (q === 0 || GAP_SENTENCE_NO_COMMA.test(tokenGap(sentence,tokens,(q - 1),q))) && (isPureSubordinator(low(q)) || /^(?:als|da|während|seit|bis|wo|wie)$/u.test(low(q))) &&
             q < ab - 2 && (AUX.test(low(ab - 1)) || (verbAnalyses.get(low(ab - 1)) || []).some(a => a.kind === "finite"));
         }
         // (the span starts a sentence or follows . ! ? : ; — after a bare comma the finite verb may stand before it: Heute spielt sie, wie
@@ -24507,8 +24582,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "becomeAdjective"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
       let begin = at, end = at;
-      while (begin > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,(begin - 1),begin))) begin--;
-      while (end + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end,(end + 1)))) end++;
+      begin = partStartAt(sentence,tokens,begin,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
+      end = partEndAt(sentence,tokens,end,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       const clause = tokens.slice(begin, end + 1).map(t => norm(t[0]));
       // A passive or perfect of werden (bekannt gegeben worden, bekannt geworden) is not this case.
       if (clause.some(w => w === "worden" || w === "geworden")) return result;
@@ -24600,8 +24675,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "reflexiveFirst"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
       let begin = at, end = at;
-      while (begin > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,(begin - 1),begin))) begin--;
-      while (end + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end,(end + 1)))) end++;
+      begin = partStartAt(sentence,tokens,begin,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
+      end = partEndAt(sentence,tokens,end,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       if (!tokens.slice(begin, end + 1).some((t, i) => begin + i !== at && reflexivePronouns.has(norm(t[0])))) return result;
       return {...result, candidates:[...result.candidates.filter(reflexive), ...result.candidates.filter(c => !reflexive(c))]};
     }
@@ -24751,7 +24826,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         for (let i = v + 1; i < tokens.length; i++) {
           if (GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,i-1,i))) break;
           const w = norm(tokens[i][0]), before = norm(tokens[i-1][0]);
-          if (/^(?:und|oder|aber|sondern|denn)$/u.test(w)) break;
+          if (CLAUSE_COORDINATOR_WORD.test(w)) break;
           const afterPreposition = prepositions.has(before) || (forms.get(before) || []).some(e => e.type === 'preposition');
           if (/^(?:die|das|den|ein|eine|einen|kein|keine|keinen|(?:mein|dein|sein|ihr|unser|eur)(?:e|en)?|diese|diesen|dieses)$/u.test(w) && !afterPreposition) { groups++; open = true; }
           else if (/^(?:der|dem|des|eines|einer|einem)$/u.test(w) || afterPreposition) open = true;
@@ -24908,8 +24983,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!idx.length || idx.some(i => norm(tokens[i][0]) === "leiden")) return result;
       const lo = Math.min(k0, ...idx), hi = Math.max(k0, ...idx);
       if (idx.some(i => i < k0) && tokens.slice(lo+1, hi).some(t => /^(?:und|oder)$/u.test(norm(t[0])))) return result;
-      let a = lo; while (a > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,a-1,a))) a--;
-      let b = hi; while (b+1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,b,b+1))) b++;
+      let a = partStartAt(sentence,tokens,lo,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
+      let b = partEndAt(sentence,tokens,hi,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       // The tokens a … b; the lower-case word of a token.
       const part = tokens.slice(a, b+1), w = t => norm(t[0]);
       const stateVerb = tokens.slice(lo, Math.min(tokens.length, hi+2)).some(t => /^(?:sein|haben|werden|gewesen|worden|geworden)$/u.test(w(t))) || sel.construction?.id === "modal-perfect-infinitive";
@@ -25174,7 +25249,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const before = at > 0 ? norm(tokens[at-1][0]) : "", gap = at > 0 ? tokenGap(sentence,tokens,at-1,at) : "";
       const prev2 = at > 1 ? norm(tokens[at-2][0]) : "";
       let end = at + 1; while (end < tokens.length && !GAP_SENTENCE.test(tokenGap(sentence,tokens,end-1,end))) end++;
-      let begin = at; while (begin > 0 && !GAP_SENTENCE_QUOTES_ALL.test(tokenGap(sentence,tokens,begin-1,begin))) begin--;
+      let begin = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_QUOTES_ALL));
       // A verb of the clause that governs auf (warten auf, bestehen auf) keeps «на это» (Darauf hatte er gewartet).
       // Finite forms of reflexive and separable verbs too (freue mich darauf, weist darauf hin), via the verb index.
       // A time phrase that opens the clause (Bald darauf kam er, Und gleich darauf …,
@@ -25240,7 +25315,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const at = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (at < 0) return result;
       let end = at + 1; while (end < tokens.length && !GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end-1,end))) end++;
-      let begin = at; while (begin > 0 && !GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,begin-1,begin))) begin--;
+      let begin = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL));
       // (nach + Dativ as the object only — not a direction «nach / in + …»; a particle closing the part makes another verb: richteten
       // sich … ein, machten sich … auf, zog … aus)
       // (aussehen — a form of sehen with aus in the part — or klingen with danach not opening its part:
@@ -25531,7 +25606,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (at > 0 && !/[.!?:;»«„“”"–—…]\s*$/u.test(tokenGap(sentence,tokens,at-1,at))) return result;
       // the part: up to the first punctuation after wer; it must end with a comma
       let end = at + 1;
-      while (end + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,(end + 1)-1,(end + 1)))) end++;
+      end = partEndAt(sentence,tokens,end,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       if (end + 1 >= tokens.length || !/^\s*,/u.test(tokenGap(sentence,tokens,(end + 1)-1,(end + 1))) || end - at < 2) return result;
       // The verb analyses of token i.
       const rows = i => verbAnalyses.get(norm(tokens[i][0])) || [];
@@ -25628,7 +25703,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sentence = String(context?.sentence || ""), tokens = sharedTokens(sentence,'dativeSenseFirst');
       const pronoun = c.construction.pronoun, p = tokens.findIndex(t => t.index === pronoun?.start);
       if (p < 0) return result;
-      let end = p + 1; while (end < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end-1,end)) && !/^(?:und|oder|aber|sondern|denn)$/u.test(norm(tokens[end][0]))) end++;
+      let end = p + 1; while (end < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end-1,end)) && !CLAUSE_COORDINATOR_WORD.test(norm(tokens[end][0]))) end++;
       const DAT_PRONOUN = /^(?:mir|dir|ihm|ihnen)$/u;
       const FEM_DAT_DET = /^(?:der|einer|meiner|deiner|seiner|ihrer|unserer|eurer|dieser|jener|keiner|jeder)$/u;
       // Does a preposition (or a contraction) stand up to three words before token k?
@@ -25669,8 +25744,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     function governedGroupInPart(sentence, tokens, at, gov, impersonal = false) {
       if (!gov) return false;
       const preps = gov.preps, kase = gov.case;
-      let a = at; while (a > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,a-1,a)) && !CLAUSE_COORDINATOR_WORD.test(norm(tokens[a-1][0]))) a--;
-      let b = at; while (b + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,b,b+1)) && !CLAUSE_COORDINATOR_WORD.test(norm(tokens[b+1][0]))) b++;
+      let {start:a, end:b} = partSpanAt(sentence,tokens,at,COORDINATED_MEMBER);
       for (let k = a; k <= b; k++) {
         const w = norm(tokens[k][0]);
         let p = null, c = null;
@@ -25733,8 +25807,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Is es the subject in the part of the word at `at` (not over und / oder)?
     function esInPart(sentence, tokens, at) {
       // (not over und / oder — ging es fort und kam zu einem Backofen: es is the girl of the first verb)
-      let a = at; while (a > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,a-1,a)) && !CLAUSE_COORDINATOR_WORD.test(norm(tokens[a-1][0]))) a--;
-      let b = at; while (b + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,b,b+1)) && !CLAUSE_COORDINATOR_WORD.test(norm(tokens[b+1][0]))) b++;
+      let {start:a, end:b} = partSpanAt(sentence,tokens,at,COORDINATED_MEMBER);
       for (let k = a; k <= b; k++) if (norm(tokens[k][0]) === "es") return true;
       return false;
     }
@@ -25755,8 +25828,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let listRows = []; try { listRows = fallback.verbPrepositions ? await fallback.verbPrepositions() : []; } catch (_) { listRows = []; }
       // The words of the part (read once).
       const partWords = (() => { 
-        let a = at; while (a > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,a-1,a))) a--;
-        let b = at; while (b + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,b,b+1))) b++;
+        let a = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
+        let b = partEndAt(sentence,tokens,at,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
         return new Set(tokens.slice(a, b + 1).map(t => norm(t[0]))); })();
       // (and not a pair kept for its correlate only — correlative_only, kommen auf «додуматься» stays in its place before daran / darauf)
       // (a direction element raises its meaning — no pair, no highlight: Er stieß sich vom Boden in die Höhe «оттолкнуться»)
@@ -25854,8 +25927,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const at = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (at < 0 || at > 0 && norm(tokens[at-1][0]) === "zu") return result;
       let lo = at, hi = at;
-      while (lo > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,lo-1,lo))) lo--;
-      while (hi + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,(hi + 1)-1,(hi + 1)))) hi++;
+      lo = partStartAt(sentence,tokens,lo,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
+      hi = partEndAt(sentence,tokens,hi,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       const heads = [];
       for (let i = lo; i <= hi; i++) {
         if (i === at || !/^\p{Ll}/u.test(tokens[i][0]) && i !== lo) continue;
@@ -25938,7 +26011,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (at < 0) return result;
       if (/^W/u.test(word) && at > 0 && !/[.!?:;»«„“”"–—…]\s*$/u.test(tokenGap(sentence,tokens,at-1,at))) return result;
       let hi = at;
-      while (hi + 1 < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,(hi + 1)-1,(hi + 1)))) hi++;
+      hi = partEndAt(sentence,tokens,hi,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       // (a comparison: als within two words after the form and then a pronoun / determiner / sonst / je — einen weiteren Weg als ihr;
       // not als «в качестве» — ein weiteres Haus als Unterkunft, weitere zwei Jahre als Wirtschaftsredakteur)
       const compares = [at + 1, at + 2].some(k => k <= hi && norm(tokens[k]?.[0] || "") === "als" &&
@@ -26095,7 +26168,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (a form equal to the infinitive, or the bare participle: a participle frame in the part)
         const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'twinParticiple'), at = clickedTokenIndex(tokens,context.tokenOffset,w);
         if (at < 0) return result;
-        let s = at; while (s > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,s-1,s))) s--;
+        let s = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
         let e = at + 1; while (e < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,e-1,e))) e++;
         const words = tokens.slice(s, e).map(x => norm(x[0]));
         if (at > 0 && norm(tokens[at-1][0]) === "zu") return result;
@@ -26130,19 +26203,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // -1 when the part does not start with such a group (then the finite verb may stand first, at start).
     // (quotes and brackets inside a sentence do not end a part: die als "Ausgang" bezeichneten …; als / wie start a comparison part:
     // anders als im Vorfeld erwartet)
-    const FINITE_PLACE_EDGE = GAP_SENTENCE_DASHES_ELLIPSIS, FINITE_PLACE_COORD = /^(?:und|oder|aber|sondern|denn|sowie|als|wie)$/u;
-    const FINITE_PLACE_OPENER = /^(?:wie|ob|dass|daß|weil|wenn|als|obwohl|obgleich|nachdem|bevor|ehe|sobald|solange|seit|seitdem|bis|falls|damit|da|wo|wohin|woher|warum|weshalb|wann|was|wer|wen|wem|wessen|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?|indem|sodass|ohne|statt)$/u;
-    const FINITE_PLACE_SUBORDINATOR = /^(?:weil|dass|daß|ob|wenn|obwohl|obgleich|nachdem|bevor|ehe|sobald|solange|seitdem|falls|indem|sodass)$/u;
+    // (dashes and the ellipsis end the part too; quotes and brackets do not; als / wie / sowie start a comparison part)
+    const FINITE_PLACE_PART = Object.freeze({marks:GAP_SENTENCE_DASHES_ELLIPSIS, coordinators:"every", words:/^(?:als|wie|sowie)$/u});
+    const FINITE_PLACE_MARKS = Object.freeze({marks:GAP_SENTENCE_DASHES_ELLIPSIS, subordinators:false});
     const FINITE_PLACE_DET = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|eur\p{Ll}*|dies\p{Ll}*|jen\p{Ll}*|jed\p{Ll}*|all\p{Ll}*|viel\p{Ll}*|manch\p{Ll}*|einig\p{Ll}*|beid\p{Ll}*|welch\p{Ll}*|solch\p{Ll}*)$/u;
     // The place of the finite verb in the part of the word at `at` (second place, last, first) — one rule of place for the participle phrase.
     function finitePlace(sentence, tokens, at) {
-      // (a subordinator without its comma also starts a part, as its first word: Er freut sich weil sie mich erinnert)
-      let start = at; while (start > 0 && !FINITE_PLACE_EDGE.test(tokenGap(sentence,tokens,start-1,start)) && !FINITE_PLACE_COORD.test(wordAt(tokens,(start-1)))) {
-        start--; if (start < at && FINITE_PLACE_SUBORDINATOR.test(wordAt(tokens,start))) break; }
-      while (start < at && FINITE_PLACE_COORD.test(wordAt(tokens,start)) && !/^(?:als|wie)$/u.test(wordAt(tokens,start))) start++;
-      let end = at; while (end + 1 < tokens.length && !FINITE_PLACE_EDGE.test(tokenGap(sentence,tokens,end,end+1))) end++;
+      // (a subordinator without its comma also starts a part, as its first word: Er freut sich weil sie mich erinnert; a coordinator or
+      // als / wie stays out of it; the end and the whole part go to the marks only)
+      const part = partSpanAt(sentence,tokens,at,FINITE_PLACE_PART), marked = partSpanAt(sentence,tokens,at,FINITE_PLACE_MARKS), end = marked.end;
+      const start = part.opener && part.start < at && !subordinatorAt(sentence,tokens,part.start) ? part.start+1 : part.start;
       // (a relative der / die / das opens a part only after a punctuation mark — not Die Dynamik … at the start of the sentence)
-      const opens = FINITE_PLACE_OPENER.test(wordAt(tokens,start)) && !(start === 0 && /^(?:der|die|das|dem|den)$/u.test(wordAt(tokens,start)));
+      const opens = (opensSubordinatePartAt(sentence,tokens,start) || /^(?:ohne|statt)$/u.test(wordAt(tokens,start))) && !(start === 0 && /^(?:der|die|das|dem|den)$/u.test(wordAt(tokens,start)));
       // Is token i a capital word inside the part?
       const capital = i => i < end + 1 && /^\p{Lu}/u.test(tokens[i]?.[0] ?? "");
       // Is token i a lower-case declined word inside the part?
@@ -26164,8 +26236,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           return j;
         }
       };
-      let whole = at; while (whole > 0 && !FINITE_PLACE_EDGE.test(tokenGap(sentence,tokens,whole-1,whole))) whole--;
-      return {start, end, whole, opens, second: opens ? -1 : group(start)};
+      return {start, end, whole: marked.start, opens, second: opens ? -1 : group(start)};
     }
     // a part with no finite verb: a word with a finite reading of a verb and an adjective reading — Die
     // Dynamik in vielen Familien gleiche einem Teufelskreis (Konjunktiv I of gleichen) — is the verb: a noun before it in the part (its
@@ -26202,8 +26273,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const question = place.start === at && /\?\s*[»«"“”]?\s*$/u.test(sentence);
         if (!(place.opens ? place.start < at && place.end === at : place.second === at && place.start < at || question)) return result;
       }
-      let a = at; while (a > 0 && !EDGE.test(tokenGap(sentence,tokens,a-1,a)) && !COORD.test(norm(tokens[a-1][0]))) a--;
-      let b = at; while (b + 1 < tokens.length && !EDGE.test(tokenGap(sentence,tokens,b,b+1)) && !COORD.test(norm(tokens[b+1][0]))) b++;
+      let {start:a, end:b} = partSpanAt(sentence,tokens,at,{marks:EDGE, words:COORD, subordinators:false, openerOut:true});
       if (!tokens.slice(a, at).some(t => /^\p{Lu}/u.test(t[0]) && (forms.get(norm(t[0])) || []).some(e => e.type === "Nomen") || /^\p{Lu}/u.test(t[0]) && !(forms.get(norm(t[0])) || []).length)) return result;
       for (let i = a; i <= b; i++) {
         if (i === at || !/^\p{Ll}/u.test(tokens[i][0])) continue;
@@ -26357,7 +26427,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!p2 || result.selected === p2 && result.status === "resolved") return result;
       // (the part between commas / dashes; a bracket or a quote does not end it — Kevin Feucht (29) alias Kevin von Anhalt getrennt)
       const EDGE = GAP_SENTENCE_DASHES_ELLIPSIS;
-      let start = at; while (start > 0 && !EDGE.test(tokenGap(sentence,tokens,start-1,start))) start--;
+      let start = partStartAt(sentence,tokens,at,byMarks(EDGE));
       // (between commas / dashes on both sides: a part closing its sentence may be the end of a sein / haben group — sind … von der
       // Krankheit betroffen, with a list comma inside: Berg-, Teich-, Kamm- oder Fadenmolch)
       const closes = at + 1 < tokens.length && /[,–—]/u.test(tokenGap(sentence,tokens,at,at+1)) && !/[-‐]\s*,/u.test(sentence.slice(0, tokens[start].index));
@@ -26800,7 +26870,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (a subject pronoun right after it, or earlier in its part with no other finite verb between: ich bitte, bitte ich, wenn ich
       // die bitte — the verb; Ich sage danke — the interjection)
       if (at + 1 < tokens.length && !/[^\s]/u.test(tokenGap(sentence,tokens,at,at+1)) && subject(at+1)) return result;
-      let start = at; while (start > 0 && !GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,start-1,start))) start--;
+      let start = partStartAt(sentence,tokens,at,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS_QUOTES_ALL));
       for (let i = at - 1; i >= start; i--) {
         if (subject(i)) {
           let between = false;
@@ -26872,7 +26942,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Does the part around sein at p show an independent sein (a predicate, a place) rather than a Perfekt / state auxiliary?
     function independentSeinSign(sentence, tokens, p) {
       let s = p, e = p;
-      while (s > 0 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,s-1,s))) s--;
+      s = partStartAt(sentence,tokens,s,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       while (e < tokens.length-1 && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,e,e+1))) e++;
       // (the noun phrase after a determiner: lowercase words up to the first capital)
       const phraseEnd = i => { let j = i+1; while (j <= e && j < i+4 && /^\p{Ll}/u.test(tokens[j][0]) && !prepositions.has(wordAt(tokens,j))) j++; return j <= e && /^\p{Lu}/u.test(tokens[j][0]) ? j : i; };
@@ -27334,12 +27404,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // form has another reading (the imperative glaub, the adjective heiß): right after ich in a main part (Ich glaub, ich geh; Ich nehm
       // sie), right before ich (Das glaub ich nicht, So heiß ich nicht) or as the last word of a subordinate part with ich (dass ich
       // Rumpelstilzchen heiß). Not weil ich heiß bin (not the last word), not after ich allein / selbst / auch.
-      const SUBORDINATOR_WORD = /^(?:wenn|weil|dass|daß|ob|als|bevor|ehe|nachdem|sobald|solange|bis|damit|falls|obwohl|obgleich|während|wie|wo|was|wer|wann|warum|seit|seitdem|indem|der|die|das|den|dem|deren|dessen|welche[rnms]?)$/u;
       // Is the form a short ich form (glaub, heiß, hab) by its place (see above)?
       const ichShort = (w,start) => {
         if (!(verbAnalyses.get(norm(w)+"e") || []).some(a => a.kind === "finite" && a.person === "ich" && a.tense === "Präsens")) return false;
         // (not a function word, a number or an adverb of its own — weil, schon, mein, gar, mal, acht: only a verb or an adjective spelling)
-        if ((forms.get(norm(w)) || []).some(e => !["Verb","Adjektiv"].includes(e.type)) || SUBORDINATOR_WORD.test(norm(w))) return false;
+        if ((forms.get(norm(w)) || []).some(e => !["Verb","Adjektiv"].includes(e.type)) || opensSubordinatePart(norm(w))) return false;
         const i = words.findIndex(x => x.index === start);
         if (i < 0) return false;
         // Are word a and word b in one part (no sentence sign, bracket, dash, ellipsis or quote between)?
@@ -27350,7 +27419,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const partEnd = k => { let j = k; while (j+1 < words.length && gapOk(j,j+1)) j++; return j; };
         // Is word k ich?
         const ichAt = k => k >= 0 && k < words.length && norm(words[k][0]) === "ich";
-        const ps = partStart(i), subordinate = SUBORDINATOR_WORD.test(norm(words[ps][0])) && ps < i;
+        // (a subordinator with another reading only with its sign at its place — Da bin ich mir sicher: da is the adverb)
+        const ps = partStart(i), subordinate = ps < i && opensSubordinatePartAt(sentence,words,ps);
         // (a separable verb of the full form whose particle closes the part keeps its own reading — bring ich … mit, schließ ich … auf)
         // (and not when such a particle closes a later part: Ich geh, mach du die Tür zu — the full gehe would take zu
         // of the next part; Bevor ich geh, mach das Licht aus)

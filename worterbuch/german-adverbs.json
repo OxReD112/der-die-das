@@ -744,9 +744,15 @@
     "example_de": "Ich habe nur zehn Euro dabei.",
     "example_ru": "У меня с собой только десять евро.",
     "example_en": "I only have ten euros on me.",
-    "usage_note_ru": "Как частица усиливает просьбу или желание: Wenn ich nur mehr Zeit hätte! — Если бы только у меня было больше времени! Не путать с erst (см. карточку erst).",
-    "usage_note_en": "As a particle it strengthens a wish or request: Wenn ich nur mehr Zeit hätte! — If only I had more time! Don't confuse it with erst (see erst).",
-    "example_cloze": "Ich habe {{c1::nur}} zehn Euro dabei."
+    "usage_note_ru": "Как частица усиливает просьбу или желание: Wenn ich nur mehr Zeit hätte! — Если бы только у меня было больше времени! Не путать с erst.",
+    "usage_note_en": "As a particle it strengthens a wish or request: Wenn ich nur mehr Zeit hätte! — If only I had more time! Don't confuse it with erst.",
+    "example_cloze": "Ich habe {{c1::nur}} zehn Euro dabei.",
+    "see_also": [
+      {
+        "id": "adverb-096",
+        "text": "erst"
+      }
+    ]
   },
   {
     "id": "adverb-071",
@@ -972,9 +978,19 @@
     "example_de": "Kommst du nicht mit? – Doch, ich komme mit!",
     "example_ru": "Ты не пойдёшь с нами? – Да нет, пойду!",
     "example_en": "Aren't you coming? – Yes, I am!",
-    "usage_note_ru": "Ответ «да» на отрицательный вопрос — doch, а не ja. При повелительном — настойчиво: Komm doch mit! — Ну пойдём же! Sei doch still! — Да замолчи же! В утверждении — упрёк, напоминание: Das weißt du doch! — Ты же это знаешь! В желаниях (часто с nur) — «ну хоть бы, только бы, если бы только»: Hätte er doch nur eine Uhr! — Если бы только у него были часы! Wenn wir doch ein Kind hätten! — Ах, если бы у нас был ребёнок! Союз doch «но, однако» — отдельная карточка.",
-    "usage_note_en": "The answer “yes” to a negative question is doch, not ja. With an imperative it insists: Komm doch mit! — Do come along! Sei doch still! — Do be quiet! In a statement it reproaches or reminds: Das weißt du doch! — But you know that! In wishes (often with nur) — “if only”: Hätte er doch nur eine Uhr! — If only he had a watch! Wenn wir doch ein Kind hätten! — If only we had a child! The conjunction doch “but, however” is a separate card.",
-    "example_cloze": "Kommst du nicht mit? – {{c1::Doch}}, ich komme mit!"
+    "usage_note_ru": "Ответ «да» на отрицательный вопрос — doch, а не ja. При повелительном — настойчиво: Komm doch mit! — Ну пойдём же! Sei doch still! — Да замолчи же! В утверждении — упрёк, напоминание: Das weißt du doch! — Ты же это знаешь! В желаниях (часто с nur) — «ну хоть бы, только бы, если бы только»: Hätte er doch nur eine Uhr! — Если бы только у него были часы! Wenn wir doch ein Kind hätten! — Ах, если бы у нас был ребёнок! Союз doch «но, однако».",
+    "usage_note_en": "The answer “yes” to a negative question is doch, not ja. With an imperative it insists: Komm doch mit! — Do come along! Sei doch still! — Do be quiet! In a statement it reproaches or reminds: Das weißt du doch! — But you know that! In wishes (often with nur) — “if only”: Hätte er doch nur eine Uhr! — If only he had a watch! Wenn wir doch ein Kind hätten! — If only we had a child! The conjunction doch “but, however”.",
+    "example_cloze": "Kommst du nicht mit? – {{c1::Doch}}, ich komme mit!",
+    "see_also": [
+      {
+        "id": "conjunction-058",
+        "text": "doch",
+        "at": {
+          "ru": 7,
+          "en": 7
+        }
+      }
+    ]
   },
   {
     "id": "adverb-086",
@@ -2561,9 +2577,19 @@
     "example_de": "Was machst du damit?",
     "example_ru": "Что ты с этим делаешь?",
     "example_en": "What are you doing with it?",
-    "usage_note_ru": "Заменяет mit + предмет: mit dem Messer → damit; для людей — mit ihm/ihr, не damit. Тем самым: Damit ist alles gesagt. — Этим всё сказано. Союз damit «чтобы» — отдельная карточка (conjunction-013).",
-    "usage_note_en": "Replaces mit + a thing: mit dem Messer → damit; for people use mit ihm/ihr, not damit. Thereby: Damit ist alles gesagt. — That says it all. The conjunction damit (so that) has a separate card (conjunction-013).",
-    "example_cloze": "Was machst du {{c1::damit}}?"
+    "usage_note_ru": "Заменяет mit + предмет: mit dem Messer → damit; для людей — mit ihm/ihr, не damit. Тем самым: Damit ist alles gesagt. — Этим всё сказано. Союз damit «чтобы».",
+    "usage_note_en": "Replaces mit + a thing: mit dem Messer → damit; for people use mit ihm/ihr, not damit. Thereby: Damit ist alles gesagt. — That says it all. The conjunction damit (so that).",
+    "example_cloze": "Was machst du {{c1::damit}}?",
+    "see_also": [
+      {
+        "id": "conjunction-013",
+        "text": "damit",
+        "at": {
+          "ru": 3,
+          "en": 3
+        }
+      }
+    ]
   },
   {
     "id": "adverb-224",
@@ -2573,9 +2599,19 @@
     "example_de": "Das ist aber schön!",
     "example_ru": "Как же это красиво!",
     "example_en": "That's really beautiful!",
-    "usage_note_ru": "Безударная частица в восклицаниях и ответах: Du spielst aber gut! — Как же ты хорошо играешь! aber gern — с удовольствием. Союз aber «но» — отдельная карточка (conjunction-003).",
-    "usage_note_en": "An unstressed particle in exclamations and replies: Du spielst aber gut! — You play really well! aber gern — gladly. The conjunction aber (but) has a separate card (conjunction-003).",
-    "example_cloze": "Das ist {{c1::aber}} schön!"
+    "usage_note_ru": "Безударная частица в восклицаниях и ответах: Du spielst aber gut! — Как же ты хорошо играешь! aber gern — с удовольствием. Союз aber «но».",
+    "usage_note_en": "An unstressed particle in exclamations and replies: Du spielst aber gut! — You play really well! aber gern — gladly. The conjunction aber (but).",
+    "example_cloze": "Das ist {{c1::aber}} schön!",
+    "see_also": [
+      {
+        "id": "conjunction-003",
+        "text": "aber",
+        "at": {
+          "ru": 3,
+          "en": 3
+        }
+      }
+    ]
   },
   {
     "id": "adverb-225",
@@ -2650,9 +2686,19 @@
     "example_de": "Der Zug war pünktlich, insofern hatten wir Glück.",
     "example_ru": "Поезд пришёл вовремя, так что в этом смысле нам повезло.",
     "example_en": "The train was on time, so in that respect we were lucky.",
-    "usage_note_ru": "insofern …, als … — в том отношении, что: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Иногда ≈ deshalb (поэтому). Союз insofern «если; поскольку» — отдельная карточка.",
-    "usage_note_en": "insofern …, als … — in that: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Sometimes ≈ deshalb (therefore). The conjunction insofern 'if; inasmuch as' has its own card.",
-    "example_cloze": "Der Zug war pünktlich, {{c1::insofern}} hatten wir Glück."
+    "usage_note_ru": "insofern …, als … — в том отношении, что: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Иногда ≈ deshalb (поэтому). Союз insofern «если; поскольку».",
+    "usage_note_en": "insofern …, als … — in that: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Sometimes ≈ deshalb (therefore). The conjunction insofern 'if; inasmuch as'.",
+    "example_cloze": "Der Zug war pünktlich, {{c1::insofern}} hatten wir Glück.",
+    "see_also": [
+      {
+        "id": "conjunction-040",
+        "text": "insofern",
+        "at": {
+          "ru": 3,
+          "en": 3
+        }
+      }
+    ]
   },
   {
     "id": "adverb-231",
@@ -2686,9 +2732,15 @@
     "example_de": "Hast du je so etwas Schönes gesehen?",
     "example_ru": "Ты когда-нибудь видел что-то настолько красивое?",
     "example_en": "Have you ever seen anything so beautiful?",
-    "usage_note_ru": "je zwei — по два: Wir bekommen je zwei Bonbons. je nach — в зависимости от: je nach Wetter; je nachdem, ob … — смотря по тому, …; Je nachdem! — Смотря как! mehr denn je — больше, чем когда-либо; seit je — испокон веку. je Person — на человека (как pro). Пара je … desto — отдельная карточка.",
-    "usage_note_en": "je zwei — two each: Wir bekommen je zwei Bonbons. je nach — depending on: je nach Wetter; je nachdem, ob … — depending on whether …; Je nachdem! — It depends! mehr denn je — more than ever; seit je — always (has been). je Person — per person (like pro). The pair je … desto has its own card.",
-    "example_cloze": "Hast du {{c1::je}} so etwas Schönes gesehen?"
+    "usage_note_ru": "je zwei — по два: Wir bekommen je zwei Bonbons. je nach — в зависимости от: je nach Wetter; je nachdem, ob … — смотря по тому, …; Je nachdem! — Смотря как! mehr denn je — больше, чем когда-либо; seit je — испокон веку. je Person — на человека (как pro). Пара je … desto.",
+    "usage_note_en": "je zwei — two each: Wir bekommen je zwei Bonbons. je nach — depending on: je nach Wetter; je nachdem, ob … — depending on whether …; Je nachdem! — It depends! mehr denn je — more than ever; seit je — always (has been). je Person — per person (like pro). The pair je … desto.",
+    "example_cloze": "Hast du {{c1::je}} so etwas Schönes gesehen?",
+    "see_also": [
+      {
+        "id": "conjunction-030",
+        "text": "je … desto"
+      }
+    ]
   },
   {
     "id": "adverb-234",
@@ -4595,8 +4647,14 @@
     "example_cloze": "Nach zehn Jahren in der Band will die Sängerin jetzt {{c1::solo}} auftreten.",
     "reading_policy": "single",
     "example_usage": "Adverb",
-    "usage_note_ru": "Не склоняется. У Duden — несклоняемое прилагательное. В значении «один, без пары» — разговорное, часто шутливое: Ich bin zurzeit solo. Существительное das Solo — отдельная карточка.",
-    "usage_note_en": "Not inflected. Duden lists it as an indeclinable adjective. In the sense “alone, single” — colloquial, often jocular: Ich bin zurzeit solo. The noun das Solo has its own card."
+    "usage_note_ru": "Не склоняется. У Duden — несклоняемое прилагательное. В значении «один, без пары» — разговорное, часто шутливое: Ich bin zurzeit solo. Существительное das Solo.",
+    "usage_note_en": "Not inflected. Duden lists it as an indeclinable adjective. In the sense “alone, single” — colloquial, often jocular: Ich bin zurzeit solo. The noun das Solo.",
+    "see_also": [
+      {
+        "id": "noun-2817",
+        "text": "Solo"
+      }
+    ]
   },
   {
     "id": "adverb-391",
@@ -4703,8 +4761,14 @@
     "example_cloze": "Das Angebot klingt {{c1::höchst}} interessant, aber ich muss noch darüber nachdenken.",
     "reading_policy": "single",
     "example_usage": "Adverb",
-    "usage_note_ru": "Стоит перед прилагательным или наречием: höchst gefährlich. «Самый высокий, высший» — это превосходная степень от hoch: der höchste Berg, am höchsten (см. карточку hoch).",
-    "usage_note_en": "Used before an adjective or adverb: höchst gefährlich. “Highest” is the superlative of hoch: der höchste Berg, am höchsten (see the card hoch)."
+    "usage_note_ru": "Стоит перед прилагательным или наречием: höchst gefährlich. «Самый высокий, высший» — это превосходная степень от hoch: der höchste Berg, am höchsten.",
+    "usage_note_en": "Used before an adjective or adverb: höchst gefährlich. “Highest” is the superlative of hoch: der höchste Berg, am höchsten.",
+    "see_also": [
+      {
+        "id": "adjective-adverb-006",
+        "text": "hoch"
+      }
+    ]
   },
   {
     "id": "adverb-399",
@@ -5093,8 +5157,8 @@
     "example_cloze": "Am Wochenende schlafe ich {{c1::meist}} bis neun Uhr.",
     "reading_policy": "single",
     "example_usage": "Adverb",
-    "usage_note_ru": "= meistens. Не путать: die meisten Leute — большинство людей (превосходная степень от viel, отдельная карточка).",
-    "usage_note_en": "= meistens. Do not confuse: die meisten Leute — most people (superlative of viel, separate card)."
+    "usage_note_ru": "= meistens. Не путать: die meisten Leute — большинство людей (превосходная степень от viel).",
+    "usage_note_en": "= meistens. Do not confuse: die meisten Leute — most people (superlative of viel)."
   },
   {
     "id": "adverb-428",
@@ -5445,9 +5509,15 @@
     "example_de": "Die Kinder liefen dem Vater entgegen.",
     "example_ru": "Дети побежали навстречу отцу.",
     "example_en": "The children ran to meet their father.",
-    "usage_note_ru": "Кому, чему — Dativ, часто после слова: dem Vater entgegen — навстречу отцу; Вопреки чему-либо (entgegen allen Erwartungen) — предлог, отдельная карточка. Часть глагола: entgegenkommen, entgegennehmen.",
-    "usage_note_en": "To whom, to what — dative, often after the word: dem Vater entgegen — to meet his father; Contrary to something (entgegen allen Erwartungen) — the preposition, a separate card. Part of a verb: entgegenkommen, entgegennehmen.",
-    "example_cloze": "Die Kinder liefen dem Vater {{c1::entgegen}}."
+    "usage_note_ru": "Кому, чему — Dativ, часто после слова: dem Vater entgegen — навстречу отцу; Вопреки чему-либо (entgegen allen Erwartungen) — предлог. Часть глагола: entgegenkommen, entgegennehmen.",
+    "usage_note_en": "To whom, to what — dative, often after the word: dem Vater entgegen — to meet his father; Contrary to something (entgegen allen Erwartungen) — the preposition. Part of a verb: entgegenkommen, entgegennehmen.",
+    "example_cloze": "Die Kinder liefen dem Vater {{c1::entgegen}}.",
+    "see_also": [
+      {
+        "id": "preposition-061",
+        "text": "entgegen allen Erwartungen"
+      }
+    ]
   },
   {
     "id": "adverb-455",

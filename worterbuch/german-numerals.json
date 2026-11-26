@@ -35,13 +35,21 @@
       "numeral_kind": "cardinal",
       "value": 1
     },
-    "usage_note_ru": "Перед существительным — не eins, а ein/eine (ein Buch); см. карточки артикля и местоимения. Время: um eins, но um ein Uhr. В составных числах: einundzwanzig (21), hunderteins (101). Номер: Linie eins.",
-    "usage_note_en": "Before a noun it is not eins but ein/eine (ein Buch); see the article and pronoun cards. Time: um eins, but um ein Uhr. In compound numbers: einundzwanzig (21), hunderteins (101). As a number: Linie eins.",
+    "usage_note_ru": "Перед существительным — не eins, а ein/eine (ein Buch); см. артикль и местоимение ein. Время: um eins, но um ein Uhr. В составных числах: einundzwanzig (21), hunderteins (101). Номер: Linie eins.",
+    "usage_note_en": "Before a noun it is not eins but ein/eine (ein Buch); see the article and the pronoun ein. Time: um eins, but um ein Uhr. In compound numbers: einundzwanzig (21), hunderteins (101). As a number: Linie eins.",
     "search_forms": [
       "eins"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/eins_Zahl",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "see_also": [
+      {
+        "id": "article-002"
+      },
+      {
+        "id": "pronoun-044"
+      }
+    ]
   },
   {
     "id": "numeral-003",
@@ -478,13 +486,19 @@
       "numeral_kind": "cardinal",
       "value": 100
     },
-    "usage_note_ru": "hundert или einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Неопределённое «сотни» — Hunderte (можно и hunderte), отдельная карточка.",
-    "usage_note_en": "hundert or einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. The indefinite “hundreds” is Hunderte (also hunderte), a separate card.",
+    "usage_note_ru": "hundert или einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Неопределённое «сотни» — Hunderte (можно и hunderte).",
+    "usage_note_en": "hundert or einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. The indefinite “hundreds” is Hunderte (also hunderte).",
     "search_forms": [
       "hundert"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/hundert",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "see_also": [
+      {
+        "id": "numeral-021",
+        "text": "Hunderte"
+      }
+    ]
   },
   {
     "id": "numeral-017",
@@ -500,13 +514,19 @@
       "numeral_kind": "cardinal",
       "value": 1000
     },
-    "usage_note_ru": "tausend или eintausend; 2026 — zweitausendsechsundzwanzig. Неопределённое «тысячи» — Tausende (можно и tausende), отдельная карточка.",
-    "usage_note_en": "tausend or eintausend; 2026 — zweitausendsechsundzwanzig. The indefinite “thousands” is Tausende (also tausende), a separate card.",
+    "usage_note_ru": "tausend или eintausend; 2026 — zweitausendsechsundzwanzig. Неопределённое «тысячи» — Tausende (можно и tausende).",
+    "usage_note_en": "tausend or eintausend; 2026 — zweitausendsechsundzwanzig. The indefinite “thousands” is Tausende (also tausende).",
     "search_forms": [
       "tausend"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/tausend",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "see_also": [
+      {
+        "id": "numeral-022",
+        "text": "Tausende"
+      }
+    ]
   },
   {
     "id": "numeral-018",

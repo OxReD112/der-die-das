@@ -29,7 +29,7 @@
       "aus"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/aus_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "Sie kommt {{c1::aus}} Japan."
   },
   {
     "id": "preposition-002",
@@ -66,7 +66,7 @@
       "bei"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/bei",
-    "wortschatz_excluded": true
+    "example_cloze": "Er wohnt {{c1::bei}} seinen Eltern."
   },
   {
     "id": "preposition-003",
@@ -98,7 +98,7 @@
       "mit"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/mit_inklusive_auch_mitsamt",
-    "wortschatz_excluded": true
+    "example_cloze": "Ich gehe {{c1::mit}} meiner Schwester ins Kino."
   },
   {
     "id": "preposition-004",
@@ -139,7 +139,7 @@
       "nach"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/nach_zu_hin_entsprechend",
-    "wortschatz_excluded": true
+    "example_cloze": "Wir fahren {{c1::nach}} Berlin."
   },
   {
     "id": "preposition-005",
@@ -165,13 +165,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Действие началось в прошлом и продолжается сейчас, поэтому глагол обычно стоит в Präsens: Ich wohne seit 2020 hier. Союз seit «с тех пор как» вводит придаточное предложение — это отдельная карточка Konjunktion.",
-    "usage_note_en": "The action began in the past and is still going on, so the verb is usually in the present tense: Ich wohne seit 2020 hier. The conjunction seit (since, introducing a clause) has a separate Konjunktion card.",
+    "usage_note_ru": "Действие началось в прошлом и продолжается сейчас, поэтому глагол обычно стоит в Präsens: Ich wohne seit 2020 hier. Союз seit «с тех пор как» вводит придаточное предложение.",
+    "usage_note_en": "The action began in the past and is still going on, so the verb is usually in the present tense: Ich wohne seit 2020 hier. The conjunction seit (since, introducing a clause).",
     "search_forms": [
       "seit"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/seit_von_da_an_spaeter_als",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "conjunction-020",
+        "text": "seit",
+        "at": {
+          "ru": 2,
+          "en": 2
+        }
+      }
+    ],
+    "example_cloze": "Ich lerne {{c1::seit}} drei Jahren Deutsch."
   },
   {
     "id": "preposition-006",
@@ -208,7 +218,7 @@
       "von"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/von_aus_ab_durch_per_seitens",
-    "wortschatz_excluded": true
+    "example_cloze": "Das Geschenk ist {{c1::von}} meiner Oma."
   },
   {
     "id": "preposition-007",
@@ -240,13 +250,21 @@
     "forms": null,
     "forms_note_ru": "Слитные формы: zum = zu dem, zur = zu der.",
     "forms_note_en": "Contracted forms: zum = zu dem, zur = zu der.",
-    "usage_note_ru": "zu Hause — дома (а nach Hause — домой). zu Fuß — пешком. Цель: zum Lernen — для учёбы. zu перед инфинитивом (Ich habe keine Zeit zu lesen) и zu «слишком» (zu groß) — не предлог, это отдельные карточки. Если zu стоит в конце предложения при глаголе (Mach die Tür zu), это часть глагола zumachen.",
-    "usage_note_en": "zu Hause — at home (but nach Hause — home(wards)). zu Fuß — on foot. Purpose: zum Lernen — for studying. zu before an infinitive (Ich habe keine Zeit zu lesen) and zu meaning too (zu groß) are not the preposition; they have separate cards. When zu stands at the end of the clause with a verb (Mach die Tür zu), it is part of the verb zumachen.",
+    "usage_note_ru": "zu Hause — дома (а nach Hause — домой). zu Fuß — пешком. Цель: zum Lernen — для учёбы. zu перед инфинитивом (Ich habe keine Zeit zu lesen) и zu «слишком» (zu groß) — не предлог. Если zu стоит в конце предложения при глаголе (Mach die Tür zu), это часть глагола zumachen.",
+    "usage_note_en": "zu Hause — at home (but nach Hause — home(wards)). zu Fuß — on foot. Purpose: zum Lernen — for studying. zu before an infinitive (Ich habe keine Zeit zu lesen) and zu meaning too (zu groß) are not the preposition. When zu stands at the end of the clause with a verb (Mach die Tür zu), it is part of the verb zumachen.",
     "search_forms": [
       "zu"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zu_Praeposition",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "function-002"
+      },
+      {
+        "id": "function-003"
+      }
+    ],
+    "example_cloze": "Ich gehe {{c1::zum}} Arzt."
   },
   {
     "id": "preposition-008",
@@ -288,7 +306,7 @@
       "ab"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/ab_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Ab}} nächster Woche arbeite ich hier."
   },
   {
     "id": "preposition-009",
@@ -339,7 +357,7 @@
       "gegenüber"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/gegenueber_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "Das Café ist {{c1::gegenüber}} dem Bahnhof."
   },
   {
     "id": "preposition-010",
@@ -376,7 +394,7 @@
       "durch"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/durch_mittels",
-    "wortschatz_excluded": true
+    "example_cloze": "Er geht {{c1::durch}} den Park."
   },
   {
     "id": "preposition-011",
@@ -413,7 +431,7 @@
       "für"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/fuer_statt",
-    "wortschatz_excluded": true
+    "example_cloze": "Das ist ein Geschenk {{c1::für}} meinen Vater."
   },
   {
     "id": "preposition-012",
@@ -445,7 +463,7 @@
       "gegen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/gegen_wider",
-    "wortschatz_excluded": true
+    "example_cloze": "Ich bin {{c1::gegen}} diesen Plan."
   },
   {
     "id": "preposition-013",
@@ -471,13 +489,19 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Часто без артикля: ohne Zucker, ohne Geld. ohne … zu + инфинитив (ohne zu fragen — не спрашивая) — это союз, отдельная карточка.",
-    "usage_note_en": "Often without an article: ohne Zucker, ohne Geld. ohne … zu + infinitive (ohne zu fragen — without asking) is a conjunction with a separate card.",
+    "usage_note_ru": "Часто без артикля: ohne Zucker, ohne Geld. ohne … zu + инфинитив (ohne zu fragen — не спрашивая) — это союз.",
+    "usage_note_en": "Often without an article: ohne Zucker, ohne Geld. ohne … zu + infinitive (ohne zu fragen — without asking).",
     "search_forms": [
       "ohne"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/ohne_Praeposition",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "conjunction-033",
+        "text": "ohne … zu"
+      }
+    ],
+    "example_cloze": "Ich trinke Kaffee {{c1::ohne}} Zucker."
   },
   {
     "id": "preposition-014",
@@ -508,13 +532,19 @@
     "forms": null,
     "forms_note_ru": "Разговорная слитная форма: ums = um das.",
     "forms_note_en": "Colloquial contracted form: ums = um das.",
-    "usage_note_ru": "Вокруг: um den Tisch (herum). Приблизительно: um Weihnachten — около Рождества. О чём: Es geht um Geld — речь идёт о деньгах. um … zu + инфинитив («чтобы») — это союз, отдельная карточка. Если um стоит в конце предложения при глаголе (Wir ziehen um), это часть глагола umziehen, а не предлог. Разница — на: Die Temperatur stieg um 5 Grad. — Температура поднялась на 5 градусов; um einen Millimeter zu kurz — на миллиметр короче.",
-    "usage_note_en": "Around: um den Tisch (herum). Approximately: um Weihnachten — around Christmas. About: Es geht um Geld — it is about money. um … zu + infinitive (in order to) is a conjunction with a separate card. When um stands at the end of the clause with a verb (Wir ziehen um), it is part of the verb umziehen, not a preposition. A difference — by: Die Temperatur stieg um 5 Grad. — The temperature rose by 5 degrees; um einen Millimeter zu kurz — a millimetre too short.",
+    "usage_note_ru": "Вокруг: um den Tisch (herum). Приблизительно: um Weihnachten — около Рождества. О чём: Es geht um Geld — речь идёт о деньгах. um … zu + инфинитив («чтобы») — это союз. Если um стоит в конце предложения при глаголе (Wir ziehen um), это часть глагола umziehen, а не предлог. Разница — на: Die Temperatur stieg um 5 Grad. — Температура поднялась на 5 градусов; um einen Millimeter zu kurz — на миллиметр короче.",
+    "usage_note_en": "Around: um den Tisch (herum). Approximately: um Weihnachten — around Christmas. About: Es geht um Geld — it is about money. um … zu + infinitive (in order to) is a conjunction. When um stands at the end of the clause with a verb (Wir ziehen um), it is part of the verb umziehen, not a preposition. A difference — by: Die Temperatur stieg um 5 Grad. — The temperature rose by 5 degrees; um einen Millimeter zu kurz — a millimetre too short.",
     "search_forms": [
       "um"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/um_herum_vorbei_fuer",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "conjunction-014",
+        "text": "um … zu"
+      }
+    ],
+    "example_cloze": "Der Film beginnt {{c1::um}} acht Uhr."
   },
   {
     "id": "preposition-015",
@@ -561,13 +591,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "bis bald, bis morgen — до скорого, до завтра. bis auf + Akkusativ — «кроме»: Alle bis auf einen waren da. Союз bis «пока не» вводит придаточное предложение — это отдельная карточка Konjunktion.",
-    "usage_note_en": "bis bald, bis morgen — see you soon, see you tomorrow. bis auf + Akkusativ — except: Alle bis auf einen waren da. The conjunction bis (until, introducing a clause) has a separate Konjunktion card.",
+    "usage_note_ru": "bis bald, bis morgen — до скорого, до завтра. bis auf + Akkusativ — «кроме»: Alle bis auf einen waren da. Союз bis «пока не» вводит придаточное предложение.",
+    "usage_note_en": "bis bald, bis morgen — see you soon, see you tomorrow. bis auf + Akkusativ — except: Alle bis auf einen waren da. The conjunction bis (until, introducing a clause).",
     "search_forms": [
       "bis"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/bis_Praeposition",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "conjunction-024",
+        "text": "bis",
+        "at": {
+          "ru": 5,
+          "en": 5
+        }
+      }
+    ],
+    "example_cloze": "Ich arbeite {{c1::bis}} Freitag."
   },
   {
     "id": "preposition-016",
@@ -619,7 +659,7 @@
       "entlang"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/entlang_seitlich_zuseiten",
-    "wortschatz_excluded": true
+    "example_cloze": "Er geht die Straße {{c1::entlang}}."
   },
   {
     "id": "preposition-017",
@@ -667,7 +707,7 @@
       "an"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/an_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "Das Bild hängt {{c1::an}} der Wand."
   },
   {
     "id": "preposition-018",
@@ -714,7 +754,7 @@
       "auf"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/auf_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "Das Buch liegt {{c1::auf}} dem Tisch."
   },
   {
     "id": "preposition-019",
@@ -762,7 +802,7 @@
       "hinter"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/hinter_nach_rueckwaertig",
-    "wortschatz_excluded": true
+    "example_cloze": "Der Garten liegt {{c1::hinter}} dem Haus."
   },
   {
     "id": "preposition-020",
@@ -810,7 +850,7 @@
       "in"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/in_innen",
-    "wortschatz_excluded": true
+    "example_cloze": "Wir wohnen {{c1::in}} Berlin."
   },
   {
     "id": "preposition-021",
@@ -852,7 +892,7 @@
       "neben"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/neben_Praeposition_bei_auszer",
-    "wortschatz_excluded": true
+    "example_cloze": "Die Apotheke ist {{c1::neben}} der Bank."
   },
   {
     "id": "preposition-022",
@@ -909,7 +949,7 @@
       "über"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/ueber_auf_darueber_darauf",
-    "wortschatz_excluded": true
+    "example_cloze": "Die Lampe hängt {{c1::über}} dem Tisch."
   },
   {
     "id": "preposition-023",
@@ -957,7 +997,7 @@
       "unter"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/unter_darunter_abwaerts_tiefer",
-    "wortschatz_excluded": true
+    "example_cloze": "Die Katze schläft {{c1::unter}} dem Bett."
   },
   {
     "id": "preposition-024",
@@ -1005,7 +1045,7 @@
       "vor"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/vor_bevor_aus_gegen_heraus",
-    "wortschatz_excluded": true
+    "example_cloze": "Das Auto steht {{c1::vor}} dem Haus."
   },
   {
     "id": "preposition-025",
@@ -1047,7 +1087,7 @@
       "zwischen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zwischen_innerhalb_inmitten_binnen",
-    "wortschatz_excluded": true
+    "example_cloze": "Das Café liegt {{c1::zwischen}} der Post und der Bank."
   },
   {
     "id": "preposition-026",
@@ -1083,13 +1123,19 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Союз während «пока, в то время как; тогда как» вводит придаточное предложение — это отдельная карточка Konjunktion.",
-    "usage_note_en": "The conjunction während (while, whereas, introducing a clause) has a separate Konjunktion card.",
+    "usage_note_ru": "Союз während «пока, в то время как; тогда как» вводит придаточное предложение.",
+    "usage_note_en": "The conjunction während (while, whereas, introducing a clause).",
     "search_forms": [
       "während"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/waehrend_binnen_inmitten",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "conjunction-025",
+        "text": "während"
+      }
+    ],
+    "example_cloze": "{{c1::Während}} des Essens sprachen sie nicht."
   },
   {
     "id": "preposition-027",
@@ -1140,7 +1186,7 @@
       "wegen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/wegen_infolge_bezueglich",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Wegen}} des schlechten Wetters blieben wir zu Hause."
   },
   {
     "id": "preposition-028",
@@ -1182,7 +1228,7 @@
       "trotz"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/trotz",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Trotz}} des Regens gingen wir spazieren."
   },
   {
     "id": "preposition-029",
@@ -1218,14 +1264,20 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "anstatt значит то же самое и управляет так же. statt … zu + инфинитив (statt zu arbeiten — вместо того чтобы работать) — это союз, отдельная карточка.",
-    "usage_note_en": "anstatt means the same and takes the same cases. statt … zu + infinitive (statt zu arbeiten — instead of working) is a conjunction with a separate card.",
+    "usage_note_ru": "anstatt значит то же самое и управляет так же. statt … zu + инфинитив (statt zu arbeiten — вместо того чтобы работать) — это союз.",
+    "usage_note_en": "anstatt means the same and takes the same cases. statt … zu + infinitive (statt zu arbeiten — instead of working).",
     "search_forms": [
       "statt",
       "anstatt"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/statt_anstelle_vorangestellt",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "conjunction-034",
+        "text": "statt … zu"
+      }
+    ],
+    "example_cloze": "{{c1::Statt}} eines Kuchens gab es Eis."
   },
   {
     "id": "preposition-030",
@@ -1268,7 +1320,7 @@
       "innerhalb"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/innerhalb_innerhalb_einer_Sache",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Innerhalb}} einer Woche war alles fertig."
   },
   {
     "id": "preposition-031",
@@ -1311,7 +1363,7 @@
       "außerhalb"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/auszerhalb_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "Wir wohnen {{c1::außerhalb}} der Stadt."
   },
   {
     "id": "preposition-032",
@@ -1347,13 +1399,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Существительное без артикля обычно без окончания: laut Gesetz. Прилагательное laut — «громкий; громко» — отдельная карточка.",
-    "usage_note_en": "A noun without an article usually has no ending: laut Gesetz. The adjective laut (loud; loudly) has a separate card.",
+    "usage_note_ru": "Существительное без артикля обычно без окончания: laut Gesetz. Прилагательное laut — «громкий; громко».",
+    "usage_note_en": "A noun without an article usually has no ending: laut Gesetz. The adjective laut (loud; loudly).",
     "search_forms": [
       "laut"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/laut_zufolge_bezueglich",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "adjective-019",
+        "text": "laut",
+        "at": {
+          "ru": 2,
+          "en": 2
+        }
+      }
+    ],
+    "example_cloze": "{{c1::Laut}} einem Bericht ist er zurückgetreten."
   },
   {
     "id": "preposition-033",
@@ -1389,13 +1451,19 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Существительное без артикля обычно без окончания: dank Internet. Существительное Dank (с большой буквы) — «благодарность», как в Vielen Dank!, — это отдельная карточка.",
-    "usage_note_en": "A noun without an article usually has no ending: dank Internet. The noun Dank (gratitude, thanks), as in Vielen Dank!, has a separate card.",
+    "usage_note_ru": "Существительное без артикля обычно без окончания: dank Internet. Существительное Dank (с большой буквы) — «благодарность», как в Vielen Dank!",
+    "usage_note_en": "A noun without an article usually has no ending: dank Internet. The noun Dank (gratitude, thanks), as in Vielen Dank!",
     "search_forms": [
       "dank"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/dank",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "noun-415",
+        "text": "Vielen Dank"
+      }
+    ],
+    "example_cloze": "{{c1::Dank}} seiner Hilfe haben wir es geschafft."
   },
   {
     "id": "preposition-034",
@@ -1441,13 +1509,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Вне: außer Betrieb — не работает, außer Atem — запыхавшись, außer Dienst — в отставке. außer sich sein — быть вне себя, außer sich geraten (mir / mich) — выйти из себя. Союз außer (außer wenn, außer dass) — отдельная карточка.",
-    "usage_note_en": "Out of: außer Betrieb — out of order, außer Atem — out of breath, außer Dienst — retired. außer sich sein — to be beside oneself, außer sich geraten (mir / mich) — to lose one's temper. The conjunction außer (außer wenn, außer dass) has its own card.",
+    "usage_note_ru": "Вне: außer Betrieb — не работает, außer Atem — запыхавшись, außer Dienst — в отставке. außer sich sein — быть вне себя, außer sich geraten (mir / mich) — выйти из себя. Союз außer (außer wenn, außer dass).",
+    "usage_note_en": "Out of: außer Betrieb — out of order, außer Atem — out of breath, außer Dienst — retired. außer sich sein — to be beside oneself, außer sich geraten (mir / mich) — to lose one's temper. The conjunction außer (außer wenn, außer dass).",
     "search_forms": [
       "außer"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/auszer_Praeposition",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "conjunction-043",
+        "text": "außer",
+        "at": {
+          "ru": 6,
+          "en": 6
+        }
+      }
+    ],
+    "example_cloze": "{{c1::Außer}} meiner Schwester kommen alle zum Fest."
   },
   {
     "id": "preposition-035",
@@ -1489,7 +1567,7 @@
       "pro"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/pro_je_zu_jeweils_fuer",
-    "wortschatz_excluded": true
+    "example_cloze": "Der Eintritt kostet zehn Euro {{c1::pro}} Person."
   },
   {
     "id": "preposition-036",
@@ -1531,7 +1609,7 @@
       "per"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/per",
-    "wortschatz_excluded": true
+    "example_cloze": "Ich schicke dir die Unterlagen {{c1::per}} E-Mail."
   },
   {
     "id": "preposition-037",
@@ -1573,7 +1651,7 @@
       "einschließlich"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/einschlieszlich_inklusive_samt_nebst",
-    "wortschatz_excluded": true
+    "example_cloze": "Die Wohnung kostet 900 Euro im Monat, {{c1::einschließlich}} der Nebenkosten."
   },
   {
     "id": "preposition-038",
@@ -1615,7 +1693,7 @@
       "inklusive"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/inklusive_mitsamt",
-    "wortschatz_excluded": true
+    "example_cloze": "Der Flug kostet 120 Euro {{c1::inklusive}} Gepäck."
   },
   {
     "id": "preposition-039",
@@ -1658,7 +1736,7 @@
       "angesichts"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/angesichts_Hinblick_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Angesichts}} der hohen Preise fahren wir dieses Jahr nicht in Urlaub."
   },
   {
     "id": "preposition-040",
@@ -1701,7 +1779,7 @@
       "anhand"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/anhand_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "Die Polizei hat den Täter {{c1::anhand}} der Fingerabdrücke identifiziert."
   },
   {
     "id": "preposition-041",
@@ -1744,7 +1822,7 @@
       "anstelle"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/anstelle_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Anstelle}} des Chefs kam seine Stellvertreterin zur Sitzung."
   },
   {
     "id": "preposition-042",
@@ -1787,7 +1865,7 @@
       "aufgrund"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/aufgrund_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Aufgrund}} eines Unfalls ist die Autobahn gesperrt."
   },
   {
     "id": "preposition-043",
@@ -1829,7 +1907,7 @@
       "bezüglich"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/bezueglich_Praeposition",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Bezüglich}} Ihrer Anfrage melden wir uns morgen."
   },
   {
     "id": "preposition-044",
@@ -1874,14 +1952,14 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Часто в документах и правилах: gemäß § 5. Прилагательное gemäß «соответствующий» (eine dem Alter gemäße Aufgabe) — не эта карточка. В Швейцарии пишется gemäss.",
-    "usage_note_en": "Common in documents and regulations: gemäß § 5. The adjective gemäß 'appropriate' (eine dem Alter gemäße Aufgabe) is not this card. In Switzerland it is spelled gemäss.",
+    "usage_note_ru": "Часто в документах и правилах: gemäß § 5. Прилагательное gemäß «соответствующий» (eine dem Alter gemäße Aufgabe) — другое слово. В Швейцарии пишется gemäss.",
+    "usage_note_en": "Common in documents and regulations: gemäß § 5. The adjective gemäß 'appropriate' (eine dem Alter gemäße Aufgabe) is a different word. In Switzerland it is spelled gemäss.",
     "search_forms": [
       "gemäß",
       "gemäss"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/gemaesz_bezueglich_laut",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Gemäß}} dem neuen Gesetz müssen alle Geräte geprüft werden."
   },
   {
     "id": "preposition-045",
@@ -1913,7 +1991,7 @@
       "hinsichtlich"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/hinsichtlich",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Hinsichtlich}} des Termins sind wir uns noch nicht einig."
   },
   {
     "id": "preposition-046",
@@ -1956,7 +2034,7 @@
       "mithilfe"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/mithilfe_durch_mittels_dank",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Mithilfe}} einer App lerne ich jeden Tag neue Wörter."
   },
   {
     "id": "preposition-047",
@@ -1988,7 +2066,7 @@
       "wider"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/wider",
-    "wortschatz_excluded": true
+    "example_cloze": "Er hat den Vertrag {{c1::wider}} besseres Wissen unterschrieben."
   },
   {
     "id": "preposition-048",
@@ -2020,7 +2098,6 @@
       "um … willen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/willen",
-    "wortschatz_excluded": true,
     "match": {
       "parts": [
         {
@@ -2045,7 +2122,8 @@
         "Er hat einen starken Willen.",
         "Um seinen Willen durchzusetzen, ist ihm jedes Mittel recht."
       ]
-    }
+    },
+    "example_cloze": "Sie hat {{c1::um}} der Kinder {{c1::willen}} auf die Reise verzichtet."
   },
   {
     "id": "preposition-049",
@@ -2087,7 +2165,7 @@
       "abzüglich"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/abzueglich",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Abzüglich}} der Steuern bleiben mir etwa 2000 Euro im Monat."
   },
   {
     "id": "preposition-050",
@@ -2130,7 +2208,7 @@
       "infolge"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/infolge_wegen_dank",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Infolge}} des Streiks fielen viele Züge aus."
   },
   {
     "id": "preposition-051",
@@ -2173,7 +2251,7 @@
       "inmitten"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/inmitten_im_Zentrum_innerhalb",
-    "wortschatz_excluded": true
+    "example_cloze": "Das kleine Haus steht {{c1::inmitten}} eines großen Gartens."
   },
   {
     "id": "preposition-052",
@@ -2215,7 +2293,7 @@
       "mitsamt"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/mitsamt",
-    "wortschatz_excluded": true
+    "example_cloze": "Der Dieb ist {{c1::mitsamt}} dem ganzen Schmuck verschwunden."
   },
   {
     "id": "preposition-053",
@@ -2247,7 +2325,7 @@
       "seitens"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/seitens",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Seitens}} der Stadt gibt es noch keine Entscheidung."
   },
   {
     "id": "preposition-054",
@@ -2288,7 +2366,7 @@
       "ungeachtet"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/ungeachtet_trotz_entgegen",
-    "wortschatz_excluded": true
+    "example_cloze": "{{c1::Ungeachtet}} des Regens spielten die Kinder draußen."
   },
   {
     "id": "preposition-055",
@@ -2341,7 +2419,7 @@
       "zu Gunsten"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zugunsten_fuer",
-    "wortschatz_excluded": true
+    "example_cloze": "Das Konzert findet {{c1::zugunsten}} eines Kinderkrankenhauses statt."
   },
   {
     "id": "preposition-056",
@@ -2374,7 +2452,7 @@
       "zulieb"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zulieb",
-    "wortschatz_excluded": true
+    "example_cloze": "Der Umwelt {{c1::zuliebe}} fahren wir mit dem Fahrrad zur Arbeit."
   },
   {
     "id": "preposition-057",
@@ -2416,7 +2494,7 @@
       "zufolge"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zufolge",
-    "wortschatz_excluded": true
+    "example_cloze": "Einer neuen Studie {{c1::zufolge}} schlafen Jugendliche zu wenig."
   },
   {
     "id": "preposition-058",
@@ -2458,7 +2536,7 @@
       "zuzüglich"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zuzueglich",
-    "wortschatz_excluded": true
+    "example_cloze": "Der Kurs kostet 250 Euro {{c1::zuzüglich}} der Prüfungsgebühr."
   },
   {
     "id": "preposition-059",
@@ -2500,7 +2578,7 @@
       "samt"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/samt_nebst_einschlieszlich",
-    "wortschatz_excluded": true
+    "example_cloze": "Sie stand plötzlich {{c1::samt}} ihrem Hund vor der Tür."
   },
   {
     "id": "preposition-060",
@@ -2532,7 +2610,7 @@
       "gen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/gen",
-    "wortschatz_excluded": true
+    "example_cloze": "Die Vögel zogen {{c1::gen}} Süden."
   },
   {
     "id": "preposition-061",
@@ -2577,13 +2655,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Наречие и приставка entgegen «навстречу» (jemandem entgegenkommen) — не эта карточка.",
-    "usage_note_en": "The adverb and prefix entgegen 'towards' (jemandem entgegenkommen) is not this card.",
+    "usage_note_ru": "Наречие и приставка entgegen «навстречу» (jemandem entgegenkommen) — другое слово.",
+    "usage_note_en": "The adverb and prefix entgegen 'towards' (jemandem entgegenkommen) is a different word.",
     "search_forms": [
       "entgegen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/entgegen_gegenueber_trotz",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "adverb-454",
+        "text": "entgegen",
+        "at": {
+          "ru": 1,
+          "en": 1
+        }
+      }
+    ],
+    "example_cloze": "{{c1::Entgegen}} der Wettervorhersage blieb es den ganzen Tag trocken."
   },
   {
     "id": "preposition-062",
@@ -2628,13 +2716,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Прилагательное и наречие entsprechend «соответствующий; соответственно» (eine entsprechende Antwort) — не эта карточка.",
-    "usage_note_en": "The adjective and adverb entsprechend 'corresponding; accordingly' (eine entsprechende Antwort) is not this card.",
+    "usage_note_ru": "Прилагательное и наречие entsprechend «соответствующий; соответственно» (eine entsprechende Antwort) — другое слово.",
+    "usage_note_en": "The adjective and adverb entsprechend 'corresponding; accordingly' (eine entsprechende Antwort) is a different word.",
     "search_forms": [
       "entsprechend"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/entsprechend_betreffend_laut",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "adjective-adverb-391",
+        "text": "entsprechend",
+        "at": {
+          "ru": 1,
+          "en": 1
+        }
+      }
+    ],
+    "example_cloze": "Den Anweisungen {{c1::entsprechend}} haben wir die Tür abgeschlossen."
   },
   {
     "id": "preposition-063",
@@ -2660,13 +2758,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Только после слова, книжн. Прилагательное halb (ein halber Liter) — не эта карточка.",
-    "usage_note_en": "Only after the word, formal. The adjective halb (ein halber Liter) is not this card.",
+    "usage_note_ru": "Только после слова, книжн. Прилагательное halb (ein halber Liter) — другое слово.",
+    "usage_note_en": "Only after the word, formal. The adjective halb (ein halber Liter) is a different word.",
     "search_forms": [
       "halber"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/halber_aufgrund_fuer_wegen",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "adjective-adverb-120",
+        "text": "halb",
+        "at": {
+          "ru": 1,
+          "en": 1
+        }
+      }
+    ],
+    "example_cloze": "Der Vollständigkeit {{c1::halber}} nenne ich noch eine dritte Möglichkeit."
   },
   {
     "id": "preposition-064",
@@ -2692,13 +2800,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Только после слова, книжн. Прилагательное zuwider «противный» (jemandem zuwider sein) — не эта карточка.",
-    "usage_note_en": "Only after the word, formal. The adjective zuwider 'repugnant' (jemandem zuwider sein) is not this card.",
+    "usage_note_ru": "Только после слова, книжн. Прилагательное zuwider «противный» (jemandem zuwider sein) — другое слово.",
+    "usage_note_en": "Only after the word, formal. The adjective zuwider 'repugnant' (jemandem zuwider sein) is a different word.",
     "search_forms": [
       "zuwider"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zuwider_entgegen_trotz_ungeachtet",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "adjective-1492",
+        "text": "zuwider",
+        "at": {
+          "ru": 1,
+          "en": 1
+        }
+      }
+    ],
+    "example_cloze": "Allen Warnungen {{c1::zuwider}} fuhr er bei Sturm aufs Meer hinaus."
   },
   {
     "id": "preposition-065",
@@ -2743,13 +2861,23 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Причастие и прилагательное betreffend «соответствующий, данный» (die betreffende Person) — не эта карточка.",
-    "usage_note_en": "The participle and adjective betreffend 'relevant, in question' (die betreffende Person) is not this card.",
+    "usage_note_ru": "Причастие и прилагательное betreffend «соответствующий, данный» (die betreffende Person) — другое слово.",
+    "usage_note_en": "The participle and adjective betreffend 'relevant, in question' (die betreffende Person) is a different word.",
     "search_forms": [
       "betreffend"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/betreffend_Praeposition",
-    "wortschatz_excluded": true
+    "see_also": [
+      {
+        "id": "adjective-1045",
+        "text": "betreffend",
+        "at": {
+          "ru": 1,
+          "en": 1
+        }
+      }
+    ],
+    "example_cloze": "Ihre Anfrage {{c1::betreffend}} können wir Ihnen leider keine Auskunft geben."
   },
   {
     "id": "preposition-066",
@@ -2775,13 +2903,12 @@
       }
     ],
     "forms": null,
-    "usage_note_ru": "Оборот из двух слов (Duden: jemandem, einer Sache zum Trotz — trotz, entgegen). Существительное Trotz «упрямство» (aus Trotz) — не эта карточка.",
-    "usage_note_en": "A two-word phrase (Duden: jemandem, einer Sache zum Trotz — trotz, entgegen). The noun Trotz 'defiance' (aus Trotz) is not this card.",
+    "usage_note_ru": "Оборот из двух слов (Duden: jemandem, einer Sache zum Trotz — trotz, entgegen). Существительное Trotz «упрямство» (aus Trotz) — другое слово.",
+    "usage_note_en": "A two-word phrase (Duden: jemandem, einer Sache zum Trotz — trotz, entgegen). The noun Trotz 'defiance' (aus Trotz) is a different word.",
     "search_forms": [
       "zum Trotz"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/Trotz",
-    "wortschatz_excluded": true,
     "match": {
       "parts": [
         {
@@ -2803,6 +2930,7 @@
         "Aus Trotz schwieg er.",
         "Er ging zum Bahnhof."
       ]
-    }
+    },
+    "example_cloze": "Allen Prognosen {{c1::zum Trotz}} hat unsere Mannschaft das Spiel gewonnen."
   }
 ]
