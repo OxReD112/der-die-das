@@ -118,7 +118,7 @@
         matched = matched.filter(row => !Array.isArray(row.gender) || !row.gender.length);
       const hidden = matched.length ? await hiddenParts(code) : new Map();
       // `labels` [gloss index, cut, codes]: the codes of a gloss; `shown` [text per gloss]: the gloss as the card shows it (the
-      // stored gloss keeps the source text); `reflexive` [gloss index, acc / dat / opt, …]; `name_like` — a name sense.
+      // glosses returned are the same texts shown — `shown[i]` where the dictionary gives one); `reflexive` [gloss index, acc / dat / opt, …]; `name_like` — a name sense.
       // Only senses with display_status "translation" are shown (forms and «see …» references are not).
       const labels = {}, shown = [], reflexive = {}, names = new Set();
       let labelled = false;
@@ -126,12 +126,21 @@
         senses:row.senses.filter(s => s.display_status === "translation" && Array.isArray(s.data?.glosses))
           .map(s => ({senseIndex:s.sense_index, sourceId:s.data.id, glosses:s.data.glosses.map((g0, i) => {
             if (typeof g0 !== "string" || !g0.trim()) return "";
+            // (27.11.2026, Turkish dictionary review) the reader shows a gloss only as the dictionary gives it for showing: `shown[i]`
+            // "" — nothing to show (the gloss is left out; a record left with none is a record without a translation — English with
+            // the mark); a `shown[i]` text — that text everywhere, also where the meanings are read as a list (parts of a verb, the
+            // base of a form) — never the source line behind it («Krankenhaus kelimesinin kısaltması»). No `shown[i]` — the gloss.
+            // A `shown[i]` of spaces only is the same as "". A hidden sense left out of the text shown leaves nothing — not the source line.
+            const display = Array.isArray(s.shown) && typeof s.shown[i] === "string" ? s.shown[i].trim() : null;
+            if (display === "") return "";
             const g = withoutHidden(g0, row.word, row.pos, hidden);
             if (!g) return "";
+            const own = display ? withoutHidden(display, row.word, row.pos, hidden) : "";
+            if (display && !own) return "";
+            // (the reflexive mark keyed by the meaning as it is listed — the text shown)
             const rm = (Array.isArray(s.reflexive) ? s.reflexive : []).find(r => Array.isArray(r) && r[0] === i && ["acc","dat","opt"].includes(r[1]));
-            if (rm && !(g in reflexive)) reflexive[g] = rm[1];
+            if (rm && !((own || g) in reflexive)) reflexive[own || g] = rm[1];
             const mark = (Array.isArray(s.labels) ? s.labels : []).find(l => Array.isArray(l) && l[0] === i && Number.isInteger(l[1]) && Array.isArray(l[2]));
-            const own = Array.isArray(s.shown) && typeof s.shown[i] === "string" && s.shown[i].trim() ? withoutHidden(s.shown[i].trim(), row.word, row.pos, hidden) : "";
             const text = own || (mark && mark[1] > 0 && mark[1] < g.length ? g.slice(mark[1]).trim() : g.trim());
             if (text) {
               shown.push(text);
@@ -143,7 +152,7 @@
               if (transitivity.length) labelled = true;
               if (!(text in labels)) labels[text] = [...new Set([...(mark ? mark[2].filter(c => typeof c === "string") : []), ...transitivity])];
             }
-            return g;
+            return own || g;
           }).filter(Boolean)}))
           .filter(s => s.glosses.length)})).filter(row => row.senses.length);
       if (entries.length) {
