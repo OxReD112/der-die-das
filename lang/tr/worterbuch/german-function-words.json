@@ -7,9 +7,9 @@
   "_src_reader": "c425a6db"
  },
  "function-002": {
-  "translation_tr": "Infinitiv önündeki parçacık (çevrilmez)",
+  "translation_tr": "Mastar önündeki parçacık (çevrilmez)",
   "example_tr": "Okumaya vaktim yok.",
-  "usage_note_tr": "zu + Infinitiv birçok fiilden, isimden ve sıfattan sonra gelir: Es ist schwer, Deutsch zu lernen. Ayrılabilen fiillerde zu kelimenin içine girer: anzurufen. Modal fiillerden sonra zu gerekmez: Ich muss lesen. Ayrıca: um … zu, ohne … zu, statt … zu. zu edatı (“-e / -a, yanına”) ve “fazla” anlamındaki zu başka kelimelerdir.",
+  "usage_note_tr": "zu + mastar birçok fiilden, isimden ve sıfattan sonra gelir: Es ist schwer, Deutsch zu lernen. Ayrılabilen fiillerde zu kelimenin içine girer: anzurufen. Modal fiillerden sonra zu gerekmez: Ich muss lesen. Ayrıca: um … zu, ohne … zu, statt … zu. zu edatı (“-e / -a, yanına”) ve “fazla” anlamındaki zu başka kelimelerdir.",
   "_src": "3261043a",
   "_src_reader": "1cb8fb04"
  },
@@ -44,7 +44,7 @@
  "function-007": {
   "translation_tr": "aa!, ah!, vay canına! (şaşkınlık)",
   "example_tr": "Aa, kim geliyor bakalım?",
-  "usage_note_tr": "Esk., çoğu zaman masallarda. Ei, ei! — vah vah!, ayıp ayıp! (sitem) ya da tamam, tamam (şefkatle, teselli ederken). Karıştırılmamalı: das Ei — yumurta.",
+  "usage_note_tr": "Esk., sıklıkla masallarda. Ei, ei! — vah vah!, ayıp ayıp! (sitem) ya da tamam, tamam (şefkatle, teselli ederken). Karıştırılmamalı: das Ei — yumurta.",
   "_src": "1f624264",
   "_src_reader": "b6ad8ee4"
  },

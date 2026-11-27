@@ -17,7 +17,7 @@
   "translation_tr": "iki",
   "example_tr": "İki çocuğum var.",
   "forms_note_tr": "Konuşma dilindeki biçimi: zwo. Nadir Genitiv: zweier (die Mutter zweier Kinder). İsimsiz Dativ: zu zweien “iki kişi birlikte”, von uns zweien. zu zweit — “iki kişi birlikte”.",
-  "usage_note_tr": "Telefonda ve açıklık için, drei ile karışmasın diye çoğu zaman zwo denir.",
+  "usage_note_tr": "Telefonda ve açıklık için, drei ile karışmasın diye sıklıkla zwo denir.",
   "collective": {
    "tr": "iki kişi birlikte"
   },
@@ -165,7 +165,7 @@
  "numeral-018": {
   "translation_tr": "birinci, ilk",
   "example_tr": "Bu benim buradaki ilk günüm.",
-  "forms_note_tr": "Sıfat gibi çekimlenir: erste, ersten, erster, erstes, erstem. Yazıda çoğu zaman noktalı rakamla: der 1. Mai.",
+  "forms_note_tr": "Sıfat gibi çekimlenir: erste, ersten, erster, erstes, erstem. Yazıda sıklıkla noktalı rakamla: der 1. Mai.",
   "usage_note_tr": "Tarihler: am ersten Mai — Mayıs'ın birinde. Diğer sıra sayıları: 19'a kadar -te eklenir (vierte, fünfte; ama siebte, achte), 20'den itibaren -ste (zwanzigste).",
   "_src": "54172847",
   "_src_reader": "4cc8888c"
@@ -173,7 +173,7 @@
  "numeral-019": {
   "translation_tr": "ikinci",
   "example_tr": "Bu şimdiden ikinci kahvem.",
-  "forms_note_tr": "Sıfat gibi çekimlenir: zweite, zweiten, zweiter, zweites, zweitem. Yazıda çoğu zaman noktalı rakamla: der 2. Mai.",
+  "forms_note_tr": "Sıfat gibi çekimlenir: zweite, zweiten, zweiter, zweites, zweitem. Yazıda sıklıkla noktalı rakamla: der 2. Mai.",
   "usage_note_tr": "zum zweiten Mal — ikinci kez. Diğer sıra sayıları: 19'a kadar -te eklenir (vierte, fünfte; ama siebte, achte), 20'den itibaren -ste (zwanzigste).",
   "_src": "16ddba39",
   "_src_reader": "67133712"
@@ -181,7 +181,7 @@
  "numeral-020": {
   "translation_tr": "üçüncü",
   "example_tr": "Üçüncü gün hava düzeldi.",
-  "forms_note_tr": "Sıfat gibi çekimlenir: dritte, dritten, dritter, drittes, drittem. Yazıda çoğu zaman noktalı rakamla: der 3. Mai.",
+  "forms_note_tr": "Sıfat gibi çekimlenir: dritte, dritten, dritter, drittes, drittem. Yazıda sıklıkla noktalı rakamla: der 3. Mai.",
   "usage_note_tr": "Düzensiz biçim: dreite değil, dritte. Diğer sıra sayıları: 19'a kadar -te eklenir (vierte, fünfte; ama siebte, achte), 20'den itibaren -ste (zwanzigste).",
   "_src": "36e21787",
   "_src_reader": "420ae744"

@@ -4482,5 +4482,4490 @@
   "at": [
    "59188c92"
   ]
+ },
+ {
+  "en": "What's wrong?",
+  "ru": "Что случилось?",
+  "tr": "Ne oldu?",
+  "at": [
+   "1de356f1"
+  ]
+ },
+ {
+  "en": "In a W-question doch only appears when you try to recall something forgotten (Wie hieß er doch gleich?); nothing to recall here.",
+  "ru": "В W-вопросе doch бывает только когда пытаешься вспомнить забытое («Wie hieß er doch gleich?»); здесь вспоминать нечего.",
+  "tr": "W-sorusunda doch yalnızca unutulmuş bir şeyi hatırlamaya çalışırken olur (“Wie hieß er doch gleich?”); burada hatırlanacak bir şey yok.",
+  "at": [
+   "23add7c2",
+   "4c02db50",
+   "5289ccce",
+   "bbbaeca6",
+   "c31bed59",
+   "d39e0873",
+   "e3167e27",
+   "f31f38ac",
+   "f4faede0",
+   "f61c5b40"
+  ]
+ },
+ {
+  "en": "Unstressed ja lives in statements and exclamations (Das ist ja teuer!), not in questions.",
+  "ru": "Безударное ja бывает в утверждениях и восклицаниях (Das ist ja teuer!), но не в вопросах.",
+  "tr": "Vurgusuz ja ifade ve ünlem cümlelerinde olur (Das ist ja teuer!), sorularda olmaz.",
+  "at": [
+   "0e3f7973",
+   "2cb1689f",
+   "32e432e5",
+   "364a994b",
+   "422dd635",
+   "43f6b0b1",
+   "5efe14c7",
+   "654b680d",
+   "74dc99d8",
+   "7d4a352c",
+   "80312801",
+   "814a74ec",
+   "8814645a",
+   "8cb43bc3",
+   "98995998",
+   "98a0e544",
+   "9903bccb",
+   "a31bd233",
+   "a34a9c44",
+   "ab4e41ab",
+   "caf21698",
+   "cbc61f57",
+   "cbde1ab2",
+   "d211f34e",
+   "d5be8ab6",
+   "da2548ca",
+   "dab162b7",
+   "dce409a7",
+   "e72aaeda",
+   "e7e06346",
+   "f20c5458",
+   "fdb829fb"
+  ]
+ },
+ {
+  "en": "mal softens requests (Kannst du mal…?). This W-question isn't one, so mal would read as 'once'.",
+  "ru": "mal смягчает просьбы, а этот вопрос — не просьба: mal прочитается как «однажды».",
+  "tr": "mal ricaları yumuşatır, bu soru ise rica değil: mal “bir kere” diye anlaşılır.",
+  "at": [
+   "13ad3e93",
+   "2aef37d4",
+   "2e698490",
+   "570e7935",
+   "59f5b942",
+   "60be94d2",
+   "630059e4",
+   "86517f38",
+   "c5228934",
+   "e8e82737",
+   "f0930881",
+   "fc628140"
+  ]
+ },
+ {
+  "en": "What's wrong, then?",
+  "ru": "Что случилось-то?",
+  "tr": "Peki, ne oldu?",
+  "at": [
+   "eed631dc"
+  ]
+ },
+ {
+  "en": "denn shows real concern: the question grows out of what you see (she looks sad); the most common way to ask.",
+  "ru": "denn — живое участие: вопрос вырастает из того, что ты видишь (она грустит); самый обычный вариант.",
+  "tr": "denn içten bir ilgi gösterir: soru gördüğün şeyden doğar (üzgün görünüyor); en sıradan biçim.",
+  "at": [
+   "219d80ed"
+  ]
+ },
+ {
+  "en": "Rhetorical schon means 'what ever happens here? (nothing)' (Was ist da schon los?). That doesn't suit a sad friend.",
+  "ru": "Риторическое schon = «да что тут вообще происходит? — ничего» (Was ist da schon los?). К грустной подруге это не подходит.",
+  "tr": "Retorik schon = “burada ne olacak ki? — hiçbir şey” (Was ist da schon los?). Üzgün bir arkadaşa uymaz.",
+  "at": [
+   "fc316d99"
+  ]
+ },
+ {
+  "en": "halt presents a fact as unchangeable (Das ist halt so), so it doesn't occur in a real question.",
+  "ru": "halt подаёт факт как неизменный (Das ist halt so), поэтому в настоящем вопросе его не бывает.",
+  "tr": "halt bir olguyu değişmez diye sunar (Das ist halt so), bu yüzden gerçek bir soruda olmaz.",
+  "at": [
+   "2cab5746",
+   "2ff019ce",
+   "3a82e4bd",
+   "3d6ec92d",
+   "481995aa",
+   "4937734e",
+   "4d5ed961",
+   "50ef3bbe",
+   "5ae6068e",
+   "5c50ef6d",
+   "6070fedb",
+   "63c2cd39",
+   "646d8dea",
+   "7563d4f7",
+   "7a4b3e40",
+   "7f2d0e95",
+   "848424ab",
+   "84b5b1f1",
+   "855befcd",
+   "86040408",
+   "883bbcf8",
+   "8e81c8b5",
+   "940764a4",
+   "998280cd",
+   "a6eec194",
+   "a9947751",
+   "ab12bd0b",
+   "b2e5b5ce",
+   "c6297dbc",
+   "ca76d00e",
+   "d0770118",
+   "d2758568",
+   "e6056a0f",
+   "eeba9581",
+   "f4117036"
+  ]
+ },
+ {
+  "en": "eben presents a fact as unchangeable (Das ist eben so), so it doesn't occur in questions; here it would read as 'just now'.",
+  "ru": "eben подаёт факт как неизменный (Das ist eben so), поэтому в вопросах его нет; здесь оно прочитается как «только что».",
+  "tr": "eben bir olguyu değişmez diye sunar (Das ist eben so), bu yüzden sorularda olmaz; burada “az önce” diye anlaşılır.",
+  "at": [
+   "03527b24",
+   "06695b9e",
+   "0a2f3335",
+   "1095c059",
+   "1f677ee3",
+   "2b427b19",
+   "37208b78",
+   "3acfb19c",
+   "5a1b2fd2",
+   "5c5ac1c0",
+   "5e1596f8",
+   "6426f324",
+   "6648dd8d",
+   "6c3872f6",
+   "81b23eb4",
+   "8a233860",
+   "92d31d68",
+   "9566325b",
+   "97f947d5",
+   "9bb14bf8",
+   "b2cc39f6",
+   "b52e5323",
+   "c2564485",
+   "cb2b07bd",
+   "cf3fdd5c",
+   "cff1759d",
+   "dad181ae",
+   "ed8d5950",
+   "f3a30801"
+  ]
+ },
+ {
+  "en": "So what's actually going on?",
+  "ru": "А что, собственно, случилось?",
+  "tr": "Bu arada, ne oldu?",
+  "at": [
+   "8f38b3f9"
+  ]
+ },
+ {
+  "en": "What's going on, I wonder?",
+  "ru": "Что там, интересно, случилось?",
+  "tr": "Ne oldu acaba?",
+  "at": [
+   "3432a717"
+  ]
+ },
+ {
+  "en": "wohl turns it into wondering aloud — said to yourself or a third person, e.g. on seeing a crowd: 'Was ist da wohl los?'",
+  "ru": "wohl — гадание вслух, скорее себе или третьему, например при виде толпы на улице: «Was ist da wohl los?»",
+  "tr": "wohl yüksek sesle tahmin yürütmedir — daha çok kendine ya da üçüncü birine, örneğin sokakta bir kalabalık görünce: “Was ist da wohl los?”",
+  "at": [
+   "f6894538"
+  ]
+ },
+ {
+  "en": "Particle aber belongs in exclamations (Das ist aber teuer!); in a question it reads as the conjunction 'but'.",
+  "ru": "Частица aber бывает в восклицаниях (Das ist aber teuer!); в вопросе она прочитается как союз «но».",
+  "tr": "aber parçacığı ünlemlerde olur (Das ist aber teuer!); soruda “ama” bağlacı diye anlaşılır.",
+  "at": [
+   "034ecbb7",
+   "0da9885d",
+   "13c0c82b",
+   "315019f0",
+   "317143c8",
+   "39559ce2",
+   "44d70dde",
+   "46d9571c",
+   "4bfc5318",
+   "52181974",
+   "5ceb3fdd",
+   "651c31a0",
+   "67d240d1",
+   "6816e566",
+   "6fa474b9",
+   "6fb4f0cc",
+   "825066c1",
+   "8c8dfdcb",
+   "93d2b205",
+   "a1f93420",
+   "a492a00b",
+   "a5626e3c",
+   "ad40f325",
+   "b626c99e",
+   "cf42a3c8",
+   "d367abc5",
+   "d4070cb1",
+   "df0530d0",
+   "df71b95b",
+   "e08ce019",
+   "e491b865",
+   "e535b4ec",
+   "f02f8135",
+   "f728ca9b",
+   "f8c7db3e"
+  ]
+ },
+ {
+  "en": "What on earth is wrong?",
+  "ru": "Да что же такое случилось?",
+  "tr": "Allah aşkına, ne oldu?!",
+  "at": [
+   "9049d2fd"
+  ]
+ },
+ {
+  "en": "bloß adds worry and helplessness: you can't make out what's wrong and you're genuinely concerned.",
+  "ru": "bloß — тревога и растерянность: ты не понимаешь, что с ней, и всерьёз беспокоишься.",
+  "tr": "bloß endişe ve çaresizlik katar: ona ne olduğunu anlayamıyorsun ve gerçekten kaygılısın.",
+  "at": [
+   "731134de"
+  ]
+ },
+ {
+  "en": "Whatever is the matter?",
+  "ru": "Ну что же с тобой такое?",
+  "tr": "Ah, neyin var?",
+  "at": [
+   "222f145a"
+  ]
+ },
+ {
+  "en": "nur — the same worry as bloß but more plaintive, so a little softer; often 'Was ist nur los mit dir?'",
+  "ru": "nur — та же тревога, что bloß, но жалобнее, мягче; часто «Was ist nur los mit dir?»",
+  "tr": "nur da bloß gibi endişelidir, ama daha yakınmalı ve yumuşaktır; sıklıkla “Was ist nur los mit dir?”",
+  "at": [
+   "cee279fb"
+  ]
+ },
+ {
+  "en": "Particle vielleicht belongs in request-questions (Kannst du vielleicht…?); in a W-question it would mean 'maybe', which makes no sense.",
+  "ru": "Частица vielleicht — в вопросах-просьбах (Kannst du vielleicht…?); в W-вопросе она значила бы «может быть», что бессмысленно.",
+  "tr": "vielleicht parçacığı rica sorularında olur (Kannst du vielleicht…?); W-sorusunda “belki” anlamına gelirdi, bu da anlamsız.",
+  "at": [
+   "30944add",
+   "3615aef9",
+   "43e9956d",
+   "5c6192f9",
+   "6179ca63",
+   "682e13a1",
+   "6a23d4f3",
+   "71336571",
+   "7297d88c",
+   "84c56091",
+   "881d1f5a",
+   "b6a83b29",
+   "cedb0e49",
+   "d0ac9f9c",
+   "ee352ee6",
+   "fa274586"
+  ]
+ },
+ {
+  "en": "ruhig 'feel free' lives in commands (Komm ruhig rein!), not in questions; here it would mean 'calmly, quietly'.",
+  "ru": "ruhig «не стесняйся» бывает в побуждениях (Komm ruhig rein!), а не в вопросах; здесь оно значило бы «спокойно, тихо».",
+  "tr": "ruhig “çekinme” anlamıyla emirlerde olur (Komm ruhig rein!), sorularda olmaz; burada “sakince, sessizce” anlamına gelirdi.",
+  "at": [
+   "06131127",
+   "0dfe4d35",
+   "0e788027",
+   "11df609a",
+   "16d36417",
+   "19b8a931",
+   "1f1ba97e",
+   "20fe2c33",
+   "256d5dd7",
+   "34096159",
+   "385b04fe",
+   "411000e0",
+   "4551fec9",
+   "4a01da18",
+   "4ed50d43",
+   "5bd91871",
+   "6cfa18d6",
+   "73588ccb",
+   "78fe7f6c",
+   "7d6e9dfc",
+   "87f111ca",
+   "a87f5c5c",
+   "b64da39d",
+   "b94c8ef5",
+   "bc02915e",
+   "be4f3dae",
+   "be971efa",
+   "c625c4cb",
+   "c760f05e",
+   "c92ed6f7",
+   "dc3e7052",
+   "df062591",
+   "e59e8f0a",
+   "efc8a296",
+   "f7187530"
+  ]
+ },
+ {
+  "en": "Particle einfach is for advice (Mach es einfach! / Warum nicht einfach…?); in this question it reads as 'simply, easily'.",
+  "ru": "Частица einfach — в советах (Mach es einfach! / Warum nicht einfach…?); в этом вопросе она прочитается как «просто, легко».",
+  "tr": "einfach parçacığı tavsiyelerde olur (Mach es einfach! / Warum nicht einfach…?); bu soruda “basitçe, kolayca” diye anlaşılır.",
+  "at": [
+   "0175f73f",
+   "0acbaf4c",
+   "0ad325ec",
+   "0c4870a4",
+   "136bece8",
+   "1a4cbbc2",
+   "1e5a24c1",
+   "25535045",
+   "2ea8e4f0",
+   "4e85460e",
+   "64c7668d",
+   "678d359f",
+   "6818e247",
+   "6b43a748",
+   "6d881f73",
+   "718423c7",
+   "7cc40cf0",
+   "7f855e0f",
+   "8946c49f",
+   "8f4bd85e",
+   "97349184",
+   "a40d0f41",
+   "ac98deb3",
+   "d68db6fe",
+   "dfbc9c9e",
+   "f5f6145a"
+  ]
+ },
+ {
+  "en": "Particle etwa ('don't tell me…') occurs only in yes/no questions (Bist du etwa krank?); in a W-question it means 'approximately'.",
+  "ru": "Частица etwa («неужели?») бывает только в вопросах да/нет (Bist du etwa krank?); в W-вопросе это «примерно».",
+  "tr": "etwa parçacığı (“yoksa…?”) yalnızca evet/hayır sorularında olur (Bist du etwa krank?); W-sorusunda “aşağı yukarı” demektir.",
+  "at": [
+   "202c1ffa",
+   "25017689",
+   "439ed43b",
+   "5808d4c7",
+   "8ab678a5",
+   "9146a68f",
+   "99e9022f",
+   "9cfce09b",
+   "b6bcef60",
+   "be68bd5f",
+   "c84b88c7",
+   "d0dd3eab",
+   "ed6802ee",
+   "f39dc3b8",
+   "fe0e8abb"
+  ]
+ },
+ {
+  "en": "eh ('anyway') is used in statements (Ich hab eh keine Zeit); it doesn't work in a question.",
+  "ru": "eh («всё равно, так и так») употребляют в утверждениях («Ich hab eh keine Zeit»); в вопросе оно не работает.",
+  "tr": "eh (“nasılsa, öyle ya da böyle”) ifade cümlelerinde kullanılır (“Ich hab eh keine Zeit”); soruda işe yaramaz.",
+  "at": [
+   "06cbc8db",
+   "0844d273",
+   "0c05507a",
+   "11f350b4",
+   "14f656b7",
+   "247fd1cb",
+   "274853e2",
+   "3c8411df",
+   "3cdb92b5",
+   "520d8cae",
+   "528dc5c5",
+   "61ae8075",
+   "77f4f9cd",
+   "7bf8ea77",
+   "7d32fce8",
+   "83db6174",
+   "8e05eba6",
+   "93471c63",
+   "abfffebc",
+   "afb4ffff",
+   "c4c82b7e",
+   "d0d4eb74",
+   "d163e5e7",
+   "dc487f65",
+   "de7ce01f",
+   "e533ba08",
+   "f18839ef",
+   "f6d566cf",
+   "fb62e4f2"
+  ]
+ },
+ {
+  "en": "So what IS wrong, then?",
+  "ru": "Ну так что же тогда случилось?",
+  "tr": "Ee, ne oldu?",
+  "at": [
+   "b1f7709c"
+  ]
+ },
+ {
+  "en": "Stressed DENN: you've ruled out the options ('Tired?' 'No.' 'Had a row?' 'No.') and you press: so what IS it, then?",
+  "ru": "Ударное DENN — ты перебрал варианты («Устала? — Нет. Поругалась с кем-то? — Нет.»), и давишь: ну а что тогда?",
+  "tr": "Vurgulu DENN: seçenekleri tek tek eledin (“Yorgun musun? — Hayır. Biriyle mi kavga ettin? — Hayır.”) ve üsteliyorsun: o hâlde ne?",
+  "at": [
+   "1f65d3ad"
+  ]
+ },
+ {
+  "en": "Your friend looks sad. Ask calmly and warmly what's wrong.",
+  "ru": "Подруга грустит. Спокойно и тепло спроси, что случилось.",
+  "tr": "Arkadaşın üzgün görünüyor. Sakin ve sıcak bir şekilde ne olduğunu sor.",
+  "at": [
+   "f083485b"
+  ]
+ },
+ {
+  "en": "You've gone through every option and she says no to each. Press her.",
+  "ru": "Ты перебрал все варианты, она на всё отвечает «нет». Надави на неё.",
+  "tr": "Bütün seçenekleri saydın, hepsine “hayır” diyor. Üstele.",
+  "at": [
+   "f7213d1b"
+  ]
+ },
+ {
+  "en": "Where's my phone?",
+  "ru": "Где мой телефон?",
+  "tr": "Telefonum nerede?",
+  "at": [
+   "e7283bdd"
+  ]
+ },
+ {
+  "en": "Recall-doch needs gleich and usually a past form: 'Wo hatte ich es doch gleich hingelegt?'; in this shape it sounds unnatural.",
+  "ru": "doch при припоминании требует gleich и обычно прошедшего: «Wo hatte ich es doch gleich hingelegt?»; в этой форме звучит неестественно.",
+  "tr": "Hatırlamaya çalışırken doch için gleich ve genellikle geçmiş zaman gerekir: “Wo hatte ich es doch gleich hingelegt?”; bu biçimde doğal duyulmaz.",
+  "at": [
+   "0fea158e"
+  ]
+ },
+ {
+  "en": "Where's my phone got to?",
+  "ru": "Где же мой телефон?",
+  "tr": "Peki, telefonum nerede?",
+  "at": [
+   "3670b718"
+  ]
+ },
+ {
+  "en": "denn is the ordinary, lively question while searching — not sharp at all.",
+  "ru": "denn — обычный живой вопрос во время поиска, не резкий.",
+  "tr": "denn ararken sorulan sıradan, canlı bir sorudur, hiç sert değil.",
+  "at": [
+   "87463631"
+  ]
+ },
+ {
+  "en": "schon fits neither as a particle nor as 'already'; rhetorical schon is for questions like 'Wer hat schon Zeit?'",
+  "ru": "schon здесь не подходит ни как частица, ни как «уже» (риторическое schon — «Wer hat schon Zeit?»).",
+  "tr": "schon burada ne parçacık olarak ne de “şimdiden” anlamında uyar; retorik schon “Wer hat schon Zeit?” gibi sorular içindir.",
+  "at": [
+   "0b7f1e43"
+  ]
+ },
+ {
+  "en": "Where's my phone, by the way?",
+  "ru": "А где, кстати, мой телефон?",
+  "tr": "Bu arada, telefonum nerede?",
+  "at": [
+   "d961accb"
+  ]
+ },
+ {
+  "en": "eigentlich is an aside: the phone crosses your mind while you're doing something else, not after a long search.",
+  "ru": "eigentlich — вопрос между делом: вспомнил о телефоне посреди другого занятия, а не после долгих поисков.",
+  "tr": "eigentlich laf arasında bir sorudur: uzun bir aramadan sonra değil, başka bir şey yaparken telefon aklına gelir.",
+  "at": [
+   "366239b4"
+  ]
+ },
+ {
+  "en": "Wondering aloud about your own phone is odd; wohl fits others: 'Wo er wohl ist?', or ironically 'Na, wo ist es wohl? — In deiner Tasche!'",
+  "ru": "Гадать вслух о своей же вещи странно; wohl естественно о других: «Wo er wohl ist?» или с иронией «Na, wo ist es wohl? — In deiner Tasche!»",
+  "tr": "Kendi eşyan hakkında yüksek sesle tahmin yürütmek tuhaf; wohl başkaları için uyar: “Wo er wohl ist?” ya da ironiyle “Na, wo ist es wohl? — In deiner Tasche!”",
+  "at": [
+   "f72d1fc6"
+  ]
+ },
+ {
+  "en": "Where on earth is my phone?",
+  "ru": "Ну где же мой телефон?!",
+  "tr": "Allah Allah, telefonum nerede?!",
+  "at": [
+   "b100be23"
+  ]
+ },
+ {
+  "en": "bloß expresses despair: you've turned the place upside down; often muttered to yourself.",
+  "ru": "bloß — отчаяние: ты уже всё перерыл; часто себе под нос.",
+  "tr": "bloß çaresizlik bildirir: her yeri altüst ettin; sıklıkla kendi kendine söylenir.",
+  "at": [
+   "d2c3d2ec"
+  ]
+ },
+ {
+  "en": "Where can my phone possibly be?",
+  "ru": "Да куда же делся мой телефон?",
+  "tr": "Of, telefonum nereye gitti?",
+  "at": [
+   "464e947c"
+  ]
+ },
+ {
+  "en": "nur — the same despair as bloß, but more plaintive and so a touch softer.",
+  "ru": "nur — то же отчаяние, что bloß, но жалобнее и потому чуть мягче.",
+  "tr": "nur da bloß gibi çaresizdir, ama daha yakınmalıdır, bu yüzden biraz daha yumuşak.",
+  "at": [
+   "6459030d"
+  ]
+ },
+ {
+  "en": "So where IS it, then?",
+  "ru": "Ну и где он тогда?",
+  "tr": "Ee, nerede?",
+  "at": [
+   "e34c37d8"
+  ]
+ },
+ {
+  "en": "DENN comes after options have been ruled out ('not on the table, not in the bag'): so where then?",
+  "ru": "DENN — после отвергнутых вариантов («на столе нет, в сумке нет»): ну а где тогда?",
+  "tr": "DENN, elenen seçeneklerden sonra gelir (“masada yok, çantada yok”): o hâlde nerede?",
+  "at": [
+   "bb2400f1"
+  ]
+ },
+ {
+  "en": "You've searched everywhere and the phone is nowhere. Sound desperate.",
+  "ru": "Ты всё перерыл, телефона нигде нет. Вырази отчаяние.",
+  "tr": "Her yeri aradın, telefon hiçbir yerde yok. Çaresizliğini göster.",
+  "at": [
+   "e0a1b916"
+  ]
+ },
+ {
+  "en": "You're told: 'Not on the table, not in your bag.' Press: so where then?",
+  "ru": "Тебе говорят: «На столе нет, в сумке тоже». Надави: где же тогда?",
+  "tr": "Sana “Masada yok, çantanda da yok” diyorlar. Üstele: o hâlde nerede?",
+  "at": [
+   "b06080c7"
+  ]
+ },
+ {
+  "en": "What time is it?",
+  "ru": "Сколько времени?",
+  "tr": "Saat kaç?",
+  "at": [
+   "d3f905a8"
+  ]
+ },
+ {
+  "en": "Only when recalling, with gleich: 'Wie spät war es doch gleich?' — if you were told the time and forgot.",
+  "ru": "Только при припоминании и с gleich: «Wie spät war es doch gleich?» — если тебе уже говорили время, а ты забыл.",
+  "tr": "Yalnızca hatırlamaya çalışırken, gleich ile: “Wie spät war es doch gleich?” — saati sana söylemişlerse ve unuttuysan.",
+  "at": [
+   "f5fbd053"
+  ]
+ },
+ {
+  "en": "So what time is it?",
+  "ru": "А сколько времени-то?",
+  "tr": "Peki, saat kaç?",
+  "at": [
+   "ff04bf65"
+  ]
+ },
+ {
+  "en": "denn — the question grows out of the situation, e.g. someone just said 'I have to go'.",
+  "ru": "denn — вопрос, выросший из ситуации, например, кто-то сказал «мне уже пора».",
+  "tr": "denn durumdan doğan bir sorudur, örneğin biri “benim gitmem lazım” dediğinde.",
+  "at": [
+   "5e901286"
+  ]
+ },
+ {
+  "en": "Here schon reads as 'already' ('how late is it already?'); people normally say 'Ist es schon spät?'",
+  "ru": "Здесь schon читается как «уже»: «который уже час?»; обычно говорят «Ist es schon spät?»",
+  "tr": "Burada schon “şimdiden” diye anlaşılır (“saat kaç olmuş bile?”); genellikle “Ist es schon spät?” denir.",
+  "at": [
+   "9d6ffa18"
+  ]
+ },
+ {
+  "en": "What time is it, actually?",
+  "ru": "Слушай, а сколько времени?",
+  "tr": "Bu arada, saat kaç?",
+  "at": [
+   "b067c0e8"
+  ]
+ },
+ {
+  "en": "eigentlich — you suddenly come to in the middle of the conversation; very common.",
+  "ru": "eigentlich — вдруг спохватился посреди разговора; очень частое употребление.",
+  "tr": "eigentlich: konuşmanın ortasında birden aklına geliyor; çok sık kullanılır.",
+  "at": [
+   "591b4141"
+  ]
+ },
+ {
+  "en": "What time would it be, I wonder?",
+  "ru": "Сколько, интересно, сейчас времени?",
+  "tr": "Saat kaç acaba?",
+  "at": [
+   "5a2b5932"
+  ]
+ },
+ {
+  "en": "wohl asks for an estimate: nobody has a watch — 'what do you reckon the time is?'",
+  "ru": "wohl просит прикинуть: часов ни у кого нет, «как думаешь, сколько сейчас?»",
+  "tr": "wohl bir tahmin ister: kimsede saat yok — “sence saat kaçtır?”",
+  "at": [
+   "11829693"
+  ]
+ },
+ {
+  "en": "Worried bloß has nothing to attach to: asking the time is no cause for despair (cf. 'Wo ist bloß mein Schlüssel?').",
+  "ru": "Тревожному bloß тут не к чему прицепиться: вопрос о времени — не повод для отчаяния (ср. «Wo ist bloß mein Schlüssel?»).",
+  "tr": "Endişe bildiren bloß burada tutunacak bir şey bulamaz: saati sormak çaresizlik sebebi değil (krş. “Wo ist bloß mein Schlüssel?”).",
+  "at": [
+   "08decf09"
+  ]
+ },
+ {
+  "en": "Like bloß, worried nur is out of place here; nur would read as 'only'.",
+  "ru": "Как и bloß, тревожное nur здесь неуместно; nur читалось бы как «только».",
+  "tr": "bloß gibi, endişe bildiren nur da burada yersiz; nur “yalnızca” diye anlaşılırdı.",
+  "at": [
+   "0c66ba36"
+  ]
+ },
+ {
+  "en": "'Wie spät ist es etwa?' is fine, but etwa means 'approximately' ('roughly what time is it?') — not the particle.",
+  "ru": "«Wie spät ist es etwa?» — нормальная фраза, но etwa значит «примерно» («сколько примерно времени?»), это не частица.",
+  "tr": "“Wie spät ist es etwa?” düzgün bir cümle, ama etwa burada “aşağı yukarı” demektir (“saat aşağı yukarı kaç?”) — parçacık değil.",
+  "at": [
+   "13d7e7d4"
+  ]
+ },
+ {
+  "en": "Mid-conversation you suddenly wonder about the time.",
+  "ru": "Посреди разговора вдруг спохватился о времени.",
+  "tr": "Konuşmanın ortasında birden saat aklına geliyor.",
+  "at": [
+   "e125f7b7"
+  ]
+ },
+ {
+  "en": "Nobody has a watch — ask your friends to estimate the time.",
+  "ru": "Ни у кого нет часов — попроси друзей прикинуть время.",
+  "tr": "Kimsede saat yok — arkadaşlarından saati tahmin etmelerini iste.",
+  "at": [
+   "bc2cf3c1"
+  ]
+ },
+ {
+  "en": "What should I cook?",
+  "ru": "Что мне приготовить?",
+  "tr": "Ne pişireyim?",
+  "at": [
+   "63da56d7"
+  ]
+ },
+ {
+  "en": "With heute: 'Was soll ich heute mal kochen?' = 'what shall I cook for a change' — a different, casual mal; without heute it's clumsy.",
+  "ru": "С heute: «Was soll ich heute mal kochen?» = «что бы такого приготовить для разнообразия» — это другое, будничное mal; без heute звучит неуклюже.",
+  "tr": "heute ile: “Was soll ich heute mal kochen?” = “bugün değişiklik olsun diye ne pişirsem” — bu başka, gündelik bir mal; heute olmadan kulağa hantal gelir.",
+  "at": [
+   "de03147e"
+  ]
+ },
+ {
+  "en": "So what should I cook?",
+  "ru": "Что же мне приготовить?",
+  "tr": "Peki, ne pişireyim?",
+  "at": [
+   "954df2e8"
+  ]
+ },
+ {
+  "en": "denn — a normal question to the kids, growing out of the situation: 'so what do you want?'",
+  "ru": "denn — нормальный вопрос к детям, выросший из ситуации: «ну и что вы хотите?»",
+  "tr": "denn çocuklara durumdan doğan normal bir sorudur: “siz ne istiyorsunuz?”",
+  "at": [
+   "72333741"
+  ]
+ },
+ {
+  "en": "What else would I cook?",
+  "ru": "Да что я там приготовлю…",
+  "tr": "Ne pişireyim ki!",
+  "at": [
+   "05440ab0"
+  ]
+ },
+ {
+  "en": "schon makes it rhetorical, with a sigh: there's no real choice — 'pasta, as always'.",
+  "ru": "schon делает вопрос риторическим, со вздохом: выбора всё равно нет — «Nudeln, wie immer».",
+  "tr": "schon soruyu iç çekerek retorik yapar: nasılsa başka seçenek yok — “Nudeln, wie immer”.",
+  "at": [
+   "de397cc9"
+  ]
+ },
+ {
+  "en": "What should I actually cook?",
+  "ru": "А что мне, собственно, приготовить?",
+  "tr": "Bu arada, ne pişireyim?",
+  "at": [
+   "1b942717"
+  ]
+ },
+ {
+  "en": "eigentlich brings you back to the real question, e.g. after chatting about everyone's day.",
+  "ru": "eigentlich возвращает к главному вопросу, например, после разговора о том, как прошёл день.",
+  "tr": "eigentlich asıl soruya döndürür, örneğin herkesin günü nasıl geçti diye konuştuktan sonra.",
+  "at": [
+   "c3f5c538"
+  ]
+ },
+ {
+  "en": "'Was soll ich wohl kochen?' sounds like teasing — 'guess what I'll cook' — possible, but not in this situation.",
+  "ru": "«Was soll ich wohl kochen?» звучит как поддразнивание «угадай, что я приготовлю» — возможно, но не в этой ситуации.",
+  "tr": "“Was soll ich wohl kochen?” takılma gibi duyulur: “bil bakalım ne pişireceğim” — olabilir, ama bu durumda değil.",
+  "at": [
+   "4b0594ae"
+  ]
+ },
+ {
+  "en": "What on earth am I supposed to cook?",
+  "ru": "Ну что же мне приготовить?!",
+  "tr": "Allah Allah, ne pişireyim?!",
+  "at": [
+   "6dad1983"
+  ]
+ },
+ {
+  "en": "bloß — despair: everything has been rejected and you're at a loss; 'Was soll ich bloß machen?' is a stock phrase.",
+  "ru": "bloß — отчаяние: всё отвергнуто, не знаешь, что делать; «Was soll ich bloß machen?» — типичная фраза.",
+  "tr": "bloß çaresizliktir: her şey reddedildi, ne yapacağını bilmiyorsun; “Was soll ich bloß machen?” kalıplaşmış bir sözdür.",
+  "at": [
+   "70370bcc"
+  ]
+ },
+ {
+  "en": "Whatever am I going to cook?",
+  "ru": "Что же мне теперь готовить?..",
+  "tr": "Of, şimdi ne pişireceğim?..",
+  "at": [
+   "d3d69a36"
+  ]
+ },
+ {
+  "en": "nur — the same tone as bloß but more plaintive, a little softer; cf. 'Was soll ich nur tun?'",
+  "ru": "nur — тот же тон, что bloß, но жалобнее, мягче; ср. «Was soll ich nur tun?»",
+  "tr": "nur da bloß ile aynı tondadır, ama daha yakınmalı ve yumuşak; krş. “Was soll ich nur tun?”",
+  "at": [
+   "569d1f6f"
+  ]
+ },
+ {
+  "en": "So what am I supposed to cook, then?",
+  "ru": "Ну а что мне тогда готовить?",
+  "tr": "Ee, ne pişireyim?",
+  "at": [
+   "a10646e8"
+  ]
+ },
+ {
+  "en": "DENN — the kids have rejected pasta and rice, and you press: so what then?",
+  "ru": "DENN — дети отвергли и макароны, и рис, и ты давишь: ну а что тогда?",
+  "tr": "DENN: çocuklar makarnayı da pilavı da reddetti, sen de üsteliyorsun: o hâlde ne?",
+  "at": [
+   "c983f341"
+  ]
+ },
+ {
+  "en": "The kids have rejected everything; you're at your wits' end.",
+  "ru": "Дети всё отвергли, ты в отчаянии и не знаешь, что готовить.",
+  "tr": "Çocuklar her şeyi reddetti; çaresizsin ve ne pişireceğini bilmiyorsun.",
+  "at": [
+   "505597f6"
+  ]
+ },
+ {
+  "en": "You sigh: there's no real choice, it'll be pasta again.",
+  "ru": "Вздыхаешь: выбора всё равно нет, опять будут макароны.",
+  "tr": "İç çekiyorsun: nasılsa başka seçenek yok, yine makarna olacak.",
+  "at": [
+   "4a23702f"
+  ]
+ },
+ {
+  "en": "Who said that?",
+  "ru": "Кто это сказал?",
+  "tr": "Bunu kim söyledi?",
+  "at": [
+   "8ca0aa38"
+  ]
+ },
+ {
+  "en": "Recall-doch: 'Wer hat das doch gleich gesagt?' — when you knew but forgot; without gleich and in this situation it doesn't fit.",
+  "ru": "doch при припоминании: «Wer hat das doch gleich gesagt?» — когда ты знал, но забыл; без gleich и в этой ситуации не подходит.",
+  "tr": "Hatırlamaya çalışırken doch: “Wer hat das doch gleich gesagt?” — bilip de unuttuğunda; gleich olmadan ve bu durumda uymaz.",
+  "at": [
+   "beef0de3"
+  ]
+ },
+ {
+  "en": "'Wer hat das mal gesagt?' = 'who once said that?' (about a quote) — mal means 'once', not the particle.",
+  "ru": "«Wer hat das mal gesagt?» = «кто это когда-то сказал?» (о цитате) — mal значит «однажды», не частица.",
+  "tr": "“Wer hat das mal gesagt?” = “bunu bir zamanlar kim söylemişti?” (bir alıntı hakkında) — mal “bir zamanlar” demektir, parçacık değil.",
+  "at": [
+   "d217afeb"
+  ]
+ },
+ {
+  "en": "Who said that, then?",
+  "ru": "А кто это сказал?",
+  "tr": "Peki, bunu kim söyledi?",
+  "at": [
+   "cce2b1fb"
+  ]
+ },
+ {
+  "en": "denn — surprised but calm interest: you're curious where the rumour came from.",
+  "ru": "denn — удивлённый, но спокойный интерес: тебе любопытно, откуда слух.",
+  "tr": "denn şaşkın ama sakin bir ilgidir: söylentinin nereden çıktığını merak ediyorsun.",
+  "at": [
+   "ac1493a4"
+  ]
+ },
+ {
+  "en": "schon reads either as 'already' or as a curt rhetorical 'who ever said that!' — neither fits this situation.",
+  "ru": "schon здесь читается как «уже» («кто уже это сказал?») или как резкое риторическое «да кто такое говорил!» — для этой ситуации не подходит.",
+  "tr": "schon burada ya “şimdiden” diye anlaşılır (“bunu şimdiden kim söyledi?”) ya da sert, retorik bir “bunu kim söylemiş ki!” — bu duruma ikisi de uymaz.",
+  "at": [
+   "32fcac4c"
+  ]
+ },
+ {
+  "en": "'Wer hat das eben gesagt?' = 'who just said that?' — eben is the adverb 'just now', not the particle.",
+  "ru": "«Wer hat das eben gesagt?» = «кто это сейчас сказал?» — eben здесь наречие «только что», не частица.",
+  "tr": "“Wer hat das eben gesagt?” = “bunu az önce kim söyledi?” — eben burada “az önce” zarfıdır, parçacık değil.",
+  "at": [
+   "59392cd9"
+  ]
+ },
+ {
+  "en": "Who actually said that?",
+  "ru": "А кто это вообще сказал?",
+  "tr": "Hem bunu kim söylemiş?",
+  "at": [
+   "37ed78d8"
+  ]
+ },
+ {
+  "en": "eigentlich questions the source: 'where did that even come from?'",
+  "ru": "eigentlich ставит источник под сомнение: «откуда это вообще взялось?»",
+  "tr": "eigentlich kaynağı sorgular: “bu da nereden çıktı?”",
+  "at": [
+   "1711f3f1"
+  ]
+ },
+ {
+  "en": "Now who might have said that, I wonder?",
+  "ru": "И кто же, интересно, это сказал?",
+  "tr": "Bunu kim söylemiş acaba?",
+  "at": [
+   "65c8f9ba"
+  ]
+ },
+ {
+  "en": "wohl — an ironic 'guess who': you already suspect the gossip (cf. 'Wer hat das wohl geschrieben?').",
+  "ru": "wohl — ироничное «угадай»: ты уже подозреваешь болтуна (ср. «Wer hat das wohl geschrieben?»).",
+  "tr": "wohl ironik bir “bil bakalım”dır: geveze olanı zaten tahmin ediyorsun (krş. “Wer hat das wohl geschrieben?”).",
+  "at": [
+   "67d405db"
+  ]
+ },
+ {
+  "en": "'Wer hat das bloß gesagt?' is what you mutter when you can't recall who said a quote; as a question to a colleague it's odd.",
+  "ru": "«Wer hat das bloß gesagt?» говорят себе, когда не можешь вспомнить автора цитаты; как вопрос коллеге — странно.",
+  "tr": "“Wer hat das bloß gesagt?” bir alıntının kime ait olduğunu hatırlayamadığında kendi kendine söylenir; iş arkadaşına soru olarak tuhaf.",
+  "at": [
+   "965aff8d"
+  ]
+ },
+ {
+  "en": "Like bloß: 'Wer hat das nur gesagt? Ich komm nicht drauf' — muttered to yourself, not asked of someone.",
+  "ru": "Как bloß: «Wer hat das nur gesagt? Ich komm nicht drauf» — себе под нос, не собеседнику.",
+  "tr": "bloß gibi: “Wer hat das nur gesagt? Ich komm nicht drauf” — kendi kendine söylenir, birine sorulmaz.",
+  "at": [
+   "f9766356"
+  ]
+ },
+ {
+  "en": "So who DID say it, then?",
+  "ru": "Ну так кто это сказал?",
+  "tr": "Ee, kim söyledi bunu?",
+  "at": [
+   "79008c3b"
+  ]
+ },
+ {
+  "en": "DENN — your colleague says 'not me, not Anna', and you press: so who then?",
+  "ru": "DENN — коллега отвечает «не я, и не Анна», а ты давишь: ну а кто тогда?",
+  "tr": "DENN: iş arkadaşın “ben değil, Anna da değil” diyor, sen de üsteliyorsun: o hâlde kim?",
+  "at": [
+   "0387e8e4"
+  ]
+ },
+ {
+  "en": "You're surprised by the rumour — ask with interest where it came from.",
+  "ru": "Ты удивлён слухом — спроси с интересом, откуда он.",
+  "tr": "Söylentiye şaşırdın — nereden çıktığını ilgiyle sor.",
+  "at": [
+   "5638dade"
+  ]
+ },
+ {
+  "en": "You know perfectly well who the gossip is. Ask ironically.",
+  "ru": "Ты отлично знаешь, кто болтун. Спроси с иронией.",
+  "tr": "Gevezenin kim olduğunu çok iyi biliyorsun. İronik bir şekilde sor.",
+  "at": [
+   "326524b9"
+  ]
+ },
+ {
+  "en": "Who has time for that?",
+  "ru": "У кого есть на это время?",
+  "tr": "Buna kimin vakti var?",
+  "at": [
+   "8bee7de4"
+  ]
+ },
+ {
+  "en": "And who's meant to have time for that?",
+  "ru": "Да у кого вообще на такое есть время?",
+  "tr": "Sanki buna kimin vakti var!",
+  "at": [
+   "bd1ea71d"
+  ]
+ },
+ {
+  "en": "denn plus 'so was' makes an indignant retort to mum's idea: 'and who's meant to have time for that?'",
+  "ru": "denn + «so was» — возмущённый вопрос в ответ на предложение мамы: «и у кого же на это время?»",
+  "tr": "denn + “so was” annenin önerisine öfkeli bir karşılıktır: “buna kimin vakti varmış?”",
+  "at": [
+   "cc4db37e"
+  ]
+ },
+ {
+  "en": "Who's got time for that, anyway?",
+  "ru": "Да у кого на это есть время!",
+  "tr": "Kimin vakti var ki buna!",
+  "at": [
+   "2755e7dd"
+  ]
+ },
+ {
+  "en": "schon makes the question rhetorical: the answer is 'nobody'; a bit dismissive.",
+  "ru": "schon делает вопрос риторическим: ответ — «ни у кого»; слегка пренебрежительно.",
+  "tr": "schon soruyu retorik yapar: cevap “hiç kimse”; biraz küçümseyici.",
+  "at": [
+   "0cf47c3e"
+  ]
+ },
+ {
+  "en": "Who actually has time for that?",
+  "ru": "У кого, собственно, есть на это время?",
+  "tr": "Bu arada, buna kimin vakti var?",
+  "at": [
+   "b5d7c74c"
+  ]
+ },
+ {
+  "en": "eigentlich asks 'who, actually, has time for that?', a calmer question than with denn, without indignation.",
+  "ru": "eigentlich — вопрос «по сути»: «а у кого, собственно, на такое есть время?» — спокойнее, чем denn, без возмущения.",
+  "tr": "eigentlich “aslında buna kimin vakti var?” diye özü sorar — denn ile sorulduğundan daha sakin, öfkesiz.",
+  "at": [
+   "b4f9bcdd"
+  ]
+ },
+ {
+  "en": "'Wer hat wohl Zeit für so was?' — 'who might have time, I wonder' sounds forced; schon is what fits here.",
+  "ru": "«Wer hat wohl Zeit für so was?» — гадание «у кого бы, интересно, нашлось время» звучит натянуто; здесь нужен schon.",
+  "tr": "“Wer hat wohl Zeit für so was?” — “buna kimin vakti olurdu acaba” tahmini zorlama duyulur; burada schon uyar.",
+  "at": [
+   "951c34e3"
+  ]
+ },
+ {
+  "en": "'Wer hat bloß Zeit für so was?' — an exasperated 'who on earth finds time for that?' does occur, but 'denn schon' is far more usual.",
+  "ru": "«Wer hat bloß Zeit für so was?» — удивлённо-раздражённое «кто же на такое время находит?» встречается, но обычнее «denn schon».",
+  "tr": "“Wer hat bloß Zeit für so was?” — şaşkın ve sinirli bir “buna kim vakit bulur?” olur, ama “denn schon” çok daha yaygındır.",
+  "at": [
+   "41749819"
+  ]
+ },
+ {
+  "en": "Like bloß: possible as an amazed outburst, but the rhetorical 'nobody' is expressed with schon.",
+  "ru": "Как bloß: возможно как изумлённое восклицание, но для риторического «ни у кого» говорят schon.",
+  "tr": "bloß gibi: şaşkın bir ünlem olarak mümkün, ama retorik “hiç kimse” için schon denir.",
+  "at": [
+   "8223f44c"
+  ]
+ },
+ {
+  "en": "Mum suggests baking bread daily. Make clear nobody has time for that.",
+  "ru": "Мама предлагает печь хлеб каждый день. Дай понять, что времени на это нет ни у кого.",
+  "tr": "Annen her gün ekmek yapmayı öneriyor. Buna kimsenin vakti olmadığını belli et.",
+  "at": [
+   "d7c8d068"
+  ]
+ },
+ {
+  "en": "Why don't you call her?",
+  "ru": "Почему ты ей не позвонишь?",
+  "tr": "Onu neden aramıyorsun?",
+  "at": [
+   "1690d459"
+  ]
+ },
+ {
+  "en": "'Warum rufst du sie doch nicht an?' = 'why aren't you calling her after all?' (though you promised) — that's 'after all', not the particle.",
+  "ru": "«Warum rufst du sie doch nicht an?» = «почему ты всё-таки не звонишь?» (раз обещал) — это наречие «всё-таки», не частица.",
+  "tr": "“Warum rufst du sie doch nicht an?” = “neden onu yine de aramıyorsun?” (söz verdiğin hâlde) — bu “yine de” zarfıdır, parçacık değil.",
+  "at": [
+   "749e492a"
+  ]
+ },
+ {
+  "en": "mal goes after nicht here: 'Warum rufst du sie nicht mal an?' — a friendly suggestion; it can't stand before nicht.",
+  "ru": "mal здесь стоит после nicht: «Warum rufst du sie nicht mal an?» — дружеское предложение; перед nicht оно не встаёт.",
+  "tr": "mal burada nicht kelimesinden sonra gelir: “Warum rufst du sie nicht mal an?” — dostça bir öneri; nicht kelimesinden önce duramaz.",
+  "at": [
+   "8a6d95c8"
+  ]
+ },
+ {
+  "en": "So why don't you call her?",
+  "ru": "А почему ты ей не звонишь?",
+  "tr": "Peki, onu neden aramıyorsun?",
+  "at": [
+   "176c13d8"
+  ]
+ },
+ {
+  "en": "denn — genuine interest in the reason: you want to understand what's stopping him.",
+  "ru": "denn — искренний интерес к причине: ты хочешь понять, что ему мешает.",
+  "tr": "denn sebebe içten bir ilgidir: onu neyin engellediğini anlamak istiyorsun.",
+  "at": [
+   "9a84d4f1"
+  ]
+ },
+ {
+  "en": "schon doesn't fit here, neither as a particle nor as 'already'.",
+  "ru": "schon тут не встаёт ни как частица, ни как «уже».",
+  "tr": "schon burada ne parçacık olarak ne de “şimdiden” anlamında uyar.",
+  "at": [
+   "f8e89577"
+  ]
+ },
+ {
+  "en": "Why don't you call her, actually?",
+  "ru": "А почему бы тебе ей не позвонить?",
+  "tr": "Sahi, neden onu aramıyorsun?",
+  "at": [
+   "de88e103"
+  ]
+ },
+ {
+  "en": "eigentlich gently points to the easy way out: 'really, why not just call her?'",
+  "ru": "eigentlich мягко подсказывает простой выход: «а правда, почему бы просто не позвонить?»",
+  "tr": "eigentlich yumuşakça kolay bir çıkış yolu gösterir: “gerçekten, neden kalkıp aramıyorsun?”",
+  "at": [
+   "63c8ca4c"
+  ]
+ },
+ {
+  "en": "wohl speculates about a third person: 'Warum ruft er sie wohl nicht an?'; asking the person himself this way is odd.",
+  "ru": "wohl — гадание о третьем лице: «Warum ruft er sie wohl nicht an?»; спрашивать так самого человека странно.",
+  "tr": "wohl üçüncü biri hakkında tahmin yürütür: “Warum ruft er sie wohl nicht an?”; kişinin kendisine böyle sormak tuhaf.",
+  "at": [
+   "1a894f9a"
+  ]
+ },
+ {
+  "en": "Why on earth don't you call her?",
+  "ru": "Ну почему ты ей не позвонишь?!",
+  "tr": "Allah aşkına, neden onu aramıyorsun?!",
+  "at": [
+   "32ffe153"
+  ]
+ },
+ {
+  "en": "bloß — exasperated bafflement: you're tired of his complaining.",
+  "ru": "bloß — раздражённое непонимание: ты устал от его жалоб.",
+  "tr": "bloß sinirli bir anlayamamadır: yakınmalarından bıktın.",
+  "at": [
+   "589b7c1c"
+  ]
+ },
+ {
+  "en": "Why ever won't you call her?",
+  "ru": "Ну почему ты ей никак не позвонишь…",
+  "tr": "Neden onu bir türlü aramıyorsun?",
+  "at": [
+   "6ac5f604"
+  ]
+ },
+ {
+  "en": "einfach goes after nicht: 'Warum rufst du sie nicht einfach an?' ('why not just call her?'). Before nicht the meaning breaks.",
+  "ru": "einfach ставят после nicht: Warum rufst du sie nicht einfach an? (= почему бы просто не позвонить). Перед nicht смысл ломается.",
+  "tr": "einfach nicht kelimesinden sonra gelir: Warum rufst du sie nicht einfach an? (= neden kalkıp aramıyorsun). nicht kelimesinden önce anlam bozulur.",
+  "at": [
+   "0aac9218"
+  ]
+ },
+ {
+  "en": "So why DON'T you call her, then?",
+  "ru": "Ну так почему же ты ей не звонишь?",
+  "tr": "Ee, neden aramıyorsun onu?",
+  "at": [
+   "153fd998"
+  ]
+ },
+ {
+  "en": "DENN — after excuses ('no time', 'she's busy') you don't buy: so why then?",
+  "ru": "DENN — после отговорок («нет времени», «она занята»), которые ты не принимаешь: ну а почему тогда?",
+  "tr": "DENN, inanmadığın bahanelerden sonra gelir (“vaktim yok”, “o meşgul”): o hâlde neden?",
+  "at": [
+   "720d15b1"
+  ]
+ },
+ {
+  "en": "Gently, without reproach, nudge your friend towards calling his sister.",
+  "ru": "Мягко, без упрёка подтолкни друга к мысли позвонить сестре.",
+  "tr": "Yumuşakça, sitem etmeden arkadaşını kız kardeşini aramaya yönlendir.",
+  "at": [
+   "2d246a96"
+  ]
+ },
+ {
+  "en": "He's been complaining for months and never calls. You're exasperated.",
+  "ru": "Он месяцами жалуется и не звонит. Ты уже раздражён.",
+  "tr": "Aylardır yakınıyor ve aramıyor. Sabrın taşmak üzere.",
+  "at": [
+   "3abc1506"
+  ]
+ },
+ {
+  "en": "What was your name?",
+  "ru": "Как ваша фамилия?",
+  "tr": "Adınız nedir?",
+  "at": [
+   "f3408c57"
+  ]
+ },
+ {
+  "en": "What was your name again?",
+  "ru": "Как, бишь, ваша фамилия?",
+  "tr": "Adınız neydi?",
+  "at": [
+   "f7e19071"
+  ]
+ },
+ {
+  "en": "doch (often doch gleich) — you knew it but forgot and are trying to recall; polite and natural.",
+  "ru": "doch (часто doch gleich) — ты знал, но забыл и пытаешься вспомнить; вежливо и естественно.",
+  "tr": "doch (sıklıkla doch gleich) — biliyordun ama unuttun ve hatırlamaya çalışıyorsun; kibar ve doğal.",
+  "at": [
+   "d808bf6a"
+  ]
+ },
+ {
+  "en": "It needs noch: 'Wie war noch mal Ihr Name?' — a very common phrase; mal alone doesn't work here.",
+  "ru": "Нужно noch: «Wie war noch mal Ihr Name?» — очень частая фраза; одно mal здесь не работает.",
+  "tr": "noch gerekir: “Wie war noch mal Ihr Name?” — çok sık kullanılan bir söz; tek başına mal burada işe yaramaz.",
+  "at": [
+   "c44a8a8e"
+  ]
+ },
+ {
+  "en": "And what was your name?",
+  "ru": "А как ваша фамилия?",
+  "tr": "Peki, adınız nedir?",
+  "at": [
+   "53480310"
+  ]
+ },
+ {
+  "en": "denn — a lively question in the flow of conversation; with strangers a touch more casual than doch.",
+  "ru": "denn — живой вопрос по ходу разговора; с незнакомыми звучит чуть свободнее, чем doch.",
+  "tr": "denn konuşmanın akışı içinde canlı bir sorudur; yabancılara doch ile sorulduğundan biraz daha rahat duyulur.",
+  "at": [
+   "4c45e5a9"
+  ]
+ },
+ {
+  "en": "Recall uses 'schon wieder': 'Wie war schon wieder Ihr Name?' ('what was your name again?'). Bare schon is Swiss only.",
+  "ru": "Для припоминания говорят schon wieder: Wie war schon wieder Ihr Name? («как там вас зовут?»). Одно schon — только в Швейцарии.",
+  "tr": "Hatırlamak için schon wieder denir: Wie war schon wieder Ihr Name? (“adınızı tekrar alabilir miyim?”). Tek başına schon yalnızca İsviçre'de.",
+  "at": [
+   "a47717c5"
+  ]
+ },
+ {
+  "en": "What was your name, by the way?",
+  "ru": "А как, кстати, ваша фамилия?",
+  "tr": "Bu arada, adınız nedir?",
+  "at": [
+   "fc8855cf"
+  ]
+ },
+ {
+  "en": "eigentlich — you catch yourself: you've been talking a while and never got the name.",
+  "ru": "eigentlich — спохватился: вы давно говорите, а имя ты так и не уточнил.",
+  "tr": "eigentlich: birden fark ediyorsun — epeydir konuşuyorsunuz, ama adını hiç sormadın.",
+  "at": [
+   "b2d3a6d0"
+  ]
+ },
+ {
+  "en": "'Wie war wohl sein Name?' — guessing someone else's name; you don't ask the person that way.",
+  "ru": "«Wie war wohl sein Name?» — гадание о чужом имени; к самому человеку так не обращаются.",
+  "tr": "“Wie war wohl sein Name?” başkasının adı hakkında tahmindir; kişinin kendisine böyle hitap edilmez.",
+  "at": [
+   "66be4d02"
+  ]
+ },
+ {
+  "en": "Like nur: racking your memory to yourself ('Wie hieß er bloß?'), not a question to the person.",
+  "ru": "Как nur: мучительное припоминание себе под нос («Wie hieß er bloß?»), не вопрос собеседнику.",
+  "tr": "nur gibi: kendi kendine zorla hatırlamaya çalışmak (“Wie hieß er bloß?”), karşındakine soru değil.",
+  "at": [
+   "da7eb51c"
+  ]
+ },
+ {
+  "en": "'Wie war nur sein Name?' is said to yourself when racking your brain; asking the person this way is odd.",
+  "ru": "«Wie war nur sein Name?» говорят себе, когда мучительно вспоминаешь; спрашивать так самого человека странно.",
+  "tr": "“Wie war nur sein Name?” zorla hatırlamaya çalışırken kendi kendine söylenir; kişinin kendisine böyle sormak tuhaf.",
+  "at": [
+   "f748a30b"
+  ]
+ },
+ {
+  "en": "A customer introduced himself but you forgot the name. Ask again politely.",
+  "ru": "Клиент представился, но ты забыл имя. Вежливо переспроси.",
+  "tr": "Müşteri adını söyledi, ama unuttun. Kibarca yeniden sor.",
+  "at": [
+   "3a01795c"
+  ]
+ },
+ {
+  "en": "What do you know about it?",
+  "ru": "Что ты об этом знаешь?",
+  "tr": "Bu konuda ne biliyorsun?",
+  "at": [
+   "3d4642dc"
+  ]
+ },
+ {
+  "en": "So what do you know about it?",
+  "ru": "А что ты об этом знаешь?",
+  "tr": "Peki, bu konuda ne biliyorsun?",
+  "at": [
+   "372fff53"
+  ]
+ },
+ {
+  "en": "denn — genuine curiosity, e.g. if he hints that he's heard something.",
+  "ru": "denn — искреннее любопытство, например, если он намекает, что что-то слышал.",
+  "tr": "denn içten bir meraktır, örneğin bir şey duyduğunu ima ediyorsa.",
+  "at": [
+   "db55761c"
+  ]
+ },
+ {
+  "en": "What would you know about it?",
+  "ru": "Да что ты в этом понимаешь!",
+  "tr": "Sen bundan ne anlarsın ki!",
+  "at": [
+   "73a5c769"
+  ]
+ },
+ {
+  "en": "schon makes it rhetorical: the answer is 'nothing'; curt and dismissive.",
+  "ru": "schon — риторически: ответ «ничего»; резко и пренебрежительно.",
+  "tr": "schon soruyu retorik yapar: cevap “hiçbir şey”; sert ve küçümseyici.",
+  "at": [
+   "83f2d762"
+  ]
+ },
+ {
+  "en": "What do you actually know about it?",
+  "ru": "А что ты вообще об этом знаешь?",
+  "tr": "Hem sen bu konuda ne biliyorsun?",
+  "at": [
+   "abadd902"
+  ]
+ },
+ {
+  "en": "eigentlich — doubt with a challenge: 'how would you know?', but still a real question.",
+  "ru": "eigentlich — сомнение с претензией: «откуда тебе-то знать?», но ещё как настоящий вопрос.",
+  "tr": "eigentlich sitemli bir kuşkudur: “sen nereden bileceksin?”, ama hâlâ gerçek bir soru.",
+  "at": [
+   "586e7663"
+  ]
+ },
+ {
+  "en": "'Was weißt du wohl davon?' sounds like mocking guesswork and is unusual; for 'you know nothing' use schon.",
+  "ru": "«Was weißt du wohl davon?» звучит как насмешливое гадание и непривычно; для «ничего ты не знаешь» нужен schon.",
+  "tr": "“Was weißt du wohl davon?” alaycı bir tahmin gibi ve alışılmadık duyulur; “hiçbir şey bilmiyorsun” için schon gerekir.",
+  "at": [
+   "7ba04409"
+  ]
+ },
+ {
+  "en": "There's no worry here; bloß would read as 'only' ('what do you know only about that?').",
+  "ru": "Тревоге здесь не место; bloß читалось бы как «только» («что ты знаешь только об этом?»).",
+  "tr": "Burada endişeye yer yok; bloß “yalnızca” diye anlaşılırdı (“yalnızca bu konuda ne biliyorsun?”).",
+  "at": [
+   "69ea4deb"
+  ]
+ },
+ {
+  "en": "Like bloß: nur would read as 'only'.",
+  "ru": "Как bloß: nur читалось бы как «только».",
+  "tr": "bloß gibi: nur “yalnızca” diye anlaşılırdı.",
+  "at": [
+   "25cbd76c"
+  ]
+ },
+ {
+  "en": "Your little brother is lecturing you. Make clear he knows nothing about it.",
+  "ru": "Младший брат учит тебя жить. Дай понять, что он ничего в этом не смыслит.",
+  "tr": "Küçük kardeşin sana akıl veriyor. Bu işten hiç anlamadığını belli et.",
+  "at": [
+   "d171d564"
+  ]
+ },
+ {
+  "en": "Can you help me for a moment?",
+  "ru": "Можешь мне на минутку помочь?",
+  "tr": "Bana biraz yardım edebilir misin?",
+  "at": [
+   "9fe3e65c"
+  ]
+ },
+ {
+  "en": "doch doesn't go into a verb-first question: you'd use statement order 'Du … doch …?' (expecting yes); here it would read as 'after all'.",
+  "ru": "В вопросе с глаголом на первом месте doch не ставят: нужна утвердительная форма «Du … doch …?» (ждёшь «да»), а здесь doch читалось бы как «всё-таки».",
+  "tr": "Fiili başta olan soruya doch konmaz: ifade sırası gerekir “Du … doch …?” (“evet” bekliyorsun); burada doch “yine de” diye anlaşılırdı.",
+  "at": [
+   "10aa7e2e",
+   "43866ef5",
+   "48a29130",
+   "54ef6f61",
+   "5fe897f5",
+   "728fe573",
+   "9005ba7b",
+   "934939bf",
+   "95a0fdd3",
+   "be379a16",
+   "de10908e",
+   "e56e170a",
+   "ec37098a"
+  ]
+ },
+ {
+  "en": "Can you give me a hand for a sec?",
+  "ru": "Помоги-ка мне на минутку, а?",
+  "tr": "Bana bir yardım eder misin?",
+  "at": [
+   "891919ee"
+  ]
+ },
+ {
+  "en": "mal — a light everyday request; the most usual way to ask.",
+  "ru": "mal — лёгкая будничная просьба; самый обычный вариант.",
+  "tr": "mal hafif, gündelik bir ricadır; en sıradan biçim.",
+  "at": [
+   "41f68fa7"
+  ]
+ },
+ {
+  "en": "So can you help me?",
+  "ru": "А ты можешь мне помочь?",
+  "tr": "Peki, bana yardım edebilir misin?",
+  "at": [
+   "a2cbeb1b"
+  ]
+ },
+ {
+  "en": "denn turns the request into a real question, 'so can you?' — e.g. after explaining the problem.",
+  "ru": "denn делает из просьбы настоящий вопрос «а ты сможешь?» — например, после того как объяснил, в чём дело.",
+  "tr": "denn ricayı gerçek bir soruya çevirir: “peki yapabilir misin?” — örneğin sorunu anlattıktan sonra.",
+  "at": [
+   "4e148144"
+  ]
+ },
+ {
+  "en": "schon here = 'already': 'can you help me yet?' (are you free now?) — not the particle.",
+  "ru": "schon здесь = «уже»: «ты уже можешь помочь?» (ты освободился?) — это не частица.",
+  "tr": "schon burada “şimdiden” demektir: “şimdiden yardım edebilir misin?” (müsait misin?) — parçacık değil.",
+  "at": [
+   "56365df2"
+  ]
+ },
+ {
+  "en": "Can you help me real quick?",
+  "ru": "Поможешь мне быстренько?",
+  "tr": "Bana yardım ediverir misin?",
+  "at": [
+   "001374d2"
+  ]
+ },
+ {
+  "en": "Northern German eben = 'real quick': a casual everyday request, often 'mal eben'; regional (north).",
+  "ru": "Северное eben = «быстренько»: будничная просьба, часто «mal eben»; региональное (север Германии).",
+  "tr": "Kuzey Almancasındaki eben = “çabucak”: gündelik bir rica, sıklıkla “mal eben”; yöresel (Kuzey Almanya).",
+  "at": [
+   "329c56b3"
+  ]
+ },
+ {
+  "en": "As a request it's odd: it sounds like 'are you even able to help?'; the reproachful version is 'Kannst du mir eigentlich auch mal helfen?'",
+  "ru": "Как просьба странно: звучит как «а ты вообще умеешь?». С упрёком говорят: Kannst du mir eigentlich auch mal helfen?",
+  "tr": "Rica olarak tuhaf: “sen yardım etmeyi bilir misin hiç?” gibi duyulur. Sitemle şöyle denir: Kannst du mir eigentlich auch mal helfen?",
+  "at": [
+   "5e0c154b"
+  ]
+ },
+ {
+  "en": "'Kannst du mir wohl helfen?' — old-fashioned politeness or regional; rare today.",
+  "ru": "«Kannst du mir wohl helfen?» — старомодно-вежливо или регионально; сегодня редко.",
+  "tr": "“Kannst du mir wohl helfen?” eski moda bir kibarlık ya da yöresel; bugün seyrek.",
+  "at": [
+   "c64d9829"
+  ]
+ },
+ {
+  "en": "bloß = 'only' (like nur); a request has no room for the worried reading.",
+  "ru": "bloß = «только» (как nur), тревожного смысла в просьбе нет.",
+  "tr": "bloß = “yalnızca” (nur gibi); ricada endişeli anlama yer yok.",
+  "at": [
+   "229d79fb"
+  ]
+ },
+ {
+  "en": "nur = 'only': 'can you help me only briefly?' — changes the meaning.",
+  "ru": "nur = «только»: «можешь помочь только на минутку?» — меняет смысл.",
+  "tr": "nur = “yalnızca”: “bana yalnızca kısa bir süre yardım edebilir misin?” — anlam değişir.",
+  "at": [
+   "a275464c"
+  ]
+ },
+ {
+  "en": "Could you maybe help me for a moment?",
+  "ru": "Ты не мог бы мне помочь?",
+  "tr": "Zahmet olmazsa bana biraz yardım eder misin?",
+  "at": [
+   "72a0908b"
+  ]
+ },
+ {
+  "en": "vielleicht makes the most careful, polite request; here it's not 'maybe' but a softener.",
+  "ru": "vielleicht — самая осторожная, вежливая просьба; здесь это не «может быть», а смягчение.",
+  "tr": "vielleicht en temkinli, kibar ricadır; burada “belki” değil, yumuşatmadır.",
+  "at": [
+   "86acea74"
+  ]
+ },
+ {
+  "en": "'Kannst du mir einfach kurz helfen?' = 'can you just help (no discussion)?' — possible when annoyed, but out of place here.",
+  "ru": "«Kannst du mir einfach kurz helfen?» = «можешь просто помочь (без разговоров)?» — бывает с раздражением, но здесь неуместно.",
+  "tr": "“Kannst du mir einfach kurz helfen?” = “sadece yardım edebilir misin (tartışmadan)?” — sinirliyken olur, ama burada yersiz.",
+  "at": [
+   "84352c5b"
+  ]
+ },
+ {
+  "en": "etwa would give 'don't tell me you can help?' — suspicious surprise, not a request.",
+  "ru": "etwa дало бы «неужели ты можешь помочь?» — подозрительное удивление, не просьба.",
+  "tr": "etwa “yoksa yardım edebilir misin?” anlamı verirdi — kuşkulu bir şaşkınlık, rica değil.",
+  "at": [
+   "d9c15dce"
+  ]
+ },
+ {
+  "en": "Ask your neighbour for help as politely and tentatively as you can.",
+  "ru": "Попроси соседа помочь как можно вежливее и осторожнее.",
+  "tr": "Komşundan olabildiğince kibar ve temkinli bir şekilde yardım iste.",
+  "at": [
+   "9fa93a0e"
+  ]
+ },
+ {
+  "en": "Casually ask your brother to give you a hand for a moment.",
+  "ru": "Просто, по-будничному попроси брата помочь на минутку.",
+  "tr": "Kardeşinden gündelik bir şekilde biraz yardım iste.",
+  "at": [
+   "a7f8eb56"
+  ]
+ },
+ {
+  "en": "Do you have a moment?",
+  "ru": "У тебя есть минутка?",
+  "tr": "Biraz vaktin var mı?",
+  "at": [
+   "8a41885c"
+  ]
+ },
+ {
+  "en": "Got a sec?",
+  "ru": "Есть минутка?",
+  "tr": "Bir dakikan var mı?",
+  "at": [
+   "e4efdb72"
+  ]
+ },
+ {
+  "en": "mal — an everyday 'got a minute?', very common.",
+  "ru": "mal — будничное «найдётся минутка?», очень частое.",
+  "tr": "mal gündelik bir “bir dakikan var mı?”dır, çok sık kullanılır.",
+  "at": [
+   "ff3d12d3"
+  ]
+ },
+ {
+  "en": "denn turns the request into a real question — 'so do you have a moment at all?' — as if you doubted it, not asking a favour. For a request use mal or vielleicht.",
+  "ru": "denn превращает просьбу в настоящий вопрос — «а у тебя вообще есть минутка?» — будто ты сомневаешься, а не просишь. Для просьбы — mal или vielleicht.",
+  "tr": "denn ricayı gerçek bir soruya çevirir — “senin hiç vaktin var mı?” — sanki rica etmiyorsun da şüpheleniyorsun. Rica için mal ya da vielleicht.",
+  "at": [
+   "c571c5fa"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'do you have time yet?' (are you free now?) — not the particle.",
+  "ru": "schon = «уже»: «у тебя уже есть время?» (ты освободилась?) — не частица.",
+  "tr": "schon = “şimdiden”: “şimdiden vaktin var mı?” (müsait oldun mu?) — parçacık değil.",
+  "at": [
+   "6973e53a"
+  ]
+ },
+ {
+  "en": "Oh, have you actually got a moment?",
+  "ru": "А у тебя, кстати, есть минутка?",
+  "tr": "Bu arada, biraz vaktin var mı?",
+  "at": [
+   "31384614"
+  ]
+ },
+ {
+  "en": "eigentlich switches to your own matter in passing, mid-chat. It only sounds reproachful with 'auch mal'.",
+  "ru": "eigentlich — между делом о своём: вы болтали, и вдруг вопрос о времени. Упрёк — только с «auch mal».",
+  "tr": "eigentlich laf arasında kendi konuna geçer: sohbet ediyordunuz ve birden vakit sorusu geliyor. Yalnızca “auch mal” ile sitemli duyulur.",
+  "at": [
+   "dbe4ca65"
+  ]
+ },
+ {
+  "en": "wohl sounds odd in a verb-first question; a guess uses statement order instead: Du bist wohl müde?",
+  "ru": "В вопросе с глаголом на первом месте wohl звучит странно; догадку выражают утвердительной формой: «Du bist wohl müde?»",
+  "tr": "Fiili başta olan soruda wohl tuhaf duyulur; tahmin ifade sırasıyla söylenir: “Du bist wohl müde?”",
+  "at": [
+   "00d6cfcd",
+   "037be28b",
+   "1247a66e",
+   "27d646c5",
+   "34448eb6",
+   "60626a7e",
+   "64d1876f",
+   "6c469463",
+   "7c631303",
+   "f1687ba3",
+   "f9bbe932"
+  ]
+ },
+ {
+  "en": "bloß = 'only' (like nur) — a different meaning.",
+  "ru": "bloß = «только» (как nur) — другой смысл.",
+  "tr": "bloß = “yalnızca” (nur gibi) — başka bir anlam.",
+  "at": [
+   "0197aba1"
+  ]
+ },
+ {
+  "en": "nur = 'only': 'do you only have a moment?' — a different meaning.",
+  "ru": "nur = «только»: «у тебя только минутка?» — другой смысл.",
+  "tr": "nur = “yalnızca”: “yalnızca bir dakikan mı var?” — başka bir anlam.",
+  "at": [
+   "bb4492f0"
+  ]
+ },
+ {
+  "en": "Have you maybe got a moment?",
+  "ru": "У тебя не найдётся минутки?",
+  "tr": "Zahmet olmazsa bana biraz vakit ayırır mısın?",
+  "at": [
+   "3f8fe1f9"
+  ]
+ },
+ {
+  "en": "vielleicht — a tactful request: you don't want to intrude.",
+  "ru": "vielleicht — деликатная просьба: не хочешь мешать.",
+  "tr": "vielleicht nazik bir ricadır: rahatsız etmek istemiyorsun.",
+  "at": [
+   "e4ea8032"
+  ]
+ },
+ {
+  "en": "'Hast du etwa Zeit?' = 'don't tell me you have time?' — ironic surprise, not a request.",
+  "ru": "«Hast du etwa Zeit?» = «неужели у тебя есть время?» — ироничное удивление, не просьба.",
+  "tr": "“Hast du etwa Zeit?” = “yoksa vaktin mi var?” — ironik şaşkınlık, rica değil.",
+  "at": [
+   "0861601c"
+  ]
+ },
+ {
+  "en": "Colloquial (Austria, south): 'Hast du eh Zeit?' = 'you've got time anyway, right?' — regional.",
+  "ru": "Разговорно (Австрия, юг): «Hast du eh Zeit?» = «у тебя ведь всё равно есть время?» — регионально.",
+  "tr": "Konuşma dilinde (Avusturya, güney): “Hast du eh Zeit?” = “nasılsa vaktin var, öyle mi?” — yöresel.",
+  "at": [
+   "85b5a0c8"
+  ]
+ },
+ {
+  "en": "Ask your colleague if she has a minute — very tactfully.",
+  "ru": "Спроси коллегу, найдётся ли у неё минутка, — очень деликатно.",
+  "tr": "İş arkadaşına biraz vakti olup olmadığını sor — çok nazikçe.",
+  "at": [
+   "4213b654"
+  ]
+ },
+ {
+  "en": "Do you have a pen?",
+  "ru": "У вас есть ручка?",
+  "tr": "Kaleminiz var mı?",
+  "at": [
+   "aa51ae5f"
+  ]
+ },
+ {
+  "en": "Got a pen?",
+  "ru": "Ручки не будет?",
+  "tr": "Bir kalem verir misiniz?",
+  "at": [
+   "88f02309"
+  ]
+ },
+ {
+  "en": "mal — an everyday request; with Sie it sounds plain rather than especially polite.",
+  "ru": "mal — будничная просьба; с Sie звучит просто, без особой вежливости.",
+  "tr": "mal gündelik bir ricadır; Sie ile özel bir kibarlık olmadan, sade duyulur.",
+  "at": [
+   "668e9e82"
+  ]
+ },
+ {
+  "en": "denn turns the request into a real question — 'so do you have a pen at all?' — as if you doubted it, not asking a favour. For a request use mal or vielleicht.",
+  "ru": "denn превращает просьбу в настоящий вопрос — «а у вас вообще есть ручка?» — будто ты сомневаешься, а не просишь. Для просьбы — mal или vielleicht.",
+  "tr": "denn ricayı gerçek bir soruya çevirir — “sizin hiç kaleminiz var mı?” — sanki rica etmiyorsun da şüpheleniyorsun. Rica için mal ya da vielleicht.",
+  "at": [
+   "00c5e571"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'do you have a pen already?' — not the particle.",
+  "ru": "schon = «уже»: «у вас уже есть ручка?» — не частица.",
+  "tr": "schon = “şimdiden”: “şimdiden kaleminiz var mı?” — parçacık değil.",
+  "at": [
+   "12dee9e9"
+  ]
+ },
+ {
+  "en": "Do you actually have a pen?",
+  "ru": "А ручка у вас, кстати, есть?",
+  "tr": "Bu arada, kaleminiz var mı?",
+  "at": [
+   "2c5b23bf"
+  ]
+ },
+ {
+  "en": "eigentlich — it suddenly occurs to you: you've been told to sign but see no pen.",
+  "ru": "eigentlich — спохватился: тебе велели подписать, а ручки ты не видишь.",
+  "tr": "eigentlich: birden aklına geliyor — imzalaman söylendi, ama kalem göremiyorsun.",
+  "at": [
+   "a3c45b80"
+  ]
+ },
+ {
+  "en": "bloß = 'only', like nur — a different meaning.",
+  "ru": "bloß = «только», как nur — другой смысл.",
+  "tr": "bloß = “yalnızca”, nur gibi — başka bir anlam.",
+  "at": [
+   "0abbd3cc"
+  ]
+ },
+ {
+  "en": "nur = 'only': 'do you only have a pen?' — a different meaning.",
+  "ru": "nur = «только»: «у вас только ручка (а карандаша нет)?» — другой смысл.",
+  "tr": "nur = “yalnızca”: “yalnızca kaleminiz mi var (kurşun kaleminiz yok mu)?” — başka bir anlam.",
+  "at": [
+   "d81fc523"
+  ]
+ },
+ {
+  "en": "Would you have a pen, perhaps?",
+  "ru": "У вас не найдётся ручки?",
+  "tr": "Zahmet olmazsa bir kalem alabilir miyim?",
+  "at": [
+   "4bffac60"
+  ]
+ },
+ {
+  "en": "vielleicht — a polite request to a stranger, the most fitting choice at the post office.",
+  "ru": "vielleicht — вежливая просьба к незнакомому, самый уместный вариант на почте.",
+  "tr": "vielleicht bir yabancıya kibar bir ricadır; postanede en uygun olanı.",
+  "at": [
+   "a0e78e39"
+  ]
+ },
+ {
+  "en": "einfach makes no sense here: 'do you simply have a pen?'",
+  "ru": "einfach здесь бессмысленно: «у вас просто есть ручка?»",
+  "tr": "einfach burada anlamsız: “sadece kaleminiz var mı?”",
+  "at": [
+   "a7442fee"
+  ]
+ },
+ {
+  "en": "etwa = 'don't tell me you have a pen?' — suspicion is out of place; natural with a negative: 'Haben Sie etwa keinen Kuli?'",
+  "ru": "etwa = «неужели у вас есть ручка?» — подозрение не к месту; естественно с отрицанием: «Haben Sie etwa keinen Kuli?»",
+  "tr": "etwa = “yoksa kaleminiz mi var?” — kuşku yersiz; olumsuzla doğaldır: “Haben Sie etwa keinen Kuli?”",
+  "at": [
+   "eee2cf17"
+  ]
+ },
+ {
+  "en": "Politely ask the clerk for a pen.",
+  "ru": "Вежливо попроси у служащего ручку.",
+  "tr": "Görevliden kibarca bir kalem iste.",
+  "at": [
+   "3ab6fb3f"
+  ]
+ },
+ {
+  "en": "Can you be quieter?",
+  "ru": "Можешь потише?",
+  "tr": "Biraz daha sessiz olabilir misin?",
+  "at": [
+   "de61a2db"
+  ]
+ },
+ {
+  "en": "Can you keep it down a bit?",
+  "ru": "Можно потише, а?",
+  "tr": "Bir saniye sessiz olur musun?",
+  "at": [
+   "46b69829"
+  ]
+ },
+ {
+  "en": "mal — an everyday request; even at night it sounds friendly.",
+  "ru": "mal — будничная просьба; даже ночью звучит по-дружески.",
+  "tr": "mal gündelik bir ricadır; gece bile dostça duyulur.",
+  "at": [
+   "338b9222"
+  ]
+ },
+ {
+  "en": "'Kannst du denn leiser sein?' asks about ability — 'are you even able to be quieter?' — not a request.",
+  "ru": "«Kannst du denn leiser sein?» — вопрос о способности «а ты вообще умеешь тише?», не просьба.",
+  "tr": "“Kannst du denn leiser sein?” yetenek sorusudur: “sen sessiz olmayı bilir misin hiç?” — rica değil.",
+  "at": [
+   "facc56a5"
+  ]
+ },
+ {
+  "en": "schon doesn't work here; the hurry-up schon belongs in imperatives: 'Sei schon leise!'",
+  "ru": "schon здесь не работает; торопят в повелительном: «Sei schon leise!»",
+  "tr": "schon burada işe yaramaz; acele ettiren schon emirde olur: “Sei schon leise!”",
+  "at": [
+   "d9737d7f"
+  ]
+ },
+ {
+  "en": "It needs auch: 'Kannst du eigentlich auch leiser sein?' — an ironic dig; without auch it's odd.",
+  "ru": "Нужно auch: «Kannst du eigentlich auch leiser sein?» — ироничный упрёк; без auch звучит странно.",
+  "tr": "auch gerekir: “Kannst du eigentlich auch leiser sein?” — ironik bir iğneleme; auch olmadan tuhaf.",
+  "at": [
+   "29d5bcde"
+  ]
+ },
+ {
+  "en": "The threatening command uses wollen: 'Willst du wohl leise sein!'; with können it sounds unusual.",
+  "ru": "Угроза-приказ строится с wollen: «Willst du wohl leise sein!»; с können звучит непривычно.",
+  "tr": "Tehditli emir wollen ile kurulur: “Willst du wohl leise sein!”; können ile alışılmadık duyulur.",
+  "at": [
+   "20f664b8"
+  ]
+ },
+ {
+  "en": "bloß doesn't occur in a request-question; the warning bloß belongs in imperatives: 'Sei bloß leise!'",
+  "ru": "bloß в просьбе-вопросе не бывает; предостерегающее bloß — в повелительном: «Sei bloß leise!»",
+  "tr": "bloß rica sorusunda olmaz; uyaran bloß emirde olur: “Sei bloß leise!”",
+  "at": [
+   "fd4c2b8e"
+  ]
+ },
+ {
+  "en": "nur here = 'only' and makes no sense; reassuring nur belongs in commands: 'Mach dir nur keine Sorgen!'",
+  "ru": "nur здесь = «только» и бессмысленно; успокаивающее nur — в повелительном: «Mach dir nur keine Sorgen!»",
+  "tr": "nur burada “yalnızca” demektir ve anlamsız; rahatlatan nur emirde olur: “Mach dir nur keine Sorgen!”",
+  "at": [
+   "87c4173d"
+  ]
+ },
+ {
+  "en": "Could you maybe keep it down?!",
+  "ru": "Ты не мог бы, наконец, потише?!",
+  "tr": "Biraz sessiz olur musun, lütfen?!",
+  "at": [
+   "3d96ebd4"
+  ]
+ },
+ {
+  "en": "Here vielleicht is ironic and sharp: an irritated tone turns the polite form into a rebuke; often 'vielleicht mal'.",
+  "ru": "Здесь vielleicht ироничное и резкое: раздражённая интонация превращает вежливую форму в упрёк; часто «vielleicht mal».",
+  "tr": "Burada vielleicht ironik ve serttir: sinirli bir tonla kibar biçim sitem olur; sıklıkla “vielleicht mal”.",
+  "at": [
+   "28d18e25"
+  ]
+ },
+ {
+  "en": "Can you just be quieter?",
+  "ru": "Можешь просто быть потише?",
+  "tr": "Biraz sessiz olsan yeter!",
+  "at": [
+   "6e76bdbd"
+  ]
+ },
+ {
+  "en": "einfach — 'just do it, no discussion': you're tired of his explanations.",
+  "ru": "einfach — «просто сделай, без разговоров»: тебе надоели его объяснения.",
+  "tr": "einfach — “sadece yap, tartışma”: açıklamalarından bıktın.",
+  "at": [
+   "2690aa9e"
+  ]
+ },
+ {
+  "en": "1 a.m., you're asking for the third time and you're angry, though the form is polite.",
+  "ru": "Час ночи, ты просишь в третий раз и злишься, хотя форма вежливая.",
+  "tr": "Gece saat bir, üçüncü kez rica ediyorsun ve kızgınsın, ama biçim kibar.",
+  "at": [
+   "42963d43"
+  ]
+ },
+ {
+  "en": "Ask your flatmate casually and in a friendly way to turn it down.",
+  "ru": "Дружелюбно и по-будничному попроси соседа сделать тише.",
+  "tr": "Ev arkadaşından dostça ve gündelik bir şekilde sesi kısmasını iste.",
+  "at": [
+   "4312fd24"
+  ]
+ },
+ {
+  "en": "Aren't you hungry?",
+  "ru": "Ты не голоден?",
+  "tr": "Aç değil misin?",
+  "at": [
+   "2277f4d8"
+  ]
+ },
+ {
+  "en": "'Hast du doch…?' = 'so you're not hungry after all?'. Particle doch needs statement order: 'Du hast doch keinen Hunger?'",
+  "ru": "Hast du doch…? = «так ты всё-таки не голоден?». Частице doch нужен порядок утверждения: Du hast doch keinen Hunger?",
+  "tr": "“Hast du doch…?” = “demek yine de aç değilsin?”. doch parçacığı için ifade sırası gerekir: “Du hast doch keinen Hunger?”",
+  "at": [
+   "9d864e73"
+  ]
+ },
+ {
+  "en": "mal doesn't fit a question about someone's state; it belongs in requests ('Hast du mal einen Moment?').",
+  "ru": "mal в вопросе о состоянии не встаёт; оно бывает в просьбах («Hast du mal einen Moment?»).",
+  "tr": "mal bir durum sorusuna uymaz; ricalarda olur (“Hast du mal einen Moment?”).",
+  "at": [
+   "bf6a5373"
+  ]
+ },
+ {
+  "en": "Aren't you hungry, then?",
+  "ru": "Ты разве не голоден?",
+  "tr": "Ne yani, aç değil misin?",
+  "at": [
+   "8351be1d"
+  ]
+ },
+ {
+  "en": "denn — surprise based on what you see: a whole day without food — how come?",
+  "ru": "denn — удивление на основе увиденного: целый день без еды — как так?",
+  "tr": "denn gördüğüne dayanan bir şaşkınlıktır: bütün gün yemek yok — nasıl olur?",
+  "at": [
+   "cb7d487e"
+  ]
+ },
+ {
+  "en": "It needs mehr: 'Hast du schon keinen Hunger mehr?' = 'not hungry any more already?'; schon = 'already'.",
+  "ru": "Нужно mehr: «Hast du schon keinen Hunger mehr?» = «ты уже наелся?»; schon здесь = «уже».",
+  "tr": "mehr gerekir: “Hast du schon keinen Hunger mehr?” = “şimdiden doydun mu?”; schon burada “şimdiden” demektir.",
+  "at": [
+   "0ceca73e"
+  ]
+ },
+ {
+  "en": "Aren't you hungry, actually?",
+  "ru": "Слушай, а ты не проголодался?",
+  "tr": "Bu arada, acıkmadın mı?",
+  "at": [
+   "9f37a1e0"
+  ]
+ },
+ {
+  "en": "eigentlich — you suddenly notice he hasn't eaten all day; a caring aside.",
+  "ru": "eigentlich — вдруг замечаешь, что он весь день не ел; заботливый вопрос между делом.",
+  "tr": "eigentlich: bütün gün yemediğini birden fark ediyorsun; laf arasında şefkatli bir soru.",
+  "at": [
+   "a6da76b9"
+  ]
+ },
+ {
+  "en": "Worried bloß goes in W-questions (Wo ist bloß mein Schlüssel?); in a yes/no question it reads as 'only'.",
+  "ru": "Тревожное bloß бывает в W-вопросах (Wo ist bloß mein Schlüssel?); в вопросе да/нет оно прочитается как «только».",
+  "tr": "Endişe bildiren bloß W-sorularında olur (Wo ist bloß mein Schlüssel?); evet/hayır sorusunda “yalnızca” diye anlaşılır.",
+  "at": [
+   "0d3fda35",
+   "1abcb4bc",
+   "66ecd21c",
+   "74998f51",
+   "76c51315",
+   "80b76b7b",
+   "8d464108",
+   "ad8c3d90",
+   "bcd187fd",
+   "d7c8eebb",
+   "d9517f19",
+   "e4050ac5"
+  ]
+ },
+ {
+  "en": "Worried nur goes in W-questions (Was soll ich nur tun?); in a yes/no question it reads as 'only'.",
+  "ru": "Тревожное nur бывает в W-вопросах (Was soll ich nur tun?); в вопросе да/нет оно прочитается как «только».",
+  "tr": "Endişe bildiren nur W-sorularında olur (Was soll ich nur tun?); evet/hayır sorusunda “yalnızca” diye anlaşılır.",
+  "at": [
+   "14c12f4c",
+   "2ba46eb0",
+   "350190c4",
+   "9694ef20",
+   "9d851483",
+   "a0fca0f2",
+   "a23b5972",
+   "a8fd7c23",
+   "aa593b00",
+   "ba5dbc8c",
+   "d8783a6d",
+   "ecb3ead3"
+  ]
+ },
+ {
+  "en": "vielleicht = 'maybe': 'maybe you're just not hungry?' — a guessing adverb, not the particle.",
+  "ru": "vielleicht = «может быть»: «может, ты просто не голоден?» — наречие-догадка, не частица.",
+  "tr": "vielleicht = “belki”: “belki de aç değilsindir?” — tahmin bildiren zarf, parçacık değil.",
+  "at": [
+   "103c1086"
+  ]
+ },
+ {
+  "en": "einfach makes no sense: 'are you simply not hungry?' — that's the adverb 'simply'.",
+  "ru": "einfach бессмысленно: «ты просто не голоден?» — это было бы наречие «просто».",
+  "tr": "einfach anlamsız: “sadece aç değil misin?” — bu “sadece, basitçe” zarfı olurdu.",
+  "at": [
+   "e7c562ff"
+  ]
+ },
+ {
+  "en": "Don't tell me you're not hungry?",
+  "ru": "Неужели ты не голоден?",
+  "tr": "Yoksa aç değil misin?",
+  "at": [
+   "1e6061e3"
+  ]
+ },
+ {
+  "en": "etwa — you suspect something's wrong: is he ill or upset?",
+  "ru": "etwa — подозреваешь неладное: может, он заболел или обиделся?",
+  "tr": "etwa: bir terslikten şüpheleniyorsun — hasta mı, kırgın mı?",
+  "at": [
+   "a304a0ac"
+  ]
+ },
+ {
+  "en": "Colloquial 'Hast du eh keinen Hunger?' = 'you're not hungry anyway, right?' — regional and not caring.",
+  "ru": "Разговорно «Hast du eh keinen Hunger?» = «ты ведь всё равно не голоден?» — регионально и не про заботу.",
+  "tr": "Konuşma dilinde “Hast du eh keinen Hunger?” = “nasılsa aç değilsin, öyle mi?” — yöresel ve şefkatle ilgisi yok.",
+  "at": [
+   "ae4a02e8"
+  ]
+ },
+ {
+  "en": "You suspect something's wrong: he hasn't eaten all day.",
+  "ru": "Ты подозреваешь неладное: он весь день ничего не ел.",
+  "tr": "Bir terslikten şüpheleniyorsun: bütün gün hiçbir şey yemedi.",
+  "at": [
+   "6784cbf6"
+  ]
+ },
+ {
+  "en": "You're surprised and ask kindly, without suspicion.",
+  "ru": "Ты удивлён и спрашиваешь с участием, без подозрений.",
+  "tr": "Şaşırdın ve şüphelenmeden, ilgiyle soruyorsun.",
+  "at": [
+   "dfc9cda8"
+  ]
+ },
+ {
+  "en": "Are you ill?",
+  "ru": "Ты заболела?",
+  "tr": "Hasta mısın?",
+  "at": [
+   "55ec9376"
+  ]
+ },
+ {
+  "en": "mal doesn't fit a question about a state; 'Warst du mal krank?' = 'have you ever been ill?'",
+  "ru": "mal в вопросе о состоянии не встаёт; «Warst du mal krank?» = «ты когда-нибудь болел?»",
+  "tr": "mal bir durum sorusuna uymaz; “Warst du mal krank?” = “hiç hastalandın mı?”",
+  "at": [
+   "255d93a9"
+  ]
+ },
+ {
+  "en": "Oh — are you ill?",
+  "ru": "Ты что, заболела?",
+  "tr": "Peki, hasta mısın?",
+  "at": [
+   "499bd403"
+  ]
+ },
+ {
+  "en": "denn — a caring question prompted by what you see: the cough, the pallor.",
+  "ru": "denn — участливый вопрос, выросший из того, что видишь: кашель, бледность.",
+  "tr": "denn gördüğünden doğan ilgili bir sorudur: öksürük, solgunluk.",
+  "at": [
+   "3899334c"
+  ]
+ },
+ {
+  "en": "schon = 'already'; usually 'Bist du schon wieder krank?' = 'ill again?' — not the particle.",
+  "ru": "schon = «уже»; обычно «Bist du schon wieder krank?» = «опять болеешь?» — не частица.",
+  "tr": "schon = “şimdiden”; genellikle “Bist du schon wieder krank?” = “yine mi hastasın?” — parçacık değil.",
+  "at": [
+   "d5a25ac8"
+  ]
+ },
+ {
+  "en": "Are you actually ill?",
+  "ru": "Слушай, а ты не заболела?",
+  "tr": "Bu arada, hasta mısın?",
+  "at": [
+   "56680636"
+  ]
+ },
+ {
+  "en": "eigentlich — a clarifying aside: 'are you ill or just tired?' (Bist du eigentlich krank oder nur müde?)",
+  "ru": "eigentlich — уточняешь между делом: «ты болеешь или просто устала?» (Bist du eigentlich krank oder nur müde?)",
+  "tr": "eigentlich laf arasında netleştirir: “hasta mısın, ya da sadece yorgun musun?” (Bist du eigentlich krank oder nur müde?)",
+  "at": [
+   "507da36f"
+  ]
+ },
+ {
+  "en": "'Bist du vielleicht krank?' is a perfectly normal, tentative question, but vielleicht here means 'maybe' (a guess), not the request-softening particle.",
+  "ru": "«Bist du vielleicht krank?» — совершенно нормальный осторожный вопрос, но vielleicht здесь «может быть» (догадка), а не частица-смягчитель просьбы.",
+  "tr": "“Bist du vielleicht krank?” tamamen normal, temkinli bir sorudur, ama vielleicht burada “belki” (tahmin) demektir, ricayı yumuşatan parçacık değil.",
+  "at": [
+   "11ca8d2c"
+  ]
+ },
+ {
+  "en": "You're not ill, are you?",
+  "ru": "Неужели ты заболела?",
+  "tr": "Yoksa hasta mısın?",
+  "at": [
+   "361a72ad"
+  ]
+ },
+ {
+  "en": "etwa — you fear the unwelcome answer: 'don't tell me you're ill' (big meeting tomorrow).",
+  "ru": "etwa — боишься, что правда то, чего не хочется: «только не говори, что заболела» (завтра важная встреча).",
+  "tr": "etwa: istemediğin cevabın doğru olmasından korkuyorsun — “sakın hasta olduğunu söyleme” (yarın önemli bir toplantı var).",
+  "at": [
+   "2cb4480e"
+  ]
+ },
+ {
+  "en": "Your colleague is coughing. Ask with concern.",
+  "ru": "Коллега кашляет. Спроси с участием, что с ней.",
+  "tr": "İş arkadaşın öksürüyor. Ona ne olduğunu ilgiyle sor.",
+  "at": [
+   "9aa97b96"
+  ]
+ },
+ {
+  "en": "You dread hearing 'yes' — there's a big meeting tomorrow.",
+  "ru": "Ты боишься услышать «да» — завтра важная встреча.",
+  "tr": "“Evet” duymaktan korkuyorsun — yarın önemli bir toplantı var.",
+  "at": [
+   "c2187a58"
+  ]
+ },
+ {
+  "en": "Are you coming along?",
+  "ru": "Ты пойдёшь с нами?",
+  "tr": "Bizimle geliyor musun?",
+  "at": [
+   "167cfeb8"
+  ]
+ },
+ {
+  "en": "Come with me for a sec?",
+  "ru": "Не сходишь со мной на минутку?",
+  "tr": "Bir dakika benimle gelir misin?",
+  "at": [
+   "6c69a8be"
+  ]
+ },
+ {
+  "en": "mal changes the meaning: it's a request, 'come with me for a moment', not a question about the cinema.",
+  "ru": "mal меняет смысл: это просьба «подойди со мной на минутку», а не вопрос про кино.",
+  "tr": "mal anlamı değiştirir: bu sinema sorusu değil, “bir dakika benimle gel” ricasıdır.",
+  "at": [
+   "5c24a9f7"
+  ]
+ },
+ {
+  "en": "So are you coming?",
+  "ru": "Так ты пойдёшь с нами?",
+  "tr": "Peki, bizimle geliyor musun?",
+  "at": [
+   "2d1a1ecb"
+  ]
+ },
+ {
+  "en": "denn — the question follows from the conversation: you've discussed the film and want an answer.",
+  "ru": "denn — вопрос вытекает из разговора: вы обсуждали фильм, и ты хочешь знать ответ.",
+  "tr": "denn konuşmadan çıkan bir sorudur: filmi konuştunuz, cevabı bilmek istiyorsun.",
+  "at": [
+   "f2dcefb4"
+  ]
+ },
+ {
+  "en": "schon here = 'already' ('are you coming already?'); coaxing schon belongs in the imperative: 'Komm schon mit!'",
+  "ru": "schon здесь = «уже» («ты уже идёшь?»); уговаривают в повелительном: «Komm schon mit!»",
+  "tr": "schon burada “şimdiden” demektir (“şimdiden mi geliyorsun?”); ikna eden schon emirde olur: “Komm schon mit!”",
+  "at": [
+   "35353df6"
+  ]
+ },
+ {
+  "en": "Are you coming along, by the way?",
+  "ru": "А ты, кстати, пойдёшь с нами?",
+  "tr": "Bu arada, bizimle geliyor musun?",
+  "at": [
+   "e2b5a46a"
+  ]
+ },
+ {
+  "en": "eigentlich — an aside to check plans; very common.",
+  "ru": "eigentlich — вопрос между делом, уточнение планов; очень частое употребление.",
+  "tr": "eigentlich planları netleştirmek için laf arasında bir sorudur; çok sık kullanılır.",
+  "at": [
+   "41d7700b"
+  ]
+ },
+ {
+  "en": "'Kommst du vielleicht mit?' leans to 'maybe you'll come?'. As a softener vielleicht works in requests: 'Kannst du vielleicht…?'",
+  "ru": "Kommst du vielleicht mit? — скорее «может, пойдёшь?». Смягчающая частица vielleicht — в просьбах: Kannst du vielleicht…?",
+  "tr": "“Kommst du vielleicht mit?” daha çok “belki gelirsin?” anlamına kayar. Yumuşatan vielleicht ricalarda olur: “Kannst du vielleicht…?”",
+  "at": [
+   "8fd9f324"
+  ]
+ },
+ {
+  "en": "'Kommst du einfach mit?' = 'will you simply come along?' — adverb; particle einfach belongs in 'Komm einfach mit!'",
+  "ru": "«Kommst du einfach mit?» = «просто пойдёшь с нами?» — наречие; частица einfach — в повелительном «Komm einfach mit!»",
+  "tr": "“Kommst du einfach mit?” = “sadece bizimle mi geleceksin?” — zarf; einfach parçacığı emirde olur: “Komm einfach mit!”",
+  "at": [
+   "a73a785b"
+  ]
+ },
+ {
+  "en": "Don't tell me you're coming too?",
+  "ru": "Ты что, тоже идёшь?",
+  "tr": "Yoksa sen de mi geliyorsun?",
+  "at": [
+   "c4bd9939"
+  ]
+ },
+ {
+  "en": "etwa — surprise with a hint of dismay: you didn't expect (or want) him to come.",
+  "ru": "etwa — удивление с неприязненным оттенком: ты не ожидал (или не хотел), что он пойдёт.",
+  "tr": "etwa hoşnutsuzluk katan bir şaşkınlıktır: onun geleceğini beklemiyordun (ya da istemiyordun).",
+  "at": [
+   "8f1d9472"
+  ]
+ },
+ {
+  "en": "Colloquial (south, Austria): 'Kommst du eh mit?' = 'you're coming anyway, right?' — regional.",
+  "ru": "Разговорно (юг, Австрия): «Kommst du eh mit?» = «ты ведь всё равно идёшь?» — регионально.",
+  "tr": "Konuşma dilinde (güney, Avusturya): “Kommst du eh mit?” = “nasılsa geliyorsun, öyle mi?” — yöresel.",
+  "at": [
+   "a1f9a0f6"
+  ]
+ },
+ {
+  "en": "You're surprised and not very pleased that he's coming too.",
+  "ru": "Ты удивлён и не очень рад, что он тоже собрался идти.",
+  "tr": "Onun da gelmeye karar vermesine şaşırdın ve pek sevinmedin.",
+  "at": [
+   "791d3a94"
+  ]
+ },
+ {
+  "en": "In passing, check your friend's plans for tonight.",
+  "ru": "Между делом уточни у подруги планы на вечер.",
+  "tr": "Laf arasında arkadaşınla bu akşamki planları netleştir.",
+  "at": [
+   "8c5a7f89"
+  ]
+ },
+ {
+  "en": "Are you serious?",
+  "ru": "Ты серьёзно?",
+  "tr": "Ciddi misin?",
+  "at": [
+   "8ef1ace2"
+  ]
+ },
+ {
+  "en": "doch belongs in a protesting statement: 'Das ist doch nicht dein Ernst!'; it doesn't go into a yes/no question.",
+  "ru": "doch — в утверждении-возражении: «Das ist doch nicht dein Ernst!»; в вопросе да/нет оно не встаёт.",
+  "tr": "doch itiraz eden bir ifade cümlesinde olur: “Das ist doch nicht dein Ernst!”; evet/hayır sorusuna girmez.",
+  "at": [
+   "20299f6b"
+  ]
+ },
+ {
+  "en": "mal doesn't fit here; it belongs in requests.",
+  "ru": "mal здесь не встаёт; ему место в просьбах.",
+  "tr": "mal burada uymaz; yeri ricalardır.",
+  "at": [
+   "3a7d757d"
+  ]
+ },
+ {
+  "en": "Wait, are you serious?",
+  "ru": "Ты это серьёзно?",
+  "tr": "Ne yani, ciddi misin?",
+  "at": [
+   "6ef886cb"
+  ]
+ },
+ {
+  "en": "denn — surprise that's still open, with no reproach: you really want the answer.",
+  "ru": "denn — удивление, ещё открытое, без упрёка: ты правда хочешь знать ответ.",
+  "tr": "denn henüz açık, sitemsiz bir şaşkınlıktır: cevabı gerçekten bilmek istiyorsun.",
+  "at": [
+   "05dba7b4"
+  ]
+ },
+ {
+  "en": "schon doesn't work here, neither as a particle nor as 'already'.",
+  "ru": "schon здесь не работает ни как частица, ни как «уже».",
+  "tr": "schon burada ne parçacık olarak ne de “şimdiden” anlamında işe yarar.",
+  "at": [
+   "4e706f96"
+  ]
+ },
+ {
+  "en": "Are you actually serious?",
+  "ru": "Ты это вообще серьёзно?",
+  "tr": "Sahiden ciddi misin?",
+  "at": [
+   "82f8d2f0"
+  ]
+ },
+ {
+  "en": "eigentlich — doubt with a challenge: 'do you even realise what you're suggesting?'",
+  "ru": "eigentlich — сомнение с претензией: «ты хоть понимаешь, что предлагаешь?»",
+  "tr": "eigentlich sitemli bir kuşkudur: “ne önerdiğinin farkında mısın?”",
+  "at": [
+   "8083ff09"
+  ]
+ },
+ {
+  "en": "wohl works in a statement: 'Das ist wohl nicht dein Ernst!'; in a verb-first question it's odd.",
+  "ru": "wohl работает в утверждении: «Das ist wohl nicht dein Ernst!»; в вопросе с глаголом на первом месте — странно.",
+  "tr": "wohl ifade cümlesinde işe yarar: “Das ist wohl nicht dein Ernst!”; fiili başta olan soruda tuhaf.",
+  "at": [
+   "08947fbb"
+  ]
+ },
+ {
+  "en": "vielleicht here = 'maybe' ('is that maybe serious?') and makes no sense.",
+  "ru": "vielleicht здесь = «может быть» («может, это всерьёз?») и звучит бессмысленно.",
+  "tr": "vielleicht burada “belki” demektir (“belki ciddidir?”) ve anlamsız duyulur.",
+  "at": [
+   "97d5c6f4"
+  ]
+ },
+ {
+  "en": "You're not serious, are you?",
+  "ru": "Неужели ты это всерьёз?",
+  "tr": "Yoksa ciddi misin?",
+  "at": [
+   "c6f441e9"
+  ]
+ },
+ {
+  "en": "etwa — very common: you hope it's a joke and fear it isn't.",
+  "ru": "etwa — очень частое: надеешься, что это шутка, и боишься, что нет.",
+  "tr": "etwa çok sık kullanılır: şaka olmasını umuyor ve olmamasından korkuyorsun.",
+  "at": [
+   "c0e83ee2"
+  ]
+ },
+ {
+  "en": "You hope he's joking: a tent in winter?!",
+  "ru": "Ты надеешься, что он шутит: зимой в палатке?!",
+  "tr": "Şaka yaptığını umuyorsun: kışın çadırda mı?!",
+  "at": [
+   "946c48e4"
+  ]
+ },
+ {
+  "en": "Did you take my bike?",
+  "ru": "Ты взял мой велосипед?",
+  "tr": "Bisikletimi aldın mı?",
+  "at": [
+   "d9c2dad0"
+  ]
+ },
+ {
+  "en": "'Hast du doch mein Fahrrad genommen?' = 'so you did take it after all?' (after denying) — 'after all', not the particle.",
+  "ru": "«Hast du doch mein Fahrrad genommen?» = «так ты всё-таки взял?» (после отрицания) — это «всё-таки», не частица.",
+  "tr": "“Hast du doch mein Fahrrad genommen?” = “demek yine de aldın?” (inkâr ettikten sonra) — bu “yine de” zarfıdır, parçacık değil.",
+  "at": [
+   "8350fdd3"
+  ]
+ },
+ {
+  "en": "mal = 'ever': 'have you ever taken my bike?' — a different meaning.",
+  "ru": "mal = «когда-нибудь»: «ты когда-нибудь брал мой велосипед?» — другой смысл.",
+  "tr": "mal = “hiç”: “hiç bisikletimi aldın mı?” — başka bir anlam.",
+  "at": [
+   "8bd962d3"
+  ]
+ },
+ {
+  "en": "So did you take my bike?",
+  "ru": "А ты мой велосипед брал?",
+  "tr": "Peki, bisikletimi aldın mı?",
+  "at": [
+   "65b7dc9d"
+  ]
+ },
+ {
+  "en": "denn — prompted by the situation: the bike is gone and you're finding out why.",
+  "ru": "denn — вопрос из ситуации: велосипеда нет, и ты выясняешь, в чём дело.",
+  "tr": "denn durumdan doğar: bisiklet yok ve ne olduğunu öğrenmeye çalışıyorsun.",
+  "at": [
+   "f6205bfe"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'have you taken the bike already?'; schon mal = 'ever' — not the particle.",
+  "ru": "schon = «уже»: «ты уже взял велосипед?»; schon mal = «когда-нибудь» — не частица.",
+  "tr": "schon = “şimdiden”: “bisikleti şimdiden aldın mı?”; schon mal = “hiç” — parçacık değil.",
+  "at": [
+   "0c3cec3e"
+  ]
+ },
+ {
+  "en": "eben = 'just now': 'did you just take my bike?' — an adverb, not the particle.",
+  "ru": "eben = «только что»: «ты только что взял мой велосипед?» — наречие, не частица.",
+  "tr": "eben = “az önce”: “bisikletimi az önce sen mi aldın?” — zarf, parçacık değil.",
+  "at": [
+   "e70ff2a1"
+  ]
+ },
+ {
+  "en": "Did you take my bike, by the way?",
+  "ru": "Слушай, а ты мой велосипед не брал?",
+  "tr": "Bu arada, bisikletimi aldın mı?",
+  "at": [
+   "08d052e8"
+  ]
+ },
+ {
+  "en": "eigentlich — no suspicion, just an aside: you've remembered the bike is gone.",
+  "ru": "eigentlich — без подозрения, между делом: вспомнил, что велосипеда нет.",
+  "tr": "eigentlich şüphesiz, laf arasındadır: bisikletin olmadığı aklına geldi.",
+  "at": [
+   "6e6c5741"
+  ]
+ },
+ {
+  "en": "A guess uses statement order: 'Du hast wohl mein Fahrrad genommen?'; verb-first it's odd.",
+  "ru": "Догадку выражают утвердительной формой: «Du hast wohl mein Fahrrad genommen?»; с глаголом на первом месте — странно.",
+  "tr": "Tahmin ifade sırasıyla söylenir: “Du hast wohl mein Fahrrad genommen?”; fiili başta olunca tuhaf.",
+  "at": [
+   "9f423443"
+  ]
+ },
+ {
+  "en": "'Hast du vielleicht mein Fahrrad genommen?' is a fine tentative question, but vielleicht = 'maybe', an adverb, not the particle.",
+  "ru": "«Hast du vielleicht mein Fahrrad genommen?» — нормальный осторожный вопрос, но vielleicht = «может быть», наречие, не частица.",
+  "tr": "“Hast du vielleicht mein Fahrrad genommen?” düzgün, temkinli bir soru, ama vielleicht = “belki”, zarf, parçacık değil.",
+  "at": [
+   "adf5fa36"
+  ]
+ },
+ {
+  "en": "Don't tell me you took my bike?",
+  "ru": "Ты что, взял мой велосипед?",
+  "tr": "Yoksa bisikletimi sen mi aldın?",
+  "at": [
+   "27df2d7b"
+  ]
+ },
+ {
+  "en": "etwa — suspicion and reproach: you're nearly sure and not happy.",
+  "ru": "etwa — подозрение и упрёк: ты почти уверен и недоволен.",
+  "tr": "etwa kuşku ve sitemdir: neredeyse eminsin ve memnun değilsin.",
+  "at": [
+   "53022e24"
+  ]
+ },
+ {
+  "en": "You're nearly sure your brother took the bike without asking, and you're cross.",
+  "ru": "Ты почти уверен, что брат без спроса взял велосипед, и злишься.",
+  "tr": "Kardeşinin bisikleti sormadan aldığından neredeyse eminsin ve kızgınsın.",
+  "at": [
+   "3e4e395e"
+  ]
+ },
+ {
+  "en": "You're coming along?",
+  "ru": "Ты идёшь с нами?",
+  "tr": "Bizimle geliyorsun yani?",
+  "at": [
+   "a24de1dc"
+  ]
+ },
+ {
+  "en": "You're coming with us, aren't you?",
+  "ru": "Ты же пойдёшь с нами?",
+  "tr": "Bizimle geliyorsun, değil mi?",
+  "at": [
+   "4dc3a670"
+  ]
+ },
+ {
+  "en": "doch in a statement-order question: you expect a 'yes' because you'd already agreed on it.",
+  "ru": "doch в вопросе с порядком утверждения: ты ждёшь «да», ведь вы об этом уже договорились.",
+  "tr": "İfade sıralı soruda doch: “evet” bekliyorsun, çünkü bunu dün kararlaştırmıştınız.",
+  "at": [
+   "9c5d2189"
+  ]
+ },
+ {
+  "en": "'Du kommst ja mit.' is a statement, 'you're coming, as we know'; as a question it needs a tag: 'Du kommst ja mit, oder?'",
+  "ru": "«Du kommst ja mit.» — утверждение «ты ведь (как известно) идёшь»; как вопрос нужен хвостик: «Du kommst ja mit, oder?»",
+  "tr": "“Du kommst ja mit.” bir ifadedir, “bildiğimiz gibi geliyorsun”; soru olarak bir kuyruk gerekir: “Du kommst ja mit, oder?”",
+  "at": [
+   "d8a5f262"
+  ]
+ },
+ {
+  "en": "mal doesn't fit: 'Du kommst mal mit' is an order ('you're coming with me'), not a question.",
+  "ru": "mal здесь не встаёт: «Du kommst mal mit» — это уже приказ «пойдёшь-ка со мной», не вопрос.",
+  "tr": "mal burada uymaz: “Du kommst mal mit” ise bir emirdir (“benimle geliyorsun”), soru değil.",
+  "at": [
+   "3abb0263"
+  ]
+ },
+ {
+  "en": "denn needs question word order ('Kommst du denn mit?'); with statement order it's impossible.",
+  "ru": "denn бывает только при вопросительном порядке слов («Kommst du denn mit?»), а здесь порядок утверждения.",
+  "tr": "denn yalnızca soru sırasıyla olur (“Kommst du denn mit?”), burada ise ifade sırası var.",
+  "at": [
+   "c00f6eda",
+   "c5c2dd98"
+  ]
+ },
+ {
+  "en": "schon here reads as 'already' ('you're coming already?'); coaxing uses the imperative 'Komm schon mit!'",
+  "ru": "schon здесь читается как «уже» («ты уже идёшь?»); уговаривают повелительным «Komm schon mit!»",
+  "tr": "schon burada “şimdiden” diye anlaşılır (“şimdiden mi geliyorsun?”); ikna etmek için emir kullanılır: “Komm schon mit!”",
+  "at": [
+   "8fac2412"
+  ]
+ },
+ {
+  "en": "Particle eben (Das ist eben so) is for 'that's how it is' statements; it doesn't go into a question, and the adverb eben = 'just now'.",
+  "ru": "Частица eben («Das ist eben so») — для утверждений «так и есть»; в вопросе она не встаёт, а наречие eben = «только что».",
+  "tr": "eben parçacığı (“Das ist eben so”) “durum böyle” ifadeleri içindir; soruya girmez, zarf olan eben ise “az önce” demektir.",
+  "at": [
+   "03e32333",
+   "f04abbaf"
+  ]
+ },
+ {
+  "en": "'Du kommst eigentlich mit?' sounds unfinished; natural are '…mit, oder?' or 'Kommst du eigentlich mit?'",
+  "ru": "«Du kommst eigentlich mit?» звучит незаконченно; естественно: …mit, oder? или Kommst du eigentlich mit?",
+  "tr": "“Du kommst eigentlich mit?” yarım kalmış gibi duyulur; doğal olanlar: …mit, oder? ya da Kommst du eigentlich mit?",
+  "at": [
+   "d19ab64f"
+  ]
+ },
+ {
+  "en": "I take it you're coming along?",
+  "ru": "Ты, я так понимаю, идёшь с нами?",
+  "tr": "Galiba sen de geliyorsun?",
+  "at": [
+   "2ed03cc0"
+  ]
+ },
+ {
+  "en": "wohl is a guess from what you see (he's already putting his shoes on); it can sound slightly ironic.",
+  "ru": "wohl — догадка по виду собеседника (он уже обувается); может звучать слегка иронично.",
+  "tr": "wohl karşındakinin görünüşünden bir tahmindir (ayakkabılarını giyiyor bile); biraz ironik duyulabilir.",
+  "at": [
+   "16c3d819"
+  ]
+ },
+ {
+  "en": "nur here = 'only' and makes no sense; worried nur belongs in W-questions.",
+  "ru": "nur здесь = «только» и бессмысленно; тревожное nur — в W-вопросах.",
+  "tr": "nur burada “yalnızca” demektir ve anlamsız; endişe bildiren nur W-sorularında olur.",
+  "at": [
+   "461f4508"
+  ]
+ },
+ {
+  "en": "vielleicht = 'maybe': 'you might come along?' — a guessing adverb, not the particle.",
+  "ru": "vielleicht = «может быть»: «ты, может, пойдёшь?» — наречие-догадка, не частица.",
+  "tr": "vielleicht = “belki”: “belki gelirsin?” — tahmin bildiren zarf, parçacık değil.",
+  "at": [
+   "735d58c8"
+  ]
+ },
+ {
+  "en": "'Du kommst einfach mit?' = 'you're just tagging along?' — adverb, not the particle; the particle is in 'Komm einfach mit!'",
+  "ru": "«Du kommst einfach mit?» = «ты просто так увязался с нами?» — наречие, не частица; частица — «Komm einfach mit!»",
+  "tr": "“Du kommst einfach mit?” = “öylece bize mi takılıyorsun?” — zarf, parçacık değil; parçacık “Komm einfach mit!” içindedir.",
+  "at": [
+   "f43fc5df"
+  ]
+ },
+ {
+  "en": "Don't tell me you're coming too?",
+  "ru": "Ты что, тоже с нами идёшь?",
+  "tr": "Yoksa sen de mi geliyorsun?",
+  "at": [
+   "c350a65d"
+  ]
+ },
+ {
+  "en": "etwa also works in a statement-order question: surprise with displeasure — you weren't counting on it.",
+  "ru": "etwa бывает и в таком вопросе: удивление с недовольством — ты на это не рассчитывал.",
+  "tr": "etwa ifade sıralı soruda da olur: hoşnutsuz bir şaşkınlık — bunu hesaba katmamıştın.",
+  "at": [
+   "38f36fbe"
+  ]
+ },
+ {
+  "en": "Colloquial (south, Austria): 'Du kommst eh mit?' = 'you're coming anyway, right?' — regional.",
+  "ru": "Разговорно (юг, Австрия): «Du kommst eh mit?» = «ты ведь всё равно идёшь?» — регионально.",
+  "tr": "Konuşma dilinde (güney, Avusturya): “Du kommst eh mit?” = “nasılsa geliyorsun, öyle mi?” — yöresel.",
+  "at": [
+   "22a28312"
+  ]
+ },
+ {
+  "en": "You agreed yesterday. You expect him to confirm.",
+  "ru": "Вы вчера договорились. Ты ждёшь подтверждения.",
+  "tr": "Dün anlaşmıştınız. Onaylamasını bekliyorsun.",
+  "at": [
+   "7b0f91ef"
+  ]
+ },
+ {
+  "en": "You weren't counting on him coming and aren't too pleased.",
+  "ru": "Ты не рассчитывал, что он пойдёт, и не очень этому рад.",
+  "tr": "Onun geleceğini hesaba katmamıştın ve buna pek sevinmedin.",
+  "at": [
+   "4a65afe8"
+  ]
+ },
+ {
+  "en": "You'll manage on your own?",
+  "ru": "Ты справишься одна?",
+  "tr": "Tek başına halledebilecek misin?",
+  "at": [
+   "7a62c8bc"
+  ]
+ },
+ {
+  "en": "You can manage on your own, can't you?",
+  "ru": "Ты же справишься одна?",
+  "tr": "Tek başına halledersin, değil mi?",
+  "at": [
+   "8a68d230"
+  ]
+ },
+ {
+  "en": "doch — you expect 'yes' because you both know she copes (she always shops alone).",
+  "ru": "doch — ждёшь «да», потому что оба знаете, что она справляется (она всегда ходит одна).",
+  "tr": "doch: “evet” bekliyorsun, çünkü ikiniz de onun becerdiğini biliyorsunuz (hep tek başına alışveriş yapıyor).",
+  "at": [
+   "1a563b49"
+  ]
+ },
+ {
+  "en": "'Du kommst ja allein zurecht.' is a statement ('you manage, as we know'); as a question only with 'oder?'.",
+  "ru": "«Du kommst ja allein zurecht.» — утверждение «ты ведь справляешься»; как вопрос — только с «oder?».",
+  "tr": "“Du kommst ja allein zurecht.” bir ifadedir (“bildiğimiz gibi idare ediyorsun”); soru olarak yalnızca “oder?” ile.",
+  "at": [
+   "503bf2d0"
+  ]
+ },
+ {
+  "en": "mal makes no sense here: 'you'll manage once?'",
+  "ru": "mal здесь бессмысленно: «ты разок справишься?»",
+  "tr": "mal burada anlamsız: “bir kereliğine idare eder misin?”",
+  "at": [
+   "39217717"
+  ]
+ },
+ {
+  "en": "You'll be fine on your own, won't you?",
+  "ru": "Ты ведь справишься одна, да?",
+  "tr": "Tek başına halledersin, eminim.",
+  "at": [
+   "f4f9507f"
+  ]
+ },
+ {
+  "en": "schon conveys confidence it'll be fine: you reassure her and yourself; often with 'oder?'.",
+  "ru": "schon — уверенность, что всё будет хорошо: ты успокаиваешь и себя, и её; часто с «oder?».",
+  "tr": "schon her şeyin yolunda gideceğine dair bir güvendir: hem onu hem kendini rahatlatıyorsun; sıklıkla “oder?” ile.",
+  "at": [
+   "87ed3440"
+  ]
+ },
+ {
+  "en": "A statement-order question with eigentlich sounds unfinished; better 'Kommst du eigentlich allein zurecht?'",
+  "ru": "Вопрос с порядком утверждения и eigentlich звучит незаконченно; лучше «Kommst du eigentlich allein zurecht?»",
+  "tr": "eigentlich ile ifade sıralı soru yarım kalmış gibi duyulur; daha iyisi: “Kommst du eigentlich allein zurecht?”",
+  "at": [
+   "283d0753"
+  ]
+ },
+ {
+  "en": "I suppose you'll manage on your own?",
+  "ru": "Ты, видимо, справишься одна?",
+  "tr": "Galiba tek başına halledeceksin?",
+  "at": [
+   "481dda00"
+  ]
+ },
+ {
+  "en": "wohl draws a conclusion from her 'go on, go'; it can sound a bit huffy or ironic.",
+  "ru": "wohl — вывод из её слов «иди, иди»; может прозвучать чуть обиженно или иронично.",
+  "tr": "wohl onun “sen git” demesinden bir sonuç çıkarır; biraz alıngan ya da ironik duyulabilir.",
+  "at": [
+   "04447759"
+  ]
+ },
+ {
+  "en": "bloß here = 'only' and makes no sense.",
+  "ru": "bloß здесь = «только» и бессмысленно.",
+  "tr": "bloß burada “yalnızca” demektir ve anlamsız.",
+  "at": [
+   "2820f48b"
+  ]
+ },
+ {
+  "en": "nur here = 'only' and makes no sense.",
+  "ru": "nur здесь = «только» и бессмысленно.",
+  "tr": "nur burada “yalnızca” demektir ve anlamsız.",
+  "at": [
+   "2b5ed50a"
+  ]
+ },
+ {
+  "en": "vielleicht = 'maybe': 'you might manage alone?' — a guessing adverb, not the particle.",
+  "ru": "vielleicht = «может быть»: «ты, может, справишься одна?» — наречие-догадка, не частица.",
+  "tr": "vielleicht = “belki”: “belki tek başına halledersin?” — tahmin bildiren zarf, parçacık değil.",
+  "at": [
+   "81117b4a"
+  ]
+ },
+ {
+  "en": "einfach = 'easily': 'you'll easily manage?' — adverb, not the particle.",
+  "ru": "einfach = «легко, просто»: «ты легко справишься?» — наречие, не частица.",
+  "tr": "einfach = “kolayca”: “kolayca halleder misin?” — zarf, parçacık değil.",
+  "at": [
+   "8a2ab3a3"
+  ]
+ },
+ {
+  "en": "etwa needs a negation here: 'Du kommst etwa nicht allein zurecht?' ('don't tell me you can't manage?'); without it, an odd 'you can manage?!'.",
+  "ru": "etwa нужно отрицание: «Du kommst etwa nicht allein zurecht?» («неужели не справишься?»); без него — странное «неужели справишься?»",
+  "tr": "etwa için burada olumsuzluk gerekir: “Du kommst etwa nicht allein zurecht?” (“yoksa halledemiyor musun?”); olumsuzluk olmadan tuhaf bir “yoksa halledebilir misin?” olur.",
+  "at": [
+   "00a9e0fc"
+  ]
+ },
+ {
+  "en": "Colloquial 'Du kommst eh allein zurecht?' = 'you manage alone anyway?' — regional and sounds offhand.",
+  "ru": "Разговорно «Du kommst eh allein zurecht?» = «ты всё равно справишься сама?» — регионально и звучит небрежно.",
+  "tr": "Konuşma dilinde “Du kommst eh allein zurecht?” = “nasılsa tek başına halledersin?” — yöresel ve baştan savma duyulur.",
+  "at": [
+   "1ffce940"
+  ]
+ },
+ {
+  "en": "Reassure your grandma (and yourself): it'll definitely be fine.",
+  "ru": "Успокой бабушку (и себя): всё точно будет хорошо.",
+  "tr": "Büyükanneni (ve kendini) rahatlat: her şey kesinlikle yolunda gidecek.",
+  "at": [
+   "f1dd2462"
+  ]
+ },
+ {
+  "en": "She always shops alone — you expect a 'yes'.",
+  "ru": "Она всегда ходит одна — ты ждёшь от неё «да».",
+  "tr": "O hep tek başına alışveriş yapar — ondan “evet” bekliyorsun.",
+  "at": [
+   "21b692af"
+  ]
+ },
+ {
+  "en": "Will you open the window?",
+  "ru": "Откроешь окно?",
+  "tr": "Pencereyi açar mısın?",
+  "at": [
+   "58d24228"
+  ]
+ },
+ {
+  "en": "'Machst du doch das Fenster auf?' = 'so you'll open the window after all?' — that's 'after all'; the doch-request is the imperative 'Mach doch mal das Fenster auf!'",
+  "ru": "«Machst du doch das Fenster auf?» = «так ты всё-таки откроешь окно?» — это «всё-таки»; doch-просьба — повелительное «Mach doch mal das Fenster auf!»",
+  "tr": "“Machst du doch das Fenster auf?” = “demek pencereyi yine de açacaksın?” — bu “yine de”dir; doch ricası emirde olur: “Mach doch mal das Fenster auf!”",
+  "at": [
+   "402f128f"
+  ]
+ },
+ {
+  "en": "Unstressed ja is impossible in a request-question; stressed JA only warns: 'Mach JA das Fenster zu!'",
+  "ru": "Безударное ja в просьбе невозможно; JA — только предостережение: «Mach JA das Fenster zu!»",
+  "tr": "Vurgusuz ja rica sorusunda olmaz; vurgulu JA yalnızca uyarır: “Mach JA das Fenster zu!”",
+  "at": [
+   "02fb0e44"
+  ]
+ },
+ {
+  "en": "Open the window, will you?",
+  "ru": "Открой-ка окно, а?",
+  "tr": "Pencereyi bir açar mısın?",
+  "at": [
+   "852ad882"
+  ]
+ },
+ {
+  "en": "mal — the most ordinary everyday request; 'Machst du mal …?' is said all the time.",
+  "ru": "mal — самая обычная будничная просьба; «Machst du mal …?» говорят постоянно.",
+  "tr": "mal en sıradan gündelik ricadır; “Machst du mal …?” sürekli söylenir.",
+  "at": [
+   "d32e5ce3"
+  ]
+ },
+ {
+  "en": "So are you going to open the window?",
+  "ru": "Так ты откроешь окно?",
+  "tr": "Peki, pencereyi açacak mısın?",
+  "at": [
+   "edc604dd"
+  ]
+ },
+ {
+  "en": "denn — no longer a request but a real question arising from the situation: he said 'it's hot', yet the window is still shut.",
+  "ru": "denn — уже не просьба, а настоящий вопрос из ситуации: он сам сказал «жарко», а окно всё ещё закрыто.",
+  "tr": "denn burada rica değil, durumdan doğan gerçek bir sorudur: kendisi “sıcak” dedi, ama pencere hâlâ kapalı.",
+  "at": [
+   "e420433e"
+  ]
+ },
+ {
+  "en": "It needs mal: 'Machst du schon mal das Fenster auf?' = 'open the window in the meantime' — schon here = 'already, in advance'.",
+  "ru": "Нужно mal: «Machst du schon mal das Fenster auf?» = «открой пока окно (заранее)» — schon здесь = «уже, заранее».",
+  "tr": "mal gerekir: “Machst du schon mal das Fenster auf?” = “şimdiden pencereyi açar mısın (önceden)?” — schon burada “şimdiden, önceden” demektir.",
+  "at": [
+   "65add7ba"
+  ]
+ },
+ {
+  "en": "Can you open the window real quick?",
+  "ru": "Откроешь быстренько окно?",
+  "tr": "Pencereyi açıverir misin?",
+  "at": [
+   "ae0ccfa4"
+  ]
+ },
+ {
+  "en": "Northern German eben = 'real quick': a casual everyday request, often 'mal eben'; regional (north).",
+  "ru": "Северное eben = «быстренько»: будничная просьба, часто «mal eben».",
+  "tr": "Kuzey Almancasındaki eben = “çabucak”: gündelik bir rica, sıklıkla “mal eben”.",
+  "at": [
+   "5ae213f5"
+  ]
+ },
+ {
+  "en": "The reproachful version is 'Machst du eigentlich auch mal das Fenster auf?' ('will you ever open the window?'); without auch mal it's odd.",
+  "ru": "С упрёком говорят «Machst du eigentlich auch mal das Fenster auf?» («ты когда-нибудь вообще откроешь окно?»); без auch mal звучит странно.",
+  "tr": "Sitemle şöyle denir: “Machst du eigentlich auch mal das Fenster auf?” (“sen pencereyi hiç açacak mısın?”); auch mal olmadan tuhaf.",
+  "at": [
+   "cbab7e39"
+  ]
+ },
+ {
+  "en": "Will you open that window!",
+  "ru": "А ну открой окно!",
+  "tr": "Hemen aç şu pencereyi!",
+  "at": [
+   "f762c74e"
+  ]
+ },
+ {
+  "en": "wohl in a verb-first question said as an exclamation is an angry command: 'Gehst du wohl ins Bett!'",
+  "ru": "wohl с глаголом впереди и восклицанием — сердитый приказ, как ребёнку: «Gehst du wohl ins Bett!»",
+  "tr": "wohl, fiili başta olan ve ünlem gibi söylenen bir soruda kızgın bir emirdir, çocuğa söyler gibi: “Gehst du wohl ins Bett!”",
+  "at": [
+   "a2804487"
+  ]
+ },
+ {
+  "en": "bloß here = 'only' ('are you only opening the window?'); the warning bloß is imperative: 'Mach bloß das Fenster zu!'",
+  "ru": "bloß здесь = «только» («ты только окно откроешь?»); предостерегающее bloß — в повелительном: «Mach bloß das Fenster zu!»",
+  "tr": "bloß burada “yalnızca” demektir (“yalnızca pencereyi mi açacaksın?”); uyaran bloß emirde olur: “Mach bloß das Fenster zu!”",
+  "at": [
+   "55c31095"
+  ]
+ },
+ {
+  "en": "nur here = 'only' ('are you only opening the window?').",
+  "ru": "nur здесь = «только» («ты только окно откроешь?»).",
+  "tr": "nur burada “yalnızca” demektir (“yalnızca pencereyi mi açacaksın?”).",
+  "at": [
+   "0310dc44"
+  ]
+ },
+ {
+  "en": "Could you maybe open the window?",
+  "ru": "Ты не мог бы открыть окно?",
+  "tr": "Zahmet olmazsa pencereyi açar mısın?",
+  "at": [
+   "c06bcdcd"
+  ]
+ },
+ {
+  "en": "vielleicht — a careful, polite request; fine even with a colleague you're not close to.",
+  "ru": "vielleicht — осторожная, вежливая просьба; можно и к коллеге, с которым не очень близок.",
+  "tr": "vielleicht temkinli, kibar bir ricadır; pek yakın olmadığın bir iş arkadaşına da olur.",
+  "at": [
+   "f82bd2ae"
+  ]
+ },
+ {
+  "en": "'Machst du einfach das Fenster auf?' = 'are you just going to open the window (without asking)?' — adverb; the request is 'Mach einfach das Fenster auf!'",
+  "ru": "«Machst du einfach das Fenster auf?» = «ты просто откроешь окно (не спросив)?» — наречие; просьба — «Mach einfach das Fenster auf!»",
+  "tr": "“Machst du einfach das Fenster auf?” = “pencereyi öylece (sormadan) mı açacaksın?” — zarf; rica: “Mach einfach das Fenster auf!”",
+  "at": [
+   "40e34a53"
+  ]
+ },
+ {
+  "en": "Don't tell me you're opening the window?",
+  "ru": "Ты что, окно открываешь?",
+  "tr": "Yoksa pencereyi açacak mısın?",
+  "at": [
+   "80880277"
+  ]
+ },
+ {
+  "en": "etwa — a different situation: it's freezing outside and he heads for the window; an alarmed question, not a request.",
+  "ru": "etwa — другая ситуация: на улице мороз, а он идёт к окну; это тревожный вопрос, не просьба.",
+  "tr": "etwa başka bir durumdur: dışarısı buz gibi, o ise pencereye gidiyor; bu rica değil, telaşlı bir sorudur.",
+  "at": [
+   "a7f50718"
+  ]
+ },
+ {
+  "en": "eh ('anyway') doesn't work in a request.",
+  "ru": "eh («всё равно») в просьбе не работает.",
+  "tr": "eh (“nasılsa”) ricada işe yaramaz.",
+  "at": [
+   "ea38ae28"
+  ]
+ },
+ {
+  "en": "Ask your colleague to open the window, simply and in a friendly way.",
+  "ru": "Попроси коллегу открыть окно — просто и по-дружески.",
+  "tr": "İş arkadaşından pencereyi açmasını iste — sade ve dostça.",
+  "at": [
+   "0ed0912a"
+  ]
+ },
+ {
+  "en": "It's minus ten outside and he reaches for the window. You're alarmed.",
+  "ru": "На улице минус десять, а он тянется к окну. Ты в ужасе.",
+  "tr": "Dışarısı eksi on derece, o ise pencereye uzanıyor. Dehşet içindesin.",
+  "at": [
+   "9fe064aa"
+  ]
+ },
+ {
+  "en": "Where have you been all this time?",
+  "ru": "Где ты был всё это время?",
+  "tr": "Bunca zaman neredeydin?",
+  "at": [
+   "944902d1"
+  ]
+ },
+ {
+  "en": "So where have you been all this time?",
+  "ru": "Ну и где ты был всё это время?",
+  "tr": "Peki, bunca zaman neredeydin?",
+  "at": [
+   "a94d3f80"
+  ]
+ },
+ {
+  "en": "denn is the usual engaged question: he's finally home and you want to know.",
+  "ru": "denn — обычный живой вопрос: сын наконец дома, и ты хочешь знать, где он был.",
+  "tr": "denn sıradan, ilgili bir sorudur: oğlun sonunda evde ve nerede olduğunu bilmek istiyorsun.",
+  "at": [
+   "56a2afd9"
+  ]
+ },
+ {
+  "en": "schon = 'already' ('where have you already been?') is nonsense; rhetorical schon ('nowhere special') doesn't fit worry.",
+  "ru": "schon = «уже» («где ты уже был?») — бессмыслица; риторическое schon («нигде особенно») к тревоге не подходит.",
+  "tr": "schon = “şimdiden” (“şimdiden nerede bulundun?”) anlamsız; retorik schon (“özel bir yerde değil”) endişeye uymaz.",
+  "at": [
+   "65ad9e7f"
+  ]
+ },
+ {
+  "en": "Where were you all this time, actually?",
+  "ru": "Где ты, собственно, был так долго?",
+  "tr": "Bu arada, bunca zaman neredeydin?",
+  "at": [
+   "395e4a77"
+  ]
+ },
+ {
+  "en": "eigentlich asks calmly about the point: you're past scolding and just want to know.",
+  "ru": "eigentlich — спокойный вопрос по сути: ругаться уже поздно, ты просто хочешь знать.",
+  "tr": "eigentlich sakin bir şekilde özü sorar: azarlamak için geç, sadece bilmek istiyorsun.",
+  "at": [
+   "34955f18"
+  ]
+ },
+ {
+  "en": "'Wo warst du wohl?' sounds like a riddle — 'guess where you were'. You wonder about a third person: 'Wo war er wohl?'",
+  "ru": "«Wo warst du wohl?» звучит как загадка «угадай, где ты был». Гадают о третьем: «Wo war er wohl?»",
+  "tr": "“Wo warst du wohl?” bir bilmece gibi duyulur: “bil bakalım neredeydin”. Üçüncü biri hakkında tahmin yürütülür: “Wo war er wohl?”",
+  "at": [
+   "358e7be6"
+  ]
+ },
+ {
+  "en": "Where on earth were you all this time?",
+  "ru": "Где ты пропадал всё это время?!",
+  "tr": "Allah aşkına, bunca zaman neredeydin?!",
+  "at": [
+   "da1eb287"
+  ]
+ },
+ {
+  "en": "bloß — strong worry and bewilderment: you've been beside yourself all evening.",
+  "ru": "bloß — сильная тревога и растерянность: ты весь вечер не находил себе места.",
+  "tr": "bloß güçlü bir endişe ve şaşkınlıktır: bütün akşam yerinde duramadın.",
+  "at": [
+   "2acf2d68"
+  ]
+ },
+ {
+  "en": "Wherever have you been all this time?",
+  "ru": "Где же ты был всё это время?..",
+  "tr": "Ah, bunca zaman neredeydin?",
+  "at": [
+   "e7fc0d98"
+  ]
+ },
+ {
+  "en": "nur — worry that hasn't quite gone yet: more plaintive and a bit softer than bloß.",
+  "ru": "nur — тревога, которая ещё не прошла: жалобнее и мягче, чем bloß.",
+  "tr": "nur henüz geçmemiş bir endişedir: bloß ile kıyaslanınca daha yakınmalı ve biraz daha yumuşak.",
+  "at": [
+   "dd6371b1"
+  ]
+ },
+ {
+  "en": "So where WERE you, then?",
+  "ru": "Так где же ты тогда был?",
+  "tr": "Ee, neredeydin?",
+  "at": [
+   "42104f40"
+  ]
+ },
+ {
+  "en": "Stressed DENN after the excuses ('not at Max's, not at the club…'): so where WERE you?",
+  "ru": "Ударное DENN — после отговорок («не у Макса, не в клубе…»): ну а где тогда?",
+  "tr": "Vurgulu DENN bahanelerden sonra gelir (“Max'ta değildim, kulüpte değildim…”): o hâlde neredeydin?",
+  "at": [
+   "fd2a8799"
+  ]
+ },
+ {
+  "en": "Your son is back at midnight. You've been worried sick — ask anxiously.",
+  "ru": "Сын вернулся в полночь. Ты весь вечер волновался — спроси с тревогой.",
+  "tr": "Oğlun gece yarısı döndü. Bütün akşam endişelendin — endişeyle sor.",
+  "at": [
+   "d5eda6da"
+  ]
+ },
+ {
+  "en": "He only says where he WASN'T. Press him: so where, then?",
+  "ru": "Он говорит только, где его НЕ было. Надави: а где тогда?",
+  "tr": "Yalnızca nerede olmadığını söylüyor. Üstele: o hâlde nerede?",
+  "at": [
+   "c426f19f"
+  ]
+ },
+ {
+  "en": "How am I supposed to manage that?",
+  "ru": "Как мне это успеть?",
+  "tr": "Bunu nasıl yetiştireyim?",
+  "at": [
+   "f89f6db5"
+  ]
+ },
+ {
+  "en": "So how am I supposed to manage that?",
+  "ru": "И как же я это успею?",
+  "tr": "Peki, bunu nasıl yetiştireyim?",
+  "at": [
+   "3bc2a4b2"
+  ]
+ },
+ {
+  "en": "denn adds a challenge to the boss: you're not refusing, but the plan is unrealistic.",
+  "ru": "denn — вопрос с претензией к шефу: ты не отказываешься, но план нереальный.",
+  "tr": "denn şefe bir itiraz katar: reddetmiyorsun, ama plan gerçekçi değil.",
+  "at": [
+   "14a7a113"
+  ]
+ },
+ {
+  "en": "Rhetorical 'Wie soll ich das schon schaffen?' = 'there's no way' — sounds like giving up in advance, not a question to the boss.",
+  "ru": "Риторическое «Wie soll ich das schon schaffen?» = «да никак» — звучит как сдался заранее, а не вопрос к шефу.",
+  "tr": "Retorik “Wie soll ich das schon schaffen?” = “hiçbir şekilde” — şefe soru değil, baştan pes etmek gibi duyulur.",
+  "at": [
+   "1c18683f"
+  ]
+ },
+ {
+  "en": "How am I actually supposed to do that?",
+  "ru": "Как я, собственно, должен это успеть?",
+  "tr": "Hem bunu ben nasıl yetiştireceğim?",
+  "at": [
+   "d74f9575"
+  ]
+ },
+ {
+  "en": "eigentlich questions the plan itself: 'how exactly am I meant to do that?' — calmer than denn, but still a challenge.",
+  "ru": "eigentlich ставит под сомнение сам план: «а как, собственно, это успеть?» — спокойнее, чем denn, но тоже претензия.",
+  "tr": "eigentlich planın kendisini sorgular: “bunu tam olarak nasıl yetiştireceğim?” — denn ile kıyaslanınca sakin, ama yine itiraz.",
+  "at": [
+   "f4e1f916"
+  ]
+ },
+ {
+  "en": "'Wie soll ich das wohl schaffen?' is a sarcastic 'how do YOU think?' — possible in a row, but very sharp.",
+  "ru": "«Wie soll ich das wohl schaffen?» — язвительное «а ты как думаешь?»: возможно в ссоре, но очень резко.",
+  "tr": "“Wie soll ich das wohl schaffen?” iğneleyici bir “sence nasıl?”dır: kavgada olur, ama çok sert.",
+  "at": [
+   "8797ba5c"
+  ]
+ },
+ {
+  "en": "How on earth am I going to manage that?",
+  "ru": "Ну как мне это всё успеть?!",
+  "tr": "Allah Allah, bunu nasıl yetiştireyim?!",
+  "at": [
+   "49988cf9"
+  ]
+ },
+ {
+  "en": "bloß — despair: you see no way out; 'Wie soll ich das bloß schaffen?' is a stock phrase.",
+  "ru": "bloß — отчаяние: выхода не видно; «Wie soll ich das bloß schaffen?» — типичная фраза.",
+  "tr": "bloß çaresizliktir: çıkış yolu görmüyorsun; “Wie soll ich das bloß schaffen?” kalıplaşmış bir sözdür.",
+  "at": [
+   "d2be9132"
+  ]
+ },
+ {
+  "en": "However am I going to manage all that?",
+  "ru": "Как же мне всё это успеть?..",
+  "tr": "Of, bunu nasıl yetiştireceğim?..",
+  "at": [
+   "b1368890"
+  ]
+ },
+ {
+  "en": "nur — helplessness, more to yourself: more plaintive and a little softer than bloß.",
+  "ru": "nur — растерянность, скорее себе под нос: жалобнее и мягче, чем bloß.",
+  "tr": "nur çaresizliktir, daha çok kendi kendine: bloß ile kıyaslanınca daha yakınmalı ve biraz daha yumuşak.",
+  "at": [
+   "f4777e29"
+  ]
+ },
+ {
+  "en": "How AM I supposed to do it, then?",
+  "ru": "Ну а как тогда мне это успеть?",
+  "tr": "Ee, bunu nasıl yetiştireyim?",
+  "at": [
+   "92dd0372"
+  ]
+ },
+ {
+  "en": "Stressed DENN: the boss rejects every option (no overtime, no help) — so how, then?",
+  "ru": "Ударное DENN — шеф отвергает все варианты (сверхурочные — нет, помощь — нет): ну а как тогда?",
+  "tr": "Vurgulu DENN: şef bütün seçenekleri reddediyor (fazla mesai yok, yardım yok) — o hâlde nasıl?",
+  "at": [
+   "97ac0ad3"
+  ]
+ },
+ {
+  "en": "You're desperate — you see no way out.",
+  "ru": "Ты в отчаянии: выхода не видно.",
+  "tr": "Çaresizsin — çıkış yolu görmüyorsun.",
+  "at": [
+   "03300760"
+  ]
+ },
+ {
+  "en": "Challenge your boss: the plan is unrealistic.",
+  "ru": "Спроси шефа с претензией: план нереальный.",
+  "tr": "Şefe itiraz ederek sor: plan gerçekçi değil.",
+  "at": [
+   "01dce21a"
+  ]
+ },
+ {
+  "en": "Who's that?",
+  "ru": "Кто это?",
+  "tr": "Bu kim?",
+  "at": [
+   "e4299674"
+  ]
+ },
+ {
+  "en": "And who's that?",
+  "ru": "А это кто?",
+  "tr": "Peki, bu kim?",
+  "at": [
+   "cf430151"
+  ]
+ },
+ {
+  "en": "denn — the natural, engaged question: you really want to know.",
+  "ru": "denn — естественный живой вопрос: тебе правда интересно.",
+  "tr": "denn doğal, ilgili bir sorudur: gerçekten bilmek istiyorsun.",
+  "at": [
+   "ff9860ca"
+  ]
+ },
+ {
+  "en": "Rhetorical 'Wer ist das schon?' = 'nobody special' — a put-down, not a question.",
+  "ru": "Риторическое «Wer ist das schon?» = «да никто особенный» — пренебрежение, а не вопрос.",
+  "tr": "Retorik “Wer ist das schon?” = “önemli biri değil” — soru değil, küçümseme.",
+  "at": [
+   "52acd7f4"
+  ]
+ },
+ {
+  "en": "Who's that, by the way?",
+  "ru": "А кто это, кстати?",
+  "tr": "Bu arada, bu kim?",
+  "at": [
+   "21a72784"
+  ]
+ },
+ {
+  "en": "eigentlich is an aside: you're scrolling through photos and ask casually.",
+  "ru": "eigentlich — вопрос между делом: листаете фото, и ты как бы невзначай спрашиваешь.",
+  "tr": "eigentlich laf arasındadır: fotoğraflara bakıyorsunuz ve sen öylesine soruyormuş gibi yapıyorsun.",
+  "at": [
+   "7cb4b955"
+  ]
+ },
+ {
+  "en": "Who might that be?",
+  "ru": "Кто бы это мог быть?",
+  "tr": "Kim olabilir acaba?",
+  "at": [
+   "5997ef46"
+  ]
+ },
+ {
+  "en": "wohl — wondering aloud, half to yourself; also when the doorbell rings: 'Wer ist das wohl?'",
+  "ru": "wohl — гадаешь вслух, скорее про себя; так же говорят, когда звонят в дверь: «Wer ist das wohl?»",
+  "tr": "wohl yüksek sesle, yarı kendi kendine tahmin yürütmedir; kapı çaldığında da böyle denir: “Wer ist das wohl?”",
+  "at": [
+   "3ec3d57f"
+  ]
+ },
+ {
+  "en": "Worried bloß works if a stranger rings at midnight (Wer ist das bloß?); for a photo it's too dramatic.",
+  "ru": "Тревожное bloß возможно, если чужой звонит в дверь ночью («Wer ist das bloß?»); для фото это слишком драматично.",
+  "tr": "Endişe bildiren bloß, gece yarısı bir yabancı kapıyı çalarsa uyar (Wer ist das bloß?); bir fotoğraf için fazla dramatik.",
+  "at": [
+   "41fa6925"
+  ]
+ },
+ {
+  "en": "nur makes it an anxious question (Wer ist das nur?); for a photo on a phone it's too dramatic.",
+  "ru": "nur делает вопрос тревожным (Wer ist das nur?); для фото на телефоне это слишком драматично.",
+  "tr": "nur soruyu endişeli yapar (Wer ist das nur?); telefondaki bir fotoğraf için fazla dramatik.",
+  "at": [
+   "7a14a6a2"
+  ]
+ },
+ {
+  "en": "So who IS it, then?",
+  "ru": "Ну и кто же это тогда?",
+  "tr": "Ee, kim bu?",
+  "at": [
+   "e5a24691"
+  ]
+ },
+ {
+  "en": "Stressed DENN: she says 'not a colleague, not my brother…' and you press: so who IS it?",
+  "ru": "Ударное DENN — она говорит «не коллега, не брат…», а ты давишь: ну кто тогда?",
+  "tr": "Vurgulu DENN: “iş arkadaşım değil, kardeşim değil…” diyor, sen de üsteliyorsun: o hâlde kim?",
+  "at": [
+   "cf343e0a"
+  ]
+ },
+ {
+  "en": "You wonder to yourself who it could be.",
+  "ru": "Ты гадаешь про себя, кто бы это мог быть.",
+  "tr": "Bunun kim olabileceğini kendi kendine tahmin etmeye çalışıyorsun.",
+  "at": [
+   "b2cdc675"
+  ]
+ },
+ {
+  "en": "She says he's not a colleague, not her brother, not a cousin. Press her: so who, then?",
+  "ru": "Она говорит: «не коллега, не брат, не двоюродный брат». Надави: ну кто же тогда?",
+  "tr": "“İş arkadaşım değil, kardeşim değil, kuzenim değil” diyor. Üstele: o hâlde kim?",
+  "at": [
+   "51d1a9fc"
+  ]
+ },
+ {
+  "en": "Why didn't you say anything?",
+  "ru": "Почему ты ничего не сказала?",
+  "tr": "Neden hiçbir şey söylemedin?",
+  "at": [
+   "ac44967f"
+  ]
+ },
+ {
+  "en": "Why didn't you say anything, then?",
+  "ru": "Что ж ты ничего не сказала?",
+  "tr": "Peki, neden hiçbir şey söylemedin?",
+  "at": [
+   "a4b7ceaa"
+  ]
+ },
+ {
+  "en": "denn — a caring question with a light reproach: you'd have helped.",
+  "ru": "denn — участливый вопрос с лёгким упрёком: ты бы помог.",
+  "tr": "denn hafif bir sitemle ilgili bir sorudur: yardım ederdin.",
+  "at": [
+   "286f974b"
+  ]
+ },
+ {
+  "en": "schon here = 'already': 'why did you already say nothing?' — nonsense.",
+  "ru": "schon здесь = «уже»: «почему ты уже ничего не сказала?» — бессмыслица.",
+  "tr": "schon burada “şimdiden” demektir: “neden şimdiden hiçbir şey söylemedin?” — anlamsız.",
+  "at": [
+   "d6cb498b"
+  ]
+ },
+ {
+  "en": "Why didn't you say anything, actually?",
+  "ru": "А почему ты, собственно, промолчала?",
+  "tr": "Bu arada, neden hiçbir şey söylemedin?",
+  "at": [
+   "17cb7cb7"
+  ]
+ },
+ {
+  "en": "eigentlich — a calm question about the point, once the first surprise has passed.",
+  "ru": "eigentlich — спокойный вопрос по сути, когда первое удивление прошло.",
+  "tr": "eigentlich ilk şaşkınlık geçince sakince özü sorar.",
+  "at": [
+   "81ef9458"
+  ]
+ },
+ {
+  "en": "'Warum hast du wohl nichts gesagt?' is a snide 'think why'. About someone else: 'Warum hat sie wohl nichts gesagt?'",
+  "ru": "«Warum hast du wohl nichts gesagt?» — язвительное «сама подумай почему». О третьем: «Warum hat sie wohl nichts gesagt?»",
+  "tr": "“Warum hast du wohl nichts gesagt?” iğneleyici bir “kendin düşün neden”dir. Üçüncü biri hakkında: “Warum hat sie wohl nichts gesagt?”",
+  "at": [
+   "a8b319b2"
+  ]
+ },
+ {
+  "en": "Why on earth didn't you say anything?",
+  "ru": "Ну почему же ты ничего не сказала?!",
+  "tr": "Allah aşkına, neden hiçbir şey söylemedin?!",
+  "at": [
+   "158f746b"
+  ]
+ },
+ {
+  "en": "bloß — the same dismay, but stronger and more emotional than nur.",
+  "ru": "bloß — то же огорчение, но сильнее и эмоциональнее, чем nur.",
+  "tr": "bloß da aynı üzüntüdür, ama nur ile kıyaslanınca daha güçlü ve duygusal.",
+  "at": [
+   "a9c53dd4"
+  ]
+ },
+ {
+  "en": "Oh, why ever didn't you tell me?",
+  "ru": "Ну почему ты мне ничего не сказала…",
+  "tr": "Ah, neden bana hiçbir şey söylemedin?",
+  "at": [
+   "2b0bb75c"
+  ]
+ },
+ {
+  "en": "nur — dismay and regret: it hurts that she coped alone.",
+  "ru": "nur — огорчение и сожаление: тебе больно, что она справлялась одна.",
+  "tr": "nur üzüntü ve pişmanlıktır: tek başına uğraşması içini acıtıyor.",
+  "at": [
+   "b3f4196d"
+  ]
+ },
+ {
+  "en": "So why DIDN'T you say anything, then?",
+  "ru": "Ну так почему же ты тогда молчала?",
+  "tr": "Ee, neden söylemedin?",
+  "at": [
+   "475a0e2a"
+  ]
+ },
+ {
+  "en": "Stressed DENN: her excuses don't convince ('phone was dead', 'didn't want to bother you') — so why really?",
+  "ru": "Ударное DENN — отговорки не убеждают («телефон сел», «не хотела мешать»): ну а почему на самом деле?",
+  "tr": "Vurgulu DENN: bahaneleri ikna etmiyor (“telefonun şarjı bitti”, “rahatsız etmek istemedim”) — o hâlde gerçekte neden?",
+  "at": [
+   "8f1b3dcb"
+  ]
+ },
+ {
+  "en": "Ask with concern and a light reproach — you'd have helped.",
+  "ru": "Спроси с участием и лёгким упрёком: ты бы ведь помог.",
+  "tr": "İlgiyle ve hafif bir sitemle sor: yardım ederdin.",
+  "at": [
+   "e04127c9"
+  ]
+ },
+ {
+  "en": "You're upset and sad that she kept quiet.",
+  "ru": "Тебе обидно и горько, что она молчала.",
+  "tr": "Sustuğu için kırgın ve üzgünsün.",
+  "at": [
+   "e3a8f8dc"
+  ]
+ },
+ {
+  "en": "Aren't you cold?",
+  "ru": "Тебе не холодно?",
+  "tr": "Üşümüyor musun?",
+  "at": [
+   "db48ef3b"
+  ]
+ },
+ {
+  "en": "mal doesn't fit a question about how someone feels: 'Ist dir mal kalt?' = 'are you ever cold?'",
+  "ru": "mal в вопросе о самочувствии не встаёт: «Ist dir mal kalt?» = «тебе когда-нибудь бывает холодно?»",
+  "tr": "mal hal hatır sorusuna uymaz: “Ist dir mal kalt?” = “hiç üşüdüğün olur mu?”",
+  "at": [
+   "f4017ebe"
+  ]
+ },
+ {
+  "en": "Aren't you cold, then?",
+  "ru": "Тебе что, не холодно?",
+  "tr": "Ne yani, üşümüyor musun?",
+  "at": [
+   "96b65d70"
+  ]
+ },
+ {
+  "en": "denn — a surprised question prompted by what you see: winter, and he's in a T-shirt.",
+  "ru": "denn — удивлённый вопрос, выросший из того, что видишь: зима, а он в футболке.",
+  "tr": "denn gördüğünden doğan şaşkın bir sorudur: kış, o ise tişörtle.",
+  "at": [
+   "ca799689"
+  ]
+ },
+ {
+  "en": "schon = 'already': without nicht, 'Ist dir schon kalt?' = 'are you cold already?'. With nicht it makes no sense.",
+  "ru": "schon = «уже»: без nicht «Ist dir schon kalt?» = «тебе уже холодно?». С nicht — бессмыслица.",
+  "tr": "schon = “şimdiden”: nicht olmadan “Ist dir schon kalt?” = “şimdiden üşüdün mü?”. nicht ile anlamsız.",
+  "at": [
+   "ac89a261"
+  ]
+ },
+ {
+  "en": "Hey, aren't you cold?",
+  "ru": "Слушай, а тебе не холодно?",
+  "tr": "Bu arada, üşümüyor musun?",
+  "at": [
+   "7c56597b"
+  ]
+ },
+ {
+  "en": "eigentlich — an aside: you've been meaning to ask, looking at his T-shirt.",
+  "ru": "eigentlich — вопрос между делом: давно хотел спросить, глядя на его футболку.",
+  "tr": "eigentlich laf arasındadır: tişörtüne bakıp uzun zamandır sormak istiyordun.",
+  "at": [
+   "9e27f224"
+  ]
+ },
+ {
+  "en": "'Ist dir vielleicht nicht kalt?' uses the adverb 'maybe': 'maybe you're not cold?' — an odd guess.",
+  "ru": "«Ist dir vielleicht nicht kalt?» — наречие «может быть»: «может, тебе не холодно?» — странная догадка.",
+  "tr": "“Ist dir vielleicht nicht kalt?” “belki” zarfını kullanır: “belki üşümüyorsundur?” — tuhaf bir tahmin.",
+  "at": [
+   "fbe94561"
+  ]
+ },
+ {
+  "en": "Don't tell me you're not cold?",
+  "ru": "Неужели тебе не холодно?",
+  "tr": "Yoksa üşümüyor musun?",
+  "at": [
+   "a547a29e"
+  ]
+ },
+ {
+  "en": "etwa — astonished disbelief with a hint of disapproval: it looks as if he really isn't cold, and you can hardly believe it (in this weather?).",
+  "ru": "etwa — изумлённое недоверие с ноткой неодобрения: похоже, ему и правда не холодно, и ты не можешь в это поверить (в такой мороз?).",
+  "tr": "etwa hayret dolu bir inanamamadır, biraz da hoşnutsuzluk: gerçekten üşümüyor gibi ve buna inanamıyorsun (bu soğukta mı?).",
+  "at": [
+   "bca02357"
+  ]
+ },
+ {
+  "en": "You're surprised: it's winter and he's in a T-shirt. Ask.",
+  "ru": "Ты удивлён: зима, а он в футболке. Спроси.",
+  "tr": "Şaşırdın: kış ve o tişörtle. Sor.",
+  "at": [
+   "de7d8eef"
+  ]
+ },
+ {
+  "en": "It looks like he really isn't cold — you can hardly believe it.",
+  "ru": "Похоже, ему и правда не холодно — ты не можешь в это поверить.",
+  "tr": "Gerçekten üşümüyor gibi — buna inanamıyorsun.",
+  "at": [
+   "3b249f3d"
+  ]
+ },
+ {
+  "en": "Have you been smoking again?",
+  "ru": "Ты опять курил?",
+  "tr": "Yine sigara mı içtin?",
+  "at": [
+   "e928dcdc"
+  ]
+ },
+ {
+  "en": "'Hast du mal geraucht?' = 'have you ever smoked?' (einmal); with wieder it makes no sense.",
+  "ru": "«Hast du mal geraucht?» = «ты когда-нибудь курил?» (einmal); с wieder — бессмыслица.",
+  "tr": "“Hast du mal geraucht?” = “hiç sigara içtin mi?” (einmal); wieder ile anlamsız.",
+  "at": [
+   "70e58a73"
+  ]
+ },
+ {
+  "en": "So have you been smoking again?",
+  "ru": "Ты что, опять курил?",
+  "tr": "Peki, yine sigara mı içtin?",
+  "at": [
+   "b5c4df35"
+  ]
+ },
+ {
+  "en": "denn — the question follows from the smell you notice; engaged, not yet accusing.",
+  "ru": "denn — вопрос вытекает из того, что ты чувствуешь запах; звучит живо, пока без обвинения.",
+  "tr": "denn aldığın kokudan doğan bir sorudur; canlı duyulur, henüz suçlamadan.",
+  "at": [
+   "1f0867d6"
+  ]
+ },
+ {
+  "en": "'Hast du schon wieder geraucht?' is very common, but schon wieder = 'yet again' — an adverb, not the particle.",
+  "ru": "«Hast du schon wieder geraucht?» — очень частая фраза, но schon wieder = «опять» (наречие), а не частица.",
+  "tr": "“Hast du schon wieder geraucht?” çok sık kullanılır, ama schon wieder = “yine mi” (zarf), parçacık değil.",
+  "at": [
+   "0e310296"
+  ]
+ },
+ {
+  "en": "Have you actually been smoking again?",
+  "ru": "А ты, кстати, опять курил?",
+  "tr": "Bu arada, yine sigara mı içtin?",
+  "at": [
+   "23ee9ac4"
+  ]
+ },
+ {
+  "en": "eigentlich — as if in passing: not the moment you smell it, but later, e.g. over dinner: 'by the way, been smoking again?'",
+  "ru": "eigentlich — как бы между делом, не в ту же секунду, а позже, например за ужином: «а ты, кстати, опять курил?»",
+  "tr": "eigentlich laf arasındaymış gibi sorulur: kokuyu aldığın anda değil, sonra, örneğin akşam yemeğinde: “bu arada, yine mi içtin?”",
+  "at": [
+   "53d9f895"
+  ]
+ },
+ {
+  "en": "'Hast du vielleicht wieder geraucht?' uses the adverb 'maybe': a timid guess, not the particle.",
+  "ru": "«Hast du vielleicht wieder geraucht?» — наречие «может быть»: робкая догадка, без частицы.",
+  "tr": "“Hast du vielleicht wieder geraucht?” “belki” zarfını kullanır: çekingen bir tahmin, parçacık değil.",
+  "at": [
+   "e119753e"
+  ]
+ },
+ {
+  "en": "Don't tell me you smoked again?",
+  "ru": "Неужели ты опять курил?",
+  "tr": "Yoksa yine sigara mı içtin?",
+  "at": [
+   "e0f08077"
+  ]
+ },
+ {
+  "en": "etwa — suspicion and disapproval: he promised to quit.",
+  "ru": "etwa — подозрение и неодобрение: он ведь обещал бросить.",
+  "tr": "etwa kuşku ve hoşnutsuzluktur: bırakacağına söz vermişti.",
+  "at": [
+   "f72a2118"
+  ]
+ },
+ {
+  "en": "He promised to quit. Ask with suspicion and disapproval.",
+  "ru": "Он обещал бросить. Спроси с подозрением и упрёком.",
+  "tr": "Bırakacağına söz vermişti. Kuşkuyla ve sitemle sor.",
+  "at": [
+   "9f0c0eaa"
+  ]
+ },
+ {
+  "en": "Bring it up as if in passing.",
+  "ru": "Заведи разговор как бы невзначай.",
+  "tr": "Konuyu laf arasındaymış gibi aç.",
+  "at": [
+   "3adff913"
+  ]
+ },
+ {
+  "en": "Can't you swim?",
+  "ru": "Ты не умеешь плавать?",
+  "tr": "Yüzme bilmiyor musun?",
+  "at": [
+   "d963d569"
+  ]
+ },
+ {
+  "en": "mal softens requests (Kannst du mal kommen?); this asks about an ability, so mal would read as 'once'.",
+  "ru": "mal смягчает просьбы (Kannst du mal kommen?); здесь вопрос об умении, и mal звучало бы как «однажды».",
+  "tr": "mal ricaları yumuşatır (Kannst du mal kommen?); burada bir beceri soruluyor, mal “bir kere” diye anlaşılırdı.",
+  "at": [
+   "415b96d0"
+  ]
+ },
+ {
+  "en": "Can't you swim, then?",
+  "ru": "Ты что, не умеешь плавать?",
+  "tr": "Ne yani, yüzme bilmiyor musun?",
+  "at": [
+   "8ea4d13a"
+  ]
+ },
+ {
+  "en": "denn — surprise prompted by the situation: everyone's in the water and he's on the bank.",
+  "ru": "denn — удивление, выросшее из ситуации: все в воде, а он сидит на берегу.",
+  "tr": "denn durumdan doğan bir şaşkınlıktır: herkes suda, o ise kıyıda oturuyor.",
+  "at": [
+   "e848f45b"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'Kannst du schon schwimmen?' is asked of a child; with nicht it makes no sense.",
+  "ru": "schon = «уже»: «Kannst du schon schwimmen?» спрашивают у ребёнка; с nicht — бессмыслица.",
+  "tr": "schon = “şimdiden”: “Kannst du schon schwimmen?” çocuğa sorulur; nicht ile anlamsız.",
+  "at": [
+   "3d4378bd"
+  ]
+ },
+ {
+  "en": "So can't you swim, actually?",
+  "ru": "Слушай, а ты не умеешь плавать?",
+  "tr": "Bu arada, yüzme bilmiyor musun?",
+  "at": [
+   "6e527e63"
+  ]
+ },
+ {
+  "en": "eigentlich — a tactful aside: you've wondered for a while why he never swims.",
+  "ru": "eigentlich — тактичный вопрос между делом: давно было интересно, почему он не купается.",
+  "tr": "eigentlich laf arasında, nazik bir sorudur: neden hiç yüzmediğini uzun zamandır merak ediyordun.",
+  "at": [
+   "8bef4e2c"
+  ]
+ },
+ {
+  "en": "'Kannst du vielleicht nicht schwimmen?' uses the adverb: 'maybe you can't swim?' — a cautious guess, not the particle.",
+  "ru": "«Kannst du vielleicht nicht schwimmen?» — наречие: «может, ты не умеешь плавать?» — осторожная догадка, не частица.",
+  "tr": "“Kannst du vielleicht nicht schwimmen?” zarfı kullanır: “belki yüzme bilmiyorsundur?” — temkinli bir tahmin, parçacık değil.",
+  "at": [
+   "55334bdb"
+  ]
+ },
+ {
+  "en": "Don't tell me you can't swim?",
+  "ru": "Неужели ты не умеешь плавать?",
+  "tr": "Yoksa yüzme bilmiyor musun?",
+  "at": [
+   "9fa14418"
+  ]
+ },
+ {
+  "en": "etwa — you can't believe it: a grown-up who can't swim? It can sound mocking.",
+  "ru": "etwa — не веришь своим ушам: взрослый — и не умеет? Может звучать насмешливо.",
+  "tr": "etwa: kulaklarına inanamıyorsun — koca adam yüzme bilmiyor mu? Alaycı duyulabilir.",
+  "at": [
+   "8ce84d31"
+  ]
+ },
+ {
+  "en": "He's the only one not swimming. Ask, surprised.",
+  "ru": "Он единственный не купается. Удивись и спроси.",
+  "tr": "Yüzmeyen tek kişi o. Şaşır ve sor.",
+  "at": [
+   "7903f739"
+  ]
+ },
+ {
+  "en": "You can't believe it — and tease him a bit.",
+  "ru": "Ты не можешь поверить — и чуть подтруниваешь.",
+  "tr": "İnanamıyorsun — ve ona biraz takılıyorsun.",
+  "at": [
+   "f06ea507"
+  ]
+ },
+ {
+  "en": "Are you scared?",
+  "ru": "Ты боишься?",
+  "tr": "Korkuyor musun?",
+  "at": [
+   "35668cc8"
+  ]
+ },
+ {
+  "en": "'Hast du mal Angst?' = 'are you ever scared?' (einmal), not a question about now.",
+  "ru": "«Hast du mal Angst?» = «тебе когда-нибудь бывает страшно?» (einmal), а не вопрос о сейчас.",
+  "tr": "“Hast du mal Angst?” = “hiç korktuğun olur mu?” (einmal), şimdiki an hakkında soru değil.",
+  "at": [
+   "1abe5ebf"
+  ]
+ },
+ {
+  "en": "Are you scared, then?",
+  "ru": "Ты что, боишься?",
+  "tr": "Peki, korkuyor musun?",
+  "at": [
+   "5be4bbcd"
+  ]
+ },
+ {
+  "en": "denn — the question grows out of what you see: he's hovering at the door.",
+  "ru": "denn — вопрос вырастает из того, что видишь: он мнётся у двери.",
+  "tr": "denn gördüğünden doğan bir sorudur: kapının önünde duraksıyor.",
+  "at": [
+   "2dc73cae"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'Hast du schon Angst?' = 'scared already?' — not the particle.",
+  "ru": "schon = «уже»: «Hast du schon Angst?» = «тебе уже страшно?» — не частица.",
+  "tr": "schon = “şimdiden”: “Hast du schon Angst?” = “şimdiden mi korktun?” — parçacık değil.",
+  "at": [
+   "e082d5ee"
+  ]
+ },
+ {
+  "en": "Are you actually scared?",
+  "ru": "Слушай, а ты, собственно, боишься?",
+  "tr": "Bu arada, korkuyor musun?",
+  "at": [
+   "d607d320"
+  ]
+ },
+ {
+  "en": "eigentlich — a calm check: 'are you actually scared, or just can't be bothered?'",
+  "ru": "eigentlich — спокойное уточнение: «ты правда боишься или просто лень идти?»",
+  "tr": "eigentlich sakin bir netleştirmedir: “gerçekten korkuyor musun, gitmeye mi üşeniyorsun?”",
+  "at": [
+   "54bc25f9"
+  ]
+ },
+ {
+  "en": "'Hast du vielleicht Angst?' uses the adverb: 'maybe you're scared?' — a cautious guess, not the particle.",
+  "ru": "«Hast du vielleicht Angst?» — наречие: «может, ты боишься?» — осторожная догадка, не частица.",
+  "tr": "“Hast du vielleicht Angst?” zarfı kullanır: “belki korkuyorsundur?” — temkinli bir tahmin, parçacık değil.",
+  "at": [
+   "7f6ff186"
+  ]
+ },
+ {
+  "en": "Don't tell me you're scared?",
+  "ru": "Неужели ты боишься?",
+  "tr": "Yoksa korkuyor musun?",
+  "at": [
+   "71af5e07"
+  ]
+ },
+ {
+  "en": "etwa — mocking disbelief: your big brother, scared? Classic teasing.",
+  "ru": "etwa — насмешливое недоверие: большой брат — и боится? Классическое поддразнивание.",
+  "tr": "etwa alaycı bir inanamamadır: koca ağabey korkuyor mu? Klasik bir takılma.",
+  "at": [
+   "a9e257e8"
+  ]
+ },
+ {
+  "en": "Ask without mocking — you just see him hesitating.",
+  "ru": "Спроси без насмешки — просто видишь, что он мнётся.",
+  "tr": "Alay etmeden sor — sadece tereddüt ettiğini görüyorsun.",
+  "at": [
+   "0ac75bf8"
+  ]
+ },
+ {
+  "en": "Where did I put my glasses?",
+  "ru": "Куда я положил очки?",
+  "tr": "Gözlüğümü nereye koydum?",
+  "at": [
+   "f4f23609"
+  ]
+ },
+ {
+  "en": "Recalling doch comes with gleich: 'Wo hab ich die doch gleich hingelegt?' — without gleich it sounds odd.",
+  "ru": "Припоминающее doch идёт с gleich: «Wo hab ich die doch gleich hingelegt?» — без gleich звучит странно.",
+  "tr": "Hatırlamaya çalışan doch, gleich ile gelir: “Wo hab ich die doch gleich hingelegt?” — gleich olmadan tuhaf duyulur.",
+  "at": [
+   "c54f851a"
+  ]
+ },
+ {
+  "en": "Now where did I put my glasses?",
+  "ru": "Куда это я положил очки?",
+  "tr": "Peki, gözlüğümü nereye koydum?",
+  "at": [
+   "34ff1fa0"
+  ]
+ },
+ {
+  "en": "denn — the ordinary question you ask yourself while searching; the most common way.",
+  "ru": "denn — обычный вопрос себе во время поиска; самый частый вариант.",
+  "tr": "denn ararken kendine sorduğun sıradan bir sorudur; en sık kullanılan biçim.",
+  "at": [
+   "704f6379"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'where did I already put them?' — nonsense; rhetorical schon ('nowhere') doesn't fit.",
+  "ru": "schon = «уже»: «куда я уже положил?» — бессмыслица; риторическое schon («никуда») тут не подходит.",
+  "tr": "schon = “şimdiden”: “şimdiden nereye koydum?” — anlamsız; retorik schon (“hiçbir yere”) burada uymaz.",
+  "at": [
+   "143e70a3"
+  ]
+ },
+ {
+  "en": "Where did I actually put my glasses?",
+  "ru": "Куда я, собственно, дел очки?",
+  "tr": "Sahi, gözlüğümü nereye koymuştum?",
+  "at": [
+   "f1d9323f"
+  ]
+ },
+ {
+  "en": "eigentlich — you try to retrace your steps: where did I actually put them?",
+  "ru": "eigentlich — пытаешься по порядку вспомнить: а куда, собственно?",
+  "tr": "eigentlich: adım adım hatırlamaya çalışıyorsun — aslında nereye?",
+  "at": [
+   "774c3f00"
+  ]
+ },
+ {
+  "en": "Where might I have put my glasses?",
+  "ru": "Куда я, интересно, положил очки?",
+  "tr": "Gözlüğümü nereye koymuştum acaba?",
+  "at": [
+   "aa7f2f31"
+  ]
+ },
+ {
+  "en": "wohl — wondering aloud to yourself, still calm.",
+  "ru": "wohl — гадаешь вслух сам с собой, пока ещё спокойно.",
+  "tr": "wohl kendi kendine yüksek sesle tahmin yürütmedir, henüz sakin.",
+  "at": [
+   "a9dca92a"
+  ]
+ },
+ {
+  "en": "Where on earth did I put my glasses?",
+  "ru": "Ну куда же я подевал очки?!",
+  "tr": "Allah Allah, gözlüğümü nereye koydum?!",
+  "at": [
+   "36e8b8af"
+  ]
+ },
+ {
+  "en": "bloß — close to despair: you've searched everywhere; 'Wo hab ich bloß…?' is a stock phrase.",
+  "ru": "bloß — почти отчаяние: обыскал всё; «Wo hab ich bloß…?» — типичная фраза.",
+  "tr": "bloß neredeyse çaresizliktir: her yeri aradın; “Wo hab ich bloß…?” kalıplaşmış bir sözdür.",
+  "at": [
+   "4f72ea30"
+  ]
+ },
+ {
+  "en": "Wherever did I put my glasses?",
+  "ru": "Куда же я дел свои очки?..",
+  "tr": "Of, gözlüğümü nereye koydum?..",
+  "at": [
+   "aa50f714"
+  ]
+ },
+ {
+  "en": "nur — you've been searching a while and feel uneasy; more plaintive and softer than bloß.",
+  "ru": "nur — ищешь уже долго, и тебе тревожно; жалобнее и мягче, чем bloß.",
+  "tr": "nur: epeydir arıyorsun ve huzursuzsun; bloß ile kıyaslanınca daha yakınmalı ve yumuşak.",
+  "at": [
+   "ffbe0d65"
+  ]
+ },
+ {
+  "en": "You've been looking for half an hour and are almost desperate.",
+  "ru": "Ищешь очки уже полчаса и почти в отчаянии.",
+  "tr": "Yarım saattir gözlüğünü arıyorsun ve neredeyse çaresizsin.",
+  "at": [
+   "43129e82"
+  ]
+ },
+ {
+  "en": "Calmly wonder aloud where they could be.",
+  "ru": "Спокойно гадаешь вслух, где они могут быть.",
+  "tr": "Nerede olabileceklerini sakince, yüksek sesle tahmin et.",
+  "at": [
+   "5f21341c"
+  ]
+ },
+ {
+  "en": "Do you have a table free?",
+  "ru": "У вас есть свободный столик?",
+  "tr": "Boş masanız kaldı mı?",
+  "at": [
+   "225dcb73"
+  ]
+ },
+ {
+  "en": "'Haben Sie mal…?' occurs in casual requests (Haben Sie mal Feuer?), but for a table it sounds overfamiliar.",
+  "ru": "«Haben Sie mal…?» бывает в бытовых просьбах (Haben Sie mal Feuer?), но про столик звучит фамильярно.",
+  "tr": "“Haben Sie mal…?” gündelik ricalarda olur (Haben Sie mal Feuer?), ama masa için fazla teklifsiz duyulur.",
+  "at": [
+   "fb4dc7d2"
+  ]
+ },
+ {
+  "en": "So have you still got a table free?",
+  "ru": "А у вас ещё есть свободный столик?",
+  "tr": "Peki, boş masanız kaldı mı?",
+  "at": [
+   "5e269366"
+  ]
+ },
+ {
+  "en": "denn — not as a cold opener: after a glance round the full room or a 'Moment, bitte' — 'so, have you got a table?'",
+  "ru": "denn — не с порога: после взгляда на полный зал или «Moment, bitte» — «так у вас есть столик?»",
+  "tr": "denn kapıdan girer girmez değil: dolu salona bir göz attıktan ya da bir “Moment, bitte” sözünden sonra — “peki, masanız var mı?”",
+  "at": [
+   "3988ac1f"
+  ]
+ },
+ {
+  "en": "Do you actually have a table free?",
+  "ru": "У вас, кстати, есть свободный столик?",
+  "tr": "Bu arada, boş masanız kaldı mı?",
+  "at": [
+   "b2248553"
+  ]
+ },
+ {
+  "en": "eigentlich — an aside, e.g. while waiting at the bar: 'have you actually got a table?'",
+  "ru": "eigentlich — вопрос между делом, например у стойки, пока ждёшь: «а столик-то есть?»",
+  "tr": "eigentlich laf arasında bir sorudur, örneğin barda beklerken: “boş masa var mı?”",
+  "at": [
+   "0ee0281c"
+  ]
+ },
+ {
+  "en": "'Haben Sie wohl noch einen Tisch frei?' is old-fashioned politeness; today people say vielleicht.",
+  "ru": "«Haben Sie wohl noch einen Tisch frei?» — старомодная вежливость; сегодня говорят vielleicht.",
+  "tr": "“Haben Sie wohl noch einen Tisch frei?” eski moda bir kibarlıktır; bugün vielleicht denir.",
+  "at": [
+   "d2fd2dc2"
+  ]
+ },
+ {
+  "en": "Would you perhaps have a table free?",
+  "ru": "У вас, случайно, не найдётся столика?",
+  "tr": "Zahmet olmazsa bize bir masa bulabilir misiniz?",
+  "at": [
+   "0734091e"
+  ]
+ },
+ {
+  "en": "vielleicht softens: polite and modest, aware there may be no room.",
+  "ru": "vielleicht смягчает: вежливо и скромно, ты понимаешь, что мест может не быть.",
+  "tr": "vielleicht yumuşatır: kibar ve alçakgönüllü; yer olmayabileceğinin farkındasın.",
+  "at": [
+   "a8f38ed7"
+  ]
+ },
+ {
+  "en": "etwa expects an unwelcome answer: 'Haben Sie etwa noch einen Tisch frei?' = 'don't tell me you have one?' — only as delighted surprise.",
+  "ru": "etwa ждёт нежеланного ответа: «Haben Sie etwa noch einen Tisch frei?» = «неужели есть?» — разве что как радостное удивление.",
+  "tr": "etwa istenmeyen bir cevap bekler: “Haben Sie etwa noch einen Tisch frei?” = “yoksa masanız mı var?” — ancak sevinçli bir şaşkınlık olarak.",
+  "at": [
+   "43d0ccf1"
+  ]
+ },
+ {
+  "en": "Ask the waiter politely and modestly.",
+  "ru": "Вежливо и скромно спроси официанта.",
+  "tr": "Garsona kibar ve alçakgönüllü bir şekilde sor.",
+  "at": [
+   "c196b6bd"
+  ]
+ },
+ {
+  "en": "Is that all?",
+  "ru": "Это всё?",
+  "tr": "Bu kadar mı?",
+  "at": [
+   "e405c5c5"
+  ]
+ },
+ {
+  "en": "'Ist das mal alles?' isn't said: mal softens requests (Kannst du mal…?), and this asks about a fact.",
+  "ru": "«Ist das mal alles?» не говорят: mal смягчает просьбы (Kannst du mal…?), а здесь вопрос о факте.",
+  "tr": "“Ist das mal alles?” denmez: mal ricaları yumuşatır (Kannst du mal…?), burada ise bir olgu soruluyor.",
+  "at": [
+   "3e76bd00"
+  ]
+ },
+ {
+  "en": "Is that all, then?",
+  "ru": "Это что, всё?",
+  "tr": "Ne yani, bu kadar mı?",
+  "at": [
+   "8750275e"
+  ]
+ },
+ {
+  "en": "denn — a surprised question prompted by what you see on the plate.",
+  "ru": "denn — удивлённый вопрос, выросший из того, что видишь на тарелке.",
+  "tr": "denn tabakta gördüğünden doğan şaşkın bir sorudur.",
+  "at": [
+   "6374fb17"
+  ]
+ },
+ {
+  "en": "'Ist das schon alles?' is very common, but schon here means 'already': 'is that all already?'",
+  "ru": "«Ist das schon alles?» — очень частая фраза, но schon здесь = «уже»: «это уже всё?»",
+  "tr": "“Ist das schon alles?” çok sık kullanılır, ama schon burada “şimdiden” demektir: “şimdiden bu kadar mı?”",
+  "at": [
+   "eed0b031"
+  ]
+ },
+ {
+  "en": "Is that actually all?",
+  "ru": "А это, собственно, всё?",
+  "tr": "Bu arada, bu kadar mı?",
+  "at": [
+   "4cc174c3"
+  ]
+ },
+ {
+  "en": "eigentlich — a restrained check: calm, no complaint yet.",
+  "ru": "eigentlich — сдержанное уточнение: спокойно, без претензии, проверяешь.",
+  "tr": "eigentlich ölçülü bir netleştirmedir: sakin, henüz şikâyet yok, kontrol ediyorsun.",
+  "at": [
+   "9aa4a60c"
+  ]
+ },
+ {
+  "en": "'Ist das vielleicht alles?' is the adverb 'maybe' or irony; there's no softening particle here.",
+  "ru": "«Ist das vielleicht alles?» — наречие «может быть» или ирония; смягчающей частицы тут нет.",
+  "tr": "“Ist das vielleicht alles?” “belki” zarfı ya da ironidir; burada yumuşatan parçacık yok.",
+  "at": [
+   "e9c345d7"
+  ]
+ },
+ {
+  "en": "Don't tell me that's all?",
+  "ru": "Неужели это всё?",
+  "tr": "Yoksa bu kadar mı?",
+  "at": [
+   "b7f231cc"
+  ]
+ },
+ {
+  "en": "etwa — indignant disbelief: all that money, and that's it?",
+  "ru": "etwa — возмущённое недоверие: за такие деньги — и это всё?",
+  "tr": "etwa öfkeli bir inanamamadır: bu kadar paraya, hepsi bu mu?",
+  "at": [
+   "07aff45d"
+  ]
+ },
+ {
+  "en": "Be indignant: that price, and an almost empty plate!",
+  "ru": "Возмутись: за такие деньги почти пустая тарелка!",
+  "tr": "Öfkelen: bu fiyata neredeyse boş bir tabak!",
+  "at": [
+   "865a4c6b"
+  ]
+ },
+ {
+  "en": "Calmly check with the waiter, no complaint.",
+  "ru": "Спокойно уточни у официанта, без претензии.",
+  "tr": "Garsonla sakince, şikâyet etmeden netleştir.",
+  "at": [
+   "ed5bef56"
+  ]
+ },
+ {
+  "en": "Are you angry with me?",
+  "ru": "Ты на меня злишься?",
+  "tr": "Bana kızgın mısın?",
+  "at": [
+   "1ab4d238"
+  ]
+ },
+ {
+  "en": "'Bist du mal sauer?' = 'do you ever get angry?' (einmal), not a question about now.",
+  "ru": "«Bist du mal sauer?» = «ты когда-нибудь злишься?» (einmal), а не вопрос о сейчас.",
+  "tr": "“Bist du mal sauer?” = “hiç kızdığın olur mu?” (einmal), şimdiki an hakkında soru değil.",
+  "at": [
+   "69627357"
+  ]
+ },
+ {
+  "en": "So are you angry with me?",
+  "ru": "Ты что, на меня злишься?",
+  "tr": "Peki, bana kızgın mısın?",
+  "at": [
+   "179add6f"
+  ]
+ },
+ {
+  "en": "denn — the question grows out of the situation: she's silent and you want to know why.",
+  "ru": "denn — вопрос вырастает из ситуации: она молчит, и ты хочешь понять почему.",
+  "tr": "denn durumdan doğan bir sorudur: susuyor ve nedenini anlamak istiyorsun.",
+  "at": [
+   "83725ef0"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'Bist du schon sauer?' = 'angry already?' — not the particle.",
+  "ru": "schon = «уже»: «Bist du schon sauer?» = «ты уже злишься?» — не частица.",
+  "tr": "schon = “şimdiden”: “Bist du schon sauer?” = “şimdiden kızdın mı?” — parçacık değil.",
+  "at": [
+   "961921f4"
+  ]
+ },
+ {
+  "en": "By the way, are you angry with me?",
+  "ru": "Слушай, а ты на меня злишься?",
+  "tr": "Bu arada, bana kızgın mısın?",
+  "at": [
+   "b510aaf8"
+  ]
+ },
+ {
+  "en": "eigentlich — you carefully clarify: 'are you actually angry, or just busy?'",
+  "ru": "eigentlich — осторожно проясняешь: «ты правда злишься или просто занята?»",
+  "tr": "eigentlich dikkatle netleştirir: “gerçekten kızgın mısın, ya da sadece meşgul müsün?”",
+  "at": [
+   "f9b3d791"
+  ]
+ },
+ {
+  "en": "'Bist du vielleicht sauer auf mich?' uses the adverb 'maybe': a timid guess, not the particle.",
+  "ru": "«Bist du vielleicht sauer auf mich?» — наречие «может быть»: робкая догадка, не частица.",
+  "tr": "“Bist du vielleicht sauer auf mich?” “belki” zarfını kullanır: çekingen bir tahmin, parçacık değil.",
+  "at": [
+   "4f8a8dd0"
+  ]
+ },
+ {
+  "en": "You're not angry with me, are you?",
+  "ru": "Неужели ты на меня злишься?",
+  "tr": "Yoksa bana kızgın mısın?",
+  "at": [
+   "ecaaf015"
+  ]
+ },
+ {
+  "en": "etwa — you dread a 'yes' and hope it isn't so.",
+  "ru": "etwa — боишься ответа «да» и надеешься, что это не так.",
+  "tr": "etwa: “evet” cevabından korkuyor ve öyle olmamasını umuyorsun.",
+  "at": [
+   "ca456336"
+  ]
+ },
+ {
+  "en": "You fear she's upset and hope she isn't.",
+  "ru": "Ты боишься, что она обиделась, и надеешься, что нет.",
+  "tr": "Kırıldığından korkuyor ve kırılmamış olmasını umuyorsun.",
+  "at": [
+   "70db58d0"
+  ]
+ },
+ {
+  "en": "Ask directly but calmly, to clear things up.",
+  "ru": "Спроси прямо, но спокойно, чтобы прояснить.",
+  "tr": "Açıkça ama sakince sor, durumu netleştirmek için.",
+  "at": [
+   "914b47d7"
+  ]
+ },
+ {
+  "en": "What have you done to your hair?",
+  "ru": "Что ты сделала с волосами?",
+  "tr": "Saçlarına ne yaptın?",
+  "at": [
+   "60ca7b2b"
+  ]
+ },
+ {
+  "en": "Oh, what have you done to your hair?",
+  "ru": "Ой, а что это ты сделала с волосами?",
+  "tr": "Hayırdır, saçlarına ne yaptın?",
+  "at": [
+   "5b94e118"
+  ]
+ },
+ {
+  "en": "denn — lively surprise at the new look: could be delight or shock.",
+  "ru": "denn — живое удивление при виде новой причёски: и восторг, и шок.",
+  "tr": "denn yeni saçı görünce canlı bir şaşkınlıktır: hayranlık da olabilir, şok da.",
+  "at": [
+   "5e469431"
+  ]
+ },
+ {
+  "en": "schon = 'already': 'what have you already done to your hair?' — not the idea; rhetorical schon doesn't fit.",
+  "ru": "schon = «уже»: «что ты уже сделала с волосами?» — не та мысль; риторическое schon тут не подходит.",
+  "tr": "schon = “şimdiden”: “saçlarına şimdiden ne yaptın?” — kastedilen bu değil; retorik schon burada uymaz.",
+  "at": [
+   "6d7becf3"
+  ]
+ },
+ {
+  "en": "What did you actually do to your hair?",
+  "ru": "А что ты, кстати, сделала с волосами?",
+  "tr": "Bu arada, saçlarına ne yaptın?",
+  "at": [
+   "04ecf82d"
+  ]
+ },
+ {
+  "en": "eigentlich — an offhand question, as if you'd only just noticed: low-key.",
+  "ru": "eigentlich — вопрос между делом, будто не сразу заметил: сдержанно.",
+  "tr": "eigentlich laf arasında, yeni fark etmiş gibi bir sorudur: ölçülü.",
+  "at": [
+   "ca51e08e"
+  ]
+ },
+ {
+  "en": "'Was hast du wohl mit deinen Haaren gemacht?' sounds like a riddle — 'guess yourself'; not how you'd ask.",
+  "ru": "«Was hast du wohl mit deinen Haaren gemacht?» звучит как загадка «угадай сама»; так не спрашивают.",
+  "tr": "“Was hast du wohl mit deinen Haaren gemacht?” bir bilmece gibi duyulur: “kendin tahmin et”; böyle sorulmaz.",
+  "at": [
+   "d3439c08"
+  ]
+ },
+ {
+  "en": "What on earth did you do to your hair?",
+  "ru": "Что ты такое натворила с волосами?!",
+  "tr": "Allah aşkına, saçlarına ne yaptın?!",
+  "at": [
+   "b5e85fdd"
+  ]
+ },
+ {
+  "en": "bloß — shock and horror: you're stunned by what you see.",
+  "ru": "bloß — шок и ужас: ты в растерянности от увиденного.",
+  "tr": "bloß şok ve dehşettir: gördüğün karşısında şaşkına döndün.",
+  "at": [
+   "24b2643e"
+  ]
+ },
+ {
+  "en": "Whatever have you done to your hair?",
+  "ru": "Что же ты сделала с волосами…",
+  "tr": "Ah, saçlarına ne yaptın?",
+  "at": [
+   "dab04180"
+  ]
+ },
+ {
+  "en": "nur — dismay with a sigh: you miss her old hair.",
+  "ru": "nur — огорчение со вздохом: тебе жаль её прежних волос.",
+  "tr": "nur iç çekerek bir üzüntüdür: eski saçlarını özlüyorsun.",
+  "at": [
+   "13f815d9"
+  ]
+ },
+ {
+  "en": "So what HAVE you done to it, then?",
+  "ru": "Ну а что ты тогда с ними сделала?",
+  "tr": "Ee, saçlarına ne yaptın?",
+  "at": [
+   "ebfab918"
+  ]
+ },
+ {
+  "en": "Stressed DENN: she brushes it off ('nothing, just washed it') and you press: so what then?",
+  "ru": "Ударное DENN — она отнекивается («ничего, просто помыла»), а ты давишь: ну а что тогда?",
+  "tr": "Vurgulu DENN: geçiştiriyor (“hiçbir şey, sadece yıkadım”), sen de üsteliyorsun: o hâlde ne?",
+  "at": [
+   "7a609c31"
+  ]
+ },
+ {
+  "en": "You're shocked by her green hair.",
+  "ru": "Ты в шоке от её зелёных волос.",
+  "tr": "Yeşil saçları karşısında şoktasın.",
+  "at": [
+   "8ac15854"
+  ]
+ },
+ {
+  "en": "She says she did nothing. Press her.",
+  "ru": "Она говорит, что ничего не делала. Надави.",
+  "tr": "Hiçbir şey yapmadığını söylüyor. Üstele.",
+  "at": [
+   "4a6d0c07"
+  ]
+ },
+ {
+  "en": "Why are you crying?",
+  "ru": "Почему ты плачешь?",
+  "tr": "Neden ağlıyorsun?",
+  "at": [
+   "64301a4d"
+  ]
+ },
+ {
+  "en": "Hey, why are you crying?",
+  "ru": "Ну что ты плачешь?",
+  "tr": "Peki, neden ağlıyorsun?",
+  "at": [
+   "e4093374"
+  ]
+ },
+ {
+  "en": "denn — a warm, caring question; the most natural way with a child.",
+  "ru": "denn — тёплый, участливый вопрос; самый естественный вариант с ребёнком.",
+  "tr": "denn sıcak, ilgili bir sorudur; çocukla en doğal biçim.",
+  "at": [
+   "dea14545"
+  ]
+ },
+ {
+  "en": "schon = 'already'; 'Warum weinst du schon wieder?' = 'crying again?' — an adverb, not the particle.",
+  "ru": "schon = «уже»; «Warum weinst du schon wieder?» = «опять плачешь?» — наречие, не частица.",
+  "tr": "schon = “şimdiden”; “Warum weinst du schon wieder?” = “yine mi ağlıyorsun?” — zarf, parçacık değil.",
+  "at": [
+   "6390a2e5"
+  ]
+ },
+ {
+  "en": "Why are you actually crying?",
+  "ru": "А почему ты, собственно, плачешь?",
+  "tr": "Bu arada, neden ağlıyorsun?",
+  "at": [
+   "f6654c8d"
+  ]
+ },
+ {
+  "en": "eigentlich — once the first tears have eased and you calmly find out the reason.",
+  "ru": "eigentlich — когда первые слёзы утихли и ты спокойно выясняешь причину.",
+  "tr": "eigentlich: ilk gözyaşları dinince nedenini sakince öğrenmeye çalışıyorsun.",
+  "at": [
+   "d684c36e"
+  ]
+ },
+ {
+  "en": "'Warum weinst du wohl?' sounds like a riddle; you'd wonder about someone else: 'Warum weint er wohl?'",
+  "ru": "«Warum weinst du wohl?» звучит как загадка; гадают о третьем: «Warum weint er wohl?»",
+  "tr": "“Warum weinst du wohl?” bir bilmece gibi duyulur; üçüncü biri hakkında tahmin yürütülür: “Warum weint er wohl?”",
+  "at": [
+   "4cc43af0"
+  ]
+ },
+ {
+  "en": "Why on earth are you crying?",
+  "ru": "Да почему же ты так плачешь?!",
+  "tr": "Allah aşkına, neden böyle ağlıyorsun?!",
+  "at": [
+   "62658a21"
+  ]
+ },
+ {
+  "en": "bloß — stronger than nur: you're alarmed and at a loss.",
+  "ru": "bloß — сильнее, чем nur: ты встревожен и растерян.",
+  "tr": "bloß, nur ile kıyaslanınca daha güçlüdür: telaşlısın ve ne yapacağını bilmiyorsun.",
+  "at": [
+   "b2b7d4da"
+  ]
+ },
+ {
+  "en": "Oh, why ever are you crying?",
+  "ru": "Ну почему же ты плачешь…",
+  "tr": "Ah canım, neden ağlıyorsun?",
+  "at": [
+   "2f497976"
+  ]
+ },
+ {
+  "en": "nur — helpless tenderness: you don't understand what's happened and you're worried.",
+  "ru": "nur — беспомощная нежность: не понимаешь, что случилось, и переживаешь.",
+  "tr": "nur çaresiz bir şefkattir: ne olduğunu anlamıyorsun ve üzülüyorsun.",
+  "at": [
+   "e89d81af"
+  ]
+ },
+ {
+  "en": "So why ARE you crying, then?",
+  "ru": "Ну а почему ты тогда плачешь?",
+  "tr": "Ee, neden ağlıyorsun?",
+  "at": [
+   "71f90cb4"
+  ]
+ },
+ {
+  "en": "Stressed DENN: 'Did you hurt yourself?' 'No.' 'Break something?' 'No.' — so why, then?",
+  "ru": "Ударное DENN — «Ударился? — Нет. Сломал что-то? — Нет.» — ну а почему тогда?",
+  "tr": "Vurgulu DENN: “Bir yere mi çarptın? — Hayır. Bir şey mi kırdın? — Hayır.” — o hâlde neden?",
+  "at": [
+   "333bfd85"
+  ]
+ },
+ {
+  "en": "Your son is crying. Ask warmly and kindly.",
+  "ru": "Сын плачет. Спроси тепло и участливо.",
+  "tr": "Oğlun ağlıyor. Sıcak ve ilgiyle sor.",
+  "at": [
+   "6bef3e63"
+  ]
+ },
+ {
+  "en": "You've tried every reason and he says no to all.",
+  "ru": "Ты перебрал все причины, он на всё говорит «нет».",
+  "tr": "Bütün nedenleri saydın, hepsine “hayır” diyor.",
+  "at": [
+   "aeabb8a3"
+  ]
  }
 ]

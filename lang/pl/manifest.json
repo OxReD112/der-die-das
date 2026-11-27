@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "09f015b95741",
+ "version": "70915bb5dbd7",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -160,8 +160,8 @@
   "example-senses": {
    "source": "deutsch-home/wortschatz/example-senses.json",
    "key": "id",
-   "items": 5475,
-   "done": 5475
+   "items": 5473,
+   "done": 5473
   }
  },
  "files": {
@@ -234,8 +234,8 @@
    "done": 129
   },
   "wortschatz/example-senses.json": {
-   "items": 5475,
-   "done": 5475
+   "items": 5473,
+   "done": 5473
   },
   "worterbuch/german-adjective-adverbs.json": {
    "items": 603,

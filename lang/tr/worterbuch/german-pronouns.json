@@ -65,7 +65,7 @@
   "_src_reader": "7596e9ca"
  },
  "pronoun-010": {
-  "translation_tr": "kişisiz “es” (çoğu zaman çevrilmez)",
+  "translation_tr": "kişisiz “es” (sıklıkla çevrilmez)",
   "example_tr": "Bugün yağmur yağıyor.",
   "usage_note_tr": "Örneğin hava durumu için (es regnet) ve es gibt + Akkusativ yapısında (“var, bulunur”) kullanılır. Belirli bir ismin yerini tutmaz.",
   "_src": "2e8ee1fe",
@@ -137,7 +137,7 @@
   "_src_reader": "9053ff62"
  },
  "pronoun-020": {
-  "translation_tr": "insanlar; belirsiz kişi (çoğu zaman edilgen ya da genel bir yapıyla karşılanır)",
+  "translation_tr": "insanlar; belirsiz kişi (sıklıkla edilgen ya da genel bir yapıyla karşılanır)",
   "example_tr": "Burada sigara içilmez.",
   "usage_note_tr": "Man özne olarak kullanılır, fiil 3. tekil kişidedir. Diğer hâller için einen ve einem kullanılır: Das kann einem passieren. Karıştırılmamalı: der Mann — erkek, adam.",
   "_src": "78ddc5ff",
@@ -160,14 +160,14 @@
  "pronoun-023": {
   "translation_tr": "herhangi bir şey; bir şey; biraz",
   "example_tr": "Bir şey içmek ister misin?",
-  "usage_note_tr": "Çekilmez. Sıfattan önce: etwas Neues (“yeni bir şey”). Az miktar için: etwas Wasser.",
+  "usage_note_tr": "Çekimlenmez. Sıfattan önce: etwas Neues (“yeni bir şey”). Az miktar için: etwas Wasser.",
   "_src": "b8d74f36",
   "_src_reader": "acd5fd4c"
  },
  "pronoun-024": {
   "translation_tr": "hiçbir şey; hiçbir şey (özne olarak)",
   "example_tr": "Hiçbir şey duymadım.",
-  "usage_note_tr": "Çekilmez. Sıfattan önce: nichts Neues (“yeni hiçbir şey”).",
+  "usage_note_tr": "Çekimlenmez. Sıfattan önce: nichts Neues (“yeni hiçbir şey”).",
   "_src": "120b3644",
   "_src_reader": "5c471f62"
  },
@@ -411,14 +411,14 @@
  "pronoun-054": {
   "translation_tr": "bütün bunlar",
   "example_tr": "Bütün bunlara rağmen geziden keyif aldık.",
-  "usage_note_tr": "Çekilmez; yalnızca edattan sonra kullanılır: trotz alledem — bütün bunlara rağmen, bei alledem — bütün bunlarla birlikte, von alledem — bütün bunlar hakkında. Şöyle de yazılır: alldem.",
+  "usage_note_tr": "Çekimlenmez; yalnızca edattan sonra kullanılır: trotz alledem — bütün bunlara rağmen, bei alledem — bütün bunlarla birlikte, von alledem — bütün bunlar hakkında. Şöyle de yazılır: alldem.",
   "_src": "430281e5",
   "_src_reader": "5dcf1466"
  },
  "pronoun-055": {
   "translation_tr": "böyle bir şey, buna benzer bir şey; böyle, benzer (isimden önce)",
   "example_tr": "Böyle bir şeyi daha önce hiç yaşamadım.",
-  "usage_note_tr": "Çekilmez. und dergleichen (mehr) — ve benzerleri (kısaltma: u. dgl. / u. dgl. m.); nichts dergleichen — öyle bir şey yok. İsimden önce: dergleichen Fragen — benzer sorular.",
+  "usage_note_tr": "Çekimlenmez. und dergleichen (mehr) — ve benzerleri (kısaltma: u. dgl. / u. dgl. m.); nichts dergleichen — buna benzer hiçbir şey. İsimden önce: dergleichen Fragen — benzer sorular.",
   "_src": "cbb70514",
   "_src_reader": "fc942ebc"
  },
@@ -441,7 +441,7 @@
  "pronoun-058": {
   "translation_tr": "herhangi bir şey, bir şey (ne olursa olsun)",
   "example_tr": "Sana içecek bir şey getireyim mi?",
-  "usage_note_tr": "Çekilmez. Konuşmada — irgendwas: Ist irgendwas? — Bir şey mi oldu? Sıfattan önce: irgendetwas Neues — yeni bir şey.",
+  "usage_note_tr": "Çekimlenmez. Konuşmada — irgendwas: Ist irgendwas? — Bir şey mi oldu? Sıfattan önce: irgendetwas Neues — yeni bir şey.",
   "_src": "709a985e",
   "_src_reader": "d25f9941"
  },
@@ -460,14 +460,14 @@
  "pronoun-060": {
   "translation_tr": "tek tek hepsi, istisnasız hepsi",
   "example_tr": "Konukların hepsi tam vaktinde geldi.",
-  "usage_note_tr": "Çekilmez; konuşma dilinde. Çoğuldaki özneye ya da nesneye bağlanır: Sie waren allesamt müde. — Hepsi yorgundu.",
+  "usage_note_tr": "Çekimlenmez; konuşma dilinde. Çoğuldaki özneye ya da nesneye bağlanır: Sie waren allesamt müde. — Hepsi yorgundu.",
   "_src": "daedffad",
   "_src_reader": "a5d48c87"
  },
  "pronoun-061": {
   "translation_tr": "bizim gibiler, bizim gibi insanlar; (daha seyrek) ben",
   "example_tr": "Bu, bizim gibiler için fazlasıyla pahalı.",
-  "forms_note_tr": "Genitiv kullanılmaz. unsereins — aynı anlam, çekilmez. Kadın için bazen — unsereine.",
+  "forms_note_tr": "Genitiv kullanılmaz. unsereins — aynı anlam, çekimlenmez. Kadın için bazen — unsereine.",
   "usage_note_tr": "Konuşma dilinde kullanılır. Fiil 3. tekil kişide: Da kann unsereiner nicht mithalten. — Bizim gibiler buna ayak uyduramaz.",
   "_src": "cb5ddb13",
   "_src_reader": "add2a592"

@@ -2,7 +2,7 @@
  "article-001": {
   "translation_tr": "belirli artikel (Türkçeye genellikle çevrilmez)",
   "example_tr": "Kadın çocuğa topu veriyor.",
-  "forms_note_tr": "Artikel, isimle cins, sayı ve hâl bakımından uyuşur. Eril ve nötr Genitiv hâlinde isim genellikle -s/-es alır (des Mannes); Dativ Plural hâlinde, çoğul biçimi -n ya da -s ile bitmiyorsa -n alır (den Kindern, ama den Frauen, den Autos). Edatla artikel çoğu zaman birleşir: im = in dem, zum = zu dem, zur = zu der.",
+  "forms_note_tr": "Artikel, isimle cins, sayı ve hâl bakımından uyuşur. Eril ve nötr Genitiv hâlinde isim genellikle -s/-es alır (des Mannes); Dativ Plural hâlinde, çoğul biçimi -n ya da -s ile bitmiyorsa -n alır (den Kindern, ama den Frauen, den Autos). Edatla artikel sıklıkla birleşir: im = in dem, zum = zu dem, zur = zu der.",
   "usage_note_tr": "Artikel ismin önünde ya da isimden önce gelen sıfatın önünde durur: der Tisch, der alte Tisch. der/die/das bir ismin yerini tutuyorsa (“o”, “… olan”), bu bir zamirdir — bkz. der zamirleri; denen, dessen, deren biçimleri yalnızca zamirde bulunur.",
   "_src": "def4d87c",
   "_src_reader": "ed0aa1e8"

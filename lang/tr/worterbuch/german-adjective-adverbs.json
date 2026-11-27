@@ -1158,7 +1158,7 @@
     "example_tr": "İddia edilen hata bulunamadı."
    }
   ],
-  "usage_note_tr": "Başkasının doğrulanmamış iddiasını aktarır; çoğu zaman şüphe ifade eder.",
+  "usage_note_tr": "Başkasının doğrulanmamış iddiasını aktarır; sıklıkla şüphe ifade eder.",
   "_src": "7cb5bdf1",
   "_src_reader": "c891be06"
  },
@@ -5050,7 +5050,7 @@
     "example_tr": "Ne zaman gelirsen gel, önceden beni ara."
    }
   ],
-  "usage_note_tr": "Konuşma dilinde kullanılır, çekilmez: Das ist mir egal. egal wann / wo / was — ne zaman / nerede / ne olursa olsun.",
+  "usage_note_tr": "Konuşma dilinde kullanılır, çekimlenmez: Das ist mir egal. egal wann / wo / was — ne zaman / nerede / ne olursa olsun.",
   "_src": "fffbf35b",
   "_src_reader": "1a419fc5"
  },
@@ -5519,7 +5519,7 @@
     "example_tr": "Belediye binasının önünden geçerek pazara gittik."
    }
   ],
-  "usage_note_tr": "Çoğu zaman fiilin parçasıdır: vorbeigehen (yanından geçmek), vorbeikommen (uğramak): Komm doch mal vorbei!",
+  "usage_note_tr": "Sıklıkla fiilin parçasıdır: vorbeigehen (yanından geçmek), vorbeikommen (uğramak): Komm doch mal vorbei!",
   "_src": "3bcb6f68",
   "_src_reader": "83481836"
  },
@@ -5542,7 +5542,7 @@
     "example_tr": "Bu devamlı gürültü sinirlerimi bozuyor."
    }
   ],
-  "usage_note_tr": "Çoğu zaman hoşnutsuzluk tınısıyla. Eş anlamlısı: ständig.",
+  "usage_note_tr": "Sıklıkla hoşnutsuzluk tınısıyla. Eş anlamlısı: ständig.",
   "_src": "8ba109c5",
   "_src_reader": "4cf5c6f3"
  },
@@ -5578,7 +5578,7 @@
     "example_tr": "Bagaj için ayrı bir bölme var."
    }
   ],
-  "usage_note_tr": "“Özel olarak, mahsus”: Ich habe extra auf dich gewartet. — Seni mahsus bekledim. Çekilmez.",
+  "usage_note_tr": "“Özel olarak, mahsus”: Ich habe extra auf dich gewartet. — Seni mahsus bekledim. Çekimlenmez.",
   "_src": "3aee9771",
   "_src_reader": "6cbfb997"
  },
@@ -5855,7 +5855,7 @@
     "example_tr": "Apaçık başarıya rağmen takım memnun değildi."
    }
   ],
-  "usage_note_tr": "Edebî. Zarf olarak çoğu zaman dış görünüşe dayanan bir çıkarımı bildirir: “görünüşe bakılırsa”.",
+  "usage_note_tr": "Edebî dilde kullanılır. Zarf olarak sıklıkla dış görünüşe dayanan bir çıkarımı bildirir: “görünüşe bakılırsa”.",
   "_src": "20c923a0",
   "_src_reader": "9529f7e0"
  },
@@ -6016,7 +6016,7 @@
     "example_tr": "Fiyatlar geçen yıldan beri önemli ölçüde değişmedi."
    }
   ],
-  "usage_note_tr": "Çoğu zaman olumsuz cümlede: nichts Nennenswertes — kayda değer hiçbir şey, söz etmeye değer hiçbir şey.",
+  "usage_note_tr": "Sıklıkla olumsuz cümlede: nichts Nennenswertes — kayda değer hiçbir şey, söz etmeye değer hiçbir şey.",
   "_src": "55f6179a",
   "_src_reader": "dad2bbad"
  },
@@ -6028,7 +6028,7 @@
     "example_tr": "Komşular anlaşılan bir yere gitmiş, posta kutuları taşıyor bile."
    }
   ],
-  "usage_note_tr": "Ara söz olarak çoğu zaman konuşanın çıkarımını bildirir: “anlaşılan”.",
+  "usage_note_tr": "Ara söz olarak sıklıkla konuşanın çıkarımını bildirir: “anlaşılan”.",
   "_src": "201a8c8c",
   "_src_reader": "7570eeb8"
  },
@@ -6233,7 +6233,7 @@
     "example_tr": "Yazın ortasında onun çatı katı dairesi deli gibi sıcak oluyor."
    }
   ],
-  "usage_note_tr": "“sapkın” anlamında, insanlar ve eğilimleri için çoğu zaman aşağılayıcıdır. “anormal, çılgınca (davranış, durum için)” anlamında ve pekiştirici olarak konuşma dilinde: abartig teuer — deli gibi pahalı.",
+  "usage_note_tr": "“sapkın” anlamında, insanlar ve eğilimleri için sıklıkla aşağılayıcıdır. “anormal, çılgınca (davranış, durum için)” anlamında ve pekiştirici olarak konuşma dilinde: abartig teuer — deli gibi pahalı.",
   "_src": "2b9b3a8e",
   "_src_reader": "25b4180d"
  },

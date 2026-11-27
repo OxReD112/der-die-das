@@ -243,7 +243,7 @@
   {
    "en": "here: is said to",
    "ru": "здесь: говорят, будто",
-   "tr": "burada: -mış, diyorlar"
+   "tr": "burada: -mIş, diyorlar"
   },
   {
    "en": "have to",
@@ -258,7 +258,7 @@
   {
    "en": "here: to have nothing / little to do",
    "ru": "здесь: нечего / мало что (сделать)",
-   "tr": "burada: yapacak bir şeyi olmamak / pek olmamak"
+   "tr": "burada: yapacak bir şeyi olmamak / pek bir şeyi olmamak"
   },
   {
    "en": "here: to have to or to have something to do",
@@ -293,7 +293,7 @@
   {
    "en": "here: let’s",
    "ru": "здесь: давай(те)",
-   "tr": "burada: hadi …-elim"
+   "tr": "burada: hadi …-(y)AlIm"
   },
   {
    "en": "here: seems to",
@@ -318,7 +318,7 @@
   {
    "en": "here: be able to",
    "ru": "здесь: быть в состоянии",
-   "tr": "burada: -ebilecek durumda olmak"
+   "tr": "burada: -(y)Abilecek durumda olmak"
   },
   {
    "en": "Auxiliary verb (perfect)",
@@ -343,12 +343,12 @@
   {
    "en": "-frei: -free",
    "ru": "-frei: без …",
-   "tr": "-frei: …-sız, …-den arınmış"
+   "tr": "-frei: …-sIz, …-DAn arınmış"
   },
   {
    "en": "-los: -less",
    "ru": "-los: без …",
-   "tr": "-los: …-sız"
+   "tr": "-los: …-sIz"
   },
   {
    "en": "-voll: -ful",
@@ -368,12 +368,12 @@
   {
    "en": "-artig: …-like",
    "ru": "-artig: похожий на …",
-   "tr": "-artig: … gibi, …-ımsı"
+   "tr": "-artig: … gibi, …-(I)msI"
   },
   {
    "en": "-fähig: capable of …",
    "ru": "-fähig: способный к …",
-   "tr": "-fähig: …-ebilen"
+   "tr": "-fähig: …-(y)Abilen"
   },
   {
    "en": "-er: inhabitant / adjective of the place",
@@ -383,12 +383,12 @@
   {
    "en": "-ig: with …",
    "ru": "-ig: с …",
-   "tr": "-ig: …-lı"
+   "tr": "-ig: …-lI"
   },
   {
    "en": "-erei: activity (often tiresome)",
    "ru": "-erei: занятие (часто надоевшее)",
-   "tr": "-erei: uğraş (çoğu zaman bıktıran)"
+   "tr": "-erei: uğraş (sıklıkla bıktıran)"
   },
   {
    "en": "-erei: place for …",
@@ -398,22 +398,22 @@
   {
    "en": "-ig: with … / like …",
    "ru": "-ig: с … / похожий на …",
-   "tr": "-ig: …-lı / … gibi"
+   "tr": "-ig: …-lI / … gibi"
   },
   {
    "en": "-lich: with … / like …",
    "ru": "-lich: с … / похожий на …",
-   "tr": "-lich: …-lı / … gibi"
+   "tr": "-lich: …-lI / … gibi"
   },
   {
    "en": "-bar: can be …",
    "ru": "-bar: можно …",
-   "tr": "-bar: …-ebilir, …-ılabilir"
+   "tr": "-bar: …-(y)Abilir, …-(I)lAbilir"
   },
   {
    "en": "un-: not …",
    "ru": "un-: не-",
-   "tr": "un-: …-sız, … olmayan"
+   "tr": "un-: …-sIz, … olmayan"
   },
   {
    "en": "literally",
@@ -458,12 +458,12 @@
   {
    "en": "here: lass uns … — “let’s …”",
    "ru": "здесь: lass uns … — «давай(те) …»",
-   "tr": "burada: lass uns … — “hadi …-elim”"
+   "tr": "burada: lass uns … — “hadi …-(y)AlIm”"
   },
   {
    "en": "here: then (often not translated)",
    "ru": "здесь: то, тогда (часто не переводится)",
-   "tr": "burada: o zaman, o hâlde (çoğu zaman çevrilmez)"
+   "tr": "burada: o zaman, o hâlde (sıklıkla çevrilmez)"
   },
   {
    "en": "{0}- = {1}: the ending is from {2}",
@@ -783,7 +783,7 @@
   {
    "en": "can / must be",
    "ru": "можно / нужно",
-   "tr": "-ebilir / -mesi gerek"
+   "tr": "-(y)Abilir / -mAsI gerek"
   },
   {
    "en": "Perfekt · Passiv · zu + infinitive",
@@ -833,7 +833,7 @@
   {
    "en": "will / probably",
    "ru": "будет / вероятно",
-   "tr": "-ecek / herhalde"
+   "tr": "-(y)AcAk / herhalde"
   },
   {
    "en": "Futur I or passive",
@@ -943,7 +943,7 @@
   {
    "en": "here: than",
    "ru": "здесь: чем",
-   "tr": "burada: -den (daha)"
+   "tr": "burada: -DAn (daha)"
   },
   {
    "en": "up (away)",
@@ -1063,7 +1063,7 @@
   {
    "en": "through",
    "ru": "сквозь, через",
-   "tr": "içinden, -den geçerek"
+   "tr": "içinden, -DAn geçerek"
   },
   {
    "en": "along, with (others)",
@@ -1113,7 +1113,7 @@
   {
    "en": "to (something); in addition",
    "ru": "к (чему-то); вдобавок",
-   "tr": "-e; ayrıca, üstelik"
+   "tr": "-(y)A; ayrıca, üstelik"
   },
   {
    "en": "after, behind; afterwards",
@@ -1158,12 +1158,12 @@
   {
    "en": "on, to",
    "ru": "к, на",
-   "tr": "-e, üstüne"
+   "tr": "-(y)A, üstüne"
   },
   {
    "en": "towards",
    "ru": "навстречу",
-   "tr": "-e doğru, karşılamaya"
+   "tr": "-(y)A doğru, karşılamaya"
   },
   {
    "en": "here: after all, you know",
@@ -1208,7 +1208,7 @@
   {
    "en": "here: then, again (in a question)",
    "ru": "здесь: же, ну",
-   "tr": "burada: …, değil mi? / … -dI? (soruda)"
+   "tr": "burada: …, değil mi? / … -DI? (soruda)"
   },
   {
    "en": "here: first, for now",
@@ -1238,7 +1238,7 @@
   {
    "en": "here: when",
    "ru": "здесь: когда",
-   "tr": "burada: -dIğI zaman, -dIğIndA"
+   "tr": "burada: -DIğI zaman, -DIğIndA"
   },
   {
    "en": "here: whoever, (the one) who",

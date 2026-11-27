@@ -8973,7 +8973,7 @@
  },
  "noun-1337": {
   "translation_tr": "katma değer vergisi, KDV",
-  "example_tr": "KDV fiyata zaten dahil.",
+  "example_tr": "KDV fiyata zaten dâhil.",
   "_src": "2d43d31b",
   "_src_reader": "7cf41e82"
  },
@@ -12316,7 +12316,7 @@
  },
  "noun-1816": {
   "translation_tr": "geceleme; otelde bir gecelik konaklama",
-  "example_tr": "Burada kahvaltı dahil bir gecelik konaklama altmış avro.",
+  "example_tr": "Burada kahvaltı dâhil bir gecelik konaklama altmış avro.",
   "_src": "73645b97",
   "_src_reader": "efa170fe"
  },
@@ -12750,7 +12750,7 @@
  "noun-1881": {
   "translation_tr": "tam pansiyon",
   "example_tr": "Tam pansiyon bir oda ayırtıyoruz.",
-  "usage_note_tr": "Kahvaltı, öğle ve akşam yemeği dahil konaklama; genellikle artikelsiz: mit Vollpension.",
+  "usage_note_tr": "Kahvaltı, öğle ve akşam yemeği dâhil konaklama; genellikle artikelsiz: mit Vollpension.",
   "_src": "7b512dc6",
   "_src_reader": "e2d852af"
  },
@@ -14207,7 +14207,7 @@
  "noun-2100": {
   "translation_tr": "pay, kısım; sermaye payı, hisse; duygudaşlık, yakın ilgi",
   "example_tr": "Masraflardaki payım yirmi avro.",
-  "plural_note_tr": "Duygudaşlık anlamında Plural biçimi yok. Anteile — paylar ya da kısımlar, sermayedeki paylar dahil.",
+  "plural_note_tr": "Duygudaşlık anlamında Plural biçimi yok. Anteile — paylar ya da kısımlar, sermayedeki paylar dâhil.",
   "complements": [
    {
     "note_tr": "bir şeydeki pay: sein Anteil am Gewinn; sermayede pay: Anteile an einem Unternehmen; duygudaşlık: Anteil an seinem Schicksal nehmen"
@@ -15458,8 +15458,8 @@
   "_src_reader": "7fdbc827"
  },
  "noun-2286": {
-  "translation_tr": "brüt fiyat, vergiler dahil fiyat; indirim öncesi fiyat",
-  "example_tr": "Brüt fiyata katma değer vergisi dahildir.",
+  "translation_tr": "brüt fiyat, vergiler dâhil fiyat; indirim öncesi fiyat",
+  "example_tr": "Brüt fiyata katma değer vergisi dâhildir.",
   "_src": "e700b967",
   "_src_reader": "65fc3769"
  },
@@ -15659,13 +15659,13 @@
  },
  "noun-2318": {
   "translation_tr": "toplam fiyat",
-  "example_tr": "Toplam fiyata tüm ücretler dahildir.",
+  "example_tr": "Toplam fiyata tüm ücretler dâhildir.",
   "_src": "a85be8ea",
   "_src_reader": "bfab8e1e"
  },
  "noun-2319": {
   "translation_tr": "işletme yönetimi; işletmenin yönetim kadrosu",
-  "example_tr": "İşletme yönetimine finans planlaması da dahildir.",
+  "example_tr": "İşletme yönetimine finans planlaması da dâhildir.",
   "plural_note_tr": "Faaliyet olarak yönetim — Plural biçimi yok. Geschäftsführungen — işletmelerin yönetim kadroları.",
   "_src": "572fdda1",
   "_src_reader": "37c48853"
@@ -15838,7 +15838,7 @@
  },
  "noun-2347": {
   "translation_tr": "teslimat masrafları",
-  "example_tr": "Teslimat masrafları fiyata dahildir.",
+  "example_tr": "Teslimat masrafları fiyata dâhildir.",
   "_src": "9fb1326e",
   "_src_reader": "805faabf"
  },
@@ -15935,7 +15935,7 @@
  },
  "noun-2363": {
   "translation_tr": "net fiyat, vergisiz ya da indirim sonrası fiyat",
-  "example_tr": "Net fiyata katma değer vergisi dahil değildir.",
+  "example_tr": "Net fiyata katma değer vergisi dâhil değildir.",
   "_src": "294fa30c",
   "_src_reader": "52b684e6"
  },
@@ -16035,7 +16035,7 @@
  },
  "noun-2379": {
   "translation_tr": "bakıma muhtaçlık sigortası",
-  "example_tr": "Bakıma muhtaçlık sigortası sosyal güvenlik sistemine dahildir.",
+  "example_tr": "Bakıma muhtaçlık sigortası sosyal güvenlik sistemine dâhildir.",
   "_src": "739a2d7d",
   "_src_reader": "32069a2d"
  },
@@ -16513,7 +16513,7 @@
   "_src_reader": "c4f23121"
  },
  "noun-2455": {
-  "translation_tr": "belirli süreli iş sözleşmesiyle geçici çalışma (ajans aracılığıyla olanlar dahil)",
+  "translation_tr": "belirli süreli iş sözleşmesiyle geçici çalışma (ajans aracılığıyla olanlar dâhil)",
   "example_tr": "Eğitiminden sonra geçici istihdam alanında bir iş buluyor.",
   "_src": "46891099",
   "_src_reader": "665d3c47"
@@ -17419,7 +17419,7 @@
  "noun-2587": {
   "translation_tr": "eğitim; kültür, bilgi birikimi; oluşum; kelime ya da biçim türetimi",
   "example_tr": "İyi eğitim, ebeveynlerin gelirine bağlı olmamalı.",
-  "plural_note_tr": "“Eğitim” ve “kültür, bilgi birikimi” anlamlarında çoğulu yok; Bildungen — oluşumlar, biçimler, kelimeler dahil.",
+  "plural_note_tr": "“Eğitim” ve “kültür, bilgi birikimi” anlamlarında çoğulu yok; Bildungen — oluşumlar, biçimler, kelimeler dâhil.",
   "_src": "99cc0409",
   "_src_reader": "3c135a5b"
  },
@@ -18527,7 +18527,7 @@
  "noun-2756": {
   "translation_tr": "merak",
   "example_tr": "Çocuğun merakı, yabancı makineden duyduğu korkudan daha büyüktü.",
-  "usage_note_tr": "Eş anlamlısı — Neugierde; bu biçimin kendi Plural biçimi var: Neugierden.",
+  "usage_note_tr": "Eş anlamlısı: Neugierde; bu biçimin kendi Plural biçimi var: Neugierden.",
   "_src": "9f7e1dd6",
   "_src_reader": "8ca966ca"
  },
@@ -18535,7 +18535,7 @@
   "translation_tr": "merak",
   "example_tr": "Merakından tavan arasındaki eski sandığı açtı.",
   "plural_note_tr": "Genellikle tekil kullanılır.",
-  "usage_note_tr": "Eş anlamlısı — Neugier; Neugier kelimesinin Plural biçimi yok.",
+  "usage_note_tr": "Eş anlamlısı: Neugier; Neugier kelimesinin Plural biçimi yok.",
   "_src": "3683dbc3",
   "_src_reader": "03a60af7"
  },
@@ -19426,7 +19426,7 @@
   "_src_reader": "37d3ebdd"
  },
  "noun-2889": {
-  "translation_tr": "eşleştirme, karşılık belirleme; bir kategoriye dahil etme",
+  "translation_tr": "eşleştirme, karşılık belirleme; bir kategoriye dâhil etme",
   "example_tr": "Resimlerin metinlerle eşleştirilmesi açık değildi.",
   "_src": "3bd51e8f",
   "_src_reader": "ae61d287"
@@ -20367,7 +20367,7 @@
   "_src_reader": "588b7343"
  },
  "noun-3017": {
-  "translation_tr": "katılım; malî katılım, şirkette pay; katılıma dahil etme",
+  "translation_tr": "katılım; malî katılım, şirkette pay; katılıma dâhil etme",
   "example_tr": "Tartışmaya canlı katılım düzenleyicileri şaşırttı.",
   "complements": [
    {
@@ -20379,7 +20379,7 @@
     "note_tr": "bir şeye katılım: die Beteiligung an der Wahl; bir şirkette pay: eine Beteiligung an der Firma"
    },
    {
-    "meaning_tr": "katılıma dahil etme",
+    "meaning_tr": "katılıma dâhil etme",
     "note_tr": "bir şeye katılım: die Beteiligung an der Wahl; bir şirkette pay: eine Beteiligung an der Firma"
    }
   ],
@@ -20903,8 +20903,8 @@
   "_src_reader": "ce2f2bee"
  },
  "noun-3095": {
-  "translation_tr": "dahil etme, katma; dikkate alma",
-  "example_tr": "Mahalle sakinlerinin sürece dahil edilmesi park planlamasını iyileştirdi.",
+  "translation_tr": "dâhil etme, katma; dikkate alma",
+  "example_tr": "Mahalle sakinlerinin sürece dâhil edilmesi park planlamasını iyileştirdi.",
   "plural_note_tr": "Çoğulu sık kullanılmaz.",
   "_src": "d804830e",
   "_src_reader": "e43cf078"
@@ -22023,7 +22023,7 @@
  },
  "noun-3260": {
   "translation_tr": "idealleştirme, olduğundan güzel gösterme",
-  "example_tr": "Geçmişin idealleştirilmesi çoğu zaman eski sorunları gizler.",
+  "example_tr": "Geçmişin idealleştirilmesi sıklıkla eski sorunları gizler.",
   "_src": "b3d25788",
   "_src_reader": "8a16f0f0"
  },
@@ -22856,7 +22856,7 @@
  },
  "noun-3379": {
   "translation_tr": "manipülasyon; hileler, dolaplar",
-  "example_tr": "Reklam çoğu zaman ince manipülasyonlara başvurur.",
+  "example_tr": "Reklam sıklıkla ince manipülasyonlara başvurur.",
   "plural_note_tr": "“Hileler, dolaplar” anlamında genellikle çoğul.",
   "_src": "2a674410",
   "_src_reader": "03138ba0"
@@ -23393,7 +23393,7 @@
  },
  "noun-3454": {
   "translation_tr": "yansıtma (kendi duygularını başkalarına aktarma); projeksiyon (görüntünün perdeye yansıtılması); izdüşüm (matematikte, haritacılıkta)",
-  "example_tr": "Başkalarını eleştirmesi çoğu zaman kendi korkularını başkalarına yansıtmaktan ibaret.",
+  "example_tr": "Başkalarını eleştirmesi sıklıkla kendi korkularını başkalarına yansıtmaktan ibaret.",
   "usage_note_tr": "Psikolojik anlamda yazı dilinde kullanılır.",
   "_src": "ff9a9db7",
   "_src_reader": "840176c3"
@@ -24700,7 +24700,7 @@
   "_src_reader": "aa5cebe9"
  },
  "noun-3647": {
-  "translation_tr": "yerinden etme, dışarı itme (psikolojik bastırma dahil)",
+  "translation_tr": "yerinden etme, dışarı itme (psikolojik bastırma dâhil)",
   "example_tr": "Yükselen kiralar, eski sakinlerin mahalleden dışarı itilmesine yol açıyor.",
   "usage_note_tr": "Psikolojide: bastırma (hoş olmayan düşüncelerin).",
   "_src": "0a3fc2f7",
@@ -25796,7 +25796,7 @@
  "noun-3809": {
   "translation_tr": "düşüş, yavaşlama (ekonomide)",
   "example_tr": "Talepteki düşüş en çok küçük işletmeleri etkiliyor.",
-  "usage_note_tr": "Ekonomide kullanılır.",
+  "usage_note_tr": "Ekonomi terimi.",
   "_src": "6af23550",
   "_src_reader": "6f7436d6"
  },
@@ -26747,7 +26747,7 @@
   "translation_tr": "iskele tarafı, sol borda",
   "example_tr": "İskele tarafından bir balıkçı teknesi yaklaşıyordu.",
   "plural_note_tr": "Çoğulu neredeyse hiç kullanılmaz.",
-  "usage_note_tr": "Avusturya'da: der Backbord. Karşıtı — Steuerbord.",
+  "usage_note_tr": "Avusturya'da: der Backbord. Karşıt anlamlısı: Steuerbord.",
   "_src": "3ec49348",
   "_src_reader": "0dc80c78"
  },
@@ -27701,7 +27701,7 @@
  },
  "noun-4090": {
   "translation_tr": "araştırma, inceleme",
-  "example_tr": "Nadir hastalıkların araştırılması için çoğu zaman para bulunmuyor.",
+  "example_tr": "Nadir hastalıkların araştırılması için sıklıkla para bulunmuyor.",
   "_src": "99fc2c1a",
   "_src_reader": "8282f09f"
  },
@@ -29026,7 +29026,7 @@
   "_src_reader": "4cb6bb91"
  },
  "noun-4298": {
-  "translation_tr": "kurulum, montaj, bağlantı (program dahil); (kurulu) donanım, tesisat (elektrik, su); enstalasyon (sanatta)",
+  "translation_tr": "kurulum, montaj, bağlantı (program dâhil); (kurulu) donanım, tesisat (elektrik, su); enstalasyon (sanatta)",
   "example_tr": "Yeni yazılımın kurulumu neredeyse bir saat sürdü.",
   "_src": "2a00c9f7",
   "_src_reader": "42be8f7d"
@@ -30004,7 +30004,7 @@
  },
  "noun-4450": {
   "translation_tr": "ağız kokusu",
-  "example_tr": "Ağız kokusuna karşı çoğu zaman düzenli diş fırçalamak bile yeter.",
+  "example_tr": "Ağız kokusuna karşı sıklıkla düzenli diş fırçalamak bile yeter.",
   "plural_note_tr": "Çoğulu nadiren kullanılır.",
   "_src": "772358a0",
   "_src_reader": "f84029a1"
@@ -30541,7 +30541,7 @@
   "translation_tr": "dakiklik",
   "example_tr": "İş arkadaşım dakikliğiyle bütün ekibe örnek oluyor.",
   "plural_note_tr": "Genellikle tekil kullanılır.",
-  "usage_note_tr": "Atasözü: Pünktlichkeit ist die Höflichkeit der Könige — dakiklik kralların nezaketidir.",
+  "usage_note_tr": "Deyim: Pünktlichkeit ist die Höflichkeit der Könige — dakiklik kralların nezaketidir.",
   "_src": "cc44c3e4",
   "_src_reader": "04db7eaf"
  },
@@ -31222,7 +31222,7 @@
   "_src_reader": "362f0792"
  },
  "noun-4638": {
-  "translation_tr": "imza (elektronik imza dahil), monogram; kitap yer numarası (kütüphanede); harita işareti",
+  "translation_tr": "imza (elektronik imza dâhil), monogram; kitap yer numarası (kütüphanede); harita işareti",
   "example_tr": "İmzanız olmadan sözleşme maalesef geçerli değil.",
   "usage_note_tr": "“imza” anlamında yazı dilinde kullanılır.",
   "_src": "a8e14cc3",
@@ -31476,7 +31476,7 @@
  "noun-4676": {
   "translation_tr": "sancak tarafı",
   "example_tr": "Gemi yavaşça sancak tarafına döndü.",
-  "usage_note_tr": "Avusturya'da ayrıca: der Steuerbord. Karşıtı — Backbord.",
+  "usage_note_tr": "Avusturya'da ayrıca: der Steuerbord. Karşıt anlamlısı: Backbord.",
   "_src": "219685f3",
   "_src_reader": "8e0d79a4"
  },
@@ -36163,7 +36163,7 @@
   "plural_note_tr": "Çoğulda artikelsiz — Weise: zwei Weise, viele Weise.",
   "translation_tr": "bilge, bilge kişi",
   "declension_note_tr": "Bu, adlaşmış bir sıfattır, bu yüzden eki sıfattaki gibi değişir. İpucu: kelimeden sonra görünmeyen bir “Mann” olduğunu düşün ve sıfatın alacağı eki koy: der weise Mann → der Weise, ein weiser Mann → ein Weiser.",
-  "usage_note_tr": "der Stein der Weisen — felsefe taşı; die drei Weisen aus dem Morgenland — (İncil'de) üç müneccim. Kadın için: die Weise, eine Weise — bilge kadın. Karıştırılmamalı: die Weise — biçim, tarz (auf diese Weise — bu şekilde).",
+  "usage_note_tr": "der Stein der Weisen — felsefe taşı; die drei Weisen aus dem Morgenland — (Kutsal Kitap'ta) üç müneccim. Kadın için: die Weise, eine Weise — bilge kadın. Karıştırılmamalı: die Weise — biçim, tarz (auf diese Weise — bu şekilde).",
   "example_tr": "Yaşlı kral ülkenin bilgelerini huzuruna çağırttı.",
   "_src": "737556b7",
   "_src_reader": "654de194"

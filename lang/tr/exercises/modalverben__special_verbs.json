@@ -3869,7 +3869,7 @@
  {
   "en": "mag — fish is not liked now.",
   "ru": "mag — рыба сейчас не нравится.",
-  "tr": "mag — balık sevmem (şimdiki zevk).",
+  "tr": "mag — şu an balıktan hoşlanmıyorum.",
   "at": [
    "fd38dab1"
   ]
@@ -3877,7 +3877,7 @@
  {
   "en": "mochte — liking in the past; mag — liking now.",
   "ru": "mochte — нравилось раньше; mag — нравится сейчас.",
-  "tr": "mochte — geçmişteki zevk; mag — şimdiki zevk.",
+  "tr": "mochte — eskiden hoşlanmak; mag — şimdi hoşlanmak.",
   "at": [
    "236ef915",
    "281d1d7f"
@@ -3918,7 +3918,7 @@
  {
   "en": "mochtest — liking in the past; magst — liking now.",
   "ru": "mochtest — нравилось раньше; magst — нравится сейчас.",
-  "tr": "mochtest — geçmişteki zevk; magst — şimdiki zevk.",
+  "tr": "mochtest — eskiden hoşlanmak; magst — şimdi hoşlanmak.",
   "at": [
    "ca34e25e"
   ]
@@ -3982,7 +3982,7 @@
  {
   "en": "mochtet — liking in the past; mögt — liking now.",
   "ru": "mochtet — нравилось раньше; mögt — нравится сейчас.",
-  "tr": "mochtet — geçmişteki zevk; mögt — şimdiki zevk.",
+  "tr": "mochtet — eskiden hoşlanmak; mögt — şimdi hoşlanmak.",
   "at": [
    "714e38d2"
   ]
@@ -4014,7 +4014,7 @@
  {
   "en": "mag — liking now; mochte — liking in the past.",
   "ru": "mag — нравится сейчас; mochte — нравилось в прошлом.",
-  "tr": "mag — şimdiki zevk; mochte — geçmişteki zevk.",
+  "tr": "mag — şimdi hoşlanmak; mochte — eskiden hoşlanmak.",
   "at": [
    "62027595",
    "9d7bec6e",
@@ -4081,7 +4081,7 @@
  {
   "en": "magst — liking now; mochtest — liking in the past.",
   "ru": "magst — нравится сейчас; mochtest — нравилось в прошлом.",
-  "tr": "magst — şimdiki zevk; mochtest — geçmişteki zevk.",
+  "tr": "magst — şimdi hoşlanmak; mochtest — eskiden hoşlanmak.",
   "at": [
    "235a7253"
   ]
@@ -4145,7 +4145,7 @@
  {
   "en": "mögt — liking now; mochtet — liking in the past.",
   "ru": "mögt — нравится сейчас; mochtet — нравилось в прошлом.",
-  "tr": "mögt — şimdiki zevk; mochtet — geçmişteki zevk.",
+  "tr": "mögt — şimdi hoşlanmak; mochtet — eskiden hoşlanmak.",
   "at": [
    "e0a4facb"
   ]

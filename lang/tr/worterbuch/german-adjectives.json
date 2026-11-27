@@ -463,7 +463,7 @@
  },
  "adjective-132": {
   "translation_tr": "yazık",
-  "usage_note_tr": "Çekilmez ve isimden önce gelmez: Das ist schade.",
+  "usage_note_tr": "Çekimlenmez ve isimden önce gelmez: Das ist schade.",
   "example_tr": "Gelemeyecek olman ne yazık.",
   "_src": "04132bf6",
   "_src_reader": "37378f7c"
@@ -555,7 +555,7 @@
  },
  "adjective-152": {
   "translation_tr": "leylak rengi; mor",
-  "usage_note_tr": "Çekilmez: ein lila Kleid (konuşma dilindeki lilanes ölçünlü dile uymaz).",
+  "usage_note_tr": "Çekimlenmez: ein lila Kleid (konuşma dilindeki lilanes ölçünlü dile uymaz).",
   "example_tr": "Leylak rengi bir elbise giyiyor.",
   "_src": "8f8c4409",
   "_src_reader": "90bd7a6d"
@@ -575,7 +575,7 @@
  },
  "adjective-155": {
   "translation_tr": "turuncu",
-  "usage_note_tr": "Ölçünlü dilde çekilmez (ein orange Ball); konuşma dilinde sık sık orangene. Ayrıca: orangefarben.",
+  "usage_note_tr": "Ölçünlü dilde çekimlenmez (ein orange Ball); konuşma dilinde sık sık orangene. Ayrıca: orangefarben.",
   "example_tr": "Sonbaharda yapraklar sarı ve turuncudur.",
   "_src": "4a36b2f6",
   "_src_reader": "2bb86163"
@@ -594,7 +594,7 @@
  },
  "adjective-158": {
   "translation_tr": "pembe",
-  "usage_note_tr": "Çekilmez: rosa Socken (konuşma dilindeki rosane ölçünlü dile uymaz).",
+  "usage_note_tr": "Çekimlenmez: rosa Socken (konuşma dilindeki rosane ölçünlü dile uymaz).",
   "example_tr": "Bebeğin pembe çorapları var.",
   "_src": "3ee6dcbf",
   "_src_reader": "8a127d25"
@@ -996,7 +996,7 @@
  },
  "adjective-227": {
   "translation_tr": "süper, harika; mükemmel",
-  "usage_note_tr": "Konuşma dilinde kullanılır; çekilmez. Karıştırılmamalı: die Klasse — sınıf.",
+  "usage_note_tr": "Konuşma dilinde kullanılır; çekimlenmez. Karıştırılmamalı: die Klasse — sınıf.",
   "example_tr": "Yeni bisikletin süper!",
   "_src": "c5c6c2d3",
   "_src_reader": "ff910f8e"
@@ -1102,7 +1102,7 @@
  },
  "adjective-246": {
   "translation_tr": "harika, çok iyi; mükemmel, birinci sınıf",
-  "usage_note_tr": "Konuşma dilinde kullanılır; çekilmez: ein prima Essen.",
+  "usage_note_tr": "Konuşma dilinde kullanılır; çekimlenmez: ein prima Essen.",
   "example_tr": "Harika, o zaman yarın görüşürüz!",
   "_src": "6c163a5f",
   "_src_reader": "87a38281"
@@ -1737,7 +1737,7 @@
  },
  "adjective-362": {
   "translation_tr": "tüketilebilir, bozulmamış; yenilebilir",
-  "usage_note_tr": "Çoğu zaman olumsuz cümlede: nicht mehr genießbar. Konuşma dilinde insan için: Er ist heute ungenießbar — o (erkek) bugün çekilmez durumda.",
+  "usage_note_tr": "Sıklıkla olumsuz cümlede: nicht mehr genießbar. Konuşma dilinde insan için: Er ist heute ungenießbar — o (erkek) bugün çekilmez durumda.",
   "example_tr": "Süt artık tüketilebilir durumda değil.",
   "_src": "0820b15d",
   "_src_reader": "e3dfc66e"
@@ -1969,7 +1969,7 @@
  "adjective-405": {
   "translation_tr": "harap, bakımsız; kendini salmış, çöküntüye uğramış",
   "example_tr": "Garın yanındaki oldukça harap bir otelde bir gece geçirdik.",
-  "usage_note_tr": "Çoğu zaman olumsuz anlam taşır. Aynı zamanda herunterkommen fiilinin bir biçimi: Sie ist gerade die Treppe heruntergekommen. — Az önce merdivenlerden indi.",
+  "usage_note_tr": "Sıklıkla olumsuz anlam taşır. Aynı zamanda herunterkommen fiilinin bir biçimi: Sie ist gerade die Treppe heruntergekommen. — Az önce merdivenlerden indi.",
   "_src": "570a54ee",
   "_src_reader": "5e44c16b"
  },
@@ -2011,7 +2011,7 @@
  "adjective-411": {
   "translation_tr": "sürekli, aralıksız; sürekli olarak, durmadan",
   "example_tr": "Telefonun sürekli çalması sinirimi bozuyor.",
-  "usage_note_tr": "Çoğu zaman bıkkınlık ifade eder: Er ruft andauernd an. — Durmadan arıyor.",
+  "usage_note_tr": "Sıklıkla bıkkınlık ifade eder: Er ruft andauernd an. — Durmadan arıyor.",
   "_src": "afb6949e",
   "_src_reader": "b9c1b6e5"
  },
@@ -2052,7 +2052,7 @@
  "adjective-417": {
   "translation_tr": "gayretli, çalışkan; zoraki, yapmacık",
   "example_tr": "Yeni iş arkadaşımız çok gayretli ve çabuk öğreniyor.",
-  "usage_note_tr": "Çoğu zaman göze çarpan bir çabayı ima eder. Kalıp ifade: bemüht sein, etwas zu tun — bir şeyi yapmaya çalışmak; um etwas bemüht sein — bir şeyi elde etmeye çabalamak.",
+  "usage_note_tr": "Sıklıkla göze çarpan bir çabayı ima eder. Kalıp ifade: bemüht sein, etwas zu tun — bir şeyi yapmaya çalışmak; um etwas bemüht sein — bir şeyi elde etmeye çabalamak.",
   "_src": "6df97f54",
   "_src_reader": "2cdf2839"
  },
@@ -2252,7 +2252,7 @@
  },
  "adjective-448": {
   "translation_tr": "tecrit edilmiş, (başkalarından) kopuk; tek tük, münferit",
-  "example_tr": "Köyde yaşlı kadın kendini çoğu zaman insanlardan kopuk hissediyordu.",
+  "example_tr": "Köyde yaşlı kadın kendini sıklıkla insanlardan kopuk hissediyordu.",
   "usage_note_tr": "Aynı zamanda isolieren fiilinin bir biçimi: Das Haus ist gut isoliert. — Ev iyi yalıtılmış.",
   "_src": "5fcc54f1",
   "_src_reader": "49c6ac16"
@@ -2373,7 +2373,7 @@
  "adjective-465": {
   "translation_tr": "meteliksiz, parasız; iflas etmiş",
   "example_tr": "Ay sonunda genellikle meteliksiz oluyorum.",
-  "usage_note_tr": "Konuşma dilinde; “meteliksiz” anlamında şaka yollu. Yalnızca yüklem olarak kullanılır, çekilmez: Ich bin pleite. pleitegehen — iflas etmek.",
+  "usage_note_tr": "Konuşma dilinde; “meteliksiz” anlamında şaka yollu. Yalnızca yüklem olarak kullanılır, çekimlenmez: Ich bin pleite. pleitegehen — iflas etmek.",
   "_src": "a63075d5",
   "_src_reader": "a304d3c8"
  },
@@ -2424,7 +2424,7 @@
  "adjective-473": {
   "translation_tr": "basit, kolay; sade, sıradan; saf, sığ kafalı",
   "example_tr": "Çözüm çok basitti, sadece fişi çekmemiz gerekiyordu.",
-  "usage_note_tr": "“Sade, sıradan” çoğu zaman olumsuz anlam taşır, “saf, sığ kafalı” olumsuz anlam taşır.",
+  "usage_note_tr": "“Sade, sıradan” sıklıkla olumsuz anlam taşır, “saf, sığ kafalı” olumsuz anlam taşır.",
   "_src": "04f26133",
   "_src_reader": "a1f535e1"
  },
@@ -2496,7 +2496,7 @@
  "adjective-484": {
   "translation_tr": "mükemmel, birinci sınıf; en yeni, moda",
   "example_tr": "Yeni kantinin yemekleri gerçekten mükemmel.",
-  "usage_note_tr": "Konuşma dilinde kullanılır. Genellikle çekilmez ve fiilden sonra gelir: Der Service war top.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. Genellikle çekimlenmez ve fiilden sonra gelir: Der Service war top.",
   "_src": "bfc4cf98",
   "_src_reader": "f72c1094"
  },
@@ -4227,7 +4227,7 @@
  },
  "adjective-749": {
   "translation_tr": "manipüle edilebilir, kolay yönlendirilen (insanlar için); hileye açık, müdahaleye açık (veriler, cihazlar için)",
-  "example_tr": "Yalnızca sosyal medyadan bilgi alanlar çoğu zaman daha kolay manipüle edilebilir.",
+  "example_tr": "Yalnızca sosyal medyadan bilgi alanlar sıklıkla daha kolay manipüle edilebilir.",
   "usage_note_tr": "Yazı dilinde kullanılır.",
   "_src": "a4921d77",
   "_src_reader": "9feb5f26"
@@ -4260,7 +4260,7 @@
  },
  "adjective-754": {
   "translation_tr": "melankolik, hüzünlü, kederli, içli",
-  "example_tr": "Yağmurlu havalarda çoğu zaman melankolik bir ruh hâlinde oluyorum.",
+  "example_tr": "Yağmurlu havalarda sıklıkla melankolik bir ruh hâlinde oluyorum.",
   "_src": "87012ef5",
   "_src_reader": "5984c9c6"
  },
@@ -4517,7 +4517,7 @@
  "adjective-794": {
   "translation_tr": "Ortodoks (Doğu Kilisesi'ne bağlı); ortodoks, dinine sıkı sıkıya bağlı; ortodoks, dogmatik (görüşler için)",
   "example_tr": "Bu ülkedeki Ortodoks Hristiyanlar Noel'i ancak 7 Ocak'ta kutlar.",
-  "usage_note_tr": "Üçüncü anlamında yazı dilinde kullanılır; çoğu zaman olumsuz.",
+  "usage_note_tr": "Üçüncü anlamında yazı dilinde kullanılır; sıklıkla olumsuz.",
   "_src": "84f23440",
   "_src_reader": "6d271fab"
  },
@@ -4672,7 +4672,7 @@
  "adjective-817": {
   "translation_tr": "konuşkan, geveze",
   "example_tr": "Konuşkan taksici yolculuk boyunca bize bütün hayat hikâyesini anlattı.",
-  "usage_note_tr": "Çoğu zaman olumsuz.",
+  "usage_note_tr": "Sıklıkla olumsuz.",
   "_src": "ecd3116e",
   "_src_reader": "9fc6abb5"
  },
@@ -4861,7 +4861,7 @@
  },
  "adjective-846": {
   "translation_tr": "duyarlı, kırılgan, ince; hassas, nazik (konu, veri için)",
-  "example_tr": "Duyarlı insanlar gürültü ve koşuşturmadan çoğu zaman daha fazla etkilenir.",
+  "example_tr": "Duyarlı insanlar gürültü ve koşuşturmadan sıklıkla daha fazla etkilenir.",
   "_src": "9c71eda8",
   "_src_reader": "c3660c26"
  },
@@ -5355,7 +5355,7 @@
  },
  "adjective-924": {
   "translation_tr": "önyargısız, tarafsız",
-  "example_tr": "Bu tür çatışmalarda dışarıdan önyargısız bir bakış çoğu zaman işe yarar.",
+  "example_tr": "Bu tür çatışmalarda dışarıdan önyargısız bir bakış sıklıkla işe yarar.",
   "_src": "8e7f5d28",
   "_src_reader": "69b70ddf"
  },
@@ -5374,7 +5374,7 @@
  },
  "adjective-927": {
   "translation_tr": "ulaşılamaz, ulaşılması zor; içine kapanık, insanlardan uzak duran",
-  "example_tr": "Küçük dağ köyüne kışın kar yüzünden çoğu zaman günlerce ulaşılamıyor.",
+  "example_tr": "Küçük dağ köyüne kışın kar yüzünden sıklıkla günlerce ulaşılamıyor.",
   "_src": "f5308eca",
   "_src_reader": "d04057b5"
  },
@@ -6408,7 +6408,7 @@
  "adjective-1086": {
   "translation_tr": "kibirli, kendini beğenmiş",
   "example_tr": "Kardeşim o kadar kendini beğenmiş ki hiçbir aynanın önünden bakmadan geçemez.",
-  "usage_note_tr": "Olumsuz anlamda kullanılır. Eskimekte olan kullanım: eitel (çekilmez) + isim — saf, katıksız: eitel Glück — katıksız mutluluk.",
+  "usage_note_tr": "Olumsuz anlamda kullanılır. Eskimekte olan kullanım: eitel (çekimlenmez) + isim — saf, katıksız: eitel Glück — katıksız mutluluk.",
   "_src": "666fc74a",
   "_src_reader": "47e12d2d"
  },
@@ -6453,7 +6453,7 @@
  "adjective-1093": {
   "translation_tr": "hevesli, (bir şeye) düşkün, can atan",
   "example_tr": "Pazar günü çalışmaya pek hevesli değilim.",
-  "usage_note_tr": "Genellikle: auf etwas erpicht sein — bir şeye can atmak; çoğu zaman olumsuz: nicht darauf erpicht sein — buna hevesli olmamak.",
+  "usage_note_tr": "Genellikle: auf etwas erpicht sein — bir şeye can atmak; sıklıkla olumsuz: nicht darauf erpicht sein — buna hevesli olmamak.",
   "_src": "396f14a1",
   "_src_reader": "07adc5e8"
  },
@@ -6669,7 +6669,7 @@
  },
  "adjective-1127": {
   "translation_tr": "tatsız, yavan (yemek için); zevksiz, cicili bicili (giysi, dekorasyon için); patavatsız, bayağı (şaka, söz için)",
-  "example_tr": "Kışın süpermarketteki domatesler çoğu zaman sulu ve tatsız oluyor.",
+  "example_tr": "Kışın süpermarketteki domatesler sıklıkla sulu ve tatsız oluyor.",
   "_src": "0bd9e5e0",
   "_src_reader": "0c39bff2"
  },
@@ -6682,7 +6682,7 @@
  "adjective-1129": {
   "translation_tr": "yumuşak, pürüzsüz, esnek (cilt, saç, malzeme için); kıvrak, çevik (vücut, hareketler için); esnek, kaypak (kişi için)",
   "example_tr": "Bu krem cildi birkaç gün içinde yumuşacık ve pürüzsüz yapıyor.",
-  "usage_note_tr": "Üçüncü anlamında çoğu zaman olumsuz.",
+  "usage_note_tr": "Üçüncü anlamında sıklıkla olumsuz.",
   "_src": "7e7db894",
   "_src_reader": "4d2ca6bd"
  },
@@ -6778,14 +6778,14 @@
  "adjective-1144": {
   "translation_tr": "hoşgörülü, anlayışlı, merhametli; lütufkâr, sıcak bakan",
   "example_tr": "Sınavı yapan hoca hoşgörülüydü ve bana ikinci bir şans verdi.",
-  "usage_note_tr": "İkinci anlamında çoğu zaman alay yollu. Hitap: gnädige Frau — hanımefendi (çok kibar).",
+  "usage_note_tr": "İkinci anlamında sıklıkla alay yollu. Hitap: gnädige Frau — hanımefendi (çok kibar).",
   "_src": "04fa3929",
   "_src_reader": "18394be7"
  },
  "adjective-1145": {
   "translation_tr": "tanrısal; ilahi, nefis (tat, ses için)",
   "example_tr": "Pek çok eski efsanede tanrısal güçler insanların hayatına karışır.",
-  "usage_note_tr": "İkinci anlamında çoğu zaman şaka yollu.",
+  "usage_note_tr": "İkinci anlamında sıklıkla şaka yollu.",
   "_src": "e85a20a4",
   "_src_reader": "5c1406cb"
  },
@@ -7162,7 +7162,7 @@
  },
  "adjective-1204": {
   "translation_tr": "sessiz, gürültüsüz",
-  "example_tr": "Elektrikli arabalar neredeyse sessizdir, bu yüzden yayalar çoğu zaman geldiklerini duymaz.",
+  "example_tr": "Elektrikli arabalar neredeyse sessizdir, bu yüzden yayalar sıklıkla geldiklerini duymaz.",
   "_src": "17e39272",
   "_src_reader": "74a397d9"
  },
@@ -7428,7 +7428,7 @@
  "adjective-1245": {
   "translation_tr": "çılgınca, öfke uyandıran, saçma; sapkın, doğaya aykırı",
   "example_tr": "Düşününce kışın süpermarketten Şili çileği alınabilmesi aslında çılgınca.",
-  "usage_note_tr": "“Çılgınca, saçma” anlamında konuşma dilinde; “sapkın” anlamında olumsuz, çoğu zaman da hakaret içerir.",
+  "usage_note_tr": "“Çılgınca, saçma” anlamında konuşma dilinde; “sapkın” anlamında olumsuz, sıklıkla da hakaret içerir.",
   "_src": "bc46d7ad",
   "_src_reader": "77cc5886"
  },
@@ -7467,7 +7467,7 @@
  "adjective-1251": {
   "translation_tr": "ilkel, çok basit; derme çatma, özensiz; ilkel, dar görüşlü (insan, görüşler için)",
   "example_tr": "Başlangıç için sadece sayıları toplayan çok ilkel bir program yeter.",
-  "usage_note_tr": "“Derme çatma” anlamında çoğu zaman olumsuz, “dar görüşlü” anlamında olumsuz.",
+  "usage_note_tr": "“Derme çatma” anlamında sıklıkla olumsuz, “dar görüşlü” anlamında olumsuz.",
   "_src": "8fb0d1d5",
   "_src_reader": "0eb12173"
  },
@@ -7494,7 +7494,7 @@
  "adjective-1255": {
   "translation_tr": "saf, katkısız; sek (içkiler için); tam, düpedüz",
   "example_tr": "Büyükannesinin yüzüğü saf gümüşten.",
-  "usage_note_tr": "İçkiler için isimden sonra gelir ve çekilmez: einen Whisky pur. “Tam, düpedüz” anlamında konuşma dilinde: aus purer Langeweile — can sıkıntısından.",
+  "usage_note_tr": "İçkiler için isimden sonra gelir ve çekimlenmez: einen Whisky pur. “Tam, düpedüz” anlamında konuşma dilinde: aus purer Langeweile — can sıkıntısından.",
   "_src": "c036b6a1",
   "_src_reader": "8b05bdb5"
  },
@@ -7538,7 +7538,7 @@
  "adjective-1262": {
   "translation_tr": "dürüst, namuslu; epey, hatırı sayılır",
   "example_tr": "O, müşterilerini asla aldatmayacak dürüst bir tüccar.",
-  "usage_note_tr": "Çoğu zaman zarf olarak: sich redlich Mühe geben — var gücüyle çabalamak; etwas redlich verdient haben — bir şeyi dürüstçe hak etmek.",
+  "usage_note_tr": "Sıklıkla zarf olarak: sich redlich Mühe geben — var gücüyle çabalamak; etwas redlich verdient haben — bir şeyi dürüstçe hak etmek.",
   "_src": "5b94b124",
   "_src_reader": "3d4f4877"
  },
@@ -7551,7 +7551,7 @@
  "adjective-1264": {
   "translation_tr": "tam bir, düpedüz, resmen; kurallara uygun, usulüne göre",
   "example_tr": "Tren iptal edilince perona tam bir kaos hâkim oldu.",
-  "usage_note_tr": "“Tam bir, düpedüz” anlamında konuşma dilinde; çoğu zaman zarf olarak: Ich war regelrecht schockiert. — Resmen şok olmuştum.",
+  "usage_note_tr": "“Tam bir, düpedüz” anlamında konuşma dilinde; sıklıkla zarf olarak: Ich war regelrecht schockiert. — Resmen şok olmuştum.",
   "_src": "565ca623",
   "_src_reader": "23fa0b63"
  },
@@ -7636,7 +7636,7 @@
  "adjective-1277": {
   "translation_tr": "şizofrenik, şizofreni hastası; çelişkili, saçma",
   "example_tr": "Şizofrenik bir hastalıkta erken tedavi özellikle önemlidir.",
-  "usage_note_tr": "Mecaz anlamda çoğu zaman olumsuz; bu kullanım bu hastalığı yaşayan insanları incitebilir.",
+  "usage_note_tr": "Mecaz anlamda sıklıkla olumsuz; bu kullanım bu hastalığı yaşayan insanları incitebilir.",
   "_src": "3f62520b",
   "_src_reader": "c13a2dcb"
  },
@@ -7741,7 +7741,7 @@
  "adjective-1294": {
   "translation_tr": "duygusal",
   "example_tr": "Eski fotoğrafları görünce babam epey duygusallaştı.",
-  "usage_note_tr": "Çoğu zaman olumsuz (aşırı duygusal, ağlak).",
+  "usage_note_tr": "Sıklıkla olumsuz (aşırı duygusal, ağlak).",
   "_src": "3a04e7f5",
   "_src_reader": "2abd6bbf"
  },
@@ -7966,7 +7966,7 @@
  "adjective-1329": {
   "translation_tr": "rahat, sıcak (yuva gibi); yakın, içten",
   "example_tr": "Akşam bütün aile şöminenin başında samimi bir aile ortamında oturuyordu.",
-  "usage_note_tr": "Edebî, eskimekte olan; çoğu zaman şaka yollu.",
+  "usage_note_tr": "Edebî, eskimekte olan; sıklıkla şaka yollu.",
   "_src": "f8a84003",
   "_src_reader": "9ebe7709"
  },
@@ -8045,7 +8045,7 @@
  "adjective-1341": {
   "translation_tr": "aceleci, alelacele verilmiş, düşüncesiz",
   "example_tr": "Patronuyla tartıştıktan sonra aceleci bir karar verip istifa etti.",
-  "usage_note_tr": "überstürzen fiilinin Partizip II biçimi — aceleyle yapmak. Çoğu zaman zarf olarak da: überstürzt abreisen — aceleyle yola çıkmak.",
+  "usage_note_tr": "überstürzen fiilinin Partizip II biçimi — aceleyle yapmak. Sıklıkla zarf olarak da: überstürzt abreisen — aceleyle yola çıkmak.",
   "_src": "75d3f59d",
   "_src_reader": "1d7df552"
  },
@@ -8132,7 +8132,7 @@
  },
  "adjective-1355": {
   "translation_tr": "öngörülemez (hava, riskler için); ne yapacağı belli olmayan, dürtüsel (kişi için)",
-  "example_tr": "Yüksek dağlarda sonbaharda hava çoğu zaman öngörülemez.",
+  "example_tr": "Yüksek dağlarda sonbaharda hava sıklıkla öngörülemez.",
   "_src": "e0c5166d",
   "_src_reader": "2aac2648"
  },
@@ -8546,7 +8546,7 @@
  },
  "adjective-1421": {
   "translation_tr": "bilgisiz, cahil; (bir şeyden) habersiz, bilmeden",
-  "example_tr": "Bilgisayar konularında çocuklarımın yanında kendimi çoğu zaman tamamen bilgisiz hissediyorum.",
+  "example_tr": "Bilgisayar konularında çocuklarımın yanında kendimi sıklıkla tamamen bilgisiz hissediyorum.",
   "_src": "298f871c",
   "_src_reader": "1de9e41a"
  },
@@ -8751,7 +8751,7 @@
  },
  "adjective-1453": {
   "translation_tr": "görsel, görmeyle ilgili",
-  "example_tr": "Çocuklar görsel yardımcı araçlarla çoğu zaman daha hızlı öğrenir.",
+  "example_tr": "Çocuklar görsel yardımcı araçlarla sıklıkla daha hızlı öğrenir.",
   "usage_note_tr": "Yazı dilinde kullanılır.",
   "_src": "4defaac1",
   "_src_reader": "a21edf99"
@@ -8838,7 +8838,7 @@
  },
  "adjective-1467": {
   "translation_tr": "seçici, mızmız",
-  "example_tr": "Mızmız çocuklar çoğu zaman sadece domates soslu makarna yer.",
+  "example_tr": "Mızmız çocuklar sıklıkla sadece domates soslu makarna yer.",
   "_src": "3347155a",
   "_src_reader": "5990c6b6"
  },
@@ -8851,7 +8851,7 @@
  "adjective-1469": {
   "translation_tr": "gerçek, hakiki; gerçekten, hakikaten",
   "example_tr": "Öğretmen sabrıyla gerçek bir büyüklük gösterdi.",
-  "usage_note_tr": "Edebî dilde kullanılır. Çoğu zaman sıfattan önce gelir: wahrhaft groß — gerçekten büyük.",
+  "usage_note_tr": "Edebî dilde kullanılır. Sıklıkla sıfattan önce gelir: wahrhaft groß — gerçekten büyük.",
   "_src": "aa27dc1f",
   "_src_reader": "301ab774"
  },
@@ -8990,7 +8990,7 @@
  "adjective-1491": {
   "translation_tr": "geri kalmış (gelişimde)",
   "example_tr": "Eskiden bu tür çocuklara düpedüz geri kalmış denirdi.",
-  "usage_note_tr": "Çoğu zaman olumsuz (hakaret gibi algılanabilir). “Geride kalmış, geri kalan” anlamında zurückbleiben fiilinin bir biçimi.",
+  "usage_note_tr": "Sıklıkla olumsuz (hakaret gibi algılanabilir). “Geride kalmış, geri kalan” anlamında zurückbleiben fiilinin bir biçimi.",
   "_src": "c4ab061b",
   "_src_reader": "59aff647"
  },
@@ -9016,7 +9016,7 @@
  "adjective-1495": {
   "translation_tr": "kaçınılmaz; kaçınılmaz olarak, zorunlu olarak",
   "example_tr": "Taşınma bütün aile için kaçınılmaz değişiklikler getirdi.",
-  "usage_note_tr": "Çoğu zaman zarf olarak: nicht zwangsläufig — illa ki değil, şart değil.",
+  "usage_note_tr": "Sıklıkla zarf olarak: nicht zwangsläufig — illa ki değil, şart değil.",
   "_src": "acc6603e",
   "_src_reader": "1d644e18"
  },
@@ -9236,7 +9236,7 @@
  "adjective-1529": {
   "translation_tr": "bunamış, elden ayaktan düşmüş; yaşlılığa bağlı (yaşlılıkta ortaya çıkan)",
   "example_tr": "Dedem 95 yaşında ama zihni hâlâ çok açık, hiç bunamadı.",
-  "usage_note_tr": "“Elden ayaktan düşmüş, bunamış” anlamında yazı dilinde kullanılır, çoğu zaman olumsuz.",
+  "usage_note_tr": "“Elden ayaktan düşmüş, bunamış” anlamında yazı dilinde kullanılır, sıklıkla olumsuz.",
   "_src": "ba88068a",
   "_src_reader": "a92a9249"
  },
@@ -9383,7 +9383,7 @@
  "adjective-1552": {
   "translation_tr": "(bir şeyi yapmaya) hazır, razı",
   "example_tr": "Ev sahibi kaloriferi tamir ettirmeye gerçekten razı mı?",
-  "usage_note_tr": "Edebî dilde kullanılır. Yalnızca şu ifadede: willens sein, etwas zu tun — bir şeyi yapmaya hazır olmak; çekilmez.",
+  "usage_note_tr": "Edebî dilde kullanılır. Yalnızca şu ifadede: willens sein, etwas zu tun — bir şeyi yapmaya hazır olmak; çekimlenmez.",
   "_src": "55f41619",
   "_src_reader": "95150b13"
  },
@@ -9404,7 +9404,7 @@
  "adjective-1555": {
   "translation_tr": "(birinden / bir şeyden) bıkmış, usanmış",
   "example_tr": "Kız kardeşim işe giderken yaşadığı bitmek bilmeyen trafik sıkışıklığından bıktı.",
-  "usage_note_tr": "Yalnızca yüklem olarak, çekilmez: jemanden, etwas leid sein / werden — birinden, bir şeyden bıkmış olmak / bıkmak (konuşma dilinde ayrıca: leid haben); Ich bin es leid, … zu … — … -mekten / -maktan bıktım. Karıştırılmamalı: es tut mir leid → leidtun (üzgün olmak); das Leid — acı, keder.",
+  "usage_note_tr": "Yalnızca yüklem olarak, çekimlenmez: jemanden, etwas leid sein / werden — birinden, bir şeyden bıkmış olmak / bıkmak (konuşma dilinde ayrıca: leid haben); Ich bin es leid, … zu … — … -mekten / -maktan bıktım. Karıştırılmamalı: es tut mir leid → leidtun (üzgün olmak); das Leid — acı, keder.",
   "_src": "9954bf84",
   "_src_reader": "d102bcc2"
  },
@@ -9496,7 +9496,7 @@
  },
  "adjective-1569": {
   "translation_tr": "terk edilmiş, yalnız, kimsesiz; ıssız, tenha",
-  "example_tr": "Kocasının ölümünden sonra büyükannem kendini çoğu zaman çok yalnız hissediyordu.",
+  "example_tr": "Kocasının ölümünden sonra büyükannem kendini sıklıkla çok yalnız hissediyordu.",
   "additional_examples": [
    {
     "example_tr": "Pazar sabahı çarşı meydanı tamamen ıssızdı."
@@ -9702,7 +9702,7 @@
  },
  "adjective-1595": {
   "translation_tr": "(auf etw. / jdn.) bir şeye / birine bağımlı, muhtaç",
-  "example_tr": "Kırsaldaki yaşlı insanlar çoğu zaman arabaya muhtaçtır.",
+  "example_tr": "Kırsaldaki yaşlı insanlar sıklıkla arabaya muhtaçtır.",
   "_src": "e51e6853",
   "_src_reader": "d58983d6"
  },
@@ -9829,7 +9829,7 @@
  "adjective-1616": {
   "translation_tr": "aziz (şehir, kilise, bayram adlarında)",
   "example_tr": "Çocuk aralık ayında Aziz Nikolaos'u bekliyor.",
-  "usage_note_tr": "Çekilmez, addan önce gelir: Sankt Gallen, Sankt Petersburg. Kısaltma: St.",
+  "usage_note_tr": "Çekimlenmez, addan önce gelir: Sankt Gallen, Sankt Petersburg. Kısaltma: St.",
   "_src": "e0b70e2b",
   "_src_reader": "1915fd0f"
  },
@@ -9850,13 +9850,13 @@
  "adjective-1619": {
   "translation_tr": "çizgili, çubuklu",
   "example_tr": "Plaja mavi beyaz çizgili havlusunu götürdü.",
-  "usage_note_tr": "Çoğu zaman renklerle: rot-weiß gestreift — kırmızı beyaz çizgili; quer / längs gestreift — enine / boyuna çizgili. Krş. kariert — kareli, gepunktet — puantiyeli. Karıştırılmamalı: streifen (fiil) — sıyırmak (hat gestreift); dolaşmak (ist gestreift).",
+  "usage_note_tr": "Sıklıkla renklerle: rot-weiß gestreift — kırmızı beyaz çizgili; quer / längs gestreift — enine / boyuna çizgili. Krş. kariert — kareli, gepunktet — puantiyeli. Karıştırılmamalı: streifen (fiil) — sıyırmak (hat gestreift); dolaşmak (ist gestreift).",
   "_src": "e5ca75e1",
   "_src_reader": "19ee2816"
  },
  "adjective-1620": {
   "translation_tr": "(konuş.) sadece, hep, bir sürü (= nur); (yaz.) saf, dürüst, içten",
-  "usage_note_tr": "“Sadece, hep” anlamında çekilmez, artikelsiz isimden önce gelir: lauter Lügen — yalandan başka bir şey değil, lauter nette Leute — hep hoş insanlar; vor lauter Freude — sevinçten. Yazı dilinde “saf, dürüst” anlamında çekilir: lauteres Gold — saf altın, die lautere Wahrheit — katıksız gerçek, ein lauterer Mensch — dürüst, namuslu bir insan, lautere Absichten — dürüst niyetler. Karıştırılmamalı: laut (yüksek sesli, daha yüksek sesle) kelimesinin biçimleri: mit lauter Stimme — yüksek sesle, Sprich lauter! — Daha yüksek sesle konuş!, immer lauter — gittikçe daha yüksek sesle, lauter als — bir şeyden daha yüksek sesle.",
+  "usage_note_tr": "“Sadece, hep” anlamında çekimlenmez, artikelsiz isimden önce gelir: lauter Lügen — yalandan başka bir şey değil, lauter nette Leute — hep hoş insanlar; vor lauter Freude — sevinçten. Yazı dilinde “saf, dürüst” anlamında çekilir: lauteres Gold — saf altın, die lautere Wahrheit — katıksız gerçek, ein lauterer Mensch — dürüst, namuslu bir insan, lautere Absichten — dürüst niyetler. Karıştırılmamalı: laut (yüksek sesli, daha yüksek sesle) kelimesinin biçimleri: mit lauter Stimme — yüksek sesle, Sprich lauter! — Daha yüksek sesle konuş!, immer lauter — gittikçe daha yüksek sesle, lauter als — bir şeyden daha yüksek sesle.",
   "example_tr": "Sepette sadece çürük elmalar vardı.",
   "_src": "37a0e146",
   "_src_reader": "862ee8c4"
@@ -9878,7 +9878,7 @@
  "adjective-1623": {
   "translation_tr": "canı sıkılmış, kızgın",
   "example_tr": "Müşteriler uzun bekleme süresi yüzünden kızgındı.",
-  "usage_note_tr": "verärgert über + Akkusativ — bir şey yüzünden canı sıkılmış, kızgın; çoğu zaman fiilden sonra: verärgert reagieren — kızgınlıkla tepki vermek. Aynı zamanda verärgern fiilinin bir biçimi: Seine Antwort hat sie verärgert. — Onun (erkek) cevabı onu (kadın) kızdırdı.",
+  "usage_note_tr": "verärgert über + Akkusativ — bir şey yüzünden canı sıkılmış, kızgın; sıklıkla fiilden sonra: verärgert reagieren — kızgınlıkla tepki vermek. Aynı zamanda verärgern fiilinin bir biçimi: Seine Antwort hat sie verärgert. — Onun (erkek) cevabı onu (kadın) kızdırdı.",
   "_src": "0654b289",
   "_src_reader": "a95d0ff8"
  },

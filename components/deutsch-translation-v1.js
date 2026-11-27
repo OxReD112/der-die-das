@@ -478,10 +478,11 @@
   /* The language of a shown pack text (27.11.2026, Turkish İ / ı). CSS text-transform and screen readers go by the element's
      lang; the page is German, so an element whose whole own text is a text the pack gave gets lang="<code>" (and loses it
      when its text changes to something else). Elements with a lang of their own, or inside one, are left alone. Only for a
-     pack language: nothing is recorded or watched in English / Russian. */
+     pack language: nothing is recorded or watched in English / Russian. A text the pack left exactly as the English one
+     (a German label written as an { en, ru } pair — «Richtig», a name) is not in the pack's language and is not marked. */
   var shownTexts = Object.create(null), langMarked = null, langWatch = null;
-  function fromPack(text){
-    if(typeof text === "string" && text){ shownTexts[text.trim()] = true; watchLang(); }
+  function fromPack(text, en){
+    if(typeof text === "string" && text && text !== en){ shownTexts[text.trim()] = true; watchLang(); }
     return text;
   }
   function markLang(el){
@@ -522,9 +523,9 @@
       var shown = getDisplayLang();
       if(isPack(shown)){
         applyPage(shown);
-        if(value[shown]) return fromPack(value[shown]);
+        if(value[shown]) return fromPack(value[shown], value.en);
         var p = (typeof value.en === "string" || typeof value.ru === "string") ? packText(shown, value.en, value.ru) : "";
-        if(p) return fromPack(p);
+        if(p) return fromPack(p, value.en);
         if(value.en) return value.en;
       }
       var lang = getLang();
@@ -542,7 +543,7 @@
     var lang = shown;
     if(isPack(shown)){ applyPage(shown); text = packText(shown, en, ru); if(!text){ text = en; lang = "en"; } }
     else text = shown === "ru" ? ru : en;
-    return isPack(shown) && lang === shown ? fromPack(format(text, args, lang)) : format(text, args, lang);
+    return isPack(shown) && lang === shown && text !== en ? fromPack(format(text, args, lang)) : format(text, args, lang);
   }
 
   /* tAt(place, en, ru, …args): like t, but a pack entry written for this place ("particle": place) comes first,
@@ -552,7 +553,7 @@
     if(isPack(shown) && place){
       applyPage(shown);
       var map = placed[shown], v = map && map[(en || "") + SEP + (ru || "") + SEP + place];
-      if(typeof v === "string" && v) return fromPack(format(v, Array.prototype.slice.call(arguments, 3), shown));
+      if(typeof v === "string" && v) return v === en ? format(v, Array.prototype.slice.call(arguments, 3), shown) : fromPack(format(v, Array.prototype.slice.call(arguments, 3), shown));
     }
     return t.apply(null, Array.prototype.slice.call(arguments, 1));
   }
@@ -564,10 +565,10 @@
     var shown = getDisplayLang();
     if(!isPack(shown)) return T[getLang()] || T.en;
     applyPage(shown);
-    if(typeof T.en === "string" || typeof T.ru === "string") return fromPack(packText(shown, T.en, T.ru)) || T.en;
+    if(typeof T.en === "string" || typeof T.ru === "string") return fromPack(packText(shown, T.en, T.ru), T.en) || T.en;
     var out = {}, en = T.en || {}, ru = T.ru || {};
     for(var k in en){
-      out[k] = (typeof en[k] === "string" && (fromPack(packText(shown, en[k], ru[k])) || en[k])) || en[k];
+      out[k] = (typeof en[k] === "string" && (fromPack(packText(shown, en[k], ru[k]), en[k]) || en[k])) || en[k];
     }
     return out;
   }
@@ -578,7 +579,7 @@
     var shown = getDisplayLang();
     if(isPack(shown)){
       var v = item[name + "_" + shown];
-      if(v != null && v !== "") return fromPack(v);
+      if(v != null && v !== "") return fromPack(v, item[name + "_en"]);
       if(shown === "xx"){ var en = item[name + "_en"]; return typeof en === "string" && en ? "⟦" + en + "⟧" : en; }
       return item[name + "_en"] || item[name + "_ru"];
     }
