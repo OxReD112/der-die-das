@@ -87,9 +87,9 @@
 
   // The data files; a new batch of cards changes the version here (and this file's ?v= in index.html).
   const FILES = Object.freeze([
-    { file: "german-nouns.json", version: "20261126-wn-x245-see-also-4", type: "noun" },
-    { file: "german-verbs.json", version: "20261126-wn-x245-see-also-4", type: "verb" },
-    { file: "german-adjectives.json", version: "20261126-wn-x245-see-also-4", type: "adjective" },
+    { file: "german-nouns.json", version: "20261127-wn-x247-tr-source-fixes-1", type: "noun" },
+    { file: "german-verbs.json", version: "20261127-wn-x248-sich-dative-1", type: "verb" },
+    { file: "german-adjectives.json", version: "20261127-wn-x247-tr-source-fixes-1", type: "adjective" },
     { file: "german-adverbs.json", version: "20261126-wn-x245-see-also-4", type: "adverb" },
     { file: "german-conjunctions.json", version: "20261126-wn-x245-see-also-4", type: "conjunction" },
     { file: "german-pronouns.json", version: "20261126-wn-x245-see-also-4", type: "pronoun" },

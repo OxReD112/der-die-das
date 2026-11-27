@@ -648,6 +648,38 @@
     ]
    }
   ],
+  "period": [
+   {
+    "word": "Urlaub",
+    "forms": [
+     "urlaub",
+     "urlaube",
+     "urlauben",
+     "urlaubes",
+     "urlaubs"
+    ]
+   },
+   {
+    "word": "Ferien",
+    "forms": [
+     "ferien"
+    ]
+   },
+   {
+    "word": "Leben",
+    "forms": [
+     "leben",
+     "lebens"
+    ]
+   },
+   {
+    "word": "Rennen",
+    "forms": [
+     "rennen",
+     "rennens"
+    ]
+   }
+  ],
   "point": [
    {
     "word": "Anfang",

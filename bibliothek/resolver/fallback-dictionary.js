@@ -170,8 +170,10 @@
   }
   // Two grammatical classes of nouns — time and measure — complete by grammar, not by corpus
   // (data/noun-classes.json, dev/bibliothek/scripts/build-noun-classes.py): {time: Set, timeUnit: Set, timePoint: Set, measure: Set}
-  // of lowercase spellings. Missing or invalid file: empty classes (no time / measure sign).
-  const nounClassesUrl=new URL('data/noun-classes.json?v=20261124-links-1',document.currentScript.src);
+  // of lowercase spellings (+ timeCompoundHead: the last parts of a time compound; timeSpan: unit, part_of_day, season, period — a span of
+  // duration; extent: measure.length + measure.distance; count: measure.count). Missing or invalid
+  // file: empty classes (no time / measure sign).
+  const nounClassesUrl=new URL('data/noun-classes.json?v=20261127-review-time-1',document.currentScript.src);
   let nounClassesPromise=null;
   // The noun classes (time, measure), loaded once; empty sets when the file is missing.
   function nounClasses() {
@@ -179,7 +181,14 @@
       if(d.format_version!==1||!d.time||!d.measure)throw Error('Invalid noun classes');
       // All forms of the given class groups as one set.
       const set=groups=>new Set(groups.flatMap(g=>(g||[]).flatMap(e=>e.forms||[])));
-      return Object.freeze({time:set(Object.values(d.time)),timeUnit:set([d.time.unit]),timePoint:set([d.time.point]),measure:set(Object.values(d.measure)),money:set([d.measure.money])});
+      // (the heads of a time compound — Freitagnachmittag, Arbeitstag, Filmabend —: the time words but the points (Anfang, Ende — a position,
+      // not a span) and the words that are also other nouns: die Uhr «часы», das Mal «знак» (Denkmal), Zeit / Weile (Mahlzeit, Langeweile),
+      // Leben / Rennen (Nachtleben, Autorennen))
+      const notHeads=new Set(['Uhr','Mal','Zeit','Weile','Leben','Rennen']);
+      const heads=new Set(Object.entries(d.time).filter(([k])=>k!=='point').flatMap(([,g])=>(g||[]).filter(e=>!notHeads.has(e.word)).flatMap(e=>e.forms||[])));
+      return Object.freeze({time:set(Object.values(d.time)),timeUnit:set([d.time.unit]),timePoint:set([d.time.point]),measure:set(Object.values(d.measure)),money:set([d.measure.money]),
+        timeCompoundHead:heads,timeSpan:set([d.time.unit,d.time.part_of_day,d.time.season,d.time.period]),extent:set([d.measure.length,d.measure.distance]),
+        count:set([d.measure.count])});
     }).catch(e=>{nounClassesPromise=null;throw e;});
     return nounClassesPromise;
   }

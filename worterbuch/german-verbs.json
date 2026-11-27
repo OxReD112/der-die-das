@@ -1347,7 +1347,8 @@
       "example_en": "I'll get dressed quickly, then we can go.",
       "note_ru": "С предметом одежды — sich (Dativ) etwas anziehen: Ich ziehe mir die Jacke an.",
       "note_en": "With an item of clothing — sich (dative) etwas anziehen: Ich ziehe mir die Jacke an."
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-028",
@@ -1560,8 +1561,8 @@
         "pattern": "mit + Dativ",
         "meaning_ru": "обстоять (о делах)",
         "meaning_en": "(of affairs) to stand, to be",
-        "note_ru": "обстоять с чем-либо (безличное es): Wie sieht es mit deinen Hausaufgaben aus? Подсвечивается только с коррелятом (damit); mit der Brille gut aussehen — «выглядеть», та же форма.",
-        "note_en": "how things stand with something (impersonal es): Wie sieht es mit deinen Hausaufgaben aus? Highlighted only with a correlative (damit); mit der Brille gut aussehen is “to look”, the same form.",
+        "note_ru": "обстоять с чем-либо (безличное es): Wie sieht es mit deinen Hausaufgaben aus?",
+        "note_en": "how things stand with something (impersonal es): Wie sieht es mit deinen Hausaufgaben aus?",
         "source": "DWDS (aussehen 3): ⟨mit jmdm., etw. sieht es gut, schlecht aus⟩ mit jmdm., etw. steht es gut, schlecht; Duden (1.2, unpersönlich): in einer bestimmten Weise um jemanden, um etwas bestellt sein",
         "source_kind": "dwds",
         "correlative_only": true
@@ -4428,7 +4429,8 @@
         "id": "verb-084",
         "text": "sich (Dativ) etwas vorstellen"
       }
-    ]
+    ],
+    "sich_dative": true
   },
   {
     "id": "verb-085",
@@ -9673,7 +9675,8 @@
       "translation_en": "to cut oneself; to cut (a slice) for oneself",
       "note_ru": "sich (D) etwas schneiden — отрезать себе (кусок)",
       "note_en": "sich (D) etwas schneiden — to cut (a slice) for oneself"
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-183",
@@ -11290,8 +11293,8 @@
         "pattern": "auf + Akkusativ",
         "meaning_ru": "указывать (на что-либо)",
         "meaning_en": "to point (at)",
-        "note_ru": "указывать на кого-, что-либо: Sie zeigt auf die Karte. Подсвечивается только с коррелятом; Er zeigte auf das Haus / zur Tür — направление, та же форма.",
-        "note_en": "to point at someone or something: Sie zeigt auf die Karte. Highlighted only with a correlative; Er zeigte auf das Haus / zur Tür is direction, the same form.",
+        "note_ru": "указывать на кого-, что-либо: Sie zeigt auf die Karte.",
+        "note_en": "to point at someone or something: Sie zeigt auf die Karte.",
         "source": "Duden (zeigen 1): mit dem Finger, Arm eine bestimmte Richtung angeben — mit dem Schirm auf etwas zeigen; sie zeigte auf den Täter; der Wegweiser zeigte nach Süden; DWDS (zeigen 1): ⟨auf etw. zeigen⟩",
         "source_kind": "duden",
         "correlative_only": true
@@ -11848,7 +11851,8 @@
         "text": "sich (Dativ) etwas anschauen",
         "field": "usage_note"
       }
-    ]
+    ],
+    "sich_dative": true
   },
   {
     "id": "verb-2746",
@@ -12006,7 +12010,8 @@
         "text": "sich (Dativ) etwas ansehen",
         "field": "usage_note"
       }
-    ]
+    ],
+    "sich_dative": true
   },
   {
     "id": "verb-2745",
@@ -17619,7 +17624,8 @@
       "example_en": "Beyond the bridge the road divides.",
       "note_ru": "на что — in + Akk.: Die Klasse teilte sich in zwei Gruppen. — Класс разделился на две группы. Не путать: sich (Dativ) etwas teilen — делить что-либо с кем-либо (см. заметку к глаголу).",
       "note_en": "into what — in + accusative: Die Klasse teilte sich in zwei Gruppen. — The class split into two groups. Do not confuse: sich (dative) etwas teilen — to share something with someone (see the note on the verb)."
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-332",
@@ -21252,16 +21258,16 @@
         "source_kind": "duden",
         "meaning_ru": "принимать (в члены)",
         "meaning_en": "to admit",
-        "note_ru": "принимать кого-либо куда-либо (в члены): Der Chor hat ihn gern in seine Reihen aufgenommen. Подсвечивается только с коррелятом; ins Krankenhaus aufgenommen werden — «принимать (у себя)», та же форма.",
-        "note_en": "to admit someone to something: Der Chor hat ihn gern in seine Reihen aufgenommen. Highlighted only with a correlative; ins Krankenhaus aufgenommen werden is «to take in», the same form.",
+        "note_ru": "принимать кого-либо куда-либо (в члены): Der Chor hat ihn gern in seine Reihen aufgenommen.",
+        "note_en": "to admit someone to something: Der Chor hat ihn gern in seine Reihen aufgenommen.",
         "correlative_only": true
       },
       {
         "pattern": "in + Akkusativ",
         "meaning_ru": "включать (во что-либо)",
         "meaning_en": "to include (in)",
-        "note_ru": "включать что-либо во что-либо: Das Theater nimmt ein neues Stück in den Spielplan auf. Подсвечивается только с коррелятом; ins Krankenhaus aufgenommen werden — «принимать (у себя)», та же форма.",
-        "note_en": "to include something in something: Das Theater nimmt ein neues Stück in den Spielplan auf. Highlighted only with a correlative; ins Krankenhaus aufgenommen werden is «to take in», the same form.",
+        "note_ru": "включать что-либо во что-либо: Das Theater nimmt ein neues Stück in den Spielplan auf.",
+        "note_en": "to include something in something: Das Theater nimmt ein neues Stück in den Spielplan auf.",
         "source": "Duden (aufnehmen 4.3): in etwas mit hineinnehmen, [mit] einbeziehen — einen Punkt in die Tagesordnung aufnehmen",
         "source_kind": "duden",
         "correlative_only": true,
@@ -26684,7 +26690,8 @@
       "example_en": "After the fright she quickly recovered.",
       "note_ru": "Er stolperte, fing sich aber im letzten Moment. — Он споткнулся, но в последний момент удержался на ногах. Der Vogel hatte sich im Netz gefangen. — Птица запуталась в сети. Sich (D) etwas fangen (разг.) — подхватить, схлопотать: Ich habe mir eine Erkältung gefangen. — Я подхватил простуду.",
       "note_en": "Er stolperte, fing sich aber im letzten Moment. — He tripped but caught himself at the last moment. Der Vogel hatte sich im Netz gefangen. — The bird got caught in the net. Sich (D) etwas fangen (colloquial) — to catch, to get: Ich habe mir eine Erkältung gefangen. — I caught a cold."
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-518",
@@ -27330,8 +27337,8 @@
         "pattern": "aus + Dativ",
         "meaning_ru": "следовать, вытекать (из чего-либо)",
         "meaning_en": "to follow, to result (from something)",
-        "note_ru": "вытекать из чего-либо: Daraus folgt, dass wir mehr Zeit brauchen. Подсвечивается только с коррелятом: er folgte ihr aus dem Zimmer — направление, та же форма.",
-        "note_en": "to follow from something: Daraus folgt, dass wir mehr Zeit brauchen. Highlighted only with a correlative: er folgte ihr aus dem Zimmer is direction, the same form.",
+        "note_ru": "вытекать из чего-либо: Daraus folgt, dass wir mehr Zeit brauchen.",
+        "note_en": "to follow from something: Daraus folgt, dass wir mehr Zeit brauchen.",
         "source": "Duden (4): sich mit logischer Konsequenz ergeben — daraus, aus seinen Darlegungen folgt, dass er im Recht war",
         "source_kind": "duden",
         "correlative_only": true,
@@ -32062,7 +32069,8 @@
       "example_en": "The boys were fighting in the schoolyard.",
       "note_ru": "Du hast dich gut geschlagen! — Ты хорошо себя показал! Sie schlugen sich durch die Bäume. — Они пробивались сквозь деревья. sich auf jemandes Seite schlagen — перейти на чью-либо сторону. Себя по чему-либо — местоимение дательное: sich (Dativ) an die Stirn schlagen — хлопнуть себя по лбу (выражение): Ich schlug mir an die Stirn.",
       "note_en": "Du hast dich gut geschlagen! — You did well! Sie schlugen sich durch die Bäume. — They fought their way through the trees. sich auf jemandes Seite schlagen — to side with someone. To hit oneself somewhere — the pronoun is dative: sich (dative) an die Stirn schlagen — to slap one's forehead (expression): Ich schlug mir an die Stirn."
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-2651",
@@ -48892,8 +48900,8 @@
         "pattern": "auf + Akkusativ",
         "meaning_ru": "быть направленным, обращённым (на кого-, что-либо)",
         "meaning_en": "to be directed (at someone, something)",
-        "note_ru": "быть направленным на кого-, что-либо: Sein ganzer Ärger richtete sich auf den Nachbarn. Подсвечивается только с коррелятом; Alle Blicke richteten sich auf die Bühne / zur Tür — направление, та же форма.",
-        "note_en": "to be directed at someone or something: Sein ganzer Ärger richtete sich auf den Nachbarn. Highlighted only with a correlative; Alle Blicke richteten sich auf die Bühne / zur Tür is direction, the same form.",
+        "note_ru": "быть направленным на кого-, что-либо: Sein ganzer Ärger richtete sich auf den Nachbarn.",
+        "note_en": "to be directed at someone or something: Sein ganzer Ärger richtete sich auf den Nachbarn.",
         "source": "Duden (richten 2.1, sich richten): (von Sachen) sich in eine bestimmte Richtung wenden — ihre Augen richteten sich auf mich; die Scheinwerfer richteten sich plötzlich alle auf einen Punkt; sein ganzer Hass richtete sich auf sie",
         "source_kind": "duden",
         "correlative_only": true
@@ -57160,8 +57168,8 @@
         "source": "DWDS: ⟨in etw. beharren⟩ im Glauben beharren; in einer einmal begonnenen Bewegung zu beharren",
         "source_kind": "dwds",
         "source_meaning": "Duden: 1.1 auf etwas bestehen, an etwas festhalten",
-        "note_ru": "упорствовать в чём-либо: Sie beharrt in ihrem Glauben. Подсвечивается только с коррелятом; im Dunkeln beharren — место, та же форма.",
-        "note_en": "to persist in something: Sie beharrt in ihrem Glauben. Highlighted only with a correlative; im Dunkeln beharren is place, the same form.",
+        "note_ru": "упорствовать в чём-либо: Sie beharrt in ihrem Glauben.",
+        "note_en": "to persist in something: Sie beharrt in ihrem Glauben.",
         "meaning_ru": "настаивать (на чём-либо), упорствовать",
         "meaning_en": "to insist (on), to persist",
         "correlative_only": true
@@ -72422,7 +72430,8 @@
       "translation_en": "to contort (a face); to pull a muscle",
       "note_ru": "sich (D) einen Muskel verzerren — растянуть мышцу",
       "note_en": "sich (D) einen Muskel verzerren — to pull a muscle"
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-1454",
@@ -87306,8 +87315,8 @@
         "pattern": "auf + Akkusativ",
         "meaning_ru": "свидетельствовать, говорить (о чём-либо), предвещать (что-либо)",
         "meaning_en": "to indicate, to suggest (something)",
-        "note_ru": "свидетельствовать о чём-либо, предвещать что-либо: Alle Zeichen deuten auf einen baldigen Wechsel. Подсвечивается только с коррелятом: Alles deutet darauf, dass … Указать на кого-, что-либо (Er deutete auf das Fenster.) — направление, без пары: можно и zum Fenster, nach Süden.",
-        "note_en": "to indicate, to suggest something: Alle Zeichen deuten auf einen baldigen Wechsel. Highlighted only with a correlative: Alles deutet darauf, dass … Pointing at someone or something (Er deutete auf das Fenster.) is direction, not a pair: zum Fenster, nach Süden are also possible.",
+        "note_ru": "свидетельствовать о чём-либо, предвещать что-либо: Alle Zeichen deuten auf einen baldigen Wechsel.",
+        "note_en": "to indicate, to suggest something: Alle Zeichen deuten auf einen baldigen Wechsel.",
         "source": "Duden (deuten 2): etwas erkennen, erwarten lassen; auf etwas hinweisen, hindeuten — die Zeichen deuten auf einen Umschwung, eine Änderung; Duden 1 (direction): mit dem Finger auf jemanden, etwas deuten; er deutete nach Süden",
         "source_kind": "duden",
         "correlative_only": true,
@@ -127880,7 +127889,8 @@
         "ihr": "wärmt",
         "Sie": "wärmen Sie"
       }
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-2640",
@@ -128277,7 +128287,8 @@
         "ihr": "kratzt",
         "Sie": "kratzen Sie"
       }
-    }
+    },
+    "sich_dative": true
   },
   {
     "id": "verb-2647",

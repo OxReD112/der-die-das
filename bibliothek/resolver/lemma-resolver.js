@@ -2064,10 +2064,17 @@ function apostropheText(text) {
     // plural)
     const NEVER_NOMINATIVE_FORMS = formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["accusative"], genders:["masculine"]});
     const NEVER_NOMINATIVE_DETERMINER = formTest(NEVER_NOMINATIVE_FORMS);
-    // (the set before step B, without jeden / manchen / welchen …: for the «sich + object group» sign — jeden Freitag is an accusative of time,
-    // and the time words of that place are narrower than data/noun-classes.json; advisor 27.11)
-    const NEVER_NOMINATIVE_CORE_DETERMINER = formTest(formsWith({families:DETERMINER_FAMILIES.core, uses:["noun"], cases:["accusative"],
-      genders:["masculine"]}));
+    // jeden, jede, jedes, manchen …, alle, allen: a determiner of an accusative of time — before a word of time the group is the time, never an
+    // object (jeden Freitag, alle zwei Wochen; «sich + object group», advisor 27.11)
+    const TIME_DETERMINER = formTest(new Set([...formsWith({families:["jeder","mancher"], uses:["noun"], cases:["accusative"]}),
+      ...formsWith({families:["alle"], cases:["accusative"]})]));
+    // ganzen, nächsten, vorigen, letzten, kommenden …: an adjective of an accusative of time (den ganzen Freitag, nächsten Montag)
+    const TIME_ADJECTIVE = /^(?:ganz|nächst|vorig|letzt|kommend)(?:e|en|em|er|es)$/u;
+    // diesen, diese, dieses: before a word of time the group is the time (sich diesen Freitag treffen)
+    const THIS_DETERMINER = formTest(formsWith({families:["dieser"], uses:["noun"], cases:["accusative"]}));
+    // einen, eine, ein, keinen …: before a unit of duration the group is the time (sich einen Moment ansehen), before another word of time an
+    // object (sich einen Filmabend machen)
+    const INDEFINITE_DETERMINER = formTest(formsWith({families:["ein","kein"], uses:["noun"], cases:["accusative"]}));
     // dem / der, einem / einer … demselben, welchem, manchem: the dative singular; after a two-way preposition «Dativ» (the feminine der /
     // einer … is also a genitive — after the preposition it is the dative: in der Stadt)
     const PHRASE_DATIVE_DET = formTest(formsWith({families:DETERMINER_FAMILIES.phrase, uses:["noun"], cases:["dative"], numbers:["singular"]}));
@@ -4484,6 +4491,17 @@ function apostropheText(text) {
             // sich die Kette um den Hals —; a group after sich is then no subject but an object)
             const elidedSubject=a.kind==='finite'&&v>0&&CLAUSE_COORDINATORS.includes(words[v-1])&&(v-1===clause.start||v===clause.start)&&(subject.index===null||subject.index>v);
             const subjectAt=elidedSubject?null:subject.index;
+            // The verb's reflexive readings in the data: an accusative one — the field reflexive (no case "Dativ") or an own «sich X» card
+            // (sich treffen «встречаться») —, and a dative sich with an accusative object — reflexive.case "Dativ" or sich_dative on a card of its
+            // base, an own «sich X» card with reflexive_case "Dativ" (sich vorstellen «представлять себе», sich freinehmen)
+            const baseCards=(lemmas.get(norm(a.base))||[]).filter(e=>e.type==='Verb'),sichCards=(lemmas.get('sich '+norm(a.base))||[]).filter(e=>e.type==='Verb');
+            const accusativeSichVerb=baseCards.some(e=>e.reflexive&&e.reflexive.case!=='Dativ')||sichCards.some(e=>e.reflexive_case!=='Dativ');
+            const dativeSichVerb=baseCards.some(e=>e.reflexive?.case==='Dativ'||e.sich_dative===true)||sichCards.some(e=>e.reflexive_case==='Dativ');
+            // Is w a word of time (data/noun-classes.json) or a compound ending in one — three letters or more before it (Vertrag ends in -trag, no
+            // time); without a determiner of time (anyCompound false) only a compound of two time words, the first one maybe with -s
+            // (Freitagnachmittag, Sonntagabend): einen Filmabend machen is an event, an object?
+            const timeWord=(w,anyCompound=true)=>nounClasses.time.has(w)||[...nounClasses.timeCompoundHead].some(h=>{const first=w.slice(0,w.length-h.length);
+              return first.length>=3&&w.endsWith(h)&&(anyCompound||nounClasses.time.has(first)||nounClasses.time.has(first.replace(/s$/u,'')));});
             // Is there an object group after sich in the clause — a determiner of ACC + up to two adjectives + a noun, not a time / measure group, not
             // a dative plural, not before a comma; with timeObject a counted time noun before the closing word counts too? true / false.
             const objectGroupWith=(ACC,timeObject=false)=>!freeDative&&caseName!=='Akkusativ'&&(()=>{
@@ -4509,12 +4527,35 @@ function apostropheText(text) {
                 const pluralDative=j=>/^(?:den|(?:mein|dein|sein|ihr|unser|eur|dies|jen|kein)en)$/u.test(words[i])&&(forms.get(words[j])||[]).some(e=>e.type==='Nomen'&&(
                   String(e.plural||'').split(/\s*,\s*/u).some(p=>{const pl=norm(p);return pl!==norm(e.word)&&(words[j]===pl+'n'||pl.endsWith('n')&&words[j]===pl);})||
                   words[i]==='den'&&norm(e.word)===words[j]&&['die','das'].includes(e.article)));
-                // (an accusative of time — den ganzen Tag, jeden Tag, einen Moment, die ganze Nacht — is no object: the noun is a time / measure noun;
-                // ganz- / jed- / all- / dies- / vorig- / nächst- before it are its determiners)
-                // (a measure of length or amount — not of time — after a definite or possessive determiner is no measure: sich den Fuß gebrochen is the
-                // foot; den ganzen Tag stays the time)
-                // («a word of time» is the class of data/noun-classes.json)
-                const timeGroup=j=>MEASURE.test(words[j])&&(nounClasses.time.has(words[j])||!/^(?:der|die|das|den|dem|des|(?:mein|dein|sein|ihr|unser|eur|euer)(?:e|en|em|er|es)?)$/u.test(words[i]))||OBJ_TIME.test(words[j]);
+                // (an accusative of time — den ganzen Tag, jeden Freitag, die ganze Nacht — is no object. The noun is a word of time of
+                // data/noun-classes.json or a compound ending in one — Freitagnachmittag, Arbeitstag; a word of time + a noun is an object — sich
+                // einen Tag Urlaub nehmen, sich den ganzen Freitag Zeit nehmen. After jed- / manch- / all- / dies- or with ganz- / nächst- /
+                // vorig- / letzt- / kommend- in the group it is the time; after ein- / kein- a span (time.unit, part_of_day, season, period — a
+                // simple word) is the time, another word of time an object (sich einen Filmabend machen); after der / a possessive it is the object
+                // when the verb takes a dative sich with an accusative object (Wir teilen uns die Woche), otherwise the time; advisor 27.11)
+                // (a verb without an accusative reflexive reading — gönnen, freihalten — takes only a simple span as the time: sich is a dative
+                // anyway, and sich diesen Freitag gönnen / freihalten is the object)
+                // (by form not told — Er hat sich diesen Freitag anders vorgestellt is the object, read as the time; Sie sahen sich den Abend an)
+                // (after jed- / manch- / all- any other noun is no object sign either — jed- + an event is a frequency: Er verletzt sich jedes
+                // Spiel, Sie treffen sich jeden Urlaub, Er quält sich jeden Kilometer)
+                // (a measure: a length / distance or a count with no noun after it is no object after a determiner that is not definite or
+                // possessive — Er rührt sich keinen Millimeter, bewegt sich ein Stück —, a length / distance with ganz- neither — schleppt sich den
+                // ganzen Weg —; sich den Fuß gebrochen is the foot, sich ein Stück Brot abschneiden the bread; other measures (money, weight …) are
+                // an object as before: Er gönnt sich keinen Cent)
+                const timeAdjective=j=>words.slice(i+1,j).some(w=>TIME_ADJECTIVE.test(w));
+                const nounRightAfter=j=>j+1<=clause.end&&/^\p{Lu}/u.test(tokens[j+1][0])&&/^\s+$/u.test(tokenGap(sentence,tokens,j,j+1));
+                const definite=/^(?:der|die|das|den|dem|des|(?:mein|dein|sein|ihr|unser|eur|euer)(?:e|en|em|er|es)?)$/u.test(words[i]);
+                const timeGroup=j=>{const w=words[j],ofTime=TIME_DETERMINER.test(words[i])||timeAdjective(j);
+                  if(TIME_DETERMINER.test(words[i]))return true;
+                  if(timeWord(w,ofTime)){
+                    if(nounRightAfter(j))return false;
+                    const span=nounClasses.timeSpan.has(w);
+                    if(!accusativeSichVerb)return span;
+                    if(ofTime||THIS_DETERMINER.test(words[i]))return true;
+                    if(INDEFINITE_DETERMINER.test(words[i]))return span;
+                    return !dativeSichVerb;}
+                  if(nounClasses.extent.has(w)&&timeAdjective(j))return true;
+                  return (nounClasses.extent.has(w)||nounClasses.count.has(w))&&!definite&&!nounRightAfter(j);};
                 // (den + a noun without a card may be the dative plural — sich den Grüppchen anschlossen —: not counted)
                 // (a dative plural always ends in -n or -s — den Kindern, den Autos —, so den + an unknown noun with another ending is the accusative
                 // singular: band sich den Gürtel um, holte sich den Schatz, zog sich den Pulli über)
@@ -4525,7 +4566,7 @@ function apostropheText(text) {
                   while(j+1<=clause.end&&/^\p{Lu}/u.test(tokens[j+1][0])&&!(forms.get(words[j])||[]).some(e=>e.type==='Nomen')&&/^\s+$/u.test(tokenGap(sentence,tokens,j,j+1)))j++;
                   // (a dative card without a plain card: an indefinite time noun is what is taken — sich ein Jahr / zwei Wochen freinehmen —, only right
                   // before the closing word: not with lang / später / danach, not jeden / den ganzen Tag)
-                  const countedTime=timeObject&&OBJ_TIME.test(words[j])&&/^(?:ein|eine|einen|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn)$/u.test(words[i])&&j+1===clause.end;
+                  const countedTime=timeObject&&timeWord(words[j])&&/^(?:ein|eine|einen|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn)$/u.test(words[i])&&j+1===clause.end;
                   if(j!==subjectAt&&!pluralDative(j)&&(!timeGroup(j)||countedTime)&&!unknownAfterDen(j))return true;break;}
               }
               return false;
@@ -4533,8 +4574,7 @@ function apostropheText(text) {
             const objectGroup=objectGroupWith(ACCUSATIVE_CAPABLE_DETERMINER);
             // (an own accusative card is set aside only before a determiner that is never nominative — sich einen Stuhl ans Fenster
             // stellte —; a group that may be the subject after sich keeps it: Östlich des Dorfes befindet sich das Oratoire)
-            // (not jeden / manchen …: an accusative of time — sich jeden Freitag treffen —, see NEVER_NOMINATIVE_CORE_DETERMINER)
-            const objectGroupStrict=objectGroupWith(NEVER_NOMINATIVE_CORE_DETERMINER);
+            const objectGroupStrict=objectGroupWith(NEVER_NOMINATIVE_DETERMINER);
             // An own «sich X» card states its case — reflexive_case "Dativ" (sich leisten, sich vorstellen «представлять себе») is not taken with
             // mich / dich (Darf ich mich vorstellen?), an accusative one not with mir / dir (Ich höre mir das Konzert an — not sich anhören
             // «звучать») nor before a possible object group (stellte sich einen Stuhl ans Fenster — not sich stellen «встать»); the plain card of
@@ -4627,7 +4667,7 @@ function apostropheText(text) {
               // (up to three lowercase words before the noun — adjectives and the adverbs before them: Diese frei beweglichen Elektronen)
               let j=s0+1;while(j<=s0+3&&j<pronoun&&/^[a-zäöüß]+$/u.test(tokens[j][0])&&!finiteAt(j)&&!SUBJECT_PRONOUNS.has(words[j]))j++;
               if(!/^\p{Lu}/u.test(tokens[j]?.[0]||'')||!finiteAt(j+1)||subjectAt<=j+1)return false;
-              if(MEASURE.test(words[j])||OBJ_TIME.test(words[j]))return false;
+              if(timeWord(words[j])||nounClasses.extent.has(words[j])||nounClasses.count.has(words[j]))return false;
               if(words[s0]==='den'&&!(forms.get(words[j])||[]).some(e=>e.type==='Nomen'&&e.article==='der'&&norm(e.word)===words[j]))return false;
               return true;
             })();
@@ -4645,7 +4685,7 @@ function apostropheText(text) {
             // etwas — a degree word too: Der Himmel zog sich etwas zu —; a counted time noun only right before the closing particle / verb — sich ein
             // Jahr / zwei Wochen frei(genommen), not ein Jahr später, eine Stunde danach)
             const objectAfterSich=!freeDative&&caseName!=='Akkusativ'&&(objectGroupWith(ACCUSATIVE_CAPABLE_DETERMINER,true)||
-              pronoun+3===clause.end&&/^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn)$/u.test(words[pronoun+1])&&OBJ_TIME.test(words[pronoun+2]));
+              pronoun+3===clause.end&&/^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn)$/u.test(words[pronoun+1])&&timeWord(words[pronoun+2]));
             const onlyDativeReflexive=ownReflexiveCard&&a.entry.reflexive_case==='Dativ'&&
               ((lemmas.get(norm(a.base))||[]).some(e=>e.type==='Verb'&&!reflexiveEntries.has(e))||objectAfterSich)&&
               !(lemmas.get(norm(a.base))||[]).some(e=>e.type==='Verb'&&e.reflexive)&&
@@ -25898,7 +25938,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // the grammatical classes «time» and «measure» of nouns — data/noun-classes.json (fallback.nounClasses);
     // without the file the classes are empty
     let nounClassSets = null;
-    const EMPTY_NOUN_CLASSES = Object.freeze({time:new Set(), timeUnit:new Set(), timePoint:new Set(), measure:new Set(), money:new Set()});
+    const EMPTY_NOUN_CLASSES = Object.freeze({time:new Set(), timeUnit:new Set(), timePoint:new Set(), measure:new Set(), money:new Set(), timeCompoundHead:new Set(), timeSpan:new Set(), extent:new Set(), count:new Set()});
     // Read data/noun-classes.json (time, measure …) once; a failed load is not kept.
     async function loadNounClasses() {
       if (nounClassSets) return nounClassSets;
