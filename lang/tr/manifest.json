@@ -2,7 +2,7 @@
  "lang": "tr",
  "name": "Türkçe",
  "format_version": 1,
- "version": "5d1b250d24c4",
+ "version": "25e097068dbf",
  "source_commit": "dc73eb0623e4b3efa638752fb2ec583a55f492a2",
  "exercise_files": {
   "partikeln__sentences": {
@@ -32,7 +32,7 @@
    ],
    "de": "поле sentence записи с подставленным answer",
    "pairs": 527,
-   "done": 404
+   "done": 527
   },
   "vielseitige_verben__sentences": {
    "source": "deutsch-home/verbformen/vielseitige_verben/sentences.js",
@@ -71,6 +71,24 @@
    "de": "поле infinitive той же записи",
    "pairs": 85,
    "done": 85
+  },
+  "pronomen__sentences": {
+   "source": "deutsch-home/pronomen/sentences.js",
+   "globals": [
+    "PRONOUN_EXERCISES"
+   ],
+   "de": "поле sentence той же записи",
+   "pairs": 105,
+   "done": 105
+  },
+  "pronomen__answer-rules": {
+   "source": "deutsch-home/pronomen/answer-rules.js",
+   "globals": [
+    "PronomenRules"
+   ],
+   "de": "пусто",
+   "pairs": 2,
+   "done": 2
   },
   "kasus__prepositions": {
    "source": "deutsch-home/praepositionen/kasus/prepositions.js",
@@ -116,7 +134,7 @@
    "source": "deutsch-home/wortschatz/example-senses.json",
    "key": "id",
    "items": 5475,
-   "done": 964
+   "done": 1610
   }
  },
  "files": {
@@ -130,7 +148,7 @@
   },
   "exercises/modalverben__special_verbs.json": {
    "items": 527,
-   "done": 404
+   "done": 527
   },
   "exercises/vielseitige_verben__sentences.json": {
    "items": 208,
@@ -143,6 +161,14 @@
   "exercises/partizipII__verbs.json": {
    "items": 85,
    "done": 85
+  },
+  "exercises/pronomen__sentences.json": {
+   "items": 105,
+   "done": 105
+  },
+  "exercises/pronomen__answer-rules.json": {
+   "items": 2,
+   "done": 2
   },
   "exercises/kasus__prepositions.json": {
    "items": 85,
@@ -162,7 +188,7 @@
   },
   "wortschatz/example-senses.json": {
    "items": 5475,
-   "done": 964
+   "done": 1610
   },
   "worterbuch/german-adjective-adverbs.json": {
    "items": 603,
@@ -172,7 +198,7 @@
   "worterbuch/german-adjectives.json": {
    "items": 1529,
    "texts": 3712,
-   "done": 15
+   "done": 1529
   },
   "worterbuch/german-adverbs.json": {
    "items": 434,
@@ -226,7 +252,7 @@
   },
   "ui.json": {
    "items": 360,
-   "done": 30
+   "done": 359
   },
   "reader.json": {
    "items": 287,

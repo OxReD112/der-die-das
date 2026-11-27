@@ -72,7 +72,7 @@
  "function-011": {
   "translation_tr": "haa!, demek öyle!",
   "example_tr": "Haa, şimdi anlıyorum!",
-  "usage_note_tr": "Anlama, sezme: Aha, jetzt verstehe ich! — Haa, şimdi anladım! Alaylı: Aha, so ist das also! — Haa, demek öyle!",
+  "usage_note_tr": "Anlama, sezme: Aha, jetzt verstehe ich! — Haa, şimdi anladım! Alay yollu: Aha, so ist das also! — Haa, demek öyle!",
   "_src": "1d549932",
   "_src_reader": "02970b99"
  },
@@ -198,7 +198,7 @@
  "function-029": {
   "translation_tr": "bay (der Herr — hitapta, mektuplarda)",
   "example_tr": "Bay Schulz bugün ofiste değil.",
-  "usage_note_tr": "Kısaltma, açılımı: der Herr. Nominativ dışındaki hâllerde — Hrn. (= Herrn): an Hrn. Schulz. Normal metinde kelime çoğunlukla tam yazılır.",
+  "usage_note_tr": "Kısaltma, açılımı: der Herr. Nominativ dışındaki hâllerde — Hrn. (= Herrn): an Hrn. Schulz. Normal metinde kelime daha çok tam yazılır.",
   "_src": "f43841c7",
   "_src_reader": "bc0ae832"
  },

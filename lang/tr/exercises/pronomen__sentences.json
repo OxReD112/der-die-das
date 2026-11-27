@@ -1,0 +1,842 @@
+[
+ {
+  "en": "Can you see me?",
+  "ru": "Ты меня видишь?",
+  "tr": "Beni görebiliyor musun?",
+  "at": [
+   "08be51b2"
+  ]
+ },
+ {
+  "en": "Will you pick me up there?",
+  "ru": "Ты заберёшь меня там?",
+  "tr": "Beni oradan alır mısın?",
+  "at": [
+   "e6a077b2"
+  ]
+ },
+ {
+  "en": "Can you help me?",
+  "ru": "Ты можешь мне помочь?",
+  "tr": "Bana yardım edebilir misin?",
+  "at": [
+   "c6da7442"
+  ]
+ },
+ {
+  "en": "Will you bring me another coffee?",
+  "ru": "Принесёшь мне ещё кофе?",
+  "tr": "Bana bir kahve daha getirir misin?",
+  "at": [
+   "c1fd7499"
+  ]
+ },
+ {
+  "en": "I see you!",
+  "ru": "Я тебя вижу!",
+  "tr": "Seni görüyorum!",
+  "at": [
+   "8da55c65"
+  ]
+ },
+ {
+  "en": "I'll visit you tomorrow.",
+  "ru": "Я навещу тебя завтра.",
+  "tr": "Yarın seni ziyaret edeceğim.",
+  "at": [
+   "d4e62be8"
+  ]
+ },
+ {
+  "en": "I'm giving you a present.",
+  "ru": "Я дам тебе подарок.",
+  "tr": "Sana bir hediye vereceğim.",
+  "at": [
+   "fe324a1f"
+  ]
+ },
+ {
+  "en": "I'll show you the way.",
+  "ru": "Я покажу тебе дорогу.",
+  "tr": "Sana yolu göstereceğim.",
+  "at": [
+   "3cf43d70"
+  ]
+ },
+ {
+  "en": "I see him every morning.",
+  "ru": "Я вижу его каждое утро.",
+  "tr": "Onu her sabah görüyorum.",
+  "at": [
+   "8073fa3d"
+  ]
+ },
+ {
+  "en": "We'll meet him there.",
+  "ru": "Мы встретим его там.",
+  "tr": "Onunla orada buluşacağız.",
+  "at": [
+   "45df7235"
+  ]
+ },
+ {
+  "en": "I visit him every Sunday.",
+  "ru": "Я навещаю его каждое воскресенье.",
+  "tr": "Onu her pazar ziyaret ediyorum.",
+  "at": [
+   "6e8b6a6d"
+  ]
+ },
+ {
+  "en": "I'm helping him today.",
+  "ru": "Я помогаю ему сегодня.",
+  "tr": "Bugün ona yardım ediyorum.",
+  "at": [
+   "925954f8"
+  ]
+ },
+ {
+  "en": "I'll pay for his coffee.",
+  "ru": "Я оплачу ему кофе.",
+  "tr": "Kahveyi ona ben ısmarlayacağım.",
+  "at": [
+   "4e1e63ab"
+  ]
+ },
+ {
+  "en": "I'll buy him a book.",
+  "ru": "Я куплю ему книгу.",
+  "tr": "Ona bir kitap alacağım.",
+  "at": [
+   "a2793091"
+  ]
+ },
+ {
+  "en": "I'll pick her up in a moment.",
+  "ru": "Я сейчас её заберу.",
+  "tr": "Onu birazdan alacağım.",
+  "at": [
+   "4098b02d"
+  ]
+ },
+ {
+  "en": "Do you already know her?",
+  "ru": "Ты уже её знаешь?",
+  "tr": "Onu önceden tanıyor musun?",
+  "at": [
+   "79b60f8a"
+  ]
+ },
+ {
+  "en": "I'm giving her the book.",
+  "ru": "Я даю ей книгу.",
+  "tr": "Kitabı ona veriyorum.",
+  "at": [
+   "c904c249"
+  ]
+ },
+ {
+  "en": "I'll bring her a jacket.",
+  "ru": "Я принесу ей куртку.",
+  "tr": "Ona bir ceket getireceğim.",
+  "at": [
+   "94896aa2"
+  ]
+ },
+ {
+  "en": "I'll explain everything to her.",
+  "ru": "Я ей всё объясню.",
+  "tr": "Ona her şeyi açıklayacağım.",
+  "at": [
+   "354e27ba"
+  ]
+ },
+ {
+  "en": "Can you pass it to me?",
+  "ru": "Передашь мне его?",
+  "tr": "Onu bana verir misin?",
+  "at": [
+   "5db6c192"
+  ]
+ },
+ {
+  "en": "I'll give it back to her tomorrow.",
+  "ru": "Я верну ей его завтра.",
+  "tr": "Onu yarın ona geri vereceğim.",
+  "at": [
+   "5a5efed6"
+  ]
+ },
+ {
+  "en": "I'll help the child right away.",
+  "ru": "Я сразу ему помогу.",
+  "tr": "Ona hemen yardım edeceğim.",
+  "at": [
+   "d17d3944"
+  ]
+ },
+ {
+  "en": "I'll read to the baby a little longer.",
+  "ru": "Я ещё немного ему почитаю.",
+  "tr": "Ona biraz daha kitap okuyacağım.",
+  "at": [
+   "07f61f9f"
+  ]
+ },
+ {
+  "en": "Can you pick us up?",
+  "ru": "Ты можешь нас забрать?",
+  "tr": "Bizi alabilir misin?",
+  "at": [
+   "60ba3a59"
+  ]
+ },
+ {
+  "en": "Do you see us?",
+  "ru": "Ты нас видишь?",
+  "tr": "Bizi görüyor musun?",
+  "at": [
+   "bfc2eb4f"
+  ]
+ },
+ {
+  "en": "He's cooking us some soup.",
+  "ru": "Он готовит нам суп.",
+  "tr": "Bize çorba pişiriyor.",
+  "at": [
+   "57d304af"
+  ]
+ },
+ {
+  "en": "Can you show us the way?",
+  "ru": "Ты можешь показать нам дорогу?",
+  "tr": "Bize yolu gösterebilir misin?",
+  "at": [
+   "97feebd4"
+  ]
+ },
+ {
+  "en": "I can see you from the window.",
+  "ru": "Я вижу вас из окна.",
+  "tr": "Sizi pencereden görüyorum.",
+  "at": [
+   "7c243977"
+  ]
+ },
+ {
+  "en": "I'm expecting you at eight.",
+  "ru": "Я жду вас в восемь.",
+  "tr": "Sizi saat sekizde bekliyorum.",
+  "at": [
+   "6d062df4"
+  ]
+ },
+ {
+  "en": "I'll show you the city.",
+  "ru": "Я покажу вам город.",
+  "tr": "Size şehri göstereceğim.",
+  "at": [
+   "2db3729a"
+  ]
+ },
+ {
+  "en": "I'll explain everything to you later.",
+  "ru": "Я объясню вам всё позже.",
+  "tr": "Size her şeyi sonra açıklayacağım.",
+  "at": [
+   "bbea900a"
+  ]
+ },
+ {
+  "en": "I'll meet them after work.",
+  "ru": "Я встречу их после работы.",
+  "tr": "Onlarla işten sonra buluşacağım.",
+  "at": [
+   "0d8dfea4"
+  ]
+ },
+ {
+  "en": "I'm calling them in to eat.",
+  "ru": "Я зову их к столу.",
+  "tr": "Onları yemeğe çağırıyorum.",
+  "at": [
+   "6ed888fa"
+  ]
+ },
+ {
+  "en": "I'm helping them at the weekend.",
+  "ru": "Я помогаю им на выходных.",
+  "tr": "Hafta sonu onlara yardım ediyorum.",
+  "at": [
+   "4c583cbd"
+  ]
+ },
+ {
+  "en": "We'll bring them some water.",
+  "ru": "Мы принесём им воду.",
+  "tr": "Onlara su getireceğiz.",
+  "at": [
+   "b8c9e5fd"
+  ]
+ },
+ {
+  "en": "We'll show them the city.",
+  "ru": "Мы покажем им город.",
+  "tr": "Onlara şehri göstereceğiz.",
+  "at": [
+   "180a57db"
+  ]
+ },
+ {
+  "en": "Then I'll visit you at ten.",
+  "ru": "Тогда я зайду к Вам в десять.",
+  "tr": "O zaman saat onda Sizi ziyaret edeceğim.",
+  "at": [
+   "407bf899"
+  ]
+ },
+ {
+  "en": "Nice to see you again.",
+  "ru": "Рад(а) снова Вас видеть.",
+  "tr": "Sizi yeniden görmek güzel.",
+  "at": [
+   "8a746fbc"
+  ]
+ },
+ {
+  "en": "I'll answer you in a moment.",
+  "ru": "Я сейчас Вам отвечу.",
+  "tr": "Size hemen cevap vereceğim.",
+  "at": [
+   "2c33d727"
+  ]
+ },
+ {
+  "en": "I'll send you the file.",
+  "ru": "Я отправлю Вам файл.",
+  "tr": "Size dosyayı göndereceğim.",
+  "at": [
+   "bfb281b8"
+  ]
+ },
+ {
+  "en": "I wish you all the best!",
+  "ru": "Желаю Вам всего наилучшего!",
+  "tr": "Size her şeyin en iyisini dilerim!",
+  "at": [
+   "75b8992e"
+  ]
+ },
+ {
+  "en": "My bike is new.",
+  "ru": "Мой велосипед новый.",
+  "tr": "Bisikletim yeni.",
+  "at": [
+   "bb67a3f4"
+  ]
+ },
+ {
+  "en": "My neighbours are friendly.",
+  "ru": "Мои соседи дружелюбные.",
+  "tr": "Komşularım cana yakın.",
+  "at": [
+   "705a3f26"
+  ]
+ },
+ {
+  "en": "I'll pick up my suitcase later.",
+  "ru": "Я заберу свой чемодан позже.",
+  "tr": "Bavulumu sonra alacağım.",
+  "at": [
+   "dd8662c3"
+  ]
+ },
+ {
+  "en": "I'm looking for my bag.",
+  "ru": "Я ищу свою сумку.",
+  "tr": "Çantamı arıyorum.",
+  "at": [
+   "b0a957e9"
+  ]
+ },
+ {
+  "en": "I'm talking to my boss.",
+  "ru": "Я разговариваю со своим начальником.",
+  "tr": "Şefimle konuşuyorum.",
+  "at": [
+   "e25f7672"
+  ]
+ },
+ {
+  "en": "I'm going to Vienna with my friend.",
+  "ru": "Я еду со своей подругой в Вену.",
+  "tr": "Arkadaşımla Viyana'ya gidiyorum.",
+  "at": [
+   "da717463"
+  ]
+ },
+ {
+  "en": "I'm reading my child a story.",
+  "ru": "Я читаю своему ребёнку историю.",
+  "tr": "Çocuğuma bir hikâye okuyorum.",
+  "at": [
+   "4f79596c"
+  ]
+ },
+ {
+  "en": "This is my brother's car.",
+  "ru": "Это машина моего брата.",
+  "tr": "Bu, erkek kardeşimin arabası.",
+  "at": [
+   "344df1c2"
+  ]
+ },
+ {
+  "en": "This is my children's room.",
+  "ru": "Это комната моих детей.",
+  "tr": "Bu, çocuklarımın odası.",
+  "at": [
+   "1ec9cde0"
+  ]
+ },
+ {
+  "en": "Your dog is very calm.",
+  "ru": "Твоя собака очень спокойная.",
+  "tr": "Köpeğin çok sakin.",
+  "at": [
+   "b6a92b2b"
+  ]
+ },
+ {
+  "en": "I like your jacket.",
+  "ru": "Мне нравится твоя куртка.",
+  "tr": "Ceketini beğendim.",
+  "at": [
+   "6f77dbc2"
+  ]
+ },
+ {
+  "en": "Did you cancel your appointment?",
+  "ru": "Ты отменил(а) свою запись к врачу?",
+  "tr": "Doktor randevunu iptal ettin mi?",
+  "at": [
+   "17225525"
+  ]
+ },
+ {
+  "en": "Where did you buy your phone?",
+  "ru": "Где ты купил(а) свой телефон?",
+  "tr": "Telefonunu nereden aldın?",
+  "at": [
+   "3bc8d9f2"
+  ]
+ },
+ {
+  "en": "Have you packed your things yet?",
+  "ru": "Ты уже собрал(а) свои вещи?",
+  "tr": "Eşyalarını şimdiden topladın mı?",
+  "at": [
+   "cbb9031a"
+  ]
+ },
+ {
+  "en": "What happened to your car?",
+  "ru": "Что случилось с твоей машиной?",
+  "tr": "Arabana ne oldu?",
+  "at": [
+   "89d961ef"
+  ]
+ },
+ {
+  "en": "Do you often play with your children?",
+  "ru": "Ты часто играешь со своими детьми?",
+  "tr": "Çocuklarınla sık sık oynar mısın?",
+  "at": [
+   "035ef1c4"
+  ]
+ },
+ {
+  "en": "I like the colour of your house.",
+  "ru": "Мне нравится цвет твоего дома.",
+  "tr": "Evinin rengini beğendim.",
+  "at": [
+   "ed656efa"
+  ]
+ },
+ {
+  "en": "That's his car.",
+  "ru": "Это его машина.",
+  "tr": "Bu, onun arabası.",
+  "at": [
+   "05224ee9"
+  ]
+ },
+ {
+  "en": "He's taking his dog with him.",
+  "ru": "Он берёт свою собаку с собой.",
+  "tr": "Köpeğini yanına alıyor.",
+  "at": [
+   "f39f9d82"
+  ]
+ },
+ {
+  "en": "He can't find his glasses.",
+  "ru": "Он не может найти свои очки.",
+  "tr": "Gözlüğünü bulamıyor.",
+  "at": [
+   "311b1840"
+  ]
+ },
+ {
+  "en": "He lives with his brother.",
+  "ru": "Он живёт у своего брата.",
+  "tr": "Erkek kardeşinin yanında kalıyor.",
+  "at": [
+   "f12efdfb"
+  ]
+ },
+ {
+  "en": "I often talk to his sister.",
+  "ru": "Я часто разговариваю с его сестрой.",
+  "tr": "Kız kardeşiyle sık sık konuşuyorum.",
+  "at": [
+   "3e23754a"
+  ]
+ },
+ {
+  "en": "He helps his child with homework.",
+  "ru": "Он помогает своему ребёнку с домашним заданием.",
+  "tr": "Çocuğuna ödevlerinde yardım ediyor.",
+  "at": [
+   "10f3016f"
+  ]
+ },
+ {
+  "en": "This is his sister's flat.",
+  "ru": "Это квартира его сестры.",
+  "tr": "Bu, onun kız kardeşinin dairesi.",
+  "at": [
+   "64d4dba9"
+  ]
+ },
+ {
+  "en": "His boss's office is on the third floor.",
+  "ru": "Кабинет его начальника на третьем этаже.",
+  "tr": "Onun şefinin ofisi üçüncü katta.",
+  "at": [
+   "29151f8a"
+  ]
+ },
+ {
+  "en": "Her brother works here.",
+  "ru": "Её брат работает здесь.",
+  "tr": "Erkek kardeşi burada çalışıyor.",
+  "at": [
+   "cc57daac"
+  ]
+ },
+ {
+  "en": "Her room is very bright.",
+  "ru": "Её комната очень светлая.",
+  "tr": "Odası çok aydınlık.",
+  "at": [
+   "79f45fcf"
+  ]
+ },
+ {
+  "en": "I can't find her key either.",
+  "ru": "Я тоже не могу найти её ключ.",
+  "tr": "Ben de onun anahtarını bulamıyorum.",
+  "at": [
+   "0acf4bb5"
+  ]
+ },
+ {
+  "en": "She can't find her card.",
+  "ru": "Она не может найти свою карту.",
+  "tr": "Kartını bulamıyor.",
+  "at": [
+   "6a0331f1"
+  ]
+ },
+ {
+  "en": "She's on the phone with her father.",
+  "ru": "Она разговаривает по телефону со своим отцом.",
+  "tr": "Babasıyla telefonda konuşuyor.",
+  "at": [
+   "325dc150"
+  ]
+ },
+ {
+  "en": "She's going to the seaside with her mother.",
+  "ru": "Она едет со своей мамой к морю.",
+  "tr": "Annesiyle denize gidiyor.",
+  "at": [
+   "9d6b90b4"
+  ]
+ },
+ {
+  "en": "She's reading her child a book.",
+  "ru": "Она читает своему ребёнку книгу.",
+  "tr": "Çocuğuna bir kitap okuyor.",
+  "at": [
+   "d7b58ea9"
+  ]
+ },
+ {
+  "en": "This is her daughter's room.",
+  "ru": "Это комната её дочери.",
+  "tr": "Bu, onun kızının odası.",
+  "at": [
+   "bd00f8a0"
+  ]
+ },
+ {
+  "en": "Our flat is small.",
+  "ru": "Наша квартира маленькая.",
+  "tr": "Dairemiz küçük.",
+  "at": [
+   "d1649e30"
+  ]
+ },
+ {
+  "en": "We're meeting our boss tomorrow.",
+  "ru": "Завтра мы встречаемся со своим начальником.",
+  "tr": "Yarın şefimizle buluşuyoruz.",
+  "at": [
+   "94350477"
+  ]
+ },
+ {
+  "en": "We're selling our car.",
+  "ru": "Мы продаём свою машину.",
+  "tr": "Arabamızı satıyoruz.",
+  "at": [
+   "e3fc0c08"
+  ]
+ },
+ {
+  "en": "We're selling our furniture.",
+  "ru": "Мы продаём свою мебель.",
+  "tr": "Mobilyalarımızı satıyoruz.",
+  "at": [
+   "ab7d3c4a"
+  ]
+ },
+ {
+  "en": "We're talking to our boss.",
+  "ru": "Мы разговариваем с нашим начальником.",
+  "tr": "Şefimizle konuşuyoruz.",
+  "at": [
+   "bb49dfa0"
+  ]
+ },
+ {
+  "en": "We're staying with our friends.",
+  "ru": "Мы живём у своих друзей.",
+  "tr": "Arkadaşlarımızın yanında kalıyoruz.",
+  "at": [
+   "935e4533"
+  ]
+ },
+ {
+  "en": "The roof of our house is new.",
+  "ru": "Крыша нашего дома новая.",
+  "tr": "Evimizin çatısı yeni.",
+  "at": [
+   "a79d92d1"
+  ]
+ },
+ {
+  "en": "Our neighbours' cars are parked in front of the house.",
+  "ru": "Машины наших соседей стоят перед домом.",
+  "tr": "Komşularımızın arabaları evin önünde duruyor.",
+  "at": [
+   "a55c8a83"
+  ]
+ },
+ {
+  "en": "Your son is so big already.",
+  "ru": "Ваш сын уже большой.",
+  "tr": "Oğlunuz şimdiden büyümüş.",
+  "at": [
+   "e4b5be34"
+  ]
+ },
+ {
+  "en": "How big is your flat?",
+  "ru": "Какого размера ваша квартира?",
+  "tr": "Daireniz ne kadar büyük?",
+  "at": [
+   "36c11e73"
+  ]
+ },
+ {
+  "en": "Your children are very nice.",
+  "ru": "Ваши дети очень милые.",
+  "tr": "Çocuklarınız çok tatlı.",
+  "at": [
+   "0d337232"
+  ]
+ },
+ {
+  "en": "Are you taking your cat with you?",
+  "ru": "Вы берёте своего кота с собой?",
+  "tr": "Kedinizi yanınıza alıyor musunuz?",
+  "at": [
+   "42eb0c9b"
+  ]
+ },
+ {
+  "en": "Can you explain your idea again?",
+  "ru": "Вы можете ещё раз объяснить свою идею?",
+  "tr": "Fikrinizi bir kez daha açıklayabilir misiniz?",
+  "at": [
+   "b32951d7"
+  ]
+ },
+ {
+  "en": "Are you going with your father?",
+  "ru": "Вы едете со своим отцом?",
+  "tr": "Babanızla mı gidiyorsunuz?",
+  "at": [
+   "5e3ed9d8"
+  ]
+ },
+ {
+  "en": "Are you talking to your teacher?",
+  "ru": "Вы разговариваете со своей учительницей?",
+  "tr": "Öğretmeninizle konuşuyor musunuz?",
+  "at": [
+   "73ee00ba"
+  ]
+ },
+ {
+  "en": "Are you going out to eat with your colleagues?",
+  "ru": "Вы идёте есть со своими коллегами?",
+  "tr": "İş arkadaşlarınızla yemeğe gidiyor musunuz?",
+  "at": [
+   "d988e3b5"
+  ]
+ },
+ {
+  "en": "This is your daughter's bike.",
+  "ru": "Это велосипед вашей дочери.",
+  "tr": "Bu, kızınızın bisikleti.",
+  "at": [
+   "8f3bd76b"
+  ]
+ },
+ {
+  "en": "Their son studies in Munich.",
+  "ru": "Их сын учится в Мюнхене.",
+  "tr": "Onların oğlu Münih'te okuyor.",
+  "at": [
+   "7244909c"
+  ]
+ },
+ {
+  "en": "Their books are lying everywhere.",
+  "ru": "Их книги лежат повсюду.",
+  "tr": "Onların kitapları her yerde duruyor.",
+  "at": [
+   "8559feb7"
+  ]
+ },
+ {
+  "en": "They're selling their house.",
+  "ru": "Они продают свой дом.",
+  "tr": "Evlerini satıyorlar.",
+  "at": [
+   "4956e8bb"
+  ]
+ },
+ {
+  "en": "The guests are taking their jackets.",
+  "ru": "Гости забирают свои куртки.",
+  "tr": "Misafirler ceketlerini alıyor.",
+  "at": [
+   "7b1dfa87"
+  ]
+ },
+ {
+  "en": "They often help their neighbour.",
+  "ru": "Они часто помогают своей соседке.",
+  "tr": "Komşularına sık sık yardım ediyorlar.",
+  "at": [
+   "5d0b458f"
+  ]
+ },
+ {
+  "en": "I'm talking to their parents.",
+  "ru": "Я разговариваю с их родителями.",
+  "tr": "Anne babalarıyla konuşuyorum.",
+  "at": [
+   "4d29c25b"
+  ]
+ },
+ {
+  "en": "The garden of their house is big.",
+  "ru": "Сад их дома большой.",
+  "tr": "Evlerinin bahçesi büyük.",
+  "at": [
+   "3ad1f83c"
+  ]
+ },
+ {
+  "en": "Your appointment is at ten o'clock.",
+  "ru": "Ваша встреча в десять часов.",
+  "tr": "Randevunuz saat onda.",
+  "at": [
+   "11ccf40b"
+  ]
+ },
+ {
+  "en": "Your bill is at the till.",
+  "ru": "Ваш счёт лежит на кассе.",
+  "tr": "Faturanız kasada.",
+  "at": [
+   "308f4827"
+  ]
+ },
+ {
+  "en": "Please show your ID.",
+  "ru": "Пожалуйста, покажите Ваше удостоверение.",
+  "tr": "Lütfen kimliğinizi gösterin.",
+  "at": [
+   "b946c209"
+  ]
+ },
+ {
+  "en": "Do you have your ticket with you?",
+  "ru": "Вы взяли с собой свой билет?",
+  "tr": "Biletiniz yanınızda mı?",
+  "at": [
+   "e6ef5ac3"
+  ]
+ },
+ {
+  "en": "Please bring your documents.",
+  "ru": "Пожалуйста, возьмите с собой свои документы.",
+  "tr": "Lütfen belgelerinizi yanınıza alın.",
+  "at": [
+   "9eaed0ce"
+  ]
+ },
+ {
+  "en": "Are you travelling with your children?",
+  "ru": "Вы путешествуете со своими детьми?",
+  "tr": "Çocuklarınızla seyahat ediyor musunuz?",
+  "at": [
+   "9b863d3e"
+  ]
+ },
+ {
+  "en": "This is your son's room.",
+  "ru": "Это комната Вашего сына.",
+  "tr": "Bu, oğlunuzun odası.",
+  "at": [
+   "49ceba4e"
+  ]
+ }
+]

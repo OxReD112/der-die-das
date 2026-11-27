@@ -1,8 +1,63 @@
 [
  {
+  "en": "Helps you notice the patterns behind German articles - they often let you guess the article of a new word.",
+  "ru": "Помогает заметить закономерности немецких артиклей - по ним артикль часто можно угадать и у незнакомого слова.",
+  "tr": "Almanca artikellerin ardındaki düzenleri fark etmene yardım eder: bunlar sayesinde yeni bir kelimenin artikelini de çoğu zaman tahmin edebilirsin."
+ },
+ {
+  "en": "Heads up:",
+  "ru": "Обратите внимание:",
+  "tr": "Dikkat:"
+ },
+ {
+  "en": "English",
+  "ru": "Русский",
+  "tr": "Türkçe"
+ },
+ {
   "en": "Restore the backup from {0}?",
   "ru": "Восстановить бэкап от {0}?",
   "tr": "{0} tarihli yedek geri yüklensin mi?"
+ },
+ {
+  "en": "Restore the backup?",
+  "ru": "Восстановить бэкап?",
+  "tr": "Yedek geri yüklensin mi?"
+ },
+ {
+  "en": "Couldn't turn on notifications.",
+  "ru": "Не получилось включить уведомления.",
+  "tr": "Bildirimler açılamadı."
+ },
+ {
+  "en": "You can keep practising today without a daily limit. It will turn on again automatically tomorrow.",
+  "ru": "Сегодня можно заниматься без дневного лимита. Завтра он снова включится сам.",
+  "tr": "Bugün günlük sınır olmadan çalışabilirsin. Sınır yarın kendiliğinden yeniden devreye girecek."
+ },
+ {
+  "en": "Some German grammar you can understand. Some you just have to remember - der, die or das, ihr or Ihnen, am or im. This app is made for exactly those parts. Short daily rounds help them stick.",
+  "ru": "Часть немецкой грамматики можно понять. А часть приходится просто запомнить - der, die или das, ihr или Ihnen, am или im. Именно для этого и создано приложение. Короткие ежедневные раунды помогают всё закрепить.",
+  "tr": "Almanca dil bilgisinin bir kısmı anlaşılabilir. Bir kısmını ise ezberlemek gerekir: der, die ya da das, ihr ya da Ihnen, am ya da im. Bu uygulama tam da bu kısımlar için yapıldı. Kısa günlük turlar bunların akılda kalmasına yardım eder."
+ },
+ {
+  "en": "Fortschritt sichern",
+  "ru": "Fortschritt sichern",
+  "tr": "Fortschritt sichern"
+ },
+ {
+  "en": "Safari deletes saved progress after 7 days without a visit. On the Home Screen, it stays safe.",
+  "ru": "Safari удаляет сохранённый прогресс, если 7 дней не заходить на сайт. На экране «Домой» он в безопасности.",
+  "tr": "Safari, siteye 7 gün girilmezse kaydedilen ilerlemeyi siler. Ana Ekranda ise güvende kalır."
+ },
+ {
+  "en": "So geht's",
+  "ru": "So geht's",
+  "tr": "So geht's"
+ },
+ {
+  "en": "Zum Home-Bildschirm",
+  "ru": "Zum Home-Bildschirm",
+  "tr": "Zum Home-Bildschirm"
  },
  {
   "en": "Save your progress first.",
@@ -10,9 +65,59 @@
   "tr": "Önce ilerlemeni kaydet."
  },
  {
+  "en": "Backup erstellen",
+  "ru": "Backup erstellen",
+  "tr": "Backup erstellen"
+ },
+ {
+  "en": "✓ Backup erstellt",
+  "ru": "✓ Backup erstellt",
+  "tr": "✓ Backup erstellt"
+ },
+ {
   "en": "Tap <b>Share</b> {0} in Safari, then <b>Add to Home Screen</b>.",
   "ru": "Нажми <b>Поделиться</b> {0} в Safari, затем <b>На экран «Домой»</b>.",
   "tr": "Safari'de <b>Paylaş</b> {0} simgesine, sonra <b>Ana Ekrana Ekle</b> seçeneğine dokun."
+ },
+ {
+  "en": "Open Deutsch. from the new icon, go to <b>Einstellungen → Wiederherstellen</b> and pick the backup file.",
+  "ru": "Открой Deutsch. с новой иконки, зайди в <b>Einstellungen → Wiederherstellen</b> и выбери файл бэкапа.",
+  "tr": "Deutsch. uygulamasını yeni simgeden aç, <b>Einstellungen → Wiederherstellen</b> bölümüne git ve yedek dosyasını seç."
+ },
+ {
+  "en": "The Home Screen app has its own storage, so your progress needs to be moved over once.",
+  "ru": "У приложения на экране «Домой» своё хранилище, поэтому прогресс нужно один раз перенести.",
+  "tr": "Ana Ekrandaki uygulamanın kendi depolama alanı var; bu yüzden ilerlemeni bir kez oraya taşıman gerekir."
+ },
+ {
+  "en": "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - add Deutsch. to your Home Screen, or make a backup often.",
+  "ru": "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - добавь Deutsch. на экран «Домой» или почаще делай бэкап.",
+  "tr": "İlerleme yalnızca bu tarayıcıda saklanır. Safari, siteye 7 gün girilmezse onu siler: Deutsch. uygulamasını Ana Ekrana ekle ya da sık sık yedek al."
+ },
+ {
+  "en": "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - make a backup often.",
+  "ru": "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делай бэкап.",
+  "tr": "İlerleme yalnızca bu tarayıcıda saklanır. Safari, siteye 7 gün girilmezse onu siler: sık sık yedek al."
+ },
+ {
+  "en": "Dein Fortschritt",
+  "ru": "Dein Fortschritt",
+  "tr": "Dein Fortschritt"
+ },
+ {
+  "en": "Your progress is saved only on this device - in this browser, or in the Home Screen app. It isn't stored online, so clearing website data, deleting the app or switching to a new device would erase it.",
+  "ru": "Прогресс хранится только на этом устройстве - в этом браузере или в приложении на экране «Домой». В интернете он не сохраняется, поэтому если очистить данные сайта, удалить приложение или перейти на новое устройство, он пропадёт.",
+  "tr": "İlerlemen yalnızca bu cihazda saklanır: bu tarayıcıda ya da Ana Ekrandaki uygulamada. İnternette saklanmaz; bu yüzden site verilerini temizlersen, uygulamayı silersen ya da yeni bir cihaza geçersen kaybolur."
+ },
+ {
+  "en": " Safari also deletes it after 7 days without a visit.",
+  "ru": " Кроме того, Safari удаляет его, если 7 дней не заходить на сайт.",
+  "tr": " Ayrıca Safari, siteye 7 gün girilmezse onu siler."
+ },
+ {
+  "en": "Make a backup now and then. It's a small file you can bring back anytime with Wiederherstellen - on this device or a new one.",
+  "ru": "Время от времени делай бэкап. Это небольшой файл, из которого прогресс можно вернуть через Wiederherstellen - на этом же или на новом устройстве.",
+  "tr": "Arada bir yedek al. Bu küçük bir dosyadır: ilerlemeni istediğin zaman Wiederherstellen ile geri getirebilirsin, bu cihazda ya da yenisinde."
  },
  {
   "en": "What you want to say:",
@@ -20,9 +125,19 @@
   "tr": "Ne söylemek istiyorsun:"
  },
  {
+  "en": "also right: ",
+  "ru": "тоже подходит: ",
+  "tr": "bu da olur: "
+ },
+ {
   "en": "{0} means “{1}”. ",
   "ru": "{0} — это «{1}». ",
   "tr": "{0} — “{1}” anlamında. "
+ },
+ {
+  "en": "Little words like doch, mal and schon barely translate, yet they change the tone of a sentence. Tap a particle and watch what happens.",
+  "ru": "Маленькие слова вроде doch, mal, schon почти не переводятся, но меняют тон фразы. Нажимай на частицы и смотри, что происходит с предложением.",
+  "tr": "doch, mal, schon gibi küçük kelimeler neredeyse çevrilemez, ama cümlenin tonunu değiştirir. Parçacıklara dokun ve cümleye ne olduğunu izle."
  },
  {
   "en": "Tap a particle below and watch where the tone moves.",
@@ -30,9 +145,169 @@
   "tr": "Aşağıdan bir parçacığa dokun ve tonun nereye kaydığını izle."
  },
  {
+  "en": "Stressed DOCH pushes back against someone's “no” or doubt. There's nothing to push back against here.",
+  "ru": "Ударное DOCH возражает на чужое «нет» или сомнение. В этом предложении спорить не с чем.",
+  "tr": "Vurgulu DOCH, birinin “hayır” demesine ya da şüphesine itiraz eder. Bu cümlede itiraz edilecek bir şey yok."
+ },
+ {
+  "en": "Stressed DENN only occurs in a question after excuses: “Wo warst du DENN?” — “so where were you, then?”",
+  "ru": "Ударное DENN бывает только в вопросе после отговорок: «Wo warst du DENN?» — «ну а где же тогда?»",
+  "tr": "Vurgulu DENN yalnızca bahanelerden sonra sorulan soruda olur: “Wo warst du DENN?” — “ee, o hâlde neredeydin?”"
+ },
+ {
   "en": "This particle doesn't fit here.",
   "ru": "Здесь эта частица не встаёт.",
   "tr": "Bu parçacık buraya uymuyor."
+ },
+ {
+  "en": "Helps you remember which case comes after prepositions like mit, für or wegen.",
+  "ru": "Помогает запомнить, какой падеж идёт после предлогов вроде mit, für или wegen.",
+  "tr": "mit, für ya da wegen gibi edatlardan sonra hangi hâlin geldiğini hatırlamana yardım eder."
+ },
+ {
+  "en": "Where? Where to? Where from? Helps you pick the right preposition for a place.",
+  "ru": "Где? Куда? Откуда? Помогает подобрать правильный предлог к месту.",
+  "tr": "Nerede? Nereye? Nereden? Bir yer için doğru edatı seçmene yardım eder."
+ },
+ {
+  "en": "also right · more common: ",
+  "ru": "тоже верно · чаще: ",
+  "tr": "bu da doğru · daha sık: "
+ },
+ {
+  "en": "Helps you remember which preposition a verb takes - and the case after it.",
+  "ru": "Помогает запомнить, с каким предлогом идёт глагол - и какой после него падеж.",
+  "tr": "Bir fiilin hangi edatla kullanıldığını ve ondan sonra hangi hâlin geldiğini hatırlamana yardım eder."
+ },
+ {
+  "en": "always",
+  "ru": "всегда",
+  "tr": "her zaman"
+ },
+ {
+  "en": "almost always",
+  "ru": "почти всегда",
+  "tr": "neredeyse her zaman"
+ },
+ {
+  "en": "often",
+  "ru": "часто",
+  "tr": "sıklıkla"
+ },
+ {
+  "en": "learn by heart",
+  "ru": "запомнить",
+  "tr": "ezberle"
+ },
+ {
+  "en": "these prepositions have only one case — nothing to guess",
+  "ru": "у этих предлогов только один падеж — угадывать нечего",
+  "tr": "bu edatların tek bir hâli var — tahmin edecek bir şey yok"
+ },
+ {
+  "en": "exception: bestehen auf + Dativ (to insist on)",
+  "ru": "исключение: bestehen auf + Dativ (настаивать на)",
+  "tr": "istisna: bestehen auf + Dativ (bir şeyde ısrar etmek)"
+ },
+ {
+  "en": "an: a thought or feeling towards → Akkusativ; taking part, working → Dativ",
+  "ru": "an: мысль, чувство к кому-то → Akkusativ; участие, работа → Dativ",
+  "tr": "an: birine yönelik düşünce, duygu → Akkusativ; katılım, çalışma → Dativ"
+ },
+ {
+  "en": "5 + 5 in this exercise — the one preposition where the case really has to be remembered",
+  "ru": "в упражнении 5 + 5 — единственный предлог, где падеж правда надо помнить",
+  "tr": "bu alıştırmada 5 + 5 — hâlin gerçekten ezberlenmesi gereken tek edat"
+ },
+ {
+  "en": "a topic; a reaction to what is there",
+  "ru": "тема разговора; реакция на то, что уже есть",
+  "tr": "konuşmanın konusu; var olan bir şeye tepki"
+ },
+ {
+  "en": "fear, danger",
+  "ru": "страх, опасность",
+  "tr": "korku, tehlike"
+ },
+ {
+  "en": "together with; busy with",
+  "ru": "вместе с кем-то; чем занят",
+  "tr": "biriyle birlikte; bir şeyle meşgul olmak"
+ },
+ {
+  "en": "searching, asking",
+  "ru": "поиск, вопрос",
+  "tr": "arama, soru"
+ },
+ {
+  "en": "asking for, caring",
+  "ru": "просьба, забота",
+  "tr": "rica, ilgilenme"
+ },
+ {
+  "en": "what lies ahead; attention",
+  "ru": "то, что впереди; внимание",
+  "tr": "ileride olan; dikkat"
+ },
+ {
+  "en": "but verzichten, bestehen auf",
+  "ru": "но verzichten, bestehen auf",
+  "tr": "ama verzichten, bestehen auf"
+ },
+ {
+  "en": "thinking, remembering, believing; taking part",
+  "ru": "думать, помнить, верить; участвовать в чём-то",
+  "tr": "düşünmek, hatırlamak, inanmak; bir şeye katılmak"
+ },
+ {
+  "en": "for what",
+  "ru": "за что (как «за»)",
+  "tr": "ne için, neyin karşılığında"
+ },
+ {
+  "en": "with / to whom",
+  "ru": "у кого, перед кем",
+  "tr": "kime (teşekkür); hangi işte (yardım)"
+ },
+ {
+  "en": "„from“ or „about“",
+  "ru": "то «от», то «о»",
+  "tr": "bazen “-den”, bazen “hakkında”"
+ },
+ {
+  "en": "to; congratulate on",
+  "ru": "к; поздравлять с",
+  "tr": "-e; bir şey için tebrik etmek"
+ },
+ {
+  "en": "of, from",
+  "ru": "из",
+  "tr": "-den, içinden"
+ },
+ {
+  "en": "in, into",
+  "ru": "в",
+  "tr": "-e, içine"
+ },
+ {
+  "en": "against",
+  "ru": "против",
+  "tr": "-e karşı"
+ },
+ {
+  "en": "Almost always so",
+  "ru": "Почти всегда так",
+  "tr": "Neredeyse her zaman böyle"
+ },
+ {
+  "en": "Often so",
+  "ru": "Часто так",
+  "tr": "Sıklıkla böyle"
+ },
+ {
+  "en": "Just learn them",
+  "ru": "Просто запомнить",
+  "tr": "Sadece ezberle"
  },
  {
   "en": "Some are like English: teilnehmen an — take part in, abhängen von — depend on, protestieren gegen — protest against.",
@@ -45,9 +320,369 @@
   "tr": "Nezaket biçimi — büyük harfle: {w}"
  },
  {
+  "en": "Lower case here: {w}",
+  "ru": "Здесь с маленькой буквы: {w}",
+  "tr": "Burada küçük harfle: {w}"
+ },
+ {
+  "en": "Helps you learn the pronoun forms by heart - mich or mir, sein or seinen - in short everyday sentences.",
+  "ru": "Помогает запомнить формы местоимений - mich или mir, sein или seinen - на примерах из повседневной речи.",
+  "tr": "Zamir biçimlerini ezberlemene yardım eder: mich ya da mir, sein ya da seinen — kısa günlük cümlelerle."
+ },
+ {
+  "en": "Helps you learn the forms of the modal verbs and pick the right form for what you mean.",
+  "ru": "Помогает запомнить формы модальных глаголов и выбирать нужную по смыслу.",
+  "tr": "Modal fiillerin biçimlerini öğrenmene ve anlatmak istediğine uygun biçimi seçmene yardım eder."
+ },
+ {
+  "en": "Richtig",
+  "ru": "Richtig",
+  "tr": "Richtig"
+ },
+ {
+  "en": "Möglich · andere Bedeutung",
+  "ru": "Möglich · andere Bedeutung",
+  "tr": "Möglich · andere Bedeutung"
+ },
+ {
+  "en": "Möglich · anderer Ton",
+  "ru": "Möglich · anderer Ton",
+  "tr": "Möglich · anderer Ton"
+ },
+ {
+  "en": "Nicht ganz",
+  "ru": "Nicht ganz",
+  "tr": "Nicht ganz"
+ },
+ {
+  "en": "The intended meaning is: ",
+  "ru": "Здесь нужно выразить: ",
+  "tr": "Burada anlatılmak istenen: "
+ },
+ {
+  "en": "Your version: ",
+  "ru": "Ваш вариант: ",
+  "tr": "Senin cevabın: "
+ },
+ {
+  "en": "What do you want to say?",
+  "ru": "Что ты хочешь сказать?",
+  "tr": "Ne söylemek istiyorsun?"
+ },
+ {
+  "en": "now; directly, without softening",
+  "ru": "сейчас; прямо, без смягчения",
+  "tr": "şimdi; doğrudan, yumuşatmadan"
+ },
+ {
+  "en": "past",
+  "ru": "в прошлом",
+  "tr": "geçmişte"
+ },
+ {
+  "en": "hypothetical, tentative, probable, advice",
+  "ru": "условно, мягко, вероятно, совет",
+  "tr": "koşullu, yumuşak, olası, tavsiye"
+ },
+ {
+  "en": "möchte today works as its own verb: a polite 'want'. In the past: wollte, not mochte.",
+  "ru": "möchte сегодня — как отдельный глагол: вежливое «хочу». В прошлом — wollte, не mochte.",
+  "tr": "möchte bugün ayrı bir fiil gibi kullanılır: kibar bir “istemek”. Geçmişte: wollte, mochte değil."
+ },
+ {
+  "en": "Präteritum and Konjunktiv II look the same — the sentence decides.",
+  "ru": "Präteritum и Konjunktiv II совпадают — решает предложение.",
+  "tr": "Präteritum ve Konjunktiv II aynı görünür — cümle karar verir."
+ },
+ {
+  "en": "I'm able to",
+  "ru": "я умею, могу",
+  "tr": "yapabilirim"
+ },
+ {
+  "en": "asking politely",
+  "ru": "вежливо попросить",
+  "tr": "kibarca rica etmek"
+ },
+ {
+  "en": "maybe, possibly",
+  "ru": "может быть",
+  "tr": "belki, olabilir"
+ },
+ {
+  "en": "I have to",
+  "ru": "надо, нужно",
+  "tr": "zorundayım, gerek"
+ },
+ {
+  "en": "I don't have to",
+  "ru": "не обязательно",
+  "tr": "gerek yok"
+ },
+ {
+  "en": "I'm sure",
+  "ru": "наверняка",
+  "tr": "kesin"
+ },
+ {
+  "en": "I really ought to (but …)",
+  "ru": "по-хорошему надо бы",
+  "tr": "aslında … gerekirdi"
+ },
+ {
+  "en": "should (I expect it)",
+  "ru": "должно бы",
+  "tr": "-mesi beklenir"
+ },
+ {
+  "en": "it's allowed",
+  "ru": "можно, разрешено",
+  "tr": "izin var"
+ },
+ {
+  "en": "you mustn't",
+  "ru": "нельзя",
+  "tr": "yasak"
+ },
+ {
+  "en": "asking very politely",
+  "ru": "очень вежливо спросить",
+  "tr": "çok kibarca sormak"
+ },
+ {
+  "en": "probably, likely",
+  "ru": "скорее всего",
+  "tr": "büyük ihtimalle"
+ },
+ {
+  "en": "I like it",
+  "ru": "мне нравится",
+  "tr": "seviyorum, hoşuma gidiyor"
+ },
+ {
+  "en": "I'd like (polite wish)",
+  "ru": "я бы хотел(а)",
+  "tr": "isterim (kibar istek)"
+ },
+ {
+  "en": "someone wants me to",
+  "ru": "кто-то хочет, чтобы я",
+  "tr": "birisi benden istiyor"
+ },
+ {
+  "en": "they say",
+  "ru": "говорят",
+  "tr": "diyorlar"
+ },
+ {
+  "en": "giving advice",
+  "ru": "дать совет",
+  "tr": "tavsiye etmek"
+ },
+ {
+  "en": "I want to, I plan to",
+  "ru": "хочу, собираюсь",
+  "tr": "istiyorum, niyetindeyim"
+ },
+ {
+  "en": "starting politely",
+  "ru": "вежливо начать",
+  "tr": "kibarca başlamak"
+ },
+ {
+  "en": "Helps you learn the Partizip II of the most common irregular verbs.",
+  "ru": "Помогает запомнить Partizip II самых частых неправильных глаголов.",
+  "tr": "En sık kullanılan düzensiz fiillerin Partizip II biçimlerini ezberlemene yardım eder."
+ },
+ {
   "en": "<i>{0}</i> is an inseparable prefix: no <i>ge-</i> in the Partizip II",
   "ru": "<i>{0}</i> — неотделяемая приставка: Partizip II без <i>ge-</i>",
   "tr": "<i>{0}</i> ayrılmayan bir ön ek: Partizip II biçiminde <i>ge-</i> yok"
+ },
+ {
+  "en": "<i>ge-</i> is an inseparable prefix here (<i>{0}</i>): no extra <i>ge-</i>",
+  "ru": "<i>ge-</i> здесь — неотделяемая приставка (<i>{0}</i>): второго <i>ge-</i> нет",
+  "tr": "<i>ge-</i> burada ayrılmayan ön ek (<i>{0}</i>): ikinci bir <i>ge-</i> yok"
+ },
+ {
+  "en": "<i>{0}</i> is a separable prefix: <i>ge-</i> goes inside — <i>{1}</i>",
+  "ru": "<i>{0}</i> — отделяемая приставка: <i>ge-</i> внутри — <i>{1}</i>",
+  "tr": "<i>{0}</i> ayrılabilen ön ek: <i>ge-</i> araya girer — <i>{1}</i>"
+ },
+ {
+  "en": "; here the consonant changes too: <i>{0}</i>",
+  "ru": "; здесь меняется и согласная: <i>{0}</i>",
+  "tr": "; burada ünsüz de değişiyor: <i>{0}</i>"
+ },
+ {
+  "en": "mixed verb: the Partizip II ends in <i>-t</i> like a regular verb, and the vowel always changes{0} — <i>{1} → {2}</i>",
+  "ru": "смешанный глагол: Partizip II кончается на <i>-t</i>, как у правильных, а гласная всегда меняется{0} — <i>{1} → {2}</i>",
+  "tr": "karma fiil: Partizip II düzenli fiillerdeki gibi <i>-t</i> ile biter, ünlü ise her zaman değişir{0} — <i>{1} → {2}</i>"
+ },
+ {
+  "en": "special verb: learn its forms — <i>{0} → {1} → {2}</i>",
+  "ru": "особый глагол: его формы запоминают — <i>{0} → {1} → {2}</i>",
+  "tr": "özel fiil: biçimleri ezberlenir — <i>{0} → {1} → {2}</i>"
+ },
+ {
+  "en": "strong verb: the Partizip II ends in <i>-en</i>, not <i>-t</i>",
+  "ru": "сильный глагол: Partizip II на <i>-en</i>, не на <i>-t</i>",
+  "tr": "güçlü fiil: Partizip II <i>-t</i> ile değil, <i>-en</i> ile biter"
+ },
+ {
+  "en": "the vowel stays <i>{0}</i>",
+  "ru": "гласная не меняется: <i>{0}</i>",
+  "tr": "ünlü değişmez: <i>{0}</i>"
+ },
+ {
+  "en": "the vowel changes <i>{0} → {1}</i>",
+  "ru": "гласная меняется: <i>{0} → {1}</i>",
+  "tr": "ünlü değişir: <i>{0} → {1}</i>"
+ },
+ {
+  "en": " (the exception to ie → o)",
+  "ru": " (исключение из ie → o)",
+  "tr": " (ie → o kuralının istisnası)"
+ },
+ {
+  "en": ", like {0}",
+  "ru": ", как {0}",
+  "tr": ", {0} gibi"
+ },
+ {
+  "en": "; consonant: <i>{0}</i>",
+  "ru": "; согласная: <i>{0}</i>",
+  "tr": "; ünsüz: <i>{0}</i>"
+ },
+ {
+  "en": "after a short vowel: <i>ss</i> — <i>gewusst, geschlossen</i> (ß only after a long vowel or a diphthong)",
+  "ru": "после краткой гласной — <i>ss</i>: <i>gewusst, geschlossen</i> (ß — только после долгой гласной или дифтонга)",
+  "tr": "kısa ünlüden sonra <i>ss</i>: <i>gewusst, geschlossen</i> (ß yalnızca uzun ünlüden ya da çift ünlüden sonra)"
+ },
+ {
+  "en": "hang something up: <i>hängte, gehängt</i> · be hanging: <i>hing, gehangen</i>",
+  "ru": "вешать: <i>hängte, gehängt</i> · висеть: <i>hing, gehangen</i>",
+  "tr": "asmak: <i>hängte, gehängt</i> · asılı durmak: <i>hing, gehangen</i>"
+ },
+ {
+  "en": "<i>{0}</i> as Partizip II only after a second verb: <i>{1}</i>. On its own: <i>{2}</i>",
+  "ru": "<i>{0}</i> вместо Partizip II — только после второго глагола: <i>{1}</i>. Отдельно: <i>{2}</i>",
+  "tr": "<i>{0}</i> Partizip II yerine yalnızca ikinci bir fiilden sonra: <i>{1}</i>. Tek başına: <i>{2}</i>"
+ },
+ {
+  "en": "(except liegen → gelegen)",
+  "ru": "(кроме liegen → gelegen)",
+  "tr": "(liegen → gelegen hariç)"
+ },
+ {
+  "en": "only sitzen and bitten",
+  "ru": "только sitzen и bitten",
+  "tr": "yalnızca sitzen ve bitten"
+ },
+ {
+  "en": "don't confuse: geben → gegeben, gehen → gegangen (here ge‑ is not a prefix but part of the stem)",
+  "ru": "не путать: geben → gegeben, gehen → gegangen (здесь ge‑ не приставка, а часть корня)",
+  "tr": "Karıştırılmamalı: geben → gegeben, gehen → gegangen (burada ge‑ ön ek değil, kökün parçası)"
+ },
+ {
+  "en": "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — no ge‑",
+  "ru": "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — без ge‑",
+  "tr": "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — ge‑ yok"
+ },
+ {
+  "en": "separable prefix — ge- goes inside",
+  "ru": "отделяемая приставка — ge- внутри",
+  "tr": "ayrılabilen ön ek — ge- araya girer"
+ },
+ {
+  "en": "ge- + stem + -t",
+  "ru": "ge- + основа + -t",
+  "tr": "ge- + kök + -t"
+ },
+ {
+  "en": "stem ending in -t / -d: ‑e‑ before the -t",
+  "ru": "основа на -t / -d — перед -t вставляется ‑e‑",
+  "tr": "kök -t / -d ile bitiyorsa: -t harfinden önce ‑e‑ eklenir"
+ },
+ {
+  "en": "-ieren — no ge‑",
+  "ru": "-ieren — без ge‑",
+  "tr": "-ieren — ge‑ yok"
+ },
+ {
+  "en": "among irregular verbs, all are strong except the mixed and the special ones",
+  "ru": "среди неправильных глаголов все, кроме смешанных и особых, — сильные",
+  "tr": "düzensiz fiillerin karma ve özel olanlar dışında hepsi güçlüdür"
+ },
+ {
+  "en": "ending -en, the vowel often changes",
+  "ru": "окончание -en, гласная часто меняется",
+  "tr": "-en eki, ünlü sıklıkla değişir"
+ },
+ {
+  "en": "in the passive — worden: Das Haus ist gebaut worden.",
+  "ru": "в пассиве — worden: Das Haus ist gebaut worden.",
+  "tr": "edilgen çatıda — worden: Das Haus ist gebaut worden."
+ },
+ {
+  "en": "and the other way round: bitten → gebeten",
+  "ru": "и наоборот: bitten → gebeten",
+  "tr": "ve tersi: bitten → gebeten"
+ },
+ {
+  "en": "ch never doubles: riechen → gerochen",
+  "ru": "ch не удваивается: riechen → gerochen",
+  "tr": "ch hiçbir zaman ikilenmez: riechen → gerochen"
+ },
+ {
+  "en": "the vowel becomes short — the consonant doubles",
+  "ru": "гласная становится краткой — согласная удваивается",
+  "tr": "ünlü kısalır — ünsüz ikilenir"
+ },
+ {
+  "en": "these are the most common such verbs",
+  "ru": "это самые частые такие глаголы",
+  "tr": "bunlar bu türden en sık fiiller"
+ },
+ {
+  "en": "the consonant changes or is added",
+  "ru": "согласная меняется или добавляется",
+  "tr": "ünsüz değişir ya da eklenir"
+ },
+ {
+  "en": "the vowel changes, the ending is -t — like regular verbs",
+  "ru": "гласная меняется, окончание -t — как у правильных",
+  "tr": "ünlü değişir, ek -t — düzenli fiillerdeki gibi"
+ },
+ {
+  "en": "There are almost no other such verbs: these seven, senden and wenden (two forms: gesandt / gesendet, gewandt / gewendet) — and the same verbs with prefixes: erkennen, verbringen, nachdenken.",
+  "ru": "Других таких глаголов почти нет: эти семь, senden и wenden (две формы: gesandt / gesendet, gewandt / gewendet) — и они же с приставками: erkennen, verbringen, nachdenken.",
+  "tr": "Bu türden başka fiil neredeyse yok: bu yedisi, senden ve wenden (iki biçim: gesandt / gesendet, gewandt / gewendet) — ve ön ekli biçimleri: erkennen, verbringen, nachdenken."
+ },
+ {
+  "en": "their own forms — learn them",
+  "ru": "свои формы — запомнить",
+  "tr": "kendi biçimleri var — ezberle"
+ },
+ {
+  "en": "with another verb — the infinitive: Ich habe kommen müssen.",
+  "ru": "с другим глаголом — инфинитив: Ich habe kommen müssen.",
+  "tr": "başka bir fiille — mastar: Ich habe kommen müssen."
+ },
+ {
+  "en": "modal verbs",
+  "ru": "модальные глаголы",
+  "tr": "modal fiiller"
+ },
+ {
+  "en": "werden or lassen? wird or ist? Helps you tell apart verbs that do many jobs and pick the right form for what you mean.",
+  "ru": "werden или lassen? wird или ist? Помогает различать глаголы, у которых много значений, и выбирать нужную форму по смыслу.",
+  "tr": "werden mi, lassen mi? wird mi, ist mi? Birçok işi olan fiilleri ayırt etmene ve anlatmak istediğine uygun biçimi seçmene yardım eder."
+ },
+ {
+  "en": "My Words",
+  "ru": "Мои слова",
+  "tr": "Kelimelerim"
  },
  {
   "en": "{0} {0|word|words}",
@@ -55,9 +690,144 @@
   "tr": "{0} {0|kelime|kelime|kelime}"
  },
  {
+  "en": "{0} {0|Word|Words}",
+  "ru": "{0} {0|слово|слова|слов}",
+  "tr": "{0} {0|Kelime|Kelime|Kelime}"
+ },
+ {
+  "en": "Back",
+  "ru": "Назад",
+  "tr": "Geri"
+ },
+ {
+  "en": "Close",
+  "ru": "Закрыть",
+  "tr": "Kapat"
+ },
+ {
+  "en": " · optional",
+  "ru": " · необязательно",
+  "tr": " · isteğe bağlı"
+ },
+ {
+  "en": "Storage is full - the word wasn't saved.",
+  "ru": "Память заполнена — слово не сохранено.",
+  "tr": "Depolama alanı dolu — kelime kaydedilmedi."
+ },
+ {
+  "en": "The word couldn't be saved.",
+  "ru": "Не удалось сохранить слово.",
+  "tr": "Kelime kaydedilemedi."
+ },
+ {
   "en": "This word is already in your collection.",
   "ru": "Это слово уже есть в коллекции.",
   "tr": "Bu kelime zaten koleksiyonunda var."
+ },
+ {
+  "en": "In list",
+  "ru": "В списке",
+  "tr": "Listede"
+ },
+ {
+  "en": "Learn Now",
+  "ru": "Учить сейчас",
+  "tr": "Şimdi Öğren"
+ },
+ {
+  "en": "Learn now",
+  "ru": "Учить сейчас",
+  "tr": "Şimdi öğren"
+ },
+ {
+  "en": "Collection Name",
+  "ru": "Название коллекции",
+  "tr": "Koleksiyon Adı"
+ },
+ {
+  "en": "Word collection: ",
+  "ru": "Коллекция слов: ",
+  "tr": "Kelime koleksiyonu: "
+ },
+ {
+  "en": "Rename",
+  "ru": "Переименовать",
+  "tr": "Yeniden Adlandır"
+ },
+ {
+  "en": "Word Sets",
+  "ru": "Наборы слов",
+  "tr": "Kelime Setleri"
+ },
+ {
+  "en": "Added within the last 24 hours",
+  "ru": "Добавлено за последние 24 часа",
+  "tr": "Son 24 saatte eklendi"
+ },
+ {
+  "en": "No words yet.",
+  "ru": "Слов пока нет.",
+  "tr": "Henüz kelime yok."
+ },
+ {
+  "en": "Export",
+  "ru": "Экспорт",
+  "tr": "Dışa Aktar"
+ },
+ {
+  "en": "Delete",
+  "ru": "Удалить",
+  "tr": "Sil"
+ },
+ {
+  "en": "Verb",
+  "ru": "Глагол",
+  "tr": "Fiil"
+ },
+ {
+  "en": "Noun",
+  "ru": "Существительное",
+  "tr": "İsim"
+ },
+ {
+  "en": "Adjective",
+  "ru": "Прилагательное",
+  "tr": "Sıfat"
+ },
+ {
+  "en": "Other",
+  "ru": "Другое",
+  "tr": "Diğer"
+ },
+ {
+  "en": "Sentence",
+  "ru": "Предложение",
+  "tr": "Cümle"
+ },
+ {
+  "en": "Sentence Translation",
+  "ru": "Перевод предложения",
+  "tr": "Cümle Çevirisi"
+ },
+ {
+  "en": "Meaning",
+  "ru": "Значение",
+  "tr": "Anlam"
+ },
+ {
+  "en": "Other Meanings",
+  "ru": "Другие значения",
+  "tr": "Diğer Anlamlar"
+ },
+ {
+  "en": "Base Form",
+  "ru": "Начальная форма",
+  "tr": "Temel Biçim"
+ },
+ {
+  "en": "Grammar",
+  "ru": "Грамматика",
+  "tr": "Dil Bilgisi"
  },
  {
   "en": "That's a bit long - try a shorter one.",
@@ -65,9 +835,79 @@
   "tr": "Bu biraz uzun oldu, kısaltmayı dene."
  },
  {
+  "en": "to suggest",
+  "ru": "предлагать",
+  "tr": "önermek"
+ },
+ {
+  "en": "to propose; to recommend",
+  "ru": "выдвигать; советовать",
+  "tr": "ileri sürmek; tavsiye etmek"
+ },
+ {
+  "en": "I suggest Saturday.",
+  "ru": "Предлагаю субботу.",
+  "tr": "Cumartesiyi öneriyorum."
+ },
+ {
+  "en": "Edit Word",
+  "ru": "Изменить слово",
+  "tr": "Kelimeyi Düzenle"
+ },
+ {
+  "en": "New Word",
+  "ru": "Новое слово",
+  "tr": "Yeni Kelime"
+ },
+ {
   "en": "Tap the word you want to practise. For separable verbs, tap both parts.",
   "ru": "Нажми на слово, которое хочешь тренировать. У глаголов с отделяемой приставкой — на обе части.",
   "tr": "Çalışmak istediğin kelimeye dokun. Ayrılabilen ön ekli fiillerde iki parçaya da dokun."
+ },
+ {
+  "en": "gap",
+  "ru": "пропуск",
+  "tr": "boşluk"
+ },
+ {
+  "en": "Word Class",
+  "ru": "Часть речи",
+  "tr": "Kelime Türü"
+ },
+ {
+  "en": "On: comes with your next new words (+ 5). Off: added to the end of your list.",
+  "ru": "Вкл.: слово придёт со следующими новыми словами (+ 5). Выкл.: добавится в конец списка.",
+  "tr": "Açık: kelime bir sonraki yeni kelimelerle gelir (+ 5). Kapalı: listenin sonuna eklenir."
+ },
+ {
+  "en": "Save",
+  "ru": "Сохранить",
+  "tr": "Kaydet"
+ },
+ {
+  "en": "Delete Word",
+  "ru": "Удалить слово",
+  "tr": "Kelimeyi Sil"
+ },
+ {
+  "en": "Please type a sentence.",
+  "ru": "Напиши предложение.",
+  "tr": "Bir cümle yaz."
+ },
+ {
+  "en": "Please tap the word you want to practise.",
+  "ru": "Нажми на слово, которое хочешь тренировать.",
+  "tr": "Çalışmak istediğin kelimeye dokun."
+ },
+ {
+  "en": "Please type the meaning.",
+  "ru": "Напиши значение.",
+  "tr": "Anlamı yaz."
+ },
+ {
+  "en": "Delete this word?",
+  "ru": "Удалить слово?",
+  "tr": "Bu kelime silinsin mi?"
  },
  {
   "en": "„{0}“ and your progress with it will be deleted.",
@@ -75,9 +915,39 @@
   "tr": "“{0}” ve bu kelimedeki ilerlemen silinecek."
  },
  {
+  "en": " The session goes on with the next word.",
+  "ru": " Тренировка продолжится со следующего слова.",
+  "tr": " Çalışma bir sonraki kelimeyle devam edecek."
+ },
+ {
+  "en": "Keep",
+  "ru": "Оставить",
+  "tr": "Kalsın"
+ },
+ {
+  "en": "Search the Wörterbuch",
+  "ru": "Поиск в Wörterbuch",
+  "tr": "Wörterbuch'ta ara"
+ },
+ {
+  "en": "Clear search",
+  "ru": "Очистить поиск",
+  "tr": "Aramayı temizle"
+ },
+ {
+  "en": "Loading the Wörterbuch…",
+  "ru": "Загружаем Wörterbuch…",
+  "tr": "Wörterbuch yükleniyor…"
+ },
+ {
   "en": "Couldn't load the Wörterbuch. Maybe you're offline.",
   "ru": "Не получилось загрузить Wörterbuch. Возможно, пропал интернет.",
   "tr": "Wörterbuch yüklenemedi. İnternet bağlantın olmayabilir."
+ },
+ {
+  "en": "Try again",
+  "ru": "Попробовать ещё раз",
+  "tr": "Tekrar dene"
  },
  {
   "en": "This word isn't in the Wörterbuch yet.",
@@ -85,9 +955,94 @@
   "tr": "Bu kelime henüz Wörterbuch'ta yok."
  },
  {
+  "en": "＋ Add it yourself",
+  "ru": "＋ Добавить самому",
+  "tr": "＋ Kendin ekle"
+ },
+ {
+  "en": "Added. Tap to undo",
+  "ru": "Добавлено. Нажми, чтобы отменить",
+  "tr": "Eklendi. Geri almak için dokun"
+ },
+ {
+  "en": "Fill the form with ",
+  "ru": "Заполнить форму: ",
+  "tr": "Formu doldur: "
+ },
+ {
+  "en": "Add ",
+  "ru": "Добавить ",
+  "tr": "Ekle: "
+ },
+ {
+  "en": "Your Own Words",
+  "ru": "Свои слова",
+  "tr": "Kendi Kelimelerin"
+ },
+ {
+  "en": "You don't have your own word collection yet. This word starts it.",
+  "ru": "У тебя ещё нет своей коллекции слов. Это слово её начнёт.",
+  "tr": "Henüz kendi kelime koleksiyonun yok. Koleksiyonun bu kelimeyle başlayacak."
+ },
+ {
+  "en": "Continue",
+  "ru": "Продолжить",
+  "tr": "Devam"
+ },
+ {
+  "en": "Cancel",
+  "ru": "Отмена",
+  "tr": "Vazgeç"
+ },
+ {
+  "en": "The dictionary entry is missing.",
+  "ru": "В словаре нет этой статьи.",
+  "tr": "Sözlükte bu madde yok."
+ },
+ {
+  "en": "This word has no learning card.",
+  "ru": "У этого слова нет учебной карточки.",
+  "tr": "Bu kelimenin kartı yok."
+ },
+ {
+  "en": "The dictionary example has invalid answer markup and needs correction.",
+  "ru": "В примере из словаря неверно отмечено слово — его нужно исправить.",
+  "tr": "Sözlükteki örnekte kelime yanlış işaretlenmiş — düzeltilmesi gerekiyor."
+ },
+ {
   "en": "You're already learning this word in Wortschatz.",
   "ru": "Ты уже учишь это слово в Wortschatz.",
   "tr": "Bu kelimeyi zaten Wortschatz'ta öğreniyorsun."
+ },
+ {
+  "en": "Already in Your Collection",
+  "ru": "Слово уже в коллекции",
+  "tr": "Kelime Zaten Koleksiyonunda"
+ },
+ {
+  "en": "Word Cannot Be Added",
+  "ru": "Слово нельзя добавить",
+  "tr": "Kelime Eklenemiyor"
+ },
+ {
+  "en": "Unknown word",
+  "ru": "Неизвестное слово",
+  "tr": "Bilinmeyen kelime"
+ },
+ {
+  "en": "The word could not be prepared. Please try again.",
+  "ru": "Не удалось подготовить слово. Попробуй ещё раз.",
+  "tr": "Kelime hazırlanamadı. Tekrar dene."
+ },
+ {
+  "en": "Words from Reading",
+  "ru": "Слова из чтения",
+  "tr": "Okuduklarından Kelimeler"
+ },
+ {
+  "en": "Review words from „{0}“. Tap any word to edit it before adding.",
+  "ru": "Проверь слова из «{0}». Нажми на слово, чтобы изменить его перед добавлением.",
+  "tr": "“{0}” metnindeki kelimeleri gözden geçir. Eklemeden önce değiştirmek için bir kelimeye dokun."
  },
  {
   "en": "{0} {0|word without a learning card remains|words without learning cards remain} saved in Bibliothek.",
@@ -95,9 +1050,129 @@
   "tr": "Kartı olmayan {0} {0|kelime|kelime|kelime} Bibliothek'te kayıtlı kalıyor."
  },
  {
+  "en": "These words start your own word collection.",
+  "ru": "С этих слов начнётся твоя коллекция.",
+  "tr": "Kendi koleksiyonun bu kelimelerle başlayacak."
+ },
+ {
+  "en": "Include ",
+  "ru": "Включить ",
+  "tr": "Dahil Et: "
+ },
+ {
+  "en": "word",
+  "ru": "слово",
+  "tr": "kelime"
+ },
+ {
+  "en": "Word",
+  "ru": "Слово",
+  "tr": "Kelime"
+ },
+ {
+  "en": "Add New Words",
+  "ru": "Куда добавить новые слова",
+  "tr": "Yeni Kelimeler Nereye Eklensin"
+ },
+ {
+  "en": "At the End of the List",
+  "ru": "В конец списка",
+  "tr": "Listenin Sonuna"
+ },
+ {
+  "en": "As the Next New Words",
+  "ru": "Следующими новыми словами",
+  "tr": "Bir Sonraki Yeni Kelimeler Olarak"
+ },
+ {
+  "en": "Next new words: before the words you haven't started. Your current reviews stay unchanged.",
+  "ru": "Следующими новыми — перед словами, которые ты ещё не начинал. Текущие повторения не меняются.",
+  "tr": "Bir sonraki yeni kelimeler: henüz başlamadığın kelimelerden önce. Şu anki tekrarların değişmez."
+ },
+ {
+  "en": "Create Collection with ",
+  "ru": "Создать коллекцию: ",
+  "tr": "Koleksiyon Oluştur: "
+ },
+ {
+  "en": "Discard This Batch",
+  "ru": "Отказаться от этих слов",
+  "tr": "Bu Kelimelerden Vazgeç"
+ },
+ {
+  "en": "Discard these words?",
+  "ru": "Отказаться от этих слов?",
+  "tr": "Bu kelimelerden vazgeçilsin mi?"
+ },
+ {
+  "en": "Nothing has been added. The words remain saved in Bibliothek.",
+  "ru": "Ничего не добавлено. Слова остаются в Bibliothek.",
+  "tr": "Hiçbir şey eklenmedi. Kelimeler Bibliothek'te kayıtlı kalıyor."
+ },
+ {
+  "en": "Keep Reviewing",
+  "ru": "Продолжить проверку",
+  "tr": "Gözden Geçirmeye Devam Et"
+ },
+ {
+  "en": "Discard Batch",
+  "ru": "Отказаться",
+  "tr": "Kelimelerden Vazgeç"
+ },
+ {
+  "en": "The draft could not be prepared. It is kept; please try again.",
+  "ru": "Не удалось подготовить черновик. Он сохранён — попробуй ещё раз.",
+  "tr": "Taslak hazırlanamadı. Taslak saklandı; tekrar dene."
+ },
+ {
+  "en": "Draft Could Not Be Restored",
+  "ru": "Не удалось восстановить черновик",
+  "tr": "Taslak Geri Yüklenemedi"
+ },
+ {
+  "en": "Your draft is kept. Please try again.",
+  "ru": "Черновик сохранён. Попробуй ещё раз.",
+  "tr": "Taslağın saklandı. Tekrar dene."
+ },
+ {
+  "en": "These words are already in your collection.",
+  "ru": "Эти слова уже есть в коллекции.",
+  "tr": "Bu kelimeler zaten koleksiyonunda var."
+ },
+ {
+  "en": "No words were added.",
+  "ru": "Слова не добавлены.",
+  "tr": "Hiç kelime eklenmedi."
+ },
+ {
+  "en": "{0} words added",
+  "ru": "Добавлено: {1}",
+  "tr": "{0} {0|kelime|kelime|kelime} eklendi"
+ },
+ {
+  "en": " as the next new words",
+  "ru": " — следующими новыми",
+  "tr": " — bir sonraki yeni kelimeler olarak"
+ },
+ {
+  "en": " {0} already in your collection.",
+  "ru": " Уже были в коллекции: {0}.",
+  "tr": " {0} {0|kelime|kelime|kelime} zaten koleksiyonundaydı."
+ },
+ {
+  "en": "The words could not be saved. Your review is kept; please try again.",
+  "ru": "Не удалось сохранить слова. Твой выбор сохранён — попробуй ещё раз.",
+  "tr": "Kelimeler kaydedilemedi. Seçimin saklandı; tekrar dene."
+ },
+ {
   "en": "{0} already in your collection.",
   "ru": "{0} {0|слово уже было|слова уже были|слов уже были} в коллекции.",
   "tr": "{0} {0|kelime|kelime|kelime} zaten koleksiyonundaydı."
+ },
+ {
+  "en": "{0} without learning cards stay in Meine Wörter.",
+  "ru": "{0} {0|слово без карточки осталось|слова без карточек остались|слов без карточек остались} в Meine Wörter.",
+  "tr": "Kartı olmayan {0} {0|kelime|kelime|kelime} Meine Wörter'de kalıyor."
  },
  {
   "en": "added to Wortschatz, collection „{1}“",
@@ -105,9 +1180,239 @@
   "tr": "Wortschatz'a eklendi, koleksiyon: “{1}”"
  },
  {
+  "en": "Open Wortschatz",
+  "ru": "Открыть Wortschatz",
+  "tr": "Wortschatz'ı aç"
+ },
+ {
+  "en": "Ready-made word sets. Open one and tick the words you want to learn.",
+  "ru": "Готовые наборы слов. Открой набор и отметь слова, которые хочешь учить.",
+  "tr": "Hazır kelime setleri. Bir set aç ve öğrenmek istediğin kelimeleri işaretle."
+ },
+ {
+  "en": "Couldn't be loaded.",
+  "ru": "Не загрузился.",
+  "tr": "Yüklenemedi."
+ },
+ {
+  "en": "Word Set",
+  "ru": "Набор слов",
+  "tr": "Kelime Seti"
+ },
+ {
+  "en": "Loading…",
+  "ru": "Загрузка…",
+  "tr": "Yükleniyor…"
+ },
+ {
+  "en": "The set couldn't be loaded. Please try again.",
+  "ru": "Не удалось загрузить набор. Попробуй ещё раз.",
+  "tr": "Set yüklenemedi. Tekrar dene."
+ },
+ {
+  "en": "This will be your own collection - you can add, edit and delete words any time.",
+  "ru": "Это будет твоя коллекция — слова можно добавлять, менять и удалять в любой момент.",
+  "tr": "Bu senin kendi koleksiyonun olacak: kelimeleri istediğin zaman ekleyebilir, değiştirebilir ve silebilirsin."
+ },
+ {
+  "en": "Select All",
+  "ru": "Выбрать все",
+  "tr": "Tümünü Seç"
+ },
+ {
+  "en": "Select all",
+  "ru": "Выбрать все",
+  "tr": "Tümünü seç"
+ },
+ {
+  "en": "Learn ",
+  "ru": "Учить ",
+  "tr": "Öğren: "
+ },
+ {
+  "en": "On: they come with your next new words (+ 5). Off: added to the end of your list.",
+  "ru": "Вкл.: слова придут со следующими новыми словами (+ 5). Выкл.: добавятся в конец списка.",
+  "tr": "Açık: kelimeler bir sonraki yeni kelimelerle gelir (+ 5). Kapalı: listenin sonuna eklenir."
+ },
+ {
+  "en": "Selected: ",
+  "ru": "",
+  "tr": "Seçilen: "
+ },
+ {
+  "en": "All words are already in your list.",
+  "ru": "Все слова уже в твоём списке.",
+  "tr": "Tüm kelimeler zaten listende."
+ },
+ {
+  "en": "Tick the words you want to learn",
+  "ru": "Отметь нужные слова",
+  "tr": "Öğrenmek istediğin kelimeleri işaretle"
+ },
+ {
+  "en": "Storage is full - the words weren't saved.",
+  "ru": "Память заполнена — слова не сохранены.",
+  "tr": "Depolama alanı dolu — kelimeler kaydedilmedi."
+ },
+ {
+  "en": "The words couldn't be saved.",
+  "ru": "Не удалось сохранить слова.",
+  "tr": "Kelimeler kaydedilemedi."
+ },
+ {
   "en": "{0} {0|word|words} added from „{1}“.",
   "ru": "Добавлено из «{1}»: {2}.",
   "tr": "“{1}” setinden {0} {0|kelime|kelime|kelime} eklendi."
+ },
+ {
+  "en": "For the long run",
+  "ru": "Чтобы запомнить надолго",
+  "tr": "Uzun süre akılda kalsın"
+ },
+ {
+  "en": "Before an exam · more reviews",
+  "ru": "Перед экзаменом · больше повторений",
+  "tr": "Sınavdan önce · daha çok tekrar"
+ },
+ {
+  "en": "A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews.",
+  "ru": "Слово с ошибкой всегда возвращается на следующий день. Новый темп действует только на следующие повторения.",
+  "tr": "Yanlış yaptığın kelime her zaman ertesi gün geri gelir. Hızı değiştirmek yalnızca sonraki tekrarları etkiler."
+ },
+ {
+  "en": "English",
+  "ru": "Russian",
+  "tr": "Turkish"
+ },
+ {
+  "en": "appointment",
+  "ru": "встреча",
+  "tr": "randevu"
+ },
+ {
+  "en": "The appointment is tomorrow at ten.",
+  "ru": "Встреча завтра в десять.",
+  "tr": "Randevu yarın saat onda."
+ },
+ {
+  "en": "Give your collection a name, then add words: search the Wörterbuch, type them or import a list.",
+  "ru": "Назови коллекцию и добавь слова: найди в Wörterbuch, введи сам или импортируй список.",
+  "tr": "Koleksiyonuna bir ad ver, sonra kelime ekle: Wörterbuch'ta ara, kendin yaz ya da bir liste içe aktar."
+ },
+ {
+  "en": "Add the First Word",
+  "ru": "Добавить первое слово",
+  "tr": "İlk Kelimeyi Ekle"
+ },
+ {
+  "en": "Import List",
+  "ru": "Импорт списка",
+  "tr": "Liste İçe Aktar"
+ },
+ {
+  "en": "Ask an AI for example sentences for your words and paste its answer here. To get the right format: ",
+  "ru": "Попроси ИИ составить примеры с твоими словами и вставь его ответ сюда. Чтобы ответ был в нужном формате: ",
+  "tr": "Kelimelerin için yapay zekâdan örnek cümleler iste ve cevabını buraya yapıştır. Cevabın doğru biçimde olması için: "
+ },
+ {
+  "en": "Format for the AI",
+  "ru": "Формат для ИИ",
+  "tr": "Yapay zekâ için biçim"
+ },
+ {
+  "en": "Paste the list",
+  "ru": "Вставь список",
+  "tr": "Listeyi yapıştır"
+ },
+ {
+  "en": "Or: ",
+  "ru": "Или: ",
+  "tr": "Ya da: "
+ },
+ {
+  "en": "Choose a File",
+  "ru": "Выбери файл",
+  "tr": "Dosya Seç"
+ },
+ {
+  "en": "New words are added to the end of your list.",
+  "ru": "Новые слова добавятся в конец списка.",
+  "tr": "Yeni kelimeler listenin sonuna eklenir."
+ },
+ {
+  "en": "Create Collection",
+  "ru": "Создать коллекцию",
+  "tr": "Koleksiyon Oluştur"
+ },
+ {
+  "en": "Add",
+  "ru": "Добавить",
+  "tr": "Ekle"
+ },
+ {
+  "en": "The file is too big.",
+  "ru": "Файл слишком большой.",
+  "tr": "Dosya çok büyük."
+ },
+ {
+  "en": "The file couldn't be read.",
+  "ru": "Не удалось прочитать файл.",
+  "tr": "Dosya okunamadı."
+ },
+ {
+  "en": "Please paste the list first.",
+  "ru": "Сначала вставь список.",
+  "tr": "Önce listeyi yapıştır."
+ },
+ {
+  "en": "This doesn't look like a list. Copy the AI's whole answer - from [ to ].",
+  "ru": "Это не похоже на список. Скопируй весь ответ ИИ — от [ до ].",
+  "tr": "Bu bir listeye benzemiyor. Yapay zekânın cevabının tamamını kopyala: [ işaretinden ] işaretine kadar."
+ },
+ {
+  "en": "Too long: {0}",
+  "ru": "Слишком длинно: {0}",
+  "tr": "Bu alan çok uzun: {0}"
+ },
+ {
+  "en": "Storage is full - nothing was saved.",
+  "ru": "Память заполнена — ничего не сохранено.",
+  "tr": "Depolama alanı dolu — hiçbir şey kaydedilmedi."
+ },
+ {
+  "en": "The list couldn't be saved.",
+  "ru": "Не удалось сохранить список.",
+  "tr": "Liste kaydedilemedi."
+ },
+ {
+  "en": "All these words are already in your collection.",
+  "ru": "Все эти слова уже есть в коллекции.",
+  "tr": "Bu kelimelerin hepsi zaten koleksiyonunda var."
+ },
+ {
+  "en": "None of the cards could be used.",
+  "ru": "Ни одну карточку не удалось использовать.",
+  "tr": "Kartların hiçbiri kullanılamadı."
+ },
+ {
+  "en": " For example no. ",
+  "ru": " Например, № ",
+  "tr": " Örneğin No. "
+ },
+ {
+  "en": "Collection Created",
+  "ru": "Коллекция создана",
+  "tr": "Koleksiyon Oluşturuldu"
+ },
+ {
+  "en": "Words Added",
+  "ru": "Слова добавлены",
+  "tr": "Kelimeler Eklendi"
+ },
+ {
+  "en": "{0} {0|word|words} in „{1}“.",
+  "ru": "{2} в «{1}».",
+  "tr": "“{1}” koleksiyonunda {0} {0|kelime|kelime|kelime}."
  },
  {
   "en": "{0} {0|word|words} added.",
@@ -115,9 +1420,24 @@
   "tr": "{0} {0|kelime|kelime|kelime} eklendi."
  },
  {
+  "en": " You start with the first 10.",
+  "ru": " Начнёшь с первых 10.",
+  "tr": " İlk 10 kelimeyle başlayacaksın."
+ },
+ {
+  "en": "{0} {0|word was|words were} already in your collection.",
+  "ru": "Уже были в коллекции: {1}.",
+  "tr": "{0} {0|kelime|kelime|kelime} zaten koleksiyonundaydı."
+ },
+ {
   "en": "{0} {0|card|cards} skipped:",
   "ru": "Пропущено: {0} {0|карточка|карточки|карточек}",
   "tr": "Atlanan: {0} {0|kart|kart|kart}"
+ },
+ {
+  "en": "No. ",
+  "ru": "№ ",
+  "tr": "No. "
  },
  {
   "en": "… and {0} more.",
@@ -125,9 +1445,284 @@
   "tr": "… ve {0} tane daha."
  },
  {
+  "en": "Done",
+  "ru": "Готово",
+  "tr": "Bitti"
+ },
+ {
+  "en": "First tell your AI what you want - which words, which level, which language for the translations. Then add this text:",
+  "ru": "Сначала напиши ИИ, что тебе нужно: какие слова, какой уровень, на каком языке переводы. Потом добавь этот текст:",
+  "tr": "Önce yapay zekâya ne istediğini yaz: hangi kelimeler, hangi seviye, çeviriler hangi dilde. Sonra bu metni ekle:"
+ },
+ {
+  "en": "Copy",
+  "ru": "Скопировать",
+  "tr": "Kopyala"
+ },
+ {
+  "en": "Copied ✓",
+  "ru": "Скопировано ✓",
+  "tr": "Kopyalandı ✓"
+ },
+ {
+  "en": "Please select the text above and copy it",
+  "ru": "Выдели текст выше и скопируй его",
+  "tr": "Yukarıdaki metni seçip kopyala"
+ },
+ {
+  "en": "Delete this collection?",
+  "ru": "Удалить коллекцию?",
+  "tr": "Bu koleksiyon silinsin mi?"
+ },
+ {
+  "en": "„{0}“ and your progress will be deleted. You can start again with a word set or your own words. This can't be undone - export the words first if you want to keep them.",
+  "ru": "«{0}» и твой прогресс будут удалены. Начать заново можно с набора слов или со своих слов. Это нельзя отменить — если хочешь сохранить слова, сначала экспортируй их.",
+  "tr": "“{0}” ve ilerlemen silinecek. Bir kelime setiyle ya da kendi kelimelerinle yeniden başlayabilirsin. Bu geri alınamaz; kelimeleri saklamak istiyorsan önce dışa aktar."
+ },
+ {
+  "en": "Export First",
+  "ru": "Сначала экспорт",
+  "tr": "Önce Dışa Aktar"
+ },
+ {
+  "en": "Not a valid entry",
+  "ru": "Неверная запись",
+  "tr": "Geçersiz kayıt"
+ },
+ {
+  "en": "No sentence",
+  "ru": "Нет предложения",
+  "tr": "Cümle yok"
+ },
+ {
+  "en": "No word marked with {{c1::…}} in the sentence",
+  "ru": "В предложении не отмечено слово {{c1::…}}",
+  "tr": "Cümlede {{c1::…}} ile işaretlenmiş kelime yok"
+ },
+ {
+  "en": "No meaning",
+  "ru": "Нет значения",
+  "tr": "Anlam yok"
+ },
+ {
+  "en": "Card not found",
+  "ru": "Карточка не найдена",
+  "tr": "Kart bulunamadı"
+ },
+ {
+  "en": "This word is already in your collection",
+  "ru": "Это слово уже есть в коллекции",
+  "tr": "Bu kelime zaten koleksiyonunda var"
+ },
+ {
+  "en": "Row ",
+  "ru": "Строка ",
+  "tr": "Satır "
+ },
+ {
+  "en": "Helps you remember words in real sentences. Each word comes back just before you'd forget it - and less and less often over time.",
+  "ru": "Помогает запоминать слова в живых предложениях. Каждое слово возвращается как раз перед тем, как забудется, - и со временем всё реже.",
+  "tr": "Kelimeleri gerçek cümleler içinde hatırlamana yardım eder. Her kelime tam unutmak üzereyken geri gelir — ve zamanla gittikçe daha seyrek."
+ },
+ {
+  "en": "＋ Start with my own words",
+  "ru": "＋ Начать со своих слов",
+  "tr": "＋ Kendi kelimelerimle başla"
+ },
+ {
+  "en": "<p><strong>Which files work</strong> EPUB without copy protection (DRM) and TXT. Books bought in shops such as Kindle, Apple Books or Kobo are usually protected and won’t open. PDF isn’t supported.</p><p><strong>Where books are kept</strong> Only on this device. Browser storage can be cleared, so keep your original files as a backup.</p>",
+  "ru": "<p><strong>Какие файлы подходят</strong> EPUB без защиты от копирования (DRM) и TXT. Книги из магазинов — Kindle, Apple Books, Kobo — обычно защищены и не откроются. PDF не поддерживается.</p><p><strong>Где хранятся книги</strong> Только на этом устройстве. Хранилище браузера может очиститься, поэтому сохраняйте исходные файлы.</p>",
+  "tr": "<p><strong>Hangi dosyalar uygun</strong> Kopya koruması (DRM) olmayan EPUB ve TXT. Kindle, Apple Books ya da Kobo gibi mağazalardan alınan kitaplar genellikle korumalıdır ve açılmaz. PDF desteklenmez.</p><p><strong>Kitaplar nerede saklanır</strong> Yalnızca bu cihazda. Tarayıcı depolama alanı temizlenebilir; bu yüzden orijinal dosyalarını yedek olarak sakla.</p>"
+ },
+ {
+  "en": "Add a TXT or unencrypted EPUB file, or paste a German text to get started.",
+  "ru": "Добавьте файл TXT или EPUB без защиты или вставьте немецкий текст, чтобы начать.",
+  "tr": "Başlamak için bir TXT ya da korumasız EPUB dosyası ekle veya Almanca bir metin yapıştır."
+ },
+ {
+  "en": "Reading position could not be saved.",
+  "ru": "Не удалось сохранить место чтения.",
+  "tr": "Okuma yeri kaydedilemedi."
+ },
+ {
+  "en": "Meaning selected, but the correction could not be saved.",
+  "ru": "Значение выбрано, но сохранить выбор не удалось.",
+  "tr": "Anlam seçildi, ama düzeltme kaydedilemedi."
+ },
+ {
+  "en": "Couldn't add the word. Please reload the page.",
+  "ru": "Не удалось добавить слово. Перезагрузите страницу.",
+  "tr": "Kelime eklenemedi. Sayfayı yeniden yükle."
+ },
+ {
+  "en": "Couldn't load your marked words.",
+  "ru": "Не удалось загрузить отмеченные слова.",
+  "tr": "İşaretlediğin kelimeler yüklenemedi."
+ },
+ {
+  "en": "The book could not be loaded. Check your internet connection.",
+  "ru": "Не удалось загрузить книгу. Проверьте подключение к интернету.",
+  "tr": "Kitap yüklenemedi. İnternet bağlantını kontrol et."
+ },
+ {
+  "en": "Could not undo the mark. Please try again.",
+  "ru": "Не удалось отменить отметку. Попробуйте ещё раз.",
+  "tr": "İşaret geri alınamadı. Tekrar dene."
+ },
+ {
+  "en": "The mark could not be saved. Please try again.",
+  "ru": "Не удалось сохранить отметку. Попробуйте ещё раз.",
+  "tr": "İşaret kaydedilemedi. Tekrar dene."
+ },
+ {
+  "en": "The book could not be saved. Check available browser storage.",
+  "ru": "Не удалось сохранить книгу. Проверьте свободное место в браузере.",
+  "tr": "Kitap kaydedilemedi. Tarayıcıdaki boş depolama alanını kontrol et."
+ },
+ {
+  "en": "The text could not be saved. Check available browser storage.",
+  "ru": "Не удалось сохранить текст. Проверьте свободное место в браузере.",
+  "tr": "Metin kaydedilemedi. Tarayıcıdaki boş depolama alanını kontrol et."
+ },
+ {
+  "en": "Local book storage is unavailable in this browser.",
+  "ru": "В этом браузере нельзя хранить книги.",
+  "tr": "Bu tarayıcıda kitaplar saklanamıyor."
+ },
+ {
+  "en": "This text is empty.",
+  "ru": "Текст пустой.",
+  "tr": "Bu metin boş."
+ },
+ {
   "en": "This file type is not supported. Choose a TXT or EPUB file.",
   "ru": "Такой файл не подходит. Выберите TXT или EPUB.",
   "tr": "Bu dosya türü desteklenmiyor. TXT ya da EPUB dosyası seç."
+ },
+ {
+  "en": "EPUB import is not available yet.",
+  "ru": "Загрузка EPUB пока недоступна.",
+  "tr": "EPUB içe aktarma henüz kullanılamıyor."
+ },
+ {
+  "en": "This file could not be read. Try selecting it again.",
+  "ru": "Не удалось прочитать файл. Выберите его ещё раз.",
+  "tr": "Bu dosya okunamadı. Dosyayı yeniden seçmeyi dene."
+ },
+ {
+  "en": "This EPUB contains invalid XML or chapter markup.",
+  "ru": "В этом EPUB ошибка в разметке глав.",
+  "tr": "Bu EPUB dosyasının bölüm işaretlemesinde hata var."
+ },
+ {
+  "en": "This EPUB references an unsupported resource.",
+  "ru": "Этот EPUB ссылается на неподдерживаемый файл.",
+  "tr": "Bu EPUB dosyası desteklenmeyen bir dosyaya başvuruyor."
+ },
+ {
+  "en": "This EPUB contains an invalid resource path.",
+  "ru": "В этом EPUB неверный путь к файлу.",
+  "tr": "Bu EPUB dosyasında geçersiz bir dosya yolu var."
+ },
+ {
+  "en": "An EPUB chapter is missing its text body.",
+  "ru": "В одной из глав EPUB нет текста.",
+  "tr": "EPUB bölümlerinden birinde metin yok."
+ },
+ {
+  "en": "This EPUB is too large. Choose a file smaller than 50 MB.",
+  "ru": "Этот EPUB слишком большой. Выберите файл меньше 50 МБ.",
+  "tr": "Bu EPUB dosyası çok büyük. En fazla 50 MB olan bir dosya seç."
+ },
+ {
+  "en": "This EPUB could not be opened. It may be damaged or password-protected.",
+  "ru": "Не удалось открыть этот EPUB. Возможно, он повреждён или защищён паролем.",
+  "tr": "Bu EPUB dosyası açılamadı. Bozuk ya da parolayla korunuyor olabilir."
+ },
+ {
+  "en": "This EPUB is too large to import on this device.",
+  "ru": "Этот EPUB слишком большой для этого устройства.",
+  "tr": "Bu EPUB dosyası bu cihaz için çok büyük."
+ },
+ {
+  "en": "This EPUB is missing a required book file.",
+  "ru": "В этом EPUB не хватает нужного файла.",
+  "tr": "Bu EPUB dosyasında gerekli bir dosya eksik."
+ },
+ {
+  "en": "An EPUB chapter is too large to import.",
+  "ru": "Одна из глав EPUB слишком большая.",
+  "tr": "EPUB bölümlerinden biri çok büyük."
+ },
+ {
+  "en": "This EPUB uses an unsupported or invalid text encoding.",
+  "ru": "В этом EPUB неподдерживаемая или неверная кодировка текста.",
+  "tr": "Bu EPUB dosyasında desteklenmeyen ya da geçersiz bir metin kodlaması var."
+ },
+ {
+  "en": "This file is not a valid EPUB book.",
+  "ru": "Файл повреждён или не является EPUB-книгой.",
+  "tr": "Bu dosya bozuk ya da bir EPUB kitabı değil."
+ },
+ {
+  "en": "This EPUB is missing its chapter list.",
+  "ru": "В этом EPUB нет списка глав.",
+  "tr": "Bu EPUB dosyasında bölüm listesi yok."
+ },
+ {
+  "en": "This EPUB is DRM-protected. Choose a DRM-free book.",
+  "ru": "Этот EPUB защищён (DRM). Выберите книгу без защиты.",
+  "tr": "Bu EPUB dosyası korumalı (DRM). Korumasız bir kitap seç."
+ },
+ {
+  "en": "This EPUB references a missing chapter.",
+  "ru": "В этом EPUB не хватает главы.",
+  "tr": "Bu EPUB dosyasında bir bölüm eksik."
+ },
+ {
+  "en": "This EPUB contains an unsupported chapter format.",
+  "ru": "В этом EPUB главы в неподдерживаемом формате.",
+  "tr": "Bu EPUB dosyasındaki bölümler desteklenmeyen bir biçimde."
+ },
+ {
+  "en": "This EPUB contains no readable text.",
+  "ru": "В этом EPUB нет текста для чтения.",
+  "tr": "Bu EPUB dosyasında okunacak metin yok."
+ },
+ {
+  "en": "Nominalization · person",
+  "ru": "Субстантивация · обозначение человека",
+  "tr": "Adlaşma · kişiyi adlandıran"
+ },
+ {
+  "en": "Nominalized adjective",
+  "ru": "Субстантивированное прилагательное",
+  "tr": "Adlaşmış sıfat"
+ },
+ {
+  "en": "Nominalized infinitive",
+  "ru": "Субстантивированный инфинитив",
+  "tr": "Adlaşmış mastar"
+ },
+ {
+  "en": "plural",
+  "ru": "множественное число",
+  "tr": "çoğul"
+ },
+ {
+  "en": "adjective",
+  "ru": "прилагательное",
+  "tr": "sıfat"
+ },
+ {
+  "en": "modifier of",
+  "ru": "определение к",
+  "tr": "nitelediği:"
+ },
+ {
+  "en": "Looking up word",
+  "ru": "Ищем значение слова",
+  "tr": "Kelimenin anlamı aranıyor"
  },
  {
   "en": "{0} more {0|meaning|meanings}",
@@ -135,9 +1730,59 @@
   "tr": "{0} {0|anlam|anlam|anlam} daha"
  },
  {
+  "en": "The dictionary could not be loaded. Please try again.",
+  "ru": "Не удалось загрузить словарь. Попробуйте ещё раз.",
+  "tr": "Sözlük yüklenemedi. Tekrar dene."
+ },
+ {
+  "en": "collapse",
+  "ru": "свернуть",
+  "tr": "daralt"
+ },
+ {
+  "en": "Other meanings",
+  "ru": "Другие значения",
+  "tr": "Diğer anlamlar"
+ },
+ {
+  "en": "Linked verb",
+  "ru": "Связанный глагол",
+  "tr": "Bağlı fiil"
+ },
+ {
+  "en": "Pronoun reference",
+  "ru": "Справка о местоимениях",
+  "tr": "Zamir tablosu"
+ },
+ {
+  "en": "Dictionary details",
+  "ru": "Словарная справка",
+  "tr": "Sözlük bilgisi"
+ },
+ {
+  "en": "Previous part",
+  "ru": "Предыдущая часть",
+  "tr": "Önceki parça"
+ },
+ {
+  "en": "Next part",
+  "ru": "Следующая часть",
+  "tr": "Sonraki parça"
+ },
+ {
   "en": "part {0} of {1}",
   "ru": "часть {0} из {1}",
-  "tr": "bölüm {0} / {1}"
+  "tr": "parça {0} / {1}"
+ },
+ {
+  "en": "Your progress is saved only on this device. Deleting the app erases it. If your iPhone backup (iCloud) is on, your progress moves to a new iPhone along with everything else.",
+  "ru": "Прогресс хранится только на этом устройстве. Если удалить приложение, прогресс пропадёт. При переезде на новый iPhone он вернётся вместе с резервной копией телефона (iCloud), если она включена.",
+  "tr": "İlerlemen yalnızca bu cihazda saklanır. Uygulamayı silersen ilerlemen de silinir. iPhone yedeklemen (iCloud) açıksa ilerlemen her şeyle birlikte yeni iPhone'a taşınır."
+ },
+ {
+  "en": "To bring your progress to another device, like an iPad, make a backup. It's a small file you can open there with Wiederherstellen.",
+  "ru": "Чтобы перенести прогресс на другое устройство, например на iPad, сделай бэкап. Это небольшой файл, его можно открыть там через Wiederherstellen.",
+  "tr": "İlerlemeni iPad gibi başka bir cihaza taşımak için yedek al. Bu küçük bir dosyadır; orada Wiederherstellen ile açabilirsin."
  },
  {
   "en": "Notifications are turned off in iPhone Settings.",

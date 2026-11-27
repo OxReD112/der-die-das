@@ -34,7 +34,7 @@
  {
   "en": "mochtet — a question about liking the hotel food during that stay.",
   "ru": "mochtet — вопрос о впечатлении от еды в гостинице.",
-  "tr": "mochtet — oteldeki yemekleri nasıl bulduğunuzu sorar.",
+  "tr": "mochtet — oteldeki yemeği beğenip beğenmediğinizi soruyor.",
   "at": [
    "a68dff3d"
   ]
@@ -3396,6 +3396,1011 @@
   "tr": "es hätte + passieren + dürfen — modal fiil Infinitiv biçiminde kalır",
   "at": [
    "329d3811"
+  ]
+ },
+ {
+  "en": "wollte — an earlier intention; in a suitable context, a tentative wish.",
+  "ru": "wollte — прошлое намерение; в подходящем контексте — смягчённое желание.",
+  "tr": "wollte — geçmişteki bir niyet; uygun bağlamda yumuşatılmış bir istek.",
+  "at": [
+   "83218d9f",
+   "e0fccae8"
+  ]
+ },
+ {
+  "en": "will — a current intention to travel next year.",
+  "ru": "will — сейчас есть намерение поехать в следующем году.",
+  "tr": "will — şimdiki niyet: gelecek yıl gitmek.",
+  "at": [
+   "e0fccae8"
+  ]
+ },
+ {
+  "en": "wollte — an earlier intention, sometimes a softener; will — direct intention now.",
+  "ru": "wollte — прошлое намерение, иногда смягчение; will — прямое намерение сейчас.",
+  "tr": "wollte — geçmişteki niyet, bazen yumuşatma; will — şimdiki doğrudan niyet.",
+  "at": [
+   "493fdd0a",
+   "b264f4e9"
+  ]
+ },
+ {
+  "en": "I want to go to Spain next year.",
+  "ru": "Я хочу в следующем году поехать в Испанию.",
+  "tr": "Seneye İspanya'ya gitmek istiyorum.",
+  "at": [
+   "727031f8"
+  ]
+ },
+ {
+  "en": "wollen → ich will",
+  "ru": "wollen → ich will",
+  "tr": "wollen → ich will",
+  "at": [
+   "31f35a5c"
+  ]
+ },
+ {
+  "en": "wolltest — an earlier intention; in a suitable context, a tentative wish.",
+  "ru": "wolltest — прошлое намерение; в подходящем контексте — смягчённое желание.",
+  "tr": "wolltest — geçmişteki bir niyet; uygun bağlamda yumuşatılmış bir istek.",
+  "at": [
+   "64b8cb96"
+  ]
+ },
+ {
+  "en": "willst — a question about plans for this evening.",
+  "ru": "willst — вопрос о планах на сегодняшний вечер.",
+  "tr": "willst — bu akşam ne yapmak istediğini soruyor.",
+  "at": [
+   "64b8cb96"
+  ]
+ },
+ {
+  "en": "wolltest — an earlier intention, sometimes a softener; willst — direct intention now.",
+  "ru": "wolltest — прошлое намерение, иногда смягчение; willst — прямое намерение сейчас.",
+  "tr": "wolltest — geçmişteki niyet, bazen yumuşatma; willst — şimdiki doğrudan niyet.",
+  "at": [
+   "c2026ee4"
+  ]
+ },
+ {
+  "en": "What do you want to do tonight?",
+  "ru": "Что ты хочешь делать сегодня вечером?",
+  "tr": "Bu akşam ne yapmak istiyorsun?",
+  "at": [
+   "365bdc5e"
+  ]
+ },
+ {
+  "en": "wollen → du willst",
+  "ru": "wollen → du willst",
+  "tr": "wollen → du willst",
+  "at": [
+   "dd35a78a"
+  ]
+ },
+ {
+  "en": "will — he intends to buy a new car.",
+  "ru": "will — он намерен купить новую машину.",
+  "tr": "will — yeni bir araba almaya niyetli.",
+  "at": [
+   "83218d9f"
+  ]
+ },
+ {
+  "en": "He wants to buy a new car.",
+  "ru": "Он хочет купить новую машину.",
+  "tr": "Yeni bir araba almak istiyor.",
+  "at": [
+   "8b391e33"
+  ]
+ },
+ {
+  "en": "wolltet — an earlier intention; in a suitable context, a tentative wish.",
+  "ru": "wolltet — прошлое намерение; в подходящем контексте — смягчённое желание.",
+  "tr": "wolltet — geçmişteki bir niyet; uygun bağlamda yumuşatılmış bir istek.",
+  "at": [
+   "5fcfe8c2"
+  ]
+ },
+ {
+  "en": "wollt — a question about wanting to come along.",
+  "ru": "wollt — вопрос о желании пойти вместе.",
+  "tr": "wollt — birlikte gelmek isteyip istemediğinizi soruyor.",
+  "at": [
+   "5fcfe8c2"
+  ]
+ },
+ {
+  "en": "wolltet — an earlier intention, sometimes a softener; wollt — direct intention now.",
+  "ru": "wolltet — прошлое намерение, иногда смягчение; wollt — прямое намерение сейчас.",
+  "tr": "wolltet — geçmişteki niyet, bazen yumuşatma; wollt — şimdiki doğrudan niyet.",
+  "at": [
+   "4ab285a0"
+  ]
+ },
+ {
+  "en": "Do you want to come along?",
+  "ru": "Вы хотите пойти с нами?",
+  "tr": "Bizimle gelmek istiyor musunuz?",
+  "at": [
+   "99d05d22"
+  ]
+ },
+ {
+  "en": "wollen → ihr wollt",
+  "ru": "wollen → ihr wollt",
+  "tr": "wollen → ihr wollt",
+  "at": [
+   "c179052e"
+  ]
+ },
+ {
+  "en": "wollen — a directly expressed current intention.",
+  "ru": "wollen — прямо выраженное намерение сейчас.",
+  "tr": "wollen — şimdiki niyet, doğrudan söylenmiş.",
+  "at": [
+   "3f71a1f0",
+   "e5ae6287",
+   "f839e464"
+  ]
+ },
+ {
+  "en": "wollten — there was an earlier plan to travel at the weekend.",
+  "ru": "wollten — раньше планировали поездку на выходных.",
+  "tr": "wollten — daha önce hafta sonu için bir gezi planlanmıştı.",
+  "at": [
+   "f839e464"
+  ]
+ },
+ {
+  "en": "wollen — intention now; wollten here — intention in the past.",
+  "ru": "wollen — намерение сейчас; wollten здесь — намерение в прошлом.",
+  "tr": "wollen — şimdiki niyet; wollten burada — geçmişteki niyet.",
+  "at": [
+   "73816046",
+   "fe7a6971"
+  ]
+ },
+ {
+  "en": "We wanted to go to Berlin at the weekend.",
+  "ru": "Мы хотели на выходных поехать в Берлин.",
+  "tr": "Hafta sonu Berlin'e gitmek istiyorduk.",
+  "at": [
+   "95c5e14c"
+  ]
+ },
+ {
+  "en": "wollen → wollte → wir wollten",
+  "ru": "wollen → wollte → wir wollten",
+  "tr": "wollen → wollte → wir wollten",
+  "at": [
+   "1a7e89b0"
+  ]
+ },
+ {
+  "en": "will — a directly expressed current intention.",
+  "ru": "will — прямо выраженное намерение сейчас.",
+  "tr": "will — şimdiki niyet, doğrudan söylenmiş.",
+  "at": [
+   "364b4391",
+   "bd3ccc91"
+  ]
+ },
+ {
+  "en": "wollte — he intended to solve the problem himself.",
+  "ru": "wollte — он хотел решить проблему самостоятельно.",
+  "tr": "wollte — sorunu kendi başına çözmek istiyordu.",
+  "at": [
+   "bd3ccc91"
+  ]
+ },
+ {
+  "en": "He wanted to solve the problem himself.",
+  "ru": "Он хотел решить проблему сам.",
+  "tr": "Sorunu kendisi çözmek istedi.",
+  "at": [
+   "c92407f5"
+  ]
+ },
+ {
+  "en": "willst — a directly expressed current intention.",
+  "ru": "willst — прямо выраженное намерение сейчас.",
+  "tr": "willst — şimdiki niyet, doğrudan söylenmiş.",
+  "at": [
+   "bd29cf6b",
+   "d5793326"
+  ]
+ },
+ {
+  "en": "wolltest — a question about an earlier intention to resign.",
+  "ru": "wolltest — вопрос о прошлом намерении уволиться.",
+  "tr": "wolltest — daha önce işten ayrılmak isteyip istemediğini soruyor.",
+  "at": [
+   "d5793326"
+  ]
+ },
+ {
+  "en": "willst — intention now; wolltest here — intention in the past.",
+  "ru": "willst — намерение сейчас; wolltest здесь — намерение в прошлом.",
+  "tr": "willst — şimdiki niyet; wolltest burada — geçmişteki niyet.",
+  "at": [
+   "beaade34"
+  ]
+ },
+ {
+  "en": "Did you really want to quit your job?",
+  "ru": "Ты действительно хотел уволиться?",
+  "tr": "Gerçekten işten ayrılmak mı istedin?",
+  "at": [
+   "2bd489ee"
+  ]
+ },
+ {
+  "en": "wollen → wollte → du wolltest",
+  "ru": "wollen → wollte → du wolltest",
+  "tr": "wollen → wollte → du wolltest",
+  "at": [
+   "83a3b8ba",
+   "9b3b6327"
+  ]
+ },
+ {
+  "en": "wollte — there was an intention to call just before this moment.",
+  "ru": "wollte — намерение позвонить возникло перед этим моментом.",
+  "tr": "wollte — arama niyeti bu andan hemen önce vardı.",
+  "at": [
+   "6bbcdbed"
+  ]
+ },
+ {
+  "en": "will — intention now; wollte — 'was just about to', an intention before this moment.",
+  "ru": "will — намерение сейчас; wollte — «как раз собирался», намерение до этого момента.",
+  "tr": "will — şimdiki niyet; wollte — “tam -ecektim”, bu andan önceki niyet.",
+  "at": [
+   "2a80b7bb"
+  ]
+ },
+ {
+  "en": "I was just about to call you.",
+  "ru": "Я как раз хотела тебе позвонить.",
+  "tr": "Tam seni arayacaktım.",
+  "at": [
+   "56a80289"
+  ]
+ },
+ {
+  "en": "wollen → wollte → ich wollte",
+  "ru": "wollen → wollte → ich wollte",
+  "tr": "wollen → wollte → ich wollte",
+  "at": [
+   "cba53685",
+   "d20502b9"
+  ]
+ },
+ {
+  "en": "wollten — the children wanted to keep playing outside.",
+  "ru": "wollten — дети хотели продолжить играть на улице.",
+  "tr": "wollten — çocuklar dışarıda oynamaya devam etmek istiyordu.",
+  "at": [
+   "e5ae6287"
+  ]
+ },
+ {
+  "en": "The children wanted to keep playing outside.",
+  "ru": "Дети хотели ещё поиграть на улице.",
+  "tr": "Çocuklar biraz daha dışarıda oynamak istiyordu.",
+  "at": [
+   "937dab0b"
+  ]
+ },
+ {
+  "en": "wollen → wollte → sie wollten",
+  "ru": "wollen → wollte → sie wollten",
+  "tr": "wollen → wollte → sie wollten",
+  "at": [
+   "e12670cb"
+  ]
+ },
+ {
+  "en": "wollt — a directly expressed current intention.",
+  "ru": "wollt — прямо выраженное намерение сейчас.",
+  "tr": "wollt — şimdiki niyet, doğrudan söylenmiş.",
+  "at": [
+   "4a5e5fb5",
+   "99ada99b"
+  ]
+ },
+ {
+  "en": "wolltet — a reminder of an earlier wish to come along.",
+  "ru": "wolltet — напоминание о прежнем желании пойти вместе.",
+  "tr": "wolltet — birlikte gelme konusundaki önceki isteği hatırlatıyor.",
+  "at": [
+   "99ada99b"
+  ]
+ },
+ {
+  "en": "wollt — intention now; wolltet here — intention in the past.",
+  "ru": "wollt — намерение сейчас; wolltet здесь — намерение в прошлом.",
+  "tr": "wollt — şimdiki niyet; wolltet burada — geçmişteki niyet.",
+  "at": [
+   "08ed13d5"
+  ]
+ },
+ {
+  "en": "You wanted to come along!",
+  "ru": "Вы же хотели пойти с нами!",
+  "tr": "Bizimle gelmek istiyordunuz ya!",
+  "at": [
+   "8ef2e847"
+  ]
+ },
+ {
+  "en": "wollen → wollte → ihr wolltet",
+  "ru": "wollen → wollte → ihr wolltet",
+  "tr": "wollen → wollte → ihr wolltet",
+  "at": [
+   "0e87f9a1",
+   "ac17b637"
+  ]
+ },
+ {
+  "en": "wollte — a tentative way to introduce a question now.",
+  "ru": "wollte — мягкое вступление к вопросу сейчас.",
+  "tr": "wollte — şimdi sorulacak soruya yumuşak bir giriş.",
+  "at": [
+   "364b4391"
+  ]
+ },
+ {
+  "en": "will — expresses a current wish directly; wollte softens the question but can also mean an earlier wish.",
+  "ru": "will — текущее желание выражено прямо; wollte смягчает вопрос, но может означать и прошлое желание.",
+  "tr": "will — şimdiki istek doğrudan söyleniyor; wollte soruyu yumuşatır, ama geçmişteki bir isteği de anlatabilir.",
+  "at": [
+   "17e9bc9f"
+  ]
+ },
+ {
+  "en": "I wanted to ask you something.",
+  "ru": "Я хотела тебя кое о чём спросить.",
+  "tr": "Sana bir şey sormak istiyordum.",
+  "at": [
+   "d662eef5"
+  ]
+ },
+ {
+  "en": "wolltest — a tentative question about wanting to add something.",
+  "ru": "wolltest — мягкий вопрос о желании что-то добавить.",
+  "tr": "wolltest — bir şey eklemek isteyip istemediğine dair yumuşak bir soru.",
+  "at": [
+   "bd29cf6b"
+  ]
+ },
+ {
+  "en": "willst — expresses a current wish directly; wolltest softens the question but can also mean an earlier wish.",
+  "ru": "willst — текущее желание выражено прямо; wolltest смягчает вопрос, но может означать и прошлое желание.",
+  "tr": "willst — şimdiki istek doğrudan söyleniyor; wolltest soruyu yumuşatır, ama geçmişteki bir isteği de anlatabilir.",
+  "at": [
+   "3ae72c65"
+  ]
+ },
+ {
+  "en": "Did you want to say something else?",
+  "ru": "Ты хотел(а) ещё что-то сказать?",
+  "tr": "Başka bir şey söylemek istiyor muydun?",
+  "at": [
+   "481cd297"
+  ]
+ },
+ {
+  "en": "wollten — a tentative question whether you'd like to order anything else.",
+  "ru": "wollten — мягкое предложение заказать ещё что-нибудь.",
+  "tr": "wollten — başka bir şey sipariş etmek isteyip istemediğinize dair yumuşak bir soru.",
+  "at": [
+   "3f71a1f0"
+  ]
+ },
+ {
+  "en": "wollen — expresses a current wish directly; wollten softens the question but can also mean an earlier wish.",
+  "ru": "wollen — текущее желание выражено прямо; wollten смягчает вопрос, но может означать и прошлое желание.",
+  "tr": "wollen — şimdiki istek doğrudan söyleniyor; wollten soruyu yumuşatır, ama geçmişteki bir isteği de anlatabilir.",
+  "at": [
+   "bfe08832"
+  ]
+ },
+ {
+  "en": "Did you want to order anything else?",
+  "ru": "Вы хотели ещё что-нибудь заказать?",
+  "tr": "Başka bir şey sipariş etmek istiyor muydunuz?",
+  "at": [
+   "ca236ad0"
+  ]
+ },
+ {
+  "en": "wollen → wollte → Sie wollten",
+  "ru": "wollen → wollte → Sie wollten",
+  "tr": "wollen → wollte → Sie wollten",
+  "at": [
+   "648c1c44"
+  ]
+ },
+ {
+  "en": "wolltet — a tentative question whether you have more questions.",
+  "ru": "wolltet — мягкий вопрос, есть ли ещё вопросы.",
+  "tr": "wolltet — başka sorunuz olup olmadığına dair yumuşak bir soru.",
+  "at": [
+   "4a5e5fb5"
+  ]
+ },
+ {
+  "en": "wollt — expresses a current wish directly; wolltet softens the question but can also mean an earlier wish.",
+  "ru": "wollt — текущее желание выражено прямо; wolltet смягчает вопрос, но может означать и прошлое желание.",
+  "tr": "wollt — şimdiki istek doğrudan söyleniyor; wolltet soruyu yumuşatır, ama geçmişteki bir isteği de anlatabilir.",
+  "at": [
+   "3f6b4503"
+  ]
+ },
+ {
+  "en": "Did you want to ask anything else?",
+  "ru": "Вы хотели ещё что-то спросить?",
+  "tr": "Başka bir şey sormak istiyor muydunuz?",
+  "at": [
+   "c6bea7c1"
+  ]
+ },
+ {
+  "en": "mochte — a preference in the past.",
+  "ru": "mochte — предпочтение в прошлом.",
+  "tr": "mochte — geçmişteki tercih.",
+  "at": [
+   "b01c62db",
+   "fd38dab1"
+  ]
+ },
+ {
+  "en": "möchte — not wanting it now (a wish), not disliking it.",
+  "ru": "möchte — «не хочу» сейчас (желание), а не «не люблю».",
+  "tr": "möchte — şimdi “istemem” (istek), “sevmem” değil.",
+  "at": [
+   "fd38dab1"
+  ]
+ },
+ {
+  "en": "mag — fish is not liked now.",
+  "ru": "mag — рыба сейчас не нравится.",
+  "tr": "mag — balık sevmem (şimdiki zevk).",
+  "at": [
+   "fd38dab1"
+  ]
+ },
+ {
+  "en": "mochte — liking in the past; mag — liking now.",
+  "ru": "mochte — нравилось раньше; mag — нравится сейчас.",
+  "tr": "mochte — geçmişteki zevk; mag — şimdiki zevk.",
+  "at": [
+   "236ef915",
+   "281d1d7f"
+  ]
+ },
+ {
+  "en": "I don't like fish.",
+  "ru": "Я не люблю рыбу.",
+  "tr": "Balık sevmem.",
+  "at": [
+   "df003b15"
+  ]
+ },
+ {
+  "en": "mögen → ich mag",
+  "ru": "mögen → ich mag",
+  "tr": "mögen → ich mag",
+  "at": [
+   "1cd972a5"
+  ]
+ },
+ {
+  "en": "mochtest — a preference in the past.",
+  "ru": "mochtest — предпочтение в прошлом.",
+  "tr": "mochtest — geçmişteki tercih.",
+  "at": [
+   "4a1fc9bc"
+  ]
+ },
+ {
+  "en": "magst — a question about liking cats now.",
+  "ru": "magst — вопрос о нынешней симпатии к кошкам.",
+  "tr": "magst — kedileri şimdi sevip sevmediğini soruyor.",
+  "at": [
+   "4a1fc9bc"
+  ]
+ },
+ {
+  "en": "mochtest — liking in the past; magst — liking now.",
+  "ru": "mochtest — нравилось раньше; magst — нравится сейчас.",
+  "tr": "mochtest — geçmişteki zevk; magst — şimdiki zevk.",
+  "at": [
+   "ca34e25e"
+  ]
+ },
+ {
+  "en": "Do you like cats?",
+  "ru": "Ты любишь кошек?",
+  "tr": "Kedileri sever misin?",
+  "at": [
+   "4c3f3cb4"
+  ]
+ },
+ {
+  "en": "mögen → du magst",
+  "ru": "mögen → du magst",
+  "tr": "mögen → du magst",
+  "at": [
+   "3ebc8f08"
+  ]
+ },
+ {
+  "en": "mag — the sister likes jazz.",
+  "ru": "mag — сестре нравится джаз.",
+  "tr": "mag — kız kardeşim cazı sever.",
+  "at": [
+   "b01c62db"
+  ]
+ },
+ {
+  "en": "My sister likes jazz.",
+  "ru": "Моя сестра любит джаз.",
+  "tr": "Kız kardeşim cazı sever.",
+  "at": [
+   "ee83eb87"
+  ]
+ },
+ {
+  "en": "mochtet — a preference in the past.",
+  "ru": "mochtet — предпочтение в прошлом.",
+  "tr": "mochtet — geçmişteki tercih.",
+  "at": [
+   "a98e1c50"
+  ]
+ },
+ {
+  "en": "möchtet — would you like spicy food now, not do you like it in general.",
+  "ru": "möchtet — хотите ли вы острой еды сейчас, а не любите ли её вообще.",
+  "tr": "möchtet — acılı yemeği genel olarak sevip sevmediğinizi değil, şimdi isteyip istemediğinizi soruyor.",
+  "at": [
+   "a98e1c50"
+  ]
+ },
+ {
+  "en": "mögt — a question about liking spicy food now.",
+  "ru": "mögt — вопрос о нынешнем вкусе к острой еде.",
+  "tr": "mögt — acılı yemeği şimdi sevip sevmediğinizi soruyor.",
+  "at": [
+   "a98e1c50"
+  ]
+ },
+ {
+  "en": "mochtet — liking in the past; mögt — liking now.",
+  "ru": "mochtet — нравилось раньше; mögt — нравится сейчас.",
+  "tr": "mochtet — geçmişteki zevk; mögt — şimdiki zevk.",
+  "at": [
+   "714e38d2"
+  ]
+ },
+ {
+  "en": "Do you like spicy food?",
+  "ru": "Вы любите острую еду?",
+  "tr": "Acılı yemek sever misiniz?",
+  "at": [
+   "37019b30"
+  ]
+ },
+ {
+  "en": "mögen → ihr mögt",
+  "ru": "mögen → ihr mögt",
+  "tr": "mögen → ihr mögt",
+  "at": [
+   "2fb599a4"
+  ]
+ },
+ {
+  "en": "mochte — spinach was not liked in childhood.",
+  "ru": "mochte — в детстве шпинат не нравился.",
+  "tr": "mochte — çocukken ıspanak sevmezdim.",
+  "at": [
+   "bb2921cc"
+  ]
+ },
+ {
+  "en": "mag — liking now; mochte — liking in the past.",
+  "ru": "mag — нравится сейчас; mochte — нравилось в прошлом.",
+  "tr": "mag — şimdiki zevk; mochte — geçmişteki zevk.",
+  "at": [
+   "62027595",
+   "9d7bec6e",
+   "d524d988"
+  ]
+ },
+ {
+  "en": "As a child I didn't like spinach.",
+  "ru": "В детстве я не любила шпинат.",
+  "tr": "Çocukken ıspanak sevmezdim.",
+  "at": [
+   "1d8e11c4"
+  ]
+ },
+ {
+  "en": "mögen → mochte → ich mochte",
+  "ru": "mögen → mochte → ich mochte",
+  "tr": "mögen → mochte → ich mochte",
+  "at": [
+   "e91556b8"
+  ]
+ },
+ {
+  "en": "mag — a preference now.",
+  "ru": "mag — предпочтение сейчас.",
+  "tr": "mag — şimdiki tercih.",
+  "at": [
+   "7b9ecf5b",
+   "e4b8f40a"
+  ]
+ },
+ {
+  "en": "mochte — he liked classical music.",
+  "ru": "mochte — ему нравилась классическая музыка.",
+  "tr": "mochte — klasik müziği severdi.",
+  "at": [
+   "7b9ecf5b"
+  ]
+ },
+ {
+  "en": "He liked classical music.",
+  "ru": "Он любил классическую музыку.",
+  "tr": "Klasik müziği severdi.",
+  "at": [
+   "30e0a007"
+  ]
+ },
+ {
+  "en": "mögen → mochte → er mochte",
+  "ru": "mögen → mochte → er mochte",
+  "tr": "mögen → mochte → er mochte",
+  "at": [
+   "3167c1f7"
+  ]
+ },
+ {
+  "en": "mochtest — a question about liking chocolate in childhood.",
+  "ru": "mochtest — вопрос о любви к шоколаду в детстве.",
+  "tr": "mochtest — çocukken çikolatayı sevip sevmediğini soruyor.",
+  "at": [
+   "d513f385"
+  ]
+ },
+ {
+  "en": "magst — liking now; mochtest — liking in the past.",
+  "ru": "magst — нравится сейчас; mochtest — нравилось в прошлом.",
+  "tr": "magst — şimdiki zevk; mochtest — geçmişteki zevk.",
+  "at": [
+   "235a7253"
+  ]
+ },
+ {
+  "en": "Did you like chocolate as a child?",
+  "ru": "Ты любила шоколад в детстве?",
+  "tr": "Çocukken çikolata sever miydin?",
+  "at": [
+   "db3782d1"
+  ]
+ },
+ {
+  "en": "mögen → mochte → du mochtest",
+  "ru": "mögen → mochte → du mochtest",
+  "tr": "mögen → mochte → du mochtest",
+  "at": [
+   "c1947151"
+  ]
+ },
+ {
+  "en": "mochte — she liked the new colleague straight away.",
+  "ru": "mochte — новый коллега сразу ей понравился.",
+  "tr": "mochte — yeni iş arkadaşını hemen sevdi.",
+  "at": [
+   "e4b8f40a"
+  ]
+ },
+ {
+  "en": "The boss liked the new colleague straight away.",
+  "ru": "Начальнице новый коллега сразу понравился.",
+  "tr": "Şef, yeni iş arkadaşını hemen sevdi.",
+  "at": [
+   "e0746b5a"
+  ]
+ },
+ {
+  "en": "mögen → mochte → die Chefin mochte",
+  "ru": "mögen → mochte → die Chefin mochte",
+  "tr": "mögen → mochte → die Chefin mochte",
+  "at": [
+   "e2cd6076"
+  ]
+ },
+ {
+  "en": "mögt — a preference now.",
+  "ru": "mögt — предпочтение сейчас.",
+  "tr": "mögt — şimdiki tercih.",
+  "at": [
+   "a68dff3d"
+  ]
+ },
+ {
+  "en": "möchtet — would you like this food now, not did you like it.",
+  "ru": "möchtet — хотите ли вы эту еду сейчас, а не понравилась ли она.",
+  "tr": "möchtet — yemeği beğenip beğenmediğinizi değil, şimdi isteyip istemediğinizi soruyor.",
+  "at": [
+   "a68dff3d"
+  ]
+ },
+ {
+  "en": "mögt — liking now; mochtet — liking in the past.",
+  "ru": "mögt — нравится сейчас; mochtet — нравилось в прошлом.",
+  "tr": "mögt — şimdiki zevk; mochtet — geçmişteki zevk.",
+  "at": [
+   "e0a4facb"
+  ]
+ },
+ {
+  "en": "Did you like the food at the hotel?",
+  "ru": "Вам понравилась еда в отеле?",
+  "tr": "Oteldeki yemeği beğendiniz mi?",
+  "at": [
+   "f562d819"
+  ]
+ },
+ {
+  "en": "mögen → mochte → ihr mochtet",
+  "ru": "mögen → mochte → ihr mochtet",
+  "tr": "mögen → mochte → ihr mochtet",
+  "at": [
+   "ffac6769"
+  ]
+ },
+ {
+  "en": "möchte — a polite request for a coffee.",
+  "ru": "möchte — вежливый заказ кофе.",
+  "tr": "möchte — kibar bir kahve siparişi.",
+  "at": [
+   "02feb917"
+  ]
+ },
+ {
+  "en": "will — expresses the wish more directly; möchte — polite and tentative.",
+  "ru": "will — то же желание выражено прямее; möchte — вежливо и мягко.",
+  "tr": "will — aynı istek daha doğrudan; möchte — kibar ve yumuşak.",
+  "at": [
+   "46935967",
+   "4c821701",
+   "edc5a503"
+  ]
+ },
+ {
+  "en": "I'd like a coffee, please.",
+  "ru": "Я хотела бы кофе, пожалуйста.",
+  "tr": "Bir kahve alabilir miyim, lütfen?",
+  "at": [
+   "19b2115b"
+  ]
+ },
+ {
+  "en": "mochte → möchte → ich möchte",
+  "ru": "mochte → möchte → ich möchte",
+  "tr": "mochte → möchte → ich möchte",
+  "at": [
+   "2aa50bad",
+   "543c57bb"
+  ]
+ },
+ {
+  "en": "mögen — also polite, but less common; heard mainly in southern Germany and Austria.",
+  "ru": "mögen — тоже вежливо, но реже; так говорят скорее на юге Германии (например, в Баварии) и в Австрии.",
+  "tr": "mögen — bu da kibar, ama daha seyrek; daha çok Güney Almanya'da (örneğin Bavyera'da) ve Avusturya'da kullanılır.",
+  "at": [
+   "3f9cbd15"
+  ]
+ },
+ {
+  "en": "möchten — a polite offer of something to drink.",
+  "ru": "möchten — вежливое предложение что-нибудь выпить.",
+  "tr": "möchten — içecek bir şey için kibar bir öneri.",
+  "at": [
+   "3f9cbd15"
+  ]
+ },
+ {
+  "en": "wollen — expresses the wish more directly; möchten — polite and tentative.",
+  "ru": "wollen — то же желание выражено прямее; möchten — вежливо и мягко.",
+  "tr": "wollen — aynı istek daha doğrudan; möchten — kibar ve yumuşak.",
+  "at": [
+   "1fd68ff9",
+   "c8436828",
+   "cf2c75a3"
+  ]
+ },
+ {
+  "en": "Would you like something to drink?",
+  "ru": "Вы хотели бы что-нибудь выпить?",
+  "tr": "Bir şey içmek ister misiniz?",
+  "at": [
+   "b4d06f21"
+  ]
+ },
+ {
+  "en": "mochte → möchte → Sie möchten",
+  "ru": "mochte → möchte → Sie möchten",
+  "tr": "mochte → möchte → Sie möchten",
+  "at": [
+   "1641bf01"
+  ]
+ },
+ {
+  "en": "möchtet — a polite question about the choice of drink.",
+  "ru": "möchtet — вежливый вопрос о выборе напитка.",
+  "tr": "möchtet — içecek seçimi hakkında kibar bir soru.",
+  "at": [
+   "ab7d0580"
+  ]
+ },
+ {
+  "en": "wollt — expresses the wish more directly; möchtet — polite and tentative.",
+  "ru": "wollt — то же желание выражено прямее; möchtet — вежливо и мягко.",
+  "tr": "wollt — aynı istek daha doğrudan; möchtet — kibar ve yumuşak.",
+  "at": [
+   "b691b842"
+  ]
+ },
+ {
+  "en": "What would you like to drink?",
+  "ru": "Что вы хотели бы выпить?",
+  "tr": "Ne içmek istersiniz?",
+  "at": [
+   "98343660"
+  ]
+ },
+ {
+  "en": "mochte → möchte → ihr möchtet",
+  "ru": "mochte → möchte → ihr möchtet",
+  "tr": "mochte → möchte → ihr möchtet",
+  "at": [
+   "c6270b34"
+  ]
+ },
+ {
+  "en": "magst — also polite, but less common; heard mainly in southern Germany and Austria.",
+  "ru": "magst — тоже вежливо, но реже; так говорят скорее на юге Германии (например, в Баварии) и в Австрии.",
+  "tr": "magst — bu da kibar, ama daha seyrek; daha çok Güney Almanya'da (örneğin Bavyera'da) ve Avusturya'da kullanılır.",
+  "at": [
+   "16769ffd"
+  ]
+ },
+ {
+  "en": "möchtest — a polite invitation to eat together.",
+  "ru": "möchtest — вежливое приглашение поесть вместе.",
+  "tr": "möchtest — birlikte yemek yemeye kibar bir davet.",
+  "at": [
+   "16769ffd"
+  ]
+ },
+ {
+  "en": "willst — expresses the wish more directly; möchtest — polite and tentative.",
+  "ru": "willst — то же желание выражено прямее; möchtest — вежливо и мягко.",
+  "tr": "willst — aynı istek daha doğrudan; möchtest — kibar ve yumuşak.",
+  "at": [
+   "79d6838b"
+  ]
+ },
+ {
+  "en": "Would you like to eat with us?",
+  "ru": "Ты хотел(а) бы поесть с нами?",
+  "tr": "Bizimle yemek yemek ister misin?",
+  "at": [
+   "71927ad9"
+  ]
+ },
+ {
+  "en": "mochte → möchte → du möchtest",
+  "ru": "mochte → möchte → du möchtest",
+  "tr": "mochte → möchte → du möchtest",
+  "at": [
+   "76146e29"
+  ]
+ },
+ {
+  "en": "möchten — a polite request to reserve a table.",
+  "ru": "möchten — вежливая просьба забронировать столик.",
+  "tr": "möchten — masa ayırtmak için kibar bir rica.",
+  "at": [
+   "6e9e5baf"
+  ]
+ },
+ {
+  "en": "We'd like to reserve a table for two.",
+  "ru": "Мы хотели бы забронировать столик на двоих.",
+  "tr": "İki kişilik bir masa ayırtmak isteriz.",
+  "at": [
+   "a6c4aa43"
+  ]
+ },
+ {
+  "en": "mochte → möchte → wir möchten",
+  "ru": "mochte → möchte → wir möchten",
+  "tr": "mochte → möchte → wir möchten",
+  "at": [
+   "644e7d93"
+  ]
+ },
+ {
+  "en": "möchte — a tentative wish for an appointment on Monday.",
+  "ru": "möchte — мягко выраженное желание записаться на понедельник.",
+  "tr": "möchte — pazartesi için randevu isteği, yumuşatılmış.",
+  "at": [
+   "c54cbfb5"
+  ]
+ },
+ {
+  "en": "He would like an appointment on Monday.",
+  "ru": "Он хотел бы записаться на понедельник.",
+  "tr": "Pazartesi için randevu rica ediyor.",
+  "at": [
+   "1a3307c1"
+  ]
+ },
+ {
+  "en": "mochte → möchte → er möchte",
+  "ru": "mochte → möchte → er möchte",
+  "tr": "mochte → möchte → er möchte",
+  "at": [
+   "61fc59a1"
+  ]
+ },
+ {
+  "en": "möchte — a tentative wish to learn more.",
+  "ru": "möchte — мягко выраженное желание узнать больше.",
+  "tr": "möchte — daha fazlasını öğrenme isteği, yumuşatılmış.",
+  "at": [
+   "b09a1539"
+  ]
+ },
+ {
+  "en": "I'd like to know more about it.",
+  "ru": "Я хотела бы узнать об этом больше.",
+  "tr": "Bu konuda daha fazla bilgi almak isterim.",
+  "at": [
+   "31692b6d"
+  ]
+ },
+ {
+  "en": "möchten — the children would like some ice cream.",
+  "ru": "möchten — дети хотят мороженого (вежливое «хотят»).",
+  "tr": "möchten — çocuklar dondurma istiyor (kibar “istemek”).",
+  "at": [
+   "ce494eea"
+  ]
+ },
+ {
+  "en": "The children would like an ice cream.",
+  "ru": "Дети хотели бы мороженого.",
+  "tr": "Çocuklar dondurma istiyor.",
+  "at": [
+   "815f3d3a"
+  ]
+ },
+ {
+  "en": "mochte → möchte → sie möchten",
+  "ru": "mochte → möchte → sie möchten",
+  "tr": "mochte → möchte → sie möchten",
+  "at": [
+   "b7282a56"
   ]
  }
 ]

@@ -1,0 +1,18 @@
+[
+ {
+  "en": "Polite form — capitalised: {w}",
+  "ru": "Вежливая форма — с большой буквы: {w}",
+  "tr": "Nezaket biçimi — büyük harfle: {w}",
+  "at": [
+   "894e4dca"
+  ]
+ },
+ {
+  "en": "Lower case here: {w}",
+  "ru": "Здесь с маленькой буквы: {w}",
+  "tr": "Burada küçük harfle: {w}",
+  "at": [
+   "32d4eb0d"
+  ]
+ }
+]

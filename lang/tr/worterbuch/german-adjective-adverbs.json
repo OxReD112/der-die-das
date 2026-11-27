@@ -479,7 +479,7 @@
   "_src_reader": "b6e452ee"
  },
  "adjective-adverb-044": {
-  "translation_tr": "küçük, düşük; önemsiz, cüzî; hafif düzeyde, az",
+  "translation_tr": "küçük, düşük; önemsiz, cüzi; hafif düzeyde, az",
   "example_tr": "Bu düşük bir risk.",
   "additional_examples": [
    {
@@ -600,18 +600,18 @@
   "_src_reader": "98845f19"
  },
  "adjective-adverb-055": {
-  "translation_tr": "merkezî; merkezde",
+  "translation_tr": "merkezi; merkezde",
   "example_tr": "Otel merkezde.",
   "additional_examples": [
    {
-    "example_tr": "Merkezî bir yerde buluşuyoruz."
+    "example_tr": "Merkezi bir yerde buluşuyoruz."
    }
   ],
   "_src": "f1202e8a",
   "_src_reader": "1aa9b2ad"
  },
  "adjective-adverb-056": {
-  "translation_tr": "tasarruflu, ekonomik; iktisadî, ekonomiyle ilgili; tasarruflu bir şekilde",
+  "translation_tr": "tasarruflu, ekonomik; iktisadi, ekonomiyle ilgili; tasarruflu bir şekilde",
   "example_tr": "Bu ekonomik bir araba.",
   "additional_examples": [
    {
@@ -842,7 +842,7 @@
   "_src_reader": "f1bc9d8f"
  },
  "adverb-181": {
-  "translation_tr": "göreli, nispî; nispeten",
+  "translation_tr": "göreli, nispi; nispeten",
   "example_tr": "Daire nispeten ucuz.",
   "additional_examples": [
    {
@@ -1019,7 +1019,7 @@
   "_src_reader": "7f0f41bd"
  },
  "adjective-adverb-093": {
-  "translation_tr": "kesin, nihaî; kesin olarak, temelli",
+  "translation_tr": "kesin, nihai; kesin olarak, temelli",
   "example_tr": "Bu benim kesin kararım.",
   "additional_examples": [
    {
@@ -1129,8 +1129,8 @@
   "_src_reader": "9544dc26"
  },
  "adjective-adverb-103": {
-  "translation_tr": "insanî, insana özgü; insancıl; insanca",
-  "example_tr": "Bu insanî bir tepkiydi.",
+  "translation_tr": "insani, insana özgü; insancıl; insanca",
+  "example_tr": "Bu insani bir tepkiydi.",
   "additional_examples": [
    {
     "example_tr": "Çok insanca davrandı."
@@ -1519,7 +1519,7 @@
   "_src_reader": "08c1d475"
  },
  "adjective-adverb-138": {
-  "translation_tr": "işle ilgili; meslekî; iş gereği",
+  "translation_tr": "işle ilgili; mesleki; iş gereği",
   "example_tr": "İş gereği sık sık yolculuk yapıyorum.",
   "additional_examples": [
    {
@@ -1629,7 +1629,7 @@
   "_src_reader": "c38b1d81"
  },
  "adjective-adverb-148": {
-  "translation_tr": "yapay, sunî; yapay olarak",
+  "translation_tr": "yapay, suni; yapay olarak",
   "example_tr": "Vazoda yapay çiçekler var.",
   "additional_examples": [
    {
@@ -1928,11 +1928,11 @@
   "_src_reader": "cf1670bd"
  },
  "adjective-adverb-175": {
-  "translation_tr": "maddî; maddî olarak",
-  "example_tr": "Bu maddî bir kayıptı.",
+  "translation_tr": "maddi; maddi olarak",
+  "example_tr": "Bu maddi bir kayıptı.",
   "additional_examples": [
    {
-    "example_tr": "Aile maddî olarak destekleniyor."
+    "example_tr": "Aile maddi olarak destekleniyor."
    }
   ],
   "_src": "eb2a842d",
@@ -2005,7 +2005,7 @@
   "_src_reader": "3b722a43"
  },
  "adjective-adverb-182": {
-  "translation_tr": "çok uzun süre, bir ömür; sonsuz, ebedî; sonsuza dek",
+  "translation_tr": "çok uzun süre, bir ömür; sonsuz, ebedi; sonsuza dek",
   "example_tr": "Bir ömür bekledik.",
   "additional_examples": [
    {
@@ -2275,7 +2275,7 @@
   "_src_reader": "9b10f958"
  },
  "adjective-adverb-206": {
-  "translation_tr": "resmî; biçimsel, şeklî; resmî olarak; biçimsel olarak, şeklen",
+  "translation_tr": "resmî; biçimsel, şekli; resmî olarak; biçimsel olarak, şeklen",
   "example_tr": "Bu resmî bir davet.",
   "additional_examples": [
    {
@@ -2308,11 +2308,11 @@
   "_src_reader": "4f6bb819"
  },
  "adjective-adverb-209": {
-  "translation_tr": "coğrafî; coğrafî olarak",
-  "example_tr": "Coğrafî verileri karşılaştırıyoruz.",
+  "translation_tr": "coğrafi; coğrafi olarak",
+  "example_tr": "Coğrafi verileri karşılaştırıyoruz.",
   "additional_examples": [
    {
-    "example_tr": "Bu yerler coğrafî olarak birbirinden çok uzak."
+    "example_tr": "Bu yerler coğrafi olarak birbirinden çok uzak."
    }
   ],
   "_src": "d40d3b0b",
@@ -2562,11 +2562,11 @@
   "_src_reader": "52a6d8a3"
  },
  "adjective-adverb-232": {
-  "translation_tr": "mimarî; mimarî açıdan",
-  "example_tr": "Bu mimarî bir ayrıntı.",
+  "translation_tr": "mimari; mimari açıdan",
+  "example_tr": "Bu mimari bir ayrıntı.",
   "additional_examples": [
    {
-    "example_tr": "Bina mimarî açıdan ilginç."
+    "example_tr": "Bina mimari açıdan ilginç."
    }
   ],
   "_src": "20f2ba79",
@@ -2661,7 +2661,7 @@
   "_src_reader": "b4e19d0f"
  },
  "adjective-adverb-241": {
-  "translation_tr": "adlî, yargısal; mahkeme yoluyla",
+  "translation_tr": "adli, yargısal; mahkeme yoluyla",
   "example_tr": "Anlaşmazlığı mahkeme yoluyla çözüyor.",
   "additional_examples": [
    {
@@ -3047,7 +3047,7 @@
   "_src_reader": "54f16777"
  },
  "adjective-adverb-276": {
-  "translation_tr": "etik, ahlakî; etik açıdan",
+  "translation_tr": "etik, ahlaki; etik açıdan",
   "example_tr": "Bu etik bir soru.",
   "additional_examples": [
    {
@@ -4046,7 +4046,7 @@
   "_src_reader": "cf27c181"
  },
  "adjective-adverb-366": {
-  "translation_tr": "cüzî, küçük; önemsiz, kayda değer olmayan; çok az",
+  "translation_tr": "cüzi, küçük; önemsiz, kayda değer olmayan; çok az",
   "example_tr": "Bu önemsiz bir fark.",
   "additional_examples": [
    {
@@ -4347,7 +4347,7 @@
   "_src_reader": "1589988d"
  },
  "adjective-adverb-393": {
-  "translation_tr": "gerçek, hakikî; gerçekten",
+  "translation_tr": "gerçek, hakiki; gerçekten",
   "example_tr": "Bu gerçek bir pırlanta.",
   "additional_examples": [
    {
@@ -5346,8 +5346,8 @@
   "_src_reader": "1fe5e7d3"
  },
  "adjective-307": {
-  "translation_tr": "dış, haricî; dışsal, görünüşteki; görünüşte, dıştan",
-  "example_tr": "Merhem yalnızca haricî kullanım içindir.",
+  "translation_tr": "dış, harici; dışsal, görünüşteki; görünüşte, dıştan",
+  "example_tr": "Merhem yalnızca harici kullanım içindir.",
   "additional_examples": [
    {
     "example_tr": "Görünüşte gayet sakin."
@@ -5401,8 +5401,8 @@
   "_src_reader": "307baf80"
  },
  "adjective-369": {
-  "translation_tr": "ahlakî; ahlaklı, erdemli; ahlakî açıdan, ahlaken",
-  "example_tr": "Bu ahlakî bir mesele.",
+  "translation_tr": "ahlaki; ahlaklı, erdemli; ahlaki açıdan, ahlaken",
+  "example_tr": "Bu ahlaki bir mesele.",
   "additional_examples": [
    {
     "example_tr": "Bu ahlaken doğru değil."
@@ -5478,11 +5478,11 @@
   "_src_reader": "445787d7"
  },
  "adverb-048": {
-  "translation_tr": "kısmen; bir ölçüde; kısmî",
+  "translation_tr": "kısmen; bir ölçüde; kısmi",
   "example_tr": "Yol, inşaat çalışmaları nedeniyle kısmen kapalı.",
   "additional_examples": [
    {
-    "example_tr": "Yalnızca kısmî bir geri ödeme aldık."
+    "example_tr": "Yalnızca kısmi bir geri ödeme aldık."
    }
   ],
   "_src": "a5aa64d6",
@@ -5583,7 +5583,7 @@
   "_src_reader": "6cbfb997"
  },
  "adverb-189": {
-  "translation_tr": "yaklaşık olarak; yaklaşık, aşağı yukarı; kabaca, tahminî",
+  "translation_tr": "yaklaşık olarak; yaklaşık, aşağı yukarı; kabaca, tahmini",
   "example_tr": "İstasyon yaklaşık on dakika uzaklıkta.",
   "additional_examples": [
    {
@@ -5594,11 +5594,11 @@
   "_src_reader": "ecc2d05d"
  },
  "adverb-193": {
-  "translation_tr": "tahminen; öngörülere göre; beklenen, tahminî",
+  "translation_tr": "tahminen; öngörülere göre; beklenen, tahmini",
   "example_tr": "Tren tahminen on dakika rötarlı gelecek.",
   "additional_examples": [
    {
-    "example_tr": "Tahminî varış saati 14.00."
+    "example_tr": "Tahmini varış saati 14.00."
    }
   ],
   "usage_note_tr": "Resmî dilde kullanılır. Genellikle anonslarda ve tahminlerde geçer.",
@@ -5636,7 +5636,7 @@
     "example_tr": "Yaşı sorulunca hemen ters tepki veriyor."
    }
   ],
-  "usage_note_tr": "allergisch gegen etwas sein — bir şeye alerjisi olmak; mecazî olarak — bir şeye tahammül edememek.",
+  "usage_note_tr": "allergisch gegen etwas sein — bir şeye alerjisi olmak; mecazi olarak — bir şeye tahammül edememek.",
   "_src": "69bbcf86",
   "_src_reader": "50003d26"
  },
@@ -5722,11 +5722,11 @@
   "_src_reader": "4ac22f19"
  },
  "adjective-adverb-454": {
-  "translation_tr": "gayriresmî, resmî olmayan; gayriresmî olarak, resmî olmayan bir şekilde",
-  "example_tr": "Konferanstan sonra kafede gayriresmî bir buluşma daha oldu.",
+  "translation_tr": "gayriresmi, resmî olmayan; gayriresmi olarak, resmî olmayan bir şekilde",
+  "example_tr": "Konferanstan sonra kafede gayriresmi bir buluşma daha oldu.",
   "additional_examples": [
    {
-    "example_tr": "Önceden zaten gayriresmî olarak anlaşmıştık."
+    "example_tr": "Önceden zaten gayriresmi olarak anlaşmıştık."
    }
   ],
   "usage_note_tr": "Yazı dilinde kullanılır.",
@@ -5741,7 +5741,7 @@
     "example_tr": "Şirket çalışanlarına epey kötü para veriyor."
    }
   ],
-  "usage_note_tr": "Konuşma dilinde kullanılır; “rezil”, “alçak” anlamlarında kötüleme. sich mies fühlen — kendini kötü hissetmek.",
+  "usage_note_tr": "Konuşma dilinde kullanılır; “rezil”, “alçak” anlamlarında olumsuz. sich mies fühlen — kendini kötü hissetmek.",
   "_src": "9d9dd655",
   "_src_reader": "76fbfc10"
  },
@@ -5914,7 +5914,7 @@
     "example_tr": "Onunla konuşacağına korkakça SMS ile ondan ayrıldı."
    }
   ],
-  "usage_note_tr": "Kötüleme. Ayrıca: feig. Karıştırılmamalı: die Feige — incir.",
+  "usage_note_tr": "Olumsuz anlamda kullanılır. Ayrıca: feig. Karıştırılmamalı: die Feige — incir.",
   "_src": "ddaf1a45",
   "_src_reader": "413d1e4e"
  },
@@ -6045,7 +6045,7 @@
   "_src_reader": "89d189bc"
  },
  "adjective-adverb-482": {
-  "translation_tr": "simgesel, mecazî; simgesel olarak, mecazen",
+  "translation_tr": "simgesel, mecazi; simgesel olarak, mecazen",
   "example_tr": "Sahnedeki boş sandalye, bugün aramızda olmayan herkesi simgesel olarak temsil ediyor.",
   "additional_examples": [
    {
@@ -6120,7 +6120,7 @@
     "example_tr": "Dışarısı bugün fena hâlde soğuk."
    }
   ],
-  "usage_note_tr": "Konuşma dilinde kullanılır; “lanet olası” anlamında ayrıca kötüleme. Ünlem olarak: Verflixt (noch mal)! — Kahretsin!",
+  "usage_note_tr": "Konuşma dilinde kullanılır; “lanet olası” anlamında ayrıca olumsuz. Ünlem olarak: Verflixt (noch mal)! — Kahretsin!",
   "_src": "075deaa0",
   "_src_reader": "6e9b1109"
  },
@@ -6154,7 +6154,7 @@
     "example_tr": "Eski bodrum katı iğrenç bir şekilde küf kokuyordu."
    }
   ],
-  "usage_note_tr": "Kötüleme.",
+  "usage_note_tr": "Olumsuz anlamda kullanılır.",
   "_src": "024ab0ff",
   "_src_reader": "b166e6f8"
  },
@@ -6203,11 +6203,11 @@
   "_src_reader": "6adfda3d"
  },
  "adjective-adverb-496": {
-  "translation_tr": "nihayetinde, sonunda; nihaî, kesin",
+  "translation_tr": "nihayetinde, sonunda; nihai, kesin",
   "example_tr": "Uzun süren ev arayışımız nihayetinde karşılığını verdi.",
   "additional_examples": [
    {
-    "example_tr": "Nihaî kararı yönetim kurulu aralık ayında verecek."
+    "example_tr": "Nihai kararı yönetim kurulu aralık ayında verecek."
    }
   ],
   "_src": "d14c9578",
@@ -6238,14 +6238,14 @@
   "_src_reader": "25b4180d"
  },
  "adjective-adverb-499": {
-  "translation_tr": "kelimenin tam anlamıyla, resmen, düpedüz; harfî, kelimesi kelimesine",
+  "translation_tr": "kelimenin tam anlamıyla, resmen, düpedüz; harfi, kelimesi kelimesine",
   "example_tr": "Uzun yürüyüşten sonra kelimenin tam anlamıyla yatağa yığıldım.",
   "additional_examples": [
    {
     "example_tr": "Selden sonra pek çok aile kelimenin tam anlamıyla her şeyini kaybetti."
    }
   ],
-  "usage_note_tr": "Asıl kullanımı zarf olarak “kelimenin tam anlamıyla” (anlatımı güçlendirir). “harfî, kelimesi kelimesine” anlamında nadir; genellikle wörtlich denir.",
+  "usage_note_tr": "Asıl kullanımı zarf olarak “kelimenin tam anlamıyla” (anlatımı güçlendirir). “harfi, kelimesi kelimesine” anlamında nadir; genellikle wörtlich denir.",
   "_src": "fd9f887c",
   "_src_reader": "25e15122"
  },
@@ -6283,14 +6283,14 @@
   "_src_reader": "ac4942f2"
  },
  "adjective-adverb-503": {
-  "translation_tr": "mecazen, mecazî anlamda; mecazî, imgeli; görsel olarak, resimle; görsel, resimli",
-  "example_tr": "Bu cümle düz anlamıyla alınmamalı, mecazî anlamda anlaşılmalı.",
+  "translation_tr": "mecazen, mecazi anlamda; mecazi, imgeli; görsel olarak, resimle; görsel, resimli",
+  "example_tr": "Bu cümle düz anlamıyla alınmamalı, mecazi anlamda anlaşılmalı.",
   "additional_examples": [
    {
     "example_tr": "Yazar imgeli diliyle tanınıyor."
    }
   ],
-  "usage_note_tr": "bildlich gesprochen — mecazî anlamda söylersek.",
+  "usage_note_tr": "bildlich gesprochen — mecazi anlamda söylersek.",
   "_src": "c1bbfe34",
   "_src_reader": "6fad2860"
  },
@@ -6423,7 +6423,7 @@
   "_src_reader": "9aee7389"
  },
  "adjective-adverb-515": {
-  "translation_tr": "cehennem gibi, dayanılmaz, korkunç; feci bir şekilde, müthiş, korkunç derecede; cehennemî, cehenneme ait",
+  "translation_tr": "cehennem gibi, dayanılmaz, korkunç; feci bir şekilde, müthiş, korkunç derecede; cehennemi, cehenneme ait",
   "example_tr": "Diş ameliyatından sonra iki gün boyunca cehennem gibi ağrı çektim.",
   "additional_examples": [
    {
@@ -6481,11 +6481,11 @@
   "_src_reader": "5e411adb"
  },
  "adjective-adverb-520": {
-  "translation_tr": "ceza hukukuna ilişkin, cezaî (ceza hukuku bakımından); cezaî yoldan, ceza hukukuna göre",
-  "example_tr": "Sürücü kaza yüzünden şimdi cezaî yoldan kovuşturuluyor.",
+  "translation_tr": "ceza hukukuna ilişkin, cezai (ceza hukuku bakımından); cezai yoldan, ceza hukukuna göre",
+  "example_tr": "Sürücü kaza yüzünden şimdi cezai yoldan kovuşturuluyor.",
   "additional_examples": [
    {
-    "example_tr": "Bu dolandırıcılık yüzünden onu ciddi cezaî yaptırımlar bekliyor."
+    "example_tr": "Bu dolandırıcılık yüzünden onu ciddi cezai yaptırımlar bekliyor."
    }
   ],
   "usage_note_tr": "Ceza hukukuyla ilgilidir, “suç niteliğinde” anlamına gelmez (suç niteliğinde — kriminell, verbrecherisch).",
@@ -6674,11 +6674,11 @@
   "_src_reader": "23af40a4"
  },
  "adjective-adverb-537": {
-  "translation_tr": "harfî, lafzî; kelimesi kelimesine, harfiyen",
+  "translation_tr": "harfi, lafzi; kelimesi kelimesine, harfiyen",
   "example_tr": "Cümleyi kitaptan kelimesi kelimesine kopyaladım.",
   "additional_examples": [
    {
-    "example_tr": "Atasözünün harfî anlamı mecazî anlamından bambaşka."
+    "example_tr": "Atasözünün harfi anlamı mecazi anlamından bambaşka."
    }
   ],
   "_src": "928b7844",
@@ -6740,7 +6740,7 @@
   "_src_reader": "b5e1be72"
  },
  "adjective-adverb-543": {
-  "translation_tr": "gergin (durum, maddî durum, sinirler, kaslar için); dikkat kesilerek, pür dikkat",
+  "translation_tr": "gergin (durum, maddi durum, sinirler, kaslar için); dikkat kesilerek, pür dikkat",
   "example_tr": "Kavgadan sonra ofisteki hava çok gergindi.",
   "additional_examples": [
    {
