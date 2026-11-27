@@ -71584,7 +71584,8 @@
       "negative": [
         "Sie hat alle Hände voll mit Taschen.",
         "Er hat heute viel zu tun.",
-        "Alle haben die Hände voll."
+        "Alle haben die Hände voll.",
+        "Er hat beide Hände voll Sand."
       ]
     }
   },
@@ -71700,7 +71701,8 @@
         "Die Flagge zeigt einen Adler.",
         "Er zeigt diese Flagge.",
         "Er zeigt jede Flagge.",
-        "Welche Flagge zeigt das Schiff?"
+        "Welche Flagge zeigt das Schiff?",
+        "Sie zeigt die Flagge ihres Landes."
       ]
     }
   },

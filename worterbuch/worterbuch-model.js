@@ -98,7 +98,7 @@
     { file: "german-function-words.json", version: "20261126-wn-x246-function-hidden-2", type: null },
     { file: "german-adjective-adverbs.json", version: "20261126-wn-x245-see-also-4", type: "adjective" },
     // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-    { file: "german-expressions.json", version: "20261127-wn-x246-zexpr-match-4", type: "expression", optional: true }
+    { file: "german-expressions.json", version: "20261127-wn-x246-zexpr-match-5", type: "expression", optional: true }
   ].map(Object.freeze));
 
   const ORDER = ["german-nouns.json", "german-verbs.json", "german-adjectives.json", "german-adverbs.json", "german-adjective-adverbs.json", "german-conjunctions.json", "german-pronouns.json", "german-prepositions.json", "german-function-words.json", "german-expressions.json"];
