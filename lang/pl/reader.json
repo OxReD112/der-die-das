@@ -1219,6 +1219,26 @@
    "en": "Not translated separately / oneself",
    "ru": "Отдельно не переводится / себя",
    "pl": "Nie tłumaczy się osobno / siebie"
+  },
+  {
+   "en": "{0} times",
+   "ru": "{0} раз",
+   "pl": "{0} razy"
+  },
+  {
+   "en": "{0} times",
+   "ru": "{0} раза",
+   "pl": "{0} razy"
+  },
+  {
+   "en": "{0}-fold",
+   "ru": "в {0} раз",
+   "pl": "{0}-krotny"
+  },
+  {
+   "en": "{0}-fold",
+   "ru": "в {0} раза",
+   "pl": "{0}-krotny"
   }
  ],
  "pronouns": [

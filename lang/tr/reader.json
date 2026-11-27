@@ -1,9 +1,89 @@
 {
  "phrases": [
   {
+   "en": "English: ",
+   "ru": "английский: ",
+   "tr": "İngilizce: "
+  },
+  {
+   "en": "dated",
+   "ru": "устар.",
+   "tr": "esk."
+  },
+  {
+   "en": "dated",
+   "ru": "устаревшее",
+   "tr": "eskimiş"
+  },
+  {
+   "en": "dated",
+   "ru": "устаревающее",
+   "tr": "giderek eskiyen"
+  },
+  {
+   "en": "formal",
+   "ru": "книжн.",
+   "tr": "yaz."
+  },
+  {
+   "en": "formal",
+   "ru": "книжное",
+   "tr": "yazı dili"
+  },
+  {
+   "en": "one and a half",
+   "ru": "полтора",
+   "tr": "bir buçuk"
+  },
+  {
+   "en": "{0} and a half",
+   "ru": "{0} с половиной",
+   "tr": "{0} buçuk"
+  },
+  {
+   "en": "{0} times",
+   "ru": "{0} раза",
+   "tr": "{0} kez"
+  },
+  {
+   "en": "{0} times",
+   "ru": "{0} раз",
+   "tr": "{0} kez"
+  },
+  {
+   "en": "{0}-fold",
+   "ru": "в {0} раза",
+   "tr": "{0} kat"
+  },
+  {
+   "en": "{0}-fold",
+   "ru": "в {0} раз",
+   "tr": "{0} kat"
+  },
+  {
    "en": "{0}-minute",
    "ru": "{0}-минутный",
    "tr": "{0} dakikalık"
+  },
+  {
+   "en": "{0}-hour",
+   "ru": "{0}-часовой",
+   "tr": "{0} saatlik"
+  },
+  {
+   "en": "{0}-day",
+   "ru": "{0}-дневный",
+   "tr": "{0} günlük"
+  },
+  {
+   "en": "{0}-week",
+   "ru": "{0}-недельный",
+   "tr": "{0} haftalık"
+  },
+  {
+   "en": "{0}-month",
+   "ru": "{0}-месячный",
+   "tr": "{0} aylık"
   },
   {
    "en": "{0}-year-old",
@@ -11,14 +91,344 @@
    "tr": "{0} yaşında; {0} yıllık"
   },
   {
+   "en": "one and a half times",
+   "ru": "полтора раза",
+   "tr": "bir buçuk kat"
+  },
+  {
+   "en": "one-and-a-half-fold",
+   "ru": "в полтора раза",
+   "tr": "bir buçuk misli"
+  },
+  {
    "en": "diminutive of {0}",
    "ru": "уменьш. от {0}",
    "tr": "{0} kelimesinin küçültmesi"
   },
   {
+   "en": "feminine of {0}",
+   "ru": "жен. к {0}",
+   "tr": "{0} kelimesinin dişil biçimi"
+  },
+  {
+   "en": "obsolete form of {0}",
+   "ru": "устар. форма от {0}",
+   "tr": "{0} kelimesinin eskimiş biçimi"
+  },
+  {
+   "en": "colloquial form of {0}",
+   "ru": "разг. форма от {0}",
+   "tr": "{0} kelimesinin konuşma dilindeki biçimi"
+  },
+  {
+   "en": "short form of {0}",
+   "ru": "краткая форма от {0}",
+   "tr": "{0} kelimesinin kısa biçimi"
+  },
+  {
    "en": "form of {0}",
    "ru": "форма от {0}",
    "tr": "{0} kelimesinin bir biçimi"
+  },
+  {
+   "en": "Superlative form",
+   "ru": "Форма превосходной степени",
+   "tr": "Üstünlük derecesi biçimi"
+  },
+  {
+   "en": "Grammatical form",
+   "ru": "Грамматическая форма",
+   "tr": "Dil bilgisi biçimi"
+  },
+  {
+   "en": "Nom.",
+   "ru": "Ном.",
+   "tr": "Nom."
+  },
+  {
+   "en": "Acc.",
+   "ru": "Акк.",
+   "tr": "Akk."
+  },
+  {
+   "en": "Dative",
+   "ru": "Датив",
+   "tr": "Dativ"
+  },
+  {
+   "en": "Gen.",
+   "ru": "Ген.",
+   "tr": "Gen."
+  },
+  {
+   "en": "masculine",
+   "ru": "мужской род",
+   "tr": "eril"
+  },
+  {
+   "en": "feminine",
+   "ru": "женский род",
+   "tr": "dişil"
+  },
+  {
+   "en": "neuter",
+   "ru": "средний род",
+   "tr": "nötr"
+  },
+  {
+   "en": "singular or plural",
+   "ru": "единственное или множественное число",
+   "tr": "tekil ya da çoğul"
+  },
+  {
+   "en": "plural",
+   "ru": "множественное число",
+   "tr": "çoğul"
+  },
+  {
+   "en": " or ",
+   "ru": " или ",
+   "tr": " ya da "
+  },
+  {
+   "en": "Base form",
+   "ru": "Начальная форма",
+   "tr": "Temel biçim"
+  },
+  {
+   "en": "I couldn’t find a translation. I even checked under the cover.",
+   "ru": "Перевода не нашёл. Даже под обложкой посмотрел.",
+   "tr": "Çeviri bulamadım. Kapağın altına bile baktım."
+  },
+  {
+   "en": "Auxiliary verb · not translated separately",
+   "ru": "Вспомогательный глагол · отдельно не переводится",
+   "tr": "Yardımcı fiil · ayrıca çevrilmez"
+  },
+  {
+   "en": "Passive auxiliary · be",
+   "ru": "Вспомогательный глагол пассива",
+   "tr": "edilgen çatı yardımcı fiili"
+  },
+  {
+   "en": "Auxiliary verb · future or passive",
+   "ru": "Вспомогательный глагол · будущее время или пассив",
+   "tr": "Yardımcı fiil · gelecek zaman ya da edilgen çatı"
+  },
+  {
+   "en": "Conditional construction · would",
+   "ru": "Условная конструкция · бы / будущее в прошлом",
+   "tr": "Koşul yapısı · -ArdI / geçmişteki gelecek"
+  },
+  {
+   "en": "Auxiliary · would have",
+   "ru": "Вспомогательный глагол · бы (о прошлом)",
+   "tr": "Yardımcı fiil · -ArdI (geçmiş için)"
+  },
+  {
+   "en": "Future perfect auxiliary · will",
+   "ru": "Вспомогательный глагол Futur II",
+   "tr": "Futur II yardımcı fiili"
+  },
+  {
+   "en": "Future perfect auxiliary · have",
+   "ru": "Вспомогательный глагол Futur II",
+   "tr": "Futur II yardımcı fiili"
+  },
+  {
+   "en": "Perfect auxiliary · have",
+   "ru": "Вспомогательный глагол Perfekt",
+   "tr": "Perfekt yardımcı fiili"
+  },
+  {
+   "en": "here: is said to",
+   "ru": "здесь: говорят, будто",
+   "tr": "burada: -mış, diyorlar"
+  },
+  {
+   "en": "have to",
+   "ru": "нужно / должен",
+   "tr": "gerek / zorunda"
+  },
+  {
+   "en": "here: to have something to do",
+   "ru": "здесь: есть что (сделать)",
+   "tr": "burada: yapacak bir şeyi olmak"
+  },
+  {
+   "en": "here: to have nothing / little to do",
+   "ru": "здесь: нечего / мало что (сделать)",
+   "tr": "burada: yapacak bir şeyi olmamak / pek olmamak"
+  },
+  {
+   "en": "here: to have to or to have something to do",
+   "ru": "здесь: нужно / должен или есть что (сделать)",
+   "tr": "burada: gerek / zorunda ya da yapacak bir şeyi olmak"
+  },
+  {
+   "en": "Not translated separately",
+   "ru": "Отдельно не переводится",
+   "tr": "Ayrıca çevrilmez"
+  },
+  {
+   "en": "Not translated separately / oneself",
+   "ru": "Отдельно не переводится / себя",
+   "tr": "Ayrıca çevrilmez / kendini"
+  },
+  {
+   "en": "here: can be done",
+   "ru": "здесь: можно (сделать)",
+   "tr": "burada: yapılabilir"
+  },
+  {
+   "en": "here: can be done / let oneself be …",
+   "ru": "здесь: можно (сделать) / позволить (себя)",
+   "tr": "burada: yapılabilir / kendine bir şey yaptırmak"
+  },
+  {
+   "en": "here: let oneself (drop, sink); (fig.) to let go, to relax",
+   "ru": "здесь: сам (упал, опустился); (перен.) расслабиться, отпустить себя",
+   "tr": "burada: kendini (düşmeye, çökmeye) bırakmak; (mec.) gevşemek, kendini salmak"
+  },
+  {
+   "en": "here: let’s",
+   "ru": "здесь: давай(те)",
+   "tr": "burada: hadi …-elim"
+  },
+  {
+   "en": "here: seems to",
+   "ru": "здесь: кажется, по-видимому",
+   "tr": "burada: görünüşe göre"
+  },
+  {
+   "en": "here: need to",
+   "ru": "здесь: нужно",
+   "tr": "burada: gerek"
+  },
+  {
+   "en": "here: know how to",
+   "ru": "здесь: уметь",
+   "tr": "burada: bilmek (yapmayı)"
+  },
+  {
+   "en": "here: usually, tends to",
+   "ru": "здесь: обычно, имеет обыкновение",
+   "tr": "burada: genellikle, -mA alışkanlığı olmak"
+  },
+  {
+   "en": "here: be able to",
+   "ru": "здесь: быть в состоянии",
+   "tr": "burada: -ebilecek durumda olmak"
+  },
+  {
+   "en": "Auxiliary verb (perfect)",
+   "ru": "Вспомогательный глагол (Perfekt)",
+   "tr": "Yardımcı fiil (Perfekt)"
+  },
+  {
+   "en": "Auxiliary verb (passive / future)",
+   "ru": "Вспомогательный глагол (пассив / Futur)",
+   "tr": "Yardımcı fiil (edilgen çatı / Futur)"
+  },
+  {
+   "en": "state",
+   "ru": "состояние",
+   "tr": "durum"
+  },
+  {
+   "en": "verb of motion left out",
+   "ru": "глагол движения опущен",
+   "tr": "hareket fiili söylenmemiş"
+  },
+  {
+   "en": "-frei: -free",
+   "ru": "-frei: без …",
+   "tr": "-frei: …-sız, …-den arınmış"
+  },
+  {
+   "en": "-los: -less",
+   "ru": "-los: без …",
+   "tr": "-los: …-sız"
+  },
+  {
+   "en": "-voll: -ful",
+   "ru": "-voll: полный …",
+   "tr": "-voll: … dolu"
+  },
+  {
+   "en": "-reich: rich in …",
+   "ru": "-reich: богатый …",
+   "tr": "-reich: … bakımından zengin"
+  },
+  {
+   "en": "-arm: low in …",
+   "ru": "-arm: бедный …",
+   "tr": "-arm: … bakımından fakir, az …"
+  },
+  {
+   "en": "-artig: …-like",
+   "ru": "-artig: похожий на …",
+   "tr": "-artig: … gibi, …-ımsı"
+  },
+  {
+   "en": "-fähig: capable of …",
+   "ru": "-fähig: способный к …",
+   "tr": "-fähig: …-ebilen"
+  },
+  {
+   "en": "-er: inhabitant / adjective of the place",
+   "ru": "-er: житель / прилагательное от названия места",
+   "tr": "-er: … sakini / yer adından sıfat"
+  },
+  {
+   "en": "-ig: with …",
+   "ru": "-ig: с …",
+   "tr": "-ig: …-lı"
+  },
+  {
+   "en": "-erei: activity (often tiresome)",
+   "ru": "-erei: занятие (часто надоевшее)",
+   "tr": "-erei: uğraş (çoğu zaman bıktıran)"
+  },
+  {
+   "en": "-erei: place for …",
+   "ru": "-erei: место для …",
+   "tr": "-erei: … yeri"
+  },
+  {
+   "en": "-ig: with … / like …",
+   "ru": "-ig: с … / похожий на …",
+   "tr": "-ig: …-lı / … gibi"
+  },
+  {
+   "en": "-lich: with … / like …",
+   "ru": "-lich: с … / похожий на …",
+   "tr": "-lich: …-lı / … gibi"
+  },
+  {
+   "en": "-bar: can be …",
+   "ru": "-bar: можно …",
+   "tr": "-bar: …-ebilir, …-ılabilir"
+  },
+  {
+   "en": "un-: not …",
+   "ru": "un-: не-",
+   "tr": "un-: …-sız, … olmayan"
+  },
+  {
+   "en": "literally",
+   "ru": "буквально",
+   "tr": "kelimesi kelimesine"
+  },
+  {
+   "en": "(diminutive)",
+   "ru": "(уменьш.)",
+   "tr": "(küçültme)"
+  },
+  {
+   "en": "Possibly from",
+   "ru": "Возможно, от",
+   "tr": "Olası kökeni:"
   },
   {
    "en": "From {0} — {1}",
@@ -29,6 +439,816 @@
    "en": "letter “{0}”",
    "ru": "буква „{0}“",
    "tr": "“{0}” harfi"
+  },
+  {
+   "en": "reported speech",
+   "ru": "косвенная речь: так говорят или думают другие",
+   "tr": "dolaylı anlatım: başkaları böyle söylüyor ya da düşünüyor"
+  },
+  {
+   "en": "old spelling: {0} = {1}",
+   "ru": "старое написание: {0} = {1}",
+   "tr": "eski yazım: {0} = {1}"
+  },
+  {
+   "en": "colloquial: {0} = {1}",
+   "ru": "разг.: {0} = {1}",
+   "tr": "konuş.: {0} = {1}"
+  },
+  {
+   "en": "here: lass uns … — “let’s …”",
+   "ru": "здесь: lass uns … — «давай(те) …»",
+   "tr": "burada: lass uns … — “hadi …-elim”"
+  },
+  {
+   "en": "here: then (often not translated)",
+   "ru": "здесь: то, тогда (часто не переводится)",
+   "tr": "burada: o zaman, o hâlde (çoğu zaman çevrilmez)"
+  },
+  {
+   "en": "{0}- = {1}: the ending is from {2}",
+   "ru": "{0}- = {1}: конец слова взят из {2}",
+   "tr": "{0}- = {1}: kelime sonu {2} kelimesinden"
+  },
+  {
+   "en": "{0} (in order; the noun left out)",
+   "ru": "{0} (по счёту; существительное опущено)",
+   "tr": "{0} (sıra sayısı; isim söylenmemiş)"
+  },
+  {
+   "en": "here: to be done / can be done",
+   "ru": "здесь: (который) надо / можно",
+   "tr": "burada: yapılması gereken / yapılabilecek"
+  },
+  {
+   "en": "(dated) to go, to make one's way (somewhere)",
+   "ru": "(уст.) отправиться, забраться (куда-либо)",
+   "tr": "(esk.) yola koyulmak, (bir yere) gitmek"
+  },
+  {
+   "en": "(without sich)",
+   "ru": "(без sich)",
+   "tr": "(sich olmadan)"
+  },
+  {
+   "en": "us",
+   "ru": "нас",
+   "tr": "bizi"
+  },
+  {
+   "en": "back, backwards; rear",
+   "ru": "назад, обратно; задний",
+   "tr": "geri, geriye; arka"
+  },
+  {
+   "en": "mis-, badly",
+   "ru": "не-, плохо",
+   "tr": "yanlış, kötü"
+  },
+  {
+   "en": "step-",
+   "ru": "неродной, сводный",
+   "tr": "üvey"
+  },
+  {
+   "en": "special",
+   "ru": "особый, специальный",
+   "tr": "özel"
+  },
+  {
+   "en": "wrong, failed",
+   "ru": "ошибочный, неудачный",
+   "tr": "yanlış, başarısız"
+  },
+  {
+   "en": "back, rear, hind",
+   "ru": "задний",
+   "tr": "arka"
+  },
+  {
+   "en": "two",
+   "ru": "два",
+   "tr": "iki"
+  },
+  {
+   "en": "three",
+   "ru": "три",
+   "tr": "üç"
+  },
+  {
+   "en": "four",
+   "ru": "четыре",
+   "tr": "dört"
+  },
+  {
+   "en": "five",
+   "ru": "пять",
+   "tr": "beş"
+  },
+  {
+   "en": "six",
+   "ru": "шесть",
+   "tr": "altı"
+  },
+  {
+   "en": "seven",
+   "ru": "семь",
+   "tr": "yedi"
+  },
+  {
+   "en": "eight",
+   "ru": "восемь",
+   "tr": "sekiz"
+  },
+  {
+   "en": "nine",
+   "ru": "девять",
+   "tr": "dokuz"
+  },
+  {
+   "en": "ten",
+   "ru": "десять",
+   "tr": "on"
+  },
+  {
+   "en": "twelve",
+   "ru": "двенадцать",
+   "tr": "on iki"
+  },
+  {
+   "en": "twenty",
+   "ru": "двадцать",
+   "tr": "yirmi"
+  },
+  {
+   "en": "thirty",
+   "ru": "тридцать",
+   "tr": "otuz"
+  },
+  {
+   "en": "forty",
+   "ru": "сорок",
+   "tr": "kırk"
+  },
+  {
+   "en": "fifty",
+   "ru": "пятьдесят",
+   "tr": "elli"
+  },
+  {
+   "en": "sixty",
+   "ru": "шестьдесят",
+   "tr": "altmış"
+  },
+  {
+   "en": "seventy",
+   "ru": "семьдесят",
+   "tr": "yetmiş"
+  },
+  {
+   "en": "eighty",
+   "ru": "восемьдесят",
+   "tr": "seksen"
+  },
+  {
+   "en": "ninety",
+   "ru": "девяносто",
+   "tr": "doksan"
+  },
+  {
+   "en": "hundred",
+   "ru": "сто",
+   "tr": "yüz"
+  },
+  {
+   "en": "thousand",
+   "ru": "тысяча",
+   "tr": "bin"
+  },
+  {
+   "en": "second",
+   "ru": "второй",
+   "tr": "ikinci"
+  },
+  {
+   "en": "third",
+   "ru": "третий",
+   "tr": "üçüncü"
+  },
+  {
+   "en": "fourth",
+   "ru": "четвёртый",
+   "tr": "dördüncü"
+  },
+  {
+   "en": "fifth",
+   "ru": "пятый",
+   "tr": "beşinci"
+  },
+  {
+   "en": "sixth",
+   "ru": "шестой",
+   "tr": "altıncı"
+  },
+  {
+   "en": "seventh",
+   "ru": "седьмой",
+   "tr": "yedinci"
+  },
+  {
+   "en": "ninth",
+   "ru": "девятый",
+   "tr": "dokuzuncu"
+  },
+  {
+   "en": "tenth",
+   "ru": "десятый",
+   "tr": "onuncu"
+  },
+  {
+   "en": "two, team of two",
+   "ru": "двойка",
+   "tr": "ikili, iki kişilik takım"
+  },
+  {
+   "en": "three, team of three",
+   "ru": "тройка",
+   "tr": "üçlü, üç kişilik takım"
+  },
+  {
+   "en": "four, team of four",
+   "ru": "четвёрка",
+   "tr": "dörtlü, dört kişilik takım"
+  },
+  {
+   "en": "six",
+   "ru": "шестёрка",
+   "tr": "altılı"
+  },
+  {
+   "en": "the twenties",
+   "ru": "двадцатые годы",
+   "tr": "yirmili yıllar"
+  },
+  {
+   "en": "the thirties",
+   "ru": "тридцатые годы",
+   "tr": "otuzlu yıllar"
+  },
+  {
+   "en": "the forties",
+   "ru": "сороковые годы",
+   "tr": "kırklı yıllar"
+  },
+  {
+   "en": "the fifties",
+   "ru": "пятидесятые годы",
+   "tr": "ellili yıllar"
+  },
+  {
+   "en": "the sixties",
+   "ru": "шестидесятые годы",
+   "tr": "altmışlı yıllar"
+  },
+  {
+   "en": "the seventies",
+   "ru": "семидесятые годы",
+   "tr": "yetmişli yıllar"
+  },
+  {
+   "en": "the eighties",
+   "ru": "восьмидесятые годы",
+   "tr": "seksenli yıllar"
+  },
+  {
+   "en": "the nineties",
+   "ru": "девяностые годы",
+   "tr": "doksanlı yıllar"
+  },
+  {
+   "en": "place name",
+   "ru": "название места",
+   "tr": "yer adı"
+  },
+  {
+   "en": "for the first time",
+   "ru": "впервые (в 1-й раз)",
+   "tr": "ilk kez (1. kez)"
+  },
+  {
+   "en": "here: each other",
+   "ru": "здесь: друг друга",
+   "tr": "burada: birbirini"
+  },
+  {
+   "en": "Possible reflexive lassen group; selection required",
+   "ru": "Возможная возвратная группа с lassen; требуется выбор",
+   "tr": "lassen ile dönüşlü yapı olabilir; seçim gerekiyor"
+  },
+  {
+   "en": "Reflexive construction",
+   "ru": "Возвратная конструкция",
+   "tr": "Dönüşlü yapı"
+  },
+  {
+   "en": "reading (the act of reading)",
+   "ru": "чтение",
+   "tr": "okuma (okuma eylemi)"
+  },
+  {
+   "en": "writing (the act of writing)",
+   "ru": "написание; процесс письма",
+   "tr": "yazma (yazma eylemi)"
+  },
+  {
+   "en": "waiting (the act of waiting)",
+   "ru": "ожидание",
+   "tr": "bekleme (bekleme eylemi)"
+  },
+  {
+   "en": "calling (the act of making a phone call)",
+   "ru": "действие: звонить по телефону",
+   "tr": "arama (telefonla arama eylemi)"
+  },
+  {
+   "en": "something new",
+   "ru": "что-то новое",
+   "tr": "yeni bir şey"
+  },
+  {
+   "en": "nothing special",
+   "ru": "ничего особенного",
+   "tr": "özel bir şey değil"
+  },
+  {
+   "en": "can / must be",
+   "ru": "можно / нужно",
+   "tr": "-ebilir / -mesi gerek"
+  },
+  {
+   "en": "Perfekt · Passiv · zu + infinitive",
+   "ru": "Perfekt · Passiv · zu + инфинитив",
+   "tr": "Perfekt · Passiv · zu + mastar"
+  },
+  {
+   "en": "Perfekt · zu + infinitive",
+   "ru": "Perfekt · zu + инфинитив",
+   "tr": "Perfekt · zu + mastar"
+  },
+  {
+   "en": "state · zu + infinitive",
+   "ru": "состояние · zu + инфинитив",
+   "tr": "durum · zu + mastar"
+  },
+  {
+   "en": "Passiv · zu + infinitive",
+   "ru": "Passiv · zu + инфинитив",
+   "tr": "Passiv · zu + mastar"
+  },
+  {
+   "en": "modal + zu + infinitive",
+   "ru": "модальный + zu + инфинитив",
+   "tr": "modal fiil + zu + mastar"
+  },
+  {
+   "en": "zu + infinitive",
+   "ru": "zu + инфинитив",
+   "tr": "zu + mastar"
+  },
+  {
+   "en": "passive auxiliary",
+   "ru": "вспомогательный глагол пассива",
+   "tr": "edilgen çatı yardımcı fiili"
+  },
+  {
+   "en": "Future / inference",
+   "ru": "Будущее / предположение",
+   "tr": "Gelecek zaman / tahmin"
+  },
+  {
+   "en": "would",
+   "ru": "бы",
+   "tr": "-ArdI"
+  },
+  {
+   "en": "will / probably",
+   "ru": "будет / вероятно",
+   "tr": "-ecek / herhalde"
+  },
+  {
+   "en": "Futur I or passive",
+   "ru": "Futur I или пассив",
+   "tr": "Futur I ya da edilgen çatı"
+  },
+  {
+   "en": "auxiliary: future or passive",
+   "ru": "вспомогательный глагол: будущее время или пассив",
+   "tr": "yardımcı fiil: gelecek zaman ya da edilgen çatı"
+  },
+  {
+   "en": "Inference",
+   "ru": "Предположение",
+   "tr": "Tahmin"
+  },
+  {
+   "en": "probably",
+   "ru": "вероятно",
+   "tr": "herhalde"
+  },
+  {
+   "en": "Becoming",
+   "ru": "Становление",
+   "tr": "Oluş"
+  },
+  {
+   "en": "infinitive marker",
+   "ru": "частица инфинитива",
+   "tr": "mastar parçacığı"
+  },
+  {
+   "en": "past Konjunktiv II · würde + perfect infinitive",
+   "ru": "Konjunktiv II прошедшего · würde + инфинитив перфекта",
+   "tr": "geçmiş Konjunktiv II · würde + Perfekt mastarı"
+  },
+  {
+   "en": "Konjunktiv II auxiliary",
+   "ru": "вспомогательный глагол Konjunktiv II",
+   "tr": "Konjunktiv II yardımcı fiili"
+  },
+  {
+   "en": "Futur II · completed future action / inference about a completed event",
+   "ru": "Futur II · завершённое действие в будущем / предположение о завершённом действии",
+   "tr": "Futur II · gelecekte tamamlanmış eylem / tamamlanmış bir olay hakkında tahmin"
+  },
+  {
+   "en": "Futur II auxiliary",
+   "ru": "вспомогательный глагол Futur II",
+   "tr": "Futur II yardımcı fiili"
+  },
+  {
+   "en": "kommen + Partizip II · the manner of coming (kam angerannt — came running)",
+   "ru": "kommen + Partizip II · способ движения (kam angerannt — прибежал)",
+   "tr": "kommen + Partizip II · geliş biçimi (kam angerannt — koşarak geldi)"
+  },
+  {
+   "en": "modal without an infinitive · verb of motion left out",
+   "ru": "модальный без инфинитива · глагол движения опущен",
+   "tr": "mastarsız modal fiil · hareket fiili söylenmemiş"
+  },
+  {
+   "en": "Superlative",
+   "ru": "Превосходная степень",
+   "tr": "Üstünlük derecesi"
+  },
+  {
+   "en": "her (dative)",
+   "ru": "ей (дательный падеж)",
+   "tr": "ona (Dativ, kadın)"
+  },
+  {
+   "en": "here: after, for (Tag um Tag — day after day)",
+   "ru": "здесь: за (Tag um Tag — день за днём)",
+   "tr": "burada: … be … (Tag um Tag — gün be gün)"
+  },
+  {
+   "en": "here: ever (more and more)",
+   "ru": "здесь: всё (всё больше, всё глубже)",
+   "tr": "burada: gittikçe (gittikçe daha çok, daha derin)"
+  },
+  {
+   "en": "here: much, far",
+   "ru": "здесь: намного, гораздо",
+   "tr": "burada: çok daha, epey"
+  },
+  {
+   "en": "here: much, far (viel zu — far too)",
+   "ru": "здесь: намного, гораздо (viel zu — слишком уж)",
+   "tr": "burada: çok daha, epey (viel zu — fazlasıyla)"
+  },
+  {
+   "en": "here: all / every (alle zehn Minuten — every ten minutes)",
+   "ru": "здесь: все / каждые (alle zehn Minuten — каждые десять минут)",
+   "tr": "burada: her (alle zehn Minuten — her on dakikada bir)"
+  },
+  {
+   "en": "here: as if",
+   "ru": "здесь: как будто",
+   "tr": "burada: sanki"
+  },
+  {
+   "en": "here: as",
+   "ru": "здесь: как",
+   "tr": "burada: kadar, gibi"
+  },
+  {
+   "en": "here: than",
+   "ru": "здесь: чем",
+   "tr": "burada: -den (daha)"
+  },
+  {
+   "en": "up (away)",
+   "ru": "наверх (туда)",
+   "tr": "yukarı (oraya)"
+  },
+  {
+   "en": "up (towards)",
+   "ru": "наверх (сюда)",
+   "tr": "yukarı (buraya)"
+  },
+  {
+   "en": "down (away)",
+   "ru": "вниз (туда)",
+   "tr": "aşağı (oraya)"
+  },
+  {
+   "en": "down (towards)",
+   "ru": "вниз (сюда)",
+   "tr": "aşağı (buraya)"
+  },
+  {
+   "en": "in (away)",
+   "ru": "внутрь (туда)",
+   "tr": "içeri (oraya)"
+  },
+  {
+   "en": "in (towards)",
+   "ru": "внутрь (сюда)",
+   "tr": "içeri (buraya)"
+  },
+  {
+   "en": "out (away)",
+   "ru": "наружу (туда)",
+   "tr": "dışarı (oraya)"
+  },
+  {
+   "en": "out (towards)",
+   "ru": "наружу (сюда)",
+   "tr": "dışarı (buraya)"
+  },
+  {
+   "en": "over, across",
+   "ru": "на ту сторону",
+   "tr": "karşıya (öbür tarafa)"
+  },
+  {
+   "en": "over, across",
+   "ru": "на эту сторону",
+   "tr": "bu tarafa (karşıdan)"
+  },
+  {
+   "en": "around",
+   "ru": "вокруг; туда-сюда",
+   "tr": "etrafında; oraya buraya"
+  },
+  {
+   "en": "back",
+   "ru": "назад, обратно",
+   "tr": "geri, geriye"
+  },
+  {
+   "en": "away",
+   "ru": "прочь",
+   "tr": "uzağa, çekip gitmek"
+  },
+  {
+   "en": "ahead, forward",
+   "ru": "вперёд",
+   "tr": "ileri, öne"
+  },
+  {
+   "en": "up(wards)",
+   "ru": "вверх",
+   "tr": "yukarı"
+  },
+  {
+   "en": "apart",
+   "ru": "в разные стороны",
+   "tr": "ayrı ayrı, her biri bir yana"
+  },
+  {
+   "en": "away, along; there",
+   "ru": "прочь, мимо; туда",
+   "tr": "uzağa, yanından; oraya"
+  },
+  {
+   "en": "down",
+   "ru": "вниз",
+   "tr": "aşağı"
+  },
+  {
+   "en": "off, away",
+   "ru": "прочь; с места",
+   "tr": "uzağa; yerinden"
+  },
+  {
+   "en": "along, this way",
+   "ru": "сюда (о движении); мимо",
+   "tr": "buraya (hareketle); yanından"
+  },
+  {
+   "en": "here, this way",
+   "ru": "сюда",
+   "tr": "buraya"
+  },
+  {
+   "en": "home",
+   "ru": "домой",
+   "tr": "eve"
+  },
+  {
+   "en": "back; again",
+   "ru": "обратно; снова",
+   "tr": "geri; yeniden"
+  },
+  {
+   "en": "through",
+   "ru": "сквозь, через",
+   "tr": "içinden, -den geçerek"
+  },
+  {
+   "en": "along, with (others)",
+   "ru": "вместе (с кем-либо)",
+   "tr": "birlikte (başkalarıyla)"
+  },
+  {
+   "en": "further, on",
+   "ru": "дальше; продолжать",
+   "tr": "daha ileri; devam etmek"
+  },
+  {
+   "en": "together",
+   "ru": "вместе; в одно (целое)",
+   "tr": "birlikte; bir araya (bütün olarak)"
+  },
+  {
+   "en": "past, by",
+   "ru": "мимо",
+   "tr": "yanından, önünden geçerek"
+  },
+  {
+   "en": "along",
+   "ru": "вдоль",
+   "tr": "boyunca"
+  },
+  {
+   "en": "here, over (towards the speaker)",
+   "ru": "сюда (к говорящему)",
+   "tr": "buraya (konuşana doğru)"
+  },
+  {
+   "en": "up to, closer",
+   "ru": "ближе, вплотную (к)",
+   "tr": "yaklaşarak, iyice yakına"
+  },
+  {
+   "en": "out, forth",
+   "ru": "наружу (из-за, из-под), вперёд",
+   "tr": "dışarı (arkasından, altından), ileri"
+  },
+  {
+   "en": "away; over",
+   "ru": "прочь; поверх, через",
+   "tr": "uzağa; üstünden, üzerinden"
+  },
+  {
+   "en": "to (something); in addition",
+   "ru": "к (чему-то); вдобавок",
+   "tr": "-e; ayrıca, üstelik"
+  },
+  {
+   "en": "after, behind; afterwards",
+   "ru": "следом, вслед; потом",
+   "tr": "arkasından, peşinden; sonra"
+  },
+  {
+   "en": "here, towards the speaker; (hinter … her) after, behind; (vor … her) ahead",
+   "ru": "сюда; (hinter … her) следом; (vor … her) впереди",
+   "tr": "buraya; (hinter … her) peşinden; (vor … her) önü sıra"
+  },
+  {
+   "en": "there, away from the speaker",
+   "ru": "туда",
+   "tr": "oraya"
+  },
+  {
+   "en": "in confusion; all at once",
+   "ru": "вперемешку; наперебой",
+   "tr": "karmakarışık; hep bir ağızdan"
+  },
+  {
+   "en": "firmly, tight",
+   "ru": "крепко, прочно",
+   "tr": "sıkıca, sağlam"
+  },
+  {
+   "en": "out; to the end",
+   "ru": "из, наружу; до конца",
+   "tr": "dışarı; sonuna kadar"
+  },
+  {
+   "en": "up; on",
+   "ru": "вверх; на",
+   "tr": "yukarı; üstüne"
+  },
+  {
+   "en": "in, into",
+   "ru": "в, внутрь",
+   "tr": "içeri, içine"
+  },
+  {
+   "en": "on, to",
+   "ru": "к, на",
+   "tr": "-e, üstüne"
+  },
+  {
+   "en": "towards",
+   "ru": "навстречу",
+   "tr": "-e doğru, karşılamaya"
+  },
+  {
+   "en": "here: after all, you know",
+   "ru": "здесь: ведь, же",
+   "tr": "burada: biliyorsun, malum"
+  },
+  {
+   "en": "here: then, so (adds emphasis to a question)",
+   "ru": "здесь: ну, же (усиливает вопрос)",
+   "tr": "burada: peki (soruyu güçlendirir)"
+  },
+  {
+   "en": "here: so, then",
+   "ru": "здесь: итак, вот и",
+   "tr": "burada: ve böylece, işte"
+  },
+  {
+   "en": "here: come on, do (insisting)",
+   "ru": "здесь: же, ну (настойчиво)",
+   "tr": "burada: -sAnA! (ısrarla)"
+  },
+  {
+   "en": "here: just (softens a request)",
+   "ru": "здесь: -ка (смягчает просьбу)",
+   "tr": "burada: bir (ricayı yumuşatır)"
+  },
+  {
+   "en": "here: just (softens a request; = mal)",
+   "ru": "здесь: -ка (смягчает просьбу; = mal)",
+   "tr": "burada: bir (ricayı yumuşatır; = mal)"
+  },
+  {
+   "en": "here: and yet",
+   "ru": "здесь: и всё-таки",
+   "tr": "burada: yine de"
+  },
+  {
+   "en": "here: if only",
+   "ru": "здесь: хоть бы, если бы только",
+   "tr": "burada: keşke"
+  },
+  {
+   "en": "here: then, again (in a question)",
+   "ru": "здесь: же, ну",
+   "tr": "burada: …, değil mi? / … -dI? (soruda)"
+  },
+  {
+   "en": "here: first, for now",
+   "ru": "здесь: сначала, для начала",
+   "tr": "burada: önce, şimdilik"
+  },
+  {
+   "en": "here: once more",
+   "ru": "здесь: ещё раз",
+   "tr": "burada: bir kez daha"
+  },
+  {
+   "en": "here: once, at one time (= einmal)",
+   "ru": "здесь: однажды, когда-то (= einmal)",
+   "tr": "burada: bir zamanlar, bir kez (= einmal)"
+  },
+  {
+   "en": "here: I wonder",
+   "ru": "здесь: интересно, …",
+   "tr": "burada: acaba …"
+  },
+  {
+   "en": "here: perfectly well",
+   "ru": "здесь: прекрасно, вполне",
+   "tr": "burada: gayet iyi, pekâlâ"
+  },
+  {
+   "en": "here: when",
+   "ru": "здесь: когда",
+   "tr": "burada: -dIğI zaman, -dIğIndA"
+  },
+  {
+   "en": "here: whoever, (the one) who",
+   "ru": "здесь: (тот,) кто",
+   "tr": "burada: kim … ise"
+  },
+  {
+   "en": "here: nothing but, pure",
+   "ru": "здесь: одни, сплошь, только",
+   "tr": "burada: sırf, baştan aşağı, sadece"
   },
   {
    "en": "{0}th",
@@ -46,10 +1266,306 @@
    "tr": "{0} ile ilgili"
   },
   {
+   "en": "nominalized infinitive of “{0}”",
+   "ru": "субстантивированный инфинитив от «{0}»",
+   "tr": "“{0}” fiilinden adlaşmış mastar"
+  },
+  {
    "en": "part of a word: {0}… — ending as in {1}",
    "ru": "часть слова: {0}… — конец как в {1}",
    "tr": "kelime parçası: {0}… — sonu {1} kelimesindeki gibi"
   }
  ],
- "pronouns": []
+ "pronouns": [
+  {
+   "en": "I",
+   "ru": "я",
+   "tr": "ben"
+  },
+  {
+   "en": "me",
+   "ru": "меня",
+   "tr": "beni"
+  },
+  {
+   "en": "me",
+   "ru": "мне",
+   "tr": "bana"
+  },
+  {
+   "en": "you",
+   "ru": "ты",
+   "tr": "sen"
+  },
+  {
+   "en": "you",
+   "ru": "тебя",
+   "tr": "seni"
+  },
+  {
+   "en": "you",
+   "ru": "тебе",
+   "tr": "sana"
+  },
+  {
+   "en": "he",
+   "ru": "он",
+   "tr": "o"
+  },
+  {
+   "en": "him",
+   "ru": "его",
+   "tr": "onu"
+  },
+  {
+   "en": "him",
+   "ru": "ему",
+   "tr": "ona"
+  },
+  {
+   "en": "she / they / you",
+   "ru": "она / они / Вы",
+   "tr": "o / onlar / Siz"
+  },
+  {
+   "en": "it",
+   "ru": "оно",
+   "tr": "o"
+  },
+  {
+   "en": "we",
+   "ru": "мы",
+   "tr": "biz"
+  },
+  {
+   "en": "us",
+   "ru": "нас / нам",
+   "tr": "bizi / bize"
+  },
+  {
+   "en": "us",
+   "ru": "нас",
+   "tr": "bizi"
+  },
+  {
+   "en": "you / her",
+   "ru": "вы / ей",
+   "tr": "siz / ona"
+  },
+  {
+   "en": "you",
+   "ru": "вас / вам",
+   "tr": "sizi / size"
+  },
+  {
+   "en": "you",
+   "ru": "вас",
+   "tr": "sizi"
+  },
+  {
+   "en": "them / you",
+   "ru": "им / Вам",
+   "tr": "onlara / Size"
+  },
+  {
+   "en": "her / them / you",
+   "ru": "её / их / Вас",
+   "tr": "onu / onları / Sizi"
+  },
+  {
+   "en": "impersonal it",
+   "ru": "безличное «это»",
+   "tr": "kişisiz es (Türkçede çevrilmez)"
+  },
+  {
+   "en": "my",
+   "ru": "мой",
+   "tr": "benim"
+  },
+  {
+   "en": "your",
+   "ru": "твой",
+   "tr": "senin"
+  },
+  {
+   "en": "his / its / own",
+   "ru": "его / свой",
+   "tr": "onun / kendi"
+  },
+  {
+   "en": "her",
+   "ru": "её",
+   "tr": "onun"
+  },
+  {
+   "en": "their",
+   "ru": "их",
+   "tr": "onların"
+  },
+  {
+   "en": "our",
+   "ru": "наш",
+   "tr": "bizim"
+  },
+  {
+   "en": "your",
+   "ru": "ваш",
+   "tr": "sizin"
+  },
+  {
+   "en": "your",
+   "ru": "Ваш",
+   "tr": "Sizin"
+  },
+  {
+   "en": "myself",
+   "ru": "себя",
+   "tr": "kendimi"
+  },
+  {
+   "en": "myself",
+   "ru": "себе",
+   "tr": "kendime"
+  },
+  {
+   "en": "yourself",
+   "ru": "себя",
+   "tr": "kendini"
+  },
+  {
+   "en": "yourself",
+   "ru": "себе",
+   "tr": "kendine"
+  },
+  {
+   "en": "ourselves",
+   "ru": "себя / себе",
+   "tr": "kendimizi / kendimize"
+  },
+  {
+   "en": "yourselves",
+   "ru": "себя / себе",
+   "tr": "kendinizi / kendinize"
+  },
+  {
+   "en": "oneself",
+   "ru": "себя / себе",
+   "tr": "kendini / kendine"
+  },
+  {
+   "en": "someone",
+   "ru": "кого-то",
+   "tr": "birini"
+  },
+  {
+   "en": "someone",
+   "ru": "кому-то",
+   "tr": "birine"
+  },
+  {
+   "en": "nobody",
+   "ru": "никого",
+   "tr": "kimseyi"
+  },
+  {
+   "en": "nobody",
+   "ru": "никому",
+   "tr": "kimseye"
+  },
+  {
+   "en": "whom",
+   "ru": "кого",
+   "tr": "kimi"
+  },
+  {
+   "en": "whom",
+   "ru": "кому",
+   "tr": "kime"
+  },
+  {
+   "en": "whose",
+   "ru": "чей / чья / чьё / чьи",
+   "tr": "kimin"
+  },
+  {
+   "en": "Pronoun",
+   "ru": "Местоимение",
+   "tr": "Zamir"
+  },
+  {
+   "en": " + it",
+   "ru": " + это",
+   "tr": " + o"
+  },
+  {
+   "en": "Personal and possessive pronouns",
+   "ru": "Личные и притяжательные местоимения",
+   "tr": "Kişi ve iyelik zamirleri"
+  },
+  {
+   "en": "Reflexive pronouns",
+   "ru": "Возвратные местоимения",
+   "tr": "Dönüşlülük zamirleri"
+  },
+  {
+   "en": "Demonstrative pronoun der/die/das",
+   "ru": "Указательное местоимение der/die/das",
+   "tr": "İşaret zamiri der/die/das"
+  },
+  {
+   "en": "Relative pronoun der/die/das",
+   "ru": "Относительное местоимение der/die/das",
+   "tr": "İlgi zamiri der/die/das"
+  },
+  {
+   "en": "Impersonal es",
+   "ru": "Безличное es",
+   "tr": "Kişisiz es"
+  },
+  {
+   "en": "Possessive pronoun = stem + ending: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren",
+   "ru": "Притяжательное местоимение = основа + окончание: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren",
+   "tr": "İyelik zamiri = kök + ek: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren"
+  },
+  {
+   "en": "Possessive endings",
+   "ru": "Притяжательные окончания",
+   "tr": "İyelik zamirlerinin ekleri"
+  },
+  {
+   "en": "I wash myself.",
+   "ru": "Я моюсь.",
+   "tr": "Yıkanıyorum."
+  },
+  {
+   "en": "I wash my hands.",
+   "ru": "Я мою себе руки.",
+   "tr": "Ellerimi yıkıyorum."
+  },
+  {
+   "en": "Impersonal es acts as a grammatical subject, for example in expressions about the weather. It does not refer to a particular thing.",
+   "ru": "Безличное es служит формальным подлежащим, например в предложениях о погоде. Оно не обозначает конкретный предмет.",
+   "tr": "Kişisiz es, örneğin hava durumuyla ilgili cümlelerde biçimsel özne görevi görür. Belirli bir şeyi göstermez."
+  },
+  {
+   "en": "It is raining.",
+   "ru": "Идёт дождь.",
+   "tr": "Yağmur yağıyor."
+  },
+  {
+   "en": "It is cold.",
+   "ru": "Холодно.",
+   "tr": "Hava soğuk."
+  },
+  {
+   "en": "Which coat? — That one over there.",
+   "ru": "Какое пальто? — То, вон там.",
+   "tr": "Hangi palto? — Şu, oradaki."
+  },
+  {
+   "en": "The man I helped.",
+   "ru": "Мужчина, которому я помог.",
+   "tr": "Yardım ettiğim adam."
+  }
+ ]
 }
