@@ -61,7 +61,8 @@
        card batch 245, «Как найти место ссылки»): the note fields usage_note, plural_note, forms_note, notes.<i>,
        reflexive.note of the shown language; the field is `field`, or else the only one that holds text; in it the places
        of text — a plain search, left to right, without overlaps, also inside longer words; with at[lang] place n
-       (1 = the first), without it the only place. That note has parts: [{ text } | { text, card }]; the { text, card }
+       (1 = the first), without it the only place. A pack language takes at / field from the pack's see_also_<lang>
+       entry with the same id. That note has parts: [{ text } | { text, card }]; the { text, card }
        part opens that card, text stays the whole note. Any other linked card → the section «Siehe auch» at the end of
        the card (not repeated when already among «Ausdrücke»).
      All texts are already in the person's language (DeutschTranslation.field); German stays German.
@@ -327,14 +328,23 @@
 
   // see_also: [{ id, text? }] → the links that are shown: { card, text } (text "" when none); the card itself and cards
   // not shown in the Wörterbuch (unknown id, worterbuch_hidden) are left out.
-  function seeAlsoLinks(item) {
+  function seeAlsoLinks(item, lang) {
     const seen = new Set();
     return (item.see_also || []).flatMap(link => {
       const card = link && link.id !== item.id && !seen.has(link.id) ? cardsById.get(link.id) : null;
       if (!card) return [];
       seen.add(link.id);
-      return [{ card, text: String(link.text || ""), at: link.at || null, field: link.field || "" }];
+      return [{ card, text: String(link.text || ""), ...linkAtFor(item, link, lang) }];
     });
+  }
+
+  // The number of the place and the field of a link for the language: RU / EN — at[lang] and field of the link; a pack
+  // language — at and field of the pack's own entry with the same id (see_also_<lang>: [{ id, at, field? }], merged in
+  // with the pack), its field replacing the link's. No number → undefined (then only a single place is a link).
+  function linkAtFor(item, link, lang) {
+    const own = Array.isArray(item["see_also_" + lang]) ? item["see_also_" + lang].find(entry => entry && entry.id === link.id) : null;
+    if (own) return { at: own.at, field: own.field || link.field || "" };
+    return { at: link.at ? link.at[lang] : undefined, field: link.field || "" };
   }
 
   // The places of `text` in one note, word for word: a plain search, left to right, without overlaps (the next search
@@ -346,15 +356,14 @@
   }
 
   // The place that becomes the link, or null (then the card is in «Siehe auch»). The field: link.field, or else the only
-  // note field of the shown language that holds text. In it: with link.at[lang] that place (1 = the first), without it
-  // the only place.
-  function linkPlace(link, notes, lang) {
+  // note field of the shown language that holds text. In it: with link.at that place (1 = the first), without it the only
+  // place.
+  function linkPlace(link, notes) {
     if (!link.text) return null;
     const fields = notes.filter(entry => link.field ? entry.field === link.field : entry.note.text.includes(link.text));
     if (fields.length !== 1) return null;
     const places = placesIn(fields[0].note, link.text);
-    const at = link.at ? link.at[lang] : undefined;
-    if (at !== undefined) return places[at - 1] || null;
+    if (link.at !== undefined) return places[link.at - 1] || null;
     return places.length === 1 ? places[0] : null;
   }
 
@@ -378,13 +387,13 @@
   // the other linked cards (no text, no such place) are rows of «Siehe auch» at the end. A card already among «Ausdrücke»
   // is not repeated.
   function linkSeeAlso(item, blocks, notes) {
-    const links = seeAlsoLinks(item);
+    const lang = T()?.getDisplayLang?.() || language();
+    const links = seeAlsoLinks(item, lang);
     if (!links.length) return;
     const used = new Set(expressionsOf(item));
-    const lang = T()?.getDisplayLang?.() || language();
     const placesByNote = new Map();
     for (const link of links) {
-      const place = linkPlace(link, notes, lang);
+      const place = linkPlace(link, notes);
       if (!place) continue;
       if (!placesByNote.has(place.note)) placesByNote.set(place.note, []);
       placesByNote.get(place.note).push({ ...place, card: link.card });
