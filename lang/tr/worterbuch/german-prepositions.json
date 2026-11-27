@@ -1,0 +1,1032 @@
+{
+ "preposition-001": {
+  "translation_tr": "bir yerden, bir şeyin içinden; bir şeyden dolayı (sebep)",
+  "example_tr": "O, Japonya'dan.",
+  "government": [
+   {
+    "note_tr": "nereden: bir yerden, bir şeyin içinden"
+   }
+  ],
+  "usage_note_tr": "Woher? (nereden?) sorusuna cevap verir: aus Berlin, aus dem Haus. Malzeme: aus Holz — tahtadan. Sebep: aus Angst — korkudan. aus cümlenin sonunda bir fiille birlikte duruyorsa (Er sieht müde aus), edat değil, aussehen fiilinin bir parçasıdır.",
+  "_src": "ac4625be",
+  "_src_reader": "5b00e259"
+ },
+ "preposition-002": {
+  "translation_tr": "birinin yanında, bir yerde; bir yerin yakınında; bir şey sırasında",
+  "example_tr": "Anne babasının yanında oturuyor.",
+  "government": [
+   {
+    "note_tr": "birinin yanında, bir yerde"
+   }
+  ],
+  "forms_note_tr": "Birleşik biçim: beim = bei dem.",
+  "usage_note_tr": "Bir kişinin yanında ya da bir kurumda: bei Oma, bei Siemens. Bir yerin yakınında: Potsdam liegt bei Berlin. Bir eylem sırasında: beim Essen — yemek yerken. bei cümlenin sonunda bir fiille birlikte duruyorsa (Sie bringt mir Deutsch bei), edat değil, beibringen fiilinin bir parçasıdır.",
+  "_src": "d9fb781b",
+  "_src_reader": "56164e1c"
+ },
+ "preposition-003": {
+  "translation_tr": "biriyle, bir şeyle birlikte; bir şeyle (taşıt için); bir şeyin yardımıyla",
+  "example_tr": "Kız kardeşimle sinemaya gidiyorum.",
+  "government": [
+   {
+    "note_tr": "biriyle, bir şeyle"
+   }
+  ],
+  "usage_note_tr": "Taşıt: mit dem Bus — otobüsle. Araç: mit dem Messer — bıçakla. mit cümlenin sonunda bir fiille birlikte duruyorsa (Kommst du mit?), edat değil, mitkommen fiilinin bir parçasıdır.",
+  "_src": "267bf0fb",
+  "_src_reader": "94ea6ae2"
+ },
+ "preposition-004": {
+  "translation_tr": "bir yere (yön: şehirler, artikelsiz ülkeler); bir şeyden sonra; bir şeye göre",
+  "example_tr": "Berlin'e gidiyoruz.",
+  "government": [
+   {
+    "note_tr": "nereye (şehirler, artikelsiz ülkeler); bir şeyden sonra"
+   },
+   {
+    "note_tr": "“bir şeye göre” anlamında isimden sonra da gelebilir"
+   }
+  ],
+  "usage_note_tr": "nach Hause — eve (ama zu Hause — evde). Artikelli ülkelerle ise in (in die Schweiz), insanlarla zu (zum Arzt) kullanılır. Zaman: nach dem Essen — yemekten sonra. nach cümlenin sonunda bir fiille birlikte duruyorsa (Ich denke darüber nach), edat değil, nachdenken fiilinin bir parçasıdır.",
+  "_src": "4f30e639",
+  "_src_reader": "3e3bf061"
+ },
+ "preposition-005": {
+  "translation_tr": "bir zamandan beri; bir süredir",
+  "example_tr": "Üç yıldır Almanca öğreniyorum.",
+  "government": [
+   {
+    "note_tr": "geçmişteki bir andan şimdiye kadar"
+   }
+  ],
+  "usage_note_tr": "Eylem geçmişte başlamış ve hâlâ sürüyor, bu yüzden fiil genellikle Präsens zamanındadır: Ich wohne seit 2020 hier. Bağlaç olan seit (“…-diğinden beri”) yan cümle başlatır.",
+  "_src": "51077f43",
+  "_src_reader": "ff7f6c13",
+  "see_also_tr": [
+   {
+    "id": "conjunction-020",
+    "at": 2
+   }
+  ]
+ },
+ "preposition-006": {
+  "translation_tr": "birinden, bir yerden (nereden); biri tarafından (Passiv, ortaç); bir şey hakkında, bir şeyden (anlatmak, duymak); birinin, bir şeyin (aitlik, Genitiv yerine)",
+  "example_tr": "Hediye büyükannemden.",
+  "government": [
+   {
+    "note_tr": "birinden, bir yerden"
+   }
+  ],
+  "forms_note_tr": "Birleşik biçim: vom = von dem.",
+  "usage_note_tr": "Nereden: von der Arbeit, vom Arzt. Zaman: von 9 bis 17 Uhr. Ne hakkında: Er erzählt von seiner Reise. Aitlik, özellikle konuşma dilinde: das Auto von meinem Bruder = das Auto meines Bruders. Kim tarafından yapıldığı — Passiv cümlede ve ortaçla: Das Buch wurde von Kafka geschrieben. — Kitap Kafka tarafından yazıldı; die von ihr geleitete Schule — onun (kadın) yönettiği okul.",
+  "_src": "57d681cd",
+  "_src_reader": "4427177d"
+ },
+ "preposition-007": {
+  "translation_tr": "birine, birinin yanına; bir yere, bir etkinliğe (kişiye, yere, etkinliğe yön)",
+  "example_tr": "Doktora gidiyorum.",
+  "government": [
+   {
+    "note_tr": "nereye: bir kişiye, bir yere ya da bir etkinliğe"
+   }
+  ],
+  "forms_note_tr": "Birleşik biçimler: zum = zu dem, zur = zu der.",
+  "usage_note_tr": "zu Hause — evde (ama nach Hause — eve). zu Fuß — yürüyerek. Amaç: zum Lernen — öğrenmek için. Infinitiv önündeki zu (Ich habe keine Zeit zu lesen) ve “fazla” anlamındaki zu (zu groß) edat değildir. zu cümlenin sonunda bir fiille birlikte duruyorsa (Mach die Tür zu), zumachen fiilinin bir parçasıdır.",
+  "_src": "a07d1af9",
+  "_src_reader": "ec578e5b"
+ },
+ "preposition-008": {
+  "translation_tr": "bir şeyden itibaren, bir yerden başlayarak (zaman, yer için)",
+  "example_tr": "Gelecek haftadan itibaren burada çalışıyorum.",
+  "government": [
+   {
+    "note_tr": "bir zamandan ya da bir yerden itibaren"
+   },
+   {
+    "note_tr": "artikelsiz ama sıfatlı zaman ifadelerinde Akkusativ de kullanılabilir"
+   }
+  ],
+  "usage_note_tr": "Genellikle artikelsiz: ab Montag, ab 18 Jahren. Kalkış yeri: ab Berlin — Berlin'den. ab cümlenin sonunda bir fiille birlikte duruyorsa (Der Zug fährt um acht ab), edat değil, abfahren fiilinin bir parçasıdır.",
+  "_src": "93f39c59",
+  "_src_reader": "38ff5386"
+ },
+ "preposition-009": {
+  "translation_tr": "bir şeyin karşısında; birine karşı (tutum, davranış); bir şeye göre, bir şeyle karşılaştırıldığında",
+  "example_tr": "Kafe istasyonun karşısında.",
+  "government": [
+   {
+    "note_tr": "isimden önce: bir şeyin karşısında"
+   },
+   {
+    "note_tr": "isimden sonra da gelebilir; zamirden sonra genellikle böyle: mir gegenüber"
+   },
+   {
+    "note_tr": "özellikle konuşma dilinde ve yer adlarıyla; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Birine karşı: Er ist mir gegenüber sehr freundlich. Karşılaştırma: gegenüber dem letzten Jahr — geçen yıla göre. İsimsiz kullanılan gegenüber “karşıda” anlamında zarftır: Sie wohnt gegenüber.",
+  "_src": "f05a239a",
+  "_src_reader": "db32227a"
+ },
+ "preposition-010": {
+  "translation_tr": "bir şeyin içinden geçerek, bir şeyin arasından; bir şey sayesinde, bir şey yoluyla (sebep, araç)",
+  "example_tr": "Parkın içinden yürüyor.",
+  "government": [
+   {
+    "note_tr": "bir yerin içinden geçme; araç ya da sebep"
+   }
+  ],
+  "forms_note_tr": "Konuşma dilinde birleşik biçim: durchs = durch das.",
+  "usage_note_tr": "Araç ya da sebep: durch Zufall — tesadüfen. Passiv cümlede bazen von yerine: durch einen Sturm zerstört. durch cümlenin sonunda bir fiille birlikte duruyorsa (Halte durch!), edat değil, durchhalten fiilinin bir parçasıdır.",
+  "_src": "a91b68a4",
+  "_src_reader": "5d483ebb"
+ },
+ "preposition-011": {
+  "translation_tr": "biri için, bir şey için; bir şeye karşılık (yerine, karşılığında); bir süreliğine",
+  "example_tr": "Bu, babam için bir hediye.",
+  "government": [
+   {
+    "note_tr": "biri için, bir şey karşılığında"
+   }
+  ],
+  "forms_note_tr": "Konuşma dilinde birleşik biçim: fürs = für das.",
+  "usage_note_tr": "Süre: für eine Woche — bir haftalığına. Fiyat: für 10 Euro — 10 avroya. Görüş: für mich — benim için, bence. Was für ein …? (“ne tür bir?”) sorusunda hâli für değil, kelimenin cümledeki görevi belirler.",
+  "_src": "0626e1b4",
+  "_src_reader": "ab9afabd"
+ },
+ "preposition-012": {
+  "translation_tr": "birine karşı, bir şeye karşı; bir şeye (çarpma); bir saate doğru (zaman için)",
+  "example_tr": "Bu plana karşıyım.",
+  "government": [
+   {
+    "note_tr": "birine, bir şeye karşı"
+   }
+  ],
+  "usage_note_tr": "Çarpma: gegen die Wand — duvara. Yaklaşık zaman: gegen acht Uhr — saat sekiz sularında. Bir şeye karşı ilaç: ein Mittel gegen Kopfschmerzen.",
+  "_src": "a52511c6",
+  "_src_reader": "3fdcda50"
+ },
+ "preposition-013": {
+  "translation_tr": "biri olmadan, bir şey olmadan",
+  "example_tr": "Kahveyi şekersiz içerim.",
+  "government": [
+   {
+    "note_tr": "biri olmadan, bir şey olmadan"
+   }
+  ],
+  "usage_note_tr": "Genellikle artikelsiz: ohne Zucker, ohne Geld. ohne … zu + Infinitiv (ohne zu fragen — sormadan) bir bağlaçtır.",
+  "_src": "9e549bd5",
+  "_src_reader": "bb869b96"
+ },
+ "preposition-014": {
+  "translation_tr": "bir saatte (kesin zaman için); bir şeyin çevresinde; bir şey hakkında (es geht um …); bir miktar farkla (um 5 Grad)",
+  "example_tr": "Film saat sekizde başlıyor.",
+  "government": [
+   {
+    "note_tr": "saat; bir şeyin çevresinde"
+   }
+  ],
+  "forms_note_tr": "Konuşma dilinde birleşik biçim: ums = um das.",
+  "usage_note_tr": "Çevresinde: um den Tisch (herum). Yaklaşık: um Weihnachten — Noel sıralarında. Ne hakkında: Es geht um Geld — konu para. um … zu + Infinitiv (“…-mek için”) bir bağlaçtır. um cümlenin sonunda bir fiille birlikte duruyorsa (Wir ziehen um), edat değil, umziehen fiilinin bir parçasıdır. Fark: Die Temperatur stieg um 5 Grad. — Sıcaklık 5 derece yükseldi; um einen Millimeter zu kurz — bir milimetre kısa.",
+  "_src": "4be7a707",
+  "_src_reader": "4febd707"
+ },
+ "preposition-015": {
+  "translation_tr": "bir şeye kadar",
+  "example_tr": "Cumaya kadar çalışıyorum.",
+  "government": [
+   {
+    "note_tr": "genellikle artikelsiz: bir zamana ya da bir yere kadar"
+   },
+   {
+    "note_tr": "zu ile: hâli zu belirler"
+   },
+   {
+    "note_tr": "başka bir edatla: hâli ikinci edat belirler"
+   }
+  ],
+  "usage_note_tr": "bis bald, bis morgen — görüşmek üzere, yarın görüşürüz. bis auf + Akkusativ — “hariç”: Alle bis auf einen waren da. Bağlaç olan bis (“…-ene kadar”) yan cümle başlatır.",
+  "_src": "3898fdc9",
+  "_src_reader": "90a7d2d1",
+  "see_also_tr": [
+   {
+    "id": "conjunction-024",
+    "at": 5
+   }
+  ]
+ },
+ "preposition-016": {
+  "translation_tr": "bir şey boyunca",
+  "example_tr": "Cadde boyunca yürüyor.",
+  "government": [
+   {
+    "note_tr": "isimden sonra: bir şey boyunca (en sık kullanım)"
+   },
+   {
+    "note_tr": "isimden önce, daha çok yazı dilinde"
+   },
+   {
+    "note_tr": "isimden önce, nadir"
+   }
+  ],
+  "usage_note_tr": "am Fluss entlang ifadesinde hâli an belirler (Dativ), entlang ise zarftır ya da entlanggehen fiilinin bir parçasıdır. İsviçre'de isimden sonra Dativ de kullanılabilir.",
+  "_src": "4b9733ce",
+  "_src_reader": "123ffe87"
+ },
+ "preposition-017": {
+  "translation_tr": "bir yerde, bir şeyin kenarında (dikey yüzey, kenar, su); bir şeye (yön: an die Tür); bir günde, bir tarihte (günler, tarihler)",
+  "example_tr": "Resim duvarda asılı.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer; zaman: am Montag"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "forms_note_tr": "Birleşik biçimler: am = an dem, ans = an das.",
+  "usage_note_tr": "Zaman (ne zaman?) — Dativ: am Montag, am Abend, am 3. Mai. Su, kenar, kapı yanında: am Meer, am Rand, an der Tür. Birçok fiil an edatını belirli bir hâlle ister: denken an + Akkusativ, teilnehmen an + Dativ. an cümlenin sonunda bir fiille birlikte duruyorsa (Ich rufe dich an), edat değil, anrufen fiilinin bir parçasıdır.",
+  "_src": "e3096db5",
+  "_src_reader": "279a4b78"
+ },
+ "preposition-018": {
+  "translation_tr": "bir şeyin üstünde (yatay yüzey); bir yerde, bir yere (etkinlik, bazı yerler); bir dilde (auf Deutsch — Almanca)",
+  "example_tr": "Kitap masanın üstünde duruyor.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "forms_note_tr": "Birleşik biçim: aufs = auf das.",
+  "usage_note_tr": "Yerler ve etkinlikler: auf der Post, auf eine Party. Dil: auf Deutsch — Almanca. Birçok fiil auf + Akkusativ ister: warten auf, sich freuen auf. auf cümlenin sonunda bir fiille birlikte duruyorsa (Ich stehe um sieben auf), edat değil, aufstehen fiilinin bir parçasıdır.",
+  "_src": "4e5790cb",
+  "_src_reader": "c4864739"
+ },
+ "preposition-019": {
+  "translation_tr": "bir şeyin arkasında, bir şeyin gerisinde",
+  "example_tr": "Bahçe evin arkasında.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "forms_note_tr": "Konuşma dilinde birleşik biçimler: hinterm = hinter dem, hinters = hinter das.",
+  "usage_note_tr": "Mecaz anlamda: Das liegt hinter uns. — Bu artık geride kaldı.",
+  "_src": "86694d76",
+  "_src_reader": "13fdf55a"
+ },
+ "preposition-020": {
+  "translation_tr": "bir şeyin içinde, bir şeyin içine; bir süre sonra (zaman için); bir ayda, bir mevsimde (im Mai)",
+  "example_tr": "Berlin'de oturuyoruz.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer; zaman: im Mai"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "forms_note_tr": "Birleşik biçimler: im = in dem, ins = in das.",
+  "usage_note_tr": "Zaman (ne zaman?) — Dativ: im Mai, im Sommer; in einer Woche — bir hafta sonra. Artikelli ülkeler: in der Schweiz (nerede), in die Schweiz (nereye).",
+  "_src": "072f08d7",
+  "_src_reader": "00952c12"
+ },
+ "preposition-021": {
+  "translation_tr": "bir şeyin yanında, bir şeyin yakınında; bir şeyin yanı sıra, bir şeye ek olarak",
+  "example_tr": "Eczane bankanın yanında.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "usage_note_tr": "“Yanı sıra” anlamında — Dativ: Neben der Arbeit studiert sie. — İşinin yanı sıra üniversitede okuyor.",
+  "_src": "fd58f634",
+  "_src_reader": "d74157a2"
+ },
+ "preposition-022": {
+  "translation_tr": "bir şeyin üstünde, bir şeyin yukarısında; bir şeyin üstünden (karşıya geçerek); bir şey hakkında (konu); bir miktardan fazla; bir süre boyunca",
+  "example_tr": "Lamba masanın üstünde asılı.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön; bir şeyin üstünden karşıya; zaman: boyunca (über die Feiertage); konu: hakkında"
+   },
+   {
+    "note_tr": "zaman için: boyunca; isimden sonra gelir"
+   }
+  ],
+  "forms_note_tr": "Konuşma dilinde birleşik biçimler: überm = über dem, übers = über das.",
+  "usage_note_tr": "Konu — her zaman Akkusativ: sprechen über das Wetter. Karşıya: über die Straße gehen. Güzergâh: über Köln nach Berlin — Köln üzerinden. Zaman: über die Feiertage — tatil için, tatil günleri boyunca; die ganze Nacht über — bütün gece. Miktar: über 100 Leute — yüzden fazla kişi.",
+  "_src": "3c86a8b1",
+  "_src_reader": "c44b0cdc"
+ },
+ "preposition-023": {
+  "translation_tr": "bir şeyin altında; bir şeyin arasında, birilerinin arasında; bir miktarın altında, bir miktardan az",
+  "example_tr": "Kedi yatağın altında uyuyor.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "forms_note_tr": "Konuşma dilinde birleşik biçimler: unterm = unter dem, unters = unter das.",
+  "usage_note_tr": "“Arasında” anlamında — Dativ: unter Freunden — arkadaşlar arasında. Az: unter 18 Jahren — 18 yaşından küçük. unter cümlenin sonunda bir fiille birlikte duruyorsa (Die Sonne geht unter), edat değil, untergehen fiilinin bir parçasıdır.",
+  "_src": "ee177b42",
+  "_src_reader": "48b53b51"
+ },
+ "preposition-024": {
+  "translation_tr": "bir şeyin önünde; bir şeyden önce (zaman için); bir süre önce; bir şeyden (sebep)",
+  "example_tr": "Araba evin önünde duruyor.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer; zaman: vor dem Essen"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "forms_note_tr": "Konuşma dilinde birleşik biçimler: vorm = vor dem, vors = vor das.",
+  "usage_note_tr": "Zaman — her zaman Dativ: vor dem Essen — yemekten önce; vor zwei Jahren — iki yıl önce. Sebep — Dativ: vor Angst zittern — korkudan titremek. vor cümlenin sonunda bir fiille birlikte duruyorsa (Ich stelle mich vor), edat değil, sich vorstellen fiilinin bir parçasıdır.",
+  "_src": "ff19fd10",
+  "_src_reader": "408f8fe0"
+ },
+ "preposition-025": {
+  "translation_tr": "iki şeyin arasında",
+  "example_tr": "Kafe postane ile bankanın arasında.",
+  "government": [
+   {
+    "note_tr": "Wo? (nerede?) — bulunulan yer; zaman: zwischen 8 und 9 Uhr"
+   },
+   {
+    "note_tr": "Wohin? (nereye?) — yön"
+   }
+  ],
+  "usage_note_tr": "Zaman — Dativ: zwischen 8 und 9 Uhr. Nereye — Akkusativ: Er setzt sich zwischen seine Eltern.",
+  "_src": "0ba7f8bb",
+  "_src_reader": "27137933"
+ },
+ "preposition-026": {
+  "translation_tr": "bir şey sırasında, bir şey süresince",
+  "example_tr": "Yemek sırasında konuşmadılar.",
+  "government": [
+   {
+    "note_tr": "bir şey sırasında"
+   },
+   {
+    "note_tr": "konuşma dilinde; Genitiv görünmüyorsa standart dilde de: während fünf Jahren"
+   }
+  ],
+  "usage_note_tr": "Bağlaç olan während (“…-ken; oysa”) yan cümle başlatır.",
+  "_src": "cdd56eab",
+  "_src_reader": "3afac1b8"
+ },
+ "preposition-027": {
+  "translation_tr": "bir şey yüzünden, bir şeyden dolayı",
+  "example_tr": "Kötü hava yüzünden evde kaldık.",
+  "government": [
+   {
+    "note_tr": "bir şey yüzünden"
+   },
+   {
+    "note_tr": "isimden sonra — yazı dili biçimi"
+   },
+   {
+    "note_tr": "konuşma dilinde, özellikle zamirlerle: wegen mir"
+   }
+  ],
+  "usage_note_tr": "Zamirlerle standart dilde meinetwegen, deinetwegen, seinetwegen kelimeleri kullanılır. Artikelsiz isim genellikle çekim eki almaz: wegen Umbau geschlossen.",
+  "_src": "47988ece",
+  "_src_reader": "1851e1e5"
+ },
+ "preposition-028": {
+  "translation_tr": "bir şeye rağmen",
+  "example_tr": "Yağmura rağmen yürüyüşe çıktık.",
+  "government": [
+   {
+    "note_tr": "bir şeye rağmen"
+   },
+   {
+    "note_tr": "konuşma dilinde, Güney Almanya'da, Avusturya ve İsviçre'de; artikelsiz çoğulda standart dilde de: trotz Beweisen"
+   }
+  ],
+  "usage_note_tr": "trotz allem — her şeye rağmen. Artikelsiz isim genellikle çekim eki almaz: trotz Regen. Büyük harfle yazılan Trotz — “inat” anlamında bir isimdir.",
+  "_src": "94c10f67",
+  "_src_reader": "cfafa3e8"
+ },
+ "preposition-029": {
+  "translation_tr": "bir şeyin yerine",
+  "example_tr": "Pasta yerine dondurma vardı.",
+  "government": [
+   {
+    "note_tr": "bir şeyin yerine"
+   },
+   {
+    "note_tr": "konuşma dilinde; Genitiv görünmüyorsa standart dilde de: statt Worten"
+   }
+  ],
+  "usage_note_tr": "anstatt aynı anlama gelir ve aynı hâlleri alır. statt … zu + Infinitiv (statt zu arbeiten — çalışacağına) bir bağlaçtır.",
+  "_src": "2e8e0479",
+  "_src_reader": "a4e00f8f"
+ },
+ "preposition-030": {
+  "translation_tr": "bir süre içinde (zaman için); bir şeyin içinde, bir şeyin sınırları içinde",
+  "example_tr": "Bir hafta içinde her şey hazırdı.",
+  "government": [
+   {
+    "note_tr": "bir süre içinde, bir şeyin sınırları içinde"
+   },
+   {
+    "note_tr": "çok sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Yer: innerhalb der Stadt — şehir sınırları içinde.",
+  "_src": "4e500e6e",
+  "_src_reader": "98b40f4d"
+ },
+ "preposition-031": {
+  "translation_tr": "bir şeyin dışında, bir şeyin sınırları dışında; bir yerin dışında (şehir dışında)",
+  "example_tr": "Şehir dışında oturuyoruz.",
+  "government": [
+   {
+    "note_tr": "bir şeyin dışında, bir şeyin sınırları dışında"
+   },
+   {
+    "note_tr": "konuşma dilinde sık, özellikle yer adlarıyla; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Zaman: außerhalb der Öffnungszeiten — çalışma saatleri dışında.",
+  "_src": "9ed063fa",
+  "_src_reader": "e1f12252"
+ },
+ "preposition-032": {
+  "translation_tr": "bir şeye göre, birinin sözlerine göre, bir şeyin verilerine göre",
+  "example_tr": "Bir habere göre istifa etmiş.",
+  "government": [
+   {
+    "note_tr": "bir şeye göre"
+   },
+   {
+    "note_tr": "nadir"
+   }
+  ],
+  "usage_note_tr": "Artikelsiz isim genellikle çekim eki almaz: laut Gesetz. laut sıfatı — “yüksek sesli; yüksek sesle”.",
+  "_src": "dc9f87e0",
+  "_src_reader": "d562f202",
+  "see_also_tr": [
+   {
+    "id": "adjective-019",
+    "at": 2
+   }
+  ]
+ },
+ "preposition-033": {
+  "translation_tr": "bir şey sayesinde",
+  "example_tr": "Onun yardımı sayesinde başardık.",
+  "government": [
+   {
+    "note_tr": "bir şey sayesinde"
+   },
+   {
+    "note_tr": "daha az kullanılır"
+   }
+  ],
+  "usage_note_tr": "Artikelsiz isim genellikle çekim eki almaz: dank Internet. Büyük harfle yazılan Dank ismi — “teşekkür, minnet”; Vielen Dank! ifadesinde olduğu gibi.",
+  "_src": "de836dd6",
+  "_src_reader": "b8586f0c"
+ },
+ "preposition-034": {
+  "translation_tr": "biri hariç, bir şey dışında; bir durumun dışında",
+  "example_tr": "Kız kardeşim dışında herkes kutlamaya geliyor.",
+  "government": [
+   {
+    "note_tr": "biri / bir şey hariç; bir şeyin dışında"
+   },
+   {
+    "note_tr": "yalnızca hareket fiilleriyle kalıp ifadelerde"
+   },
+   {
+    "note_tr": "yalnızca außer Landes (eskimekte olan) ve außer Hauses (yaz.)"
+   }
+  ],
+  "usage_note_tr": "Dışında: außer Betrieb — çalışmıyor, außer Atem — nefes nefese, außer Dienst — emekli. außer sich sein — çılgına dönmüş olmak (öfkeden, heyecandan), außer sich geraten (mir / mich) — kendini kaybetmek. Bağlaç olan außer (außer wenn, außer dass).",
+  "_src": "e001749f",
+  "_src_reader": "79faa785",
+  "see_also_tr": [
+   {
+    "id": "conjunction-043",
+    "at": 6
+   }
+  ]
+ },
+ "preposition-035": {
+  "translation_tr": "bir şey başına, her biri için; bir zaman biriminde (saatte, günde)",
+  "example_tr": "Giriş kişi başına on avro.",
+  "government": [
+   {
+    "note_tr": "her birim için; genellikle artikelsiz"
+   },
+   {
+    "note_tr": "aynı anlam; hâl yalnızca sıfatta görünür"
+   }
+  ],
+  "usage_note_tr": "Genellikle artikelsiz: pro Tag, pro Stunde, pro Stück. 100 km pro Stunde — saatte 100 km.",
+  "_src": "35329dfc",
+  "_src_reader": "b15f3ed6"
+ },
+ "preposition-036": {
+  "translation_tr": "bir şeyle, bir şey yoluyla (iletme yolu); bir tarih itibarıyla (tarih için, tic.)",
+  "example_tr": "Belgeleri sana e-postayla göndereceğim.",
+  "government": [
+   {
+    "note_tr": "yol: bir şeyle, bir şey yoluyla; genellikle artikelsiz"
+   },
+   {
+    "note_tr": "aynı anlam; hâl yalnızca sıfatta görünür"
+   }
+  ],
+  "usage_note_tr": "Genellikle artikelsiz: per Post, per Bahn, per Telefon. Ticaret dili: per 1. Mai — 1 Mayıs itibarıyla, per Stück — tanesi (daha iyisi: pro Stück). mit jemandem per du sein — biriyle senli benli olmak.",
+  "_src": "1d5bb22d",
+  "_src_reader": "3f5ea6f1"
+ },
+ "preposition-037": {
+  "translation_tr": "bir şey dâhil",
+  "example_tr": "Daire, yan giderler dâhil ayda 900 avro.",
+  "government": [
+   {
+    "note_tr": "bir şey dâhil"
+   },
+   {
+    "note_tr": "nadir; ama çoğulda, Genitiv görünmüyorsa, genellikle Dativ kullanılır (ya da çekim eki olmadan)"
+   }
+  ],
+  "usage_note_tr": "Tekil artikelsiz isim çekim eki almaz: einschließlich Porto. İsimden sonra da gelebilir. Zarf: bis einschließlich Freitag — cumaya kadar, cuma dâhil. Kısaltma: einschl.",
+  "_src": "c098b8f6",
+  "_src_reader": "0c670bc9"
+ },
+ "preposition-038": {
+  "translation_tr": "bir şey dâhil",
+  "example_tr": "Uçuş, bagaj dâhil 120 avro.",
+  "government": [
+   {
+    "note_tr": "bir şey dâhil"
+   },
+   {
+    "note_tr": "nadir; ama çoğulda, Genitiv görünmüyorsa, genellikle Dativ kullanılır (ya da çekim eki olmadan)"
+   }
+  ],
+  "usage_note_tr": "Özellikle ticaret dilinde. Tekil artikelsiz isim çekim eki almaz: inklusive Frühstück. İsimden sonra da gelebilir: Frühstück inklusive. Zarf: bis inklusive Montag. Kısaltma: inkl.",
+  "_src": "f023b0f5",
+  "_src_reader": "0c670bc9"
+ },
+ "preposition-039": {
+  "translation_tr": "bir şey göz önüne alındığında, bir şeyi dikkate alarak; bir şeyi görünce, bir şey karşısında",
+  "example_tr": "Yüksek fiyatları göz önüne alarak bu yıl tatile gitmiyoruz.",
+  "government": [
+   {
+    "note_tr": "bir şey göz önüne alındığında; bir şeyi görünce"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Yazı dilinde kullanılır.",
+  "_src": "d3f2895a",
+  "_src_reader": "13273336"
+ },
+ "preposition-040": {
+  "translation_tr": "bir şeye dayanarak, bir şeyden, bir şeyin yardımıyla",
+  "example_tr": "Polis faili parmak izlerinden teşhis etti.",
+  "government": [
+   {
+    "note_tr": "bir şeye dayanarak, bir şeyin yardımıyla"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Yalnızca bitişik yazılır.",
+  "_src": "d35fb875",
+  "_src_reader": "efdc241d"
+ },
+ "preposition-041": {
+  "translation_tr": "birinin yerine, bir şeyin yerine",
+  "example_tr": "Toplantıya müdürün yerine yardımcısı geldi.",
+  "government": [
+   {
+    "note_tr": "birinin / bir şeyin yerine"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Ayrı da yazılır: an Stelle (Duden sözlüğü anstelle yazımını önerir). Ama: an die Stelle von … treten — birinin yerini almak. Aynı anlamda — statt.",
+  "_src": "13fd1394",
+  "_src_reader": "364db1a1"
+ },
+ "preposition-042": {
+  "translation_tr": "bir şey yüzünden, bir şeyden dolayı; bir şeye dayanarak",
+  "example_tr": "Bir kaza yüzünden otoyol kapalı.",
+  "government": [
+   {
+    "note_tr": "bir şey yüzünden, bir şeye dayanarak"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Ayrı da yazılır: auf Grund (Duden sözlüğü aufgrund yazımını önerir). aufgrund dessen — bu yüzden, bu sebeple. wegen kelimesinden daha resmî duyulur.",
+  "_src": "ebac3ba9",
+  "_src_reader": "cd596105"
+ },
+ "preposition-043": {
+  "translation_tr": "bir şeyle ilgili olarak, bir şey hakkında",
+  "example_tr": "Talebinizle ilgili olarak yarın size dönüş yapacağız.",
+  "government": [
+   {
+    "note_tr": "bir şeyle ilgili olarak"
+   },
+   {
+    "note_tr": "çoğulda, Genitiv görünmüyorsa"
+   }
+  ],
+  "usage_note_tr": "Resmî dilde kullanılır: mektuplarda, belgelerde. Kısaltma: bez.",
+  "_src": "68bfbdf9",
+  "_src_reader": "acfa8933"
+ },
+ "preposition-044": {
+  "translation_tr": "bir şeye göre, bir şeye uygun olarak",
+  "example_tr": "Yeni yasaya göre bütün cihazların denetlenmesi gerekiyor.",
+  "government": [
+   {
+    "note_tr": "bir şeye uygun olarak"
+   },
+   {
+    "note_tr": "isimden sonra da gelebilir"
+   },
+   {
+    "note_tr": "nadir"
+   }
+  ],
+  "usage_note_tr": "Belgelerde ve yönetmeliklerde sık: gemäß § 5. gemäß sıfatı — “uygun” (eine dem Alter gemäße Aufgabe) — başka bir kelimedir. İsviçre'de gemäss yazılır.",
+  "_src": "b5612a0d",
+  "_src_reader": "6ad48807"
+ },
+ "preposition-045": {
+  "translation_tr": "bir şey bakımından, bir şeyle ilgili olarak",
+  "example_tr": "Tarih konusunda henüz anlaşamadık.",
+  "government": [
+   {
+    "note_tr": "bir şey bakımından"
+   }
+  ],
+  "usage_note_tr": "Resmî dilde kullanılır.",
+  "_src": "880de1e8",
+  "_src_reader": "e2218ece"
+ },
+ "preposition-046": {
+  "translation_tr": "birinin / bir şeyin yardımıyla",
+  "example_tr": "Bir uygulama yardımıyla her gün yeni kelimeler öğreniyorum.",
+  "government": [
+   {
+    "note_tr": "birinin / bir şeyin yardımıyla"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Ayrı da yazılır: mit Hilfe (Duden sözlüğü mithilfe yazımını önerir).",
+  "_src": "4a4ade40",
+  "_src_reader": "d954da56"
+ },
+ "preposition-047": {
+  "translation_tr": "bir şeye rağmen, bir şeye aykırı olarak; bir şeye karşı",
+  "example_tr": "Sözleşmeyi, yanlış yaptığını çok iyi bildiği hâlde imzaladı.",
+  "government": [
+   {
+    "note_tr": "bir şeye rağmen; bir şeye karşı"
+   }
+  ],
+  "usage_note_tr": "Yazı dilinde kullanılır. Kalıp ifade: wider Willen — istemeyerek, wider Erwarten — beklentilerin aksine, das Für und Wider — artıları ve eksileri. Karıştırılmamalı: wieder — yine.",
+  "_src": "93345ecb",
+  "_src_reader": "7840f975"
+ },
+ "preposition-048": {
+  "translation_tr": "birinin hatırı için, bir şey uğruna",
+  "example_tr": "Çocukların hatırı için geziden vazgeçti.",
+  "government": [
+   {
+    "note_tr": "birinin / bir şeyin hatırı için; Genitiv hâlindeki kelime um ile willen arasında durur"
+   }
+  ],
+  "usage_note_tr": "Ünlemler: Um Himmels willen! Um Gottes willen! — Aman Allahım! Zamirlerle bitişik yazılır: um meinetwillen, um deinetwillen.",
+  "_src": "c2cf0c35",
+  "_src_reader": "f9ac89ee"
+ },
+ "preposition-049": {
+  "translation_tr": "bir şey düşülerek, eksi bir şey",
+  "example_tr": "Vergiler düşüldükten sonra elime ayda yaklaşık 2.000 avro kalıyor.",
+  "government": [
+   {
+    "note_tr": "bir şey düşülerek"
+   },
+   {
+    "note_tr": "çoğulda, Genitiv görünmüyorsa"
+   }
+  ],
+  "usage_note_tr": "Özellikle ticaret dilinde. Tekil artikelsiz isim çekim eki almaz: abzüglich Rabatt. Karşıt anlamlısı: zuzüglich (artı).",
+  "_src": "89cb32e2",
+  "_src_reader": "4bf49d04"
+ },
+ "preposition-050": {
+  "translation_tr": "bir şeyin sonucu olarak, bir şey yüzünden",
+  "example_tr": "Grev yüzünden birçok tren iptal edildi.",
+  "government": [
+   {
+    "note_tr": "bir şeyin sonucu olarak"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Bitişik yazılır. Ayrı yazılan in Folge — “art arda”: dreimal in Folge.",
+  "_src": "a4045e4f",
+  "_src_reader": "d021d838"
+ },
+ "preposition-051": {
+  "translation_tr": "bir şeyin ortasında, bir şeyin arasında",
+  "example_tr": "Küçük ev büyük bir bahçenin ortasında duruyor.",
+  "government": [
+   {
+    "note_tr": "bir şeyin ortasında"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Yazı dilinde kullanılır; konuşmada — mitten in: mitten im Garten.",
+  "_src": "39225a4e",
+  "_src_reader": "8156e884"
+ },
+ "preposition-052": {
+  "translation_tr": "bir şeyle birlikte",
+  "example_tr": "Hırsız bütün mücevherlerle birlikte ortadan kayboldu.",
+  "government": [
+   {
+    "note_tr": "biriyle / bir şeyle birlikte"
+   },
+   {
+    "note_tr": "nadir"
+   }
+  ],
+  "usage_note_tr": "samt kelimesinin vurgulu biçimi: “her şeyiyle birlikte”.",
+  "_src": "8f04e33c",
+  "_src_reader": "4de17390"
+ },
+ "preposition-053": {
+  "translation_tr": "biri tarafından",
+  "example_tr": "Belediyeden henüz bir karar çıkmadı.",
+  "government": [
+   {
+    "note_tr": "biri tarafından"
+   }
+  ],
+  "usage_note_tr": "Resmî dilde kullanılır; daha basiti: von der Stadt, vonseiten der Stadt.",
+  "_src": "503e7f9b",
+  "_src_reader": "01a01b93"
+ },
+ "preposition-054": {
+  "translation_tr": "bir şeye rağmen, bir şeye bakmaksızın",
+  "example_tr": "Yağmura rağmen çocuklar dışarıda oynadı.",
+  "government": [
+   {
+    "note_tr": "bir şeye rağmen"
+   },
+   {
+    "note_tr": "isimden sonra da gelebilir"
+   }
+  ],
+  "usage_note_tr": "Yazı dilinde kullanılır; genellikle trotz denir. dessen ungeachtet — buna rağmen.",
+  "_src": "b75f4790",
+  "_src_reader": "21695a4b"
+ },
+ "preposition-055": {
+  "translation_tr": "bir şeyin lehine, birinin yararına",
+  "example_tr": "Konser bir çocuk hastanesinin yararına düzenleniyor.",
+  "government": [
+   {
+    "note_tr": "birinin / bir şeyin lehine"
+   },
+   {
+    "note_tr": "isimden sonra — daha az"
+   },
+   {
+    "note_tr": "sık kullanılır, özellikle Genitiv görünmüyorsa; hâli von belirler"
+   }
+  ],
+  "usage_note_tr": "Ayrı da yazılır: zu Gunsten (Duden sözlüğü zugunsten yazımını önerir).",
+  "_src": "1ddb7d1c",
+  "_src_reader": "a4ebcbfd"
+ },
+ "preposition-056": {
+  "translation_tr": "birinin / bir şeyin hatırına, birinin gönlü için",
+  "example_tr": "Çevre için işe bisikletle gidiyoruz.",
+  "government": [
+   {
+    "note_tr": "isimden sonra gelir"
+   }
+  ],
+  "usage_note_tr": "Yalnızca kelimenin arkasında durur: mir zuliebe — benim hatırım için. zulieb biçimi — özellikle Avusturya'da.",
+  "_src": "52de7370",
+  "_src_reader": "f049f5ee"
+ },
+ "preposition-057": {
+  "translation_tr": "bir şeye göre (sözlere, verilere göre)",
+  "example_tr": "Yeni bir araştırmaya göre gençler çok az uyuyor.",
+  "government": [
+   {
+    "note_tr": "isimden sonra gelir"
+   },
+   {
+    "note_tr": "daha az; isimden önce — İsviçre'de ve hukuk dilinde"
+   }
+  ],
+  "usage_note_tr": "Genellikle isimden sonra gelir. Yakın anlamlıları: laut, gemäß.",
+  "_src": "af849f73",
+  "_src_reader": "ee1f9dc0"
+ },
+ "preposition-058": {
+  "translation_tr": "artı bir şey, bir şey eklenerek",
+  "example_tr": "Kurs 250 avro, artı sınav ücreti.",
+  "government": [
+   {
+    "note_tr": "artı bir şey"
+   },
+   {
+    "note_tr": "çoğulda, Genitiv görünmüyorsa"
+   }
+  ],
+  "usage_note_tr": "Özellikle ticaret dilinde. Tekil artikelsiz isim çekim eki almaz: zuzüglich Porto. Karşıt anlamlısı: abzüglich (eksi). Kısaltma: zzgl.",
+  "_src": "fdc8410b",
+  "_src_reader": "9fe3e2fd"
+ },
+ "preposition-059": {
+  "translation_tr": "bir şeyle birlikte, biriyle",
+  "example_tr": "Birden köpeğiyle birlikte kapıda belirdi.",
+  "government": [
+   {
+    "note_tr": "bir şeyle / biriyle birlikte"
+   },
+   {
+    "note_tr": "çoğulda Genitiv de sık"
+   }
+  ],
+  "usage_note_tr": "Tekil artikelsiz isim çekim eki almaz: samt Zubehör. samt und sonders — istisnasız hepsi. Vurgulu biçimi — mitsamt. Karıştırılmamalı: der Samt — kadife (isim).",
+  "_src": "086cbf88",
+  "_src_reader": "7bc2e376"
+ },
+ "preposition-060": {
+  "translation_tr": "bir şeye doğru, bir yöne doğru",
+  "example_tr": "Kuşlar güneye doğru uçtu.",
+  "government": [
+   {
+    "note_tr": "bir şeye doğru; genellikle artikelsiz"
+   }
+  ],
+  "usage_note_tr": "Eskimekte olan kelime (kitaplarda, masallarda, bazen şaka yollu); genellikle yönlerle ve Himmel ile: gen Himmel — göğe doğru. Bugün genellikle nach ya da zu: nach Süden, zum Himmel.",
+  "_src": "c3e3526a",
+  "_src_reader": "b375ef0c"
+ },
+ "preposition-061": {
+  "translation_tr": "bir şeyin aksine, bir şeye rağmen",
+  "example_tr": "Hava tahmininin aksine bütün gün yağış olmadı.",
+  "government": [
+   {
+    "note_tr": "bir şeyin aksine"
+   },
+   {
+    "note_tr": "nadir: isimden sonra"
+   },
+   {
+    "note_tr": "çoğulda bazen Genitiv"
+   }
+  ],
+  "usage_note_tr": "entgegen zarfı ve ön eki — “karşılamaya, karşı yönde” (jemandem entgegenkommen) — başka bir kelimedir.",
+  "_src": "5283e6ed",
+  "_src_reader": "530a506c",
+  "see_also_tr": [
+   {
+    "id": "adverb-454",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-062": {
+  "translation_tr": "bir şeye uygun olarak, bir şeye göre",
+  "example_tr": "Talimatlara uygun olarak kapıyı kilitledik.",
+  "government": [
+   {
+    "note_tr": "bir şeye uygun olarak"
+   },
+   {
+    "note_tr": "isimden sonra da gelebilir"
+   },
+   {
+    "note_tr": "daha az"
+   }
+  ],
+  "usage_note_tr": "entsprechend sıfatı ve zarfı — “uygun; buna göre” (eine entsprechende Antwort) — başka bir kelimedir.",
+  "_src": "5f54aade",
+  "_src_reader": "a2c384e9",
+  "see_also_tr": [
+   {
+    "id": "adjective-adverb-391",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-063": {
+  "translation_tr": "bir şey için, bir şey adına; bir şey yüzünden",
+  "example_tr": "Eksiksiz olsun diye üçüncü bir olasılığı da sayayım.",
+  "government": [
+   {
+    "note_tr": "(yaz.) Genitiv hâlindeki isimden sonra gelir"
+   }
+  ],
+  "usage_note_tr": "Yalnızca kelimenin arkasında durur (yaz.). halb sıfatı (ein halber Liter) başka bir kelimedir.",
+  "_src": "a35f9355",
+  "_src_reader": "286e7bb2",
+  "see_also_tr": [
+   {
+    "id": "adjective-adverb-120",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-064": {
+  "translation_tr": "bir şeye rağmen, bir şeye karşı gelerek",
+  "example_tr": "Bütün uyarılara rağmen fırtınada denize açıldı.",
+  "government": [
+   {
+    "note_tr": "(yaz.) bir şeye rağmen; Dativ hâlindeki kelimenin arkasında durur"
+   }
+  ],
+  "usage_note_tr": "Yalnızca kelimenin arkasında durur (yaz.). zuwider sıfatı — “itici, tiksindirici” (jemandem zuwider sein) — başka bir kelimedir.",
+  "_src": "0aaa920b",
+  "_src_reader": "12bce8bb",
+  "see_also_tr": [
+   {
+    "id": "adjective-1492",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-065": {
+  "translation_tr": "bir şeyle ilgili olarak, bir şeye dair",
+  "example_tr": "Talebinizle ilgili olarak size maalesef bilgi veremiyoruz.",
+  "government": [
+   {
+    "note_tr": "isimden sonra gelir"
+   },
+   {
+    "note_tr": "isimden önce de gelebilir"
+   },
+   {
+    "note_tr": "isimden önce, özellikle Avusturya'da"
+   }
+  ],
+  "usage_note_tr": "betreffend ortacı ve sıfatı — “ilgili, söz konusu” (die betreffende Person) — başka bir kelimedir.",
+  "_src": "dec8e327",
+  "_src_reader": "e817b84c",
+  "see_also_tr": [
+   {
+    "id": "adjective-1045",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-066": {
+  "translation_tr": "bir şeye rağmen, birine inat",
+  "example_tr": "Bütün tahminlere rağmen takımımız maçı kazandı.",
+  "government": [
+   {
+    "note_tr": "birine, bir şeye rağmen; Dativ hâlindeki kelimenin arkasında durur"
+   }
+  ],
+  "usage_note_tr": "İki kelimelik ifade (Duden sözlüğünde: jemandem, einer Sache zum Trotz — trotz, entgegen). Trotz ismi — “inat” (aus Trotz) — başka bir kelimedir.",
+  "_src": "c2413f07",
+  "_src_reader": "9790a10c"
+ }
+}

@@ -34,7 +34,7 @@
  {
   "en": "You watched a horror film alone last night. Say that at one point you started to get really scared.",
   "ru": "Ты вчера одна смотрела фильм ужасов. Скажи, что тебе стало по-настоящему страшно.",
-  "tr": "Dün akşam tek başına korku filmi izledin. Bir an gerçekten korktuğunu söyle.",
+  "tr": "Dün gece tek başına korku filmi izledin. Bir an gerçekten korkmaya başladığını söyle.",
   "at": [
    "2eb8806b"
   ]
@@ -53,6 +53,1651 @@
   "tr": "lassen im Imperativ (ihr) + uns + Infinitiv = hadi …-elim / …-alım (birkaç kişiye)",
   "at": [
    "1ef7d0dc"
+  ]
+ },
+ {
+  "en": "The kids got tired quickly on the way home. Tell their parents.",
+  "ru": "По дороге домой дети быстро устали. Расскажи родителям.",
+  "tr": "Dün dönüş yolunda çocuklar çabucak yoruldu. Anne babalarına anlat.",
+  "at": [
+   "e2221663"
+  ]
+ },
+ {
+  "en": "time in the past + werden im Präteritum + adjective = became, got",
+  "ru": "время в прошлом + werden im Präteritum + прилагательное = стали",
+  "tr": "geçmiş bir zaman + werden im Präteritum + sıfat = oldu, oldular",
+  "at": [
+   "d1d3ee7f"
+  ]
+ },
+ {
+  "en": "Med school: finally conquered. His family can relax.",
+  "ru": "Медфак наконец покорён. Родные могут выдохнуть.",
+  "tr": "Tıp fakültesi sonunda fethedildi. Ailesi rahat bir nefes alabilir.",
+  "at": [
+   "6580e5bd"
+  ]
+ },
+ {
+  "en": "a year in the past + werden im Präteritum + noun = became",
+  "ru": "год в прошлом + werden im Präteritum + существительное = стал",
+  "tr": "geçmiş bir yıl + werden im Präteritum + isim = oldu",
+  "at": [
+   "51072515"
+  ]
+ },
+ {
+  "en": "She traded lecture halls for the staff room. Share the news.",
+  "ru": "Сменила аудитории на учительскую. Поделись новостью.",
+  "tr": "Amfileri öğretmenler odasıyla değiştirdi. Haberi paylaş.",
+  "at": [
+   "c7a8b522"
+  ]
+ },
+ {
+  "en": "sein im Präsens + Partizip II von werden, no second verb = became",
+  "ru": "sein im Präsens + Partizip II von werden, без второго глагола = стала",
+  "tr": "sein im Präsens + Partizip II von werden, ikinci fiil yok = oldu",
+  "at": [
+   "b5206a0c"
+  ]
+ },
+ {
+  "en": "noun",
+  "ru": "существительное",
+  "tr": "isim",
+  "at": [
+   "e0c141c4"
+  ]
+ },
+ {
+  "en": "became",
+  "ru": "стала",
+  "tr": "oldu",
+  "at": [
+   "9485b7ac"
+  ]
+ },
+ {
+  "en": "Bike gone; lock says nothing. Tell a friend.",
+  "ru": "Велосипед исчез, замок молчит. Расскажи другу.",
+  "tr": "Bisiklet yok, kilit sessiz. Bir arkadaşına anlat.",
+  "at": [
+   "452dea31"
+  ]
+ },
+ {
+  "en": "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done",
+  "ru": "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали",
+  "tr": "nesne + sein im Präsens + Partizip II + worden = Passiv, bu yapıldı (iş bitti)",
+  "at": [
+   "16632861",
+   "eed502f1"
+  ]
+ },
+ {
+  "en": "it was done",
+  "ru": "это сделали",
+  "tr": "bu yapıldı",
+  "at": [
+   "4f5e00e3",
+   "a0809cf3"
+  ]
+ },
+ {
+  "en": "Promise your friend you'll call her tomorrow.",
+  "ru": "Пообещай подруге, что позвонишь ей завтра.",
+  "tr": "Arkadaşına yarın onu arayacağına söz ver.",
+  "at": [
+   "b94a6e02"
+  ]
+ },
+ {
+  "en": "werden im Präsens + infinitive = future",
+  "ru": "werden im Präsens + Infinitiv = будущее",
+  "tr": "werden im Präsens + Infinitiv = gelecek zaman",
+  "at": [
+   "08c75846",
+   "551e936c"
+  ]
+ },
+ {
+  "en": "Your friend is nervous before a job interview. Reassure her: it'll work out.",
+  "ru": "Подруга нервничает перед собеседованием. Успокой её: всё получится.",
+  "tr": "Arkadaşın iş görüşmesinden önce gergin. Onu rahatlat: her şey yolunda gidecek.",
+  "at": [
+   "00ec8e0f"
+  ]
+ },
+ {
+  "en": "werden im Präsens + schon + infinitive = a confident guess: it'll be fine",
+  "ru": "werden im Präsens + schon + Infinitiv = уверенное предположение: всё будет хорошо",
+  "tr": "werden im Präsens + schon + Infinitiv = emin bir tahmin: her şey iyi olacak",
+  "at": [
+   "c7b0ff33"
+  ]
+ },
+ {
+  "en": "infinitive",
+  "ru": "Infinitiv",
+  "tr": "Infinitiv",
+  "at": [
+   "1b5aee23",
+   "27860699",
+   "c5e51ebe",
+   "e7294e66",
+   "f93a709d"
+  ]
+ },
+ {
+  "en": "it'll be fine (a confident guess)",
+  "ru": "всё будет хорошо (уверенное предположение)",
+  "tr": "her şey iyi olacak (emin bir tahmin)",
+  "at": [
+   "69cbef45"
+  ]
+ },
+ {
+  "en": "The cleaning crew is racing the clock. Give a live update.",
+  "ru": "Уборщики работают на скорость. Доложи обстановку.",
+  "tr": "Temizlikçiler zamanla yarışıyor. Durumu canlı aktar.",
+  "at": [
+   "79b4776f"
+  ]
+ },
+ {
+  "en": "thing + werden im Präsens + Partizip II = Passiv, it's being done right now",
+  "ru": "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас",
+  "tr": "nesne + werden im Präsens + Partizip II = Passiv, bu şu anda yapılıyor",
+  "at": [
+   "97a7ef13"
+  ]
+ },
+ {
+  "en": "Say when the Berlin Wall was built.",
+  "ru": "Скажи, когда построили Берлинскую стену.",
+  "tr": "Berlin Duvarı'nın ne zaman inşa edildiğini söyle.",
+  "at": [
+   "a20bcff0"
+  ]
+ },
+ {
+  "en": "time in the past + werden im Präteritum + Partizip II = Passiv, it was done",
+  "ru": "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали",
+  "tr": "geçmiş bir zaman + werden im Präteritum + Partizip II = Passiv, bu yapıldı",
+  "at": [
+   "ba67d12e"
+  ]
+ },
+ {
+  "en": "You're going away and leave the neighbour your key. Say the cat has to be fed every day.",
+  "ru": "Ты уезжаешь и оставляешь соседке ключ. Скажи, что кошку нужно кормить каждый день.",
+  "tr": "Bir yere gidiyorsun ve anahtarı komşuna bırakıyorsun. Kedinin her gün beslenmesi gerektiğini söyle.",
+  "at": [
+   "b967a9d9"
+  ]
+ },
+ {
+  "en": "modal verb + Partizip II + werden = Passiv with a modal verb: it has to be done",
+  "ru": "модальный глагол + Partizip II + werden = Passiv с модальным глаголом: это нужно сделать",
+  "tr": "modal fiil + Partizip II + werden = modal fiilli Passiv: bunun yapılması gerekiyor",
+  "at": [
+   "014600a9"
+  ]
+ },
+ {
+  "en": "it has to be done",
+  "ru": "это нужно сделать",
+  "tr": "bunun yapılması gerekiyor",
+  "at": [
+   "89c7f4cb"
+  ]
+ },
+ {
+  "en": "A friend invites you to the cinema. Say you'd love to come, but you have to work.",
+  "ru": "Друг зовёт в кино. Скажи, что ты бы с радостью, но тебе надо работать.",
+  "tr": "Bir arkadaşın seni sinemaya çağırıyor. Seve seve gelmek istediğini ama çalışman gerektiğini söyle.",
+  "at": [
+   "b85b99a9"
+  ]
+ },
+ {
+  "en": "werden im Konjunktiv II + infinitive = would (not real: you can't come)",
+  "ru": "werden im Konjunktiv II + Infinitiv = бы (не на самом деле: ты не можешь пойти)",
+  "tr": "werden im Konjunktiv II + Infinitiv = -erdi / -ardı (gerçek değil: gelemiyorsun)",
+  "at": [
+   "06ddc099"
+  ]
+ },
+ {
+  "en": "On the train, you're cold. Politely ask the person next to you to close the window.",
+  "ru": "В электричке как в холодильнике. Вежливо попроси соседа закрыть окно.",
+  "tr": "Trende hava buzdolabı gibi. Yanındaki kişiden kibarca pencereyi kapatmasını rica et.",
+  "at": [
+   "8a380642"
+  ]
+ },
+ {
+  "en": "werden im Konjunktiv II + infinitive = would (a polite request)",
+  "ru": "werden im Konjunktiv II + Infinitiv = бы (вежливая просьба)",
+  "tr": "werden im Konjunktiv II + Infinitiv = -erdi / -ardı (kibar bir rica)",
+  "at": [
+   "741d9fac"
+  ]
+ },
+ {
+  "en": "Daydream a little: what would you do with more money?",
+  "ru": "Помечтай немного: что бы ты делала, будь у тебя больше денег?",
+  "tr": "Biraz hayal kur: daha çok paran olsaydı ne yapardın?",
+  "at": [
+   "e1f37eb5"
+  ]
+ },
+ {
+  "en": "werden im Konjunktiv II + infinitive = would (not real)",
+  "ru": "werden im Konjunktiv II + Infinitiv = бы (нереально)",
+  "tr": "werden im Konjunktiv II + Infinitiv = -erdi / -ardı (gerçek dışı)",
+  "at": [
+   "59523acd"
+  ]
+ },
+ {
+  "en": "Exam tomorrow. Confidence is leaving the group chat.",
+  "ru": "Экзамен завтра. Уверенность уже выходит из чата.",
+  "tr": "Sınav yarın. Özgüven gruptan çıkmak üzere.",
+  "at": [
+   "4683722a"
+  ]
+ },
+ {
+  "en": "werden im Präsens + adjective = become, get",
+  "ru": "werden im Präsens + прилагательное = становиться",
+  "tr": "werden im Präsens + sıfat = (bir şey) olmak",
+  "at": [
+   "b5f38c14"
+  ]
+ },
+ {
+  "en": "The surprise party is held together with duct tape and optimism. Reassure your friends.",
+  "ru": "Подготовка сюрприза держится на скотче и оптимизме. Подбодри друзей.",
+  "tr": "Sürpriz parti hazırlığı bant ve iyimserlikle ayakta duruyor. Arkadaşlarına moral ver.",
+  "at": [
+   "cd7278a8"
+  ]
+ },
+ {
+  "en": "Your family is always late. Send the taxi reminder.",
+  "ru": "Ваша семья вечно опаздывает. Напомни всем про такси.",
+  "tr": "Ailen hep geç kalıyor. Herkese taksiyi hatırlat.",
+  "at": [
+   "3ee30ac7"
+  ]
+ },
+ {
+  "en": "person + werden im Präsens + Partizip II = Passiv, it's done to us",
+  "ru": "человек + werden im Präsens + Partizip II = Passiv, это делают с нами",
+  "tr": "kişi + werden im Präsens + Partizip II = Passiv, bu bize yapılıyor",
+  "at": [
+   "83f9ac8b"
+  ]
+ },
+ {
+  "en": "No rain expected. One less thing to carry.",
+  "ru": "Дождя не обещают — одной вещью меньше в сумке.",
+  "tr": "Yağmur beklenmiyor — taşınacak bir eşya eksildi.",
+  "at": [
+   "679a1115"
+  ]
+ },
+ {
+  "en": "lassen im Präsens + thing + place, no second verb = leave",
+  "ru": "lassen im Präsens + вещь + место, без второго глагола = оставить",
+  "tr": "lassen im Präsens + nesne + yer, ikinci fiil yok = bırakmak",
+  "at": [
+   "4dcbe6ad"
+  ]
+ },
+ {
+  "en": "Your friend is out all night. What about the dog?",
+  "ru": "Подруга гуляет всю ночь. А собака?",
+  "tr": "Arkadaşın bütün gece dışarıda. Peki ya köpek?",
+  "at": [
+   "12783dc3"
+  ]
+ },
+ {
+  "en": "haben im Präsens + Partizip II von lassen, no second verb = left",
+  "ru": "haben im Präsens + Partizip II von lassen, без второго глагола = оставила",
+  "tr": "haben im Präsens + Partizip II von lassen, ikinci fiil yok = bıraktın",
+  "at": [
+   "09ee4d5f"
+  ]
+ },
+ {
+  "en": "object",
+  "ru": "кого / что",
+  "tr": "kimi / neyi",
+  "at": [
+   "117b25a6",
+   "15a461fe",
+   "4454bc81",
+   "c5e51ebe",
+   "c6606322",
+   "e0c7c7e7",
+   "e7294e66",
+   "e86455a7",
+   "f93a709d"
+  ]
+ },
+ {
+  "en": "place",
+  "ru": "место",
+  "tr": "yer",
+  "at": [
+   "117b25a6",
+   "15a461fe",
+   "e7294e66",
+   "e86455a7"
+  ]
+ },
+ {
+  "en": "left",
+  "ru": "оставила",
+  "tr": "bıraktın",
+  "at": [
+   "5afd9689"
+  ]
+ },
+ {
+  "en": "You left the car at the repair shop; now it's back.",
+  "ru": "Оставила машину в автосервисе — теперь она снова на ходу.",
+  "tr": "Arabanı tamirciye bıraktın — şimdi yine çalışıyor.",
+  "at": [
+   "3b776845"
+  ]
+ },
+ {
+  "en": "person + haben im Präsens + thing + infinitive + lassen im Infinitiv = had it done",
+  "ru": "человек + haben im Präsens + вещь + Infinitiv + lassen im Infinitiv = поручила сделать",
+  "tr": "kişi + haben im Präsens + nesne + Infinitiv + lassen im Infinitiv = yaptırdım",
+  "at": [
+   "9c1a98bd",
+   "ada8d7d6"
+  ]
+ },
+ {
+  "en": "had it done",
+  "ru": "мне это сделали",
+  "tr": "yaptırdım",
+  "at": [
+   "460847ce",
+   "fe112667"
+  ]
+ },
+ {
+  "en": "Your friend booked a salon slot. Ask her about it.",
+  "ru": "Подруга записалась в салон. Спроси её об этом.",
+  "tr": "Arkadaşın kuaföre randevu aldı. Ona bunu sor.",
+  "at": [
+   "3f40be3b"
+  ]
+ },
+ {
+  "en": "person + lassen im Präsens + thing + infinitive = have someone do it",
+  "ru": "человек + lassen im Präsens + вещь + Infinitiv = поручить кому-то",
+  "tr": "kişi + lassen im Präsens + nesne + Infinitiv = birine yaptırmak",
+  "at": [
+   "50c36171",
+   "5ebe5017"
+  ]
+ },
+ {
+  "en": "Your family’s laptop is broken. Tomorrow you’re taking it to a repair shop.",
+  "ru": "Семейный ноутбук сломался. Завтра вы несёте его в ремонт.",
+  "tr": "Ailenin dizüstü bilgisayarı bozuldu. Yarın tamire götürüyorsunuz.",
+  "at": [
+   "53abb9a1"
+  ]
+ },
+ {
+  "en": "Your friend notices your new haircut.",
+  "ru": "Подруга заметила новую стрижку.",
+  "tr": "Arkadaşın yeni saç kesimini fark etti.",
+  "at": [
+   "69152a58"
+  ]
+ },
+ {
+  "en": "Your friend keeps waking you up. Ask her to let you sleep.",
+  "ru": "Подруга всё время тебя будит. Попроси дать тебе поспать.",
+  "tr": "Arkadaşın seni sürekli uyandırıyor. Uyumana izin vermesini rica et.",
+  "at": [
+   "e6b4cddb"
+  ]
+ },
+ {
+  "en": "lassen im Imperativ + person + infinitive = let someone do it",
+  "ru": "lassen im Imperativ + кто-то + Infinitiv = дай кому-то сделать",
+  "tr": "lassen im Imperativ + kişi + Infinitiv = birinin bir şey yapmasına izin ver",
+  "at": [
+   "97c40f37"
+  ]
+ },
+ {
+  "en": "Suggest to your friend that you go for a walk.",
+  "ru": "Предложи подруге пойти погулять.",
+  "tr": "Arkadaşına yürüyüşe çıkmayı öner.",
+  "at": [
+   "59736fcc"
+  ]
+ },
+ {
+  "en": "lassen im Imperativ (du) + uns + infinitive = let's (to one person)",
+  "ru": "lassen im Imperativ (du) + uns + Infinitiv = давай (одному)",
+  "tr": "lassen im Imperativ (du) + uns + Infinitiv = hadi …-elim / …-alım (bir kişiye)",
+  "at": [
+   "b0591692"
+  ]
+ },
+ {
+  "en": "Game night: everyone's at the table. Suggest to your friends that you all start.",
+  "ru": "Вечер настолок, все за столом. Предложи всем начать.",
+  "tr": "Kutu oyunu akşamı, herkes masada. Herkese başlamayı öner.",
+  "at": [
+   "90e7fed2"
+  ]
+ },
+ {
+  "en": "Your little brother keeps poking you. Tell him to stop.",
+  "ru": "Младший брат всё время тебя тыкает. Скажи ему прекратить.",
+  "tr": "Küçük kardeşin seni durmadan dürtüyor. Ona kesmesini söyle.",
+  "at": [
+   "e8576254"
+  ]
+ },
+ {
+  "en": "Lass das! = stop it (fixed phrase)",
+  "ru": "Lass das! = прекрати (устойчивое выражение)",
+  "tr": "Lass das! = kes şunu! (kalıp ifade)",
+  "at": [
+   "c65f935a"
+  ]
+ },
+ {
+  "en": "Your friend's lamp is broken. Tell her it can be fixed.",
+  "ru": "У подруги сломалась лампа. Скажи ей, что её можно починить.",
+  "tr": "Arkadaşının lambası bozuldu. Ona lambanın tamir edilebileceğini söyle.",
+  "at": [
+   "05b12e95"
+  ]
+ },
+ {
+  "en": "thing + lassen im Präsens + sich + infinitive = can be done",
+  "ru": "вещь + lassen im Präsens + sich + Infinitiv = можно сделать",
+  "tr": "nesne + lassen im Präsens + sich + Infinitiv = yapılabilir",
+  "at": [
+   "7c13fb2d",
+   "805dc915"
+  ]
+ },
+ {
+  "en": "Yesterday's train trip: you left your umbrella behind on the train.",
+  "ru": "Вчерашняя поездка: ты забыла зонт в поезде и оставила его там.",
+  "tr": "Dünkü tren yolculuğu: şemsiyeni trende unuttun ve orada bıraktın.",
+  "at": [
+   "ac994298"
+  ]
+ },
+ {
+  "en": "lassen im Präteritum + thing + zurück = left it behind",
+  "ru": "lassen im Präteritum + вещь + zurück = оставила (забыла)",
+  "tr": "lassen im Präteritum + nesne + zurück = bıraktım (unuttum)",
+  "at": [
+   "4a661716"
+  ]
+ },
+ {
+  "en": "left behind (forgot)",
+  "ru": "оставила (забыла)",
+  "tr": "bıraktım (unuttum)",
+  "at": [
+   "b101470e"
+  ]
+ },
+ {
+  "en": "Your friend asks: “You were at the cinema yesterday, but what about the kids?”",
+  "ru": "Подруга спрашивает: «Вы вчера были в кино, а как же дети?»",
+  "tr": "Arkadaşın soruyor: “Dün sinemadaydınız, peki çocuklar ne oldu?”",
+  "at": [
+   "f2e2a840"
+  ]
+ },
+ {
+  "en": "haben im Präsens + Partizip II von lassen, no second verb = left",
+  "ru": "haben im Präsens + Partizip II von lassen, без второго глагола = оставили",
+  "tr": "haben im Präsens + Partizip II von lassen, ikinci fiil yok = bıraktık",
+  "at": [
+   "07941e1e"
+  ]
+ },
+ {
+  "en": "left",
+  "ru": "оставили",
+  "tr": "bıraktık",
+  "at": [
+   "09636236"
+  ]
+ },
+ {
+  "en": "You're home, but your key isn't in your bag.",
+  "ru": "Ты дома, а ключа нет в сумке.",
+  "tr": "Evdesin ama anahtarın çantanda yok.",
+  "at": [
+   "25b41800"
+  ]
+ },
+ {
+  "en": "haben im Präsens + liegen + lassen im Infinitiv = left (forgot) something",
+  "ru": "haben im Präsens + liegen + lassen im Infinitiv = забыла, оставила",
+  "tr": "haben im Präsens + liegen + lassen im Infinitiv = unuttum, bıraktım",
+  "at": [
+   "04621bde"
+  ]
+ },
+ {
+  "en": "left behind (forgot)",
+  "ru": "забыла",
+  "tr": "unuttum",
+  "at": [
+   "f9a471f6"
+  ]
+ },
+ {
+  "en": "You arrive at the shop and try the door. Too late, it's locked.",
+  "ru": "Ты подходишь к магазину и дёргаешь дверь. Поздно, заперто.",
+  "tr": "Dükkâna geliyorsun ve kapıyı çekiyorsun. Geç kaldın, kilitli.",
+  "at": [
+   "d7e3a578"
+  ]
+ },
+ {
+  "en": "thing + sein im Präsens + Partizip II = already done, a state",
+  "ru": "вещь + sein im Präsens + Partizip II = уже сделано, состояние",
+  "tr": "nesne + sein im Präsens + Partizip II = çoktan yapılmış, bir durum",
+  "at": [
+   "1dcf04f6",
+   "3fbcdd76"
+  ]
+ },
+ {
+  "en": "The exam's over. Your friend asks how it went.",
+  "ru": "Экзамен позади. Друг спрашивает, как всё прошло.",
+  "tr": "Sınav bitti. Arkadaşın nasıl geçtiğini soruyor.",
+  "at": [
+   "78a4daa1"
+  ]
+ },
+ {
+  "en": "time in the past + sein im Präteritum + zu + infinitive = could be done",
+  "ru": "время в прошлом + sein im Präteritum + zu + Infinitiv = можно было сделать",
+  "tr": "geçmiş bir zaman + sein im Präteritum + zu + Infinitiv = yapılabilirdi",
+  "at": [
+   "85d4ac71"
+  ]
+ },
+ {
+  "en": "Tell a friend what you did yesterday evening.",
+  "ru": "Расскажи подруге, что ты делала вчера вечером.",
+  "tr": "Arkadaşına dün akşam ne yaptığını anlat.",
+  "at": [
+   "266673c2"
+  ]
+ },
+ {
+  "en": "going from A to B → sein im Präsens + Partizip II = Perfekt",
+  "ru": "движение из А в Б → sein im Präsens + Partizip II = Perfekt",
+  "tr": "A'dan B'ye hareket → sein im Präsens + Partizip II = Perfekt",
+  "at": [
+   "1fcc242c",
+   "fe4d4298"
+  ]
+ },
+ {
+  "en": "Yesterday's museum trip ended at a locked door.",
+  "ru": "Вчера поход в музей закончился у закрытой двери.",
+  "tr": "Dünkü müze gezisi kilitli bir kapının önünde bitti.",
+  "at": [
+   "0a886cb6"
+  ]
+ },
+ {
+  "en": "thing + sein im Präteritum + Partizip II = a state in the past",
+  "ru": "вещь + sein im Präteritum + Partizip II = состояние в прошлом",
+  "tr": "nesne + sein im Präteritum + Partizip II = geçmişteki bir durum",
+  "at": [
+   "bb684648"
+  ]
+ },
+ {
+  "en": "Tell your neighbour what you did at the weekend.",
+  "ru": "Расскажи соседке, что вы делали на выходных.",
+  "tr": "Komşuna hafta sonu ne yaptığınızı anlat.",
+  "at": [
+   "8d45e026"
+  ]
+ },
+ {
+  "en": "You come home: the windows are clean already, the cleaners are gone.",
+  "ru": "Ты приходишь домой: окна уже чистые, уборщиков нет.",
+  "tr": "Eve geliyorsun: pencereler çoktan temizlenmiş, temizlikçiler gitmiş.",
+  "at": [
+   "cd2c3bf8"
+  ]
+ },
+ {
+  "en": "Your colleague left you a note. You can hardly read it.",
+  "ru": "Коллега оставил тебе записку. Её почти невозможно прочитать.",
+  "tr": "İş arkadaşın sana bir not bırakmış. Neredeyse okunmuyor.",
+  "at": [
+   "67c5039d"
+  ]
+ },
+ {
+  "en": "thing + sein im Präsens + zu + infinitive = can be done",
+  "ru": "вещь + sein im Präsens + zu + Infinitiv = можно сделать",
+  "tr": "nesne + sein im Präsens + zu + Infinitiv = yapılabilir",
+  "at": [
+   "2f466b75"
+  ]
+ },
+ {
+  "en": "When you got to the centre on Sunday, all the streets were already closed off.",
+  "ru": "Когда вы в воскресенье приехали в центр, все улицы уже были перекрыты.",
+  "tr": "Pazar günü merkeze vardığınızda bütün sokaklar çoktan kapatılmıştı.",
+  "at": [
+   "d211e6fe"
+  ]
+ },
+ {
+  "en": "time in the past + sein im Präteritum + Partizip II = a state in the past",
+  "ru": "время в прошлом + sein im Präteritum + Partizip II = состояние в прошлом",
+  "tr": "geçmiş bir zaman + sein im Präteritum + Partizip II = geçmişteki bir durum",
+  "at": [
+   "dcb9bad0"
+  ]
+ },
+ {
+  "en": "It's 2 pm. Ask your friend whether she's had lunch yet.",
+  "ru": "Два часа дня. Спроси подругу, обедала ли она уже.",
+  "tr": "Saat öğleden sonra iki. Arkadaşına öğle yemeği yiyip yemediğini sor.",
+  "at": [
+   "61aab58a"
+  ]
+ },
+ {
+  "en": "haben im Präsens + Partizip II = Perfekt",
+  "ru": "haben im Präsens + Partizip II = Perfekt",
+  "tr": "haben im Präsens + Partizip II = Perfekt",
+  "at": [
+   "24fd9ff4"
+  ]
+ },
+ {
+  "en": "Friends invite you to a bar tonight, but your to-do list has other plans. Say no.",
+  "ru": "Друзья зовут тебя вечером в бар, а у тебя ещё куча дел. Откажись.",
+  "tr": "Arkadaşların akşam seni bara çağırıyor, ama daha bir sürü işin var. Reddet.",
+  "at": [
+   "a01a4399"
+  ]
+ },
+ {
+  "en": "haben im Präsens + zu + infinitive = have to",
+  "ru": "haben im Präsens + zu + Infinitiv = нужно",
+  "tr": "haben im Präsens + zu + Infinitiv = gerekiyor",
+  "at": [
+   "16cf1c69",
+   "26d09b08"
+  ]
+ },
+ {
+  "en": "Explain why you didn't come yesterday: chores had to come first.",
+  "ru": "Объясни, почему ты вчера не пришла: пришлось заняться делами.",
+  "tr": "Dün neden gelmediğini açıkla: işlerle uğraşman gerekti.",
+  "at": [
+   "88ec9b5f"
+  ]
+ },
+ {
+  "en": "time in the past + haben im Präteritum + zu + infinitive = had to",
+  "ru": "время в прошлом + haben im Präteritum + zu + Infinitiv = нужно было",
+  "tr": "geçmiş bir zaman + haben im Präteritum + zu + Infinitiv = gerekiyordu",
+  "at": [
+   "765611a3"
+  ]
+ },
+ {
+  "en": "Your friend says the train leaves at 8. You check the timetable.",
+  "ru": "Подруга говорит, что поезд в восемь. Ты сверяешься с расписанием.",
+  "tr": "Arkadaşın trenin sekizde kalktığını söylüyor. Tarifeye bakıyorsun.",
+  "at": [
+   "67f59621"
+  ]
+ },
+ {
+  "en": "recht haben = to be right (fixed phrase)",
+  "ru": "recht haben = быть правым (устойчивое выражение)",
+  "tr": "recht haben = haklı olmak (kalıp ifade)",
+  "at": [
+   "2f40caf1"
+  ]
+ },
+ {
+  "en": "be right",
+  "ru": "быть правым",
+  "tr": "haklı olmak",
+  "at": [
+   "0a2c74f3"
+  ]
+ },
+ {
+  "en": "Someone starts chatting to you, but you need to catch your bus.",
+  "ru": "С тобой заговорили, а тебе надо успеть на автобус.",
+  "tr": "Biri seninle sohbete başladı, ama otobüse yetişmen gerek.",
+  "at": [
+   "fe91d840"
+  ]
+ },
+ {
+  "en": "es eilig haben = to be in a hurry (fixed phrase)",
+  "ru": "es eilig haben = торопиться (устойчивое выражение)",
+  "tr": "es eilig haben = acelesi olmak (kalıp ifade)",
+  "at": [
+   "f3652e1e"
+  ]
+ },
+ {
+  "en": "be in a hurry",
+  "ru": "спешить",
+  "tr": "acelesi olmak",
+  "at": [
+   "437f9236"
+  ]
+ },
+ {
+  "en": "Your brother insists on a night-light and five teddy bears. Explain to Grandma.",
+  "ru": "Брат требует ночник и пять мишек. Объясни бабушке.",
+  "tr": "Kardeşin gece lambası ve beş oyuncak ayı istiyor. Büyükannene açıkla.",
+  "at": [
+   "55caee8e"
+  ]
+ },
+ {
+  "en": "haben im Präsens + Angst = already feel it, a state",
+  "ru": "haben im Präsens + Angst = уже чувствовать, состояние",
+  "tr": "haben im Präsens + Angst = zaten hissetmek, bir durum",
+  "at": [
+   "50de0840"
+  ]
+ },
+ {
+  "en": "Grandma calls: “What are you cooking tonight?” Be honest.",
+  "ru": "Бабушка звонит: «Что готовите на ужин?» Ответь честно.",
+  "tr": "Büyükannen arıyor: “Akşama ne pişiriyorsunuz?” Dürüstçe cevap ver.",
+  "at": [
+   "1974c588"
+  ]
+ },
+ {
+  "en": "haben im Präsens + Lust = feel like doing it",
+  "ru": "haben im Präsens + Lust = хотеться",
+  "tr": "haben im Präsens + Lust = canı istemek",
+  "at": [
+   "d85d1da6"
+  ]
+ },
+ {
+  "en": "You want to go to the lake with your friends. Ask if they're free.",
+  "ru": "Хочешь позвать друзей на озеро. Спроси, свободны ли они.",
+  "tr": "Arkadaşlarını göle çağırmak istiyorsun. Boş olup olmadıklarını sor.",
+  "at": [
+   "c9397976"
+  ]
+ },
+ {
+  "en": "Your neighbour saw the postman at your door. Tell her what you got.",
+  "ru": "Соседка видела у твоей двери почтальона. Расскажи ей, что ты получила.",
+  "tr": "Komşun kapının önünde postacıyı görmüş. Ona sana ne geldiğini anlat.",
+  "at": [
+   "4a3b9379"
+  ]
+ },
+ {
+  "en": "haben im Präsens + thing + Partizip II von bekommen = got, received",
+  "ru": "haben im Präsens + вещь + Partizip II von bekommen = получила",
+  "tr": "haben im Präsens + nesne + Partizip II von bekommen = aldım",
+  "at": [
+   "f08be6c9"
+  ]
+ },
+ {
+  "en": "got, received",
+  "ru": "получила",
+  "tr": "aldım",
+  "at": [
+   "14d0d46b"
+  ]
+ },
+ {
+  "en": "You ordered shoes online a week ago. Call the shop and ask.",
+  "ru": "Ты заказала туфли неделю назад. Позвони в магазин и спроси.",
+  "tr": "Bir hafta önce internetten ayakkabı sipariş ettin. Mağazayı ara ve sor.",
+  "at": [
+   "1ffee9af"
+  ]
+ },
+ {
+  "en": "bekommen im Präsens + thing = get, receive",
+  "ru": "bekommen im Präsens + вещь = получать",
+  "tr": "bekommen im Präsens + nesne = almak",
+  "at": [
+   "91a7db53"
+  ]
+ },
+ {
+  "en": "person + haben im Präsens + thing + Partizip II + Partizip II von bekommen = given / sent to you",
+  "ru": "человек + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = тебе подарили / прислали",
+  "tr": "kişi + haben im Präsens + nesne + Partizip II + Partizip II von bekommen = hediye edildi / gönderildi",
+  "at": [
+   "462aaf52",
+   "478e5e9f"
+  ]
+ },
+ {
+  "en": "was given",
+  "ru": "мне подарили",
+  "tr": "bana hediye edildi",
+  "at": [
+   "b902b672"
+  ]
+ },
+ {
+  "en": "Write your memoirs: explain why you still hate socks.",
+  "ru": "Пишешь мемуары: объясни, почему до сих пор терпеть не можешь носки.",
+  "tr": "Anılarını yazıyorsun: neden hâlâ çoraplardan nefret ettiğini açıkla.",
+  "at": [
+   "1c9145b1"
+  ]
+ },
+ {
+  "en": "time in the past + haben im Präsens + thing + Partizip II + Partizip II von bekommen = I was given (as presents)",
+  "ru": "время в прошлом + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = мне дарили",
+  "tr": "geçmiş bir zaman + haben im Präsens + nesne + Partizip II + Partizip II von bekommen = bana hediye edilirdi",
+  "at": [
+   "c4e826e1"
+  ]
+ },
+ {
+  "en": "haben + noun (a feeling) + bekommen = started to feel it",
+  "ru": "haben + существительное (чувство) + bekommen = стало (страшно)",
+  "tr": "haben + isim (bir duygu) + bekommen = (korku) hissetmeye başladım",
+  "at": [
+   "8e4e4267"
+  ]
+ },
+ {
+  "en": "Call your boss and explain why you won't come in today.",
+  "ru": "Позвони начальнику и объясни, почему не придёшь сегодня.",
+  "tr": "Patronunu ara ve bugün neden gelemeyeceğini açıkla.",
+  "at": [
+   "7c0cd062"
+  ]
+ },
+ {
+  "en": "haben im Präsens + illness + Partizip II von bekommen = got ill",
+  "ru": "haben im Präsens + болезнь + Partizip II von bekommen = заболела",
+  "tr": "haben im Präsens + hastalık + Partizip II von bekommen = hastalandım",
+  "at": [
+   "36d1e74c"
+  ]
+ },
+ {
+  "en": "You weren't hungry, but the neighbours' pizza smell has just made you hungry. Complain.",
+  "ru": "Ты не была голодна, но запах пиццы от соседей только что разбудил аппетит. Пожалуйся.",
+  "tr": "Aç değildin, ama komşuların pizza kokusu az önce iştahını açtı. Şikâyet et.",
+  "at": [
+   "dd9489b8"
+  ]
+ },
+ {
+  "en": "bekommen im Präsens + noun (a feeling) = start to feel",
+  "ru": "bekommen im Präsens + существительное (чувство) = начать чувствовать",
+  "tr": "bekommen im Präsens + isim (bir duygu) = hissetmeye başlamak",
+  "at": [
+   "753887b6"
+  ]
+ },
+ {
+  "en": "A friend asks why you look so tired. The neighbours' new baby kept you awake.",
+  "ru": "Друг спрашивает, почему у тебя такой уставший вид. Тебе не давал спать новорождённый ребёнок соседей.",
+  "tr": "Bir arkadaşın neden bu kadar yorgun göründüğünü soruyor. Komşuların yeni doğan bebeği seni uyutmadı.",
+  "at": [
+   "2dab27cc"
+  ]
+ },
+ {
+  "en": "haben im Präsens + ein Baby + Partizip II von bekommen = had a baby",
+  "ru": "haben im Präsens + ein Baby + Partizip II von bekommen = родили ребёнка",
+  "tr": "haben im Präsens + ein Baby + Partizip II von bekommen = bebekleri oldu",
+  "at": [
+   "a47efe92"
+  ]
+ },
+ {
+  "en": "You and your friend are late. Hurry her up.",
+  "ru": "Вы с подругой опаздываете. Поторопи её.",
+  "tr": "Arkadaşınla geç kalıyorsunuz. Ona acele etmesini söyle.",
+  "at": [
+   "97678954"
+  ]
+ },
+ {
+  "en": "bekommen im Präsens + den Zug = catch the train",
+  "ru": "bekommen im Präsens + den Zug = успеть на поезд",
+  "tr": "bekommen im Präsens + den Zug = trene yetişmek",
+  "at": [
+   "70d3605a"
+  ]
+ },
+ {
+  "en": "Explain where your sister's dog came from: she got it for her birthday last year.",
+  "ru": "Объясни, откуда у сестры собака: ей подарили её на день рождения в прошлом году.",
+  "tr": "Kız kardeşinin köpeğinin nereden geldiğini açıkla: geçen yıl doğum gününde ona hediye edildi.",
+  "at": [
+   "0115561e"
+  ]
+ },
+ {
+  "en": "time in the past + haben im Präsens + something / someone + Partizip II von bekommen = got, received",
+  "ru": "время в прошлом + haben im Präsens + что / кого + Partizip II von bekommen = получила",
+  "tr": "geçmiş bir zaman + haben im Präsens + neyi / kimi + Partizip II von bekommen = aldı",
+  "at": [
+   "44dddc70"
+  ]
+ },
+ {
+  "en": "The meeting starts in five minutes. Ask your colleague if they got the link.",
+  "ru": "Встреча через пять минут. Спроси коллегу, прислали ли ему ссылку.",
+  "tr": "Toplantı beş dakika sonra başlıyor. İş arkadaşına linkin ona gönderilip gönderilmediğini sor.",
+  "at": [
+   "05f2fe03"
+  ]
+ },
+ {
+  "en": "was sent to you",
+  "ru": "тебе прислали",
+  "tr": "sana gönderildi",
+  "at": [
+   "f1b8e3c9"
+  ]
+ },
+ {
+  "en": "A friend is scared of the dentist. Reassure him: it probably won't be that bad.",
+  "ru": "Друг боится идти к зубному. Успокой его: наверняка всё не так страшно.",
+  "tr": "Arkadaşın dişçiye gitmekten korkuyor. Onu rahatlat: eminim o kadar kötü olmayacak.",
+  "at": [
+   "39dd0cb1"
+  ]
+ },
+ {
+  "en": "werden im Präsens + schon + infinitive = reassurance: surely it's not that bad",
+  "ru": "werden im Präsens + schon + Infinitiv = успокаиваю: наверняка всё не так страшно",
+  "tr": "werden im Präsens + schon + Infinitiv = rahatlatıyorum: eminim o kadar kötü değildir",
+  "at": [
+   "fc17d3e1"
+  ]
+ },
+ {
+  "en": "surely not that bad (reassuring)",
+  "ru": "наверняка не так страшно (успокаиваю)",
+  "tr": "eminim o kadar kötü değildir (rahatlatıyorum)",
+  "at": [
+   "6ac7fb63"
+  ]
+ },
+ {
+  "en": "You're sixteen. Complain that your parents won't let you go on holiday alone.",
+  "ru": "Тебе шестнадцать. Пожалуйся, что родители не разрешают тебе ехать в отпуск одной.",
+  "tr": "On altı yaşındasın. Annenle babanın tatile yalnız gitmene izin vermediğinden şikâyet et.",
+  "at": [
+   "36ddfc31"
+  ]
+ },
+ {
+  "en": "lassen im Präsens + person + infinitive = let, allow",
+  "ru": "lassen im Präsens + человек + Infinitiv = разрешать",
+  "tr": "lassen im Präsens + kişi + Infinitiv = izin vermek",
+  "at": [
+   "29c3ae61"
+  ]
+ },
+ {
+  "en": "A colleague is panicking. Reassure him: the problem is easy to solve.",
+  "ru": "Коллега паникует. Успокой его: проблема легко решается.",
+  "tr": "İş arkadaşın panik hâlinde. Onu rahatlat: sorun kolayca çözülür.",
+  "at": [
+   "77fbd1bd"
+  ]
+ },
+ {
+  "en": "A friend asks what you did yesterday. Honestly: you slept all day.",
+  "ru": "Друг спрашивает, что ты делала вчера. Честно: проспала весь день.",
+  "tr": "Bir arkadaşın dün ne yaptığını soruyor. Dürüst ol: bütün gün uyudun.",
+  "at": [
+   "932d0432"
+  ]
+ },
+ {
+  "en": "After a day at the beach the sun gave you a headache. Complain.",
+  "ru": "После дня на пляже у тебя разболелась голова от солнца. Пожалуйся.",
+  "tr": "Plajda geçen bir günden sonra güneş yüzünden başın ağrıdı. Şikâyet et.",
+  "at": [
+   "c9eb7e48"
+  ]
+ },
+ {
+  "en": "haben + pain / illness + bekommen = got it",
+  "ru": "haben + боль / болезнь + bekommen = получил(а)",
+  "tr": "haben + ağrı / hastalık + bekommen = başım ağrımaya başladı",
+  "at": [
+   "bec8b366"
+  ]
+ },
+ {
+  "en": "become",
+  "ru": "становиться",
+  "tr": "(bir şey) olmak",
+  "at": [
+   "0fb896d7"
+  ]
+ },
+ {
+  "en": "future",
+  "ru": "будущее",
+  "tr": "gelecek zaman",
+  "at": [
+   "71dd1f87"
+  ]
+ },
+ {
+  "en": "a guess",
+  "ru": "предположение",
+  "tr": "tahmin",
+  "at": [
+   "c2130b3a"
+  ]
+ },
+ {
+  "en": "passive",
+  "ru": "пассив",
+  "tr": "Passiv",
+  "at": [
+   "1f4cb765",
+   "f4490469"
+  ]
+ },
+ {
+  "en": "would",
+  "ru": "бы",
+  "tr": "-erdi / -ardı",
+  "at": [
+   "8efa768b",
+   "9feb80e4"
+  ]
+ },
+ {
+  "en": "leave something",
+  "ru": "оставить",
+  "tr": "bırakmak",
+  "at": [
+   "bab4b056"
+  ]
+ },
+ {
+  "en": "have someone do it",
+  "ru": "поручить сделать",
+  "tr": "yaptırmak",
+  "at": [
+   "c2dce1da"
+  ]
+ },
+ {
+  "en": "let someone",
+  "ru": "позволить",
+  "tr": "izin vermek",
+  "at": [
+   "e1043bdb"
+  ]
+ },
+ {
+  "en": "let's",
+  "ru": "давай",
+  "tr": "hadi …-elim / …-alım",
+  "at": [
+   "0b550e1d"
+  ]
+ },
+ {
+  "en": "stop it",
+  "ru": "прекрати",
+  "tr": "kes şunu!",
+  "at": [
+   "115a64f1"
+  ]
+ },
+ {
+  "en": "can't give it up",
+  "ru": "не мочь бросить",
+  "tr": "bırakamamak",
+  "at": [
+   "f46a95e2"
+  ]
+ },
+ {
+  "en": "get (an illness, pain)",
+  "ru": "получить (простуду, боль)",
+  "tr": "yakalanmak (soğuk algınlığına), ağrımak",
+  "at": [
+   "8916ca84"
+  ]
+ },
+ {
+  "en": "have a baby",
+  "ru": "родить ребёнка",
+  "tr": "bebeği olmak",
+  "at": [
+   "e3e4d33c"
+  ]
+ },
+ {
+  "en": "catch (a train)",
+  "ru": "успеть (на поезд)",
+  "tr": "yetişmek (trene)",
+  "at": [
+   "c992fa3a"
+  ]
+ },
+ {
+  "en": "feel (already)",
+  "ru": "испытывать (чувство)",
+  "tr": "(bir duygu) hissetmek",
+  "at": [
+   "c36f318d"
+  ]
+ },
+ {
+  "en": "can be done",
+  "ru": "можно сделать",
+  "tr": "yapılabilir",
+  "at": [
+   "366ab5f1"
+  ]
+ },
+ {
+  "en": "a state",
+  "ru": "состояние",
+  "tr": "durum",
+  "at": [
+   "549bc5b6"
+  ]
+ },
+ {
+  "en": "Perfekt helper",
+  "ru": "вспомогательный в Perfekt",
+  "tr": "Perfekt yardımcı fiili",
+  "at": [
+   "45b42133"
+  ]
+ },
+ {
+  "en": "have to",
+  "ru": "нужно",
+  "tr": "gerekmek",
+  "at": [
+   "85202f4c"
+  ]
+ },
+ {
+  "en": "fixed phrases",
+  "ru": "устойчивые выражения",
+  "tr": "kalıp ifadeler",
+  "at": [
+   "7cfe318e"
+  ]
+ },
+ {
+  "en": "get, receive",
+  "ru": "получать",
+  "tr": "almak",
+  "at": [
+   "826fc130"
+  ]
+ },
+ {
+  "en": "given / sent to you",
+  "ru": "тебе подарили / прислали",
+  "tr": "sana hediye edildi / gönderildi",
+  "at": [
+   "f2aca48a"
+  ]
+ },
+ {
+  "en": "start to feel",
+  "ru": "начать чувствовать",
+  "tr": "hissetmeye başlamak",
+  "at": [
+   "2b147186"
+  ]
+ },
+ {
+  "en": "present tense",
+  "ru": "настоящее время",
+  "tr": "şimdiki zaman",
+  "at": [
+   "e8e70fdb"
+  ]
+ },
+ {
+  "en": "past",
+  "ru": "прошлое",
+  "tr": "geçmiş",
+  "at": [
+   "80b733e0"
+  ]
+ },
+ {
+  "en": "for Perfekt and passive",
+  "ru": "для Perfekt и пассива",
+  "tr": "Perfekt ve Passiv için",
+  "at": [
+   "f99fb1f5"
+  ]
+ },
+ {
+  "en": "basic form",
+  "ru": "начальная форма",
+  "tr": "temel biçim",
+  "at": [
+   "1b64b5d8"
+  ]
+ },
+ {
+  "en": "request, command",
+  "ru": "просьба, приказ",
+  "tr": "rica, emir",
+  "at": [
+   "a353778d"
+  ]
+ },
+ {
+  "en": "became",
+  "ru": "стал(а)",
+  "tr": "oldu",
+  "at": [
+   "4617ed6d"
+  ]
+ },
+ {
+  "en": "In the past:",
+  "ru": "В прошлом:",
+  "tr": "Geçmişte:",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "haben + gelassen",
+  "ru": "haben + gelassen",
+  "tr": "haben + gelassen",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "haben + infinitive + lassen",
+  "ru": "haben + Infinitiv + lassen",
+  "tr": "haben + Infinitiv + lassen",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "*will* = want (wollen)",
+  "ru": "*will* = хочу (wollen)",
+  "tr": "*will* = istiyorum (wollen)",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "lassen is irregular: *ließ*, not *lasste*",
+  "ru": "lassen — неправильный глагол: *ließ*, не *lasste*",
+  "tr": "lassen düzensiz bir fiil: *ließ*, *lasste* değil",
+  "at": [
+   "850e54ab"
+  ]
+ },
+ {
+  "en": "bekommen has no ge-: *habe … bekommen*",
+  "ru": "у bekommen нет ge-: *habe … bekommen*",
+  "tr": "bekommen fiilinde ge- yok: *habe … bekommen*",
+  "at": [
+   "0d32b4a7"
+  ]
+ },
+ {
+  "en": "*kriegen* = spoken *bekommen*. Right! In writing: *bekommen*.",
+  "ru": "*kriegen* — разговорный вариант *bekommen*. Верно! Письменно — *bekommen*.",
+  "tr": "*kriegen* — *bekommen* fiilinin konuşma dilindeki biçimi. Doğru! Yazıda — *bekommen*.",
+  "at": [
+   "54f3a23d",
+   "5ecf8cb9",
+   "7dc901c1",
+   "93c753be",
+   "a4c76e81",
+   "b215eb22"
+  ]
+ },
+ {
+  "en": "*erhalten* = formal *bekommen*. Right! In everyday speech: *bekommen*.",
+  "ru": "*erhalten* — официальный вариант *bekommen*. Верно! В обычной речи — *bekommen*.",
+  "tr": "*erhalten* — *bekommen* fiilinin resmî biçimi. Doğru! Günlük konuşmada — *bekommen*.",
+  "at": [
+   "21e7f001",
+   "cf1f7ebd"
+  ]
+ },
+ {
+  "en": "*erreichen* / *schaffen* / *erwischen* work too! Here we practise *bekommen*.",
+  "ru": "*erreichen* / *schaffen* / *erwischen* — тоже верно! Здесь тренируем *bekommen*.",
+  "tr": "*erreichen* / *schaffen* / *erwischen* — bunlar da doğru! Burada *bekommen* çalışıyoruz.",
+  "at": [
+   "7dce92b2",
+   "a56f17a7",
+   "dacaff00"
+  ]
+ },
+ {
+  "en": "*Macht es Ihnen etwas aus …?* is also polite and right! Here we practise *würde*.",
+  "ru": "*Macht es Ihnen etwas aus …?* — тоже вежливо и верно! Здесь тренируем *würde*.",
+  "tr": "*Macht es Ihnen etwas aus …?* — bu da kibar ve doğru! Burada *würde* çalışıyoruz.",
+  "at": [
+   "28da6dbd"
+  ]
+ },
+ {
+  "en": "*liegen gelassen* is also correct, but less common. Here we practise *liegen lassen*.",
+  "ru": "*liegen gelassen* тоже правильно, но встречается реже. Здесь мы тренируем *liegen lassen*.",
+  "tr": "*liegen gelassen* de doğru ama daha seyrek kullanılır. Burada *liegen lassen* çalışıyoruz.",
+  "at": [
+   "50b5f6b8"
+  ]
+ },
+ {
+  "en": "Past tense, passive:",
+  "ru": "Прошлое в пассиве:",
+  "tr": "Passiv'de geçmiş:",
+  "at": [
+   "828fd724"
+  ]
+ },
+ {
+  "en": "speaking: sein + Partizip II + *worden* (Perfekt)",
+  "ru": "в разговоре: sein + Partizip II + *worden* (Perfekt)",
+  "tr": "konuşurken: sein + Partizip II + *worden* (Perfekt)",
+  "at": [
+   "828fd724"
+  ]
+ },
+ {
+  "en": "writing: *wurde* + Partizip II (Präteritum)",
+  "ru": "в тексте: *wurde* + Partizip II (Präteritum)",
+  "tr": "yazıda: *wurde* + Partizip II (Präteritum)",
+  "at": [
+   "828fd724"
+  ]
+ },
+ {
+  "en": "Past tense:",
+  "ru": "Прошлое:",
+  "tr": "Geçmiş:",
+  "at": [
+   "0d32b4a7",
+   "850e54ab"
+  ]
+ },
+ {
+  "en": "speaking: haben + *bekommen* (Perfekt)",
+  "ru": "в разговоре: haben + *bekommen* (Perfekt)",
+  "tr": "konuşurken: haben + *bekommen* (Perfekt)",
+  "at": [
+   "0d32b4a7"
+  ]
+ },
+ {
+  "en": "writing: *bekam* (Präteritum)",
+  "ru": "в тексте: *bekam* (Präteritum)",
+  "tr": "yazıda: *bekam* (Präteritum)",
+  "at": [
+   "0d32b4a7"
+  ]
+ },
+ {
+  "en": "speaking: haben + *gelassen* (Perfekt)",
+  "ru": "в разговоре: haben + *gelassen* (Perfekt)",
+  "tr": "konuşurken: haben + *gelassen* (Perfekt)",
+  "at": [
+   "850e54ab"
+  ]
+ },
+ {
+  "en": "writing: *ließ* (Präteritum)",
+  "ru": "в тексте: *ließ* (Präteritum)",
+  "tr": "yazıda: *ließ* (Präteritum)",
+  "at": [
+   "850e54ab"
+  ]
+ },
+ {
+  "en": "werden + infinitive = future: you will do it (yourself)",
+  "ru": "werden + Infinitiv = будущее: ты сделаешь это сам(а)",
+  "tr": "werden + Infinitiv = gelecek zaman: bunu (kendin) yapacaksın",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "lassen + infinitive = someone else does it",
+  "ru": "lassen + Infinitiv = сделает кто-то другой",
+  "tr": "lassen + Infinitiv = bunu başka biri yapacak",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "only a subject → werden — *Das Auto wird repariert.*",
+  "ru": "только подлежащее → werden — *Das Auto wird repariert.*",
+  "tr": "yalnızca özne → werden — *Das Auto wird repariert.*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "subject + object → lassen — *Ich lasse das Auto reparieren.*",
+  "ru": "подлежащее + дополнение → lassen — *Ich lasse das Auto reparieren.*",
+  "tr": "özne + nesne → lassen — *Ich lasse das Auto reparieren.*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "sein + **zu** + infinitive",
+  "ru": "sein + **zu** + Infinitiv",
+  "tr": "sein + **zu** + Infinitiv",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "lassen + **sich** + infinitive",
+  "ru": "lassen + **sich** + Infinitiv",
+  "tr": "lassen + **sich** + Infinitiv",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "werden = the action: what happens / happened",
+  "ru": "werden = действие: что происходит / произошло",
+  "tr": "werden = eylem: ne oluyor / ne oldu",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "sein = the result: how it is / was at that moment",
+  "ru": "sein = результат: как всё есть / было в тот момент",
+  "tr": "sein = sonuç: o anda her şey nasıl / nasıldı",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "werden = a change — *wird Arzt, wurden müde*",
+  "ru": "werden = изменение — *wird Arzt, wurden müde*",
+  "tr": "werden = değişim — *wird Arzt, wurden müde*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "sein = a state — *ist Arzt, waren müde*",
+  "ru": "sein = состояние — *ist Arzt, waren müde*",
+  "tr": "sein = durum — *ist Arzt, waren müde*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "bekommen = get, receive",
+  "ru": "bekommen = получать",
+  "tr": "bekommen = almak",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "werden + Partizip II = it is done to the thing — *wurde geschenkt*",
+  "ru": "werden + Partizip II = это сделали с вещью — *wurde geschenkt*",
+  "tr": "werden + Partizip II = bu, nesneye yapıldı — *wurde geschenkt*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "bekommen + Partizip II = you receive it — *bekam es geschenkt*",
+  "ru": "bekommen + Partizip II = ты получаешь — *bekam es geschenkt*",
+  "tr": "bekommen + Partizip II = sen alıyorsun — *bekam es geschenkt*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "bekommen + noun — *Angst bekommen*",
+  "ru": "bekommen + существительное — *Angst bekommen*",
+  "tr": "bekommen + isim — *Angst bekommen*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "werden + adjective — *nervös werden*",
+  "ru": "werden + прилагательное — *nervös werden*",
+  "tr": "werden + sıfat — *nervös werden*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "haben + a feeling = already feel it",
+  "ru": "haben + чувство = уже чувствовать",
+  "tr": "haben + duygu = zaten hissetmek",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "bekommen + a feeling = start to feel",
+  "ru": "bekommen + чувство = начать чувствовать",
+  "tr": "bekommen + duygu = hissetmeye başlamak",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "lassen = you arrange it yourself",
+  "ru": "lassen = ты сам(а) это устраиваешь",
+  "tr": "lassen = bunu kendin ayarlıyorsun",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "bekommen = it's given to you, you just receive it",
+  "ru": "bekommen = тебе это дают, ты только получаешь",
+  "tr": "bekommen = bu sana veriliyor, sen sadece alıyorsun",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "*have* something done = **lassen**, not haben",
+  "ru": "англ. *have* something done = **lassen**, не haben",
+  "tr": "İngilizcedeki *have* something done = **lassen**, haben değil",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "sein: movement, change + *sein, bleiben, passieren*",
+  "ru": "sein: движение, изменение + *sein, bleiben, passieren*",
+  "tr": "sein: hareket, değişim + *sein, bleiben, passieren*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "haben: most verbs",
+  "ru": "haben: большинство глаголов",
+  "tr": "haben: çoğu fiil",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "sein + zu: the thing that can / must be done — *Die Aufgabe ist zu lösen*",
+  "ru": "sein + zu: вещь, которую можно / нужно сделать — *Die Aufgabe ist zu lösen*",
+  "tr": "sein + zu: yapılabilecek / yapılması gereken şey — *Die Aufgabe ist zu lösen*",
+  "at": [
+   "27228e55"
+  ]
+ },
+ {
+  "en": "haben + zu: the person who has to act — *Ich habe zu tun*",
+  "ru": "haben + zu: человек, которому нужно действовать — *Ich habe zu tun*",
+  "tr": "haben + zu: harekete geçmesi gereken kişi — *Ich habe zu tun*",
+  "at": [
+   "27228e55"
   ]
  }
 ]

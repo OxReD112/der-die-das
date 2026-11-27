@@ -1,0 +1,3112 @@
+{
+ "adverb-001": {
+  "translation_tr": "yakında",
+  "example_tr": "Tren birazdan gelecek.",
+  "_src": "5a5c9f5e",
+  "_src_reader": "a57c5d78"
+ },
+ "adverb-002": {
+  "translation_tr": "dışarıda, dış tarafta; açık havada, sokakta",
+  "example_tr": "Çocuklar sokakta oynuyor.",
+  "_src": "f30fe3e4",
+  "_src_reader": "47910d7a"
+ },
+ "adverb-004": {
+  "translation_tr": "isteyerek, seve seve; zevkle",
+  "example_tr": "Okumayı severim ama en çok polisiye okumaktan hoşlanırım.",
+  "usage_note_tr": "gern + fiil = “bir şey yapmayı sevmek”: Ich lese gern. — Okumayı severim. Olumsuz: nicht gern. Yiyecekler ve eşyalar için — mögen: Ich mag Pizza. Ayrıca: gerne.",
+  "_src": "e3d63213",
+  "_src_reader": "78edad30"
+ },
+ "adverb-005": {
+  "translation_tr": "dün",
+  "example_tr": "Dün birlikte yemek yaptık.",
+  "_src": "5c4261a9",
+  "_src_reader": "faf043c7"
+ },
+ "adverb-006": {
+  "translation_tr": "bugün",
+  "example_tr": "Bugün evden çalışıyorum.",
+  "usage_note_tr": "Günün bir zamanıyla: heute Morgen, heute Abend — bu sabah, bu akşam. Sıfat: heutig (die heutige Zeitung).",
+  "_src": "2755ca3a",
+  "_src_reader": "fc5b549c"
+ },
+ "adverb-007": {
+  "translation_tr": "burada; buraya",
+  "example_tr": "Lütfen burada bekleyin.",
+  "usage_note_tr": "Nerede? — hier. Nereye? — hierher (buraya): Komm hierher! hie (esk.) = hier.",
+  "_src": "18553ac9",
+  "_src_reader": "4e0ec5b3"
+ },
+ "adverb-008": {
+  "translation_tr": "her zaman, daima",
+  "example_tr": "Her zaman tam vaktinde gelir.",
+  "usage_note_tr": "immer + karşılaştırma derecesi — gittikçe daha: immer besser, immer mehr. Karşıt anlamlısı: nie.",
+  "_src": "52075bb8",
+  "_src_reader": "6ff1390a"
+ },
+ "adverb-009": {
+  "translation_tr": "şimdi; artık",
+  "example_tr": "Artık vaktim var.",
+  "_src": "38465780",
+  "_src_reader": "0d198f57"
+ },
+ "adverb-010": {
+  "translation_tr": "solda; sola",
+  "example_tr": "Eczane kafenin hemen solunda.",
+  "usage_note_tr": "Nerede? — links (solda). Nereye? — nach links (sola). Karşıt anlamlısı: rechts. Karıştırılmamalı: link- sıfatı (die linke Hand).",
+  "_src": "5ab91109",
+  "_src_reader": "34b0e704"
+ },
+ "adverb-011": {
+  "translation_tr": "yarın",
+  "example_tr": "Yarın arkadaşlarımızı ziyaret ediyoruz.",
+  "usage_note_tr": "morgen (küçük harfle) — yarın; der Morgen — sabah; morgens — sabahları. Yarın sabah — morgen früh.",
+  "_src": "139c336e",
+  "_src_reader": "2e4eaac4"
+ },
+ "adverb-012": {
+  "translation_tr": "sonra, daha sonra; bundan sonra, ardından",
+  "example_tr": "Seni sonra ararım.",
+  "usage_note_tr": "Karşıt anlamlısı: vorher. Vedalaşma: Bis nachher! — Sonra görüşürüz (aynı gün)!",
+  "_src": "898ade67",
+  "_src_reader": "dbd0969b"
+ },
+ "adverb-013": {
+  "translation_tr": "hâlâ, daha, henüz",
+  "example_tr": "Hâlâ otobüsü mü bekliyorsun?",
+  "usage_note_tr": "noch nicht — henüz … değil; noch nie — hiç, şimdiye kadar hiç; noch ein(e) — bir … daha: Noch ein Bier, bitte. noch kelimesinin karşıt anlamlısı — schon, noch nicht için — nicht mehr.",
+  "_src": "5d4bc3d2",
+  "_src_reader": "428eb5a4"
+ },
+ "adverb-014": {
+  "translation_tr": "yukarıda, üst katta; üstte",
+  "example_tr": "Dairem en üst katta.",
+  "usage_note_tr": "Nerede? — oben (yukarıda). Nereye? — nach oben (yukarıya). Karşıt anlamlısı: unten.",
+  "_src": "211851aa",
+  "_src_reader": "19dedff8"
+ },
+ "adverb-015": {
+  "translation_tr": "sık sık",
+  "example_tr": "Parkta sık sık yürüyüş yaparız.",
+  "_src": "2eb8408b",
+  "_src_reader": "23168c97"
+ },
+ "adverb-016": {
+  "translation_tr": "sağda; sağa",
+  "example_tr": "Kavşakta sağa dönmeniz gerekiyor.",
+  "usage_note_tr": "Nerede? — rechts (sağda). Nereye? — nach rechts (sağa). Karşıt anlamlısı: links. Karıştırılmamalı: recht (oldukça; recht haben — haklı olmak).",
+  "_src": "25ec47ae",
+  "_src_reader": "39a434cc"
+ },
+ "adverb-017": {
+  "translation_tr": "zaten, çoktan, bile; elbet, elbette, nasılsa (parçacık: güven, ödünleme); hadi ama (Komm schon!)",
+  "example_tr": "Film çoktan başladı.",
+  "usage_note_tr": "schon mal — hiç, daha önce: Warst du schon mal in Rom? Parçacık olarak — güven: Das wird schon gehen. — Bir şekilde olur. Das schaffst du schon! — Sen bunu başarırsın! Ödünleme: Das ist schon richtig, aber … — Bu elbette doğru ama … Sabırsızlık: Komm schon! — Hadi ama! Retorik soru: Wen interessiert das schon? — Bu kimin umurunda ki? Vurgulu schon genellikle ödünleme bildirir, vurgusuz — güven ya da sabırsızlık. “Zaten, çoktan” anlamının karşıtı — noch nicht.",
+  "_src": "6952613c",
+  "_src_reader": "ea709109"
+ },
+ "adverb-019": {
+  "translation_tr": "hemen; derhâl",
+  "example_tr": "Lütfen derhâl ofise gelin.",
+  "_src": "363dd515",
+  "_src_reader": "eb1dd568"
+ },
+ "adverb-020": {
+  "translation_tr": "aşağıda, altta",
+  "example_tr": "Giriş aşağıda sağda.",
+  "usage_note_tr": "Nerede? — unten (aşağıda). Nereye? — nach unten (aşağıya). Karşıt anlamlısı: oben.",
+  "_src": "21612ff1",
+  "_src_reader": "6c052151"
+ },
+ "adverb-021": {
+  "translation_tr": "belki de, olabilir ki; belki",
+  "example_tr": "Belki yarın telefonda konuşabiliriz.",
+  "_src": "a90a1c86",
+  "_src_reader": "56317a87"
+ },
+ "adverb-022": {
+  "translation_tr": "yeniden, tekrar; yine",
+  "example_tr": "Tekrar sağlığına kavuştu.",
+  "usage_note_tr": "Çoğu zaman fiilin parçasıdır: wiederholen (tekrarlamak), wiederkommen (geri gelmek). Karıştırılmamalı: yazı dilindeki wider (karşı).",
+  "_src": "12e50156",
+  "_src_reader": "1b67739f"
+ },
+ "adverb-023": {
+  "translation_tr": "birlikte",
+  "example_tr": "Hafta sonları birlikte kahvaltı yaparız.",
+  "usage_note_tr": "zusammen sein — çıkmak, çift olmak: Sind Anna und Tom noch zusammen?",
+  "_src": "6da341d7",
+  "_src_reader": "7b9d588f"
+ },
+ "adverb-024": {
+  "translation_tr": "geriye, arkaya; geri",
+  "example_tr": "Ne zaman geri geliyorsun?",
+  "usage_note_tr": "Çoğu zaman ayrılabilen bir fiilin parçasıdır: zurückkommen, zurückgeben, zurückrufen → Ich rufe dich zurück.",
+  "_src": "5b7ce777",
+  "_src_reader": "f5488ec8"
+ },
+ "adverb-025": {
+  "translation_tr": "önce, ilk olarak; ilk önce",
+  "example_tr": "Önce metni okuyacağız, sonra soruları cevaplayacağız.",
+  "usage_note_tr": "Eylemlerin sırası: zuerst … dann … danach … zuletzt. “Başlangıçta, ilk zamanlar” için — anfangs.",
+  "_src": "736942c9",
+  "_src_reader": "d6424f49"
+ },
+ "adverb-026": {
+  "translation_tr": "ancak, fakat; gerçi",
+  "example_tr": "Daire güzel, ancak çok pahalı.",
+  "_src": "b455d701",
+  "_src_reader": "ff499ea7"
+ },
+ "adverb-027": {
+  "translation_tr": "bunun dışında; yoksa, aksi takdirde",
+  "example_tr": "Yol biraz uzun, bunun dışında güzergâh kolay.",
+  "notes_tr": [
+   "Eş anlamlısı: sonst."
+  ],
+  "_src": "9321c422",
+  "_src_reader": "bf1dd4b7"
+ },
+ "adverb-029": {
+  "translation_tr": "ayrıca, bundan başka; üstelik",
+  "example_tr": "Otel merkezde. Ayrıca kahvaltı fiyata dahil.",
+  "notes_tr": [
+   "Bir gerekçe daha ekler."
+  ],
+  "_src": "940c29bd",
+  "_src_reader": "a098c458"
+ },
+ "adverb-030": {
+  "translation_tr": "buna karşılık, aksine; öte yandan; buna karşı",
+  "example_tr": "Mia denize gitmeyi sever. Erkek kardeşi buna karşılık dağlarda kalmayı tercih eder.",
+  "usage_note_tr": "“Buna karşı” anlamında — da + gegen: Ich bin dagegen. — Ben karşıyım. Hast du etwas dagegen? — Bir itirazın var mı?",
+  "_src": "1b2c1a64",
+  "_src_reader": "85ef6606"
+ },
+ "adverb-031": {
+  "translation_tr": "bu yüzden, bu nedenle; oradan",
+  "example_tr": "Tren iptal edildi. Bu yüzden otobüse bineceğiz.",
+  "_src": "d47333e1",
+  "_src_reader": "3d98fed4"
+ },
+ "adverb-032": {
+  "translation_tr": "bu sayede; bu şekilde, böylece",
+  "example_tr": "Her gün çalışıyor ve bu sayede kendine daha çok güveniyor.",
+  "usage_note_tr": "Bir eylemi sonucuna bağlayabilir. Karıştırılmamalı: deshalb — dadurch ise çoğu zaman sonuca hangi yolla ya da araçla ulaşıldığını vurgular.",
+  "_src": "850c29a7",
+  "_src_reader": "48230b0e"
+ },
+ "adverb-033": {
+  "translation_tr": "buna rağmen; yine de",
+  "example_tr": "Çok yağmur yağıyor. Buna rağmen yürüyüşe çıkıyoruz.",
+  "_src": "37f4db7f",
+  "_src_reader": "72611afc"
+ },
+ "adverb-034": {
+  "translation_tr": "bu yüzden; bu sebeple",
+  "example_tr": "Hastayım. Bu yüzden bugün evde kalıyorum.",
+  "notes_tr": [
+   "Sebebi sonuca bağlar.",
+   "Eş anlamlısı: deswegen."
+  ],
+  "_src": "70309c03",
+  "_src_reader": "532f7c12"
+ },
+ "adverb-035": {
+  "translation_tr": "daha çok, tercihen; daha erken, daha önce",
+  "example_tr": "Vaktinde varmak için daha erken yola çıkmalıyız.",
+  "usage_note_tr": "bald kelimesinin karşılaştırma derecesi (bald – eher – am ehesten). “Daha çok, tercihen”: Ich trinke eher Tee.",
+  "_src": "9e65d63a",
+  "_src_reader": "6bbc4302"
+ },
+ "adverb-036": {
+  "translation_tr": "gerekirse; ihtiyaç olursa",
+  "example_tr": "Lütfen gerekirse yanınıza bir şemsiye alın.",
+  "_src": "50ea210e",
+  "_src_reader": "b55611cc"
+ },
+ "adverb-037": {
+  "translation_tr": "buna karşılık; oysa, hâlbuki",
+  "example_tr": "Güneyde hava güneşli, oysa kuzeyde yağmur yağıyor.",
+  "usage_note_tr": "İki olguyu karşılaştırır. Yakın anlamlısı dagegen genellikle daha bağımsız kullanılır; hingegen daha çok ifadenin kısımları arasındaki karşıtlığı doğrudan vurgular.",
+  "_src": "7ad3a4cf",
+  "_src_reader": "3d259ace"
+ },
+ "adverb-038": {
+  "translation_tr": "bu arada, o arada; şimdiye kadar, artık",
+  "example_tr": "Durum artık belirgin biçimde düzeldi.",
+  "_src": "77209926",
+  "_src_reader": "59c139bb"
+ },
+ "adverb-039": {
+  "translation_tr": "her hâlükârda; her durumda",
+  "example_tr": "Arabayla mı trenle mi gideceğimizi henüz bilmiyoruz. Her durumda erken çıkmamız gerek.",
+  "_src": "d03ab8cb",
+  "_src_reader": "7e1f0654"
+ },
+ "adverb-040": {
+  "translation_tr": "ancak, güç bela; neredeyse hiç",
+  "example_tr": "Gürültü yüzünden neredeyse hiç uyuyamadım.",
+  "usage_note_tr": "Zaten olumsuz bir anlamı vardır — nicht eklenmez: Ich habe kaum Zeit. — Neredeyse hiç vaktim yok.",
+  "_src": "129d1d00",
+  "_src_reader": "f70b302c"
+ },
+ "adverb-041": {
+  "translation_tr": "belki, olabilir ki; muhtemelen",
+  "example_tr": "Randevu belki ertelenecek.",
+  "_src": "8d08d4a2",
+  "_src_reader": "dae63890"
+ },
+ "adverb-042": {
+  "translation_tr": "bu arada, o arada; şimdiye kadar, artık",
+  "example_tr": "Eskiden işe otobüsle giderdi, artık bisikletle gidiyor.",
+  "_src": "2dbd988f",
+  "_src_reader": "5d1d0e75"
+ },
+ "adverb-044": {
+  "translation_tr": "sonunda, nihayet; ne de olsa, sonuçta",
+  "example_tr": "Artık çıkmalıyız. Ne de olsa ev sahibimiz bizi bekliyor.",
+  "usage_note_tr": "İki anlamı vardır: “sonunda, nihayet” (Schließlich hat er ja gesagt.) ve “ne de olsa, sonuçta” — gerekçe (örnekteki gibi).",
+  "_src": "6aeb4ba6",
+  "_src_reader": "44eebd91"
+ },
+ "adverb-045": {
+  "translation_tr": "böylece, bu şekilde; dolayısıyla",
+  "example_tr": "Bütün belgeler tam. Böylece başvuru işleme alınabilir.",
+  "notes_tr": [
+   "deshalb kelimesinin daha resmî eş anlamlısı."
+  ],
+  "_src": "13c509ac",
+  "_src_reader": "64698c00"
+ },
+ "adverb-046": {
+  "translation_tr": "bunun yerine",
+  "example_tr": "Otobüs bugün çalışmıyor. Bunun yerine taksiye bineceğiz.",
+  "_src": "cf5b0926",
+  "_src_reader": "12e8b6d1"
+ },
+ "adverb-051": {
+  "translation_tr": "daha iyi",
+  "example_tr": "Bugün kendimi artık daha iyi hissediyorum.",
+  "usage_note_tr": "gut kelimesinin karşılaştırma derecesi (gut – besser – am besten). Öğüt olarak da: Du gehst besser zum Arzt. — Doktora gitsen iyi olur.",
+  "_src": "5d77bcd4",
+  "_src_reader": "99673f6f"
+ },
+ "adverb-052": {
+  "translation_tr": "biraz; azıcık",
+  "example_tr": "Biraz daha yavaş konuşabilir misin?",
+  "usage_note_tr": "Hemen hemen her zaman ein ile: ein bisschen. Çekilmez: mit ein bisschen Glück. Olumsuz: kein bisschen — hiç, zerre kadar.",
+  "_src": "9854fdc7",
+  "_src_reader": "e628f249"
+ },
+ "adverb-053": {
+  "translation_tr": "yaklaşık; aşağı yukarı",
+  "example_tr": "Yolculuk yaklaşık iki saat sürüyor.",
+  "usage_note_tr": "Çoğu zaman kısaltılarak yazılır: ca. Şöyle de yazılır: zirka.",
+  "_src": "bb006103",
+  "_src_reader": "c26a16a8"
+ },
+ "adverb-054": {
+  "translation_tr": "orada; burada; o zaman",
+  "example_tr": "Paul burada mı? – Hayır, çoktan gitti.",
+  "usage_note_tr": "Durumdan görülen ya da anlaşılan bir yeri gösterir: da drüben — şurada, ötede. da sein — orada olmak, hazır bulunmak.",
+  "_src": "f814992a",
+  "_src_reader": "f964469e"
+ },
+ "adverb-055": {
+  "translation_tr": "yanında (bunun, onun); hedefin yanından, ıska",
+  "example_tr": "Bu postane, yanında da bir fırın var.",
+  "usage_note_tr": "daneben = neben + bu (eşya, yer). İnsanlar için neben ihm / neben ihr denir.",
+  "_src": "ad0756f3",
+  "_src_reader": "9e12fee5"
+ },
+ "adverb-056": {
+  "translation_tr": "sonra, ardından; o zaman, o hâlde",
+  "example_tr": "Önce yemek yiyeceğim, sonra ödevlerimi yapacağım.",
+  "notes_tr": [
+   "“O hâlde”: Wenn du müde bist, dann schlaf."
+  ],
+  "_src": "91e3a203",
+  "_src_reader": "f0a1affa"
+ },
+ "adverb-057": {
+  "translation_tr": "orada",
+  "example_tr": "Kafeyi görüyor musun? Orada buluşuruz.",
+  "usage_note_tr": "Nerede? — dort. Nereye? — dorthin. Nereden? — von dort / dorther.",
+  "_src": "95f072c4",
+  "_src_reader": "54655705"
+ },
+ "adverb-058": {
+  "translation_tr": "bir kez, bir defa; bir zamanlar, bir keresinde; bir gün (gelecekte)",
+  "example_tr": "Bir keresinde Viyana'ya gitmiştim.",
+  "usage_note_tr": "Konuşma dilinde çoğu zaman mal biçimine kısalır: Komm mal her! Ayrıca bkz. noch einmal — bir kez daha.",
+  "_src": "1dc4ae52",
+  "_src_reader": "4976d27c"
+ },
+ "adverb-059": {
+  "translation_tr": "eskiden, önceleri; daha erken",
+  "example_tr": "Eskiden Berlin'de oturuyordum.",
+  "usage_note_tr": "İki kullanımı vardır: “geçmişte” (Früher war alles anders.) ve früh kelimesinin karşılaştırma derecesi — “daha erken” (Ich komme heute früher.).",
+  "_src": "02e72f75",
+  "_src_reader": "ffa3b4fb"
+ },
+ "adverb-060": {
+  "translation_tr": "tam şu anda, şu sırada; az önce, demin",
+  "example_tr": "Telefonda konuşamam, şu anda yemek yapıyorum.",
+  "usage_note_tr": "Almancada “şu anda sürüyor” demenin yolu (Almancada Continuous biçimi yoktur). gerade eben — az önce. nicht gerade — pek … değil: Das ist nicht gerade billig. gerade noch — kıl payı, ancak: Wir haben den Zug gerade noch erreicht.",
+  "_src": "e73ae958",
+  "_src_reader": "6b3de866"
+ },
+ "adverb-061": {
+  "translation_tr": "dosdoğru, düz",
+  "example_tr": "Buradan dümdüz gidin, sonra sola dönün.",
+  "_src": "169204fd",
+  "_src_reader": "6d157fac"
+ },
+ "adverb-062": {
+  "translation_tr": "birazdan; hemen; kısa süre sonra; hemen yanında",
+  "example_tr": "Birazdan dönerim.",
+  "usage_note_tr": "Bir yer ifadesinden önce: gleich nebenan / gleich neben dem Bahnhof — hemen yan tarafta / istasyonun hemen yanında.",
+  "_src": "bcc1787f",
+  "_src_reader": "8e45e72b"
+ },
+ "adverb-063": {
+  "translation_tr": "arkada; geride",
+  "example_tr": "Otobüste en çok arkada oturmayı severim.",
+  "usage_note_tr": "Karşıt anlamlısı: vorn. Karıştırılmamalı: hinter edatı (hinter dem Haus).",
+  "_src": "22372b20",
+  "_src_reader": "2588baf9"
+ },
+ "adverb-065": {
+  "translation_tr": "maalesef, ne yazık ki",
+  "example_tr": "Maalesef bugün gelemiyorum.",
+  "_src": "4f520d7b",
+  "_src_reader": "fa6f2c7f"
+ },
+ "adverb-066": {
+  "translation_tr": "daha isteyerek, tercihen; daha iyi (tercih)",
+  "example_tr": "Kahve yerine çayı tercih ederim.",
+  "usage_note_tr": "gern kelimesinin karşılaştırma derecesi (gern – lieber – am liebsten). Tercih böyle ifade edilir: lieber … als … Öğüt olarak da: Bleib lieber zu Hause.",
+  "_src": "118700d7",
+  "_src_reader": "c73121c0"
+ },
+ "adverb-067": {
+  "translation_tr": "daha çok, daha fazla; (nicht mehr) artık … değil, artık … -mez / -maz",
+  "example_tr": "Artık Hamburg'da oturmuyorum.",
+  "usage_note_tr": "viel ve sehr kelimelerinin karşılaştırma derecesi. Çekilmez: mehr Zeit, mehr Leute. nicht mehr / kein … mehr — “artık … değil”.",
+  "_src": "fd51ec97",
+  "_src_reader": "7317c1a0"
+ },
+ "adverb-068": {
+  "translation_tr": "değil, -me / -ma (olumsuzluk)",
+  "example_tr": "Bunu anlamıyorum.",
+  "usage_note_tr": "Bütün fiili olumsuzluyorsa cümlenin sonuna yakın durur (Ich komme heute nicht.); tek bir kelimeyi olumsuzluyorsa onun hemen önünde durur (Nicht ich, sondern er.). Artikelsiz ya da ein ile kullanılan isim kein ile olumsuzlanır: Ich habe kein Auto.",
+  "_src": "f7f70b5a",
+  "_src_reader": "f31ba500"
+ },
+ "adverb-069": {
+  "translation_tr": "hiçbir zaman, asla",
+  "example_tr": "Daha önce hiç İtalya'ya gitmedim.",
+  "usage_note_tr": "Almancada tek olumsuzluk kullanılır: Ich trinke nie Kaffee (nicht olmadan). Daha güçlü biçimi — niemals.",
+  "_src": "b2ead20e",
+  "_src_reader": "3b638769"
+ },
+ "adverb-070": {
+  "translation_tr": "yalnızca, sadece",
+  "example_tr": "Yanımda yalnızca on avro var.",
+  "usage_note_tr": "Parçacık olarak bir isteği ya da dileği pekiştirir: Wenn ich nur mehr Zeit hätte! — Keşke biraz daha vaktim olsaydı! Karıştırılmamalı: erst.",
+  "_src": "f69e54b5",
+  "_src_reader": "e1a52158"
+ },
+ "adverb-071": {
+  "translation_tr": "çok",
+  "example_tr": "Yemek çok güzeldi.",
+  "usage_note_tr": "Fiillerle — “çok, pek”: Ich freue mich sehr. İsimlerle kullanılmaz: viel Arbeit (sehr Arbeit değil).",
+  "_src": "86a5241b",
+  "_src_reader": "bfddc3db"
+ },
+ "adverb-072": {
+  "translation_tr": "böyle, öyle; böyle bir, o kadar; peki, işte",
+  "example_tr": "Lütfen onu benim yaptığım gibi yap.",
+  "usage_note_tr": "Karşılaştırma: so groß wie ich — benim kadar büyük. Cümle başında “peki, işte”: So, jetzt gehen wir.",
+  "_src": "c0338a72",
+  "_src_reader": "b2cfef6b"
+ },
+ "adverb-073": {
+  "translation_tr": "daha sonra; sonra",
+  "example_tr": "Seni daha sonra ararım.",
+  "usage_note_tr": "spät kelimesinin karşılaştırma derecesi. Vedalaşma: Bis später! — Sonra görüşmek üzere!",
+  "_src": "746396c4",
+  "_src_reader": "2c391e89"
+ },
+ "adverb-074": {
+  "translation_tr": "çok",
+  "example_tr": "Hafta sonu çok uyurum.",
+  "usage_note_tr": "İsimle: viel Zeit (tek.), viele Leute (çoğ. — ekli). Karşılaştırma derecesinden önce — “çok daha”: viel besser.",
+  "_src": "f5afad3b",
+  "_src_reader": "a6e0a845"
+ },
+ "adverb-075": {
+  "translation_tr": "ne zaman",
+  "example_tr": "Film ne zaman başlıyor?",
+  "usage_note_tr": "Soru kelimesi. Dolaylı soruda fiil sona gider: Weißt du, wann der Film anfängt? Geçmişi anlatırken “-diğinde / -dığında” için — als / wenn bağlaçları, wann değil.",
+  "extra_meanings": [
+   {
+    "tr": "-diğinde / -dığında, eğer (= wenn)",
+    "example_tr": "Kraliçe olduğunda artık yürümek zorunda kalmayacaksın."
+   }
+  ],
+  "_src": "de150ee6",
+  "_src_reader": "e3e24af1"
+ },
+ "adverb-076": {
+  "translation_tr": "neden, niçin",
+  "example_tr": "Neden Almanca öğreniyorsun?",
+  "usage_note_tr": "Dolaylı soruda fiil sona gider: Ich weiß nicht, warum er so spät kommt. Yakın anlamlıları: wieso, weshalb.",
+  "_src": "9d80d70d",
+  "_src_reader": "baf7ab89"
+ },
+ "adverb-077": {
+  "translation_tr": "ileriye, devam ederek; daha, başka, ayrıca",
+  "example_tr": "Lütfen okumaya devam edin.",
+  "usage_note_tr": "Fiillerle “devam etmek” anlamına gelir: weiterlesen, weiterarbeiten. Und so weiter (usw.) — ve saire. “Daha, başka, ayrıca” (Duden sözlüğünde: außerdem, sonst) — daha çok olumsuzluktan sonra ya da soruda: Weiter weiß ich nichts. — Başka bir şey bilmiyorum. Es war niemand weiter da. — Başka kimse yoktu. Was weiter? — Başka ne var? nichts weiter als — sadece, … başka bir şey değil: Das ist nichts weiter als ein Kratzer. — Bu sadece bir çizik.",
+  "_src": "f0bf0d15",
+  "_src_reader": "122750d4"
+ },
+ "adverb-079": {
+  "translation_tr": "nasıl? (soru); gibi, kadar (karşılaştırma)",
+  "example_tr": "Adın ne?",
+  "additional_examples": [
+   {
+    "example_tr": "Bunun nasıl yapıldığını bilmiyorum."
+   },
+   {
+    "example_tr": "Babası kadar uzun boylu."
+   }
+  ],
+  "notes_tr": [
+   "Sorular: Wie alt …? Wie viel …? Wie lange …?",
+   "Dolaylı soruda ve wie ile kurulan yan cümlede fiil sondadır: Ich weiß nicht, wie das geht. wie du willst — nasıl istersen.",
+   "Eşitlik: so … wie, genauso … wie. wie immer — her zamanki gibi.",
+   "Karşılaştırma derecesinden sonra — als: größer als. größer wie konuşmada duyulur ama standart değildir."
+  ],
+  "extra_meanings": [
+   {
+    "tr": "-diğinde / -dığında, -ince / -ınca (= als)",
+    "example_tr": "Ona hiçbir şey hediye etmek istemediklerini görünce kapıdan çıkıp gitti."
+   }
+  ],
+  "_src": "af11a7cd",
+  "_src_reader": "cbdf51b4"
+ },
+ "adverb-080": {
+  "translation_tr": "nerede",
+  "example_tr": "Nerede oturuyorsun?",
+  "usage_note_tr": "Wo? — nerede (yer), wohin? — nereye, woher? — nereden. Dolaylı soruda fiil sona gider: Weißt du, wo er wohnt?",
+  "_src": "8b395a3f",
+  "_src_reader": "9bb284e6"
+ },
+ "adverb-081": {
+  "translation_tr": "nereden",
+  "example_tr": "Nerelisiniz?",
+  "usage_note_tr": "Konuşmada çoğu zaman ikiye ayrılır: Wo kommst du her?",
+  "_src": "c0744b5d",
+  "_src_reader": "7162a4f6"
+ },
+ "adverb-082": {
+  "translation_tr": "nereye",
+  "example_tr": "Tatilde nereye gidiyorsun?",
+  "usage_note_tr": "Konuşmada genellikle ayrılır: Wo fährst du hin? wohin kelimesinden sonra edat genellikle Akkusativ alır: in den Park.",
+  "_src": "d9e4c143",
+  "_src_reader": "4853003e"
+ },
+ "adverb-083": {
+  "translation_tr": "şu sıralar; şu anda",
+  "example_tr": "Şu anda bir kafede çalışıyorum.",
+  "usage_note_tr": "Bitişik yazılır. Karıştırılmamalı: zur Zeit + Genitiv (ayrı yazılır) — “… zamanında”: zur Zeit Goethes.",
+  "_src": "a4e04e18",
+  "_src_reader": "0129f60a"
+ },
+ "adverb-084": {
+  "translation_tr": "özellikle",
+  "example_tr": "Özellikle eski şehri beğeniyorum.",
+  "usage_note_tr": "nicht besonders — “pek değil, şöyle böyle”: Der Film war nicht besonders gut.",
+  "_src": "fd76cdff",
+  "_src_reader": "9ca6eb17"
+ },
+ "adverb-085": {
+  "translation_tr": "yine de; ya, işte (emirde: -sene / -sana); tabii ki, aksine (olumsuz soruya itiraz ederken); (dileklerde) keşke",
+  "example_tr": "Gelmiyor musun? – Geliyorum tabii ki!",
+  "usage_note_tr": "Olumsuz bir soruya itiraz eden “evet” cevabı — doch, ja değil. Emir kipiyle ısrar bildirir: Komm doch mit! — Gelsene! Sei doch still! — Sussana artık! Bir ifadede sitem, hatırlatma: Das weißt du doch! — Bunu biliyorsun ya! Dileklerde (genellikle nur ile) — “keşke, bari”: Hätte er doch nur eine Uhr! — Keşke bir saati olsaydı! Wenn wir doch ein Kind hätten! — Ah, keşke bir çocuğumuz olsaydı! doch bağlacı — “ama, ancak”.",
+  "see_also_tr": [
+   {
+    "id": "conjunction-058",
+    "at": 7
+   }
+  ],
+  "_src": "0ea3f83c",
+  "_src_reader": "2fe6f181"
+ },
+ "adverb-086": {
+  "translation_tr": "nihayet",
+  "example_tr": "Nihayet hafta sonu!",
+  "usage_note_tr": "Rahatlama ya da sabırsızlık bildirir. Sıralamada “en sonunda” için zuletzt / schließlich daha uygundur. Sıfat olarak (yaz.) — “sonlu”: Unsere Ressourcen sind endlich. — Kaynaklarımız sonludur.",
+  "_src": "1b6fa588",
+  "_src_reader": "abbbc79c"
+ },
+ "adverb-087": {
+  "translation_tr": "yeterince; yeter",
+  "example_tr": "Yanında yeterince para var mı?",
+  "usage_note_tr": "Çekilmez. İsimle genellikle isimden önce gelir (genug Zeit), sıfatla — sıfattan sonra (alt genug).",
+  "_src": "377af3d7",
+  "_src_reader": "8c03ec59"
+ },
+ "adverb-088": {
+  "translation_tr": "umarım; umalım ki",
+  "example_tr": "Umarım yarın yağmur yağmaz.",
+  "_src": "318b93c3",
+  "_src_reader": "c26ef749"
+ },
+ "adverb-089": {
+  "translation_tr": "bazen",
+  "example_tr": "Bazen işe bisikletle giderim.",
+  "_src": "6547a4c7",
+  "_src_reader": "7c65fd21"
+ },
+ "adverb-090": {
+  "translation_tr": "en az; asgari olarak",
+  "example_tr": "En az sekiz saat uyurum.",
+  "usage_note_tr": "Miktar için. Teselli anlamındaki “en azından” için — wenigstens / zumindest. Karşıt anlamlısı: höchstens.",
+  "_src": "891b9607",
+  "_src_reader": "60cc90b9"
+ },
+ "adverb-091": {
+  "translation_tr": "her yerde; her yanda",
+  "example_tr": "Anahtarımı her yerde aradım.",
+  "_src": "38e7d009",
+  "_src_reader": "bb420c0f"
+ },
+ "adverb-092": {
+  "translation_tr": "başka türlü, farklı",
+  "example_tr": "Şehri tamamen farklı hayal etmiştim.",
+  "usage_note_tr": "anders als … — … gibi değil, …-den / -dan farklı: Er denkt anders als ich. Sıfat — ander-: ein anderes Buch.",
+  "_src": "7a2cd0cc",
+  "_src_reader": "6ba03a9e"
+ },
+ "adverb-093": {
+  "translation_tr": "o zamanlar, o dönemde",
+  "example_tr": "O zamanlar henüz cep telefonumuz yoktu.",
+  "usage_note_tr": "Yalnızca geçmiş için. “O zaman, bu durumda” için — dann.",
+  "_src": "d40059ed",
+  "_src_reader": "7383affd"
+ },
+ "adverb-094": {
+  "translation_tr": "içinde; içeride (kapalı alanda)",
+  "example_tr": "Yağmur yağıyor, bugün içeride kalıyoruz.",
+  "usage_note_tr": "Karşıt anlamlısı: draußen. Konuşma dilinde kullanılır; daha nötr — innen.",
+  "_src": "bbba1e2a",
+  "_src_reader": "c075d3d8"
+ },
+ "adverb-095": {
+  "translation_tr": "orada, karşı tarafta",
+  "example_tr": "Durak tam şurada, karşı tarafta.",
+  "usage_note_tr": "Daha çok da drüben söz öbeğinde — şurada, şu karşıda.",
+  "_src": "d259cf76",
+  "_src_reader": "974a44cd"
+ },
+ "adverb-096": {
+  "translation_tr": "önce; ancak (daha erken değil)",
+  "example_tr": "Dükkân ancak saat onda açılıyor.",
+  "usage_note_tr": "erst = “beklenenden geç ya da az”: Er ist erst fünf. — Daha beş yaşında. nur = “o kadar, fazlası değil”: Ich habe nur fünf Euro. “Önce” anlamında: Erst essen wir, dann gehen wir.",
+  "_src": "6a973b54",
+  "_src_reader": "8e60da6d"
+ },
+ "adverb-097": {
+  "translation_tr": "neredeyse",
+  "example_tr": "Neredeyse hazırım.",
+  "_src": "c45d078d",
+  "_src_reader": "86f8840d"
+ },
+ "adverb-098": {
+  "translation_tr": "buraya (konuşana doğru); (… zaman) önce; (von … her) … yönünden; (hinter … her) birinin / bir şeyin peşinden; (vor sich her) kendi önünde",
+  "example_tr": "Gel bakalım buraya!",
+  "usage_note_tr": "her — konuşana doğru hareket, hin — konuşandan uzağa. Genellikle fiilin parçasıdır: herkommen. Zaman için: Das ist lange her. — Bu çok uzun zaman önceydi.",
+  "_src": "cbb9276b",
+  "_src_reader": "c8953d44"
+ },
+ "adverb-099": {
+  "translation_tr": "dışarı (konuşana doğru); (bir şeyin) içinden",
+  "example_tr": "Dışarı çıksana, güneş parlıyor!",
+  "usage_note_tr": "Konuşma dilinde: raus. Genellikle fiilin parçasıdır: herauskommen, herausfinden (öğrenmek, ortaya çıkarmak). heraus — konuşana doğru dışarı, hinaus — konuşandan uzağa dışarı.",
+  "_src": "29141f2b",
+  "_src_reader": "dc3e8ac0"
+ },
+ "adverb-100": {
+  "translation_tr": "içeri (konuşana doğru)",
+  "example_tr": "Girin! Kapı açık.",
+  "usage_note_tr": "Konuşma dilinde: rein. Herein! — kapı çalındığında böyle cevap verilir. Genellikle fiilin parçasıdır: hereinkommen.",
+  "_src": "0b43e6c6",
+  "_src_reader": "f4b7f47b"
+ },
+ "adverb-101": {
+  "translation_tr": "içeri (konuş.)",
+  "example_tr": "İçeri mi gireceksin, dışarı mı çıkacaksın?",
+  "usage_note_tr": "herein ve hinein kelimelerinin konuşma dilindeki biçimi. Genellikle fiilin parçasıdır: reinkommen. Sıfat olarak rein “temiz” anlamına gelir.",
+  "_src": "3379e7ed",
+  "_src_reader": "0124bd8f"
+ },
+ "adverb-102": {
+  "translation_tr": "oraya (konuşandan uzağa); (nach / zum … hin) bir yere doğru; (auf … hin) (rica, emir) üzerine; (bis … hin) bir şeye varıncaya kadar",
+  "example_tr": "Nereye gidiyorsun?",
+  "usage_note_tr": "hin — konuşandan uzağa hareket, her — konuşana doğru. Genellikle fiilin parçasıdır: hingehen, hinfahren. hin sein (konuş.) — bozulmak, mahvolmak: Mein Handy ist hin. — Telefonum gitti.",
+  "_src": "eaa98683",
+  "_src_reader": "44ea83e1"
+ },
+ "adverb-103": {
+  "translation_tr": "genellikle; çoğu zaman",
+  "example_tr": "Genellikle evde kahvaltı ederim.",
+  "_src": "dd993877",
+  "_src_reader": "4f855fed"
+ },
+ "adverb-104": {
+  "translation_tr": "bitişikte; yan tarafta",
+  "example_tr": "Bitişikteki komşular çok iyi insanlar.",
+  "_src": "3dcd91af",
+  "_src_reader": "64d82e26"
+ },
+ "adverb-105": {
+  "translation_tr": "hiçbir yerde",
+  "example_tr": "Burada hiçbir yere park edilemiyor.",
+  "usage_note_tr": "Tek olumsuzluk: nirgends (nicht olmadan). Eş anlamlısı: nirgendwo.",
+  "_src": "ff24da55",
+  "_src_reader": "3227b751"
+ },
+ "adverb-106": {
+  "translation_tr": "kendisi; bile",
+  "example_tr": "Pastayı kendim pişirdim.",
+  "usage_note_tr": "Değişmez: ich selbst, wir selbst. Konuşma dilindeki biçimi — selber. Bir kelimeden önce “bile” anlamına gelir: Selbst mein Bruder war da.",
+  "_src": "25d12d02",
+  "_src_reader": "b546a100"
+ },
+ "adverb-107": {
+  "translation_tr": "bile, hatta",
+  "example_tr": "Çince bile konuşuyor.",
+  "_src": "69a26c51",
+  "_src_reader": "a564b6f1"
+ },
+ "adverb-108": {
+  "translation_tr": "yoksa, aksi hâlde; normalde, genellikle; başka (bunun dışında)",
+  "example_tr": "Acele et, yoksa treni kaçıracağız.",
+  "notes_tr": [
+   "Sonst noch etwas? — Başka bir şey?",
+   "Sonst ist er pünktlich. — Normalde dakiktir."
+  ],
+  "_src": "7a18a3bc",
+  "_src_reader": "d2d44589"
+ },
+ "adverb-111": {
+  "translation_tr": "evvelki gün",
+  "example_tr": "Evvelki gün doktordaydım.",
+  "_src": "326b0d6d",
+  "_src_reader": "d6078fa5"
+ },
+ "adverb-112": {
+  "translation_tr": "bundan önce, ondan önce; önceden",
+  "example_tr": "Geleceğin zaman lütfen önceden ara.",
+  "usage_note_tr": "Karşıt anlamlısı: nachher. Karıştırılmamalı: bevor (bağlaç) — Bevor ich komme, rufe ich an.",
+  "_src": "e4e1a022",
+  "_src_reader": "ae096883"
+ },
+ "adverb-113": {
+  "translation_tr": "önde; önden",
+  "example_tr": "Sinemada en önde oturmayı sevmem.",
+  "usage_note_tr": "Ayrıca: vorne. Karşıt anlamlısı: hinten. nach vorn — ileri; von vorn — baştan.",
+  "_src": "190124ed",
+  "_src_reader": "ffb69f6b"
+ },
+ "adverb-114": {
+  "translation_tr": "ileri",
+  "example_tr": "Lütfen arabayı biraz ileri sür.",
+  "usage_note_tr": "Karşıt anlamlısı: rückwärts.",
+  "_src": "500e1888",
+  "_src_reader": "43fdf5c8"
+ },
+ "adverb-116": {
+  "translation_tr": "yok (kaybolmuş, gitmiş); uzağa",
+  "example_tr": "Bisikletim yok olmuş!",
+  "usage_note_tr": "Genellikle fiilin parçasıdır: weggehen, wegfahren, wegwerfen. Karıştırılmamalı: der Weg (isim) — yol. weg sein — kaybolmak; konuşma dilinde ayrıca “kendinden geçmek” (uyuyakalmak, bayılmak).",
+  "_src": "cc4bd0bf",
+  "_src_reader": "2fdf228b"
+ },
+ "adverb-117": {
+  "translation_tr": "en azından; hiç değilse",
+  "example_tr": "Yağmur yağıyor ama en azından hava sıcak.",
+  "usage_note_tr": "Genellikle teselli olarak. Miktar için daha çok mindestens. Eş anlamlısı: zumindest.",
+  "_src": "e51b9b2b",
+  "_src_reader": "60cc90b9"
+ },
+ "adverb-118": {
+  "translation_tr": "en son; sonunda, en sonda",
+  "example_tr": "Dişçiye en son ne zaman gittin?",
+  "usage_note_tr": "Sıralamada: zuerst … dann … zuletzt. nicht zuletzt — özellikle de, en önemlisi de.",
+  "_src": "1419d6b6",
+  "_src_reader": "11ec30b9"
+ },
+ "adverb-119": {
+  "translation_tr": "öbür gün",
+  "example_tr": "Öbür gün tatile gidiyoruz.",
+  "_src": "a8cc1d93",
+  "_src_reader": "7d5538ff"
+ },
+ "adverb-120": {
+  "translation_tr": "aşağı",
+  "example_tr": "Buradan sonra yol hep aşağı iniyor.",
+  "usage_note_tr": "Karşıt anlamlısı: aufwärts. Mit … geht es abwärts — birinin / bir şeyin durumu gittikçe kötüleşiyor.",
+  "_src": "e30a5d21",
+  "_src_reader": "c223bb8c"
+ },
+ "adverb-121": {
+  "translation_tr": "öte yandan",
+  "example_tr": "Daire güzel, öte yandan çok pahalı.",
+  "notes_tr": [
+   "Çift kullanım: einerseits … andererseits."
+  ],
+  "_src": "8cc40038",
+  "_src_reader": "2083b7a0"
+ },
+ "adverb-122": {
+  "translation_tr": "başta; başlangıçta",
+  "example_tr": "Başta iş zordu, şimdi idare ediyor.",
+  "usage_note_tr": "Yalnızca zaman için (= am Anfang). İşlerin sırası için — zuerst.",
+  "_src": "9f917ad0",
+  "_src_reader": "15d4c2a2"
+ },
+ "adverb-123": {
+  "translation_tr": "yukarı",
+  "example_tr": "Asansörle yukarı çıkıyoruz.",
+  "usage_note_tr": "Karşıt anlamlısı: abwärts. Es geht aufwärts — işler yoluna giriyor.",
+  "_src": "2cf3dc88",
+  "_src_reader": "886d345a"
+ },
+ "adverb-124": {
+  "translation_tr": "dışta, dış tarafta",
+  "example_tr": "Ev dıştan gri, içi ise rengârenk.",
+  "usage_note_tr": "Karşıt anlamlısı: innen. nach außen — dışarıya.",
+  "_src": "404c0fdc",
+  "_src_reader": "1a431b38"
+ },
+ "adverb-125": {
+  "translation_tr": "neredeyse; az kalsın",
+  "example_tr": "Az kalsın otobüsü kaçırıyordum.",
+  "usage_note_tr": "Eş anlamlısı: fast. Az kalsın olacak bir şey için genellikle Konjunktiv II ile: Ich wäre beinahe gefallen.",
+  "_src": "9af96f35",
+  "_src_reader": "86f8840d"
+ },
+ "adverb-126": {
+  "translation_tr": "çoktan, zaten",
+  "example_tr": "Tren çoktan kalktı.",
+  "usage_note_tr": "schon kelimesinin daha resmî eş anlamlısı.",
+  "_src": "a302ed4b",
+  "_src_reader": "b56ed7d7"
+ },
+ "adverb-127": {
+  "translation_tr": "şimdiye kadar; şimdilik",
+  "example_tr": "Şimdiye kadar her şey yolunda gitti.",
+  "_src": "bec1f361",
+  "_src_reader": "af1f5ef7"
+ },
+ "adverb-128": {
+  "translation_tr": "yalnızca, sırf; sadece, öylesine",
+  "example_tr": "Bir şey almak istemiyorum, sadece bakıyorum.",
+  "usage_note_tr": "nur kelimesinin eş anlamlısı (konuş.). Parçacık olarak uyarıyı ya da dileği güçlendirir: Komm bloß nicht zu spät! Wenn ich bloß Zeit hätte!",
+  "_src": "f4cf247f",
+  "_src_reader": "e1a52158"
+ },
+ "adverb-129": {
+  "translation_tr": "bu sırada, bunu yaparken; yanında; yanı başında",
+  "example_tr": "Yanında kalem var mı?",
+  "usage_note_tr": "dabei = da + bei (bu sırada). dabei haben — yanında bulundurmak; dabei sein — katılmak. bei + şey yerine kullanılır: Hilfst du mir bei der Arbeit? → Hilfst du mir dabei?",
+  "_src": "9ded0489",
+  "_src_reader": "b3542c42"
+ },
+ "adverb-130": {
+  "translation_tr": "bunun için; (bundan) yana; buna karşılık",
+  "example_tr": "Erken yola çıkmamızdan yanayım.",
+  "usage_note_tr": "dafür = da + für. Edatlı fiillerde für + şey yerine geçer: Ich interessiere mich für Musik. → Ich interessiere mich dafür. İnsanlar için: für ihn / für sie. Ayrıca “buna karşılık”: Es ist teuer, dafür gut.",
+  "_src": "a1947930",
+  "_src_reader": "877bb147"
+ },
+ "adverb-131": {
+  "translation_tr": "oraya",
+  "example_tr": "Yeni parkı biliyor musun? Yarın oraya gidebiliriz.",
+  "usage_note_tr": "Nereye? — dahin / dorthin; nerede? — da / dort. bis dahin — o zamana kadar: Bis dahin bin ich fertig.",
+  "_src": "b7659bff",
+  "_src_reader": "3fb085f5"
+ },
+ "adverb-132": {
+  "translation_tr": "bundan sonra, sonra; (fiil + nach) bunu, buna, bunun hakkında, buna göre; (es sieht danach aus / es klingt danach) öyle görünüyor, öyle anlaşılıyor",
+  "example_tr": "Sinemaya gidiyoruz, sonra da bir şeyler yiyeceğiz.",
+  "notes_tr": [
+   "danach = da + nach, nach + şey yerine geçer: Er fragt nach dem Weg. → Er fragt danach."
+  ],
+  "sense_marks": [
+   {
+    "meaning_tr": "(fiil + nach) bunu, buna, bunun hakkında, buna göre"
+   },
+   {
+    "meaning_tr": "(es sieht danach aus / es klingt danach) öyle görünüyor, öyle anlaşılıyor"
+   }
+  ],
+  "_src": "b5fe1afc",
+  "_src_reader": "ba0999e0"
+ },
+ "adverb-134": {
+  "translation_tr": "bu yüzden",
+  "example_tr": "Hastaydım, bu yüzden gelemedim.",
+  "notes_tr": [
+   "Eş anlamlısı: deshalb."
+  ],
+  "_src": "d2e1482a",
+  "_src_reader": "0437def5"
+ },
+ "adverb-135": {
+  "translation_tr": "bu sefer",
+  "example_tr": "Bu sefer ben ödüyorum.",
+  "_src": "d1690413",
+  "_src_reader": "2544de60"
+ },
+ "adverb-136": {
+  "translation_tr": "oraya",
+  "example_tr": "İstasyon uzak değil, seni oraya götürürüm.",
+  "usage_note_tr": "Nereye? — dorthin; nerede? — dort.",
+  "_src": "860bebc1",
+  "_src_reader": "3fb085f5"
+ },
+ "adverb-138": {
+  "translation_tr": "az önce; tam, tam da; işte (durum böyle)",
+  "example_tr": "Az önce geldim.",
+  "usage_note_tr": "Parçacık olarak — “ne yapalım, durum böyle”: Das ist eben so. Cevap olarak — “işte, aynen öyle”: Eben!",
+  "_src": "c2b53df3",
+  "_src_reader": "12defa82"
+ },
+ "adverb-139": {
+  "translation_tr": "de / da, dahi; aynı şekilde",
+  "example_tr": "İyi hafta sonları! – Teşekkürler, size de!",
+  "usage_note_tr": "Danke, ebenfalls! — iyi bir dileğe verilen kibar cevap. Eş anlamlısı: gleichfalls.",
+  "_src": "803f4167",
+  "_src_reader": "8e8033e8"
+ },
+ "adverb-140": {
+  "translation_tr": "aynı derecede, o kadar; tıpkı, aynen öyle",
+  "example_tr": "Erkek kardeşim benim kadar uzun.",
+  "usage_note_tr": "ebenso … wie — “… kadar …”. Eş anlamlısı: genauso.",
+  "_src": "3962db6a",
+  "_src_reader": "8c939bd9"
+ },
+ "adverb-141": {
+  "translation_tr": "aslında; gerçekte; esasen",
+  "example_tr": "Aslında bugün evde kalmak istiyordum.",
+  "usage_note_tr": "Soruda — merak bildiren parçacık (“peki, acaba”): Wie alt bist du eigentlich?",
+  "_src": "c3dd1bc3",
+  "_src_reader": "16f4022f"
+ },
+ "adverb-142": {
+  "translation_tr": "bir yandan",
+  "example_tr": "Bir yandan seyahat etmek istiyorum, öte yandan hiç param yok.",
+  "notes_tr": [
+   "Çift kullanım: einerseits … andererseits."
+  ],
+  "_src": "3ff7598b",
+  "_src_reader": "42c70f52"
+ },
+ "adverb-143": {
+  "translation_tr": "yaklaşık, aşağı yukarı; yoksa … mı?",
+  "example_tr": "Yolculuk yaklaşık bir saat sürüyor.",
+  "usage_note_tr": "Soruda şaşkınlık ya da endişe bildirir: Bist du etwa krank? — Yoksa hasta mısın? Karıştırılmamalı: etwas — bir şey.",
+  "_src": "d221bb41",
+  "_src_reader": "7caf3a07"
+ },
+ "adverb-146": {
+  "translation_tr": "hiç (gar nicht — hiç değil)",
+  "example_tr": "Bunu hiç bilmiyordum.",
+  "usage_note_tr": "Olumsuzluğu güçlendirir: gar nicht, gar kein, gar nichts. Sıfat olarak gar “pişmiş” anlamına gelir: Die Kartoffeln sind gar.",
+  "_src": "d595e26f",
+  "_src_reader": "e0c64d65"
+ },
+ "adverb-147": {
+  "translation_tr": "tıpkı, aynı şekilde",
+  "example_tr": "Ben de bunu tıpkı senin gibi görüyorum.",
+  "usage_note_tr": "genauso … wie — tam … kadar …: genauso alt wie ich.",
+  "_src": "2f2d4dad",
+  "_src_reader": "d9f010d8"
+ },
+ "adverb-148": {
+  "translation_tr": "de / da; karşılıklı, sana da / size de",
+  "example_tr": "Afiyet olsun! – Teşekkürler, size de!",
+  "usage_note_tr": "Neredeyse her zaman iyi bir dileğe cevap olarak: Danke, gleichfalls! Eş anlamlısı: ebenfalls.",
+  "_src": "9867c2bd",
+  "_src_reader": "7b11d3b4"
+ },
+ "adverb-150": {
+  "translation_tr": "yarım gün; yarı zamanlı",
+  "example_tr": "Annem yarım gün çalışıyor.",
+  "usage_note_tr": "Karşıt anlamlısı: ganztags. İsim: die Halbtagsstelle — yarı zamanlı iş.",
+  "_src": "94342b65",
+  "_src_reader": "7fc2eb25"
+ },
+ "adverb-151": {
+  "translation_tr": "işte, ne yapalım (durum böyle)",
+  "example_tr": "Bilet kalmamış. – Ne yapalım, durum bu.",
+  "usage_note_tr": "Konuşma dilinde parçacık, eben gibi: hiçbir şeyin değiştirilemeyeceğini bildirir. Halt! — Dur! (halten fiilinden).",
+  "_src": "9cd51181",
+  "_src_reader": "354f2477"
+ },
+ "adverb-152": {
+  "translation_tr": "eve",
+  "example_tr": "İşten sonra doğruca eve giderim.",
+  "usage_note_tr": "nach Hause ifadesinin eş anlamlısı (özellikle Güney Almanya'da). Genellikle fiilin parçasıdır: heimgehen, heimfahren. İsim: das Heim — ev, yurt.",
+  "_src": "961a1ec9",
+  "_src_reader": "9517c97f"
+ },
+ "adverb-153": {
+  "translation_tr": "buraya",
+  "example_tr": "Buraya nasıl geldin?",
+  "usage_note_tr": "Nereye? — hierher; nerede? — hier. Konuşana doğru hareket.",
+  "_src": "9a48f955",
+  "_src_reader": "8d6d36de"
+ },
+ "adverb-154": {
+  "translation_tr": "sonra, sonradan; peşinden, arkadan",
+  "example_tr": "Sonradan insan her şeyi hep daha iyi bilir.",
+  "usage_note_tr": "Zaman için nachher kelimesinin eş anlamlısı. Yer için — “peşinden”: Er läuft dem Bus hinterher.",
+  "_src": "11eb73a4",
+  "_src_reader": "eeed3d5b"
+ },
+ "adverb-155": {
+  "translation_tr": "en fazla; … -den / -dan fazla değil",
+  "example_tr": "En fazla bir saat kalırım.",
+  "usage_note_tr": "Karşıt anlamlısı: mindestens.",
+  "_src": "af1edc76",
+  "_src_reader": "85635179"
+ },
+ "adverb-156": {
+  "translation_tr": "içeride, içte",
+  "example_tr": "Kapı yalnızca içeriden açılabiliyor.",
+  "usage_note_tr": "Karşıt anlamlısı: außen. von innen — içeriden, nach innen — içeriye.",
+  "_src": "2120320a",
+  "_src_reader": "4460f9d6"
+ },
+ "adverb-157": {
+  "translation_tr": "toplam, toplamda; genel olarak",
+  "example_tr": "Hepsi toplam 25 avro ediyor.",
+  "_src": "8b35ac08",
+  "_src_reader": "cd2abac6"
+ },
+ "adverb-158": {
+  "translation_tr": "bir gün, günün birinde; bir ara",
+  "example_tr": "Bir gün Japonya'ya gitmek istiyorum.",
+  "usage_note_tr": "irgend- = “herhangi bir”: irgendwo (bir yerde), irgendwie (bir şekilde), irgendwer (biri).",
+  "_src": "45724b0e",
+  "_src_reader": "6a755356"
+ },
+ "adverb-159": {
+  "translation_tr": "her an, istenildiği zaman",
+  "example_tr": "Beni istediğiniz zaman arayabilirsiniz.",
+  "_src": "379434d7",
+  "_src_reader": "c8ca9247"
+ },
+ "adverb-160": {
+  "translation_tr": "hiç, herhangi bir zaman",
+  "example_tr": "Hiç Paris'te bulundun mu?",
+  "usage_note_tr": "Daha çok sorularda. Konuşmada genellikle schon mal: Warst du schon mal in Paris?",
+  "_src": "f89c5a83",
+  "_src_reader": "cd5a688d"
+ },
+ "adverb-161": {
+  "translation_tr": "her seferinde; sırasıyla; her biri (-er / -ar)",
+  "example_tr": "İki odanın her biri gecelik 80 avro.",
+  "usage_note_tr": "Her birine dağıtır (“-er / -ar”): Die Kinder bekommen jeweils zwei Euro. — Çocuklar ikişer avro alıyor.",
+  "_src": "e82d1e81",
+  "_src_reader": "cf32e8e7"
+ },
+ "adverb-162": {
+  "translation_tr": "geçenlerde; birkaç gün önce",
+  "example_tr": "Geçenlerde eski bir arkadaşımla karşılaştım.",
+  "usage_note_tr": "Eş anlamlıları: neulich, vor Kurzem. Sıfat olarak (bei unserem kürzlichen Treffen) nadiren kullanılır.",
+  "_src": "3e1c3501",
+  "_src_reader": "d740dc21"
+ },
+ "adverb-163": {
+  "translation_tr": "ileri!, haydi!; (bir şey) olmuş",
+  "example_tr": "Haydi, acele edin!",
+  "usage_note_tr": "Was ist los? — Ne oldu? Genellikle fiilin parçasıdır: losgehen, losfahren (yola çıkmak). loswerden — bir şeyden kurtulmak. Karıştırılmamalı: lose — gevşek, serbest.",
+  "_src": "a345b5b9",
+  "_src_reader": "aef93b20"
+ },
+ "adverb-164": {
+  "translation_tr": "çoktan; uzun zamandır",
+  "example_tr": "Bunu zaten uzun zamandır biliyorum!",
+  "usage_note_tr": "längst nicht — hiç de … değil: Das ist längst nicht alles.",
+  "_src": "6fad3d0b",
+  "_src_reader": "9db836da"
+ },
+ "adverb-165": {
+  "translation_tr": "bir (ricayı, emri yumuşatır, -sene / -sana); bir zaman, bir kez (= einmal); çarpı (2 mal 3)",
+  "example_tr": "Bana bir yardım eder misin?",
+  "usage_note_tr": "Parçacık olarak ricayı ya da emri yumuşatır: Komm mal her! — Bir gelsene buraya! Kannst du mir mal helfen? — Bana bir yardım eder misin? nun mal — ne yapalım, öyle: Das ist nun mal so. einmal kelimesinin kısa biçimi: Warst du schon mal hier? — Hiç burada bulundun mu? Matematikte: drei mal vier — üç çarpı dört. İsim: das Mal (kez, sefer).",
+  "sense_marks": [
+   {
+    "meaning_tr": "çarpı (2 mal 3)"
+   }
+  ],
+  "_src": "cc96778c",
+  "_src_reader": "f9c56412"
+ },
+ "adverb-166": {
+  "translation_tr": "birbiriyle; birlikte",
+  "example_tr": "Birbirimizle çok az konuşuyoruz.",
+  "usage_note_tr": "Aynı şekilde oluşturulur: voneinander, nebeneinander, füreinander (edat + einander = “birbirini, birbirine …”).",
+  "_src": "6f3e1918",
+  "_src_reader": "3488d0b5"
+ },
+ "adverb-167": {
+  "translation_tr": "(bir şeyin) tam ortasında; ortada",
+  "example_tr": "Şehrin tam ortasında oturuyoruz.",
+  "usage_note_tr": "Genellikle edatla: mitten in, mitten auf, mitten in der Nacht — gecenin ortasında.",
+  "_src": "22ca803d",
+  "_src_reader": "7e33e6ca"
+ },
+ "adverb-168": {
+  "translation_tr": "olabildiğince, mümkün olduğunca",
+  "example_tr": "Lütfen olabildiğince çabuk cevap verin.",
+  "usage_note_tr": "möglichst + sıfat = so … wie möglich: möglichst bald = so bald wie möglich.",
+  "_src": "22bed68d",
+  "_src_reader": "cd7eac1e"
+ },
+ "adverb-169": {
+  "translation_tr": "bir yandan, paralel olarak; bu arada, laf arasında",
+  "example_tr": "Okuyor, bir yandan da bir kafede çalışıyor.",
+  "usage_note_tr": "nebenbei gesagt — bu arada, laf arasında.",
+  "_src": "3ec6a63b",
+  "_src_reader": "d727c556"
+ },
+ "adverb-170": {
+  "translation_tr": "geçenlerde, geçen gün",
+  "example_tr": "Geçen gün kız kardeşini süpermarkette gördüm.",
+  "usage_note_tr": "Yalnızca geçmiş için. Eş anlamlısı: kürzlich.",
+  "_src": "d97341fe",
+  "_src_reader": "d740dc21"
+ },
+ "adverb-171": {
+  "translation_tr": "hiçbir yerde",
+  "example_tr": "Gözlüğümü hiçbir yerde bulamıyorum.",
+  "usage_note_tr": "Tek olumsuzluk: nirgendwo (nicht olmadan). Eş anlamlısı: nirgends.",
+  "_src": "26d55c40",
+  "_src_reader": "3227b751"
+ },
+ "adverb-172": {
+  "translation_tr": "bir kez daha; yeniden",
+  "example_tr": "Bir kez daha teşekkür etmek isterim.",
+  "usage_note_tr": "noch einmal / noch mal ifadesinin daha resmî eş anlamlısı.",
+  "_src": "a87e046d",
+  "_src_reader": "48fb8973"
+ },
+ "adverb-173": {
+  "translation_tr": "normalde; kural olarak",
+  "example_tr": "Normalde saat yedide kalkarım.",
+  "_src": "ac4193c6",
+  "_src_reader": "6eb736b7"
+ },
+ "adverb-174": {
+  "translation_tr": "şimdi, artık; peki, eh",
+  "example_tr": "Artık çok geç.",
+  "usage_note_tr": "jetzt kelimesinin yazı dilindeki eş anlamlısı. Cümle başında — “peki, eh”: Nun, was meinst du? Nun ja — eh, peki öyle olsun.",
+  "_src": "a14d769d",
+  "_src_reader": "7b019faa"
+ },
+ "adverb-175": {
+  "translation_tr": "işin aslı, çünkü; ne de olsa; yani, şöyle ki",
+  "example_tr": "Gelemiyorum, işin aslı hastayım.",
+  "notes_tr": [
+   "Bir önceki cümleyi açıklar.",
+   "Ayrıca “yani, şöyle ki”: zwei Sprachen, nämlich Deutsch und Englisch."
+  ],
+  "_src": "7bad80b9",
+  "_src_reader": "6136632f"
+ },
+ "adverb-176": {
+  "translation_tr": "daha sık; sık sık, birçok kez",
+  "example_tr": "Birbirimizi daha sık görmeliyiz.",
+  "usage_note_tr": "oft kelimesinin karşılaştırma derecesi. Karşılaştırma olmadan “sık sık, zaman zaman” anlamına gelir: Ich gehe öfter ins Kino. Bu anlamdaki eş anlamlısı — öfters (konuş.).",
+  "_src": "6cb9a352",
+  "_src_reader": "b024389b"
+ },
+ "adverb-177": {
+  "translation_tr": "boydan boya (quer durch); enine; çapraz",
+  "example_tr": "Şehri boydan boya geçmem gerekiyor.",
+  "usage_note_tr": "Genellikle edatla: quer durch, quer über. Sıfat olarak neredeyse hiç kullanılmaz; “enine çizgili” — quergestreift.",
+  "_src": "6eae84d0",
+  "_src_reader": "4452246a"
+ },
+ "adverb-178": {
+  "translation_tr": "yukarı (konuş.)",
+  "example_tr": "İşte merdiven, hadi, çabuk yukarı!",
+  "usage_note_tr": "herauf ve hinauf kelimelerinin konuşma dilindeki biçimi. Genellikle fiilin parçasıdır: raufgehen, raufkommen. Karşıt anlamlısı: runter.",
+  "_src": "19e944ec",
+  "_src_reader": "652f19e6"
+ },
+ "adverb-179": {
+  "translation_tr": "dışarı; defol, çık dışarı (konuş.)",
+  "example_tr": "Bu güzel havada dışarı çıkıyoruz.",
+  "usage_note_tr": "heraus ve hinaus kelimelerinin konuşma dilindeki biçimi. Genellikle fiilin parçasıdır: rausgehen, rauskommen. Raus! — Defol!",
+  "_src": "82e2d99e",
+  "_src_reader": "75f856e1"
+ },
+ "adverb-180": {
+  "translation_tr": "oldukça, epey; tam olarak, doğru dürüst (nicht ile)",
+  "example_tr": "Oda oldukça büyük.",
+  "additional_examples": [
+   {
+    "example_tr": "Ne söyleyeceğini tam bilemedi."
+   }
+  ],
+  "usage_note_tr": "nicht recht + fiil — pek değil, tam olarak değil: nicht recht wissen — tam bilememek, jemandem nicht recht trauen — birine pek güvenmemek. Karıştırılmamalı: recht haben — haklı olmak; das Recht — hak.",
+  "_src": "0705f6ff",
+  "_src_reader": "1a80038b"
+ },
+ "adverb-182": {
+  "translation_tr": "geri, geri geri; tersten",
+  "example_tr": "Geri geri park edebiliyor musun?",
+  "usage_note_tr": "Karşıt anlamlısı: vorwärts.",
+  "_src": "28e39c85",
+  "_src_reader": "b4d88fed"
+ },
+ "adverb-183": {
+  "translation_tr": "kendisi (konuş.)",
+  "example_tr": "Bunu kendisi yapmak istiyor.",
+  "usage_note_tr": "selbst kelimesinin konuşma dilindeki biçimi. Değişmez: ich selber, wir selber. “Bile” anlamında yalnızca selbst kullanılır. Nadiren (esk.) selber = selbe “aynı”: an selber Stätte — aynı yerde.",
+  "_src": "baa65499",
+  "_src_reader": "6a62ab5b"
+ },
+ "adverb-184": {
+  "translation_tr": "nasılsa; zaten",
+  "example_tr": "Beni almana gerek yok, nasılsa yürüyerek gideceğim.",
+  "_src": "c6c9e440",
+  "_src_reader": "bf17696c"
+ },
+ "adverb-185": {
+  "translation_tr": "en geç; … -den / -dan geç değil",
+  "example_tr": "En geç sekizde evde olurum.",
+  "usage_note_tr": "Karşıt anlamlısı: frühestens.",
+  "_src": "e27c2bd1",
+  "_src_reader": "3cd3e8d0"
+ },
+ "adverb-186": {
+  "translation_tr": "yine de; buna rağmen",
+  "example_tr": "Yağmur yağıyor, yine de yürüyüşe çıkıyoruz.",
+  "notes_tr": [
+   "obwohl — aynı anlam ama fiil sona gider: Obwohl es regnet, gehen wir spazieren."
+  ],
+  "_src": "30892cfa",
+  "_src_reader": "4c48bdac"
+ },
+ "adverb-188": {
+  "translation_tr": "bedava, ücretsiz; boşuna, boş yere",
+  "example_tr": "Çocuklar için giriş ücretsiz.",
+  "usage_note_tr": "İkinci anlamı — “boşuna”: Ich habe umsonst gewartet, er ist nicht gekommen.",
+  "_src": "78b2e24b",
+  "_src_reader": "ec24bec2"
+ },
+ "adverb-190": {
+  "translation_tr": "yolda, yol üstünde; evde değil, dışarıda",
+  "example_tr": "Seni sonra ararım, şu an yoldayım.",
+  "usage_note_tr": "Genellikle sein ile: Wir waren den ganzen Tag unterwegs. — Bütün gün dışarıdaydık.",
+  "_src": "830cef3a",
+  "_src_reader": "85d16915"
+ },
+ "adverb-191": {
+  "translation_tr": "birbirinden; birbiri hakkında",
+  "example_tr": "Uzun zamandır birbirimizden haber alamadık.",
+  "usage_note_tr": "von + einander. Aynı şekilde: miteinander, nebeneinander.",
+  "_src": "01e9f7a8",
+  "_src_reader": "3c5157f5"
+ },
+ "adverb-192": {
+  "translation_tr": "öne, önde",
+  "example_tr": "Siz önden gidin, ben hemen arkanızdan gelirim.",
+  "usage_note_tr": "im Voraus — önceden, peşinen: Vielen Dank im Voraus! Genellikle fiilin parçasıdır: vorausgehen, voraussetzen.",
+  "_src": "a0d99857",
+  "_src_reader": "01e5f36d"
+ },
+ "adverb-194": {
+  "translation_tr": "az önce, biraz önce (bugün)",
+  "example_tr": "Az önce annen aradı.",
+  "usage_note_tr": "Yakın geçmiş için, genellikle aynı gün. Karıştırılmamalı: vorher (bundan önce, önceden).",
+  "_src": "10365c22",
+  "_src_reader": "99e3dfc1"
+ },
+ "adverb-195": {
+  "translation_tr": "neden; hangi sebeple",
+  "example_tr": "Bana neden hiçbir şey söylemedin?",
+  "usage_note_tr": "warum kelimesinin eş anlamlısı (biraz daha resmî). Dolaylı soruda fiil sona gider.",
+  "_src": "ac9a7ee6",
+  "_src_reader": "2f7b8e0f"
+ },
+ "adverb-196": {
+  "translation_tr": "neden; ne diye",
+  "example_tr": "Neden bu kadar erken evdesin?",
+  "usage_note_tr": "warum kelimesinin konuşma dilindeki eş anlamlısı, genellikle şaşkınlıkla. Dolaylı soruda fiil sona gider.",
+  "_src": "a11ef060",
+  "_src_reader": "e90c270a"
+ },
+ "adverb-197": {
+  "translation_tr": "herhalde, galiba; iyi, rahat (hissetme hâli)",
+  "example_tr": "Herhalde hastadır.",
+  "usage_note_tr": "Tahmin bildirir. “İyi” anlamında: Ich fühle mich hier wohl. — Burada kendimi iyi hissediyorum. Zum Wohl! — Şerefe!",
+  "_src": "2ccb7d72",
+  "_src_reader": "88ff0b68"
+ },
+ "adverb-198": {
+  "translation_tr": "ne hakkında",
+  "example_tr": "Film ne hakkında?",
+  "usage_note_tr": "worum = wo + um: um alan fiillerle, şeyler hakkında soru: Es geht um … → Worum geht es? İnsanlar için: Um wen geht es?",
+  "_src": "4575c31c",
+  "_src_reader": "e618405e"
+ },
+ "adverb-199": {
+  "translation_tr": "ne hakkında; neye, ne üzerine",
+  "example_tr": "Ne hakkında konuştunuz?",
+  "usage_note_tr": "worüber = wo + über: über alan fiillerle, şeyler hakkında soru: sich freuen über → Worüber freust du dich? İnsanlar için: Über wen …? Cevap: darüber.",
+  "_src": "9539fddd",
+  "_src_reader": "e618405e"
+ },
+ "adverb-201": {
+  "translation_tr": "en azından; hiç değilse",
+  "example_tr": "Geç kalacaksan hiç değilse arayabilirdin.",
+  "usage_note_tr": "Eş anlamlısı: wenigstens.",
+  "_src": "ff26ea44",
+  "_src_reader": "60cc90b9"
+ },
+ "adverb-202": {
+  "translation_tr": "önce; ilk önce; şimdilik",
+  "example_tr": "Önce formu doldurmamız gerekiyor.",
+  "usage_note_tr": "zuerst kelimesinin biraz daha resmî eş anlamlısı.",
+  "_src": "a6986d47",
+  "_src_reader": "707bf765"
+ },
+ "adverb-203": {
+  "translation_tr": "gerçi, her ne kadar (… ama)",
+  "example_tr": "Araba gerçi eski ama hâlâ iyi gidiyor.",
+  "usage_note_tr": "Neredeyse her zaman ikili kullanılır: zwar …, aber … Ayrıca und zwar — yani, şöyle ki: Ich komme, und zwar sofort.",
+  "_src": "1310b0f1",
+  "_src_reader": "5cd6533e"
+ },
+ "adverb-204": {
+  "translation_tr": "genel olarak, aslında; hiç",
+  "example_tr": "Hiç vaktim yok.",
+  "usage_note_tr": "Olumsuzluğu güçlendirir: überhaupt nicht, überhaupt kein. Soruda: Hast du überhaupt Hunger? — Gerçekten aç mısın ki?",
+  "_src": "e2d6efbf",
+  "_src_reader": "0eab48ef"
+ },
+ "adverb-205": {
+  "translation_tr": "bu arada; laf arasında",
+  "example_tr": "Bu arada, yarın benim doğum günüm.",
+  "notes_tr": [
+   "Tek başına, virgülle de kullanılabilir: Übrigens, …"
+  ],
+  "_src": "cb786bed",
+  "_src_reader": "fac53f42"
+ },
+ "adverb-206": {
+  "translation_tr": "akşam, akşamleyin; akşamları",
+  "example_tr": "Akşamları televizyon izlemeyi severim.",
+  "usage_note_tr": "Gün bölümlerindeki -s eki “genellikle, düzenli olarak” anlamı verir: morgens, mittags, nachmittags, abends, nachts. Küçük harfle yazılır. Tek bir sefer için: am Abend.",
+  "_src": "4b6631c0",
+  "_src_reader": "f0eaa29f"
+ },
+ "adverb-207": {
+  "translation_tr": "gece, geceleyin; geceleri",
+  "example_tr": "Burası geceleri çok sessiz.",
+  "usage_note_tr": "Gün bölümlerindeki -s eki “düzenli olarak” anlamı verir: morgens, abends, nachts. Küçük harfle yazılır. Tek bir sefer için: in der Nacht.",
+  "_src": "3b6cd894",
+  "_src_reader": "e102847c"
+ },
+ "adverb-208": {
+  "translation_tr": "gündüz; gün boyunca",
+  "example_tr": "Gündüz çalışıyorum, akşamları Almanca öğreniyorum.",
+  "_src": "df4d6922",
+  "_src_reader": "a937cf31"
+ },
+ "adverb-209": {
+  "translation_tr": "günümüzde; şimdilerde",
+  "example_tr": "Günümüzde neredeyse herkesin akıllı telefonu var.",
+  "_src": "3f8e46d6",
+  "_src_reader": "6be60172"
+ },
+ "adverb-210": {
+  "translation_tr": "mutlaka, kesin; elbette",
+  "example_tr": "Bunu mutlaka daha önce duymuşsundur.",
+  "usage_note_tr": "sicher kelimesinin eş anlamlısı (zarf olarak): Er kommt sicher.",
+  "_src": "10e4008f",
+  "_src_reader": "6f2449fd"
+ },
+ "adverb-211": {
+  "translation_tr": "hâlâ, eskisi gibi; bundan sonra da; ayrıca",
+  "example_tr": "Size bundan sonra da başarılar dilerim.",
+  "usage_note_tr": "Sıralamada “ayrıca” anlamında da (resmî): Weiterhin ist zu beachten, dass …",
+  "_src": "c7184779",
+  "_src_reader": "bd388018"
+ },
+ "adverb-212": {
+  "translation_tr": "her iki taraftan, her iki tarafta; karşılıklı olarak",
+  "example_tr": "Sözleşme her iki tarafça imzalandı.",
+  "usage_note_tr": "Resmî dilde kullanılır. Ayrıca Genitiv alan edat: beiderseits des Flusses — nehrin iki yakasında. Sıfat: beiderseitig — karşılıklı.",
+  "_src": "ea41d934",
+  "_src_reader": "4be3517f"
+ },
+ "adverb-213": {
+  "translation_tr": "en erken; … -den / -dan önce değil",
+  "example_tr": "Altıdan önce dönmem.",
+  "usage_note_tr": "Karşıt anlamlısı: spätestens.",
+  "_src": "7a611887",
+  "_src_reader": "344c1d06"
+ },
+ "adverb-214": {
+  "translation_tr": "şu hâlde; demek ki, o zaman; yani",
+  "example_tr": "Otobüs gelmiyor. Demek ki yürüyerek gideceğiz.",
+  "notes_tr": [
+   "Yalancı eş: also ≠ İngilizce “also” (o anlam — auch).",
+   "Virgülle — “eh, peki”, kelime sırası değişmez: Also, wo waren wir?"
+  ],
+  "extra_meanings": [
+   {
+    "tr": "böyle, bu şekilde",
+    "example_tr": "Ve böyle oldu."
+   }
+  ],
+  "_src": "73f55a94",
+  "_src_reader": "3bd76478"
+ },
+ "adverb-215": {
+  "translation_tr": "bir şeyden yola çıkarak",
+  "example_tr": "Bu verilerden yola çıkarak deneyi planlıyoruz.",
+  "usage_note_tr": "Zarf olarak kullanımda: ausgehend von + Dativ — bir şeyden yola çıkarak.",
+  "_src": "876e1948",
+  "_src_reader": "9038655d"
+ },
+ "adverb-216": {
+  "translation_tr": "akıcı, rahatça; takılmadan, su gibi",
+  "example_tr": "Almancayı akıcı konuşuyor.",
+  "_src": "f36657cd",
+  "_src_reader": "8d44144a"
+ },
+ "adverb-217": {
+  "translation_tr": "tamamen; oldukça",
+  "example_tr": "Oda tamamen boş.",
+  "usage_note_tr": "Bağlama göre: “tamamen” (ganz leer) ya da “oldukça” (ganz gut).",
+  "_src": "72726c52",
+  "_src_reader": "79aff7aa"
+ },
+ "adverb-218": {
+  "translation_tr": "önemli ölçüde; büyük ölçüde, esaslı biçimde",
+  "example_tr": "Yeni güzergâh önemli ölçüde daha kısa.",
+  "_src": "b403b6f7",
+  "_src_reader": "33d52a22"
+ },
+ "adverb-219": {
+  "translation_tr": "-den biraz az / -dan biraz az; güç bela, zar zor; az farkla",
+  "example_tr": "Yolculuk bir saatten biraz az sürüyor.",
+  "_src": "6f758a33",
+  "_src_reader": "435d7158"
+ },
+ "adverb-220": {
+  "translation_tr": "pratikte, neredeyse; fiilen, gerçekte",
+  "example_tr": "Ev neredeyse boş.",
+  "_src": "d052b1df",
+  "_src_reader": "1ce83012"
+ },
+ "adverb-221": {
+  "translation_tr": "genellikle",
+  "example_tr": "Genellikle saat yedide kalkarım.",
+  "_src": "ff76901a",
+  "_src_reader": "26b0d3a8"
+ },
+ "adverb-222": {
+  "translation_tr": "son derece; fevkalade, olağanüstü",
+  "example_tr": "Fevkalade nazik biridir.",
+  "_src": "522ae26a",
+  "_src_reader": "ab3a8e58"
+ },
+ "adverb-223": {
+  "translation_tr": "bununla, onunla; böylelikle",
+  "example_tr": "Bununla ne yapıyorsun?",
+  "usage_note_tr": "mit + şey yerine geçer: mit dem Messer → damit; insanlar için mit ihm/ihr kullanılır, damit değil. “Böylelikle” anlamında: Damit ist alles gesagt. — Bununla her şey söylenmiş oldu. damit bağlacı — “-sin diye / -sın diye”.",
+  "see_also_tr": [
+   {
+    "id": "conjunction-013",
+    "at": 3
+   }
+  ],
+  "_src": "184f29bb",
+  "_src_reader": "1c2fb28b"
+ },
+ "adverb-224": {
+  "translation_tr": "ne kadar da, amma da (vurgu, şaşkınlık)",
+  "example_tr": "Bu ne kadar da güzel!",
+  "usage_note_tr": "Ünlem ve cevaplarda vurgusuz parçacık: Du spielst aber gut! — Ne kadar da iyi oynuyorsun! aber gern — memnuniyetle. aber bağlacı — “ama”.",
+  "see_also_tr": [
+   {
+    "id": "conjunction-003",
+    "at": 3
+   }
+  ],
+  "_src": "9d06521a",
+  "_src_reader": "ece513a6"
+ },
+ "adverb-225": {
+  "translation_tr": "lütfen; rica ederim (“teşekkürler” sözüne cevap olarak); efendim?, pardon? (Wie bitte?)",
+  "example_tr": "Bana yardım edebilir misin lütfen?",
+  "usage_note_tr": "Nezaket parçacığı: ricayı yumuşatır; başta, ortada ya da sonda gelebilir: Bitte setzen Sie sich! / Setzen Sie sich bitte! Danke! sözüne cevap olarak — Bitte! ya da Bitte schön! (rica ederim). Bir şey uzatırken — Bitte schön / Bitte sehr (buyurun). Karıştırılmamalı: fiil ve isimle: ich bitte (dich um …) — rica ediyorum; die Bitte — rica.",
+  "_src": "5093261e",
+  "_src_reader": "fe86c332"
+ },
+ "adverb-226": {
+  "translation_tr": "tabii ki; doğal olarak",
+  "example_tr": "Sen de geliyor musun? – Tabii ki!",
+  "usage_note_tr": "Ayrıca “doğal, rahat bir şekilde”: Sie lacht ganz natürlich. — Çok doğal gülüyor.",
+  "_src": "49b328b3",
+  "_src_reader": "d16d50a2"
+ },
+ "adverb-227": {
+  "translation_tr": "muhakkak, kesin; kesinlikle",
+  "example_tr": "Birazdan kesin gelir.",
+  "_src": "4f6c4b73",
+  "_src_reader": "aa5f0a3c"
+ },
+ "adverb-228": {
+  "translation_tr": "kelimenin tam anlamıyla, adeta; resmî olarak",
+  "example_tr": "Sevinçten adeta havaya sıçradı.",
+  "_src": "682f0c24",
+  "_src_reader": "7f94172e"
+ },
+ "adverb-229": {
+  "translation_tr": "adında, isimli",
+  "example_tr": "Grubumuzda Jonas adında bir öğrenci var.",
+  "usage_note_tr": "İsimden sonra, özel addan önce gelir. Resmî dilde namens + Genitiv — “adına”: namens des Vorstands.",
+  "_src": "8705fbb8",
+  "_src_reader": "a784f0bf"
+ },
+ "adverb-230": {
+  "translation_tr": "bu bakımdan, bu açıdan",
+  "example_tr": "Tren zamanında geldi, bu bakımdan şanslıydık.",
+  "usage_note_tr": "insofern …, als … — şu bakımdan ki: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Bazen ≈ deshalb (bu yüzden). insofern bağlacı — “eğer; madem ki”.",
+  "see_also_tr": [
+   {
+    "id": "conjunction-040",
+    "at": 3
+   }
+  ],
+  "_src": "47c5450d",
+  "_src_reader": "7a9f2ca4"
+ },
+ "adverb-231": {
+  "translation_tr": "bu bakımdan, bu ölçüde",
+  "example_tr": "Onarım pahalıydı, bu konuda haklısın.",
+  "usage_note_tr": "insofern ile aynı anlamda. insoweit …, als … — -diği ölçüde / -dığı ölçüde. insoweit (als) bağlacı — “-diği ölçüde / -dığı ölçüde; eğer”: Insoweit es die Zeit erlaubt, … — zaman elverdiği ölçüde.",
+  "_src": "e65978a0",
+  "_src_reader": "310398d1"
+ },
+ "adverb-232": {
+  "translation_tr": "bu arada, o sırada",
+  "example_tr": "Ben yemek yapıyorum, sen de bu arada sofrayı kur.",
+  "usage_note_tr": "derweil bağlacı — “-diği sırada / -dığı sırada” (fiil sona gider): Derweil die Kinder spielten, telefonierte ich. derweilen eskimekte olan bir biçimdir.",
+  "_src": "6f68751c",
+  "_src_reader": "274592c7"
+ },
+ "adverb-233": {
+  "translation_tr": "hiç, şimdiye kadar; her birine, -er / -ar (ikişer, üçer)",
+  "example_tr": "Hiç bu kadar güzel bir şey gördün mü?",
+  "usage_note_tr": "je zwei — ikişer: Wir bekommen je zwei Bonbons. je nach — -e göre / -a göre: je nach Wetter; je nachdem, ob … — … -ip -mediğine / -madığına bağlı olarak; Je nachdem! — Duruma göre! mehr denn je — her zamankinden daha çok; seit je — eskiden beri, ezelden beri. je Person — kişi başına (pro gibi). Çift yapı: je … desto.",
+  "_src": "a09b2e86",
+  "_src_reader": "0b36dd92"
+ },
+ "adverb-234": {
+  "translation_tr": "fazla, aşırı derecede",
+  "example_tr": "Film çok da heyecanlı değildi.",
+  "usage_note_tr": "Sıfat ya da zarftan önce gelir: allzu oft, allzu viel. Olumsuzlukla yumuşatır: nicht allzu … — pek … değil.",
+  "_src": "21d2a83a",
+  "_src_reader": "7575bda6"
+ },
+ "adverb-235": {
+  "translation_tr": "başka bir zaman",
+  "example_tr": "Bugün vaktim yok, bunu başka bir zaman konuşalım.",
+  "usage_note_tr": "Yalnızca ein andermal kalıbında. ein anderes Mal şeklinde de söylenebilir.",
+  "_src": "123836d9",
+  "_src_reader": "84056fd5"
+ },
+ "adverb-236": {
+  "translation_tr": "birbirini, birbiri hakkında; birbirine; birbirinin yanından",
+  "example_tr": "Tatilde sık sık birbirimizi düşündük.",
+  "usage_note_tr": "an + einander: çeviri an ile kullanılan fiile bağlıdır: denken an → aneinander denken, sich gewöhnen an → sich aneinander gewöhnen (birbirine alışmak). Vurgu aneinander üzerindeyse fiille bitişik yazılır: aneinandergrenzen (birbiriyle sınır komşusu olmak).",
+  "_src": "dfc075b1",
+  "_src_reader": "13e144c0"
+ },
+ "adverb-237": {
+  "translation_tr": "birbirini, birbirine; üst üste",
+  "example_tr": "Girişte birbirimizi bekliyoruz.",
+  "usage_note_tr": "auf + einander: çeviri auf ile kullanılan fiile bağlıdır: warten auf → aufeinander warten, sich verlassen auf → sich aufeinander verlassen (birbirine güvenmek). Yer için: Die Kisten stehen aufeinander. — Kutular üst üste duruyor.",
+  "_src": "0add4054",
+  "_src_reader": "fa69f3de"
+ },
+ "adverb-238": {
+  "translation_tr": "istisna olarak",
+  "example_tr": "Bugün istisna olarak daha geç yatabilirsin.",
+  "_src": "41699a36",
+  "_src_reader": "48751475"
+ },
+ "adverb-239": {
+  "translation_tr": "bir kenara",
+  "example_tr": "Telefonu bir kenara koydu ve beni dinledi.",
+  "usage_note_tr": "Çoğu zaman fiille: beiseitelegen (bir kenara koymak), beiseiteschieben (kenara itmek). Spaß beiseite! — Şaka bir yana!",
+  "_src": "e5b9f307",
+  "_src_reader": "e0e1f1ed"
+ },
+ "adverb-240": {
+  "translation_tr": "örneğin",
+  "example_tr": "Birçok meyve, örneğin elma ve armut, Almanya'da da yetişir.",
+  "usage_note_tr": "Eş anlamlısı: zum Beispiel (z. B.). Kısaltma: bspw.",
+  "_src": "221f3818",
+  "_src_reader": "dd8c7aec"
+ },
+ "adverb-241": {
+  "translation_tr": "bilindiği gibi",
+  "example_tr": "Bilindiği gibi, işleyen demir ışıldar.",
+  "_src": "9df61534",
+  "_src_reader": "c474f11d"
+ },
+ "adverb-242": {
+  "translation_tr": "çok iyi, mükemmel; en içten (teşekkür ve selamlarda)",
+  "example_tr": "Çocuklar tatil kampında çok iyi eğlendi.",
+  "usage_note_tr": "sein fiilinden sonra da: Alles ist bestens. — Her şey mükemmel. Mektuplarda: Wir danken Ihnen bestens. — Size en içten teşekkürlerimizi sunarız.",
+  "_src": "cb2b1052",
+  "_src_reader": "fdf4d424"
+ },
+ "adverb-243": {
+  "translation_tr": "şimdiye kadar, henüz",
+  "example_tr": "Şimdiye kadar ilana kimse başvurmadı.",
+  "usage_note_tr": "Eş anlamlısı: bisher.",
+  "_src": "828d3887",
+  "_src_reader": "500d03cc"
+ },
+ "adverb-244": {
+  "translation_tr": "bunun üzerine, bunun sonucunda; bu amaçla, bu açıdan",
+  "example_tr": "Müşteri şikâyet etti, bunun üzerine parası iade edildi.",
+  "notes_tr": [
+   "Vurgu hin üzerindedir: daraufhín.",
+   "Karıştırılmamalı: darauf + hin- ile kurulan fiil: Alles deutet darauf hin. — Her şey bunu gösteriyor."
+  ],
+  "_src": "3c41aa92",
+  "_src_reader": "8f8c3cc1"
+ },
+ "adverb-245": {
+  "translation_tr": "bunun hakkında, bu konuda; bunun üstünde, üstte; daha fazla, fazlası",
+  "example_tr": "Dün bunun hakkında bir makale okudum.",
+  "usage_note_tr": "da + über: über + şey yerine geçer: über das Problem sprechen → darüber sprechen. İnsanlar için: über ihn, über sie. Yer için: An der Wand steht ein Regal, darüber hängt ein Bild. darüber hinaus — ayrıca, bunun yanı sıra. Konuşma dilinde: drüber.",
+  "_src": "0bea2ab0",
+  "_src_reader": "91f98e8f"
+ },
+ "adverb-246": {
+  "translation_tr": "bundan önce, ondan önce; onun önünde, önde (yer için); bundan (korkmak), buna karşı (uyarmak)",
+  "example_tr": "Saat sekizde akşam yemeği var, ondan önce biraz yürüyüş yapacağız.",
+  "usage_note_tr": "da + vor: yer ve zaman için, ayrıca vor ile kullanılan fiillerde vor + şey yerine: Angst haben vor → Ich habe Angst davor. warnen vor → Ich habe dich davor gewarnt. İnsanlar için: vor ihm, vor ihr.",
+  "_src": "fdcf92b5",
+  "_src_reader": "e11f8e9b"
+ },
+ "adverb-247": {
+  "translation_tr": "senin yüzünden; senin için, senin hatırın için",
+  "example_tr": "Senin yüzünden yağmurda bir saat beklemek zorunda kaldım!",
+  "usage_note_tr": "Aynı şekilde: meinetwegen, seinetwegen, ihretwegen, unsertwegen, euretwegen. Konuşma dilinde ayrıca wegen dir.",
+  "_src": "b8192a4a",
+  "_src_reader": "4eab46c4"
+ },
+ "adverb-248": {
+  "translation_tr": "yakında, en kısa zamanda",
+  "example_tr": "Komşularımız yakında Hamburg'a taşınıyor.",
+  "_src": "5069d026",
+  "_src_reader": "056549bf"
+ },
+ "adverb-249": {
+  "translation_tr": "şu sıralar, şu anda",
+  "example_tr": "Meslektaşımız şu anda izinde.",
+  "usage_note_tr": "Eş anlamlısı: zurzeit. Sıfat: derzeitig (şimdiki).",
+  "_src": "855c07fd",
+  "_src_reader": "a67f36bb"
+ },
+ "adverb-250": {
+  "translation_tr": "bunun altında, onun altında, altta",
+  "example_tr": "Battaniyeyi bir kaldır, belki anahtar altındadır.",
+  "usage_note_tr": "darunter kelimesinin konuşma dilindeki biçimi. Es geht drunter und drüber. — Her şey alt üst, tam bir karmaşa.",
+  "_src": "1418443a",
+  "_src_reader": "2624d846"
+ },
+ "adverb-251": {
+  "translation_tr": "pekâlâ, tamamen; mutlaka",
+  "example_tr": "Bu pekâlâ olabilir.",
+  "usage_note_tr": "durchaus nicht — hiç de … değil: Das ist durchaus nicht einfach. — Bu hiç de kolay değil.",
+  "_src": "8ae7e477",
+  "_src_reader": "c9da753c"
+ },
+ "adverb-252": {
+  "translation_tr": "aşağı yukarı, bir ölçüde, nispeten",
+  "example_tr": "Üç ay sonra Almanca aşağı yukarı derdini anlatabiliyordu.",
+  "usage_note_tr": "“Wie geht's?” sorusuna cevap: Einigermaßen. — Şöyle böyle, idare eder. Konuşma dilinde ayrıca “oldukça, epey”: einigermaßen erstaunt — epey şaşırmış.",
+  "_src": "ce9c0d66",
+  "_src_reader": "89de67c1"
+ },
+ "adverb-253": {
+  "translation_tr": "bir zamanlar, eskiden; bir gün (gelecekte)",
+  "example_tr": "Bu binada bir zamanlar bir fabrika vardı.",
+  "usage_note_tr": "Yazı dilinde kullanılır. Genellikle geçmiş için; gelecek için daha nadir, fiilin zamanından anlaşılır. Sıfat: einstig (eski, önceki).",
+  "_src": "9bf7d0f4",
+  "_src_reader": "77a0b55b"
+ },
+ "adverb-254": {
+  "translation_tr": "şu şekilde, şöyle",
+  "example_tr": "Lütfen şu şekilde hareket edin: önce formu doldurun.",
+  "_src": "1fef7330",
+  "_src_reader": "4602293e"
+ },
+ "adverb-255": {
+  "translation_tr": "dolayısıyla, bu yüzden",
+  "example_tr": "Tren gecikti, bu yüzden toplantıya geç kaldık.",
+  "notes_tr": [
+   "Eş anlamlısı: also, deshalb; daha resmî duyulur."
+  ],
+  "_src": "d85b7570",
+  "_src_reader": "b77a4b87"
+ },
+ "adverb-256": {
+  "translation_tr": "birbiri için, birbiri adına",
+  "example_tr": "Birbirleri için küçük hediyeler aldılar.",
+  "usage_note_tr": "für + einander. füreinander da sein — birbirine destek olmak, birbirinin yanında olmak.",
+  "_src": "dc699c37",
+  "_src_reader": "03b86fb7"
+ },
+ "adverb-257": {
+  "translation_tr": "bir bakıma, tabiri caizse",
+  "example_tr": "Kütüphane bir bakıma benim ikinci evim.",
+  "_src": "ca523cbe",
+  "_src_reader": "6fc41c33"
+ },
+ "adverb-258": {
+  "translation_tr": "eşit ölçüde, aynı derecede",
+  "example_tr": "Kitap çocuklar ve yetişkinler için aynı derecede ilginç.",
+  "_src": "3d189278",
+  "_src_reader": "7189f47a"
+ },
+ "adverb-259": {
+  "translation_tr": "neyse ki",
+  "example_tr": "Neyse ki yanımda şemsiye vardı.",
+  "usage_note_tr": "Eş anlamlısı: zum Glück.",
+  "_src": "ee485d26",
+  "_src_reader": "673e4115"
+ },
+ "adverb-260": {
+  "translation_tr": "aşağı (yukarıdan buraya)",
+  "example_tr": "Çatıdan yağmur suyu aşağı damlıyordu.",
+  "usage_note_tr": "Yazı dilinde = herunter (konuşma dilinde runter). Daha çok fiilin parçası: herabsteigen (aşağı inmek), herabsetzen (düşürmek, indirmek).",
+  "_src": "a98c5aa4",
+  "_src_reader": "b5e5d499"
+ },
+ "adverb-261": {
+  "translation_tr": "daha yakına, buraya (konuşana ya da hedefe doğru)",
+  "example_tr": "Daha yakına gel, o zaman daha iyi görürsün.",
+  "usage_note_tr": "Daha çok fiilin parçası: herankommen (yaklaşmak), heranwachsen (büyümek, yetişmek). bis an … heran — ta …-e kadar / …-a kadar. Konuşma dilinde: ran.",
+  "_src": "7e7d94b5",
+  "_src_reader": "41500701"
+ },
+ "adverb-262": {
+  "translation_tr": "bu sırada, bunu yaparken; bu durumda",
+  "example_tr": "Metni dikkatlice okuyun, bunu yaparken sözlük kullanabilirsiniz.",
+  "usage_note_tr": "hier + bei — dabei ile aynı, daha çok yazı dilinde.",
+  "_src": "29ade4ab",
+  "_src_reader": "1f9740fd"
+ },
+ "adverb-263": {
+  "translation_tr": "bunun için; bunun karşılığında",
+  "example_tr": "Kurs için dizüstü bilgisayar gerekiyor, bunun için eski bir model de yeterli.",
+  "usage_note_tr": "hier + für — dafür ile aynı, daha çok yazı dilinde.",
+  "_src": "e4c1d77b",
+  "_src_reader": "dc2b17cc"
+ },
+ "adverb-264": {
+  "translation_tr": "işbu yazıyla, bu vesileyle (resmî kalıplarda); bununla",
+  "example_tr": "İşbu yazıyla siparişinizin alındığını onaylarız.",
+  "usage_note_tr": "hier + mit — damit ile aynı, daha çok yazı dilinde. Resmî mektuplarda tipiktir: Hiermit kündige ich meinen Vertrag. — İşbu yazıyla sözleşmemi feshediyorum.",
+  "_src": "c7f35c72",
+  "_src_reader": "8c1ee79b"
+ },
+ "adverb-265": {
+  "translation_tr": "bunun içinden, bunlardan; bundan, bunun hakkında",
+  "example_tr": "Otuz başvuru aldık, bunlardan beşi bir sonraki aşamaya kaldı.",
+  "usage_note_tr": "hier + von — davon ile aynı, daha çok yazı dilinde.",
+  "_src": "268cccc9",
+  "_src_reader": "50d4936a"
+ },
+ "adverb-266": {
+  "translation_tr": "dışarı (konuşandan uzağa); öteye, sınırın ötesine",
+  "example_tr": "Çocuklar koşarak bahçeye çıktı.",
+  "usage_note_tr": "Konuşma dilinde: raus. hinaus — konuşandan uzağa dışarı, heraus — konuşana doğru. Sık sık fiilin parçası: hinausgehen. darüber hinaus — ayrıca; über … hinaus — … ötesinde, … aşan.",
+  "_src": "442e51e0",
+  "_src_reader": "682e345a"
+ },
+ "adverb-267": {
+  "translation_tr": "üzerinden, üstünden (über … hinweg); boyunca; uzağa (yaz.)",
+  "example_tr": "Gözlüğünün üstünden bana baktı.",
+  "usage_note_tr": "Hemen hemen her zaman über ile: über … hinweg. Zaman için: über Jahre hinweg — yıllar boyunca. Fiilin parçası: hinwegsehen über (görmezden gelmek). Karıştırılmamalı: der Hinweg — gidiş yolu.",
+  "_src": "fbbbf271",
+  "_src_reader": "39389563"
+ },
+ "adverb-268": {
+  "translation_tr": "buna ek olarak, ilaveten",
+  "example_tr": "Buna ek olarak otel plajdan çok uzak.",
+  "usage_note_tr": "Çoğunlukla fiilin parçası: hinzufügen (eklemek), hinzukommen (eklenmek). Hinzu kommt, dass … — Üstelik …",
+  "_src": "9e5b06cc",
+  "_src_reader": "e07b8a8c"
+ },
+ "adverb-269": {
+  "translation_tr": "onun yüzünden, onun hatırı için (kadın); onların yüzünden, onların hatırı için",
+  "example_tr": "Onun hatırı için Berlin'e taşındı.",
+  "usage_note_tr": "Büyük harfle — sizin yüzünüzden, sizin hatırınız için (nezaket biçimi): Ihretwegen. Aynı şekilde: meinetwegen, deinetwegen, seinetwegen.",
+  "_src": "2a4afdd4",
+  "_src_reader": "89b87d1a"
+ },
+ "adverb-270": {
+  "translation_tr": "hiç değilse, yine de; ne de olsa, sonuçta",
+  "example_tr": "Kaybettik ama hiç değilse bir gol attık.",
+  "usage_note_tr": "Ayrıca “ne de olsa, sonuçta”: Sie hat immerhin zehn Jahre hier gearbeitet. Cevap olarak: Immerhin! — Hiç yoktan iyidir!",
+  "_src": "0d0503e8",
+  "_src_reader": "6d91add3"
+ },
+ "adverb-271": {
+  "translation_tr": "sürekli, durmadan",
+  "example_tr": "Telefon bugün durmadan çalıyor.",
+  "usage_note_tr": "Konuşma dilinde kullanılır; çoğu zaman bıkkınlık tonu taşır.",
+  "_src": "31694102",
+  "_src_reader": "2c23356b"
+ },
+ "adverb-272": {
+  "translation_tr": "özellikle, bilhassa",
+  "example_tr": "Özellikle kışın şehirde hava kötü.",
+  "usage_note_tr": "besonders kelimesinden daha sık yazı dilinde kullanılır.",
+  "_src": "6e5a95cd",
+  "_src_reader": "fa337010"
+ },
+ "adverb-273": {
+  "translation_tr": "hangi bakımdan, ne açıdan; neden",
+  "example_tr": "Bu çözüm eskisinden hangi bakımdan daha iyi?",
+  "usage_note_tr": "Soru kelimesi; dolaylı soruda fiil sona gider: Ich verstehe nicht, inwiefern das wichtig ist. Yakın anlamlısı: inwieweit.",
+  "_src": "285b62d8",
+  "_src_reader": "df013d2f"
+ },
+ "adverb-274": {
+  "translation_tr": "ne ölçüde, ne kadar",
+  "example_tr": "Yeni kuralların ne ölçüde yardımcı olacağı henüz belli değil.",
+  "usage_note_tr": "Soru kelimesi; dolaylı soruda fiil sona gider. Yakın anlamlısı: inwiefern (hangi bakımdan).",
+  "_src": "0b7ae1d3",
+  "_src_reader": "aed71485"
+ },
+ "adverb-275": {
+  "translation_tr": "bir yerde, herhangi bir yerde",
+  "example_tr": "Gözlüğümü bir yerde unuttum.",
+  "usage_note_tr": "“Bir yere” — irgendwohin. Konuşma dilinde ayrıca “bir bakıma”: Irgendwo verstehe ich ihn. — Bir bakıma onu anlıyorum.",
+  "_src": "15d82b2f",
+  "_src_reader": "30934a29"
+ },
+ "adverb-276": {
+  "translation_tr": "bir yere, herhangi bir yere",
+  "example_tr": "Hafta sonu bir yere gidelim.",
+  "usage_note_tr": "“Bir yerde” (yer) — irgendwo.",
+  "_src": "49de2c3c",
+  "_src_reader": "ac02c5ed"
+ },
+ "adverb-277": {
+  "translation_tr": "hiç de … değil, katiyen, hiçbir şekilde",
+  "example_tr": "Görev, düşündüğümüz kadar hiç de kolay değildi.",
+  "usage_note_tr": "Güçlü olumsuzluk, nicht olmadan. Tek başına cevap olabilir: Keineswegs! — Asla!",
+  "_src": "66475625",
+  "_src_reader": "30cae926"
+ },
+ "adverb-278": {
+  "translation_tr": "yalnızca, sadece",
+  "example_tr": "Yalnızca trenin ne zaman geleceğini öğrenmek istiyoruz.",
+  "usage_note_tr": "nur kelimesinden daha sık yazı dilinde kullanılır.",
+  "_src": "1382aed5",
+  "_src_reader": "92fa40bb"
+ },
+ "adverb-279": {
+  "translation_tr": "nihayetinde, son tahlilde; sonunda, en sonunda",
+  "example_tr": "Nihayetinde her şey havaya bağlı.",
+  "usage_note_tr": "Karıştırılmamalı: letztens — geçenlerde.",
+  "_src": "39c65090",
+  "_src_reader": "fced4f9f"
+ },
+ "adverb-280": {
+  "translation_tr": "neredeyse, hemen hemen",
+  "example_tr": "Neredeyse bütün yerler doluydu.",
+  "usage_note_tr": "fast kelimesinden daha sık yazı dilinde kullanılır.",
+  "_src": "c34d3c3a",
+  "_src_reader": "27c13afc"
+ },
+ "adverb-281": {
+  "translation_tr": "son zamanlarda, bir süredir",
+  "example_tr": "Komşum bir süredir işe bisikletle gidiyor.",
+  "usage_note_tr": "Eskiden farklı olduğunu vurgular.",
+  "_src": "05dc8ea9",
+  "_src_reader": "6f12855c"
+ },
+ "adverb-282": {
+  "translation_tr": "asla, hiçbir zaman",
+  "example_tr": "Bunu asla düşünmezdim!",
+  "usage_note_tr": "Vurgulu nie. Cevap olarak: Niemals! — Kesinlikle olmaz!",
+  "_src": "3530494c",
+  "_src_reader": "3b638769"
+ },
+ "adverb-283": {
+  "translation_tr": "mutlaka, zorunlu olarak; kaçınılmaz olarak",
+  "example_tr": "Pahalı olan mutlaka daha iyi değildir.",
+  "usage_note_tr": "En çok nicht notwendigerweise kalıbında — mutlaka … değil.",
+  "_src": "a836386f",
+  "_src_reader": "b6fa9309"
+ },
+ "adverb-284": {
+  "translation_tr": "zaten, nasılsa",
+  "example_tr": "Beni almana gerek yok, zaten şehre gidiyorum.",
+  "usage_note_tr": "Eş anlamlısı: sowieso; daha çok yazı dilinde.",
+  "_src": "515498db",
+  "_src_reader": "079260bb"
+ },
+ "adverb-285": {
+  "translation_tr": "neredeyse, pratikte; adeta, tabiri caizse",
+  "example_tr": "Proje neredeyse bitti, sadece sunum eksik.",
+  "usage_note_tr": "Konuşma dilinde çok sık kullanılır.",
+  "_src": "5a9453f5",
+  "_src_reader": "7da105ea"
+ },
+ "adverb-286": {
+  "translation_tr": "onun yüzünden (erkek); onun hatırı için (erkek); onun açısından (itirazı yok)",
+  "example_tr": "Onun yüzünden geç kaldık.",
+  "usage_note_tr": "Aynı şekilde: meinetwegen, deinetwegen, ihretwegen. Konuşma dilinde ayrıca wegen ihm.",
+  "_src": "71f0ea83",
+  "_src_reader": "368852c4"
+ },
+ "adverb-287": {
+  "translation_tr": "tabiri caizse, adeta",
+  "example_tr": "Köpek tabiri caizse aileden biri.",
+  "usage_note_tr": "Bitişik yazılır. Ayrı yazılan so zu sagen — “böyle söylemek” (başka anlam).",
+  "_src": "f7adf0b6",
+  "_src_reader": "c8f2b69e"
+ },
+ "adverb-288": {
+  "translation_tr": "her zaman, daima",
+  "example_tr": "İşe her zaman vaktinde gelir.",
+  "usage_note_tr": "immer kelimesinden daha sık yazı dilinde kullanılır.",
+  "_src": "8d72cd47",
+  "_src_reader": "b43cc25f"
+ },
+ "adverb-289": {
+  "translation_tr": "genellikle",
+  "example_tr": "Genellikle saat sekizde kahvaltı ederiz.",
+  "usage_note_tr": "Eş anlamlısı: normalerweise, gewöhnlich.",
+  "_src": "8c47c51c",
+  "_src_reader": "aa67a78c"
+ },
+ "adverb-290": {
+  "translation_tr": "isteksizce, gönülsüzce",
+  "example_tr": "Sisli havada araba kullanmayı sevmem.",
+  "usage_note_tr": "ungern + fiil = “bir şeyi yapmayı sevmemek”. Karşıt anlamlısı: gern.",
+  "_src": "576d9b1c",
+  "_src_reader": "b70c4efe"
+ },
+ "adverb-291": {
+  "translation_tr": "daha ziyade, daha doğrusu; tam tersine",
+  "example_tr": "Tembel değil, daha ziyade yorgun.",
+  "usage_note_tr": "Çoğu zaman sondern kelimesinden sonra: nicht …, sondern vielmehr …. Karıştırılmamalı: viel mehr (ayrı yazılır) — çok daha fazla.",
+  "_src": "99519d87",
+  "_src_reader": "3b15527c"
+ },
+ "adverb-292": {
+  "translation_tr": "önde, önden; ileri, öne doğru",
+  "example_tr": "Suya başı önde, balıklama atladı.",
+  "usage_note_tr": "Daha çok fiilin parçası: vorangehen (önden gitmek; ilerlemek), vorankommen (ilerlemek): Die Arbeit kommt gut voran.",
+  "_src": "b8c69061",
+  "_src_reader": "6495fcc8"
+ },
+ "adverb-293": {
+  "translation_tr": "şimdilik, ilk etapta",
+  "example_tr": "Şimdilik annemlerde kalıyoruz.",
+  "_src": "1ea1badf",
+  "_src_reader": "f3a06090"
+ },
+ "adverb-294": {
+  "translation_tr": "bitti, geride kaldı; yanından, önünden (geçerek)",
+  "example_tr": "Sınav dönemi nihayet geride kaldı.",
+  "usage_note_tr": "Eş anlamlısı: vorbei, biraz daha yazı diline özgü. Yer için — “yanından”, daha çok fiilin parçası olarak: vorübergehen (yanından geçmek).",
+  "_src": "3a035746",
+  "_src_reader": "a0321fb9"
+ },
+ "adverb-295": {
+  "translation_tr": "tercihen, daha çok",
+  "example_tr": "Tercihen balkonlu bir daire arıyoruz.",
+  "_src": "89f12d37",
+  "_src_reader": "5416c579"
+ },
+ "adverb-296": {
+  "translation_tr": "neden, ne yüzünden",
+  "example_tr": "Beni neden aramadın?",
+  "usage_note_tr": "Eş anlamlısı: weshalb, warum. Yan cümlede fiil sona gider: …, weswegen ich zu spät kam. — …, bu yüzden geç kaldım.",
+  "_src": "59042fc9",
+  "_src_reader": "9633dce0"
+ },
+ "adverb-297": {
+  "translation_tr": "o da, kendi payına; öte yandan, buna karşılık; yine, tekrar",
+  "example_tr": "Ben bunu Anna'dan duydum, o da kardeşinden duymuş.",
+  "usage_note_tr": "Ayrıca “öte yandan”: Das wiederum finde ich gut. — Bu ise hoşuma gidiyor. Ve “yine, tekrar”.",
+  "_src": "3a3431a0",
+  "_src_reader": "a9f64ba2"
+ },
+ "adverb-298": {
+  "translation_tr": "neye, ne karşılığında, ne için",
+  "example_tr": "Bu kadar parayı neye harcadın?",
+  "usage_note_tr": "wo + für: für ile kullanılan fiillerle şey hakkında soru: sich bedanken für → Wofür bedankst du dich? İnsanlar için: Für wen …? Cevap: dafür.",
+  "_src": "4aa3e155",
+  "_src_reader": "f36da471"
+ },
+ "adverb-299": {
+  "translation_tr": "neyle, neyin yardımıyla",
+  "example_tr": "Neyle yazmayı daha çok seversin, tükenmez kalemle mi kurşun kalemle mi?",
+  "usage_note_tr": "wo + mit: rechnen mit → Womit rechnest du? İnsanlar için: Mit wem …? Cevap: damit.",
+  "_src": "4a0be1b0",
+  "_src_reader": "044e3033"
+ },
+ "adverb-300": {
+  "translation_tr": "belki, muhtemelen (çoğu zaman istenmeyen bir şey için)",
+  "example_tr": "Yanına bir ceket al, belki bu akşam hava soğur.",
+  "usage_note_tr": "Soru kelimesi değildir. Karıştırılmamalı: wo möglich (ayrı yazılır) — “mümkün olan yerde, mümkünse”.",
+  "_src": "6fc774e8",
+  "_src_reader": "df27491b"
+ },
+ "adverb-301": {
+  "translation_tr": "ne, neyi (aramak), ne hakkında (sormak), ne (kokmak); ki buna göre, -diğine göre / -dığına göre",
+  "example_tr": "Ne arıyorsun?",
+  "usage_note_tr": "wo + nach: suchen nach, fragen nach, riechen nach. İnsanlar için: Nach wem …? Cevap: danach. Haberlerde: eine Meldung, wonach … — … olduğuna dair bir haber.",
+  "_src": "36e36eca",
+  "_src_reader": "ee24451a"
+ },
+ "adverb-302": {
+  "translation_tr": "neyi (beklemek), neye; bunun üzerine",
+  "example_tr": "Daha ne bekliyorsun?",
+  "usage_note_tr": "wo + auf: warten auf, sich freuen auf, sich verlassen auf. Yer için — “neyin üstünde”: Worauf sitzt du? İnsanlar için: Auf wen …? Cevap: darauf. Virgülden sonra ilgi anlamında — “bunun üzerine”: Er nickte, worauf alle gingen. — Başını salladı, bunun üzerine herkes gitti.",
+  "_src": "17f217e0",
+  "_src_reader": "f8925dcb"
+ },
+ "adverb-303": {
+  "translation_tr": "ne hakkında; neyden; neyle (geçinmek)",
+  "example_tr": "Ne hakkında hayal kuruyorsun?",
+  "usage_note_tr": "wo + von: reden von, träumen von, leben von (Wovon lebt er? — Neyle geçiniyor?). İnsanlar için: Von wem …? Cevap: davon.",
+  "_src": "1b0fe609",
+  "_src_reader": "18dfac34"
+ },
+ "adverb-304": {
+  "translation_tr": "neyden (korkmak); neyin önünde",
+  "example_tr": "Neyden korkuyorsun?",
+  "usage_note_tr": "wo + vor: Angst haben vor, sich fürchten vor, warnen vor. İnsanlar için: Vor wem …? Cevap: davor.",
+  "_src": "df3ea943",
+  "_src_reader": "38fee82a"
+ },
+ "adverb-305": {
+  "translation_tr": "niçin, ne için; neye",
+  "example_tr": "Ne için Çince öğreniyorsun?",
+  "usage_note_tr": "Amaç sorusu, warum / wofür gibi. Ayrıca zu ile kullanılan fiillerde wo + zu: gratulieren zu → Wozu gratulierst du ihm? Cevap: dazu.",
+  "_src": "31bc31ae",
+  "_src_reader": "ad6a2f14"
+ },
+ "adverb-306": {
+  "translation_tr": "ayrıca, üstelik",
+  "example_tr": "Daire çok küçük, üstelik çok gürültülü.",
+  "notes_tr": [
+   "außerdem kelimesinin yazı dilindeki eş anlamlısı."
+  ],
+  "_src": "2f0e0e6f",
+  "_src_reader": "9dc6dfb7"
+ },
+ "adverb-307": {
+  "translation_tr": "birbirine, birbiriyle",
+  "example_tr": "Bu renkler birbiriyle çok iyi uyuyor.",
+  "usage_note_tr": "zu + einander. Ayrıca: freundlich zueinander sein — birbirine karşı nazik olmak.",
+  "_src": "47314194",
+  "_src_reader": "be345268"
+ },
+ "adverb-308": {
+  "translation_tr": "aynı anda, aynı zamanda",
+  "example_tr": "Doktor olarak çalışıyor, aynı zamanda müzik okuyor.",
+  "usage_note_tr": "Eş anlamlısı: gleichzeitig (zugleich yalnızca zarftır). X und Y zugleich — hem X hem Y: Er ist Koch und Kellner zugleich.",
+  "_src": "470628ee",
+  "_src_reader": "5e88b10c"
+ },
+ "adverb-309": {
+  "translation_tr": "derinden, yürekten",
+  "example_tr": "Haber bizi derinden sarstı.",
+  "usage_note_tr": "Genellikle duygularla: zutiefst traurig, zutiefst dankbar.",
+  "_src": "63c635b2",
+  "_src_reader": "a59dd6f8"
+ },
+ "adverb-310": {
+  "translation_tr": "bundan önce, daha önce",
+  "example_tr": "Kitabı daha önce iki kez okumuştu.",
+  "usage_note_tr": "Yazı dilinde kullanılır; günlük dilde: vorher. kurz zuvor — bundan kısa süre önce; mehr als je zuvor — her zamankinden daha çok.",
+  "_src": "85b1cdec",
+  "_src_reader": "86feccf6"
+ },
+ "adverb-311": {
+  "translation_tr": "kesinlikle, her hâlükârda; her zaman, her seferinde",
+  "example_tr": "Taksiyle otobüsten kesinlikle daha hızlı varırız.",
+  "usage_note_tr": "Birinci anlamı konuşma dilindedir. Karıştırılmamalı: ein für alle Mal — kesin olarak, temelli.",
+  "_src": "3f7c3514",
+  "_src_reader": "07c153af"
+ },
+ "adverb-312": {
+  "translation_tr": "herkese (selamlaşmada); her taraftan, herkes tarafından",
+  "example_tr": "Herkese iyi geceler, yarın görüşürüz!",
+  "usage_note_tr": "En çok bir gruba selam verirken: Hallo allerseits! — Herkese merhaba!",
+  "_src": "975041dd",
+  "_src_reader": "0d404ceb"
+ },
+ "adverb-313": {
+  "translation_tr": "her zaman",
+  "example_tr": "Apartman görevlimiz her zaman yardıma hazır.",
+  "usage_note_tr": "Eskimekte olan bir kelime. allzeit bereit — “her zaman hazır” sloganından bilinir. Varyant: allezeit. Günlük dilde: immer.",
+  "_src": "f5065e36",
+  "_src_reader": "6ff1390a"
+ },
+ "adverb-314": {
+  "translation_tr": "aksi hâlde, yoksa",
+  "example_tr": "Cumaya kadar kaydolman gerekiyor, aksi hâlde yerin gider.",
+  "notes_tr": [
+   "Varyant: anderenfalls. Eş anlamlısı: sonst, ansonsten."
+  ],
+  "_src": "da4d0a62",
+  "_src_reader": "6a11b4d1"
+ },
+ "adverb-315": {
+  "translation_tr": "başka bir yerde, başka yerlerde",
+  "example_tr": "Burada her yer dolu, başka bir yerde kalmamız gerekecek.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. “Başka bir yere” — anderswohin. Eş anlamlısı: woanders.",
+  "_src": "9125e4e6",
+  "_src_reader": "c0e823cf"
+ },
+ "adverb-316": {
+  "translation_tr": "kısmen, bir ölçüde",
+  "example_tr": "Sorun şimdiye kadar yalnızca kısmen çözüldü.",
+  "usage_note_tr": "Çoğu zaman olumsuzlukla: nicht einmal ansatzweise — yakından bile değil, hiç de değil.",
+  "_src": "127b529e",
+  "_src_reader": "48082ec4"
+ },
+ "adverb-317": {
+  "translation_tr": "evin dışında, dışarıda; başka bir yerde, kendi şehrinin dışında (sporda — deplasmanda); dışarıya doğru",
+  "example_tr": "Hafta sonları dışarıda yemek yemeyi severiz.",
+  "usage_note_tr": "Sporda: auswärts spielen — deplasmanda oynamak (das Auswärtsspiel). Sıfat: auswärtig.",
+  "_src": "2200be2c",
+  "_src_reader": "498a2b68"
+ },
+ "adverb-318": {
+  "translation_tr": "maalesef, ne yazık ki",
+  "example_tr": "Maalesef etkinliği iptal etmek zorundayız.",
+  "usage_note_tr": "leider kelimesinden daha resmîdir.",
+  "_src": "0143c2c7",
+  "_src_reader": "ccda318e"
+ },
+ "adverb-319": {
+  "translation_tr": "en iyi ihtimalle",
+  "example_tr": "Bu arabayla en iyi ihtimalle saatte 120 km yaparız.",
+  "usage_note_tr": "Karşıt anlamlısı: schlimmstenfalls. Karıştırılmamalı: bestens — çok iyi.",
+  "_src": "f6506299",
+  "_src_reader": "ab58d1c4"
+ },
+ "adverb-320": {
+  "translation_tr": "aralarında, ortada; içlerinde; arada, bu arada (zaman için)",
+  "example_tr": "Solda kanepe, sağda dolap, aralarında da küçük bir masa var.",
+  "usage_note_tr": "da + zwischen. Çoğu zaman fiilin parçası: dazwischenkommen — engel çıkmak: Mir ist etwas dazwischengekommen. — Bir işim çıktı (ve planlar bozuldu).",
+  "_src": "e68be004",
+  "_src_reader": "11e4c224"
+ },
+ "adverb-321": {
+  "translation_tr": "bu nedenle, dolayısıyla",
+  "example_tr": "Yol kapalıydı, bu nedenle dolambaçlı yoldan gitmek zorunda kaldık.",
+  "notes_tr": [
+   "Eş anlamlısı: folglich, deshalb; daha çok yazı dilinde.",
+   "İlgi yan cümlesinde ayrı yazılır: der Bericht, dem zufolge … — … olduğunu bildiren rapor."
+  ],
+  "_src": "cc7c18d3",
+  "_src_reader": "b77a4b87"
+ },
+ "adverb-322": {
+  "translation_tr": "öyle, o kadar, o derece",
+  "example_tr": "Film o kadar sıkıcıydı ki uyuyakaldım.",
+  "usage_note_tr": "Çoğu zaman dass ile: derart …, dass — o kadar … ki. Eş anlamlısı: dermaßen. İsimden önce sıfat kullanılır — derartig: ein derartiger Fehler.",
+  "_src": "b26b32ec",
+  "_src_reader": "d00169cc"
+ },
+ "adverb-323": {
+  "translation_tr": "o kadar, öylesine",
+  "example_tr": "O kadar sinirlendim ki tek kelime daha edemedim.",
+  "usage_note_tr": "Çoğu zaman dass ile. Eş anlamlısı: derart.",
+  "_src": "7baf09eb",
+  "_src_reader": "db773958"
+ },
+ "adverb-324": {
+  "translation_tr": "ne yazık ki, aksilik bu ya; aptallık edip, akılsızlıkla",
+  "example_tr": "Aksilik bu ya, anahtarımı ofiste unuttum.",
+  "usage_note_tr": "İki anlam: talihsiz bir durum (= leider) ve insanın kendi aptallığı: Ich habe ihm dummerweise alles erzählt. — Aptallık edip ona her şeyi anlattım.",
+  "_src": "6b90c6e0",
+  "_src_reader": "2bd1ae28"
+ },
+ "adverb-325": {
+  "translation_tr": "eskiden, önceden, bir zamanlar",
+  "example_tr": "Eskiden boş duran binada artık daireler var.",
+  "usage_note_tr": "İsimden önce sıfat kullanılır — ehemalig: der ehemalige Chef (ehemals Chef değil).",
+  "_src": "8ff60a01",
+  "_src_reader": "7c1cd6f0"
+ },
+ "adverb-326": {
+  "translation_tr": "yukarı, yukarıya doğru",
+  "example_tr": "Duman yavaşça göğe doğru yükseliyordu.",
+  "usage_note_tr": "Yazı dilinde kullanılır. Hemen hemen her zaman fiilin parçası: emporsteigen (yükselmek), emporblicken (yukarı bakmak). Günlük dilde: hinauf, nach oben.",
+  "_src": "093aae53",
+  "_src_reader": "f730ed8a"
+ },
+ "adverb-327": {
+  "translation_tr": "ilk kez, ilk defa",
+  "example_tr": "Festival bu yıl ilk kez açık havada yapılıyor.",
+  "usage_note_tr": "Karıştırılmamalı: erst mal (konuş. = önce, şimdilik). İsimden önce — erstmalig: die erstmalige Teilnahme.",
+  "_src": "4fdd8664",
+  "_src_reader": "851d35ec"
+ },
+ "adverb-328": {
+  "translation_tr": "yanlışlıkla, hata sonucu",
+  "example_tr": "E-postayı yanlışlıkla bütün iş arkadaşlarıma gönderdim.",
+  "usage_note_tr": "Eş anlamlısı: irrtümlich, aus Versehen.",
+  "_src": "7b1f006e",
+  "_src_reader": "ce36bb96"
+ },
+ "adverb-329": {
+  "translation_tr": "akıntı yönünde, nehrin aşağısına doğru",
+  "example_tr": "Kanoyla keyifle akıntı yönünde kürek çektik.",
+  "usage_note_tr": "Karşıt anlamlısı: flussaufwärts.",
+  "_src": "c8c7be93",
+  "_src_reader": "e4f430dd"
+ },
+ "adverb-330": {
+  "translation_tr": "akıntıya karşı, nehrin yukarısına doğru",
+  "example_tr": "Somonlar sonbaharda akıntıya karşı yüzer.",
+  "usage_note_tr": "Karşıt anlamlısı: flussabwärts.",
+  "_src": "d65ba72e",
+  "_src_reader": "82d682ee"
+ },
+ "adverb-331": {
+  "translation_tr": "o günden itibaren, bundan böyle",
+  "example_tr": "Kazadan sonra o günden itibaren yalnızca trenle yolculuk etti.",
+  "usage_note_tr": "Yazı dilinde kullanılır. Günlük dilde: von nun an, ab jetzt.",
+  "_src": "5eead39c",
+  "_src_reader": "8f204ab3"
+ },
+ "adverb-332": {
+  "translation_tr": "gerçi, ancak, bununla birlikte",
+  "example_tr": "Daire güzel, gerçi oldukça da pahalı.",
+  "usage_note_tr": "Güney Almanya'da ayrıca onaylayan cevap: Kommst du mit? — Freilich! — Tabii ki!",
+  "_src": "2eff45da",
+  "_src_reader": "dc220ffc"
+ },
+ "adverb-333": {
+  "translation_tr": "nezaket gösterip, lütfedip",
+  "example_tr": "Komşumuz nezaket gösterip çiçeklerimizi suladı.",
+  "usage_note_tr": "Çoğu zaman rica ve teşekkürlerde: Könnten Sie mir freundlicherweise helfen? — Bana yardım etme nezaketini gösterir misiniz?",
+  "_src": "0344a4f1",
+  "_src_reader": "78488492"
+ },
+ "adverb-334": {
+  "translation_tr": "gerçekten, hakikaten",
+  "example_tr": "Gerçekten unutulmaz bir akşamdı.",
+  "usage_note_tr": "Yazı dilinde kullanılır, eski moda duyulur. Günlük dilde: wirklich, in der Tat.",
+  "_src": "309bd20b",
+  "_src_reader": "4cfeeaae"
+ },
+ "adverb-335": {
+  "translation_tr": "artık, lütfen (sert bir talepte)",
+  "example_tr": "Kapıyı kapat artık!",
+  "usage_note_tr": "Konuşma dilinde kullanılır. Yalnızca sinirli taleplerde; kaba duyulur, nazik değil!",
+  "_src": "a603e427",
+  "_src_reader": "62acd4a9"
+ },
+ "adverb-336": {
+  "translation_tr": "doğruca, dosdoğru; açıkça, lafı dolandırmadan",
+  "example_tr": "İşten sonra doğruca eve gitti.",
+  "usage_note_tr": "Karıştırılmamalı: geradezu — adeta, resmen (vurgu).",
+  "_src": "b264b6b2",
+  "_src_reader": "f8162876"
+ },
+ "adverb-337": {
+  "translation_tr": "adeta, resmen, düpedüz; doğruca, dosdoğru",
+  "example_tr": "Buradan manzara düpedüz muhteşem.",
+  "usage_note_tr": "Ardından gelen kelimeyi güçlendirir. “Doğruca, dosdoğru” (yön için, = gerade zu) — yalnızca eski metinlerde, örneğin Grimm Kardeşlerin masallarında; bugün bu anlamda geradewegs denir.",
+  "_src": "8f982d8b",
+  "_src_reader": "6f09d40a"
+ },
+ "adverb-338": {
+  "translation_tr": "büyük ölçüde, çoğunlukla",
+  "example_tr": "Konuklar büyük ölçüde yurt dışından gelmişti.",
+  "usage_note_tr": "Oran, miktar için. Sıklık için — meistens.",
+  "_src": "f93b756f",
+  "_src_reader": "0c54f3f3"
+ },
+ "adverb-339": {
+  "translation_tr": "az çok, şöyle böyle",
+  "example_tr": "Taşınmadan sonra daire artık az çok döşenmiş durumda.",
+  "usage_note_tr": "Eş anlamlısı: einigermaßen. “Yarı yolda” anlamı eskimiştir.",
+  "_src": "2460a110",
+  "_src_reader": "44de861c"
+ },
+ "adverb-340": {
+  "translation_tr": "yığınla, sürüyle, bir sürü",
+  "example_tr": "Fırtınadan sonra yolda yığınla dal vardı.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. jede Menge gibi, isimden önce eksiz gelir.",
+  "_src": "8111ded7",
+  "_src_reader": "f2c54082"
+ },
+ "adverb-341": {
+  "translation_tr": "yukarı (aşağıdan buraya, konuşana doğru)",
+  "example_tr": "Mahzenden yukarı taze ekmek kokusu geliyordu.",
+  "usage_note_tr": "her — konuşana doğru, hin — konuşandan uzağa: herauf — buraya yukarı, hinauf — oraya yukarı. Daha çok fiilin bir parçası: heraufkommen. Konuşma dilinde: rauf.",
+  "_src": "f1d3b18c",
+  "_src_reader": "b2ea12e8"
+ },
+ "adverb-342": {
+  "translation_tr": "buraya (konuşana doğru)",
+  "example_tr": "O seslenince bütün çocuklar koşarak yanına geldi.",
+  "usage_note_tr": "Tek başına — neredeyse yalnızca ünlemlerde. Daha çok fiilin bir parçası: herbeirufen (yanına çağırmak), herbeiführen (yol açmak, neden olmak).",
+  "_src": "52ed0c25",
+  "_src_reader": "2b6648f6"
+ },
+ "adverb-343": {
+  "translation_tr": "dışarı, öne (bir şeyin arkasından, altından)",
+  "example_tr": "Güneş bulutun arkasından çıktı.",
+  "usage_note_tr": "Tek başına — yazı dilinde. Genellikle fiilin bir parçası: hervorkommen (ortaya çıkmak), hervorheben (vurgulamak), hervorrufen (neden olmak).",
+  "_src": "0ae70db4",
+  "_src_reader": "11c1d993"
+ },
+ "adverb-344": {
+  "translation_tr": "buraya, tam buraya",
+  "example_tr": "Kutuyu lütfen buraya, kapının yanına koy.",
+  "usage_note_tr": "Wo? (nerede?) — hier. Wohin? (nereye?) — hierhin. Buraya, yanıma — hierher. bis hierhin — buraya kadar.",
+  "_src": "9a477b8e",
+  "_src_reader": "22589e8d"
+ },
+ "adverb-345": {
+  "translation_tr": "bunun hakkında; bunun üstünde",
+  "example_tr": "Bunun hakkında bir sonraki toplantıda konuşmak istiyorum.",
+  "usage_note_tr": "hier + über — darüber ile aynı, daha çok yazı dilinde.",
+  "_src": "11723fc9",
+  "_src_reader": "a6d54680"
+ },
+ "adverb-346": {
+  "translation_tr": "buna, bununla; bunun için; bu konuda",
+  "example_tr": "Balığın yanında pilav var, buna sek beyaz şarap yakışır.",
+  "usage_note_tr": "hier + zu — dazu ile aynı, daha çok yazı dilinde. Hierzu gehören … — Buna … dahildir.",
+  "_src": "cfd582e1",
+  "_src_reader": "ef11005e"
+ },
+ "adverb-347": {
+  "translation_tr": "arka arkaya, birbiri ardına; üst üste",
+  "example_tr": "Çocuklar dar köprüden arka arkaya geçti.",
+  "usage_note_tr": "Zaman için: dreimal hintereinander — üç kez üst üste, ara vermeden. nacheinander — sırayla, biri ötekinden sonra (aralar olabilir).",
+  "_src": "1ded0c27",
+  "_src_reader": "194ca657"
+ },
+ "adverb-348": {
+  "translation_tr": "oraya, karşı tarafa; (konuş.) bozuk, bozulmuş",
+  "example_tr": "Adaya yüzerek geçtik.",
+  "usage_note_tr": "Konuşma dilinde: rüber. hinüber — oraya (konuşandan uzağa), herüber — buraya. Konuşma dilinde hinüber sein — bozulmak, kırılmak: Die Milch ist hinüber. — Süt ekşimiş.",
+  "_src": "df61dc50",
+  "_src_reader": "e5409e77"
+ },
+ "adverb-349": {
+  "translation_tr": "büyük olasılıkla, büyük ihtimalle",
+  "example_tr": "Tren büyük olasılıkla yine rötarlı.",
+  "usage_note_tr": "sein ve yan cümleyle — ayrı yazılır: Es ist höchst wahrscheinlich, dass …",
+  "_src": "6fe15af9",
+  "_src_reader": "780fd9f9"
+ },
+ "adverb-350": {
+  "translation_tr": "gizlice, içten içe, içinden",
+  "example_tr": "İçten içe onun arayacağını umuyordu.",
+  "usage_note_tr": "Genellikle belli edilmeyen düşünceler ve duygular için.",
+  "_src": "43432f8b",
+  "_src_reader": "5052e8e2"
+ },
+ "adverb-351": {
+  "translation_tr": "ne ironiktir ki, işin garibi",
+  "example_tr": "Ne ironiktir ki sürücü kursu hocası hız radarına yakalandı.",
+  "usage_note_tr": "Durumu değerlendirir. Krş. ironisch — alaycı bir şekilde (söyleniş biçimi): etwas ironisch sagen.",
+  "_src": "381bf7f9",
+  "_src_reader": "97b0fe49"
+ },
+ "adverb-352": {
+  "translation_tr": "hiçbir şekilde, asla",
+  "example_tr": "İlacı hiçbir şekilde aç karnına almayın.",
+  "usage_note_tr": "Güçlü olumsuzluk, nicht olmadan. Krş. keineswegs — hiç de … değil, asla.",
+  "_src": "6d848fff",
+  "_src_reader": "79a76bd9"
+ },
+ "adverb-353": {
+  "translation_tr": "tuhaftır ki, nedense",
+  "example_tr": "Tuhaftır ki bugün kimse aramadı.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. Anlamı “tuhaf bir şekilde”, “komik bir şekilde” değil. Nötr: seltsamerweise.",
+  "_src": "4f73cb9d",
+  "_src_reader": "33454cbc"
+ },
+ "adverb-354": {
+  "translation_tr": "kendi adıma, bana gelince",
+  "example_tr": "Ben kendi adıma evde kalmayı tercih ederim.",
+  "usage_note_tr": "Cevap olarak: Ganz meinerseits! — Karşılıklı! Aynı şekilde: deinerseits, seinerseits, ihrerseits, unsererseits.",
+  "_src": "724d79ee",
+  "_src_reader": "a65ef3d9"
+ },
+ "adverb-355": {
+  "translation_tr": "bazen, ara sıra",
+  "example_tr": "Ara sıra işe gitmek bir saatten fazla sürüyor.",
+  "usage_note_tr": "Eş anlamlısı: manchmal, ab und zu; daha çok yazı dilinde.",
+  "_src": "32330e95",
+  "_src_reader": "e7a3cd45"
+ },
+ "adverb-356": {
+  "translation_tr": "birbiri ardına, sırayla",
+  "example_tr": "Misafirler kapıdan birbiri ardına içeri girdi.",
+  "usage_note_tr": "nach + einander. nach alan fiillerle: sich nacheinander sehnen — birbirini özlemek. Krş. hintereinander — üst üste, arka arkaya.",
+  "_src": "5cedb17f",
+  "_src_reader": "29248e0e"
+ },
+ "adverb-357": {
+  "translation_tr": "yine de, buna rağmen",
+  "example_tr": "Bütün gün yağmur yağdı, yine de herkesin keyfi yerindeydi.",
+  "notes_tr": [
+   "Konuşma dilinde, nichtsdestoweniger ve trotzdem kelimelerinin şakacı bir karışımı. Nötr: trotzdem."
+  ],
+  "_src": "8cc647f8",
+  "_src_reader": "5bc76f27"
+ },
+ "adverb-358": {
+  "translation_tr": "hiçbir yere",
+  "example_tr": "Bugün izinliyim ve hiçbir yere gitmem gerekmiyor.",
+  "usage_note_tr": "Wohin? (nereye?) — nirgendwohin. Wo? (nerede?) — nirgendwo, nirgends. nicht olmadan kullanılır.",
+  "_src": "1bff7012",
+  "_src_reader": "fe00ef35"
+ },
+ "adverb-359": {
+  "translation_tr": "şimdi, artık; bundan böyle",
+  "example_tr": "Dükkân artık elli yıldır faaliyette.",
+  "usage_note_tr": "Yazı dilinde kullanılır. Genellikle: jetzt, nun.",
+  "_src": "ddec0b6d",
+  "_src_reader": "a9ea60d8"
+ },
+ "adverb-360": {
+  "translation_tr": "üstüne üstlük, üstelik",
+  "example_tr": "Geç kaldı, üstüne üstlük belgelerini de unuttu.",
+  "usage_note_tr": "Çoğu zaman söylenenin üstüne gelen hoş olmayan bir şey için; sık sık noch ile.",
+  "_src": "331d55d9",
+  "_src_reader": "d002aab0"
+ },
+ "adverb-361": {
+  "translation_tr": "bir an önce, hemen",
+  "example_tr": "Gök gürültülü fırtınada bir an önce sudan çıkmak gerekir.",
+  "_src": "f1ec1522",
+  "_src_reader": "1a93c036"
+ },
+ "adverb-362": {
+  "translation_tr": "en kötü ihtimalle",
+  "example_tr": "En kötü ihtimalle geziyi ertelemek zorunda kalırız.",
+  "usage_note_tr": "Karşıt anlamlısı: bestenfalls.",
+  "_src": "7e1fc7d6",
+  "_src_reader": "6578c796"
+ },
+ "adverb-363": {
+  "translation_tr": "zamanında, o zamanlar",
+  "example_tr": "O zamanlar köyümüzde henüz süpermarket yoktu.",
+  "usage_note_tr": "Geçmiş için. Eş anlamlısı: damals.",
+  "_src": "4907d2be",
+  "_src_reader": "8a98b7e2"
+ },
+ "adverb-364": {
+  "translation_tr": "o zamandan beri",
+  "example_tr": "İki yıl önce kavga ettik ve o zamandan beri hiç konuşmadık.",
+  "usage_note_tr": "Yalnızca zarf. seitdem bağlaç da olabilir: seitdem ich hier wohne (ama seither ich … değil).",
+  "_src": "2ee085d4",
+  "_src_reader": "2ceaafaa"
+ },
+ "adverb-365": {
+  "translation_tr": "tuhaftır ki, garip bir şekilde",
+  "example_tr": "Garip bir şekilde dükkân cumartesi kapalıydı.",
+  "usage_note_tr": "Konuşma dilindeki eş anlamlısı: komischerweise.",
+  "_src": "59c092d0",
+  "_src_reader": "c114be50"
+ },
+ "adverb-366": {
+  "translation_tr": "az önce, demin; tam şu anda",
+  "example_tr": "Otobüs az önce kalktı.",
+  "usage_note_tr": "gerade, eben kelimelerinden daha çok yazı dilinde. Ayrı yazılan so eben — ancak, güç bela: so eben noch geschafft.",
+  "_src": "7cc183ac",
+  "_src_reader": "9c5fb3e7"
+ },
+ "adverb-367": {
+  "translation_tr": "tonlarca",
+  "example_tr": "Süpermarketlerde tonlarca gıda çöpe atılıyor.",
+  "usage_note_tr": "Çoğu zaman mecaz anlamda — “çok fazla”. Aynı şekilde: kiloweise, stückweise.",
+  "_src": "e30ed945",
+  "_src_reader": "17e19671"
+ },
+ "adverb-368": {
+  "translation_tr": "ne yazık ki, ne acıdır ki",
+  "example_tr": "Ne yazık ki durumda hiçbir şey değişmedi.",
+  "usage_note_tr": "Durumu değerlendirir (= leider). Krş. traurig — üzgün üzgün (nasıl): traurig schauen.",
+  "_src": "ce18e8f7",
+  "_src_reader": "5499c5ba"
+ },
+ "adverb-369": {
+  "translation_tr": "son derece, olağanüstü",
+  "example_tr": "Yeni iş arkadaşı son derece cana yakın.",
+  "usage_note_tr": "Yazı dilinde kullanılır. Genellikle sıfattan önce gelir. Karıştırılmamalı: durchaus — tamamen, pekâlâ.",
+  "_src": "93043595",
+  "_src_reader": "5691314f"
+ },
+ "adverb-370": {
+  "translation_tr": "etrafta, çevrede",
+  "example_tr": "Etrafta her şey sessizdi.",
+  "usage_note_tr": "Tek başına — yazı dilinde, çoğu zaman rings umher — her yanda. Daha çok fiilin bir parçası: umhergehen (oraya buraya dolaşmak), umherliegen (her yanda dağınık durmak).",
+  "_src": "4f457702",
+  "_src_reader": "9af7bf35"
+ },
+ "adverb-371": {
+  "translation_tr": "talihsizlik eseri, ne yazık ki",
+  "example_tr": "Talihsizlik eseri yağmur tam mangal yaparken başladı.",
+  "usage_note_tr": "Karşıt anlamlısı: glücklicherweise.",
+  "_src": "c24fd8d0",
+  "_src_reader": "fa6f2c7f"
+ },
+ "adverb-372": {
+  "translation_tr": "bu arada, o arada",
+  "example_tr": "Ben yemeği pişiriyorum, sen bu arada sofrayı kurabilirsin.",
+  "usage_note_tr": "Eş anlamlısı: inzwischen, währenddessen.",
+  "_src": "49219fd0",
+  "_src_reader": "274592c7"
+ },
+ "adverb-373": {
+  "translation_tr": "boş yere, boşuna, nafile",
+  "example_tr": "Boş yere bir telefon bekledik.",
+  "usage_note_tr": "Ayrıca sein fiilinden sonra: Alle Mühe war vergebens. İsimden önce — vergeblich: ein vergeblicher Versuch.",
+  "_src": "18d8aa45",
+  "_src_reader": "f46f46fa"
+ },
+ "adverb-374": {
+  "translation_tr": "çok, gönülden (teşekkür ve özürlerde)",
+  "example_tr": "Yardımın için sana çok teşekkür ederim.",
+  "usage_note_tr": "Neredeyse yalnızca nezaket kalıplarında: Danke vielmals! — Çok teşekkürler! Entschuldigen Sie vielmals! — Çok özür dilerim! “Birçok kez” anlamı — nadir.",
+  "_src": "3a27ff01",
+  "_src_reader": "74b89252"
+ },
+ "adverb-375": {
+  "translation_tr": "önceden; önce, ilk olarak",
+  "example_tr": "Biletlerin önceden internetten alınması gerekiyor.",
+  "usage_note_tr": "Yazışmalarda sık: Vielen Dank vorab! — Şimdiden teşekkürler!",
+  "_src": "444a0ae2",
+  "_src_reader": "853f0791"
+ },
+ "adverb-376": {
+  "translation_tr": "her ihtimale karşı, ne olur ne olmaz",
+  "example_tr": "Her ihtimale karşı yanıma bir kazak alıyorum.",
+  "usage_note_tr": "“Her ihtimale karşı” demektir, “dikkatle” (vorsichtig) değil.",
+  "_src": "bcc933e4",
+  "_src_reader": "6294bbb7"
+ },
+ "adverb-377": {
+  "translation_tr": "bu arada, o sırada",
+  "example_tr": "Anne baba alışverişe gitti, çocuklar da o sırada parkta oynadı.",
+  "usage_note_tr": "Zarf: ondan sonra fiil ikinci sırada gelir (Währenddessen spielten …). während bağlacından sonra fiil sona gider.",
+  "_src": "131bcb58",
+  "_src_reader": "274592c7"
+ },
+ "adverb-378": {
+  "translation_tr": "gerçekten, hakikaten",
+  "example_tr": "Bu gerçekten kolay bir karar değildi.",
+  "usage_note_tr": "Yazı dilinde, eskimekte olan; kulağa ağırbaşlı ve törensel gelir. Genellikle: wirklich.",
+  "_src": "68f3e5b6",
+  "_src_reader": "d61fe8f4"
+ },
+ "adverb-379": {
+  "translation_tr": "çok daha, kat kat; açık ara (en …)",
+  "example_tr": "Yeni model eskisinden çok daha sessiz.",
+  "usage_note_tr": "Yalnızca karşılaştırma ya da üstünlük derecesinden önce: weitaus besser, der weitaus beste.",
+  "_src": "a6a638cb",
+  "_src_reader": "0e505eb2"
+ },
+ "adverb-380": {
+  "translation_tr": "bu sırada, -ken (yan cümlede); ne yaparken, ne sırasında (soru); gerçi, ama",
+  "example_tr": "Seyahatini anlatırken birçok fotoğraf gösterdi.",
+  "usage_note_tr": "wo + bei: yan cümlede fiil sona gider. Soru: Wobei hast du dich verletzt? — Ne yaparken yaralandın? Konuşma dilinde cümle başında — “gerçi, ama”: Wobei: das könnte teuer werden.",
+  "_src": "849ee9b1",
+  "_src_reader": "dc149ee2"
+ },
+ "adverb-381": {
+  "translation_tr": "bu yüzden, bunun sonucunda; neyle, ne yoluyla",
+  "example_tr": "Tren rötar yaptı, bu yüzden aktarmayı kaçırdık.",
+  "usage_note_tr": "wo + durch: yan cümlede fiil sona gider. Soru: Wodurch ist der Schaden entstanden? — Hasara ne yol açtı? İnsanlar için: durch wen.",
+  "_src": "7e02f40f",
+  "_src_reader": "278f467d"
+ },
+ "adverb-382": {
+  "translation_tr": "neyde, nerede (soru); içinde … olan, -diği yer / -dığı yer",
+  "example_tr": "İki tarife arasındaki fark nerede yatıyor?",
+  "usage_note_tr": "wo + in. Çoğu zaman bestehen, liegen ile: Worin besteht das Problem? İlgi cümlesinde: das Haus, worin sie wohnte — onun (kadın) oturduğu ev. İnsanlar için: in wem.",
+  "_src": "c4fb4c1c",
+  "_src_reader": "964f807a"
+ },
+ "adverb-383": {
+  "translation_tr": "zaman zaman, ara ara; geçici olarak, bir süre",
+  "example_tr": "Öğleden sonra hava zaman zaman güneşli.",
+  "usage_note_tr": "İsimden önce genellikle — zeitweilig: eine zeitweilige Störung.",
+  "_src": "a686ee43",
+  "_src_reader": "edd4270b"
+ },
+ "adverb-384": {
+  "translation_tr": "tesadüfen, rastlantı eseri",
+  "example_tr": "Eski öğretmenime trende tesadüfen rastladım.",
+  "usage_note_tr": "Eş anlamlısı: zufällig. Kibar soru: Weißt du zufälligerweise, wo …? — Acaba … nerede, biliyor musun?",
+  "_src": "11df0a15",
+  "_src_reader": "5768fc1d"
+ },
+ "adverb-385": {
+  "translation_tr": "bazen, zaman zaman",
+  "example_tr": "Bazen köy hayatını özlüyorum.",
+  "usage_note_tr": "Yazı dilinde kullanılır. Genellikle: manchmal.",
+  "_src": "84806276",
+  "_src_reader": "f2584b74"
+ },
+ "adverb-386": {
+  "translation_tr": "şüphesiz, hiç şüphesiz",
+  "example_tr": "Burası şüphesiz şehrin en iyi restoranı.",
+  "usage_note_tr": "Eş anlamlısı: zweifellos, daha vurgulu.",
+  "_src": "2e441bda",
+  "_src_reader": "f2a20776"
+ },
+ "adverb-387": {
+  "translation_tr": "görünüşe göre, anlaşılan",
+  "example_tr": "Anlaşılan randevuyu unutmuş, gelmedi.",
+  "usage_note_tr": "Karıştırılmamalı: anscheinend — “görünüşe göre öyle, muhtemelen de öyle”, scheinbar — “yalnızca öyle görünüyor, aslında öyle değil”.",
+  "_src": "615a85e3",
+  "_src_reader": "18c11842"
+ },
+ "adverb-388": {
+  "translation_tr": "kesinlikle, mutlaka",
+  "example_tr": "Şimdi çıkmazsak otobüsü kesinlikle kaçıracağız.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. “Garantili” (garantierte Qualität) — garantieren fiilinin bir biçimi.",
+  "_src": "6310b192",
+  "_src_reader": "e717b260"
+ },
+ "adverb-389": {
+  "translation_tr": "canlı yayında; canlı olarak, bizzat",
+  "example_tr": "Bu akşam final maçı televizyonda canlı yayınlanıyor.",
+  "usage_note_tr": "Çekilmez. Duden sözlüğünde — çekimsiz sıfat; isimden önce bitişik ya da kısa çizgiyle yazılır: das Livekonzert / Live-Konzert.",
+  "_src": "cfef5eee",
+  "_src_reader": "445528e0"
+ },
+ "adverb-390": {
+  "translation_tr": "solo, tek başına; yalnız, sevgilisi olmadan",
+  "example_tr": "Grupta geçen on yıldan sonra şarkıcı artık solo sahneye çıkmak istiyor.",
+  "usage_note_tr": "Çekilmez. Duden sözlüğünde — çekimsiz sıfat. “Yalnız, sevgilisi olmadan” anlamında konuşma dilinde, çoğu zaman şaka yollu: Ich bin zurzeit solo. İsim: das Solo.",
+  "_src": "0c4290d4",
+  "_src_reader": "cf6410d6"
+ },
+ "adverb-391": {
+  "translation_tr": "elbette, şüphesiz, mutlaka",
+  "example_tr": "Annenle baban mutlaka şimdiden merak etmiştir, onları arasan iyi olur.",
+  "usage_note_tr": "Aber gewiss! — Elbette!",
+  "_src": "2039ee96",
+  "_src_reader": "47f2ec3d"
+ },
+ "adverb-392": {
+  "translation_tr": "akıllıca, ileriyi düşünerek",
+  "example_tr": "Yaşlı değirmenci uzun yol için akıllıca yanına biraz ekmek almıştı.",
+  "usage_note_tr": "Eskimiş kullanım.",
+  "_src": "6c5bd3ff",
+  "_src_reader": "7fc4c2b7"
+ },
+ "adverb-393": {
+  "translation_tr": "aşağı; kahrolsun (sloganlarda)",
+  "example_tr": "Çocuklar saatlerce trambolinde yukarı aşağı zıpladı.",
+  "usage_note_tr": "Genellikle kalıp ifadelerde: auf und nieder — yukarı aşağı; Nieder mit …! — Kahrolsun …!",
+  "_src": "5afda898",
+  "_src_reader": "2bfd42a9"
+ },
+ "adverb-394": {
+  "translation_tr": "çoğunlukla, ağırlıklı olarak",
+  "example_tr": "Mahallemizde çoğunlukla çocuklu genç aileler oturuyor.",
+  "_src": "b6b38734",
+  "_src_reader": "1d162217"
+ },
+ "adverb-395": {
+  "translation_tr": "şüphesiz, kuşkusuz",
+  "example_tr": "Bu, şüphesiz hayatımızın en güzel tatiliydi.",
+  "_src": "d42f84af",
+  "_src_reader": "f2a20776"
+ },
+ "adverb-396": {
+  "translation_tr": "yaklaşık, neredeyse",
+  "example_tr": "Arabanın tamiri yaklaşık üç yüz avroya mal oldu.",
+  "usage_note_tr": "Daha nadir olarak isimden önce: eine annähernde Schätzung — yaklaşık bir tahmin.",
+  "_src": "b360d8a2",
+  "_src_reader": "33312856"
+ },
+ "adverb-397": {
+  "translation_tr": "nihayetinde, sonuç olarak",
+  "example_tr": "Hangi işin sana daha uygun olduğuna nihayetinde kendin karar vermelisin.",
+  "usage_note_tr": "Eş anlamlıları: schließlich, schlussendlich. Nadiren isimden önce: die letztendliche Entscheidung — nihaî karar.",
+  "_src": "1bba6f3e",
+  "_src_reader": "e8fc1d7a"
+ },
+ "adverb-398": {
+  "translation_tr": "son derece, pek, en üst derecede",
+  "example_tr": "Teklif son derece ilginç geliyor ama biraz daha düşünmem gerek.",
+  "usage_note_tr": "Sıfattan ya da zarftan önce gelir: höchst gefährlich. “En yüksek, en üst” — hoch kelimesinin üstünlük derecesidir: der höchste Berg, am höchsten.",
+  "_src": "33f66bf0",
+  "_src_reader": "60dda336"
+ },
+ "adverb-399": {
+  "translation_tr": "bizzat, şahsen",
+  "example_tr": "Doğum günümü patron bizzat kendisi kutladı.",
+  "usage_note_tr": "Birinin (çoğu zaman önemli biri) beklenmedik şekilde bir şeyi kendisinin yaptığını vurgular. Karıştırılmamalı: höchst persönlich — tamamen kişisel.",
+  "_src": "3b3277a6",
+  "_src_reader": "ddc86582"
+ },
+ "adverb-400": {
+  "translation_tr": "gizli görevde, gizlice",
+  "example_tr": "Bir meslektaşı yıllarca polis olarak gizli görevde çalıştı.",
+  "usage_note_tr": "Biçimi değişmez.",
+  "_src": "f155518b",
+  "_src_reader": "1f24ae90"
+ },
+ "adverb-401": {
+  "translation_tr": "bol bol, bolca, yeterince; epey, oldukça, fazlasıyla; aşkın, -den fazla / -dan fazla",
+  "example_tr": "Çekinme, buyur; tencerede herkese yetecek kadar çorba daha var.",
+  "usage_note_tr": "“Epey, fazlasıyla” anlamında (sıfattan önce) konuşma dilinde: reichlich teuer — epey pahalı. Sayıyla: reichlich drei Stunden — üç saati aşkın, üç saatten fazla.",
+  "_src": "47f0b69c",
+  "_src_reader": "a67555c2"
+ },
+ "adverb-402": {
+  "translation_tr": "sağ salim, hasarsız, sapasağlam",
+  "example_tr": "Sarsıntılı yolculuğa rağmen bütün kadehler bize sapasağlam ulaştı.",
+  "usage_note_tr": "Ayrıca Genitiv alan edat: unbeschadet der neuen Regeln — yeni kurallara rağmen.",
+  "_src": "f24d7905",
+  "_src_reader": "3386771b"
+ },
+ "adverb-403": {
+  "translation_tr": "ceza görmeden, cezasız",
+  "example_tr": "Bu öğretmenin dersinde kimse ceza görmeden telefonla oynayamaz.",
+  "_src": "c697d899",
+  "_src_reader": "623fd703"
+ },
+ "adverb-404": {
+  "translation_tr": "gerçekten, hakikaten",
+  "example_tr": "Bu gerçekten şimdiye kadar yediğim en güzel yemekti.",
+  "_src": "7cd35656",
+  "_src_reader": "b8b86b31"
+ },
+ "adverb-405": {
+  "translation_tr": "saygılarımla (resmî mektubun sonunda)",
+  "example_tr": "Bugün artık neredeyse kimse iş mektubunun altına “saygılarımla” yazmıyor.",
+  "usage_note_tr": "Resmî mektubun sonunda nezaket kalıbı; bugün genellikle Mit freundlichen Grüßen yazılır.",
+  "_src": "c4e8b396",
+  "_src_reader": "011f3817"
+ },
+ "adverb-406": {
+  "translation_tr": "tam olarak söylemek gerekirse, aslına bakılırsa",
+  "example_tr": "Aslına bakılırsa sadece üç haftadır tanışıyoruz.",
+  "usage_note_tr": "Duden sözlüğü ayrı yazılışı önerir: genau genommen. Yakın anlamlısı: streng genommen, eigentlich.",
+  "_src": "5e8efe4c",
+  "_src_reader": "3b4412b9"
+ },
+ "adverb-407": {
+  "translation_tr": "içinden, arasından geçerek; boyunca (bütün … boyunca)",
+  "example_tr": "Güneş kalın bulutların arasından parlıyordu.",
+  "usage_note_tr": "Mekân anlamında — durch + Akkusativ + hindurch çerçevesinde: durch den Park hindurch — parkın (tam) içinden. Zaman için — Akkusativ hâlindeki isimden sonra: den ganzen Tag hindurch — bütün gün, gün boyunca. Ayrıca fiil ön eki: hindurchgehen.",
+  "_src": "f8943694",
+  "_src_reader": "a4a211b0"
+ },
+ "adverb-408": {
+  "translation_tr": "yapabilecek durumda, muktedir",
+  "example_tr": "Uzun gece vardiyasından sonra gözlerimi açık tutacak hâlim neredeyse yoktu.",
+  "usage_note_tr": "Genellikle sein ile (ayrıca sich imstande fühlen): imstande sein, etwas zu tun / zu etwas imstande sein — (bir şeyi) yapabilecek durumda olmak. Alaycı anlamda: er ist imstande und … — ondan (aptalca bir şey yapması) beklenir. Ayrıca: im Stande.",
+  "_src": "dfcb8a99",
+  "_src_reader": "e8724833"
+ },
+ "adverb-409": {
+  "translation_tr": "(bir şeyi) yapmadan edememek, (bir şeyden) kendini alamamak",
+  "example_tr": "Bu manzara karşısında kahkahalarla gülmekten kendini alamadı.",
+  "usage_note_tr": "Yalnızca können / kommen ile ve genellikle olumsuz (nicht, kaum): nicht umhinkönnen / nicht umhinkommen, etwas zu tun — bir şeyi yapmadan edememek. Infinitiv bitişik yazılır; cümlede: ich kann nicht umhin, …",
+  "_src": "e3110a8e",
+  "_src_reader": "526fef83"
+ },
+ "adverb-410": {
+  "translation_tr": "çevrim içi, internet üzerinden; ağa bağlı, internette",
+  "example_tr": "Sinema biletlerini dün akşam internet üzerinden aldım.",
+  "usage_note_tr": "Çekilmez. online sein — çevrim içi olmak; online gehen — internete girmek. İsimden önce — bitişik: der Onlineshop (Online-Shop). Karşıt anlamlısı: offline.",
+  "_src": "df06d315",
+  "_src_reader": "9c9faead"
+ },
+ "adverb-411": {
+  "translation_tr": "ayrı ayrı, birbirinden uzakta, aralıklı",
+  "example_tr": "Doğum günlerimiz arasında yalnızca iki gün var.",
+  "usage_note_tr": "Ayrılabilen fiillerin parçası: auseinandernehmen — sökmek (parçalarına ayırmak), auseinanderfallen — dağılmak, sich auseinandersetzen — (bir şeyle) uğraşmak. Konuşma dilinde: auseinander sein — ayrılmış olmak (çift için).",
+  "_src": "31fa812a",
+  "_src_reader": "cdd70a0a"
+ },
+ "adverb-412": {
+  "translation_tr": "bedava, ücretsiz",
+  "example_tr": "Burada her kahvenin yanında bedava küçük bir kurabiye veriliyor.",
+  "usage_note_tr": "Çekilmez. İsimden önce — kostenlos (eine kostenlose Probe) ya da bitişik: die Gratisprobe.",
+  "_src": "751e988b",
+  "_src_reader": "480f949c"
+ },
+ "adverb-413": {
+  "translation_tr": "benim yüzümden, benim için; bence olur, bana kalırsa (karşı değilim); örneğin, diyelim",
+  "example_tr": "Lütfen planlarınızı benim yüzümden değiştirmeyin, ben tek başıma idare ederim.",
+  "usage_note_tr": "“Bence olur, karşı değilim” anlamında konuşma dilinde: Meinetwegen! — Peki, bence sakıncası yok. Aynı şekilde: deinetwegen, seinetwegen, ihretwegen, unseretwegen, euretwegen.",
+  "_src": "a7990937",
+  "_src_reader": "7b0576fb"
+ },
+ "adverb-414": {
+  "translation_tr": "eksi; sıfırın altında",
+  "example_tr": "Bu gece sıcaklığın eksi on dereceye kadar düşmesi bekleniyor.",
+  "usage_note_tr": "Hesapta (bağlaç): zehn minus vier ist sechs — on eksi dört altı eder. İş dilinde (edat) — düşülerek: der Preis minus Rabatt. Not için: eine Zwei minus — “2 eksi” (2 = iyi). İsim: das Minus — eksi, açık.",
+  "_src": "929cdf7e",
+  "_src_reader": "e0bf6aad"
+ },
+ "adverb-415": {
+  "translation_tr": "artı; sıfırın üstünde",
+  "example_tr": "Ocakta bile gündüzleri genellikle artı üç derece vardı.",
+  "usage_note_tr": "Hesapta (bağlaç): zwei plus zwei ist vier — iki artı iki dört eder. İş dilinde (edat) — artı, üstüne eklenerek: der Preis plus Versand. Not için: eine Zwei plus — “2 artı” (2 = iyi). İsim: das Plus — artı, avantaj; kâr.",
+  "_src": "f543eb7d",
+  "_src_reader": "837f4713"
+ },
+ "adverb-416": {
+  "translation_tr": "içeri, oraya (konuşandan uzağa); (bis in … hinein) ta … -e kadar / -a kadar (zaman için de)",
+  "example_tr": "Kapı açıktı, ben de öylece içeri girdim.",
+  "usage_note_tr": "hin — konuşandan uzağa: hinein — içeri, oraya; herein — içeri, buraya (konuşana doğru). Konuşma dilinde: rein. Fiillerin parçası: hineingehen, hineinschauen. bis spät in die Nacht hinein — gece geç saatlere kadar.",
+  "_src": "d88d0da0",
+  "_src_reader": "06fc3bf9"
+ },
+ "adverb-417": {
+  "translation_tr": "etrafında, çevresinde; civarında, sularında; geçti, bitti (zaman için)",
+  "example_tr": "Akşamları çocuklar kamp ateşinin etrafında oturup şarkı söylüyor.",
+  "usage_note_tr": "Çoğu zaman um ile: um den Tisch herum — masanın etrafında. “Civarında” anlamında: um fünf herum — beş sularında (konuşma dilinde). Fiillerin parçası: herumlaufen — oraya buraya koşmak, herumliegen — ortada dağınık durmak. Die Woche ist herum. — Hafta geçti. Konuşma dilinde: rum (rumlaufen).",
+  "_src": "8be9f9a0",
+  "_src_reader": "4309266d"
+ },
+ "adverb-418": {
+  "translation_tr": "karşıya, oraya; buraya, bize",
+  "example_tr": "Hadi, caddenin karşısına hızlıca geçelim.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. = hinüber (oraya, konuşandan uzağa) / herüber (buraya, konuşana doğru). Fiillerin parçası: rüberkommen, rübergehen, rüberreichen.",
+  "_src": "e67434c3",
+  "_src_reader": "74132d36"
+ },
+ "adverb-419": {
+  "translation_tr": "aşağı",
+  "example_tr": "Kahvaltıdan sonra hemen çöpü aşağı indireceğim.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. = hinunter (aşağı, konuşandan uzağa) / herunter (aşağı, konuşana doğru). Fiillerin parçası: runterfallen, runterkommen. Köpfe runter! — Başlarınızı eğin!",
+  "_src": "5a5003de",
+  "_src_reader": "110adf6d"
+ },
+ "adverb-420": {
+  "translation_tr": "(belli bir) ifadeyle, (belli bir) tavırla (dreinschauen, dreinblicken fiillerinde); oraya, bunun içine (= darein)",
+  "example_tr": "Bu sabah neden öyle somurtkan bakıyorsun?",
+  "usage_note_tr": "En çok fiillerin parçası olarak: traurig / verängstigt dreinschauen, dreinblicken — üzgün / korkmuş bakmak; dreinreden — (lafa) karışmak; sich dreinfinden — razı olmak, boyun eğmek. “Oraya, bunun içine” (= darein) anlamında konuşma dilinde.",
+  "_src": "cf2a8cd4",
+  "_src_reader": "7c241090"
+ },
+ "adverb-421": {
+  "translation_tr": "bunun içinde, onun içinde; bu konuda, bu bakımdan",
+  "example_tr": "Eski bir bavul buldum, içinde büyükannemin mektupları vardı.",
+  "usage_note_tr": "in + nesne yerine geçer, Wo? (nerede?) sorusunda: im Koffer → darin; insanlar için — in + zamir. Darin hast du recht. — Bu konuda haklısın. Konuşma dilinde: drin. Wohin? (nereye?) → hinein, darein.",
+  "_src": "7b4ccf99",
+  "_src_reader": "94df9ff0"
+ },
+ "adverb-422": {
+  "translation_tr": "bundan, ondan (içinden); bundan (sonuç, malzeme, kaynak için)",
+  "example_tr": "Dolapta bir kutu var, içinden ihtiyacın olanı al.",
+  "usage_note_tr": "aus + nesne yerine geçer; insanlar için — aus + zamir. Was wird daraus? — Bundan ne çıkacak? Daraus wird nichts. — Bundan bir şey çıkmaz. Konuşma dilinde: draus.",
+  "_src": "73191cc7",
+  "_src_reader": "7cdf5934"
+ },
+ "adverb-423": {
+  "translation_tr": "buna, bunun üstünde (burada); bundan sonra, ardından; bunun sonucunda, bunun üzerine",
+  "example_tr": "Buna maalesef sana net bir cevap veremem.",
+  "usage_note_tr": "auf + nesne yerine geçer (darauf gibi ama hier ile — “işte buna”); insanlar için — auf + zamir. Hikâyelerde sık: Hierauf ging er fort. — Bundan sonra (ardından) gitti.",
+  "sense_marks": [
+   {
+    "meaning_tr": "bundan sonra, ardından"
+   }
+  ],
+  "_src": "673fda65",
+  "_src_reader": "1ff0400a"
+ },
+ "adverb-424": {
+  "translation_tr": "ondan sonra, sonra; daha sonra",
+  "example_tr": "Önce sakin sakin öğle yemeğimizi yiyelim, sonra yürüyüşe çıkalım.",
+  "usage_note_tr": "Yöresel; masallarda sık. Genellikle danach, nachher denir.",
+  "_src": "a6389f96",
+  "_src_reader": "8cb62fcc"
+ },
+ "adverb-425": {
+  "translation_tr": "hemen, derhâl",
+  "example_tr": "Kız kardeşinin mektubunu okudu ve hemen cevap verdi.",
+  "usage_note_tr": "= sofort.",
+  "_src": "d718910a",
+  "_src_reader": "2eee9b79"
+ },
+ "adverb-426": {
+  "translation_tr": "her seferinde, her defasında",
+  "example_tr": "Onu ziyarete her gittiğimizde büyükannem kek yapar.",
+  "usage_note_tr": "Ayrı yazılır; eski yazım (1996'dan önce, eski kitaplarda): jedesmal. jedes Mal, wenn … — her … -diğinde / -dığında.",
+  "_src": "86625eb0",
+  "_src_reader": "4713e4e5"
+ },
+ "adverb-427": {
+  "translation_tr": "genellikle, çoğu zaman; büyük ölçüde, çoğunlukla",
+  "example_tr": "Hafta sonları genellikle saat dokuza kadar uyurum.",
+  "usage_note_tr": "= meistens. Karıştırılmamalı: die meisten Leute — insanların çoğu (viel kelimesinin üstünlük derecesi).",
+  "_src": "0031789d",
+  "_src_reader": "286f794b"
+ },
+ "adverb-428": {
+  "translation_tr": "tamamen, büsbütün",
+  "example_tr": "İkinci fırtınadan sonra bahçemiz tamamen sular altında kaldı.",
+  "_src": "d1c6df49",
+  "_src_reader": "c7b690eb"
+ },
+ "adverb-429": {
+  "translation_tr": "tam da, illa ki (sitem ya da şaşkınlıkla)",
+  "example_tr": "Neden yağmur tam da hafta sonu yağmak zorunda?",
+  "usage_note_tr": "Konuşma dilinde kullanılır. Olası görünmeyen bir şey için de: Warum sollte ausgerechnet er gewinnen? — Neden kazanan illa o olsun? Karıştırılmamalı: ausrechnen fiilinin bir biçimi — Ich habe die Kosten ausgerechnet. — Masrafları hesapladım.",
+  "_src": "d8ea2ab4",
+  "_src_reader": "86c50ac1"
+ },
+ "adverb-430": {
+  "translation_tr": "dosdoğru, doğruca; hemen, lafı uzatmadan",
+  "example_tr": "Film biter bitmez dosdoğru yatağa gitti.",
+  "usage_note_tr": "Konuşma dilinde kullanılır.",
+  "_src": "af6cb404",
+  "_src_reader": "6dd06c46"
+ },
+ "adverb-431": {
+  "translation_tr": "zaten, nasılsa; (seit eh und je, wie eh und je) ezelden beri, her zamanki gibi; (esk., bağlaç = ehe) -meden önce / -madan önce",
+  "example_tr": "Şemsiyeyi rahatça alabilirsin, bana zaten lazım değil.",
+  "usage_note_tr": "“Zaten” anlamında konuşma dilinde (Güney Almanya, Avusturya) = sowieso. seit eh und je — ezelden beri; wie eh und je — her zamanki gibi. Bağlaç olarak (esk.) eh = ehe “-meden önce”: eh ich gehe — ben gitmeden önce.",
+  "_src": "00cb0d4a",
+  "_src_reader": "e2b673d1"
+ },
+ "adverb-432": {
+  "translation_tr": "şüphesiz, mutlaka",
+  "example_tr": "Yaşlı papaz şöyle dedi: “Tanrı size mutlaka yardım edecektir.”",
+  "usage_note_tr": "Eskimekte olan. Genellikle: gewiss, bestimmt. Eski yazım: gewißlich.",
+  "_src": "712a8b19",
+  "_src_reader": "39f1afda"
+ },
+ "adverb-433": {
+  "translation_tr": "bin kere, yüz kere (çok sık); bin kat, çok daha (+ karşılaştırma derecesi)",
+  "example_tr": "Sana kapıyı kapatmanı bin kere söyledim.",
+  "usage_note_tr": "“Çok sık; çok daha” anlamında konuşma dilinde: Das ist tausendmal besser. — Bu bin kat daha iyi.",
+  "_src": "f38cdbc6",
+  "_src_reader": "f66d639d"
+ },
+ "adverb-434": {
+  "translation_tr": "oraya, bunun içine (içeri); buna (sich darein fügen — buna boyun eğmek)",
+  "example_tr": "Boş bir karton kutu buldu ve eski mektupları içine koydu.",
+  "usage_note_tr": "Edebî, eskimekte olan. Bugün genellikle: hinein, da hinein. Konuşma dilinde: drein; dreinschauen, dreinblicken fiillerinde — (belli bir ifadeyle) bakmak: verängstigt dreinschauen — korkmuş korkmuş bakmak.",
+  "_src": "3bd62974",
+  "_src_reader": "9fa4f35c"
+ },
+ "adverb-435": {
+  "translation_tr": "buna, onun üstüne (bunun üstünde, onun üstünde); bundan sonra, sonra; buna cevaben, bunun sonucunda",
+  "example_tr": "Sandalye kırık, lütfen üstüne oturma.",
+  "usage_note_tr": "auf + nesne yerine geçer; insanlar için — auf + zamir (auf ihn). auf alan fiil ve sıfatlarla: stolz darauf — bununla gururlu, sich darauf freuen — bunu sevinçle beklemek, warten darauf — bunu beklemek. “Sonra” anlamı: bald darauf — kısa süre sonra, ein Jahr darauf — bir yıl sonra. Konuşma dilinde: drauf.",
+  "sense_marks": [
+   {
+    "meaning_tr": "bundan sonra, sonra"
+   }
+  ],
+  "_src": "98f8ea09",
+  "_src_reader": "4cafb1e3"
+ },
+ "adverb-436": {
+  "translation_tr": "çok fazla",
+  "example_tr": "Dün akşam kesinlikle çok fazla yedim.",
+  "usage_note_tr": "Ayrı yazılır; eski yazım (1996'dan önce, eski kitaplarda): zuviel. Sayılabilen isimlerin çoğuluyla: zu viele Leute — çok fazla insan. İsim: das Zuviel — fazlalık.",
+  "_src": "a095bbb0",
+  "_src_reader": "87f7da24"
+ },
+ "adverb-437": {
+  "translation_tr": "bunu, onu (düşünmek, hatırlamak), buna (inanmak); bunun üzerinde, onun üzerinde, buna (tutunmak)",
+  "example_tr": "Lütfen kapıyı kilitlemeyi unutma.",
+  "usage_note_tr": "an + nesne yerine geçer; insanlar için — an + zamir (an ihn). an alan fiil ve sıfatlarla: daran denken — bunu hatırlamak, daran glauben — buna inanmak, daran arbeiten — bunun üzerinde çalışmak, interessiert daran — bununla ilgilenen. Es liegt daran, dass … — Bunun sebebi şu: … Konuşma dilinde: dran.",
+  "_src": "e1637cca",
+  "_src_reader": "a929157f"
+ },
+ "adverb-438": {
+  "translation_tr": "bu yüzden, bu nedenle; bunu, bununla (rica etmek, ilgilenmek); bunun etrafında",
+  "example_tr": "Hastaydım, bu yüzden gelemedim.",
+  "usage_note_tr": "um + nesne yerine geçer; insanlar için — um + zamir (um ihn). um alan fiillerle: darum bitten — bunu rica etmek, sich darum kümmern — bununla ilgilenmek. Es geht darum, dass … — Mesele şu ki … Darum! — Öyle işte! Konuşma dilinde: drum.",
+  "_src": "5deb1f97",
+  "_src_reader": "0cee2848"
+ },
+ "adverb-439": {
+  "translation_tr": "bunun altında, onun altında (bunun altına); aralarında, bunlar dahil; (miktar için) daha az, daha düşük",
+  "example_tr": "Halıyı kaldırdı ve altında eski bir anahtar buldu.",
+  "usage_note_tr": "unter + nesne yerine geçer; insanlar için — unter + zamir (unter ihm). Aralarında: viele Gäste, darunter auch der Bürgermeister — aralarında belediye başkanının da bulunduğu birçok misafir. Was verstehst du darunter? — Bundan ne anlıyorsun? unter alan fiillerle: darunter leiden — bundan dolayı acı çekmek. Konuşma dilinde: drunter.",
+  "_src": "4cd78551",
+  "_src_reader": "c3c6952d"
+ },
+ "adverb-440": {
+  "translation_tr": "bunun hakkında, onun hakkında (konuşmak, bilmek); bundan, ondan; bunlardan, onlardan (bir kısmı)",
+  "example_tr": "Bunun hakkında daha önce hiçbir şey duymadım.",
+  "usage_note_tr": "von + nesne yerine geçer; insanlar için — von + zamir (von ihm). von alan fiil ve sıfatlarla: davon sprechen — bundan söz etmek, davon träumen — bunun hayalini kurmak, davon abhängen — buna bağlı olmak, davon überzeugt — buna inanmış. Bir kısım: Zwei davon sind kaputt. — Bunlardan ikisi bozuk. Karıştırılmamalı: davonlaufen, davonfahren — “uzağa” anlamında ayrılabilen ön ek.",
+  "_src": "8aa45688",
+  "_src_reader": "5ae23e6f"
+ },
+ "adverb-441": {
+  "translation_tr": "buna, bununla ilgili (söylemek, eklemek); bunun için; üstelik, ayrıca",
+  "example_tr": "Buna ne dersin?",
+  "usage_note_tr": "zu + nesne yerine geçer; insanlar için — zu + zamir (zu ihm). Bunun için: Dazu braucht man viel Geduld. — Bunun için çok sabır gerekir. Ich habe keine Lust dazu. — Buna hiç hevesim yok. Ich bin nicht dazu gekommen. — Fırsat bulamadım. noch dazu — üstelik. Karıştırılmamalı: dazugehören, dazukommen — ayrılabilen ön ek (fiilin parçası).",
+  "_src": "200e6eed",
+  "_src_reader": "25923ed2"
+ },
+ "adverb-442": {
+  "translation_tr": "neyi, neye, neyin üzerinde (soru); neyden, nereden (tanımak, anlamak)",
+  "example_tr": "Şu anda neyi düşünüyorsun?",
+  "usage_note_tr": "wo + an: an alan fiillerle bir şey hakkında soru: denken an → Woran denkst du? Woran arbeitest du? — Ne üzerinde çalışıyorsun? Woran liegt das? — Bunun sebebi ne? Woran erkennt man …? — … nereden anlaşılır? İnsanlar için: An wen …? Cevap: daran.",
+  "_src": "9ff023c7",
+  "_src_reader": "9587ac9b"
+ },
+ "adverb-443": {
+  "translation_tr": "(konuş.) bunu (düşünmek, hatırlamak); bunun üzerinde, onun üzerinde, buna (= daran); (an etwas ist etwas dran) bunda bir şey var; (dran sein) (birinin) sırası",
+  "example_tr": "Unutma, yarın yine okul var!",
+  "usage_note_tr": "daran kelimesinin konuşma dilindeki biçimi. Am Knochen ist kaum Fleisch dran. — Kemikte neredeyse hiç et yok. An dem Gerücht ist etwas dran. — Bu söylentide bir gerçeklik payı var. jemanden drannehmen — (öğrenciyi) derste kaldırmak. İfadeler: dran sein, spät dran sein, gut / schlecht dran sein, drauf und dran sein.",
+  "_src": "5d2e1e82",
+  "_src_reader": "c63bc808"
+ },
+ "adverb-444": {
+  "translation_tr": "(konuş.) bu yüzden; bunu, bununla (rica etmek, ilgilenmek); bunun etrafında",
+  "example_tr": "Telefonumu unutmuştum, bu yüzden almak için geri döndüm.",
+  "usage_note_tr": "darum kelimesinin konuşma dilindeki biçimi. sei’s drum — olsun, varsın; drum herumreden — lafı dolandırmak; mit allem Drum und Dran — gereken her şeyiyle; das Drumherum — işin çevresi, etrafındaki her şey.",
+  "_src": "4c3dda07",
+  "_src_reader": "1485d726"
+ },
+ "adverb-445": {
+  "translation_tr": "teşekkürler, sağ ol",
+  "example_tr": "Güzel çiçekler için teşekkürler!",
+  "usage_note_tr": "Ayrıca: danke schön, danke sehr — çok teşekkürler; Nein, danke. — Hayır, teşekkürler. Cevap: Bitte! / Bitte schön! — Rica ederim. Kökeni: ich danke (teşekkür ederim); teşekkür etmek — danken (+ Dat.): Ich danke dir für alles.",
+  "_src": "74ee9234",
+  "_src_reader": "d13f8615"
+ },
+ "adverb-446": {
+  "translation_tr": "evet; (cümle ortasında) ya, işte, zaten; (virgülden sonra, pekiştirme) hatta",
+  "example_tr": "Bizimle geliyor musun? – Evet, memnuniyetle.",
+  "usage_note_tr": "Bir ifadenin ortasında parçacık — “ya, zaten”: Das ist ja toll! — Bu harika ya! Du weißt ja, … — Biliyorsun ya, … Rica ve uyarıda ja nicht — “sakın, asla”: Komm ja nicht zu spät! — Sakın geç kalma!; olumsuzluk olmadan — “mutlaka”: Sei ja vorsichtig! — Bak, dikkatli ol! Olumsuz soruya “evet” cevabı — doch. na ja / nun ja — ayrı bir ifade.",
+  "_src": "bf23e3b4",
+  "_src_reader": "4fd601a3"
+ },
+ "adverb-447": {
+  "translation_tr": "hayır",
+  "example_tr": "Biraz daha kahve ister misin? – Hayır, teşekkürler.",
+  "usage_note_tr": "Soruya cevap: Nein! — Hayır! Olumsuz soruya “evet” cevabı — doch (Kommst du nicht? – Doch!). Şaşkınlık: Nein, wie schön! — Aa, ne güzel! Karıştırılmamalı: nicht — değil (bir kelimeyi olumsuzlar), kein — hiç, hiçbir.",
+  "_src": "d3de40ff",
+  "_src_reader": "3f912940"
+ },
+ "adverb-448": {
+  "translation_tr": "uzağa; ileri (devam ederek)",
+  "example_tr": "Vardığımızda tren çoktan gitmişti.",
+  "usage_note_tr": "Daha çok fiilin bir parçası: fortgehen — gitmek, uzaklaşmak, fortfahren — devam etmek (fährt fort zu reden). und so fort — ve saire; in einem fort — durmadan. Karıştırılmamalı: das Fort — kale (istihkâm).",
+  "_src": "2a2eccd3",
+  "_src_reader": "af2bdf8c"
+ },
+ "adverb-449": {
+  "translation_tr": "yukarı (oraya, konuşandan uzağa)",
+  "example_tr": "Merdivenlerden yukarı çatı katına çıkılıyor.",
+  "usage_note_tr": "her — konuşana doğru, hin — konuşandan uzağa. hinauf — oraya yukarı, herauf — buraya yukarı. Daha çok fiilin bir parçası: hinaufgehen, hinaufsteigen. Konuşma dilinde: rauf.",
+  "_src": "b03236ba",
+  "_src_reader": "8c5e7fd1"
+ },
+ "adverb-450": {
+  "translation_tr": "aşağı (oraya, konuşandan uzağa)",
+  "example_tr": "Dağdan aşağı bisikletle indik.",
+  "usage_note_tr": "her — konuşana doğru, hin — konuşandan uzağa. hinunter — oraya aşağı, herunter — buraya aşağı. Daha çok fiilin bir parçası: hinuntergehen, hinunterschauen. Konuşma dilinde: runter.",
+  "_src": "56455038",
+  "_src_reader": "8fc1edb8"
+ },
+ "adverb-451": {
+  "translation_tr": "aşağı (buraya, konuşana doğru)",
+  "example_tr": "Hemen damdan aşağı in!",
+  "usage_note_tr": "her — konuşana doğru, hin — konuşandan uzağa. herunter — buraya aşağı, hinunter — oraya aşağı. Daha çok fiilin bir parçası: herunterkommen, herunterfallen. Konuşma dilinde: runter.",
+  "_src": "57508c04",
+  "_src_reader": "21aae7c0"
+ },
+ "adverb-452": {
+  "translation_tr": "aşağı (oraya, konuşandan uzağa)",
+  "example_tr": "Dar patika dik bir şekilde vadiye iniyordu.",
+  "usage_note_tr": "Yazı dilinde kullanılır. = hinunter. Daha çok fiilin bir parçası: hinabsteigen, hinabsinken.",
+  "_src": "30183b2e",
+  "_src_reader": "8fc1edb8"
+ },
+ "adverb-453": {
+  "translation_tr": "buraya, bu tarafa",
+  "example_tr": "Komşu bahçeden buraya müzik sesi geliyordu.",
+  "usage_note_tr": "her — konuşana doğru, hin — konuşandan uzağa. herüber — buraya, bir şeyin üzerinden; hinüber — oraya, karşı tarafa. Daha çok fiilin bir parçası: herüberkommen, herüberreichen. Konuşma dilinde: rüber.",
+  "_src": "d8cc75af",
+  "_src_reader": "d1776902"
+ },
+ "adverb-454": {
+  "translation_tr": "karşılamaya, (birine) doğru; (bir şeye) karşıt, aykırı",
+  "example_tr": "Çocuklar babalarını karşılamaya koştu.",
+  "usage_note_tr": "Kime, neye — Dativ hâlinde, çoğu zaman kelimeden sonra: dem Vater entgegen — babayı karşılamaya. Bir şeye rağmen (entgegen allen Erwartungen) — edat. Fiilin parçası: entgegenkommen, entgegennehmen.",
+  "_src": "ee914571",
+  "_src_reader": "85223979"
+ },
+ "adverb-455": {
+  "translation_tr": "de / da, dahi; birlikte (başkalarıyla)",
+  "example_tr": "Derneğin kuruluşunda ben de oradaydım.",
+  "usage_note_tr": "Karıştırılmamalı: mit + Dativ edatı (mit dem Bus). Zarf isimsiz kullanılır, çoğu zaman dabei, dazu, daran kelimelerinden önce: Das gehört mit dazu. — Bu da buna dahil. Das musst du mit berücksichtigen. — Bunu da hesaba katmalısın. Üstünlük derecesiyle — “… biri”: Sie ist mit die Beste. — O (kadın) en iyilerden biri. Kommst du mit? — bu, mitkommen fiilidir.",
+  "_src": "97e88dd9",
+  "_src_reader": "3491b478"
+ },
+ "adverb-456": {
+  "translation_tr": "daha az; daha az (sıfattan önce)",
+  "example_tr": "Bugün dünden daha az vaktim var.",
+  "usage_note_tr": "wenig kelimesinin karşılaştırma derecesi: wenig — weniger — am wenigsten. Çekilmez: weniger Geld, weniger Leute. Sıfattan önce — “daha az”: weniger schön. immer weniger — gittikçe daha az; nicht weniger als — en az, … kadar. Karıştırılmamalı: wenige — az sayıda (wenige Leute). Hesapta — eksi: zehn weniger drei — on eksi üç.",
+  "_src": "90160f54",
+  "_src_reader": "b0c37968"
+ },
+ "adverb-457": {
+  "translation_tr": "uzun süre, uzun uzun; uzun zamandır, çoktandır",
+  "example_tr": "Yürüyüşten sonra pazar günü uzun uzun uyuduk.",
+  "usage_note_tr": "Er schlief lange. — Uzun süre uyudu. Ich warte schon lange. — Uzun zamandır bekliyorum. Wie lange dauert das? — Bu ne kadar sürer? Zarf: lange — länger — am längsten; noch lange nicht — hiç de … değil, daha çok var. Karıştırılmamalı: lang sıfatı (die lange Nacht — uzun gece).",
+  "_src": "0806c001",
+  "_src_reader": "bc09315a"
+ }
+}

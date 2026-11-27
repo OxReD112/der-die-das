@@ -2,7 +2,7 @@
  "lang": "tr",
  "name": "Türkçe",
  "format_version": 1,
- "version": "73ff617ce493",
+ "version": "5d1b250d24c4",
  "source_commit": "dc73eb0623e4b3efa638752fb2ec583a55f492a2",
  "exercise_files": {
   "partikeln__sentences": {
@@ -23,7 +23,7 @@
    ],
    "de": "поле word той же записи",
    "pairs": 430,
-   "done": 10
+   "done": 429
   },
   "modalverben__special_verbs": {
    "source": "deutsch-home/verbformen/modalverben/special_verbs.js",
@@ -32,7 +32,7 @@
    ],
    "de": "поле sentence записи с подставленным answer",
    "pairs": 527,
-   "done": 10
+   "done": 404
   },
   "vielseitige_verben__sentences": {
    "source": "deutsch-home/verbformen/vielseitige_verben/sentences.js",
@@ -49,7 +49,7 @@
    ],
    "de": "поле sentence записи с подставленным answer; VV_FORM_MEANINGS, VV_HINTS, VV_OTHER_WORDS — пусто",
    "pairs": 208,
-   "done": 7
+   "done": 208
   },
   "vielseitige_verben__forms_table": {
    "source": "deutsch-home/verbformen/vielseitige_verben/forms_table.js",
@@ -58,7 +58,19 @@
    ],
    "de": "поле ex ближайшей записи-предка; если нет — пусто",
    "pairs": 77,
-   "done": 3
+   "done": 77
+  },
+  "partizipII__verbs": {
+   "source": "deutsch-home/verbformen/partizipII/verbs.js",
+   "globals": [
+    {
+     "name": "VERBS",
+     "const": true
+    }
+   ],
+   "de": "поле infinitive той же записи",
+   "pairs": 85,
+   "done": 85
   },
   "kasus__prepositions": {
    "source": "deutsch-home/praepositionen/kasus/prepositions.js",
@@ -67,7 +79,7 @@
    ],
    "de": "exampleTranslation → поле example той же записи; остальное → поле example той же записи (первое по DE_KEYS)",
    "pairs": 85,
-   "done": 4
+   "done": 85
   },
   "ortspraepositionen__places": {
    "source": "deutsch-home/praepositionen/ortspraepositionen/places.js",
@@ -78,7 +90,7 @@
    ],
    "de": "article + \" \" + noun той же записи; ORTS_KATEGORIEN, ORTS_ZU_HINTS — пусто",
    "pairs": 77,
-   "done": 3
+   "done": 77
   },
   "verben_mit_praepositionen__verbs": {
    "source": "deutsch-home/praepositionen/verben_mit_praepositionen/verbs.js",
@@ -87,7 +99,16 @@
    ],
    "de": "exampleTranslation → поле example; meaning → поле example той же записи (первое по DE_KEYS)",
    "pairs": 144,
-   "done": 3
+   "done": 144
+  },
+  "home__phrases": {
+   "source": "deutsch-home/phrases.js",
+   "globals": [
+    "PHRASES"
+   ],
+   "de": "поле title той же записи (сама фраза)",
+   "pairs": 30,
+   "done": 30
   }
  },
  "wortschatz_files": {
@@ -95,7 +116,7 @@
    "source": "deutsch-home/wortschatz/example-senses.json",
    "key": "id",
    "items": 5475,
-   "done": 41
+   "done": 964
   }
  },
  "files": {
@@ -105,50 +126,98 @@
   },
   "exercises/artikel__words.json": {
    "items": 430,
-   "done": 10
+   "done": 429
   },
   "exercises/modalverben__special_verbs.json": {
    "items": 527,
-   "done": 10
+   "done": 404
   },
   "exercises/vielseitige_verben__sentences.json": {
    "items": 208,
-   "done": 7
+   "done": 208
   },
   "exercises/vielseitige_verben__forms_table.json": {
    "items": 77,
-   "done": 3
+   "done": 77
+  },
+  "exercises/partizipII__verbs.json": {
+   "items": 85,
+   "done": 85
   },
   "exercises/kasus__prepositions.json": {
    "items": 85,
-   "done": 4
+   "done": 85
   },
   "exercises/ortspraepositionen__places.json": {
    "items": 77,
-   "done": 3
+   "done": 77
   },
   "exercises/verben_mit_praepositionen__verbs.json": {
    "items": 144,
-   "done": 3
+   "done": 144
+  },
+  "exercises/home__phrases.json": {
+   "items": 30,
+   "done": 30
   },
   "wortschatz/example-senses.json": {
    "items": 5475,
-   "done": 41
+   "done": 964
+  },
+  "worterbuch/german-adjective-adverbs.json": {
+   "items": 603,
+   "texts": 1914,
+   "done": 603
   },
   "worterbuch/german-adjectives.json": {
    "items": 1529,
    "texts": 3712,
    "done": 15
   },
+  "worterbuch/german-adverbs.json": {
+   "items": 434,
+   "texts": 1268,
+   "done": 434
+  },
+  "worterbuch/german-articles.json": {
+   "items": 3,
+   "texts": 12,
+   "done": 3
+  },
+  "worterbuch/german-conjunctions.json": {
+   "items": 58,
+   "texts": 263,
+   "done": 58
+  },
   "worterbuch/german-expressions.json": {
    "items": 457,
    "texts": 1533,
    "done": 15
   },
+  "worterbuch/german-function-words.json": {
+   "items": 50,
+   "texts": 150,
+   "done": 50
+  },
   "worterbuch/german-nouns.json": {
    "items": 5377,
    "texts": 13411,
    "done": 15
+  },
+  "worterbuch/german-numerals.json": {
+   "items": 24,
+   "texts": 97,
+   "done": 24
+  },
+  "worterbuch/german-prepositions.json": {
+   "items": 66,
+   "texts": 334,
+   "done": 66
+  },
+  "worterbuch/german-pronouns.json": {
+   "items": 61,
+   "texts": 203,
+   "done": 61
   },
   "worterbuch/german-verbs.json": {
    "items": 2800,

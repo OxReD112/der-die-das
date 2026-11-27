@@ -22,5 +22,612 @@
   "at": [
    "e99bbdde"
   ]
+ },
+ {
+  "en": "became",
+  "ru": "стал(а)",
+  "tr": "oldu",
+  "at": [
+   "9db085d8"
+  ]
+ },
+ {
+  "en": "Passiv",
+  "ru": "пассив",
+  "tr": "Passiv",
+  "at": [
+   "6ab58987",
+   "9db085d8"
+  ]
+ },
+ {
+  "en": "become, get",
+  "ru": "становиться",
+  "tr": "(bir şey) olmak",
+  "at": [
+   "af978a99"
+  ]
+ },
+ {
+  "en": "adjective / noun",
+  "ru": "прилагательное / существительное",
+  "tr": "sıfat / isim",
+  "at": [
+   "4aa06595"
+  ]
+ },
+ {
+  "en": "becomes, became",
+  "ru": "становится, стал(а)",
+  "tr": "oluyor, oldu",
+  "at": [
+   "44ee4aff"
+  ]
+ },
+ {
+  "en": "future",
+  "ru": "будущее",
+  "tr": "gelecek zaman",
+  "at": [
+   "cee4d69e"
+  ]
+ },
+ {
+  "en": "infinitive",
+  "ru": "Infinitiv",
+  "tr": "Infinitiv",
+  "at": [
+   "1ead42f0",
+   "24b16fb7",
+   "551d3e58",
+   "65190016",
+   "73a838d4",
+   "b9721d41",
+   "c4fd19ab"
+  ]
+ },
+ {
+  "en": "will",
+  "ru": "будет (делать)",
+  "tr": "-ecek / -acak (yapacak)",
+  "at": [
+   "cccb3230"
+  ]
+ },
+ {
+  "en": "For plans, Präsens is often enough: *Ich rufe dich morgen an.* Use werden for a promise or forecast.",
+  "ru": "Для планов часто достаточно Präsens: *Ich rufe dich morgen an.* werden используют для обещания или прогноза.",
+  "tr": "Planlar için çoğu zaman Präsens yeterli: *Ich rufe dich morgen an.* werden söz vermek ya da öngörü için kullanılır.",
+  "at": [
+   "eea53d7d"
+  ]
+ },
+ {
+  "en": "Usage",
+  "ru": "Употребление",
+  "tr": "Kullanım",
+  "at": [
+   "0b2bc1f4"
+  ]
+ },
+ {
+  "en": "a guess",
+  "ru": "предположение",
+  "tr": "tahmin",
+  "at": [
+   "8d66ad70"
+  ]
+ },
+ {
+  "en": "probably; it'll be fine",
+  "ru": "наверное; всё будет хорошо",
+  "tr": "herhalde; her şey iyi olacak",
+  "at": [
+   "aaaa4386"
+  ]
+ },
+ {
+  "en": "*wohl* = probably: *Er wird wohl schlafen.* · *schon* = don't worry: *Es wird schon nicht so schlimm sein.*",
+  "ru": "*wohl* = наверное: *Er wird wohl schlafen.* · *schon* = не волнуйся: *Es wird schon nicht so schlimm sein.*",
+  "tr": "*wohl* = herhalde: *Er wird wohl schlafen.* · *schon* = merak etme: *Es wird schon nicht so schlimm sein.*",
+  "at": [
+   "b918e2df"
+  ]
+ },
+ {
+  "en": "Also",
+  "ru": "Ещё",
+  "tr": "Ayrıca",
+  "at": [
+   "8d42fa6e"
+  ]
+ },
+ {
+  "en": "it is being done / was done",
+  "ru": "это делают / сделали",
+  "tr": "bu yapılıyor / yapıldı",
+  "at": [
+   "23c6bff1"
+  ]
+ },
+ {
+  "en": "would",
+  "ru": "бы",
+  "tr": "-erdi / -ardı",
+  "at": [
+   "81cc4b6f"
+  ]
+ },
+ {
+  "en": "would: polite, or not real",
+  "ru": "бы: вежливо или не на самом деле",
+  "tr": "-erdi / -ardı: kibarca ya da gerçek dışı",
+  "at": [
+   "93df1c79"
+  ]
+ },
+ {
+  "en": "*Würdest du mir kurz helfen?*",
+  "ru": "*Würdest du mir kurz helfen?*",
+  "tr": "*Würdest du mir kurz helfen?*",
+  "at": [
+   "2268fc36"
+  ]
+ },
+ {
+  "en": "Polite request",
+  "ru": "Вежливая просьба",
+  "tr": "Kibar rica",
+  "at": [
+   "e1039321"
+  ]
+ },
+ {
+  "en": "after a 2nd verb",
+  "ru": "после 2-го глагола",
+  "tr": "ikinci bir fiilden sonra",
+  "at": [
+   "9db085d8"
+  ]
+ },
+ {
+  "en": "leave something",
+  "ru": "оставить",
+  "tr": "bırakmak",
+  "at": [
+   "c59708e7"
+  ]
+ },
+ {
+  "en": "object",
+  "ru": "вещь",
+  "tr": "nesne",
+  "at": [
+   "9091664d",
+   "abc2ab8f",
+   "bc8c8a8f",
+   "c4fd19ab"
+  ]
+ },
+ {
+  "en": "place",
+  "ru": "место",
+  "tr": "yer",
+  "at": [
+   "abc2ab8f"
+  ]
+ },
+ {
+  "en": "leave (somewhere)",
+  "ru": "оставить (где-то)",
+  "tr": "bırakmak (bir yerde)",
+  "at": [
+   "0c943b51"
+  ]
+ },
+ {
+  "en": "have someone do it",
+  "ru": "поручить сделать",
+  "tr": "yaptırmak",
+  "at": [
+   "675e7dbb"
+  ]
+ },
+ {
+  "en": "someone else does it for you",
+  "ru": "делает кто-то другой",
+  "tr": "bunu başka biri yapıyor",
+  "at": [
+   "3ea8e50d"
+  ]
+ },
+ {
+  "en": "allow someone",
+  "ru": "разрешить",
+  "tr": "izin vermek",
+  "at": [
+   "8dba765d"
+  ]
+ },
+ {
+  "en": "person",
+  "ru": "человек",
+  "tr": "kişi",
+  "at": [
+   "b9721d41"
+  ]
+ },
+ {
+  "en": "allow someone to do something",
+  "ru": "разрешить кому-то что-то сделать",
+  "tr": "birinin bir şey yapmasına izin vermek",
+  "at": [
+   "804d682b"
+  ]
+ },
+ {
+  "en": "*Lass mich das tragen!* = let me carry it",
+  "ru": "*Lass mich das tragen!* = давай я понесу",
+  "tr": "*Lass mich das tragen!* = bırak ben taşıyayım",
+  "at": [
+   "a65e7edc"
+  ]
+ },
+ {
+  "en": "Offer help",
+  "ru": "Предложить помощь",
+  "tr": "Yardım teklif etmek",
+  "at": [
+   "1a1348ef"
+  ]
+ },
+ {
+  "en": "let's",
+  "ru": "давай",
+  "tr": "hadi …-elim",
+  "at": [
+   "a4031f76"
+  ]
+ },
+ {
+  "en": "let's",
+  "ru": "давай(те)",
+  "tr": "hadi …-elim / …-alım",
+  "at": [
+   "392b9128"
+  ]
+ },
+ {
+  "en": "One person: *lass uns* · several: *lasst uns* · formal: *Lassen Sie uns*",
+  "ru": "Одному: *lass uns* · нескольким: *lasst uns* · вежливо: *Lassen Sie uns*",
+  "tr": "Bir kişiye: *lass uns* · birkaç kişiye: *lasst uns* · kibarca: *Lassen Sie uns*",
+  "at": [
+   "e2fc3345"
+  ]
+ },
+ {
+  "en": "Forms",
+  "ru": "Формы",
+  "tr": "Biçimler",
+  "at": [
+   "f3cca3ec"
+  ]
+ },
+ {
+  "en": "can be done",
+  "ru": "можно сделать",
+  "tr": "yapılabilir",
+  "at": [
+   "02ff551d",
+   "78641c12"
+  ]
+ },
+ {
+  "en": "it can be done",
+  "ru": "это можно сделать",
+  "tr": "bu yapılabilir",
+  "at": [
+   "4cf83adc"
+  ]
+ },
+ {
+  "en": "stop it! (fixed phrase)",
+  "ru": "прекрати! (устойчивое выражение)",
+  "tr": "kes şunu! (kalıp ifade)",
+  "at": [
+   "a655c470"
+  ]
+ },
+ {
+  "en": "can't give it up",
+  "ru": "не мочь бросить",
+  "tr": "bırakamamak",
+  "at": [
+   "4bcaff80"
+  ]
+ },
+ {
+  "en": "activity",
+  "ru": "занятие",
+  "tr": "uğraş, alışkanlık",
+  "at": [
+   "36b62046"
+  ]
+ },
+ {
+  "en": "not stop doing something; can't give it up",
+  "ru": "не прекращать занятие; не мочь бросить",
+  "tr": "bir şeyi yapmayı sürdürmek; bırakamamak",
+  "at": [
+   "fc648256"
+  ]
+ },
+ {
+  "en": "a state",
+  "ru": "состояние",
+  "tr": "durum",
+  "at": [
+   "875a6333"
+  ]
+ },
+ {
+  "en": "the result of an action: how the thing is now (was then)",
+  "ru": "результат действия: какая вещь сейчас (была тогда)",
+  "tr": "bir eylemin sonucu: nesne şimdi nasıl (o zaman nasıldı)",
+  "at": [
+   "42107205"
+  ]
+ },
+ {
+  "en": "Being done right now → werden: *Die Tür wird gerade geschlossen.*",
+  "ru": "Делают прямо сейчас → werden: *Die Tür wird gerade geschlossen.*",
+  "tr": "Şu anda yapılıyor → werden: *Die Tür wird gerade geschlossen.*",
+  "at": [
+   "2b805072"
+  ]
+ },
+ {
+  "en": "Compare",
+  "ru": "Сравните",
+  "tr": "Karşılaştır",
+  "at": [
+   "7f455d3d",
+   "d028199d",
+   "d7aa421e"
+  ]
+ },
+ {
+  "en": "zu + infinitive",
+  "ru": "zu + Infinitiv",
+  "tr": "zu + Infinitiv",
+  "at": [
+   "3d576fc0",
+   "6fb9b301"
+  ]
+ },
+ {
+  "en": "it can / could be done",
+  "ru": "это можно / можно было сделать",
+  "tr": "bu yapılabilir / yapılabilirdi",
+  "at": [
+   "e26c13eb"
+  ]
+ },
+ {
+  "en": "Sometimes = must: *Die Rechnung ist bis Freitag zu bezahlen.*",
+  "ru": "Иногда = нужно: *Die Rechnung ist bis Freitag zu bezahlen.*",
+  "tr": "Bazen = gerekir: *Die Rechnung ist bis Freitag zu bezahlen.*",
+  "at": [
+   "8444599c"
+  ]
+ },
+ {
+  "en": "Can also mean",
+  "ru": "Также может значить",
+  "tr": "Şu anlama da gelebilir",
+  "at": [
+   "7c31f4af"
+  ]
+ },
+ {
+  "en": "Perfekt (movement, change)",
+  "ru": "Perfekt (движение, изменение)",
+  "tr": "Perfekt (hareket, değişim)",
+  "at": [
+   "c6a27cfc"
+  ]
+ },
+ {
+  "en": "past of a verb of movement or change (gehen, fahren, werden)",
+  "ru": "прошлое глагола движения или изменения (gehen, fahren, werden)",
+  "tr": "hareket ya da değişim bildiren bir fiilin geçmişi (gehen, fahren, werden)",
+  "at": [
+   "c4dd80aa"
+  ]
+ },
+ {
+  "en": "Also *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
+  "ru": "Ещё *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
+  "tr": "Ayrıca *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
+  "at": [
+   "0468b3a3"
+  ]
+ },
+ {
+  "en": "Other common verbs",
+  "ru": "Другие частые глаголы",
+  "tr": "Sık kullanılan diğer fiiller",
+  "at": [
+   "cbe9d9b2"
+  ]
+ },
+ {
+  "en": "Perfekt",
+  "ru": "Perfekt",
+  "tr": "Perfekt",
+  "at": [
+   "dd887b52"
+  ]
+ },
+ {
+  "en": "past (most verbs)",
+  "ru": "прошлое (большинство глаголов)",
+  "tr": "geçmiş (çoğu fiil)",
+  "at": [
+   "c23eac1c"
+  ]
+ },
+ {
+  "en": "have to",
+  "ru": "нужно",
+  "tr": "gerekmek",
+  "at": [
+   "18be7a66"
+  ]
+ },
+ {
+  "en": "have to / had to",
+  "ru": "нужно / нужно было",
+  "tr": "gerekiyor / gerekiyordu",
+  "at": [
+   "4563b9d8"
+  ]
+ },
+ {
+  "en": "a feeling you already have",
+  "ru": "чувство уже есть",
+  "tr": "duygu zaten var",
+  "at": [
+   "0a7a6aa5"
+  ]
+ },
+ {
+  "en": "When the feeling starts → bekommen: *Ich bekomme Angst.*",
+  "ru": "Когда чувство только появляется → bekommen: *Ich bekomme Angst.*",
+  "tr": "Duygu yeni başlıyorsa → bekommen: *Ich bekomme Angst.*",
+  "at": [
+   "4db05492"
+  ]
+ },
+ {
+  "en": "fixed phrases",
+  "ru": "устойчивые выражения",
+  "tr": "kalıp ifadeler",
+  "at": [
+   "6478fff1"
+  ]
+ },
+ {
+  "en": "be right · be in a hurry",
+  "ru": "быть правым · спешить",
+  "tr": "haklı olmak · acelesi olmak",
+  "at": [
+   "4e2da377"
+  ]
+ },
+ {
+  "en": "no ge-",
+  "ru": "без ge-",
+  "tr": "ge- yok",
+  "at": [
+   "9db085d8"
+  ]
+ },
+ {
+  "en": "get, receive",
+  "ru": "получать",
+  "tr": "almak",
+  "at": [
+   "b22a45e7",
+   "ba0a4051"
+  ]
+ },
+ {
+  "en": "start to feel",
+  "ru": "начать чувствовать",
+  "tr": "hissetmeye başlamak",
+  "at": [
+   "420ab940"
+  ]
+ },
+ {
+  "en": "a feeling starts",
+  "ru": "чувство появляется",
+  "tr": "bir duygu başlıyor",
+  "at": [
+   "e917e516"
+  ]
+ },
+ {
+  "en": "Already there → haben: *Ich habe Angst.*",
+  "ru": "Чувство уже есть → haben: *Ich habe Angst.*",
+  "tr": "Duygu zaten varsa → haben: *Ich habe Angst.*",
+  "at": [
+   "ce878dcf"
+  ]
+ },
+ {
+  "en": "get ill",
+  "ru": "заболеть",
+  "tr": "hastalanmak",
+  "at": [
+   "c7aaf799"
+  ]
+ },
+ {
+  "en": "illness",
+  "ru": "болезнь",
+  "tr": "hastalık",
+  "at": [
+   "db885495"
+  ]
+ },
+ {
+  "en": "caught (a cold …)",
+  "ru": "заболел(а)",
+  "tr": "hastalandı(m)",
+  "at": [
+   "40d7ffff"
+  ]
+ },
+ {
+  "en": "have a baby",
+  "ru": "родить ребёнка",
+  "tr": "bebeği olmak",
+  "at": [
+   "d23a3836"
+  ]
+ },
+ {
+  "en": "catch (a train)",
+  "ru": "успеть (на поезд)",
+  "tr": "yetişmek (trene)",
+  "at": [
+   "ea559d17"
+  ]
+ },
+ {
+  "en": "make it in time",
+  "ru": "успеть",
+  "tr": "zamanında yetişmek",
+  "at": [
+   "1312d741"
+  ]
+ },
+ {
+  "en": "given / sent to you",
+  "ru": "тебе подарили / прислали",
+  "tr": "sana hediye edildi / gönderildi",
+  "at": [
+   "9318acf1"
+  ]
+ },
+ {
+  "en": "you receive it: given, sent",
+  "ru": "ты получаешь: подарили, прислали",
+  "tr": "sen alıyorsun: hediye edildi, gönderildi",
+  "at": [
+   "e01d9877"
+  ]
  }
 ]

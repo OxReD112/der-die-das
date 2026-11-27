@@ -98,5 +98,3991 @@
   "at": [
    "858879a0"
   ]
+ },
+ {
+  "en": "newspaper",
+  "ru": "газета",
+  "tr": "gazete",
+  "at": [
+   "27e8020b"
+  ]
+ },
+ {
+  "en": "-UNG ENDING",
+  "ru": "ОКОНЧАНИЕ -UNG",
+  "tr": "-UNG İLE BİTEN İSİMLER",
+  "at": [
+   "05562ba3",
+   "0e522690",
+   "1d8c0a1d",
+   "5ec3cbb9",
+   "63f63058",
+   "64187d25",
+   "64e55a37",
+   "8a3487e2",
+   "9ed64355",
+   "bce15f58"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ung are feminine.",
+  "ru": "Слова на -ung — женского рода.",
+  "tr": "-ung ile biten isimler dişildir.",
+  "at": [
+   "3140a8bb",
+   "57ccfc87",
+   "6a169870",
+   "74275a7a",
+   "7590c7cb",
+   "7c8cbbc8",
+   "a4300b05",
+   "a5bda563",
+   "b152d370",
+   "df7c4a79"
+  ]
+ },
+ {
+  "en": "Very reliable. Exception: der Sprung (short word, -ung is not an ending here).",
+  "ru": "очень надёжно. Исключение: der Sprung (короткое слово, -ung не окончание).",
+  "tr": "çok güvenilir. İstisna: der Sprung (kısa kelime, burada -ung bir ek değil).",
+  "at": [
+   "1dac289b",
+   "3ae1f1b0",
+   "48083860",
+   "64e8639b",
+   "81af8f7c",
+   "b4108ea8",
+   "deb58db2",
+   "e97b9ace",
+   "eee9c819",
+   "fe765d13"
+  ]
+ },
+ {
+  "en": "flat, apartment",
+  "ru": "квартира",
+  "tr": "daire",
+  "at": [
+   "f6b6625b"
+  ]
+ },
+ {
+  "en": "bill, invoice",
+  "ru": "счёт",
+  "tr": "fatura, hesap",
+  "at": [
+   "86d50b49"
+  ]
+ },
+ {
+  "en": "experience, know-how",
+  "ru": "опыт",
+  "tr": "deneyim",
+  "at": [
+   "b3433ff7"
+  ]
+ },
+ {
+  "en": "invitation",
+  "ru": "приглашение",
+  "tr": "davet",
+  "at": [
+   "a9de7e74"
+  ]
+ },
+ {
+  "en": "opinion",
+  "ru": "мнение",
+  "tr": "fikir, görüş",
+  "at": [
+   "c40a230c"
+  ]
+ },
+ {
+  "en": "health",
+  "ru": "здоровье",
+  "tr": "sağlık",
+  "at": [
+   "99eae04d"
+  ]
+ },
+ {
+  "en": "-HEIT ENDING",
+  "ru": "ОКОНЧАНИЕ -HEIT",
+  "tr": "-HEIT İLE BİTEN İSİMLER",
+  "at": [
+   "4fb3b4a6",
+   "536be2f3",
+   "895134df",
+   "ad2185c5",
+   "d1585733",
+   "d4bb77b1"
+  ]
+ },
+ {
+  "en": "Nouns ending in -heit are feminine.",
+  "ru": "Слова на -heit — женского рода.",
+  "tr": "-heit ile biten isimler dişildir.",
+  "at": [
+   "5cd3638d",
+   "7dc25bab",
+   "8d590b3f",
+   "94c3d809",
+   "e6c18c49",
+   "f24cbe76"
+  ]
+ },
+ {
+  "en": "Very reliable, no exceptions.",
+  "ru": "очень надёжно, исключений нет.",
+  "tr": "çok güvenilir, istisnası yok.",
+  "at": [
+   "0358af99",
+   "0a006f5c",
+   "11e1b356",
+   "1a438f5b",
+   "20f7d4fc",
+   "2c426a22",
+   "31e98381",
+   "365bd857",
+   "3ba2b7cd",
+   "3e8d8b60",
+   "3fc33f90",
+   "42a25fe0",
+   "4a1eb6f0",
+   "5169122b",
+   "51fa78d2",
+   "527b8d7f",
+   "53c669b1",
+   "6662836f",
+   "67bd5730",
+   "73e858c5",
+   "752b1782",
+   "76556634",
+   "798680f8",
+   "7b7b36ec",
+   "7ce1e4a5",
+   "81be6cb3",
+   "84c45289",
+   "8fad7598",
+   "93667967",
+   "9802f2c2",
+   "9f8d8351",
+   "a274b218",
+   "b0b6582d",
+   "b15d7f89",
+   "b89b7c26",
+   "b9869569",
+   "bd82cc90",
+   "bfd443a4",
+   "c51b96e8",
+   "ca828498",
+   "d00a97ff",
+   "d39ed9ba",
+   "da2137c1",
+   "de1fa3a5",
+   "eb85b27e",
+   "ebe6719a",
+   "ed32c100",
+   "f0040015"
+  ]
+ },
+ {
+  "en": "freedom",
+  "ru": "свобода",
+  "tr": "özgürlük",
+  "at": [
+   "868003f9"
+  ]
+ },
+ {
+  "en": "safety, security",
+  "ru": "безопасность",
+  "tr": "güvenlik",
+  "at": [
+   "9c9791df"
+  ]
+ },
+ {
+  "en": "illness, disease",
+  "ru": "болезнь",
+  "tr": "hastalık",
+  "at": [
+   "eff3c95a"
+  ]
+ },
+ {
+  "en": "possibility, opportunity",
+  "ru": "возможность",
+  "tr": "olanak, imkân",
+  "at": [
+   "3b87c93e"
+  ]
+ },
+ {
+  "en": "-KEIT ENDING",
+  "ru": "ОКОНЧАНИЕ -KEIT",
+  "tr": "-KEIT İLE BİTEN İSİMLER",
+  "at": [
+   "07b15452",
+   "08e64514",
+   "2ab3a98d",
+   "3c9250d9",
+   "4699552d",
+   "4e595d18",
+   "6067fec5",
+   "710eff46",
+   "947e41ea",
+   "bcab69cc"
+  ]
+ },
+ {
+  "en": "Nouns ending in -keit are feminine.",
+  "ru": "Слова на -keit — женского рода.",
+  "tr": "-keit ile biten isimler dişildir.",
+  "at": [
+   "0002ceab",
+   "035b6a0c",
+   "425e0982",
+   "501a376a",
+   "55b9c5f4",
+   "5e4f96b3",
+   "a2b0f356",
+   "b6593467",
+   "d19dd153",
+   "df5d4c30"
+  ]
+ },
+ {
+  "en": "difficulty",
+  "ru": "трудность",
+  "tr": "zorluk",
+  "at": [
+   "bcaa8c03"
+  ]
+ },
+ {
+  "en": "ability, skill",
+  "ru": "способность",
+  "tr": "yetenek",
+  "at": [
+   "07f96f20"
+  ]
+ },
+ {
+  "en": "reality",
+  "ru": "реальность",
+  "tr": "gerçeklik",
+  "at": [
+   "2a4caa14",
+   "597b47eb"
+  ]
+ },
+ {
+  "en": "friendship",
+  "ru": "дружба",
+  "tr": "arkadaşlık, dostluk",
+  "at": [
+   "274ceef2"
+  ]
+ },
+ {
+  "en": "-SCHAFT ENDING",
+  "ru": "ОКОНЧАНИЕ -SCHAFT",
+  "tr": "-SCHAFT İLE BİTEN İSİMLER",
+  "at": [
+   "076c2246",
+   "2dc5bda5",
+   "2e911a9c",
+   "a761dece",
+   "c276cb2e",
+   "d74489d5",
+   "f6842735"
+  ]
+ },
+ {
+  "en": "Nouns ending in -schaft are feminine.",
+  "ru": "Слова на -schaft — женского рода.",
+  "tr": "-schaft ile biten isimler dişildir.",
+  "at": [
+   "21ec685b",
+   "2bdad03b",
+   "41733456",
+   "a26c2d4b",
+   "a76a875c",
+   "be1a61be",
+   "ef890d5e"
+  ]
+ },
+ {
+  "en": "society; company",
+  "ru": "общество",
+  "tr": "toplum",
+  "at": [
+   "86f3ca52"
+  ]
+ },
+ {
+  "en": "team",
+  "ru": "команда",
+  "tr": "takım",
+  "at": [
+   "e7e75ef8"
+  ]
+ },
+ {
+  "en": "landscape",
+  "ru": "пейзаж, местность",
+  "tr": "manzara, arazi",
+  "at": [
+   "18e469fb"
+  ]
+ },
+ {
+  "en": "information",
+  "ru": "информация",
+  "tr": "bilgi",
+  "at": [
+   "3843eb81"
+  ]
+ },
+ {
+  "en": "-TION / -SION ENDING",
+  "ru": "ОКОНЧАНИЕ -TION / -SION",
+  "tr": "-TION / -SION İLE BİTEN İSİMLER",
+  "at": [
+   "289d2361",
+   "66690e62",
+   "73aaf4af",
+   "780eed52",
+   "aa5275fa",
+   "be2cdc8d",
+   "c6ff5c55",
+   "e3b3fb0b"
+  ]
+ },
+ {
+  "en": "Nouns ending in -tion or -sion are feminine.",
+  "ru": "Слова на -tion и -sion — женского рода.",
+  "tr": "-tion ve -sion ile biten isimler dişildir.",
+  "at": [
+   "23810a6a",
+   "27c5fbbb",
+   "66df8e52",
+   "889641fa",
+   "96c8c253",
+   "c2e8cf2f",
+   "ebde9c61",
+   "f1794b9d"
+  ]
+ },
+ {
+  "en": "situation",
+  "ru": "ситуация",
+  "tr": "durum",
+  "at": [
+   "81d57d03"
+  ]
+ },
+ {
+  "en": "reaction",
+  "ru": "реакция",
+  "tr": "tepki",
+  "at": [
+   "2356782e"
+  ]
+ },
+ {
+  "en": "university",
+  "ru": "университет",
+  "tr": "üniversite",
+  "at": [
+   "bbd3fcf6"
+  ]
+ },
+ {
+  "en": "-TÄT ENDING",
+  "ru": "ОКОНЧАНИЕ -TÄT",
+  "tr": "-TÄT İLE BİTEN İSİMLER",
+  "at": [
+   "0be4c068",
+   "0d3a7f1a",
+   "63def870",
+   "8703d572",
+   "96cbac39",
+   "c55b272b"
+  ]
+ },
+ {
+  "en": "Nouns ending in -tät are feminine.",
+  "ru": "Слова на -tät — женского рода.",
+  "tr": "-tät ile biten isimler dişildir.",
+  "at": [
+   "17594141",
+   "17bd32b2",
+   "2192a480",
+   "9dc72368",
+   "ca50c94a",
+   "f7154207"
+  ]
+ },
+ {
+  "en": "quality",
+  "ru": "качество",
+  "tr": "kalite",
+  "at": [
+   "528b8577"
+  ]
+ },
+ {
+  "en": "activity",
+  "ru": "активность",
+  "tr": "etkinlik, aktivite",
+  "at": [
+   "513a0a61"
+  ]
+ },
+ {
+  "en": "music",
+  "ru": "музыка",
+  "tr": "müzik",
+  "at": [
+   "6a7793f8"
+  ]
+ },
+ {
+  "en": "-IK ENDING",
+  "ru": "ОКОНЧАНИЕ -IK",
+  "tr": "-IK İLE BİTEN İSİMLER",
+  "at": [
+   "09424264",
+   "313e03ff",
+   "7cab999c",
+   "87e80624",
+   "bacf3adb",
+   "c9a5842f",
+   "cba33916",
+   "e81ba3c3",
+   "f0298267"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ik (sciences, fields, concepts) are feminine.",
+  "ru": "Слова на -ik (науки, области, понятия) — женского рода.",
+  "tr": "-ik ile biten isimler (bilimler, alanlar, kavramlar) dişildir.",
+  "at": [
+   "29fabc5c",
+   "4137d61d",
+   "50eea6a6",
+   "6faa5ec4",
+   "78044104",
+   "d8033231",
+   "dade3eb5",
+   "e15c036d",
+   "ff310e59"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: der Atlantik.",
+  "ru": "надёжно. Исключение: der Atlantik.",
+  "tr": "güvenilir. İstisna: der Atlantik.",
+  "at": [
+   "085a06a6",
+   "15f6ae67",
+   "5d5f1392",
+   "75725e8a",
+   "873be58f",
+   "c31660b5",
+   "c742d44f",
+   "d2f44b3e",
+   "debd5436"
+  ]
+ },
+ {
+  "en": "politics, policy",
+  "ru": "политика",
+  "tr": "politika, siyaset",
+  "at": [
+   "808ac8c5"
+  ]
+ },
+ {
+  "en": "technology, engineering",
+  "ru": "техника, технология",
+  "tr": "teknik, teknoloji",
+  "at": [
+   "2407d1b1"
+  ]
+ },
+ {
+  "en": "bakery",
+  "ru": "пекарня",
+  "tr": "fırın",
+  "at": [
+   "3c411f68"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ei (shops, workshops, institutions) are feminine.",
+  "ru": "Слова на -ei (мастерские, магазины, учреждения) — женского рода.",
+  "tr": "-ei ile biten isimler (atölyeler, dükkânlar, kurumlar) dişildir.",
+  "at": [
+   "577fbd5e",
+   "5edaa11f",
+   "74f9b4e9",
+   "a833a749",
+   "beb6082f",
+   "edc5f3ac"
+  ]
+ },
+ {
+  "en": "Very reliable. Exception: das Ei.",
+  "ru": "очень надёжно. Исключение: das Ei.",
+  "tr": "çok güvenilir. İstisna: das Ei.",
+  "at": [
+   "59750dc2",
+   "a39967cd",
+   "bba17ca4",
+   "c76e7062",
+   "d7d5f714",
+   "f26e9cf7"
+  ]
+ },
+ {
+  "en": "police",
+  "ru": "полиция",
+  "tr": "polis",
+  "at": [
+   "6ab02599"
+  ]
+ },
+ {
+  "en": "girl",
+  "ru": "девочка",
+  "tr": "kız çocuğu",
+  "at": [
+   "ad45bf00"
+  ]
+ },
+ {
+  "en": "-CHEN / -LEIN ENDING",
+  "ru": "ОКОНЧАНИЕ -CHEN / -LEIN",
+  "tr": "-CHEN / -LEIN İLE BİTEN İSİMLER",
+  "at": [
+   "03c14ab4",
+   "098791cd",
+   "1aac9559",
+   "2834a704",
+   "2dbc2e13",
+   "535991bd",
+   "7dbe89b6",
+   "b0d03650",
+   "ef9ac65a",
+   "f342770a"
+  ]
+ },
+ {
+  "en": "Diminutives ending in -chen or -lein are neuter, even for people.",
+  "ru": "Уменьшительные слова на -chen и -lein — среднего рода, даже если речь о человеке.",
+  "tr": "-chen ve -lein ile biten küçültme isimleri, bir insanı gösterse bile nötrdür.",
+  "at": [
+   "1800f306",
+   "2e6b8493",
+   "2fdd1664",
+   "55ed5ac3",
+   "7e702988",
+   "9f70cd62",
+   "b0f0c5e7",
+   "c3a47ce9",
+   "d53b05f2",
+   "db3893d4"
+  ]
+ },
+ {
+  "en": "Very reliable. But -chen that is not a diminutive does not count: der Kuchen.",
+  "ru": "очень надёжно. Но -chen без уменьшения не считается: der Kuchen.",
+  "tr": "çok güvenilir. Ama küçültme olmayan -chen sayılmaz: der Kuchen.",
+  "at": [
+   "049800dc",
+   "16193862",
+   "2b66be08",
+   "8812f415",
+   "91ee49d8",
+   "a47d35a1",
+   "d353afd3",
+   "e1c389f1",
+   "f7101eef",
+   "f9168c5f"
+  ]
+ },
+ {
+  "en": "bread roll",
+  "ru": "булочка",
+  "tr": "küçük ekmek",
+  "at": [
+   "70e1b143"
+  ]
+ },
+ {
+  "en": "little house, cottage",
+  "ru": "домик",
+  "tr": "küçük ev",
+  "at": [
+   "b95aed99"
+  ]
+ },
+ {
+  "en": "document",
+  "ru": "документ",
+  "tr": "belge",
+  "at": [
+   "6fca07d8"
+  ]
+ },
+ {
+  "en": "-MENT ENDING",
+  "ru": "ОКОНЧАНИЕ -MENT",
+  "tr": "-MENT İLE BİTEN İSİMLER",
+  "at": [
+   "10a6e382",
+   "36eeccb6",
+   "61b16017",
+   "6881c73c",
+   "b9447340",
+   "f96159d7"
+  ]
+ },
+ {
+  "en": "Borrowed nouns ending in -ment are neuter.",
+  "ru": "Заимствованные слова на -ment — среднего рода.",
+  "tr": "-ment ile biten alıntı isimler nötrdür.",
+  "at": [
+   "13827cb8",
+   "1d9f66a5",
+   "49fd9406",
+   "5452f665",
+   "5b72723c",
+   "c730455a"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: der Moment.",
+  "ru": "надёжно. Исключение: der Moment.",
+  "tr": "güvenilir. İstisna: der Moment.",
+  "at": [
+   "33b4fe47",
+   "4cb5946e",
+   "80655a2e",
+   "ba0f9515",
+   "dd6aa1f9",
+   "f5c53543"
+  ]
+ },
+ {
+  "en": "instrument",
+  "ru": "инструмент",
+  "tr": "alet",
+  "at": [
+   "47fb37c4"
+  ]
+ },
+ {
+  "en": "experiment",
+  "ru": "эксперимент",
+  "tr": "deney",
+  "at": [
+   "4049b48e"
+  ]
+ },
+ {
+  "en": "argument",
+  "ru": "аргумент",
+  "tr": "argüman",
+  "at": [
+   "cf1d718a"
+  ]
+ },
+ {
+  "en": "date",
+  "ru": "дата",
+  "tr": "tarih (gün)",
+  "at": [
+   "128a9d48"
+  ]
+ },
+ {
+  "en": "-UM ENDING",
+  "ru": "ОКОНЧАНИЕ -UM",
+  "tr": "-UM İLE BİTEN İSİMLER",
+  "at": [
+   "1838324c",
+   "2ca0bb3e",
+   "8f66e0d6",
+   "a502def9",
+   "d97c6a85",
+   "e7729ecc",
+   "f424e16b"
+  ]
+ },
+ {
+  "en": "Borrowed (Latin) nouns ending in -um are neuter.",
+  "ru": "Заимствованные (латинские) слова на -um — среднего рода.",
+  "tr": "-um ile biten alıntı (Latince) isimler nötrdür.",
+  "at": [
+   "0a3b5781",
+   "1942b0ae",
+   "1a3f8f6b",
+   "4d48d9c7",
+   "68cba78c",
+   "7062b666",
+   "73c6f10c"
+  ]
+ },
+ {
+  "en": "Reliable. Short native words do not count: der Baum, der Raum.",
+  "ru": "надёжно. Короткие немецкие слова не считаются: der Baum, der Raum.",
+  "tr": "güvenilir. Kısa Almanca kelimeler sayılmaz: der Baum, der Raum.",
+  "at": [
+   "4bb15e75",
+   "767ce5bc",
+   "7f2d67da",
+   "85cd2a9d",
+   "9bcc15d7",
+   "a6c75f57",
+   "eea8bd50"
+  ]
+ },
+ {
+  "en": "centre",
+  "ru": "центр",
+  "tr": "merkez",
+  "at": [
+   "02386aea"
+  ]
+ },
+ {
+  "en": "university studies",
+  "ru": "учёба в вузе",
+  "tr": "üniversite öğrenimi",
+  "at": [
+   "74615c70"
+  ]
+ },
+ {
+  "en": "-IUM ENDING",
+  "ru": "ОКОНЧАНИЕ -IUM",
+  "tr": "-IUM İLE BİTEN İSİMLER",
+  "at": [
+   "32288484",
+   "366c4f65",
+   "5100b65d",
+   "676280aa",
+   "eea0420d"
+  ]
+ },
+ {
+  "en": "aquarium",
+  "ru": "аквариум",
+  "tr": "akvaryum",
+  "at": [
+   "a717e166"
+  ]
+ },
+ {
+  "en": "topic, subject",
+  "ru": "тема",
+  "tr": "konu",
+  "at": [
+   "a71d731a"
+  ]
+ },
+ {
+  "en": "Greek nouns ending in -ma (plural in -men) are neuter.",
+  "ru": "Греческие слова на -ma (множественное число на -men) — среднего рода.",
+  "tr": "-ma ile biten Yunanca isimler (çoğulu -men ile) nötrdür.",
+  "at": [
+   "2cabaf63",
+   "57923636",
+   "999cc11a",
+   "b6cfb0a8",
+   "d3839ecb",
+   "e5a1a556",
+   "fd0ec268"
+  ]
+ },
+ {
+  "en": "Reliable. Non-Greek words do not count: die Firma, die Oma.",
+  "ru": "надёжно. Не греческие — нет: die Firma, die Oma.",
+  "tr": "güvenilir. Yunanca olmayanlar sayılmaz: die Firma, die Oma.",
+  "at": [
+   "211055a5",
+   "3afe98a8",
+   "51504db9",
+   "96f47785",
+   "98d4c8b0",
+   "c2f243f3",
+   "e1060bb3"
+  ]
+ },
+ {
+  "en": "climate",
+  "ru": "климат",
+  "tr": "iklim",
+  "at": [
+   "868c9933"
+  ]
+ },
+ {
+  "en": "food, meal",
+  "ru": "еда",
+  "tr": "yemek",
+  "at": [
+   "96113a39"
+  ]
+ },
+ {
+  "en": "VERB USED AS A NOUN",
+  "ru": "ГЛАГОЛ КАК СУЩЕСТВИТЕЛЬНОЕ",
+  "tr": "İSİM OLARAK KULLANILAN FİİL",
+  "at": [
+   "1e460a9c",
+   "3fd88d00",
+   "70c07573",
+   "7306e0bc",
+   "95bfb1a7",
+   "c487db06",
+   "d5195fe3"
+  ]
+ },
+ {
+  "en": "A verb used as a noun (essen → das Essen) is neuter.",
+  "ru": "Глагол, превращённый в существительное (essen → das Essen), — среднего рода.",
+  "tr": "İsim olarak kullanılan fiil (essen → das Essen) nötrdür.",
+  "at": [
+   "053cd75c",
+   "175bf716",
+   "6a456abc",
+   "b8ea8a78",
+   "dd9c44b9",
+   "edfa4389",
+   "f9ffb9f5"
+  ]
+ },
+ {
+  "en": "Always, no exceptions.",
+  "ru": "всегда, исключений нет.",
+  "tr": "her zaman, istisnası yok.",
+  "at": [
+   "0f8b38f2",
+   "1de31f65",
+   "1de447dc",
+   "281091cb",
+   "4287f6c7",
+   "5f9b7823",
+   "a3246ea2",
+   "a5332398",
+   "ac0cc57b",
+   "beb6f903",
+   "ce618302",
+   "cf623f7e",
+   "f138c967"
+  ]
+ },
+ {
+  "en": "reading",
+  "ru": "чтение",
+  "tr": "okuma",
+  "at": [
+   "7e9d0058"
+  ]
+ },
+ {
+  "en": "learning, studying",
+  "ru": "учёба, процесс обучения",
+  "tr": "öğrenme, öğrenim süreci",
+  "at": [
+   "f845b705"
+  ]
+ },
+ {
+  "en": "butterfly",
+  "ru": "бабочка",
+  "tr": "kelebek",
+  "at": [
+   "dc147d90"
+  ]
+ },
+ {
+  "en": "-LING ENDING",
+  "ru": "ОКОНЧАНИЕ -LING",
+  "tr": "-LING İLE BİTEN İSİMLER",
+  "at": [
+   "4cf164bb",
+   "5f15e159",
+   "aa1919d8",
+   "b0d52276",
+   "f4df5c47",
+   "f6697d64"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ling are masculine.",
+  "ru": "Слова на -ling — мужского рода.",
+  "tr": "-ling ile biten isimler erildir.",
+  "at": [
+   "48ccaac6",
+   "62c38a04",
+   "6fd1bbf0",
+   "a3ee09e7",
+   "b0009155",
+   "fa2839d1"
+  ]
+ },
+ {
+  "en": "Very reliable. English -ing is different: das Training.",
+  "ru": "очень надёжно. Английское -ing — другое: das Training.",
+  "tr": "çok güvenilir. İngilizcedeki -ing farklıdır: das Training.",
+  "at": [
+   "23674c1b",
+   "3c0dc12a",
+   "71fb2e8f",
+   "ddb99ede",
+   "de8f8cd5",
+   "f79544dc"
+  ]
+ },
+ {
+  "en": "spring (season)",
+  "ru": "весна",
+  "tr": "ilkbahar",
+  "at": [
+   "13cb4b51"
+  ]
+ },
+ {
+  "en": "twin",
+  "ru": "близнец",
+  "tr": "ikiz",
+  "at": [
+   "1c74e057"
+  ]
+ },
+ {
+  "en": "optimism",
+  "ru": "оптимизм",
+  "tr": "iyimserlik",
+  "at": [
+   "1388d547"
+  ]
+ },
+ {
+  "en": "-ISMUS ENDING",
+  "ru": "ОКОНЧАНИЕ -ISMUS",
+  "tr": "-ISMUS İLE BİTEN İSİMLER",
+  "at": [
+   "2bb32129",
+   "45cf2aa7",
+   "55825494",
+   "5ccf32d3",
+   "d2de2db6",
+   "f0a6f303"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ismus are masculine.",
+  "ru": "Слова на -ismus — мужского рода.",
+  "tr": "-ismus ile biten isimler erildir.",
+  "at": [
+   "16232cf5",
+   "30ada337",
+   "7ff1ff06",
+   "c4c62799",
+   "c96f5ba9",
+   "d348d074"
+  ]
+ },
+ {
+  "en": "tourism",
+  "ru": "туризм",
+  "tr": "turizm",
+  "at": [
+   "0511dc8a"
+  ]
+ },
+ {
+  "en": "student",
+  "ru": "студент",
+  "tr": "üniversite öğrencisi",
+  "at": [
+   "aecd7014"
+  ]
+ },
+ {
+  "en": "MALE PERSON",
+  "ru": "МУЖЧИНА",
+  "tr": "ERKEK KİŞİ",
+  "at": [
+   "6a985f5a",
+   "810b6d4c",
+   "929f8a70",
+   "9b0910ea",
+   "a0eda9ce",
+   "d0ca7aef"
+  ]
+ },
+ {
+  "en": "The word names a man, so it is der. Sex beats the ending.",
+  "ru": "Слово обозначает мужчину, поэтому der. Пол важнее окончания.",
+  "tr": "Kelime bir erkeği gösteriyor, bu yüzden der. Cinsiyet ekten daha önemlidir.",
+  "at": [
+   "2247e968",
+   "35c5ae82",
+   "4ae7ffdd",
+   "a581d8f2",
+   "d2eef08c",
+   "faffdabe"
+  ]
+ },
+ {
+  "en": "Very reliable. -ent and -or for people are der too; things in -ent are often das: das Talent.",
+  "ru": "очень надёжно. Окончания -ent, -or у людей тоже der; у предметов на -ent часто das: das Talent.",
+  "tr": "çok güvenilir. İnsan bildiren -ent ve -or ekli isimler de der; -ent ile biten nesneler sıklıkla das: das Talent.",
+  "at": [
+   "0258c166",
+   "05ef5ed7",
+   "063f32b3",
+   "b20a5cf1",
+   "cd88dcc1",
+   "ed9bd12d"
+  ]
+ },
+ {
+  "en": "patient",
+  "ru": "пациент",
+  "tr": "hasta",
+  "at": [
+   "c3d94352"
+  ]
+ },
+ {
+  "en": "director",
+  "ru": "директор",
+  "tr": "müdür",
+  "at": [
+   "03b5bffd"
+  ]
+ },
+ {
+  "en": "author",
+  "ru": "автор",
+  "tr": "yazar",
+  "at": [
+   "7cade648"
+  ]
+ },
+ {
+  "en": "engine, motor",
+  "ru": "мотор, двигатель",
+  "tr": "motor",
+  "at": [
+   "bece87ee"
+  ]
+ },
+ {
+  "en": "-OR ENDING",
+  "ru": "ОКОНЧАНИЕ -OR",
+  "tr": "-OR İLE BİTEN İSİMLER",
+  "at": [
+   "4e145879",
+   "4e671dbe",
+   "7228d322",
+   "bbdef958",
+   "ccedcdcf"
+  ]
+ },
+ {
+  "en": "Nouns ending in -or are masculine.",
+  "ru": "Слова на -or — мужского рода.",
+  "tr": "-or ile biten isimler erildir.",
+  "at": [
+   "169db6ba",
+   "34410c2e",
+   "365bf247",
+   "82cb077d",
+   "cd10b670"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: das Labor.",
+  "ru": "надёжно. Исключение: das Labor.",
+  "tr": "güvenilir. İstisna: das Labor.",
+  "at": [
+   "5f8ffe3c",
+   "80a6469b",
+   "a0cb861d",
+   "bfb44606",
+   "d6f9ba59"
+  ]
+ },
+ {
+  "en": "Monday",
+  "ru": "понедельник",
+  "tr": "pazartesi",
+  "at": [
+   "5ba9182b"
+  ]
+ },
+ {
+  "en": "DAYS OF THE WEEK",
+  "ru": "ДНИ НЕДЕЛИ",
+  "tr": "HAFTANIN GÜNLERİ",
+  "at": [
+   "024a2c05",
+   "613e72fb",
+   "81888c52"
+  ]
+ },
+ {
+  "en": "Days of the week are masculine.",
+  "ru": "Дни недели — мужского рода.",
+  "tr": "Haftanın günleri erildir.",
+  "at": [
+   "b4846d11",
+   "c5d3bfeb",
+   "ce4f9f6a"
+  ]
+ },
+ {
+  "en": "Always.",
+  "ru": "всегда.",
+  "tr": "her zaman.",
+  "at": [
+   "01f9b237",
+   "2f92e789",
+   "4521c066",
+   "4bde4fc2",
+   "76dae13d",
+   "7c76ccd8",
+   "87022459",
+   "9a3cedd0",
+   "9ad84492",
+   "b58bf895",
+   "d2aef250",
+   "da33516a",
+   "eef6553b"
+  ]
+ },
+ {
+  "en": "Tuesday",
+  "ru": "вторник",
+  "tr": "salı",
+  "at": [
+   "b9bd313e"
+  ]
+ },
+ {
+  "en": "Friday",
+  "ru": "пятница",
+  "tr": "cuma",
+  "at": [
+   "78ca8391"
+  ]
+ },
+ {
+  "en": "January",
+  "ru": "январь",
+  "tr": "ocak",
+  "at": [
+   "ca99d50a"
+  ]
+ },
+ {
+  "en": "MONTHS",
+  "ru": "МЕСЯЦЫ",
+  "tr": "AYLAR",
+  "at": [
+   "5415dcb8",
+   "db624736",
+   "dc8c3acd"
+  ]
+ },
+ {
+  "en": "Months are masculine.",
+  "ru": "Месяцы — мужского рода.",
+  "tr": "Aylar erildir.",
+  "at": [
+   "18f40793",
+   "4579f786",
+   "7abe4e10"
+  ]
+ },
+ {
+  "en": "March",
+  "ru": "март",
+  "tr": "mart",
+  "at": [
+   "e2a152ac"
+  ]
+ },
+ {
+  "en": "October",
+  "ru": "октябрь",
+  "tr": "ekim",
+  "at": [
+   "5b6a3443"
+  ]
+ },
+ {
+  "en": "summer",
+  "ru": "лето",
+  "tr": "yaz",
+  "at": [
+   "6ed6f1ee"
+  ]
+ },
+ {
+  "en": "SEASONS",
+  "ru": "ВРЕМЕНА ГОДА",
+  "tr": "MEVSİMLER",
+  "at": [
+   "555796c3",
+   "5615d122",
+   "911cd96c"
+  ]
+ },
+ {
+  "en": "The seasons are masculine.",
+  "ru": "Времена года — мужского рода.",
+  "tr": "Mevsimler erildir.",
+  "at": [
+   "3caa3f59",
+   "6d768fec",
+   "c6a620ba"
+  ]
+ },
+ {
+  "en": "winter",
+  "ru": "зима",
+  "tr": "kış",
+  "at": [
+   "b55373a8"
+  ]
+ },
+ {
+  "en": "autumn",
+  "ru": "осень",
+  "tr": "sonbahar",
+  "at": [
+   "b7c3ef29"
+  ]
+ },
+ {
+  "en": "school",
+  "ru": "школа",
+  "tr": "okul",
+  "at": [
+   "c86e6983"
+  ]
+ },
+ {
+  "en": "-E ENDING",
+  "ru": "ОКОНЧАНИЕ -E",
+  "tr": "-E İLE BİTEN İSİMLER",
+  "at": [
+   "0957520d",
+   "25e6d694",
+   "51fdc591",
+   "5904879f",
+   "69f66500",
+   "722c03c0",
+   "874fbeb9",
+   "8f2890ac",
+   "c0f05f01",
+   "dfbe77bd"
+  ]
+ },
+ {
+  "en": "Most nouns ending in -e are feminine.",
+  "ru": "Большинство слов на -e — женского рода.",
+  "tr": "-e ile biten isimlerin çoğu dişildir.",
+  "at": [
+   "30e60c4d",
+   "6395cddf",
+   "65b62d87",
+   "a84ebcc3",
+   "b1bb422c",
+   "dd61aed3",
+   "ec93d10f",
+   "f3a0e674",
+   "fc635238",
+   "fdb0d278"
+  ]
+ },
+ {
+  "en": "Works about 9 times in 10. Exception: der Name.",
+  "ru": "работает примерно в 9 случаях из 10. Исключение: der Name.",
+  "tr": "yaklaşık 10 durumdan 9'unda geçerli. İstisna: der Name.",
+  "at": [
+   "037d4103",
+   "2256c784",
+   "7a571616",
+   "7dc82008",
+   "8f98c07c",
+   "b663eb77",
+   "d6466218",
+   "dea60ac3",
+   "df6b07d4",
+   "f062adff"
+  ]
+ },
+ {
+  "en": "street",
+  "ru": "улица",
+  "tr": "cadde, sokak",
+  "at": [
+   "e407ff7f"
+  ]
+ },
+ {
+  "en": "language",
+  "ru": "язык",
+  "tr": "dil",
+  "at": [
+   "c12c70f7"
+  ]
+ },
+ {
+  "en": "kitchen; cuisine",
+  "ru": "кухня",
+  "tr": "mutfak",
+  "at": [
+   "00366de8"
+  ]
+ },
+ {
+  "en": "question",
+  "ru": "вопрос",
+  "tr": "soru",
+  "at": [
+   "30dc0d44"
+  ]
+ },
+ {
+  "en": "name",
+  "ru": "имя",
+  "tr": "ad, isim",
+  "at": [
+   "36e3635a"
+  ]
+ },
+ {
+  "en": "-E EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -E",
+  "tr": "-E KURALININ İSTİSNASI",
+  "at": [
+   "14a842a6",
+   "27bf4e91",
+   "ca82f7e3",
+   "ce6167fa"
+  ]
+ },
+ {
+  "en": "Nouns in -e are usually die, but this one is der. Learn it as an exception.",
+  "ru": "Слова на -e обычно die, но это слово — der. Такие слова надо запомнить.",
+  "tr": "-e ile biten isimler genellikle die, ama bu kelime der. Bu tür kelimeleri ezberlemek gerekir.",
+  "at": [
+   "393c5876",
+   "d6767452"
+  ]
+ },
+ {
+  "en": "There are only a few: der Name, der Käse, der Gedanke, der Buchstabe.",
+  "ru": "исключений немного: der Name, der Käse, der Gedanke, der Buchstabe.",
+  "tr": "istisnalar az: der Name, der Käse, der Gedanke, der Buchstabe.",
+  "at": [
+   "0f246951",
+   "bad7f2c5"
+  ]
+ },
+ {
+  "en": "cheese",
+  "ru": "сыр",
+  "tr": "peynir",
+  "at": [
+   "7d11a596"
+  ]
+ },
+ {
+  "en": "end",
+  "ru": "конец",
+  "tr": "son",
+  "at": [
+   "ad76cc89"
+  ]
+ },
+ {
+  "en": "Nouns in -e are usually die, but this one is das. Learn it as an exception.",
+  "ru": "Слова на -e обычно die, но это слово — das. Такие слова надо запомнить.",
+  "tr": "-e ile biten isimler genellikle die, ama bu kelime das. Bu tür kelimeleri ezberlemek gerekir.",
+  "at": [
+   "28d3ccb9",
+   "6c13f0df"
+  ]
+ },
+ {
+  "en": "There are only a few: das Ende, das Auge, das Interesse.",
+  "ru": "исключений немного: das Ende, das Auge, das Interesse.",
+  "tr": "istisnalar az: das Ende, das Auge, das Interesse.",
+  "at": [
+   "5ac2c0f2",
+   "e7e92ad4"
+  ]
+ },
+ {
+  "en": "eye",
+  "ru": "глаз",
+  "tr": "göz",
+  "at": [
+   "ec86227f"
+  ]
+ },
+ {
+  "en": "front door",
+  "ru": "входная дверь",
+  "tr": "dış kapı",
+  "at": [
+   "4995ff1c"
+  ]
+ },
+ {
+  "en": "COMPOUND → LAST PART",
+  "ru": "СЛОЖНОЕ СЛОВО → ПОСЛЕДНЯЯ ЧАСТЬ",
+  "tr": "BİRLEŞİK KELİME → SON PARÇA",
+  "at": [
+   "0c0df053",
+   "119d7ff8",
+   "22de0a59",
+   "2e03268d",
+   "7ab3a748",
+   "fbb3c5e0"
+  ]
+ },
+ {
+  "en": "Haus + Tür. The last part decides: die Tür, so die Haustür.",
+  "ru": "Haus + Tür. Решает последняя часть: die Tür, значит die Haustür.",
+  "tr": "Haus + Tür. Son parça belirler: die Tür, öyleyse die Haustür.",
+  "at": [
+   "052d1120"
+  ]
+ },
+ {
+  "en": "bathroom",
+  "ru": "ванная комната",
+  "tr": "banyo",
+  "at": [
+   "975b2b03"
+  ]
+ },
+ {
+  "en": "Bade + Zimmer. The last part decides: das Zimmer, so das Badezimmer.",
+  "ru": "Bade + Zimmer. Решает последняя часть: das Zimmer, значит das Badezimmer.",
+  "tr": "Bade + Zimmer. Son parça belirler: das Zimmer, öyleyse das Badezimmer.",
+  "at": [
+   "ac4e7053"
+  ]
+ },
+ {
+  "en": "driving licence",
+  "ru": "водительские права",
+  "tr": "ehliyet",
+  "at": [
+   "d41af8a4"
+  ]
+ },
+ {
+  "en": "Führer + Schein. The last part decides: der Schein, so der Führerschein.",
+  "ru": "Führer + Schein. Решает последняя часть: der Schein, значит der Führerschein.",
+  "tr": "Führer + Schein. Son parça belirler: der Schein, öyleyse der Führerschein.",
+  "at": [
+   "f2336398"
+  ]
+ },
+ {
+  "en": "Wohn + Zimmer. The last part decides: das Zimmer, so das Wohnzimmer.",
+  "ru": "Wohn + Zimmer. Решает последняя часть: das Zimmer, значит das Wohnzimmer.",
+  "tr": "Wohn + Zimmer. Son parça belirler: das Zimmer, öyleyse das Wohnzimmer.",
+  "at": [
+   "40516029"
+  ]
+ },
+ {
+  "en": "train station",
+  "ru": "вокзал",
+  "tr": "gar",
+  "at": [
+   "42c3e357"
+  ]
+ },
+ {
+  "en": "Bahn + Hof. The last part decides: der Hof, so der Bahnhof (even though die Bahn).",
+  "ru": "Bahn + Hof. Решает последняя часть: der Hof, значит der Bahnhof (хотя die Bahn).",
+  "tr": "Bahn + Hof. Son parça belirler: der Hof, öyleyse der Bahnhof (die Bahn olsa da).",
+  "at": [
+   "ca3d0ce7"
+  ]
+ },
+ {
+  "en": "hospital",
+  "ru": "больница",
+  "tr": "hastane",
+  "at": [
+   "2ec4efec"
+  ]
+ },
+ {
+  "en": "Kranken + Haus. The last part decides: das Haus, so das Krankenhaus.",
+  "ru": "Kranken + Haus. Решает последняя часть: das Haus, значит das Krankenhaus.",
+  "tr": "Kranken + Haus. Son parça belirler: das Haus, öyleyse das Krankenhaus.",
+  "at": [
+   "44e77150"
+  ]
+ },
+ {
+  "en": "table",
+  "ru": "стол",
+  "tr": "masa",
+  "at": [
+   "81f6a138"
+  ]
+ },
+ {
+  "en": "NO RELIABLE RULE",
+  "ru": "ПРАВИЛА НЕТ",
+  "tr": "KURAL YOK",
+  "at": [
+   "0b1d28cb",
+   "13add1f0",
+   "1c2c717c",
+   "21320492",
+   "6a73b142",
+   "94520fa1",
+   "a3e88802",
+   "b1ac1cdc",
+   "b2341e77",
+   "b7678636",
+   "bee14ff3",
+   "c30c3dff",
+   "d17cd62a"
+  ]
+ },
+ {
+  "en": "Just remember this one: der Tisch.",
+  "ru": "Это слово надо просто запомнить: der Tisch.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: der Tisch.",
+  "at": [
+   "c657489c"
+  ]
+ },
+ {
+  "en": "chair",
+  "ru": "стул",
+  "tr": "sandalye",
+  "at": [
+   "4719d6b5"
+  ]
+ },
+ {
+  "en": "Just remember this one: der Stuhl.",
+  "ru": "Это слово надо просто запомнить: der Stuhl.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: der Stuhl.",
+  "at": [
+   "1e0c6e45"
+  ]
+ },
+ {
+  "en": "key",
+  "ru": "ключ",
+  "tr": "anahtar",
+  "at": [
+   "85304a0a"
+  ]
+ },
+ {
+  "en": "Just remember this one: der Schlüssel.",
+  "ru": "Это слово надо просто запомнить: der Schlüssel.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: der Schlüssel.",
+  "at": [
+   "00106c86"
+  ]
+ },
+ {
+  "en": "appointment",
+  "ru": "встреча, назначенный срок",
+  "tr": "randevu, belirlenmiş tarih",
+  "at": [
+   "29b21318"
+  ]
+ },
+ {
+  "en": "Stressed -in is not the female -in ending. Remember: der Termin.",
+  "ru": "-in с ударением — не женское окончание -in. Запомните: der Termin.",
+  "tr": "Vurgulu -in, dişil -in eki değildir. Ezberle: der Termin.",
+  "at": [
+   "8db5c37c"
+  ]
+ },
+ {
+  "en": "profession, occupation",
+  "ru": "профессия",
+  "tr": "meslek",
+  "at": [
+   "03561859"
+  ]
+ },
+ {
+  "en": "VERB STEM, NO ENDING",
+  "ru": "ОТ ГЛАГОЛА БЕЗ ОКОНЧАНИЯ",
+  "tr": "EKSİZ FİİL KÖKÜNDEN",
+  "at": [
+   "18577140",
+   "3c98bdcc",
+   "4fe151a9",
+   "a1eb42d3",
+   "f804fe15",
+   "f9c4f3a5"
+  ]
+ },
+ {
+  "en": "From the verb berufen (\"to call\") with no ending — der Beruf. Likewise rufen → der Ruf.",
+  "ru": "От глагола berufen («призывать») без окончания — der Beruf. Так же rufen → der Ruf.",
+  "tr": "berufen (“çağırmak, atamak”) fiilinden, eksiz — der Beruf. Aynı şekilde rufen → der Ruf.",
+  "at": [
+   "07d80ba9"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: das Spiel.",
+  "ru": "надёжно. Исключение: das Spiel.",
+  "tr": "güvenilir. İstisna: das Spiel.",
+  "at": [
+   "1a9f7457",
+   "22442930",
+   "4bef9f43",
+   "6aab1a22",
+   "7260f320",
+   "f3ecec6c"
+  ]
+ },
+ {
+  "en": "coffee",
+  "ru": "кофе",
+  "tr": "kahve",
+  "at": [
+   "1efd294f"
+  ]
+ },
+ {
+  "en": "BEVERAGES → MOSTLY DER",
+  "ru": "НАПИТКИ → ЧАЩЕ DER",
+  "tr": "İÇECEKLER → DAHA ÇOK DER",
+  "at": [
+   "031bfdea",
+   "0beb8c5a",
+   "1449024b",
+   "5061f301",
+   "62c50b19"
+  ]
+ },
+ {
+  "en": "Most beverages are masculine.",
+  "ru": "Большинство напитков — мужского рода.",
+  "tr": "İçeceklerin çoğu erildir.",
+  "at": [
+   "27e430a7",
+   "55562d0f",
+   "76db76a1",
+   "7f5707f2",
+   "dd081d82"
+  ]
+ },
+ {
+  "en": "Reliable for alcohol and hot drinks. Exceptions: das Bier, das Wasser, die Milch.",
+  "ru": "надёжно для алкоголя и горячих напитков. Исключения: das Bier, das Wasser, die Milch.",
+  "tr": "alkollü ve sıcak içeceklerde güvenilir. İstisnalar: das Bier, das Wasser, die Milch.",
+  "at": [
+   "0982b5fa",
+   "74cb4bc1",
+   "8b192384",
+   "8bdf8bf1",
+   "fc6b5b9c"
+  ]
+ },
+ {
+  "en": "work, job",
+  "ru": "работа",
+  "tr": "iş",
+  "at": [
+   "f7976de6"
+  ]
+ },
+ {
+  "en": "Just remember this one: die Arbeit.",
+  "ru": "Это слово надо просто запомнить: die Arbeit.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: die Arbeit.",
+  "at": [
+   "0b9f23c2"
+  ]
+ },
+ {
+  "en": "answer",
+  "ru": "ответ",
+  "tr": "cevap",
+  "at": [
+   "739c6d4e"
+  ]
+ },
+ {
+  "en": "Just remember this one: die Antwort.",
+  "ru": "Это слово надо просто запомнить: die Antwort.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: die Antwort.",
+  "at": [
+   "69898a1a"
+  ]
+ },
+ {
+  "en": "city, town",
+  "ru": "город",
+  "tr": "şehir",
+  "at": [
+   "cba4372d"
+  ]
+ },
+ {
+  "en": "Just remember this one: die Stadt.",
+  "ru": "Это слово надо просто запомнить: die Stadt.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: die Stadt.",
+  "at": [
+   "e755016d"
+  ]
+ },
+ {
+  "en": "time",
+  "ru": "время",
+  "tr": "zaman",
+  "at": [
+   "6d24ec41"
+  ]
+ },
+ {
+  "en": "Just remember this one: die Zeit.",
+  "ru": "Это слово надо просто запомнить: die Zeit.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: die Zeit.",
+  "at": [
+   "b4ee3e21"
+  ]
+ },
+ {
+  "en": "hand",
+  "ru": "рука, кисть",
+  "tr": "el",
+  "at": [
+   "b6fae294"
+  ]
+ },
+ {
+  "en": "Just remember this one: die Hand.",
+  "ru": "Это слово надо просто запомнить: die Hand.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: die Hand.",
+  "at": [
+   "2a755be8"
+  ]
+ },
+ {
+  "en": "house",
+  "ru": "дом",
+  "tr": "ev",
+  "at": [
+   "158a660e"
+  ]
+ },
+ {
+  "en": "Just remember this one: das Haus.",
+  "ru": "Это слово надо просто запомнить: das Haus.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: das Haus.",
+  "at": [
+   "9c70f6da"
+  ]
+ },
+ {
+  "en": "child",
+  "ru": "ребёнок",
+  "tr": "çocuk",
+  "at": [
+   "c051bebf"
+  ]
+ },
+ {
+  "en": "YOUNG BEINGS",
+  "ru": "ДЕТИ И ДЕТЁНЫШИ",
+  "tr": "ÇOCUKLAR VE YAVRULAR",
+  "at": [
+   "160ce81d",
+   "28980cd1",
+   "4c16d09f",
+   "654427cc",
+   "d84e7f8c"
+  ]
+ },
+ {
+  "en": "Children and young animals are neuter, whatever their sex.",
+  "ru": "Дети и детёныши животных — среднего рода, независимо от пола.",
+  "tr": "Çocuklar ve hayvan yavruları, cinsiyetleri ne olursa olsun nötrdür.",
+  "at": [
+   "02b8af63",
+   "c64c6f4d",
+   "e0f89b1f",
+   "e8f5140c",
+   "fd5d45cc"
+  ]
+ },
+ {
+  "en": "Reliable. It also explains das Mädchen.",
+  "ru": "надёжно. То же объясняет das Mädchen.",
+  "tr": "güvenilir. das Mädchen de bununla açıklanır.",
+  "at": [
+   "0fbd7916",
+   "110b98a8",
+   "1bf58257",
+   "3e17c817",
+   "59f3f114"
+  ]
+ },
+ {
+  "en": "book",
+  "ru": "книга",
+  "tr": "kitap",
+  "at": [
+   "0eb66baf"
+  ]
+ },
+ {
+  "en": "Just remember this one: das Buch.",
+  "ru": "Это слово надо просто запомнить: das Buch.",
+  "tr": "Bu kelimeyi ezberlemek gerekir: das Buch.",
+  "at": [
+   "6ed4176f"
+  ]
+ },
+ {
+  "en": "decision",
+  "ru": "решение",
+  "tr": "karar",
+  "at": [
+   "0ee790ae"
+  ]
+ },
+ {
+  "en": "vocational training",
+  "ru": "образование, профессиональное обучение",
+  "tr": "eğitim, meslek eğitimi",
+  "at": [
+   "ff9e8f33"
+  ]
+ },
+ {
+  "en": "exercise, practice",
+  "ru": "упражнение",
+  "tr": "alıştırma",
+  "at": [
+   "aeedc375"
+  ]
+ },
+ {
+  "en": "(job) application",
+  "ru": "заявление о приёме на работу, отклик на вакансию",
+  "tr": "iş başvurusu",
+  "at": [
+   "7ccde80c"
+  ]
+ },
+ {
+  "en": "truth",
+  "ru": "правда",
+  "tr": "gerçek, doğru",
+  "at": [
+   "3cdaceb9"
+  ]
+ },
+ {
+  "en": "beauty",
+  "ru": "красота",
+  "tr": "güzellik",
+  "at": [
+   "d73ad4eb"
+  ]
+ },
+ {
+  "en": "small thing, trifle",
+  "ru": "мелочь",
+  "tr": "ufak şey, ayrıntı",
+  "at": [
+   "2ee00ad7"
+  ]
+ },
+ {
+  "en": "cleanliness",
+  "ru": "чистота",
+  "tr": "temizlik",
+  "at": [
+   "5aa4a3cc"
+  ]
+ },
+ {
+  "en": "speed",
+  "ru": "скорость",
+  "tr": "hız",
+  "at": [
+   "6ce8063a"
+  ]
+ },
+ {
+  "en": "punctuality",
+  "ru": "пунктуальность",
+  "tr": "dakiklik",
+  "at": [
+   "321c1363"
+  ]
+ },
+ {
+  "en": "accuracy, precision",
+  "ru": "точность",
+  "tr": "doğruluk, kesinlik",
+  "at": [
+   "706284a6"
+  ]
+ },
+ {
+  "en": "friendliness, kindness",
+  "ru": "дружелюбие",
+  "tr": "güler yüzlülük",
+  "at": [
+   "ad1a5fc8"
+  ]
+ },
+ {
+  "en": "neighbourhood",
+  "ru": "соседство",
+  "tr": "komşuluk",
+  "at": [
+   "f15089db"
+  ]
+ },
+ {
+  "en": "partnership",
+  "ru": "партнёрство",
+  "tr": "ortaklık",
+  "at": [
+   "0baa473a"
+  ]
+ },
+ {
+  "en": "science",
+  "ru": "наука",
+  "tr": "bilim",
+  "at": [
+   "54c3678b"
+  ]
+ },
+ {
+  "en": "nation",
+  "ru": "нация",
+  "tr": "ulus",
+  "at": [
+   "0d7abf96"
+  ]
+ },
+ {
+  "en": "production",
+  "ru": "производство",
+  "tr": "üretim",
+  "at": [
+   "0eee9c3e"
+  ]
+ },
+ {
+  "en": "organisation",
+  "ru": "организация",
+  "tr": "kuruluş, örgüt",
+  "at": [
+   "ed3bb55b"
+  ]
+ },
+ {
+  "en": "discussion",
+  "ru": "дискуссия",
+  "tr": "tartışma",
+  "at": [
+   "741801bd"
+  ]
+ },
+ {
+  "en": "station, stop",
+  "ru": "станция",
+  "tr": "istasyon",
+  "at": [
+   "a9b0426f"
+  ]
+ },
+ {
+  "en": "identity",
+  "ru": "идентичность",
+  "tr": "kimlik",
+  "at": [
+   "29aa9b7c"
+  ]
+ },
+ {
+  "en": "topicality, relevance",
+  "ru": "актуальность",
+  "tr": "güncellik",
+  "at": [
+   "ee99741e"
+  ]
+ },
+ {
+  "en": "mathematics",
+  "ru": "математика",
+  "tr": "matematik",
+  "at": [
+   "f1553490"
+  ]
+ },
+ {
+  "en": "grammar",
+  "ru": "грамматика",
+  "tr": "dil bilgisi",
+  "at": [
+   "d541ad50"
+  ]
+ },
+ {
+  "en": "logic",
+  "ru": "логика",
+  "tr": "mantık",
+  "at": [
+   "c3d68c3d"
+  ]
+ },
+ {
+  "en": "criticism; review",
+  "ru": "критика",
+  "tr": "eleştiri",
+  "at": [
+   "7a4abe29"
+  ]
+ },
+ {
+  "en": "republic",
+  "ru": "республика",
+  "tr": "cumhuriyet",
+  "at": [
+   "c5ab392d"
+  ]
+ },
+ {
+  "en": "dynamics",
+  "ru": "динамика",
+  "tr": "dinamik",
+  "at": [
+   "2d82cb2a"
+  ]
+ },
+ {
+  "en": "(public) library",
+  "ru": "библиотека",
+  "tr": "kütüphane",
+  "at": [
+   "47f21ef9"
+  ]
+ },
+ {
+  "en": "butcher's shop",
+  "ru": "мясная лавка",
+  "tr": "kasap dükkânı",
+  "at": [
+   "a57d7b6f"
+  ]
+ },
+ {
+  "en": "cake shop, café-patisserie",
+  "ru": "кондитерская",
+  "tr": "pastane",
+  "at": [
+   "3e33c4bf"
+  ]
+ },
+ {
+  "en": "fairy tale",
+  "ru": "сказка",
+  "tr": "masal",
+  "at": [
+   "9d20d08a"
+  ]
+ },
+ {
+  "en": "sausage, frankfurter",
+  "ru": "сосиска",
+  "tr": "sosis",
+  "at": [
+   "29779c57"
+  ]
+ },
+ {
+  "en": "chicken (dish)",
+  "ru": "курица (блюдо)",
+  "tr": "tavuk (yemek)",
+  "at": [
+   "f624d893"
+  ]
+ },
+ {
+  "en": "kitten",
+  "ru": "котёнок",
+  "tr": "yavru kedi",
+  "at": [
+   "050ef7f0"
+  ]
+ },
+ {
+  "en": "apartment, studio flat",
+  "ru": "небольшая квартира, студия",
+  "tr": "küçük daire, stüdyo daire",
+  "at": [
+   "c08358d5"
+  ]
+ },
+ {
+  "en": "compliment",
+  "ru": "комплимент",
+  "tr": "iltifat",
+  "at": [
+   "dfc62f15"
+  ]
+ },
+ {
+  "en": "audience",
+  "ru": "публика",
+  "tr": "seyirci",
+  "at": [
+   "f19a08a2"
+  ]
+ },
+ {
+  "en": "academic secondary school",
+  "ru": "гимназия",
+  "tr": "lise (akademik)",
+  "at": [
+   "949cb983"
+  ]
+ },
+ {
+  "en": "ministry",
+  "ru": "министерство",
+  "tr": "bakanlık",
+  "at": [
+   "f4aa1e4b"
+  ]
+ },
+ {
+  "en": "internship",
+  "ru": "практика",
+  "tr": "staj",
+  "at": [
+   "b014e7ab"
+  ]
+ },
+ {
+  "en": "drinking",
+  "ru": "питьё",
+  "tr": "içme",
+  "at": [
+   "05e5fafa"
+  ]
+ },
+ {
+  "en": "swimming",
+  "ru": "плавание",
+  "tr": "yüzme",
+  "at": [
+   "45b9aef8"
+  ]
+ },
+ {
+  "en": "writing; letter",
+  "ru": "письмо (официальное); процесс письма",
+  "tr": "resmî yazı; yazma",
+  "at": [
+   "f6519784"
+  ]
+ },
+ {
+  "en": "refugee",
+  "ru": "беженец",
+  "tr": "mülteci",
+  "at": [
+   "59a0354a"
+  ]
+ },
+ {
+  "en": "darling, favourite",
+  "ru": "любимец",
+  "tr": "gözde, sevgili",
+  "at": [
+   "d40f7c65"
+  ]
+ },
+ {
+  "en": "professor",
+  "ru": "профессор",
+  "tr": "profesör",
+  "at": [
+   "be6ece36"
+  ]
+ },
+ {
+  "en": "doctor (title)",
+  "ru": "доктор",
+  "tr": "doktor (unvan)",
+  "at": [
+   "63ca29a6"
+  ]
+ },
+ {
+  "en": "monitor",
+  "ru": "монитор",
+  "tr": "monitör",
+  "at": [
+   "8d0ce49d"
+  ]
+ },
+ {
+  "en": "bag",
+  "ru": "сумка",
+  "tr": "çanta",
+  "at": [
+   "b63acd4f"
+  ]
+ },
+ {
+  "en": "flower",
+  "ru": "цветок",
+  "tr": "çiçek",
+  "at": [
+   "3b17df84"
+  ]
+ },
+ {
+  "en": "bridge",
+  "ru": "мост",
+  "tr": "köprü",
+  "at": [
+   "a5e08fa0"
+  ]
+ },
+ {
+  "en": "minute",
+  "ru": "минута",
+  "tr": "dakika",
+  "at": [
+   "63bf640d"
+  ]
+ },
+ {
+  "en": "number",
+  "ru": "номер",
+  "tr": "numara",
+  "at": [
+   "c178bdb9"
+  ]
+ },
+ {
+  "en": "Ends in -er but is not made from a verb, so the \"-er → der\" rule does not apply. Remember: die Nummer.",
+  "ru": "Оканчивается на -er, но не от глагола, поэтому правило «-er → der» здесь не работает. Запомните: die Nummer.",
+  "tr": "-er ile bitiyor ama fiilden türememiş, bu yüzden “-er → der” kuralı burada geçerli değil. Ezberle: die Nummer.",
+  "at": [
+   "1961c709"
+  ]
+ },
+ {
+  "en": "boy",
+  "ru": "мальчик",
+  "tr": "erkek çocuk",
+  "at": [
+   "0a1e1e02"
+  ]
+ },
+ {
+  "en": "MALE BEING IN -E",
+  "ru": "СУЩЕСТВО МУЖСКОГО ПОЛА НА -E",
+  "tr": "-E İLE BİTEN ERKEK CANLILAR",
+  "at": [
+   "593f0a22",
+   "b603acde"
+  ]
+ },
+ {
+  "en": "Nouns in -e are usually die, but a male person or animal is der. Sex beats the ending.",
+  "ru": "Слова на -e обычно die, но человек или животное мужского пола — der. Пол важнее окончания.",
+  "tr": "-e ile biten isimler genellikle die, ama erkek bir insan ya da hayvan der. Cinsiyet ekten daha önemlidir.",
+  "at": [
+   "bc94d3ba",
+   "cd15380e"
+  ]
+ },
+ {
+  "en": "Reliable, no exceptions.",
+  "ru": "надёжно, исключений нет.",
+  "tr": "güvenilir, istisnası yok.",
+  "at": [
+   "75d44afd",
+   "7cf0d759"
+  ]
+ },
+ {
+  "en": "hare",
+  "ru": "заяц",
+  "tr": "tavşan",
+  "at": [
+   "64c5a4ee"
+  ]
+ },
+ {
+  "en": "existence",
+  "ru": "существование",
+  "tr": "varoluş",
+  "at": [
+   "eea39883"
+  ]
+ },
+ {
+  "en": "-ENZ / -ANZ ENDING",
+  "ru": "ОКОНЧАНИЕ -ENZ / -ANZ",
+  "tr": "-ENZ / -ANZ İLE BİTEN İSİMLER",
+  "at": [
+   "3ae9c0e8",
+   "694c7205",
+   "73ca7f0d",
+   "7e9739c8",
+   "9466fb92",
+   "f53b2e48"
+  ]
+ },
+ {
+  "en": "Nouns ending in -enz and -anz are feminine.",
+  "ru": "Слова на -enz и -anz — женского рода.",
+  "tr": "-enz ve -anz ile biten isimler dişildir.",
+  "at": [
+   "0396ddd3",
+   "1750a7aa",
+   "6e7041eb",
+   "da634a00",
+   "e7487ca0",
+   "f8469e20"
+  ]
+ },
+ {
+  "en": "Very reliable. Exception: der Tanz (short word).",
+  "ru": "очень надёжно. Исключение: der Tanz (короткое слово).",
+  "tr": "çok güvenilir. İstisna: der Tanz (kısa kelime).",
+  "at": [
+   "0a2bfd4b",
+   "0a39b7ab",
+   "1b2a1ecb",
+   "42d96fd0",
+   "7dcd09c9",
+   "fc7b9118"
+  ]
+ },
+ {
+  "en": "difference",
+  "ru": "разница",
+  "tr": "fark",
+  "at": [
+   "2bb16a9c"
+  ]
+ },
+ {
+  "en": "intelligence",
+  "ru": "интеллект",
+  "tr": "zekâ",
+  "at": [
+   "3caf8c1c"
+  ]
+ },
+ {
+  "en": "conference",
+  "ru": "конференция",
+  "tr": "konferans",
+  "at": [
+   "04459a2b"
+  ]
+ },
+ {
+  "en": "tolerance",
+  "ru": "терпимость",
+  "tr": "hoşgörü",
+  "at": [
+   "6fda4b7e"
+  ]
+ },
+ {
+  "en": "distance",
+  "ru": "дистанция",
+  "tr": "mesafe",
+  "at": [
+   "e27b40fc"
+  ]
+ },
+ {
+  "en": "family",
+  "ru": "семья",
+  "tr": "aile",
+  "at": [
+   "833d2790"
+  ]
+ },
+ {
+  "en": "-IE ENDING",
+  "ru": "ОКОНЧАНИЕ -IE",
+  "tr": "-IE İLE BİTEN İSİMLER",
+  "at": [
+   "18346750",
+   "3a1c2569",
+   "482e1d9e",
+   "68c21a74",
+   "7899f314",
+   "9b4f3b64",
+   "adbc82f5",
+   "c00d61ad"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ie are feminine.",
+  "ru": "Слова на -ie — женского рода.",
+  "tr": "-ie ile biten isimler dişildir.",
+  "at": [
+   "0607bff4",
+   "09ec3404",
+   "2fe25b77",
+   "3495e01b",
+   "530cc033",
+   "536a48ce",
+   "da098894",
+   "dd0d8488"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: das Knie.",
+  "ru": "надёжно. Исключение: das Knie.",
+  "tr": "güvenilir. İstisna: das Knie.",
+  "at": [
+   "02c9877f",
+   "0f21202c",
+   "12f5651f",
+   "1923d88f",
+   "1ca3f5c0",
+   "31f10ad3",
+   "6e43aa78",
+   "8dc1d3bd"
+  ]
+ },
+ {
+  "en": "energy",
+  "ru": "энергия",
+  "tr": "enerji",
+  "at": [
+   "ea903234"
+  ]
+ },
+ {
+  "en": "technology",
+  "ru": "технология",
+  "tr": "teknoloji",
+  "at": [
+   "11abb0c2"
+  ]
+ },
+ {
+  "en": "melody",
+  "ru": "мелодия",
+  "tr": "melodi",
+  "at": [
+   "b8476920"
+  ]
+ },
+ {
+  "en": "biology",
+  "ru": "биология",
+  "tr": "biyoloji",
+  "at": [
+   "2f5b3987"
+  ]
+ },
+ {
+  "en": "photography; photo",
+  "ru": "фотография",
+  "tr": "fotoğrafçılık; fotoğraf",
+  "at": [
+   "26d93ce3"
+  ]
+ },
+ {
+  "en": "theory",
+  "ru": "теория",
+  "tr": "teori",
+  "at": [
+   "e0bee4bb"
+  ]
+ },
+ {
+  "en": "culture",
+  "ru": "культура",
+  "tr": "kültür",
+  "at": [
+   "97ad7e3a"
+  ]
+ },
+ {
+  "en": "-UR ENDING",
+  "ru": "ОКОНЧАНИЕ -UR",
+  "tr": "-UR İLE BİTEN İSİMLER",
+  "at": [
+   "a1e37ec9",
+   "a388f329",
+   "b5cccb07",
+   "cd579ea2",
+   "e27c6746",
+   "ec6c149d",
+   "f753b999"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ur are feminine.",
+  "ru": "Слова на -ur — женского рода.",
+  "tr": "-ur ile biten isimler dişildir.",
+  "at": [
+   "362d9a97",
+   "38b4d027",
+   "57b838e3",
+   "5a9dd53a",
+   "7a282937",
+   "b6d4dd15",
+   "cd766b56"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: der Flur.",
+  "ru": "надёжно. Исключение: der Flur.",
+  "tr": "güvenilir. İstisna: der Flur.",
+  "at": [
+   "08e51ba5",
+   "0d3bfb1c",
+   "1af9d8d9",
+   "43d4579e",
+   "660b2228",
+   "87e4a74c",
+   "c4f5bcec"
+  ]
+ },
+ {
+  "en": "nature",
+  "ru": "природа",
+  "tr": "doğa",
+  "at": [
+   "5d035b47"
+  ]
+ },
+ {
+  "en": "structure",
+  "ru": "структура",
+  "tr": "yapı",
+  "at": [
+   "b19922b3"
+  ]
+ },
+ {
+  "en": "literature",
+  "ru": "литература",
+  "tr": "edebiyat",
+  "at": [
+   "e5963f97"
+  ]
+ },
+ {
+  "en": "architecture",
+  "ru": "архитектура",
+  "tr": "mimari",
+  "at": [
+   "c0bceea7"
+  ]
+ },
+ {
+  "en": "agency",
+  "ru": "агентство",
+  "tr": "ajans",
+  "at": [
+   "fd2ed925"
+  ]
+ },
+ {
+  "en": "temperature",
+  "ru": "температура",
+  "tr": "sıcaklık",
+  "at": [
+   "02cea66e"
+  ]
+ },
+ {
+  "en": "garage",
+  "ru": "гараж",
+  "tr": "garaj",
+  "at": [
+   "f5bc3048"
+  ]
+ },
+ {
+  "en": "-AGE ENDING",
+  "ru": "ОКОНЧАНИЕ -AGE",
+  "tr": "-AGE İLE BİTEN İSİMLER",
+  "at": [
+   "1af3365d",
+   "49dc5920",
+   "4a70721a",
+   "de7e0b4c",
+   "fd7bf876"
+  ]
+ },
+ {
+  "en": "Nouns ending in -age (French, pronounced \"-ahzh\") are feminine.",
+  "ru": "Слова на -age (французские, читается «-аж») — женского рода.",
+  "tr": "-age ile biten isimler (Fransızca kökenli, “-aj” diye okunur) dişildir.",
+  "at": [
+   "117463b2",
+   "47ce92a3",
+   "4bfd3a8c",
+   "a94f5cc6",
+   "c2e2f1d8"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: das Image (English).",
+  "ru": "надёжно. Исключение: das Image (английское).",
+  "tr": "güvenilir. İstisna: das Image (İngilizceden).",
+  "at": [
+   "3f123ed5",
+   "4d7d9ab1",
+   "7ea716e8",
+   "7efda8d7",
+   "a7798f63"
+  ]
+ },
+ {
+  "en": "floor, storey",
+  "ru": "этаж",
+  "tr": "kat",
+  "at": [
+   "9a345273"
+  ]
+ },
+ {
+  "en": "report, feature (media)",
+  "ru": "репортаж",
+  "tr": "röportaj",
+  "at": [
+   "b58b2df6"
+  ]
+ },
+ {
+  "en": "assembly, installation",
+  "ru": "монтаж",
+  "tr": "montaj",
+  "at": [
+   "ba22e74a"
+  ]
+ },
+ {
+  "en": "massage",
+  "ru": "массаж",
+  "tr": "masaj",
+  "at": [
+   "c3574ce4"
+  ]
+ },
+ {
+  "en": "cigarette",
+  "ru": "сигарета",
+  "tr": "sigara",
+  "at": [
+   "da222590"
+  ]
+ },
+ {
+  "en": "-ETTE ENDING",
+  "ru": "ОКОНЧАНИЕ -ETTE",
+  "tr": "-ETTE İLE BİTEN İSİMLER",
+  "at": [
+   "0ef5be0e",
+   "9a5c3300",
+   "a0617564",
+   "a2dc4791",
+   "a989163e"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ette are feminine.",
+  "ru": "Слова на -ette — женского рода.",
+  "tr": "-ette ile biten isimler dişildir.",
+  "at": [
+   "60d13204",
+   "6e8e2c78",
+   "75abe3df",
+   "9ceae1fe",
+   "eaf659ae"
+  ]
+ },
+ {
+  "en": "Very reliable. Not the same as -ett: das Bett.",
+  "ru": "очень надёжно. Не путать с -ett: das Bett.",
+  "tr": "çok güvenilir. -ett ile karıştırılmamalı: das Bett.",
+  "at": [
+   "5780d39d",
+   "7008d68f",
+   "745a9b03",
+   "f1811dd4",
+   "f2fbb26d"
+  ]
+ },
+ {
+  "en": "napkin",
+  "ru": "салфетка",
+  "tr": "peçete",
+  "at": [
+   "59ae9b92"
+  ]
+ },
+ {
+  "en": "toilet",
+  "ru": "туалет",
+  "tr": "tuvalet",
+  "at": [
+   "f61e157f"
+  ]
+ },
+ {
+  "en": "pill, tablet (medicine)",
+  "ru": "таблетка",
+  "tr": "tablet (ilaç)",
+  "at": [
+   "c34db1a2"
+  ]
+ },
+ {
+  "en": "jam",
+  "ru": "джем, варенье",
+  "tr": "reçel, marmelat",
+  "at": [
+   "a080f1e5"
+  ]
+ },
+ {
+  "en": "-ADE ENDING",
+  "ru": "ОКОНЧАНИЕ -ADE",
+  "tr": "-ADE İLE BİTEN İSİMLER",
+  "at": [
+   "2574ccc7",
+   "38ef54a8",
+   "475c9ae4",
+   "4c1629c8",
+   "cef05097"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ade are feminine.",
+  "ru": "Слова на -ade — женского рода.",
+  "tr": "-ade ile biten isimler dişildir.",
+  "at": [
+   "34395c25",
+   "53a872c0",
+   "7c7206d5",
+   "7d48cca0",
+   "989dae84"
+  ]
+ },
+ {
+  "en": "Reliable for things. People in -ade can be der: der Nomade.",
+  "ru": "надёжно для предметов. Люди на -ade могут быть der: der Nomade.",
+  "tr": "nesnelerde güvenilir. -ade ile biten insan adları der olabilir: der Nomade.",
+  "at": [
+   "634f89ee",
+   "a02c4d4b",
+   "a5923f6b",
+   "a7d5530f",
+   "aa2b145e"
+  ]
+ },
+ {
+  "en": "chocolate",
+  "ru": "шоколад",
+  "tr": "çikolata",
+  "at": [
+   "c1b1ba9c"
+  ]
+ },
+ {
+  "en": "lemonade, soft drink",
+  "ru": "лимонад",
+  "tr": "limonata",
+  "at": [
+   "11eea210"
+  ]
+ },
+ {
+  "en": "little book, booklet",
+  "ru": "книжечка",
+  "tr": "kitapçık",
+  "at": [
+   "8bf2d734"
+  ]
+ },
+ {
+  "en": "little bird",
+  "ru": "птичка",
+  "tr": "küçük kuş",
+  "at": [
+   "2fb54286"
+  ]
+ },
+ {
+  "en": "north",
+  "ru": "север",
+  "tr": "kuzey",
+  "at": [
+   "941b1cab"
+  ]
+ },
+ {
+  "en": "CARDINAL DIRECTIONS",
+  "ru": "СТОРОНЫ СВЕТА",
+  "tr": "ANA YÖNLER",
+  "at": [
+   "0cc717ef",
+   "6c38e985",
+   "bf334e33",
+   "e863561e"
+  ]
+ },
+ {
+  "en": "The cardinal directions are masculine.",
+  "ru": "Стороны света — мужского рода.",
+  "tr": "Ana yönler erildir.",
+  "at": [
+   "3c83564e",
+   "8db0fedd",
+   "9a9ce949",
+   "fe45c46b"
+  ]
+ },
+ {
+  "en": "south",
+  "ru": "юг",
+  "tr": "güney",
+  "at": [
+   "467ebefd"
+  ]
+ },
+ {
+  "en": "east",
+  "ru": "восток",
+  "tr": "doğu",
+  "at": [
+   "fac4be42"
+  ]
+ },
+ {
+  "en": "west",
+  "ru": "запад",
+  "tr": "batı",
+  "at": [
+   "3a5b60f9"
+  ]
+ },
+ {
+  "en": "wine",
+  "ru": "вино",
+  "tr": "şarap",
+  "at": [
+   "0b0c98a6"
+  ]
+ },
+ {
+  "en": "tea",
+  "ru": "чай",
+  "tr": "çay",
+  "at": [
+   "2f1224c1"
+  ]
+ },
+ {
+  "en": "juice",
+  "ru": "сок",
+  "tr": "meyve suyu",
+  "at": [
+   "d4c5a017"
+  ]
+ },
+ {
+  "en": "sparkling wine",
+  "ru": "игристое вино",
+  "tr": "köpüklü şarap",
+  "at": [
+   "9843fd36"
+  ]
+ },
+ {
+  "en": "beer",
+  "ru": "пиво",
+  "tr": "bira",
+  "at": [
+   "b711decf"
+  ]
+ },
+ {
+  "en": "BEVERAGE EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ СРЕДИ НАПИТКОВ",
+  "tr": "İÇECEKLERDE İSTİSNA",
+  "at": [
+   "1c0ee020",
+   "a9433416",
+   "aa992381"
+  ]
+ },
+ {
+  "en": "Beverages are usually der, but not this one. The three main exceptions: das Bier, das Wasser, die Milch.",
+  "ru": "Напитки обычно der, но это слово — нет. Три главных исключения: das Bier, das Wasser, die Milch.",
+  "tr": "İçecekler genellikle der, ama bu kelime değil. Üç ana istisna: das Bier, das Wasser, die Milch.",
+  "at": [
+   "9d4e2fa6",
+   "ed6ae28f",
+   "f6157ed8"
+  ]
+ },
+ {
+  "en": "Memorise these three.",
+  "ru": "запомните эти три.",
+  "tr": "bu üçünü ezberle.",
+  "at": [
+   "0f75e9b5",
+   "232dd904",
+   "daac1c63"
+  ]
+ },
+ {
+  "en": "tree",
+  "ru": "дерево",
+  "tr": "ağaç",
+  "at": [
+   "bca0ee7e"
+  ]
+ },
+ {
+  "en": "-um is no hint here, as in Raum, Traum. Remember: der Baum.",
+  "ru": "-um здесь не подсказка, как в Raum, Traum. Запомните: der Baum.",
+  "tr": "Raum ve Traum kelimelerinde olduğu gibi, -um burada ipucu değil. Ezberle: der Baum.",
+  "at": [
+   "64174aaa"
+  ]
+ },
+ {
+  "en": "drama",
+  "ru": "драма",
+  "tr": "dram",
+  "at": [
+   "89944914"
+  ]
+ },
+ {
+  "en": "dilemma",
+  "ru": "дилемма",
+  "tr": "ikilem",
+  "at": [
+   "afd8b83a"
+  ]
+ },
+ {
+  "en": "comma",
+  "ru": "запятая",
+  "tr": "virgül",
+  "at": [
+   "f95a6154"
+  ]
+ },
+ {
+  "en": "water",
+  "ru": "вода",
+  "tr": "su",
+  "at": [
+   "f689d9e4"
+  ]
+ },
+ {
+  "en": "milk",
+  "ru": "молоко",
+  "tr": "süt",
+  "at": [
+   "79e2542a"
+  ]
+ },
+ {
+  "en": "moment",
+  "ru": "момент, мгновение",
+  "tr": "an",
+  "at": [
+   "36a7e9c9"
+  ]
+ },
+ {
+  "en": "-MENT EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -MENT",
+  "tr": "-MENT KURALININ İSTİSNASI",
+  "at": [
+   "3d853723"
+  ]
+ },
+ {
+  "en": "Nouns in -ment are usually das, but Moment is der.",
+  "ru": "Слова на -ment обычно das, но Moment — der.",
+  "tr": "-ment ile biten isimler genellikle das, ama Moment der.",
+  "at": [
+   "8f4f28f9"
+  ]
+ },
+ {
+  "en": "Memorise der Moment (point in time). Das Moment = \"factor\" exists too, but is rare.",
+  "ru": "запомните der Moment (мгновение). Есть и das Moment — «фактор», редкое.",
+  "tr": "der Moment (an) kelimesini ezberle. das Moment (“etken”) de var ama nadir.",
+  "at": [
+   "8e886c32"
+  ]
+ },
+ {
+  "en": "company, firm",
+  "ru": "фирма, компания",
+  "tr": "firma, şirket",
+  "at": [
+   "3f939944"
+  ]
+ },
+ {
+  "en": "-MA EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -MA",
+  "tr": "-MA KURALININ İSTİSNASI",
+  "at": [
+   "190f27c0"
+  ]
+ },
+ {
+  "en": "Greek nouns in -ma are das, but Firma is not Greek: die Firma.",
+  "ru": "Греческие слова на -ma — das, но Firma не греческое: die Firma.",
+  "tr": "-ma ile biten Yunanca isimler das, ama Firma Yunanca değil: die Firma.",
+  "at": [
+   "0b1ade38"
+  ]
+ },
+ {
+  "en": "Memorise die Firma, die Oma, die Mama.",
+  "ru": "запомните die Firma, die Oma, die Mama.",
+  "tr": "die Firma, die Oma, die Mama kelimelerini ezberle.",
+  "at": [
+   "ed5d96c3"
+  ]
+ },
+ {
+  "en": "hallway, corridor",
+  "ru": "коридор, прихожая",
+  "tr": "koridor, antre",
+  "at": [
+   "083b30d0"
+  ]
+ },
+ {
+  "en": "-UR EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -UR",
+  "tr": "-UR KURALININ İSTİSNASI",
+  "at": [
+   "1f7ee0a4"
+  ]
+ },
+ {
+  "en": "Nouns in -ur are usually die, but Flur is der.",
+  "ru": "Слова на -ur обычно die, но Flur — der.",
+  "tr": "-ur ile biten isimler genellikle die, ama Flur der.",
+  "at": [
+   "a2a3e244"
+  ]
+ },
+ {
+  "en": "Memorise der Flur (hallway). Die Flur = \"open fields\" exists too, but is rare.",
+  "ru": "запомните der Flur (коридор). Есть и die Flur — «угодья», редкое.",
+  "tr": "der Flur (koridor) kelimesini ezberle. die Flur (“tarla, ova”) de var ama nadir.",
+  "at": [
+   "fa3c57cf"
+  ]
+ },
+ {
+  "en": "permission",
+  "ru": "разрешение",
+  "tr": "izin",
+  "at": [
+   "6ced039c"
+  ]
+ },
+ {
+  "en": "-NIS EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -NIS",
+  "tr": "-NIS KURALININ İSTİSNASI",
+  "at": [
+   "b13164c8"
+  ]
+ },
+ {
+  "en": "Nouns in -nis are mostly das, but Erlaubnis is die.",
+  "ru": "Слова на -nis чаще das, но Erlaubnis — die.",
+  "tr": "-nis ile biten isimler daha çok das, ama Erlaubnis die.",
+  "at": [
+   "288415a0"
+  ]
+ },
+ {
+  "en": "Memorise die Erlaubnis, die Kenntnis.",
+  "ru": "запомните die Erlaubnis, die Kenntnis.",
+  "tr": "die Erlaubnis, die Kenntnis kelimelerini ezberle.",
+  "at": [
+   "4b67964b"
+  ]
+ },
+ {
+  "en": "teacher (female)",
+  "ru": "учительница",
+  "tr": "öğretmen (kadın)",
+  "at": [
+   "f99bcb6c"
+  ]
+ },
+ {
+  "en": "-IN ENDING (FEMALE PERSON)",
+  "ru": "ОКОНЧАНИЕ -IN (ЖЕНЩИНА)",
+  "tr": "-IN İLE BİTEN İSİMLER (KADIN)",
+  "at": [
+   "33a52106",
+   "53bbd158",
+   "631d6278",
+   "961dadb2",
+   "cd7298be"
+  ]
+ },
+ {
+  "en": "Nouns ending in -in that name a woman are feminine.",
+  "ru": "Слова на -in, обозначающие женщину, — женского рода.",
+  "tr": "Bir kadını gösteren -in ile biten isimler dişildir.",
+  "at": [
+   "00e17916",
+   "0fbe4cd0",
+   "243cc58a",
+   "c5cbfe70",
+   "f59f152e"
+  ]
+ },
+ {
+  "en": "Very reliable. Stressed -in is a different ending: der Termin.",
+  "ru": "очень надёжно. Но -in с ударением — другое окончание: der Termin.",
+  "tr": "çok güvenilir. Ama vurgulu -in başka bir ektir: der Termin.",
+  "at": [
+   "0768a165",
+   "62298f1d",
+   "76e3a0fb",
+   "79618e9b",
+   "97f1c0a9"
+  ]
+ },
+ {
+  "en": "friend, girlfriend",
+  "ru": "подруга",
+  "tr": "arkadaş (kadın)",
+  "at": [
+   "7d62fa5e"
+  ]
+ },
+ {
+  "en": "doctor (female)",
+  "ru": "врач (женщина)",
+  "tr": "doktor (kadın)",
+  "at": [
+   "ef6b7cfa"
+  ]
+ },
+ {
+  "en": "colleague (female)",
+  "ru": "коллега (женщина)",
+  "tr": "iş arkadaşı (kadın)",
+  "at": [
+   "d8834e0c"
+  ]
+ },
+ {
+  "en": "boss (female)",
+  "ru": "начальница",
+  "tr": "patron (kadın)",
+  "at": [
+   "cdf66d22"
+  ]
+ },
+ {
+  "en": "building",
+  "ru": "здание",
+  "tr": "bina",
+  "at": [
+   "03941df5"
+  ]
+ },
+ {
+  "en": "GE- PREFIX",
+  "ru": "ПРИСТАВКА GE-",
+  "tr": "GE- ÖN EKİ",
+  "at": [
+   "0d0762d2",
+   "18bf220e",
+   "66478fb9",
+   "73903525",
+   "bce559b7",
+   "fee9f474"
+  ]
+ },
+ {
+  "en": "Reliable, but an ending beats the prefix: die Gesundheit (-heit). Exception: die Geschichte.",
+  "ru": "надёжно, но окончание сильнее приставки: die Gesundheit (-heit). Исключение: die Geschichte.",
+  "tr": "güvenilir, ama son ek ön ekten güçlüdür: die Gesundheit (-heit). İstisna: die Geschichte.",
+  "at": [
+   "3e21f54e",
+   "74b73f09",
+   "79e7fe6d",
+   "c89cd9b0",
+   "ca10431f",
+   "ef55fb7c"
+  ]
+ },
+ {
+  "en": "vegetables (collective)",
+  "ru": "овощи (собирательное)",
+  "tr": "sebze (topluluk adı)",
+  "at": [
+   "9c1c4cc0"
+  ]
+ },
+ {
+  "en": "drink, beverage",
+  "ru": "напиток",
+  "tr": "içecek",
+  "at": [
+   "fee188be"
+  ]
+ },
+ {
+  "en": "conversation",
+  "ru": "разговор",
+  "tr": "konuşma",
+  "at": [
+   "b5a2ea0b"
+  ]
+ },
+ {
+  "en": "present, gift",
+  "ru": "подарок",
+  "tr": "hediye",
+  "at": [
+   "20e9abf7"
+  ]
+ },
+ {
+  "en": "face",
+  "ru": "лицо",
+  "tr": "yüz",
+  "at": [
+   "e09ae792"
+  ]
+ },
+ {
+  "en": "result",
+  "ru": "результат",
+  "tr": "sonuç",
+  "at": [
+   "c6991a02"
+  ]
+ },
+ {
+  "en": "-NIS ENDING",
+  "ru": "ОКОНЧАНИЕ -NIS",
+  "tr": "-NIS İLE BİTEN İSİMLER",
+  "at": [
+   "0717de7e",
+   "9a7d29eb",
+   "cc9b20de",
+   "db47eecb"
+  ]
+ },
+ {
+  "en": "Nouns ending in -nis are mostly neuter.",
+  "ru": "Слова на -nis чаще всего среднего рода.",
+  "tr": "-nis ile biten isimler çoğunlukla nötrdür.",
+  "at": [
+   "508576ee",
+   "7de84021",
+   "8990340e",
+   "a3ca1501"
+  ]
+ },
+ {
+  "en": "About 2 in 3. Common exceptions: die Erlaubnis, die Kenntnis.",
+  "ru": "примерно 2 из 3. Частые исключения: die Erlaubnis, die Kenntnis.",
+  "tr": "yaklaşık 3 durumdan 2'sinde. Sık istisnalar: die Erlaubnis, die Kenntnis.",
+  "at": [
+   "108f7f7a",
+   "18bc255a",
+   "284c68dd",
+   "324f46fd"
+  ]
+ },
+ {
+  "en": "report card, certificate",
+  "ru": "аттестат, свидетельство",
+  "tr": "karne, belge",
+  "at": [
+   "673940e2"
+  ]
+ },
+ {
+  "en": "experience (an event)",
+  "ru": "переживание, впечатление",
+  "tr": "yaşantı, izlenim",
+  "at": [
+   "4258c521"
+  ]
+ },
+ {
+  "en": "understanding",
+  "ru": "понимание",
+  "tr": "anlayış",
+  "at": [
+   "361eee41"
+  ]
+ },
+ {
+  "en": "teacher",
+  "ru": "учитель",
+  "tr": "öğretmen",
+  "at": [
+   "0c9872a7"
+  ]
+ },
+ {
+  "en": "-ER ENDING (FROM A VERB)",
+  "ru": "ОКОНЧАНИЕ -ER (ОТ ГЛАГОЛА)",
+  "tr": "-ER İLE BİTEN İSİMLER (FİİLDEN)",
+  "at": [
+   "4d7a37c7",
+   "631ef154",
+   "77bf8ac9",
+   "807a09cd",
+   "a804276d"
+  ]
+ },
+ {
+  "en": "Nouns in -er made from a verb (a person or a device) are masculine.",
+  "ru": "Слова на -er, образованные от глагола (кто делает / чем делают), — мужского рода.",
+  "tr": "Fiilden türeyen ve -er ile biten isimler (yapan kişi / kullanılan alet) erildir.",
+  "at": [
+   "0313daf3",
+   "21d95fd5",
+   "615cac93",
+   "82091e97",
+   "b49e3e34"
+  ]
+ },
+ {
+  "en": "Very reliable when the noun comes from a verb. Otherwise no: die Butter, das Zimmer.",
+  "ru": "очень надёжно, если слово от глагола. Иначе — нет: die Butter, das Zimmer.",
+  "tr": "isim fiilden türemişse çok güvenilir. Değilse geçerli değil: die Butter, das Zimmer.",
+  "at": [
+   "4f926d5e",
+   "7c843dbf",
+   "c4df71d8",
+   "d3c02b4c",
+   "ec02d738"
+  ]
+ },
+ {
+  "en": "driver",
+  "ru": "водитель",
+  "tr": "sürücü",
+  "at": [
+   "45e84ae5"
+  ]
+ },
+ {
+  "en": "TV (set)",
+  "ru": "телевизор",
+  "tr": "televizyon",
+  "at": [
+   "179f62a3"
+  ]
+ },
+ {
+  "en": "printer",
+  "ru": "принтер",
+  "tr": "yazıcı",
+  "at": [
+   "a3d2d943"
+  ]
+ },
+ {
+  "en": "alarm clock",
+  "ru": "будильник",
+  "tr": "çalar saat",
+  "at": [
+   "86ab6960"
+  ]
+ },
+ {
+  "en": "singing",
+  "ru": "пение",
+  "tr": "şarkı söyleme",
+  "at": [
+   "623f4489"
+  ]
+ },
+ {
+  "en": "car",
+  "ru": "автомобиль",
+  "tr": "otomobil",
+  "at": [
+   "05986a2a"
+  ]
+ },
+ {
+  "en": "-O ENDING",
+  "ru": "ОКОНЧАНИЕ -O",
+  "tr": "-O İLE BİTEN İSİMLER",
+  "at": [
+   "32893e14",
+   "4899f61e",
+   "522148cc",
+   "c301b616",
+   "d3ab659e",
+   "f5e31ccc"
+  ]
+ },
+ {
+  "en": "Nouns ending in -o are neuter.",
+  "ru": "Слова на -o — среднего рода.",
+  "tr": "-o ile biten isimler nötrdür.",
+  "at": [
+   "290445a6",
+   "3293b8f4",
+   "5e64364e",
+   "7a7660ce",
+   "8ad5db0c",
+   "91d0bf0c"
+  ]
+ },
+ {
+  "en": "Reliable. Exception: der Euro.",
+  "ru": "надёжно. Исключение: der Euro.",
+  "tr": "güvenilir. İstisna: der Euro.",
+  "at": [
+   "2f55807f",
+   "98bbc13d",
+   "9b2bffb5",
+   "b4cdebbd",
+   "bdd64957",
+   "c4d12d57"
+  ]
+ },
+ {
+  "en": "cinema",
+  "ru": "кинотеатр",
+  "tr": "sinema",
+  "at": [
+   "38b7c8c2"
+  ]
+ },
+ {
+  "en": "office",
+  "ru": "офис",
+  "tr": "ofis",
+  "at": [
+   "3494d0c8"
+  ]
+ },
+ {
+  "en": "video",
+  "ru": "видео",
+  "tr": "video",
+  "at": [
+   "3b8fb4c8"
+  ]
+ },
+ {
+  "en": "echo",
+  "ru": "эхо",
+  "tr": "yankı",
+  "at": [
+   "e4d36220"
+  ]
+ },
+ {
+  "en": "bank account",
+  "ru": "банковский счёт",
+  "tr": "banka hesabı",
+  "at": [
+   "1ca59e42"
+  ]
+ },
+ {
+  "en": "phone call",
+  "ru": "телефонный звонок",
+  "tr": "telefon araması",
+  "at": [
+   "0f4a398b"
+  ]
+ },
+ {
+  "en": "A noun made from a verb stem with no ending (rufen → der Ruf) is masculine.",
+  "ru": "Существительное из основы глагола без окончания (rufen → der Ruf) — мужского рода.",
+  "tr": "Ek almadan fiil kökünden türeyen isimler (rufen → der Ruf) erildir.",
+  "at": [
+   "50dcc67b",
+   "5cf2ff4b",
+   "69ace6b8",
+   "a91f58b7",
+   "e79f060c"
+  ]
+ },
+ {
+  "en": "visit",
+  "ru": "визит, посещение",
+  "tr": "ziyaret",
+  "at": [
+   "98898a1b"
+  ]
+ },
+ {
+  "en": "beginning",
+  "ru": "начало",
+  "tr": "başlangıç",
+  "at": [
+   "9e25a1c4"
+  ]
+ },
+ {
+  "en": "flight",
+  "ru": "полёт, рейс",
+  "tr": "uçuş",
+  "at": [
+   "8bfa8ac7"
+  ]
+ },
+ {
+  "en": "sleep",
+  "ru": "сон (состояние)",
+  "tr": "uyku",
+  "at": [
+   "915dfbc8"
+  ]
+ },
+ {
+  "en": "king",
+  "ru": "король",
+  "tr": "kral",
+  "at": [
+   "3b0fbcda"
+  ]
+ },
+ {
+  "en": "-IG / -ICH ENDING",
+  "ru": "ОКОНЧАНИЕ -IG / -ICH",
+  "tr": "-IG / -ICH İLE BİTEN İSİMLER",
+  "at": [
+   "a9894582",
+   "b6116706",
+   "bcd8d8fa",
+   "e3f8b8e0",
+   "fbbbdf26"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ig or -ich are masculine.",
+  "ru": "Слова на -ig и -ich — мужского рода.",
+  "tr": "-ig ve -ich ile biten isimler erildir.",
+  "at": [
+   "3d68b1f6",
+   "864f9498",
+   "bd778f52",
+   "cf8bfb16",
+   "e808fb5a"
+  ]
+ },
+ {
+  "en": "Reliable, almost no exceptions.",
+  "ru": "надёжно, исключений почти нет.",
+  "tr": "güvenilir, neredeyse istisnası yok.",
+  "at": [
+   "bf044c45",
+   "d6132365",
+   "f3b7a923",
+   "f6258451",
+   "fe4357f9"
+  ]
+ },
+ {
+  "en": "honey",
+  "ru": "мёд",
+  "tr": "bal",
+  "at": [
+   "61226a8e"
+  ]
+ },
+ {
+  "en": "cage",
+  "ru": "клетка (для животных)",
+  "tr": "kafes",
+  "at": [
+   "683729a4"
+  ]
+ },
+ {
+  "en": "vinegar",
+  "ru": "уксус",
+  "tr": "sirke",
+  "at": [
+   "be15fefa"
+  ]
+ },
+ {
+  "en": "carpet",
+  "ru": "ковёр",
+  "tr": "halı",
+  "at": [
+   "6412c096"
+  ]
+ },
+ {
+  "en": "police officer",
+  "ru": "полицейский",
+  "tr": "polis memuru",
+  "at": [
+   "ab8d4879"
+  ]
+ },
+ {
+  "en": "-IST ENDING",
+  "ru": "ОКОНЧАНИЕ -IST",
+  "tr": "-IST İLE BİTEN İSİMLER",
+  "at": [
+   "34d0d4b3",
+   "3f008a41",
+   "ba617aaf",
+   "dd02c24c",
+   "f8bd0680"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ist (people by job or outlook) are masculine.",
+  "ru": "Слова на -ist (люди по роду занятий или взглядам) — мужского рода.",
+  "tr": "-ist ile biten isimler (meslek ya da görüş bildiren insan adları) erildir.",
+  "at": [
+   "0bced0c9",
+   "12d3d78c",
+   "aca48d9d",
+   "cdcea2f8",
+   "edca1c4f"
+  ]
+ },
+ {
+  "en": "Very reliable. A woman gets -in: die Polizistin.",
+  "ru": "очень надёжно. Женщина — с -in: die Polizistin.",
+  "tr": "çok güvenilir. Kadın için -in eklenir: die Polizistin.",
+  "at": [
+   "0cb933c4",
+   "45d445d7",
+   "73c6be26",
+   "bd103742",
+   "d39b1183"
+  ]
+ },
+ {
+  "en": "journalist",
+  "ru": "журналист",
+  "tr": "gazeteci",
+  "at": [
+   "bc92cd48"
+  ]
+ },
+ {
+  "en": "tourist",
+  "ru": "турист",
+  "tr": "turist",
+  "at": [
+   "2f4343bd"
+  ]
+ },
+ {
+  "en": "optimist",
+  "ru": "оптимист",
+  "tr": "iyimser",
+  "at": [
+   "0b35b004"
+  ]
+ },
+ {
+  "en": "pianist",
+  "ru": "пианист",
+  "tr": "piyanist",
+  "at": [
+   "230e5e8f"
+  ]
+ },
+ {
+  "en": "baby",
+  "ru": "младенец, малыш",
+  "tr": "bebek",
+  "at": [
+   "f925c70d"
+  ]
+ },
+ {
+  "en": "calf",
+  "ru": "телёнок",
+  "tr": "buzağı",
+  "at": [
+   "5c999933"
+  ]
+ },
+ {
+  "en": "lamb",
+  "ru": "ягнёнок",
+  "tr": "kuzu",
+  "at": [
+   "913e2288"
+  ]
+ },
+ {
+  "en": "chick",
+  "ru": "цыплёнок",
+  "tr": "civciv",
+  "at": [
+   "92b409c8"
+  ]
+ },
+ {
+  "en": "bed",
+  "ru": "кровать",
+  "tr": "yatak",
+  "at": [
+   "6cb352ac"
+  ]
+ },
+ {
+  "en": "-ETT ENDING",
+  "ru": "ОКОНЧАНИЕ -ETT",
+  "tr": "-ETT İLE BİTEN İSİMLER",
+  "at": [
+   "150bdcb8",
+   "55e2b991",
+   "843189bd",
+   "9a9f17f9"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ett are neuter.",
+  "ru": "Слова на -ett — среднего рода.",
+  "tr": "-ett ile biten isimler nötrdür.",
+  "at": [
+   "04d04e10",
+   "779b02c3",
+   "b3e88cc7",
+   "d64549df"
+  ]
+ },
+ {
+  "en": "Reliable. Not the same as -ette: die Toilette.",
+  "ru": "надёжно. Не путать с -ette: die Toilette.",
+  "tr": "güvenilir. -ette ile karıştırılmamalı: die Toilette.",
+  "at": [
+   "4d146608",
+   "521a83d4",
+   "7908553b",
+   "dd1c98bc"
+  ]
+ },
+ {
+  "en": "ballet",
+  "ru": "балет",
+  "tr": "bale",
+  "at": [
+   "56b77b7f"
+  ]
+ },
+ {
+  "en": "label, tag",
+  "ru": "этикетка",
+  "tr": "etiket",
+  "at": [
+   "76fc3837"
+  ]
+ },
+ {
+  "en": "tray",
+  "ru": "поднос",
+  "tr": "tepsi",
+  "at": [
+   "17d28093"
+  ]
+ },
+ {
+  "en": "factor",
+  "ru": "фактор",
+  "tr": "etken",
+  "at": [
+   "0c986422"
+  ]
+ },
+ {
+  "en": "sensor",
+  "ru": "датчик",
+  "tr": "sensör",
+  "at": [
+   "f96f9db7"
+  ]
+ },
+ {
+  "en": "humour",
+  "ru": "юмор",
+  "tr": "mizah",
+  "at": [
+   "dfc8060c"
+  ]
+ },
+ {
+  "en": "egoism",
+  "ru": "эгоизм",
+  "tr": "bencillik",
+  "at": [
+   "14692a05"
+  ]
+ },
+ {
+  "en": "idealism",
+  "ru": "идеализм",
+  "tr": "idealizm",
+  "at": [
+   "c4ed6859"
+  ]
+ },
+ {
+  "en": "organism",
+  "ru": "организм",
+  "tr": "organizma",
+  "at": [
+   "55248569"
+  ]
+ },
+ {
+  "en": "trauma",
+  "ru": "травма (психическая)",
+  "tr": "travma (ruhsal)",
+  "at": [
+   "85dad90b"
+  ]
+ },
+ {
+  "en": "panorama",
+  "ru": "панорама",
+  "tr": "panorama",
+  "at": [
+   "a3afa44e"
+  ]
+ },
+ {
+  "en": "parade",
+  "ru": "парад",
+  "tr": "geçit töreni",
+  "at": [
+   "652211bc"
+  ]
+ },
+ {
+  "en": "Olympics, Olympiad",
+  "ru": "олимпиада",
+  "tr": "olimpiyat",
+  "at": [
+   "f6602495"
+  ]
+ },
+ {
+  "en": "album",
+  "ru": "альбом",
+  "tr": "albüm",
+  "at": [
+   "1d85e6c8"
+  ]
+ },
+ {
+  "en": "visa",
+  "ru": "виза",
+  "tr": "vize",
+  "at": [
+   "105c8537"
+  ]
+ },
+ {
+  "en": "criterion",
+  "ru": "критерий",
+  "tr": "ölçüt",
+  "at": [
+   "e0a8d273"
+  ]
+ },
+ {
+  "en": "(political) party",
+  "ru": "партия (политическая)",
+  "tr": "parti (siyasi)",
+  "at": [
+   "8f439ef2"
+  ]
+ },
+ {
+  "en": "clarinet",
+  "ru": "кларнет",
+  "tr": "klarnet",
+  "at": [
+   "abf53984"
+  ]
+ },
+ {
+  "en": "young lady, Miss",
+  "ru": "барышня, фройляйн",
+  "tr": "genç hanım, matmazel",
+  "at": [
+   "ee27fb36"
+  ]
  }
 ]

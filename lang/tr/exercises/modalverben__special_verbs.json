@@ -78,5 +78,3324 @@
   "at": [
    "07e3659f"
   ]
+ },
+ {
+  "en": "directly, without softening",
+  "ru": "прямо, без смягчения",
+  "tr": "doğrudan, yumuşatmadan",
+  "at": [
+   "20de6408",
+   "26140316",
+   "27fc347a",
+   "2946d877",
+   "2ac3be13",
+   "2baf78e0",
+   "47c0ef43",
+   "51cdbb9c",
+   "6a8ef932",
+   "7e23f564",
+   "ab65fbd5",
+   "c62480c5",
+   "cb7e635a",
+   "ceaaa6a1",
+   "e5d899d0",
+   "e64476db",
+   "fc2484b4",
+   "ffe38182"
+  ]
+ },
+ {
+  "en": "könnte — conditional or softened: 'could'.",
+  "ru": "könnte — условно или смягчённо: «мог бы».",
+  "tr": "könnte — koşullu ya da yumuşatılmış: “-ebilirdim”.",
+  "at": [
+   "c179bb5c"
+  ]
+ },
+ {
+  "en": "konnte — it was not possible in the past.",
+  "ru": "konnte — в прошлом не получилось.",
+  "tr": "konnte — geçmişte mümkün olmadı.",
+  "at": [
+   "c179bb5c"
+  ]
+ },
+ {
+  "en": "kann — coming today is not possible.",
+  "ru": "kann — сегодня прийти не получается.",
+  "tr": "kann — bugün gelmek mümkün değil.",
+  "at": [
+   "c179bb5c"
+  ]
+ },
+ {
+  "en": "könnte — softer or conditional ('could'); kann — direct: I can't come today.",
+  "ru": "könnte — мягче или условно («мог бы»); kann — прямо: сегодня не могу.",
+  "tr": "könnte — daha yumuşak ya da koşullu (“-ebilirdim”); kann — doğrudan: bugün gelemiyorum.",
+  "at": [
+   "fdb5bd3e"
+  ]
+ },
+ {
+  "en": "Unfortunately I can't come today.",
+  "ru": "Я сегодня, к сожалению, не могу прийти.",
+  "tr": "Bugün maalesef gelemiyorum.",
+  "at": [
+   "a716f654"
+  ]
+ },
+ {
+  "en": "können → ich kann",
+  "ru": "können → ich kann",
+  "tr": "können → ich kann",
+  "at": [
+   "648c45a8"
+  ]
+ },
+ {
+  "en": "direct question",
+  "ru": "прямой вопрос",
+  "tr": "doğrudan soru",
+  "at": [
+   "00fa62e5",
+   "1d3f8779",
+   "3970e72f",
+   "7060cfd7",
+   "8a627af1",
+   "b8f3b4a4",
+   "cd0aceab",
+   "d9ba7615",
+   "f5fbb705"
+  ]
+ },
+ {
+  "en": "könntest — a conditional possibility or a more tentative request.",
+  "ru": "könntest — условная возможность или более мягкая просьба.",
+  "tr": "könntest — koşullu bir imkân ya da daha yumuşak bir rica.",
+  "at": [
+   "5c3a4ab4"
+  ]
+ },
+ {
+  "en": "kannst — a direct request for help.",
+  "ru": "kannst — прямая просьба о помощи.",
+  "tr": "kannst — doğrudan yardım ricası.",
+  "at": [
+   "5c3a4ab4"
+  ]
+ },
+ {
+  "en": "könntest — a more tentative request; kannst — direct, and can also be polite.",
+  "ru": "könntest — более мягкая просьба; kannst — прямая, тоже может быть вежливой.",
+  "tr": "könntest — daha yumuşak bir rica; kannst — doğrudan, ama yine de kibar olabilir.",
+  "at": [
+   "e523af96"
+  ]
+ },
+ {
+  "en": "Can you help me for a moment?",
+  "ru": "Можешь мне на минутку помочь?",
+  "tr": "Bana bir dakika yardım edebilir misin?",
+  "at": [
+   "9fe3e65c"
+  ]
+ },
+ {
+  "en": "können → du kannst",
+  "ru": "können → du kannst",
+  "tr": "können → du kannst",
+  "at": [
+   "7b4a0d60"
+  ]
+ },
+ {
+  "en": "konnte — ability or possibility in the past.",
+  "ru": "konnte — возможность в прошлом.",
+  "tr": "konnte — geçmişteki imkân.",
+  "at": [
+   "d9903b00"
+  ]
+ },
+ {
+  "en": "könnte — hypothetical: 'could'.",
+  "ru": "könnte — условно: «мог бы».",
+  "tr": "könnte — koşullu: “-ebilirdi”.",
+  "at": [
+   "d9903b00"
+  ]
+ },
+ {
+  "en": "kann — he has good cooking skills.",
+  "ru": "kann — он умеет хорошо готовить.",
+  "tr": "kann — iyi yemek yapmayı biliyor.",
+  "at": [
+   "d9903b00"
+  ]
+ },
+ {
+  "en": "konnte — ability or possibility in the past; kann — ability or possibility now.",
+  "ru": "konnte — умение или возможность в прошлом; kann — сейчас.",
+  "tr": "konnte — geçmişteki beceri ya da imkân; kann — şimdi.",
+  "at": [
+   "8d661dc2"
+  ]
+ },
+ {
+  "en": "He can cook very well.",
+  "ru": "Он очень хорошо умеет готовить.",
+  "tr": "Çok iyi yemek yapabiliyor.",
+  "at": [
+   "93a543e0"
+  ]
+ },
+ {
+  "en": "könntet — a conditional possibility or a more tentative request.",
+  "ru": "könntet — условная возможность или более мягкая просьба.",
+  "tr": "könntet — koşullu bir imkân ya da daha yumuşak bir rica.",
+  "at": [
+   "e8d56776"
+  ]
+ },
+ {
+  "en": "könnt — a direct question about coming tomorrow.",
+  "ru": "könnt — прямой вопрос о возможности прийти завтра.",
+  "tr": "könnt — yarın gelebilmekle ilgili doğrudan soru.",
+  "at": [
+   "e8d56776"
+  ]
+ },
+ {
+  "en": "könntet — a more tentative request; könnt — direct, and can also be polite.",
+  "ru": "könntet — более мягкая просьба; könnt — прямая, тоже может быть вежливой.",
+  "tr": "könntet — daha yumuşak bir rica; könnt — doğrudan, ama yine de kibar olabilir.",
+  "at": [
+   "09652984"
+  ]
+ },
+ {
+  "en": "Can you come earlier tomorrow?",
+  "ru": "Вы можете завтра прийти пораньше?",
+  "tr": "Yarın daha erken gelebilir misiniz?",
+  "at": [
+   "5a17b43e"
+  ]
+ },
+ {
+  "en": "können → ihr könnt",
+  "ru": "können → ihr könnt",
+  "tr": "können → ihr könnt",
+  "at": [
+   "6eaa226a"
+  ]
+ },
+ {
+  "en": "past",
+  "ru": "прошлое",
+  "tr": "geçmiş",
+  "at": [
+   "004109df",
+   "0128ec33",
+   "0ee2ce96",
+   "13a51a90",
+   "182bda15",
+   "1cc487bb",
+   "1d2fe702",
+   "20f79e72",
+   "28a1949c",
+   "2fc71bf6",
+   "3e457aaa",
+   "410d6947",
+   "422f17a4",
+   "44df0b10",
+   "4cd36014",
+   "50ad5384",
+   "57e58000",
+   "5ea6f1e8",
+   "6b53858b",
+   "6d884cb7",
+   "75580534",
+   "76e8946e",
+   "7bfcaf63",
+   "7ecc1494",
+   "849f5707",
+   "87b30c39",
+   "8cfbed74",
+   "92b619fd",
+   "94f14408",
+   "971a9dc7",
+   "a7ddeb8a",
+   "a8b89d0d",
+   "ab68bf8b",
+   "ae7c15f0",
+   "b2aa32be",
+   "c4c735e7",
+   "d012ccd6",
+   "d3b9587d",
+   "dcb68a62",
+   "ed771bb0",
+   "f7d8494b"
+  ]
+ },
+ {
+  "en": "konnte — coming yesterday was not possible.",
+  "ru": "konnte — вчера прийти не получилось.",
+  "tr": "konnte — dün gelmek mümkün olmadı.",
+  "at": [
+   "c88d4983"
+  ]
+ },
+ {
+  "en": "kann — ability or possibility now; konnte — ability or possibility in the past.",
+  "ru": "kann — возможность сейчас; konnte — возможность в прошлом.",
+  "tr": "kann — şimdiki imkân; konnte — geçmişteki imkân.",
+  "at": [
+   "24d4d1fd",
+   "85fbce72",
+   "8ec4387e",
+   "a2aad89c"
+  ]
+ },
+ {
+  "en": "Yesterday I couldn't come to work.",
+  "ru": "Вчера я не могла прийти на работу.",
+  "tr": "Dün işe gelemedim.",
+  "at": [
+   "b1d8c0ff"
+  ]
+ },
+ {
+  "en": "können → konnte → ich konnte",
+  "ru": "können → konnte → ich konnte",
+  "tr": "können → konnte → ich konnte",
+  "at": [
+   "31668f5f",
+   "5ac74284"
+  ]
+ },
+ {
+  "en": "konnte — had the ability to run fast as a child.",
+  "ru": "konnte — в детстве умела быстро бегать.",
+  "tr": "konnte — çocukken hızlı koşabiliyordum.",
+  "at": [
+   "e7ebb530"
+  ]
+ },
+ {
+  "en": "As a child I could run very fast.",
+  "ru": "В детстве я могла очень быстро бегать.",
+  "tr": "Çocukken çok hızlı koşabiliyordum.",
+  "at": [
+   "d4183610"
+  ]
+ },
+ {
+  "en": "können — ability or possibility stated directly in the present.",
+  "ru": "können — возможность сейчас, выраженная прямо.",
+  "tr": "können — şimdiki imkân, doğrudan söylenmiş.",
+  "at": [
+   "7eaf5271",
+   "982cbb4b",
+   "e41aef05"
+  ]
+ },
+ {
+  "en": "konnten — the weather prevented staying outside.",
+  "ru": "konnten — погода не позволила остаться на улице.",
+  "tr": "konnten — hava yüzünden dışarıda kalmak mümkün olmadı.",
+  "at": [
+   "982cbb4b"
+  ]
+ },
+ {
+  "en": "können — ability or possibility now; konnten — ability or possibility in the past.",
+  "ru": "können — возможность сейчас; konnten — возможность в прошлом.",
+  "tr": "können — şimdiki imkân; konnten — geçmişteki imkân.",
+  "at": [
+   "7348fc85",
+   "dc7a6c3f"
+  ]
+ },
+ {
+  "en": "We couldn't stay outside because of the weather.",
+  "ru": "Мы не могли оставаться на улице из-за погоды.",
+  "tr": "Hava yüzünden dışarıda kalamadık.",
+  "at": [
+   "3c940077"
+  ]
+ },
+ {
+  "en": "können → konnte → wir konnten",
+  "ru": "können → konnte → wir konnten",
+  "tr": "können → konnte → wir konnten",
+  "at": [
+   "e11dbd07"
+  ]
+ },
+ {
+  "en": "kann — ability or possibility stated directly in the present.",
+  "ru": "kann — возможность сейчас, выраженная прямо.",
+  "tr": "kann — şimdiki imkân, doğrudan söylenmiş.",
+  "at": [
+   "310f6c9c",
+   "4fe8151e",
+   "5da8f5dd",
+   "670e91ee"
+  ]
+ },
+ {
+  "en": "konnte — opening the door was not possible.",
+  "ru": "konnte — открыть дверь не удалось.",
+  "tr": "konnte — kapıyı açmak mümkün olmadı.",
+  "at": [
+   "670e91ee"
+  ]
+ },
+ {
+  "en": "He couldn't open the door.",
+  "ru": "Он не мог открыть дверь.",
+  "tr": "Kapıyı açamadı.",
+  "at": [
+   "8a5a12e6"
+  ]
+ },
+ {
+  "en": "können → konnte → er konnte",
+  "ru": "können → konnte → er konnte",
+  "tr": "können → konnte → er konnte",
+  "at": [
+   "9e61c8c2"
+  ]
+ },
+ {
+  "en": "konntest — a question about being able to sleep well yesterday.",
+  "ru": "konntest — вопрос о возможности выспаться вчера.",
+  "tr": "konntest — dün iyi uyuyup uyuyamadığını soruyor.",
+  "at": [
+   "c81b3897"
+  ]
+ },
+ {
+  "en": "kannst — ability or possibility now; konntest — ability or possibility in the past.",
+  "ru": "kannst — возможность сейчас; konntest — возможность в прошлом.",
+  "tr": "kannst — şimdiki imkân; konntest — geçmişteki imkân.",
+  "at": [
+   "17ff0681"
+  ]
+ },
+ {
+  "en": "Were you able to sleep well last night?",
+  "ru": "Тебе вчера удалось хорошо выспаться?",
+  "tr": "Dün iyi uyuyabildin mi?",
+  "at": [
+   "1df708db"
+  ]
+ },
+ {
+  "en": "können → konnte → du konntest",
+  "ru": "können → konnte → du konntest",
+  "tr": "können → konnte → du konntest",
+  "at": [
+   "58814f3b"
+  ]
+ },
+ {
+  "en": "könnt — ability or possibility stated directly in the present.",
+  "ru": "könnt — возможность сейчас, выраженная прямо.",
+  "tr": "könnt — şimdiki imkân, doğrudan söylenmiş.",
+  "at": [
+   "5f6981be"
+  ]
+ },
+ {
+  "en": "konntet — a question about why coming earlier was not possible.",
+  "ru": "konntet — вопрос о причине прошлой невозможности.",
+  "tr": "konntet — geçmişte neden mümkün olmadığını soruyor.",
+  "at": [
+   "5f6981be"
+  ]
+ },
+ {
+  "en": "könnt — ability or possibility now; konntet — ability or possibility in the past.",
+  "ru": "könnt — возможность сейчас; konntet — возможность в прошлом.",
+  "tr": "könnt — şimdiki imkân; konntet — geçmişteki imkân.",
+  "at": [
+   "790dcb2c"
+  ]
+ },
+ {
+  "en": "Why couldn't you come earlier?",
+  "ru": "Почему вы не смогли прийти раньше?",
+  "tr": "Neden daha erken gelemediniz?",
+  "at": [
+   "ebdfd976"
+  ]
+ },
+ {
+  "en": "können → konnte → ihr konntet",
+  "ru": "können → konnte → ihr konntet",
+  "tr": "können → konnte → ihr konntet",
+  "at": [
+   "47c90f32"
+  ]
+ },
+ {
+  "en": "konnte — answering the question was not possible.",
+  "ru": "konnte — ответить на вопрос не удалось.",
+  "tr": "konnte — soruyu cevaplamak mümkün olmadı.",
+  "at": [
+   "310f6c9c"
+  ]
+ },
+ {
+  "en": "The pupil couldn't answer the question.",
+  "ru": "Ученица не могла ответить на вопрос.",
+  "tr": "Öğrenci soruyu cevaplayamadı.",
+  "at": [
+   "4cccd294"
+  ]
+ },
+ {
+  "en": "können → konnte → die Schülerin konnte",
+  "ru": "können → konnte → die Schülerin konnte",
+  "tr": "können → konnte → die Schülerin konnte",
+  "at": [
+   "c0474be8"
+  ]
+ },
+ {
+  "en": "konnten — those days off allowed the children to sleep in.",
+  "ru": "konnten — в те выходные появилась возможность выспаться.",
+  "tr": "konnten — o hafta sonu uzun uzun uyuma fırsatı oldu.",
+  "at": [
+   "7eaf5271"
+  ]
+ },
+ {
+  "en": "At the weekend the children could finally sleep in.",
+  "ru": "На выходных дети наконец смогли выспаться.",
+  "tr": "Hafta sonu çocuklar sonunda doyasıya uyuyabildi.",
+  "at": [
+   "1be15dd5"
+  ]
+ },
+ {
+  "en": "können → konnte → sie konnten",
+  "ru": "können → konnte → sie konnten",
+  "tr": "können → konnte → sie konnten",
+  "at": [
+   "afb0fb65"
+  ]
+ },
+ {
+  "en": "polite and tentative",
+  "ru": "вежливо и мягко",
+  "tr": "kibar ve yumuşak",
+  "at": [
+   "0596134b",
+   "097d6cfa",
+   "234ed68d",
+   "2dd82b5a",
+   "35e2d46a",
+   "36f1a2d8",
+   "4f917498",
+   "618ef319",
+   "6de4855b",
+   "986965c4",
+   "a96beaf6",
+   "b59061d5",
+   "c395b878",
+   "c95bd62c",
+   "c9923fbe",
+   "cf02ccfa",
+   "d9524343",
+   "e97573c2",
+   "eb723480"
+  ]
+ },
+ {
+  "en": "können — a directly expressed possibility; the question can still be polite.",
+  "ru": "können — возможность выражена прямо; вопрос может оставаться вежливым.",
+  "tr": "können — imkân doğrudan söylenmiş; soru yine de kibar olabilir.",
+  "at": [
+   "9e67bf3e",
+   "bc98b213"
+  ]
+ },
+ {
+  "en": "könnten — a tentative request for help.",
+  "ru": "könnten — смягчённая просьба о помощи.",
+  "tr": "könnten — yumuşatılmış yardım ricası.",
+  "at": [
+   "bc98b213"
+  ]
+ },
+ {
+  "en": "können — a more direct question or request; könnten — more tentative.",
+  "ru": "können — более прямой вопрос или просьба; könnten — мягче.",
+  "tr": "können — daha doğrudan bir soru ya da rica; könnten — daha yumuşak.",
+  "at": [
+   "5a271a4d",
+   "be2638ac"
+  ]
+ },
+ {
+  "en": "Could you help me, please?",
+  "ru": "Не могли бы Вы мне помочь?",
+  "tr": "Bana yardım edebilir misiniz lütfen?",
+  "at": [
+   "788b97cf"
+  ]
+ },
+ {
+  "en": "konnte → könnte → Sie könnten",
+  "ru": "konnte → könnte → Sie könnten",
+  "tr": "konnte → könnte → Sie könnten",
+  "at": [
+   "aee49b8f"
+  ]
+ },
+ {
+  "en": "könnt — a directly expressed possibility; the question can still be polite.",
+  "ru": "könnt — возможность выражена прямо; вопрос может оставаться вежливым.",
+  "tr": "könnt — imkân doğrudan söylenmiş; soru yine de kibar olabilir.",
+  "at": [
+   "3abe40e6"
+  ]
+ },
+ {
+  "en": "könntet — a tentative request to be quieter.",
+  "ru": "könntet — смягчённая просьба вести себя потише.",
+  "tr": "könntet — biraz daha sessiz olma ricası, yumuşatılmış.",
+  "at": [
+   "3abe40e6"
+  ]
+ },
+ {
+  "en": "könnt — a more direct question or request; könntet — more tentative.",
+  "ru": "könnt — более прямой вопрос или просьба; könntet — мягче.",
+  "tr": "könnt — daha doğrudan bir soru ya da rica; könntet — daha yumuşak.",
+  "at": [
+   "e10ed4f4"
+  ]
+ },
+ {
+  "en": "Could you be a bit quieter, please?",
+  "ru": "Не могли бы вы быть потише?",
+  "tr": "Biraz daha sessiz olabilir misiniz lütfen?",
+  "at": [
+   "a0533eae"
+  ]
+ },
+ {
+  "en": "konnte → könnte → ihr könntet",
+  "ru": "konnte → könnte → ihr könntet",
+  "tr": "konnte → könnte → ihr könntet",
+  "at": [
+   "0593087a"
+  ]
+ },
+ {
+  "en": "könnten — a tentative suggestion to talk tomorrow.",
+  "ru": "könnten — мягкое предложение поговорить завтра.",
+  "tr": "könnten — yarın konuşmak için yumuşak bir öneri.",
+  "at": [
+   "9e67bf3e"
+  ]
+ },
+ {
+  "en": "Could we talk about it tomorrow?",
+  "ru": "Могли бы мы поговорить об этом завтра?",
+  "tr": "Yarın bunu konuşsak olur mu?",
+  "at": [
+   "3de46ef6"
+  ]
+ },
+ {
+  "en": "konnte → könnte → wir könnten",
+  "ru": "konnte → könnte → wir könnten",
+  "tr": "konnte → könnte → wir könnten",
+  "at": [
+   "99cda4b2",
+   "b2efa4d1"
+  ]
+ },
+ {
+  "en": "kannst — a directly expressed possibility; the question can still be polite.",
+  "ru": "kannst — возможность выражена прямо; вопрос может оставаться вежливым.",
+  "tr": "kannst — imkân doğrudan söylenmiş; soru yine de kibar olabilir.",
+  "at": [
+   "b3b27fef"
+  ]
+ },
+ {
+  "en": "könntest — a tentative request to send the file.",
+  "ru": "könntest — смягчённая просьба прислать файл.",
+  "tr": "könntest — dosyayı gönderme ricası, yumuşatılmış.",
+  "at": [
+   "b3b27fef"
+  ]
+ },
+ {
+  "en": "kannst — a more direct question or request; könntest — more tentative.",
+  "ru": "kannst — более прямой вопрос или просьба; könntest — мягче.",
+  "tr": "kannst — daha doğrudan bir soru ya da rica; könntest — daha yumuşak.",
+  "at": [
+   "fc60eb39"
+  ]
+ },
+ {
+  "en": "konnte → könnte → du könntest",
+  "ru": "konnte → könnte → du könntest",
+  "tr": "konnte → könnte → du könntest",
+  "at": [
+   "1efa33d3"
+  ]
+ },
+ {
+  "en": "hypothetical",
+  "ru": "гипотетически",
+  "tr": "varsayımsal",
+  "at": [
+   "1c96130a",
+   "4b351c6d",
+   "adc57506"
+  ]
+ },
+ {
+  "en": "könnte — staying longer would be possible if needed.",
+  "ru": "könnte — можно было бы остаться, если понадобится.",
+  "tr": "könnte — gerekse daha uzun kalabilirdim.",
+  "at": [
+   "39879021"
+  ]
+ },
+ {
+  "en": "kann — states possibility directly; könnte — considers an option or depends on a condition.",
+  "ru": "kann — возможность утверждается прямо; könnte — рассматривается как вариант или зависит от условия.",
+  "tr": "kann — imkân doğrudan söyleniyor; könnte — bir seçenek olarak düşünülüyor ya da bir koşula bağlı.",
+  "at": [
+   "51a3b0cc",
+   "c1dc342f"
+  ]
+ },
+ {
+  "en": "I could stay longer today if it were necessary.",
+  "ru": "Я могла бы сегодня остаться дольше, если бы это было необходимо.",
+  "tr": "Gerekse bugün daha uzun kalabilirdim.",
+  "at": [
+   "74842545"
+  ]
+ },
+ {
+  "en": "konnte → könnte → ich könnte",
+  "ru": "konnte → könnte → ich könnte",
+  "tr": "konnte → könnte → ich könnte",
+  "at": [
+   "ced79b35",
+   "df8ceb92"
+  ]
+ },
+ {
+  "en": "könnten — travelling by car is one possible option.",
+  "ru": "könnten — поездка на машине — один из вариантов.",
+  "tr": "könnten — arabayla gitmek seçeneklerden biri.",
+  "at": [
+   "e41aef05"
+  ]
+ },
+ {
+  "en": "können — states possibility directly; könnten — considers an option or depends on a condition.",
+  "ru": "können — возможность утверждается прямо; könnten — рассматривается как вариант или зависит от условия.",
+  "tr": "können — imkân doğrudan söyleniyor; könnten — bir seçenek olarak düşünülüyor ya da bir koşula bağlı.",
+  "at": [
+   "76155dd3"
+  ]
+ },
+ {
+  "en": "We could go by car, but the train is more comfortable.",
+  "ru": "Мы могли бы поехать на машине, но поезд удобнее.",
+  "tr": "Arabayla gidebilirdik, ama tren daha rahat.",
+  "at": [
+   "cc92b651"
+  ]
+ },
+ {
+  "en": "könnte — considering a possible action now.",
+  "ru": "könnte — поиск возможного действия сейчас.",
+  "tr": "könnte — şimdi ne yapılabileceği düşünülüyor.",
+  "at": [
+   "4fe8151e"
+  ]
+ },
+ {
+  "en": "What could I do now?",
+  "ru": "Что я мог(ла) бы сейчас сделать?",
+  "tr": "Şimdi ne yapabilirdim?",
+  "at": [
+   "992ae9d6"
+  ]
+ },
+ {
+  "en": "tentative possibility",
+  "ru": "осторожное предположение",
+  "tr": "temkinli tahmin",
+  "at": [
+   "e00e69a2"
+  ]
+ },
+ {
+  "en": "könnte — a possibility: this might be a good solution.",
+  "ru": "könnte — предположение: это может оказаться решением.",
+  "tr": "könnte — tahmin: bu iyi bir çözüm olabilir.",
+  "at": [
+   "5da8f5dd"
+  ]
+ },
+ {
+  "en": "kann — also expresses possibility; könnte makes the assumption more tentative.",
+  "ru": "kann — тоже выражает возможность; könnte делает предположение осторожнее.",
+  "tr": "kann — o da olasılık bildirir; könnte tahmini daha temkinli kılar.",
+  "at": [
+   "114e02ab"
+  ]
+ },
+ {
+  "en": "That could be a good solution.",
+  "ru": "Это могло бы быть хорошим решением.",
+  "tr": "Bu iyi bir çözüm olabilir.",
+  "at": [
+   "2c434cb9"
+  ]
+ },
+ {
+  "en": "konnte → könnte → es könnte",
+  "ru": "konnte → könnte → es könnte",
+  "tr": "konnte → könnte → es könnte",
+  "at": [
+   "842c5609"
+  ]
+ },
+ {
+  "en": "müsste — a less categorical or conditional necessity.",
+  "ru": "müsste — менее категоричная или условная необходимость.",
+  "tr": "müsste — daha az kategorik ya da koşullu bir gereklilik.",
+  "at": [
+   "971a3515",
+   "dd2fc70b"
+  ]
+ },
+ {
+  "en": "muss — leaving now is necessary.",
+  "ru": "muss — сейчас необходимо уходить.",
+  "tr": "muss — şimdi gitmek gerekiyor.",
+  "at": [
+   "dd2fc70b"
+  ]
+ },
+ {
+  "en": "müsste — less categorical or conditional necessity; muss — direct necessity.",
+  "ru": "müsste — менее категоричная или условная необходимость; muss — прямая необходимость.",
+  "tr": "müsste — daha az kategorik ya da koşullu gereklilik; muss — doğrudan gereklilik.",
+  "at": [
+   "1de0eda3",
+   "90e2cc45"
+  ]
+ },
+ {
+  "en": "Unfortunately I have to go now.",
+  "ru": "Мне, к сожалению, уже пора идти.",
+  "tr": "Maalesef artık gitmem gerek.",
+  "at": [
+   "78921c37"
+  ]
+ },
+ {
+  "en": "müssen → ich muss",
+  "ru": "müssen → ich muss",
+  "tr": "müssen → ich muss",
+  "at": [
+   "b57e70c7"
+  ]
+ },
+ {
+  "en": "müsstest — a less categorical or conditional necessity.",
+  "ru": "müsstest — менее категоричная или условная необходимость.",
+  "tr": "müsstest — daha az kategorik ya da koşullu bir gereklilik.",
+  "at": [
+   "a9d6d04b"
+  ]
+ },
+ {
+  "en": "musst — a question about needing to work tomorrow.",
+  "ru": "musst — вопрос о необходимости работать завтра.",
+  "tr": "musst — yarın çalışmanın gerekip gerekmediğini soruyor.",
+  "at": [
+   "a9d6d04b"
+  ]
+ },
+ {
+  "en": "müsstest — less categorical or conditional necessity; musst — direct necessity.",
+  "ru": "müsstest — менее категоричная или условная необходимость; musst — прямая необходимость.",
+  "tr": "müsstest — daha az kategorik ya da koşullu gereklilik; musst — doğrudan gereklilik.",
+  "at": [
+   "cd00b185"
+  ]
+ },
+ {
+  "en": "Do you have to work tomorrow?",
+  "ru": "Тебе завтра нужно работать?",
+  "tr": "Yarın çalışman gerekiyor mu?",
+  "at": [
+   "e00a6577"
+  ]
+ },
+ {
+  "en": "müssen → du musst",
+  "ru": "müssen → du musst",
+  "tr": "müssen → du musst",
+  "at": [
+   "84942207",
+   "bafb544a"
+  ]
+ },
+ {
+  "en": "musste — necessity in the past.",
+  "ru": "musste — необходимость в прошлом.",
+  "tr": "musste — geçmişteki gereklilik.",
+  "at": [
+   "971a3515"
+  ]
+ },
+ {
+  "en": "muss — staying longer today is necessary.",
+  "ru": "muss — сегодня необходимо остаться дольше.",
+  "tr": "muss — bugün daha uzun kalmak gerekiyor.",
+  "at": [
+   "971a3515"
+  ]
+ },
+ {
+  "en": "Anna has to stay longer today.",
+  "ru": "Анне сегодня нужно задержаться.",
+  "tr": "Anna'nın bugün daha uzun kalması gerekiyor.",
+  "at": [
+   "04ad6721"
+  ]
+ },
+ {
+  "en": "müssen → sie muss",
+  "ru": "müssen → sie muss",
+  "tr": "müssen → sie muss",
+  "at": [
+   "661eb701"
+  ]
+ },
+ {
+  "en": "müsstet — a conditional absence of a need to get up early.",
+  "ru": "müsstet — условное отсутствие необходимости вставать рано.",
+  "tr": "müsstet — koşullu: erken kalkmanız gerekmezdi.",
+  "at": [
+   "54231938"
+  ]
+ },
+ {
+  "en": "musstet nicht — it was not necessary in the past.",
+  "ru": "musstet nicht — в прошлом не было необходимости.",
+  "tr": "musstet nicht — geçmişte gerek yoktu.",
+  "at": [
+   "54231938"
+  ]
+ },
+ {
+  "en": "Ihr dürft nicht so früh aufstehen — getting up early is forbidden; müsst nicht — it is optional.",
+  "ru": "Ihr dürft nicht so früh aufstehen — запрещено вставать рано; müsst nicht — это необязательно.",
+  "tr": "Ihr dürft nicht so früh aufstehen — erken kalkmak yasak; müsst nicht — gerek yok.",
+  "at": [
+   "1bdcdf9a"
+  ]
+ },
+ {
+  "en": "You don't have to get up so early.",
+  "ru": "Вам не обязательно вставать так рано.",
+  "tr": "Bu kadar erken kalkmanız gerekmiyor.",
+  "at": [
+   "a01c4448"
+  ]
+ },
+ {
+  "en": "müssen → ihr müsst",
+  "ru": "müssen → ihr müsst",
+  "tr": "müssen → ihr müsst",
+  "at": [
+   "f65d4e8c"
+  ]
+ },
+ {
+  "en": "musste — working long hours yesterday was necessary.",
+  "ru": "musste — вчера пришлось долго работать.",
+  "tr": "musste — dün uzun süre çalışmak zorunda kaldım.",
+  "at": [
+   "616d7c9d"
+  ]
+ },
+ {
+  "en": "muss — necessity now; musste — necessity in the past.",
+  "ru": "muss — необходимость сейчас; musste — необходимость в прошлом.",
+  "tr": "muss — şimdiki gereklilik; musste — geçmişteki gereklilik.",
+  "at": [
+   "2d7dad6b",
+   "61015333",
+   "a784d062",
+   "e5310d4e"
+  ]
+ },
+ {
+  "en": "Yesterday I had to work late.",
+  "ru": "Вчера мне пришлось долго работать.",
+  "tr": "Dün uzun süre çalışmak zorunda kaldım.",
+  "at": [
+   "48feb479"
+  ]
+ },
+ {
+  "en": "müssen → musste → ich musste",
+  "ru": "müssen → musste → ich musste",
+  "tr": "müssen → musste → ich musste",
+  "at": [
+   "a0a21571",
+   "a9403cc9"
+  ]
+ },
+ {
+  "en": "müssen — necessity now.",
+  "ru": "müssen — необходимость сейчас.",
+  "tr": "müssen — şimdiki gereklilik.",
+  "at": [
+   "179403bb",
+   "2fcbb658",
+   "34e0192f",
+   "5319a44a"
+  ]
+ },
+ {
+  "en": "mussten — rescheduling the appointment was necessary.",
+  "ru": "mussten — перенести встречу было необходимо.",
+  "tr": "mussten — randevuyu ertelemek gerekti.",
+  "at": [
+   "2fcbb658"
+  ]
+ },
+ {
+  "en": "müssen — necessity now; mussten — necessity in the past.",
+  "ru": "müssen — необходимость сейчас; mussten — необходимость в прошлом.",
+  "tr": "müssen — şimdiki gereklilik; mussten — geçmişteki gereklilik.",
+  "at": [
+   "be68d7fa",
+   "e28d04b5"
+  ]
+ },
+ {
+  "en": "We had to postpone the appointment.",
+  "ru": "Нам пришлось перенести встречу.",
+  "tr": "Randevuyu ertelemek zorunda kaldık.",
+  "at": [
+   "233a0368"
+  ]
+ },
+ {
+  "en": "müssen → musste → wir mussten",
+  "ru": "müssen → musste → wir mussten",
+  "tr": "müssen → musste → wir mussten",
+  "at": [
+   "d4bed7ac"
+  ]
+ },
+ {
+  "en": "muss — necessity now.",
+  "ru": "muss — необходимость сейчас.",
+  "tr": "muss — şimdiki gereklilik.",
+  "at": [
+   "228d9247",
+   "325039e0",
+   "62a7305a",
+   "69a692aa",
+   "852554f6",
+   "946215ec"
+  ]
+ },
+ {
+  "en": "musste — he had to get up early.",
+  "ru": "musste — ему пришлось рано встать.",
+  "tr": "musste — erken kalkmak zorunda kaldı.",
+  "at": [
+   "946215ec"
+  ]
+ },
+ {
+  "en": "He had to get up early.",
+  "ru": "Ему пришлось рано встать.",
+  "tr": "Erken kalkmak zorunda kaldı.",
+  "at": [
+   "a8aea5e4"
+  ]
+ },
+ {
+  "en": "müssen → musste → er musste",
+  "ru": "müssen → musste → er musste",
+  "tr": "müssen → musste → er musste",
+  "at": [
+   "a83a4ad8"
+  ]
+ },
+ {
+  "en": "musste — taking the bus used to be necessary.",
+  "ru": "musste — раньше приходилось ездить на автобусе.",
+  "tr": "musste — eskiden otobüse binmek gerekiyordu.",
+  "at": [
+   "ab13fda5"
+  ]
+ },
+ {
+  "en": "I used to have to take the bus every day.",
+  "ru": "Раньше мне приходилось каждый день ездить на автобусе.",
+  "tr": "Eskiden her gün otobüse binmek zorundaydım.",
+  "at": [
+   "64e82bf1"
+  ]
+ },
+ {
+  "en": "müsst — necessity now.",
+  "ru": "müsst — необходимость сейчас.",
+  "tr": "müsst — şimdiki gereklilik.",
+  "at": [
+   "c3d6881a",
+   "de2bd0e7"
+  ]
+ },
+ {
+  "en": "musstet — a question about whether waiting long was necessary.",
+  "ru": "musstet — вопрос о том, пришлось ли долго ждать.",
+  "tr": "musstet — uzun süre beklemek zorunda kalıp kalmadığınızı soruyor.",
+  "at": [
+   "de2bd0e7"
+  ]
+ },
+ {
+  "en": "müsst — necessity now; musstet — necessity in the past.",
+  "ru": "müsst — необходимость сейчас; musstet — необходимость в прошлом.",
+  "tr": "müsst — şimdiki gereklilik; musstet — geçmişteki gereklilik.",
+  "at": [
+   "3a48ef91"
+  ]
+ },
+ {
+  "en": "Did you have to wait long for the bus?",
+  "ru": "Вам пришлось долго ждать автобус?",
+  "tr": "Otobüsü uzun süre beklemek zorunda kaldınız mı?",
+  "at": [
+   "49eab46b"
+  ]
+ },
+ {
+  "en": "müssen → musste → ihr musstet",
+  "ru": "müssen → musste → ihr musstet",
+  "tr": "müssen → musste → ihr musstet",
+  "at": [
+   "f0723b2b"
+  ]
+ },
+ {
+  "en": "müsste — 'ought to', a less categorical necessity.",
+  "ru": "müsste — «надо бы», менее категоричная необходимость.",
+  "tr": "müsste — “-mesi gerekirdi”, daha az kategorik bir gereklilik.",
+  "at": [
+   "325039e0"
+  ]
+ },
+ {
+  "en": "musste — she had to stay at home.",
+  "ru": "musste — ей пришлось остаться дома.",
+  "tr": "musste — evde kalmak zorunda kaldı.",
+  "at": [
+   "325039e0"
+  ]
+ },
+ {
+  "en": "My sister had to stay at home.",
+  "ru": "Моей сестре пришлось остаться дома.",
+  "tr": "Kız kardeşim evde kalmak zorunda kaldı.",
+  "at": [
+   "293bbfc0"
+  ]
+ },
+ {
+  "en": "müssen → musste → meine Schwester musste",
+  "ru": "müssen → musste → meine Schwester musste",
+  "tr": "müssen → musste → meine Schwester musste",
+  "at": [
+   "1e43d994"
+  ]
+ },
+ {
+  "en": "musstest — a question about needing to work yesterday.",
+  "ru": "musstest — вопрос о необходимости работать вчера.",
+  "tr": "musstest — dün çalışmak zorunda kalıp kalmadığını soruyor.",
+  "at": [
+   "e0a13bc7"
+  ]
+ },
+ {
+  "en": "musst — necessity now; musstest — necessity in the past.",
+  "ru": "musst — необходимость сейчас; musstest — необходимость в прошлом.",
+  "tr": "musst — şimdiki gereklilik; musstest — geçmişteki gereklilik.",
+  "at": [
+   "df9d56b1"
+  ]
+ },
+ {
+  "en": "Did you have to work yesterday?",
+  "ru": "Тебе вчера пришлось работать?",
+  "tr": "Dün çalışmak zorunda kaldın mı?",
+  "at": [
+   "85a0764b"
+  ]
+ },
+ {
+  "en": "müssen → musste → du musstest",
+  "ru": "müssen → musste → du musstest",
+  "tr": "müssen → musste → du musstest",
+  "at": [
+   "9e89cb0b"
+  ]
+ },
+ {
+  "en": "mussten — the guests had to wait a long time.",
+  "ru": "mussten — гостям пришлось долго ждать.",
+  "tr": "mussten — misafirler uzun süre beklemek zorunda kaldı.",
+  "at": [
+   "179403bb"
+  ]
+ },
+ {
+  "en": "The guests had to wait a long time.",
+  "ru": "Гостям пришлось долго ждать.",
+  "tr": "Misafirler uzun süre beklemek zorunda kaldı.",
+  "at": [
+   "26c6e967"
+  ]
+ },
+ {
+  "en": "müssen → musste → sie mussten",
+  "ru": "müssen → musste → sie mussten",
+  "tr": "müssen → musste → sie mussten",
+  "at": [
+   "5abe0357"
+  ]
+ },
+ {
+  "en": "ought to (but …)",
+  "ru": "надо бы",
+  "tr": "-mesi gerekirdi",
+  "at": [
+   "06a49070",
+   "0ff1cc65",
+   "46b22a89",
+   "6d169779",
+   "6fd72e18",
+   "747193d9",
+   "b06fe178",
+   "b9d049c9"
+  ]
+ },
+ {
+  "en": "müsste — leaving earlier would be necessary, but is not settled.",
+  "ru": "müsste — уйти раньше было бы нужно, но это не решено.",
+  "tr": "müsste — daha erken çıkmak gerekirdi, ama karar verilmiş değil.",
+  "at": [
+   "69a692aa"
+  ]
+ },
+ {
+  "en": "muss — states necessity directly; müsste — less categorical or conditional.",
+  "ru": "muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.",
+  "tr": "muss — gereklilik doğrudan söyleniyor; müsste — daha az kategorik ya da bir koşula bağlı.",
+  "at": [
+   "12feace8",
+   "56554704",
+   "59adfd31",
+   "b641d958"
+  ]
+ },
+ {
+  "en": "Actually, I really ought to leave earlier today.",
+  "ru": "Мне вообще-то надо бы сегодня уйти пораньше.",
+  "tr": "Aslında bugün daha erken çıkmam gerekirdi.",
+  "at": [
+   "b393cefa"
+  ]
+ },
+ {
+  "en": "musste → müsste → ich müsste",
+  "ru": "musste → müsste → ich müsste",
+  "tr": "musste → müsste → ich müsste",
+  "at": [
+   "203d4be6",
+   "c509cb16"
+  ]
+ },
+ {
+  "en": "musst — necessity now.",
+  "ru": "musst — необходимость сейчас.",
+  "tr": "musst — şimdiki gereklilik.",
+  "at": [
+   "934ddb8f"
+  ]
+ },
+ {
+  "en": "müsstest — more sleep would be necessary.",
+  "ru": "müsstest — больше сна было бы необходимо.",
+  "tr": "müsstest — daha çok uyumak gerekirdi.",
+  "at": [
+   "934ddb8f"
+  ]
+ },
+ {
+  "en": "musst — states necessity directly; müsstest — less categorical or conditional.",
+  "ru": "musst — необходимость выражена прямо; müsstest — менее категорично или при некотором условии.",
+  "tr": "musst — gereklilik doğrudan söyleniyor; müsstest — daha az kategorik ya da bir koşula bağlı.",
+  "at": [
+   "b172ac19"
+  ]
+ },
+ {
+  "en": "You really ought to sleep more.",
+  "ru": "Тебе надо бы больше спать.",
+  "tr": "Aslında daha çok uyuman gerekirdi.",
+  "at": [
+   "e469ad23"
+  ]
+ },
+ {
+  "en": "musste → müsste → du müsstest",
+  "ru": "musste → müsste → du müsstest",
+  "tr": "musste → müsste → du müsstest",
+  "at": [
+   "cfde2573"
+  ]
+ },
+ {
+  "en": "müssten — discussing the problem first would be necessary.",
+  "ru": "müssten — сначала было бы нужно обсудить проблему.",
+  "tr": "müssten — önce sorunu konuşmak gerekirdi.",
+  "at": [
+   "5319a44a"
+  ]
+ },
+ {
+  "en": "müssen — states necessity directly; müssten — less categorical or conditional.",
+  "ru": "müssen — необходимость выражена прямо; müssten — менее категорично или при некотором условии.",
+  "tr": "müssen — gereklilik doğrudan söyleniyor; müssten — daha az kategorik ya da bir koşula bağlı.",
+  "at": [
+   "554ff2c8",
+   "61227d79"
+  ]
+ },
+ {
+  "en": "We really ought to discuss the problem first.",
+  "ru": "Нам надо бы сначала обсудить проблему.",
+  "tr": "Aslında önce sorunu konuşmamız gerekirdi.",
+  "at": [
+   "5c17f59a"
+  ]
+ },
+ {
+  "en": "musste → müsste → wir müssten",
+  "ru": "musste → müsste → wir müssten",
+  "tr": "musste → müsste → wir müssten",
+  "at": [
+   "0c8cb8b6"
+  ]
+ },
+ {
+  "en": "müsste — making an appointment would be necessary for this.",
+  "ru": "müsste — для этого понадобилось бы записаться.",
+  "tr": "müsste — bunun için randevu almak gerekirdi.",
+  "at": [
+   "852554f6"
+  ]
+ },
+ {
+  "en": "My colleague really ought to make an appointment for that.",
+  "ru": "Моей коллеге надо бы для этого записаться на приём.",
+  "tr": "İş arkadaşımın bunun için aslında randevu alması gerekirdi.",
+  "at": [
+   "38d8f9be"
+  ]
+ },
+ {
+  "en": "musste → müsste → meine Kollegin müsste",
+  "ru": "musste → müsste → meine Kollegin müsste",
+  "tr": "musste → müsste → meine Kollegin müsste",
+  "at": [
+   "4d6b67ea"
+  ]
+ },
+ {
+  "en": "müsste — one really ought to be more careful.",
+  "ru": "müsste — надо бы быть осторожнее.",
+  "tr": "müsste — aslında daha dikkatli olmak gerekirdi.",
+  "at": [
+   "228d9247"
+  ]
+ },
+ {
+  "en": "One really ought to be more careful.",
+  "ru": "Надо бы быть осторожнее.",
+  "tr": "Aslında daha dikkatli olmak gerekirdi.",
+  "at": [
+   "ed9bb4cb"
+  ]
+ },
+ {
+  "en": "musste → müsste → man müsste",
+  "ru": "musste → müsste → man müsste",
+  "tr": "musste → müsste → man müsste",
+  "at": [
+   "0685098b"
+  ]
+ },
+ {
+  "en": "müsstet — taking more breaks would be necessary.",
+  "ru": "müsstet — потребовалось бы делать больше перерывов.",
+  "tr": "müsstet — daha çok mola vermek gerekirdi.",
+  "at": [
+   "c3d6881a"
+  ]
+ },
+ {
+  "en": "müsst — states necessity directly; müsstet — less categorical or conditional.",
+  "ru": "müsst — необходимость выражена прямо; müsstet — менее категорично или при некотором условии.",
+  "tr": "müsst — gereklilik doğrudan söyleniyor; müsstet — daha az kategorik ya da bir koşula bağlı.",
+  "at": [
+   "899dc218"
+  ]
+ },
+ {
+  "en": "You really ought to take more breaks.",
+  "ru": "Вам надо бы делать больше перерывов.",
+  "tr": "Aslında daha çok mola vermeniz gerekirdi.",
+  "at": [
+   "f6a3b52a"
+  ]
+ },
+ {
+  "en": "musste → müsste → ihr müsstet",
+  "ru": "musste → müsste → ihr müsstet",
+  "tr": "musste → müsste → ihr müsstet",
+  "at": [
+   "1a0f90a6"
+  ]
+ },
+ {
+  "en": "müssten — the children would really need to go to bed earlier.",
+  "ru": "müssten — детям надо бы ложиться раньше.",
+  "tr": "müssten — çocukların aslında daha erken yatması gerekirdi.",
+  "at": [
+   "34e0192f"
+  ]
+ },
+ {
+  "en": "The children really ought to go to bed earlier.",
+  "ru": "Детям надо бы раньше ложиться спать.",
+  "tr": "Çocukların aslında daha erken yatması gerekirdi.",
+  "at": [
+   "90c4bfc3"
+  ]
+ },
+ {
+  "en": "musste → müsste → sie müssten",
+  "ru": "musste → müsste → sie müssten",
+  "tr": "musste → müsste → sie müssten",
+  "at": [
+   "4e4e9313"
+  ]
+ },
+ {
+  "en": "müsste — asking again would be necessary.",
+  "ru": "müsste — потребовалось бы уточнить ещё раз.",
+  "tr": "müsste — bir kez daha sormak gerekirdi.",
+  "at": [
+   "62a7305a"
+  ]
+ },
+ {
+  "en": "I really ought to ask again.",
+  "ru": "Мне надо бы ещё раз уточнить.",
+  "tr": "Aslında bir kez daha sormam gerekirdi.",
+  "at": [
+   "b213006a"
+  ]
+ },
+ {
+  "en": "musst nicht — not necessary, you can skip it.",
+  "ru": "musst nicht — не обязательно, можно и не делать.",
+  "tr": "musst nicht — gerek yok, yapmayabilirsin.",
+  "at": [
+   "db9a0e56"
+  ]
+ },
+ {
+  "en": "nicht müssen = don't have to; nicht dürfen = mustn't: Du darfst nicht kommen.",
+  "ru": "nicht müssen = не обязательно; nicht dürfen = нельзя: Du darfst nicht kommen.",
+  "tr": "nicht müssen = gerek yok; nicht dürfen = yasak: Du darfst nicht kommen.",
+  "at": [
+   "139f7da4"
+  ]
+ },
+ {
+  "en": "You don't have to come if you don't have time.",
+  "ru": "Тебе не обязательно приходить, если у тебя нет времени.",
+  "tr": "Vaktin yoksa gelmen gerekmiyor.",
+  "at": [
+   "df43ff1e"
+  ]
+ },
+ {
+  "en": "müssten — conditional: 'we wouldn't have to cook'.",
+  "ru": "müssten — условно: «не пришлось бы готовить».",
+  "tr": "müssten — koşullu: “yemek yapmamız gerekmezdi”.",
+  "at": [
+   "f60875bd"
+  ]
+ },
+ {
+  "en": "nicht müssen — cooking today is not necessary.",
+  "ru": "nicht müssen — готовить сегодня не обязательно.",
+  "tr": "nicht müssen — bugün yemek yapmak gerekmiyor.",
+  "at": [
+   "f60875bd"
+  ]
+ },
+ {
+  "en": "nicht müssen = don't have to; nicht dürfen = mustn't.",
+  "ru": "nicht müssen = не обязательно; nicht dürfen = нельзя.",
+  "tr": "nicht müssen = gerek yok; nicht dürfen = yasak.",
+  "at": [
+   "f7e7c14b"
+  ]
+ },
+ {
+  "en": "We don't have to cook today, we're eating out.",
+  "ru": "Нам сегодня не нужно готовить, мы идём в ресторан.",
+  "tr": "Bugün yemek yapmamız gerekmiyor, dışarıda yiyeceğiz.",
+  "at": [
+   "bdae3699"
+  ]
+ },
+ {
+  "en": "müssen → wir müssen",
+  "ru": "müssen → wir müssen",
+  "tr": "müssen → wir müssen",
+  "at": [
+   "c7f7c5e9"
+  ]
+ },
+ {
+  "en": "I'm sure",
+  "ru": "наверняка",
+  "tr": "kesin",
+  "at": [
+   "5b4fbdc2"
+  ]
+ },
+ {
+  "en": "müsste — also an assumption, but a bit less sure ('should be').",
+  "ru": "müsste — тоже предположение, но чуть осторожнее («должно бы»).",
+  "tr": "müsste — o da bir tahmin, ama biraz daha temkinli (“-mesi beklenir”).",
+  "at": [
+   "52d159fd"
+  ]
+ },
+ {
+  "en": "muss — the speaker is almost sure.",
+  "ru": "muss — говорящий почти уверен.",
+  "tr": "muss — konuşan neredeyse emin.",
+  "at": [
+   "52d159fd"
+  ]
+ },
+ {
+  "en": "muss — surely; müsste — should be; dürfte — probably; könnte — maybe.",
+  "ru": "muss — наверняка; müsste — должно бы; dürfte — скорее всего; könnte — может быть.",
+  "tr": "muss — kesin; müsste — “-mesi beklenir”; dürfte — büyük ihtimalle; könnte — belki.",
+  "at": [
+   "668e7d8b"
+  ]
+ },
+ {
+  "en": "That must be Anna, I recognise her voice.",
+  "ru": "Это наверняка Анна, я узнаю её голос.",
+  "tr": "Bu kesin Anna, sesini tanıyorum.",
+  "at": [
+   "bf5ed4d9"
+  ]
+ },
+ {
+  "en": "müssen → es muss",
+  "ru": "müssen → es muss",
+  "tr": "müssen → es muss",
+  "at": [
+   "c3e0c829"
+  ]
+ },
+ {
+  "en": "should (I expect it)",
+  "ru": "должно бы",
+  "tr": "-mesi beklenir",
+  "at": [
+   "ca0f2ee6"
+  ]
+ },
+ {
+  "en": "muss — certain ('must'), no hedging.",
+  "ru": "muss — уверенно, без «бы».",
+  "tr": "muss — kesin, yumuşatma yok.",
+  "at": [
+   "af668801"
+  ]
+ },
+ {
+  "en": "müsste — the speaker expects it, but isn't 100% sure.",
+  "ru": "müsste — говорящий этого ожидает, но не уверен на все сто.",
+  "tr": "müsste — konuşan bunu bekliyor, ama yüzde yüz emin değil.",
+  "at": [
+   "af668801"
+  ]
+ },
+ {
+  "en": "muss — certain; müsste — an expectation, a bit less sure.",
+  "ru": "muss — уверенно; müsste — ожидание, чуть осторожнее.",
+  "tr": "muss — kesin; müsste — bir beklenti, biraz daha temkinli.",
+  "at": [
+   "4d35b04f"
+  ]
+ },
+ {
+  "en": "The train should be here any minute — it's already been announced.",
+  "ru": "Поезд вот-вот должен подойти — о нём уже объявили.",
+  "tr": "Trenin her an gelmesi beklenir, anonsu yapıldı bile.",
+  "at": [
+   "e51b7f25"
+  ]
+ },
+ {
+  "en": "musste → müsste → er müsste",
+  "ru": "musste → müsste → er müsste",
+  "tr": "musste → müsste → er müsste",
+  "at": [
+   "9ec18315"
+  ]
+ },
+ {
+  "en": "können — there was a chance to call, but it was not taken.",
+  "ru": "können — была возможность позвонить, но ею не воспользовались.",
+  "tr": "können — arama fırsatı vardı, ama kullanılmadı.",
+  "at": [
+   "9823f69c"
+  ]
+ },
+ {
+  "en": "Du konntest mich anrufen — the chance existed; hättest … können here highlights a missed chance.",
+  "ru": "Du konntest mich anrufen — возможность была; hättest … können здесь подчёркивает упущенную возможность.",
+  "tr": "Du konntest mich anrufen — fırsat vardı; hättest … können burada kaçırılmış bir fırsatı vurguluyor.",
+  "at": [
+   "c1a0027e"
+  ]
+ },
+ {
+  "en": "You could have called me.",
+  "ru": "Ты мог(ла) бы мне позвонить.",
+  "tr": "Beni arayabilirdin.",
+  "at": [
+   "eb1ffc94"
+  ]
+ },
+ {
+  "en": "du hättest + anrufen + können — modal verb stays in the infinitive",
+  "ru": "du hättest + anrufen + können — модальный глагол в инфинитиве",
+  "tr": "du hättest + anrufen + können — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "5e9a75e8"
+  ]
+ },
+ {
+  "en": "können — a worse outcome was possible, but did not happen.",
+  "ru": "können — допустимый худший исход, который не наступил.",
+  "tr": "können — daha kötü bir sonuç mümkündü, ama olmadı.",
+  "at": [
+   "e85bcaaf"
+  ]
+ },
+ {
+  "en": "Das könnte schlimmer sein — a possible outcome now; hätte … können — a possible outcome in the past.",
+  "ru": "Das könnte schlimmer sein — возможный исход сейчас; hätte … können — возможный исход в прошлом.",
+  "tr": "Das könnte schlimmer sein — şimdi olası bir sonuç; hätte … können — geçmişte olası bir sonuç.",
+  "at": [
+   "2c72def9"
+  ]
+ },
+ {
+  "en": "It could have been worse.",
+  "ru": "Могло быть и хуже.",
+  "tr": "Daha kötü de olabilirdi.",
+  "at": [
+   "6eaa0943"
+  ]
+ },
+ {
+  "en": "es hätte + sein + können — modal verb stays in the infinitive",
+  "ru": "es hätte + sein + können — модальный глагол в инфинитиве",
+  "tr": "es hätte + sein + können — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "2c33dc93"
+  ]
+ },
+ {
+  "en": "können — there was a chance to help, but it was not taken.",
+  "ru": "können — была возможность помочь, но ею не воспользовались.",
+  "tr": "können — yardım etme fırsatı vardı, ama kullanılmadı.",
+  "at": [
+   "3ad0f727"
+  ]
+ },
+ {
+  "en": "Ich konnte dir helfen — help was possible; hätte … können here means the opportunity was not used.",
+  "ru": "Ich konnte dir helfen — помощь была возможна; hätte … können здесь означает, что возможность осталась неиспользованной.",
+  "tr": "Ich konnte dir helfen — yardım mümkündü; hätte … können burada fırsatın kullanılmadığını anlatıyor.",
+  "at": [
+   "9b1364d1"
+  ]
+ },
+ {
+  "en": "I could have helped you.",
+  "ru": "Я могла бы тебе помочь.",
+  "tr": "Sana yardım edebilirdim.",
+  "at": [
+   "6801dbab"
+  ]
+ },
+ {
+  "en": "ich hätte + helfen + können — modal verb stays in the infinitive",
+  "ru": "ich hätte + helfen + können — модальный глагол в инфинитиве",
+  "tr": "ich hätte + helfen + können — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "d22c836b"
+  ]
+ },
+ {
+  "en": "müssen — it was done although it was not necessary.",
+  "ru": "müssen — это сделали, хотя необходимости не было.",
+  "tr": "müssen — gerek olmadığı hâlde yapıldı.",
+  "at": [
+   "6732ce5a"
+  ]
+ },
+ {
+  "en": "Wir mussten das nicht machen — it was not necessary; hätten … nicht … müssen here adds: it was done anyway.",
+  "ru": "Wir mussten das nicht machen — необходимости не было; hätten … nicht … müssen здесь добавляет: всё же сделали.",
+  "tr": "Wir mussten das nicht machen — gerek yoktu; hätten … nicht … müssen burada şunu ekliyor: yine de yapıldı.",
+  "at": [
+   "f9e33758"
+  ]
+ },
+ {
+  "en": "We needn't have done that.",
+  "ru": "Нам не нужно было это делать.",
+  "tr": "Bunu yapmamıza gerek yoktu.",
+  "at": [
+   "833a7e6a"
+  ]
+ },
+ {
+  "en": "wir hätten + machen + müssen — modal verb stays in the infinitive",
+  "ru": "wir hätten + machen + müssen — модальный глагол в инфинитиве",
+  "tr": "wir hätten + machen + müssen — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "f164c9e6"
+  ]
+ },
+ {
+  "en": "müssen — you came early although it was not necessary.",
+  "ru": "müssen — ты пришёл (пришла) рано, хотя это было не нужно.",
+  "tr": "müssen — gerek olmadığı hâlde erken geldin.",
+  "at": [
+   "16de897f"
+  ]
+ },
+ {
+  "en": "Du musstest nicht so früh kommen — coming early was not required; hättest … nicht … müssen here adds: you came anyway.",
+  "ru": "Du musstest nicht so früh kommen — ранний приход не требовался; hättest … nicht … müssen здесь добавляет: всё же пришли.",
+  "tr": "Du musstest nicht so früh kommen — erken gelmek gerekmiyordu; hättest … nicht … müssen burada şunu ekliyor: yine de geldin.",
+  "at": [
+   "fa60c489"
+  ]
+ },
+ {
+  "en": "You needn't have come so early.",
+  "ru": "Тебе не обязательно было приходить так рано.",
+  "tr": "Bu kadar erken gelmene gerek yoktu.",
+  "at": [
+   "4b3cda13"
+  ]
+ },
+ {
+  "en": "du hättest + kommen + müssen — modal verb stays in the infinitive",
+  "ru": "du hättest + kommen + müssen — модальный глагол в инфинитиве",
+  "tr": "du hättest + kommen + müssen — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "ab055c43"
+  ]
+ },
+ {
+  "en": "dürfte — a more tentative request for permission.",
+  "ru": "dürfte — более мягкий вопрос о разрешении.",
+  "tr": "dürfte — izin için daha yumuşak bir soru.",
+  "at": [
+   "f77d144a"
+  ]
+ },
+ {
+  "en": "darf — a direct question about permission to park.",
+  "ru": "darf — прямой вопрос о разрешении парковаться.",
+  "tr": "darf — park etmek için doğrudan izin sorusu.",
+  "at": [
+   "f77d144a"
+  ]
+ },
+ {
+  "en": "dürfte — a more tentative permission request; darf — a direct question.",
+  "ru": "dürfte — более мягкий вопрос о разрешении; darf — прямой вопрос.",
+  "tr": "dürfte — daha yumuşak bir izin sorusu; darf — doğrudan soru.",
+  "at": [
+   "dcb162c8"
+  ]
+ },
+ {
+  "en": "May I park here?",
+  "ru": "Можно мне здесь припарковаться?",
+  "tr": "Buraya park edebilir miyim?",
+  "at": [
+   "ff42659a"
+  ]
+ },
+ {
+  "en": "dürfen → ich darf",
+  "ru": "dürfen → ich darf",
+  "tr": "dürfen → ich darf",
+  "at": [
+   "afb728b6"
+  ]
+ },
+ {
+  "en": "durftest — permission or prohibition in the past.",
+  "ru": "durftest — разрешение или запрет в прошлом.",
+  "tr": "durftest — geçmişteki izin ya da yasak.",
+  "at": [
+   "f2fd2832"
+  ]
+ },
+ {
+  "en": "dürftest — 'probably (not) allowed' (an assumption).",
+  "ru": "dürftest — «скорее всего, (не) разрешено» (предположение).",
+  "tr": "dürftest — “büyük ihtimalle izin var (yok)” (tahmin).",
+  "at": [
+   "f2fd2832"
+  ]
+ },
+ {
+  "en": "darfst — smoking here is prohibited.",
+  "ru": "darfst — курить здесь запрещено.",
+  "tr": "darfst — burada sigara içmek yasak.",
+  "at": [
+   "f2fd2832"
+  ]
+ },
+ {
+  "en": "Du musst hier nicht rauchen — smoking is not necessary; darfst nicht — smoking is forbidden.",
+  "ru": "Du musst hier nicht rauchen — курить необязательно; darfst nicht — курить запрещено.",
+  "tr": "Du musst hier nicht rauchen — sigara içmen gerekmiyor; darfst nicht — sigara içmek yasak.",
+  "at": [
+   "c3419b10"
+  ]
+ },
+ {
+  "en": "You're not allowed to smoke here.",
+  "ru": "Тебе здесь нельзя курить.",
+  "tr": "Burada sigara içemezsin.",
+  "at": [
+   "9cab0592"
+  ]
+ },
+ {
+  "en": "dürfen → du darfst",
+  "ru": "dürfen → du darfst",
+  "tr": "dürfen → du darfst",
+  "at": [
+   "dfe74bfe"
+  ]
+ },
+ {
+  "en": "durfte — permission or prohibition in the past.",
+  "ru": "durfte — разрешение или запрет в прошлом.",
+  "tr": "durfte — geçmişteki izin ya da yasak.",
+  "at": [
+   "04f2d477"
+  ]
+ },
+ {
+  "en": "dürfte — 'probably (not) allowed' (an assumption).",
+  "ru": "dürfte — «скорее всего, (не) разрешено» (предположение).",
+  "tr": "dürfte — “büyük ihtimalle izin var (yok)” (tahmin).",
+  "at": [
+   "04f2d477",
+   "72b61039"
+  ]
+ },
+ {
+  "en": "darf — the son is allowed only an hour of TV in the evening.",
+  "ru": "darf — сыну разрешён только час телевизора вечером.",
+  "tr": "darf — oğlumuzun akşamları yalnızca bir saat televizyon izleme izni var.",
+  "at": [
+   "04f2d477"
+  ]
+ },
+ {
+  "en": "durfte — permission or prohibition in the past; darf — now.",
+  "ru": "durfte — разрешение или запрет в прошлом; darf — сейчас.",
+  "tr": "durfte — geçmişteki izin ya da yasak; darf — şimdi.",
+  "at": [
+   "57d17d21"
+  ]
+ },
+ {
+  "en": "Our son is only allowed to watch TV for an hour in the evening.",
+  "ru": "Нашему сыну вечером можно смотреть телевизор только час.",
+  "tr": "Oğlumuz akşamları yalnızca bir saat televizyon izleyebilir.",
+  "at": [
+   "d96ae0bb"
+  ]
+ },
+ {
+  "en": "dürfen → er darf",
+  "ru": "dürfen → er darf",
+  "tr": "dürfen → er darf",
+  "at": [
+   "2d41dc1b"
+  ]
+ },
+ {
+  "en": "durftet — permission in the past.",
+  "ru": "durftet — разрешение в прошлом.",
+  "tr": "durftet — geçmişteki izin.",
+  "at": [
+   "26afcae6"
+  ]
+ },
+ {
+  "en": "dürft — you are welcome to stay overnight.",
+  "ru": "dürft — вы можете остаться у нас на ночь, мы рады.",
+  "tr": "dürft — bizde kalabilirsiniz, memnun oluruz.",
+  "at": [
+   "26afcae6"
+  ]
+ },
+ {
+  "en": "durftet — permission in the past; dürft — permission now.",
+  "ru": "durftet — разрешение в прошлом; dürft — разрешение сейчас.",
+  "tr": "durftet — geçmişteki izin; dürft — şimdiki izin.",
+  "at": [
+   "37679ef4"
+  ]
+ },
+ {
+  "en": "You're welcome to stay the night with us.",
+  "ru": "Вы можете у нас переночевать — мы будем рады.",
+  "tr": "Bizde kalabilirsiniz, memnun oluruz.",
+  "at": [
+   "745368ae"
+  ]
+ },
+ {
+  "en": "dürfen → ihr dürft",
+  "ru": "dürfen → ihr dürft",
+  "tr": "dürfen → ihr dürft",
+  "at": [
+   "6d188e5f",
+   "d993327a"
+  ]
+ },
+ {
+  "en": "durfte — staying out late was forbidden as a child.",
+  "ru": "durfte — в детстве поздно гулять было запрещено.",
+  "tr": "durfte — çocukken geç saate kadar dışarıda kalmak yasaktı.",
+  "at": [
+   "28047467"
+  ]
+ },
+ {
+  "en": "darf — permission or prohibition now; durfte — in the past.",
+  "ru": "darf — разрешение или запрет сейчас; durfte — в прошлом.",
+  "tr": "darf — şimdiki izin ya da yasak; durfte — geçmişte.",
+  "at": [
+   "97628311",
+   "9999c717",
+   "c953b467",
+   "cb9d0d8e"
+  ]
+ },
+ {
+  "en": "As a child I wasn't allowed to stay out so late.",
+  "ru": "В детстве мне нельзя было так поздно оставаться на улице.",
+  "tr": "Çocukken bu kadar geç saatte dışarıda kalmama izin yoktu.",
+  "at": [
+   "9b8a0feb"
+  ]
+ },
+ {
+  "en": "dürfen → durfte → ich durfte",
+  "ru": "dürfen → durfte → ich durfte",
+  "tr": "dürfen → durfte → ich durfte",
+  "at": [
+   "1545b6ad",
+   "421196ab"
+  ]
+ },
+ {
+  "en": "dürfen — permission or prohibition now.",
+  "ru": "dürfen — разрешение или запрет сейчас.",
+  "tr": "dürfen — şimdiki izin ya da yasak.",
+  "at": [
+   "05bf67f0",
+   "efe7c008"
+  ]
+ },
+ {
+  "en": "dürften — 'probably (not) allowed' (an assumption).",
+  "ru": "dürften — «скорее всего, (не) разрешено» (предположение).",
+  "tr": "dürften — “büyük ihtimalle izin var (yok)” (tahmin).",
+  "at": [
+   "efe7c008"
+  ]
+ },
+ {
+  "en": "durften — entering the room was forbidden.",
+  "ru": "durften — входить в комнату было запрещено.",
+  "tr": "durften — odaya girmek yasaktı.",
+  "at": [
+   "efe7c008"
+  ]
+ },
+ {
+  "en": "dürfen — permission or prohibition now; durften — in the past.",
+  "ru": "dürfen — разрешение или запрет сейчас; durften — в прошлом.",
+  "tr": "dürfen — şimdiki izin ya da yasak; durften — geçmişte.",
+  "at": [
+   "32610e32",
+   "c613996a"
+  ]
+ },
+ {
+  "en": "We weren't allowed to enter the room.",
+  "ru": "Нам нельзя было входить в комнату.",
+  "tr": "Odaya girmemize izin yoktu.",
+  "at": [
+   "8924c818"
+  ]
+ },
+ {
+  "en": "dürfen → durfte → wir durften",
+  "ru": "dürfen → durfte → wir durften",
+  "tr": "dürfen → durfte → wir durften",
+  "at": [
+   "ed28787c"
+  ]
+ },
+ {
+  "en": "durfte — he was allowed to leave earlier yesterday.",
+  "ru": "durfte — вчера ему разрешили уйти раньше.",
+  "tr": "durfte — dün eve daha erken gitmesine izin verildi.",
+  "at": [
+   "af3b992c"
+  ]
+ },
+ {
+  "en": "He was allowed to go home early yesterday.",
+  "ru": "Ему вчера разрешили уйти домой раньше.",
+  "tr": "Dün eve daha erken gitmesine izin verildi.",
+  "at": [
+   "902cd124"
+  ]
+ },
+ {
+  "en": "darf — permission or prohibition now.",
+  "ru": "darf — разрешение или запрет сейчас.",
+  "tr": "darf — şimdiki izin ya da yasak.",
+  "at": [
+   "1d4d50e9",
+   "72b61039"
+  ]
+ },
+ {
+  "en": "durfte — she was allowed to use her parents' car.",
+  "ru": "durfte — ей разрешали пользоваться машиной родителей.",
+  "tr": "durfte — annesiyle babasının arabasını kullanma izni vardı.",
+  "at": [
+   "1d4d50e9"
+  ]
+ },
+ {
+  "en": "Lena was allowed to use her parents' car.",
+  "ru": "Лене разрешали пользоваться машиной родителей.",
+  "tr": "Lena'nın annesiyle babasının arabasını kullanma izni vardı.",
+  "at": [
+   "7fb47d1d"
+  ]
+ },
+ {
+  "en": "dürfen → durfte → Lena durfte",
+  "ru": "dürfen → durfte → Lena durfte",
+  "tr": "dürfen → durfte → Lena durfte",
+  "at": [
+   "75729ffd"
+  ]
+ },
+ {
+  "en": "durftest — a question about permission to travel at that time.",
+  "ru": "durftest — вопрос о разрешении путешествовать тогда.",
+  "tr": "durftest — o zamanlar yalnız seyahat etme izni olup olmadığını soruyor.",
+  "at": [
+   "3724833b"
+  ]
+ },
+ {
+  "en": "darfst — permission or prohibition now; durftest — in the past.",
+  "ru": "darfst — разрешение или запрет сейчас; durftest — в прошлом.",
+  "tr": "darfst — şimdiki izin ya da yasak; durftest — geçmişte.",
+  "at": [
+   "62fdf435"
+  ]
+ },
+ {
+  "en": "Were you allowed to travel alone back then?",
+  "ru": "Тебе тогда разрешали путешествовать одному?",
+  "tr": "O zamanlar yalnız seyahat etmene izin var mıydı?",
+  "at": [
+   "b8bfe0e7"
+  ]
+ },
+ {
+  "en": "dürfen → durfte → du durftest",
+  "ru": "dürfen → durfte → du durftest",
+  "tr": "dürfen → durfte → du durftest",
+  "at": [
+   "ecb6fad7"
+  ]
+ },
+ {
+  "en": "durfte — taking photos there was forbidden.",
+  "ru": "durfte — фотографировать там было запрещено.",
+  "tr": "durfte — orada fotoğraf çekmek yasaktı.",
+  "at": [
+   "72b61039"
+  ]
+ },
+ {
+  "en": "I wasn't allowed to take photos there.",
+  "ru": "Мне там нельзя было фотографировать.",
+  "tr": "Orada fotoğraf çekmeme izin yoktu.",
+  "at": [
+   "1c09d66d"
+  ]
+ },
+ {
+  "en": "durften — the children were allowed another hour of play.",
+  "ru": "durften — детям разрешили играть ещё час.",
+  "tr": "durften — çocuklara bir saat daha oynama izni verildi.",
+  "at": [
+   "05bf67f0"
+  ]
+ },
+ {
+  "en": "The children were allowed to play for another hour.",
+  "ru": "Детям разрешили играть ещё час.",
+  "tr": "Çocukların bir saat daha oynamasına izin verildi.",
+  "at": [
+   "210790d0"
+  ]
+ },
+ {
+  "en": "dürfen → durfte → sie durften",
+  "ru": "dürfen → durfte → sie durften",
+  "tr": "dürfen → durfte → sie durften",
+  "at": [
+   "bb704244"
+  ]
+ },
+ {
+  "en": "durftet — a question about permission to watch TV as children.",
+  "ru": "durftet — вопрос о разрешении смотреть телевизор в детстве.",
+  "tr": "durftet — çocukken televizyon izleme iznini soruyor.",
+  "at": [
+   "ff816d9f"
+  ]
+ },
+ {
+  "en": "dürft — permission or prohibition now; durftet — in the past.",
+  "ru": "dürft — разрешение или запрет сейчас; durftet — в прошлом.",
+  "tr": "dürft — şimdiki izin ya da yasak; durftet — geçmişte.",
+  "at": [
+   "2ee0d4e9"
+  ]
+ },
+ {
+  "en": "Were you allowed to watch TV for long as children?",
+  "ru": "Вам в детстве разрешали долго смотреть телевизор?",
+  "tr": "Çocukken uzun süre televizyon izlemenize izin var mıydı?",
+  "at": [
+   "e5b6fe33"
+  ]
+ },
+ {
+  "en": "dürfen → durfte → ihr durftet",
+  "ru": "dürfen → durfte → ihr durftet",
+  "tr": "dürfen → durfte → ihr durftet",
+  "at": [
+   "8bd61463"
+  ]
+ },
+ {
+  "en": "darf — permission or prohibition now; a directly asked question.",
+  "ru": "darf — разрешение или запрет сейчас; вопрос задан прямо.",
+  "tr": "darf — şimdiki izin ya da yasak; soru doğrudan sorulmuş.",
+  "at": [
+   "653d2b65",
+   "b5641a8f"
+  ]
+ },
+ {
+  "en": "dürfte — a tentative request for permission to ask a question.",
+  "ru": "dürfte — мягкий вопрос о разрешении задать вопрос.",
+  "tr": "dürfte — soru sormak için yumuşak bir izin ricası.",
+  "at": [
+   "b5641a8f"
+  ]
+ },
+ {
+  "en": "darf — a direct permission request; dürfte — more tentative.",
+  "ru": "darf — прямой вопрос о разрешении; dürfte — более мягкий.",
+  "tr": "darf — doğrudan izin sorusu; dürfte — daha yumuşak.",
+  "at": [
+   "36b1cb19",
+   "c4ba1ef3"
+  ]
+ },
+ {
+  "en": "Might I ask you something?",
+  "ru": "Позвольте Вас кое о чём спросить?",
+  "tr": "Size bir şey sorabilir miyim acaba?",
+  "at": [
+   "7564dc23"
+  ]
+ },
+ {
+  "en": "durfte → dürfte → ich dürfte",
+  "ru": "durfte → dürfte → ich dürfte",
+  "tr": "durfte → dürfte → ich dürfte",
+  "at": [
+   "2db03631",
+   "60d95473"
+  ]
+ },
+ {
+  "en": "probability",
+  "ru": "предположение: вероятно",
+  "tr": "tahmin: büyük ihtimalle",
+  "at": [
+   "098f8532",
+   "37b6b9b1",
+   "4b976899",
+   "5190e67e",
+   "838ae6db"
+  ]
+ },
+ {
+  "en": "dürftest — a probability: you are likely to be right.",
+  "ru": "dürftest — предположение: ты, скорее всего, прав(а).",
+  "tr": "dürftest — tahmin: büyük ihtimalle haklısın.",
+  "at": [
+   "4ecd9e82"
+  ]
+ },
+ {
+  "en": "könntest — only a possibility; dürftest here means “likely”.",
+  "ru": "könntest — лишь возможное предположение; dürftest здесь означает «скорее всего».",
+  "tr": "könntest — yalnızca olası bir tahmin; dürftest burada “büyük ihtimalle” demek.",
+  "at": [
+   "c370f060"
+  ]
+ },
+ {
+  "en": "You're probably right.",
+  "ru": "Ты, скорее всего, прав(а).",
+  "tr": "Büyük ihtimalle haklısın.",
+  "at": [
+   "b7fdb6e2"
+  ]
+ },
+ {
+  "en": "durfte → dürfte → du dürftest",
+  "ru": "durfte → dürfte → du dürftest",
+  "tr": "durfte → dürfte → du dürftest",
+  "at": [
+   "a149ecee"
+  ]
+ },
+ {
+  "en": "dürfte — a tentative request for permission to make a suggestion.",
+  "ru": "dürfte — мягкий вопрос о разрешении предложить идею.",
+  "tr": "dürfte — öneride bulunmak için yumuşak bir izin ricası.",
+  "at": [
+   "653d2b65"
+  ]
+ },
+ {
+  "en": "Might I make a suggestion?",
+  "ru": "Позвольте Вам кое-что предложить?",
+  "tr": "Size bir öneride bulunabilir miyim acaba?",
+  "at": [
+   "79b4d5b1"
+  ]
+ },
+ {
+  "en": "dürfen — permission or prohibition now; a directly asked question.",
+  "ru": "dürfen — разрешение или запрет сейчас; вопрос задан прямо.",
+  "tr": "dürfen — şimdiki izin ya da yasak; soru doğrudan sorulmuş.",
+  "at": [
+   "4d90fee8"
+  ]
+ },
+ {
+  "en": "dürften — a tentative request for permission to wait here.",
+  "ru": "dürften — мягкий вопрос о разрешении подождать здесь.",
+  "tr": "dürften — burada beklemek için yumuşak bir izin ricası.",
+  "at": [
+   "4d90fee8"
+  ]
+ },
+ {
+  "en": "Might we wait here for a moment?",
+  "ru": "Нельзя ли нам здесь немного подождать?",
+  "tr": "Burada biraz bekleyebilir miyiz acaba?",
+  "at": [
+   "1113a5f8"
+  ]
+ },
+ {
+  "en": "durfte → dürfte → wir dürften",
+  "ru": "durfte → dürfte → wir dürften",
+  "tr": "durfte → dürfte → wir dürften",
+  "at": [
+   "d096ce5c"
+  ]
+ },
+ {
+  "en": "dürfte — a probability: this is unlikely to be a problem.",
+  "ru": "dürfte — предположение: проблемы, скорее всего, не будет.",
+  "tr": "dürfte — tahmin: büyük ihtimalle sorun olmayacak.",
+  "at": [
+   "71067cf9"
+  ]
+ },
+ {
+  "en": "könnte — only a possibility; dürfte here means “likely”.",
+  "ru": "könnte — лишь возможное предположение; dürfte здесь означает «скорее всего».",
+  "tr": "könnte — yalnızca olası bir tahmin; dürfte burada “büyük ihtimalle” demek.",
+  "at": [
+   "975c31a8",
+   "cd9eb527"
+  ]
+ },
+ {
+  "en": "That probably won't be a problem.",
+  "ru": "Скорее всего, это не будет проблемой.",
+  "tr": "Büyük ihtimalle bu sorun olmaz.",
+  "at": [
+   "4d88a72d"
+  ]
+ },
+ {
+  "en": "durfte → dürfte → es dürfte",
+  "ru": "durfte → dürfte → es dürfte",
+  "tr": "durfte → dürfte → es dürfte",
+  "at": [
+   "6939716d"
+  ]
+ },
+ {
+  "en": "dürfte — a probability: he is likely to be home already.",
+  "ru": "dürfte — предположение: он, скорее всего, уже дома.",
+  "tr": "dürfte — tahmin: büyük ihtimalle evde.",
+  "at": [
+   "a188686a"
+  ]
+ },
+ {
+  "en": "He's probably already at home.",
+  "ru": "Он, наверное, уже дома.",
+  "tr": "Büyük ihtimalle çoktan evdedir.",
+  "at": [
+   "71d66eba"
+  ]
+ },
+ {
+  "en": "durfte → dürfte → er dürfte",
+  "ru": "durfte → dürfte → er dürfte",
+  "tr": "durfte → dürfte → er dürfte",
+  "at": [
+   "a79f5bd6"
+  ]
+ },
+ {
+  "en": "dürftet — a probability: you are likely to be tired.",
+  "ru": "dürftet — предположение: вы, скорее всего, устали.",
+  "tr": "dürftet — tahmin: büyük ihtimalle yorgunsunuz.",
+  "at": [
+   "57752b00"
+  ]
+ },
+ {
+  "en": "könntet — only a possibility; dürftet here means “likely”.",
+  "ru": "könntet — лишь возможное предположение; dürftet здесь означает «скорее всего».",
+  "tr": "könntet — yalnızca olası bir tahmin; dürftet burada “büyük ihtimalle” demek.",
+  "at": [
+   "acf90dc2"
+  ]
+ },
+ {
+  "en": "You're probably tired after the long journey.",
+  "ru": "После долгой поездки вы, наверное, устали.",
+  "tr": "Uzun yolculuktan sonra büyük ihtimalle yorgunsunuzdur.",
+  "at": [
+   "86e933e0"
+  ]
+ },
+ {
+  "en": "durfte → dürfte → ihr dürftet",
+  "ru": "durfte → dürfte → ihr dürftet",
+  "tr": "durfte → dürfte → ihr dürftet",
+  "at": [
+   "b4dc08b4"
+  ]
+ },
+ {
+  "en": "dürften — a probability: the guests are likely to arrive soon.",
+  "ru": "dürften — предположение: гости, скорее всего, скоро придут.",
+  "tr": "dürften — tahmin: misafirler büyük ihtimalle birazdan gelir.",
+  "at": [
+   "eac95aad"
+  ]
+ },
+ {
+  "en": "könnten — only a possibility; dürften here means “likely”.",
+  "ru": "könnten — лишь возможное предположение; dürften здесь означает «скорее всего».",
+  "tr": "könnten — yalnızca olası bir tahmin; dürften burada “büyük ihtimalle” demek.",
+  "at": [
+   "cba0587b"
+  ]
+ },
+ {
+  "en": "The guests will probably arrive soon.",
+  "ru": "Гости, скорее всего, скоро придут.",
+  "tr": "Misafirler büyük ihtimalle birazdan gelir.",
+  "at": [
+   "4b692749"
+  ]
+ },
+ {
+  "en": "durfte → dürfte → sie dürften",
+  "ru": "durfte → dürfte → sie dürften",
+  "tr": "durfte → dürfte → sie dürften",
+  "at": [
+   "a4106679"
+  ]
+ },
+ {
+  "en": "dürft nicht — forbidden.",
+  "ru": "dürft nicht — запрещено.",
+  "tr": "dürft nicht — yasak.",
+  "at": [
+   "2c8d5883"
+  ]
+ },
+ {
+  "en": "nicht dürfen = mustn't; nicht müssen = don't have to: Ihr müsst nicht schwimmen.",
+  "ru": "nicht dürfen = нельзя; nicht müssen = не обязательно: Ihr müsst nicht schwimmen.",
+  "tr": "nicht dürfen = yasak; nicht müssen = gerek yok: Ihr müsst nicht schwimmen.",
+  "at": [
+   "bd67c0fd"
+  ]
+ },
+ {
+  "en": "You mustn't swim here, it's dangerous.",
+  "ru": "Вам здесь нельзя плавать, это опасно.",
+  "tr": "Burada yüzemezsiniz, tehlikeli.",
+  "at": [
+   "ed8abfff"
+  ]
+ },
+ {
+  "en": "durfte — a prohibition in the past.",
+  "ru": "durfte — запрет в прошлом.",
+  "tr": "durfte — geçmişteki yasak.",
+  "at": [
+   "4856aead"
+  ]
+ },
+ {
+  "en": "dürfte — 'you're probably not allowed to' (an assumption).",
+  "ru": "dürfte — «скорее всего, здесь нельзя» (предположение).",
+  "tr": "dürfte — “büyük ihtimalle burada yasak” (tahmin).",
+  "at": [
+   "4856aead"
+  ]
+ },
+ {
+  "en": "darf nicht — it is forbidden here.",
+  "ru": "darf nicht — здесь это запрещено.",
+  "tr": "darf nicht — burada bu yasak.",
+  "at": [
+   "4856aead"
+  ]
+ },
+ {
+  "en": "nicht dürfen = mustn't; nicht müssen = don't have to.",
+  "ru": "nicht dürfen = нельзя; nicht müssen = не обязательно.",
+  "tr": "nicht dürfen = yasak; nicht müssen = gerek yok.",
+  "at": [
+   "21042c7b"
+  ]
+ },
+ {
+  "en": "You're not allowed to park here.",
+  "ru": "Здесь нельзя парковаться.",
+  "tr": "Buraya park etmek yasak.",
+  "at": [
+   "b977bb49"
+  ]
+ },
+ {
+  "en": "dürfen → man darf",
+  "ru": "dürfen → man darf",
+  "tr": "dürfen → man darf",
+  "at": [
+   "121efa79"
+  ]
+ },
+ {
+  "en": "sollte — advice or an earlier instruction.",
+  "ru": "sollte — совет или поручение в прошлом.",
+  "tr": "sollte — tavsiye ya da geçmişteki bir görev.",
+  "at": [
+   "d3a76f26"
+  ]
+ },
+ {
+  "en": "soll — a question about what I am expected to bring.",
+  "ru": "soll — вопрос о том, что от меня ожидают.",
+  "tr": "soll — benden ne beklendiğini soruyor.",
+  "at": [
+   "d3a76f26"
+  ]
+ },
+ {
+  "en": "sollte — advice or an earlier instruction; soll here — a current instruction.",
+  "ru": "sollte — совет либо прошлое поручение; soll здесь — текущее поручение.",
+  "tr": "sollte — tavsiye ya da geçmişteki görev; soll burada — şimdiki görev.",
+  "at": [
+   "66e49a34"
+  ]
+ },
+ {
+  "en": "What am I supposed to bring?",
+  "ru": "Что мне принести?",
+  "tr": "Ne getireyim?",
+  "at": [
+   "bdaa85ee"
+  ]
+ },
+ {
+  "en": "sollen → ich soll",
+  "ru": "sollen → ich soll",
+  "tr": "sollen → ich soll",
+  "at": [
+   "1579b4ba"
+  ]
+ },
+ {
+  "en": "solltest — advice or an earlier instruction.",
+  "ru": "solltest — совет или поручение в прошлом.",
+  "tr": "solltest — tavsiye ya da geçmişteki bir görev.",
+  "at": [
+   "f1e2fb35"
+  ]
+ },
+ {
+  "en": "sollst — you have been instructed to call the boss back.",
+  "ru": "sollst — тебе поручили перезвонить начальнику.",
+  "tr": "sollst — şefi geri araman isteniyor.",
+  "at": [
+   "f1e2fb35"
+  ]
+ },
+ {
+  "en": "solltest — advice or an earlier instruction; sollst here — a current instruction.",
+  "ru": "solltest — совет либо прошлое поручение; sollst здесь — текущее поручение.",
+  "tr": "solltest — tavsiye ya da geçmişteki görev; sollst burada — şimdiki görev.",
+  "at": [
+   "78b7d083"
+  ]
+ },
+ {
+  "en": "You're supposed to call the boss back.",
+  "ru": "Тебе нужно перезвонить начальнику (он просил).",
+  "tr": "Şef, kendisini geri aramanı istedi.",
+  "at": [
+   "42d17b41"
+  ]
+ },
+ {
+  "en": "sollen → du sollst",
+  "ru": "sollen → du sollst",
+  "tr": "sollen → du sollst",
+  "at": [
+   "8a9acd21"
+  ]
+ },
+ {
+  "en": "they say",
+  "ru": "говорят",
+  "tr": "diyorlar (-mış)",
+  "at": [
+   "635e91b6",
+   "abe9cba9"
+  ]
+ },
+ {
+  "en": "sollte — an expectation or assumption about the film.",
+  "ru": "sollte — ожидание или предположение о качестве фильма.",
+  "tr": "sollte — film hakkında bir beklenti ya da tahmin.",
+  "at": [
+   "bd5e3a51"
+  ]
+ },
+ {
+  "en": "soll — reporting what others say about the film.",
+  "ru": "soll — передача чужого мнения о фильме.",
+  "tr": "soll — başkalarının film hakkındaki görüşü aktarılıyor.",
+  "at": [
+   "bd5e3a51"
+  ]
+ },
+ {
+  "en": "sollte — an expectation or assumption; soll here reports what others say.",
+  "ru": "sollte — ожидание или предположение; soll здесь передаёт чужое мнение.",
+  "tr": "sollte — beklenti ya da tahmin; soll burada başkalarının görüşünü aktarıyor.",
+  "at": [
+   "bd6a155f"
+  ]
+ },
+ {
+  "en": "The film is supposed to be very good.",
+  "ru": "Говорят, фильм очень хороший.",
+  "tr": "Film çok iyiymiş, diyorlar.",
+  "at": [
+   "088d1cb5"
+  ]
+ },
+ {
+  "en": "sollen → er soll",
+  "ru": "sollen → er soll",
+  "tr": "sollen → er soll",
+  "at": [
+   "df7fb445"
+  ]
+ },
+ {
+  "en": "solltet — advice or an earlier instruction.",
+  "ru": "solltet — совет или поручение в прошлом.",
+  "tr": "solltet — tavsiye ya da geçmişteki bir görev.",
+  "at": [
+   "68445fa7"
+  ]
+ },
+ {
+  "en": "sollt — you are expected at the station at eight.",
+  "ru": "sollt — вам велели быть на вокзале к восьми.",
+  "tr": "sollt — sekizde garda olmanız isteniyor.",
+  "at": [
+   "68445fa7"
+  ]
+ },
+ {
+  "en": "solltet — advice or an earlier instruction; sollt here — a current instruction.",
+  "ru": "solltet — совет либо прошлое поручение; sollt здесь — текущее поручение.",
+  "tr": "solltet — tavsiye ya da geçmişteki görev; sollt burada — şimdiki görev.",
+  "at": [
+   "633b5d51"
+  ]
+ },
+ {
+  "en": "You're supposed to be at the station at eight.",
+  "ru": "Вам велели быть на вокзале в восемь.",
+  "tr": "Sekizde garda olmanız isteniyor.",
+  "at": [
+   "c9634c2b"
+  ]
+ },
+ {
+  "en": "sollen → ihr sollt",
+  "ru": "sollen → ihr sollt",
+  "tr": "sollen → ihr sollt",
+  "at": [
+   "338df3eb"
+  ]
+ },
+ {
+  "en": "sollte — I was instructed to call the boss yesterday.",
+  "ru": "sollte — вчера мне было поручено позвонить начальнику.",
+  "tr": "sollte — dün şefi aramam gerekiyordu (bana söylenmişti).",
+  "at": [
+   "6f1e176e"
+  ]
+ },
+ {
+  "en": "Without gestern, sollte can express advice now. Here gestern indicates an earlier instruction; soll — a current instruction.",
+  "ru": "Без gestern: sollte может выражать совет сейчас. Здесь gestern задаёт прошлое поручение; soll — текущее поручение.",
+  "tr": "gestern olmadan sollte şimdiki bir tavsiye de ifade edebilir. Burada gestern geçmişteki bir görevi gösteriyor; soll — şimdiki görev.",
+  "at": [
+   "84b58e1c"
+  ]
+ },
+ {
+  "en": "I was supposed to call the boss yesterday.",
+  "ru": "Вчера я должна была позвонить начальнику.",
+  "tr": "Dün şefi aramam gerekiyordu.",
+  "at": [
+   "d73c7066"
+  ]
+ },
+ {
+  "en": "sollen → sollte → ich sollte",
+  "ru": "sollen → sollte → ich sollte",
+  "tr": "sollen → sollte → ich sollte",
+  "at": [
+   "eb442642"
+  ]
+ },
+ {
+  "en": "sollten — we were expected there at eight.",
+  "ru": "sollten — от нас ожидали прибытия к восьми.",
+  "tr": "sollten — bizden sekizde orada olmamız bekleniyordu.",
+  "at": [
+   "671a6c7f"
+  ]
+ },
+ {
+  "en": "sollten can also express advice now; sollen — a current instruction.",
+  "ru": "sollten также может выражать совет сейчас; sollen — текущее поручение.",
+  "tr": "sollten şimdiki bir tavsiye de ifade edebilir; sollen — şimdiki görev.",
+  "at": [
+   "8e560789",
+   "b1198cff"
+  ]
+ },
+ {
+  "en": "Yesterday we were supposed to be there at eight.",
+  "ru": "Вчера мы должны были быть там в восемь.",
+  "tr": "Dün sekizde orada olmamız gerekiyordu.",
+  "at": [
+   "6013ed13"
+  ]
+ },
+ {
+  "en": "sollen → sollte → wir sollten",
+  "ru": "sollen → sollte → wir sollten",
+  "tr": "sollen → sollte → wir sollten",
+  "at": [
+   "bfdc6f43"
+  ]
+ },
+ {
+  "en": "sollte — he was instructed to bring the documents.",
+  "ru": "sollte — ему было поручено принести документы.",
+  "tr": "sollte — belgeleri getirmesi isteniyordu.",
+  "at": [
+   "956f332b"
+  ]
+ },
+ {
+  "en": "sollte can also express advice now; soll — a current instruction.",
+  "ru": "sollte также может выражать совет сейчас; soll — текущее поручение.",
+  "tr": "sollte şimdiki bir tavsiye de ifade edebilir; soll — şimdiki görev.",
+  "at": [
+   "8d2cb325"
+  ]
+ },
+ {
+  "en": "He was supposed to bring the documents last week.",
+  "ru": "На прошлой неделе он должен был принести документы.",
+  "tr": "Geçen hafta belgeleri getirmesi gerekiyordu.",
+  "at": [
+   "776aea57"
+  ]
+ },
+ {
+  "en": "sollen → sollte → er sollte",
+  "ru": "sollen → sollte → er sollte",
+  "tr": "sollen → sollte → er sollte",
+  "at": [
+   "fee413e7"
+  ]
+ },
+ {
+  "en": "solltest — a question about whether you were instructed to tell him.",
+  "ru": "solltest — вопрос о том, было ли поручено сообщить ему.",
+  "tr": "solltest — ona haber vermenin senden istenip istenmediğini soruyor.",
+  "at": [
+   "ffebdf30"
+  ]
+ },
+ {
+  "en": "solltest can also express advice now; sollst — a current instruction.",
+  "ru": "solltest также может выражать совет сейчас; sollst — текущее поручение.",
+  "tr": "solltest şimdiki bir tavsiye de ifade edebilir; sollst — şimdiki görev.",
+  "at": [
+   "97973872"
+  ]
+ },
+ {
+  "en": "Were you supposed to let him know yesterday?",
+  "ru": "Ты должен(на) был(а) вчера ему сообщить?",
+  "tr": "Dün ona haber vermen gerekiyor muydu?",
+  "at": [
+   "ae710010"
+  ]
+ },
+ {
+  "en": "sollen → sollte → du solltest",
+  "ru": "sollen → sollte → du solltest",
+  "tr": "sollen → sollte → du solltest",
+  "at": [
+   "35200c84"
+  ]
+ },
+ {
+  "en": "sollten — the children were expected to wash their hands before eating.",
+  "ru": "sollten — от детей ожидали мытья рук перед едой.",
+  "tr": "sollten — çocuklardan yemekten önce ellerini yıkamaları bekleniyordu.",
+  "at": [
+   "dd64da31"
+  ]
+ },
+ {
+  "en": "In the past, the children were always supposed to wash their hands before eating.",
+  "ru": "Раньше дети всегда должны были мыть руки перед едой.",
+  "tr": "Eskiden çocukların yemekten önce her zaman ellerini yıkaması gerekiyordu.",
+  "at": [
+   "7fccb295"
+  ]
+ },
+ {
+  "en": "sollen → sollte → sie sollten",
+  "ru": "sollen → sollte → sie sollten",
+  "tr": "sollen → sollte → sie sollten",
+  "at": [
+   "bda5ea25"
+  ]
+ },
+ {
+  "en": "sollt — a current instruction or expectation.",
+  "ru": "sollt — текущее поручение или ожидание.",
+  "tr": "sollt — şimdiki görev ya da beklenti.",
+  "at": [
+   "a38b99ac",
+   "dba9fe93"
+  ]
+ },
+ {
+  "en": "solltet — a reminder of an earlier arrangement.",
+  "ru": "solltet — напоминание о прежней договорённости.",
+  "tr": "solltet — daha önceki bir anlaşmayı hatırlatıyor.",
+  "at": [
+   "a38b99ac"
+  ]
+ },
+ {
+  "en": "solltet can also express advice now; sollt — a current instruction.",
+  "ru": "solltet также может выражать совет сейчас; sollt — текущее поручение.",
+  "tr": "solltet şimdiki bir tavsiye de ifade edebilir; sollt — şimdiki görev.",
+  "at": [
+   "aa9c9e0e"
+  ]
+ },
+ {
+  "en": "You were supposed to be home at eight!",
+  "ru": "Вы же должны были быть дома в восемь!",
+  "tr": "Sekizde evde olmanız gerekiyordu ya!",
+  "at": [
+   "8f9c59a4"
+  ]
+ },
+ {
+  "en": "sollen → sollte → ihr solltet",
+  "ru": "sollen → sollte → ihr solltet",
+  "tr": "sollen → sollte → ihr solltet",
+  "at": [
+   "adb4c498"
+  ]
+ },
+ {
+  "en": "advice",
+  "ru": "совет",
+  "tr": "tavsiye",
+  "at": [
+   "488a27c5",
+   "5ee936ac",
+   "69081918",
+   "73cc0a9b",
+   "827769f4",
+   "a004f745"
+  ]
+ },
+ {
+  "en": "sollst — a current instruction or expectation.",
+  "ru": "sollst — текущее поручение или ожидание.",
+  "tr": "sollst — şimdiki görev ya da beklenti.",
+  "at": [
+   "88d79d56"
+  ]
+ },
+ {
+  "en": "solltest — advice to talk to him.",
+  "ru": "solltest — совет поговорить с ним.",
+  "tr": "solltest — onunla konuşma tavsiyesi.",
+  "at": [
+   "88d79d56"
+  ]
+ },
+ {
+  "en": "sollst — an instruction or expectation; solltest here — advice.",
+  "ru": "sollst — поручение или ожидание; solltest здесь — совет.",
+  "tr": "sollst — görev ya da beklenti; solltest burada — tavsiye.",
+  "at": [
+   "6f9feca4"
+  ]
+ },
+ {
+  "en": "You'd better talk to him.",
+  "ru": "Тебе лучше поговорить с ним.",
+  "tr": "Onunla konuşsan iyi olur.",
+  "at": [
+   "1a8b7e1e"
+  ]
+ },
+ {
+  "en": "sollte → du solltest",
+  "ru": "sollte → du solltest",
+  "tr": "sollte → du solltest",
+  "at": [
+   "f642d34a"
+  ]
+ },
+ {
+  "en": "solltet — advice to give notice earlier.",
+  "ru": "solltet — совет сообщать заранее.",
+  "tr": "solltet — önceden haber verme tavsiyesi.",
+  "at": [
+   "dba9fe93"
+  ]
+ },
+ {
+  "en": "sollt — an instruction or expectation; solltet here — advice.",
+  "ru": "sollt — поручение или ожидание; solltet здесь — совет.",
+  "tr": "sollt — görev ya da beklenti; solltet burada — tavsiye.",
+  "at": [
+   "434576cd"
+  ]
+ },
+ {
+  "en": "You should let us know earlier.",
+  "ru": "Вам стоило бы предупреждать раньше.",
+  "tr": "Daha erken haber verseniz iyi olur.",
+  "at": [
+   "f0852c4f"
+  ]
+ },
+ {
+  "en": "sollte → ihr solltet",
+  "ru": "sollte → ihr solltet",
+  "tr": "sollte → ihr solltet",
+  "at": [
+   "26de300f"
+  ]
+ },
+ {
+  "en": "soll — a current instruction or expectation.",
+  "ru": "soll — текущее поручение или ожидание.",
+  "tr": "soll — şimdiki görev ya da beklenti.",
+  "at": [
+   "7b60b21b",
+   "903582c0"
+  ]
+ },
+ {
+  "en": "sollte — a thought: checking again would be advisable.",
+  "ru": "sollte — мысль: стоит проверить ещё раз.",
+  "tr": "sollte — bir düşünce: bir kez daha kontrol etmek iyi olur.",
+  "at": [
+   "7b60b21b"
+  ]
+ },
+ {
+  "en": "soll — an instruction or expectation; sollte here — advice.",
+  "ru": "soll — поручение или ожидание; sollte здесь — совет.",
+  "tr": "soll — görev ya da beklenti; sollte burada — tavsiye.",
+  "at": [
+   "49a8ac55",
+   "7d75fa82"
+  ]
+ },
+ {
+  "en": "I should probably check that again.",
+  "ru": "Мне, пожалуй, стоит ещё раз это проверить.",
+  "tr": "Galiba bunu bir kez daha kontrol etsem iyi olur.",
+  "at": [
+   "10edf8c7"
+  ]
+ },
+ {
+  "en": "sollte → ich sollte",
+  "ru": "sollte → ich sollte",
+  "tr": "sollte → ich sollte",
+  "at": [
+   "2e12c6b7"
+  ]
+ },
+ {
+  "en": "sollen — a current instruction or expectation.",
+  "ru": "sollen — текущее поручение или ожидание.",
+  "tr": "sollen — şimdiki görev ya da beklenti.",
+  "at": [
+   "f37e4c2f",
+   "ffa700d6"
+  ]
+ },
+ {
+  "en": "sollten — a suggestion to ask a doctor.",
+  "ru": "sollten — предложение обратиться к врачу за советом.",
+  "tr": "sollten — bir doktora danışma önerisi.",
+  "at": [
+   "ffa700d6"
+  ]
+ },
+ {
+  "en": "sollen — an instruction or expectation; sollten here — advice.",
+  "ru": "sollen — поручение или ожидание; sollten здесь — совет.",
+  "tr": "sollen — görev ya da beklenti; sollten burada — tavsiye.",
+  "at": [
+   "e9c84024",
+   "fb741079"
+  ]
+ },
+ {
+  "en": "Maybe we should ask a doctor.",
+  "ru": "Нам, возможно, стоит спросить врача.",
+  "tr": "Belki bir doktora sorsak iyi olur.",
+  "at": [
+   "21cd999e"
+  ]
+ },
+ {
+  "en": "sollte → wir sollten",
+  "ru": "sollte → wir sollten",
+  "tr": "sollte → wir sollten",
+  "at": [
+   "fd84eeca"
+  ]
+ },
+ {
+  "en": "sollte — advice to take a little more time.",
+  "ru": "sollte — совет не торопиться.",
+  "tr": "sollte — kendine biraz daha zaman tanıma tavsiyesi.",
+  "at": [
+   "903582c0"
+  ]
+ },
+ {
+  "en": "Anna should take a bit more time.",
+  "ru": "Анне стоило бы не торопиться.",
+  "tr": "Anna kendine biraz daha zaman tanımalı.",
+  "at": [
+   "c7f8f4a0"
+  ]
+ },
+ {
+  "en": "sollte → Anna sollte",
+  "ru": "sollte → Anna sollte",
+  "tr": "sollte → Anna sollte",
+  "at": [
+   "15b94b74"
+  ]
+ },
+ {
+  "en": "sollten — advice for the children to play outside more.",
+  "ru": "sollten — совет детям больше играть на улице.",
+  "tr": "sollten — çocuklara dışarıda daha çok oynama tavsiyesi.",
+  "at": [
+   "f37e4c2f"
+  ]
+ },
+ {
+  "en": "The children should play outside more.",
+  "ru": "Детям стоило бы больше играть на улице.",
+  "tr": "Çocuklar dışarıda daha çok oynamalı.",
+  "at": [
+   "ebd322c3"
+  ]
+ },
+ {
+  "en": "sollte → sie sollten",
+  "ru": "sollte → sie sollten",
+  "tr": "sollte → sie sollten",
+  "at": [
+   "a95cf613"
+  ]
+ },
+ {
+  "en": "sollten — 'should be' (an expectation), not 'they say'.",
+  "ru": "sollten — «должны бы быть» (ожидание), а не «говорят».",
+  "tr": "sollten — “-meli” (beklenti), “diyorlar” değil.",
+  "at": [
+   "abb40e3a"
+  ]
+ },
+ {
+  "en": "sollen — others say so; the speaker hasn't checked.",
+  "ru": "sollen — так говорят другие, сам говорящий не проверял.",
+  "tr": "sollen — başkaları böyle söylüyor, konuşan kendisi doğrulamadı.",
+  "at": [
+   "abb40e3a"
+  ]
+ },
+ {
+  "en": "sollen = they say; sollten = should be (expectation or advice).",
+  "ru": "sollen = говорят; sollten = должны бы быть (ожидание или совет).",
+  "tr": "sollen = diyorlar (-mış); sollten = -meli (beklenti ya da tavsiye).",
+  "at": [
+   "c2bfbbf8"
+  ]
+ },
+ {
+  "en": "The new neighbours are said to be very nice.",
+  "ru": "Говорят, новые соседи очень милые.",
+  "tr": "Yeni komşular çok cana yakınmış, diyorlar.",
+  "at": [
+   "f2b8d94a"
+  ]
+ },
+ {
+  "en": "sollen → sie sollen",
+  "ru": "sollen → sie sollen",
+  "tr": "sollen → sie sollen",
+  "at": [
+   "e1e54ec6"
+  ]
+ },
+ {
+  "en": "hypothetical past",
+  "ru": "гипотетически: прошлое",
+  "tr": "varsayımsal: geçmiş",
+  "at": [
+   "11870dbc",
+   "167d50cc",
+   "236ea94a",
+   "25e8d6e8",
+   "4970b61e",
+   "5c6017c9",
+   "6329fb98",
+   "70b5bd50",
+   "92b8e6b7",
+   "cf79c028"
+  ]
+ },
+ {
+  "en": "sollen — regret: coming earlier would have been better.",
+  "ru": "sollen — сожаление: лучше было прийти раньше.",
+  "tr": "sollen — pişmanlık: daha erken gelmek daha iyi olurdu.",
+  "at": [
+   "ee091ba3"
+  ]
+ },
+ {
+  "en": "Ich sollte früher kommen — an earlier instruction or current advice; hätte … sollen evaluates what was not done.",
+  "ru": "Ich sollte früher kommen — прошлое поручение или нынешний совет; hätte … sollen — оценка несделанного.",
+  "tr": "Ich sollte früher kommen — geçmişteki görev ya da şimdiki tavsiye; hätte … sollen — yapılmayanı değerlendiriyor.",
+  "at": [
+   "84e78bdd"
+  ]
+ },
+ {
+  "en": "I should have come earlier.",
+  "ru": "Мне следовало прийти раньше.",
+  "tr": "Daha erken gelmeliydim.",
+  "at": [
+   "88acf21f"
+  ]
+ },
+ {
+  "en": "ich hätte + kommen + sollen — modal verb stays in the infinitive",
+  "ru": "ich hätte + kommen + sollen — модальный глагол в инфинитиве",
+  "tr": "ich hätte + kommen + sollen — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "444c997f"
+  ]
+ },
+ {
+  "en": "sollen — reproach: telling me would have been the right thing to do.",
+  "ru": "sollen — упрёк: стоило сообщить мне об этом.",
+  "tr": "sollen — sitem: bunu bana söylemen doğru olurdu.",
+  "at": [
+   "6746f599"
+  ]
+ },
+ {
+  "en": "Du solltest mir das sagen — an instruction or advice; hättest … sollen is reproach about the past.",
+  "ru": "Du solltest mir das sagen — поручение или совет; hättest … sollen — упрёк о прошлом.",
+  "tr": "Du solltest mir das sagen — görev ya da tavsiye; hättest … sollen — geçmiş için sitem.",
+  "at": [
+   "5803f607"
+  ]
+ },
+ {
+  "en": "You should have told me that.",
+  "ru": "Тебе следовало сказать мне это.",
+  "tr": "Bunu bana söylemeliydin.",
+  "at": [
+   "c7b6a3cd"
+  ]
+ },
+ {
+  "en": "du hättest + sagen + sollen — modal verb stays in the infinitive",
+  "ru": "du hättest + sagen + sollen — модальный глагол в инфинитиве",
+  "tr": "du hättest + sagen + sollen — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "8a9f270d"
+  ]
+ },
+ {
+  "en": "sollen — regret: taking the train would have been better.",
+  "ru": "sollen — сожаление: лучше было ехать на поезде.",
+  "tr": "sollen — pişmanlık: trenle gitmek daha iyi olurdu.",
+  "at": [
+   "ac8e2ebf"
+  ]
+ },
+ {
+  "en": "Wir sollten den Zug nehmen — an instruction or advice; hätten … sollen regrets a past choice.",
+  "ru": "Wir sollten den Zug nehmen — поручение или совет; hätten … sollen — сожаление о прошлом выборе.",
+  "tr": "Wir sollten den Zug nehmen — görev ya da tavsiye; hätten … sollen — geçmişteki bir seçimden pişmanlık.",
+  "at": [
+   "b90b9ac9"
+  ]
+ },
+ {
+  "en": "We should have taken the train.",
+  "ru": "Нам надо было ехать на поезде.",
+  "tr": "Trenle gitmeliydik.",
+  "at": [
+   "93a15653"
+  ]
+ },
+ {
+  "en": "wir hätten + nehmen + sollen — modal verb stays in the infinitive",
+  "ru": "wir hätten + nehmen + sollen — модальный глагол в инфинитиве",
+  "tr": "wir hätten + nehmen + sollen — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "17bcc983"
+  ]
+ },
+ {
+  "en": "dürfen — regret: those words should not have been said.",
+  "ru": "dürfen — сожаление: эти слова не следовало произносить.",
+  "tr": "dürfen — pişmanlık: bu sözler söylenmemeliydi.",
+  "at": [
+   "453687b3"
+  ]
+ },
+ {
+  "en": "Das durfte ich nicht sagen — it was forbidden; hätte … nicht … dürfen — regret about having said it.",
+  "ru": "Das durfte ich nicht sagen — это было запрещено; hätte … nicht … dürfen — сожаление о сказанном.",
+  "tr": "Das durfte ich nicht sagen — bu yasaktı; hätte … nicht … dürfen — söylenen şeyden pişmanlık.",
+  "at": [
+   "20e1f3ad"
+  ]
+ },
+ {
+  "en": "I shouldn't have said that.",
+  "ru": "Мне не следовало этого говорить.",
+  "tr": "Bunu söylememeliydim.",
+  "at": [
+   "c8c1f16f"
+  ]
+ },
+ {
+  "en": "ich hätte + sagen + dürfen — modal verb stays in the infinitive",
+  "ru": "ich hätte + sagen + dürfen — модальный глагол в инфинитиве",
+  "tr": "ich hätte + sagen + dürfen — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "e1fa7e2f"
+  ]
+ },
+ {
+  "en": "dürfen — a judgment about the past: this should not have happened.",
+  "ru": "dürfen — оценка прошлого: это не должно было случиться.",
+  "tr": "dürfen — geçmişe dair bir değerlendirme: bu olmamalıydı.",
+  "at": [
+   "9d7a8445"
+  ]
+ },
+ {
+  "en": "Das darf nicht passieren — unacceptable now or in the future; hätte … nicht … dürfen — a judgment about what happened.",
+  "ru": "Das darf nicht passieren — недопустимо сейчас или в будущем; hätte … nicht … dürfen — оценка случившегося.",
+  "tr": "Das darf nicht passieren — şimdi ya da gelecekte kabul edilemez; hätte … nicht … dürfen — olmuş bir şeye dair değerlendirme.",
+  "at": [
+   "7b7af013"
+  ]
+ },
+ {
+  "en": "That should never have happened.",
+  "ru": "Этого не должно было случиться.",
+  "tr": "Bu olmamalıydı.",
+  "at": [
+   "f6e34e91"
+  ]
+ },
+ {
+  "en": "es hätte + passieren + dürfen — modal verb stays in the infinitive",
+  "ru": "es hätte + passieren + dürfen — модальный глагол в инфинитиве",
+  "tr": "es hätte + passieren + dürfen — modal fiil Infinitiv biçiminde kalır",
+  "at": [
+   "329d3811"
+  ]
  }
 ]

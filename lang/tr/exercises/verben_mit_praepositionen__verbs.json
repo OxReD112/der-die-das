@@ -2,7 +2,7 @@
  {
   "en": "I'm studying German grammar at the moment.",
   "ru": "Сейчас я занимаюсь немецкой грамматикой.",
-  "tr": "Şu sıralar Almanca dilbilgisiyle uğraşıyorum.",
+  "tr": "Şu sıralar Almanca dil bilgisiyle uğraşıyorum.",
   "at": [
    "ba755b61"
   ]
@@ -21,6 +21,1134 @@
   "tr": "(bir konuyu) görüşmek, bir şey hakkında tartışmak",
   "at": [
    "475897c4"
+  ]
+ },
+ {
+  "en": "to think of, to remember",
+  "ru": "думать о ком-то / вспоминать",
+  "tr": "birini düşünmek / hatırlamak",
+  "at": [
+   "08fd6585"
+  ]
+ },
+ {
+  "en": "I often think of my family.",
+  "ru": "Я часто думаю о своей семье.",
+  "tr": "Ailemi sık sık düşünüyorum.",
+  "at": [
+   "bef58663"
+  ]
+ },
+ {
+  "en": "to remember",
+  "ru": "вспоминать, помнить о",
+  "tr": "hatırlamak, aklına getirmek",
+  "at": [
+   "57812441"
+  ]
+ },
+ {
+  "en": "I remember the holiday.",
+  "ru": "Я вспоминаю отпуск.",
+  "tr": "Tatili hatırlıyorum.",
+  "at": [
+   "f90102ff"
+  ]
+ },
+ {
+  "en": "to believe in",
+  "ru": "верить в",
+  "tr": "birine / bir şeye inanmak",
+  "at": [
+   "317be3fa"
+  ]
+ },
+ {
+  "en": "I believe in you.",
+  "ru": "Я верю в тебя.",
+  "tr": "Sana inanıyorum.",
+  "at": [
+   "e903544a"
+  ]
+ },
+ {
+  "en": "to take part, to participate",
+  "ru": "участвовать в",
+  "tr": "bir şeye katılmak",
+  "at": [
+   "88882918"
+  ]
+ },
+ {
+  "en": "I'm taking a German course.",
+  "ru": "Я хожу на курс немецкого.",
+  "tr": "Bir Almanca kursuna gidiyorum.",
+  "at": [
+   "d30cace4"
+  ]
+ },
+ {
+  "en": "to work on",
+  "ru": "работать над",
+  "tr": "bir şey üzerinde çalışmak",
+  "at": [
+   "0ab6a875"
+  ]
+ },
+ {
+  "en": "She is working on a new project.",
+  "ru": "Она работает над новым проектом.",
+  "tr": "Yeni bir proje üzerinde çalışıyor.",
+  "at": [
+   "07d1f6b3"
+  ]
+ },
+ {
+  "en": "to answer, to reply",
+  "ru": "отвечать на",
+  "tr": "bir şeye cevap vermek",
+  "at": [
+   "0a13b3c2"
+  ]
+ },
+ {
+  "en": "I'm answering the question.",
+  "ru": "Я отвечаю на вопрос.",
+  "tr": "Soruya cevap veriyorum.",
+  "at": [
+   "f1284d82"
+  ]
+ },
+ {
+  "en": "to look forward to",
+  "ru": "с нетерпением ждать, радоваться тому, что предстоит",
+  "tr": "sabırsızlıkla beklemek, olacak bir şeye sevinmek",
+  "at": [
+   "0149c943"
+  ]
+ },
+ {
+  "en": "I'm looking forward to the holiday.",
+  "ru": "Я с нетерпением жду отпуска.",
+  "tr": "Tatili sabırsızlıkla bekliyorum.",
+  "at": [
+   "d8f44655"
+  ]
+ },
+ {
+  "en": "to hope for",
+  "ru": "надеяться на",
+  "tr": "bir şeyi ummak",
+  "at": [
+   "16e60172"
+  ]
+ },
+ {
+  "en": "We're hoping for good weather.",
+  "ru": "Мы надеемся на хорошую погоду.",
+  "tr": "Havanın güzel olmasını umuyoruz.",
+  "at": [
+   "93a853d2"
+  ]
+ },
+ {
+  "en": "to react, to respond",
+  "ru": "реагировать на",
+  "tr": "bir şeye tepki vermek",
+  "at": [
+   "174d89ab"
+  ]
+ },
+ {
+  "en": "He reacts quickly to my question.",
+  "ru": "Он быстро реагирует на мой вопрос.",
+  "tr": "Soruma hızlı tepki veriyor.",
+  "at": [
+   "3924ef6d"
+  ]
+ },
+ {
+  "en": "to wait",
+  "ru": "ждать",
+  "tr": "beklemek",
+  "at": [
+   "f3ee40b3"
+  ]
+ },
+ {
+  "en": "I'm waiting for the bus.",
+  "ru": "Я жду автобус.",
+  "tr": "Otobüsü bekliyorum.",
+  "at": [
+   "ca2de3e5"
+  ]
+ },
+ {
+  "en": "to thank (a person)",
+  "ru": "благодарить кого-то (человека)",
+  "tr": "birine teşekkür etmek (kişiye)",
+  "at": [
+   "68e375e4"
+  ]
+ },
+ {
+  "en": "I'd like to thank you for the invitation.",
+  "ru": "Я благодарю тебя за приглашение.",
+  "tr": "Davetin için sana teşekkür ederim.",
+  "at": [
+   "8fd05020"
+  ]
+ },
+ {
+  "en": "to start, to begin (something)",
+  "ru": "начинать с, начинать что-либо",
+  "tr": "bir şeyle başlamak, bir şeye başlamak",
+  "at": [
+   "42892e5d"
+  ]
+ },
+ {
+  "en": "We're starting work.",
+  "ru": "Мы начинаем работу.",
+  "tr": "İşe başlıyoruz.",
+  "at": [
+   "9e52184b"
+  ]
+ },
+ {
+  "en": "to talk, to speak (with someone)",
+  "ru": "разговаривать, говорить с",
+  "tr": "biriyle konuşmak, görüşmek",
+  "at": [
+   "c62fb5b0"
+  ]
+ },
+ {
+  "en": "I'm talking to my mother.",
+  "ru": "Я разговариваю с мамой.",
+  "tr": "Annemle konuşuyorum.",
+  "at": [
+   "e38fa06c"
+  ]
+ },
+ {
+  "en": "to meet (someone)",
+  "ru": "встречаться с",
+  "tr": "biriyle buluşmak",
+  "at": [
+   "5b0764c7"
+  ]
+ },
+ {
+  "en": "I'm meeting up with friends.",
+  "ru": "Я встречаюсь с друзьями.",
+  "tr": "Arkadaşlarımla buluşuyorum.",
+  "at": [
+   "4dd4baf9"
+  ]
+ },
+ {
+  "en": "to ask about",
+  "ru": "спрашивать о, спрашивать кого-либо о",
+  "tr": "bir şeyi sormak, birine bir şey sormak",
+  "at": [
+   "415ee7f1"
+  ]
+ },
+ {
+  "en": "I'm asking about the price.",
+  "ru": "Я спрашиваю о цене.",
+  "tr": "Fiyatı soruyorum.",
+  "at": [
+   "7d37b10f"
+  ]
+ },
+ {
+  "en": "to look for, to search",
+  "ru": "искать",
+  "tr": "aramak",
+  "at": [
+   "0417ecf4"
+  ]
+ },
+ {
+  "en": "I'm looking for my keys.",
+  "ru": "Я ищу свои ключи.",
+  "tr": "Anahtarlarımı arıyorum.",
+  "at": [
+   "bbd93290"
+  ]
+ },
+ {
+  "en": "to thank (for sth)",
+  "ru": "благодарить за (человек — Dativ без предлога)",
+  "tr": "bir şey için teşekkür etmek (kişi — edatsız Dativ)",
+  "at": [
+   "d1dc8426"
+  ]
+ },
+ {
+  "en": "Thank you for your help.",
+  "ru": "Спасибо тебе за помощь.",
+  "tr": "Yardımın için sana teşekkür ederim.",
+  "at": [
+   "c908bc76"
+  ]
+ },
+ {
+  "en": "to apologise (for what you did)",
+  "ru": "извиняться за",
+  "tr": "bir şey için özür dilemek",
+  "at": [
+   "78760623"
+  ]
+ },
+ {
+  "en": "I apologise for my mistake.",
+  "ru": "Я извиняюсь за свою ошибку.",
+  "tr": "Hatam için özür dilerim.",
+  "at": [
+   "2974ba75"
+  ]
+ },
+ {
+  "en": "to decide on, to choose",
+  "ru": "выбрать, сделать выбор в пользу",
+  "tr": "seçmek, bir şeyde karar kılmak",
+  "at": [
+   "62ca46a9"
+  ]
+ },
+ {
+  "en": "I'm choosing the blue coat.",
+  "ru": "Я выбираю синее пальто.",
+  "tr": "Mavi paltoyu seçiyorum.",
+  "at": [
+   "1902bbf7"
+  ]
+ },
+ {
+  "en": "to be interested in",
+  "ru": "интересоваться",
+  "tr": "bir şeyle ilgilenmek",
+  "at": [
+   "daa50e2d"
+  ]
+ },
+ {
+  "en": "I'm interested in modern art.",
+  "ru": "Я интересуюсь современным искусством.",
+  "tr": "Modern sanatla ilgileniyorum.",
+  "at": [
+   "c10ac6fb"
+  ]
+ },
+ {
+  "en": "I'm asking you a favour.",
+  "ru": "Я прошу тебя об одолжении.",
+  "tr": "Senden bir iyilik rica ediyorum.",
+  "at": [
+   "80afc9c2"
+  ]
+ },
+ {
+  "en": "to take care of, to look after",
+  "ru": "заботиться о, позаботиться о",
+  "tr": "birine bakmak, biriyle ilgilenmek",
+  "at": [
+   "a312a6f8"
+  ]
+ },
+ {
+  "en": "I look after the children.",
+  "ru": "Я забочусь о детях.",
+  "tr": "Çocuklara bakıyorum.",
+  "at": [
+   "1f036c04"
+  ]
+ },
+ {
+  "en": "it's about",
+  "ru": "речь идёт о",
+  "tr": "söz konusu olmak",
+  "at": [
+   "0b0f7803"
+  ]
+ },
+ {
+  "en": "It's about an important topic.",
+  "ru": "Речь идёт о важной теме.",
+  "tr": "Önemli bir konu söz konusu.",
+  "at": [
+   "4d9ae815"
+  ]
+ },
+ {
+  "en": "to be happy about (sth that has happened or you've received)",
+  "ru": "радоваться чему-либо (тому, что уже произошло или что получил)",
+  "tr": "bir şeye sevinmek (olmuş ya da alınmış bir şeye)",
+  "at": [
+   "db0eef3c"
+  ]
+ },
+ {
+  "en": "I'm happy about the present.",
+  "ru": "Я радуюсь подарку.",
+  "tr": "Hediyeye seviniyorum.",
+  "at": [
+   "f1a93d28"
+  ]
+ },
+ {
+  "en": "to reflect on, to think over",
+  "ru": "размышлять, обдумывать",
+  "tr": "düşünüp taşınmak, kafa yormak",
+  "at": [
+   "cd3afff0"
+  ]
+ },
+ {
+  "en": "I'm thinking about the question.",
+  "ru": "Я размышляю над вопросом.",
+  "tr": "Soru üzerinde düşünüyorum.",
+  "at": [
+   "7528f2ac"
+  ]
+ },
+ {
+  "en": "He often talks about his childhood.",
+  "ru": "Он часто говорит о своём детстве.",
+  "tr": "Sık sık çocukluğundan bahseder.",
+  "at": [
+   "eef0096f"
+  ]
+ },
+ {
+  "en": "to talk about",
+  "ru": "говорить о, разговаривать о",
+  "tr": "bir şey hakkında konuşmak",
+  "at": [
+   "2eba2e95"
+  ]
+ },
+ {
+  "en": "We're talking about the film.",
+  "ru": "Мы говорим о фильме.",
+  "tr": "Film hakkında konuşuyoruz.",
+  "at": [
+   "d1680e93"
+  ]
+ },
+ {
+  "en": "to find out, to get information",
+  "ru": "узнавать информацию о, информироваться о",
+  "tr": "bir şey hakkında bilgi almak, bilgi edinmek",
+  "at": [
+   "55e96dcd"
+  ]
+ },
+ {
+  "en": "I'm finding out about the course.",
+  "ru": "Я собираю информацию о курсе.",
+  "tr": "Kurs hakkında bilgi alıyorum.",
+  "at": [
+   "bcf833db"
+  ]
+ },
+ {
+  "en": "She told us a lot about her holiday.",
+  "ru": "Она много рассказала о своём отпуске.",
+  "tr": "Tatili hakkında çok şey anlattı.",
+  "at": [
+   "c95a2780"
+  ]
+ },
+ {
+  "en": "to tell (someone) about",
+  "ru": "рассказывать о",
+  "tr": "bir şeyi anlatmak",
+  "at": [
+   "01814385"
+  ]
+ },
+ {
+  "en": "She's telling us about her work.",
+  "ru": "Она рассказывает о своей работе.",
+  "tr": "İşini anlatıyor.",
+  "at": [
+   "8308d063"
+  ]
+ },
+ {
+  "en": "to dream about",
+  "ru": "мечтать о; видеть во сне",
+  "tr": "bir şeyin hayalini kurmak; rüyasında görmek",
+  "at": [
+   "82eb7344"
+  ]
+ },
+ {
+  "en": "I'm dreaming of a trip.",
+  "ru": "Я мечтаю о путешествии.",
+  "tr": "Bir yolculuğun hayalini kuruyorum.",
+  "at": [
+   "720954c0"
+  ]
+ },
+ {
+  "en": "to be part of, to belong to",
+  "ru": "относиться к, принадлежать к",
+  "tr": "bir şeyin parçası olmak, bir şeye dahil olmak",
+  "at": [
+   "3e11fbeb"
+  ]
+ },
+ {
+  "en": "That's part of my job.",
+  "ru": "Это относится к моей профессии.",
+  "tr": "Bu, mesleğimin bir parçası.",
+  "at": [
+   "f1d74fad"
+  ]
+ },
+ {
+  "en": "to congratulate on",
+  "ru": "поздравлять с",
+  "tr": "birini bir şey için kutlamak",
+  "at": [
+   "fa6ba6ed"
+  ]
+ },
+ {
+  "en": "I'd like to congratulate you on your new job.",
+  "ru": "Поздравляю тебя с новой работой.",
+  "tr": "Yeni işin için seni kutlarım.",
+  "at": [
+   "9aac61bb"
+  ]
+ },
+ {
+  "en": "to warn about, to warn against",
+  "ru": "предупреждать о, предостерегать от",
+  "tr": "birini bir şey hakkında uyarmak, bir şeye karşı uyarmak",
+  "at": [
+   "21e942e0"
+  ]
+ },
+ {
+  "en": "I'm warning you about this man.",
+  "ru": "Я предупреждаю тебя насчёт этого человека.",
+  "tr": "Seni bu adama karşı uyarıyorum.",
+  "at": [
+   "67a0a0bc"
+  ]
+ },
+ {
+  "en": "to fall for (someone)",
+  "ru": "влюбиться в",
+  "tr": "birine âşık olmak",
+  "at": [
+   "515a2e61"
+  ]
+ },
+ {
+  "en": "She has fallen in love with him.",
+  "ru": "Она влюбилась в него.",
+  "tr": "Ona âşık oldu.",
+  "at": [
+   "afb3ec5f"
+  ]
+ },
+ {
+  "en": "to consist of, to be made up of",
+  "ru": "состоять из",
+  "tr": "bir şeyden oluşmak",
+  "at": [
+   "1e947cf0"
+  ]
+ },
+ {
+  "en": "The flat consists of one room and a kitchen.",
+  "ru": "Квартира состоит из комнаты и кухни.",
+  "tr": "Daire bir oda ve bir mutfaktan oluşuyor.",
+  "at": [
+   "fa9c71ac"
+  ]
+ },
+ {
+  "en": "to get used to",
+  "ru": "привыкать к",
+  "tr": "bir şeye alışmak",
+  "at": [
+   "ddfefbed"
+  ]
+ },
+ {
+  "en": "I'm getting used to the new job.",
+  "ru": "Я привыкаю к новой работе.",
+  "tr": "Yeni işe alışıyorum.",
+  "at": [
+   "c11b28bb"
+  ]
+ },
+ {
+  "en": "to write (to someone)",
+  "ru": "писать кому-то (письмо, e-mail)",
+  "tr": "birine yazmak (mektup, e-posta)",
+  "at": [
+   "ca6118c7"
+  ]
+ },
+ {
+  "en": "I'm writing an email to my boss.",
+  "ru": "Я пишу e-mail своему начальнику.",
+  "tr": "Patronuma bir e-posta yazıyorum.",
+  "at": [
+   "e133f6f9"
+  ]
+ },
+ {
+  "en": "to look after, to watch",
+  "ru": "присматривать за, следить за",
+  "tr": "bir şeye göz kulak olmak, bir şeye dikkat etmek",
+  "at": [
+   "97dc1a28"
+  ]
+ },
+ {
+  "en": "Can you keep an eye on my bag?",
+  "ru": "Можешь присмотреть за моей сумкой?",
+  "tr": "Çantama göz kulak olabilir misin?",
+  "at": [
+   "dbba0d14"
+  ]
+ },
+ {
+  "en": "to concentrate, to focus",
+  "ru": "сосредоточиться на",
+  "tr": "bir şeye odaklanmak",
+  "at": [
+   "82408b33"
+  ]
+ },
+ {
+  "en": "I can't concentrate on my work.",
+  "ru": "Я не могу сосредоточиться на работе.",
+  "tr": "İşe odaklanamıyorum.",
+  "at": [
+   "8b482765"
+  ]
+ },
+ {
+  "en": "to rely on, to count on",
+  "ru": "полагаться на",
+  "tr": "birine güvenmek",
+  "at": [
+   "1685de43"
+  ]
+ },
+ {
+  "en": "You can rely on me.",
+  "ru": "Ты можешь на меня положиться.",
+  "tr": "Bana güvenebilirsin.",
+  "at": [
+   "07db4d55"
+  ]
+ },
+ {
+  "en": "to apologise (to a person)",
+  "ru": "извиняться перед кем-то",
+  "tr": "birinden özür dilemek",
+  "at": [
+   "a7c28142"
+  ]
+ },
+ {
+  "en": "I apologise to you for being late.",
+  "ru": "Я извиняюсь перед тобой за опоздание.",
+  "tr": "Geç kaldığım için senden özür dilerim.",
+  "at": [
+   "1c611202"
+  ]
+ },
+ {
+  "en": "to stop, to give up (doing sth)",
+  "ru": "прекращать, бросать (делать что-то)",
+  "tr": "bırakmak, son vermek (bir şeyi yapmayı)",
+  "at": [
+   "d75a29ec"
+  ]
+ },
+ {
+  "en": "I'm giving up smoking.",
+  "ru": "Я бросаю курить.",
+  "tr": "Sigarayı bırakıyorum.",
+  "at": [
+   "db4a7838"
+  ]
+ },
+ {
+  "en": "to spend time on, to study",
+  "ru": "заниматься чем-то",
+  "tr": "bir şeyle uğraşmak",
+  "at": [
+   "03efb2df"
+  ]
+ },
+ {
+  "en": "to depend on",
+  "ru": "зависеть от",
+  "tr": "bir şeye bağlı olmak",
+  "at": [
+   "230462cc"
+  ]
+ },
+ {
+  "en": "It depends on the weather.",
+  "ru": "Это зависит от погоды.",
+  "tr": "Bu, havaya bağlı.",
+  "at": [
+   "66340d58"
+  ]
+ },
+ {
+  "en": "to think highly / little of",
+  "ru": "быть какого-то мнения о",
+  "tr": "bir şey hakkında iyi ya da kötü düşünmek",
+  "at": [
+   "df51171f"
+  ]
+ },
+ {
+  "en": "What do you think of my idea?",
+  "ru": "Что ты думаешь о моей идее?",
+  "tr": "Fikrim hakkında ne düşünüyorsun?",
+  "at": [
+   "cc5a17a1"
+  ]
+ },
+ {
+  "en": "to recover from",
+  "ru": "отдыхать, восстанавливаться после",
+  "tr": "dinlenmek, bir şeyin yorgunluğunu atmak",
+  "at": [
+   "f191670e"
+  ]
+ },
+ {
+  "en": "I need to recover from work.",
+  "ru": "Мне нужно отдохнуть от работы.",
+  "tr": "İşin yorgunluğunu atmam gerek.",
+  "at": [
+   "446473ae"
+  ]
+ },
+ {
+  "en": "to say goodbye (to someone)",
+  "ru": "прощаться с",
+  "tr": "biriyle vedalaşmak",
+  "at": [
+   "5d3686fd"
+  ]
+ },
+ {
+  "en": "I'm saying goodbye to my colleagues.",
+  "ru": "Я прощаюсь с коллегами.",
+  "tr": "İş arkadaşlarımla vedalaşıyorum.",
+  "at": [
+   "7449a8ab"
+  ]
+ },
+ {
+  "en": "to be annoyed (by)",
+  "ru": "злиться на что-то",
+  "tr": "bir şeye kızmak",
+  "at": [
+   "94176c26"
+  ]
+ },
+ {
+  "en": "I'm annoyed about the traffic jam.",
+  "ru": "Я злюсь из-за пробки.",
+  "tr": "Trafik sıkışıklığına kızıyorum.",
+  "at": [
+   "7ac9b476"
+  ]
+ },
+ {
+  "en": "to complain (about sth)",
+  "ru": "жаловаться на",
+  "tr": "bir şeyden şikâyet etmek",
+  "at": [
+   "2edb25ab"
+  ]
+ },
+ {
+  "en": "He's complaining about the noise.",
+  "ru": "Он жалуется на шум.",
+  "tr": "Gürültüden şikâyet ediyor.",
+  "at": [
+   "8498236d"
+  ]
+ },
+ {
+  "en": "to go well, to match",
+  "ru": "подходить к, сочетаться с",
+  "tr": "bir şeye uymak, bir şeyle uyum içinde olmak",
+  "at": [
+   "729f7e1f"
+  ]
+ },
+ {
+  "en": "The shoes go well with your dress.",
+  "ru": "Туфли хорошо подходят к твоему платью.",
+  "tr": "Ayakkabılar elbisene çok yakışıyor.",
+  "at": [
+   "d0afe4a1"
+  ]
+ },
+ {
+  "en": "to take care of, to provide",
+  "ru": "обеспечивать, позаботиться о",
+  "tr": "sağlamak, bir şeyi üstlenmek",
+  "at": [
+   "2bd07999"
+  ]
+ },
+ {
+  "en": "Who's taking care of the drinks?",
+  "ru": "Кто позаботится о напитках?",
+  "tr": "İçecekleri kim hallediyor?",
+  "at": [
+   "efeec2c7"
+  ]
+ },
+ {
+  "en": "to consider, to regard as",
+  "ru": "считать кем-то / чем-то",
+  "tr": "birini bir şey olarak görmek",
+  "at": [
+   "75492588"
+  ]
+ },
+ {
+  "en": "I consider him a good teacher.",
+  "ru": "Я считаю его хорошим учителем.",
+  "tr": "Onu iyi bir öğretmen olarak görüyorum.",
+  "at": [
+   "efb8e534"
+  ]
+ },
+ {
+  "en": "to be afraid of",
+  "ru": "бояться кого-то / чего-то",
+  "tr": "birinden / bir şeyden korkmak",
+  "at": [
+   "9e1971ad"
+  ]
+ },
+ {
+  "en": "I'm afraid of big dogs.",
+  "ru": "Я боюсь больших собак.",
+  "tr": "Büyük köpeklerden korkarım.",
+  "at": [
+   "4974bd7b"
+  ]
+ },
+ {
+  "en": "to feel like, to fancy",
+  "ru": "хотеть чего-то, иметь желание",
+  "tr": "canı bir şey istemek, bir şeye hevesli olmak",
+  "at": [
+   "a1df8978"
+  ]
+ },
+ {
+  "en": "I fancy an ice cream.",
+  "ru": "Мне хочется мороженого.",
+  "tr": "Canım dondurma istiyor.",
+  "at": [
+   "eb193784"
+  ]
+ },
+ {
+  "en": "to be on the phone to, to call",
+  "ru": "говорить по телефону с",
+  "tr": "biriyle telefonda konuşmak",
+  "at": [
+   "1276b176"
+  ]
+ },
+ {
+  "en": "I talk to my mum on the phone every Sunday.",
+  "ru": "Я каждое воскресенье говорю по телефону с мамой.",
+  "tr": "Her pazar annemle telefonda konuşuyorum.",
+  "at": [
+   "2c8a6966"
+  ]
+ },
+ {
+  "en": "to help (someone) with sth",
+  "ru": "помогать с чем-то (в каком-то деле)",
+  "tr": "birine bir işte yardım etmek",
+  "at": [
+   "afbddd7b"
+  ]
+ },
+ {
+  "en": "Can you help me with the move?",
+  "ru": "Можешь помочь мне с переездом?",
+  "tr": "Taşınmama yardım edebilir misin?",
+  "at": [
+   "9ba8a05d"
+  ]
+ },
+ {
+  "en": "to chat to someone, to have a conversation",
+  "ru": "беседовать с кем-то",
+  "tr": "biriyle sohbet etmek",
+  "at": [
+   "dda62183"
+  ]
+ },
+ {
+  "en": "I had a long chat with my neighbour.",
+  "ru": "Я долго беседовала с соседкой.",
+  "tr": "Komşumla uzun uzun sohbet ettim.",
+  "at": [
+   "55cfa095"
+  ]
+ },
+ {
+  "en": "to talk, to chat (about a topic)",
+  "ru": "беседовать о чём-то (тема разговора)",
+  "tr": "bir şey hakkında sohbet etmek (sohbetin konusu)",
+  "at": [
+   "a1e3f003"
+  ]
+ },
+ {
+  "en": "We talked about the concert.",
+  "ru": "Мы поговорили о концерте.",
+  "tr": "Konser hakkında sohbet ettik.",
+  "at": [
+   "927f1015"
+  ]
+ },
+ {
+  "en": "We're discussing the new plan.",
+  "ru": "Мы обсуждаем новый план.",
+  "tr": "Yeni planı tartışıyoruz.",
+  "at": [
+   "7e4d3640"
+  ]
+ },
+ {
+  "en": "to pay attention to, to watch out for",
+  "ru": "обращать внимание на, следить за",
+  "tr": "bir şeye dikkat etmek, bir şeye özen göstermek",
+  "at": [
+   "fd9aaf4a"
+  ]
+ },
+ {
+  "en": "I look after my health.",
+  "ru": "Я слежу за своим здоровьем.",
+  "tr": "Sağlığıma dikkat ediyorum.",
+  "at": [
+   "37c2887a"
+  ]
+ },
+ {
+  "en": "to doubt",
+  "ru": "сомневаться в",
+  "tr": "bir şeyden şüphe etmek",
+  "at": [
+   "401888ea"
+  ]
+ },
+ {
+  "en": "I doubt his honesty.",
+  "ru": "Я сомневаюсь в его честности.",
+  "tr": "Dürüstlüğünden şüphe ediyorum.",
+  "at": [
+   "214e375a"
+  ]
+ },
+ {
+  "en": "to take part, to contribute",
+  "ru": "участвовать в, вносить свой вклад",
+  "tr": "bir şeye katılmak, katkıda bulunmak",
+  "at": [
+   "10c9a246"
+  ]
+ },
+ {
+  "en": "Everyone is taking part in the discussion.",
+  "ru": "Все участвуют в обсуждении.",
+  "tr": "Herkes tartışmaya katılıyor.",
+  "at": [
+   "c6e185d6"
+  ]
+ },
+ {
+  "en": "to recognise (someone) by",
+  "ru": "узнавать (кого-то) по",
+  "tr": "birini bir şeyden tanımak",
+  "at": [
+   "ad112612"
+  ]
+ },
+ {
+  "en": "I recognise him by his voice.",
+  "ru": "Я узнаю его по голосу.",
+  "tr": "Onu sesinden tanıyorum.",
+  "at": [
+   "5a6e25b2"
+  ]
+ },
+ {
+  "en": "to insist",
+  "ru": "настаивать на",
+  "tr": "bir şeyde ısrar etmek",
+  "at": [
+   "503cb4ed"
+  ]
+ },
+ {
+  "en": "He insists on an answer.",
+  "ru": "Он настаивает на ответе.",
+  "tr": "Bir cevap almakta ısrar ediyor.",
+  "at": [
+   "5b7ebbbb"
+  ]
+ },
+ {
+  "en": "to be scared (of sth)",
+  "ru": "бояться",
+  "tr": "korkmak",
+  "at": [
+   "ec843ca4"
+  ]
+ },
+ {
+  "en": "The child is scared of the dog.",
+  "ru": "Ребёнок боится собаки.",
+  "tr": "Çocuk köpekten korkuyor.",
+  "at": [
+   "0bf96ce0"
+  ]
+ },
+ {
+  "en": "to hide (from someone or sth)",
+  "ru": "прятаться от",
+  "tr": "birinden / bir şeyden saklanmak",
+  "at": [
+   "06eb2e1a"
+  ]
+ },
+ {
+  "en": "The cat is hiding from the thunderstorm.",
+  "ru": "Кошка прячется от грозы.",
+  "tr": "Kedi fırtınadan saklanıyor.",
+  "at": [
+   "ded95eaa"
+  ]
+ },
+ {
+  "en": "to get worked up, to get upset",
+  "ru": "возмущаться чем-то, нервничать",
+  "tr": "bir şeye sinirlenmek, öfkelenmek",
+  "at": [
+   "7924eb7a"
+  ]
+ },
+ {
+  "en": "He's getting worked up about his boss.",
+  "ru": "Он возмущается из-за своего начальника.",
+  "tr": "Patronu yüzünden öfkeleniyor.",
+  "at": [
+   "0efad6ca"
+  ]
+ },
+ {
+  "en": "to arrange to meet (someone)",
+  "ru": "договориться о встрече с",
+  "tr": "biriyle sözleşmek, buluşmak için anlaşmak",
+  "at": [
+   "1591a6ff"
+  ]
+ },
+ {
+  "en": "I'm arranging to meet my friend.",
+  "ru": "Я договариваюсь о встрече с подругой.",
+  "tr": "Arkadaşımla buluşmak için sözleşiyorum.",
+  "at": [
+   "bae56341"
+  ]
+ },
+ {
+  "en": "to ask about, to enquire",
+  "ru": "осведомляться о, расспрашивать о",
+  "tr": "bir şeyi sormak, sorup öğrenmek",
+  "at": [
+   "d1454ac3"
+  ]
+ },
+ {
+  "en": "She's asking the way.",
+  "ru": "Она спрашивает дорогу.",
+  "tr": "Yolu soruyor.",
+  "at": [
+   "92dd46d5"
+  ]
+ },
+ {
+  "en": "to do without, to give up",
+  "ru": "отказываться от",
+  "tr": "bir şeyden vazgeçmek",
+  "at": [
+   "74a27e21"
+  ]
+ },
+ {
+  "en": "I'll skip dessert.",
+  "ru": "Я отказываюсь от десерта.",
+  "tr": "Tatlıdan vazgeçiyorum.",
+  "at": [
+   "58a3491f"
+  ]
+ },
+ {
+  "en": "it's a matter of, it concerns",
+  "ru": "речь идёт о (книжнее, чем es geht um)",
+  "tr": "söz konusu olmak (es geht um ifadesine göre daha çok yazı dilinde)",
+  "at": [
+   "96f50f81"
+  ]
+ },
+ {
+  "en": "It's a mistake.",
+  "ru": "Речь идёт об ошибке.",
+  "tr": "Bir hata söz konusu.",
+  "at": [
+   "07bd963f"
+  ]
+ },
+ {
+  "en": "to protest",
+  "ru": "протестовать против",
+  "tr": "bir şeyi protesto etmek",
+  "at": [
+   "6568d93a"
+  ]
+ },
+ {
+  "en": "Many people are protesting against the new rules.",
+  "ru": "Многие протестуют против новых правил.",
+  "tr": "Birçok kişi yeni kuralları protesto ediyor.",
+  "at": [
+   "5fff0c8a"
   ]
  }
 ]

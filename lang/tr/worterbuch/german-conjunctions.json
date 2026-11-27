@@ -1,0 +1,645 @@
+{
+ "conjunction-001": {
+  "translation_tr": "ve",
+  "example_tr": "Ben yemek yapıyorum, sen de sofrayı kuruyorsun.",
+  "notes_tr": [
+   "und kelimesinden önce genellikle virgül konmaz.",
+   "Aynı özne tekrarlanmayabilir: Ich koche und esse."
+  ],
+  "_src": "4f0a9607",
+  "_src_reader": "f86e3f64"
+ },
+ "conjunction-002": {
+  "translation_tr": "veya, ya da",
+  "example_tr": "Çay mı içiyorsun, yoksa kahve mi istersin?",
+  "notes_tr": [
+   "oder kelimesinden önce genellikle virgül konmaz.",
+   "Çift bağlaç: entweder … oder."
+  ],
+  "_src": "fb755e9d",
+  "_src_reader": "8ad49d3a"
+ },
+ "conjunction-003": {
+  "translation_tr": "ama, fakat; ise, oysa",
+  "example_tr": "Elbise güzel ama çok pahalı.",
+  "notes_tr": [
+   "aber kelimesinden önce virgül konur.",
+   "Olumsuzluktan sonra (“… değil, …”) — sondern.",
+   "Cümle içinde (fiilden sonra, yan cümlede) — “ancak, ama”: Er klopfte, bekam aber keine Antwort. — Kapıyı çaldı, ancak cevap alamadı.",
+   "Şaşkınlık bildiren parçacık: Das ist aber schön!"
+  ],
+  "_src": "033c32cd",
+  "_src_reader": "af724b2c"
+ },
+ "conjunction-004": {
+  "translation_tr": "çünkü; ne de olsa, zira",
+  "example_tr": "Bugün evde kalıyorum, çünkü hastayım.",
+  "notes_tr": [
+   "denn ile başlayan kısım her zaman ikinci sırada gelir.",
+   "weil — aynı anlam, ama fiil sona gider.",
+   "Soruda parçacık: Was ist denn los? — Ne oldu?",
+   "Anlatımda, cümle ortasında — “işte, böylece”: So fingen sie denn an. — Ve işte başladılar."
+  ],
+  "_src": "4da0bab7",
+  "_src_reader": "c1031e6f"
+ },
+ "conjunction-005": {
+  "translation_tr": "… değil, … (bilakis, aksine)",
+  "example_tr": "Bu benim telefonum değil, seninki.",
+  "notes_tr": [
+   "Yalnızca olumsuzluktan sonra (nicht, kein), ikinci kısım birinciyi düzelttiğinde.",
+   "Düzeltme yoksa — aber: Das Handy ist nicht neu, aber gut.",
+   "Çift bağlaç: nicht nur … sondern auch."
+  ],
+  "_src": "3c87aaa3",
+  "_src_reader": "55f56e1d"
+ },
+ "conjunction-006": {
+  "translation_tr": "ancak, fakat",
+  "example_tr": "Uzun süre bekledik, ancak gelmedi.",
+  "notes_tr": [
+   "Bağlaç işlevli zarf: başta devrik kelime sırasıyla (Jedoch war er müde.), daha çok cümle ortasında (Er war jedoch müde.).",
+   "aber gibi, devrik sıra olmadan bağlaç olarak: genellikle bir kelime grubundan önce — Er versuchte es, jedoch ohne Erfolg; bütün bir cümleden önce (Jedoch er kam nicht.) — nadir, yazı dilinde.",
+   "Yazı dilinde kullanılır; konuşmada — aber."
+  ],
+  "_src": "580baba5",
+  "_src_reader": "1cd43a85"
+ },
+ "conjunction-007": {
+  "translation_tr": "ki, -diğini / -dığını; -sin diye / -sın diye, -mesi için / -ması için",
+  "example_tr": "Bugün onun gelmeyeceğini sanıyorum.",
+  "notes_tr": [
+   "Çoğu zaman “-mesini, -sin diye” anlamında: istek ve talep fiillerinden sonra — Ich will, dass du kommst. — Gelmeni istiyorum; amaç için (= damit) — Hilf ihm, dass er fertig wird. — Bitirebilmesi için ona yardım et.",
+   "ss ile yazılır.",
+   "das — artikel ya da ilgi zamiri (“ki”, “-diği”): Das Buch, das ich lese.",
+   "Kontrol: yerine dieses / welches konabiliyorsa das yazılır."
+  ],
+  "_src": "eaebc882",
+  "_src_reader": "97f5e8bb"
+ },
+ "conjunction-008": {
+  "translation_tr": "-diği için / -dığı için, çünkü",
+  "example_tr": "Hasta olduğum için evde kalıyorum.",
+  "notes_tr": [
+   "warum? (neden?) sorusuna cevap verir.",
+   "denn — aynı anlam, kelime sırası değişmeden."
+  ],
+  "_src": "91612a74",
+  "_src_reader": "a8b8fe23"
+ },
+ "conjunction-009": {
+  "translation_tr": "-diğinde / -dığında, -ince / -ınca; eğer, -se / -sa",
+  "example_tr": "Vaktim olduğunda seni ararım.",
+  "notes_tr": [
+   "wenn — şimdiki zaman, gelecek, geçmişte tekrarlanan olaylar.",
+   "als — geçmişte bir kez.",
+   "wann — “ne zaman?” sorusu.",
+   "“-ip -mediğini” (dolaylı soru) — ob, wenn değil."
+  ],
+  "_src": "0392580b",
+  "_src_reader": "f33923d8"
+ },
+ "conjunction-010": {
+  "translation_tr": "-diğinde / -dığında, -ken (geçmişte bir kez); -den daha / -dan daha; olarak",
+  "example_tr": "Ben küçükken Köln'de oturuyorduk.",
+  "notes_tr": [
+   "Geçmişte tekrarlanan olaylar — wenn.",
+   "größer als ich — benden daha büyük (kelime sırası değişmez).",
+   "als Lehrerin — öğretmen (kadın) olarak."
+  ],
+  "_src": "20e0bc5e",
+  "_src_reader": "e0374a2e"
+ },
+ "conjunction-011": {
+  "translation_tr": "-ip -mediğini / -ıp -madığını, acaba",
+  "example_tr": "Bugün gelip gelmeyeceğini bilmiyorum.",
+  "notes_tr": [
+   "“Evet / hayır” dolaylı sorusu: Kommt er? → ob er kommt.",
+   "İngilizce if “-ip -mediği” anlamındaysa → ob; “eğer” anlamındaysa → wenn."
+  ],
+  "_src": "db087e53",
+  "_src_reader": "5147fbd0"
+ },
+ "conjunction-012": {
+  "translation_tr": "-diği hâlde / -dığı hâlde, -mesine rağmen / -masına rağmen",
+  "example_tr": "Yağmur yağdığı hâlde yürüyüşe çıkıyor.",
+  "notes_tr": [
+   "Ana cümlede — trotzdem: Es regnet, trotzdem geht er spazieren."
+  ],
+  "_src": "4d1dc3d6",
+  "_src_reader": "dfa910df"
+ },
+ "conjunction-013": {
+  "translation_tr": "-sin diye / -sın diye, -mesi için / -ması için",
+  "example_tr": "Herkes beni anlasın diye yavaş konuşuyorum.",
+  "notes_tr": [
+   "İki kısımda özne aynıysa — genellikle um … zu.",
+   "damit zarfı — “bununla, onunla”: Was machst du damit?"
+  ],
+  "_src": "e8b72bc6",
+  "_src_reader": "0c742522"
+ },
+ "conjunction-014": {
+  "translation_tr": "-mek için / -mak için",
+  "example_tr": "Berlin'de çalışmak için Almanca öğreniyorum.",
+  "notes_tr": [
+   "Yalnızca özne ana cümledekiyle aynıysa; değilse — damit.",
+   "Ayrılabilen fiiller: um früh aufzustehen."
+  ],
+  "_src": "e3d44985",
+  "_src_reader": "ec766033"
+ },
+ "conjunction-015": {
+  "translation_tr": "-meden önce / -madan önce; -mezden önce / -mazdan önce",
+  "example_tr": "İşe gitmeden önce bir kahve içiyorum.",
+  "notes_tr": [
+   "İsimden önce — vor: vor der Arbeit.",
+   "Karşıt anlamlısı: nachdem."
+  ],
+  "_src": "adc8dba9",
+  "_src_reader": "c109ac1c"
+ },
+ "conjunction-016": {
+  "translation_tr": "-dikten sonra / -dıktan sonra",
+  "example_tr": "Yemeğimi yedikten sonra yürüyüşe çıktım.",
+  "notes_tr": [
+   "Ana cümle Präteritum / Perfekt ise → nachdem + Plusquamperfekt.",
+   "Ana cümle Präsens ise → nachdem + Perfekt.",
+   "İsimden önce — nach: nach dem Essen."
+  ],
+  "_src": "945adb00",
+  "_src_reader": "974ca0b9"
+ },
+ "conjunction-017": {
+  "translation_tr": "eğer, -se / -sa; -diği takdirde / -dığı takdirde",
+  "example_tr": "Yağmur yağarsa evde kalırız.",
+  "notes_tr": [
+   "wenn (“eğer”) gibi, ama bunun olmayabileceğini vurgular."
+  ],
+  "_src": "01128d97",
+  "_src_reader": "22bff594"
+ },
+ "conjunction-018": {
+  "translation_tr": "-erek / -arak; -mek suretiyle / -mak suretiyle",
+  "example_tr": "Dil, çok konuşarak öğrenilir.",
+  "notes_tr": [
+   "wie? (nasıl?) sorusuna cevap verir (hangi yolla).",
+   "Türkçede genellikle -erek / -arak: indem man spricht — konuşarak."
+  ],
+  "extra_meanings": [
+   {
+    "tr": "(zarf) bu arada, o sırada",
+    "example_tr": "O sırada köylü mahzene girdi."
+   }
+  ],
+  "_src": "2ff24980",
+  "_src_reader": "a7b3c21d"
+ },
+ "conjunction-019": {
+  "translation_tr": "-diğinden beri / -dığından beri",
+  "example_tr": "Berlin'de oturduğumdan beri sık sık bisiklete biniyorum.",
+  "notes_tr": [
+   "Eş anlamlısı: seit.",
+   "Eylem sürüyor — şimdiki zaman (wohne), Perfekt değil.",
+   "Zarf: Seitdem fahre ich Rad. — O zamandan beri bisiklete biniyorum."
+  ],
+  "_src": "3efafcb5",
+  "_src_reader": "d59fc6a2"
+ },
+ "conjunction-020": {
+  "translation_tr": "-diğinden beri / -dığından beri, -eli / -alı",
+  "example_tr": "Spor yaptığımdan beri kendimi daha iyi hissediyorum.",
+  "notes_tr": [
+   "Eş anlamlısı: seitdem.",
+   "Eylem sürüyor — şimdiki zaman.",
+   "Dativ alan edat: seit einem Jahr — bir yıldır."
+  ],
+  "_src": "eed1a46a",
+  "_src_reader": "be303895"
+ },
+ "conjunction-021": {
+  "translation_tr": "-er -mez / -ar -maz, -ir -mez / -ır -maz",
+  "example_tr": "Eve varır varmaz seni ararım.",
+  "_src": "498b3051",
+  "_src_reader": "2c1d7eb2"
+ },
+ "conjunction-022": {
+  "translation_tr": "-diği sürece / -dığı sürece (bütün o süre boyunca)",
+  "example_tr": "Ateşin olduğu sürece yatakta kalman gerek.",
+  "notes_tr": [
+   "İki eylem de aynı süre boyunca sürer.",
+   "“-ene kadar” (bir ana kadar) — bis."
+  ],
+  "_src": "0a92cfd4",
+  "_src_reader": "db8a5509"
+ },
+ "conjunction-023": {
+  "translation_tr": "bu yüzden, böylece",
+  "example_tr": "Çok yağmur yağdı, bu yüzden maç iptal edildi.",
+  "notes_tr": [
+   "sodass ile başlayan kısım her zaman ikinci sırada gelir.",
+   "Amaç değil, sonuç (amaç — damit).",
+   "Ayrı da yazılabilir: so dass.",
+   "Karıştırılmamalı: so stark, dass … — bkz. so … dass."
+  ],
+  "_src": "9b5a6490",
+  "_src_reader": "c70a5b32"
+ },
+ "conjunction-024": {
+  "translation_tr": "-ene kadar / -ana kadar; -inceye kadar / -ıncaya kadar",
+  "example_tr": "Ben dönene kadar burada bekle.",
+  "notes_tr": [
+   "Almancada olumsuzluk yoktur, Türkçedeki “-ene kadar” gibi: bis ich zurückkomme — ben dönene kadar.",
+   "Edat: bis Montag — pazartesiye kadar."
+  ],
+  "_src": "36b15e4c",
+  "_src_reader": "b4409263"
+ },
+ "conjunction-025": {
+  "translation_tr": "-erken / -arken, -diği sırada / -dığı sırada; oysa, buna karşılık",
+  "example_tr": "Ben yemek yaparken o müzik dinliyor.",
+  "notes_tr": [
+   "Karşıtlık: Er ist ruhig, während sie viel redet.",
+   "Genitiv alan edat: während des Urlaubs — tatil sırasında."
+  ],
+  "_src": "16ef3eac",
+  "_src_reader": "ece0575e"
+ },
+ "conjunction-026": {
+  "translation_tr": "ya … ya; ya … ya da",
+  "example_tr": "Ya bugün gelirim ya da yarın.",
+  "notes_tr": [
+   "entweder kelimesinden sonra normal kelime sırası da olabilir: Entweder ich komme heute, oder …",
+   "Çoğu zaman yalnızca kelimeleri bağlar: entweder Tee oder Kaffee."
+  ],
+  "_src": "aee6748f",
+  "_src_reader": "e324f387"
+ },
+ "conjunction-027": {
+  "translation_tr": "ne … ne (de)",
+  "example_tr": "Ne kahve ne de çay içerim.",
+  "notes_tr": [
+   "Zaten olumsuzdur — nicht ve kein gerekmez."
+  ],
+  "_src": "f1e95df1",
+  "_src_reader": "17ff4d85"
+ },
+ "conjunction-028": {
+  "translation_tr": "hem … hem (de)",
+  "example_tr": "Partiye hem Anna hem de Tom geliyor.",
+  "notes_tr": [
+   "İki özneyle fiil genellikle çoğuldur: Anna und Tom kommen."
+  ],
+  "_src": "7b1d765e",
+  "_src_reader": "3712b58c"
+ },
+ "conjunction-029": {
+  "translation_tr": "yalnız … değil, … de / … da",
+  "example_tr": "Sadece İngilizce değil, İspanyolca da konuşuyor.",
+  "notes_tr": [
+   "sondern kelimesinden önce virgül konur."
+  ],
+  "_src": "d82a5041",
+  "_src_reader": "53e7efaa"
+ },
+ "conjunction-030": {
+  "translation_tr": "ne kadar … o kadar (-dikçe / -dıkça)",
+  "example_tr": "Ne kadar çok pratik yaparsam o kadar iyi konuşurum.",
+  "notes_tr": [
+   "desto yerine — umso.",
+   "Kısaca: Je früher, desto besser."
+  ],
+  "_src": "c94a4808",
+  "_src_reader": "53ff0361"
+ },
+ "conjunction-032": {
+  "translation_tr": "-diğinden / -dığından, mademki",
+  "example_tr": "Yağmur yağdığından evde kalıyoruz.",
+  "notes_tr": [
+   "Fiil yan cümlenin sonuna gider.",
+   "da ile kurulan yan cümle genellikle başta gelir, sebep çoğu zaman zaten bilinir. Yeni bir sebep daha çok weil ile verilir.",
+   "da zarfı: “orada, burada, o zaman”."
+  ],
+  "_src": "ea7389a1",
+  "_src_reader": "28563f72",
+  "see_also_tr": [
+   {
+    "id": "adverb-054",
+    "at": 1
+   }
+  ]
+ },
+ "conjunction-033": {
+  "translation_tr": "(bir şey) yapmadan, -meden / -madan; -meksizin / -maksızın",
+  "example_tr": "Tek kelime söylemeden çıkıp gitti.",
+  "notes_tr": [
+   "Yalnızca özne ana cümledekiyle aynıysa; değilse — ohne dass.",
+   "ohne edatı + Akkusativ: ohne Geld."
+  ],
+  "_src": "92ff51f7",
+  "_src_reader": "aa4b8a3e",
+  "see_also_tr": [
+   {
+    "id": "preposition-013",
+    "at": 1
+   }
+  ]
+ },
+ "conjunction-034": {
+  "translation_tr": "-mek yerine / -mak yerine",
+  "example_tr": "Çalışmak yerine uyuyor.",
+  "notes_tr": [
+   "anstatt … zu — aynı anlam.",
+   "Yalnızca özne ana cümledekiyle aynıysa; değilse — anstatt dass.",
+   "statt edatı + Genitiv: statt des Autos."
+  ],
+  "_src": "2d081b4f",
+  "_src_reader": "e3720d93",
+  "see_also_tr": [
+   {
+    "id": "preposition-029",
+    "at": 1
+   }
+  ]
+ },
+ "conjunction-035": {
+  "translation_tr": "-mesi şartıyla / -ması şartıyla, eğer",
+  "example_tr": "Hava elverirse cumartesi mangal yapacağız.",
+  "notes_tr": [
+   "falls / wenn gibi, ama “… şartıyla” anlamı taşır."
+  ],
+  "_src": "033c5438",
+  "_src_reader": "20fa2a61"
+ },
+ "conjunction-036": {
+  "translation_tr": "ayrıca, ve; -er -mez / -ar -maz, -ir -mez / -ır -maz",
+  "example_tr": "Una, şekere ve ayrıca iki yumurtaya ihtiyacımız var.",
+  "notes_tr": [
+   "“-er -mez” (= sobald) anlamında — fiil sonda: Sowie ich zu Hause bin, rufe ich dich an.",
+   "Karşılaştırma ayrı yazılır: so groß wie."
+  ],
+  "_src": "24524f3b",
+  "_src_reader": "15714356"
+ },
+ "conjunction-037": {
+  "translation_tr": "oysa, hâlbuki",
+  "example_tr": "Erkek kardeşim sporu sever, oysa ben okumayı tercih ederim.",
+  "notes_tr": [
+   "“oysa” anlamındaki während gibi karşıtlık bildirir.",
+   "wohingegen ile başlayan kısım her zaman ikinci sırada gelir."
+  ],
+  "_src": "3ecf0cf7",
+  "_src_reader": "3fb43399"
+ },
+ "conjunction-038": {
+  "translation_tr": "-diği hâlde / -dığı hâlde, -mesine rağmen / -masına rağmen",
+  "example_tr": "Yorgun olduğu hâlde çalışmaya devam etti.",
+  "notes_tr": [
+   "obwohl ile aynı anlamda."
+  ],
+  "_src": "eb946bc2",
+  "_src_reader": "7d29823b"
+ },
+ "conjunction-039": {
+  "translation_tr": "hele ki, özellikle -diği için / -dığı için",
+  "example_tr": "Bugün evde kalıyoruz, hele ki dışarısı çok soğuk.",
+  "notes_tr": [
+   "Bir sebep daha, özellikle önemli bir sebep ekler.",
+   "Ayrıca: zumal da, zumal wenn.",
+   "zumal zarfı “özellikle”: Ich esse gern Obst, zumal im Sommer — özellikle yazın."
+  ],
+  "_src": "95d26479",
+  "_src_reader": "c58a7ee8"
+ },
+ "conjunction-040": {
+  "translation_tr": "eğer, -mesi şartıyla / -ması şartıyla; -diği ölçüde / -dığı ölçüde (insofern als)",
+  "example_tr": "Bir aksilik olmazsa saat sekizde orada oluruz.",
+  "notes_tr": [
+   "Çoğu zaman insofern als “-diği ölçüde”: Ich verstehe ihn, insofern als ich das Gleiche erlebt habe.",
+   "“Eğer” anlamında daha çok sofern ya da falls kullanılır.",
+   "insofern zarfı “bu bakımdan”."
+  ],
+  "_src": "54c92ef4",
+  "_src_reader": "7af51a40"
+ },
+ "conjunction-041": {
+  "translation_tr": "… şöyle dursun, hele hele (… hiç)",
+  "example_tr": "Yemek pişirmeye vaktim yok, hamur işi yapmak şöyle dursun.",
+  "notes_tr": [
+   "Yalnızca olumsuz ya da sınırlayıcı bir ifadeden sonra.",
+   "denn atılabilir: geschweige zum Backen.",
+   "Yan cümle başlatabilir: geschweige denn, dass …"
+  ],
+  "_src": "34e1892e",
+  "_src_reader": "0fab7003"
+ },
+ "conjunction-042": {
+  "translation_tr": "o kadar, daha da (+ karşılaştırma derecesi)",
+  "example_tr": "Bizimle geliyor musun? Daha da iyi!",
+  "notes_tr": [
+   "Daha çok je … desto çiftinde: Je mehr ich übe, desto besser spreche ich.",
+   "umso ile aynı anlamda; tek başına daha çok Umso besser! denir."
+  ],
+  "_src": "6d27141f",
+  "_src_reader": "15cddcf1"
+ },
+ "conjunction-043": {
+  "translation_tr": "-medikçe / -madıkça, meğer ki (außer wenn); -mesi dışında / -ması dışında (außer dass)",
+  "example_tr": "Uzun süre çalışmam gerekmedikçe akşamları kahve içmem.",
+  "notes_tr": [
+   "außer dass — “-mesi dışında”: Die Reise war schön, außer dass es oft geregnet hat.",
+   "wenn olmadan — normal kelime sırası: …, außer du hast keine Zeit.",
+   "Bağlaç olarak hâli değiştirmez: Niemand außer ich selbst hat einen Schlüssel (edat daha yaygındır: niemand außer mir).",
+   "außer edatı + Dativ."
+  ],
+  "_src": "efd8e9b6",
+  "_src_reader": "2f1c573b"
+ },
+ "conjunction-044": {
+  "translation_tr": "gerçi … ama, her ne kadar … -se de / -sa da",
+  "example_tr": "Gerçi yağmur yağıyordu ama yine de yürüyüşe çıktık.",
+  "notes_tr": [
+   "aber yerine — doch ya da jedoch; jedoch kelimesinden sonra genellikle hemen fiil gelir: …, jedoch gingen wir …",
+   "zwar cümle ortasında da durabilir: Es regnete zwar, aber …",
+   "und zwar — yani, şöyle ki (zwar zarfı)."
+  ],
+  "_src": "c6fd0965",
+  "_src_reader": "81c39fd8"
+ },
+ "conjunction-045": {
+  "translation_tr": "(bir şey) kadar …, (bir şey) gibi …",
+  "example_tr": "Yeni dizüstü bilgisayar neredeyse bir tablet kadar hafif.",
+  "notes_tr": [
+   "Olumsuz: nicht so … wie — … kadar … değil.",
+   "doppelt so groß wie — (bir şeyden) iki kat büyük.",
+   "Eşitsizlik — Komparativ + als: größer als ich.",
+   "genauso … wie, ebenso … wie — aynı anlam, vurgulu (“tıpkı … kadar”): Das Essen ist genauso gut wie früher.",
+   "sowie (bitişik) — başka bir bağlaç: “ayrıca, ve”.",
+   "Ayrıca bkz. so ve wie."
+  ],
+  "_src": "e3460f7b",
+  "_src_reader": "18e1e801"
+ },
+ "conjunction-046": {
+  "translation_tr": "sanki, -miş gibi / -mış gibi",
+  "example_tr": "Beni tanımıyormuş gibi davranıyor.",
+  "notes_tr": [
+   "Genellikle Konjunktiv: hätte, wäre (ya da habe, sei); bazen Indikativ da.",
+   "Daha kısa: als + hemen fiil: als würde er mich nicht kennen.",
+   "als wenn — aynı anlam.",
+   "Ünlem: Als ob ich das nicht wüsste! — Sanki bunu bilmiyormuşum gibi!"
+  ],
+  "_src": "95e798ee",
+  "_src_reader": "4d970f33"
+ },
+ "conjunction-047": {
+  "translation_tr": "(biri) -meden / -madan, (biri) -meksizin / -maksızın",
+  "example_tr": "Kimse fark etmeden odadan çıktı.",
+  "notes_tr": [
+   "Özne aynıysa daha çok ohne … zu: Sie ging, ohne sich umzudrehen.",
+   "Çoğu zaman Konjunktiv II: …, ohne dass es jemand bemerkt hätte.",
+   "ohne edatı + Akkusativ."
+  ],
+  "_src": "08363485",
+  "_src_reader": "098d4180"
+ },
+ "conjunction-048": {
+  "translation_tr": "(birinin) -mesi yerine / -ması yerine",
+  "example_tr": "Çocukların yardım etmesi yerine her şeyi tek başıma yapmak zorundayım.",
+  "notes_tr": [
+   "Özne aynıysa daha çok (an)statt … zu: Anstatt zu helfen, sitzt er …",
+   "statt dass — aynı anlamda, ama eskimekte olan bir kullanım."
+  ],
+  "_src": "28ad58d0",
+  "_src_reader": "5aaf90cd"
+ },
+ "conjunction-049": {
+  "translation_tr": "öyle (o kadar) … ki",
+  "example_tr": "O kadar yorgundum ki otobüste uyuyakaldım.",
+  "notes_tr": [
+   "dass kelimesinden önce virgül konur, dass ile başlayan kısım ikinci sırada gelir.",
+   "sodass (ya da so dass; virgül so kelimesinden önce) — “bu yüzden, böylece”, vurgusuz: Es regnete, sodass wir zu Hause blieben.",
+   "Ayrıca so viel / so sehr …, dass. Sıfat olmadan — “öyle bir şekilde … ki”: Er erklärte es so, dass sogar die Kinder es kapierten."
+  ],
+  "_src": "a14dd4bb",
+  "_src_reader": "0b2ee860"
+ },
+ "conjunction-050": {
+  "translation_tr": "bir yandan …, öte yandan",
+  "example_tr": "Bir yandan seyahat etmek istiyorum, öte yandan param yok.",
+  "notes_tr": [
+   "Bunlar zarftır: kısmın başında hemen fiil gelir; cümle ortasında da durabilirler.",
+   "Başka biçimler: anderseits, andrerseits.",
+   "andererseits tek başına da kullanılır: “öte yandan” — bkz. andererseits zarfı."
+  ],
+  "_src": "28ece3d0",
+  "_src_reader": "047c1ea8",
+  "see_also_tr": [
+   {
+    "id": "adverb-121",
+    "at": 2
+   }
+  ]
+ },
+ "conjunction-051": {
+  "translation_tr": "henüz … -mişti ki / -mıştı ki, -er -mez / -ar -maz",
+  "example_tr": "Henüz oturmuştum ki otobüs hareket etti.",
+  "notes_tr": [
+   "Ayrıca kaum …, da: Kaum hatte ich mich hingesetzt, da fuhr der Bus los (da kelimesinden sonra hemen fiil gelir).",
+   "kaum dass “… -er -mez” — eskimekte olan.",
+   "Karıştırılmamalı: kaum älter als ich — benden pek büyük sayılmaz (kaum zarfı)."
+  ],
+  "_src": "90610a3c",
+  "_src_reader": "9e45ad79",
+  "see_also_tr": [
+   {
+    "id": "adverb-040",
+    "at": 2
+   }
+  ]
+ },
+ "conjunction-052": {
+  "translation_tr": "bir …, bir … (bazen …, bazen …)",
+  "example_tr": "Bir yağmur yağıyor, bir güneş açıyor.",
+  "notes_tr": [
+   "mal — einmal kelimesinin kısa biçimi.",
+   "mal so, mal so — bir öyle, bir böyle.",
+   "mal parçacığı (Komm mal her!) — başka bir kelime."
+  ],
+  "_src": "b2766702",
+  "_src_reader": "a2bce9f5"
+ },
+ "conjunction-053": {
+  "translation_tr": "kâh …, kâh … (bir …, bir …)",
+  "example_tr": "Çocuk kâh bu oyuncağı istiyordu, kâh şunu.",
+  "notes_tr": [
+   "Konuşmada daha çok mal … mal.",
+   "bald zarfı “yakında”."
+  ],
+  "_src": "200fa8d3",
+  "_src_reader": "6a3029ad"
+ },
+ "conjunction-054": {
+  "translation_tr": "kısmen …, kısmen",
+  "example_tr": "Misafirlerin kimi arabayla, kimi trenle geldi.",
+  "notes_tr": [
+   "Teils, teils! — Hem evet hem hayır (şöyle böyle).",
+   "teils tek başına — “kısmen”: teils schwer verletzt."
+  ],
+  "_src": "c2b1588a",
+  "_src_reader": "7246a1f1"
+ },
+ "conjunction-055": {
+  "translation_tr": "o kadar (daha), daha da",
+  "example_tr": "Ne kadar erken yola çıkarsak o kadar iyi.",
+  "notes_tr": [
+   "Çift bağlaç: je + karşılaştırma derecesi …, umso / desto + karşılaştırma derecesi. je kelimesinden sonra fiil sona gider: Je mehr ich lerne, umso mehr weiß ich."
+  ],
+  "_src": "36dfb047",
+  "_src_reader": "e7305acb"
+ },
+ "conjunction-056": {
+  "translation_tr": "-diği kadarıyla / -dığı kadarıyla; ne kadar … -se de / -sa da",
+  "example_tr": "Bildiğim kadarıyla müze pazartesileri kapalı.",
+  "notes_tr": [
+   "En sık: soviel ich weiß — bildiğim kadarıyla; soviel ich sehe — gördüğüm kadarıyla.",
+   "Ne kadar … -se de: Soviel sie auch verdient, am Monatsende ist das Geld weg. — Ne kadar kazansa da ay sonunda para bitiyor. Böyle bir kısımdan sonra ana cümlede kelime sırası normaldir.",
+   "1996 yazım reformundan önceki metinlerde (örneğin Grimm masallarında) soviel — “o kadar” da demektir: dreimal soviel — üç kat fazla, soviel Geld — o kadar para. Bugün bu anlamda ayrı yazılır: so viel."
+  ],
+  "_src": "43cf9e67",
+  "_src_reader": "175a68d6"
+ },
+ "conjunction-057": {
+  "translation_tr": "veya, daha doğrusu, yani; sırasıyla",
+  "example_tr": "Bu kitabı okudum, daha doğrusu okumaya başladım.",
+  "notes_tr": [
+   "Kısaltma: bzw. (yazıda çok sık). “Sırasıyla” anlamında — resmî dil.",
+   "Sırasıyla: Kaffee und Tee kosten 3 bzw. 2 Euro. — Kahve ve çay sırasıyla 3 ve 2 avro.",
+   "Kelime sırasını değiştirmez."
+  ],
+  "_src": "300a97c8",
+  "_src_reader": "be839718"
+ },
+ "conjunction-058": {
+  "translation_tr": "ama, ancak",
+  "example_tr": "Gelmek istedi ama vakti yoktu.",
+  "notes_tr": [
+   "doch kelimesinden önce virgül (ya da nokta: Doch …) konur.",
+   "Bağlaç olarak — kelime sırası aber sonrasındaki gibi: …, doch er hatte keine Zeit. doch kelimesinden hemen sonra fiil geliyorsa (Doch wollte er nicht warten), doch ilk sıradaki zarftır, anlamı aynı: “ancak”.",
+   "Parçacık olarak — “-sene, işte” (Komm doch!); olumsuz soruya cevap olarak — “hayır, öyle değil!”, “tabii ki!” (Doch!)."
+  ],
+  "_src": "5dd3565a",
+  "_src_reader": "af724b2c"
+ },
+ "conjunction-059": {
+  "translation_tr": "(yaz.) -meden önce / -madan önce, -mezden evvel / -mazdan evvel",
+  "example_tr": "Hava kararmadan yola çıkmalıyız.",
+  "notes_tr": [
+   "= bevor, ama daha çok yazı dilinde. Fiil sonda: ehe er ging. noch ehe — daha … -meden: Noch ehe ich antworten konnte, war er weg.",
+   "lieber ile — “… -mektense”: Ehe ich nachgebe, kündige ich lieber. — Boyun eğmektense istifa ederim.",
+   "Eskimiş kısa biçim — eh: eh ich gehe — ben gitmeden önce. Karıştırılmamalı: die Ehe — evlilik."
+  ],
+  "_src": "b787f14b",
+  "_src_reader": "08c5a488"
+ }
+}

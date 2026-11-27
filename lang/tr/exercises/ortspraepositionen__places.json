@@ -22,5 +22,597 @@
   "at": [
    "6475c6b4"
   ]
+ },
+ {
+  "en": "hinein · into it, inside",
+  "ru": "hinein · внутрь",
+  "tr": "hinein · içine",
+  "at": [
+   "4b77ac31"
+  ]
+ },
+ {
+  "en": "direkt dran · right to the edge",
+  "ru": "direkt dran · вплотную",
+  "tr": "direkt dran · tam bitişiğine",
+  "at": [
+   "6b8b6649"
+  ]
+ },
+ {
+  "en": "drauf · onto it",
+  "ru": "drauf · на само место",
+  "tr": "drauf · tam o yere, üstüne",
+  "at": [
+   "995634ba"
+  ]
+ },
+ {
+  "en": "nur bis dorthin · just up to it, not into or onto it",
+  "ru": "nur bis dorthin · только до места, не внутрь и не на него",
+  "tr": "nur bis dorthin · yalnızca oraya kadar, içine ya da üstüne değil",
+  "at": [
+   "609820eb"
+  ]
+ },
+ {
+  "en": "heraus · out of it, from inside",
+  "ru": "heraus · изнутри",
+  "tr": "heraus · içinden",
+  "at": [
+   "865616d1"
+  ]
+ },
+ {
+  "en": "nur von dort · from there, not from inside",
+  "ru": "nur von dort · просто оттуда, не изнутри",
+  "tr": "nur von dort · sadece oradan, içinden değil",
+  "at": [
+   "48e21091"
+  ]
+ },
+ {
+  "en": "house (building)",
+  "ru": "дом (здание)",
+  "tr": "ev (bina)",
+  "at": [
+   "3ee9c866"
+  ]
+ },
+ {
+  "en": "cinema",
+  "ru": "кинотеатр",
+  "tr": "sinema",
+  "at": [
+   "62b4354a"
+  ]
+ },
+ {
+  "en": "theatre",
+  "ru": "театр",
+  "tr": "tiyatro",
+  "at": [
+   "e320cd06"
+  ]
+ },
+ {
+  "en": "restaurant",
+  "ru": "ресторан",
+  "tr": "restoran",
+  "at": [
+   "61d07882"
+  ]
+ },
+ {
+  "en": "museum",
+  "ru": "музей",
+  "tr": "müze",
+  "at": [
+   "941fd2e9"
+  ]
+ },
+ {
+  "en": "hotel",
+  "ru": "гостиница",
+  "tr": "otel",
+  "at": [
+   "ad67f2d1"
+  ]
+ },
+ {
+  "en": "office",
+  "ru": "офис",
+  "tr": "ofis",
+  "at": [
+   "9c6cac50"
+  ]
+ },
+ {
+  "en": "supermarket (inside)",
+  "ru": "супермаркет (внутри)",
+  "tr": "süpermarket (içinde)",
+  "at": [
+   "d11781f2"
+  ]
+ },
+ {
+  "en": "hospital",
+  "ru": "больница",
+  "tr": "hastane",
+  "at": [
+   "33433894"
+  ]
+ },
+ {
+  "en": "city centre",
+  "ru": "центр города",
+  "tr": "şehir merkezi",
+  "at": [
+   "3a942a12"
+  ]
+ },
+ {
+  "en": "kitchen",
+  "ru": "кухня",
+  "tr": "mutfak",
+  "at": [
+   "4b37c7f2"
+  ]
+ },
+ {
+  "en": "town (going into town)",
+  "ru": "город (поехать в город, в центр)",
+  "tr": "şehir (şehre, merkeze gitmek)",
+  "at": [
+   "69f3fb3b"
+  ]
+ },
+ {
+  "en": "Not a room, but the same pattern: in der · in die · aus der.",
+  "ru": "Не помещение, но так же: in der · in die · aus der.",
+  "tr": "Kapalı bir yer değil ama kalıp aynı: in der · in die · aus der.",
+  "at": [
+   "71d905e4"
+  ]
+ },
+ {
+  "en": "bed (in bed)",
+  "ru": "кровать (в постели)",
+  "tr": "yatak (yatakta)",
+  "at": [
+   "9cbc3234"
+  ]
+ },
+ {
+  "en": "Berlin",
+  "ru": "Берлин",
+  "tr": "Berlin",
+  "at": [
+   "aca922c3"
+  ]
+ },
+ {
+  "en": "Paris",
+  "ru": "Париж",
+  "tr": "Paris",
+  "at": [
+   "4f50a54a"
+  ]
+ },
+ {
+  "en": "Japan",
+  "ru": "Япония",
+  "tr": "Japonya",
+  "at": [
+   "1a7b796d"
+  ]
+ },
+ {
+  "en": "Italy",
+  "ru": "Италия",
+  "tr": "İtalya",
+  "at": [
+   "ca4f0e85"
+  ]
+ },
+ {
+  "en": "Austria",
+  "ru": "Австрия",
+  "tr": "Avusturya",
+  "at": [
+   "a5a5e306"
+  ]
+ },
+ {
+  "en": "London",
+  "ru": "Лондон",
+  "tr": "Londra",
+  "at": [
+   "8cde1b7d"
+  ]
+ },
+ {
+  "en": "Switzerland",
+  "ru": "Швейцария",
+  "tr": "İsviçre",
+  "at": [
+   "e088fa10"
+  ]
+ },
+ {
+  "en": "Turkey",
+  "ru": "Турция",
+  "tr": "Türkiye",
+  "at": [
+   "6934076e"
+  ]
+ },
+ {
+  "en": "USA",
+  "ru": "США",
+  "tr": "ABD",
+  "at": [
+   "506d43fa"
+  ]
+ },
+ {
+  "en": "beach",
+  "ru": "пляж",
+  "tr": "plaj",
+  "at": [
+   "f34587fc"
+  ]
+ },
+ {
+  "en": "sea (at the seaside)",
+  "ru": "море (на побережье)",
+  "tr": "deniz (deniz kenarında)",
+  "at": [
+   "cdb10c30"
+  ]
+ },
+ {
+  "en": "lake (on the shore)",
+  "ru": "озеро (на берегу)",
+  "tr": "göl (göl kıyısında)",
+  "at": [
+   "1017de1f"
+  ]
+ },
+ {
+  "en": "river (on the bank)",
+  "ru": "река (на берегу)",
+  "tr": "nehir (nehir kıyısında)",
+  "at": [
+   "6e63e247"
+  ]
+ },
+ {
+  "en": "window",
+  "ru": "окно",
+  "tr": "pencere",
+  "at": [
+   "77d89b26"
+  ]
+ },
+ {
+  "en": "table (sitting at it)",
+  "ru": "стол (сесть за стол)",
+  "tr": "masa (masaya oturmak)",
+  "at": [
+   "ad99a82b"
+  ]
+ },
+ {
+  "en": "the Baltic Sea (at the seaside)",
+  "ru": "Балтийское море (на побережье)",
+  "tr": "Baltık Denizi (deniz kenarında)",
+  "at": [
+   "a77d4022"
+  ]
+ },
+ {
+  "en": "sports ground",
+  "ru": "спортивная площадка",
+  "tr": "spor sahası",
+  "at": [
+   "0464bc97"
+  ]
+ },
+ {
+  "en": "playground",
+  "ru": "детская площадка",
+  "tr": "çocuk parkı",
+  "at": [
+   "93b40c90"
+  ]
+ },
+ {
+  "en": "market, marketplace",
+  "ru": "рынок",
+  "tr": "pazar",
+  "at": [
+   "bf6cd6d3"
+  ]
+ },
+ {
+  "en": "balcony",
+  "ru": "балкон",
+  "tr": "balkon",
+  "at": [
+   "4795721d"
+  ]
+ },
+ {
+  "en": "street (on the road, not an address)",
+  "ru": "улица (на дороге, не адрес)",
+  "tr": "sokak (sokakta, adres değil)",
+  "at": [
+   "e3e98df9"
+  ]
+ },
+ {
+  "en": "island",
+  "ru": "остров",
+  "tr": "ada",
+  "at": [
+   "9ee4d97c"
+  ]
+ },
+ {
+  "en": "mountain (at/to the top)",
+  "ru": "гора (на вершине, на вершину)",
+  "tr": "dağ (zirvede, zirveye)",
+  "at": [
+   "61ce32ae"
+  ]
+ },
+ {
+  "en": "the countryside",
+  "ru": "сельская местность (за городом, в деревне)",
+  "tr": "kırsal bölge (şehir dışında, köyde)",
+  "at": [
+   "1d8f5300"
+  ]
+ },
+ {
+  "en": "roof",
+  "ru": "крыша",
+  "tr": "çatı",
+  "at": [
+   "0aa3ca29"
+  ]
+ },
+ {
+  "en": "toilet, bathroom",
+  "ru": "туалет",
+  "tr": "tuvalet",
+  "at": [
+   "a5c76de9"
+  ]
+ },
+ {
+  "en": "Ausnahme · it's a room, but German says auf (or zu), not in",
+  "ru": "Ausnahme · это комната, но говорят auf (или zu), не in",
+  "tr": "Ausnahme · bu bir oda, ama auf (ya da zu) denir, in değil",
+  "at": [
+   "a46202e2"
+  ]
+ },
+ {
+  "en": "doctor",
+  "ru": "врач",
+  "tr": "doktor",
+  "at": [
+   "9b669de9"
+  ]
+ },
+ {
+  "en": "hairdresser",
+  "ru": "парикмахер",
+  "tr": "kuaför",
+  "at": [
+   "2225b688"
+  ]
+ },
+ {
+  "en": "(my) grandma",
+  "ru": "бабушка (моя)",
+  "tr": "büyükannem",
+  "at": [
+   "fd68312e"
+  ]
+ },
+ {
+  "en": "Lisa",
+  "ru": "Лиза",
+  "tr": "Lisa",
+  "at": [
+   "273a616c"
+  ]
+ },
+ {
+  "en": "H&M (shop)",
+  "ru": "H&M (магазин)",
+  "tr": "H&M (mağaza)",
+  "at": [
+   "5db7fe08"
+  ]
+ },
+ {
+  "en": "picnic",
+  "ru": "пикник",
+  "tr": "piknik",
+  "at": [
+   "6d42f353"
+  ]
+ },
+ {
+  "en": "training session",
+  "ru": "тренировка",
+  "tr": "antrenman",
+  "at": [
+   "71865953"
+  ]
+ },
+ {
+  "en": "work",
+  "ru": "работа",
+  "tr": "iş",
+  "at": [
+   "e6eb671c"
+  ]
+ },
+ {
+  "en": "supermarket (by the supermarket, not inside)",
+  "ru": "супермаркет (у супермаркета, не внутри)",
+  "tr": "süpermarket (süpermarketin yanında, içinde değil)",
+  "at": [
+   "d11781f2"
+  ]
+ },
+ {
+  "en": "boss",
+  "ru": "начальница",
+  "tr": "patron (kadın)",
+  "at": [
+   "c11e3bd4"
+  ]
+ },
+ {
+  "en": "IKEA (shop)",
+  "ru": "Ikea (магазин)",
+  "tr": "Ikea (mağaza)",
+  "at": [
+   "f72a7fb5"
+  ]
+ },
+ {
+  "en": "exam",
+  "ru": "экзамен",
+  "tr": "sınav",
+  "at": [
+   "436f24ad"
+  ]
+ },
+ {
+  "en": "grandparents",
+  "ru": "бабушка и дедушка",
+  "tr": "büyükanne ve büyükbaba",
+  "at": [
+   "bee3b49a"
+  ]
+ },
+ {
+  "en": "party",
+  "ru": "вечеринка",
+  "tr": "parti",
+  "at": [
+   "55508f11"
+  ]
+ },
+ {
+  "en": "wedding",
+  "ru": "свадьба",
+  "tr": "düğün",
+  "at": [
+   "135954bd"
+  ]
+ },
+ {
+  "en": "forest, woods",
+  "ru": "лес",
+  "tr": "orman",
+  "at": [
+   "79f64a08"
+  ]
+ },
+ {
+  "en": "park",
+  "ru": "парк",
+  "tr": "park",
+  "at": [
+   "8eb17dfc"
+  ]
+ },
+ {
+  "en": "swimming pool",
+  "ru": "бассейн",
+  "tr": "yüzme havuzu",
+  "at": [
+   "5545f6ba"
+  ]
+ },
+ {
+  "en": "mountains (in the mountains)",
+  "ru": "горы (в горах)",
+  "tr": "dağlar (dağlarda)",
+  "at": [
+   "4565d9a4"
+  ]
+ },
+ {
+  "en": "Alps",
+  "ru": "Альпы",
+  "tr": "Alpler",
+  "at": [
+   "e925ec0d"
+  ]
+ },
+ {
+  "en": "Goethe Street (address)",
+  "ru": "улица Гёте (адрес)",
+  "tr": "Goethe Caddesi (adres)",
+  "at": [
+   "67187ccd"
+  ]
+ },
+ {
+  "en": "home (at, to, from home)",
+  "ru": "дом (дома / домой / из дома)",
+  "tr": "ev (evde / eve / evden)",
+  "at": [
+   "b3a1b4ab"
+  ]
+ },
+ {
+  "en": "station (meeting point, train)",
+  "ru": "вокзал (на вокзале: встреча, поезд)",
+  "tr": "gar (garda: buluşma, tren)",
+  "at": [
+   "405ac688"
+  ]
+ },
+ {
+  "en": "airport (flight, meeting point)",
+  "ru": "аэропорт (в аэропорту: рейс, встреча)",
+  "tr": "havalimanı (havalimanında: uçuş, buluşma)",
+  "at": [
+   "eddee1fe"
+  ]
+ },
+ {
+  "en": "bus / tram stop",
+  "ru": "остановка (автобуса, трамвая)",
+  "tr": "durak (otobüs, tramvay)",
+  "at": [
+   "6541dfb2"
+  ]
+ },
+ {
+  "en": "petrol station",
+  "ru": "заправка",
+  "tr": "benzin istasyonu",
+  "at": [
+   "db04e07a"
+  ]
+ },
+ {
+  "en": "checkout, till",
+  "ru": "касса",
+  "tr": "kasa",
+  "at": [
+   "7f1fd4f8"
+  ]
  }
 ]
