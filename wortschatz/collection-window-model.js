@@ -670,9 +670,12 @@
   // The AI part: users write their own request (which words, level, language) and paste this block after it.
   // 21.11.2026 (Alena): always in English (an AI reads it, not the user); the translations default to the language
   // chosen in the app; the limits (LIMIT) and otherMeanings are in it — exactly what the import takes.
-  const AI_LANGUAGE = { en: "English", ru: "Russian", pl: "Polish" };
+  // the language's English name for any language code (27.11.2026: a pack language needs no line here)
+  const aiLanguage = code => {
+    try { return new Intl.DisplayNames("en", { type: "language" }).of(code) || "English"; } catch (e) { return "English"; }
+  };
   const FORMAT_BLOCK = () => {
-    const lang = AI_LANGUAGE[D()?.getDisplayLang?.() || (RU() ? "ru" : "en")] || "English";
+    const lang = aiLanguage(D()?.getDisplayLang?.() || (RU() ? "ru" : "en"));
     const q = s => JSON.stringify(s);
     return `Format the words as a JSON list and answer with the list only - no other text.
 One object per word, like this:
