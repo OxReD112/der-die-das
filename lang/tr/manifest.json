@@ -2,7 +2,7 @@
  "lang": "tr",
  "name": "Türkçe",
  "format_version": 1,
- "version": "fb591cbe85fa",
+ "version": "d272ed8ca330",
  "source_commit": "dc73eb0623e4b3efa638752fb2ec583a55f492a2",
  "exercise_files": {
   "partikeln__sentences": {
@@ -14,7 +14,7 @@
    ],
    "de": "поле sentence записи-предка с «___»: в particles.<частица>.… — с подставленной частицей (как записан ключ: DOCH — ударное); в tasks[i] — с accept[0] (+ остальные accept в «  [+ …]»); в base.… — без пропуска; подписи PARTIKELN_FUNCTIONS — пусто",
    "pairs": 1982,
-   "done": 20
+   "done": 533
   },
   "artikel__words": {
    "source": "deutsch-home/Artikel/words.js",
@@ -134,13 +134,13 @@
    "source": "deutsch-home/wortschatz/example-senses.json",
    "key": "id",
    "items": 5475,
-   "done": 2356
+   "done": 4129
   }
  },
  "files": {
   "exercises/partikeln__sentences.json": {
    "items": 1982,
-   "done": 20
+   "done": 533
   },
   "exercises/artikel__words.json": {
    "items": 430,
@@ -188,7 +188,7 @@
   },
   "wortschatz/example-senses.json": {
    "items": 5475,
-   "done": 2356
+   "done": 4129
   },
   "worterbuch/german-adjective-adverbs.json": {
    "items": 603,
@@ -228,7 +228,7 @@
   "worterbuch/german-nouns.json": {
    "items": 5377,
    "texts": 13411,
-   "done": 1875
+   "done": 5377
   },
   "worterbuch/german-numerals.json": {
    "items": 24,
