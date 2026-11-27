@@ -107,7 +107,6 @@
   // only, so it also takes jedoch, allein, allerdings. eure / euren … only as a whole word (not Europa, euretwegen).
   const DETERMINER_STEM = /^(?:mein|dein|sein|ihr|unser|euer|eure[mnrs]?(?![\p{L}])|kein|dies|jen|all|jed|solch|welch)/u;
   // Dative singular determiners (dem, einem, diesem, meinem …): a dative object, not an accusative one.
-  const DATIVE_SINGULAR_DETERMINERS = ["dem","einem","diesem","jenem","jedem","keinem","meinem","deinem","seinem","ihrem","unserem","eurem"];
   // The forms of the relative pronoun by the gender of its noun (and the plural): nominative / accusative / dative. No genitive: the rules
   // that read it (relativeFitsNoun, derRoleByVerbPlace) decide what a tapped der / die / das / den / dem / denen is — dessen / deren never come here.
   const RELATIVE_PRONOUN_FORMS = {der:['der','den','dem'],die:['die','der'],das:['das','dem'],plural:['die','denen']};
@@ -353,7 +352,6 @@
   const PRONOUN_OBJECTS = ["es","das","nichts","alles"];
   // a determiner that can open an accusative object (sich die Hände waschen) / one that is never nominative (sich einen Stuhl stellen)
   const ACCUSATIVE_CAPABLE_DETERMINER = /^(?:den|das|die|einen|ein|eine|keinen|kein|keine|(?:mein|dein|sein|ihr|unser|eur)(?:en|e)?|(?:dies|jen)(?:en|e|es))$/u;
-  const NEVER_NOMINATIVE_DETERMINER = /^(?:den|einen|keinen|(?:mein|dein|sein|ihr|unser|eur|dies|jen)en)$/u;
   // a word opening an object clause after a comma (Sie konnte sich nicht vorstellen, wie …)
   const OBJECT_CLAUSE_OPENERS = ["wie","dass","daß","was","ob","wer","wo","wann","warum","welche","welcher","welches"];
   // a relative pronoun that can be an object of its clause (die Hütte, die man sich vorstellen kann)
@@ -1853,7 +1851,6 @@ function apostropheText(text) {
     // compound of known parts (Rock-täsch-lein — Rock + Tasche). Two different bases (Gräbelein: Grab / Graben; Gäblein: Gabe / Gabel) or
     // two splits — no card: «not found» is better than a guess. A whole word known to a dictionary never comes here (Mädchen, Brötchen,
     // Häuschen keep their cards). A stem in -e is no diminutive (the -e drops before the suffix: Kupferstechen).
-    const DIMINUTIVE = /^(.+?)(elein|erchen|lein|chen)(s)?$/u;
     // The diminutive card of w: its base noun (or a compound base) and «Verkleinerung von …»; null for two bases or none.
     async function diminutive(w, ctx) {
       if (!/(?:chen|lein)s?$/u.test(w)) return null;
@@ -2003,6 +2000,97 @@ function apostropheText(text) {
   // line, presentation, expressions, the directional particle, the steps after the choice, the pipeline, sense steps, pair senses, the
   // small steps, references and old spellings, the entry resolvePublic.
   function create(entries, fallback, {diagnostics = window.BibliothekAnalysisDiagnostics, light = []} = {}) {
+    // Case by form: every reading of a closed-class form from the declension tables of our cards — the articles and the pronoun
+    // cards (personal, possessive, demonstrative, relative, interrogative, indefinite). A reading is {case, gender, number, family, use}:
+    // family — the card's word (a pronoun card of an article's word: «der·Pronomen», «ein·Pronomen», «kein·Pronomen»); use — "noun"
+    // (before a noun: an article table, «Vor einem Nomen», a «Deklination» by gender), "alone" («Ohne Nomen» …) or "person" (one «Form»
+    // column: ich / mich / mir; alle, man, wer). Nothing is guessed: a form a table does not list has no reading. The caller chooses
+    // among the readings (der — Nom. m., Dat. f., Gen. f., Gen. Pl.).
+    const CASE_TABLE_COLUMNS = Object.freeze({Maskulin:{gender:"masculine",number:"singular"},Feminin:{gender:"feminine",number:"singular"},
+      Neutrum:{gender:"neuter",number:"singular"},Plural:{gender:null,number:"plural"},Form:{gender:null,number:null}});
+    const caseTable = new Map();
+    { const articleWords = new Set(entries.filter(e => e?.type === "article").map(e => e.word));
+      for (const entry of entries) {
+        if (!(entry?.type === "article" || entry?.type === "Pronomen") || !Array.isArray(entry.forms)) continue;
+        const family = entry.type === "Pronomen" && articleWords.has(entry.word) ? `${entry.word}·Pronomen` : entry.word;
+        for (const table of entry.forms) {
+          const columns = (table?.columns || []).map(label => CASE_TABLE_COLUMNS[label] || null);
+          const use = columns.every(c => c && c.number === null) ? "person" : /^Ohne\b/u.test(String(table?.label || "")) ? "alone" : "noun";
+          for (const [row, cells] of Object.entries(table?.rows || {})) {
+            const grammaticalCase = articleCases[row];
+            if (!grammaticalCase || !Array.isArray(cells)) continue;
+            cells.forEach((cell, i) => { if (!columns[i]) return;
+              for (const form of String(cell ?? "").split("/").map(x => norm(x.trim())).filter(x => x && x !== "—")) {
+                const rows = caseTable.get(form) || [];
+                rows.push(Object.freeze({case:grammaticalCase, ...columns[i], family, use}));
+                caseTable.set(form, rows);
+              }
+            });
+          }
+        }
+      } }
+    // The readings of a form (see above); [] for a form of no table.
+    const caseReadings = form => caseTable.get(norm(form)) || [];
+    // The forms with a reading that fits every filter given ({families, cases, genders, numbers, uses} — lists; an absent filter fits
+    // all), read once per filter.
+    const formsWithCache = new Map();
+    function formsWith(filter) {
+      const key = JSON.stringify(filter);
+      if (!formsWithCache.has(key)) {
+        const fits = (list, value) => !list || list.includes(value);
+        formsWithCache.set(key, Object.freeze(new Set([...caseTable].filter(([, rows]) => rows.some(r => fits(filter.families, r.family) &&
+          fits(filter.cases, r.case) && fits(filter.genders, r.gender) && fits(filter.numbers, r.number) && fits(filter.uses, r.use))).map(([form]) => form))));
+      }
+      return formsWithCache.get(key);
+    }
+    // The determiner families of the old word lists, by name (each place keeps the families its list had).
+    const POSSESSIVE_FAMILIES = ["mein","dein","sein","ihr","unser","euer"];
+    const DETERMINER_FAMILIES = Object.freeze({
+      core: ["der","ein","kein",...POSSESSIVE_FAMILIES,"dieser","jener"],
+      withJeder: ["der","ein","kein",...POSSESSIVE_FAMILIES,"dieser","jener","jeder"],
+      // (after a two-way preposition: also the der-words with a der table — in demselben Ort, in welchem, mit manchem)
+      phrase: ["der","ein","kein",...POSSESSIVE_FAMILIES,"dieser","jener","jeder","welcher","mancher","solcher","derselbe","derjenige"],
+      // (den / meinen … + a noun: the case by the noun's number — enDeterminerCase)
+      en: ["der","kein",...POSSESSIVE_FAMILIES,"dieser"],
+      // (step B, advisor 27.11: the case of a form does not depend on a list — every determiner with a table in our cards)
+      all: ["der","ein","kein",...POSSESSIVE_FAMILIES,"dieser","jener","jeder","welcher","mancher","solcher","derselbe","derjenige","irgendein",
+        "jeglicher"]});
+    // A test over a set of forms, written as the old regular expressions were used (the exact lower-case form).
+    const formTest = forms => Object.freeze({test: w => forms.has(w)});
+    // dem, einem, keinem, meinem … diesem, jenem, jedem: the dative singular masculine / neuter
+    const DATIVE_SINGULAR_DETERMINERS = Object.freeze([...formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["dative"],
+      numbers:["singular"], genders:["masculine","neuter"]})]);
+    // den, einen, keinen, meinen …, diesen, jenen, jeden, welchen …: never a nominative (the accusative masculine; den / -en also the dative
+    // plural)
+    const NEVER_NOMINATIVE_FORMS = formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["accusative"], genders:["masculine"]});
+    const NEVER_NOMINATIVE_DETERMINER = formTest(NEVER_NOMINATIVE_FORMS);
+    // (the set before step B, without jeden / manchen / welchen …: for the «sich + object group» sign — jeden Freitag is an accusative of time,
+    // and the time words of that place are narrower than data/noun-classes.json; advisor 27.11)
+    const NEVER_NOMINATIVE_CORE_DETERMINER = formTest(formsWith({families:DETERMINER_FAMILIES.core, uses:["noun"], cases:["accusative"],
+      genders:["masculine"]}));
+    // dem / der, einem / einer … demselben, welchem, manchem: the dative singular; after a two-way preposition «Dativ» (the feminine der /
+    // einer … is also a genitive — after the preposition it is the dative: in der Stadt)
+    const PHRASE_DATIVE_DET = formTest(formsWith({families:DETERMINER_FAMILIES.phrase, uses:["noun"], cases:["dative"], numbers:["singular"]}));
+    // die, das, einen, eine, ein, diese, dieses, meine …, keine, alle: an accusative of no dative form (after a two-way preposition the
+    // nominative is out) — «Akkusativ»
+    const PHRASE_ACCUSATIVE_FORMS = new Set([...formsWith({families:["der","ein","kein",...POSSESSIVE_FAMILIES,"dieser"], uses:["noun"], cases:["accusative"]}),
+      ...formsWith({families:["alle"], cases:["accusative"]})].filter(f => !caseReadings(f).some(r => r.case === "dative" && r.use !== "person") &&
+      // (as the old list: not the bare kein / mein … — twoWayCaseVisible counts them, the case stays to the noun; ein is in)
+      !["kein",...POSSESSIVE_FAMILIES].includes(f)));
+    const PHRASE_ACCUSATIVE_DET = formTest(PHRASE_ACCUSATIVE_FORMS);
+    // den, meinen …, keinen, diesen, welchen …: the accusative masculine or the dative plural (both readings) — the noun decides
+    // (enDeterminerCase)
+    const PHRASE_EN_DET = formTest(new Set([...formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["accusative"], genders:["masculine"]})]
+      .filter(f => formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["dative"], numbers:["plural"]}).has(f))));
+    // den, einen, keinen, meinen … diesen, jenen, jeden, welchen …: the accusative masculine (also the dative plural -en)
+    const ACC_DET = NEVER_NOMINATIVE_DETERMINER;
+    // der, einer, keiner, meiner … dieser, jener, jeder, welcher …: the dative feminine (also the genitive feminine / plural)
+    const FEM_DAT_FORMS = formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["dative"], genders:["feminine"]});
+    const FEM_DAT_DET = formTest(FEM_DAT_FORMS);
+    // mir, dir, ihm, ihnen — «Dativ»; mich, dich, ihn — «Akkusativ»: a personal pronoun form of one case (uns, euch, ihr, sie, es have two)
+    const OBJECT_PRONOUN_CASE = Object.freeze(Object.fromEntries([...formsWith({families:["ich","du","er","sie","es","wir","ihr","Sie"], uses:["person"],
+      cases:["dative","accusative"]})].map(f => [f, new Set(caseReadings(f).filter(r => r.use === "person").map(r => r.case))])
+      .filter(([, cases]) => cases.size === 1).map(([f, cases]) => [f, cases.has("dative") ? "Dativ" : "Akkusativ"])));
     // the rows of one verb in the list of pairs by its base, built once per list object
     const vpIndexCache = new WeakMap(), pairRowIndex = new WeakMap();
     // The rows of the list of pairs for one verb base (sich and case ignored), from a per-list index.
@@ -4445,7 +4533,8 @@ function apostropheText(text) {
             const objectGroup=objectGroupWith(ACCUSATIVE_CAPABLE_DETERMINER);
             // (an own accusative card is set aside only before a determiner that is never nominative — sich einen Stuhl ans Fenster
             // stellte —; a group that may be the subject after sich keeps it: Östlich des Dorfes befindet sich das Oratoire)
-            const objectGroupStrict=objectGroupWith(NEVER_NOMINATIVE_DETERMINER);
+            // (not jeden / manchen …: an accusative of time — sich jeden Freitag treffen —, see NEVER_NOMINATIVE_CORE_DETERMINER)
+            const objectGroupStrict=objectGroupWith(NEVER_NOMINATIVE_CORE_DETERMINER);
             // An own «sich X» card states its case — reflexive_case "Dativ" (sich leisten, sich vorstellen «представлять себе») is not taken with
             // mich / dich (Darf ich mich vorstellen?), an accusative one not with mir / dir (Ich höre mir das Konzert an — not sich anhören
             // «звучать») nor before a possible object group (stellte sich einen Stuhl ans Fenster — not sich stellen «встать»); the plain card of
@@ -4770,7 +4859,7 @@ function apostropheText(text) {
         const strongEs = d < index-1 && /es$/u.test(norm(tokens[index-1][0]));
         const neuterOnly = dn === "das" || /^(?:dies|jen|jed|all|welch|manch|solch)es$/u.test(dn) || /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)$/u.test(dn) && strongEs;
         // dem Fischen, beim Fischen: an outside neuter noun of this form is the noun from the infinitive itself
-        const neuterDative = sameOuterNeuter && /^(?:dem|diesem|jenem|jedem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem)$/u.test(dn);
+        const neuterDative = sameOuterNeuter && DATIVE_SINGULAR_DETERMINERS.includes(dn);
         if (!neuterOnly && !neuterDative) return null;
       }
       // (in the pair choice the noun from the verb of an own noun with the same headword needs our own verb card — the outside one carries the
@@ -6212,7 +6301,7 @@ function apostropheText(text) {
           if (i+1 >= tokens.length || GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,i,i+1))) return [];
           // (nor in a subordinate clause — Bevor ich geh mach das Licht aus, Wenn ich komm mach bitte auf without the comma: the verb ends that
           // clause; a subordinator of any kind — before ich it is no preposition or adverb)
-          if (i >= 2 && norm(tokens[i-1][0]) === "ich" && (isSubordinator(norm(tokens[i-2][0])) || /^(?:wie|wo|was|wer|wann|warum)$/u.test(norm(tokens[i-2][0])))) return [];
+          if (i >= 2 && norm(tokens[i-1][0]) === "ich" && (isPureSubordinator(norm(tokens[i-2][0])) || /^(?:bevor|als|ob|solange|bis|damit|während|wie|wo|was|wer|wann|warum)$/u.test(norm(tokens[i-2][0])))) return [];
           const near = [i-1,i+1].some(k => k >= 0 && k < tokens.length && norm(tokens[k][0]) === "ich" &&
             !GAP_SENTENCE_DASHES_ELLIPSIS.test(tokenGap(sentence,tokens,Math.min(k,i),Math.max(k,i))));
           return near ? (separatedForms.get(w + "e") || []).filter(p => !(separatedForms.get(w) || []).some(q => q.entry.id === p.entry.id && q.prefix === p.prefix)) : []; })();
@@ -6586,7 +6675,7 @@ function apostropheText(text) {
             const finiteWord = k => /^\p{Ll}/u.test(tokens[k][0]) && verbRowsAt(tokens,k).some(x => x.kind === "finite") &&
               !(verbAnalyses.get(wordAt(tokens,k)) || []).some(x => x.kind === "participle");
             // (an opener that is also a preposition / article — bis, während, seit, da, der … — needs the verb at the end of its part)
-            const sureOpener = (isPureSubordinator(opener) || /^(?:als|ehe|weshalb|weswegen|warum|wieso)$/u.test(opener));
+            const sureOpener = (isPureSubordinator(opener) || /^(?:als|ob|bevor|ehe|solange|weshalb|weswegen|warum|wieso)$/u.test(opener));
             if ((sureOpener || (opensSubordinatePartAt(sentence,tokens,b) || opener === "so" && wordAt(tokens,(b+1)) === "wie") && finiteWord(a-1))) {
               if (b === 0) return false;
               let c = b - 1; while (c > 0 && !sign(c-1, c)) c--;
@@ -6636,7 +6725,8 @@ function apostropheText(text) {
       // (a determiner that is never nominative opens no subject — stieß seinen Gesellen an after a comma; after the verb first in its part an
       // object pronoun right after the verb leaves no room for the subject before the group — »…« reichte ihm die Gans hin; sie after the verb
       // with a nominal subject before the verb is the object — Berlusconi hielt sie … zusammen)
-      const NEVER_NOMINATIVE = /^(?:einen|seinen|meinen|deinen|unseren|euren|diesen|jenen|keinen|jeden|welchen)$/u;
+      // (not den: den + a plural noun is the dative — sich den Medien … zu präsentieren)
+      const NEVER_NOMINATIVE = {test: w => w !== "den" && NEVER_NOMINATIVE_DETERMINER.test(w)};
       // (the subject before the verb is sure only when it cannot be the accusative — der / ein (kein, mein …) + a masculine noun of our cards,
       // adjectives between; a name, die / das + noun may be the object: Die Frau sah sie, Das Kind rief sie, Maria sah sie — sie is no sure
       // accusative)
@@ -7149,8 +7239,8 @@ function apostropheText(text) {
     // (a word set read through subordinatorKind: has(w) — the coordinators, doch, als and the pure subordinators; with the place of the
     // word, has(w, sentence, tokens, j), a subordinator of another reading too when its verb-final sign holds — seitdem, soviel, bevor, ob)
     const PART_BOUNDARY_FIXED = new Set([...CLAUSE_COORDINATORS, "doch", "als"]);
-    const partBoundaryWord = (w, sentence, tokens, j) => PART_BOUNDARY_FIXED.has(w) || subordinatorKind(w) === "pure" ||
-      typeof sentence === "string" && tokens?.[j] && subordinatorKind(w) === "sign" && subordinatorReadingsRead.has(w) && subordinatorOpensAt(sentence,tokens,j);
+    const partBoundaryWord = (w, sentence, tokens, j) => PART_BOUNDARY_FIXED.has(w) || isPureSubordinator(w) ||
+      typeof sentence === "string" && tokens?.[j] && subordinatorKind(w) === "sign" && subordinatorOtherReadings.has(w) && subordinatorOpensAt(sentence,tokens,j);
     const PART_BOUNDARY_WORDS = Object.freeze({has: partBoundaryWord});
     // (während and damit end a werden / zu / Futur II group by themselves too; um / ohne / statt / anstatt … zu a zu group)
     const WERDEN_BOUNDARIES = Object.freeze({has: (w, ...at) => PART_BOUNDARY_WORDS.has(w, ...at) || w === "während" || w === "damit"});
@@ -7594,7 +7684,7 @@ function apostropheText(text) {
           if (!finiteAfter) return true;
         }
         const next = norm(tokens[k+1][0]);
-        if (subjectWords.has(next) || (isPureSubordinator(next) || ['auch','wie','wo','wohin','woher','was','wer','warum','weshalb','wann','da','damit','während','sondern','denn'].includes(next))) return false;
+        if (subjectWords.has(next) || (isPureSubordinator(next) || ['ob','bevor','auch','wie','wo','wohin','woher','was','wer','warum','weshalb','wann','da','damit','während','sondern','denn'].includes(next))) return false;
         // Two participles joined by und / oder before a closing werden (gequält und getötet werden, begonnen und noch in diesem Jahr
         // abgeschlossen werden, gestürzt und ermordet worden): one passive group, not two clauses.
         // (a word no own card knows with the shape of a participle — particle + ge…t / ge…en, …iert, ge…t of an own verb's stem: modernisiert,
@@ -9604,7 +9694,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (also under haben / hätte — daß er fast den Spieß hätte fallen lassen und ihm der Angstschweiß … ausbrach:
           // the subject may follow a dative — ihm der Angstschweiß —, the part closes with a finite form that is no infinitive)
           if(!independent && next<tokens.length && words(end+1)==='und' && (outer===null||outer<l) && l===end && connected(end+1,next)) {
-            if((isPureSubordinator(words(next)) || ['während','damit','wo','wie'].includes(words(next))))independent=true;
+            if((isPureSubordinator(words(next)) || ['ob','bevor','während','damit','wo','wie'].includes(words(next))))independent=true;
             else {
               let t=next;while(t+1<tokens.length&&connected(t,t+1)&&!['und','oder','aber','denn','sondern'].includes(words(t+1)))t++;
               // Can token j be a subject (a personal pronoun, determiner + capital, a capital word)?
@@ -9782,7 +9872,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const closedSubject=members.length===1&&m0.start===m0.end&&LASSEN_CAN_SUBJECTS.has(m0.word)&&(m0.word!=='es'||thatClause)&&!(m0.word==='das'&&relative);
             // (such a subordinate part with no accusative object — «можно», no slash: the form proves it —
             // die sich leicht anwenden lässt, wie sich hier Abhilfe schaffen lässt; lässt sich die Haare schneiden keeps its object)
-            const relativeOpener=opener!==null&&/^(?:der|die|das|welcher|welche|welches)$/u.test(words(opener));
             // (one noun group at most besides the opener — the subject; two — dass sich der Junge die Haare schneiden lässt — hold an object)
             // (the adverb of ease is no condition any more — no separate accusative object is the sign)
             // (a von + agent group keeps «позволить (себя)» — der sich von Freunden unterstützen ließ: a person lets it happen)
@@ -10205,9 +10294,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // place / direction case: nach, zu, zum, zur are a direction always, the others none — null, as when the determiner shows no
     // case (in München, in Gefahr).
     // (also demselben / jedem / welchem / manchem / solchem / demjenigen — in demselben Ort)
-    const PHRASE_DATIVE_DET = /^(?:dem|der|einem|einer|meinem|meiner|deinem|deiner|seinem|seiner|ihrem|ihrer|unserem|unserer|eurem|eurer|diesem|dieser|jenem|jener|keinem|keiner|demselben|derselben|demjenigen|derjenigen|jedem|jeder|welchem|welcher|manchem|mancher|solchem|solcher)$/u;
-    const PHRASE_ACCUSATIVE_DET = /^(?:die|das|einen|eine|ein|diese|dieses|meine|deine|seine|ihre|unsere|eure|keine|alle)$/u;
-    const PHRASE_EN_DET = /^(?:den|meinen|deinen|seinen|ihren|unseren|euren|keinen|diesen)$/u;
     // Case of a group after a preposition, data warmed before the sync rules, and the sign of a direction. twoWayCaseVisible /
     // prepositionPhraseCase: the case a two-way preposition's group shows by its form; enDeterminerCase / bareDativePlural: the case of
     // den + noun and of a bare noun by its number; warmZuTransitivity, warmWordClasses, warmPhraseNouns: facts read once before the sync
@@ -10680,7 +10766,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           !(hasSeinCard && DIRECTION.test(norm(tokens[j+1]?.[0] ?? ""))) ? j : 0; };
       // Is token k a masculine singular own noun (der, the word itself)?
       const masculineSingular = k => (forms.get(norm(tokens[k][0])) || []).some(e => e.type === "Nomen" && norm(e.word) === norm(tokens[k][0]) && /^der\b/u.test(String(e.article || "")));
-      const ACC_DET = /^(?:den|einen|keinen|meinen|deinen|seinen|ihren|unseren|euren|diesen|jenen|jeden)$/u;
       const NEUTRAL_DET = /^(?:die|das|eine|keine|meine|deine|seine|ihre|unsere|eure|diese|jene)$/u;
       // ein / kein / sein … without an ending — a neuter object (er zog sein Schwert, ein langes Bandmaß) or a
       // masculine subject (… kam ein Wolf): an object only with a known subject and not before an own masculine noun.
@@ -11927,7 +12012,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const MODAL_PREPOSITION = {test:w => /^(?:in|an|auf|über|unter|nach|zu|aus|von|mit|bei|durch|für|gegen|ohne|um|vor|hinter|neben|zwischen|seit|bis|bey)$/u.test(basePreposition(w))};
     const MODAL_PERSONAL = /^(?:ich|du|er|sie|es|wir|ihr|man|mich|dich|ihn|uns|euch|mir|dir|ihm|ihnen|dies|das|was|wer|jemand|niemand|alles|nichts|etwas)$/u;
     const MODAL_OBJECT_ONLY = /^(?:mich|dich|ihn|einen|den|(?:der|die|das|den|dem|des)selben?)$/u;
-    const MODAL_CLAUSE_OPENER = {test: w => isPureSubordinator(w) || /^(?:als|da|wo|wohin|woher|aber|sondern|denn|so|und|oder|der|die|das|dem|den|welche[rnms]?|ich|du|er|sie|es|wir|ihr|man|was|wie|damit|während|um|doch|dann|bis|seit|sonst|ehe)$/u.test(w)};
+    const MODAL_CLAUSE_OPENER = {test: w => isPureSubordinator(w) || /^(?:als|ob|bevor|seitdem|da|wo|wohin|woher|aber|sondern|denn|so|und|oder|der|die|das|dem|den|welche[rnms]?|ich|du|er|sie|es|wir|ihr|man|was|wie|damit|während|um|doch|dann|bis|seit|sonst|ehe)$/u.test(w)};
     // A modal with a direction and no infinitive (Ich muss nach Hause, Die Kinder müssen fort, muss ein neuer Berg her): «Modal +
     // Richtung»; null when an infinitive or an object stands in the part.
     async function modalDirectionGroup(word, context, candidates = []) {
@@ -12739,7 +12824,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             (teAdverb(tokens[k+1][0]) || teSeriesAttribute(tokens[k+1][0], ending))) continue;
           return -1;
         }
-        if ((isPureSubordinator(w) || ['sowie','aber','sondern','wie'].includes(w))) return -1;
+        if ((isPureSubordinator(w) || ['ob','sowie','aber','sondern','wie'].includes(w))) return -1;
         if (/^\p{Lu}/u.test(t)) { if (grammaticalWords.has(w) && !pending) return -1; pending = true; state.clean = false; continue; }
         // a dative personal pronoun or sich right after the determiner is part of the frame — die ihm bekannten Gegenden,
         // das ihm verhasste Papsttum, eine sich entwickelnde Krankheit, die sich nähernden Schritte; not after a comma (the relative: …,
@@ -13324,7 +13409,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const rows = der ? forms.flatMap(f => [...(articleFeatures(der)?.get(f) || [])]) : [];
         return rows.length ? rows.map(f => ({...f,declension:"weak"})) : null;
       }
-      return null;
+      // (step B, advisor 27.11: the other determiners with a table in our cards — solcher, derselbe, derjenige, jeglicher like der,
+      // irgendein like ein: in solchem Fall, mit demselben Zug, in irgendeinem Haus)
+      const declension = {solcher:"weak",derselbe:"weak",derjenige:"weak",jeglicher:"weak",irgendein:"mixed"};
+      const rows = caseReadings(key).filter(r => r.use === "noun" && declension[r.family]);
+      return rows.length ? rows.map(r => ({case:r.case, ...(r.gender ? {gender:r.gender} : {}), number:r.number, declension:declension[r.family]})) : null;
     }
     const nounGenders = ARTICLE_GENDER;
     // the word opens quoted speech (»Au, …, — »Ja, …); its capital proves no noun.
@@ -14113,7 +14202,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const before = rest.slice(0,rest.length - chunk.length);
           // Is x a subordinating conjunction?
           const subWord = x => (forms.get(x) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
-            (isPureSubordinator(x) || ['wie','als','während','bis','damit','ehe','seit'].includes(x));
+            (isPureSubordinator(x) || ['wie','als','ob','bevor','solange','seitdem','während','bis','damit','ehe','seit'].includes(x));
           // (also a two-word opener: so dass, als ob, auch wenn, ohne dass, anstatt dass)
           const subordinating = subWord(first) || /^(?:so|als|auch|ohne|anstatt|statt|selbst)$/u.test(first) && subWord(norm(words[1] || ''));
           // (also a relative clause opened after an earlier comma: ein Fluss, der im Département Oise, in der Region Picardie verläuft)
@@ -14154,7 +14243,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const x = norm(tokens[i][0]);
           if (!['und','oder','aber'].includes(norm(tokens[i-1][0]))) continue;
           if ((forms.get(x) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
-            (isPureSubordinator(x) || ['während','damit','als','wie'].includes(x))) return endFiniteMemo = false;
+            (isPureSubordinator(x) || ['ob','bevor','während','damit','als','wie'].includes(x))) return endFiniteMemo = false;
         }
         if (!noun || !verbRows(end).some(r => r.kind === 'infinitive' || r.kind === 'participle')) return endFiniteMemo = true;
         // (a modal / werden before the comma owns an infinitive at the end: Im Mittelpunkt sollen der Austausch von Beschäftigten, die
@@ -14312,7 +14401,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const kind = subordinatorKinds.get(w);
       return kind === "pure" && subordinatorOtherReadings.has(w) ? "sign" : kind;
     }
-    // Read the external readings of the pure subordinators of a sentence once per word (subordinatorKind).
+    // Read the external readings of the pure subordinators of a sentence once per word, before its taps (subordinatorKind): the word
+    // lists read the words of their own sentence, so a kind is the same there for every tap (no lookup for a sentence without one).
     const subordinatorReadingsRead = new Set();
     async function readSubordinatorReadings(sentence) {
       for (const t of sharedTokens(String(sentence || ""),'readSubordinatorReadings')) {
@@ -14325,22 +14415,26 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           subordinatorOtherReadings.add(w);
       }
     }
-    // Is the word a subordinator of the cards (with or without the verb-final sign)?
     const isSubordinator = w => subordinatorKind(w) !== null;
     // Does the word open a part after a comma (a pure subordinator of the cards or COMMA_PART_OPENER_WORDS)?
     const commaPartOpener = w => isPureSubordinator(w) || COMMA_PART_OPENER_WORDS.has(w);
     // Is the word a subordinator of the cards that is nothing else (dass, weil, wenn, obwohl …)?
-    // (by the own cards: the word lists that read a subordinator without its place — the place-bound sign of another reading is the
-    // core's, subordinatorOpensAt / PART_BOUNDARY_WORDS)
-    const isPureSubordinator = w => (subordinatorKind(w), subordinatorKinds.get(w) === "pure");
+    // (pure by every source — the word lists that read a subordinator without its place; a subordinator with another reading counts there
+    // only when the old list of that place had it, written out at the place: ob, als, bevor, seit … — subordinatorOpensAt reads its sign)
+    const isPureSubordinator = w => subordinatorKind(w) === "pure";
     // Does the word open a subordinate part by itself: a subordinator, a question word or a relative word?
-    const opensSubordinatePart = w => isSubordinator(w) || isQuestionWord(w) || RELATIVE_WORDS.has(w);
+    // A part opener read by its word alone, where its place cannot be checked (the parts as words: the imperative, the ich short form):
+    // a pure subordinator, a question or relative word, and the subordinators with another reading the old lists of these places had —
+    // not da, außer, insofern, soviel, zumal (Da, schaut mal! is an imperative). To read at the place (subordinatorOpensAt) once these
+    // functions have the tokens.
+    const SUBORDINATORS_BY_WORD = new Set(["ob","als","bevor","ehe","bis","seit","seitdem","solange","während","damit"]);
+    const opensSubordinatePartByWord = w => isPureSubordinator(w) || SUBORDINATORS_BY_WORD.has(w) || isQuestionWord(w) || RELATIVE_WORDS.has(w);
     // A comma-enclosed inserted clause opened by a relative word, wie / wo / als / während or a pure subordinator of the cards
     // (, wie …, / , der …, / , obwohl …,), for matchAll.
     const INSERTED_CLAUSE_SPAN = new RegExp(`,\\s*(?:wie|während|als|wo|${[...RELATIVE_WORDS, ...entries.filter(e => e?.type === "Konjunktion" &&
       conjunctionKind(e) === "subordinating").map(e => norm(e.word)).filter(w => subordinatorKind(w) === "pure").flatMap(w => [w, oldSpelling(w)])].join("|")})\\b[^,;:.!?]*,`, "gu");
     // The words that open an inserted clause (, der …, / , wenn …,): a relative word, wo / wie / was / wer, a subordinator of the cards.
-    const insertedClauseOpener = w => RELATIVE_WORDS.has(w) || /^(?:wo|wie|was|wer)$/u.test(w) || isSubordinator(w);
+    const insertedClauseOpener = w => RELATIVE_WORDS.has(w) || /^(?:wo|wie|was|wer)$/u.test(w) || isPureSubordinator(w) || SUBORDINATORS_BY_WORD.has(w);
     // The same three at the word's place (token i): a subordinator with another reading only with its sign (subordinatorOpensAt); als
     // always, as the word lists of main (Da bin ich mir sicher — da is the adverb there).
     const subordinatorAt = (sentence, tokens, i) => !!tokens[i] && (norm(tokens[i][0]) === "als" || subordinatorOpensAt(sentence,tokens,i));
@@ -14524,7 +14618,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let start = k;
       start = partStartAt(sentence,tokens,start,byMarks(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL));
       if (end > k+2 && start < k && WAEHREND_GENITIVE.test(norm(next)) &&
-          start > 0 && (isPureSubordinator(norm(tokens[start][0])) || /^(?:wie|als|da|wo|warum|weshalb|wann|was|wer|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?)$/u.test(norm(tokens[start][0]))) && /^\p{Ll}/u.test(tokens[end-1][0]) &&
+          start > 0 && (isPureSubordinator(norm(tokens[start][0])) || /^(?:wie|ob|bevor|als|da|wo|warum|weshalb|wann|was|wer|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?)$/u.test(norm(tokens[start][0]))) && /^\p{Ll}/u.test(tokens[end-1][0]) &&
           (verbAnalyses.get(norm(last[0])) || []).some(r => r.kind === 'finite' && AUXILIARY_AND_MODAL_WORD.test(r.base || ''))) last = tokens[end-1];
       const f = norm(last[0]);
       return SEPARABLE_PARTICIPLE_PARTICLES.split('|').includes(f) ||
@@ -14536,6 +14630,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (the part of damit stops before a subordinator without its comma: rechnet damit dass sie kommt, hört damit auf wenn …)
       let end = partEnd(sentence,tokens,k);
       // (a subordinator, a question word or welche- of its own part)
+      // (any subordinator of the cards ends the part of the word — as main since package 1: a stop is the safe side here, the word only
+      // shortens the part whose end is the sign; … nur insofern etwas geändert hat, als …)
       const stopAt = i => isSubordinator(norm(tokens[i][0])) || isQuestionWord(norm(tokens[i][0])) || /^welche[rsnm]?$/u.test(norm(tokens[i][0]));
       for (let i = k+1; i <= end; i++) if (stopAt(i)) { end = i-1; break; }
       if (!(end > k && (finiteVerbToken(tokens[end]) || joinedFiniteToken(tokens[end])))) return false;
@@ -14592,7 +14688,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (an object clause after the verb is no more words of the part: Leute, die fragten wer es wäre)
         // (two verbs joined by und / oder and nothing else — der kam und ging: both may be the end of a relative clause; the window,
         if (end === index+3 && ['und','oder'].includes(norm(tokens[index+2][0])) && verbRowsAt(tokens,end).length) return null;
-        if (end > index+1 && !(isPureSubordinator(norm(tokens[index+2][0])) || ['wer','was','wie','wo'].includes(norm(tokens[index+2][0])))) return 'demonstrative';
+        if (end > index+1 && !(isPureSubordinator(norm(tokens[index+2][0])) || ['wer','was','wie','wo','ob'].includes(norm(tokens[index+2][0])))) return 'demonstrative';
       }
       // (a part ending (no finite verb right after the word) in zu + infinitive: das is its object — das zu vertuschen; der / die — not sure)
       if (norm(tokens[end-1]?.[0] || '') === 'zu' || verbRowsAt(tokens,end).some(r => r.zu)) return norm(tokens[index][0]) === 'das' ? 'demonstrative' : null;
@@ -14601,7 +14697,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!afterComma) return null;
       if (joinedSeparableOnly(tokens,index+1)) return 'relative';
       // (a verb alone after the comma: a relative only after a noun that fits it — …, der fragte, wer; not Die Potters, das stimmt; ich hoffe nur, das reicht)
-      if (finite(index+1) && (end === index+1 || (isPureSubordinator(norm(tokens[index+2][0])) || ['wer','was','wie','wo'].includes(norm(tokens[index+2][0]))))) {
+      if (finite(index+1) && (end === index+1 || (isPureSubordinator(norm(tokens[index+2][0])) || ['wer','was','wie','wo','ob'].includes(norm(tokens[index+2][0]))))) {
         let c = index; if (c > 0 && /^\s+$/u.test(tokenGap(sentence,tokens,c-1,c))) c--;
         const head = tokens[c-1]?.[0] || '', hk = norm(head), w = norm(tokens[index][0]);
         const nouns = /^\p{Lu}/u.test(head) ? (forms.get(hk) || []).filter(e => e.type === 'Nomen') : [];
@@ -14704,7 +14800,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // opener is a member or a clause of its own and ends the walk (die Hunde im Hofe, die Tauben …; seinem Lebensraum, der Prärie, und
       // seinen Warnrufen, die …), and so does a list end with und / oder (Österreich, der Schweiz, Italien, Skandinavien und Osteuropa teil);
       // a verb at the end of a part reached — no decision)
-      const OPENS_OWN = {test: w => isPureSubordinator(norm(w)) || /^(?:der|die|das|den|dem|des|ein\p{Ll}*|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|euer\p{Ll}*|eur\p{Ll}*|und|oder|sowie|sondern|wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|als|ohne|um|statt|anstatt)$/iu.test(w)};
+      const OPENS_OWN = {test: w => isPureSubordinator(norm(w)) || /^(?:der|die|das|den|dem|des|ein\p{Ll}*|kein\p{Ll}*|mein\p{Ll}*|dein\p{Ll}*|sein\p{Ll}*|ihr\p{Ll}*|unser\p{Ll}*|euer\p{Ll}*|eur\p{Ll}*|und|oder|sowie|sondern|wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|als|ob|bevor|ohne|um|statt|anstatt)$/iu.test(w)};
       // an inserted relative clause on the way — a part opened by a lowercase der / die / das / den / dem / denen / deren /
       // dessen (or a preposition + one of them) and verb-last by finiteAtPartEnd, the sign the relative rule reads — is stepped over:
       // Kinder, die Hunde, die bellten, fürchteten, … and Kinder, die Hunde, die Harry hatte, fürchteten, … (the walk goes on to
@@ -14736,7 +14832,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // fürchteten wie die Pest / fürchteten und mieden —: no decision. Right after the word.)
         if (k > 0 || stepped) { const e2 = partEnd(sentence,tokens,e+1);
           if (/^\p{Ll}/u.test(tokens[e+1][0]) && rowsAt(e+1).some(r => r.kind === 'finite') && verbSecondTail(tokens,e+1,e2,rowsAt) === 'continues') break; }
-        if (k > 0 && OPENS_OWN.test(tokens[e+1][0]) || k === 0 && (isPureSubordinator(tokens[e+1][0]) || /^(?:wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|als|ohne|um|statt|anstatt)$/u.test(tokens[e+1][0]))) break;
+        if (k > 0 && OPENS_OWN.test(tokens[e+1][0]) || k === 0 && (isPureSubordinator(tokens[e+1][0]) || /^(?:wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|als|ob|bevor|ohne|um|statt|anstatt)$/u.test(tokens[e+1][0]))) break;
         const e2 = partEnd(sentence,tokens,e+1);
         // (a part with und / oder ends the list: the walk stops there; right after the word its verb at the end still decides —
         // die Nüsse, Äpfel und Birnen kaufte; further on it is the end of the list, not the relative clause — Österreich, der Schweiz,
@@ -16122,7 +16218,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Other groups are objects or attributes (der Inhalt der Kunde).
     function subordinateOpener(tokens, start) {
       return start > 0 && ((forms.get(norm(tokens[start-1][0])) || []).some(e => e.type === 'Konjunktion' && conjunctionKind(e) === 'subordinating') ||
-        (isPureSubordinator(norm(tokens[start-1][0])) || ['als','während','damit'].includes(norm(tokens[start-1][0]))));
+        (isPureSubordinator(norm(tokens[start-1][0])) || ['als','ob','bevor','während','damit'].includes(norm(tokens[start-1][0]))));
     }
     // Does the group at det stand in a place of the subject in its part (start..end) relative to the finite verb?
     function subjectGroupPlaced(det, finite, start, end, subordinate) {
@@ -17363,6 +17459,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const {tokens,index,start} = f;
       const prepositions = new Set(["in","an","auf","über","unter","vor","hinter","neben","zwischen","für","durch","gegen","ohne","um","mit","bei","von","zu","aus","nach","seit"]);
       const accusativePronouns = new Set(["mich","dich","ihn","etwas","nichts"]);
+      // (no jeden: jeden Tag / jeden Morgen is an accusative of time, not an object of the participle)
       const accusativeDeterminers = new Set(["den","einen","meinen","deinen","seinen","ihren","unseren","euren","keinen","diesen","jenen"]);
       const accusative = f.clauseIndices.some(i => i !== index && !(i > start && prepositions.has(norm(tokens[i-1][0]))) &&
         (accusativePronouns.has(norm(tokens[i][0])) || accusativeDeterminers.has(norm(tokens[i][0])) && (() => {
@@ -18077,7 +18174,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // the word right before: a title (with its point), a chain of titles, an initial
       const m = /(?:^|[^\p{L}])([\p{L}]+)(\.?)\s+$/u.exec(before); if (!m) return result;
       const prev = m[1], dot = m[2] === ".", key = norm(prev);
-      const beforePrev = before.slice(0, m.index + (m[0].length - m[0].trimStart().length));
       let kind = null;
       if (dot && NAME_TITLE_ABBREVIATIONS.has(key)) kind = "abbreviation";
       else if (dot && TITLE_ABBREVIATIONS.has(key) && /(?:^|\s)(?:Dr|Prof)\.\s+(?:\p{L}+\.\s+)*$/u.test(before)) kind = "abbreviation";
@@ -19545,15 +19641,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // does not contradict the list (Ich warte auf dem Bahnsteig is no link).
     // Marks the card only: verb «Verb · auf + Akkusativ», preposition
     // «Präposition · warten + auf + Akkusativ», highlight verb … preposition.
-    const objectCase = {dem:'Dativ',einem:'Dativ',keinem:'Dativ',meinem:'Dativ',deinem:'Dativ',seinem:'Dativ',ihrem:'Dativ',unserem:'Dativ',
-      eurem:'Dativ',diesem:'Dativ',jenem:'Dativ',welchem:'Dativ',mir:'Dativ',dir:'Dativ',ihm:'Dativ',ihnen:'Dativ',
-      einen:'Akkusativ',keinen:'Akkusativ',meinen:'Akkusativ',deinen:'Akkusativ',seinen:'Akkusativ',unseren:'Akkusativ',euren:'Akkusativ',
-      diesen:'Akkusativ',jenen:'Akkusativ',mich:'Akkusativ',dich:'Akkusativ',ihn:'Akkusativ'};
-    // (a case shown by the article after the preposition — der / einer / dieser … Dativ (auf der anderen Seite),
-    // die / das / eine / diese … Akkusativ; den, ein, a bare noun stay open)
-    const determinedCase = {der:'Dativ',einer:'Dativ',keiner:'Dativ',meiner:'Dativ',deiner:'Dativ',seiner:'Dativ',ihrer:'Dativ',unserer:'Dativ',
-      eurer:'Dativ',dieser:'Dativ',jener:'Dativ',jeder:'Dativ',die:'Akkusativ',das:'Akkusativ',eine:'Akkusativ',keine:'Akkusativ',meine:'Akkusativ',
-      deine:'Akkusativ',seine:'Akkusativ',ihre:'Akkusativ',unsere:'Akkusativ',eure:'Akkusativ',diese:'Akkusativ',jene:'Akkusativ',jedes:'Akkusativ'};
+    // (step B, advisor 27.11: from the case core, every determiner with a table) dem, einem … welchem, manchem: «Dativ»; mir, dir, ihm, ihnen
+    // «Dativ», mich, dich, ihn «Akkusativ» (OBJECT_PRONOUN_CASE); einen, meinen … diesen, welchen: «Akkusativ» — not den, which stays open
+    // with ein and a bare noun (den Kindern)
+    const objectCase = Object.freeze({...Object.fromEntries([...formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["accusative"],
+      genders:["masculine"]})].filter(f => f !== "den").map(f => [f,"Akkusativ"])), ...Object.fromEntries(DATIVE_SINGULAR_DETERMINERS.map(f => [f,"Dativ"])),
+      ...OBJECT_PRONOUN_CASE});
+    // (a case shown by the article after the preposition — der / einer / dieser … Dativ (auf der anderen Seite), die / das / eine / diese …
+    // Akkusativ: a feminine, neuter or plural accusative of no dative form; den, ein / kein / mein …, a bare noun stay open)
+    const determinedCase = Object.freeze({...Object.fromEntries([...formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["accusative"]})]
+      .filter(f => !caseReadings(f).some(r => r.use === "noun" && (r.case === "dative" || r.gender === "masculine" && r.case === "accusative")) &&
+        !["ein","kein","irgendein",...POSSESSIVE_FAMILIES].includes(f)).map(f => [f,"Akkusativ"])),
+      ...Object.fromEntries([...FEM_DAT_FORMS].map(f => [f,"Dativ"]))});
     // words for the pair's «no_object» and the direction sign
     const PREPOSITION_TOKEN = {test:w => /^(?:an|auf|in|über|unter|vor|hinter|neben|zwischen|mit|von|zu|aus|bei|nach|seit|für|gegen|ohne|um|durch|bis|ab|außer|gegenüber|wegen|trotz|während|statt|als|wie)$/u.test(basePreposition(w))};
     const GENITIVE_DETERMINER = /^(?:des|der|aller|eines|einer|dieses|dieser|jenes|jener|seines|seiner|ihres|ihrer|unseres|unserer|meines|meiner|deines|deiner|eures|eurer|keines|keiner)$/u;
@@ -19563,7 +19662,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const DIRECTION_BEFORE_PREPOSITION = wordClass("direction-adverb");
     // time-before-da-form — with a time noun of data/noun-classes.json: the word that makes the da(r)- form after it an adverb of time
     const timeBeforeDaForm = w => wordClass("time-before-da-form").test(w) || !!nounClassSets?.time.has(norm(String(w)));
-    const OBJECT_PRONOUN_CASE = {mir:'Dativ',dir:'Dativ',ihm:'Dativ',ihnen:'Dativ',mich:'Akkusativ',dich:'Akkusativ',ihn:'Akkusativ'};
     // the forms of verbs with a pair of a light record that no card of ours has: per sentence, the lowercase words of the part
     // that are no form of ours, whose first letters may be such a verb's (its word, or the base after its separable particle) — the
     // dictionary's inflection rows give the lemma and the kind (finite / infinitive / participle)
@@ -19642,7 +19740,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (the light record's text is the one shown — presentResolution puts it over the external reading)
       const lightRecord = card.source === 'fallback' && card.light !== false ? lightByWordPos.get(`${norm(card.lemma || '')}|${card.pos}`) : null;
       const nounMeanings = String(card.item?.translation_ru || lightRecord?.translation_ru || card.translation?.ru || '').split(';').map(x => x.trim()).filter(Boolean);
-      const nounMeaningsEn = String(card.item?.translation_en || lightRecord?.translation_en || card.translation?.en || '').split(';').map(x => x.trim()).filter(Boolean);
       // The meaning numbers of the noun a pair names (none when a row has no meaning).
       const pairSenses = own => own.some(([,, meaning]) => !meaning) ? [] : [...new Set(own.map(([,, meaning]) => nounMeanings.indexOf(meaning)))].filter(i => i >= 0).sort((a,b) => a-b);
       const nounLink = nounVerb || (nounOwn.length ? norm(card.lemma || word) : '');
@@ -20404,7 +20501,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // oder / aber / sondern / denn / sowie, subordinators and der / die / das / welche (hat 170 Einwohner und ist umgeben), the
     // participle in lower case (Verfahren, Begriffen), not zu werden, not werden lassen. Er wird Arzt, Sie ist verheiratet —.
     const AUX_HINT_CUT = {has: w => CLAUSE_COORDINATOR_WORD.test(w) || isPureSubordinator(w) ||
-      ["sowie","bis","als","wie","damit","während","um","ohne","statt","der","die","das","welche","welcher","welches"].includes(w)};
+      ["sowie","bis","als","ob","bevor","wie","damit","während","um","ohne","statt","der","die","das","welche","welcher","welches"].includes(w)};
     const AUX_HINT_WERDEN = /^(?:werde|wirst|wird|werden|werdet|wurde|wurdest|wurden|wurdet|würde|würdest|würden|würdet|ward)$/u;
     // werden / haben / sein without a link, whose part holds a participle of a matching verb: «auxiliary verb» first (see above). true / false.
     function auxiliaryHint(word, candidate, context) {
@@ -20497,7 +20594,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const gap = (a, b) => sentence.slice(words[a].index + words[a][0].length, words[b].index);
       if (!/^\s*,\s*$/u.test(gap(at, at + 1))) return false;
       const first = words[at + 1][0], f = norm(first);
-      if ((isPureSubordinator(f) || /^(?:als|da|damit|wie|was|wo|wer|und|aber|so|der|die|das|den|dem|denen|deren|dessen)$/u.test(f)) && !(/^(?:der|die|das|den|dem)$/u.test(f) && words[at + 2] && /^\p{Lu}/u.test(words[at + 2][0]))) return false;
+      if ((isPureSubordinator(f) || /^(?:als|ob|da|damit|wie|was|wo|wer|und|aber|so|der|die|das|den|dem|denen|deren|dessen)$/u.test(f)) && !(/^(?:der|die|das|den|dem)$/u.test(f) && words[at + 2] && /^\p{Lu}/u.test(words[at + 2][0]))) return false;
       // Is the word at i a finite verb right after (spaces only)?
       const finite = i => words[i] && /^\s+$/u.test(gap(i - 1, i)) && (wollte ? (() => { const rows = (verbAnalyses.get(norm(words[i][0])) || []).filter(r => r.kind === "finite");
         return rows.length > 0 && rows.every(r => r.tense === "Konjunktiv II"); })() : (verbAnalyses.get(norm(words[i][0])) || []).some(r => r.kind === "finite"));
@@ -21035,7 +21132,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const opener = /^(?:so|dann|da|also|nun|jetzt)$/u.test((wordsBefore[0] || "").toLowerCase());
             const parts = before.slice(cutAt(HARD_PART_MARKS), cutAt([",",...HARD_PART_MARKS])).split(",").map(wordsOf).filter(part => part.length);
             for (const part of parts) {
-              if ((opensSubordinatePart(part[0].toLowerCase()) || part[0].toLowerCase() === 'je')) { if (!opener) return null; continue; }
+              if ((opensSubordinatePartByWord(part[0].toLowerCase()) || part[0].toLowerCase() === 'je')) { if (!opener) return null; continue; }
               if (part.some((w, i) => NOMINATIVE_WORDS.test(w.toLowerCase()) || i > 0 && /^\p{Lu}/u.test(w) && !IMPERATIVE_CAPITAL_OBJECTS.test(w)) &&
                 part.some(w => (verbAnalyses.get(norm(w)) || []).some(r => r.kind === "finite"))) return null;
             }
@@ -21118,7 +21215,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (!fronted) for (const part of stretch.split(",").slice(0, -1).map(wordsOf).filter(p => p.length)) {
             const head = part[0].toLowerCase();
             if (/^(?:wer|was|dass|daß)$/u.test(head)) return false;
-            if ((opensSubordinatePart(head) || head === 'je')) continue;
+            if ((opensSubordinatePartByWord(head) || head === 'je')) continue;
             const finite = part.some(w => (verbAnalyses.get(norm(w)) || []).some(r => r.kind === "finite"));
             const verbFirst = (verbAnalyses.get(norm(part[0])) || []).some(r => ["imperative","finite"].includes(r.kind));
             if (finite && !emptySubjectSlot(verbFirst ? part.slice(1) : part)) return false;
@@ -21238,7 +21335,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // werden morgen kommen
             // (die opens its part — after a comma, at the start, after und / oder / aber / dass …; not inside a preposition group: gegen die
             // Sozialdemokraten ist, über die königlichen Gestüte war)
-            if (k >= 0 && /^die$/iu.test(words[k]) && (k === 0 || /^[,;:(»«„“"–—]$/u.test(words[k-1]) || (isPureSubordinator(norm(words[k-1])) || /^(?:und|oder|aber|sondern|denn|als|da|doch)$/iu.test(words[k-1])))) {
+            if (k >= 0 && /^die$/iu.test(words[k]) && (k === 0 || /^[,;:(»«„“"–—]$/u.test(words[k-1]) || (isPureSubordinator(norm(words[k-1])) || /^(?:und|oder|aber|sondern|denn|als|ob|da|doch)$/iu.test(words[k-1])))) {
               const after = String(context.sentence || "").slice(context.tokenOffset + String(word).length);
               const part = after.split(GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL)[0];
               if (/^\s+(?:sein|werden|bleiben|ist|war|wird|wurde|bleibt|blieb|sei|wäre|würde|gewesen|geworden|geblieben)(?![\p{L}\p{M}])/u.test(part) &&
@@ -22150,7 +22247,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // A degree word after so (so geschwind, so viel, so große Freude): an adjective or adverb, not a finite verb
     // (so steige ich), a pronoun or a preposition (so hinter einem Baum).
     async function degreeToken(token) {
-      if (!token || /^\p{Lu}/u.test(token[0]) || (isPureSubordinator(norm(token[0])) || ['wie','als'].includes(norm(token[0])))) return false;
+      if (!token || /^\p{Lu}/u.test(token[0]) || (isPureSubordinator(norm(token[0])) || ['wie','als','ob'].includes(norm(token[0])))) return false;
       const own = forms.get(norm(token[0])) || [];
       if (own.some(e => ["Verb","Pronomen","preposition","article","Konjunktion"].includes(e.type))) return false;
       if (own.some(e => e.type === "Adjektiv" || e.type === "Adverb") || comparativeForms.has(norm(token[0]))) return true;
@@ -22209,7 +22306,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             while (to < tokens.length-1 && !hard(to,to+1) && !soft(to,to+1)) to++;
             const inPart = new Set(tokens.slice(from, to+1).map(t => norm(t[0])));
             if (m.parts.some(part => part.clause_has && ![].concat(part.clause_has).map(norm).some(w => inPart.has(w)))) continue;
-            if (m.parts.some(part => part.not_clause_has && [].concat(part.not_clause_has).map(norm).some(w => inPart.has(w)))) continue;
+            const partKeys = tokens.slice(from, to+1).map(t => norm(t[0]));
+            if (m.parts.some(part => part.not_clause_has && [].concat(part.not_clause_has).map(norm).some(entry => { const piece = entry.split(/\s+/u);
+              return partKeys.some((_,k) => piece.every((w,n) => partKeys[k+n] === w)); }))) continue;
             // a finite verb right after the pattern and a verb before it whose particle is the first word — a new clause
             // follows (stand auf und davon wusste niemand): the first word stays the particle.
             const finiteAt = k => k < tokens.length && /^\p{Ll}/u.test(tokens[k][0]) && verbRowsAt(tokens,k).some(a => a.kind === "finite") &&
@@ -22423,7 +22522,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // POSSESSIVE_WORD — not seinerzeit, ihrerseits); the word reached is checked against the preposition cards
             // (`prepositions`, with vom / im / zum). An article or possessive: ARTICLE_WORD / POSSESSIVE_WORD; the bare ihr
             // counts as the pronoun, not a determiner (Wisst ihr Bescheid?) — to be replaced by the G37 sign when there is one.
-            if (part.not_after_phrase && (() => {
+            if (part.not_after_phrase && await (async () => {
               const classes = [].concat(part.not_after_phrase);
               const possessiveStem = /^(?:mein|dein|sein|ihr|unser|eur)/u;
               let j = i - 1, article = false;
@@ -22448,6 +22547,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
                 // (an adverbial preposition + -em word without a determiner: seit langem, vor allem, bei weitem, von neuem)
                 if (/em$/u.test(w) && !ARTICLE_WORD.test(w) && !POSSESSIVE_WORD.test(w) && !/^(?:dies|jen|jed|kein|manch|solch|welch)/u.test(w) &&
                     j > 0 && clause[j-1] === clause[i] && prepositions.has(keys[j-1])) break;
+                // (the other determiners with a table in our cards — dies- / jen- / jed- / welch- / manch- / solch-, derselbe,
+                // derjenige, irgendein, jeglich- (determinerFeatures; not kein-: keinen Bescheid wissen, keine Flagge zeigen stay
+                // the expression) — a determiner of the noun only right after a preposition (von diesem Bescheid, mit welchem Ernst)
+                // or with a reading in the case of the part (`phrase_case`) that agrees with the noun group (jeden Bescheid,
+                // diese / welche Flagge, solche Hoffnungen); otherwise the pronoun subject (damit jeder Bescheid weiß, Weiß dieser
+                // Bescheid?, wenn jeder Flagge zeigt) — the phrase ends there)
+                const familyFeatures = !ARTICLE_WORD.test(w) && !POSSESSIVE_WORD.test(w) && determinerFeatures(tokens[j][0]);
+                if (familyFeatures && !(articleCardsByForm.get(w) || []).some(card => card.grammar?.article_kind === "negative")) {
+                  if (j > 0 && clause[j-1] === clause[i] && prepositions.has(keys[j-1])) { article = true; continue; }
+                  const cases = part.phrase_case ? new Set([].concat(part.phrase_case)) : null;
+                  const group = cases ? await nounGroupAfter(sentence, tokens, j, {determiner:false, consumer:'constructionAt'}) : null;
+                  if (group?.readings && agreeingFeatures(familyFeatures, group, cases).length) { article = true; continue; }
+                  break;
+                }
                 if (DETERMINER_WORD.test(w) && (!possessiveStem.test(w) || POSSESSIVE_WORD.test(w))) {
                   if (ARTICLE_WORD.test(w) || POSSESSIVE_WORD.test(w) && w !== "ihr") article = true;
                   continue;
@@ -22488,7 +22601,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (part.clause_has && !tokens.some((t,k) => clause[k] === clause[i] && keyIn(k, partList(part,"clause_has")))) continue;
             // `not_clause_has` (jdm. ist nach etw. — not with zumute, that is jdm. ist nach etw. zumute) —
             // the reverse of clause_has, none of these words in the part's clause.
-            if (part.not_clause_has && tokens.some((t,k) => clause[k] === clause[i] && keyIn(k, partList(part,"not_clause_has")))) continue;
+            // An entry of several words is a piece of adjacent words (008 mit etwas zu tun haben: not with «Hände voll» —
+            // that is 455 alle Hände voll zu tun haben; not one word voll: der voll besetzte Zug).
+            if (part.not_clause_has && partList(part,"not_clause_has").some(entry => { const piece = entry.split(/\s+/u);
+              return tokens.some((t,k) => piece.every((w,n) => k+n < tokens.length && clause[k+n] === clause[i] && (n || keyIn(k,[w])) && (!n || keys[k+n] === w))); })) continue;
             // (a reflexive part agrees with the subject — CONSTRUCTION_REFLEXIVE_DATIVE above)
             if (part.reflexive) {
               const shared = await sentenceSubjectFacts(sentence,'constructionAt');
@@ -24468,7 +24584,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           let q = partStartAt(sentence,tokens,ab - 1,byMarks(GAP_SENTENCE_DASHES_ELLIPSIS,true));
           // (a subordinate clause has a word between the conjunction and its finite verb last: Als die Römer kamen, …; not Da stand er
           // nun, verloren mitten …, not Wie erwartet, entschieden besser …)
-          clauseBefore = (q === 0 || GAP_SENTENCE_NO_COMMA.test(tokenGap(sentence,tokens,(q - 1),q))) && (isPureSubordinator(low(q)) || /^(?:als|da|während|seit|bis|wo|wie)$/u.test(low(q))) &&
+          clauseBefore = (q === 0 || GAP_SENTENCE_NO_COMMA.test(tokenGap(sentence,tokens,(q - 1),q))) && (isPureSubordinator(low(q)) || /^(?:als|ob|bevor|solange|seitdem|da|während|seit|bis|wo|wie)$/u.test(low(q))) &&
             q < ab - 2 && (AUX.test(low(ab - 1)) || (verbAnalyses.get(low(ab - 1)) || []).some(a => a.kind === "finite"));
         }
         // (the span starts a sentence or follows . ! ? : ; — after a bare comma the finite verb may stand before it: Heute spielt sie, wie
@@ -25705,7 +25821,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (p < 0) return result;
       let end = p + 1; while (end < tokens.length && !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(sentence,tokens,end-1,end)) && !CLAUSE_COORDINATOR_WORD.test(norm(tokens[end][0]))) end++;
       const DAT_PRONOUN = /^(?:mir|dir|ihm|ihnen)$/u;
-      const FEM_DAT_DET = /^(?:der|einer|meiner|deiner|seiner|ihrer|unserer|eurer|dieser|jener|keiner|jeder)$/u;
       // Does a preposition (or a contraction) stand up to three words before token k?
       const afterPreposition = k => tokens.slice(Math.max(p + 1, k - 3), k).some(t => prepositions.has(norm(t[0])));
       let sure = false;
@@ -27408,7 +27523,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const ichShort = (w,start) => {
         if (!(verbAnalyses.get(norm(w)+"e") || []).some(a => a.kind === "finite" && a.person === "ich" && a.tense === "Präsens")) return false;
         // (not a function word, a number or an adverb of its own — weil, schon, mein, gar, mal, acht: only a verb or an adjective spelling)
-        if ((forms.get(norm(w)) || []).some(e => !["Verb","Adjektiv"].includes(e.type)) || opensSubordinatePart(norm(w))) return false;
+        if ((forms.get(norm(w)) || []).some(e => !["Verb","Adjektiv"].includes(e.type)) || opensSubordinatePartByWord(norm(w))) return false;
         const i = words.findIndex(x => x.index === start);
         if (i < 0) return false;
         // Are word a and word b in one part (no sentence sign, bracket, dash, ellipsis or quote between)?

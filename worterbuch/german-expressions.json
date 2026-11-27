@@ -1647,7 +1647,10 @@
             ]
           },
           {
-            "form": "zu tun"
+            "form": "zu tun",
+            "not_clause_has": [
+              "Hände voll"
+            ]
           }
         ],
         "order": "fixed",
@@ -1664,7 +1667,10 @@
             ]
           },
           {
-            "form": "zu tun"
+            "form": "zu tun",
+            "not_clause_has": [
+              "Hände voll"
+            ]
           },
           {
             "form": [
@@ -1723,7 +1729,10 @@
             ]
           },
           {
-            "form": "zu tun"
+            "form": "zu tun",
+            "not_clause_has": [
+              "Hände voll"
+            ]
           }
         ],
         "order": "fixed",
@@ -1734,13 +1743,14 @@
     "tests": {
       "positive": [
         "Seine schlechte Laune hat sicher mit dem Wetter zu tun.",
-        "Konnte all dies etwas mit den Potters zu tun haben?",
+        "Konnte das alles etwas mit seiner Reise zu tun haben?",
         "Hat er etwas damit zu tun?",
         "Was hat das mit mir zu tun?",
         "Mit wem habe ich es zu tun?",
         "Ich glaube, dass es mit seiner Kindheit zu tun hat.",
         "In meinem Beruf habe ich viel mit Kindern zu tun.",
-        "Es hat damit zu tun, dass er krank ist."
+        "Es hat damit zu tun, dass er krank ist.",
+        "Was hat der voll besetzte Zug mit mir zu tun?"
       ],
       "negative": [
         "Ich habe heute viel zu tun.",
@@ -1749,7 +1759,9 @@
         "Das hat nichts mit dir zu tun.",
         "Damit habe ich nichts zu tun!",
         "Damit hatte er zu kämpfen.",
-        "Womit habe ich das verdient?"
+        "Womit habe ich das verdient?",
+        "Mit den Zwillingen hat sie alle Hände voll zu tun.",
+        "Er hat alle Hände voll damit zu tun, die Kinder zu beruhigen."
       ]
     },
     "see_also": [
@@ -10656,7 +10668,8 @@
               "bekam",
               "bekommt",
               "schickt"
-            ]
+            ],
+            "phrase_case": "accusative"
           }
         ],
         "order": "fixed",
@@ -10699,7 +10712,8 @@
               "bekam",
               "bekommt",
               "schickt"
-            ]
+            ],
+            "phrase_case": "accusative"
           },
           {
             "form": [
@@ -10756,7 +10770,13 @@
         "Er weiß schon Bescheid.",
         "Er sagte, er wisse Bescheid.",
         "Wisst ihr Bescheid?",
-        "Wir wissen alle Bescheid."
+        "Wir wissen alle Bescheid.",
+        "Sag es allen, damit jeder Bescheid weiß.",
+        "Ich hoffe, dass jeder Bescheid weiß.",
+        "Weiß jeder Bescheid?",
+        "Weiß dieser Bescheid?",
+        "Jeder weiß Bescheid.",
+        "Ich hoffe, dass keiner Bescheid weiß."
       ],
       "negative": [
         "Sag mir Bescheid, wenn du fertig bist.",
@@ -10767,7 +10787,10 @@
         "Ich wusste nichts von dem Bescheid.",
         "Ich weiß von einem ablehnenden Bescheid.",
         "Er wusste nichts vom Bescheid des Amtes.",
-        "Woher weißt du von seinem neuen Bescheid?"
+        "Woher weißt du von seinem neuen Bescheid?",
+        "Er weiß jeden Bescheid auswendig.",
+        "Er wusste von diesem Bescheid nichts.",
+        "Welchen Bescheid weißt du?"
       ]
     },
     "complements": [
@@ -27933,7 +27956,8 @@
               "letzten",
               "einzige",
               "einzigen"
-            ]
+            ],
+            "phrase_case": "accusative"
           }
         ],
         "order": "fixed",
@@ -27981,7 +28005,8 @@
               "letzten",
               "einzige",
               "einzigen"
-            ]
+            ],
+            "phrase_case": "accusative"
           },
           {
             "form": [
@@ -28121,7 +28146,9 @@
         "Wir machen uns Hoffnungen auf den Sieg.",
         "Habt ihr euch Hoffnungen gemacht?",
         "Unter den Fans macht sich Hoffnung breit.",
-        "Er machte die Tür voller Hoffnung auf."
+        "Er machte die Tür voller Hoffnung auf.",
+        "Diese Hoffnung macht Mut.",
+        "Er macht jede Hoffnung zunichte."
       ]
     },
     "see_also": [
@@ -28337,7 +28364,8 @@
               "alles",
               "nichts",
               "etwas"
-            ]
+            ],
+            "phrase_case": "accusative"
           }
         ],
         "order": "fixed",
@@ -28472,7 +28500,10 @@
         "Sie macht Ernst Vorwürfe.",
         "Das Leben hat ihn ernst gemacht.",
         "Ich weiß, dass es ihn ernst macht.",
-        "Sie macht das ernst gemeinte Angebot rückgängig."
+        "Sie macht das ernst gemeinte Angebot rückgängig.",
+        "Diesen Ernst macht ihm keiner nach.",
+        "Mit welchem Ernst er das macht!",
+        "Dieser Ernst macht mir Angst."
       ]
     },
     "see_also": [
@@ -71465,7 +71496,97 @@
       "verb-002"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/Hand",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt"
+            ]
+          },
+          {
+            "form": [
+              "alle Hände voll",
+              "beide Hände voll"
+            ]
+          },
+          {
+            "form": "zu tun"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "alle Hände voll",
+              "beide Hände voll"
+            ]
+          },
+          {
+            "form": "zu tun"
+          },
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Vor Weihnachten haben wir alle Hände voll zu tun.",
+        "Mit den Zwillingen hat sie alle Hände voll zu tun.",
+        "Er hatte beide Hände voll zu tun.",
+        "Ich weiß, dass er alle Hände voll zu tun hat.",
+        "Er hat alle Hände voll damit zu tun, die Kinder zu beruhigen."
+      ],
+      "negative": [
+        "Sie hat alle Hände voll mit Taschen.",
+        "Er hat heute viel zu tun.",
+        "Alle haben die Hände voll."
+      ]
+    }
   },
   {
     "id": "expression-456",
@@ -71489,7 +71610,99 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/Flagge",
     "source": "Duden (Flagge, Wendungen): Flagge zeigen — seine Meinung oder Erwartung mit Nachdruck und deutlich zu erkennen geben; nach englisch to show the flag",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "zeige",
+              "zeigst",
+              "zeigt",
+              "zeigen",
+              "zeigte",
+              "zeigtest",
+              "zeigten",
+              "zeigtet",
+              "zeig",
+              "zeiget",
+              "gezeigt",
+              "zu zeigen",
+              "zeigend"
+            ]
+          },
+          {
+            "form": "Flagge",
+            "not_after_phrase": [
+              "preposition",
+              "determiner"
+            ],
+            "phrase_case": "accusative"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "Flagge",
+            "not_after_phrase": [
+              "preposition",
+              "determiner"
+            ],
+            "phrase_case": "accusative"
+          },
+          {
+            "form": [
+              "zeige",
+              "zeigst",
+              "zeigt",
+              "zeigen",
+              "zeigte",
+              "zeigtest",
+              "zeigten",
+              "zeigtet",
+              "zeig",
+              "zeiget",
+              "gezeigt",
+              "zu zeigen",
+              "zeigend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "In der Debatte hat die Partei endlich Flagge gezeigt.",
+        "Die Stadt zeigt jetzt klar Flagge gegen den Plan.",
+        "Wir müssen Flagge zeigen.",
+        "Es ist Zeit, Flagge zu zeigen.",
+        "Ich finde gut, dass sie Flagge zeigt.",
+        "Es hilft, wenn jeder Flagge zeigt.",
+        "Es ist gut, dass mancher Flagge zeigt.",
+        "Ich will, dass ihr Flagge zeigt.",
+        "Sie zeigten ihm Flagge.",
+        "Sie zeigten ihr Flagge.",
+        "Er zeigt keine Flagge.",
+        "Er zeigte Flagge und blieb standhaft."
+      ],
+      "negative": [
+        "Das Schiff zeigte die Flagge.",
+        "Er zeigte auf die Flagge.",
+        "Sie zeigt ihre neue Flagge.",
+        "Er zeigte uns eine rote Flagge.",
+        "Die Flagge zeigt einen Adler.",
+        "Er zeigt diese Flagge.",
+        "Er zeigt jede Flagge.",
+        "Welche Flagge zeigt das Schiff?"
+      ]
+    }
   },
   {
     "id": "expression-457",
