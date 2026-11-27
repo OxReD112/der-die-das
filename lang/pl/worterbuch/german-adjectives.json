@@ -290,8 +290,8 @@
  "adjective-101": {
   "translation_pl": "wychodzący",
   "example_pl": "To są połączenia wychodzące.",
-  "usage_note_pl": "Wyrażenie ausgehend von („wychodząc z”) — osobne hasło.",
-  "_src": "16b66780",
+  "usage_note_pl": "ausgehend von („wychodząc z”).",
+  "_src": "14054491",
   "_src_reader": "f75805d3"
  },
  "adjective-102": {
@@ -733,9 +733,9 @@
  },
  "adjective-185": {
   "translation_pl": "szczególny; wyjątkowy",
-  "usage_note_pl": "Tylko przed rzeczownikiem: ein besonderer Tag. Przysłówek besonders — osobne hasło.",
+  "usage_note_pl": "Tylko przed rzeczownikiem: ein besonderer Tag. Przysłówek besonders.",
   "example_pl": "Dziś jest wyjątkowy dzień.",
-  "_src": "8005b684",
+  "_src": "489818e4",
   "_src_reader": "48604eba"
  },
  "adjective-186": {
@@ -842,9 +842,9 @@
  },
  "adjective-202": {
   "translation_pl": "dorosły",
-  "usage_note_pl": "Rzeczownik der / die Erwachsene — osobne hasło.",
+  "usage_note_pl": "Rzeczownik der / die Erwachsene.",
   "example_pl": "Nasze dzieci są już dorosłe.",
-  "_src": "1728b678",
+  "_src": "cbfe7ef8",
   "_src_reader": "90bfb35f"
  },
  "adjective-203": {
@@ -1009,9 +1009,9 @@
  },
  "adjective-229": {
   "translation_pl": "lewy",
-  "usage_note_pl": "Tylko przed rzeczownikiem. Przysłówek links — osobne hasło. Pot. link — podejrzany, nieuczciwy.",
+  "usage_note_pl": "Tylko przed rzeczownikiem. Przysłówek links. Pot. link — podejrzany, nieuczciwy.",
   "example_pl": "Pisze lewą ręką.",
-  "_src": "b7e17902",
+  "_src": "1e429680",
   "_src_reader": "1785271e"
  },
  "adjective-230": {
@@ -1115,10 +1115,16 @@
  },
  "adjective-248": {
   "translation_pl": "prawy",
-  "usage_note_pl": "Tylko przed rzeczownikiem. Przysłówek rechts i przymiotnik recht (odpowiedni) — osobne hasła.",
+  "usage_note_pl": "Tylko przed rzeczownikiem. Przysłówek rechts i przymiotnik recht (odpowiedni).",
   "example_pl": "Boli mnie prawe kolano.",
-  "_src": "6bf7a21e",
-  "_src_reader": "f871c0ad"
+  "_src": "8002b785",
+  "_src_reader": "f871c0ad",
+  "see_also_pl": [
+   {
+    "id": "adjective-105",
+    "at": 2
+   }
+  ]
  },
  "adjective-250": {
   "translation_pl": "dojrzały",
@@ -1128,10 +1134,16 @@
  },
  "adjective-251": {
   "translation_pl": "czysty",
-  "usage_note_pl": "Nie mylić z przysłówkiem rein = herein (osobne hasło).",
+  "usage_note_pl": "Nie mylić z przysłówkiem rein = herein.",
   "example_pl": "Sweter jest z czystej wełny.",
-  "_src": "a8fa41eb",
-  "_src_reader": "57624ad1"
+  "_src": "35ef590b",
+  "_src_reader": "57624ad1",
+  "see_also_pl": [
+   {
+    "id": "adverb-101",
+    "at": 1
+   }
+  ]
  },
  "adjective-252": {
   "translation_pl": "ogromny",
@@ -1327,9 +1339,9 @@
  },
  "adjective-290": {
   "translation_pl": "spokrewniony; pokrewny",
-  "usage_note_pl": "mit jemandem (Dativ) verwandt sein. Rzeczownik der / die Verwandte — osobne hasła.",
+  "usage_note_pl": "mit jemandem (Dativ) verwandt sein. Rzeczownik der / die Verwandte.",
   "example_pl": "Jesteś z nim spokrewniony / spokrewniona?",
-  "_src": "e9342cff",
+  "_src": "7283919a",
   "_src_reader": "3494fe46"
  },
  "adjective-291": {
@@ -7546,8 +7558,8 @@
  "adjective-1265": {
   "translation_pl": "obfity, hojny; więcej niż wystarczający",
   "example_pl": "Po wędrówce była obfita kolacja z zupą i pieczenią.",
-  "usage_note_pl": "Znaczenia przysłówkowe (pod dostatkiem, dość, z okładem) — w osobnym haśle przysłówka reichlich.",
-  "_src": "d160c403",
+  "usage_note_pl": "Znaczenia przysłówkowe (pod dostatkiem, dość, z okładem) — ma przysłówek reichlich.",
+  "_src": "102a72f7",
   "_src_reader": "b2085d90"
  },
  "adjective-1266": {
@@ -9606,9 +9618,15 @@
  "adjective-1582": {
   "translation_pl": "(die meisten) większość, największa liczba; (das meiste) większa część, prawie wszystko",
   "example_pl": "Większość dzieci w klasie ma komórkę.",
-  "usage_note_pl": "Stopień najwyższy od viel: viel — mehr — am meisten. Prawie zawsze z rodzajnikiem: die meisten (Leute) — większość (ludzi); die meisten von uns — większość z nas; das meiste — większa część: Das meiste habe ich vergessen. Przysłówek meist — zwykle, najczęściej (osobne hasło).",
-  "_src": "1d4e2527",
-  "_src_reader": "06f71691"
+  "usage_note_pl": "Stopień najwyższy od viel: viel — mehr — am meisten. Prawie zawsze z rodzajnikiem: die meisten (Leute) — większość (ludzi); die meisten von uns — większość z nas; das meiste — większa część: Das meiste habe ich vergessen. Przysłówek meist — zwykle, najczęściej.",
+  "_src": "5f16d967",
+  "_src_reader": "06f71691",
+  "see_also_pl": [
+   {
+    "id": "adverb-427",
+    "at": 6
+   }
+  ]
  },
  "adjective-1583": {
   "translation_pl": "osłabiony, sfatygowany; niedysponowany, wyszczerbiony (o naczyniach)",

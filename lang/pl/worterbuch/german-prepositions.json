@@ -59,9 +59,15 @@
     "note_pl": "od jakiegoś momentu do teraz"
    }
   ],
-  "usage_note_pl": "Czynność zaczęła się w przeszłości i trwa nadal, dlatego czasownik zwykle stoi w czasie Präsens: Ich wohne seit 2020 hier. Spójnik seit „odkąd” wprowadza zdanie podrzędne — to osobne hasło Konjunktion.",
-  "_src": "d1acdd9d",
-  "_src_reader": "ff7f6c13"
+  "usage_note_pl": "Czynność zaczęła się w przeszłości i trwa nadal, dlatego czasownik zwykle stoi w czasie Präsens: Ich wohne seit 2020 hier. Spójnik seit „odkąd” wprowadza zdanie podrzędne.",
+  "_src": "51077f43",
+  "_src_reader": "ff7f6c13",
+  "see_also_pl": [
+   {
+    "id": "conjunction-020",
+    "at": 2
+   }
+  ]
  },
  "preposition-006": {
   "translation_pl": "od, z (skąd); przez kogoś (strona bierna, imiesłów); o (opowiadać o, słyszeć o); przynależność (zamiast Genitivu)",
@@ -85,8 +91,8 @@
    }
   ],
   "forms_note_pl": "Formy ściągnięte: zum = zu dem, zur = zu der.",
-  "usage_note_pl": "zu Hause — w domu (a nach Hause — do domu). zu Fuß — pieszo. Cel: zum Lernen — do nauki. zu przed bezokolicznikiem (Ich habe keine Zeit zu lesen) i zu „zbyt” (zu groß) — to nie przyimek, to osobne hasła. Jeśli zu stoi na końcu zdania przy czasowniku (Mach die Tür zu), jest częścią czasownika zumachen.",
-  "_src": "370e679c",
+  "usage_note_pl": "zu Hause — w domu (a nach Hause — do domu). zu Fuß — pieszo. Cel: zum Lernen — do nauki. zu przed bezokolicznikiem (Ich habe keine Zeit zu lesen) i zu „zbyt” (zu groß) — to nie przyimek. Jeśli zu stoi na końcu zdania przy czasowniku (Mach die Tür zu), jest częścią czasownika zumachen.",
+  "_src": "a07d1af9",
   "_src_reader": "ec578e5b"
  },
  "preposition-008": {
@@ -168,12 +174,11 @@
     "note_pl": "bez kogoś, bez czegoś"
    }
   ],
-  "usage_note_pl": "Często bez rodzajnika: ohne Zucker, ohne Geld. ohne … zu + bezokolicznik (ohne zu fragen — nie pytając) — to spójnik, osobne hasło.",
-  "_src": "ef496066",
+  "usage_note_pl": "Często bez rodzajnika: ohne Zucker, ohne Geld. ohne … zu + bezokolicznik (ohne zu fragen — nie pytając) — to spójnik.",
+  "_src": "9e549bd5",
   "_src_reader": "bb869b96"
  },
  "preposition-014": {
-  "_src": "087a6111",
   "translation_pl": "o (o dokładnej godzinie); wokół; o (es geht um …); o (o różnicy: um 5 Grad)",
   "example_pl": "Film zaczyna się o ósmej.",
   "government": [
@@ -182,7 +187,8 @@
    }
   ],
   "forms_note_pl": "Potoczna forma ściągnięta: ums = um das.",
-  "usage_note_pl": "Wokół: um den Tisch (herum). W przybliżeniu: um Weihnachten — około Bożego Narodzenia. O czym: Es geht um Geld — chodzi o pieniądze. um … zu + bezokolicznik („żeby”) — to spójnik, osobne hasło. Jeśli um stoi na końcu zdania przy czasowniku (Wir ziehen um), jest częścią czasownika umziehen, a nie przyimkiem. Różnica — o: Die Temperatur stieg um 5 Grad. — Temperatura wzrosła o 5 stopni; um einen Millimeter zu kurz — o milimetr za krótki.",
+  "usage_note_pl": "Wokół: um den Tisch (herum). W przybliżeniu: um Weihnachten — około Bożego Narodzenia. O czym: Es geht um Geld — chodzi o pieniądze. um … zu + bezokolicznik („żeby”) — to spójnik. Jeśli um stoi na końcu zdania przy czasowniku (Wir ziehen um), jest częścią czasownika umziehen, a nie przyimkiem. Różnica — o: Die Temperatur stieg um 5 Grad. — Temperatura wzrosła o 5 stopni; um einen Millimeter zu kurz — o milimetr za krótki.",
+  "_src": "4be7a707",
   "_src_reader": "4febd707"
  },
  "preposition-015": {
@@ -199,9 +205,15 @@
     "note_pl": "z innym przyimkiem: o przypadku decyduje drugi przyimek"
    }
   ],
-  "usage_note_pl": "bis bald, bis morgen — do zobaczenia wkrótce, do jutra. bis auf + Akkusativ — „oprócz”: Alle bis auf einen waren da. Spójnik bis „dopóki nie, aż” wprowadza zdanie podrzędne — to osobne hasło Konjunktion.",
-  "_src": "fdc5706f",
-  "_src_reader": "90a7d2d1"
+  "usage_note_pl": "bis bald, bis morgen — do zobaczenia wkrótce, do jutra. bis auf + Akkusativ — „oprócz”: Alle bis auf einen waren da. Spójnik bis „dopóki nie, aż” wprowadza zdanie podrzędne.",
+  "_src": "3898fdc9",
+  "_src_reader": "90a7d2d1",
+  "see_also_pl": [
+   {
+    "id": "conjunction-024",
+    "at": 5
+   }
+  ]
  },
  "preposition-016": {
   "translation_pl": "wzdłuż",
@@ -301,20 +313,23 @@
   "_src_reader": "d74157a2"
  },
  "preposition-022": {
-  "translation_pl": "nad; przez (w poprzek); o (temat); ponad, więcej niż",
+  "translation_pl": "nad; przez (w poprzek); o (temat); ponad, więcej niż; w ciągu, podczas",
   "example_pl": "Lampa wisi nad stołem.",
   "government": [
    {
     "note_pl": "Wo? — gdzie (miejsce)"
    },
    {
-    "note_pl": "Wohin? — dokąd (kierunek); przez coś; temat: o czym"
+    "note_pl": "Wohin? — dokąd (kierunek); przez coś; czas: w ciągu (über die Feiertage); temat: o czym"
+   },
+   {
+    "note_pl": "o czasie: w ciągu, podczas; stoi po rzeczowniku"
    }
   ],
-  "forms_note_pl": "Potoczna forma ściągnięta: übers = über das.",
-  "usage_note_pl": "Temat — zawsze Akkusativ: sprechen über das Wetter. Przez: über die Straße gehen. Trasa: über Köln nach Berlin — przez Kolonię. Ilość: über 100 Leute — ponad sto osób.",
-  "_src": "4c44f21e",
-  "_src_reader": "09df33d9"
+  "forms_note_pl": "Potoczne formy ściągnięte: überm = über dem, übers = über das.",
+  "usage_note_pl": "Temat — zawsze Akkusativ: sprechen über das Wetter. Przez: über die Straße gehen. Trasa: über Köln nach Berlin — przez Kolonię. Czas: über die Feiertage — na święta, w czasie świąt; die ganze Nacht über — przez całą noc. Ilość: über 100 Leute — ponad sto osób.",
+  "_src": "3c86a8b1",
+  "_src_reader": "c44b0cdc"
  },
  "preposition-023": {
   "translation_pl": "pod; wśród, między; poniżej, mniej niż",
@@ -374,8 +389,8 @@
     "note_pl": "w języku potocznym; w języku standardowym — gdy nie widać Genitivu: während fünf Jahren"
    }
   ],
-  "usage_note_pl": "Spójnik während „gdy, podczas gdy; natomiast” wprowadza zdanie podrzędne — to osobne hasło Konjunktion.",
-  "_src": "e40b1d65",
+  "usage_note_pl": "Spójnik während „gdy, podczas gdy; natomiast” wprowadza zdanie podrzędne.",
+  "_src": "cdd56eab",
   "_src_reader": "3afac1b8"
  },
  "preposition-027": {
@@ -422,8 +437,8 @@
     "note_pl": "w języku potocznym; w języku standardowym — gdy nie widać Genitivu: statt Worten"
    }
   ],
-  "usage_note_pl": "anstatt znaczy to samo i łączy się z tymi samymi przypadkami. statt … zu + bezokolicznik (statt zu arbeiten — zamiast pracować) — to spójnik, osobne hasło.",
-  "_src": "49f716a2",
+  "usage_note_pl": "anstatt znaczy to samo i łączy się z tymi samymi przypadkami. statt … zu + bezokolicznik (statt zu arbeiten — zamiast pracować) — to spójnik.",
+  "_src": "2e8e0479",
   "_src_reader": "a4e00f8f"
  },
  "preposition-030": {
@@ -467,9 +482,15 @@
     "note_pl": "rzadko"
    }
   ],
-  "usage_note_pl": "Rzeczownik bez rodzajnika zwykle bez końcówki: laut Gesetz. Przymiotnik laut — „głośny; głośno” — osobne hasło.",
-  "_src": "fe5de122",
-  "_src_reader": "d562f202"
+  "usage_note_pl": "Rzeczownik bez rodzajnika zwykle bez końcówki: laut Gesetz. Przymiotnik laut — „głośny; głośno”.",
+  "_src": "dc9f87e0",
+  "_src_reader": "d562f202",
+  "see_also_pl": [
+   {
+    "id": "adjective-019",
+    "at": 2
+   }
+  ]
  },
  "preposition-033": {
   "translation_pl": "dzięki",
@@ -482,8 +503,8 @@
     "note_pl": "rzadziej"
    }
   ],
-  "usage_note_pl": "Rzeczownik bez rodzajnika zwykle bez końcówki: dank Internet. Rzeczownik Dank (wielką literą) — „wdzięczność”, jak w Vielen Dank! — to osobne hasło.",
-  "_src": "a28bf846",
+  "usage_note_pl": "Rzeczownik bez rodzajnika zwykle bez końcówki: dank Internet. Rzeczownik Dank (wielką literą) — „wdzięczność”, jak w Vielen Dank!",
+  "_src": "de836dd6",
   "_src_reader": "b8586f0c"
  },
  "preposition-034": {
@@ -500,9 +521,15 @@
     "note_pl": "tylko außer Landes (wychodzące z użycia) i außer Hauses (książk.)"
    }
   ],
-  "usage_note_pl": "Poza: außer Betrieb — nieczynny, außer Atem — bez tchu, außer Dienst — w stanie spoczynku. außer sich sein — nie posiadać się (z gniewu, radości), außer sich geraten (mir / mich) — wyjść z siebie. Spójnik außer (außer wenn, außer dass) — osobne hasło.",
-  "_src": "f887bb85",
-  "_src_reader": "79faa785"
+  "usage_note_pl": "Poza: außer Betrieb — nieczynny, außer Atem — bez tchu, außer Dienst — w stanie spoczynku. außer sich sein — nie posiadać się (z gniewu, radości), außer sich geraten (mir / mich) — wyjść z siebie. Spójnik außer (außer wenn, außer dass).",
+  "_src": "e001749f",
+  "_src_reader": "79faa785",
+  "see_also_pl": [
+   {
+    "id": "conjunction-043",
+    "at": 6
+   }
+  ]
  },
  "preposition-035": {
   "translation_pl": "na, od (każdego); na (jednostkę czasu)",
@@ -653,8 +680,8 @@
     "note_pl": "rzadko"
    }
   ],
-  "usage_note_pl": "Często w dokumentach i przepisach: gemäß § 5. Przymiotnik gemäß „odpowiedni” (eine dem Alter gemäße Aufgabe) — to nie to hasło.",
-  "_src": "815446fb",
+  "usage_note_pl": "Często w dokumentach i przepisach: gemäß § 5. Przymiotnik gemäß „odpowiedni” (eine dem Alter gemäße Aufgabe) — to inne słowo. W Szwajcarii pisze się gemäss.",
+  "_src": "b5612a0d",
   "_src_reader": "6ad48807"
  },
  "preposition-045": {
@@ -881,5 +908,125 @@
   "usage_note_pl": "Wyraz wychodzący z użycia (w książkach, baśniach, czasem żartobliwie); zwykle z nazwami stron świata i Himmel: gen Himmel — ku niebu. Dziś zwykle nach lub zu: nach Süden, zum Himmel.",
   "_src": "c3e3526a",
   "_src_reader": "b375ef0c"
+ },
+ "preposition-061": {
+  "translation_pl": "wbrew",
+  "example_pl": "Wbrew prognozie pogody przez cały dzień było sucho.",
+  "government": [
+   {
+    "note_pl": "wbrew czemuś"
+   },
+   {
+    "note_pl": "rzadko: po rzeczowniku"
+   },
+   {
+    "note_pl": "w liczbie mnogiej czasem Genitiv"
+   }
+  ],
+  "usage_note_pl": "Przysłówek i przedrostek entgegen „naprzeciw” (jemandem entgegenkommen) — to inne słowo.",
+  "_src": "5283e6ed",
+  "_src_reader": "530a506c",
+  "see_also_pl": [
+   {
+    "id": "adverb-454",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-062": {
+  "translation_pl": "według, zgodnie z",
+  "example_pl": "Zgodnie z instrukcjami zamknęliśmy drzwi na klucz.",
+  "government": [
+   {
+    "note_pl": "zgodnie z czymś"
+   },
+   {
+    "note_pl": "może stać także po rzeczowniku"
+   },
+   {
+    "note_pl": "rzadziej"
+   }
+  ],
+  "usage_note_pl": "Przymiotnik i przysłówek entsprechend „odpowiedni; odpowiednio” (eine entsprechende Antwort) — to inne słowo.",
+  "_src": "5f54aade",
+  "_src_reader": "a2c384e9",
+  "see_also_pl": [
+   {
+    "id": "adjective-adverb-391",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-063": {
+  "translation_pl": "dla; z powodu",
+  "example_pl": "Dla pełnego obrazu wymienię jeszcze trzecią możliwość.",
+  "government": [
+   {
+    "note_pl": "(książk.) stoi po rzeczowniku w Genitivie"
+   }
+  ],
+  "usage_note_pl": "Stoi tylko po słowie, książk. Przymiotnik halb (ein halber Liter) — to inne słowo.",
+  "_src": "a35f9355",
+  "_src_reader": "286e7bb2",
+  "see_also_pl": [
+   {
+    "id": "adjective-adverb-120",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-064": {
+  "translation_pl": "wbrew, na przekór",
+  "example_pl": "Wbrew wszelkim ostrzeżeniom wypłynął w sztorm na morze.",
+  "government": [
+   {
+    "note_pl": "(książk.) wbrew czemuś; stoi po słowie w Dativie"
+   }
+  ],
+  "usage_note_pl": "Stoi tylko po słowie, książk. Przymiotnik zuwider „wstrętny” (jemandem zuwider sein) — to inne słowo.",
+  "_src": "0aaa920b",
+  "_src_reader": "12bce8bb",
+  "see_also_pl": [
+   {
+    "id": "adjective-1492",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-065": {
+  "translation_pl": "odnośnie do, co do",
+  "example_pl": "Odnośnie do Pana zapytania niestety nie możemy udzielić Panu informacji.",
+  "government": [
+   {
+    "note_pl": "stoi po rzeczowniku"
+   },
+   {
+    "note_pl": "może stać także przed rzeczownikiem"
+   },
+   {
+    "note_pl": "przed rzeczownikiem, zwłaszcza w Austrii"
+   }
+  ],
+  "usage_note_pl": "Imiesłów i przymiotnik betreffend „odpowiedni, dany” (die betreffende Person) — to inne słowo.",
+  "_src": "dec8e327",
+  "_src_reader": "e817b84c",
+  "see_also_pl": [
+   {
+    "id": "adjective-1045",
+    "at": 1
+   }
+  ]
+ },
+ "preposition-066": {
+  "translation_pl": "wbrew, na przekór (komuś, czemuś)",
+  "example_pl": "Wbrew wszelkim prognozom nasza drużyna wygrała mecz.",
+  "government": [
+   {
+    "note_pl": "wbrew komuś, czemuś; stoi po słowie w Dativie"
+   }
+  ],
+  "usage_note_pl": "Wyrażenie dwuwyrazowe (Duden: jemandem, einer Sache zum Trotz — trotz, entgegen). Rzeczownik Trotz „upór” (aus Trotz) — to inne słowo.",
+  "_src": "c2413f07",
+  "_src_reader": "9790a10c"
  }
 }

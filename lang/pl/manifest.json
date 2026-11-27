@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "81c4e0749cf5",
+ "version": "2bccd60548fe",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -160,8 +160,8 @@
   "example-senses": {
    "source": "deutsch-home/wortschatz/example-senses.json",
    "key": "id",
-   "items": 5445,
-   "done": 5445
+   "items": 5475,
+   "done": 5475
   }
  },
  "files": {
@@ -234,8 +234,8 @@
    "done": 129
   },
   "wortschatz/example-senses.json": {
-   "items": 5445,
-   "done": 5445
+   "items": 5475,
+   "done": 5475
   },
   "worterbuch/german-adjective-adverbs.json": {
    "items": 603,
@@ -263,9 +263,9 @@
    "done": 58
   },
   "worterbuch/german-expressions.json": {
-   "items": 454,
-   "texts": 1524,
-   "done": 454
+   "items": 457,
+   "texts": 1533,
+   "done": 457
   },
   "worterbuch/german-function-words.json": {
    "items": 50,
@@ -274,12 +274,12 @@
   },
   "worterbuch/german-light.json": {
    "items": 465,
-   "texts": 935,
+   "texts": 931,
    "done": 418
   },
   "worterbuch/german-nouns.json": {
    "items": 5377,
-   "texts": 13413,
+   "texts": 13411,
    "done": 5377
   },
   "worterbuch/german-numerals.json": {
@@ -288,9 +288,9 @@
    "done": 24
   },
   "worterbuch/german-prepositions.json": {
-   "items": 60,
-   "texts": 303,
-   "done": 60
+   "items": 66,
+   "texts": 334,
+   "done": 66
   },
   "worterbuch/german-pronouns.json": {
    "items": 61,
@@ -299,7 +299,7 @@
   },
   "worterbuch/german-verbs.json": {
    "items": 2800,
-   "texts": 10516,
+   "texts": 10607,
    "done": 2800
   },
   "ui.json": {
@@ -308,7 +308,7 @@
   },
   "reader.json": {
    "items": 287,
-   "done": 298
+   "done": 302
   }
  },
  "dictionary": {

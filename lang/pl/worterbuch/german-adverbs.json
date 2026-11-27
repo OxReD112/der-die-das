@@ -415,8 +415,8 @@
  "adverb-070": {
   "translation_pl": "tylko",
   "example_pl": "Mam przy sobie tylko dziesięć euro.",
-  "usage_note_pl": "Jako partykuła wzmacnia prośbę lub życzenie: Wenn ich nur mehr Zeit hätte! — Gdybym tylko miał / miała więcej czasu! Nie mylić z erst (zob. hasło erst).",
-  "_src": "5df76b53",
+  "usage_note_pl": "Jako partykuła wzmacnia prośbę lub życzenie: Wenn ich nur mehr Zeit hätte! — Gdybym tylko miał / miała więcej czasu! Nie mylić z erst.",
+  "_src": "f69e54b5",
   "_src_reader": "e1a52158"
  },
  "adverb-071": {
@@ -538,9 +538,15 @@
  "adverb-085": {
   "translation_pl": "jednak, mimo wszystko; -że, no, przecież; ależ tak (w odpowiedzi na przeczenie); (w życzeniach) gdyby tylko",
   "example_pl": "Nie idziesz z nami? – Ależ tak, idę!",
-  "usage_note_pl": "Odpowiedź „tak” na pytanie przeczące — doch, a nie ja. Z trybem rozkazującym — z naciskiem: Komm doch mit! — No chodźże z nami! Sei doch still! — Bądźże cicho! W zdaniu oznajmującym — wyrzut, przypomnienie: Das weißt du doch! — Przecież to wiesz! W życzeniach (często z nur) — „żeby chociaż, byle tylko, gdyby tylko”: Hätte er doch nur eine Uhr! — Gdyby tylko miał zegarek! Wenn wir doch ein Kind hätten! — Ach, gdybyśmy mieli dziecko! Spójnik doch „ale, jednak” — osobne hasło.",
-  "_src": "0ce089a6",
-  "_src_reader": "2fe6f181"
+  "usage_note_pl": "Odpowiedź „tak” na pytanie przeczące — doch, a nie ja. Z trybem rozkazującym — z naciskiem: Komm doch mit! — No chodźże z nami! Sei doch still! — Bądźże cicho! W zdaniu oznajmującym — wyrzut, przypomnienie: Das weißt du doch! — Przecież to wiesz! W życzeniach (często z nur) — „żeby chociaż, byle tylko, gdyby tylko”: Hätte er doch nur eine Uhr! — Gdyby tylko miał zegarek! Wenn wir doch ein Kind hätten! — Ach, gdybyśmy mieli dziecko! Spójnik doch „ale, jednak”.",
+  "_src": "0ea3f83c",
+  "_src_reader": "2fe6f181",
+  "see_also_pl": [
+   {
+    "id": "conjunction-058",
+    "at": 7
+   }
+  ]
  },
  "adverb-086": {
   "translation_pl": "nareszcie",
@@ -1435,16 +1441,28 @@
  "adverb-223": {
   "translation_pl": "tym, z tym; tym samym",
   "example_pl": "Co z tym robisz?",
-  "usage_note_pl": "Zastępuje mit + rzecz: mit dem Messer → damit; o ludziach — mit ihm/ihr, nie damit. Tym samym: Damit ist alles gesagt. — I tym wszystko powiedziane. Spójnik damit „żeby” — osobne hasło (conjunction-013).",
-  "_src": "24edcd2d",
-  "_src_reader": "1c2fb28b"
+  "usage_note_pl": "Zastępuje mit + rzecz: mit dem Messer → damit; o ludziach — mit ihm/ihr, nie damit. Tym samym: Damit ist alles gesagt. — I tym wszystko powiedziane. Spójnik damit „żeby”.",
+  "_src": "184f29bb",
+  "_src_reader": "1c2fb28b",
+  "see_also_pl": [
+   {
+    "id": "conjunction-013",
+    "at": 3
+   }
+  ]
  },
  "adverb-224": {
   "translation_pl": "ale, ależ (wzmocnienie, zdziwienie)",
   "example_pl": "Ależ to piękne!",
-  "usage_note_pl": "Nieakcentowana partykuła w wykrzyknieniach i odpowiedziach: Du spielst aber gut! — Ale dobrze grasz! aber gern — z przyjemnością. Spójnik aber „ale” — osobne hasło (conjunction-003).",
-  "_src": "e07bd85b",
-  "_src_reader": "ece513a6"
+  "usage_note_pl": "Nieakcentowana partykuła w wykrzyknieniach i odpowiedziach: Du spielst aber gut! — Ale dobrze grasz! aber gern — z przyjemnością. Spójnik aber „ale”.",
+  "_src": "9d06521a",
+  "_src_reader": "ece513a6",
+  "see_also_pl": [
+   {
+    "id": "conjunction-003",
+    "at": 3
+   }
+  ]
  },
  "adverb-225": {
   "translation_pl": "proszę; nie ma za co (w odpowiedzi na „dziękuję”); słucham? (Wie bitte?)",
@@ -1482,9 +1500,15 @@
  "adverb-230": {
   "translation_pl": "pod tym względem, w tym sensie",
   "example_pl": "Pociąg był punktualny, pod tym względem mieliśmy szczęście.",
-  "usage_note_pl": "insofern …, als … — pod tym względem, że: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Czasem ≈ deshalb (dlatego). Spójnik insofern „jeśli; o ile” — osobne hasło.",
-  "_src": "b3e08a63",
-  "_src_reader": "7a9f2ca4"
+  "usage_note_pl": "insofern …, als … — pod tym względem, że: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Czasem ≈ deshalb (dlatego). Spójnik insofern „jeśli; o ile”.",
+  "_src": "47c5450d",
+  "_src_reader": "7a9f2ca4",
+  "see_also_pl": [
+   {
+    "id": "conjunction-040",
+    "at": 3
+   }
+  ]
  },
  "adverb-231": {
   "translation_pl": "pod tym względem, w tej mierze",
@@ -1503,8 +1527,8 @@
  "adverb-233": {
   "translation_pl": "kiedykolwiek; po (tyle a tyle na każdego)",
   "example_pl": "Widziałeś kiedykolwiek coś tak pięknego?",
-  "usage_note_pl": "je zwei — po dwa: Wir bekommen je zwei Bonbons. je nach — w zależności od: je nach Wetter; je nachdem, ob … — zależnie od tego, czy …; Je nachdem! — To zależy! mehr denn je — bardziej niż kiedykolwiek; seit je — od zawsze. je Person — na osobę (jak pro). Para je … desto — osobne hasło.",
-  "_src": "b040144e",
+  "usage_note_pl": "je zwei — po dwa: Wir bekommen je zwei Bonbons. je nach — w zależności od: je nach Wetter; je nachdem, ob … — zależnie od tego, czy …; Je nachdem! — To zależy! mehr denn je — bardziej niż kiedykolwiek; seit je — od zawsze. je Person — na osobę (jak pro). Para je … desto.",
+  "_src": "a09b2e86",
   "_src_reader": "0b36dd92"
  },
  "adverb-234": {
@@ -2607,8 +2631,8 @@
  "adverb-390": {
   "translation_pl": "solo, solowo; sam, bez pary",
   "example_pl": "Po dziesięciu latach w zespole piosenkarka chce teraz występować solo.",
-  "usage_note_pl": "Nie odmienia się. W Dudenie — nieodmienny przymiotnik. W znaczeniu „sam, bez pary” — potocznie, często żartobliwie: Ich bin zurzeit solo. Rzeczownik das Solo — osobne hasło.",
-  "_src": "c8819ab4",
+  "usage_note_pl": "Nie odmienia się. W Dudenie — nieodmienny przymiotnik. W znaczeniu „sam, bez pary” — potocznie, często żartobliwie: Ich bin zurzeit solo. Rzeczownik das Solo.",
+  "_src": "0c4290d4",
   "_src_reader": "cf6410d6"
  },
  "adverb-391": {
@@ -2661,8 +2685,8 @@
  "adverb-398": {
   "translation_pl": "wyjątkowo, bardzo, w najwyższym stopniu",
   "example_pl": "Oferta brzmi wyjątkowo interesująco, ale muszę się jeszcze zastanowić.",
-  "usage_note_pl": "Stoi przed przymiotnikiem lub przysłówkiem: höchst gefährlich. „Najwyższy” — to stopień najwyższy od hoch: der höchste Berg, am höchsten (zob. hasło hoch).",
-  "_src": "5650161f",
+  "usage_note_pl": "Stoi przed przymiotnikiem lub przysłówkiem: höchst gefährlich. „Najwyższy” — to stopień najwyższy od hoch: der höchste Berg, am höchsten.",
+  "_src": "33f66bf0",
   "_src_reader": "60dda336"
  },
  "adverb-399": {
@@ -2867,8 +2891,8 @@
  "adverb-427": {
   "translation_pl": "zwykle, najczęściej; w większości",
   "example_pl": "W weekendy zwykle śpię do dziewiątej.",
-  "usage_note_pl": "= meistens. Nie mylić: die meisten Leute — większość ludzi (stopień najwyższy od viel, osobne hasło).",
-  "_src": "791d1f56",
+  "usage_note_pl": "= meistens. Nie mylić: die meisten Leute — większość ludzi (stopień najwyższy od viel).",
+  "_src": "0031789d",
   "_src_reader": "286f794b"
  },
  "adverb-428": {
@@ -3058,11 +3082,11 @@
   "_src_reader": "d1776902"
  },
  "adverb-454": {
-  "translation_pl": "naprzeciw; wbrew",
+  "translation_pl": "naprzeciw; przeciwny (czemuś)",
   "example_pl": "Dzieci wybiegły ojcu naprzeciw.",
-  "usage_note_pl": "Komu, czemu — Dativ, często po słowie: dem Vater entgegen — naprzeciw ojcu; entgegen allen Erwartungen / allen Erwartungen entgegen — wbrew wszelkim oczekiwaniom. Część czasownika: entgegenkommen, entgegennehmen.",
-  "_src": "263262bb",
-  "_src_reader": "5750704b"
+  "usage_note_pl": "Komu, czemu — Dativ, często po słowie: dem Vater entgegen — naprzeciw ojcu; Wbrew czemuś (entgegen allen Erwartungen) — przyimek. Część czasownika: entgegenkommen, entgegennehmen.",
+  "_src": "ee914571",
+  "_src_reader": "85223979"
  },
  "adverb-455": {
   "translation_pl": "też, także; razem (z innymi)",

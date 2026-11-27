@@ -9,8 +9,8 @@
  "function-002": {
   "translation_pl": "partykuła przed bezokolicznikiem (nie tłumaczy się)",
   "example_pl": "Nie mam czasu czytać.",
-  "usage_note_pl": "zu + bezokolicznik stoi po wielu czasownikach, rzeczownikach i przymiotnikach: Es ist schwer, Deutsch zu lernen. W czasownikach z przedrostkiem rozdzielnym zu stoi wewnątrz słowa: anzurufen. Po czasownikach modalnych zu nie jest potrzebne: Ich muss lesen. Także: um … zu, ohne … zu, statt … zu. Przyimek zu („do”) i zu „zbyt” — osobne hasła.",
-  "_src": "04ec80a6",
+  "usage_note_pl": "zu + bezokolicznik stoi po wielu czasownikach, rzeczownikach i przymiotnikach: Es ist schwer, Deutsch zu lernen. W czasownikach z przedrostkiem rozdzielnym zu stoi wewnątrz słowa: anzurufen. Po czasownikach modalnych zu nie jest potrzebne: Ich muss lesen. Także: um … zu, ohne … zu, statt … zu. Przyimek zu („do”) i zu „zbyt”.",
+  "_src": "3261043a",
   "_src_reader": "1cb8fb04"
  },
  "function-003": {
@@ -37,8 +37,8 @@
  "function-006": {
   "translation_pl": "no!, no?; no i … (zdziwienie, zniecierpliwienie, zachęta)",
   "example_pl": "No, jak leci?",
-  "usage_note_pl": "Na also! — No widzisz! Na und? — No i co? Na gut. — No dobrze. Na los! — No, dalej! na ja — no, w sumie (osobne hasło).",
-  "_src": "ba3d72b3",
+  "usage_note_pl": "Na also! — No widzisz! Na und? — No i co? Na gut. — No dobrze. Na los! — No, dalej! na ja — no, w sumie.",
+  "_src": "01d8424a",
   "_src_reader": "d22468d2"
  },
  "function-007": {

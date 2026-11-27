@@ -1199,6 +1199,26 @@
    "en": "{0} (in order; the noun left out)",
    "ru": "{0} (по счёту; существительное опущено)",
    "pl": "{0} (z kolei; pominięty rzeczownik)"
+  },
+  {
+   "en": "here: to have something to do",
+   "ru": "здесь: есть что (сделать)",
+   "pl": "tu: mieć coś do (zrobienia)"
+  },
+  {
+   "en": "here: to have nothing / little to do",
+   "ru": "здесь: нечего / мало что (сделать)",
+   "pl": "tu: nie mieć nic / mieć niewiele do (zrobienia)"
+  },
+  {
+   "en": "here: to have to or to have something to do",
+   "ru": "здесь: нужно / должен или есть что (сделать)",
+   "pl": "tu: trzeba / musi albo ma coś do (zrobienia)"
+  },
+  {
+   "en": "Not translated separately / oneself",
+   "ru": "Отдельно не переводится / себя",
+   "pl": "Nie tłumaczy się osobno / siebie"
   }
  ],
  "pronouns": [

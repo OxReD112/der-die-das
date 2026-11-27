@@ -119,11 +119,11 @@
   "_src_reader": "f1cfbe1e"
  },
  "noun-019b": {
-  "plural_note_pl": "To hasło dotyczy słowa w znaczeniu wypowiedzi lub mowy ciągłej. Na przykład: ein paar Worte sagen — „powiedzieć kilka słów”.",
+  "plural_note_pl": "Tutaj — słowo w znaczeniu wypowiedzi lub mowy ciągłej. Na przykład: ein paar Worte sagen — „powiedzieć kilka słów”.",
   "translation_pl": "wypowiedź; słowo w znaczeniu „to, co powiedziane”",
   "example_pl": "Znalazła właściwe słowa.",
-  "_src": "3853be43",
-  "_src_reader": "ce70cf50"
+  "_src": "00807004",
+  "_src_reader": "8d11f8cb"
  },
  "noun-020": {
   "translation_pl": "staż, praktyka",
@@ -2391,14 +2391,10 @@
    {
     "meaning_pl": "przeprosiny",
     "note_pl": "przeprosiny za coś: eine Entschuldigung für die Verspätung"
-   },
-   {
-    "meaning_pl": "pisemne usprawiedliwienie nieobecności",
-    "note_pl": "pisemne usprawiedliwienie nieobecności (w szkole itp.): Die Mutter schrieb ihm eine Entschuldigung für die Schule."
    }
   ],
-  "_src": "7e72266f",
-  "_src_reader": "c88b2eb0"
+  "_src": "cade9655",
+  "_src_reader": "4835ff22"
  },
  "noun-349": {
   "plural_note_pl": "W znaczeniu „ogień, płomień” zwykle bez liczby mnogiej; Feuer w liczbie mnogiej — pojedyncze ogniska lub pożary.",
@@ -4036,10 +4032,10 @@
   "_src_reader": "b6fd3a3a"
  },
  "noun-597": {
-  "translation_pl": "droga",
+  "translation_pl": "ścieżka, dróżka; droga; sposób, metoda",
   "example_pl": "Czy może mi Pan pokazać drogę na dworzec?",
-  "_src": "243c9b06",
-  "_src_reader": "a83f985e"
+  "_src": "e2ce24cd",
+  "_src_reader": "e7ae8255"
  },
  "noun-598": {
   "translation_pl": "życzenie, pragnienie",
@@ -5701,17 +5697,17 @@
   "_src_reader": "237c86f9"
  },
  "noun-849": {
-  "translation_pl": "zajęcie; praca, zatrudnienie",
+  "translation_pl": "zajęcie; praca; zatrudnienie; zajmowanie się (czymś)",
   "example_pl": "Czytanie to moje ulubione zajęcie w weekendy.",
   "plural_note_pl": "W znaczeniu „zatrudnienie (pracowników)” występuje bez liczby mnogiej.",
   "complements": [
    {
-    "meaning_pl": "zajęcie",
+    "meaning_pl": "zajmowanie się (czymś)",
     "note_pl": "zajmowanie się czymś: die Beschäftigung mit Kunst"
    }
   ],
-  "_src": "338d57ad",
-  "_src_reader": "04a5cec3"
+  "_src": "a37003f5",
+  "_src_reader": "46da8bdb"
  },
  "noun-850": {
   "translation_pl": "poprawa; wyzdrowienie",
@@ -7425,16 +7421,16 @@
   "_src_reader": "15b86551"
  },
  "noun-1106": {
-  "translation_pl": "uczucie, poczucie; odczucie, wrażenie",
+  "translation_pl": "uczucie; odczucie, wrażenie; poczucie (rytmu, humoru), wyczucie",
   "example_pl": "Mam wrażenie, że już się znamy.",
   "complements": [
    {
-    "note_pl": "poczucie czegoś: ein Gefühl für Rhythmus",
-    "meaning_pl": "uczucie, poczucie"
+    "note_pl": "wyczucie czegoś: Sie hat ein gutes Gefühl für Farben.",
+    "meaning_pl": "poczucie (rytmu, humoru), wyczucie"
    }
   ],
-  "_src": "51331cb3",
-  "_src_reader": "3f4093ed"
+  "_src": "cf14745c",
+  "_src_reader": "499fc78c"
  },
  "noun-1107": {
   "translation_pl": "okolica, rejon",
@@ -11202,16 +11198,16 @@
  "noun-1670": {
   "translation_pl": "chustka; kawałek materiału, ścierka",
   "example_pl": "Zawiązuje sobie na głowie kolorową chustkę.",
-  "plural_note_pl": "Tücher — pojedyncze chustki lub kawałki materiału. W znaczeniu „sukno” używa się formy Tuche (osobne hasło).",
-  "_src": "cc150b2b",
-  "_src_reader": "d12bfcba"
+  "plural_note_pl": "Tücher — pojedyncze chustki lub kawałki materiału. W znaczeniu „sukno” używa się formy Tuche.",
+  "_src": "614a3721",
+  "_src_reader": "1cef6c06"
  },
  "noun-1671": {
   "translation_pl": "sukno; tkanina wełniana",
   "example_pl": "Płaszcz jest uszyty z cienkiego sukna.",
-  "plural_note_pl": "Tuche — rodzaje sukna. W odniesieniu do chustek i pojedynczych kawałków materiału używa się formy Tücher (osobne hasło).",
-  "_src": "507c089b",
-  "_src_reader": "e844bc5e"
+  "plural_note_pl": "Tuche — rodzaje sukna. W odniesieniu do chustek i pojedynczych kawałków materiału używa się formy Tücher.",
+  "_src": "b7edb43f",
+  "_src_reader": "b07c6468"
  },
  "noun-1672": {
   "translation_pl": "wieża; wieża (w szachach)",
@@ -12475,17 +12471,29 @@
  "noun-1841": {
   "translation_pl": "papryka (warzywo)",
   "example_pl": "Do sałatki potrzebujemy czerwonej papryki.",
-  "usage_note_pl": "Także: der Paprika w odniesieniu do tego samego warzywa. Mielona przyprawa — der Paprika (osobne hasło).",
-  "_src": "ff21f2b9",
-  "_src_reader": "d47642fc"
+  "usage_note_pl": "Także: der Paprika w odniesieniu do tego samego warzywa. Mielona przyprawa — der Paprika.",
+  "_src": "5aad5bcb",
+  "_src_reader": "2e1d2f04",
+  "see_also_pl": [
+   {
+    "id": "noun-1842",
+    "at": 2
+   }
+  ]
  },
  "noun-1842": {
   "translation_pl": "papryka mielona; papryka (roślina)",
   "example_pl": "Doprawiam zupę łyżeczką papryki.",
-  "usage_note_pl": "Mielona przyprawa i roślina — der Paprika. Warzywo — die lub der Paprika (osobne hasło).",
+  "usage_note_pl": "Mielona przyprawa i roślina — der Paprika. Warzywo — die lub der Paprika.",
   "plural_note_pl": "Formy Paprika i Paprikas mogą oznaczać pojedyncze rośliny. Przyprawa jako substancja występuje zwykle w liczbie pojedynczej.",
-  "_src": "d0af2f54",
-  "_src_reader": "2829c1ba"
+  "_src": "68bf7c2c",
+  "_src_reader": "ce3d7aa6",
+  "see_also_pl": [
+   {
+    "id": "noun-1841",
+    "at": 2
+   }
+  ]
  },
  "noun-1843": {
   "translation_pl": "procent; zniżka",
@@ -12610,9 +12618,9 @@
   "translation_pl": "stopień; stopień (miara kąta); stopień naukowy",
   "example_pl": "Stopień zanieczyszczenia jest regularnie mierzony.",
   "plural_note_pl": "Po liczebniku forma się nie zmienia: zwanzig Grad. Grade — stopnie, poziomy lub różne stopnie jako jednostki miary.",
-  "usage_note_pl": "W znaczeniu stopnia (poziomu) lub kąta — der Grad. W odniesieniu do temperatury częściej das Grad (osobne hasło).",
-  "_src": "8c0876c2",
-  "_src_reader": "357f438e"
+  "usage_note_pl": "W znaczeniu stopnia (poziomu) lub kąta — der Grad. W odniesieniu do temperatury częściej das Grad.",
+  "_src": "41c55ffe",
+  "_src_reader": "39ed7e22"
  },
  "noun-1863": {
   "translation_pl": "stopień temperatury",
@@ -13327,17 +13335,17 @@
  "noun-1970": {
   "translation_pl": "komputer osobisty",
   "example_pl": "Komputer stoi na moim biurku.",
-  "usage_note_pl": "Skrót od Personal Computer. Poprawność polityczna — die PC (osobne hasło).",
+  "usage_note_pl": "Skrót od Personal Computer. Poprawność polityczna — die PC.",
   "plural_note_pl": "Zwykle PCs; rzadziej nieodmienne PC.",
-  "_src": "8b5e9eed",
-  "_src_reader": "81a92582"
+  "_src": "0b9db0b7",
+  "_src_reader": "aa9359be"
  },
  "noun-1971": {
   "translation_pl": "poprawność polityczna",
   "example_pl": "W dyskusji chodzi o poprawność polityczną i język pełen szacunku.",
-  "usage_note_pl": "Skrót od Political Correctness. Komputer — der PC (osobne hasło).",
-  "_src": "ed28d6a0",
-  "_src_reader": "7ed7d6a9"
+  "usage_note_pl": "Skrót od Political Correctness. Komputer — der PC.",
+  "_src": "e0753270",
+  "_src_reader": "b92db0fb"
  },
  "noun-1972": {
   "translation_pl": "fizyka",
@@ -15128,9 +15136,9 @@
  "noun-2236": {
   "translation_pl": "ósma część",
   "example_pl": "Zostaje ósma część ciasta.",
-  "usage_note_pl": "W Szwajcarii także: der Achtel. Znaczenie muzyczne — osobne hasło die Achtel.",
-  "_src": "19262611",
-  "_src_reader": "511b25b0"
+  "usage_note_pl": "W Szwajcarii także: der Achtel. Znaczenie muzyczne — die Achtel.",
+  "_src": "1a156f8f",
+  "_src_reader": "cd9523a6"
  },
  "noun-2237": {
   "translation_pl": "ósemka (nuta)",
@@ -17557,9 +17565,9 @@
  "noun-2610": {
   "translation_pl": "tuzin (dwanaście sztuk)",
   "example_pl": "Na przyjęcie kupiła dwa tuziny bułek.",
-  "plural_note_pl": "Po liczebniku forma się nie zmienia: zwei Dutzend. Nieokreślona duża liczba: Dutzende — osobne hasło.",
-  "_src": "342d4582",
-  "_src_reader": "d9b1ceea"
+  "plural_note_pl": "Po liczebniku forma się nie zmienia: zwei Dutzend. Nieokreślona duża liczba: Dutzende.",
+  "_src": "114428e5",
+  "_src_reader": "e83260dd"
  },
  "noun-2611": {
   "translation_pl": "dziesiątki; mnóstwo",
@@ -27488,20 +27496,20 @@
   "plural_note_pl": "W znaczeniach „wgląd” i „widok” bez lm.",
   "complements": [
    {
-    "note_pl": "zrozumienie czegoś: die Einsicht in die Notwendigkeit; wgląd w coś: Einsicht in die Akten; widok do wnętrza: die Einsicht in den Garten",
+    "note_pl": "zrozumienie czegoś: Er kam zur Einsicht in seine Fehler.",
     "meaning_pl": "zrozumienie, uświadomienie sobie"
    },
    {
-    "note_pl": "zrozumienie czegoś: die Einsicht in die Notwendigkeit; wgląd w coś: Einsicht in die Akten; widok do wnętrza: die Einsicht in den Garten",
+    "note_pl": "wgląd w coś: Sie bat um Einsicht in die Unterlagen.",
     "meaning_pl": "wgląd (w dokumenty)"
    },
    {
-    "note_pl": "zrozumienie czegoś: die Einsicht in die Notwendigkeit; wgląd w coś: Einsicht in die Akten; widok do wnętrza: die Einsicht in den Garten",
+    "note_pl": "widok do wnętrza czegoś: Der Zaun verhindert die Einsicht in den Hof.",
     "meaning_pl": "widok (do wnętrza)"
    }
   ],
-  "_src": "01579ada",
-  "_src_reader": "9d5b923c"
+  "_src": "254ce428",
+  "_src_reader": "80b66812"
  },
  "noun-4062": {
   "translation_pl": "odwołanie, sprzeciw (od decyzji); zastrzeżenie, protest",

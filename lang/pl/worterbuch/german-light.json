@@ -1314,7 +1314,7 @@
   "_src_reader": "811c9dc5"
  },
  "light-0270": {
-  "translation_pl": "zabiegać, ubiegać się, przypochlebiać się; przestarz. czulić się, flirtować; przestarz. zalecać się, umizgać się",
+  "translation_pl": "zabiegać, ubiegać się, przypochlebiać się; przestarz. zalecać się, umizgać się; przestarz. czulić się, flirtować",
   "complements": [
    {
     "note_pl": "zabiegać o coś (pejor.): Die Parteien buhlen um die Gunst der Wähler.",
@@ -1329,8 +1329,8 @@
     "meaning_pl": "przestarz. czulić się, flirtować"
    }
   ],
-  "_src": "7e5cadd0",
-  "_src_reader": "7e5cadd0"
+  "_src": "957cb348",
+  "_src_reader": "957cb348"
  },
  "light-0271": {
   "translation_pl": "potępiać, odrzucać; przestarz. zakazywać pod groźbą kary",
@@ -1726,7 +1726,7 @@
   "_src_reader": "4ee40b82"
  },
  "light-0314": {
-  "translation_pl": "powstawać, pojawiać się, zrywać się, wchodzić w modę; płacić, pokrywać (koszty); odpowiadać, ponosić odpowiedzialność; radzić sobie, mierzyć się; dorównywać, wybijać się (przy kimś); podnosić się, wstawać; (książk.) wracać do zdrowia, zdrowieć; (reg.) wychodzić na jaw, ujawniać się; lądować; odrabiać straty, nasilać atak (w sporcie); ukazywać się na horyzoncie (o statku)",
+  "translation_pl": "powstawać, pojawiać się, zrywać się, wchodzić w modę; płacić, pokrywać (koszty); odpowiadać, ponosić odpowiedzialność; radzić sobie, mierzyć się; równać się (z kimś), dorównywać; podnosić się, wstawać; (książk.) wracać do zdrowia, zdrowieć; (reg.) wychodzić na jaw, ujawniać się; lądować; odrabiać straty, nasilać atak (w sporcie); ukazywać się na horyzoncie (o statku)",
   "complements": [
    {
     "meaning_pl": "płacić, pokrywać (koszty)",
@@ -1741,7 +1741,7 @@
     "note_pl": "radzić sobie z kimś, czymś: Gegen diesen Gegner kommt er nicht auf."
    },
    {
-    "meaning_pl": "dorównywać, wybijać się (przy kimś)",
+    "meaning_pl": "równać się (z kimś), dorównywać",
     "note_pl": "dorównywać komuś: Gegen ihn kommt im Team niemand auf."
    }
   ],
@@ -2530,23 +2530,23 @@
   "_src_reader": "1c1cd768"
  },
  "light-0376": {
-  "translation_pl": "nie trafić (ręką), zagrać fałszywą nutę; pomylić się (w wyborze), wybrać coś niewłaściwego; przywłaszczyć sobie, sięgnąć (po cudze); podnieść rękę, użyć przemocy",
+  "translation_pl": "nie trafiać (ręką), grać fałszywą nutę; mylić się (w wyborze), wybierać coś niewłaściwego; przywłaszczać sobie, sięgać (po cudze); podnosić rękę, używać przemocy",
   "complements": [
    {
-    "meaning_pl": "przywłaszczyć sobie, sięgnąć (po cudze)",
-    "note_pl": "sięgnąć po coś (cudzego), przywłaszczyć sobie coś: Er hat sich an der Kasse vergriffen."
+    "meaning_pl": "przywłaszczać sobie, sięgać (po cudze)",
+    "note_pl": "sięgać po coś (cudzego), przywłaszczać sobie coś: Der Verwalter vergriff sich an den Spendengeldern."
    },
    {
-    "meaning_pl": "podnieść rękę, użyć przemocy",
+    "meaning_pl": "podnosić rękę, używać przemocy",
     "note_pl": "podnieść rękę na kogoś: Er vergreift sich an einem Schwächeren."
    },
    {
-    "meaning_pl": "pomylić się (w wyborze), wybrać coś niewłaściwego",
+    "meaning_pl": "mylić się (w wyborze), wybierać coś niewłaściwego",
     "note_pl": "pomylić się w czymś (w tonie, wyrażeniu): Er hat sich im Ton vergriffen."
    }
   ],
-  "_src": "d8e47f16",
-  "_src_reader": "d8e47f16"
+  "_src": "62a816b5",
+  "_src_reader": "62a816b5"
  },
  "light-0377": {
   "translation_pl": "wydawać za mąż, żenić",
@@ -2604,14 +2604,14 @@
   "_src_reader": "fa983786"
  },
  "light-0381": {
-  "translation_pl": "pomylić, (przez pomyłkę) wziąć cudze zamiast swojego; zmieniać, zamieniać, wymieniać; zmienić (jedno zajęcie na inne)",
+  "translation_pl": "mylić, (przez pomyłkę) brać cudze zamiast swojego; zmieniać, zamieniać, wymieniać; zmieniać (jedno zajęcie na inne)",
   "complements": [
    {
     "meaning_pl": "zmieniać, zamieniać, wymieniać",
     "note_pl": "zamieniać coś na coś: Er vertauscht den Mantel gegen eine Jacke."
    },
    {
-    "meaning_pl": "zmienić (jedno zajęcie na inne)",
+    "meaning_pl": "zmieniać (jedno zajęcie na inne)",
     "note_pl": "zmienić jedno zajęcie na inne: Sie vertauschte das Büro gegen das Atelier."
    },
    {
@@ -2795,14 +2795,10 @@
    {
     "meaning_pl": "spotykać się",
     "note_pl": "spotykać się z kimś: Er trifft im Café mit seinen Freunden zusammen."
-   },
-   {
-    "meaning_pl": "zbiegać się (w czasie)",
-    "note_pl": "zbiegać się z czymś: Der Feiertag trifft mit dem Sonntag zusammen."
    }
   ],
-  "_src": "e72dddd8",
-  "_src_reader": "e72dddd8"
+  "_src": "1f0a5b3a",
+  "_src_reader": "1f0a5b3a"
  },
  "light-0395": {
   "translation_pl": "podchodzić, zbliżać się (do kogoś, czegoś); kopać",
@@ -2989,14 +2985,14 @@
   "_src_reader": "2abb2466"
  },
  "light-0410": {
-  "translation_pl": "zaprzyjaźnić się (z kimś); oswoić się, zżyć się (z czymś), pogodzić się (z myślą)",
+  "translation_pl": "zaprzyjaźnić się (z kimś); oswajać się, zżywać się (z czymś), godzić się (z myślą)",
   "complements": [
    {
     "meaning_pl": "zaprzyjaźnić się (z kimś)",
     "note_pl": "zaprzyjaźnić się z kimś: Sie hat sich mit der neuen Kollegin befreundet."
    },
    {
-    "meaning_pl": "oswoić się, zżyć się (z czymś), pogodzić się (z myślą)",
+    "meaning_pl": "oswajać się, zżywać się (z czymś), godzić się (z myślą)",
     "note_pl": "oswoić się z czymś: Mit dem neuen System kann er sich nicht befreunden."
    }
   ],
@@ -3098,16 +3094,12 @@
   "translation_pl": "zaprzysięgać, wiązać przysięgą wierności; zobowiązywać (do przestrzegania czegoś), nastawiać, jednoczyć (wokół czegoś)",
   "complements": [
    {
-    "meaning_pl": "zaprzysięgać, wiązać przysięgą wierności",
-    "note_pl": "zaprzysięgać na wierność czemuś: Die Rekruten wurden auf die Verfassung eingeschworen."
-   },
-   {
     "meaning_pl": "zobowiązywać (do przestrzegania czegoś), nastawiać, jednoczyć (wokół czegoś)",
     "note_pl": "zobowiązywać do przestrzegania czegoś: Der Chef schwor das Team auf den neuen Kurs ein."
    }
   ],
-  "_src": "78254abe",
-  "_src_reader": "78254abe"
+  "_src": "625cd959",
+  "_src_reader": "625cd959"
  },
  "light-0420": {
   "translation_pl": "zastępować, wyręczać (kogoś), ratować sytuację; (sport.) rozpoczynać ćwiczenie skokiem; zatrzaskiwać się; cofać się w głąb, być cofniętym (o ścianie)",
@@ -3574,18 +3566,18 @@
  "light-0459": {
   "translation_pl": "(książk.) uzbrajać, wyposażać (kogoś na trudną sytuację)",
   "reflexive": {
-   "translation_pl": "(książk.) przygotować się, nastawić się (na coś nieprzyjemnego); (książk.) uzbroić się (w cierpliwość, odwagę)",
+   "translation_pl": "(książk.) przygotowywać się, nastawiać się (na coś nieprzyjemnego); (książk.) uzbrajać się (w cierpliwość, odwagę)",
    "complements": [
     {
-     "meaning_pl": "(książk.) przygotować się, nastawić się (na coś nieprzyjemnego)",
+     "meaning_pl": "(książk.) przygotowywać się, nastawiać się (na coś nieprzyjemnego)",
      "note_pl": "przygotowywać się na coś: Wir wappnen uns für den Winter."
     },
     {
-     "meaning_pl": "(książk.) przygotować się, nastawić się (na coś nieprzyjemnego)",
+     "meaning_pl": "(książk.) przygotowywać się, nastawiać się (na coś nieprzyjemnego)",
      "note_pl": "przygotować się na coś, zabezpieczyć się przed czymś: Sie wappnete sich gegen die Kritik."
     },
     {
-     "meaning_pl": "(książk.) uzbroić się (w cierpliwość, odwagę)",
+     "meaning_pl": "(książk.) uzbrajać się (w cierpliwość, odwagę)",
      "note_pl": "uzbroić się w coś: Er wappnete sich mit Geduld."
     }
    ]
