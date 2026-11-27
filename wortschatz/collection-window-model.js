@@ -173,7 +173,7 @@
   // others keep the answer screen in place (Alena 21.11). The form stops typing there (maxlength) and says tooLong
   // under the field; import skips such cards and says which field. Words from a book are Wörterbuch cards too (their
   // examples are kept within the limits, cards chat 21.11), so the same limits apply when one is edited before adding.
-  const LIMIT = { sentence: 100, sentenceTranslation: 130, translation: 60, otherMeanings: 150, base: 50, grammar: 60 };
+  const LIMIT = { sentence: 100, sentenceTranslation: 130, translation: 120, otherMeanings: 300, base: 50, grammar: 75 };
   const LIMIT_NAME = {
     sentence: () => L("Sentence", "Предложение"),
     sentenceTranslation: () => L("Sentence Translation", "Перевод предложения"),
@@ -461,9 +461,13 @@
     const issues = I.validate([row], dictionary);
     if (issues.length) return { error: { ...issues[0], code: "DICTIONARY_CLOZE_INVALID" } };
     const validate = async () => I.validate([row], await I.load());
+    // the form: the card as the Wortschatz search gives it — the trained meaning (example-senses.json), the rest in
+    // «Other Meanings» (row only checks the Wörterbuch card, its fields are not the form's)
+    if (root.WortschatzMeanings) await root.WortschatzMeanings.load();
+    const prefill = searchFields(item, request.lang);
     // 21.11.2026 (Alena, variant A): already in the own collection → say so now (the same rule as «Save», which stays)
-    if (own() && C.has({ ...row.card, dictionaryId: item.id })) return { error: { code: "DICTIONARY_DUPLICATE", dictionaryId: item.id, base: row.card.base || "" } };
-    return own() ? { form: { prefill: row.card, validate, dictionaryId: item.id, fromDictionary: true } } : { confirm: [row.card, validate, item.id] };
+    if (own() && C.has(prefill)) return { error: { code: "DICTIONARY_DUPLICATE", dictionaryId: item.id, base: prefill.base || "" } };
+    return own() ? { form: { prefill, validate, dictionaryId: item.id, fromDictionary: true } } : { confirm: [prefill, validate, item.id] };
   }
 
   /* ---------- words from a book (Bibliothek) ---------- */

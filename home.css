@@ -1165,6 +1165,8 @@ header h1 {
 .dictionary-entry-detail {
   margin-top: 4px;
 }
+/* Wörterbuch · «Kasus» of a preposition: pattern, note, example — a little room before the next pattern */
+.dictionary-government-example + .dictionary-word-order-pattern { margin-top: 12px; }
 .dictionary-verb-complements .dictionary-entry-detail {
   margin-bottom: 0;
 }

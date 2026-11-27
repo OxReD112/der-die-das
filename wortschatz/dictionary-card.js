@@ -43,7 +43,7 @@
       Object.assign(error, result.error);
       throw error;
     }
-    const aliases={Nomen:"noun",Substantiv:"noun",Verb:"verb",Adjektiv:"adjective",Adverb:"adverb",Konjunktion:"conjunction",Pronomen:"pronoun"};
+    const aliases={Nomen:"noun",Substantiv:"noun",Verb:"verb",Adjektiv:"adjective",Adverb:"adverb",Konjunktion:"conjunction",Pronomen:"pronoun",Präposition:"preposition"};
     item={...item,type:aliases[item.type] || item.type};
     const word = String(item.word || item.infinitive || "").trim();
     const base = item.type === "noun" ? [item.article, word].filter(Boolean).join(" ") : word;
@@ -55,6 +55,10 @@
     else if (item.type === "verb" && item.perfect_form) grammar = item.perfect_form;
     else if (item.type === "adjective" && (item.comparative || item.superlative))
       grammar = [item.comparative, item.superlative].filter(Boolean).join(" · ");
+    // a preposition: its first two standard patterns (government with status "standard"), in their order — wegen + Genitiv;
+    // in + Dativ / in + Akkusativ; Akkusativ + entlang / entlang + Genitiv; bis + Akkusativ / bis zu + Dativ
+    else if (item.type === "preposition")
+      grammar = (item.government || []).filter(g => g.status === "standard").slice(0, 2).map(g => g.pattern).join(" / ");
     const pos = item.parts_of_speech?.join(" / ") || ({ noun: "Substantiv", verb: "Verb", adjective: "Adjektiv" })[item.type] || "Andere";
     const translatedValue = (ru, en) => lang === "ru" ? ru || en || "" : en || ru || "";
     // a language pack (17.11.2026): item.<field>_<lang> (merged in at load), else as English

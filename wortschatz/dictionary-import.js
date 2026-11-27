@@ -3,7 +3,7 @@
   "use strict";
   const VERSION=2, READING="deutschWortschatzPendingReadingWordsV2", DIRECT="deutschWortschatzPendingDictionaryWordV2";
   const root=new URL('../worterbuch/',document.currentScript.src);
-  const files=[['nouns','noun'],['verbs','verb'],['adjectives','adjective'],['adverbs','adverb'],['adjective-adverbs','adjective'],['conjunctions','conjunction'],['pronouns','pronoun']];
+  const files=[['nouns','noun'],['verbs','verb'],['adjectives','adjective'],['adverbs','adverb'],['adjective-adverbs','adjective'],['conjunctions','conjunction'],['pronouns','pronoun'],['prepositions','preposition'],['function-words',null]]; // function words keep their own type
   async function load() {
     const groups=await Promise.all(files.map(async([file,type])=>{
       const response=await fetch(new URL(`german-${file}.json?v=20261007-adjadv-1`,root),{cache:'no-store'});
@@ -11,7 +11,7 @@
       const list=await response.json();
       // a language pack (17.11.2026): its texts are merged in by id, so cards can be made in that language
       if(window.DeutschTranslation?.needsPack?.())await window.DeutschTranslation.mergeById(list,`worterbuch/german-${file}.json`);
-      return list.map(item=>({...item,type}));
+      return list.map(item=>({...item,type:type || item.type}));
     }));
     const dictionary=new Map(groups.flat().map(item=>[item.id,item]));
     for(const item of groups.flat())for(const id of item.alias_ids || [])dictionary.set(id,item);

@@ -8,7 +8,7 @@
 
    Loading
      WorterbuchModel.load(options)   → Promise of the cards (array) or null when the dictionary could not be loaded.
-                                       The same 8 files as always (FILES), a language pack merged in by id
+                                       The files of FILES, a language pack merged in by id
                                        (DeutschTranslation.mergeById), cards with worterbuch_hidden left out, each
                                        card's `type` set, «Ausdrücke» built from the expressions' related_ids. A second
                                        call while loading returns the same promise; after a failure the next call tries
@@ -43,13 +43,14 @@
          { kind: "translation", text }
          { kind: "reflexive", sich, text }        «sich X — …» (sich X bold)
          { kind: "section", type, label, lines }  a labelled section; type:
-             wordOrder, example, hints, pronounForms, declension, complements, reflexive, verbForms, imperative,
-             expressions, seeAlso
+             wordOrder, example, hints, pronounForms, declension, complements, government, reflexive, verbForms,
+             imperative, expressions, seeAlso
            lines:
              { kind: "detail", text }             { kind: "pattern", parts: [{ text, bold }] }
              { kind: "example", text }            { kind: "reflexiveExample", text }
              { kind: "exampleTranslation", text } (text may be "" — an extra example always has the line)
              { kind: "note", text }               { kind: "complement", text } (bold) · { kind: "complementNote", text }
+             { kind: "governmentExample", text }  the German example of a preposition's pattern («Kasus»)
              { kind: "table", corner, columns, rows: [{ head, cells }], scroll, label }
                                                   pronoun tables scroll sideways (scroll: true, label for VoiceOver),
                                                   the verb table does not
@@ -91,14 +92,19 @@
     { file: "german-adverbs.json", version: "20261126-wn-x245-see-also-4", type: "adverb" },
     { file: "german-conjunctions.json", version: "20261126-wn-x245-see-also-4", type: "conjunction" },
     { file: "german-pronouns.json", version: "20261126-wn-x245-see-also-4", type: "pronoun" },
+    { file: "german-prepositions.json", version: "20261126-wn-x246-function-hidden-2", type: "preposition" },
+    // function words: each card keeps its own type (particle, adverb …); those for the book reader only are worterbuch_hidden
+    { file: "german-function-words.json", version: "20261126-wn-x246-function-hidden-2", type: null },
     { file: "german-adjective-adverbs.json", version: "20261126-wn-x245-see-also-4", type: "adjective" },
     // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
     { file: "german-expressions.json", version: "20261126-wn-x245-see-also-4", type: "expression", optional: true }
   ].map(Object.freeze));
 
-  const ORDER = ["german-nouns.json", "german-verbs.json", "german-adjectives.json", "german-adverbs.json", "german-adjective-adverbs.json", "german-conjunctions.json", "german-pronouns.json", "german-expressions.json"];
+  const ORDER = ["german-nouns.json", "german-verbs.json", "german-adjectives.json", "german-adverbs.json", "german-adjective-adverbs.json", "german-conjunctions.json", "german-pronouns.json", "german-prepositions.json", "german-function-words.json", "german-expressions.json"];
 
-  const TYPE_LABEL = Object.freeze({ noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion", pronoun: "Pronomen", expression: "Ausdruck" });
+  const TYPE_LABEL = Object.freeze({ noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion", pronoun: "Pronomen", preposition: "Präposition", particle: "Partikel", expression: "Ausdruck" });
+  // the status of a preposition's pattern (government[].status) → its mark; "standard" has none
+  const GOVERNMENT_STATUS = Object.freeze({ also_correct: "auch möglich", colloquial: "umgangssprachlich" });
   const MAX_ROWS = 12;
 
   const T = () => root.DeutschTranslation;
@@ -169,7 +175,7 @@
     const lang = T()?.getDisplayLang?.() || "";
     if (item.searchKeys && item.searchKeys.lang === lang) return item.searchKeys;
     const word = normalized(item.word);
-    const forms = new Set((item.search_forms || []).map(normalized));
+    const forms = new Set([...(item.search_forms || []), ...Object.keys(item.contractions || {})].map(normalized));
     const raw = String(item.word);
     if (raw.includes("(")) {
       forms.add(normalized(raw.replace(/\s*\([^)]*\)/g, "")));
@@ -213,7 +219,7 @@
         lists.forEach((list, i) => {
           const { file, type } = FILES[i];
           cards[file] = (Array.isArray(list) ? list : []).filter(item => item && typeof (type === "verb" ? item.infinitive : item.word) === "string")
-            .map(item => type === "verb" ? { ...item, word: item.infinitive, type } : { ...item, type });
+            .map(item => type === "verb" ? { ...item, word: item.infinitive, type } : { ...item, type: type || item.type });
         });
         // Wörterbuch quality A4 (user 27.10.2026): a card with `worterbuch_hidden: true` is for the book reader only — not shown here.
         // the order of the cards as always: nouns, verbs, adjectives, adverbs, adjective-adverbs, conjunctions, pronouns, expressions
@@ -388,6 +394,25 @@
     if (rest.length) blocks.push({ kind: "section", type: "seeAlso", label: "Siehe auch", lines: rest.map(card => cardRow("cardLink", card)) });
   }
 
+  // «Kasus» of a preposition: each pattern of government in the order of the data — the pattern in bold (its place
+  // before / after the noun is in the pattern itself: wegen + Genitiv, Akkusativ + entlang) with its status mark, its
+  // note, its German example; at the end the note on the contracted forms (forms_note: zum = zu dem).
+  function governmentSection(item, cardNote) {
+    if (!item.government?.length) return null;
+    const lines = [];
+    for (const g of item.government) {
+      const parts = [{ text: g.pattern, bold: true }];
+      if (GOVERNMENT_STATUS[g.status]) parts.push({ text: " · " + GOVERNMENT_STATUS[g.status], bold: false });
+      lines.push({ kind: "pattern", parts });
+      const note = translatedField(g, "note");
+      if (note) lines.push({ kind: "complementNote", text: note });
+      if (g.example_de) lines.push({ kind: "governmentExample", text: g.example_de });
+    }
+    const formsNote = translatedField(item, "forms_note");
+    if (formsNote) lines.push(cardNote(formsNote, "forms_note"));
+    return { kind: "section", type: "government", label: "Kasus", lines };
+  }
+
   function hintsSection(item, cardNote) {
     const lines = noteLines(item);
     if (!Array.isArray(lines) || !lines.length) return null;
@@ -427,9 +452,9 @@
     // Cards with a word-order rule (conjunctions, linking adverbs): translation → „Wortstellung“ (rule, pattern) → „Beispiel“ → „Hinweise“.
     const hasWordOrder = Boolean(item.word_order_rule || item.word_order_pattern);
     const noteAfterTranslation = ["adverb", "conjunction", "pronoun"].includes(item.type);
-    // Wörterbuch quality A2 (user 26.10.2026): the note of a verb, noun or adjective stands right under its translation (and the
+    // Wörterbuch quality A2 (user 26.10.2026): the note of a verb, noun, adjective, preposition or particle stands right under its translation (and the
     // «sich X» line), as WOERTERBUCH_VERBS asks; the Plural line and its plural note stay above the translation.
-    const noteUnderTranslation = ["verb", "noun", "adjective"].includes(item.type);
+    const noteUnderTranslation = ["verb", "noun", "adjective", "preposition", "particle"].includes(item.type);
     if (usageNote && !noteAfterTranslation && !noteUnderTranslation) push(cardNote(usageNote, "usage_note"));
 
     push({ kind: "translation", text: translatedField(item, "translation") });
@@ -478,6 +503,8 @@
       if (declensionNote) lines.push({ kind: "note", text: declensionNote });
       push({ kind: "section", type: "declension", label: "Deklination", lines });
     }
+
+    if (item.type === "preposition") push(governmentSection(item, cardNote));
 
     if (item.type === "verb" && item.complements?.length) {
       const lines = [];

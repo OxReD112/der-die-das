@@ -51,6 +51,7 @@
     pronounForms: "dictionary-pronoun-forms",
     declension: "dictionary-noun-declension",
     complements: "dictionary-verb-complements",
+    government: "dictionary-verb-complements dictionary-preposition-government",
     reflexive: "dictionary-entry-reflexive-section",
     verbForms: "dictionary-verb-forms",
     imperative: "dictionary-verb-imperative",
@@ -63,7 +64,8 @@
     reflexiveExample: "dictionary-entry-example dictionary-entry-reflexive-example",
     exampleTranslation: "dictionary-entry-example-translation",
     note: "dictionary-entry-note",
-    complementNote: "dictionary-entry-example-translation dictionary-verb-complement-note"
+    complementNote: "dictionary-entry-example-translation dictionary-verb-complement-note",
+    governmentExample: "dictionary-entry-plural dictionary-entry-detail dictionary-government-example"
   };
 
   function makeTable(line) {
