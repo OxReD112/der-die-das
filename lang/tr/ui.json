@@ -1,0 +1,152 @@
+[
+ {
+  "en": "Restore the backup from {0}?",
+  "ru": "Восстановить бэкап от {0}?",
+  "tr": "{0} tarihli yedek geri yüklensin mi?"
+ },
+ {
+  "en": "Save your progress first.",
+  "ru": "Сначала сохрани прогресс.",
+  "tr": "Önce ilerlemeni kaydet."
+ },
+ {
+  "en": "Tap <b>Share</b> {0} in Safari, then <b>Add to Home Screen</b>.",
+  "ru": "Нажми <b>Поделиться</b> {0} в Safari, затем <b>На экран «Домой»</b>.",
+  "tr": "Safari'de <b>Paylaş</b> {0} simgesine, sonra <b>Ana Ekrana Ekle</b> seçeneğine dokun."
+ },
+ {
+  "en": "What you want to say:",
+  "ru": "Что ты хочешь сказать:",
+  "tr": "Ne söylemek istiyorsun:"
+ },
+ {
+  "en": "{0} means “{1}”. ",
+  "ru": "{0} — это «{1}». ",
+  "tr": "{0} — “{1}” anlamında. "
+ },
+ {
+  "en": "Tap a particle below and watch where the tone moves.",
+  "ru": "Нажми на частицу внизу — и смотри, куда сдвинется тон.",
+  "tr": "Aşağıdan bir parçacığa dokun ve tonun nereye kaydığını izle."
+ },
+ {
+  "en": "This particle doesn't fit here.",
+  "ru": "Здесь эта частица не встаёт.",
+  "tr": "Bu parçacık buraya uymuyor."
+ },
+ {
+  "en": "Some are like English: teilnehmen an — take part in, abhängen von — depend on, protestieren gegen — protest against.",
+  "ru": "Часто помогает русский: antworten auf — отвечать на, glauben an — верить в, abhängen von — зависеть от. Ловушка: warten auf — просто «ждать».",
+  "tr": "Çoğu zaman Türkçe de yardımcı olur: protestieren gegen — bir şeye karşı protesto etmek, sprechen über — bir şey üzerine konuşmak, glauben an — bir şeye inanmak. Tuzak: warten auf — sadece “beklemek”."
+ },
+ {
+  "en": "Polite form — capitalised: {w}",
+  "ru": "Вежливая форма — с большой буквы: {w}",
+  "tr": "Nezaket biçimi — büyük harfle: {w}"
+ },
+ {
+  "en": "<i>{0}</i> is an inseparable prefix: no <i>ge-</i> in the Partizip II",
+  "ru": "<i>{0}</i> — неотделяемая приставка: Partizip II без <i>ge-</i>",
+  "tr": "<i>{0}</i> ayrılmayan bir ön ek: Partizip II biçiminde <i>ge-</i> yok"
+ },
+ {
+  "en": "{0} {0|word|words}",
+  "ru": "{0} {0|слово|слова|слов}",
+  "tr": "{0} {0|kelime|kelime|kelime}"
+ },
+ {
+  "en": "This word is already in your collection.",
+  "ru": "Это слово уже есть в коллекции.",
+  "tr": "Bu kelime zaten koleksiyonunda var."
+ },
+ {
+  "en": "That's a bit long - try a shorter one.",
+  "ru": "Ой, слишком длинно. Сократи немного.",
+  "tr": "Bu biraz uzun oldu, kısaltmayı dene."
+ },
+ {
+  "en": "Tap the word you want to practise. For separable verbs, tap both parts.",
+  "ru": "Нажми на слово, которое хочешь тренировать. У глаголов с отделяемой приставкой — на обе части.",
+  "tr": "Çalışmak istediğin kelimeye dokun. Ayrılabilen ön ekli fiillerde iki parçaya da dokun."
+ },
+ {
+  "en": "„{0}“ and your progress with it will be deleted.",
+  "ru": "«{0}» и прогресс по нему будут удалены.",
+  "tr": "“{0}” ve bu kelimedeki ilerlemen silinecek."
+ },
+ {
+  "en": "Couldn't load the Wörterbuch. Maybe you're offline.",
+  "ru": "Не получилось загрузить Wörterbuch. Возможно, пропал интернет.",
+  "tr": "Wörterbuch yüklenemedi. İnternet bağlantın olmayabilir."
+ },
+ {
+  "en": "This word isn't in the Wörterbuch yet.",
+  "ru": "Этого слова в Wörterbuch пока нет.",
+  "tr": "Bu kelime henüz Wörterbuch'ta yok."
+ },
+ {
+  "en": "You're already learning this word in Wortschatz.",
+  "ru": "Ты уже учишь это слово в Wortschatz.",
+  "tr": "Bu kelimeyi zaten Wortschatz'ta öğreniyorsun."
+ },
+ {
+  "en": "{0} {0|word without a learning card remains|words without learning cards remain} saved in Bibliothek.",
+  "ru": "{0} {0|слово без учебной карточки остаётся|слова без учебных карточек остаются|слов без учебных карточек остаются} в Bibliothek.",
+  "tr": "Kartı olmayan {0} {0|kelime|kelime|kelime} Bibliothek'te kayıtlı kalıyor."
+ },
+ {
+  "en": "{0} already in your collection.",
+  "ru": "{0} {0|слово уже было|слова уже были|слов уже были} в коллекции.",
+  "tr": "{0} {0|kelime|kelime|kelime} zaten koleksiyonundaydı."
+ },
+ {
+  "en": "added to Wortschatz, collection „{1}“",
+  "ru": "{0|добавлено|добавлены} в Wortschatz, коллекция «{1}»",
+  "tr": "Wortschatz'a eklendi, koleksiyon: “{1}”"
+ },
+ {
+  "en": "{0} {0|word|words} added from „{1}“.",
+  "ru": "Добавлено из «{1}»: {2}.",
+  "tr": "“{1}” setinden {0} {0|kelime|kelime|kelime} eklendi."
+ },
+ {
+  "en": "{0} {0|word|words} added.",
+  "ru": "Добавлено: {1}.",
+  "tr": "{0} {0|kelime|kelime|kelime} eklendi."
+ },
+ {
+  "en": "{0} {0|card|cards} skipped:",
+  "ru": "Пропущено: {0} {0|карточка|карточки|карточек}",
+  "tr": "Atlanan: {0} {0|kart|kart|kart}"
+ },
+ {
+  "en": "… and {0} more.",
+  "ru": "… и ещё {0}.",
+  "tr": "… ve {0} tane daha."
+ },
+ {
+  "en": "This file type is not supported. Choose a TXT or EPUB file.",
+  "ru": "Такой файл не подходит. Выберите TXT или EPUB.",
+  "tr": "Bu dosya türü desteklenmiyor. TXT ya da EPUB dosyası seç."
+ },
+ {
+  "en": "{0} more {0|meaning|meanings}",
+  "ru": "ещё {0} {0|значение|значения|значений}",
+  "tr": "{0} {0|anlam|anlam|anlam} daha"
+ },
+ {
+  "en": "part {0} of {1}",
+  "ru": "часть {0} из {1}",
+  "tr": "bölüm {0} / {1}"
+ },
+ {
+  "en": "Notifications are turned off in iPhone Settings.",
+  "ru": "Уведомления запрещены в настройках iPhone.",
+  "tr": "Bildirimler iPhone ayarlarında kapalı."
+ },
+ {
+  "en": "Open iPhone Settings",
+  "ru": "Открыть настройки iPhone",
+  "tr": "iPhone ayarlarını aç"
+ }
+]

@@ -1,0 +1,55 @@
+{
+ "phrases": [
+  {
+   "en": "{0}-minute",
+   "ru": "{0}-минутный",
+   "tr": "{0} dakikalık"
+  },
+  {
+   "en": "{0}-year-old",
+   "ru": "{0}-летний",
+   "tr": "{0} yaşında; {0} yıllık"
+  },
+  {
+   "en": "diminutive of {0}",
+   "ru": "уменьш. от {0}",
+   "tr": "{0} kelimesinin küçültmesi"
+  },
+  {
+   "en": "form of {0}",
+   "ru": "форма от {0}",
+   "tr": "{0} kelimesinin bir biçimi"
+  },
+  {
+   "en": "From {0} — {1}",
+   "ru": "От {0} — {1}",
+   "tr": "{0} kelimesinden — {1}"
+  },
+  {
+   "en": "letter “{0}”",
+   "ru": "буква „{0}“",
+   "tr": "“{0}” harfi"
+  },
+  {
+   "en": "{0}th",
+   "ru": "{0}-й",
+   "tr": "{0}."
+  },
+  {
+   "en": "for the {0}th time",
+   "ru": "в {0}-й раз",
+   "tr": "{0}. kez"
+  },
+  {
+   "en": "of/from {0}",
+   "ru": "относящийся к {0}",
+   "tr": "{0} ile ilgili"
+  },
+  {
+   "en": "part of a word: {0}… — ending as in {1}",
+   "ru": "часть слова: {0}… — конец как в {1}",
+   "tr": "kelime parçası: {0}… — sonu {1} kelimesindeki gibi"
+  }
+ ],
+ "pronouns": []
+}

@@ -1,0 +1,26 @@
+[
+ {
+  "en": "holiday, vacation",
+  "ru": "отпуск",
+  "tr": "tatil",
+  "at": [
+   "de38ebcb"
+  ]
+ },
+ {
+  "en": "garden",
+  "ru": "сад",
+  "tr": "bahçe",
+  "at": [
+   "48ed5abd"
+  ]
+ },
+ {
+  "en": "Not a room, but the same pattern: im · in den · aus dem.",
+  "ru": "Не помещение, но так же: im · in den · aus dem.",
+  "tr": "Kapalı bir yer değil ama kalıp aynı: im · in den · aus dem.",
+  "at": [
+   "6475c6b4"
+  ]
+ }
+]

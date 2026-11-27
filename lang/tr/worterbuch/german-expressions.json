@@ -1,0 +1,142 @@
+{
+ "expression-015": {
+  "translation_tr": "açık havada, dışarıda, açıkta",
+  "example_tr": "Hava güzel olunca yazın sık sık dışarıda yemek yiyoruz.",
+  "notes_tr": [
+   "Nereye: ins Freie — dışarıya, açık havaya: Die Kinder liefen ins Freie.",
+   "Karıştırılmamalı: im freien Fall — serbest düşüşte (freien — frei sıfatı, küçük harfle); freien (esk.) — kız istemek, evlenme teklif etmek."
+  ],
+  "_src": "fe6fa70b",
+  "_src_reader": "66b79391"
+ },
+ "expression-045": {
+  "translation_tr": "kendini zorlamak, cesaretini toplamak",
+  "example_tr": "Sonunda kendimi zorlayıp onu aradım.",
+  "notes_tr": [
+   "Zamir Dativ hâlinde: Gib dir einen Ruck! — Kendini topla!",
+   "einen ile Ruck arasında sıfat olabilir: sich einen kleinen Ruck geben."
+  ],
+  "_src": "7cb5968f",
+  "_src_reader": "2a967135"
+ },
+ "expression-074": {
+  "translation_tr": "karar vermek",
+  "example_tr": "Bugün içinde bir karar vermemiz gerekiyor.",
+  "notes_tr": [
+   "Ayrıca: die Entscheidung treffen, keine Entscheidung treffen, Entscheidungen treffen; yaz. eine Entscheidung fällen. Ne hakkında — über + Akk.",
+   "Karıştırılmamalı: Die Entscheidung traf ihn hart. — Karar onu çok sarstı (treffen “sarsmak, etkilemek”)."
+  ],
+  "_src": "24a76574",
+  "_src_reader": "ab79a3f8"
+ },
+ "expression-103": {
+  "translation_tr": "tetikte olmak; sakınmak (birinden, bir şeyden — vor + Dativ)",
+  "example_tr": "Bu adamdan sakın!",
+  "notes_tr": [
+   "İyelik zamiriyle de: auf seiner Hut sein. die Hut (yaz.) — koruma; karıştırılmamalı: der Hut — şapka: auf dem Hut — şapkanın üstünde."
+  ],
+  "_src": "a53adac2",
+  "_src_reader": "8c44093b"
+ },
+ "expression-132": {
+  "translation_tr": "istenilenin gerisinde kalmak",
+  "example_tr": "Bu oteldeki hizmet istenilenin çok gerisinde.",
+  "notes_tr": [
+   "Çoğu zaman pekiştirmeyle: viel, sehr, einiges zu wünschen übrig lassen. Tersi: nichts zu wünschen übrig lassen — hiçbir eksiği olmamak, kusursuz olmak (başka bir ifade)."
+  ],
+  "_src": "22021e7e",
+  "_src_reader": "1a662dcb"
+ },
+ "expression-161": {
+  "translation_tr": "aklına gelmek",
+  "example_tr": "Birden aklıma iyi bir fikir geldi.",
+  "notes_tr": [
+   "Kime — Dativ: Es wäre mir nie in den Sinn gekommen. — Bu hiç aklıma gelmezdi."
+  ],
+  "_src": "58cfc60b",
+  "_src_reader": "ead433db"
+ },
+ "expression-193": {
+  "translation_tr": "(konuş.) ortalığı toparlamak, düzene sokmak; meseleyi kökünden halletmek, hesaplaşmak (kesin olarak)",
+  "example_tr": "Kavgadan sonra nihayet her şeyi açıkça konuşup halletmek istedik.",
+  "notes_tr": [
+   "Biriyle / bir şeyle — mit + Dativ: mit der Vergangenheit reinen Tisch machen."
+  ],
+  "_src": "0d8aabff",
+  "_src_reader": "26022445"
+ },
+ "expression-225": {
+  "translation_tr": "var gücüyle, olanca hızıyla",
+  "example_tr": "Çocuklar otobüse yetişmek için var güçleriyle koştu.",
+  "notes_tr": [
+   "Fiil zamana göre değişir: was das Zeug hält / hielt; Grimm masallarında — was das Zeug wollte halten."
+  ],
+  "_src": "687632ea",
+  "_src_reader": "ee63709a"
+ },
+ "expression-253": {
+  "translation_tr": "(esk.) yeniden, baştan",
+  "example_tr": "Ortalık sessizleşir sessizleşmez bağırış yeniden başladı.",
+  "notes_tr": [
+   "Bugün: von Neuem, aufs Neue. Duden sözlüğünde bu kalıp yok (frisch 2.1 «erneuert»), Grimm masallarında geçer; “esk.” işaretini biz koyduk. Karıştırılmamalı: von frischem Brot — taze ekmek hakkında (isimden önce sıfat)."
+  ],
+  "_src": "9f740229",
+  "_src_reader": "5c384909"
+ },
+ "expression-282": {
+  "translation_tr": "içini dökmek, rahatlamak",
+  "example_tr": "Kavgadan sonra içini tamamen dökmesi gerekiyordu.",
+  "notes_tr": [
+   "Dönüşlü zamir Dativ hâlinde: ich rede mir, du redest dir … etwas von der Seele. etwas yerine alles, das, seinen Kummer ya da bir yan cümle (was …) gelebilir. Krş. sich etwas von der Seele schreiben — yazarak içini dökmek."
+  ],
+  "_src": "f70cddd3",
+  "_src_reader": "9138f360"
+ },
+ "expression-325": {
+  "translation_tr": "örneğin",
+  "example_tr": "Birçok hayvan, örneğin ayılar, kış uykusuna yatar.",
+  "notes_tr": [
+   "Kısaltma: z. B."
+  ],
+  "_src": "8470c819",
+  "_src_reader": "dd8c7aec"
+ },
+ "expression-356": {
+  "translation_tr": "işi garantiye almak, tedbiri elden bırakmamak",
+  "example_tr": "Ne olur ne olmaz diye şemsiye alıyorum.",
+  "notes_tr": [
+   "Konuşma dilinde kullanılır."
+  ],
+  "_src": "683e2084",
+  "_src_reader": "c88c58ee"
+ },
+ "expression-385": {
+  "translation_tr": "altına yapmak (korkudan)",
+  "example_tr": "Korkudan altına yaptı.",
+  "notes_tr": [
+   "Konuşma dilinde, biraz kaba (Duden: salopp); çoğu zaman mecaz anlamda — çok korkmak. sich ve vor Angst zorunlu değil: Das Kind hat in die Hose gemacht."
+  ],
+  "_src": "7764bacc",
+  "_src_reader": "c9643041"
+ },
+ "expression-414": {
+  "translation_tr": "iktidara gelmek",
+  "example_tr": "Parti seçimden sonra iktidara geldi.",
+  "notes_tr": [
+   "Aynı şekilde zur Macht kommen. Krş. an der Macht sein — iktidarda olmak."
+  ],
+  "_src": "10af5bc5",
+  "_src_reader": "eb25c8e6"
+ },
+ "expression-443": {
+  "translation_tr": "ayağa kalkmak, doğrulmak; iyileşmek, sağlığına kavuşmak; belini doğrultmak (maddi olarak), toparlanmak",
+  "example_tr": "Uzun hastalıktan sonra yavaş yavaş iyileşti.",
+  "notes_tr": [
+   "Duden üç anlam verir: ayağa kalkmak, doğrulmak; iyileşmek; maddi olarak toparlanmak, ayakları üzerinde sağlam durmak.",
+   "Krş. jdn., sich auf die Beine bringen / stellen — (birini, kendini) ayağa kaldırmak; jdm. auf die Beine helfen — (birinin) kalkmasına yardım etmek; wieder auf den Beinen sein — yeniden ayakta olmak.",
+   "Karıştırılmamalı: sich auf die Beine machen — yola çıkmak; etw. auf die Beine stellen — düzenlemek, kurmak; es kommt auf die Beine an — her şey bacaklara bağlı (ankommen auf)."
+  ],
+  "_src": "e53d2d3b",
+  "_src_reader": "4646c9ba"
+ }
+}

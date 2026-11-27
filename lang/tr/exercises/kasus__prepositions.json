@@ -1,0 +1,34 @@
+[
+ {
+  "en": "According to the weather forecast, it will rain tomorrow.",
+  "ru": "Согласно прогнозу погоды, завтра будет дождь.",
+  "tr": "Hava tahminine göre yarın yağmur yağacak.",
+  "at": [
+   "32c8e108"
+  ]
+ },
+ {
+  "en": "He was fired because of a mistake.",
+  "ru": "Из-за ошибки его уволили.",
+  "tr": "Bir hata yüzünden işten çıkarıldı.",
+  "at": [
+   "bb91b365"
+  ]
+ },
+ {
+  "en": "Also: aufgrund von + Dativ.",
+  "ru": "Также: aufgrund von + Dativ.",
+  "tr": "Ayrıca: aufgrund von + Dativ.",
+  "at": [
+   "377b2170"
+  ]
+ },
+ {
+  "en": "due to, because of, on the basis of",
+  "ru": "из-за, вследствие, на основании",
+  "tr": "yüzünden, nedeniyle, bir şeye dayanarak",
+  "at": [
+   "569790ef"
+  ]
+ }
+]

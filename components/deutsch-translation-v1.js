@@ -134,7 +134,8 @@
   var BUILTIN = ["en", "ru"];
   /* Pack languages: code → name and pack version (the version goes into every pack address as ?v=). */
   var PACKS = {
-    pl: { name: "Polski", version: "0", size: "4 MB", published: false }
+    pl: { name: "Polski", version: "0", size: "4 MB", published: false },
+    tr: { name: "Türkçe", version: "0", size: "1 MB", published: false }   // 27.11.2026: in work, preview only
   };
   /* Test packs (17.11.2026, for checks only: "a new language needs no code"): a test registers a pack language
      without touching PACKS — localStorage "deutschLangTestPacksV1" = {"zz": {"name": "Testsprache", "version": "1"}}

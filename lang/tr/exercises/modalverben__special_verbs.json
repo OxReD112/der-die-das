@@ -1,0 +1,82 @@
+[
+ {
+  "en": "mögen → sie mag",
+  "ru": "mögen → sie mag",
+  "tr": "mögen → sie mag",
+  "at": [
+   "ef0b0d77"
+  ]
+ },
+ {
+  "en": "dürfen → durfte → er durfte",
+  "ru": "dürfen → durfte → er durfte",
+  "tr": "dürfen → durfte → er durfte",
+  "at": [
+   "ae453c18"
+  ]
+ },
+ {
+  "en": "dürfen — a direct permission request; dürften — more tentative.",
+  "ru": "dürfen — прямой вопрос о разрешении; dürften — более мягкий.",
+  "tr": "dürfen — doğrudan izin sorusu; dürften — daha yumuşak.",
+  "at": [
+   "fba6910a"
+  ]
+ },
+ {
+  "en": "wollen → wollte → er wollte",
+  "ru": "wollen → wollte → er wollte",
+  "tr": "wollen → wollte → er wollte",
+  "at": [
+   "be664f85"
+  ]
+ },
+ {
+  "en": "mochtet — a question about liking the hotel food during that stay.",
+  "ru": "mochtet — вопрос о впечатлении от еды в гостинице.",
+  "tr": "mochtet — oteldeki yemekleri nasıl bulduğunuzu sorar.",
+  "at": [
+   "a68dff3d"
+  ]
+ },
+ {
+  "en": "müsst — getting up so early is not necessary.",
+  "ru": "müsst — вставать так рано необязательно.",
+  "tr": "müsst — bu kadar erken kalkmak gerekmiyor.",
+  "at": [
+   "54231938"
+  ]
+ },
+ {
+  "en": "Could you send me the file, please?",
+  "ru": "Не мог(ла) бы ты прислать мне файл?",
+  "tr": "Dosyayı bana gönderebilir misin lütfen?",
+  "at": [
+   "0a06ee83"
+  ]
+ },
+ {
+  "en": "können → er kann",
+  "ru": "können → er kann",
+  "tr": "können → er kann",
+  "at": [
+   "c19818b4"
+  ]
+ },
+ {
+  "en": "wollen → er will",
+  "ru": "wollen → er will",
+  "tr": "wollen → er will",
+  "at": [
+   "31583463"
+  ]
+ },
+ {
+  "en": "will — intention now; wollte here — intention in the past.",
+  "ru": "will — намерение сейчас; wollte здесь — намерение в прошлом.",
+  "tr": "will — şimdiki niyet; wollte burada — geçmişteki niyet.",
+  "at": [
+   "07e3659f"
+  ]
+ }
+]

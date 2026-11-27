@@ -1,0 +1,26 @@
+[
+ {
+  "en": "I'm studying German grammar at the moment.",
+  "ru": "Сейчас я занимаюсь немецкой грамматикой.",
+  "tr": "Şu sıralar Almanca dilbilgisiyle uğraşıyorum.",
+  "at": [
+   "ba755b61"
+  ]
+ },
+ {
+  "en": "to ask (politely) for",
+  "ru": "просить о",
+  "tr": "bir şey rica etmek",
+  "at": [
+   "f4610802"
+  ]
+ },
+ {
+  "en": "to discuss, to debate (a topic)",
+  "ru": "обсуждать (тему), спорить о чём-то",
+  "tr": "(bir konuyu) görüşmek, bir şey hakkında tartışmak",
+  "at": [
+   "475897c4"
+  ]
+ }
+]

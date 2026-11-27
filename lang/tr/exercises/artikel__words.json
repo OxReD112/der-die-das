@@ -1,0 +1,102 @@
+[
+ {
+  "en": "-MA ENDING",
+  "ru": "ОКОНЧАНИЕ -MA",
+  "tr": "-MA İLE BİTEN İSİMLER",
+  "at": [
+   "46e7a066",
+   "6793a225",
+   "6ba780b0",
+   "97b3f642",
+   "a905e81d",
+   "bf937570",
+   "f23fd546"
+  ]
+ },
+ {
+  "en": "Nouns ending in -ium are neuter.",
+  "ru": "Слова на -ium — среднего рода.",
+  "tr": "-ium ile biten isimler nötrdür.",
+  "at": [
+   "0d93730b",
+   "8e4312a3",
+   "9f2f7ae4",
+   "a98ffed3",
+   "bb1f9742"
+  ]
+ },
+ {
+  "en": "apprentice",
+  "ru": "ученик (на производстве), стажёр",
+  "tr": "çırak, stajyer",
+  "at": [
+   "82890b8c"
+  ]
+ },
+ {
+  "en": "bottle",
+  "ru": "бутылка",
+  "tr": "şişe",
+  "at": [
+   "48863a93"
+  ]
+ },
+ {
+  "en": "museum",
+  "ru": "музей",
+  "tr": "müze",
+  "at": [
+   "a8ca07a1"
+  ]
+ },
+ {
+  "en": "living room",
+  "ru": "гостиная",
+  "tr": "oturma odası",
+  "at": [
+   "3bcf6cd9"
+  ]
+ },
+ {
+  "en": "-EI ENDING",
+  "ru": "ОКОНЧАНИЕ -EI",
+  "tr": "-EI İLE BİTEN İSİMLER",
+  "at": [
+   "1782c833",
+   "1940d613",
+   "35745ed1",
+   "7d7cdb2e",
+   "b6482e61",
+   "ce88352c"
+  ]
+ },
+ {
+  "en": "Nouns with the prefix Ge- are neuter.",
+  "ru": "Слова с приставкой Ge- — среднего рода.",
+  "tr": "Ge- ön ekli isimler nötrdür.",
+  "at": [
+   "034bafcb",
+   "1373f6ea",
+   "23d72dfe",
+   "91246694",
+   "c5736887",
+   "f8d66585"
+  ]
+ },
+ {
+  "en": "democracy",
+  "ru": "демократия",
+  "tr": "demokrasi",
+  "at": [
+   "e5016ec0"
+  ]
+ },
+ {
+  "en": "realism",
+  "ru": "реализм",
+  "tr": "gerçekçilik",
+  "at": [
+   "858879a0"
+  ]
+ }
+]

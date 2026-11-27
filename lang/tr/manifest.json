@@ -1,0 +1,171 @@
+{
+ "lang": "tr",
+ "name": "Türkçe",
+ "format_version": 1,
+ "version": "73ff617ce493",
+ "source_commit": "dc73eb0623e4b3efa638752fb2ec583a55f492a2",
+ "exercise_files": {
+  "partikeln__sentences": {
+   "source": "deutsch-home/partikeln/sentences.js",
+   "globals": [
+    "PARTIKELN_PARTICLES",
+    "PARTIKELN_FUNCTIONS",
+    "PARTIKELN_SENTENCES"
+   ],
+   "de": "поле sentence записи-предка с «___»: в particles.<частица>.… — с подставленной частицей (как записан ключ: DOCH — ударное); в tasks[i] — с accept[0] (+ остальные accept в «  [+ …]»); в base.… — без пропуска; подписи PARTIKELN_FUNCTIONS — пусто",
+   "pairs": 1982,
+   "done": 20
+  },
+  "artikel__words": {
+   "source": "deutsch-home/Artikel/words.js",
+   "globals": [
+    "WORDS"
+   ],
+   "de": "поле word той же записи",
+   "pairs": 430,
+   "done": 10
+  },
+  "modalverben__special_verbs": {
+   "source": "deutsch-home/verbformen/modalverben/special_verbs.js",
+   "globals": [
+    "SPECIAL_VERB_EXERCISES"
+   ],
+   "de": "поле sentence записи с подставленным answer",
+   "pairs": 527,
+   "done": 10
+  },
+  "vielseitige_verben__sentences": {
+   "source": "deutsch-home/verbformen/vielseitige_verben/sentences.js",
+   "globals": [
+    "VV_SENTENCES",
+    "VV_JOBS",
+    "VV_FORM_MEANINGS",
+    "VV_FORMS",
+    "VV_USE_PAIRS",
+    "VV_OTHER_WORDS",
+    "VV_ALSO_NOTES",
+    "VV_PAST_NOTES",
+    "VV_HINTS"
+   ],
+   "de": "поле sentence записи с подставленным answer; VV_FORM_MEANINGS, VV_HINTS, VV_OTHER_WORDS — пусто",
+   "pairs": 208,
+   "done": 7
+  },
+  "vielseitige_verben__forms_table": {
+   "source": "deutsch-home/verbformen/vielseitige_verben/forms_table.js",
+   "globals": [
+    "VV_TABLE"
+   ],
+   "de": "поле ex ближайшей записи-предка; если нет — пусто",
+   "pairs": 77,
+   "done": 3
+  },
+  "kasus__prepositions": {
+   "source": "deutsch-home/praepositionen/kasus/prepositions.js",
+   "globals": [
+    "PRAEPOSITIONEN"
+   ],
+   "de": "exampleTranslation → поле example той же записи; остальное → поле example той же записи (первое по DE_KEYS)",
+   "pairs": 85,
+   "done": 4
+  },
+  "ortspraepositionen__places": {
+   "source": "deutsch-home/praepositionen/ortspraepositionen/places.js",
+   "globals": [
+    "ORTS_ZU_HINTS",
+    "ORTS_KATEGORIEN",
+    "ORTSPRAEPOSITIONEN"
+   ],
+   "de": "article + \" \" + noun той же записи; ORTS_KATEGORIEN, ORTS_ZU_HINTS — пусто",
+   "pairs": 77,
+   "done": 3
+  },
+  "verben_mit_praepositionen__verbs": {
+   "source": "deutsch-home/praepositionen/verben_mit_praepositionen/verbs.js",
+   "globals": [
+    "VERBEN_MIT_PRAEPOSITIONEN"
+   ],
+   "de": "exampleTranslation → поле example; meaning → поле example той же записи (первое по DE_KEYS)",
+   "pairs": 144,
+   "done": 3
+  }
+ },
+ "wortschatz_files": {
+  "example-senses": {
+   "source": "deutsch-home/wortschatz/example-senses.json",
+   "key": "id",
+   "items": 5475,
+   "done": 41
+  }
+ },
+ "files": {
+  "exercises/partikeln__sentences.json": {
+   "items": 1982,
+   "done": 20
+  },
+  "exercises/artikel__words.json": {
+   "items": 430,
+   "done": 10
+  },
+  "exercises/modalverben__special_verbs.json": {
+   "items": 527,
+   "done": 10
+  },
+  "exercises/vielseitige_verben__sentences.json": {
+   "items": 208,
+   "done": 7
+  },
+  "exercises/vielseitige_verben__forms_table.json": {
+   "items": 77,
+   "done": 3
+  },
+  "exercises/kasus__prepositions.json": {
+   "items": 85,
+   "done": 4
+  },
+  "exercises/ortspraepositionen__places.json": {
+   "items": 77,
+   "done": 3
+  },
+  "exercises/verben_mit_praepositionen__verbs.json": {
+   "items": 144,
+   "done": 3
+  },
+  "wortschatz/example-senses.json": {
+   "items": 5475,
+   "done": 41
+  },
+  "worterbuch/german-adjectives.json": {
+   "items": 1529,
+   "texts": 3712,
+   "done": 15
+  },
+  "worterbuch/german-expressions.json": {
+   "items": 457,
+   "texts": 1533,
+   "done": 15
+  },
+  "worterbuch/german-nouns.json": {
+   "items": 5377,
+   "texts": 13411,
+   "done": 15
+  },
+  "worterbuch/german-verbs.json": {
+   "items": 2800,
+   "texts": 10607,
+   "done": 15
+  },
+  "ui.json": {
+   "items": 360,
+   "done": 30
+  },
+  "reader.json": {
+   "items": 287,
+   "done": 10
+  }
+ },
+ "dictionary": {
+  "source_link": "Vikisözlük / Wiktionary",
+  "license": "CC BY-SA 4.0"
+ }
+}
