@@ -1,0 +1,3491 @@
+[
+ {
+  "en": "I'm going for a walk although it's raining.",
+  "ru": "Я иду гулять, хотя идёт дождь.",
+  "tr": "Yağmur yağmasına rağmen yürüyüşe çıkıyorum.",
+  "at": [
+   "d95b1e5c"
+  ]
+ },
+ {
+  "en": "obwohl + verb at the end",
+  "ru": "obwohl + глагол в конце",
+  "tr": "obwohl + fiil sonda",
+  "at": [
+   "737b0a51"
+  ]
+ },
+ {
+  "en": "although, even though",
+  "ru": "хотя, несмотря на то что",
+  "tr": "-diği hâlde / -dığı hâlde, -mesine rağmen / -masına rağmen",
+  "at": [
+   "a254e4bb"
+  ]
+ },
+ {
+  "en": "I have to cancel my driving lesson.",
+  "ru": "Мне нужно отменить урок вождения.",
+  "tr": "Direksiyon dersimi iptal etmem gerekiyor.",
+  "at": [
+   "c006d1c9"
+  ]
+ },
+ {
+  "en": "to cancel",
+  "ru": "отменять",
+  "tr": "iptal etmek",
+  "at": [
+   "e9ba0316"
+  ]
+ },
+ {
+  "en": "What's the reason?",
+  "ru": "В чём причина?",
+  "tr": "Sebebi ne?",
+  "at": [
+   "1d1a203b"
+  ]
+ },
+ {
+  "en": "reason, cause",
+  "ru": "причина, основание",
+  "tr": "neden, sebep; dayanak",
+  "at": [
+   "f8a22958"
+  ]
+ },
+ {
+  "en": "That isn't necessary.",
+  "ru": "Это не обязательно / не необходимо.",
+  "tr": "Bu gerekli değil.",
+  "at": [
+   "d09dd7ff"
+  ]
+ },
+ {
+  "en": "necessary",
+  "ru": "необходимый, нужный",
+  "tr": "gerekli, zorunlu",
+  "at": [
+   "7290e18c"
+  ]
+ },
+ {
+  "en": "It's raining. I'm going for a walk anyway.",
+  "ru": "Идёт дождь. Несмотря на это, я иду гулять.",
+  "tr": "Yağmur yağıyor. Buna rağmen yürüyüşe çıkıyorum.",
+  "at": [
+   "6ee5afec"
+  ]
+ },
+ {
+  "en": "nevertheless, anyway",
+  "ru": "несмотря на это, всё же",
+  "tr": "yine de, buna rağmen",
+  "at": [
+   "d116ab8b"
+  ]
+ },
+ {
+  "en": "Can we move the appointment to Friday?",
+  "ru": "Можем перенести встречу на пятницу?",
+  "tr": "Randevuyu cumaya erteleyebilir miyiz?",
+  "at": [
+   "69f6906d"
+  ]
+ },
+ {
+  "en": "to postpone, to move (a date)",
+  "ru": "переносить",
+  "tr": "ertelemek, başka zamana almak",
+  "at": [
+   "063618fa"
+  ]
+ },
+ {
+  "en": "That's a difficult decision.",
+  "ru": "Это трудное решение.",
+  "tr": "Bu zor bir karar.",
+  "at": [
+   "3178cf15"
+  ]
+ },
+ {
+  "en": "decision",
+  "ru": "решение",
+  "tr": "karar",
+  "at": [
+   "9992bb42"
+  ]
+ },
+ {
+  "en": "I'll probably come later.",
+  "ru": "Вероятно, я приду позже.",
+  "tr": "Muhtemelen daha sonra geleceğim.",
+  "at": [
+   "8cc3aa5f"
+  ]
+ },
+ {
+  "en": "probably, likely",
+  "ru": "вероятно",
+  "tr": "muhtemelen",
+  "at": [
+   "607b972c"
+  ]
+ },
+ {
+  "en": "I can't make up my mind.",
+  "ru": "Я не могу решиться / сделать выбор.",
+  "tr": "Karar veremiyorum.",
+  "at": [
+   "cd294ea3"
+  ]
+ },
+ {
+  "en": "to decide, to make up your mind",
+  "ru": "решаться, принимать решение",
+  "tr": "karar vermek",
+  "at": [
+   "1bd828e0"
+  ]
+ },
+ {
+  "en": "Our bags are similar.",
+  "ru": "Наши сумки похожи.",
+  "tr": "Çantalarımız birbirine benziyor.",
+  "at": [
+   "3c07ebae"
+  ]
+ },
+ {
+  "en": "similar",
+  "ru": "похожий",
+  "tr": "benzer",
+  "at": [
+   "49c92305"
+  ]
+ },
+ {
+  "en": "I'm tired, so I'm going home.",
+  "ru": "Я устала, поэтому иду домой.",
+  "tr": "Yorgunum, bu yüzden eve gidiyorum.",
+  "at": [
+   "b90bab39"
+  ]
+ },
+ {
+  "en": "deshalb = that's why, so",
+  "ru": "deshalb = поэтому",
+  "tr": "deshalb = bu yüzden",
+  "at": [
+   "f72b18d0"
+  ]
+ },
+ {
+  "en": "that's why, so",
+  "ru": "поэтому",
+  "tr": "bu yüzden",
+  "at": [
+   "4b539e86",
+   "d2ee08d7"
+  ]
+ },
+ {
+  "en": "I suggest Saturday.",
+  "ru": "Я предлагаю субботу.",
+  "tr": "Cumartesiyi öneriyorum.",
+  "at": [
+   "f9859e22"
+  ]
+ },
+ {
+  "en": "to suggest",
+  "ru": "предлагать",
+  "tr": "önermek",
+  "at": [
+   "d1eb37a9"
+  ]
+ },
+ {
+  "en": "My application isn't finished yet.",
+  "ru": "Моё заявление ещё не готово.",
+  "tr": "Başvurum henüz hazır değil.",
+  "at": [
+   "c305c9b9"
+  ]
+ },
+ {
+  "en": "application (form)",
+  "ru": "заявление, заявка",
+  "tr": "başvuru, dilekçe",
+  "at": [
+   "68526d06"
+  ]
+ },
+ {
+  "en": "I'm ready for the exam.",
+  "ru": "Я готова к экзамену.",
+  "tr": "Sınava hazırım.",
+  "at": [
+   "f2da57ca"
+  ]
+ },
+ {
+  "en": "ready",
+  "ru": "готовый",
+  "tr": "hazır",
+  "at": [
+   "5d054111"
+  ]
+ },
+ {
+  "en": "I need bread and also milk.",
+  "ru": "Мне нужен хлеб, а кроме того молоко.",
+  "tr": "Ekmeğe, ayrıca süte de ihtiyacım var.",
+  "at": [
+   "1c905997"
+  ]
+ },
+ {
+  "en": "also, besides",
+  "ru": "кроме того",
+  "tr": "ayrıca, bundan başka",
+  "at": [
+   "43d16ca4"
+  ]
+ },
+ {
+  "en": "I avoid the supermarket on Saturdays.",
+  "ru": "Я избегаю супермаркета по субботам.",
+  "tr": "Cumartesileri süpermarketten uzak duruyorum.",
+  "at": [
+   "debed960"
+  ]
+ },
+ {
+  "en": "to avoid",
+  "ru": "избегать",
+  "tr": "kaçınmak",
+  "at": [
+   "ef67d84f"
+  ]
+ },
+ {
+  "en": "The deadline is on Friday.",
+  "ru": "Срок заканчивается в пятницу.",
+  "tr": "Süre cuma günü doluyor.",
+  "at": [
+   "ed886d8c"
+  ]
+ },
+ {
+  "en": "deadline",
+  "ru": "срок",
+  "tr": "süre, son tarih",
+  "at": [
+   "882f8feb"
+  ]
+ },
+ {
+  "en": "The week was very tiring.",
+  "ru": "Неделя была очень утомительной.",
+  "tr": "Hafta çok yorucuydu.",
+  "at": [
+   "25b44d1d"
+  ]
+ },
+ {
+  "en": "tiring, exhausting",
+  "ru": "утомительный, напряжённый",
+  "tr": "yorucu, zahmetli",
+  "at": [
+   "4007e4ea"
+  ]
+ },
+ {
+  "en": "I don't drink tea, I drink coffee.",
+  "ru": "Я пью не чай, а кофе.",
+  "tr": "Çay değil, kahve içiyorum.",
+  "at": [
+   "7c56950a"
+  ]
+ },
+ {
+  "en": "but (rather)",
+  "ru": "а, а наоборот",
+  "tr": "… değil, …; bilakis",
+  "at": [
+   "486de551"
+  ]
+ },
+ {
+  "en": "I'm preparing for the exam.",
+  "ru": "Я готовлюсь к экзамену.",
+  "tr": "Sınava hazırlanıyorum.",
+  "at": [
+   "d2775c8e"
+  ]
+ },
+ {
+  "en": "to prepare for",
+  "ru": "готовиться к",
+  "tr": "bir şeye hazırlanmak",
+  "at": [
+   "f5ed9025"
+  ]
+ },
+ {
+  "en": "His remark was pretty annoying.",
+  "ru": "Его замечание было довольно раздражающим.",
+  "tr": "Söylediği şey oldukça sinir bozucuydu.",
+  "at": [
+   "8fc54adb"
+  ]
+ },
+ {
+  "en": "annoying",
+  "ru": "раздражающий, досадный",
+  "tr": "can sıkıcı, sinir bozucu",
+  "at": [
+   "46460a38"
+  ]
+ },
+ {
+  "en": "The little café is very cosy.",
+  "ru": "Это маленькое кафе очень уютное.",
+  "tr": "Bu küçük kafe çok samimi ve rahat.",
+  "at": [
+   "808482c0"
+  ]
+ },
+ {
+  "en": "cosy, comfortable",
+  "ru": "уютный, комфортный",
+  "tr": "samimi, rahat, huzurlu",
+  "at": [
+   "e9b94cef"
+  ]
+ },
+ {
+  "en": "I was stunned when I read the message.",
+  "ru": "Я была ошеломлена, когда прочитала сообщение.",
+  "tr": "Mesajı okuyunca şaşkına döndüm.",
+  "at": [
+   "7c9c3893"
+  ]
+ },
+ {
+  "en": "stunned, speechless",
+  "ru": "ошеломлённый, поражённый",
+  "tr": "şaşkına dönmüş, şaşkın",
+  "at": [
+   "9d8564d0"
+  ]
+ },
+ {
+  "en": "After the holiday I had real wanderlust.",
+  "ru": "После отпуска мне очень хотелось снова куда-нибудь далеко уехать.",
+  "tr": "Tatilden sonra yeniden uzaklara gitmeyi çok istedim.",
+  "at": [
+   "589e2485"
+  ]
+ },
+ {
+  "en": "wanderlust",
+  "ru": "тяга к дальним странам, тоска по путешествиям",
+  "tr": "uzaklara gitme özlemi, seyahat tutkusu",
+  "at": [
+   "e851d472"
+  ]
+ },
+ {
+  "en": "After the holiday I felt happy again.",
+  "ru": "После отпуска я снова чувствовала себя счастливой.",
+  "tr": "Tatilden sonra kendimi yeniden mutlu hissettim.",
+  "at": [
+   "8a6e2258"
+  ]
+ },
+ {
+  "en": "happy",
+  "ru": "счастливый",
+  "tr": "mutlu",
+  "at": [
+   "974eeae7"
+  ]
+ },
+ {
+  "en": "She is dissatisfied with the result.",
+  "ru": "Она недовольна результатом.",
+  "tr": "Sonuçtan memnun değil.",
+  "at": [
+   "cc09bf79"
+  ]
+ },
+ {
+  "en": "dissatisfied, unhappy",
+  "ru": "недовольный",
+  "tr": "memnuniyetsiz, hoşnutsuz",
+  "at": [
+   "f3c09fc6"
+  ]
+ },
+ {
+  "en": "Are you happy with your decision?",
+  "ru": "Ты довольна своим решением?",
+  "tr": "Kararından memnun musun?",
+  "at": [
+   "b11f2f42"
+  ]
+ },
+ {
+  "en": "satisfied, happy",
+  "ru": "довольный",
+  "tr": "memnun",
+  "at": [
+   "b9214209"
+  ]
+ },
+ {
+  "en": "She does volunteer work.",
+  "ru": "Она занимается волонтёрской / общественной деятельностью.",
+  "tr": "Gönüllü bir görevi var.",
+  "at": [
+   "0f843fc4"
+  ]
+ },
+ {
+  "en": "volunteer work",
+  "ru": "волонтёрская, общественная деятельность",
+  "tr": "gönüllü görev, fahri görev",
+  "at": [
+   "7b09eba3"
+  ]
+ },
+ {
+  "en": "We can't work and talk on the phone at the same time.",
+  "ru": "Мы не можем одновременно работать и разговаривать по телефону.",
+  "tr": "Aynı anda hem çalışıp hem de telefonla konuşamayız.",
+  "at": [
+   "fba720e7"
+  ]
+ },
+ {
+  "en": "at the same time",
+  "ru": "одновременно",
+  "tr": "aynı anda, eş zamanlı",
+  "at": [
+   "b7292c34"
+  ]
+ },
+ {
+  "en": "My grandfather died two years ago.",
+  "ru": "Мой дедушка умер два года назад.",
+  "tr": "Dedem iki yıl önce vefat etti.",
+  "at": [
+   "141f32a7"
+  ]
+ },
+ {
+  "en": "to die",
+  "ru": "умирать",
+  "tr": "ölmek",
+  "at": [
+   "9dde46f4"
+  ]
+ },
+ {
+  "en": "The journey takes about two hours.",
+  "ru": "Поездка длится примерно два часа.",
+  "tr": "ölmek",
+  "at": [
+   "758baa6d"
+  ]
+ },
+ {
+  "en": "about, approximately",
+  "ru": "примерно",
+  "tr": "yaklaşık, aşağı yukarı",
+  "at": [
+   "9369f2fa"
+  ]
+ },
+ {
+  "en": "We're arranging an appointment.",
+  "ru": "Мы договариваемся о встрече.",
+  "tr": "Bir randevu ayarlıyoruz.",
+  "at": [
+   "53f06733"
+  ]
+ },
+ {
+  "en": "to arrange, to agree on",
+  "ru": "договариваться, согласовывать",
+  "tr": "kararlaştırmak, üzerinde anlaşmak; (randevu) ayarlamak",
+  "at": [
+   "86d886b0"
+  ]
+ },
+ {
+  "en": "My salary comes at the end of the month.",
+  "ru": "Моя зарплата приходит в конце месяца.",
+  "tr": "Maaşım ay sonunda yatıyor.",
+  "at": [
+   "f5bbffde"
+  ]
+ },
+ {
+  "en": "salary",
+  "ru": "зарплата",
+  "tr": "maaş",
+  "at": [
+   "07ca6ef5"
+  ]
+ },
+ {
+  "en": "This chair is very comfortable.",
+  "ru": "Этот стул очень удобный.",
+  "tr": "Bu sandalye çok rahat.",
+  "at": [
+   "fef2408d"
+  ]
+ },
+ {
+  "en": "comfortable",
+  "ru": "удобный",
+  "tr": "rahat",
+  "at": [
+   "a06118da"
+  ]
+ },
+ {
+  "en": "I need at least eight hours of sleep.",
+  "ru": "Мне нужно минимум восемь часов сна.",
+  "tr": "En az sekiz saat uykuya ihtiyacım var.",
+  "at": [
+   "a7f2582e"
+  ]
+ },
+ {
+  "en": "at least",
+  "ru": "как минимум",
+  "tr": "en az",
+  "at": [
+   "3c747f85"
+  ]
+ },
+ {
+  "en": "I couldn't find my keys anywhere.",
+  "ru": "Я нигде не нашла свои ключи.",
+  "tr": "Anahtarlarımı hiçbir yerde bulamadım.",
+  "at": [
+   "7e112dc7"
+  ]
+ },
+ {
+  "en": "nowhere",
+  "ru": "нигде",
+  "tr": "hiçbir yerde",
+  "at": [
+   "8bc912d4"
+  ]
+ },
+ {
+  "en": "I'm expecting a parcel today.",
+  "ru": "Я сегодня жду посылку.",
+  "tr": "Bugün bir paket bekliyorum.",
+  "at": [
+   "5988df7c"
+  ]
+ },
+ {
+  "en": "to expect",
+  "ru": "ожидать",
+  "tr": "beklemek",
+  "at": [
+   "7cb6c29b"
+  ]
+ },
+ {
+  "en": "Your suggestion is good.",
+  "ru": "Твоё предложение хорошее.",
+  "tr": "Önerin iyi.",
+  "at": [
+   "8a25396d"
+  ]
+ },
+ {
+  "en": "suggestion, proposal",
+  "ru": "предложение",
+  "tr": "öneri",
+  "at": [
+   "1fbca1fa"
+  ]
+ },
+ {
+  "en": "This street is dangerous at night.",
+  "ru": "Эта улица ночью опасна.",
+  "tr": "Bu sokak geceleri tehlikeli.",
+  "at": [
+   "bebe728d"
+  ]
+ },
+ {
+  "en": "dangerous",
+  "ru": "опасный",
+  "tr": "tehlikeli",
+  "at": [
+   "53610ada"
+  ]
+ },
+ {
+  "en": "Actually, I'd like to stay at home today.",
+  "ru": "Вообще-то я хочу сегодня остаться дома.",
+  "tr": "Aslında bugün evde kalmak istiyorum.",
+  "at": [
+   "d9fefc6e"
+  ]
+ },
+ {
+  "en": "actually",
+  "ru": "вообще-то, собственно",
+  "tr": "aslında, gerçekte",
+  "at": [
+   "62788cc5"
+  ]
+ },
+ {
+  "en": "I'd like to complain about the bad service.",
+  "ru": "Я хочу пожаловаться на плохое обслуживание.",
+  "tr": "Kötü hizmetten şikâyet etmek istiyorum.",
+  "at": [
+   "a79f92e8"
+  ]
+ },
+ {
+  "en": "to complain about",
+  "ru": "жаловаться на",
+  "tr": "bir şeyden şikâyet etmek",
+  "at": [
+   "fbad9c37"
+  ]
+ },
+ {
+  "en": "If it rains, I'll stay at home.",
+  "ru": "Если пойдёт дождь, я останусь дома.",
+  "tr": "Yağmur yağarsa evde kalırım.",
+  "at": [
+   "bb12c889"
+  ]
+ },
+ {
+  "en": "if, in case",
+  "ru": "если, в случае если",
+  "tr": "eğer, -se / -sa; -diği takdirde / -dığı takdirde",
+  "at": [
+   "d94b3bd6"
+  ]
+ },
+ {
+  "en": "I want to pass the exam.",
+  "ru": "Я хочу сдать экзамен.",
+  "tr": "Sınavı geçmek istiyorum.",
+  "at": [
+   "2c44363d"
+  ]
+ },
+ {
+  "en": "to pass (an exam); to consist; to exist",
+  "ru": "сдать; состоять; существовать",
+  "tr": "(sınavı) geçmek; bir şeyden oluşmak; var olmak",
+  "at": [
+   "1c3edcca"
+  ]
+ },
+ {
+  "en": "You have to decide for yourself what you want to do.",
+  "ru": "Ты должна сама решить, что хочешь делать.",
+  "tr": "Ne yapmak istediğine kendin karar vermelisin.",
+  "at": [
+   "4fec4b6e"
+  ]
+ },
+ {
+  "en": "to decide, to determine",
+  "ru": "определять, решать",
+  "tr": "karar vermek; belirlemek",
+  "at": [
+   "9066fbc5"
+  ]
+ },
+ {
+  "en": "That's my duty.",
+  "ru": "Это моя обязанность.",
+  "tr": "Bu benim görevim.",
+  "at": [
+   "44150fee"
+  ]
+ },
+ {
+  "en": "duty",
+  "ru": "обязанность",
+  "tr": "görev, yükümlülük",
+  "at": [
+   "f83db045"
+  ]
+ },
+ {
+  "en": "My street is quiet at night.",
+  "ru": "Моя улица ночью тихая.",
+  "tr": "Sokağım geceleri sessiz.",
+  "at": [
+   "6601078a"
+  ]
+ },
+ {
+  "en": "calm, quiet",
+  "ru": "спокойный, тихий",
+  "tr": "sakin, sessiz",
+  "at": [
+   "723687d1"
+  ]
+ },
+ {
+  "en": "I'm turning down the offer.",
+  "ru": "Я отклоняю предложение.",
+  "tr": "Teklifi reddediyorum.",
+  "at": [
+   "03e0e047"
+  ]
+ },
+ {
+  "en": "to decline, to turn down",
+  "ru": "отклонять, отказываться",
+  "tr": "reddetmek, geri çevirmek",
+  "at": [
+   "9f4ef554"
+  ]
+ },
+ {
+  "en": "I'm looking for a new job.",
+  "ru": "Я ищу новую работу / должность.",
+  "tr": "Yeni bir iş arıyorum.",
+  "at": [
+   "38cf3de9"
+  ]
+ },
+ {
+  "en": "job, position; place",
+  "ru": "работа, должность; место",
+  "tr": "iş, pozisyon; yer",
+  "at": [
+   "ac9e97f6"
+  ]
+ },
+ {
+  "en": "A passport is required.",
+  "ru": "Необходим паспорт.",
+  "tr": "Pasaport gerekli.",
+  "at": [
+   "0d42932a"
+  ]
+ },
+ {
+  "en": "required, necessary",
+  "ru": "необходимый, требуемый",
+  "tr": "gerekli, şart koşulan",
+  "at": [
+   "6b9d54b1"
+  ]
+ },
+ {
+  "en": "I'm signing up for the course.",
+  "ru": "Я записываюсь на курс.",
+  "tr": "Kursa kaydoluyorum.",
+  "at": [
+   "96481177"
+  ]
+ },
+ {
+  "en": "to sign up, to register",
+  "ru": "регистрироваться, записываться",
+  "tr": "kaydolmak, kayıt yaptırmak",
+  "at": [
+   "7d6fa4c4"
+  ]
+ },
+ {
+  "en": "There's no danger here.",
+  "ru": "Здесь нет опасности.",
+  "tr": "Burada tehlike yok.",
+  "at": [
+   "267313c6"
+  ]
+ },
+ {
+  "en": "danger",
+  "ru": "опасность",
+  "tr": "tehlike",
+  "at": [
+   "307afd9d"
+  ]
+ },
+ {
+  "en": "My friend is very reliable.",
+  "ru": "Моя подруга очень надёжная.",
+  "tr": "Arkadaşım çok güvenilir.",
+  "at": [
+   "180d0f4d"
+  ]
+ },
+ {
+  "en": "reliable",
+  "ru": "надёжный",
+  "tr": "güvenilir",
+  "at": [
+   "b1ecbb9a"
+  ]
+ },
+ {
+  "en": "Don't worry, the atmosphere here is very relaxed.",
+  "ru": "Не переживай, здесь очень непринуждённая атмосфера.",
+  "tr": "Merak etme, burada ortam çok rahat.",
+  "at": [
+   "40b99901"
+  ]
+ },
+ {
+  "en": "relaxed, laid-back",
+  "ru": "непринуждённый, расслабленный",
+  "tr": "rahat, samimi",
+  "at": [
+   "ef13202e"
+  ]
+ },
+ {
+  "en": "I can recommend this cake.",
+  "ru": "Я могу порекомендовать тебе этот пирог.",
+  "tr": "Sana bu pastayı tavsiye edebilirim.",
+  "at": [
+   "0983d7d3"
+  ]
+ },
+ {
+  "en": "to recommend",
+  "ru": "рекомендовать",
+  "tr": "tavsiye etmek",
+  "at": [
+   "92323510"
+  ]
+ },
+ {
+  "en": "I have a lot of experience with customers.",
+  "ru": "У меня большой опыт работы с клиентами.",
+  "tr": "Müşterilerle çalışma konusunda çok deneyimim var.",
+  "at": [
+   "d347ee2d"
+  ]
+ },
+ {
+  "en": "experience",
+  "ru": "опыт",
+  "tr": "deneyim, tecrübe",
+  "at": [
+   "89e8dbba"
+  ]
+ },
+ {
+  "en": "The dress is lovely; however, it's very expensive.",
+  "ru": "Платье красивое, однако очень дорогое.",
+  "tr": "Elbise güzel, ancak çok pahalı.",
+  "at": [
+   "7199c117"
+  ]
+ },
+ {
+  "en": "however, though",
+  "ru": "однако, правда",
+  "tr": "ancak, fakat; gerçi",
+  "at": [
+   "78436424"
+  ]
+ },
+ {
+  "en": "The weather is pleasant today.",
+  "ru": "Сегодня приятная погода.",
+  "tr": "Bugün hava güzel.",
+  "at": [
+   "d920e2b9"
+  ]
+ },
+ {
+  "en": "pleasant",
+  "ru": "приятный",
+  "tr": "hoş, keyifli",
+  "at": [
+   "1a676606"
+  ]
+ },
+ {
+  "en": "I have to deal with the post today.",
+  "ru": "Мне нужно сегодня разобраться с почтой.",
+  "tr": "Bugün gelen postaları halletmem gerekiyor.",
+  "at": [
+   "4379acf0"
+  ]
+ },
+ {
+  "en": "to deal with, to get done",
+  "ru": "выполнять, улаживать",
+  "tr": "halletmek, yerine getirmek",
+  "at": [
+   "0f37b99f"
+  ]
+ },
+ {
+  "en": "I don't see any difference.",
+  "ru": "Я не вижу разницы.",
+  "tr": "Hiçbir fark görmüyorum.",
+  "at": [
+   "06532af5"
+  ]
+ },
+ {
+  "en": "difference",
+  "ru": "разница, различие",
+  "tr": "fark, ayrım",
+  "at": [
+   "45d64e62"
+  ]
+ },
+ {
+  "en": "I'm ill, so I'm staying at home.",
+  "ru": "Я болею, поэтому остаюсь дома.",
+  "tr": "Hastayım, bu yüzden evde kalıyorum.",
+  "at": [
+   "b184ecc8"
+  ]
+ },
+ {
+  "en": "The two of them had a big argument yesterday.",
+  "ru": "Вчера они сильно поссорились.",
+  "tr": "Dün ikisi büyük bir kavga etti.",
+  "at": [
+   "c2c76e93"
+  ]
+ },
+ {
+  "en": "argument, quarrel",
+  "ru": "ссора, конфликт",
+  "tr": "kavga, anlaşmazlık",
+  "at": [
+   "d197dad0"
+  ]
+ },
+ {
+  "en": "I notice a mistake.",
+  "ru": "Я обнаруживаю ошибку.",
+  "tr": "Bir hata tespit ediyorum.",
+  "at": [
+   "0dbfa99c"
+  ]
+ },
+ {
+  "en": "to notice, to find; to establish",
+  "ru": "устанавливать, констатировать; обнаруживать",
+  "tr": "fark etmek, bulmak; tespit etmek",
+  "at": [
+   "03e68dfb"
+  ]
+ },
+ {
+  "en": "Please listen carefully.",
+  "ru": "Пожалуйста, слушай внимательно.",
+  "tr": "Lütfen dikkatle dinle.",
+  "at": [
+   "f52155af"
+  ]
+ },
+ {
+  "en": "attentive; attentively",
+  "ru": "внимательно; внимательный",
+  "tr": "dikkatle; dikkatli",
+  "at": [
+   "2a5c45fc"
+  ]
+ },
+ {
+  "en": "German B1 is an important requirement.",
+  "ru": "Немецкий B1 — важное требование / условие.",
+  "tr": "Almanca B1 önemli bir ön koşul.",
+  "at": [
+   "a6ab2c06"
+  ]
+ },
+ {
+  "en": "requirement, prerequisite",
+  "ru": "условие, предпосылка",
+  "tr": "koşul, ön koşul",
+  "at": [
+   "463174dd"
+  ]
+ },
+ {
+  "en": "My friend supports me.",
+  "ru": "Моя подруга меня поддерживает.",
+  "tr": "Arkadaşım bana destek oluyor.",
+  "at": [
+   "29ff3577"
+  ]
+ },
+ {
+  "en": "to support",
+  "ru": "поддерживать",
+  "tr": "desteklemek",
+  "at": [
+   "757648c4"
+  ]
+ },
+ {
+  "en": "Thanks for your support.",
+  "ru": "Спасибо за твою поддержку.",
+  "tr": "Desteğin için teşekkürler.",
+  "at": [
+   "1a6504c9"
+  ]
+ },
+ {
+  "en": "support",
+  "ru": "поддержка",
+  "tr": "destek",
+  "at": [
+   "f1f0d616"
+  ]
+ },
+ {
+  "en": "I'll call you as soon as I'm home.",
+  "ru": "Я позвоню тебе, как только буду дома.",
+  "tr": "Eve varır varmaz seni ararım.",
+  "at": [
+   "f46067ea"
+  ]
+ },
+ {
+  "en": "as soon as",
+  "ru": "как только",
+  "tr": "-er -mez / -ar -maz, -ir -mez / -ır -maz",
+  "at": [
+   "a78bbf71"
+  ]
+ },
+ {
+  "en": "This café is very popular.",
+  "ru": "Это кафе очень популярное.",
+  "tr": "Bu kafe çok popüler.",
+  "at": [
+   "ceefdf91"
+  ]
+ },
+ {
+  "en": "popular",
+  "ru": "популярный, любимый",
+  "tr": "popüler, sevilen",
+  "at": [
+   "3d867afe"
+  ]
+ },
+ {
+  "en": "She offers me a coffee.",
+  "ru": "Она предлагает мне кофе.",
+  "tr": "Bana kahve ikram ediyor.",
+  "at": [
+   "7d2ebae5"
+  ]
+ },
+ {
+  "en": "to offer",
+  "ru": "предлагать",
+  "tr": "teklif etmek, ikram etmek",
+  "at": [
+   "cf803312"
+  ]
+ },
+ {
+  "en": "I get really homesick when I'm away from home for a long time.",
+  "ru": "Я сильно скучаю по дому, когда долго не бываю дома.",
+  "tr": "Uzun süre evden uzak kalınca evimi çok özlüyorum.",
+  "at": [
+   "659d2b47"
+  ]
+ },
+ {
+  "en": "homesickness",
+  "ru": "тоска по дому",
+  "tr": "ev özlemi, sıla hasreti",
+  "at": [
+   "9e98e054"
+  ]
+ },
+ {
+  "en": "The event starts at eight.",
+  "ru": "Мероприятие начинается в восемь.",
+  "tr": "Etkinlik saat sekizde başlıyor.",
+  "at": [
+   "7bbc1a79"
+  ]
+ },
+ {
+  "en": "event",
+  "ru": "мероприятие",
+  "tr": "etkinlik",
+  "at": [
+   "be8e9ac6"
+  ]
+ },
+ {
+  "en": "As long as it's raining, I'll stay here.",
+  "ru": "Пока идёт дождь, я останусь здесь.",
+  "tr": "Yağmur yağdığı sürece burada kalacağım.",
+  "at": [
+   "0e6361d7"
+  ]
+ },
+ {
+  "en": "as long as",
+  "ru": "пока, до тех пор пока",
+  "tr": "-diği sürece / -dığı sürece",
+  "at": [
+   "4bae9de4"
+  ]
+ },
+ {
+  "en": "I'm applying for a job.",
+  "ru": "Я подаю заявку на вакансию.",
+  "tr": "Bir iş ilanına başvuruyorum.",
+  "at": [
+   "c3ed6e6b"
+  ]
+ },
+ {
+  "en": "to apply for",
+  "ru": "подавать заявку на",
+  "tr": "bir şeye başvurmak",
+  "at": [
+   "a6e24088"
+  ]
+ },
+ {
+  "en": "I'm disappointed with the film.",
+  "ru": "Я разочарована фильмом.",
+  "tr": "Filmden hayal kırıklığına uğradım.",
+  "at": [
+   "c4e41291"
+  ]
+ },
+ {
+  "en": "disappointed",
+  "ru": "разочарованный",
+  "tr": "hayal kırıklığına uğramış",
+  "at": [
+   "9c934dfe"
+  ]
+ },
+ {
+  "en": "We have a clear agreement.",
+  "ru": "У нас есть чёткая договорённость.",
+  "tr": "Açık bir anlaşmamız var.",
+  "at": [
+   "d0e288ea"
+  ]
+ },
+ {
+  "en": "agreement, arrangement",
+  "ru": "договорённость, соглашение",
+  "tr": "anlaşma, mutabakat",
+  "at": [
+   "0d4ec071"
+  ]
+ },
+ {
+  "en": "My parents don't allow me to do that.",
+  "ru": "Родители мне этого не разрешают.",
+  "tr": "Ailem buna izin vermiyor.",
+  "at": [
+   "7a60d80c"
+  ]
+ },
+ {
+  "en": "to allow",
+  "ru": "разрешать",
+  "tr": "izin vermek",
+  "at": [
+   "7e3f2a6b"
+  ]
+ },
+ {
+  "en": "I'm sending my application today.",
+  "ru": "Я сегодня отправляю свою заявку на работу.",
+  "tr": "Bugün iş başvurumu gönderiyorum.",
+  "at": [
+   "235f9880"
+  ]
+ },
+ {
+  "en": "(job) application",
+  "ru": "заявка (особенно на работу); пакет документов",
+  "tr": "başvuru, iş başvurusu; başvuru dosyası",
+  "at": [
+   "1ccfbfaf"
+  ]
+ },
+ {
+  "en": "He was so angry that he could hardly speak.",
+  "ru": "Он был настолько зол, что едва мог говорить.",
+  "tr": "O kadar öfkeliydi ki zar zor konuşabiliyordu.",
+  "at": [
+   "f97a6bda"
+  ]
+ },
+ {
+  "en": "angry, furious",
+  "ru": "злой, в ярости",
+  "tr": "öfkeli, hiddetli",
+  "at": [
+   "6645dc61"
+  ]
+ },
+ {
+  "en": "By now I feel at home in Munich.",
+  "ru": "Теперь я уже чувствую себя в Мюнхене как дома.",
+  "tr": "Artık Münih'te kendimi evimdeymiş gibi hissediyorum.",
+  "at": [
+   "75c911ed"
+  ]
+ },
+ {
+  "en": "by now, meanwhile",
+  "ru": "тем временем, к настоящему времени",
+  "tr": "artık, bu süre içinde; bu arada",
+  "at": [
+   "908fea7a"
+  ]
+ },
+ {
+  "en": "The exam was a success.",
+  "ru": "Экзамен прошёл успешно.",
+  "tr": "Sınav başarılı geçti.",
+  "at": [
+   "89fae9c4"
+  ]
+ },
+ {
+  "en": "successful",
+  "ru": "успешный",
+  "tr": "başarılı",
+  "at": [
+   "80bd55a3"
+  ]
+ },
+ {
+  "en": "I'm getting used to the weather.",
+  "ru": "Я привыкаю к погоде.",
+  "tr": "Havaya alışıyorum.",
+  "at": [
+   "ee494651"
+  ]
+ },
+ {
+  "en": "to get used to",
+  "ru": "привыкать к",
+  "tr": "bir şeye alışmak",
+  "at": [
+   "3015eebe"
+  ]
+ },
+ {
+  "en": "She's training to be a cook.",
+  "ru": "Она учится на повара.",
+  "tr": "Aşçılık eğitimi alıyor.",
+  "at": [
+   "61e5dd77"
+  ]
+ },
+ {
+  "en": "vocational training, apprenticeship",
+  "ru": "профобучение, образование",
+  "tr": "meslek eğitimi; eğitim",
+  "at": [
+   "d4cff0c4"
+  ]
+ },
+ {
+  "en": "In the end, we found a solution.",
+  "ru": "В конце концов мы нашли решение.",
+  "tr": "Sonunda bir çözüm bulduk.",
+  "at": [
+   "c38121c9"
+  ]
+ },
+ {
+  "en": "finally, in the end",
+  "ru": "в конце концов, наконец",
+  "tr": "sonunda, nihayet",
+  "at": [
+   "877a5316"
+  ]
+ },
+ {
+  "en": "I'd like to cancel my contract.",
+  "ru": "Я хочу расторгнуть договор.",
+  "tr": "Sözleşmemi feshetmek istiyorum.",
+  "at": [
+   "2cd9130c"
+  ]
+ },
+ {
+  "en": "to quit (a job); to cancel (a contract)",
+  "ru": "увольняться; расторгать",
+  "tr": "sözleşmeyi feshetmek; işten ayrılmak",
+  "at": [
+   "b477056b"
+  ]
+ },
+ {
+  "en": "For this job you need a knowledge of German.",
+  "ru": "Для этой должности нужны знания немецкого.",
+  "tr": "Bu pozisyon için Almanca bilgisi gerekiyor.",
+  "at": [
+   "0a84294d"
+  ]
+ },
+ {
+  "en": "knowledge, skills",
+  "ru": "знания",
+  "tr": "bilgi, bilgiler",
+  "at": [
+   "73c2959a"
+  ]
+ },
+ {
+  "en": "We need to solve the problem.",
+  "ru": "Нам нужно решить проблему.",
+  "tr": "Sorunu çözmemiz gerekiyor.",
+  "at": [
+   "9d424881"
+  ]
+ },
+ {
+  "en": "to solve; to loosen",
+  "ru": "решать; развязывать, ослаблять",
+  "tr": "çözmek; gevşetmek",
+  "at": [
+   "26835fae"
+  ]
+ },
+ {
+  "en": "The child suddenly started to cry.",
+  "ru": "Ребёнок внезапно начал плакать.",
+  "tr": "Çocuk birden ağlamaya başladı.",
+  "at": [
+   "ae7b6ac8"
+  ]
+ },
+ {
+  "en": "to cry",
+  "ru": "плакать",
+  "tr": "ağlamak",
+  "at": [
+   "cbcac6d7"
+  ]
+ },
+ {
+  "en": "Patience is an important skill.",
+  "ru": "Терпение — важный навык.",
+  "tr": "Sabır önemli bir beceridir.",
+  "at": [
+   "c6ff8d65"
+  ]
+ },
+ {
+  "en": "ability, skill",
+  "ru": "способность, навык",
+  "tr": "yetenek, beceri",
+  "at": [
+   "68833592"
+  ]
+ },
+ {
+  "en": "I like Munich especially in summer.",
+  "ru": "Мне особенно нравится Мюнхен летом.",
+  "tr": "Münih'i özellikle yazın seviyorum.",
+  "at": [
+   "90b680f8"
+  ]
+ },
+ {
+  "en": "especially",
+  "ru": "особенно",
+  "tr": "özellikle",
+  "at": [
+   "17758a47"
+  ]
+ },
+ {
+  "en": "We're cooking together today.",
+  "ru": "Сегодня мы готовим вместе.",
+  "tr": "Bugün birlikte yemek yapıyoruz.",
+  "at": [
+   "2d8479cd"
+  ]
+ },
+ {
+  "en": "together; shared",
+  "ru": "совместный; вместе, совместно",
+  "tr": "birlikte; ortak",
+  "at": [
+   "57bb561a"
+  ]
+ },
+ {
+  "en": "That doesn't convince me.",
+  "ru": "Это меня не убеждает.",
+  "tr": "Bu beni ikna etmiyor.",
+  "at": [
+   "36ec1647"
+  ]
+ },
+ {
+  "en": "to convince",
+  "ru": "убеждать",
+  "tr": "ikna etmek",
+  "at": [
+   "84416b54"
+  ]
+ },
+ {
+  "en": "I know the area well.",
+  "ru": "Я хорошо знаю окрестности.",
+  "tr": "Buraları iyi tanıyorum.",
+  "at": [
+   "80afe99f"
+  ]
+ },
+ {
+  "en": "surroundings, area",
+  "ru": "окружение, окрестности",
+  "tr": "civar, yakın çevre; ortam",
+  "at": [
+   "67c1846c"
+  ]
+ },
+ {
+  "en": "I'll wait ten minutes at most.",
+  "ru": "Я подожду максимум десять минут.",
+  "tr": "En fazla on dakika beklerim.",
+  "at": [
+   "e42debc6"
+  ]
+ },
+ {
+  "en": "at most",
+  "ru": "максимум, не более",
+  "tr": "en fazla",
+  "at": [
+   "8a12d59d"
+  ]
+ },
+ {
+  "en": "I agree with you.",
+  "ru": "Я с тобой согласна.",
+  "tr": "Sana katılıyorum.",
+  "at": [
+   "8c490ef3"
+  ]
+ },
+ {
+  "en": "to agree",
+  "ru": "соглашаться",
+  "tr": "katılmak, hak vermek",
+  "at": [
+   "4bd4c770"
+  ]
+ },
+ {
+  "en": "Trust is the basis of every good relationship.",
+  "ru": "Доверие — основа любых хороших отношений.",
+  "tr": "Güven, her iyi ilişkinin temelidir.",
+  "at": [
+   "9c5d86b2"
+  ]
+ },
+ {
+  "en": "trust",
+  "ru": "доверие",
+  "tr": "güven",
+  "at": [
+   "2c888d39"
+  ]
+ },
+ {
+  "en": "My driving instructor is very patient.",
+  "ru": "Мой инструктор по вождению очень терпеливый.",
+  "tr": "Direksiyon hocam çok sabırlı.",
+  "at": [
+   "0b667155"
+  ]
+ },
+ {
+  "en": "patient",
+  "ru": "терпеливый",
+  "tr": "sabırlı",
+  "at": [
+   "ce730f82"
+  ]
+ },
+ {
+  "en": "They have a good relationship.",
+  "ru": "У них хорошие отношения.",
+  "tr": "Aralarında iyi bir ilişki var.",
+  "at": [
+   "d5950b62"
+  ]
+ },
+ {
+  "en": "relationship",
+  "ru": "отношения, связь",
+  "tr": "ilişki; bağlantı",
+  "at": [
+   "57399be9"
+  ]
+ },
+ {
+  "en": "It depends on the weather.",
+  "ru": "Это зависит от погоды.",
+  "tr": "Bu havaya bağlı.",
+  "at": [
+   "b7b8a727"
+  ]
+ },
+ {
+  "en": "to depend on",
+  "ru": "зависеть от",
+  "tr": "bir şeye bağlı olmak",
+  "at": [
+   "f47fab74"
+  ]
+ },
+ {
+  "en": "His behaviour was strange.",
+  "ru": "Его поведение было странным.",
+  "tr": "Davranışları tuhaftı.",
+  "at": [
+   "7bc08c28"
+  ]
+ },
+ {
+  "en": "behaviour",
+  "ru": "поведение",
+  "tr": "davranış",
+  "at": [
+   "69b9d577"
+  ]
+ },
+ {
+  "en": "I might come later.",
+  "ru": "Возможно, я приду позже.",
+  "tr": "Belki daha sonra gelirim.",
+  "at": [
+   "43193325"
+  ]
+ },
+ {
+  "en": "possibly, maybe",
+  "ru": "возможно",
+  "tr": "belki, olabilir ki",
+  "at": [
+   "aaf82652"
+  ]
+ },
+ {
+  "en": "I'm used to the weather.",
+  "ru": "Я привыкла к этой погоде.",
+  "tr": "Bu havaya alıştım.",
+  "at": [
+   "c0710d92"
+  ]
+ },
+ {
+  "en": "used to (something); usual",
+  "ru": "привыкший к чему-либо; привычный",
+  "tr": "alışkın; alışılmış, her zamanki",
+  "at": [
+   "a9457ed9"
+  ]
+ },
+ {
+  "en": "The mistake stands out immediately.",
+  "ru": "Ошибка сразу бросается в глаза.",
+  "tr": "Hata hemen göze çarpıyor.",
+  "at": [
+   "0640d7d0"
+  ]
+ },
+ {
+  "en": "to stand out, to be noticed",
+  "ru": "бросаться в глаза, замечаться",
+  "tr": "göze çarpmak, dikkat çekmek",
+  "at": [
+   "5715053f"
+  ]
+ },
+ {
+  "en": "Having coffee in the morning is a habit of mine.",
+  "ru": "Кофе утром — моя привычка.",
+  "tr": "Sabahları kahve içmek benim alışkanlığım.",
+  "at": [
+   "f7954cbe"
+  ]
+ },
+ {
+  "en": "habit",
+  "ru": "привычка",
+  "tr": "alışkanlık",
+  "at": [
+   "b63e0195"
+  ]
+ },
+ {
+  "en": "His behaviour was so ridiculous that everyone had to laugh.",
+  "ru": "Его поведение было настолько нелепым, что все невольно рассмеялись.",
+  "tr": "Davranışı o kadar gülünçtü ki herkes elinde olmadan güldü.",
+  "at": [
+   "b10af895"
+  ]
+ },
+ {
+  "en": "ridiculous",
+  "ru": "смешной, нелепый, смехотворный",
+  "tr": "gülünç, saçma",
+  "at": [
+   "60ff34c2"
+  ]
+ },
+ {
+  "en": "In any case, I'd like to try.",
+  "ru": "Во всяком случае, я хочу попробовать.",
+  "tr": "Her hâlükârda denemek istiyorum.",
+  "at": [
+   "8e21f470"
+  ]
+ },
+ {
+  "en": "in any case, anyway",
+  "ru": "во всяком случае",
+  "tr": "her hâlükârda, her durumda",
+  "at": [
+   "63cc911f"
+  ]
+ },
+ {
+  "en": "The money isn't enough.",
+  "ru": "Денег недостаточно.",
+  "tr": "Para yetmiyor.",
+  "at": [
+   "66b13e88"
+  ]
+ },
+ {
+  "en": "to be enough",
+  "ru": "быть достаточным, хватать",
+  "tr": "yetmek, yeterli olmak",
+  "at": [
+   "7edf5297"
+  ]
+ },
+ {
+  "en": "The employee was very polite.",
+  "ru": "Сотрудник был очень вежлив.",
+  "tr": "Çalışan çok kibardı.",
+  "at": [
+   "405d3e2b"
+  ]
+ },
+ {
+  "en": "polite",
+  "ru": "вежливый",
+  "tr": "kibar, nazik",
+  "at": [
+   "6ea49348"
+  ]
+ },
+ {
+  "en": "Working from home has a big advantage.",
+  "ru": "У удалённой работы есть большое преимущество.",
+  "tr": "Uzaktan çalışmanın büyük bir avantajı var.",
+  "at": [
+   "9f2f35a2"
+  ]
+ },
+ {
+  "en": "advantage",
+  "ru": "преимущество",
+  "tr": "avantaj",
+  "at": [
+   "ede75f29"
+  ]
+ },
+ {
+  "en": "I'd like to apply for a new passport.",
+  "ru": "Я хочу подать заявление на новый паспорт.",
+  "tr": "Yeni bir pasaport için başvurmak istiyorum.",
+  "at": [
+   "0a958e83"
+  ]
+ },
+ {
+  "en": "to apply for (officially)",
+  "ru": "подавать заявление на",
+  "tr": "bir şey için başvurmak, talep etmek",
+  "at": [
+   "f190b180"
+  ]
+ },
+ {
+  "en": "The price is a disadvantage.",
+  "ru": "Цена — это недостаток.",
+  "tr": "Fiyat bir dezavantaj.",
+  "at": [
+   "679ac154"
+  ]
+ },
+ {
+  "en": "disadvantage",
+  "ru": "недостаток",
+  "tr": "dezavantaj",
+  "at": [
+   "9c202cb3"
+  ]
+ },
+ {
+  "en": "In contrast, Munich is very quiet.",
+  "ru": "В отличие от этого Мюнхен очень спокойный.",
+  "tr": "Buna karşılık Münih çok sakin.",
+  "at": [
+   "fd0f69c0"
+  ]
+ },
+ {
+  "en": "in contrast",
+  "ru": "в отличие от этого",
+  "tr": "buna karşılık",
+  "at": [
+   "f38a53ef"
+  ]
+ },
+ {
+  "en": "I admire people who never give up.",
+  "ru": "Я восхищаюсь людьми, которые никогда не сдаются.",
+  "tr": "Asla pes etmeyen insanlara hayranım.",
+  "at": [
+   "1adef443"
+  ]
+ },
+ {
+  "en": "to admire",
+  "ru": "восхищаться",
+  "tr": "hayran olmak, takdir etmek",
+  "at": [
+   "9a511840"
+  ]
+ },
+ {
+  "en": "I was embarrassed to speak in front of everyone.",
+  "ru": "Мне было неловко говорить перед всеми.",
+  "tr": "Herkesin önünde konuşmak beni utandırdı.",
+  "at": [
+   "b0b49b2d"
+  ]
+ },
+ {
+  "en": "embarrassing",
+  "ru": "неловкий, постыдный",
+  "tr": "utanç verici, mahcup edici",
+  "at": [
+   "fa80e8ba"
+  ]
+ },
+ {
+  "en": "Please give reasons for your opinion.",
+  "ru": "Пожалуйста, обоснуйте своё мнение.",
+  "tr": "Lütfen görüşünüzü gerekçelendirin.",
+  "at": [
+   "def38749"
+  ]
+ },
+ {
+  "en": "to give reasons for, to justify",
+  "ru": "обосновывать",
+  "tr": "gerekçelendirmek",
+  "at": [
+   "bc6b8896"
+  ]
+ },
+ {
+  "en": "I'm writing a complaint.",
+  "ru": "Я пишу жалобу.",
+  "tr": "Bir şikâyet yazıyorum.",
+  "at": [
+   "69e46272"
+  ]
+ },
+ {
+  "en": "complaint",
+  "ru": "жалоба",
+  "tr": "şikâyet",
+  "at": [
+   "1f9754f9"
+  ]
+ },
+ {
+  "en": "On the one hand it's expensive, on the other hand it's convenient.",
+  "ru": "С одной стороны, это дорого, с другой — удобно.",
+  "tr": "Bir yandan pahalı, öte yandan pratik.",
+  "at": [
+   "a78cc5d0"
+  ]
+ },
+ {
+  "en": "on the one hand … on the other hand",
+  "ru": "с одной стороны … с другой стороны",
+  "tr": "bir yandan …, öte yandan …",
+  "at": [
+   "b6c9333f"
+  ]
+ },
+ {
+  "en": "She's telling us about her trip.",
+  "ru": "Она рассказывает о своей поездке.",
+  "tr": "Yolculuğunu anlatıyor.",
+  "at": [
+   "f2fcdb08"
+  ]
+ },
+ {
+  "en": "to report, to tell",
+  "ru": "сообщать, рассказывать",
+  "tr": "anlatmak, bildirmek",
+  "at": [
+   "d5b5df17"
+  ]
+ },
+ {
+  "en": "The price depends on the date.",
+  "ru": "Цена зависит от даты.",
+  "tr": "Fiyat tarihe bağlı.",
+  "at": [
+   "27eb6959"
+  ]
+ },
+ {
+  "en": "dependent (on)",
+  "ru": "зависимый от",
+  "tr": "bağlı",
+  "at": [
+   "536fde66"
+  ]
+ },
+ {
+  "en": "I need permission.",
+  "ru": "Мне нужно разрешение.",
+  "tr": "Bir izne ihtiyacım var.",
+  "at": [
+   "7b3e7466"
+  ]
+ },
+ {
+  "en": "permission",
+  "ru": "разрешение",
+  "tr": "izin",
+  "at": [
+   "c203157d"
+  ]
+ },
+ {
+  "en": "I'm working on a new project.",
+  "ru": "Я занимаюсь новым проектом.",
+  "tr": "Yeni bir projeyle uğraşıyorum.",
+  "at": [
+   "4cad958f"
+  ]
+ },
+ {
+  "en": "to deal with, to work on",
+  "ru": "заниматься чем-либо",
+  "tr": "bir şeyle uğraşmak",
+  "at": [
+   "dbca109c"
+  ]
+ },
+ {
+  "en": "It's amazing how fast time goes by.",
+  "ru": "Удивительно, как быстро проходит время.",
+  "tr": "Zamanın bu kadar hızlı geçmesi şaşırtıcı.",
+  "at": [
+   "4e71da97"
+  ]
+ },
+ {
+  "en": "amazing, astonishing",
+  "ru": "удивительный, поразительный",
+  "tr": "şaşırtıcı",
+  "at": [
+   "63e7cda4"
+  ]
+ },
+ {
+  "en": "Participation is free.",
+  "ru": "Участие бесплатное.",
+  "tr": "Katılım ücretsiz.",
+  "at": [
+   "2e9158f3"
+  ]
+ },
+ {
+  "en": "participation",
+  "ru": "участие",
+  "tr": "katılım",
+  "at": [
+   "4345d170"
+  ]
+ },
+ {
+  "en": "I like both coffee and tea.",
+  "ru": "Я люблю и кофе, и чай.",
+  "tr": "Hem kahveyi hem çayı severim.",
+  "at": [
+   "6b4f0084"
+  ]
+ },
+ {
+  "en": "both … and",
+  "ru": "как … так и",
+  "tr": "hem … hem",
+  "at": [
+   "c9075663"
+  ]
+ },
+ {
+  "en": "Two hours are enough.",
+  "ru": "Двух часов достаточно.",
+  "tr": "İki saat yeterli.",
+  "at": [
+   "a5b48c25"
+  ]
+ },
+ {
+  "en": "sufficient, enough",
+  "ru": "достаточный",
+  "tr": "yeterli",
+  "at": [
+   "52c55f52"
+  ]
+ },
+ {
+  "en": "I try hard to be on time.",
+  "ru": "Я стараюсь быть вовремя.",
+  "tr": "Dakik olmaya gayret ediyorum.",
+  "at": [
+   "44e44a49"
+  ]
+ },
+ {
+  "en": "to try hard, to make an effort",
+  "ru": "стараться, прилагать усилия",
+  "tr": "gayret etmek, çaba göstermek",
+  "at": [
+   "98b2eb96"
+  ]
+ },
+ {
+  "en": "Can you draw the curtains, please?",
+  "ru": "Можешь, пожалуйста, задёрнуть шторы?",
+  "tr": "Perdeleri çeker misin lütfen?",
+  "at": [
+   "a60fa332"
+  ]
+ },
+ {
+  "en": "to draw (curtains), to pull shut",
+  "ru": "задёргивать (шторы), закрывать, потянув на себя",
+  "tr": "(perdeyi) çekmek, kapatmak",
+  "at": [
+   "047599b9"
+  ]
+ },
+ {
+  "en": "I drink neither cola nor juice.",
+  "ru": "Я не пью ни колу, ни сок.",
+  "tr": "Ne kola ne meyve suyu içerim.",
+  "at": [
+   "90471003"
+  ]
+ },
+ {
+  "en": "neither … nor",
+  "ru": "ни … ни",
+  "tr": "ne … ne",
+  "at": [
+   "34e98300"
+  ]
+ },
+ {
+  "en": "The assistant is advising me.",
+  "ru": "Сотрудница меня консультирует.",
+  "tr": "Görevli bana bilgi veriyor.",
+  "at": [
+   "14afdb6f"
+  ]
+ },
+ {
+  "en": "to advise",
+  "ru": "консультировать, советовать",
+  "tr": "danışmanlık yapmak, bilgi vermek, tavsiyede bulunmak",
+  "at": [
+   "92c018bc"
+  ]
+ },
+ {
+  "en": "Music can calm me down quickly.",
+  "ru": "Музыка может быстро меня успокоить.",
+  "tr": "Müzik beni çabucak sakinleştirebilir.",
+  "at": [
+   "4fd57c7a"
+  ]
+ },
+ {
+  "en": "to calm (down)",
+  "ru": "успокаивать",
+  "tr": "sakinleştirmek",
+  "at": [
+   "03e8b8c1"
+  ]
+ },
+ {
+  "en": "I'm very busy today.",
+  "ru": "Я сегодня очень занята.",
+  "tr": "Bugün çok meşgulüm.",
+  "at": [
+   "d434ac5d"
+  ]
+ },
+ {
+  "en": "busy",
+  "ru": "занятый",
+  "tr": "meşgul",
+  "at": [
+   "bcf5c52a"
+  ]
+ },
+ {
+  "en": "I don't accept this condition.",
+  "ru": "Я не принимаю это условие.",
+  "tr": "Bu koşulu kabul etmiyorum.",
+  "at": [
+   "0381f6fd"
+  ]
+ },
+ {
+  "en": "condition",
+  "ru": "условие",
+  "tr": "koşul",
+  "at": [
+   "d713468a"
+  ]
+ },
+ {
+  "en": "Please take my situation into account.",
+  "ru": "Пожалуйста, учтите мою ситуацию.",
+  "tr": "Lütfen durumumu dikkate alın.",
+  "at": [
+   "6f7867ee"
+  ]
+ },
+ {
+  "en": "to take into account",
+  "ru": "учитывать",
+  "tr": "dikkate almak, göz önünde bulundurmak",
+  "at": [
+   "c4ee0845"
+  ]
+ },
+ {
+  "en": "The monthly fee is too high.",
+  "ru": "Ежемесячный взнос слишком высокий.",
+  "tr": "Aylık aidat çok yüksek.",
+  "at": [
+   "c4130226"
+  ]
+ },
+ {
+  "en": "contribution; fee; post (article)",
+  "ru": "вклад; взнос; публикация",
+  "tr": "aidat; katkı; (gazete, dergi) yazısı",
+  "at": [
+   "ec94313d"
+  ]
+ },
+ {
+  "en": "Please speak clearly.",
+  "ru": "Пожалуйста, говори чётко.",
+  "tr": "Lütfen anlaşılır konuş.",
+  "at": [
+   "8f1425db"
+  ]
+ },
+ {
+  "en": "clear; clearly",
+  "ru": "ясный, отчётливый; чётко",
+  "tr": "anlaşılır bir şekilde; net, anlaşılır",
+  "at": [
+   "6ba08538"
+  ]
+ },
+ {
+  "en": "We agree on Friday.",
+  "ru": "Мы договариваемся на пятницу.",
+  "tr": "Cuma günü için anlaşıyoruz.",
+  "at": [
+   "74e81de1"
+  ]
+ },
+ {
+  "en": "to agree, to come to an agreement",
+  "ru": "договариваться, приходить к согласию",
+  "tr": "anlaşmak, uzlaşmak",
+  "at": [
+   "0c68894e"
+  ]
+ },
+ {
+  "en": "I work in a creative field.",
+  "ru": "Я работаю в творческой сфере.",
+  "tr": "Yaratıcı bir alanda çalışıyorum.",
+  "at": [
+   "6da75511"
+  ]
+ },
+ {
+  "en": "area, field",
+  "ru": "область, сфера",
+  "tr": "alan, sektör",
+  "at": [
+   "746ac07e"
+  ]
+ },
+ {
+  "en": "I'm discovering a new café.",
+  "ru": "Я открываю для себя новое кафе.",
+  "tr": "Yeni bir kafe keşfediyorum.",
+  "at": [
+   "01536da4"
+  ]
+ },
+ {
+  "en": "to discover",
+  "ru": "обнаруживать, открывать",
+  "tr": "keşfetmek, bulmak",
+  "at": [
+   "46db3f43"
+  ]
+ },
+ {
+  "en": "At the weekend I just want to relax.",
+  "ru": "На выходных я просто хочу расслабиться.",
+  "tr": "Hafta sonu sadece dinlenmek istiyorum.",
+  "at": [
+   "0046e7de"
+  ]
+ },
+ {
+  "en": "to relax",
+  "ru": "расслабляться, отдыхать",
+  "tr": "rahatlamak, dinlenmek",
+  "at": [
+   "528056f5"
+  ]
+ },
+ {
+  "en": "I urgently need a coffee.",
+  "ru": "Мне срочно нужен кофе.",
+  "tr": "Acilen kahveye ihtiyacım var.",
+  "at": [
+   "58c7ed92"
+  ]
+ },
+ {
+  "en": "urgent; urgently",
+  "ru": "срочный; срочно",
+  "tr": "acilen; acil",
+  "at": [
+   "ad205ed9"
+  ]
+ },
+ {
+  "en": "I'm still waiting for the decision.",
+  "ru": "Я всё ещё жду официального решения.",
+  "tr": "Hâlâ resmî cevabı bekliyorum.",
+  "at": [
+   "cbdc0c57"
+  ]
+ },
+ {
+  "en": "official decision, notice",
+  "ru": "официальное решение, уведомление",
+  "tr": "resmî cevap, karar; bildirim",
+  "at": [
+   "37967864"
+  ]
+ },
+ {
+  "en": "Please be honest with me.",
+  "ru": "Пожалуйста, будь со мной честна.",
+  "tr": "Lütfen bana karşı dürüst ol.",
+  "at": [
+   "3a428313"
+  ]
+ },
+ {
+  "en": "honest",
+  "ru": "честный",
+  "tr": "dürüst",
+  "at": [
+   "9406df50"
+  ]
+ },
+ {
+  "en": "The situation is developing well.",
+  "ru": "Ситуация развивается хорошо.",
+  "tr": "Durum iyi gelişiyor.",
+  "at": [
+   "b38929a9"
+  ]
+ },
+ {
+  "en": "to develop",
+  "ru": "развиваться",
+  "tr": "gelişmek",
+  "at": [
+   "6934c6b6"
+  ]
+ },
+ {
+  "en": "The company has twenty employees.",
+  "ru": "На предприятии двадцать сотрудников.",
+  "tr": "İşletmede yirmi çalışan var.",
+  "at": [
+   "a016b8fd"
+  ]
+ },
+ {
+  "en": "company, business; operation",
+  "ru": "предприятие; работа",
+  "tr": "işletme; çalışma, işleyiş",
+  "at": [
+   "5699c88a"
+  ]
+ },
+ {
+  "en": "I don't have the time.",
+  "ru": "Мне не хватает времени.",
+  "tr": "Vaktim yetmiyor.",
+  "at": [
+   "1c1f2137"
+  ]
+ },
+ {
+  "en": "to be missing; to be lacking",
+  "ru": "отсутствовать; не хватать",
+  "tr": "eksik olmak, yetmemek; bulunmamak",
+  "at": [
+   "38cc4684"
+  ]
+ },
+ {
+  "en": "I'd like a flat of my own.",
+  "ru": "Я хочу собственную квартиру.",
+  "tr": "Kendime ait bir daire istiyorum.",
+  "at": [
+   "adb7c13d"
+  ]
+ },
+ {
+  "en": "own",
+  "ru": "собственный",
+  "tr": "kendi, kendine ait",
+  "at": [
+   "b09807ca"
+  ]
+ },
+ {
+  "en": "He tried to cheat me.",
+  "ru": "Он пытался меня обмануть.",
+  "tr": "Beni kandırmaya çalıştı.",
+  "at": [
+   "e136d57d"
+  ]
+ },
+ {
+  "en": "to cheat, to deceive",
+  "ru": "обманывать, мошенничать",
+  "tr": "kandırmak, dolandırmak",
+  "at": [
+   "de34d50a"
+  ]
+ },
+ {
+  "en": "That's a good opportunity.",
+  "ru": "Это хорошая возможность.",
+  "tr": "Bu iyi bir fırsat.",
+  "at": [
+   "3fba5531"
+  ]
+ },
+ {
+  "en": "opportunity, chance",
+  "ru": "возможность, случай",
+  "tr": "fırsat, imkân",
+  "at": [
+   "77c5e6de"
+  ]
+ },
+ {
+  "en": "The ticket is only valid today.",
+  "ru": "Билет действует только сегодня.",
+  "tr": "Bilet sadece bugün geçerli.",
+  "at": [
+   "9a08b198"
+  ]
+ },
+ {
+  "en": "to be valid; to be considered",
+  "ru": "действовать; считаться",
+  "tr": "geçerli olmak; sayılmak",
+  "at": [
+   "2b925027"
+  ]
+ },
+ {
+  "en": "The fee is twenty euros.",
+  "ru": "Сбор составляет двадцать евро.",
+  "tr": "Ücret yirmi avro.",
+  "at": [
+   "28163de5"
+  ]
+ },
+ {
+  "en": "fee, charge",
+  "ru": "сбор, плата",
+  "tr": "ücret, harç",
+  "at": [
+   "8ba65612"
+  ]
+ },
+ {
+  "en": "Alone at home, I sometimes feel lonely.",
+  "ru": "Одна дома я иногда чувствую себя одиноко.",
+  "tr": "Evde tek başımayken bazen kendimi yalnız hissediyorum.",
+  "at": [
+   "3d9b47ce"
+  ]
+ },
+ {
+  "en": "lonely",
+  "ru": "одинокий",
+  "tr": "yalnız",
+  "at": [
+   "f747cd65"
+  ]
+ },
+ {
+  "en": "I'm enjoying my coffee.",
+  "ru": "Я наслаждаюсь своим кофе.",
+  "tr": "Kahvemin tadını çıkarıyorum.",
+  "at": [
+   "7f044178"
+  ]
+ },
+ {
+  "en": "to enjoy",
+  "ru": "наслаждаться",
+  "tr": "bir şeyin tadını çıkarmak",
+  "at": [
+   "823dbac7"
+  ]
+ },
+ {
+  "en": "I'm sending the cancellation by post.",
+  "ru": "Я отправляю уведомление о расторжении договора по почте.",
+  "tr": "Fesih bildirimini postayla gönderiyorum.",
+  "at": [
+   "f26bee08"
+  ]
+ },
+ {
+  "en": "cancellation (of a contract); dismissal, resignation",
+  "ru": "расторжение (договора); увольнение",
+  "tr": "sözleşmenin feshi; işten çıkarma",
+  "at": [
+   "b9419217"
+  ]
+ },
+ {
+  "en": "I won't manage it today.",
+  "ru": "Я сегодня с этим не справлюсь.",
+  "tr": "Bunu bugün yetiştiremem.",
+  "at": [
+   "49a5d481"
+  ]
+ },
+ {
+  "en": "to manage, to make it",
+  "ru": "справляться, успевать",
+  "tr": "başarmak, halletmek; yetiştirmek",
+  "at": [
+   "aab16bae"
+  ]
+ },
+ {
+  "en": "The damage to the car is minor.",
+  "ru": "Повреждение машины небольшое.",
+  "tr": "Arabadaki hasar küçük.",
+  "at": [
+   "d942df45"
+  ]
+ },
+ {
+  "en": "damage",
+  "ru": "ущерб, повреждение",
+  "tr": "zarar, hasar",
+  "at": [
+   "e5850332"
+  ]
+ },
+ {
+  "en": "Before a trip I always feel great anticipation.",
+  "ru": "Перед поездкой я всегда испытываю приятное предвкушение.",
+  "tr": "Yolculuktan önce hep tatlı bir heyecan duyarım.",
+  "at": [
+   "a9f4cb46"
+  ]
+ },
+ {
+  "en": "anticipation, looking forward",
+  "ru": "предвкушение, радостное ожидание",
+  "tr": "tatlı heyecan, sevinçli bekleyiş",
+  "at": [
+   "03eb451d"
+  ]
+ },
+ {
+  "en": "I'm not giving up.",
+  "ru": "Я не сдаюсь.",
+  "tr": "Pes etmiyorum.",
+  "at": [
+   "8e0d61ab"
+  ]
+ },
+ {
+  "en": "to give up",
+  "ru": "сдаваться; отказываться",
+  "tr": "pes etmek; bırakmak",
+  "at": [
+   "6511c6c8"
+  ]
+ },
+ {
+  "en": "The move to Munich was expensive.",
+  "ru": "Переезд в Мюнхен был дорогим.",
+  "tr": "Münih'e taşınmak pahalıydı.",
+  "at": [
+   "ea9dd2b1"
+  ]
+ },
+ {
+  "en": "move (to a new home)",
+  "ru": "переезд",
+  "tr": "taşınma",
+  "at": [
+   "287d345e"
+  ]
+ },
+ {
+  "en": "That sounds sensible.",
+  "ru": "Это звучит разумно.",
+  "tr": "Kulağa mantıklı geliyor.",
+  "at": [
+   "ffffe78a"
+  ]
+ },
+ {
+  "en": "sensible, useful",
+  "ru": "целесообразный, осмысленный",
+  "tr": "mantıklı, anlamlı",
+  "at": [
+   "8ab967d1"
+  ]
+ },
+ {
+  "en": "I'm quitting smoking.",
+  "ru": "Я прекращаю курить.",
+  "tr": "Sigarayı bırakıyorum.",
+  "at": [
+   "ed94fceb"
+  ]
+ },
+ {
+  "en": "to stop",
+  "ru": "прекращать",
+  "tr": "bırakmak; sona ermek",
+  "at": [
+   "f3107f08"
+  ]
+ },
+ {
+  "en": "That wasn't my intention.",
+  "ru": "Это не было моим намерением.",
+  "tr": "Niyetim bu değildi.",
+  "at": [
+   "5aa716d4"
+  ]
+ },
+ {
+  "en": "intention",
+  "ru": "намерение",
+  "tr": "niyet",
+  "at": [
+   "491d5233"
+  ]
+ },
+ {
+  "en": "I spend too much money on coffee.",
+  "ru": "Я трачу слишком много денег на кофе.",
+  "tr": "Kahveye çok fazla para harcıyorum.",
+  "at": [
+   "8fdacb07"
+  ]
+ },
+ {
+  "en": "to spend (money); to hand out",
+  "ru": "тратить; выдавать",
+  "tr": "harcamak; dağıtmak",
+  "at": [
+   "a569bd14"
+  ]
+ },
+ {
+  "en": "We have different opinions.",
+  "ru": "У нас разные мнения.",
+  "tr": "Farklı görüşlerimiz var.",
+  "at": [
+   "dea28e4f"
+  ]
+ },
+ {
+  "en": "different, various",
+  "ru": "различный, разный",
+  "tr": "farklı, değişik",
+  "at": [
+   "405b865c"
+  ]
+ },
+ {
+  "en": "He felt a bit of schadenfreude when his competitor lost.",
+  "ru": "Он испытал немного злорадства, когда его конкурент проиграл.",
+  "tr": "Rakibi kaybedince içten içe biraz sevindi.",
+  "at": [
+   "fdf6aef4"
+  ]
+ },
+ {
+  "en": "gloating (joy at others' bad luck)",
+  "ru": "злорадство",
+  "tr": "başkasının zararına sevinme",
+  "at": [
+   "99228f13"
+  ]
+ },
+ {
+  "en": "Today I'll make an exception.",
+  "ru": "Сегодня я сделаю исключение.",
+  "tr": "Bugün bir istisna yapıyorum.",
+  "at": [
+   "d37c5144"
+  ]
+ },
+ {
+  "en": "exception",
+  "ru": "исключение",
+  "tr": "istisna",
+  "at": [
+   "72a74d23"
+  ]
+ },
+ {
+  "en": "Please note the opening hours.",
+  "ru": "Пожалуйста, обратите внимание на часы работы.",
+  "tr": "Lütfen çalışma saatlerine dikkat edin.",
+  "at": [
+   "3630e96d"
+  ]
+ },
+ {
+  "en": "to pay attention to, to note",
+  "ru": "учитывать, обращать внимание",
+  "tr": "dikkat etmek, uymak",
+  "at": [
+   "1ec251fa"
+  ]
+ },
+ {
+  "en": "My first impression was good.",
+  "ru": "Моё первое впечатление было хорошим.",
+  "tr": "İlk izlenimim iyiydi.",
+  "at": [
+   "558f0711"
+  ]
+ },
+ {
+  "en": "impression",
+  "ru": "впечатление",
+  "tr": "izlenim",
+  "at": [
+   "e596327e"
+  ]
+ },
+ {
+  "en": "The appointment is no longer available.",
+  "ru": "Эта запись больше недоступна.",
+  "tr": "Randevu artık müsait değil.",
+  "at": [
+   "7b9f6be9"
+  ]
+ },
+ {
+  "en": "available",
+  "ru": "доступный, имеющийся",
+  "tr": "mevcut, müsait",
+  "at": [
+   "4a8f05f6"
+  ]
+ },
+ {
+  "en": "Please let me know tomorrow.",
+  "ru": "Дай мне, пожалуйста, знать завтра.",
+  "tr": "Yarın bana haber ver lütfen.",
+  "at": [
+   "4f476049"
+  ]
+ },
+ {
+  "en": "to let (someone) know",
+  "ru": "дать знать, сообщить",
+  "tr": "haber vermek",
+  "at": [
+   "c5614196"
+  ]
+ },
+ {
+  "en": "Stress has a big influence on me.",
+  "ru": "Стресс сильно на меня влияет.",
+  "tr": "Stres beni çok etkiliyor.",
+  "at": [
+   "daf4c0a5"
+  ]
+ },
+ {
+  "en": "influence",
+  "ru": "влияние",
+  "tr": "etki",
+  "at": [
+   "aff583d2"
+  ]
+ },
+ {
+  "en": "The company is laying off ten employees.",
+  "ru": "Компания увольняет десять сотрудников.",
+  "tr": "Şirket on çalışanı işten çıkarıyor.",
+  "at": [
+   "a3436f79"
+  ]
+ },
+ {
+  "en": "to dismiss, to lay off; to discharge",
+  "ru": "увольнять; отпускать",
+  "tr": "işten çıkarmak; serbest bırakmak, taburcu etmek",
+  "at": [
+   "de344fc6"
+  ]
+ },
+ {
+  "en": "That can have serious consequences.",
+  "ru": "У этого могут быть плохие последствия.",
+  "tr": "Bunun kötü sonuçları olabilir.",
+  "at": [
+   "0536779f"
+  ]
+ },
+ {
+  "en": "consequence; episode",
+  "ru": "последствие; серия",
+  "tr": "sonuç; bölüm",
+  "at": [
+   "f47c526c"
+  ]
+ },
+ {
+  "en": "She's a very warm-hearted person.",
+  "ru": "Она очень душевный и добрый человек.",
+  "tr": "Çok sıcakkanlı ve iyi kalpli bir insan.",
+  "at": [
+   "c6193aa8"
+  ]
+ },
+ {
+  "en": "warm-hearted, kind",
+  "ru": "душевный, сердечный, добрый",
+  "tr": "sıcakkanlı, içten, iyi kalpli",
+  "at": [
+   "721533f7"
+  ]
+ },
+ {
+  "en": "I found out about it yesterday.",
+  "ru": "Я узнала об этом вчера.",
+  "tr": "Bunu dün öğrendim.",
+  "at": [
+   "c55f9ee9"
+  ]
+ },
+ {
+  "en": "to find out, to learn; to experience",
+  "ru": "узнавать; испытывать",
+  "tr": "öğrenmek, haber almak; yaşamak",
+  "at": [
+   "ffe7d8f6"
+  ]
+ },
+ {
+  "en": "The device isn't working.",
+  "ru": "Устройство не работает.",
+  "tr": "Cihaz çalışmıyor.",
+  "at": [
+   "6a197e82"
+  ]
+ },
+ {
+  "en": "device, appliance",
+  "ru": "прибор, устройство",
+  "tr": "alet, cihaz",
+  "at": [
+   "c4ff5149"
+  ]
+ },
+ {
+  "en": "I can still catch the train.",
+  "ru": "Я ещё успеваю на поезд.",
+  "tr": "Trene hâlâ yetişebilirim.",
+  "at": [
+   "3fac42f8"
+  ]
+ },
+ {
+  "en": "to catch (a train); to reach; to get through to (by phone)",
+  "ru": "успевать (на поезд); достигать; дозваниваться",
+  "tr": "(trene) yetişmek; ulaşmak; (telefonla) ulaşmak",
+  "at": [
+   "223d0c47"
+  ]
+ },
+ {
+  "en": "The law has been in force since January.",
+  "ru": "Закон действует с января.",
+  "tr": "Kanun ocaktan beri geçerli.",
+  "at": [
+   "2f5883ba"
+  ]
+ },
+ {
+  "en": "law",
+  "ru": "закон",
+  "tr": "kanun, yasa",
+  "at": [
+   "87e6f901"
+  ]
+ },
+ {
+  "en": "I recognise him immediately.",
+  "ru": "Я сразу его узнаю.",
+  "tr": "Onu hemen tanırım.",
+  "at": [
+   "1faca26c"
+  ]
+ },
+ {
+  "en": "to recognise",
+  "ru": "узнавать, распознавать",
+  "tr": "tanımak, fark etmek",
+  "at": [
+   "5cebce0b"
+  ]
+ },
+ {
+  "en": "I hate housework.",
+  "ru": "Я ненавижу домашние дела.",
+  "tr": "Ev işlerinden nefret ediyorum.",
+  "at": [
+   "12b4a1cd"
+  ]
+ },
+ {
+  "en": "housework, household; budget",
+  "ru": "домашние дела, домашнее хозяйство; бюджет",
+  "tr": "ev işleri, ev idaresi; bütçe",
+  "at": [
+   "7aae7e1a"
+  ]
+ },
+ {
+  "en": "She doesn't mention the problem.",
+  "ru": "Она не упоминает проблему.",
+  "tr": "Sorundan bahsetmiyor.",
+  "at": [
+   "5f3baa48"
+  ]
+ },
+ {
+  "en": "to mention",
+  "ru": "упоминать",
+  "tr": "bahsetmek, söz etmek",
+  "at": [
+   "a4509657"
+  ]
+ },
+ {
+  "en": "He was completely desperate because he hadn't found a solution.",
+  "ru": "Он был в полном отчаянии, потому что не нашёл решения.",
+  "tr": "Bir çözüm bulamadığı için tamamen çaresizdi.",
+  "at": [
+   "44ca3125"
+  ]
+ },
+ {
+  "en": "desperate",
+  "ru": "отчаявшийся, в отчаянии",
+  "tr": "çaresiz, umutsuz",
+  "at": [
+   "e5bf6452"
+  ]
+ },
+ {
+  "en": "Where you come from doesn't matter.",
+  "ru": "Происхождение не имеет значения.",
+  "tr": "Köken önemli değil.",
+  "at": [
+   "667d2d3c"
+  ]
+ },
+ {
+  "en": "origin, background",
+  "ru": "происхождение",
+  "tr": "köken",
+  "at": [
+   "ce432a5b"
+  ]
+ },
+ {
+  "en": "Please let me know your decision.",
+  "ru": "Пожалуйста, сообщите мне ваше решение.",
+  "tr": "Lütfen kararınızı bana bildirin.",
+  "at": [
+   "8e48e60b"
+  ]
+ },
+ {
+  "en": "to inform, to let know",
+  "ru": "сообщать",
+  "tr": "bildirmek",
+  "at": [
+   "f5be2968"
+  ]
+ },
+ {
+  "en": "That was a good performance.",
+  "ru": "Это был хороший результат / достижение.",
+  "tr": "İyi bir performanstı.",
+  "at": [
+   "3011b55f"
+  ]
+ },
+ {
+  "en": "performance, achievement",
+  "ru": "результат, достижение; производительность",
+  "tr": "başarı, performans; verim",
+  "at": [
+   "4fdf422c"
+  ]
+ },
+ {
+  "en": "I'm checking the bill again.",
+  "ru": "Я ещё раз проверяю счёт.",
+  "tr": "Faturayı bir kez daha kontrol ediyorum.",
+  "at": [
+   "6966f1d1"
+  ]
+ },
+ {
+  "en": "to check; to examine",
+  "ru": "проверять; экзаменовать",
+  "tr": "kontrol etmek; sınav yapmak",
+  "at": [
+   "30e7aa3e"
+  ]
+ },
+ {
+  "en": "There's a shortage of staff.",
+  "ru": "Не хватает персонала.",
+  "tr": "Personel eksik.",
+  "at": [
+   "5835b728"
+  ]
+ },
+ {
+  "en": "shortage, lack",
+  "ru": "недостаток, нехватка",
+  "tr": "eksiklik, yetersizlik",
+  "at": [
+   "ad00a077"
+  ]
+ },
+ {
+  "en": "I'm comparing the prices.",
+  "ru": "Я сравниваю цены.",
+  "tr": "Fiyatları karşılaştırıyorum.",
+  "at": [
+   "d9f35f30"
+  ]
+ },
+ {
+  "en": "to compare",
+  "ru": "сравнивать",
+  "tr": "karşılaştırmak",
+  "at": [
+   "740988df"
+  ]
+ },
+ {
+  "en": "I'm throwing the ball.",
+  "ru": "Я бросаю мяч.",
+  "tr": "Topu atıyorum.",
+  "at": [
+   "ca75a659"
+  ]
+ },
+ {
+  "en": "to throw",
+  "ru": "бросать",
+  "tr": "atmak, fırlatmak",
+  "at": [
+   "77437b66"
+  ]
+ },
+ {
+  "en": "I promise to be on time.",
+  "ru": "Я обещаю быть вовремя.",
+  "tr": "Zamanında geleceğime söz veriyorum.",
+  "at": [
+   "d566cdf8"
+  ]
+ },
+ {
+  "en": "to promise",
+  "ru": "обещать",
+  "tr": "söz vermek",
+  "at": [
+   "c4fd3747"
+  ]
+ },
+ {
+  "en": "He reacted to the news with complete indifference.",
+  "ru": "Он совершенно безразлично отреагировал на сообщение.",
+  "tr": "Habere karşı tamamen kayıtsız kaldı.",
+  "at": [
+   "11f0adbe"
+  ]
+ },
+ {
+  "en": "indifferent",
+  "ru": "безразличный, равнодушный",
+  "tr": "kayıtsız, ilgisiz",
+  "at": [
+   "74f24295"
+  ]
+ },
+ {
+  "en": "The glass falls to the floor.",
+  "ru": "Стакан падает на пол.",
+  "tr": "Bardak yere düşüyor.",
+  "at": [
+   "13dd0ed2"
+  ]
+ },
+ {
+  "en": "to fall",
+  "ru": "падать",
+  "tr": "düşmek",
+  "at": [
+   "b32c8c19"
+  ]
+ },
+ {
+  "en": "I'm annoyed about the delay.",
+  "ru": "Я злюсь из-за задержки.",
+  "tr": "Gecikmeye sinirleniyorum.",
+  "at": [
+   "9ff79279"
+  ]
+ },
+ {
+  "en": "to be annoyed about",
+  "ru": "злиться, раздражаться из-за",
+  "tr": "bir şeye sinirlenmek, kızmak",
+  "at": [
+   "fdb312c6"
+  ]
+ },
+ {
+  "en": "Safety is important to me.",
+  "ru": "Безопасность для меня важна.",
+  "tr": "Güvenlik benim için önemli.",
+  "at": [
+   "9eff8c7f"
+  ]
+ },
+ {
+  "en": "die Sicherheit · mostly no plural (Sicherheiten = guarantees, collateral)",
+  "ru": "die Sicherheit · meist ohne Plural (Sicherheiten = гарантии/обеспечение)",
+  "tr": "die Sicherheit · meist ohne Plural (Sicherheiten = teminat, güvence)",
+  "at": [
+   "e5f82dde"
+  ]
+ },
+ {
+  "en": "safety, security; certainty",
+  "ru": "безопасность; уверенность",
+  "tr": "güvenlik; emin olma",
+  "at": [
+   "3c32860c"
+  ]
+ },
+ {
+  "en": "I don't know my way around here.",
+  "ru": "Я здесь не ориентируюсь / не разбираюсь.",
+  "tr": "Buranın yabancısıyım.",
+  "at": [
+   "a2c778bf"
+  ]
+ },
+ {
+  "en": "to know your way around",
+  "ru": "разбираться, ориентироваться",
+  "tr": "bir yeri iyi bilmek, yabancısı olmamak",
+  "at": [
+   "52543b4c"
+  ]
+ },
+ {
+  "en": "I pick the book up off the floor.",
+  "ru": "Я поднимаю книгу с пола.",
+  "tr": "Kitabı yerden alıyorum.",
+  "at": [
+   "9263cc74"
+  ]
+ },
+ {
+  "en": "to pick up (from the floor)",
+  "ru": "поднимать (с поверхности)",
+  "tr": "yerden almak, kaldırmak",
+  "at": [
+   "5e4f7c93"
+  ]
+ },
+ {
+  "en": "The hotel is in the centre.",
+  "ru": "Отель находится в центре.",
+  "tr": "Otel merkezde bulunuyor.",
+  "at": [
+   "e9f4f793"
+  ]
+ },
+ {
+  "en": "to be (located)",
+  "ru": "находиться",
+  "tr": "bulunmak",
+  "at": [
+   "d0a143d0"
+  ]
+ },
+ {
+  "en": "We're looking for the cause.",
+  "ru": "Мы ищем причину.",
+  "tr": "Sebebini arıyoruz.",
+  "at": [
+   "755dcdaf"
+  ]
+ },
+ {
+  "en": "cause",
+  "ru": "причина",
+  "tr": "neden, sebep",
+  "at": [
+   "2a61bdfc"
+  ]
+ },
+ {
+  "en": "She looks worried.",
+  "ru": "Она выглядит обеспокоенной.",
+  "tr": "Endişeli görünüyor.",
+  "at": [
+   "b04a648d"
+  ]
+ },
+ {
+  "en": "worried, concerned",
+  "ru": "обеспокоенный, встревоженный",
+  "tr": "endişeli, kaygılı",
+  "at": [
+   "06e8bcda"
+  ]
+ },
+ {
+  "en": "Sport contributes to good health.",
+  "ru": "Спорт способствует здоровью.",
+  "tr": "Spor sağlığa katkıda bulunur.",
+  "at": [
+   "2cde8c90"
+  ]
+ },
+ {
+  "en": "to contribute to",
+  "ru": "способствовать, вносить вклад в",
+  "tr": "bir şeye katkıda bulunmak",
+  "at": [
+   "616589ff"
+  ]
+ },
+ {
+  "en": "There's a direct connection to Berlin.",
+  "ru": "До Берлина есть прямое сообщение.",
+  "tr": "Berlin'e direkt bağlantı var.",
+  "at": [
+   "903dd849"
+  ]
+ },
+ {
+  "en": "connection",
+  "ru": "связь, соединение",
+  "tr": "bağlantı, bağ",
+  "at": [
+   "d0e0b996"
+  ]
+ },
+ {
+  "en": "Please confirm the appointment.",
+  "ru": "Пожалуйста, подтвердите встречу.",
+  "tr": "Lütfen randevuyu onaylayın.",
+  "at": [
+   "79633d02"
+  ]
+ },
+ {
+  "en": "to confirm",
+  "ru": "подтверждать",
+  "tr": "onaylamak",
+  "at": [
+   "b779bfc9"
+  ]
+ },
+ {
+  "en": "What's the point of that?",
+  "ru": "Какой в этом смысл?",
+  "tr": "Bunun amacı ne?",
+  "at": [
+   "4ccbdd18"
+  ]
+ },
+ {
+  "en": "purpose",
+  "ru": "цель, назначение",
+  "tr": "amaç, işlev",
+  "at": [
+   "7ad98ba7"
+  ]
+ },
+ {
+  "en": "I'm taking part in the project.",
+  "ru": "Я участвую в проекте.",
+  "tr": "Projeye katılıyorum.",
+  "at": [
+   "7cd10b0a"
+  ]
+ },
+ {
+  "en": "to take part in",
+  "ru": "участвовать в",
+  "tr": "bir şeye katılmak",
+  "at": [
+   "51279b51"
+  ]
+ },
+ {
+  "en": "I don't understand the connection.",
+  "ru": "Я не понимаю взаимосвязь / контекст.",
+  "tr": "Aradaki bağlantıyı anlamıyorum.",
+  "at": [
+   "4bd17fcf"
+  ]
+ },
+ {
+  "en": "connection, context",
+  "ru": "связь, взаимосвязь",
+  "tr": "bağlantı, karşılıklı ilişki",
+  "at": [
+   "90b3c7dc"
+  ]
+ },
+ {
+  "en": "I can't think of a single word.",
+  "ru": "Мне не приходит в голову ни одного слова.",
+  "tr": "Aklıma tek bir kelime gelmiyor.",
+  "at": [
+   "fe4084f9"
+  ]
+ },
+ {
+  "en": "to occur to (someone), to come to mind",
+  "ru": "приходить в голову",
+  "tr": "aklına gelmek",
+  "at": [
+   "d0ca3546"
+  ]
+ },
+ {
+  "en": "I can't assess the risk.",
+  "ru": "Я не могу оценить риск.",
+  "tr": "Riski değerlendiremiyorum.",
+  "at": [
+   "0a40e132"
+  ]
+ },
+ {
+  "en": "to assess, to judge",
+  "ru": "оценивать",
+  "tr": "değerlendirmek, kestirmek",
+  "at": [
+   "8af517b9"
+  ]
+ },
+ {
+  "en": "The child was scared when left alone in the room.",
+  "ru": "Ребёнку было страшно, когда он был один в комнате.",
+  "tr": "Çocuk odada yalnızken korkmuştu.",
+  "at": [
+   "954c931d"
+  ]
+ },
+ {
+  "en": "anxious, fearful",
+  "ru": "боязливый, испуганный",
+  "tr": "korkak, ürkek, korkmuş",
+  "at": [
+   "1f356aea"
+  ]
+ },
+ {
+  "en": "A new house is being built here.",
+  "ru": "Здесь строится / возникает новый дом.",
+  "tr": "Burada yeni bir ev yapılıyor.",
+  "at": [
+   "674a355e"
+  ]
+ },
+ {
+  "en": "to arise, to come into being",
+  "ru": "возникать, появляться",
+  "tr": "ortaya çıkmak, oluşmak",
+  "at": [
+   "506d7475"
+  ]
+ },
+ {
+  "en": "I'm thinking about the offer.",
+  "ru": "Я обдумываю предложение.",
+  "tr": "Teklifi düşünüyorum.",
+  "at": [
+   "2907fc8a"
+  ]
+ },
+ {
+  "en": "to think about, to consider",
+  "ru": "размышлять о, обдумывать",
+  "tr": "bir şeyin üzerinde düşünmek, düşünüp taşınmak",
+  "at": [
+   "2787dcd1"
+  ]
+ },
+ {
+  "en": "The exam takes place on Monday.",
+  "ru": "Экзамен состоится в понедельник.",
+  "tr": "Sınav pazartesi günü yapılacak.",
+  "at": [
+   "70b935c0"
+  ]
+ },
+ {
+  "en": "to take place",
+  "ru": "происходить, состояться",
+  "tr": "yapılmak, gerçekleşmek",
+  "at": [
+   "ad769fef"
+  ]
+ },
+ {
+  "en": "I need to think for a moment.",
+  "ru": "Мне нужно немного подумать.",
+  "tr": "Biraz düşünmem gerekiyor.",
+  "at": [
+   "e3dc5a40"
+  ]
+ },
+ {
+  "en": "to think (something) over",
+  "ru": "обдумывать",
+  "tr": "düşünüp taşınmak",
+  "at": [
+   "6cdbb46f"
+  ]
+ },
+ {
+  "en": "I'll transfer the rent tomorrow.",
+  "ru": "Я переведу арендную плату завтра.",
+  "tr": "Kirayı yarın havale edeceğim.",
+  "at": [
+   "6884dfc2"
+  ]
+ },
+ {
+  "en": "to transfer (money)",
+  "ru": "переводить деньги",
+  "tr": "havale etmek",
+  "at": [
+   "13b36289"
+  ]
+ },
+ {
+  "en": "What shall we do at the weekend?",
+  "ru": "Чем займёмся на выходных?",
+  "tr": "Hafta sonu ne yapalım?",
+  "at": [
+   "d25e54b0"
+  ]
+ },
+ {
+  "en": "to do (something); to undertake",
+  "ru": "предпринимать; делать",
+  "tr": "yapmak, girişmek",
+  "at": [
+   "5fb14e5f"
+  ]
+ },
+ {
+  "en": "I'm arranging to meet a friend.",
+  "ru": "Я договариваюсь встретиться с подругой.",
+  "tr": "Bir arkadaşımla buluşmak için sözleşiyorum.",
+  "at": [
+   "f0c50b01"
+  ]
+ },
+ {
+  "en": "to arrange to meet",
+  "ru": "договариваться о встрече",
+  "tr": "buluşmak için sözleşmek",
+  "at": [
+   "9eaa522e"
+  ]
+ },
+ {
+  "en": "I was very nervous before my first day at work.",
+  "ru": "Перед первым рабочим днём я очень волновалась.",
+  "tr": "İlk iş günümden önce çok heyecanlıydım.",
+  "at": [
+   "bc055441"
+  ]
+ },
+ {
+  "en": "excited, nervous",
+  "ru": "взволнованный, возбуждённый",
+  "tr": "heyecanlı",
+  "at": [
+   "f3626a6e"
+  ]
+ },
+ {
+  "en": "I need to water the flowers.",
+  "ru": "Мне нужно полить цветы.",
+  "tr": "Çiçekleri sulamam gerekiyor.",
+  "at": [
+   "b1614e42"
+  ]
+ },
+ {
+  "en": "to water; to pour",
+  "ru": "поливать; лить",
+  "tr": "sulamak; dökmek",
+  "at": [
+   "a4da8109"
+  ]
+ },
+ {
+  "en": "I turn the key.",
+  "ru": "Я поворачиваю ключ.",
+  "tr": "Anahtarı çeviriyorum.",
+  "at": [
+   "b1bc5f0c"
+  ]
+ },
+ {
+  "en": "to turn",
+  "ru": "поворачивать; крутить",
+  "tr": "döndürmek, çevirmek",
+  "at": [
+   "c7ecd16b"
+  ]
+ },
+ {
+  "en": "I put the key in the lock.",
+  "ru": "Я вставляю ключ в замок.",
+  "tr": "Anahtarı kilide sokuyorum.",
+  "at": [
+   "1fecd246"
+  ]
+ },
+ {
+  "en": "to put (in); to be (stuck) in",
+  "ru": "вставлять; находиться внутри",
+  "tr": "sokmak, takmak; bulunmak, takılı olmak",
+  "at": [
+   "b7256c1d"
+  ]
+ }
+]

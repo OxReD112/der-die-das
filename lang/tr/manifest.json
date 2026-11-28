@@ -2,7 +2,7 @@
  "lang": "tr",
  "name": "Türkçe",
  "format_version": 1,
- "version": "fa61a6134a08",
+ "version": "fe89a55e9522",
  "source_commit": "dc73eb0623e4b3efa638752fb2ec583a55f492a2",
  "exercise_files": {
   "partikeln__sentences": {
@@ -14,7 +14,7 @@
    ],
    "de": "поле sentence записи-предка с «___»: в particles.<частица>.… — с подставленной частицей (как записан ключ: DOCH — ударное); в tasks[i] — с accept[0] (+ остальные accept в «  [+ …]»); в base.… — без пропуска; подписи PARTIKELN_FUNCTIONS — пусто",
    "pairs": 1982,
-   "done": 1555
+   "done": 1982
   },
   "artikel__words": {
    "source": "deutsch-home/Artikel/words.js",
@@ -130,6 +130,33 @@
   }
  },
  "wortschatz_files": {
+  "starter-set": {
+   "source": "deutsch-home/wortschatz/legacy/starter-set.js",
+   "globals": [
+    "WORDS"
+   ],
+   "de": "как у упражнений (de-context.cjs)",
+   "pairs": 436,
+   "done": 436
+  },
+  "sets__a2-b1": {
+   "source": "deutsch-home/wortschatz/sets/a2-b1.json",
+   "de": "как у упражнений (de-context.cjs)",
+   "pairs": 31,
+   "done": 31
+  },
+  "sets__b1-b2": {
+   "source": "deutsch-home/wortschatz/sets/b1-b2.json",
+   "de": "как у упражнений (de-context.cjs)",
+   "pairs": 70,
+   "done": 70
+  },
+  "sets__b2-c1": {
+   "source": "deutsch-home/wortschatz/sets/b2-c1.json",
+   "de": "как у упражнений (de-context.cjs)",
+   "pairs": 129,
+   "done": 129
+  },
   "example-senses": {
    "source": "deutsch-home/wortschatz/example-senses.json",
    "key": "id",
@@ -140,7 +167,7 @@
  "files": {
   "exercises/partikeln__sentences.json": {
    "items": 1982,
-   "done": 1555
+   "done": 1982
   },
   "exercises/artikel__words.json": {
    "items": 430,
@@ -185,6 +212,26 @@
   "exercises/home__phrases.json": {
    "items": 30,
    "done": 30
+  },
+  "exercises/partikeln__hints.json": {
+   "items": 216,
+   "done": 240
+  },
+  "wortschatz/starter-set.json": {
+   "items": 436,
+   "done": 436
+  },
+  "wortschatz/sets__a2-b1.json": {
+   "items": 31,
+   "done": 31
+  },
+  "wortschatz/sets__b1-b2.json": {
+   "items": 70,
+   "done": 70
+  },
+  "wortschatz/sets__b2-c1.json": {
+   "items": 129,
+   "done": 129
   },
   "wortschatz/example-senses.json": {
    "items": 5473,
@@ -252,7 +299,7 @@
   },
   "worterbuch/german-verbs.json": {
    "items": 2800,
-   "texts": 10607,
+   "texts": 10609,
    "done": 2800
   },
   "ui.json": {
