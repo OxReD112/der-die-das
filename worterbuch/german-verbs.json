@@ -7582,7 +7582,19 @@
       "translation_ru": "держаться (стойко, за что-либо), сохраняться; придерживаться (правил, фактов); не портиться (о продуктах)",
       "translation_en": "to hold on, to hold up (bravely), to last; to stick to (rules, facts); to keep (of food)",
       "note_ru": "sich halten an + Akk. — придерживаться (правил, фактов)",
-      "note_en": "sich halten an + accusative — to stick to (rules, facts)"
+      "note_en": "sich halten an + accusative — to stick to (rules, facts)",
+      "complements": [
+        {
+          "pattern": "an + Akkusativ",
+          "meaning_ru": "придерживаться (правил, фактов)",
+          "meaning_en": "to stick to (rules, facts)",
+          "note_ru": "придерживаться чего-либо: Er hielt sich an die Regeln.",
+          "note_en": "to stick to something: Er hielt sich an die Regeln.",
+          "prep_required": true,
+          "source": "DWDS (halten 7): eine Verpflichtung einhalten, erfüllen, einer Verpflichtung nachkommen — ● ⟨sich an etw. halten⟩; DWDS (halten 20): ⟨sich an etw. halten (= sich nach etw. richten)⟩; Duden (halten 8.4, Grammatik: sich halten): einer Vorschrift, Vorlage, Verpflichtung o. Ä. entsprechend handeln — sich an die Gesetze, an einen Vertrag halten; (8.5) sich nach etwas richten, an etwas orientieren — du solltest dich mehr an die Tatsachen halten",
+          "source_kind": "dwds"
+        }
+      ]
     },
     "see_also": [
       {

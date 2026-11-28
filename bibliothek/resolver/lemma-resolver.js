@@ -2086,9 +2086,10 @@ function apostropheText(text) {
       !["kein",...POSSESSIVE_FAMILIES].includes(f)));
     const PHRASE_ACCUSATIVE_DET = formTest(PHRASE_ACCUSATIVE_FORMS);
     // den, meinen …, keinen, diesen, welchen …: the accusative masculine or the dative plural (both readings) — the noun decides
-    // (enDeterminerCase)
-    const PHRASE_EN_DET = formTest(new Set([...formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["accusative"], genders:["masculine"]})]
-      .filter(f => formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["dative"], numbers:["plural"]}).has(f))));
+    // (enDeterminerCase); also allen, the dative of the alle table (an allen Halmen — the dative plural, allen Mut — the accusative
+    // masculine, as den)
+    const PHRASE_EN_DET = formTest(new Set([...[...formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["accusative"], genders:["masculine"]})]
+      .filter(f => formsWith({families:DETERMINER_FAMILIES.all, uses:["noun"], cases:["dative"], numbers:["plural"]}).has(f)), ...formsWith({families:["alle"], cases:["dative"]})]));
     // den, einen, keinen, meinen … diesen, jenen, jeden, welchen …: the accusative masculine (also the dative plural -en)
     const ACC_DET = NEVER_NOMINATIVE_DETERMINER;
     // der, einer, keiner, meiner … dieser, jener, jeder, welcher …: the dative feminine (also the genitive feminine / plural)
@@ -10443,9 +10444,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (let i = 0; i + 1 < tokens.length; i++) {
         const prep = norm(tokens[i][0]);
         // (any preposition before an -en determiner — mit seinen Freunden is a dative plural, not an accusative; and a
-        // bare noun after a two-way preposition — auf Felsvorsprüngen, plural + -n, is a dative plural)
+        // bare noun after a two-way preposition — auf Felsvorsprüngen, plural + -n, is a dative plural; allen after a two-way preposition, as
+        // prepositionPhraseCase reads it — an allen Halmen)
         if (!(TWO_WAY_PREPOSITION.test(prep) || ANY_PREPOSITION.test(prep))) continue;
-        const enDet = PHRASE_EN_DET_ANY.test(norm(tokens[i+1][0]));
+        const enDet = PHRASE_EN_DET_ANY.test(norm(tokens[i+1][0])) || TWO_WAY_PREPOSITION.test(prep) && PHRASE_EN_DET.test(norm(tokens[i+1][0]));
         if (!enDet && !(TWO_WAY_PREPOSITION.test(prep) && /^\p{Lu}\p{Ll}+n$/u.test(tokens[i+1][0]))) continue;
         let k = enDet ? phraseHead(tokens,i+2) : i+1;
         if (k < 0 || k >= tokens.length) continue;
@@ -14432,10 +14434,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // The kind of a subordinator by its cards, read once per word: "pure", "sign" (only with the verb-final sign) or null. A word with
     // another reading in any source is "sign": an own card of another part of speech, or a reading of the external dictionary
     // (seitdem, soviel — adverbs there; readSubordinatorReadings before the tap; a noun reading is capitalised and does not count).
+    // A merged card of another part of speech with «Konjunktion» among its parts of speech (wie, adverb-079) is a subordinator when a line of
+    // its word order pattern ends with the verb — with its other reading, "sign", and only at the start of its part (subordinatorOpensAt:
+    // inside a part it is the comparison — die sich wie eine Chefin aufführt).
     const subordinatorKinds = new Map(), subordinatorOtherReadings = new Set();
+    const subordinatingCard = e => e.type === "Konjunktion" ? conjunctionKind(e) === "subordinating" : Array.isArray(e.parts_of_speech) &&
+      e.parts_of_speech.includes("Konjunktion") && String(e.word_order_pattern || "").split("\n").some(line => conjunctionKind({word_order_pattern:line}) === "subordinating");
     function subordinatorKind(w) {
       if (!subordinatorKinds.has(w)) { const cards = forms.get(w) || forms.get(w.replace(/ß/gu,"ss")) || [];
-        subordinatorKinds.set(w, !cards.some(e => e.type === "Konjunktion" && conjunctionKind(e) === "subordinating") ? null :
+        subordinatorKinds.set(w, !cards.some(subordinatingCard) ? null :
           cards.every(e => e.type === "Konjunktion") && w !== "als" ? "pure" : "sign"); }
       const kind = subordinatorKinds.get(w);
       return kind === "pure" && subordinatorOtherReadings.has(w) ? "sign" : kind;
@@ -14485,8 +14492,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // A word that is something else too — another card of its own (seit, bis, während: a preposition; da, damit, insofern: an adverb) or
     // the comparison particle als — only with the verb-final sign of its part (damitOpensPart): seit drei Jahren, bis morgen, größer als
     // ich, Er war da, Damit hatte er nicht gerechnet stay one part.
+    // (a subordinator of a merged card only — wie — opens a part only at the start of the sentence or right after a mark)
+    const mergedSubordinatorOnly = w => { const cards = forms.get(w) || []; return cards.some(subordinatingCard) && !cards.some(e => e.type === "Konjunktion"); };
     function subordinatorOpensAt(sentence, tokens, i) {
       const kind = subordinatorKind(norm(tokens[i][0]));
+      if (kind && i > 0 && mergedSubordinatorOnly(norm(tokens[i][0])) && !/[,;:()«»„“"‚‘–—]/u.test(tokenGap(sentence,tokens,i-1,i))) return false;
       // (the sign of a word with another reading is a finite verb only — seitdem, soviel, bevor, ob, seit, bis …; als, the word of a
       // comparison or a predicative, keeps the participle at the end as its sign too, as on main: sich … als sehr schlecht informiert)
       return kind === "pure" || kind === "sign" && damitOpensPart(sentence,tokens,i,{finiteOnly:norm(tokens[i][0]) !== "als"});
@@ -19460,7 +19470,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             resolution.selected = plain;
           }
         } }
-      await verbPrepositionLink(word,context,resolution);
+      // (a tap on the detached particle reads the pair at its verb — the same grammar line and lit words as the tap on the verb:
+      // Er dachte über das Problem nach, Sie zeichneten sich durch Mut aus)
+      const verbSpan = detachedParticleVerbSpan(resolution.selected, context);
+      await verbPrepositionLink(verbSpan ? verbSpan.text : word, verbSpan ? {...context, tokenOffset:verbSpan.start} : context, resolution);
       // Noun-phrase facts feed one agreement row. Attaching them to the cards is
       // presentation (presentResolution), so the row reads the facts directly.
       const phrases = await nounPhrase(word,context,resolution.candidates);
@@ -19764,6 +19777,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     // The pair of the tapped verb or preposition in its part (see above): the resolution with the pair's link, label and sense mark; the
     // resolution itself when no pair holds.
+    // The verb's span of the separable construction whose detached particle is tapped (dachte … nach, zeichneten sich … aus), or null.
+    function detachedParticleVerbSpan(card, context) {
+      const spans = card?.construction?.spans;
+      if (!Array.isArray(spans) || spans.length < 2 || !Number.isInteger(context?.tokenOffset)) return null;
+      const tapped = spans.find(s => s.start === context.tokenOffset);
+      // (the tapped word is the particle of the card's verb — vorbei of vorbeikommen —, not a non-finite form of the verb at the end:
+      // verneigt, zehren, getrachtet)
+      const base = norm(String(card.lemma || "")).replace(/^sich\s+/u, ""), t = norm(String(tapped?.text || ""));
+      if (!tapped || tapped === spans[0] || (verbAnalyses.get(t) || []).length || !(base.length > t.length && base.startsWith(t))) return null;
+      return spans.find(s => s !== tapped && (verbAnalyses.get(norm(s.text)) || []).length) || null;
+    }
     async function verbPrepositionLink(word, context, resolution) {
       // (the pair of a verb also on its participle used as an adjective and on its state — sein + Partizip II:
       // waren an der Studie beteiligt (sich beteiligen an), war an Spinnen gewöhnt (sich gewöhnen an); a window between the verb's state
@@ -19883,9 +19907,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (acceptance: a word that opens a clause or a zu-infinitive is no preposition of the sich after it — während sich
       // die Spielerinnen … freuen, seit / bis sich …; um / ohne / (an)statt sich … zu treffen / zu kümmern with a zu-infinitive in the part)
       const zuInPart = indices.some(k => /^\p{Ll}/u.test(tokens[k][0]) && (verbAnalyses.get(norm(tokens[k][0])) || []).some(a => a.kind === 'infinitive' && (a.zu || norm(tokens[k-1]?.[0] ?? '') === 'zu')));
-      // Is the word before i a preposition that governs the word at i (not a conjunction or a zu-infinitive opener)?
+      // Is the word before i a preposition that governs the word at i (not a conjunction or a zu-infinitive opener)? (als / wie that
+      // open a part are its subordinator — Als sich der Lehrer über den Lärm beschwerte, Wie sich Peter über das Geschenk freute)
       const prepositionOf = i => { const w = norm(tokens[i-1]?.[0] ?? '');
         return i > 0 && PREPOSITION_TOKEN.test(w) && !/^(?:während|seit|bis)$/u.test(w) && !(/^(?:um|ohne|statt|anstatt)$/u.test(w) && zuInPart) &&
+          !(/^(?:als|wie)$/u.test(w) && subordinatorOpensAt(clause.sentence,tokens,i-1)) &&
           !GAP_SENTENCE_BRACKETS_DASHES_ELLIPSIS_QUOTES_ALL.test(tokenGap(clause.sentence,tokens,i-1,i)); };
       // (and a sich before und / oder of the same stretch, no verb form between — die sich etwas sachlicher und differenzierter mit dem
       // Thema befassen: the part was cut at und)
@@ -25910,8 +25936,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // group right after a noun (der Brief von meiner Mutter — the noun's); the meanings are not reordered otherwise.
     const GOV_FIXED = {von:"Dativ",mit:"Dativ",zu:"Dativ",aus:"Dativ",bei:"Dativ",nach:"Dativ",seit:"Dativ",gegenüber:"Dativ",
       für:"Akkusativ",durch:"Akkusativ",gegen:"Akkusativ",ohne:"Akkusativ",um:"Akkusativ",wegen:"Genitiv",trotz:"Genitiv",während:"Genitiv"};
+    // Does the part of the word at `at` hold the correlate of a pair on prep — the da(r)- form of prep closing the part (not right after
+    // und / oder / aber, not the adverb of time: kurz darauf), and right after it, past a comma, a part opening with dass / ob or holding a
+    // zu-infinitive (Er bestand darauf, dass sie kommt; …, sofort zu gehen)? true / false.
+    function correlateInPart(sentence, tokens, at, prep) {
+      const {start:a, end:b} = partSpanAt(sentence,tokens,at,COORDINATED_MEMBER);
+      const k = b;
+      if (k < a || pronominalPreposition(tokens[k][0]) !== prep || k + 1 >= tokens.length || !/,/u.test(tokenGap(sentence, tokens, k, k + 1))) return false;
+      if (k > 0 && [...COORDINATORS_WITHOUT_COMMA, "aber"].includes(norm(tokens[k-1][0])) || timeDistanceBeforeDaForm(tokens, k)) return false;
+      if (wordClass("correlate-subordinator").test(tokens[k+1][0])) return true;
+      const next = partSpanAt(sentence,tokens,k+1,COORDINATED_MEMBER);
+      for (let j = next.start; j <= next.end; j++) { const w = norm(tokens[j][0]);
+        if (zuForms.has(w) || w === "zu" && j < next.end && /^\p{Ll}/u.test(tokens[j+1][0]) && (verbAnalyses.get(norm(tokens[j+1][0])) || []).some(r => r.kind === "infinitive")) return true; }
+      return false;
+    }
     // Does the part hold a group governed by gov — complementFact's {preps, case} (the preposition, the case its group shows)? true / false.
-    function governedGroupInPart(sentence, tokens, at, gov, impersonal = false) {
+    // lit — the starts of the prepositions the chosen card's pair lights (verbPrepositionLink), or null.
+    function governedGroupInPart(sentence, tokens, at, gov, impersonal = false, lit = null) {
       if (!gov) return false;
       const preps = gov.preps, kase = gov.case;
       let {start:a, end:b} = partSpanAt(sentence,tokens,at,COORDINATED_MEMBER);
@@ -25919,7 +25960,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const w = norm(tokens[k][0]);
         let p = null, c = null, daForm = false;
         if (contractionArticle(w)) [p, c] = [contractionPrepositionOf(w), contractionCaseOf(w)];
-        else if (preps.includes(w)) { p = w; c = TWO_WAY_PREPOSITION.test(w) ? prepositionPhraseCase(tokens, k, b) : GOV_FIXED[w] || null; }
+        else if (preps.includes(w)) { p = w; c = TWO_WAY_PREPOSITION.test(w) ? prepositionPhraseCase(tokens, k, b) : GOV_FIXED[w] || null;
+          // (a group whose case is not shown — über Quidditch, an Hagrid — is not against the pair where the pair is lit on this preposition
+          // (verbPrepositionLink: not in a set phrase — auf einmal —, not another verb's group); a time noun of the group keeps it a time —
+          // über Weihnachten, über Nacht)
+          if (c === null && TWO_WAY_PREPOSITION.test(w) && lit?.has(tokens[k].index)) { const n = tokens.slice(k + 1, b + 1).findIndex(t => /^\p{Lu}/u.test(t[0]));
+            if (n < 0 || !nounClassSets?.time.has(norm(tokens[k + 1 + n][0]))) c = kase; } }
         // (a da(r)- / wo(r)- form of the preposition stands for its group, of any case — Damit hatte er nicht gerechnet, Worauf wartest du?;
         // not right after und / oder / aber, where it is the connecting adverb — und damit einen Rekord gebrochen «тем самым»; not after a
         // time sign, where it is the adverb of time — Kurz darauf hörten sie einen Schrei, am Tag darauf)
@@ -25994,6 +26040,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       await loadImpersonalPairs();
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'governedSenseFirst');
       const at = clickedTokenIndex(tokens, context.tokenOffset, word);
+      // (the prepositions the card's pair lights)
+      const lit = new Set((c.prepositionLink?.spans || []).map(s => s.start));
       if (at < 0) return result;
       let row = null;
       // (a pair whose element asks for a word of the part — requires_any: verstehen von «разбираться» with
@@ -26006,7 +26054,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         return new Set(tokens.slice(a, b + 1).map(t => norm(t[0]))); })();
       // (and not a pair kept for its correlate only — correlative_only, kommen auf «додуматься» stays in its place before daran / darauf)
       // (a direction element raises its meaning — no pair, no highlight: Er stieß sich vom Boden in die Höhe «оттолкнуться»)
-      const wordMissing = f => { if (f.correlativeOnly) return true; if (!f.pair || f.requiresAny === undefined) return false;
+      // (a correlative_only pattern counts only with its correlate — the da(r)- form of its preposition closing its part and a part with
+      // dass / ob / zu + infinitive right after it: Alles deutet darauf, dass er kommt)
+      const wordMissing = f => { if (f.correlativeOnly) return !f.pair || !correlateInPart(sentence, tokens, at, f.pair.prep); if (!f.pair || f.requiresAny === undefined) return false;
         const verb = norm(String(c.lemma || "")).replace(/^sich\s+/u, "");
         const need = vpRows(listRows, verb).filter(r => r[1] === f.pair.prep && r[2] === f.pair.case && Array.isArray(r[3]?.requires_any));
         return need.length > 0 && !need.some(r => r[3].requires_any.some(w => partWords.has(norm(w)))); };
@@ -26020,7 +26070,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (the pair's meaning first in every language by its own mark — a Russian line with it first already, an
           // English one without: the rule still runs, the Russian order stays)
           const en = markedSenses(textEn, [x], "first", "en")?.first ?? 0;
-          if ((k > 0 || k === 0 && en > 0) && (impersonalComplement(c.lemma, x) ? esInPart(sentence, tokens, at) && governedGroupInPart(sentence, tokens, at, complementFact(x).gov, true) : governedGroupInPart(sentence, tokens, at, complementFact(x).gov))) { row = x; return k; }
+          if ((k > 0 || k === 0 && en > 0) && (impersonalComplement(c.lemma, x) ? esInPart(sentence, tokens, at) && governedGroupInPart(sentence, tokens, at, complementFact(x).gov, true, lit) : governedGroupInPart(sentence, tokens, at, complementFact(x).gov, false, lit))) { row = x; return k; }
         }
         return -1;
       };
