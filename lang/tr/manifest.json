@@ -2,7 +2,7 @@
  "lang": "tr",
  "name": "Türkçe",
  "format_version": 1,
- "version": "7d5462110966",
+ "version": "13887dde0c83",
  "source_commit": "dc73eb0623e4b3efa638752fb2ec583a55f492a2",
  "exercise_files": {
   "partikeln__sentences": {
@@ -14,7 +14,7 @@
    ],
    "de": "поле sentence записи-предка с «___»: в particles.<частица>.… — с подставленной частицей (как записан ключ: DOCH — ударное); в tasks[i] — с accept[0] (+ остальные accept в «  [+ …]»); в base.… — без пропуска; подписи PARTIKELN_FUNCTIONS — пусто",
    "pairs": 1982,
-   "done": 1055
+   "done": 1555
   },
   "artikel__words": {
    "source": "deutsch-home/Artikel/words.js",
@@ -140,7 +140,7 @@
  "files": {
   "exercises/partikeln__sentences.json": {
    "items": 1982,
-   "done": 1055
+   "done": 1555
   },
   "exercises/artikel__words.json": {
    "items": 430,

@@ -579,7 +579,7 @@
  {
   "en": "halt, with a sigh: since you're here anyway, come in. A bit offhand, typical of the south.",
   "ru": "halt — со вздохом: раз уж пришёл, ну заходи. Звучит чуть небрежно, особенно на юге.",
-  "tr": "halt — iç çekerek: madem geldin, gir içeri. Biraz baştan savma gelir, özellikle güneyde.",
+  "tr": "halt — iç çekerek: madem geldin, gir içeri. Biraz baştan savma gelir, özellikle Güney Almanya'da.",
   "at": [
    "7862f106"
   ]
@@ -662,7 +662,7 @@
  {
   "en": "In a command aber is a 'but mind you' reminder (Komm aber pünktlich!). There's nothing to remind about here, so it sounds like 'but'.",
   "ru": "В побуждении aber — напоминание «но смотри» (Komm aber pünktlich!). Здесь напоминать не о чем, и aber звучит как «но».",
-  "tr": "Emirde aber bir “ama unutma” hatırlatmasıdır (Komm aber pünktlich!). Burada hatırlatılacak bir şey yok, bu yüzden aber “ama” gibi duyulur.",
+  "tr": "Emirde aber bir “ama unutma” hatırlatmasıdır (Komm aber pünktlich!). Burada hatırlatılacak bir şey yok, bu yüzden aber “ama” gibi gelir.",
   "at": [
    "15befeea",
    "16aa0fa8",
@@ -688,7 +688,7 @@
  {
   "en": "In a command bloß is a warning, usually with nicht (Komm bloß nicht zu spät!). No danger here, so it sounds like 'only' or a threat.",
   "ru": "В побуждении bloß — предостережение, обычно с nicht (Komm bloß nicht zu spät!). Здесь опасности нет, и bloß звучит как «только» или угроза.",
-  "tr": "Emirde bloß bir uyarıdır, genellikle nicht ile (Komm bloß nicht zu spät!). Burada tehlike yok; bloß “yalnızca” ya da tehdit gibi duyulur.",
+  "tr": "Emirde bloß bir uyarıdır, genellikle nicht ile (Komm bloß nicht zu spät!). Burada tehlike yok; bloß “yalnızca” ya da tehdit gibi gelir.",
   "at": [
    "1699a433",
    "200301b2",
@@ -899,7 +899,7 @@
  {
   "en": "doch coaxes: why don't you call me? Sounds warm.",
   "ru": "doch уговаривает: а почему бы тебе не позвонить? Звучит тепло.",
-  "tr": "doch ikna eder: beni neden aramayasın? Sıcak duyulur.",
+  "tr": "doch ikna eder: beni neden aramayasın? Kulağa sıcak gelir.",
   "at": [
    "cb6e8ece"
   ]
@@ -971,7 +971,7 @@
  {
   "en": "Here nur reads as 'only': 'call only me'. Reassuring nur sounds dated here; ruhig is better.",
   "ru": "Здесь nur читается как «только»: «звони только мне». Успокаивающее nur здесь звучит устаревше; лучше ruhig.",
-  "tr": "Burada nur “yalnızca” diye anlaşılır: “yalnızca beni ara”. Rahatlatan nur burada eski moda duyulur; ruhig daha iyi.",
+  "tr": "Burada nur “yalnızca” diye anlaşılır: “yalnızca beni ara”. Rahatlatan nur burada eski moda gelir; ruhig daha iyi.",
   "at": [
    "31e94759"
   ]
@@ -1075,7 +1075,7 @@
  {
   "en": "doch with a slight nudge: you can see I need it. Without mal it sounds a little impatient; the friendly version is 'Gib mir doch mal das Salz'.",
   "ru": "doch с нажимом: видишь же, мне нужно. Без mal — чуть нетерпеливо; дружески: «Gib mir doch mal das Salz».",
-  "tr": "doch hafifçe üsteler: görüyorsun ya, bana lazım. mal olmadan biraz sabırsız duyulur; arkadaşça olanı: “Gib mir doch mal das Salz”.",
+  "tr": "doch hafifçe üsteler: görüyorsun ya, bana lazım. mal olmadan biraz sabırsız gelir; arkadaşça olanı: “Gib mir doch mal das Salz”.",
   "at": [
    "00bcf2bd"
   ]
@@ -1395,7 +1395,7 @@
  {
   "en": "Hör halt zu sounds like a shrug, 'well, listen then'; it only fits as a reply to 'I didn't get it'.",
   "ru": "Hör halt zu звучит как пожатие плеч «ну так слушай», подходит только как ответ на жалобу «я ничего не понял».",
-  "tr": "Hör halt zu bir omuz silkme gibi duyulur: “dinle işte”; yalnızca “hiçbir şey anlamadım” şikâyetine cevap olarak uyar.",
+  "tr": "Hör halt zu bir omuz silkme gibi gelir: “dinle işte”; yalnızca “hiçbir şey anlamadım” şikâyetine cevap olarak uyar.",
   "at": [
    "8e38ddaf"
   ]
@@ -1411,7 +1411,7 @@
  {
   "en": "Hör nur zu! sounds bookish ('just listen to this!') or like 'only listen (don't talk)'. In speech Hör mal zu is usual.",
   "ru": "Hör nur zu! звучит книжно («ты только послушай!») или как «только слушай (не говори)». В разговоре чаще Hör mal zu.",
-  "tr": "Hör nur zu! kitabi duyulur (“dinle hele şunu!”) ya da “yalnızca dinle (konuşma)” gibi. Konuşmada genellikle Hör mal zu denir.",
+  "tr": "Hör nur zu! kitabi gelir (“dinle hele şunu!”) ya da “yalnızca dinle (konuşma)” gibi. Konuşmada genellikle Hör mal zu denir.",
   "at": [
    "a213b057"
   ]
@@ -1531,7 +1531,7 @@
  {
   "en": "schon encourages: why are you standing there, sit down! Usually: Nun setz dich schon! After several refusals it turns impatient.",
   "ru": "schon подбадривает: что ты стоишь, садись! Обычно: Nun setz dich schon! После его отказов — нетерпеливо.",
-  "tr": "schon cesaret verir: ne ayakta duruyorsun, otur! Genellikle: Nun setz dich schon! Birkaç kez reddettikten sonra sabırsız duyulur.",
+  "tr": "schon cesaret verir: ne ayakta duruyorsun, otur! Genellikle: Nun setz dich schon! Birkaç kez reddettikten sonra sabırsız gelir.",
   "at": [
    "11744772"
   ]
@@ -1563,7 +1563,7 @@
  {
   "en": "Setz dich nur! is understandable as reassurance but sounds old-fashioned; today people use ruhig or doch.",
   "ru": "Setz dich nur! понятно как успокоение, но звучит старомодно; сегодня говорят ruhig или doch.",
-  "tr": "Setz dich nur! rahatlatma olarak anlaşılır, ama eski moda duyulur; bugün ruhig ya da doch denir.",
+  "tr": "Setz dich nur! rahatlatma olarak anlaşılır, ama eski moda gelir; bugün ruhig ya da doch denir.",
   "at": [
    "64c9a1d4"
   ]
@@ -1675,7 +1675,7 @@
  {
   "en": "schon is odd in a negative command; there's no one to hurry.",
   "ru": "schon в отрицательном приказе звучит странно; торопить тут некого.",
-  "tr": "schon olumsuz emirde tuhaf duyulur; burada acele ettirilecek kimse yok.",
+  "tr": "schon olumsuz emirde tuhaf gelir; burada acele ettirilecek kimse yok.",
   "at": [
    "774d5290"
   ]
@@ -1683,7 +1683,7 @@
  {
   "en": "halt ('well then') sounds indifferent, almost dismissive: Dann mach dir halt keine Sorgen. Not comforting.",
   "ru": "halt («ну раз так») звучит равнодушно, почти обидно: Dann mach dir halt keine Sorgen. Для утешения не годится.",
-  "tr": "halt (“madem öyle”) kayıtsız, neredeyse kırıcı duyulur: Dann mach dir halt keine Sorgen. Teselli etmek için uygun değil.",
+  "tr": "halt (“madem öyle”) kayıtsız, neredeyse kırıcı gelir: Dann mach dir halt keine Sorgen. Teselli etmek için uygun değil.",
   "at": [
    "f9178ad2"
   ]
@@ -1691,7 +1691,7 @@
  {
   "en": "eben like halt ('well then') sounds cold; 'quickly' makes no sense with 'don't worry'.",
   "ru": "eben как halt — «ну раз так» — звучит холодно; «быстренько» не подходит к «не волнуйся».",
-  "tr": "eben de halt gibi (“madem öyle”) soğuk duyulur; “çabucak” anlamı “merak etme”ye uymaz.",
+  "tr": "eben de halt gibi (“madem öyle”) soğuk gelir; “çabucak” anlamı “merak etme”ye uymaz.",
   "at": [
    "eb6798f3"
   ]
@@ -1803,7 +1803,7 @@
  {
   "en": "mal with a negative command is odd; 'mal nicht' reads as 'for once don't'. Compare: Nimm mal den Schlüssel mit!",
   "ru": "mal с отрицательным приказом звучит странно; mal nicht читается как «хоть раз не». Ср.: Nimm mal den Schlüssel mit!",
-  "tr": "mal olumsuz emirde tuhaf duyulur; mal nicht “bir kere olsun unutma” diye anlaşılır. Krş.: Nimm mal den Schlüssel mit!",
+  "tr": "mal olumsuz emirde tuhaf gelir; mal nicht “bir kere olsun unutma” diye anlaşılır. Krş.: Nimm mal den Schlüssel mit!",
   "at": [
    "efa4818a"
   ]
@@ -1827,7 +1827,7 @@
  {
   "en": "eben here sounds like 'just now' or needs 'dann' (Dann … eben = well then). The northern 'quickly' sense (Mach eben das Licht an) doesn't fit here.",
   "ru": "eben здесь звучит как «только что» или требует «dann» (Dann … eben = ну раз так). Северное «быстренько» (Mach eben das Licht an) тут не к месту.",
-  "tr": "eben burada “az önce” gibi duyulur ya da dann gerektirir (Dann … eben = madem öyle). Kuzeydeki “çabucak” anlamı (Mach eben das Licht an) burada yerinde değil.",
+  "tr": "eben burada “az önce” gibi gelir ya da dann gerektirir (Dann … eben = madem öyle). Kuzeydeki “çabucak” anlamı (Mach eben das Licht an) burada yerinde değil.",
   "at": [
    "1044368c",
    "16f84392",
@@ -1881,7 +1881,7 @@
  {
   "en": "nur sounds caring and a bit anxious: whatever happens, don't forget it! A little old-fashioned; today bloß or JA is more common.",
   "ru": "nur — заботливо, с тревогой: что бы ни случилось, не забудь! Чуть старомодно; сегодня чаще bloß или JA.",
-  "tr": "nur şefkatli ve biraz endişeli duyulur: ne olursa olsun, unutma! Biraz eski moda; bugün daha çok bloß ya da JA kullanılır.",
+  "tr": "nur şefkatli ve biraz endişeli gelir: ne olursa olsun, unutma! Biraz eski moda; bugün daha çok bloß ya da JA kullanılır.",
   "at": [
    "b29c6681"
   ]
@@ -1897,7 +1897,7 @@
  {
   "en": "'Just don't forget' is clumsy; einfach goes better with an action: Nimm einfach den Schlüssel mit!",
   "ru": "«Просто не забудь» звучит неуклюже; einfach лучше с действием: Nimm einfach den Schlüssel mit!",
-  "tr": "“Sadece unutma” beceriksizce duyulur; einfach bir eylemle daha iyi gider: Nimm einfach den Schlüssel mit!",
+  "tr": "“Sadece unutma” beceriksizce gelir; einfach bir eylemle daha iyi gider: Nimm einfach den Schlüssel mit!",
   "at": [
    "7e7277fe"
   ]
@@ -1969,7 +1969,7 @@
  {
   "en": "'mal nicht' reads as 'for once don't touch' — a reproach, not a warning.",
   "ru": "mal nicht читается как «хоть раз не трогай» — звучит как упрёк, а не предостережение.",
-  "tr": "mal nicht “bir kere de dokunma” diye anlaşılır — uyarı değil, sitem gibi duyulur.",
+  "tr": "mal nicht “bir kere de dokunma” diye anlaşılır — uyarı değil, sitem gibi gelir.",
   "at": [
    "1ea5c689"
   ]
@@ -2017,7 +2017,7 @@
  {
   "en": "nur sounds anxious and caring: anything but that! A little old-fashioned; today bloß or JA is more common.",
   "ru": "nur звучит тревожно и заботливо: только не это! Немного старомодно; сегодня чаще bloß или JA.",
-  "tr": "nur endişeli ve şefkatli duyulur: yeter ki bu olmasın! Biraz eski moda; bugün daha çok bloß ya da JA kullanılır.",
+  "tr": "nur endişeli ve şefkatli gelir: yeter ki bu olmasın! Biraz eski moda; bugün daha çok bloß ya da JA kullanılır.",
   "at": [
    "adf8536c"
   ]
@@ -2033,7 +2033,7 @@
  {
   "en": "'Just don't touch it' is too relaxed for danger; einfach might be heard as 'simple'.",
   "ru": "«Просто не трогай» звучит слишком спокойно для опасности; einfach здесь звучит как «простой».",
-  "tr": "“Sadece dokunma” tehlike için fazla sakin duyulur; einfach burada “basit” diye de anlaşılabilir.",
+  "tr": "“Sadece dokunma” tehlike için fazla sakin gelir; einfach burada “basit” diye de anlaşılabilir.",
   "at": [
    "25d4a0c9"
   ]
@@ -2113,7 +2113,7 @@
  {
   "en": "Impatient schon with Sie sounds rude; with du it's natural: Komm schon rein!",
   "ru": "Kommen Sie schon herein! — нетерпение с Sie звучит грубовато; с du естественно: Komm schon rein!",
-  "tr": "Kommen Sie schon herein! — Sie ile sabırsızlık kaba duyulur; du ile doğaldır: Komm schon rein!",
+  "tr": "Kommen Sie schon herein! — Sie ile sabırsızlık kaba gelir; du ile doğaldır: Komm schon rein!",
   "at": [
    "c0967fcb"
   ]
@@ -2121,7 +2121,7 @@
  {
   "en": "halt with polite Sie sounds offhand and unwelcoming.",
   "ru": "halt с вежливым Sie звучит небрежно и неприветливо.",
-  "tr": "halt, kibar Sie ile baştan savma ve soğuk duyulur.",
+  "tr": "halt, kibar Sie ile baştan savma ve soğuk gelir.",
   "at": [
    "bb3cdbe5"
   ]
@@ -2297,7 +2297,7 @@
  {
   "en": "nur reads as 'only close the window (nothing else)' or sounds old-fashioned.",
   "ru": "nur читается как «только закройте окно (больше ничего)» или звучит старомодно.",
-  "tr": "nur “yalnızca pencereyi kapatın (başka bir şey değil)” diye anlaşılır ya da eski moda duyulur.",
+  "tr": "nur “yalnızca pencereyi kapatın (başka bir şey değil)” diye anlaşılır ya da eski moda gelir.",
   "at": [
    "b0a588bd"
   ]
@@ -2433,7 +2433,7 @@
  {
   "en": "eben is like halt but more northern and a bit drier: since I don't know, there's no other way.",
   "ru": "eben — как halt, но звучит более по-северному и чуть суше: раз я не знаю, другого выхода нет.",
-  "tr": "eben de halt gibidir, ama daha kuzeyli ve biraz daha kuru duyulur: ben bilmediğime göre başka çare yok.",
+  "tr": "eben de halt gibidir, ama daha kuzeyli ve biraz daha kuru gelir: ben bilmediğime göre başka çare yok.",
   "at": [
    "75d44cba"
   ]
@@ -2561,7 +2561,7 @@
  {
   "en": "Sei halt still sounds like 'well, keep quiet then', only as a reply to a complaint. Odd here.",
   "ru": "Sei halt still звучит как «ну так и молчи», только в ответ на жалобу. В этой ситуации странно.",
-  "tr": "Sei halt still “sus işte” gibi duyulur, yalnızca bir şikâyete cevap olarak. Bu durumda tuhaf.",
+  "tr": "Sei halt still “sus işte” gibi gelir, yalnızca bir şikâyete cevap olarak. Bu durumda tuhaf.",
   "at": [
    "42661d7d"
   ]
@@ -2585,7 +2585,7 @@
  {
   "en": "Sei nur still sounds bookish or like 'only be quiet (do nothing else)'.",
   "ru": "Sei nur still звучит книжно или как «только молчи (ничего не делай)».",
-  "tr": "Sei nur still kitabi duyulur ya da “yalnızca sus (başka bir şey yapma)” gibi.",
+  "tr": "Sei nur still kitabi gelir ya da “yalnızca sus (başka bir şey yapma)” gibi.",
   "at": [
    "7f9738bf"
   ]
@@ -2897,7 +2897,7 @@
  {
   "en": "nur sounds like 'only be punctual' — unnatural. bloß is better for a warning.",
   "ru": "nur — «будьте только пунктуальны», звучит неестественно. Предостережение лучше с bloß.",
-  "tr": "nur “yalnızca zamanında gelin” gibi duyulur, doğal değil. Uyarı için bloß daha iyi.",
+  "tr": "nur “yalnızca zamanında gelin” gibi gelir, doğal değil. Uyarı için bloß daha iyi.",
   "at": [
    "3af8d66c"
   ]
@@ -3169,7 +3169,7 @@
  {
   "en": "halt: 'well, say something then' — a shrug at a complaint ('nobody asks my opinion'); in an awkward pause it sounds offhand.",
   "ru": "halt: «ну так скажи что-нибудь» — пожатие плечами на жалобу «меня не спрашивают»; в неловкой паузе — небрежно.",
-  "tr": "halt: “bir şey söyle işte” — “kimse fikrimi sormuyor” şikâyetine bir omuz silkme; sıkıntılı bir sessizlikte baştan savma duyulur.",
+  "tr": "halt: “bir şey söyle işte” — “kimse fikrimi sormuyor” şikâyetine bir omuz silkme; sıkıntılı bir sessizlikte baştan savma gelir.",
   "at": [
    "4dd8ba84"
   ]
@@ -3177,7 +3177,7 @@
  {
   "en": "nur reads as 'just say anything (that's all)', which is clumsy.",
   "ru": "nur читается как «скажи только что-нибудь (и всё)», звучит неуклюже.",
-  "tr": "nur “yalnızca bir şey söyle (başka bir şey değil)” diye anlaşılır, beceriksiz duyulur.",
+  "tr": "nur “yalnızca bir şey söyle (başka bir şey değil)” diye anlaşılır, beceriksiz gelir.",
   "at": [
    "b3c4dc4e"
   ]
@@ -3345,7 +3345,7 @@
  {
   "en": "Lass mich ruhig in Ruhe — permission 'feel free to leave me alone' — sounds ironic and clumsy.",
   "ru": "Lass mich ruhig in Ruhe — разрешение «можешь меня не трогать» звучит иронично и неуклюже.",
-  "tr": "Lass mich ruhig in Ruhe — “beni rahat bırakabilirsin” izni ironik ve beceriksiz duyulur.",
+  "tr": "Lass mich ruhig in Ruhe — “beni rahat bırakabilirsin” izni ironik ve beceriksiz gelir.",
   "at": [
    "f6e58475"
   ]
@@ -3417,7 +3417,7 @@
  {
   "en": "mal with a negative command is odd: 'Sag mal keinem etwas' isn't said. Compare: Sag mal, wer war das?",
   "ru": "mal с отрицательным приказом звучит странно: «Sag mal keinem etwas» не говорят. Ср.: Sag mal, wer war das?",
-  "tr": "mal olumsuz emirde tuhaf duyulur: “Sag mal keinem etwas” denmez. Krş.: Sag mal, wer war das?",
+  "tr": "mal olumsuz emirde tuhaf gelir: “Sag mal keinem etwas” denmez. Krş.: Sag mal, wer war das?",
   "at": [
    "a5aef7f3"
   ]
@@ -3494,7 +3494,7 @@
  {
   "en": "nur sounds caring and a bit anxious; slightly old-fashioned, today bloß or JA is more common.",
   "ru": "nur — заботливо и чуть тревожно; немного старомодно, сегодня чаще bloß или JA.",
-  "tr": "nur şefkatli ve biraz endişeli duyulur; biraz eski moda, bugün daha çok bloß ya da JA kullanılır.",
+  "tr": "nur şefkatli ve biraz endişeli gelir; biraz eski moda, bugün daha çok bloß ya da JA kullanılır.",
   "at": [
    "261eabce"
   ]
@@ -3502,7 +3502,7 @@
  {
   "en": "ruhig permits, but this is a prohibition — 'feel free to tell no one' sounds odd.",
   "ru": "ruhig разрешает, а здесь запрет — «можешь спокойно никому не говорить» звучит странно.",
-  "tr": "ruhig izin verir, burada ise yasak var — “çekinmeden kimseye söyleme” tuhaf duyulur.",
+  "tr": "ruhig izin verir, burada ise yasak var — “çekinmeden kimseye söyleme” tuhaf gelir.",
   "at": [
    "ed4617b4"
   ]
@@ -3638,7 +3638,7 @@
  {
   "en": "nur, like ruhig, gives the go-ahead: eat up, it's for you; a touch more encouraging.",
   "ru": "nur, как и ruhig, разрешает: доедай, это для тебя; звучит чуть ободряюще.",
-  "tr": "nur da ruhig gibi izin verir: bitir, bu senin için; biraz daha cesaret verici duyulur.",
+  "tr": "nur da ruhig gibi izin verir: bitir, bu senin için; biraz daha cesaret verici gelir.",
   "at": [
    "bafd70bf"
   ]
@@ -3774,7 +3774,7 @@
  {
   "en": "halt is a shrug: 'Geh halt hin!' = 'well, just go, what's the problem?' — impatient, not encouraging for a scared child.",
   "ru": "halt — пожатие плечами: «Geh halt hin!» = «ну так иди, в чём проблема» — нетерпеливо, а не ободряюще для ребёнка.",
-  "tr": "halt bir omuz silkmedir: “Geh halt hin!” = “git işte, sorun ne?” — korkan bir çocuğa cesaret vermez, sabırsız duyulur.",
+  "tr": "halt bir omuz silkmedir: “Geh halt hin!” = “git işte, sorun ne?” — korkan bir çocuğa cesaret vermez, sabırsız gelir.",
   "at": [
    "4c11830d"
   ]
@@ -3886,7 +3886,7 @@
  {
   "en": "mal with a negative command is odd: 'Mach mal keinen Lärm' isn't said. Compare: Mach mal leiser!",
   "ru": "mal с отрицательным приказом звучит странно: «Mach mal keinen Lärm» не говорят. Ср.: Mach mal leiser!",
-  "tr": "mal olumsuz emirde tuhaf duyulur: “Mach mal keinen Lärm” denmez. Krş.: Mach mal leiser!",
+  "tr": "mal olumsuz emirde tuhaf gelir: “Mach mal keinen Lärm” denmez. Krş.: Mach mal leiser!",
   "at": [
    "2214525f"
   ]
@@ -3950,7 +3950,7 @@
  {
   "en": "nur sounds caring and anxious: as long as nobody wakes up. A little old-fashioned.",
   "ru": "nur — заботливо и тревожно: лишь бы никого не разбудить. Немного старомодно.",
-  "tr": "nur şefkatli ve endişeli duyulur: yeter ki kimse uyanmasın. Biraz eski moda.",
+  "tr": "nur şefkatli ve endişeli gelir: yeter ki kimse uyanmasın. Biraz eski moda.",
   "at": [
    "9139e3d4"
   ]
@@ -4062,7 +4062,7 @@
  {
   "en": "schon in a command is impatience, 'come on' (Komm schon!); 'Bleib schon sitzen' sounds odd.",
   "ru": "schon в побуждении — нетерпение «ну давай» (Komm schon!); «Bleib schon sitzen» звучит странно.",
-  "tr": "Emirde schon sabırsızlıktır, “hadi” (Komm schon!); “Bleib schon sitzen” tuhaf duyulur.",
+  "tr": "Emirde schon sabırsızlıktır, “hadi” (Komm schon!); “Bleib schon sitzen” tuhaf gelir.",
   "at": [
    "73ae5987"
   ]
@@ -4366,7 +4366,7 @@
  {
   "en": "'Fahr mal vorsichtig' sounds like 'try driving carefully for once' — a dig; mal is for light requests.",
   "ru": "«Fahr mal vorsichtig» звучит как «попробуй разок поездить осторожно» — с упрёком; mal — для лёгких просьб.",
-  "tr": "“Fahr mal vorsichtig” “bir kere de dikkatli kullanmayı dene” gibi duyulur — iğnelemeli; mal hafif ricalar içindir.",
+  "tr": "“Fahr mal vorsichtig” “bir kere de dikkatli kullanmayı dene” gibi gelir — iğnelemeli; mal hafif ricalar içindir.",
   "at": [
    "050bc4fc"
   ]
@@ -5261,7 +5261,7 @@
  {
   "en": "'Was soll ich wohl kochen?' sounds like teasing — 'guess what I'll cook' — possible, but not in this situation.",
   "ru": "«Was soll ich wohl kochen?» звучит как поддразнивание «угадай, что я приготовлю» — возможно, но не в этой ситуации.",
-  "tr": "“Was soll ich wohl kochen?” takılma gibi duyulur: “bil bakalım ne pişireceğim” — olabilir, ama bu durumda değil.",
+  "tr": "“Was soll ich wohl kochen?” takılma gibi gelir: “bil bakalım ne pişireceğim” — olabilir, ama bu durumda değil.",
   "at": [
    "4b0594ae"
   ]
@@ -5525,7 +5525,7 @@
  {
   "en": "'Wer hat wohl Zeit für so was?' — 'who might have time, I wonder' sounds forced; schon is what fits here.",
   "ru": "«Wer hat wohl Zeit für so was?» — гадание «у кого бы, интересно, нашлось время» звучит натянуто; здесь нужен schon.",
-  "tr": "“Wer hat wohl Zeit für so was?” — “buna kimin vakti olurdu acaba” tahmini zorlama duyulur; burada schon uyar.",
+  "tr": "“Wer hat wohl Zeit für so was?” — “buna kimin vakti olurdu acaba” tahmini zorlama gelir; burada schon uyar.",
   "at": [
    "951c34e3"
   ]
@@ -5733,7 +5733,7 @@
  {
   "en": "denn — a lively question in the flow of conversation; with strangers a touch more casual than doch.",
   "ru": "denn — живой вопрос по ходу разговора; с незнакомыми звучит чуть свободнее, чем doch.",
-  "tr": "denn konuşmanın akışı içinde canlı bir sorudur; yabancılara doch ile sorulduğundan biraz daha rahat duyulur.",
+  "tr": "denn konuşmanın akışı içinde canlı bir sorudur; yabancılara doch ile sorulduğundan biraz daha rahat gelir.",
   "at": [
    "4c45e5a9"
   ]
@@ -5853,7 +5853,7 @@
  {
   "en": "'Was weißt du wohl davon?' sounds like mocking guesswork and is unusual; for 'you know nothing' use schon.",
   "ru": "«Was weißt du wohl davon?» звучит как насмешливое гадание и непривычно; для «ничего ты не знаешь» нужен schon.",
-  "tr": "“Was weißt du wohl davon?” alaycı bir tahmin gibi ve alışılmadık duyulur; “hiçbir şey bilmiyorsun” için schon gerekir.",
+  "tr": "“Was weißt du wohl davon?” alaycı bir tahmin gibi ve alışılmadık gelir; “hiçbir şey bilmiyorsun” için schon gerekir.",
   "at": [
    "7ba04409"
   ]
@@ -5969,7 +5969,7 @@
  {
   "en": "As a request it's odd: it sounds like 'are you even able to help?'; the reproachful version is 'Kannst du mir eigentlich auch mal helfen?'",
   "ru": "Как просьба странно: звучит как «а ты вообще умеешь?». С упрёком говорят: Kannst du mir eigentlich auch mal helfen?",
-  "tr": "Rica olarak tuhaf: “sen yardım etmeyi bilir misin hiç?” gibi duyulur. Sitemle şöyle denir: Kannst du mir eigentlich auch mal helfen?",
+  "tr": "Rica olarak tuhaf: “sen yardım etmeyi bilir misin hiç?” gibi gelir. Sitemle şöyle denir: Kannst du mir eigentlich auch mal helfen?",
   "at": [
    "5e0c154b"
   ]
@@ -6097,7 +6097,7 @@
  {
   "en": "eigentlich switches to your own matter in passing, mid-chat. It only sounds reproachful with 'auch mal'.",
   "ru": "eigentlich — между делом о своём: вы болтали, и вдруг вопрос о времени. Упрёк — только с «auch mal».",
-  "tr": "eigentlich laf arasında kendi konuna geçer: sohbet ediyordunuz ve birden vakit sorusu geliyor. Yalnızca “auch mal” ile sitemli duyulur.",
+  "tr": "eigentlich laf arasında kendi konuna geçer: sohbet ediyordunuz ve birden vakit sorusu geliyor. Yalnızca “auch mal” ile sitemli gelir.",
   "at": [
    "dbe4ca65"
   ]
@@ -6105,7 +6105,7 @@
  {
   "en": "wohl sounds odd in a verb-first question; a guess uses statement order instead: Du bist wohl müde?",
   "ru": "В вопросе с глаголом на первом месте wohl звучит странно; догадку выражают утвердительной формой: «Du bist wohl müde?»",
-  "tr": "Fiili başta olan soruda wohl tuhaf duyulur; tahmin ifade sırasıyla söylenir: “Du bist wohl müde?”",
+  "tr": "Fiili başta olan soruda wohl tuhaf gelir; tahmin ifade sırasıyla söylenir: “Du bist wohl müde?”",
   "at": [
    "00d6cfcd",
    "037be28b",
@@ -6195,7 +6195,7 @@
  {
   "en": "mal — an everyday request; with Sie it sounds plain rather than especially polite.",
   "ru": "mal — будничная просьба; с Sie звучит просто, без особой вежливости.",
-  "tr": "mal gündelik bir ricadır; Sie ile özel bir kibarlık olmadan, sade duyulur.",
+  "tr": "mal gündelik bir ricadır; Sie ile özel bir kibarlık olmadan, kulağa sade gelir.",
   "at": [
    "668e9e82"
   ]
@@ -6307,7 +6307,7 @@
  {
   "en": "mal — an everyday request; even at night it sounds friendly.",
   "ru": "mal — будничная просьба; даже ночью звучит по-дружески.",
-  "tr": "mal gündelik bir ricadır; gece bile dostça duyulur.",
+  "tr": "mal gündelik bir ricadır; gece bile kulağa dostça gelir.",
   "at": [
    "338b9222"
   ]
@@ -6339,7 +6339,7 @@
  {
   "en": "The threatening command uses wollen: 'Willst du wohl leise sein!'; with können it sounds unusual.",
   "ru": "Угроза-приказ строится с wollen: «Willst du wohl leise sein!»; с können звучит непривычно.",
-  "tr": "Tehditli emir wollen ile kurulur: “Willst du wohl leise sein!”; können ile alışılmadık duyulur.",
+  "tr": "Tehditli emir wollen ile kurulur: “Willst du wohl leise sein!”; können ile alışılmadık gelir.",
   "at": [
    "20f664b8"
   ]
@@ -6857,7 +6857,7 @@
  {
   "en": "vielleicht here = 'maybe' ('is that maybe serious?') and makes no sense.",
   "ru": "vielleicht здесь = «может быть» («может, это всерьёз?») и звучит бессмысленно.",
-  "tr": "vielleicht burada “belki” demektir (“belki ciddidir?”) ve anlamsız duyulur.",
+  "tr": "vielleicht burada “belki” demektir (“belki ciddidir?”) ve anlamsız gelir.",
   "at": [
    "97d5c6f4"
   ]
@@ -7067,7 +7067,7 @@
  {
   "en": "'Du kommst eigentlich mit?' sounds unfinished; natural are '…mit, oder?' or 'Kommst du eigentlich mit?'",
   "ru": "«Du kommst eigentlich mit?» звучит незаконченно; естественно: …mit, oder? или Kommst du eigentlich mit?",
-  "tr": "“Du kommst eigentlich mit?” yarım kalmış gibi duyulur; doğal olanlar: …mit, oder? ya da Kommst du eigentlich mit?",
+  "tr": "“Du kommst eigentlich mit?” yarım kalmış gibi gelir; doğal olanlar: …mit, oder? ya da Kommst du eigentlich mit?",
   "at": [
    "d19ab64f"
   ]
@@ -7211,7 +7211,7 @@
  {
   "en": "A statement-order question with eigentlich sounds unfinished; better 'Kommst du eigentlich allein zurecht?'",
   "ru": "Вопрос с порядком утверждения и eigentlich звучит незаконченно; лучше «Kommst du eigentlich allein zurecht?»",
-  "tr": "eigentlich ile ifade sıralı soru yarım kalmış gibi duyulur; daha iyisi: “Kommst du eigentlich allein zurecht?”",
+  "tr": "eigentlich ile ifade sıralı soru yarım kalmış gibi gelir; daha iyisi: “Kommst du eigentlich allein zurecht?”",
   "at": [
    "283d0753"
   ]
@@ -7275,7 +7275,7 @@
  {
   "en": "Colloquial 'Du kommst eh allein zurecht?' = 'you manage alone anyway?' — regional and sounds offhand.",
   "ru": "Разговорно «Du kommst eh allein zurecht?» = «ты всё равно справишься сама?» — регионально и звучит небрежно.",
-  "tr": "Konuşma dilinde “Du kommst eh allein zurecht?” = “nasılsa tek başına halledersin?” — yöresel ve baştan savma duyulur.",
+  "tr": "Konuşma dilinde “Du kommst eh allein zurecht?” = “nasılsa tek başına halledersin?” — yöresel ve baştan savma gelir.",
   "at": [
    "1ffce940"
   ]
@@ -7531,7 +7531,7 @@
  {
   "en": "'Wo warst du wohl?' sounds like a riddle — 'guess where you were'. You wonder about a third person: 'Wo war er wohl?'",
   "ru": "«Wo warst du wohl?» звучит как загадка «угадай, где ты был». Гадают о третьем: «Wo war er wohl?»",
-  "tr": "“Wo warst du wohl?” bir bilmece gibi duyulur: “bil bakalım neredeydin”. Üçüncü biri hakkında tahmin yürütülür: “Wo war er wohl?”",
+  "tr": "“Wo warst du wohl?” bir bilmece gibi gelir: “bil bakalım neredeydin”. Üçüncü biri hakkında tahmin yürütülür: “Wo war er wohl?”",
   "at": [
    "358e7be6"
   ]
@@ -7627,7 +7627,7 @@
  {
   "en": "Rhetorical 'Wie soll ich das schon schaffen?' = 'there's no way' — sounds like giving up in advance, not a question to the boss.",
   "ru": "Риторическое «Wie soll ich das schon schaffen?» = «да никак» — звучит как сдался заранее, а не вопрос к шефу.",
-  "tr": "Retorik “Wie soll ich das schon schaffen?” = “hiçbir şekilde” — şefe soru değil, baştan pes etmek gibi duyulur.",
+  "tr": "Retorik “Wie soll ich das schon schaffen?” = “hiçbir şekilde” — şefe soru değil, baştan pes etmek gibi gelir.",
   "at": [
    "1c18683f"
   ]
@@ -8075,7 +8075,7 @@
  {
   "en": "denn — the question follows from the smell you notice; engaged, not yet accusing.",
   "ru": "denn — вопрос вытекает из того, что ты чувствуешь запах; звучит живо, пока без обвинения.",
-  "tr": "denn aldığın kokudan doğan bir sorudur; canlı duyulur, henüz suçlamadan.",
+  "tr": "denn aldığın kokudan doğan bir sorudur; kulağa canlı gelir, henüz suçlamadan.",
   "at": [
    "1f0867d6"
   ]
@@ -8339,7 +8339,7 @@
  {
   "en": "Recalling doch comes with gleich: 'Wo hab ich die doch gleich hingelegt?' — without gleich it sounds odd.",
   "ru": "Припоминающее doch идёт с gleich: «Wo hab ich die doch gleich hingelegt?» — без gleich звучит странно.",
-  "tr": "Hatırlamaya çalışan doch, gleich ile gelir: “Wo hab ich die doch gleich hingelegt?” — gleich olmadan tuhaf duyulur.",
+  "tr": "Hatırlamaya çalışan doch, gleich ile gelir: “Wo hab ich die doch gleich hingelegt?” — gleich olmadan tuhaf gelir.",
   "at": [
    "c54f851a"
   ]
@@ -8459,7 +8459,7 @@
  {
   "en": "'Haben Sie mal…?' occurs in casual requests (Haben Sie mal Feuer?), but for a table it sounds overfamiliar.",
   "ru": "«Haben Sie mal…?» бывает в бытовых просьбах (Haben Sie mal Feuer?), но про столик звучит фамильярно.",
-  "tr": "“Haben Sie mal…?” gündelik ricalarda olur (Haben Sie mal Feuer?), ama masa için fazla teklifsiz duyulur.",
+  "tr": "“Haben Sie mal…?” gündelik ricalarda olur (Haben Sie mal Feuer?), ama masa için fazla teklifsiz gelir.",
   "at": [
    "fb4dc7d2"
   ]
@@ -8779,7 +8779,7 @@
  {
   "en": "'Was hast du wohl mit deinen Haaren gemacht?' sounds like a riddle — 'guess yourself'; not how you'd ask.",
   "ru": "«Was hast du wohl mit deinen Haaren gemacht?» звучит как загадка «угадай сама»; так не спрашивают.",
-  "tr": "“Was hast du wohl mit deinen Haaren gemacht?” bir bilmece gibi duyulur: “kendin tahmin et”; böyle sorulmaz.",
+  "tr": "“Was hast du wohl mit deinen Haaren gemacht?” bir bilmece gibi gelir: “kendin tahmin et”; böyle sorulmaz.",
   "at": [
    "d3439c08"
   ]
@@ -8899,7 +8899,7 @@
  {
   "en": "'Warum weinst du wohl?' sounds like a riddle; you'd wonder about someone else: 'Warum weint er wohl?'",
   "ru": "«Warum weinst du wohl?» звучит как загадка; гадают о третьем: «Warum weint er wohl?»",
-  "tr": "“Warum weinst du wohl?” bir bilmece gibi duyulur; üçüncü biri hakkında tahmin yürütülür: “Warum weint er wohl?”",
+  "tr": "“Warum weinst du wohl?” bir bilmece gibi gelir; üçüncü biri hakkında tahmin yürütülür: “Warum weint er wohl?”",
   "at": [
    "4cc43af0"
   ]
@@ -8966,6 +8966,4093 @@
   "tr": "Bütün nedenleri saydın, hepsine “hayır” diyor.",
   "at": [
    "aeabb8a3"
+  ]
+ },
+ {
+  "en": "That's how it is.",
+  "ru": "Так оно и есть.",
+  "tr": "Öyle.",
+  "at": [
+   "09b159c3"
+  ]
+ },
+ {
+  "en": "I guess that's how it is.",
+  "ru": "Наверное, так оно и есть.",
+  "tr": "Galiba öyle.",
+  "at": [
+   "b5bdae5b"
+  ]
+ },
+ {
+  "en": "wohl turns the statement into a guess: the speaker isn't fully sure.",
+  "ru": "wohl делает утверждение догадкой: говорящий сам не до конца уверен.",
+  "tr": "wohl ifadeyi bir tahmine çevirir: konuşan kendinden tam emin değil.",
+  "at": [
+   "3e88ef84"
+  ]
+ },
+ {
+  "en": "Well, that's how it is, you know.",
+  "ru": "Так ведь оно и есть.",
+  "tr": "Öyle, biliyorsun.",
+  "at": [
+   "befd4c80"
+  ]
+ },
+ {
+  "en": "ja points to something both people know — typically as calm agreement: 'Ja, das ist ja so' ('yes, that's how it is, after all'). No pressure.",
+  "ru": "ja ссылается на то, что оба знают, — обычно как спокойное согласие: «Ja, das ist ja so» («да, так ведь оно и есть»). Без нажима.",
+  "tr": "ja ikisinin de bildiği bir şeye gönderme yapar — genellikle sakin bir onay olarak: “Ja, das ist ja so” (“evet, bu böyle, biliyorsun”). Baskı yok.",
+  "at": [
+   "92ab46d9"
+  ]
+ },
+ {
+  "en": "That's true enough (but…).",
+  "ru": "Так-то оно так (но…).",
+  "tr": "Öyle olmasına öyle (ama…).",
+  "at": [
+   "672ea200"
+  ]
+ },
+ {
+  "en": "schon grants the point and sets up a 'but': 'Das ist schon so, aber…'.",
+  "ru": "schon признаёт правоту и готовит «но»: «Das ist schon so, aber…».",
+  "tr": "schon haklı olduğunu kabul eder ve bir “ama” hazırlar: “Das ist schon so, aber…”.",
+  "at": [
+   "c18c4f59"
+  ]
+ },
+ {
+  "en": "Actually, that is how it is.",
+  "ru": "Вообще-то так и есть.",
+  "tr": "Aslında öyle.",
+  "at": [
+   "bd8ec3b1"
+  ]
+ },
+ {
+  "en": "eigentlich gently corrects someone who thinks otherwise.",
+  "ru": "eigentlich мягко поправляет собеседника, который думает иначе.",
+  "tr": "eigentlich farklı düşünen karşısındakini yumuşakça düzeltir.",
+  "at": [
+   "7c363eaa"
+  ]
+ },
+ {
+  "en": "Well, that's just how it is.",
+  "ru": "Ну, так уж заведено.",
+  "tr": "Öyle işte.",
+  "at": [
+   "1cbd3002"
+  ]
+ },
+ {
+  "en": "halt is a shrug: nothing to be done. Colloquial, more southern; a near-synonym of eben.",
+  "ru": "halt — пожатие плечами: ничего не поделаешь. Разговорное, чаще на юге; почти синоним eben.",
+  "tr": "halt omuz silkmektir: yapacak bir şey yok. Konuşma dilinde, daha çok Güney Almanya'da; anlamca eben kelimesine çok yakın.",
+  "at": [
+   "fcfecb63"
+  ]
+ },
+ {
+  "en": "That's just the way it is.",
+  "ru": "Так уж заведено.",
+  "tr": "Öyle, o kadar.",
+  "at": [
+   "51348855"
+  ]
+ },
+ {
+  "en": "eben is the more northern/neutral near-synonym of halt: the same shrug, slightly firmer.",
+  "ru": "eben — более северный и нейтральный почти-синоним halt: то же пожатие плечами, чуть твёрже.",
+  "tr": "eben, halt ile neredeyse eş anlamlıdır, ama daha kuzeyli ve üslup bakımından daha nötrdür: aynı omuz silkme, biraz daha kesin.",
+  "at": [
+   "f3e3a876"
+  ]
+ },
+ {
+  "en": "That's the way it is anyway.",
+  "ru": "Так оно в любом случае и есть.",
+  "tr": "Zaten öyle.",
+  "at": [
+   "288d6cd4"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': no point arguing. Colloquial, especially southern and Austrian.",
+  "ru": "eh = «всё равно, так или иначе»: спорить бессмысленно. Разговорное, особенно на юге и в Австрии.",
+  "tr": "eh = “nasılsa, her durumda”: tartışmanın anlamı yok. Konuşma dilinde, özellikle Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "f13b4125"
+  ]
+ },
+ {
+  "en": "But that's how it is, you know that!",
+  "ru": "Так оно же и есть, сам знаешь!",
+  "tr": "Dün anlattım ya, öyle!",
+  "at": [
+   "0d8f3a5b"
+  ]
+ },
+ {
+  "en": "doch reminds with a slight reproach: 'you know that yourself'.",
+  "ru": "doch напоминает с лёгким упрёком: «ты же сам это знаешь».",
+  "tr": "doch hafif bir sitemle hatırlatır: “bunu daha önce konuştuk”.",
+  "at": [
+   "fdefd384"
+  ]
+ },
+ {
+  "en": "That's simply how it is.",
+  "ru": "Просто так оно есть, и всё.",
+  "tr": "Öyle, hepsi bu.",
+  "at": [
+   "7341b2d5"
+  ]
+ },
+ {
+  "en": "einfach cuts the discussion short: no further explanation. Sounds a bit curt.",
+  "ru": "einfach обрывает обсуждение: объяснений не будет. Звучит резковато.",
+  "tr": "einfach tartışmayı keser: açıklama yapılmayacak. Kulağa biraz sert gelir.",
+  "at": [
+   "1a761ff6"
+  ]
+ },
+ {
+  "en": "But that IS how it is!",
+  "ru": "А вот так оно и есть!",
+  "tr": "Ama öyle!",
+  "at": [
+   "40ef4d9d"
+  ]
+ },
+ {
+  "en": "aber sets the statement against what the other person said: 'and yet it is so'. Used in an argument.",
+  "ru": "aber противопоставляет утверждение словам собеседника: «а всё-таки так». Говорят в споре.",
+  "tr": "aber ifadeyi karşısındakinin sözlerine karşı koyar: “her şeye rağmen böyle”. Tartışmada söylenir.",
+  "at": [
+   "8499defe"
+  ]
+ },
+ {
+  "en": "It IS like that!",
+  "ru": "Да так оно и есть!",
+  "tr": "Yok canım, öyle!",
+  "at": [
+   "c8f3aa9b"
+  ]
+ },
+ {
+  "en": "Stressed DOCH insists against a direct 'no, it isn't'.",
+  "ru": "Ударное DOCH настаивает против прямого «нет, это не так».",
+  "tr": "Vurgulu DOCH doğrudan bir “hayır, bu doğru değil” karşısında üsteler.",
+  "at": [
+   "9558a7c4"
+  ]
+ },
+ {
+  "en": "mal softens requests and offers (Ich ruf dich mal an). There's none here, so mal would read as 'once'.",
+  "ru": "mal смягчает просьбы и предложения (Ich ruf dich mal an). Здесь их нет, и mal прочитается как «однажды».",
+  "tr": "mal ricaları ve önerileri yumuşatır (Ich ruf dich mal an). Burada ikisi de yok, mal “bir gün, bir kere” diye anlaşılır.",
+  "at": [
+   "20ae9ea4",
+   "2255f5f9",
+   "6438c80b",
+   "9c5d0241",
+   "d1016a76",
+   "d1afcfb6",
+   "de3a0a8e",
+   "e2eaa5e0",
+   "e642b89c",
+   "f1ece197",
+   "f4200d7f",
+   "fa22f1ad",
+   "fdd66d98",
+   "ff365a61"
+  ]
+ },
+ {
+  "en": "Here bloß would read as 'only, merely'. The particle is for worried questions (Wo ist bloß…?) and warnings (Mach bloß keinen Fehler!).",
+  "ru": "Здесь bloß прочитается как «только, лишь». Частица bloß — в тревожных вопросах (Wo ist bloß…?) и предостережениях.",
+  "tr": "Burada bloß “yalnızca” diye anlaşılır. Parçacık olarak bloß endişeli sorularda (Wo ist bloß…?) ve uyarılarda olur.",
+  "at": [
+   "06bb914c",
+   "146e53d1",
+   "1ed68d82",
+   "2310427a",
+   "3a082260",
+   "4e7ac82c",
+   "51130b9b",
+   "7c5cc57a",
+   "8704a91d",
+   "8f814151",
+   "a0ddde29",
+   "a3563e0d",
+   "b7a6d3fa",
+   "c4fa055e",
+   "d0ddfc24",
+   "d3716da1",
+   "daab044b",
+   "dac815b0",
+   "dc44f535",
+   "eb9bd6ab",
+   "f49fce93",
+   "f888a8bb"
+  ]
+ },
+ {
+  "en": "In a statement nur means 'only'. The particle is for reassuring commands (Komm nur rein!) and worried questions (Was soll ich nur tun?).",
+  "ru": "В утверждении nur значит «только, лишь». Частица nur — в побуждениях (Komm nur rein!) и тревожных вопросах (Was soll ich nur tun?).",
+  "tr": "İfade cümlesinde nur “yalnızca” demektir. Parçacık olarak nur teşviklerde (Komm nur rein!) ve endişeli sorularda (Was soll ich nur tun?) olur.",
+  "at": [
+   "112983a2",
+   "160d2044",
+   "25e3317b",
+   "339ac76a",
+   "3599340f",
+   "4fa139ba",
+   "59a44280",
+   "6ebc21e1",
+   "80fcabcb",
+   "82703a04",
+   "85f93924",
+   "91210383",
+   "a1543763",
+   "ace6fb20",
+   "bbc27626",
+   "bdc7de8d",
+   "eb2a5abb",
+   "fba39a84",
+   "fbe82150"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Das ist vielleicht so' = 'maybe it's like that'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Das ist vielleicht so» = «может быть, так и есть».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Das ist vielleicht so” = “belki de böyledir”.",
+  "at": [
+   "5b56e937"
+  ]
+ },
+ {
+  "en": "ruhig = 'feel free' (Du kannst ruhig bleiben). Nothing is being permitted here, so it reads as 'calmly, quietly'.",
+  "ru": "ruhig = «не стесняйся, можно» (Du kannst ruhig bleiben). Здесь ничего не разрешают, так что ruhig прочитается как «спокойно, тихо».",
+  "tr": "ruhig = “çekinme, olur” (Du kannst ruhig bleiben). Burada izin verilen bir şey yok, bu yüzden ruhig “sakin, sessiz” diye anlaşılır.",
+  "at": [
+   "3229c52a",
+   "3a2b193a",
+   "4b0839f3",
+   "50666bfe",
+   "60e68e37",
+   "61a43d30",
+   "70a76c99",
+   "725a3286",
+   "774ec476",
+   "7d120081",
+   "851a9b7d",
+   "8e6c7e39",
+   "99c2ae24",
+   "9b24efb8",
+   "9eac7dd5",
+   "9f9ee089"
+  ]
+ },
+ {
+  "en": "Particle etwa ('don't tell me…') only works in yes/no questions: 'Bist du etwa krank?'. In a statement etwa means 'approximately', which doesn't fit here.",
+  "ru": "etwa-частица (подозрение «неужели?») бывает только в вопросах да/нет: «Bist du etwa krank?». В утверждении etwa значит «примерно» и здесь не подходит.",
+  "tr": "Parçacık olarak etwa (“yoksa?” kuşkusu) yalnızca evet/hayır sorularında olur: “Bist du etwa krank?”. İfade cümlesinde etwa “yaklaşık” demektir ve burada uymaz.",
+  "at": [
+   "14b2c1ea",
+   "219931ae",
+   "2347315d",
+   "2adcd2a6",
+   "34245925",
+   "3cdec064",
+   "4adf19d2",
+   "5b7a7382",
+   "631e4b71",
+   "6e03e2e5",
+   "9b5d77dd",
+   "a528ccef",
+   "a6c506bc",
+   "b9c2102b",
+   "c4d62558",
+   "ca300f58",
+   "cc1eaf86",
+   "deb8ed66",
+   "e89aa4dd",
+   "eac58951",
+   "eeb8f3bb"
+  ]
+ },
+ {
+  "en": "Your friend argues with an obvious rule. Shrug: nothing to be done.",
+  "ru": "Друг спорит с очевидным правилом. Пожми плечами: ничего не поделаешь.",
+  "tr": "Arkadaşın apaçık bir kurala itiraz ediyor. Omuz silk: yapacak bir şey yok.",
+  "at": [
+   "8325dfaa"
+  ]
+ },
+ {
+  "en": "He says 'no, it isn't' for the third time. Insist.",
+  "ru": "Он в третий раз говорит «нет, это не так». Настой на своём.",
+  "tr": "Üçüncü kez “hayır, öyle değil” diyor. Üstele.",
+  "at": [
+   "d1de06b9"
+  ]
+ },
+ {
+  "en": "I don't have time.",
+  "ru": "У меня нет времени.",
+  "tr": "Vaktim yok.",
+  "at": [
+   "68fd9377"
+  ]
+ },
+ {
+  "en": "I don't have time, you see.",
+  "ru": "У меня ведь нет времени.",
+  "tr": "Vaktim yok, biliyorsun.",
+  "at": [
+   "29f73b28"
+  ]
+ },
+ {
+  "en": "ja presents the refusal as a known fact and an explanation — softly.",
+  "ru": "ja подаёт отказ как известный факт и объяснение — мягко.",
+  "tr": "ja reddi bilinen bir olgu ve açıklama olarak sunar — yumuşakça.",
+  "at": [
+   "8566f781"
+  ]
+ },
+ {
+  "en": "Actually, I don't really have time.",
+  "ru": "Вообще-то у меня нет времени.",
+  "tr": "Aslında vaktim yok.",
+  "at": [
+   "9d3146c1"
+  ]
+ },
+ {
+  "en": "eigentlich is a polite refusal: 'strictly speaking I have no time' (maybe you can still talk me round).",
+  "ru": "eigentlich — вежливый отказ: «по-хорошему у меня нет времени» (может, ещё уговоришь).",
+  "tr": "eigentlich kibar bir rettir: “doğrusu vaktim yok” (belki yine de ikna edersin).",
+  "at": [
+   "2b82cefa"
+  ]
+ },
+ {
+  "en": "I just don't have time, that's all.",
+  "ru": "Ну нет у меня времени.",
+  "tr": "Vaktim yok işte.",
+  "at": [
+   "86ea5b36"
+  ]
+ },
+ {
+  "en": "halt: 'what can I do' — a refusal with a shrug. Colloquial, southern; close to eben.",
+  "ru": "halt — «ну что поделать»: отказ с пожатием плеч. Разговорное, южное; близко к eben.",
+  "tr": "halt “ne yapalım” demektir: omuz silkerek ret. Konuşma dilinde, Güney Almanya'da; anlamca eben kelimesine yakın.",
+  "at": [
+   "665a926f"
+  ]
+ },
+ {
+  "en": "I just don't have time.",
+  "ru": "Нет у меня времени, так уж вышло.",
+  "tr": "Vaktim yok, o kadar.",
+  "at": [
+   "c0de6d4d"
+  ]
+ },
+ {
+  "en": "eben is the more northern/neutral near-synonym of halt: the same shrugging refusal, a bit drier.",
+  "ru": "eben — более северный и нейтральный почти-синоним halt: тот же отказ с пожатием плеч, чуть суше.",
+  "tr": "eben, halt ile neredeyse eş anlamlıdır, ama daha kuzeyli ve üslup bakımından daha nötrdür: aynı omuz silkerek ret, biraz daha kuru.",
+  "at": [
+   "cc9a992e"
+  ]
+ },
+ {
+  "en": "I don't have time anyway.",
+  "ru": "У меня всё равно нет времени.",
+  "tr": "Zaten vaktim yok.",
+  "at": [
+   "de3c7324"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': the matter is closed regardless of the request. Colloquial, southern/Austrian.",
+  "ru": "eh = «и так, всё равно»: вопрос закрыт независимо от просьбы. Разговорное, южное/австрийское.",
+  "tr": "eh = “nasılsa, zaten”: rica ne olursa olsun konu kapanmıştır. Konuşma dilinde, Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "c130a675"
+  ]
+ },
+ {
+  "en": "I simply don't have time.",
+  "ru": "У меня просто нет времени.",
+  "tr": "Vaktim yok, hepsi bu.",
+  "at": [
+   "369cbd35"
+  ]
+ },
+ {
+  "en": "einfach: 'simply no, nothing to discuss'. A firm refusal.",
+  "ru": "einfach — «просто нет, и обсуждать нечего». Твёрдый отказ.",
+  "tr": "einfach — “yok, konuşacak bir şey yok”. Kesin bir ret.",
+  "at": [
+   "13ada1d6"
+  ]
+ },
+ {
+  "en": "I don't have time, I told you!",
+  "ru": "У меня же нет времени!",
+  "tr": "Vaktim yok dedim ya!",
+  "at": [
+   "c28ebbe7"
+  ]
+ },
+ {
+  "en": "doch reproaches: 'you know that / I told you'. Sounds irritated.",
+  "ru": "doch упрекает: «ты же знаешь / я же говорил». Звучит раздражённо.",
+  "tr": "doch sitem eder: “sana söylemiştim”. Kulağa sinirli gelir.",
+  "at": [
+   "380eba48"
+  ]
+ },
+ {
+  "en": "But I don't have time!",
+  "ru": "Но у меня нет времени!",
+  "tr": "Ama vaktim yok!",
+  "at": [
+   "f8e308a5"
+  ]
+ },
+ {
+  "en": "aber sets up a contrast: 'but I've got no time!' — an objection to the request.",
+  "ru": "aber противопоставляет: «а у меня-то времени нет!» — возражение на просьбу.",
+  "tr": "aber karşı koyar: “Ama benim vaktim yok!” — ricaya itiraz.",
+  "at": [
+   "7a4a2ac6"
+  ]
+ },
+ {
+  "en": "Here schon reads as 'already'. Concessive schon works with a positive: 'Ich habe schon Zeit, aber…'.",
+  "ru": "Здесь schon прочитается как «уже» («у меня уже нет времени»). Уступка работает с утвердительным: Ich habe schon Zeit, aber…",
+  "tr": "Burada schon “artık, çoktan” diye anlaşılır (“artık vaktim yok”). Kabul anlamı olumlu cümleyle çalışır: Ich habe schon Zeit, aber…",
+  "at": [
+   "1e2993a9"
+  ]
+ },
+ {
+  "en": "Guessing about your own schedule is odd. It works about others: 'Er hat wohl keine Zeit' ('he probably has no time').",
+  "ru": "Гадать о своём собственном времени странно. Работает про других: «Er hat wohl keine Zeit» («у него, видно, нет времени»).",
+  "tr": "İnsanın kendi vakti hakkında tahmin yürütmesi tuhaftır. Başkaları için olur: “Er hat wohl keine Zeit” (“galiba onun vakti yok”).",
+  "at": [
+   "3803ca30"
+  ]
+ },
+ {
+  "en": "'Ich habe nur keine Zeit' = 'it's only that I have no time' — restrictive 'only', not a tone particle.",
+  "ru": "«Ich habe nur keine Zeit» = «просто у меня нет времени (в остальном я за)» — это nur «только», ограничение, а не частица тона.",
+  "tr": "“Ich habe nur keine Zeit” = “yalnızca vaktim yok (onun dışında varım)” — bu, sınırlama bildiren “yalnızca” anlamındaki nur kelimesidir, ton parçacığı değil.",
+  "at": [
+   "4e4b63cf"
+  ]
+ },
+ {
+  "en": "The adverb 'maybe I have no time' is odd about yourself. As a particle it only works as an exclamation: 'Ich hab vielleicht keine Zeit!'",
+  "ru": "Наречие «может, у меня нет времени» — странно о себе. Частица — только в восклицании: Ich hab vielleicht keine Zeit!",
+  "tr": "“Belki vaktim yok” zarfı insanın kendisi için tuhaftır. Parçacık yalnızca ünlemde olur: Ich hab vielleicht keine Zeit!",
+  "at": [
+   "adff60f3"
+  ]
+ },
+ {
+  "en": "You already told him you're busy. Refuse, irritated.",
+  "ru": "Ты уже говорил ему, что занят. Откажи с раздражением.",
+  "tr": "Ona meşgul olduğunu daha önce söylemiştin. Sinirle reddet.",
+  "at": [
+   "47fba7fa"
+  ]
+ },
+ {
+  "en": "You know that.",
+  "ru": "Ты это знаешь.",
+  "tr": "Bunu biliyorsun.",
+  "at": [
+   "a0aea630"
+  ]
+ },
+ {
+  "en": "But you know that.",
+  "ru": "Ты ведь это знаешь.",
+  "tr": "Bunu sen de bilirsin.",
+  "at": [
+   "f3a2c4d3"
+  ]
+ },
+ {
+  "en": "ja warmly refers to shared knowledge: 'you already know that'.",
+  "ru": "ja тепло отсылает к общему знанию: «ты и так это знаешь».",
+  "tr": "ja sıcak bir şekilde ortak bilgiye gönderme yapar: “bunu sen de bilirsin”.",
+  "at": [
+   "235fce9c"
+  ]
+ },
+ {
+  "en": "You know that already.",
+  "ru": "Ты это и так знаешь.",
+  "tr": "Bunu zaten biliyorsun.",
+  "at": [
+   "8a156927"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': confirmation without fuss. Colloquial, southern/Austrian.",
+  "ru": "eh = «и так, всё равно»: подтверждение без лишних слов. Разговорное, южное/австрийское.",
+  "tr": "eh = “nasılsa, zaten”: fazla söze gerek olmadan onaylar. Konuşma dilinde, Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "90400988"
+  ]
+ },
+ {
+  "en": "Actually, you do know that.",
+  "ru": "Вообще-то ты это знаешь.",
+  "tr": "Aslında bunu biliyorsun.",
+  "at": [
+   "599b0dec"
+  ]
+ },
+ {
+  "en": "eigentlich gently points out the question is unnecessary — she knows the answer.",
+  "ru": "eigentlich мягко указывает: вопрос лишний, ответ ей известен.",
+  "tr": "eigentlich yumuşakça belirtir: soru gereksiz, cevabı kendisi biliyor.",
+  "at": [
+   "e87696fd"
+  ]
+ },
+ {
+  "en": "You know that, don't you!",
+  "ru": "Ты же это знаешь!",
+  "tr": "Bunu biliyorsun ya!",
+  "at": [
+   "60ba454a"
+  ]
+ },
+ {
+  "en": "doch: 'come on, you know that!' — a slight reproach that she had to ask.",
+  "ru": "doch — «ну ты же знаешь!»: с лёгким укором, что вообще пришлось спрашивать.",
+  "tr": "doch — “bunu biliyorsun ya!”: sormak zorunda kalmasına hafif bir sitemle.",
+  "at": [
+   "ca228d6b"
+  ]
+ },
+ {
+  "en": "You DO know that!",
+  "ru": "Да знаешь ты это!",
+  "tr": "Yok canım, biliyorsun bunu!",
+  "at": [
+   "6ffc064a"
+  ]
+ },
+ {
+  "en": "Stressed DOCH contradicts 'no, I don't know': 'yes you do!'.",
+  "ru": "Ударное DOCH возражает на «нет, не знаю»: «знаешь, знаешь!».",
+  "tr": "Vurgulu DOCH “hayır, bilmiyorum” sözüne itiraz eder: “bal gibi biliyorsun!”.",
+  "at": [
+   "3b0a006b"
+  ]
+ },
+ {
+  "en": "'Das weißt du schon' mostly reads as 'you already know that' (time adverb). Reassuring schon fits better as 'Das wirst du schon wissen'.",
+  "ru": "«Das weißt du schon» скорее прочитается как «ты это уже знаешь» (наречие времени). Уверенность в будущем — «Das wirst du schon wissen».",
+  "tr": "“Das weißt du schon” daha çok “bunu artık / çoktan biliyorsun” diye anlaşılır (zaman zarfı). Gelecekle ilgili güven için: “Das wirst du schon wissen”.",
+  "at": [
+   "12043fb2"
+  ]
+ },
+ {
+  "en": "Unstressed wohl ('you probably know') is out of place here; stressed WOHL ('you sure do know!') is sharp and rare.",
+  "ru": "Безударное wohl («наверное, знаешь») здесь не к месту; ударное WOHL («уж ты-то знаешь!») — резкое и редкое.",
+  "tr": "Vurgusuz wohl (“herhalde biliyorsun”) burada yersizdir; vurgulu WOHL (“elbette biliyorsun!”) sert ve nadirdir.",
+  "at": [
+   "b7c3b47b"
+  ]
+ },
+ {
+  "en": "'Das weißt du halt' sounds like a helpless shrug — wrong for a warm answer. Compare: 'Das ist halt so'.",
+  "ru": "«Das weißt du halt» звучит как беспомощное пожатие плеч — не подходит к ласковому ответу. Ср.: «Das ist halt so».",
+  "tr": "“Das weißt du halt” kulağa çaresiz bir omuz silkme gibi gelir — sevgi dolu bir cevaba uymaz. Krş.: “Das ist halt so”.",
+  "at": [
+   "b0cc10e6"
+  ]
+ },
+ {
+  "en": "eben here tends to read as 'just now' ('you just found out') or as the agreeing reply 'Eben!'.",
+  "ru": "eben здесь скорее прочитается как «только что» («ты это только что узнала») или как реплика-согласие «Eben!».",
+  "tr": "eben burada daha çok “az önce” (“bunu az önce öğrendin”) ya da onaylayan “Eben!” cevabı diye anlaşılır.",
+  "at": [
+   "feff22f1"
+  ]
+ },
+ {
+  "en": "'Das weißt du einfach' = 'you just know it (intuitively)' — adverbial, not a tone particle.",
+  "ru": "«Das weißt du einfach» = «ты просто это знаешь (чувствуешь)» — наречие «просто, интуитивно», а не частица тона.",
+  "tr": "“Das weißt du einfach” = “bunu öylece biliyorsun (hissediyorsun)” — ton parçacığı değil, “düpedüz, sezgiyle” anlamında zarf.",
+  "at": [
+   "2049dbff"
+  ]
+ },
+ {
+  "en": "'Das weißt du aber!' only works as an amazed exclamation ('you know a lot!'), not as an answer here.",
+  "ru": "«Das weißt du aber!» возможно только как удивлённое восклицание («а ты много знаешь!»), не как ответ здесь.",
+  "tr": "“Das weißt du aber!” yalnızca şaşkın bir ünlem olarak mümkündür (“çok şey biliyorsun!”), buradaki cevap olarak değil.",
+  "at": [
+   "9fef4ce1"
+  ]
+ },
+ {
+  "en": "In a statement vielleicht is the adverb 'maybe', not a particle. The particle is for request-questions (Kannst du vielleicht…?) and exclamations.",
+  "ru": "В утверждении vielleicht — наречие «может быть», а не частица. Частица — в просьбах (Kannst du vielleicht…?) и восклицаниях.",
+  "tr": "İfade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. Parçacık olarak ricalarda (Kannst du vielleicht…?) ve ünlemlerde olur.",
+  "at": [
+   "aeee8ebe"
+  ]
+ },
+ {
+  "en": "Reassure her warmly: she knows the answer already.",
+  "ru": "Успокой её тепло: ответ ей и так известен.",
+  "tr": "Onu sıcak bir şekilde rahatlat: cevabı zaten biliyor.",
+  "at": [
+   "c138e24c"
+  ]
+ },
+ {
+  "en": "She replies 'no, I don't'. Contradict firmly.",
+  "ru": "Она отвечает «нет, не знаю». Возрази настойчиво.",
+  "tr": "“Hayır, bilmiyorum” diyor. Israrla itiraz et.",
+  "at": [
+   "54fb1fe9"
+  ]
+ },
+ {
+  "en": "The bus is coming soon.",
+  "ru": "Автобус сейчас придёт.",
+  "tr": "Otobüs birazdan gelir.",
+  "at": [
+   "b9f95b4e"
+  ]
+ },
+ {
+  "en": "The bus will be here soon, don't worry.",
+  "ru": "Да сейчас придёт автобус.",
+  "tr": "Otobüs birazdan gelir, eminim.",
+  "at": [
+   "7ddb00fd"
+  ]
+ },
+ {
+  "en": "schon reassures: 'don't worry, it'll come'. Even more common without gleich: 'Der kommt schon'.",
+  "ru": "schon успокаивает: «не волнуйся, придёт». Чаще без gleich: «Der kommt schon».",
+  "tr": "schon rahatlatır: “merak etme, gelir”. Daha çok gleich olmadan: “Der kommt schon”.",
+  "at": [
+   "e7015ede"
+  ]
+ },
+ {
+  "en": "The bus is coming any minute, you know.",
+  "ru": "Автобус ведь сейчас придёт.",
+  "tr": "Otobüs birazdan gelir, biliyorsun.",
+  "at": [
+   "96a29b1b"
+  ]
+ },
+ {
+  "en": "ja soothes by pointing to the obvious: 'it's coming any minute'.",
+  "ru": "ja успокаивает ссылкой на очевидное: «ну, сейчас же придёт».",
+  "tr": "ja apaçık olana dayanarak rahatlatır: “birazdan gelecek, belli”.",
+  "at": [
+   "eb799144"
+  ]
+ },
+ {
+  "en": "The bus should be here soon, I think.",
+  "ru": "Автобус, наверное, сейчас придёт.",
+  "tr": "Otobüs galiba birazdan gelecek.",
+  "at": [
+   "43f243d8"
+  ]
+ },
+ {
+  "en": "wohl is a guess: not certain, but probably soon.",
+  "ru": "wohl — предположение: говорящий не уверен, но думает, что скоро.",
+  "tr": "wohl bir tahmindir: konuşan emin değil, ama yakında geleceğini düşünüyor.",
+  "at": [
+   "fbe064f1"
+  ]
+ },
+ {
+  "en": "Come on, the bus is coming soon.",
+  "ru": "Ну автобус же сейчас придёт.",
+  "tr": "Otobüs birazdan gelir ya.",
+  "at": [
+   "d658d430"
+  ]
+ },
+ {
+  "en": "doch coaxes the child to be patient: 'it's coming soon!', with a light push.",
+  "ru": "doch уговаривает потерпеть: «ну скоро же!», с лёгким нажимом.",
+  "tr": "doch biraz beklemeye ikna eder: “az kaldı ya!”, hafif bir baskıyla.",
+  "at": [
+   "17c2a149"
+  ]
+ },
+ {
+  "en": "Actually, the bus is due any minute.",
+  "ru": "Вообще-то автобус должен сейчас прийти.",
+  "tr": "Aslında otobüsün birazdan gelmesi lazım.",
+  "at": [
+   "38edfdb6"
+  ]
+ },
+ {
+  "en": "eigentlich: 'by the timetable it's due now' — with a hint of doubt that it will.",
+  "ru": "eigentlich — «по расписанию должен вот-вот»: с ноткой сомнения, что так и будет.",
+  "tr": "eigentlich — “tarifeye göre her an gelmeli”: öyle olacağından hafif bir kuşkuyla.",
+  "at": [
+   "6396f1ef"
+  ]
+ },
+ {
+  "en": "The bus is coming soon anyway.",
+  "ru": "Автобус и так сейчас придёт.",
+  "tr": "Otobüs zaten birazdan gelir.",
+  "at": [
+   "70d300a7"
+  ]
+ },
+ {
+  "en": "eh = 'it's coming anyway' — an argument to calm the child down. Colloquial, southern.",
+  "ru": "eh = «он и так сейчас придёт» — довод, чтобы ребёнок успокоился. Разговорное, южное.",
+  "tr": "eh = “nasılsa birazdan gelir” — çocuk sakinleşsin diye bir gerekçe. Konuşma dilinde, Güney Almanya'da.",
+  "at": [
+   "2d2e3808"
+  ]
+ },
+ {
+  "en": "The bus IS coming!",
+  "ru": "Да придёт автобус сейчас!",
+  "tr": "Yok canım, otobüs birazdan gelecek!",
+  "at": [
+   "4fe976b0"
+  ]
+ },
+ {
+  "en": "Stressed DOCH contradicts 'it's never coming!'. Can also mean 'it's coming after all'.",
+  "ru": "Ударное DOCH возражает на «он вообще не придёт!». Может значить и «всё-таки придёт».",
+  "tr": "Vurgulu DOCH “hiç gelmeyecek!” sözüne itiraz eder. “Yine de gelecek” anlamına da gelebilir.",
+  "at": [
+   "cc1600c9"
+  ]
+ },
+ {
+  "en": "halt (resigned 'that's how it is') doesn't fit a forecast for the next minute. Compare: 'Dann warten wir halt'.",
+  "ru": "halt (смирение «ну так уж») не вяжется с прогнозом на ближайшую минуту. Ср.: «Dann warten wir halt».",
+  "tr": "halt (“ne yapalım, öyle” teslimiyeti) önümüzdeki dakikaya dair bir tahminle bağdaşmaz. Krş.: “Dann warten wir halt”.",
+  "at": [
+   "a3b0dc0a"
+  ]
+ },
+ {
+  "en": "Next to gleich, eben reads as the adverb 'right now' — 'the bus is just arriving'.",
+  "ru": "eben рядом с gleich прочитается как наречие «как раз сейчас» — «автобус как раз подходит».",
+  "tr": "eben, gleich ile birlikte “tam şimdi” zarfı diye anlaşılır — “otobüs tam şimdi geliyor”.",
+  "at": [
+   "a686eb6b"
+  ]
+ },
+ {
+  "en": "'Der Bus kommt einfach gleich' isn't said: einfach ('simply') doesn't fit a forecast.",
+  "ru": "«Der Bus kommt einfach gleich» не говорят: einfach («просто») не сочетается с прогнозом.",
+  "tr": "“Der Bus kommt einfach gleich” denmez: einfach (“düpedüz”) bir tahminle bağdaşmaz.",
+  "at": [
+   "f02b2a7d"
+  ]
+ },
+ {
+  "en": "aber reads as 'but' here: a rebuttal right after a complaint. Exclamatory aber needs an evaluation: 'Der Bus ist aber voll!'",
+  "ru": "aber здесь = «но»: возражение сразу после жалобы. Восклицательной частице aber нужна оценка: Der Bus ist aber voll!",
+  "tr": "aber burada “ama” demektir: yakınmanın hemen ardından itiraz. Ünlem parçacığı aber bir değerlendirme ister: Der Bus ist aber voll!",
+  "at": [
+   "9b559b7b"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Der Bus kommt vielleicht gleich' = 'maybe the bus is coming soon'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Der Bus kommt vielleicht gleich» = «может, автобус сейчас придёт».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Der Bus kommt vielleicht gleich” = “belki otobüs birazdan gelir”.",
+  "at": [
+   "e443fd72"
+  ]
+ },
+ {
+  "en": "Here etwa reads as 'approximately', which is unnatural. Suspicious etwa only works in questions: 'Kommt der Bus etwa nicht?'.",
+  "ru": "Здесь etwa прочитается как «примерно» («примерно сейчас» — неестественно). Подозрение etwa — только в вопросах: «Kommt der Bus etwa nicht?».",
+  "tr": "Burada etwa “yaklaşık” diye anlaşılır (“yaklaşık şimdi” — doğal değil). Kuşku bildiren etwa yalnızca sorularda olur: “Kommt der Bus etwa nicht?”.",
+  "at": [
+   "2b311658"
+  ]
+ },
+ {
+  "en": "The child is whining. Reassure him it'll be fine.",
+  "ru": "Ребёнок хнычет. Успокой его: всё будет хорошо.",
+  "tr": "Çocuk mızıldanıyor. Onu rahatlat: her şey yoluna girecek.",
+  "at": [
+   "50998322"
+  ]
+ },
+ {
+  "en": "You're not sure, but you think it'll be soon.",
+  "ru": "Ты не уверен, но думаешь, что скоро.",
+  "tr": "Emin değilsin, ama yakında geleceğini düşünüyorsun.",
+  "at": [
+   "cd4d84c7"
+  ]
+ },
+ {
+  "en": "It doesn't matter.",
+  "ru": "Это неважно.",
+  "tr": "Fark etmez.",
+  "at": [
+   "f2469982"
+  ]
+ },
+ {
+  "en": "It probably doesn't matter.",
+  "ru": "Это, наверное, неважно.",
+  "tr": "Galiba fark etmez.",
+  "at": [
+   "26c68d7a"
+  ]
+ },
+ {
+  "en": "wohl is a cautious guess: 'probably makes no difference'.",
+  "ru": "wohl — осторожное предположение: «пожалуй, без разницы».",
+  "tr": "wohl temkinli bir tahmindir: “pek fark etmez sanki”.",
+  "at": [
+   "93924e9b"
+  ]
+ },
+ {
+  "en": "It doesn't really matter, you know.",
+  "ru": "Это ведь неважно.",
+  "tr": "Fark etmez, biliyorsun.",
+  "at": [
+   "b09fb345"
+  ]
+ },
+ {
+  "en": "ja: 'we both know it makes no difference' — calm and friendly.",
+  "ru": "ja — «мы же оба понимаем, что без разницы»: спокойно, по-дружески.",
+  "tr": "ja — “ikimiz de fark etmediğini anlıyoruz”: sakin, dostça.",
+  "at": [
+   "a5981de6"
+  ]
+ },
+ {
+  "en": "Actually, it doesn't matter.",
+  "ru": "Вообще-то это неважно.",
+  "tr": "Aslında fark etmez.",
+  "at": [
+   "5cbad8b4"
+  ]
+ },
+ {
+  "en": "eigentlich gently defuses it: 'when you think about it, it doesn't matter'.",
+  "ru": "eigentlich мягко снимает проблему: «если подумать, без разницы».",
+  "tr": "eigentlich sorunu yumuşakça ortadan kaldırır: “düşününce, fark etmez”.",
+  "at": [
+   "ebffa185"
+  ]
+ },
+ {
+  "en": "Come on, it doesn't matter!",
+  "ru": "Да это же неважно!",
+  "tr": "Fark etmez ya!",
+  "at": [
+   "3e0ae97a"
+  ]
+ },
+ {
+  "en": "doch talks her round: 'why agonise, it doesn't matter!'.",
+  "ru": "doch переубеждает: «ну что ты мучаешься, это же неважно!».",
+  "tr": "doch fikrini değiştirmeye çalışır: “ne diye kafa yoruyorsun, fark etmez ya!”.",
+  "at": [
+   "d238a29b"
+  ]
+ },
+ {
+  "en": "It doesn't matter anyway.",
+  "ru": "Это и так без разницы.",
+  "tr": "Zaten fark etmez.",
+  "at": [
+   "a2876939"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': the very common colloquial 'Das ist eh egal'. Can sound a bit indifferent.",
+  "ru": "eh = «всё равно»: очень частое разговорное «Das ist eh egal». Может звучать чуть безразлично.",
+  "tr": "eh = “nasılsa”: konuşma dilinde çok yaygın “Das ist eh egal”. Biraz umursamaz duyulabilir.",
+  "at": [
+   "9bb20472"
+  ]
+ },
+ {
+  "en": "No, it really DOESN'T matter!",
+  "ru": "Да неважно это!",
+  "tr": "Yok canım, fark etmez!",
+  "at": [
+   "1ad1e7ba"
+  ]
+ },
+ {
+  "en": "Stressed DOCH insists against 'no, it does matter!'.",
+  "ru": "Ударное DOCH настаивает против «нет, это важно!».",
+  "tr": "Vurgulu DOCH “hayır, önemli!” sözüne karşı üsteler.",
+  "at": [
+   "951f6fdb"
+  ]
+ },
+ {
+  "en": "'Das ist schon egal' is hardly said; schon would read as 'already' ('it doesn't matter any more').",
+  "ru": "«Das ist schon egal» почти не говорят; schon скорее прочитается как «уже» («теперь уже всё равно»).",
+  "tr": "“Das ist schon egal” neredeyse hiç denmez; schon daha çok “artık” diye anlaşılır (“artık fark etmez”).",
+  "at": [
+   "cdaa9a66"
+  ]
+ },
+ {
+  "en": "'Das ist halt egal' is possible but sounds like a helpless shrug, not an answer about choosing a restaurant.",
+  "ru": "«Das ist halt egal» возможно, но звучит как бессильное пожатие плеч, а не как ответ на выбор ресторана.",
+  "tr": "“Das ist halt egal” mümkündür, ama kulağa restoran seçimine bir cevap gibi değil, çaresiz bir omuz silkme gibi gelir.",
+  "at": [
+   "52c16d2c"
+  ]
+ },
+ {
+  "en": "'Das ist eben egal' sounds like a debating reply ('exactly, it doesn't matter'); unnatural here.",
+  "ru": "«Das ist eben egal» звучит как ответ в споре («вот именно, неважно»); здесь неестественно.",
+  "tr": "“Das ist eben egal” kulağa tartışmada verilen bir cevap gibi gelir (“aynen, fark etmez”); burada doğal değil.",
+  "at": [
+   "91284401"
+  ]
+ },
+ {
+  "en": "It simply doesn't matter.",
+  "ru": "Это просто неважно, и всё.",
+  "tr": "Fark etmez, hepsi bu, düşünecek bir şey yok.",
+  "at": [
+   "ad1df328"
+  ]
+ },
+ {
+  "en": "einfach cuts the discussion short: 'there's nothing to think about'. Categorical, a little dismissive.",
+  "ru": "einfach обрывает обсуждение: «тут вообще не о чем думать». Звучит категорично, чуть отмахиваясь.",
+  "tr": "einfach tartışmayı keser: “burada düşünecek hiçbir şey yok”. Kesin, biraz da geçiştirir gibi.",
+  "at": [
+   "022d9f81"
+  ]
+ },
+ {
+  "en": "'Das ist aber egal' needs a contrast ('but THAT doesn't matter'); odd in this situation.",
+  "ru": "«Das ist aber egal» требует противопоставления («а вот это неважно»); в этой ситуации странно.",
+  "tr": "“Das ist aber egal” bir karşıtlık ister (“bu ise fark etmez”); bu durumda tuhaf.",
+  "at": [
+   "45f23ba9"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Das ist vielleicht egal' = 'maybe it doesn't matter'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Das ist vielleicht egal» = «может, это неважно».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Das ist vielleicht egal” = “belki fark etmez”.",
+  "at": [
+   "047fd190"
+  ]
+ },
+ {
+  "en": "She's been agonising for ten minutes. Talk her round, friendly.",
+  "ru": "Она мучается уже десять минут. Переубеди её дружески.",
+  "tr": "On dakikadır karar veremiyor. Onu dostça ikna et.",
+  "at": [
+   "751fdf79"
+  ]
+ },
+ {
+  "en": "Say it makes no difference at all, a bit indifferently.",
+  "ru": "Скажи, что разницы нет никакой, с лёгким безразличием.",
+  "tr": "Hiç fark etmediğini söyle, hafif bir umursamazlıkla.",
+  "at": [
+   "3f5f2a94"
+  ]
+ },
+ {
+  "en": "You're tired.",
+  "ru": "Ты устал.",
+  "tr": "Yorgunsun.",
+  "at": [
+   "c5ea5a64"
+  ]
+ },
+ {
+  "en": "You must be tired.",
+  "ru": "Ты, наверное, устал.",
+  "tr": "Galiba yorgunsun.",
+  "at": [
+   "d08d4b9a"
+  ]
+ },
+ {
+  "en": "wohl is a caring guess: 'looks like you're tired'.",
+  "ru": "wohl — заботливая догадка: «похоже, ты устал».",
+  "tr": "wohl şefkatli bir tahmindir: “yorgun görünüyorsun”.",
+  "at": [
+   "9772aa3b"
+  ]
+ },
+ {
+  "en": "Oh, you're tired!",
+  "ru": "Да ты устал!",
+  "tr": "Aa, yorulmuşsun!",
+  "at": [
+   "101840b1"
+  ]
+ },
+ {
+  "en": "ja: 'oh, you're tired!' — the speaker has just noticed.",
+  "ru": "ja — «о, да ты устал!»: говорящий только что это заметил.",
+  "tr": "ja — “aa, yorulmuşsun!”: konuşan bunu yeni fark etti.",
+  "at": [
+   "37b025aa"
+  ]
+ },
+ {
+  "en": "You're tired anyway (so go to bed).",
+  "ru": "Ты всё равно устал (так что иди спать).",
+  "tr": "Zaten yorgunsun, git yat.",
+  "at": [
+   "0ec32989"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': an argument for advice — 'you're tired anyway, so…'. Colloquial, southern.",
+  "ru": "eh = «всё равно»: аргумент для совета — «тебе и так пора спать». Разговорное, южное.",
+  "tr": "eh = “nasılsa”: bir öğüt için gerekçe — “zaten yatma vaktin geldi”. Konuşma dilinde, Güney Almanya'da.",
+  "at": [
+   "7e93ea02"
+  ]
+ },
+ {
+  "en": "You're just tired, that's all.",
+  "ru": "Ну устал ты, вот и всё.",
+  "tr": "Yorgunsun işte.",
+  "at": [
+   "ae1d3ce3"
+  ]
+ },
+ {
+  "en": "halt explains his mood: 'that's what it is — you're tired'. Southern, close to eben.",
+  "ru": "halt объясняет его настроение: «вот в чём дело — ты устал». Южное, близко к eben.",
+  "tr": "halt onun keyifsizliğini açıklar: “mesele bu — yorgunsun”. Güney Almanya'da; anlamca eben kelimesine yakın.",
+  "at": [
+   "ba5e41ac"
+  ]
+ },
+ {
+  "en": "You're tired, that's what it is.",
+  "ru": "Ты устал, вот в чём дело.",
+  "tr": "Yorgunsun, o kadar.",
+  "at": [
+   "1f9d5b6c"
+  ]
+ },
+ {
+  "en": "eben is the more northern/neutral near-synonym of halt: the same 'that's what it is' explanation.",
+  "ru": "eben — более северный и нейтральный почти-синоним halt: то же объяснение «вот в чём дело».",
+  "tr": "eben, halt ile neredeyse eş anlamlıdır, ama daha kuzeyli ve üslup bakımından daha nötrdür: aynı açıklama, “mesele bu”.",
+  "at": [
+   "c389077d"
+  ]
+ },
+ {
+  "en": "You're simply tired, period.",
+  "ru": "Ты просто-напросто устал.",
+  "tr": "Sadece yorgunsun, başka bir şey değil.",
+  "at": [
+   "3581d1be"
+  ]
+ },
+ {
+  "en": "einfach: 'no other reason, you're just tired' — more categorical than halt/eben.",
+  "ru": "einfach — «никаких других причин, просто устал»: категоричнее, чем halt/eben.",
+  "tr": "einfach — “başka hiçbir sebep yok, sadece yorgunsun”: halt / eben ile söylenenden daha kesin.",
+  "at": [
+   "5672d4f7"
+  ]
+ },
+ {
+  "en": "But you're tired, aren't you!",
+  "ru": "Ты же устал!",
+  "tr": "Yorgunsun ya!",
+  "at": [
+   "33c94d22"
+  ]
+ },
+ {
+  "en": "doch: 'but you're tired!' — an appeal to admit the obvious and go rest.",
+  "ru": "doch — «ну ты же устал!» — призыв признать очевидное и пойти отдыхать.",
+  "tr": "doch — “yorgunsun ya!” — apaçık olanı kabul edip dinlenmeye gitmesi için bir çağrı.",
+  "at": [
+   "82720e03"
+  ]
+ },
+ {
+  "en": "You ARE tired!",
+  "ru": "Да устал ты!",
+  "tr": "Yok canım, yorgunsun!",
+  "at": [
+   "ae374762"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against his 'I'm not tired': 'yes, you are!'.",
+  "ru": "Ударное DOCH — против его «я не устал»: «устал-устал!».",
+  "tr": "Vurgulu DOCH onun “yorgun değilim” sözüne karşıdır: “yorgunsun, yorgunsun!”.",
+  "at": [
+   "234a5743"
+  ]
+ },
+ {
+  "en": "'Du bist schon müde' reads as 'you're already tired' (so early?). Concessive 'schon …, aber' is rare here.",
+  "ru": "«Du bist schon müde» прочитается как «ты уже устал» (так рано?). Уступка: «Du bist schon müde, aber…» — редко.",
+  "tr": "“Du bist schon müde” “şimdiden yoruldun” (bu kadar erken mi?) diye anlaşılır. Kabul anlamında: “Du bist schon müde, aber…” — nadir.",
+  "at": [
+   "b34d6fe4"
+  ]
+ },
+ {
+  "en": "'Du bist eigentlich müde' = 'deep down you're tired' — possible but forced.",
+  "ru": "«Du bist eigentlich müde» = «на самом деле ты устал (хоть и не признаёшь)» — возможно, но звучит натянуто.",
+  "tr": "“Du bist eigentlich müde” = “gerçekte yorgunsun (kabul etmesen de)” — mümkün, ama kulağa zorlama gelir.",
+  "at": [
+   "2e0cab95"
+  ]
+ },
+ {
+  "en": "Boy, are you tired!",
+  "ru": "Ну ты и устал!",
+  "tr": "Ne kadar da yorgun görünüyorsun!",
+  "at": [
+   "1beff064"
+  ]
+ },
+ {
+  "en": "aber turns it into an exclamation: 'boy, are you tired!' — when his yawning strikes you. Needs exclamatory intonation.",
+  "ru": "aber превращает фразу в восклицание: «ну ты и устал!» — когда его зевота бросается в глаза. Нужен восклицательный тон.",
+  "tr": "aber cümleyi ünleme çevirir: “ne kadar da yorgunsun!” — esnemesi göze batınca. Ünlem tonu gerekir.",
+  "at": [
+   "7e7471b5"
+  ]
+ },
+ {
+  "en": "As the adverb 'maybe you're tired' it's possible, but not a particle. Particle vielleicht only in the exclamation 'Du bist vielleicht müde!' ('Boy, are you tired!').",
+  "ru": "Как наречие «может, ты устал» — возможно, но это не частица. Частица vielleicht — только в восклицании: «Du bist vielleicht müde!» («Ну ты и устал!»).",
+  "tr": "Zarf olarak “belki yorgunsun” mümkündür, ama bu parçacık değil. Parçacık olarak vielleicht yalnızca ünlemde olur: “Du bist vielleicht müde!” (“Amma da yorgunsun!”).",
+  "at": [
+   "be805c74"
+  ]
+ },
+ {
+  "en": "He's been yawning all evening and doesn't get why he's off. Calmly explain what it is.",
+  "ru": "Он весь вечер зевает и не понимает, что с ним. Спокойно объясни, в чём дело.",
+  "tr": "Bütün akşam esniyor ve ona ne olduğunu anlamıyor. Sakince sebebini açıkla.",
+  "at": [
+   "0e800ba9"
+  ]
+ },
+ {
+  "en": "He denies being tired. Insist.",
+  "ru": "Он отрицает, что устал. Настой.",
+  "tr": "Yorgun olduğunu inkâr ediyor. Üstele.",
+  "at": [
+   "5461fc51"
+  ]
+ },
+ {
+  "en": "You can stay here.",
+  "ru": "Ты можешь остаться здесь.",
+  "tr": "Burada kalabilirsin.",
+  "at": [
+   "4615efb6"
+  ]
+ },
+ {
+  "en": "Feel free to stay here.",
+  "ru": "Оставайся, не стесняйся.",
+  "tr": "Burada kal, çekinme.",
+  "at": [
+   "57ceda33"
+  ]
+ },
+ {
+  "en": "ruhig removes any awkwardness: 'go ahead and stay, it's no trouble'.",
+  "ru": "ruhig снимает неловкость: «спокойно оставайся, мне не трудно».",
+  "tr": "ruhig mahcubiyeti giderir: “rahat rahat kal, bana zahmet değil”.",
+  "at": [
+   "cc4f037c"
+  ]
+ },
+ {
+  "en": "You could always stay here.",
+  "ru": "Ты ведь можешь остаться здесь.",
+  "tr": "İstersen burada kalabilirsin.",
+  "at": [
+   "91a5d74b"
+  ]
+ },
+ {
+  "en": "ja offers an obvious way out: 'you could just stay, after all'.",
+  "ru": "ja предлагает очевидный выход: «да оставайся, в чём проблема».",
+  "tr": "ja apaçık bir çözüm önerir: “kal, bunda sorun yok”.",
+  "at": [
+   "0be9b134"
+  ]
+ },
+ {
+  "en": "Why don't you stay here?",
+  "ru": "Ты же можешь остаться здесь!",
+  "tr": "Burada kalsana!",
+  "at": [
+   "bc044392"
+  ]
+ },
+ {
+  "en": "doch coaxes: a warm invitation with a light push.",
+  "ru": "doch уговаривает: тёплое приглашение, с лёгким нажимом.",
+  "tr": "doch ikna eder: sıcak bir davet, hafif bir baskıyla.",
+  "at": [
+   "7fb10873"
+  ]
+ },
+ {
+  "en": "You can just stay here.",
+  "ru": "Можешь просто остаться здесь.",
+  "tr": "Kal gitsin burada.",
+  "at": [
+   "6598e7f8"
+  ]
+ },
+ {
+  "en": "einfach: 'just stay, no complications' — the simple solution.",
+  "ru": "einfach — «просто останься, без сложностей»: простое решение.",
+  "tr": "einfach — “kal gitsin, zorluk yok”: basit bir çözüm.",
+  "at": [
+   "8d6dfe91"
+  ]
+ },
+ {
+  "en": "Actually, you could stay here.",
+  "ru": "Вообще-то ты можешь остаться.",
+  "tr": "Aslında burada kalabilirsin.",
+  "at": [
+   "b44bc938"
+  ]
+ },
+ {
+  "en": "eigentlich: an option the guest hadn't considered — 'actually, there's another way'.",
+  "ru": "eigentlich — предложение, о котором гость не подумал: «вообще-то есть вариант».",
+  "tr": "eigentlich misafirin aklına gelmemiş bir öneridir: “aslında bir seçenek var”.",
+  "at": [
+   "3a8efcd1"
+  ]
+ },
+ {
+  "en": "You can stay, sure (but…).",
+  "ru": "Остаться-то ты можешь (но…).",
+  "tr": "Kalmasına kalabilirsin (ama…).",
+  "at": [
+   "9a2a5dcb"
+  ]
+ },
+ {
+  "en": "schon: 'you can, sure', often followed by 'but' — a concession without enthusiasm.",
+  "ru": "schon — «можешь, конечно», часто с последующим «но»: уступка без восторга.",
+  "tr": "schon — “kalabilirsin elbette”, sıklıkla ardından bir “ama” gelir: coşkusuz bir kabul.",
+  "at": [
+   "424b7cb4"
+  ]
+ },
+ {
+  "en": "Well, you can just stay here then.",
+  "ru": "Ну, тогда можешь и остаться здесь.",
+  "tr": "Burada kal bari.",
+  "at": [
+   "deebde15"
+  ]
+ },
+ {
+  "en": "halt is only a shrug, not a warm invitation: e.g. the last bus has gone — 'Dann kannst du halt hierbleiben'. Often with dann.",
+  "ru": "halt — пожатие плечами, а не тёплое приглашение: автобус ушёл — «Dann kannst du halt hierbleiben». Часто с dann.",
+  "tr": "halt sıcak bir davet değil, omuz silkmedir: otobüs gitti — “Dann kannst du halt hierbleiben”. Sıklıkla dann ile; Türkçede “bari”.",
+  "at": [
+   "39b8cd36"
+  ]
+ },
+ {
+  "en": "Well then, you can stay here.",
+  "ru": "Ну, значит, можешь остаться здесь.",
+  "tr": "O zaman burada kalırsın.",
+  "at": [
+   "3f9c5fd8"
+  ]
+ },
+ {
+  "en": "eben works like halt: a shrug ('well then, stay'), not an invitation. Usually with dann: 'Dann bleibst du eben hier'.",
+  "ru": "eben — как halt: пожатие плечами («ну, значит, оставайся»), а не приглашение. Обычно с dann: Dann bleibst du eben hier.",
+  "tr": "eben de halt gibidir: davet değil, omuz silkme (“o hâlde kal”). Genellikle dann ile: Dann bleibst du eben hier.",
+  "at": [
+   "3b4bf8f1"
+  ]
+ },
+ {
+  "en": "Yes, you CAN stay here!",
+  "ru": "Да можешь ты остаться!",
+  "tr": "Yok canım, kalabilirsin!",
+  "at": [
+   "43505712"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against 'no, I can't': 'yes, you can!'.",
+  "ru": "Ударное DOCH — против «нет, мне неудобно / нельзя»: «можешь-можешь!».",
+  "tr": "Vurgulu DOCH “hayır, olmaz / ayıp olur” sözüne karşıdır: “kalabilirsin, kalabilirsin!”.",
+  "at": [
+   "0ac9eaf3"
+  ]
+ },
+ {
+  "en": "'Du kannst wohl hierbleiben' = 'you can probably stay' — an odd guess about your own invitation.",
+  "ru": "«Du kannst wohl hierbleiben» = «ты, наверное, можешь остаться» — странная догадка о собственном приглашении.",
+  "tr": "“Du kannst wohl hierbleiben” = “galiba kalabilirsin” — insanın kendi davetine dair tuhaf bir tahmin.",
+  "at": [
+   "a5e67f93"
+  ]
+ },
+ {
+  "en": "You can stay here anyway.",
+  "ru": "Ты всё равно можешь остаться здесь.",
+  "tr": "Burada kalabilirsin zaten.",
+  "at": [
+   "541933fb"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': the bed's made up anyway — staying is the easy option; an offhand offer. Colloquial, southern/Austrian.",
+  "ru": "eh = «и так»: постель и так готова — остаться проще всего; небрежное предложение. Разговорное, южное/австрийское.",
+  "tr": "eh = “nasılsa”: yatak zaten hazır — kalmak en kolayı; laf arasında bir öneri. Konuşma dilinde, Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "f38c79a4"
+  ]
+ },
+ {
+  "en": "'Du kannst aber hierbleiben' = 'but you can stay' — a contrast; odd without a preceding 'you can't'.",
+  "ru": "«Du kannst aber hierbleiben» = «но ты можешь остаться» — противопоставление; без предшествующего «нельзя» странно.",
+  "tr": "“Du kannst aber hierbleiben” = “ama burada kalabilirsin” — bir karşıtlık; önce bir “olmaz” gelmeden tuhaf.",
+  "at": [
+   "d735b079"
+  ]
+ },
+ {
+  "en": "'Du kannst mal hierbleiben' sounds like 'you could stay over sometime' (einmal) — a future visit, not tonight.",
+  "ru": "«Du kannst mal hierbleiben» = «можешь как-нибудь остаться» (einmal) — о будущем, а не о сегодняшнем вечере.",
+  "tr": "“Du kannst mal hierbleiben” = “bir gün burada kalabilirsin” (einmal) — bu akşamla değil, gelecekle ilgili.",
+  "at": [
+   "e0ea560d"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Du kannst vielleicht hierbleiben' = 'maybe you can stay here'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Du kannst vielleicht hierbleiben» = «может, тебе можно остаться».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Du kannst vielleicht hierbleiben” = “belki burada kalabilirsin”.",
+  "at": [
+   "5db8954a"
+  ]
+ },
+ {
+  "en": "The guest feels awkward. Make clear he's welcome and it's no trouble.",
+  "ru": "Гость стесняется. Дай понять, что ему тут рады и это не трудно.",
+  "tr": "Misafir mahcup. Burada hoş karşılandığını ve bunun zahmet olmadığını belli et.",
+  "at": [
+   "77ad9226"
+  ]
+ },
+ {
+  "en": "He says 'no, I can't'. Contradict.",
+  "ru": "Он говорит «нет, не могу». Возрази.",
+  "tr": "“Hayır, kalamam” diyor. İtiraz et.",
+  "at": [
+   "f8412221"
+  ]
+ },
+ {
+  "en": "He's ill.",
+  "ru": "Он болен.",
+  "tr": "Hasta.",
+  "at": [
+   "29131459"
+  ]
+ },
+ {
+  "en": "He's probably ill.",
+  "ru": "Он, видно, заболел.",
+  "tr": "Galiba hasta.",
+  "at": [
+   "7edf4d6f"
+  ]
+ },
+ {
+  "en": "wohl is a guess: 'he's probably ill', we don't know for sure.",
+  "ru": "wohl — предположение: «наверное, болеет», точно не знаем.",
+  "tr": "wohl bir tahmindir: “herhalde hasta”, kesin bilmiyoruz.",
+  "at": [
+   "1034aef0"
+  ]
+ },
+ {
+  "en": "He's ill, you know.",
+  "ru": "Он ведь болен.",
+  "tr": "Hasta, biliyorsun.",
+  "at": [
+   "9ff7089e"
+  ]
+ },
+ {
+  "en": "ja recalls something known: 'he's ill, you know' (that's why he's away).",
+  "ru": "ja — напоминание об известном: «он ведь болеет» (вот почему его нет).",
+  "tr": "ja bilineni hatırlatır: “hasta, biliyorsun” (o yüzden yok).",
+  "at": [
+   "92a57557"
+  ]
+ },
+ {
+  "en": "He's ill anyway.",
+  "ru": "Он всё равно болеет.",
+  "tr": "Zaten hasta.",
+  "at": [
+   "6339589a"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': he's ill anyway, so there's no point inviting him. Colloquial, especially in the south and Austria.",
+  "ru": "eh = «и так, всё равно»: он всё равно болеет, так что звать его бессмысленно. Разговорное, особенно на юге и в Австрии.",
+  "tr": "eh = “nasılsa, zaten”: nasılsa hasta, onu çağırmanın anlamı yok. Konuşma dilinde, özellikle Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "81af413b"
+  ]
+ },
+ {
+  "en": "He's just ill, that's all.",
+  "ru": "Ну болеет он.",
+  "tr": "Hasta işte.",
+  "at": [
+   "293b4c10"
+  ]
+ },
+ {
+  "en": "halt: a plain explanation without drama — 'he's ill, what can you do'. Southern, close to eben.",
+  "ru": "halt — простое объяснение без драмы: «ну болеет, что поделать». Южное, близко к eben.",
+  "tr": "halt dramsız, basit bir açıklamadır: “hasta, ne yapalım”. Güney Almanya'da; anlamca eben kelimesine yakın.",
+  "at": [
+   "59fb70a9"
+  ]
+ },
+ {
+  "en": "He's ill, that's why.",
+  "ru": "Болеет он, вот и всё.",
+  "tr": "Hasta, o kadar.",
+  "at": [
+   "9599177d"
+  ]
+ },
+ {
+  "en": "eben is the more northern/neutral near-synonym of halt: the same plain explanation.",
+  "ru": "eben — более северный и нейтральный почти-синоним halt: то же простое объяснение.",
+  "tr": "eben, halt ile neredeyse eş anlamlıdır, ama daha kuzeyli ve üslup bakımından daha nötrdür: aynı basit açıklama.",
+  "at": [
+   "8fbada5e"
+  ]
+ },
+ {
+  "en": "Actually, he's ill.",
+  "ru": "Вообще-то он болен.",
+  "tr": "Aslında hasta.",
+  "at": [
+   "e7ed2759"
+  ]
+ },
+ {
+  "en": "eigentlich corrects: 'actually he's ill (though you thought he was on holiday / though he came in)'.",
+  "ru": "eigentlich поправляет: «на самом деле он болен (хотя ты думал, что в отпуске / хотя он пришёл)».",
+  "tr": "eigentlich düzeltir: “gerçekte hasta (sen tatilde sanıyordun / gelmiş olsa da)”.",
+  "at": [
+   "26f0b912"
+  ]
+ },
+ {
+  "en": "schon reads as 'already' here. Concessive 'sure, he's ill' needs a 'but': 'Er ist schon krank, aber…'",
+  "ru": "schon здесь читается как «уже». Уступка «болен-то он болен» требует «но»: Er ist schon krank, aber…",
+  "tr": "schon burada “artık, çoktan” diye anlaşılır. “Hasta olmasına hasta” kabulü bir “ama” ister: Er ist schon krank, aber…",
+  "at": [
+   "ae3fa29d"
+  ]
+ },
+ {
+  "en": "He's ill, remember!",
+  "ru": "Он же болен!",
+  "tr": "Hasta ya!",
+  "at": [
+   "e2ce3f9f"
+  ]
+ },
+ {
+  "en": "doch is a reproachful reminder: 'you know he's ill, why are you calling him?'.",
+  "ru": "doch — упрёк-напоминание: «ты же знаешь, что он болен, зачем ему звонишь?».",
+  "tr": "doch sitemli bir hatırlatmadır: “hasta olduğunu bildiğin hâlde neden arıyorsun?”.",
+  "at": [
+   "f2def8e0"
+  ]
+ },
+ {
+  "en": "He IS ill!",
+  "ru": "Да болен он!",
+  "tr": "Yok canım, hasta!",
+  "at": [
+   "445b65df"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against the doubt 'he's not ill, he's skiving'.",
+  "ru": "Ударное DOCH — против сомнения «да не болен он, прогуливает».",
+  "tr": "Vurgulu DOCH “hasta değil, işi asıyor” kuşkusuna karşıdır.",
+  "at": [
+   "d76e5320"
+  ]
+ },
+ {
+  "en": "He's simply ill — nothing more to it.",
+  "ru": "Он просто болен, и всё.",
+  "tr": "Sadece hasta, başka bir sebebi yok.",
+  "at": [
+   "7cf8ad93"
+  ]
+ },
+ {
+  "en": "einfach: no hidden reason — he's simply ill; said when someone suspects he's skiving or looks for a deeper cause.",
+  "ru": "einfach: без скрытых причин — он просто болен; так отвечают тому, кто подозревает прогул или ищет другую причину.",
+  "tr": "einfach: gizli bir sebep yok — sadece hasta; işi astığından şüphelenene ya da başka bir sebep arayana böyle cevap verilir.",
+  "at": [
+   "b1ee9e5c"
+  ]
+ },
+ {
+  "en": "'Er ist aber krank' needs a contrast ('but HE is ill'); odd without context.",
+  "ru": "«Er ist aber krank» требует противопоставления («а вот он-то болен»); без контекста странно.",
+  "tr": "“Er ist aber krank” bir karşıtlık ister (“o ise hasta”); bağlam olmadan tuhaf.",
+  "at": [
+   "5dfeac4e"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Er ist vielleicht krank' = 'maybe he's ill'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Er ist vielleicht krank» = «может, он болен».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Er ist vielleicht krank” = “belki hastadır”.",
+  "at": [
+   "397269d1"
+  ]
+ },
+ {
+  "en": "You don't know exactly why he's away, but you have a guess.",
+  "ru": "Ты не знаешь точно, почему его нет, но догадываешься.",
+  "tr": "Neden gelmediğini tam bilmiyorsun, ama tahmin ediyorsun.",
+  "at": [
+   "633aa6b2"
+  ]
+ },
+ {
+  "en": "A colleague asks where he is again, though she knows. Remind her, reproachfully.",
+  "ru": "Коллега опять спрашивает, где он, хотя знает. Напомни с упрёком.",
+  "tr": "İş arkadaşın, bildiği hâlde yine nerede olduğunu soruyor. Sitemle hatırlat.",
+  "at": [
+   "16cdc202"
+  ]
+ },
+ {
+  "en": "I didn't mean it like that.",
+  "ru": "Я это не так имел в виду.",
+  "tr": "Öyle demek istemedim.",
+  "at": [
+   "c2d737e6"
+  ]
+ },
+ {
+  "en": "I didn't mean it like that, you know.",
+  "ru": "Я ведь не так это имел в виду.",
+  "tr": "Öyle demek istemedim, biliyorsun.",
+  "at": [
+   "a89b97cd"
+  ]
+ },
+ {
+  "en": "ja soothes: 'you know I didn't mean it that way'.",
+  "ru": "ja успокаивает: «ну ты же понимаешь, я не так имел в виду».",
+  "tr": "ja rahatlatır: “anlıyorsun, öyle demek istemedim”.",
+  "at": [
+   "f53d10ae"
+  ]
+ },
+ {
+  "en": "Come on, I didn't mean it like that!",
+  "ru": "Ну я же не так это имел в виду!",
+  "tr": "Öyle demek istemedim ya!",
+  "at": [
+   "266cb202"
+  ]
+ },
+ {
+  "en": "doch coaxes her not to be offended, with a light push.",
+  "ru": "doch уговаривает не обижаться, с лёгким нажимом.",
+  "tr": "doch alınmaması için ikna eder, hafif bir ısrarla.",
+  "at": [
+   "2091b163"
+  ]
+ },
+ {
+  "en": "It probably wasn't meant like that.",
+  "ru": "Наверное, это имели в виду не так.",
+  "tr": "Galiba öyle demek istemedi.",
+  "at": [
+   "5b1c1f6a"
+  ]
+ },
+ {
+  "en": "wohl is a guess about someone else's words: used when comforting about another person's remark, not your own.",
+  "ru": "wohl — догадка о чужих словах: так говорят, утешая из-за чьей-то фразы, не своей.",
+  "tr": "wohl başkasının sözleri hakkında bir tahmindir: kendi sözün için değil, birinin cümlesi yüzünden teselli ederken böyle denir.",
+  "at": [
+   "21bbf10b"
+  ]
+ },
+ {
+  "en": "Actually, I didn't mean it like that.",
+  "ru": "Вообще-то я не это имел в виду.",
+  "tr": "Aslında öyle demek istemedim.",
+  "at": [
+   "e9b9099c"
+  ]
+ },
+ {
+  "en": "eigentlich gently corrects her reading: 'actually I meant something else'.",
+  "ru": "eigentlich мягко поправляет её понимание: «на самом деле смысл был другой».",
+  "tr": "eigentlich onun anlayışını yumuşakça düzeltir: “gerçekte anlamı başkaydı”.",
+  "at": [
+   "e5954ead"
+  ]
+ },
+ {
+  "en": "Well, I just didn't mean it that way.",
+  "ru": "Ну не так я это имел в виду.",
+  "tr": "Öyle demek istemedim işte.",
+  "at": [
+   "11893db3"
+  ]
+ },
+ {
+  "en": "halt is a shrug: 'well, I didn't, what can I say'. To someone offended it sounds offhand — sharper than a plain apology.",
+  "ru": "halt — пожатие плеч: «ну не так, что поделать». Обиженному звучит небрежно — резче, чем простое извинение.",
+  "tr": "halt omuz silkmedir: “öyle demek istemedim, ne yapalım”. Alınan birine umursamaz gelir — basit bir özürden daha sert.",
+  "at": [
+   "5fc1d5fc"
+  ]
+ },
+ {
+  "en": "I simply didn't mean it that way.",
+  "ru": "Я просто не это имел в виду.",
+  "tr": "Öyle demek istemedim, hepsi bu.",
+  "at": [
+   "a09177dc"
+  ]
+ },
+ {
+  "en": "einfach: 'simply not, no hidden meaning' — firmer, almost self-defence.",
+  "ru": "einfach — «просто нет, без задних мыслей»: твёрже, почти оправдание.",
+  "tr": "einfach — “sadece hayır, art niyet yok”: daha kesin, neredeyse bir savunma.",
+  "at": [
+   "4d4072ed"
+  ]
+ },
+ {
+  "en": "But I didn't mean it like that!",
+  "ru": "А я это не так имел в виду!",
+  "tr": "Ama öyle demek istemedim!",
+  "at": [
+   "b7762ddc"
+  ]
+ },
+ {
+  "en": "aber sets it against her reaction: 'but that's not what I meant!'. Sounds defensive.",
+  "ru": "aber противопоставляет её обиде: «а я-то не это имел в виду!». Звучит оборонительно.",
+  "tr": "aber onun kırgınlığına karşı koyar: “Ama ben öyle demek istemedim!”. Kulağa savunmacı gelir.",
+  "at": [
+   "6044b4ed"
+  ]
+ },
+ {
+  "en": "'Das war eben nicht so gemeint' reads as 'exactly, it wasn't meant that way' in an argument — not an apology.",
+  "ru": "«Das war eben nicht so gemeint» скорее прочитается как «вот именно, не так» в споре — не как извинение.",
+  "tr": "“Das war eben nicht so gemeint” daha çok tartışmadaki “aynen, öyle değil” diye anlaşılır — özür gibi değil.",
+  "at": [
+   "4e6f06e5"
+  ]
+ },
+ {
+  "en": "I didn't mean it like that anyway.",
+  "ru": "Я это и так не всерьёз.",
+  "tr": "Zaten ciddi söylememiştim.",
+  "at": [
+   "b3144ab5"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': brushing it off — it wasn't serious anyway. Colloquial (southern/Austrian) and a bit dismissive, so it won't soothe her much.",
+  "ru": "eh = «и так, всё равно»: отмахивается — это и так было не всерьёз. Разговорное (южное/австрийское) и пренебрежительное, обиженную это мало успокоит.",
+  "tr": "eh = “nasılsa, zaten”: elini sallar — zaten ciddi değildi. Konuşma dilinde (Güney Almanya'da ve Avusturya'da) ve küçümseyici; kırgın birini pek rahatlatmaz.",
+  "at": [
+   "819bd256"
+  ]
+ },
+ {
+  "en": "In a statement vielleicht is the adverb: 'maybe it wasn't meant like that' — not the particle.",
+  "ru": "В утверждении vielleicht — наречие: «может быть, это было сказано не так», а не частица.",
+  "tr": "İfade cümlesinde vielleicht parçacık değil, zarftır: “belki öyle söylenmemişti”.",
+  "at": [
+   "1893c928"
+  ]
+ },
+ {
+  "en": "Make up with her, softly and warmly.",
+  "ru": "Помирись с ней, мягко и тепло.",
+  "tr": "Onunla barış, yumuşak ve sıcak bir şekilde.",
+  "at": [
+   "c265cd59"
+  ]
+ },
+ {
+  "en": "You're defending yourself: she misunderstood.",
+  "ru": "Ты защищаешься: она тебя неправильно поняла.",
+  "tr": "Kendini savunuyorsun: seni yanlış anladı.",
+  "at": [
+   "b9df9c5b"
+  ]
+ },
+ {
+  "en": "We can go tomorrow.",
+  "ru": "Мы можем пойти завтра.",
+  "tr": "Yarın gidebiliriz.",
+  "at": [
+   "7a98b996"
+  ]
+ },
+ {
+  "en": "We can easily go tomorrow, no problem.",
+  "ru": "Можем спокойно пойти завтра.",
+  "tr": "Yarın gideriz, hiç çekinme.",
+  "at": [
+   "e980d609"
+  ]
+ },
+ {
+  "en": "ruhig: 'no harm in going tomorrow' — no pressure.",
+  "ru": "ruhig — «ничего страшного, можно и завтра»: без давления.",
+  "tr": "ruhig — “bir şey olmaz, yarın da olur”: baskısız.",
+  "at": [
+   "f3ec4782"
+  ]
+ },
+ {
+  "en": "We can probably go tomorrow.",
+  "ru": "Мы, наверное, сможем пойти завтра.",
+  "tr": "Galiba yarın gidebiliriz.",
+  "at": [
+   "422c61aa"
+  ]
+ },
+ {
+  "en": "wohl is a guess: 'tomorrow will probably work'.",
+  "ru": "wohl — предположение: «завтра, похоже, получится».",
+  "tr": "wohl bir tahmindir: “yarın olacak gibi”.",
+  "at": [
+   "8572e04b"
+  ]
+ },
+ {
+  "en": "We could always go tomorrow.",
+  "ru": "Мы ведь можем пойти завтра.",
+  "tr": "İstersen yarın gidebiliriz.",
+  "at": [
+   "9c5d32b1"
+  ]
+ },
+ {
+  "en": "ja suggests the obvious option: 'we can always go tomorrow'.",
+  "ru": "ja предлагает очевидный вариант: «ну завтра же можно».",
+  "tr": "ja apaçık bir seçenek önerir: “yarın da olur”.",
+  "at": [
+   "07285baa"
+  ]
+ },
+ {
+  "en": "We can go tomorrow, can't we!",
+  "ru": "Ну можем же завтра пойти!",
+  "tr": "Yarın gideriz ya!",
+  "at": [
+   "84d064ba"
+  ]
+ },
+ {
+  "en": "doch is an active suggestion: 'why don't we go tomorrow!'.",
+  "ru": "doch — активное предложение-уговор: «а давай завтра!».",
+  "tr": "doch etkin bir öneri ve iknadır: “hadi yarın gidelim!”.",
+  "at": [
+   "a2e856db"
+  ]
+ },
+ {
+  "en": "We can just go tomorrow.",
+  "ru": "Можем просто пойти завтра.",
+  "tr": "Yarın gideriz, olur biter.",
+  "at": [
+   "8f0bf2c4"
+  ]
+ },
+ {
+  "en": "einfach: 'let's just move it, no problem'.",
+  "ru": "einfach — «просто перенесём, никаких проблем».",
+  "tr": "einfach — “erteleriz, hiç sorun yok”.",
+  "at": [
+   "eb828095"
+  ]
+ },
+ {
+  "en": "Actually, we could go tomorrow.",
+  "ru": "Вообще-то можно и завтра.",
+  "tr": "Aslında yarın da gidebiliriz.",
+  "at": [
+   "b65a19f4"
+  ]
+ },
+ {
+  "en": "eigentlich: a new idea that gently adjusts the plan.",
+  "ru": "eigentlich — новая мысль, мягко поправляющая планы.",
+  "tr": "eigentlich yeni bir düşüncedir, planları yumuşakça düzeltir.",
+  "at": [
+   "cdfa30c5"
+  ]
+ },
+ {
+  "en": "Well, we'll just go tomorrow then.",
+  "ru": "Ну, пойдём тогда завтра.",
+  "tr": "Yarın gideriz bari.",
+  "at": [
+   "f9bdaf77"
+  ]
+ },
+ {
+  "en": "halt accepts the weather: 'oh well, tomorrow then'. Southern, close to eben.",
+  "ru": "halt — смирение с погодой: «ну что ж, завтра». Южное, близко к eben.",
+  "tr": "halt havaya boyun eğmektir: “ne yapalım, yarın”. Güney Almanya'da; anlamca eben kelimesine yakın.",
+  "at": [
+   "2e5c7e18"
+  ]
+ },
+ {
+  "en": "Then we'll go tomorrow, that's all.",
+  "ru": "Значит, пойдём завтра.",
+  "tr": "O zaman yarın gideriz.",
+  "at": [
+   "ee7e0034"
+  ]
+ },
+ {
+  "en": "eben (the northern/neutral twin of halt) accepts the weather — natural mainly with dann: 'Dann gehen wir eben morgen'.",
+  "ru": "eben (северный, нейтральный близнец halt): принимаем погоду как есть; лучше с dann: «Dann gehen wir eben morgen».",
+  "tr": "eben (halt kelimesinin kuzeyli, üslup bakımından nötr ikizi): havayı olduğu gibi kabul ederiz; dann ile daha iyi: “Dann gehen wir eben morgen”.",
+  "at": [
+   "2ce98005"
+  ]
+ },
+ {
+  "en": "We can go tomorrow anyway.",
+  "ru": "Мы всё равно можем пойти завтра.",
+  "tr": "Zaten yarın da gidebiliriz.",
+  "at": [
+   "ca96e7e1"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': no loss in postponing. Colloquial, southern.",
+  "ru": "eh = «и так, всё равно»: переносить не жалко. Разговорное, южное.",
+  "tr": "eh = “nasılsa, zaten”: ertelemeye üzülmeyiz. Konuşma dilinde, Güney Almanya'da.",
+  "at": [
+   "572b389a"
+  ]
+ },
+ {
+  "en": "Yes, we CAN go tomorrow!",
+  "ru": "Да можем мы пойти завтра!",
+  "tr": "Yok canım, yarın gidebiliriz!",
+  "at": [
+   "72b5dc7a"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against 'tomorrow won't work!'. Can also mean 'we can after all'.",
+  "ru": "Ударное DOCH — против «завтра не получится!». Может значить и «всё-таки можем».",
+  "tr": "Vurgulu DOCH “yarın olmaz!” sözüne karşıdır. “Yine de gidebiliriz” anlamına da gelebilir.",
+  "at": [
+   "20510b9b"
+  ]
+ },
+ {
+  "en": "'Wir können schon morgen gehen' reads as 'we can go as early as tomorrow' — a different meaning.",
+  "ru": "«Wir können schon morgen gehen» прочитается как «мы можем пойти уже завтра» (раньше, чем думали) — другое значение.",
+  "tr": "“Wir können schon morgen gehen” “yarın bile gidebiliriz” (sandığımızdan erken) diye anlaşılır — başka bir anlam.",
+  "at": [
+   "fe4e141a"
+  ]
+ },
+ {
+  "en": "'Wir können aber morgen gehen' = 'but we can go tomorrow' — a contrast that needs prior context.",
+  "ru": "«Wir können aber morgen gehen» = «но мы можем пойти завтра» — противопоставление, нужен предшествующий контекст.",
+  "tr": "“Wir können aber morgen gehen” = “ama yarın gidebiliriz” — bir karşıtlık, öncesinde bir bağlam gerekir.",
+  "at": [
+   "999abccd"
+  ]
+ },
+ {
+  "en": "mal usually comes after morgen: 'Wir können morgen mal gehen' ('we could pop over tomorrow').",
+  "ru": "Обычно mal ставят после morgen: «Wir können morgen mal gehen» — «можем завтра сходить».",
+  "tr": "Genellikle mal kelimesi morgen kelimesinden sonra gelir: “Wir können morgen mal gehen” — “yarın bir gidebiliriz”.",
+  "at": [
+   "aff3cca9"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Wir können vielleicht morgen gehen' = 'maybe we can go tomorrow'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Wir können vielleicht morgen gehen» = «может, пойдём завтра».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Wir können vielleicht morgen gehen” = “belki yarın gideriz”.",
+  "at": [
+   "14f629c4"
+  ]
+ },
+ {
+  "en": "Your child is upset about the rain. Suggest postponing, lightly.",
+  "ru": "Ребёнок расстроен из-за дождя. Предложи перенос легко и без давления.",
+  "tr": "Çocuğun yağmur yüzünden üzgün. Ertelemeyi baskısız, hafifçe öner.",
+  "at": [
+   "05d45084"
+  ]
+ },
+ {
+  "en": "Accept the weather: oh well, tomorrow then.",
+  "ru": "Смирись с погодой: ну что поделаешь, завтра.",
+  "tr": "Havaya boyun eğ: ne yapalım, yarına kaldı.",
+  "at": [
+   "3cc9eefd"
+  ]
+ },
+ {
+  "en": "That can happen.",
+  "ru": "Такое может случиться.",
+  "tr": "Böyle şeyler olabilir.",
+  "at": [
+   "d5b1f2bd"
+  ]
+ },
+ {
+  "en": "Don't worry, it happens.",
+  "ru": "Да бывает.",
+  "tr": "Olur böyle şeyler, inan bana.",
+  "at": [
+   "97844f6c"
+  ]
+ },
+ {
+  "en": "schon comforts: 'never mind, it happens'. Very common as 'Das kann schon (mal) passieren'.",
+  "ru": "schon утешает: «ничего, бывает». Очень частое «Das kann schon (mal) passieren».",
+  "tr": "schon teselli eder: “önemli değil, olur böyle şeyler”. Çok yaygın: “Das kann schon (mal) passieren”.",
+  "at": [
+   "9ce3a37d"
+  ]
+ },
+ {
+  "en": "These things happen.",
+  "ru": "Такое ведь бывает.",
+  "tr": "Böyle şeyler olur, biliyorsun.",
+  "at": [
+   "4066c37c"
+  ]
+ },
+ {
+  "en": "ja: 'that happens to everyone' — comfort via the obvious.",
+  "ru": "ja — «ну это ж с каждым бывает»: утешение через общеизвестное.",
+  "tr": "ja — “herkesin başına gelir”: herkesin bildiği şeyle teselli.",
+  "at": [
+   "577c600d"
+  ]
+ },
+ {
+  "en": "Come on, that can happen!",
+  "ru": "Ну такое же бывает!",
+  "tr": "Böyle şeyler olur ya!",
+  "at": [
+   "ec740789"
+  ]
+ },
+ {
+  "en": "doch coaxes him not to worry: 'oh come on, it happens!'.",
+  "ru": "doch уговаривает не переживать: «да ладно тебе, бывает же!».",
+  "tr": "doch üzülmemesi için ikna eder: “boş ver, olur ya böyle şeyler!”.",
+  "at": [
+   "10742402"
+  ]
+ },
+ {
+  "en": "Well, these things happen.",
+  "ru": "Ну, бывает.",
+  "tr": "Olur işte.",
+  "at": [
+   "7ee9459e"
+  ]
+ },
+ {
+  "en": "halt is a shrug: 'it happens, what can you do'. Southern, close to eben.",
+  "ru": "halt — пожатие плеч: «бывает, что поделать». Южное, близко к eben.",
+  "tr": "halt omuz silkmedir: “olur, ne yapalım”. Güney Almanya'da; anlamca eben kelimesine yakın.",
+  "at": [
+   "b17d9c57"
+  ]
+ },
+ {
+  "en": "That just happens.",
+  "ru": "Ну бывает, что уж тут.",
+  "tr": "Olur, o kadar.",
+  "at": [
+   "adf25227"
+  ]
+ },
+ {
+  "en": "eben is the more northern/neutral near-synonym of halt: the same 'it happens, what can you do'.",
+  "ru": "eben — более северный и нейтральный почти-синоним halt: то же «бывает, что поделать».",
+  "tr": "eben, halt ile neredeyse eş anlamlıdır, ama daha kuzeyli ve üslup bakımından daha nötrdür: aynı omuz silkme, “olur”.",
+  "at": [
+   "12407488"
+  ]
+ },
+ {
+  "en": "That just happens sometimes.",
+  "ru": "Такое просто бывает.",
+  "tr": "Böyle şeyler olur, kimsenin suçu yok, hepsi bu.",
+  "at": [
+   "2cb4d737"
+  ]
+ },
+ {
+  "en": "einfach: 'it simply happens, nobody's to blame'.",
+  "ru": "einfach — «это просто случается, никто не виноват».",
+  "tr": "einfach — “bu sadece oldu, kimse suçlu değil”.",
+  "at": [
+   "c0ff9bd8"
+  ]
+ },
+ {
+  "en": "Yes, that CAN happen!",
+  "ru": "Да может такое случиться!",
+  "tr": "Yok canım, olabilir böyle şey!",
+  "at": [
+   "f2b21049"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against 'this shouldn't have happened!'.",
+  "ru": "Ударное DOCH — против «такого не должно было случиться!».",
+  "tr": "Vurgulu DOCH “böyle bir şey başıma gelmemeliydi!” sözüne karşıdır.",
+  "at": [
+   "c160fec2"
+  ]
+ },
+ {
+  "en": "Possible, but mal here is einmal ('now and then'), not the particle. Typical: 'Das kann schon mal passieren'.",
+  "ru": "Возможно, но mal здесь = einmal («иногда, разок»), а не частица. Типично: Das kann schon mal passieren.",
+  "tr": "Mümkündür, ama mal burada parçacık değil, einmal (“arada bir, bir kere”) anlamındadır. Tipik olarak: Das kann schon mal passieren.",
+  "at": [
+   "b92c25d4"
+  ]
+ },
+ {
+  "en": "'Das kann wohl passieren' = 'that may well happen' — bookish concession, not used for comforting.",
+  "ru": "«Das kann wohl passieren» = «это, пожалуй, может случиться» — книжная уступка, в утешении не говорят.",
+  "tr": "“Das kann wohl passieren” = “bu pekâlâ olabilir” — yazı diline özgü bir kabul, teselli ederken söylenmez.",
+  "at": [
+   "3e5e2ef2"
+  ]
+ },
+ {
+  "en": "'Das kann eigentlich passieren' sounds odd; eigentlich corrects nothing here.",
+  "ru": "«Das kann eigentlich passieren» звучит странно; eigentlich здесь ничего не поправляет.",
+  "tr": "“Das kann eigentlich passieren” kulağa tuhaf gelir; eigentlich burada hiçbir şeyi düzeltmez.",
+  "at": [
+   "0b3e74c8"
+  ]
+ },
+ {
+  "en": "'Das kann eh passieren' = 'it can happen anyway' — unclear what 'anyway' refers to.",
+  "ru": "«Das kann eh passieren» = «это и так может случиться» — непонятно, к чему «и так».",
+  "tr": "“Das kann eh passieren” = “bu nasılsa olabilir” — “nasılsa” sözünün neye bağlandığı belli değil.",
+  "at": [
+   "097acf7d"
+  ]
+ },
+ {
+  "en": "'Das kann aber passieren' = 'but that can happen' — a contrast, not comfort.",
+  "ru": "«Das kann aber passieren» = «но такое может случиться» — противопоставление, не утешение.",
+  "tr": "“Das kann aber passieren” = “ama böyle şeyler olabilir” — bir karşıtlık, teselli değil.",
+  "at": [
+   "e479c930"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Das kann vielleicht passieren' = 'that might happen'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Das kann vielleicht passieren» = «может, такое и случится».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Das kann vielleicht passieren” = “belki böyle bir şey olur”.",
+  "at": [
+   "d7146aeb"
+  ]
+ },
+ {
+  "en": "'Das kann ruhig passieren' = 'no harm if it happens' — possible about the future, not as comfort afterwards.",
+  "ru": "«Das kann ruhig passieren» = «пусть случается, ничего страшного» — возможно, но про будущее, а не утешение после случившегося.",
+  "tr": "“Das kann ruhig passieren” = “olursa olsun, önemli değil” — mümkün, ama olup bitmiş bir şeyden sonra teselli değil, gelecekle ilgili.",
+  "at": [
+   "f63886c5"
+  ]
+ },
+ {
+  "en": "Your colleague is very upset. Comfort him as gently as possible.",
+  "ru": "Коллега очень расстроен. Утешь его как можно мягче.",
+  "tr": "İş arkadaşın çok üzgün. Onu olabildiğince yumuşak bir şekilde teselli et.",
+  "at": [
+   "0f3aa48d"
+  ]
+ },
+ {
+  "en": "The boss is scolding. Contradict him: this can happen.",
+  "ru": "Начальник ругается. Возрази ему: такое вполне может случиться.",
+  "tr": "Şef azarlıyor. Ona itiraz et: böyle şeyler pekâlâ olabilir.",
+  "at": [
+   "174e80c4"
+  ]
+ },
+ {
+  "en": "You're right.",
+  "ru": "Ты прав.",
+  "tr": "Haklısın.",
+  "at": [
+   "72564f06"
+  ]
+ },
+ {
+  "en": "But you're right, you know.",
+  "ru": "Да ты же прав!",
+  "tr": "Haklısın ya, neden şüphe ediyorsun!",
+  "at": [
+   "b96b6604"
+  ]
+ },
+ {
+  "en": "doch talks round someone who doubts himself: 'but you're right!'.",
+  "ru": "doch переубеждает того, кто в себе сомневается: «да ты же прав!».",
+  "tr": "doch kendinden şüphe edeni ikna eder: “haklısın ya!”.",
+  "at": [
+   "36d82cd5"
+  ]
+ },
+ {
+  "en": "I suppose you're right.",
+  "ru": "Ты, пожалуй, прав.",
+  "tr": "Galiba haklısın.",
+  "at": [
+   "802d1314"
+  ]
+ },
+ {
+  "en": "wohl is a cautious admission: 'I guess you're right'.",
+  "ru": "wohl — осторожное признание: «похоже, ты прав».",
+  "tr": "wohl temkinli bir kabuldür: “haklı gibisin”.",
+  "at": [
+   "f31fa165"
+  ]
+ },
+ {
+  "en": "Well, you're right.",
+  "ru": "А ведь ты прав.",
+  "tr": "Aa, haklıymışsın.",
+  "at": [
+   "d941c731"
+  ]
+ },
+ {
+  "en": "ja admits the point, often a bit grudgingly: 'yeah, you're right' (typically 'Ja, ja, du hast ja recht').",
+  "ru": "ja — признание, часто чуть нехотя: «ну да, ты ведь прав» (типично: «Ja, ja, du hast ja recht»).",
+  "tr": "ja — “aa, haklıymışsın”: konuşan bunu yeni fark etti, sıklıkla biraz isteksizce kabul eder (tipik olarak: “Ja, ja, du hast ja recht”).",
+  "at": [
+   "14f0f12a"
+  ]
+ },
+ {
+  "en": "Actually, you're right.",
+  "ru": "Вообще-то ты прав.",
+  "tr": "Aslında haklısın.",
+  "at": [
+   "8a0f0f46"
+  ]
+ },
+ {
+  "en": "eigentlich: 'come to think of it, you're right' — admitting after reflection.",
+  "ru": "eigentlich — «если подумать, ты прав»: признание после размышления.",
+  "tr": "eigentlich — “düşününce, haklısın”: biraz düşündükten sonra gelen bir kabul.",
+  "at": [
+   "f23f357f"
+  ]
+ },
+ {
+  "en": "You're right, sure, but…",
+  "ru": "Прав-то ты прав, но…",
+  "tr": "Haklı olmasına haklısın, ama…",
+  "at": [
+   "d1b3293f"
+  ]
+ },
+ {
+  "en": "schon grants the point but sets up an objection: 'Du hast schon recht, aber…'.",
+  "ru": "schon признаёт правоту, но готовит возражение: «Du hast schon recht, aber…».",
+  "tr": "schon haklı olduğunu kabul eder, ama bir itiraz hazırlar: “Du hast schon recht, aber…”.",
+  "at": [
+   "aafa7400"
+  ]
+ },
+ {
+  "en": "Yeah, you're right anyway.",
+  "ru": "Да прав ты, прав.",
+  "tr": "Zaten haklısın.",
+  "at": [
+   "c587c6d5"
+  ]
+ },
+ {
+  "en": "eh: 'yeah, you're right, whatever' — agreement with a sigh. Especially Austrian.",
+  "ru": "eh — «да прав ты, чего уж»: согласие со вздохом. Особенно австрийское.",
+  "tr": "eh — “haklısın, zaten öyle”: içini çekerek onay. Özellikle Avusturya'da.",
+  "at": [
+   "30841bf6"
+  ]
+ },
+ {
+  "en": "You're simply right.",
+  "ru": "Ты просто прав, и всё.",
+  "tr": "Haklısın, hepsi bu, tartışacak bir şey yok.",
+  "at": [
+   "86aa4b40"
+  ]
+ },
+ {
+  "en": "einfach: 'nothing to argue about, you're right' — categorical.",
+  "ru": "einfach — «тут и спорить не о чем, ты прав»: категорично.",
+  "tr": "einfach — “burada tartışacak bir şey yok, haklısın”: kesin.",
+  "at": [
+   "1a9fbb99"
+  ]
+ },
+ {
+  "en": "You ARE right!",
+  "ru": "Да прав ты!",
+  "tr": "Yok canım, haklısın!",
+  "at": [
+   "cf21d704"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against his 'no, I'm probably wrong'. Or: 'you're right after all'.",
+  "ru": "Ударное DOCH — против его «нет, я, наверное, ошибаюсь». Или: «всё-таки ты прав».",
+  "tr": "Vurgulu DOCH onun “hayır, herhalde yanılıyorum” sözüne karşıdır. Ya da: “yine de haklısın”.",
+  "at": [
+   "1e9eafd5"
+  ]
+ },
+ {
+  "en": "Well, you're right, I'll give you that.",
+  "ru": "Ну прав ты, что тут скажешь.",
+  "tr": "Haklısın işte, ne diyeyim.",
+  "at": [
+   "c111ad1b"
+  ]
+ },
+ {
+  "en": "halt: a reluctant, slightly annoyed admission — 'well, you're right, what can I say'; said when you've lost the argument.",
+  "ru": "halt: неохотное, чуть раздражённое признание — «ну прав ты, что тут скажешь»; так говорят, проиграв спор.",
+  "tr": "halt: isteksiz, biraz sinirli bir kabul — “haklısın, ne diyeyim”; tartışmayı kaybedince böyle denir.",
+  "at": [
+   "d3162744"
+  ]
+ },
+ {
+  "en": "'Du hast eben recht' tends to read as 'exactly, you're right' or as 'just now'.",
+  "ru": "«Du hast eben recht» скорее прочитается как «вот именно, ты прав» или «только что ты был прав».",
+  "tr": "“Du hast eben recht” daha çok “aynen, haklısın” ya da “az önce haklıydın” diye anlaşılır.",
+  "at": [
+   "99671133"
+  ]
+ },
+ {
+  "en": "'Du hast aber recht!' is an exclamation of surprise; odd as a plain statement.",
+  "ru": "«Du hast aber recht!» — восклицание-удивление; как спокойное утверждение странно.",
+  "tr": "“Du hast aber recht!” bir şaşkınlık ünlemidir; sakin bir ifade olarak tuhaf.",
+  "at": [
+   "9e29f423"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Du hast vielleicht recht' = 'maybe you're right'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Du hast vielleicht recht» = «может, ты и прав».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Du hast vielleicht recht” = “belki haklısın”.",
+  "at": [
+   "cf7382ac"
+  ]
+ },
+ {
+  "en": "Admit he's right, but signal a 'but' is coming.",
+  "ru": "Признай правоту, но дай понять, что сейчас будет «но».",
+  "tr": "Haklı olduğunu kabul et, ama bir “ama” geleceğini belli et.",
+  "at": [
+   "8f14ce22"
+  ]
+ },
+ {
+  "en": "You suddenly realise he's right. Admit it, slightly surprised.",
+  "ru": "Ты вдруг понял, что он прав. Признай это с лёгким удивлением.",
+  "tr": "Birden haklı olduğunu anladın. Bunu hafif bir şaşkınlıkla kabul et.",
+  "at": [
+   "ed84aaf3"
+  ]
+ },
+ {
+  "en": "I called.",
+  "ru": "Я звонил.",
+  "tr": "Aradım.",
+  "at": [
+   "88f26832"
+  ]
+ },
+ {
+  "en": "I did call, you know.",
+  "ru": "Я ведь звонил.",
+  "tr": "Aradım, biliyorsun.",
+  "at": [
+   "ed5764d7"
+  ]
+ },
+ {
+  "en": "ja is not a protest (that's doch) but a calm reminder of a fact: 'I did call, you know — nobody picked up'.",
+  "ru": "ja — не протест (для протеста — doch), а спокойное напоминание о факте: «я ведь звонил — никто не взял трубку».",
+  "tr": "ja bir itiraz değil (itiraz için doch), bir olgunun sakin bir hatırlatmasıdır: “aradım, biliyorsun — kimse açmadı”.",
+  "at": [
+   "dffa11f8"
+  ]
+ },
+ {
+  "en": "I've already called as it is.",
+  "ru": "Я и так звонил.",
+  "tr": "Zaten aradım.",
+  "at": [
+   "1c5f93ab"
+  ]
+ },
+ {
+  "en": "eh (colloquial; very common in Austria and southern Germany) ≈ sowieso / ohnehin: it's already the case, so there's no need to complain. Here it works much like a soft, slightly dismissive ja.",
+  "ru": "eh — «я и так звонил»: в австрийском очень частое смягчённое «ведь».",
+  "tr": "eh — “zaten aradım”: Avusturya Almancasında çok yaygındır; yumuşatılmış bir ja gibi çalışır.",
+  "at": [
+   "61616614"
+  ]
+ },
+ {
+  "en": "Actually, I did call.",
+  "ru": "Вообще-то я звонил.",
+  "tr": "Aslında aradım.",
+  "at": [
+   "f4ad2750"
+  ]
+ },
+ {
+  "en": "eigentlich is a polite correction: 'actually, I did call'.",
+  "ru": "eigentlich — вежливая поправка: «на самом деле я звонил».",
+  "tr": "eigentlich kibar bir düzeltmedir: “gerçekte aradım”.",
+  "at": [
+   "ddb2fbe9"
+  ]
+ },
+ {
+  "en": "But I called!",
+  "ru": "Я же звонил!",
+  "tr": "Aradım ya!",
+  "at": [
+   "35dc8142"
+  ]
+ },
+ {
+  "en": "doch is a reproach: 'I did call, don't you remember?'.",
+  "ru": "doch — упрёк: «я же звонил, ты что, не помнишь?».",
+  "tr": "doch sitemdir: “aradım ya, hatırlamıyor musun?”.",
+  "at": [
+   "3f0b25a3"
+  ]
+ },
+ {
+  "en": "aber reads as 'but' — a rebuttal that needs a reproach right before it. For a protest use doch: 'Ich habe doch angerufen!'",
+  "ru": "aber здесь = «но»: возражению «а я звонил!» нужен упрёк перед ним. Для протеста обычно doch: Ich habe doch angerufen!",
+  "tr": "aber burada “ama” demektir: “ben aradım ama!” itirazından önce bir sitem gerekir. İtiraz için genellikle doch: Ich habe doch angerufen!",
+  "at": [
+   "1672122d"
+  ]
+ },
+ {
+  "en": "I DID call!",
+  "ru": "Да звонил я!",
+  "tr": "Yok canım, aradım!",
+  "at": [
+   "00f9cd42"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — a sharp contradiction of 'you didn't call!'.",
+  "ru": "Ударное DOCH — резкое возражение на «ты не звонил!».",
+  "tr": "Vurgulu DOCH “aramadın!” sözüne sert bir itirazdır.",
+  "at": [
+   "8b0949a3"
+  ]
+ },
+ {
+  "en": "'Ich habe schon angerufen' reads as 'I've already called' — time adverb, a different meaning.",
+  "ru": "«Ich habe schon angerufen» прочитается как «я уже позвонил» — наречие времени, другое значение.",
+  "tr": "“Ich habe schon angerufen” “çoktan aradım” diye anlaşılır — zaman zarfı, başka bir anlam.",
+  "at": [
+   "86d48640"
+  ]
+ },
+ {
+  "en": "Unstressed wohl ('I probably called') is odd about your own call; stressed WOHL ('I did so!') is regional and sharp.",
+  "ru": "Безударное wohl («я, наверное, звонил») о собственном звонке странно; ударное WOHL («звонил я!») — региональное и резкое.",
+  "tr": "Vurgusuz wohl (“galiba aradım”) insanın kendi araması için tuhaftır; vurgulu WOHL (“aradım elbette!”) yöreseldir ve serttir.",
+  "at": [
+   "2591bbeb"
+  ]
+ },
+ {
+  "en": "'Ich habe halt angerufen' = 'well, I called, so what' — justifying the call, not contradicting.",
+  "ru": "«Ich habe halt angerufen» = «ну позвонил я, и что» — как оправдание за звонок, а не возражение.",
+  "tr": "“Ich habe halt angerufen” = “aradım, ne olmuş” — itiraz değil, aradığına bir mazeret gibi.",
+  "at": [
+   "ceb04a72"
+  ]
+ },
+ {
+  "en": "'Ich habe eben angerufen' = 'I called just now' — time adverb.",
+  "ru": "«Ich habe eben angerufen» = «я только что позвонил» — наречие времени.",
+  "tr": "“Ich habe eben angerufen” = “az önce aradım” — zaman zarfı.",
+  "at": [
+   "6b692195"
+  ]
+ },
+ {
+  "en": "'Ich habe mal angerufen' = 'I called once' — mal = einmal, an adverb.",
+  "ru": "«Ich habe mal angerufen» = «я как-то раз звонил» — mal = einmal, наречие.",
+  "tr": "“Ich habe mal angerufen” = “bir ara aramıştım” — mal = einmal, zarf.",
+  "at": [
+   "8c85ebb5"
+  ]
+ },
+ {
+  "en": "'Ich habe nur angerufen' = 'I only called / just calling' — restrictive 'only'.",
+  "ru": "«Ich habe nur angerufen» = «я только позвонил / просто звоню» — ограничительное «только».",
+  "tr": "“Ich habe nur angerufen” = “sadece aradım / öylesine arıyorum” — sınırlama bildiren “sadece”.",
+  "at": [
+   "f8e0a192"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Ich habe vielleicht angerufen' = 'maybe I did call'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Ich habe vielleicht angerufen» = «может, я и звонил».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Ich habe vielleicht angerufen” = “belki aramışımdır”.",
+  "at": [
+   "fea0027e"
+  ]
+ },
+ {
+  "en": "Correct your mother, politely and calmly.",
+  "ru": "Поправь маму вежливо и спокойно.",
+  "tr": "Anneni kibarca ve sakince düzelt.",
+  "at": [
+   "cd378119"
+  ]
+ },
+ {
+  "en": "It'll work out.",
+  "ru": "Всё получится.",
+  "tr": "Her şey yolunda gidecek.",
+  "at": [
+   "586b6b28"
+  ]
+ },
+ {
+  "en": "It'll be fine, you'll see.",
+  "ru": "Да всё получится.",
+  "tr": "Her şey yolunda gidecek, eminim.",
+  "at": [
+   "bd3fb831"
+  ]
+ },
+ {
+  "en": "schon is the classic reassurance: 'don't worry, it'll work out'.",
+  "ru": "schon — классическое утешение: «не бойся, получится».",
+  "tr": "schon klasik bir tesellidir: “korkma, başaracaksın”.",
+  "at": [
+   "ddf5f42a"
+  ]
+ },
+ {
+  "en": "It'll work out anyway.",
+  "ru": "Всё и так получится.",
+  "tr": "Zaten yolunda gidecek.",
+  "at": [
+   "c2d41a4d"
+  ]
+ },
+ {
+  "en": "eh: 'it'll work out anyway' — light colloquial comfort, especially southern/Austrian.",
+  "ru": "eh — «да получится, куда денется»: лёгкое разговорное утешение, особенно на юге и в Австрии.",
+  "tr": "eh — “olacak, nereye gidecek”: konuşma dilinde hafif bir teselli, özellikle Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "1142102e"
+  ]
+ },
+ {
+  "en": "It'll probably work out.",
+  "ru": "Наверное, получится.",
+  "tr": "Galiba yolunda gidecek.",
+  "at": [
+   "9f285370"
+  ]
+ },
+ {
+  "en": "wohl is a cautious forecast: less comforting than schon.",
+  "ru": "wohl — осторожный прогноз: утешает слабее, чем schon.",
+  "tr": "wohl temkinli bir tahmindir: schon ile söylenenden daha zayıf teselli eder.",
+  "at": [
+   "86219889"
+  ]
+ },
+ {
+  "en": "This mostly sounds like your own worried hope: 'it will work, won't it?'. To encourage, say 'Das wird schon klappen'.",
+  "ru": "Звучит скорее как своя тревога: «ведь получится же, правда?». Чтобы подбодрить, говорят: Das wird schon klappen.",
+  "tr": "Kulağa daha çok konuşanın kendi kaygısı gibi gelir: “olacak, değil mi?”. Cesaret vermek için şöyle denir: Das wird schon klappen.",
+  "at": [
+   "b2129719"
+  ]
+ },
+ {
+  "en": "With wird, eigentlich sounds odd; natives say 'Das müsste eigentlich klappen' ('it should work, in principle').",
+  "ru": "С wird eigentlich звучит странно; говорят Das müsste eigentlich klappen («по идее, должно получиться»).",
+  "tr": "wird ile eigentlich kulağa tuhaf gelir; şöyle denir: Das müsste eigentlich klappen (“normalde olması lazım”).",
+  "at": [
+   "1bded9cb"
+  ]
+ },
+ {
+  "en": "It WILL work out!",
+  "ru": "Да получится!",
+  "tr": "Yok canım, yolunda gidecek!",
+  "at": [
+   "47309e80"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against her 'it'll never work!'.",
+  "ru": "Ударное DOCH — против её «у меня ничего не выйдет!».",
+  "tr": "Vurgulu DOCH onun “hiç başaramayacağım!” sözüne karşıdır.",
+  "at": [
+   "73e09cd9"
+  ]
+ },
+ {
+  "en": "'Das wird ja klappen' sounds odd; ja with a forecast appears in reproach: 'Das wird ja wohl klappen!' ('surely that much will work!').",
+  "ru": "«Das wird ja klappen» звучит странно; ja с прогнозом бывает в упрёке: «Das wird ja wohl klappen!» («уж это-то должно получиться!»).",
+  "tr": "“Das wird ja klappen” kulağa tuhaf gelir; tahminle ja sitemde olur: “Das wird ja wohl klappen!” (“bu kadarı da olur herhalde!”).",
+  "at": [
+   "2f1b4b3a"
+  ]
+ },
+ {
+  "en": "halt (resignation) doesn't fit encouragement before an exam.",
+  "ru": "halt (смирение) не подходит к ободрению перед экзаменом.",
+  "tr": "halt (teslimiyet) sınavdan önce cesaret vermeye uymaz.",
+  "at": [
+   "e523f7f8"
+  ]
+ },
+ {
+  "en": "'Das wird eben klappen' — eben doesn't fit an encouraging forecast.",
+  "ru": "«Das wird eben klappen» — eben не сочетается с прогнозом-ободрением; прочитается как «вот так и получится».",
+  "tr": "“Das wird eben klappen” — eben cesaret veren bir tahminle bağdaşmaz; “işte böyle olacak” diye anlaşılır.",
+  "at": [
+   "2d7bc93f"
+  ]
+ },
+ {
+  "en": "'Das wird einfach klappen' = 'it'll just work, period' — possible, but sounds like a slogan.",
+  "ru": "«Das wird einfach klappen» = «просто получится, и всё» — возможно, но звучит как лозунг.",
+  "tr": "“Das wird einfach klappen” = “olacak, bu kadar” — mümkün, ama kulağa bir slogan gibi gelir.",
+  "at": [
+   "9d9e616f"
+  ]
+ },
+ {
+  "en": "'Das wird aber klappen' needs a contrast ('but THIS will work').",
+  "ru": "«Das wird aber klappen» требует противопоставления («а вот это получится»).",
+  "tr": "“Das wird aber klappen” bir karşıtlık ister (“bu ise olacak”).",
+  "at": [
+   "627847a7"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Das wird vielleicht klappen' = 'maybe it'll work'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Das wird vielleicht klappen» = «может, получится».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Das wird vielleicht klappen” = “belki olur”.",
+  "at": [
+   "e48ea254"
+  ]
+ },
+ {
+  "en": "Reassure her as confidently and warmly as you can.",
+  "ru": "Успокой её как можно увереннее и теплее.",
+  "tr": "Onu olabildiğince emin ve sıcak bir şekilde rahatlat.",
+  "at": [
+   "613ef71c"
+  ]
+ },
+ {
+  "en": "She keeps saying 'I'll fail'. Contradict her.",
+  "ru": "Она повторяет «я провалюсь». Возрази.",
+  "tr": "“Sınavda kalacağım” deyip duruyor. Ona itiraz et.",
+  "at": [
+   "ac3e59df"
+  ]
+ },
+ {
+  "en": "I have to work.",
+  "ru": "Мне надо работать.",
+  "tr": "Çalışmam lazım.",
+  "at": [
+   "9eacf05f"
+  ]
+ },
+ {
+  "en": "I'll probably have to work.",
+  "ru": "Мне, наверное, придётся работать.",
+  "tr": "Galiba çalışmam gerekecek.",
+  "at": [
+   "0f267fcb"
+  ]
+ },
+ {
+  "en": "wohl: 'looks like I'll have to work' — not certain yet.",
+  "ru": "wohl — «похоже, придётся работать»: ещё не точно.",
+  "tr": "wohl — “galiba çalışmam gerekecek”: henüz kesin değil.",
+  "at": [
+   "dee242b4"
+  ]
+ },
+ {
+  "en": "I have to work, you know.",
+  "ru": "Мне ведь надо работать.",
+  "tr": "Çalışmam lazım, biliyorsunuz.",
+  "at": [
+   "b963be90"
+  ]
+ },
+ {
+  "en": "ja — 'as you know': you point to a fact your friends already know (you're working) — a soft refusal.",
+  "ru": "ja — «вы же знаете»: напоминаешь друзьям известный им факт (ты работаешь) — мягкий отказ.",
+  "tr": "ja — “biliyorsunuz”: arkadaşlarına bildikleri bir olguyu (çalıştığını) hatırlatıyorsun — yumuşak bir ret.",
+  "at": [
+   "2fed4029"
+  ]
+ },
+ {
+  "en": "Actually, I'm supposed to be working.",
+  "ru": "Вообще-то мне надо работать.",
+  "tr": "Aslında çalışmam lazım.",
+  "at": [
+   "7a00ed31"
+  ]
+ },
+ {
+  "en": "eigentlich: 'strictly I should be working (but maybe I'll come)' — leaves a loophole.",
+  "ru": "eigentlich — «по-хорошему мне надо работать (но может, и пойду)»: оставляет лазейку.",
+  "tr": "eigentlich — “doğrusu çalışmam lazım (ama belki gelirim)”: bir kapı aralık bırakır.",
+  "at": [
+   "4c99832a"
+  ]
+ },
+ {
+  "en": "Well, I've got to work.",
+  "ru": "Ну, мне надо работать.",
+  "tr": "Çalışmam lazım işte.",
+  "at": [
+   "1af9f5aa"
+  ]
+ },
+ {
+  "en": "halt is a sigh: 'what can I do, work'. Southern, colloquial; synonym of eben.",
+  "ru": "halt — вздох: «что поделать, работа». Южное, разговорное; синоним eben.",
+  "tr": "halt bir iç çekmedir: “ne yapalım, iş”. Güneyde, konuşma dilinde; eben ile eş anlamlı.",
+  "at": [
+   "b17f5c4b"
+  ]
+ },
+ {
+  "en": "I have to work, that's just how it is.",
+  "ru": "Мне, увы, надо работать.",
+  "tr": "Çalışmam lazım, o kadar.",
+  "at": [
+   "e886a0f9"
+  ]
+ },
+ {
+  "en": "eben is the more northern/neutral near-synonym of halt: the same 'what can I do' sigh.",
+  "ru": "eben — более северный и нейтральный почти-синоним halt: тот же вздох «что поделать».",
+  "tr": "eben, halt ile neredeyse eş anlamlıdır, ama daha kuzeyli ve üslup bakımından daha nötrdür: aynı iç çekme.",
+  "at": [
+   "5e448d32"
+  ]
+ },
+ {
+  "en": "I have to work anyway.",
+  "ru": "Мне всё равно надо работать.",
+  "tr": "Zaten çalışmam lazım.",
+  "at": [
+   "53d89548"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': the evening's taken regardless. Colloquial, southern.",
+  "ru": "eh = «и так, всё равно»: даже без кино вечер занят. Разговорное, южное.",
+  "tr": "eh = “nasılsa, zaten”: sinema olmasa da akşam dolu. Konuşma dilinde, Güney Almanya'da.",
+  "at": [
+   "a3871e21"
+  ]
+ },
+ {
+  "en": "I have to work, I told you!",
+  "ru": "Мне же надо работать!",
+  "tr": "Çalışmam lazım ya!",
+  "at": [
+   "cf2f4813"
+  ]
+ },
+ {
+  "en": "doch is a reproachful reminder: 'I told you I'm working'.",
+  "ru": "doch — упрёк-напоминание: «я же говорил, что работаю».",
+  "tr": "doch sitemli bir hatırlatmadır: “çalıştığımı söylemiştim”.",
+  "at": [
+   "30e265dc"
+  ]
+ },
+ {
+  "en": "I DO have to work (after all).",
+  "ru": "Мне всё-таки надо работать.",
+  "tr": "Yok yok, yine de çalışmam lazım.",
+  "at": [
+   "774566d3"
+  ]
+ },
+ {
+  "en": "Stressed DOCH: 'I have to work after all' (plans changed) or a retort to 'you don't have to work!'.",
+  "ru": "Ударное DOCH: «всё-таки надо работать» (планы изменились) или возражение на «тебе не надо работать!».",
+  "tr": "Vurgulu DOCH: “yine de çalışmam lazım” (planlar değişti) ya da “çalışman gerekmiyor!” sözüne itiraz.",
+  "at": [
+   "6622149c"
+  ]
+ },
+ {
+  "en": "'Ich muss schon arbeiten' is ambiguous: 'I already have to work' or concessive 'I do have to work (but…)'. Odd without a continuation.",
+  "ru": "«Ich muss schon arbeiten» неоднозначно: «мне уже пора работать» или уступка «работать-то надо (но…)». Без продолжения странно.",
+  "tr": "“Ich muss schon arbeiten” iki anlamlıdır: “artık çalışmam lazım” ya da “çalışmam lazım elbette (ama…)” kabulü. Devamı olmadan tuhaf.",
+  "at": [
+   "14a78071"
+  ]
+ },
+ {
+  "en": "I simply have to work.",
+  "ru": "Мне просто надо работать.",
+  "tr": "Çalışmam lazım, hepsi bu, kaçarı yok.",
+  "at": [
+   "71eb67f1"
+  ]
+ },
+ {
+  "en": "einfach: a firm excuse, no discussion — 'I simply have to work, that's all': not an inner urge but 'there's no way round it'.",
+  "ru": "einfach: твёрдая отговорка без обсуждения — «мне просто надо работать, и всё»: не внутренний порыв, а «никуда не денешься».",
+  "tr": "einfach: tartışmasız, kesin bir bahane — “sadece çalışmam lazım, başka sebep yok”: içten gelen bir istek değil, kaçarı olmayan bir zorunluluk.",
+  "at": [
+   "88a7adea"
+  ]
+ },
+ {
+  "en": "'Ich muss aber arbeiten' = 'but I have to work' — possible as a retort to persuasion, but here it's the first reply.",
+  "ru": "«Ich muss aber arbeiten» = «но мне надо работать» — возможно как возражение на уговоры, но здесь первая реплика.",
+  "tr": "“Ich muss aber arbeiten” = “ama çalışmam lazım” — ikna çabalarına itiraz olarak mümkün, ama burada ilk cevap bu.",
+  "at": [
+   "2237cc6a"
+  ]
+ },
+ {
+  "en": "'Ich muss mal arbeiten' = 'I should get some work done', but as an excuse it sounds off. Bare 'Ich muss mal' = 'I need the loo'.",
+  "ru": "«Ich muss mal arbeiten» = «надо бы поработать», но как отказ от кино звучит не к месту. Голое «Ich muss mal» = «мне надо в туалет».",
+  "tr": "“Ich muss mal arbeiten” = “biraz çalışmam lazım”, ama sinemayı reddederken kulağa yersiz gelir. Tek başına “Ich muss mal” = “tuvalete gitmem lazım”.",
+  "at": [
+   "1867124e"
+  ]
+ },
+ {
+  "en": "'Ich muss nur arbeiten' = 'I only have to work' — restrictive 'only'.",
+  "ru": "«Ich muss nur arbeiten» = «мне надо только работать» — ограничительное «только».",
+  "tr": "“Ich muss nur arbeiten” = “yalnızca çalışmam lazım” — sınırlama bildiren “yalnızca”.",
+  "at": [
+   "370f6057"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Ich muss vielleicht arbeiten' = 'I might have to work'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Ich muss vielleicht arbeiten» = «может, мне придётся работать».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Ich muss vielleicht arbeiten” = “belki çalışmam gerekir”.",
+  "at": [
+   "08979e0f"
+  ]
+ },
+ {
+  "en": "Decline with a sigh: nothing you can do.",
+  "ru": "Откажись со вздохом: ничего не поделаешь.",
+  "tr": "İçini çekerek reddet: yapacak bir şey yok.",
+  "at": [
+   "7ba31422"
+  ]
+ },
+ {
+  "en": "Decline, but leave room for them to talk you round.",
+  "ru": "Откажись, но так, чтобы тебя ещё можно было уговорить.",
+  "tr": "Reddet, ama ikna edilebileceğini belli et.",
+  "at": [
+   "d27a9e1c"
+  ]
+ },
+ {
+  "en": "You can take a seat.",
+  "ru": "Можете присесть.",
+  "tr": "Oturabilirsiniz.",
+  "at": [
+   "a25a965e"
+  ]
+ },
+ {
+  "en": "Feel free to take a seat.",
+  "ru": "Присаживайтесь, не стесняйтесь.",
+  "tr": "Oturun, çekinmeyin.",
+  "at": [
+   "47f456d5"
+  ]
+ },
+ {
+  "en": "You could take a seat in the meantime.",
+  "ru": "Вы ведь можете пока присесть.",
+  "tr": "İsterseniz şimdilik oturabilirsiniz.",
+  "at": [
+   "ace134e7"
+  ]
+ },
+ {
+  "en": "ja: 'you can sit down meanwhile' — suggests the obvious option.",
+  "ru": "ja — «пока что можете присесть»: подсказывает очевидную возможность.",
+  "tr": "ja — “şimdilik oturabilirsiniz”: apaçık bir imkânı hatırlatır.",
+  "at": [
+   "f55ad548"
+  ]
+ },
+ {
+  "en": "Do take a seat!",
+  "ru": "Да присаживайтесь же!",
+  "tr": "Buyurun, oturun lütfen!",
+  "at": [
+   "98459e84"
+  ]
+ },
+ {
+  "en": "doch is an invitation with gentle coaxing, if the person keeps standing.",
+  "ru": "doch — приглашение с лёгким уговором, если человек мнётся стоя.",
+  "tr": "doch hafif bir ısrarla davettir, kişi ayakta duraksıyorsa.",
+  "at": [
+   "98886e55"
+  ]
+ },
+ {
+  "en": "You can just take a seat.",
+  "ru": "Можете просто присесть.",
+  "tr": "Sadece oturun, başka bir şey gerekmez.",
+  "at": [
+   "66e77e60"
+  ]
+ },
+ {
+  "en": "einfach: 'just sit down, nothing else needed'.",
+  "ru": "einfach — «просто садитесь, ничего не нужно делать».",
+  "tr": "einfach — “sadece oturun, bir şey yapmanız gerekmiyor”.",
+  "at": [
+   "bb126439"
+  ]
+ },
+ {
+  "en": "On its own schon reads as 'already'. People say 'Sie können schon mal Platz nehmen' ('take a seat in the meantime').",
+  "ru": "Одно schon читается как «уже». Здесь говорят schon mal: Sie können schon mal Platz nehmen («присаживайтесь пока»).",
+  "tr": "Tek başına schon “artık, çoktan” diye anlaşılır. Burada schon mal denir: Sie können schon mal Platz nehmen (“siz şimdilik oturun”).",
+  "at": [
+   "3c442ace"
+  ]
+ },
+ {
+  "en": "wohl ('probably') makes no sense in an invitation.",
+  "ru": "wohl («наверное») в приглашении бессмысленно.",
+  "tr": "Davette wohl (“galiba”) anlamsızdır.",
+  "at": [
+   "5898d5f5"
+  ]
+ },
+ {
+  "en": "'Sie können eigentlich Platz nehmen' sounds like correcting an awkward situation — possible but rare.",
+  "ru": "«Sie können eigentlich Platz nehmen» звучит как поправка неловкой ситуации — возможно, но редко.",
+  "tr": "“Sie können eigentlich Platz nehmen” kulağa garip bir durumu düzeltmek gibi gelir — mümkün, ama nadir.",
+  "at": [
+   "d3f60ad7"
+  ]
+ },
+ {
+  "en": "'Sie können halt Platz nehmen' sounds offhand ('well, sit down then') — impolite to a client.",
+  "ru": "«Sie können halt Platz nehmen» звучит небрежно-пренебрежительно («ну, сядьте тогда») — невежливо с клиентом.",
+  "tr": "“Sie können halt Platz nehmen” kulağa özensiz ve küçümseyici gelir (“oturun bari”) — müşteriye karşı kaba.",
+  "at": [
+   "d3d208d2"
+  ]
+ },
+ {
+  "en": "eben here reads as 'for a moment' or a shrug — inappropriate with a client.",
+  "ru": "eben здесь прочитается как «на минутку, быстро» или пожатие плеч — с клиентом неуместно.",
+  "tr": "eben burada “bir dakikalığına, çabucak” ya da omuz silkme diye anlaşılır — müşteriyle yersiz.",
+  "at": [
+   "43ec2f5b"
+  ]
+ },
+ {
+  "en": "'Sie können eh Platz nehmen' = 'you can sit anyway' — too offhand for a client.",
+  "ru": "«Sie können eh Platz nehmen» = «вы всё равно можете сесть» — небрежно, не для клиента.",
+  "tr": "“Sie können eh Platz nehmen” = “nasılsa oturabilirsiniz” — özensiz, müşteriye göre değil.",
+  "at": [
+   "874e5004"
+  ]
+ },
+ {
+  "en": "'Sie können aber Platz nehmen' = 'but you can sit down' — needs a contrast.",
+  "ru": "«Sie können aber Platz nehmen» = «но вы можете присесть» — нужен контраст («ждать придётся, но можете сесть»).",
+  "tr": "“Sie können aber Platz nehmen” = “ama oturabilirsiniz” — bir karşıtlık gerekir (“beklemeniz gerekecek, ama oturabilirsiniz”).",
+  "at": [
+   "b8b889fb"
+  ]
+ },
+ {
+  "en": "Grammatical, but too casual for a client. The usual phrase is 'Sie können schon mal Platz nehmen'.",
+  "ru": "Грамматически нормально, но с клиентом слишком по-свойски. Обычная формула: Sie können schon mal Platz nehmen.",
+  "tr": "Dil bilgisi açısından doğru, ama müşteriye karşı fazla teklifsiz. Alışılmış kalıp: Sie können schon mal Platz nehmen.",
+  "at": [
+   "73b2fff1"
+  ]
+ },
+ {
+  "en": "Here vielleicht is the adverb, not the particle: 'perhaps you could take a seat' — a cautious suggestion.",
+  "ru": "Здесь vielleicht — наречие, а не частица: «может, вы присядете?» — осторожное предложение.",
+  "tr": "Burada vielleicht parçacık değil, zarftır: “belki oturursunuz?” — temkinli bir öneri.",
+  "at": [
+   "9fd7f86a"
+  ]
+ },
+ {
+  "en": "The client stands awkwardly. Let him know he can sit, no need to be shy.",
+  "ru": "Клиент стоит неловко. Дай понять, что сесть можно без стеснения.",
+  "tr": "Müşteri mahcup bir şekilde ayakta duruyor. Çekinmeden oturabileceğini belli et.",
+  "at": [
+   "1f938390"
+  ]
+ },
+ {
+  "en": "That's not bad.",
+  "ru": "Неплохо.",
+  "tr": "Fena değil.",
+  "at": [
+   "5f2de05d"
+  ]
+ },
+ {
+  "en": "Hey, that's not bad at all!",
+  "ru": "Ого, а неплохо!",
+  "tr": "Hiç de fena değil ha!",
+  "at": [
+   "72ba97cb"
+  ]
+ },
+ {
+  "en": "aber is pleasant surprise: 'hey, that's not bad!'. Sounds almost exclamatory.",
+  "ru": "aber — приятное удивление: «а это неплохо!». Звучит почти как восклицание.",
+  "tr": "aber hoş bir şaşkınlıktır: “hiç de fena değil!”. Neredeyse bir ünlem gibidir.",
+  "at": [
+   "a4b30ab4"
+  ]
+ },
+ {
+  "en": "Oh, that's not bad!",
+  "ru": "Да это неплохо!",
+  "tr": "Aa, fena değilmiş!",
+  "at": [
+   "ee75de0e"
+  ]
+ },
+ {
+  "en": "ja expresses surprise: 'oh, that's not bad!'. Often with gar: 'ja gar nicht schlecht'.",
+  "ru": "ja — удивление: «о, а это же неплохо!». Часто с gar: «ja gar nicht schlecht».",
+  "tr": "ja şaşkınlıktır: “aa, bu fena değilmiş!”. Sıklıkla gar ile: “ja gar nicht schlecht”.",
+  "at": [
+   "71d65247"
+  ]
+ },
+ {
+  "en": "Actually, that's not bad.",
+  "ru": "Вообще-то неплохо.",
+  "tr": "Aslında fena değil.",
+  "at": [
+   "6a05740f"
+  ]
+ },
+ {
+  "en": "eigentlich: admitting against expectations — 'actually, not bad'.",
+  "ru": "eigentlich — признание вопреки ожиданиям: «вообще-то неплохо».",
+  "tr": "eigentlich beklentiye rağmen gelen bir kabuldür: “aslında fena değil”.",
+  "at": [
+   "981c8b10"
+  ]
+ },
+ {
+  "en": "It's not bad, sure (but…).",
+  "ru": "Неплохо-то неплохо (но…).",
+  "tr": "Gerçi fena değil, ama…",
+  "at": [
+   "f28e038e"
+  ]
+ },
+ {
+  "en": "schon is restrained praise with a 'but' ready: 'not bad, but a bit too sweet'.",
+  "ru": "schon — сдержанная похвала с «но» наготове: «неплохо, но сахара многовато».",
+  "tr": "schon ölçülü bir övgüdür, “ama” hazırda bekler: “fena değil, ama şekeri biraz fazla”.",
+  "at": [
+   "a312cac7"
+  ]
+ },
+ {
+  "en": "Come on, that's not bad!",
+  "ru": "Да это же неплохо!",
+  "tr": "Fena değil ya!",
+  "at": [
+   "bd375d05"
+  ]
+ },
+ {
+  "en": "doch talks your sister round when she criticises her cake: 'come on, it's not bad!'.",
+  "ru": "doch переубеждает сестру, которая ругает свой пирог: «да это же неплохо!».",
+  "tr": "doch kendi pastasını kötüleyen kız kardeşini ikna eder: “fena değil ya!”.",
+  "at": [
+   "c61db8a6"
+  ]
+ },
+ {
+  "en": "It's NOT bad!",
+  "ru": "Да неплохо это!",
+  "tr": "Yok canım, fena değil!",
+  "at": [
+   "8a6ba5c5"
+  ]
+ },
+ {
+  "en": "Stressed DOCH — against 'it turned out awful!'.",
+  "ru": "Ударное DOCH — против «это ужасно получилось!».",
+  "tr": "Vurgulu DOCH “berbat olmuş!” sözüne karşıdır.",
+  "at": [
+   "f81c6d66"
+  ]
+ },
+ {
+  "en": "'Das ist wohl nicht schlecht' = 'probably not bad' — odd when you're tasting it yourself.",
+  "ru": "«Das ist wohl nicht schlecht» = «наверное, неплохо» — странно, когда ты сам пробуешь.",
+  "tr": "“Das ist wohl nicht schlecht” = “galiba fena değil” — kendin tadarken tuhaf.",
+  "at": [
+   "1a4cc4a6"
+  ]
+ },
+ {
+  "en": "halt (resignation) doesn't go with praise.",
+  "ru": "halt (смирение) с похвалой не сочетается.",
+  "tr": "halt (teslimiyet) övgüyle bağdaşmaz.",
+  "at": [
+   "a79220c5"
+  ]
+ },
+ {
+  "en": "'Das ist eben nicht schlecht' = 'exactly, not bad' — a debating reply.",
+  "ru": "«Das ist eben nicht schlecht» = «вот именно, неплохо» — как реплика в споре.",
+  "tr": "“Das ist eben nicht schlecht” = “aynen, fena değil” — tartışmadaki bir cevap gibi.",
+  "at": [
+   "35a52edc"
+  ]
+ },
+ {
+  "en": "'Das ist einfach nicht schlecht' is odd: einfach intensifies, but 'not bad' is understated. Compare 'Das ist einfach lecker!'.",
+  "ru": "«Das ist einfach nicht schlecht» — странно: einfach усиливает, а «неплохо» — сдержанная оценка. Ср.: «Das ist einfach lecker!».",
+  "tr": "“Das ist einfach nicht schlecht” tuhaftır: einfach güçlendirir, “fena değil” ise ölçülü bir değerlendirmedir. Krş.: “Das ist einfach lecker!”.",
+  "at": [
+   "f6b2765c"
+  ]
+ },
+ {
+  "en": "'Das ist eh nicht schlecht' = 'it's not bad anyway' — only in an argument about whether to change something.",
+  "ru": "«Das ist eh nicht schlecht» = «и так неплохо» — возможно только в споре о том, надо ли что-то менять.",
+  "tr": "“Das ist eh nicht schlecht” = “nasılsa fena değil” — yalnızca bir şeyi değiştirmek gerekip gerekmediği tartışılırken mümkün.",
+  "at": [
+   "93993713"
+  ]
+ },
+ {
+  "en": "As the adverb 'maybe not bad' it's odd for something you're tasting. Particle vielleicht is exclamatory: 'Der ist vielleicht lecker!'.",
+  "ru": "Как наречие: «может, неплохо» — странно о том, что пробуешь. Частица vielleicht — в восклицании: «Der ist vielleicht lecker!».",
+  "tr": "Zarf olarak: “belki fena değil” — tadına baktığın şey için tuhaf. Parçacık olarak vielleicht ünlemde olur: “Der ist vielleicht lecker!”.",
+  "at": [
+   "2fdb3679"
+  ]
+ },
+ {
+  "en": "You expected worse, but the cake is good. Admit it, surprised.",
+  "ru": "Ты ждал худшего, а пирог оказался вкусным. Признай это с удивлением.",
+  "tr": "Daha kötüsünü bekliyordun, ama pasta lezzetli çıktı. Bunu şaşkınlıkla kabul et.",
+  "at": [
+   "77cf26cc"
+  ]
+ },
+ {
+  "en": "Praise it in a restrained way, hinting at criticism.",
+  "ru": "Похвали сдержанно, но с намёком на критику.",
+  "tr": "Ölçülü bir şekilde öv, ama eleştiriyi de sezdir.",
+  "at": [
+   "736a284d"
+  ]
+ },
+ {
+  "en": "I'll be ready in a moment.",
+  "ru": "Я сейчас буду готов.",
+  "tr": "Birazdan hazırım.",
+  "at": [
+   "153f1d87"
+  ]
+ },
+ {
+  "en": "I'm almost ready, you know.",
+  "ru": "Я ведь почти готов.",
+  "tr": "Görüyorsun, neredeyse hazırım.",
+  "at": [
+   "54aa2630"
+  ]
+ },
+ {
+  "en": "ja soothes: 'I'm nearly ready, don't worry'.",
+  "ru": "ja успокаивает: «ну я же почти готов, не волнуйся».",
+  "tr": "ja rahatlatır: “neredeyse hazırım, merak etme”.",
+  "at": [
+   "24f1f749"
+  ]
+ },
+ {
+  "en": "I'm nearly ready anyway.",
+  "ru": "Я и так почти готов.",
+  "tr": "Zaten neredeyse hazırım.",
+  "at": [
+   "339efaac"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': no need to rush me. Colloquial, southern/Austrian.",
+  "ru": "eh = «и так уже»: торопить незачем. Разговорное, южное/австрийское.",
+  "tr": "eh = “zaten”: acele ettirmeye gerek yok. Konuşma dilinde, Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "996451bd"
+  ]
+ },
+ {
+  "en": "I should be ready soon, I think.",
+  "ru": "Я, наверное, скоро буду готов.",
+  "tr": "Galiba birazdan hazır olurum.",
+  "at": [
+   "adde5a59"
+  ]
+ },
+ {
+  "en": "wohl: 'probably soon' — not quite sure yourself.",
+  "ru": "wohl — «пожалуй, скоро»: сам не до конца уверен.",
+  "tr": "wohl — “herhalde yakında”: kendisi de tam emin değil.",
+  "at": [
+   "4d87e212"
+  ]
+ },
+ {
+  "en": "Actually, I'm almost done.",
+  "ru": "Вообще-то я почти готов.",
+  "tr": "Aslında neredeyse hazırım.",
+  "at": [
+   "d5702047"
+  ]
+ },
+ {
+  "en": "eigentlich gently corrects his impatience: 'actually I'm nearly done'.",
+  "ru": "eigentlich мягко поправляет его нетерпение: «на самом деле я уже почти всё».",
+  "tr": "eigentlich onun sabırsızlığını yumuşakça düzeltir: “gerçekte neredeyse bitirdim”.",
+  "at": [
+   "c50c5728"
+  ]
+ },
+ {
+  "en": "I'm almost ready, OK!",
+  "ru": "Я же почти готов!",
+  "tr": "Neredeyse hazırım ya!",
+  "at": [
+   "c9e73ed9"
+  ]
+ },
+ {
+  "en": "doch, slightly irritated: 'I'm nearly ready, stop rushing me!'.",
+  "ru": "doch — с лёгким раздражением: «ну я же почти готов, не дёргай!».",
+  "tr": "doch hafif bir sinirle: “neredeyse hazırım ya, sıkıştırma!”.",
+  "at": [
+   "3fec6792"
+  ]
+ },
+ {
+  "en": "'Ich bin schon gleich fertig' sounds odd: schon reads as 'already'. Compare 'Ich bin schon fast fertig' ('nearly done already').",
+  "ru": "«Ich bin schon gleich fertig» звучит странно: schon прочитается как «уже». Ср.: «Ich bin schon fast fertig» («уже почти готов»).",
+  "tr": "“Ich bin schon gleich fertig” kulağa tuhaf gelir: schon “şimdiden” diye anlaşılır. Krş.: “Ich bin schon fast fertig” (“şimdiden neredeyse hazırım”).",
+  "at": [
+   "5957523b"
+  ]
+ },
+ {
+  "en": "halt (resignation) doesn't go with the promise 'I'll be ready soon'.",
+  "ru": "halt (смирение) с обещанием «сейчас буду» не сочетается.",
+  "tr": "halt (teslimiyet) “birazdan hazırım” sözüyle bağdaşmaz.",
+  "at": [
+   "3dc43447"
+  ]
+ },
+ {
+  "en": "Next to gleich, eben reads as a time adverb ('right now').",
+  "ru": "Рядом с gleich eben прочитается как наречие времени («как раз сейчас»).",
+  "tr": "gleich yanında eben bir zaman zarfı diye anlaşılır (“tam şimdi”).",
+  "at": [
+   "b2a78004"
+  ]
+ },
+ {
+  "en": "'Ich bin einfach gleich fertig' isn't said: einfach doesn't fit a promise.",
+  "ru": "«Ich bin einfach gleich fertig» не говорят: einfach не сочетается с обещанием.",
+  "tr": "“Ich bin einfach gleich fertig” denmez: einfach bir sözle bağdaşmaz.",
+  "at": [
+   "344e7e4e"
+  ]
+ },
+ {
+  "en": "'Ich bin aber gleich fertig' = 'but I'll be ready soon' — possible as a retort, but closer to the conjunction 'but'.",
+  "ru": "«Ich bin aber gleich fertig» = «но я сейчас буду готов» — возможно как ответ на упрёк, но это скорее союзное «но».",
+  "tr": "“Ich bin aber gleich fertig” = “ama birazdan hazırım” — bir sitem karşısında mümkün, ama bu daha çok “ama” bağlacıdır.",
+  "at": [
+   "49527dc4"
+  ]
+ },
+ {
+  "en": "In a plain statement vielleicht is the adverb 'maybe', not a particle. 'Ich bin vielleicht gleich fertig' = 'I might be done soon'.",
+  "ru": "В обычном утверждении vielleicht — это наречие «может быть», а не частица. «Ich bin vielleicht gleich fertig» = «может, я скоро закончу».",
+  "tr": "Sıradan bir ifade cümlesinde vielleicht parçacık değil, “belki” zarfıdır. “Ich bin vielleicht gleich fertig” = “belki birazdan bitiririm”.",
+  "at": [
+   "b62b4e6f"
+  ]
+ },
+ {
+  "en": "Your friend is getting nervous. Reassure him.",
+  "ru": "Друг нервничает. Успокой его.",
+  "tr": "Arkadaşın gerginleşiyor. Onu rahatlat.",
+  "at": [
+   "a9122b05"
+  ]
+ },
+ {
+  "en": "He's rushing you for the third time. Answer, irritated.",
+  "ru": "Он торопит тебя уже третий раз. Ответь с раздражением.",
+  "tr": "Seni üçüncü kez acele ettiriyor. Sinirle cevap ver.",
+  "at": [
+   "4d7e5bb4"
+  ]
+ },
+ {
+  "en": "You may smoke here.",
+  "ru": "Здесь можно курить.",
+  "tr": "Burada sigara içebilirsiniz.",
+  "at": [
+   "d87a3abd"
+  ]
+ },
+ {
+  "en": "You're allowed to smoke here, I told you!",
+  "ru": "Здесь же можно курить!",
+  "tr": "Burada sigara içebilirsiniz ya!",
+  "at": [
+   "a74a19d1"
+  ]
+ },
+ {
+  "en": "doch is a reproachful reminder: the guest keeps going out to the street to smoke.",
+  "ru": "doch — упрёк-напоминание: гость уже третий раз уходит курить на улицу.",
+  "tr": "doch sitemli bir hatırlatmadır: misafir üçüncü kez sigara içmek için sokağa çıkıyor.",
+  "at": [
+   "f179424a"
+  ]
+ },
+ {
+  "en": "You're allowed to smoke here, you know.",
+  "ru": "Здесь ведь можно курить.",
+  "tr": "Burada sigara içebilirsiniz, biliyorsunuz.",
+  "at": [
+   "2c46d6c0"
+  ]
+ },
+ {
+  "en": "ja — 'after all': the rule is plain to see (there's an ashtray), no need to ask; often as a reason: Rauchen Sie ruhig, Sie dürfen hier ja rauchen.",
+  "ru": "ja — «ведь»: правило видно и так (вон пепельница); часто как довод: Rauchen Sie ruhig, Sie dürfen hier ja rauchen.",
+  "tr": "ja: kural ortada (bakın, kül tablası var); sıklıkla bir gerekçe olarak: Rauchen Sie ruhig, Sie dürfen hier ja rauchen.",
+  "at": [
+   "44508619"
+  ]
+ },
+ {
+  "en": "You may smoke here, sure (but…)",
+  "ru": "Курить-то здесь можно (но…)",
+  "tr": "İçmesine içebilirsiniz (ama…).",
+  "at": [
+   "bfcfb428"
+  ]
+ },
+ {
+  "en": "schon concedes 'yes, you may', usually with a 'but': …aber bitte nicht neben dem Baby.",
+  "ru": "schon — уступка «да, можно», обычно с «но»: …aber bitte nicht neben dem Baby.",
+  "tr": "schon “evet, olur” kabulüdür, genellikle ardından bir “ama”: …aber bitte nicht neben dem Baby.",
+  "at": [
+   "42651281"
+  ]
+ },
+ {
+  "en": "halt = 'that's how it is': a shrug about the rules, not an answer to a guest.",
+  "ru": "halt = «так уж есть»: «ну, тут курить разрешено» — пожатие плечами о правилах, а не ответ гостю.",
+  "tr": "halt = “kural böyle”: “burada sigara serbest, ne yapalım” — kurallar hakkında bir omuz silkme, misafire cevap değil.",
+  "at": [
+   "36a5cdd7"
+  ]
+ },
+ {
+  "en": "eben, like halt, is a curt 'that's the rule'; odd as a reply to a guest's question.",
+  "ru": "eben, как halt, — сухое «так уж положено»; как ответ на вопрос гостя звучит странно.",
+  "tr": "eben de halt gibi kuru bir “kural böyle”dir; misafirin sorusuna cevap olarak kulağa tuhaf gelir.",
+  "at": [
+   "6f0c2eb4"
+  ]
+ },
+ {
+  "en": "Strictly speaking, you may smoke here.",
+  "ru": "Вообще-то здесь можно курить.",
+  "tr": "Aslında burada sigara içebilirsiniz.",
+  "at": [
+   "f161a4d3"
+  ]
+ },
+ {
+  "en": "eigentlich: 'by the rules you may (but I'm not keen)' — leaves a loophole.",
+  "ru": "eigentlich — «по правилам можно (но мне не очень нравится)»: оставляет лазейку.",
+  "tr": "eigentlich — “kurallara göre olur (ama pek hoşuma gitmez)”: bir kapı aralık bırakır.",
+  "at": [
+   "18a66e9c"
+  ]
+ },
+ {
+  "en": "You're probably allowed to smoke here.",
+  "ru": "Здесь, наверное, можно курить.",
+  "tr": "Galiba burada sigara içebilirsiniz.",
+  "at": [
+   "6d8bbd89"
+  ]
+ },
+ {
+  "en": "wohl is a guess: you're not the host but guessing, e.g. in someone else's café.",
+  "ru": "wohl — догадка: ты не хозяин, а гадаешь, например в чужом кафе.",
+  "tr": "wohl bir tahmindir: ev sahibi sen değilsin, örneğin başkasının kafesinde tahmin yürütüyorsun.",
+  "at": [
+   "d5a16602"
+  ]
+ },
+ {
+  "en": "'Sie dürfen hier aber rauchen' = 'but here you may smoke' — a contrast, e.g. after 'not indoors'.",
+  "ru": "«Sie dürfen hier aber rauchen» = «а вот здесь курить можно» — противопоставление, например после «в доме нельзя».",
+  "tr": "“Sie dürfen hier aber rauchen” = “burada ise sigara içebilirsiniz” — bir karşıtlık, örneğin “içeride olmaz” sözünden sonra.",
+  "at": [
+   "f7f293ec"
+  ]
+ },
+ {
+  "en": "In a statement vielleicht is the adverb 'maybe', not a particle: 'Sie dürfen hier vielleicht rauchen' = 'maybe you're allowed to smoke here'.",
+  "ru": "В утверждении vielleicht — наречие «может быть», а не частица: «Sie dürfen hier vielleicht rauchen» = «может, здесь можно курить».",
+  "tr": "İfade cümlesinde vielleicht parçacık değil, “belki” zarfıdır: “Sie dürfen hier vielleicht rauchen” = “belki burada sigara içilebilir”.",
+  "at": [
+   "c2149a9b"
+  ]
+ },
+ {
+  "en": "Feel free to smoke here.",
+  "ru": "Курите здесь, не стесняйтесь.",
+  "tr": "Rahat rahat için, çekinmeyin.",
+  "at": [
+   "859dd410"
+  ]
+ },
+ {
+  "en": "ruhig removes the awkwardness: 'go ahead, smoke, it doesn't bother me'.",
+  "ru": "ruhig снимает неловкость: «пожалуйста, курите, мне не мешает».",
+  "tr": "ruhig mahcubiyeti giderir: “lütfen için, beni rahatsız etmez”.",
+  "at": [
+   "b70c88a9"
+  ]
+ },
+ {
+  "en": "einfach = 'just like that': 'you can simply smoke here' — the adverb, not the particle.",
+  "ru": "einfach = «просто так»: «здесь можно просто курить» — наречие, а не частица.",
+  "tr": "einfach = “öylece”: “burada öylece sigara içebilirsiniz” — parçacık değil, zarf.",
+  "at": [
+   "92a5f9ac"
+  ]
+ },
+ {
+  "en": "You're allowed to smoke here anyway.",
+  "ru": "Здесь и так можно курить.",
+  "tr": "Zaten burada sigara içebilirsiniz.",
+  "at": [
+   "a909eb28"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': no need to ask — on the terrace it's allowed anyway. Colloquial, southern/Austrian.",
+  "ru": "eh = «и так»: можно не спрашивать — на террасе курить и так разрешено. Разговорное, южное/австрийское.",
+  "tr": "eh = “zaten”: sormanıza gerek yok — terasta sigara zaten serbest. Konuşma dilinde, Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "27c00781"
+  ]
+ },
+ {
+  "en": "The guest feels awkward. Make clear he's welcome to smoke.",
+  "ru": "Гость стесняется. Дай понять, что можно смело курить.",
+  "tr": "Misafir mahcup. Gönül rahatlığıyla sigara içebileceğini belli et.",
+  "at": [
+   "e4b97b0f"
+  ]
+ },
+ {
+  "en": "Allow it, but with a reservation — a 'but' is coming.",
+  "ru": "Разреши, но с оговоркой — дальше будет «но».",
+  "tr": "İzin ver, ama bir şartla — ardından bir “ama” gelecek.",
+  "at": [
+   "61e1b5f7"
+  ]
+ },
+ {
+  "en": "He forgot about it.",
+  "ru": "Он об этом забыл.",
+  "tr": "Unuttu.",
+  "at": [
+   "39a413c1"
+  ]
+ },
+ {
+  "en": "But he forgot, remember!",
+  "ru": "Он же забыл!",
+  "tr": "Unuttu ya, söyledim sana!",
+  "at": [
+   "ce4aa255"
+  ]
+ },
+ {
+  "en": "doch is a reproachful reminder: 'I told you, he forgot'.",
+  "ru": "doch — напоминание с упрёком: «я же тебе говорил, он забыл».",
+  "tr": "doch sitemli bir hatırlatmadır: “sana söylemiştim, unuttu”.",
+  "at": [
+   "2736d676"
+  ]
+ },
+ {
+  "en": "He forgot about it, as you know.",
+  "ru": "Он ведь об этом забыл.",
+  "tr": "Unuttu, biliyorsun.",
+  "at": [
+   "db1be324"
+  ]
+ },
+ {
+  "en": "ja — 'as we both know': he admitted this morning he'd forgotten.",
+  "ru": "ja — «как мы оба знаем»: он сам утром признался, что забыл.",
+  "tr": "ja — “ikimizin de bildiği gibi”: sabah unuttuğunu kendisi söyledi.",
+  "at": [
+   "55d3f675"
+  ]
+ },
+ {
+  "en": "schon here = 'already': 'he's already forgotten' — not the particle.",
+  "ru": "schon здесь = «уже»: «он уже забыл» — не частица.",
+  "tr": "schon burada “çoktan” demektir: “çoktan unuttu” — parçacık değil.",
+  "at": [
+   "97fc9df5"
+  ]
+ },
+ {
+  "en": "Well, he forgot, that's all.",
+  "ru": "Ну, забыл он.",
+  "tr": "Unuttu işte.",
+  "at": [
+   "195ad8b6"
+  ]
+ },
+ {
+  "en": "halt is a shrug: he forgot, what can you do. Southern, colloquial.",
+  "ru": "halt — пожатие плечами: забыл, что поделаешь. Южное, разговорное.",
+  "tr": "halt omuz silkmedir: unuttu, ne yapalım. Güneyde, konuşma dilinde.",
+  "at": [
+   "2e0092ef"
+  ]
+ },
+ {
+  "en": "He just forgot, that's how it is.",
+  "ru": "Ну, забыл он, бывает.",
+  "tr": "Unuttu, o kadar.",
+  "at": [
+   "907959eb"
+  ]
+ },
+ {
+  "en": "eben is the northern near-synonym of halt: the same 'he forgot, it happens'.",
+  "ru": "eben — северный почти-синоним halt: то же «ну забыл, бывает».",
+  "tr": "eben, halt ile neredeyse eş anlamlıdır, ama kuzeylidir: aynı omuz silkme.",
+  "at": [
+   "ef4af654"
+  ]
+ },
+ {
+  "en": "'Das hat er eigentlich vergessen' = 'actually he forgot' — possible as a correction of someone's version, odd without one.",
+  "ru": "«Das hat er eigentlich vergessen» = «вообще-то он забыл» — возможно как поправка к чужой версии, без неё странно.",
+  "tr": "“Das hat er eigentlich vergessen” = “aslında unuttu” — başkasının anlattığını düzeltmek için mümkün, o olmadan tuhaf.",
+  "at": [
+   "e8ec8634"
+  ]
+ },
+ {
+  "en": "He's probably forgotten.",
+  "ru": "Он, наверное, забыл.",
+  "tr": "Galiba unuttu.",
+  "at": [
+   "3782f575"
+  ]
+ },
+ {
+  "en": "wohl is a guess: you don't know for sure, but it looks like it.",
+  "ru": "wohl — догадка: точно не знаешь, но похоже на то.",
+  "tr": "wohl bir tahmindir: kesin bilmiyorsun, ama öyle görünüyor.",
+  "at": [
+   "065e1916"
+  ]
+ },
+ {
+  "en": "'Das hat er aber vergessen' = 'but he forgot' — a contrast; odd without a preceding remark.",
+  "ru": "«Das hat er aber vergessen» = «но он забыл» — противопоставление; без предыдущей реплики странно.",
+  "tr": "“Das hat er aber vergessen” = “ama unuttu” — bir karşıtlık; önceki bir söz olmadan tuhaf.",
+  "at": [
+   "2796b59c"
+  ]
+ },
+ {
+  "en": "In a statement vielleicht is the adverb 'maybe', not a particle: 'Das hat er vielleicht vergessen' = 'maybe he forgot'.",
+  "ru": "В утверждении vielleicht — наречие «может быть», а не частица: «Das hat er vielleicht vergessen» = «может, он забыл».",
+  "tr": "İfade cümlesinde vielleicht parçacık değil, “belki” zarfıdır: “Das hat er vielleicht vergessen” = “belki unutmuştur”.",
+  "at": [
+   "da0a3eab"
+  ]
+ },
+ {
+  "en": "He simply forgot, that's all.",
+  "ru": "Он просто забыл, и всё.",
+  "tr": "Sadece unuttu, başka bir şey yok.",
+  "at": [
+   "ae450f0b"
+  ]
+ },
+ {
+  "en": "einfach: 'he simply forgot' — no hidden motive, end of discussion.",
+  "ru": "einfach — «просто забыл»: никакой интриги, объяснение без обсуждения.",
+  "tr": "einfach — “sadece unuttu”: hiçbir entrika yok, tartışmasız bir açıklama.",
+  "at": [
+   "b9fd1df4"
+  ]
+ },
+ {
+  "en": "He'd forgotten about it anyway.",
+  "ru": "Он и так про это забыл.",
+  "tr": "Zaten unutmuştu.",
+  "at": [
+   "7b7e4ff4"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': too late to remind him — he'd forgotten regardless. Colloquial, southern/Austrian.",
+  "ru": "eh = «и так, всё равно»: напоминать было поздно — он и так забыл. Разговорное, южное/австрийское.",
+  "tr": "eh = “zaten, nasılsa”: hatırlatmak için çok geçti — zaten unutmuştu. Konuşma dilinde, Güney Almanya'da ve Avusturya'da.",
+  "at": [
+   "f0a4f2c5"
+  ]
+ },
+ {
+  "en": "You don't know for sure but suppose he forgot.",
+  "ru": "Ты не знаешь точно, но предполагаешь, что он забыл.",
+  "tr": "Kesin bilmiyorsun, ama unuttuğunu tahmin ediyorsun.",
+  "at": [
+   "eed577b0"
+  ]
+ },
+ {
+  "en": "Shrug: he forgot, what can you do.",
+  "ru": "Пожми плечами: забыл, что поделаешь.",
+  "tr": "Omuz silk: unuttu, ne yapalım.",
+  "at": [
+   "dde1098e"
+  ]
+ },
+ {
+  "en": "I'll drop by tomorrow.",
+  "ru": "Я завтра зайду.",
+  "tr": "Yarın uğrarım.",
+  "at": [
+   "776b6605"
+  ]
+ },
+ {
+  "en": "I'm coming by tomorrow, remember!",
+  "ru": "Я же завтра зайду!",
+  "tr": "Yarın uğrarım ya!",
+  "at": [
+   "37602cd7"
+  ]
+ },
+ {
+  "en": "doch is a reproachful reminder: 'I told you I'm coming tomorrow'.",
+  "ru": "doch — напоминание с упрёком: «я же говорила, что зайду завтра».",
+  "tr": "doch sitemli bir hatırlatmadır: “yarın uğrayacağımı söylemiştim”.",
+  "at": [
+   "bca9e9f8"
+  ]
+ },
+ {
+  "en": "I'm coming by tomorrow, after all.",
+  "ru": "Я ведь завтра зайду.",
+  "tr": "Yarın uğrayacağım, biliyorsun.",
+  "at": [
+   "357b766a"
+  ]
+ },
+ {
+  "en": "ja — 'as you know': you've already arranged it, so you'll bring the book.",
+  "ru": "ja — «как ты знаешь»: вы уже договорились, так что книгу принесёшь.",
+  "tr": "ja — “bildiğin gibi”: sözleşmiştiniz bile, kitabı getireceksin.",
+  "at": [
+   "213c460b"
+  ]
+ },
+ {
+  "en": "The order 'mal morgen' is awkward; people say 'Ich komme morgen mal vorbei' — 'I'll pop by tomorrow'.",
+  "ru": "Порядок «mal morgen» неудобен; говорят «Ich komme morgen mal vorbei» — «загляну завтра».",
+  "tr": "“mal morgen” sırası rahat değil; “Ich komme morgen mal vorbei” denir — “yarın bir uğrarım”.",
+  "at": [
+   "a72c8258"
+  ]
+ },
+ {
+  "en": "schon is ambiguous: 'as early as tomorrow' or 'I'll come, don't worry'; better: 'Ich komme schon vorbei'.",
+  "ru": "schon здесь двусмысленно: «уже завтра зайду» (раньше, чем думали) или «да зайду я!»; лучше: «Ich komme schon vorbei».",
+  "tr": "schon burada iki anlamlıdır: “yarın bile uğrarım” (sandığından erken) ya da “uğrayacağım elbette!”; daha iyisi: “Ich komme schon vorbei”.",
+  "at": [
+   "d6bf64a1"
+  ]
+ },
+ {
+  "en": "Oh well, I'll come by tomorrow then.",
+  "ru": "Ну, тогда зайду завтра.",
+  "tr": "Yarın uğrarım bari.",
+  "at": [
+   "fe91f3b8"
+  ]
+ },
+ {
+  "en": "halt — 'well then, I'll come tomorrow': usually with dann, when today didn't work out.",
+  "ru": "halt — «ну раз так, зайду завтра»: обычно с dann, когда сегодня не вышло.",
+  "tr": "halt — “madem öyle, yarın uğrarım”: genellikle dann ile, bugün olmadığında; Türkçede “bari”.",
+  "at": [
+   "c27c7451"
+  ]
+ },
+ {
+  "en": "Well then, I'll come by tomorrow.",
+  "ru": "Значит, зайду завтра.",
+  "tr": "O zaman yarın uğrarım.",
+  "at": [
+   "787130fd"
+  ]
+ },
+ {
+  "en": "eben works like halt, the northern variant: 'Dann komme ich eben morgen vorbei'.",
+  "ru": "eben — как halt, северный вариант: «Dann komme ich eben morgen vorbei».",
+  "tr": "eben de halt gibidir, kuzeyli biçimi: “Dann komme ich eben morgen vorbei”.",
+  "at": [
+   "358ceede"
+  ]
+ },
+ {
+  "en": "Actually, I plan to come by tomorrow.",
+  "ru": "Вообще-то я завтра зайду.",
+  "tr": "Aslında yarın uğrayacağım.",
+  "at": [
+   "9efe9b3d"
+  ]
+ },
+ {
+  "en": "eigentlich: 'the plan is to come tomorrow (unless something changes)' — leaves a loophole.",
+  "ru": "eigentlich — «по плану зайду завтра (если ничего не изменится)»: оставляет лазейку.",
+  "tr": "eigentlich — “plana göre yarın uğrayacağım (bir şey değişmezse)”: bir kapı aralık bırakır.",
+  "at": [
+   "cc1ecb1e"
+  ]
+ },
+ {
+  "en": "I'll probably drop by tomorrow.",
+  "ru": "Я, наверное, завтра зайду.",
+  "tr": "Galiba yarın uğrarım.",
+  "at": [
+   "27c8c5e7"
+  ]
+ },
+ {
+  "en": "wohl — 'most likely': you're not promising.",
+  "ru": "wohl — «скорее всего»: точно не обещаешь.",
+  "tr": "wohl — “büyük ihtimalle”: kesin söz vermiyorsun.",
+  "at": [
+   "bdaab848"
+  ]
+ },
+ {
+  "en": "'Ich komme aber morgen vorbei' = 'but I'll come by tomorrow' — a contrast (not today); odd without one.",
+  "ru": "«Ich komme aber morgen vorbei» = «но завтра я зайду» — противопоставление (сегодня — нет), без него странно.",
+  "tr": "“Ich komme aber morgen vorbei” = “ama yarın uğrarım” — bir karşıtlık (bugün değil), o olmadan tuhaf.",
+  "at": [
+   "15faf436"
+  ]
+ },
+ {
+  "en": "In a statement vielleicht is the adverb 'maybe', not a particle: 'Ich komme vielleicht morgen vorbei' = 'maybe I'll drop by tomorrow'.",
+  "ru": "В утверждении vielleicht — наречие «может быть», а не частица: «Ich komme vielleicht morgen vorbei» = «может, завтра зайду».",
+  "tr": "İfade cümlesinde vielleicht parçacık değil, “belki” zarfıdır: “Ich komme vielleicht morgen vorbei” = “belki yarın uğrarım”.",
+  "at": [
+   "8ebf55f9"
+  ]
+ },
+ {
+  "en": "I'll just drop by tomorrow.",
+  "ru": "Я просто завтра зайду.",
+  "tr": "Ben yarın uğrarım, olur biter.",
+  "at": [
+   "bec61eab"
+  ]
+ },
+ {
+  "en": "einfach — the simple solution: no need to post it, you'll just drop by.",
+  "ru": "einfach — простое решение: ничего не надо пересылать, ты просто зайдёшь.",
+  "tr": "einfach basit bir çözümdür: hiçbir şey göndermeye gerek yok, sen uğrarsın, olur biter.",
+  "at": [
+   "84291714"
+  ]
+ },
+ {
+  "en": "I'm dropping by tomorrow anyway.",
+  "ru": "Я и так завтра зайду.",
+  "tr": "Zaten yarın uğrayacağım.",
+  "at": [
+   "20fc9fba"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': no trouble, you're coming by tomorrow regardless. Colloquial, southern.",
+  "ru": "eh = «и так»: тебе не трудно, ты всё равно завтра зайдёшь. Разговорное, южное.",
+  "tr": "eh = “zaten”: senin için zahmet değil, nasılsa yarın uğrayacaksın. Konuşma dilinde, Güney Almanya'da.",
+  "at": [
+   "63b217db"
+  ]
+ },
+ {
+  "en": "Reassure your friend: it's no trouble, you're coming by anyway.",
+  "ru": "Успокой подругу: тебе не трудно, ты всё равно будешь рядом.",
+  "tr": "Arkadaşını rahatlat: senin için zahmet değil, nasılsa oralarda olacaksın.",
+  "at": [
+   "790e86b9"
+  ]
+ },
+ {
+  "en": "Today didn't work out. Shrug: you'll come tomorrow.",
+  "ru": "Сегодня не получилось. Пожми плечами: зайдёшь завтра.",
+  "tr": "Bugün olmadı. Omuz silk: yarın uğrarsın.",
+  "at": [
+   "25495b18"
+  ]
+ },
+ {
+  "en": "You can call me 'du'.",
+  "ru": "Можете говорить мне «ты».",
+  "tr": "Bana “sen” diyebilirsiniz.",
+  "at": [
+   "b1047f86"
+  ]
+ },
+ {
+  "en": "Why don't you call me 'du'?",
+  "ru": "Вы же можете говорить мне «ты»!",
+  "tr": "Bana “sen” desenize!",
+  "at": [
+   "ec355390"
+  ]
+ },
+ {
+  "en": "doch warmly coaxes: come on, let's use du!",
+  "ru": "doch тепло уговаривает: давайте уже на ты!",
+  "tr": "doch sıcak bir şekilde ikna eder: gelin, “sen” diyelim!",
+  "at": [
+   "6113ef29"
+  ]
+ },
+ {
+  "en": "You could always call me 'du'.",
+  "ru": "Можно ведь и на «ты».",
+  "tr": "İsterseniz bana “sen” diyebilirsiniz.",
+  "at": [
+   "ab7a10cd"
+  ]
+ },
+ {
+  "en": "ja offers the obvious option: 'just use du, why not'.",
+  "ru": "ja предлагает очевидный выход: «да говорите на ты, в чём проблема».",
+  "tr": "ja apaçık bir çözüm önerir: “sen deyin, ne sorun var ki”.",
+  "at": [
+   "3e6d2bae"
+  ]
+ },
+ {
+  "en": "'Sie können mal du sagen' = 'you could say du sometime' (einmal) — nonsense.",
+  "ru": "«Sie können mal du sagen» = «можете как-нибудь сказать ты» (einmal) — бессмыслица.",
+  "tr": "“Sie können mal du sagen” = “bir gün ‘sen’ diyebilirsiniz” (einmal) — anlamsız.",
+  "at": [
+   "679e64ad"
+  ]
+ },
+ {
+  "en": "'Sie können schon du sagen' = 'you can use du, sure (but…)' — a reluctant concession; odd as an invitation.",
+  "ru": "«Sie können schon du sagen» = «на ты-то можно (но…)» — уступка без охоты; странно для приглашения.",
+  "tr": "“Sie können schon du sagen” = “sen demesine diyebilirsiniz (ama…)” — isteksiz bir kabul; davet için tuhaf.",
+  "at": [
+   "a20db388"
+  ]
+ },
+ {
+  "en": "halt is a shrug: 'well, you can use du then' — too cool for an invitation.",
+  "ru": "halt — пожатие плечами: «ну, можете на ты, раз так» — холодно для приглашения.",
+  "tr": "halt omuz silkmedir: “madem öyle, sen deyin” — davet için soğuk.",
+  "at": [
+   "7d5484b4"
+  ]
+ },
+ {
+  "en": "eben, like halt, is a shrug ('well then, du'); too cool for a friendly invitation.",
+  "ru": "eben, как halt, — пожатие плечами («ну, значит, на ты»); для дружеского приглашения холодно.",
+  "tr": "eben de halt gibi omuz silkmedir (“o hâlde sen deyin”); dostça bir davet için soğuk.",
+  "at": [
+   "d705e66b"
+  ]
+ },
+ {
+  "en": "Actually, you can call me 'du'.",
+  "ru": "Вообще-то можно и на «ты».",
+  "tr": "Aslında bana “sen” diyebilirsiniz.",
+  "at": [
+   "a81b3346"
+  ]
+ },
+ {
+  "en": "eigentlich is a gentle correction: she thinks Sie is required, but actually it isn't.",
+  "ru": "eigentlich — мягкая поправка: она думает, что нужно «Sie», а вообще-то не нужно.",
+  "tr": "eigentlich yumuşak bir düzeltmedir: o “Sie” demek gerektiğini sanıyor, aslında gerekmiyor.",
+  "at": [
+   "d9a2617f"
+  ]
+ },
+ {
+  "en": "'Sie können wohl du sagen' = 'you can probably…' — an odd guess about your own permission.",
+  "ru": "«Sie können wohl du sagen» = «вы, наверное, можете…» — странная догадка о собственном разрешении.",
+  "tr": "“Sie können wohl du sagen” = “galiba diyebilirsiniz…” — insanın kendi verdiği izne dair tuhaf bir tahmin.",
+  "at": [
+   "68611489"
+  ]
+ },
+ {
+  "en": "'Sie können aber du sagen' = 'but you can use du' — a contrast; odd without a preceding 'you can't'.",
+  "ru": "«Sie können aber du sagen» = «но можете на ты» — противопоставление; без предыдущего «нельзя» странно.",
+  "tr": "“Sie können aber du sagen” = “ama sen diyebilirsiniz” — bir karşıtlık; önce bir “olmaz” gelmeden tuhaf.",
+  "at": [
+   "a642414b"
+  ]
+ },
+ {
+  "en": "In a statement vielleicht is the adverb 'maybe', not a particle: 'Sie können vielleicht du sagen' = 'maybe you can use du'.",
+  "ru": "В утверждении vielleicht — наречие «может быть», а не частица: «Sie können vielleicht du sagen» = «может, вам можно на ты».",
+  "tr": "İfade cümlesinde vielleicht parçacık değil, “belki” zarfıdır: “Sie können vielleicht du sagen” = “belki bana ‘sen’ diyebilirsiniz”.",
+  "at": [
+   "673f8c3c"
+  ]
+ },
+ {
+  "en": "Feel free to call me 'du'.",
+  "ru": "Можете спокойно говорить мне «ты».",
+  "tr": "Bana “sen” deyin, çekinmeyin.",
+  "at": [
+   "987fc3bf"
+  ]
+ },
+ {
+  "en": "ruhig removes the awkwardness: 'please, let's use du' — the most common phrasing.",
+  "ru": "ruhig снимает неловкость: «пожалуйста, давайте на ты» — самая частая фраза.",
+  "tr": "ruhig mahcubiyeti giderir: “lütfen, sen diyelim” — en yaygın cümle.",
+  "at": [
+   "17d03b80"
+  ]
+ },
+ {
+  "en": "You can just call me 'du'.",
+  "ru": "Можете просто говорить мне «ты».",
+  "tr": "Bana “sen” deyin gitsin.",
+  "at": [
+   "d8264a94"
+  ]
+ },
+ {
+  "en": "einfach: no ceremony — just use du.",
+  "ru": "einfach: без церемоний — просто на ты.",
+  "tr": "einfach: tören yok — “sen” deyin gitsin.",
+  "at": [
+   "09aeafe5"
+  ]
+ },
+ {
+  "en": "eh = 'anyway': 'you can use du anyway' — possible colloquially (everyone does here), but offhand.",
+  "ru": "eh = «и так»: «можете и так на ты» — разговорно возможно (тут все на ты), но звучит небрежно.",
+  "tr": "eh = “nasılsa”: “nasılsa sen diyebilirsiniz” — konuşma dilinde mümkün (burada herkes “sen” diyor), ama kulağa özensiz gelir.",
+  "at": [
+   "79bf0032"
+  ]
+ },
+ {
+  "en": "Yes, you CAN call me 'du'!",
+  "ru": "Да можно же на «ты»!",
+  "tr": "Olur mu öyle şey, “sen” diyebilirsiniz!",
+  "at": [
+   "4f5d2790"
+  ]
+ },
+ {
+  "en": "Stressed DOCH against her 'no, I couldn't': yes, you can!",
+  "ru": "Ударное DOCH — против её «нет, мне неудобно»: можно-можно!",
+  "tr": "Vurgulu DOCH onun “hayır, olmaz” sözüne karşıdır: diyebilirsiniz, diyebilirsiniz!",
+  "at": [
+   "1c9b2b29"
+  ]
+ },
+ {
+  "en": "Your colleague feels awkward. Make clear she's welcome to use du.",
+  "ru": "Коллега стесняется. Дай понять, что можно смело на ты.",
+  "tr": "İş arkadaşın mahcup. Gönül rahatlığıyla “sen” diyebileceğini belli et.",
+  "at": [
+   "a2d6a1a2"
   ]
  }
 ]

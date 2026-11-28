@@ -343,10 +343,13 @@ RU «(женщина)» — 147, EN «(female)» — ≈ 500; решаем **п�
 | № | вопрос | что сейчас |
 |---|---|---|
 | Н8 | Modalverben: вежливое möchte в 3-м лице — *rica ediyor* (*Pazartesi için randevu rica ediyor*) и *istiyor* (*Çocuklar dondurma istiyor*) — естественно? Есть ли форма, отличная от will (*istiyor*)? | rica ediyor / istiyor |
-| Н9 | Partikeln: einfach в просьбах — *… gitsin* (*Ara gitsin, Bitir gitsin*), с отрицанием *…, yeter* — естественно для «просто сделай»? | gitsin / yeter |
+| Н9 | einfach *gitsin* в просьбах — вошёл в Н17 (28.11), отдельно не спрашиваем. | — |
 | Н10 | Partikeln: пожелания doch / bloß / nur — *Keşke…* / *Ah, keşke…* / ? Чем передать nur («если бы только»), не занимая *bir* (mal)? | — |
 | Н11 | Partikeln: mal (*bir*) в фразе, где уже есть числительное *bir* (*Bir dilim daha al*) — второе *bir* не ставим. Есть ли другое лёгкое «-ка»? | без метки |
 | Н12 ★ | Partikeln, вопросы: denn *Peki, …?* (живой интерес), DENN *Ee, …?* (допытываюсь после отговорок), eigentlich *Hem …?* / *Sahiden …?* (ставлю под сомнение) — естественно? | Peki / Ee / Hem, Sahiden |
 | Н13 | Modalverben: пояснение «mochte — нравилось раньше; mag — нравится сейчас» → *mochte — eskiden hoşlanmak; mag — şimdi hoşlanmak* (было *geçmişteki zevk*, читалось как «удовольствие в прошлом»). Естественно ли с инфинитивом, или лучше *eskiden hoşlanırdı / şimdi hoşlanıyor*? | eskiden / şimdi hoşlanmak |
 | Н14 ★ | **Первая очередь (форма 28.11).** Аффикс без слова (§11). Показать носителю рядом: **«-ig: …-lI»** и **«-ig: …-lı / -li / -lu / -lü»**; так же *-sIz* / *-sız / -siz / -suz / -süz*. Какой вариант понятнее обычному читателю? | заглавными (-lI) |
 | Н15 | Читалка: «в {0} раз» → *{0} kat* (*3 kat*). Не читается ли как «3 этажа»? Вариант — *{0} misli*. | {0} kat |
+| Н16 ★ | Partikeln, утверждения: halt *… işte* (*Öyle işte. Vaktim yok işte.*) против eben *…, o kadar* (*Öyle, o kadar. Vaktim yok, o kadar.*) — различимы и естественны? В решениях: halt *… bari* (*Burada kal bari*), eben *O zaman …*. | işte / o kadar |
+| Н17 ★ | Partikeln: einfach в утверждениях *…, hepsi bu* (*Vaktim yok, hepsi bu*), в решениях *…, olur biter* (*Yarın gideriz, olur biter*), в просьбах *… gitsin* (*Kal gitsin burada*, *Bitir gitsin*) — естественно для «просто, и всё»? | hepsi bu / olur biter / gitsin |
+| Н18 | Partikeln: ударное DOCH к Sie — *Olur mu öyle şey, “sen” diyebilirsiniz!* (к «ты» — *Yok canım, …!*) — естественно и вежливо? | Olur mu öyle şey |
