@@ -88,7 +88,7 @@
     return separablePromise;
   }
   // Verb + preposition data file (verb-prepositions.json): only its named word classes are read here.
-  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261126-links-step1", document.currentScript.src);
+  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261127-links-time-da", document.currentScript.src);
   let verbPrepositionPromise = null;
   // «classes»: named closed lists of words that several rules share — one notion, one list (indefinite-quantity: halten
   // von, haben + zu, the card choice of halten). A row's requires_any is a list of words or the name of a class; the rows come with the

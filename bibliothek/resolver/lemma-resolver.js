@@ -10980,11 +10980,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (the own form decides unless an object speaks against its card: hing den Hasen an einen Ast — window)
       if (formCard) return accusative && !patterns(formCard).some(p => /Akkusativ/u.test(p)) ? null : {candidate:formCard,evidence:'own-form'};
       // a pronominal adverb carries its preposition (Ich halte nichts davon «считать», bestand darauf) — not first in the
-      // clause and not after a time word (Bald darauf …, ein paar Tage darauf — «после этого»).
+      // clause and not after a time sign (Bald darauf …, ein paar Tage darauf — «после этого»; timeDistanceBeforeDaForm).
       // wo(r)- too (Wofür hältst du mich?, Worauf bestehst du?); first in the clause only not darauf (Darauf ging sie … «потом»).
       const DA_PREP = PRONOMINAL_ADVERB;
-      const TIME_BEFORE = /^(?:bald|gleich|kurz|lange|sofort|tags|gleichzeitig)$/u;
-      const daPreps = words.filter(x => DA_PREP.test(x.w) && !(x.i === start && x.w === "darauf") && !(x.i > start && /^\p{Lu}/u.test(tokens[x.i-1]?.[0] ?? "")) && !TIME_BEFORE.test(norm(tokens[x.i-1]?.[0] ?? "")))
+      const daPreps = words.filter(x => DA_PREP.test(x.w) && !(x.i === start && x.w === "darauf") && !(x.i > start && /^\p{Lu}/u.test(tokens[x.i-1]?.[0] ?? "")) && !timeDistanceBeforeDaForm(tokens, x.i))
         .map(x => x.w.match(DA_PREP)[1]);
       const clauseWords = new Set([...prepWords.map(x => x.w), ...daPreps]);
       // a haben card whose preposition takes the accusative object along (hielt ihn für einen Spitzbuben «считать»,
@@ -19700,8 +19699,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // direction-adverb — before the preposition or closing the part; without the list — no word of the class
     const wordClass = name => ({test:w => !!wordClassSets?.get(name)?.has(norm(String(w)))});
     const DIRECTION_BEFORE_PREPOSITION = wordClass("direction-adverb");
-    // time-before-da-form — with a time noun of data/noun-classes.json: the word that makes the da(r)- form after it an adverb of time
-    const timeBeforeDaForm = w => wordClass("time-before-da-form").test(w) || !!nounClassSets?.time.has(norm(String(w)));
+    // A time sign right before a da(r)- form at k makes it the adverb of time, not the group of a pair: only darauf / danach / davor;
+    // the word before it of time-before-da-form (kurz darauf; lange only after nicht — nicht lange darauf), or a time noun of
+    // data/noun-classes.json whose group shows a distance — a time-distance-determiner, a number, a preposition (zwei Wochen danach,
+    // den Abend davor, am Tag darauf); a time-duration-determiner in the group (den ganzen Tag, jeden Tag, seit Tagen) is a duration
+    // or a frequency and the da(r)- form stays free for the pair.
+    const TIME_DA_FORM = /^(?:darauf|danach|davor)$/u;
+    const timeDistanceBeforeDaForm = (tokens, k) => {
+      if (k < 1 || !TIME_DA_FORM.test(norm(tokens[k][0]))) return false;
+      const before = norm(tokens[k-1][0]);
+      if (wordClass("time-before-da-form").test(before)) return true;
+      if (before === "lange") return k > 1 && norm(tokens[k-2][0]) === "nicht";
+      if (!nounClassSets?.time.has(before)) return false;
+      const group = [k-2, k-3].filter(j => j >= 0).map(j => norm(tokens[j][0]));
+      if (group.some(w => wordClass("time-duration-determiner").test(w))) return false;
+      const head = group[0] ?? "";
+      return wordClass("time-distance-determiner").test(head) || /^\d/u.test(head) || PREPOSITION_TOKEN.test(head);
+    };
     // the forms of verbs with a pair of a light record that no card of ours has: per sentence, the lowercase words of the part
     // that are no form of ours, whose first letters may be such a verb's (its word, or the base after its separable particle) — the
     // dictionary's inflection rows give the lemma and the kind (finite / infinitive / participle)
@@ -25378,10 +25392,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // потом», hierauf) shows that meaning first only with an explicit sign: a time word right before it (bald, gleich,
     // kurz, nicht lange, tags, am Morgen, ein paar Tage darauf) when no verb of the clause governs auf (seit Jahren
     // darauf wartet). The card is not changed.
-    const TIME_WORD = /^(?:bald|gleich|kurz|wenig|alsbald|sogleich|tags)$/u;
+    const TIME_WORD = wordClass("time-before-da-form");
     // A time noun counts after a count or an article (ein paar Tage darauf, am Morgen darauf), not after seit (seit Jahren darauf wartet).
-    const TIME_NOUN = /^(?:tage|tagen|jahre|wochen|monate|stunden|minuten|augenblicke?|augenblick|morgen|abend|nacht|tag|woche|jahr)$/u;
-    const TIME_COUNT = {test:w => isDemContraction(w) || /^(?:ein|eine|einen|einem|paar|einige|wenige|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|\d+)$/u.test(w)};
+    // (the time nouns of data/noun-classes.json and the time-distance-determiner of data/verb-prepositions.json, as timeDistanceBeforeDaForm)
+    const TIME_NOUN = {test:w => !!nounClassSets?.time.has(w)};
+    const TIME_COUNT = {test:w => isDemContraction(w) || /^\d/u.test(w) || wordClass("time-distance-determiner").test(w)};
     // Steps of meanings and particles after the choice: temporalSense (darauf / danach with a time word — «после этого»), danachSense,
     // modalParticle (ja, denn — «Partikel»), imperativeParticle (doch / mal in an imperative part), wohlEben (wohl, eben), woWhen (wo
     // «когда»), werRelative, lauterOnly (lauter «одни, сплошь»). Each changes the order of meanings or the line of the chosen card, not
@@ -25902,14 +25917,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let {start:a, end:b} = partSpanAt(sentence,tokens,at,COORDINATED_MEMBER);
       for (let k = a; k <= b; k++) {
         const w = norm(tokens[k][0]);
-        let p = null, c = null;
+        let p = null, c = null, daForm = false;
         if (contractionArticle(w)) [p, c] = [contractionPrepositionOf(w), contractionCaseOf(w)];
         else if (preps.includes(w)) { p = w; c = TWO_WAY_PREPOSITION.test(w) ? prepositionPhraseCase(tokens, k, b) : GOV_FIXED[w] || null; }
         // (a da(r)- / wo(r)- form of the preposition stands for its group, of any case — Damit hatte er nicht gerechnet, Worauf wartest du?;
-        // not right after und / oder / aber, where it is the connecting adverb — und damit einen Rekord gebrochen «тем самым»; not right after
-        // a word of time, where it is the adverb of time — Kurz darauf hörten sie einen Schrei, am Tag darauf)
-        else if (preps.includes(pronominalPreposition(w)) && !(k > 0 && ([...COORDINATORS_WITHOUT_COMMA, "aber"].includes(norm(tokens[k-1][0])) || timeBeforeDaForm(tokens[k-1][0])))) { p = pronominalPreposition(w); c = kase; }
-        if (!p || !preps.includes(p) || c !== kase || k + 1 > b) continue;
+        // not right after und / oder / aber, where it is the connecting adverb — und damit einen Rekord gebrochen «тем самым»; not after a
+        // time sign, where it is the adverb of time — Kurz darauf hörten sie einen Schrei, am Tag darauf)
+        else if (preps.includes(pronominalPreposition(w)) && !(k > 0 && [...COORDINATORS_WITHOUT_COMMA, "aber"].includes(norm(tokens[k-1][0])) || timeDistanceBeforeDaForm(tokens, k))) {
+          // (the da(r)- form is the whole group: it may close the part — Er freut sich seit Tagen darauf —, and a time noun before it is
+          // the duration, not a noun it belongs to — die ganze Zeit damit gerechnet)
+          p = pronominalPreposition(w); c = kase; daForm = true; }
+        if (!p || !preps.includes(p) || c !== kase || k + 1 > b && !daForm) continue;
         // (acceptance step (1к): an adverb of direction right before the preposition makes the group a direction —
         // folgte Hagrid hinaus auf den Felsen —, as for the pairs (verbPrepositionLink))
         if (k > a && DIRECTION_BEFORE_PREPOSITION.test(norm(tokens[k-1][0]))) continue;
@@ -25926,7 +25944,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             /^(?:glück|beispiel|teil|schluss|schluß|ende|anfang|beginn|hause|haus|fuß|fuss|recht|unrecht|zeit|stande|tisch)$/u.test(norm(tokens[n][0])))) continue; }
         // (a group right after a noun is the noun's — der Brief von meiner Mutter)
         // (the impersonal es-complement before the noun's pair — dass es nach der Wahl zu einer Einigung kommt)
-        if (!impersonal && k > a && /^\p{Lu}/u.test(tokens[k-1][0]) && !clauseInitial(sentence, tokens[k-1].index) && (forms.get(norm(tokens[k-1][0])) || []).some(e => e.type === "Nomen")) continue;
+        if (!impersonal && k > a && /^\p{Lu}/u.test(tokens[k-1][0]) && !clauseInitial(sentence, tokens[k-1].index) && !(daForm && nounClassSets?.time.has(norm(tokens[k-1][0]))) && (forms.get(norm(tokens[k-1][0])) || []).some(e => e.type === "Nomen")) continue;
         return true;
       }
       return false;
@@ -25973,7 +25991,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Kaikki has no pairs by meaning — nothing for it)
       const item = ourPairSource(c);
       if (!c || !item || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || !Number.isInteger(context?.tokenOffset)) return result;
-      await loadImpersonalPairs(); await loadNounClasses();
+      await loadImpersonalPairs();
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'governedSenseFirst');
       const at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
@@ -27703,7 +27721,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // The resolution of one tap before the pipeline steps (word + context): the prepared data, the colloquial / old spelling readings,
     // then resolveFollowingReference → resolveInternal. Called by resolveWithDiagnostics, the first stage of the pipeline.
     async function resolvePublic(word, context) {
-      await warmWordClasses();
+      // (the word classes and the noun classes, read once: the time signs of the steps after the choice read both)
+      await warmWordClasses(); await loadNounClasses();
       await warmZuTransitivity(context);
       // zu of «zu dritt / zu dreien» opens the card of the numeral after it.
       if (norm(word) === "zu" && Number.isInteger(context?.tokenOffset)) {

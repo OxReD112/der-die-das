@@ -1574,8 +1574,14 @@
       return {...rest, heading:`sich ${lemma}`, grammar:rest.grammar.split(' · ').map(m => m.replace(` mit ${lemma}`, ` mit sich ${lemma}`)).join(' · '),
         text:L(directionLanguage, '(уст.) отправиться, забраться (куда-либо)', '(dated) to go, to make one\'s way (somewhere)'), textLanguage:directionLanguage, missing:false, derived:true, note:rest.note || '', more:0};
     }
+    // The card that holds the field `reflexive`: our card, a light record itself (sich scheuen «бояться, стесняться», sich erwärmen),
+    // or our card of the same verb. (A pack language reads no light record's pack texts in the reader — pack-translations.js enrichOwn
+    // fills our cards only —: a light record with the pack dictionary's own marked senses keeps them; without them — the field, as
+    // the English card.)
+    const lightField = !(isPack(language) && candidate.reflexiveMarks?.[language]) && candidate.light != null && candidate.reflexive && typeof candidate.reflexive === 'object';
+    const ownItem = candidate.item || (lightField ? candidate : options.lookup ? options.lookup({word:lemma, type:'Verb'}) : null);
     // (a field marked "direction" with no direction group — as no field: the external marks too)
-    const fieldItem = (candidate.item || options.lookup?.({word:lemma, type:'Verb'}))?.reflexive;
+    const fieldItem = ownItem?.reflexive;
     if (!candidate.reflexivePhraseVerb && !objectDative && (!fieldItem || fieldItem.direction && !candidate.reflexiveFieldDirection)) {
       const dative = k.reflexiveCase === 'Dativ';
       const unclear = !dative && k.reflexiveCase !== 'Akkusativ' && ['uns','euch'].includes(norm(k.pronoun?.text || ''));
@@ -1610,7 +1616,7 @@
     // (a link found through the external record of the verb — Beruhige dich! — reads the field of our card of the same verb)
     // a field marked "case": "Dativ" (begegnen, beißen) is the meaning with a dative sich — taken with
     // mir / dir and with an object, not with mich / dich (ich beiße mir auf die Lippe → «прикусить (губу, язык)»).
-    const ownItem = candidate.item || (options.lookup ? options.lookup({word:lemma, type:'Verb'}) : null);
+
     const dativeField = ownItem?.reflexive?.case === 'Dativ';
     if (k.freeDative && !dativeField) return {...result, heading:lemma, grammar:result.grammar.split(' · ').map(m => m.replace(` mit sich ${lemma}`, ` mit ${lemma}`)).join(' · ')};
     // (the object only when the resolver's reflexiveDirectObject agrees with the field's
@@ -1625,7 +1631,7 @@
     // one, as an English card)
     // (a candidate of the external dictionary whose field is its own card's — that card's pack texts, candidate.packOwnVerb)
     const packField = !isPack(language) || !field ? null : ownItem === candidate.item ? candidate.packItem?.[language]?.reflexive :
-      ownItem && candidate.packOwnVerb?.[language]?.id === ownItem.id ? candidate.packOwnVerb[language].fields?.reflexive : null;
+      ownItem && ownItem !== candidate && candidate.packOwnVerb?.[language]?.id === ownItem.id ? candidate.packOwnVerb[language].fields?.reflexive : null;
     // (a meaning of the field proved by its pair — the pack's place by the pack's own marks; a pack row without its mark —
     // the English field, with the mark)
     const fieldMark = candidate.senseMark?.field === 'reflexive' ? candidate.senseMark : null;
