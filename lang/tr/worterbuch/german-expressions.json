@@ -40,7 +40,7 @@
   "translation_tr": "bir şeyi göz önünde bulundurarak, bir şeyi dikkate alarak; bir şeye gelince, bir şey açısından",
   "example_tr": "Yüksek masrafları göz önünde bulundurarak trenle gitmeye karar verdik.",
   "notes_tr": [
-   "auf + Akkusativ ile kullanılır: im Hinblick auf die Prüfung.",
+   "auf + Akkusativ'le kullanılır: im Hinblick auf die Prüfung.",
    "Daha nadiren: in Hinblick auf. Yan cümleyle: im Hinblick darauf, dass … — … olduğunu göz önünde bulundurarak.",
    "Yazı dilinde kullanılır; konuşma dilinde daha çok wegen, was … angeht."
   ],
@@ -98,7 +98,7 @@
   "translation_tr": "var, mevcut; olacak, çıkacak (bir olay için)",
   "example_tr": "Sokağımızda küçük bir fırın var.",
   "notes_tr": [
-   "Akkusativ alır; fiil her zaman tekil: Es gibt einen Park. Es gibt viele Bücher. Gibt es noch Kaffee?",
+   "Akkusativ'le kullanılır; fiil her zaman tekil: Es gibt einen Park. Es gibt viele Bücher. Gibt es noch Kaffee?",
    "Bir olay için: Gleich gibt's Ärger! — Birazdan olay çıkacak!",
    "es ist / sind ile farkı: es gibt — bir şey genel olarak var, mevcut; es ist / sind — bir şey bir yerde bulunuyor (Es sind drei Kinder im Garten).",
    "Was gibt's? — Ne oldu? Ne var? Was gibt es heute zum Essen? — Bugün yemekte ne var?",
@@ -462,7 +462,7 @@
   "translation_tr": "kendine yol açmak, yarıp geçmek",
   "example_tr": "Kalabalığın içinden kendine yol açtı.",
   "notes_tr": [
-   "Zamir Dativ'de. Ayrıca: sich den Weg bahnen. Bir şeyin içinden — durch + Akk.: sich einen Weg durch das Gestrüpp bahnen.",
+   "Zamir Dativ'de. Ayrıca: sich den Weg bahnen. Bir şeyin içinden — durch + Akkusativ: sich einen Weg durch das Gestrüpp bahnen.",
    "Karıştırılmamalı: jemandem den Weg bahnen — birine yol açmak."
   ],
   "_src": "470a7ee8",
@@ -482,7 +482,7 @@
   "translation_tr": "kendini zorlamak, cesaretini toplamak",
   "example_tr": "Sonunda kendimi zorlayıp onu aradım.",
   "notes_tr": [
-   "Zamir Dativ hâlinde: Gib dir einen Ruck! — Kendini topla!",
+   "Zamir Dativ'de: Gib dir einen Ruck! — Kendini topla!",
    "einen ile Ruck arasında sıfat olabilir: sich einen kleinen Ruck geben."
   ],
   "_src": "7cb5968f",
@@ -523,7 +523,7 @@
   "translation_tr": "düşünmek, kafa yormak; (biri / bir şey için) endişelenmek",
   "example_tr": "Gelecek hakkında kafa yoruyorum.",
   "notes_tr": [
-   "Zamir Dativ'de. Bir şey hakkında — über + Akk.: Mach dir keine Gedanken! — Merak etme! Kafana takma!",
+   "Zamir Dativ'de. Bir şey hakkında — über + Akkusativ: Mach dir keine Gedanken! — Merak etme! Kafana takma!",
    "sich (Dativ) Sorgen machen — endişelenmek (ayrı bir ifade)."
   ],
   "_src": "fc7ccc81",
@@ -533,7 +533,7 @@
   "translation_tr": "biriyle / bir şeyle alay etmek, birini / bir şeyi tiye almak; (esk.) eğlenmek",
   "example_tr": "Diğer çocuklar onunla alay ediyordu.",
   "notes_tr": [
-   "Biriyle / bir şeyle — über + Akk.: Mach dich nicht über mich lustig! — Benimle alay etme!",
+   "Biriyle / bir şeyle — über + Akkusativ: Mach dich nicht über mich lustig! — Benimle alay etme!",
    "(esk.) eğlenmek: Sie aßen, tranken und machten sich lustig bis in die Nacht."
   ],
   "complements": [
@@ -549,7 +549,7 @@
   "translation_tr": "(bir şey için) umutlanmak, umut beslemek",
   "example_tr": "Boş umutlara kapılma!",
   "notes_tr": [
-   "Zamir Dativ'de. Bir şey için — auf + Akk.: Sie macht sich Hoffnungen auf die Stelle.",
+   "Zamir Dativ'de. Bir şey için — auf + Akkusativ: Sie macht sich Hoffnungen auf die Stelle.",
    "Karıştırılmamalı: jemandem Hoffnungen machen — birini umutlandırmak: Er hat mir Hoffnungen gemacht."
   ],
   "_src": "a139cba3",
@@ -615,7 +615,7 @@
   "translation_tr": "(biri / bir şey için) endişelenmek, kaygılanmak",
   "example_tr": "Kardeşim için endişeleniyorum.",
   "notes_tr": [
-   "Zamir Dativ'de. Biri / bir şey için — um + Akk.: Mach dir keine Sorgen! — Merak etme!",
+   "Zamir Dativ'de. Biri / bir şey için — um + Akkusativ: Mach dir keine Sorgen! — Merak etme!",
    "Karıştırılmamalı: jemandem Sorgen machen — birini endişelendirmek, kaygılandırmak: Das macht mir Sorgen. — Bu beni endişelendiriyor."
   ],
   "complements": [
@@ -630,7 +630,7 @@
   "translation_tr": "bilmek, (bir şeyden) haberdar olmak; (bir şeyden) anlamak, (bir konuyu) iyi bilmek",
   "example_tr": "Haberin var mı? Parti iptal oldu.",
   "notes_tr": [
-   "Bir şey hakkında — über + Akk.: Weißt du darüber Bescheid? Bir konuda — in + Dat.: In der Stadt weiß ich am besten Bescheid. — Şehri en iyi ben bilirim.",
+   "Bir şey hakkında — über + Akkusativ: Weißt du darüber Bescheid? Bir konuda — in + Dativ: In der Stadt weiß ich am besten Bescheid. — Şehri en iyi ben bilirim.",
    "Karıştırılmamalı: Bescheid sagen / geben — haber vermek: Sag mir Bescheid! der Bescheid — resmî cevap, bildirim."
   ],
   "complements": [
@@ -788,7 +788,7 @@
   "translation_tr": "karar vermek",
   "example_tr": "Bugün içinde bir karar vermemiz gerekiyor.",
   "notes_tr": [
-   "Ayrıca: die Entscheidung treffen, keine Entscheidung treffen, Entscheidungen treffen; yaz. eine Entscheidung fällen. Ne hakkında — über + Akk.",
+   "Ayrıca: die Entscheidung treffen, keine Entscheidung treffen, Entscheidungen treffen; yaz. eine Entscheidung fällen. Ne hakkında — über + Akkusativ",
    "Karıştırılmamalı: Die Entscheidung traf ihn hart. — Karar onu çok sarstı (treffen “sarsmak, etkilemek”)."
   ],
   "_src": "24a76574",
@@ -808,7 +808,7 @@
   "translation_tr": "önlem almak",
   "example_tr": "Okul zorbalığa karşı önlem aldı.",
   "notes_tr": [
-   "Bir şeye karşı — gegen + Akk.: Maßnahmen gegen den Lärm treffen. Ayrıca: eine Maßnahme treffen; Maßnahmen ergreifen.",
+   "Bir şeye karşı — gegen + Akkusativ: Maßnahmen gegen den Lärm treffen. Ayrıca: eine Maßnahme treffen; Maßnahmen ergreifen.",
    "Karıştırılmamalı: Die Maßnahmen treffen vor allem Familien. — Önlemler en çok aileleri etkiliyor (treffen “etkilemek, vurmak”)."
   ],
   "_src": "198783c9",
@@ -1121,7 +1121,7 @@
   "translation_tr": "birinin içi … olmak, kendini … hissetmek; (nach etwas) birinin canı bir şey istemek, bir şeyi yapacak havada olmak",
   "example_tr": "Sınavdan önce içim bir tuhaftı.",
   "notes_tr": [
-   "Kime — Dativ'de: mir ist …, ihm war … Canının ne istediği — nach + Dat.: Mir ist nicht nach Feiern zumute. Şöyle de yazılır: zu Mute. zumuten fiili (“birinden fazlasını beklemek”) başka bir kelimedir."
+   "Kime — Dativ'de: mir ist …, ihm war … Canının ne istediği — nach + Dativ: Mir ist nicht nach Feiern zumute. Şöyle de yazılır: zu Mute. zumuten fiili (“birinden fazlasını beklemek”) başka bir kelimedir."
   ],
   "_src": "2fbc59f5",
   "_src_reader": "7f930dc1"
@@ -1157,7 +1157,7 @@
   "translation_tr": "hüküm vermek, (mahkeme) kararını açıklamak",
   "example_tr": "Mahkeme yarın hükmünü verecek.",
   "notes_tr": [
-   "Yaz., huk. Kimin hakkında — über + Akk.: das Urteil über jemanden sprechen. Edilgen çatı: Das Urteil wurde gesprochen. Benzer: ein Urteil fällen."
+   "Yaz., huk. Kimin hakkında — über + Akkusativ: das Urteil über jemanden sprechen. Edilgen çatı: Das Urteil wurde gesprochen. Benzer: ein Urteil fällen."
   ],
   "_src": "e7b52d49",
   "_src_reader": "11341fee"
@@ -1184,7 +1184,7 @@
   "translation_tr": "birini umutlandırmak, birine umut aşılamak",
   "example_tr": "Doktor onu çabucak iyileşeceği konusunda umutlandırdı.",
   "notes_tr": [
-   "Kime — Dativ'de; ne konusunda — auf + Akk. jemandem falsche Hoffnungen machen — birini boş yere umutlandırmak. Karıştırılmamalı: sich (Dativ) Hoffnungen machen — umut etmek."
+   "Kime — Dativ'de; ne konusunda — auf + Akkusativ jemandem falsche Hoffnungen machen — birini boş yere umutlandırmak. Karıştırılmamalı: sich (Dativ) Hoffnungen machen — umut etmek."
   ],
   "_src": "a4ebe462",
   "_src_reader": "9de78d13"
@@ -1239,7 +1239,7 @@
   "translation_tr": "birinin dikkatini bir şeye çekmek; (auf sich aufmerksam machen) dikkatleri üzerine çekmek",
   "example_tr": "Metindeki bir hataya dikkatimi çekti.",
   "notes_tr": [
-   "Kimi — Akk., neye — auf + Akk.: jemanden auf etwas aufmerksam machen; kendine — auf sich aufmerksam machen. auf olmadan — sıfat: Sie hörte aufmerksam zu. — Dikkatle dinledi."
+   "Kimi — Akkusativ, neye — auf + Akkusativ: jemanden auf etwas aufmerksam machen; kendine — auf sich aufmerksam machen. auf olmadan — sıfat: Sie hörte aufmerksam zu. — Dikkatle dinledi."
   ],
   "complements": [
    {
@@ -1272,7 +1272,7 @@
   "translation_tr": "kendinden geçmek, havalara uçmak (sevinçten, heyecandan); (geraten) coşmak, heyecana kapılmak",
   "example_tr": "Sonucu duyunca sevinçten havalara uçtu.",
   "notes_tr": [
-   "Konuşma dilinde kullanılır. Daha çok ganz, völlig ile: ganz aus dem Häuschen sein. Neyden — vor + Dat.: vor Freude aus dem Häuschen sein. aus dem Häuschen geraten — coşmak, heyecana kapılmak; jemanden aus dem Häuschen bringen — birini coşturmak. Gerçek anlamda (“küçük evden”): Er trat aus dem Häuschen — kalıp ifade değil."
+   "Konuşma dilinde kullanılır. Daha çok ganz, völlig ile: ganz aus dem Häuschen sein. Neyden — vor + Dativ: vor Freude aus dem Häuschen sein. aus dem Häuschen geraten — coşmak, heyecana kapılmak; jemanden aus dem Häuschen bringen — birini coşturmak. Gerçek anlamda (“küçük evden”): Er trat aus dem Häuschen — kalıp ifade değil."
   ],
   "_src": "e188e8d9",
   "_src_reader": "34b7a356"
@@ -1844,7 +1844,7 @@
   "translation_tr": "(konuş.) bir şeyden bıkıp usanmak, birine gına gelmek",
   "example_tr": "Bu yağmurdan artık gına geldi.",
   "notes_tr": [
-   "Neyden — von + Dat.: Ich habe die Nase voll von dir."
+   "Neyden — von + Dativ: Ich habe die Nase voll von dir."
   ],
   "_src": "4d02f67e",
   "_src_reader": "c6624cd5"
@@ -1937,7 +1937,7 @@
   "translation_tr": "birinin tarafını tutmak",
   "example_tr": "Kavgada hemen kardeşinin tarafını tuttu.",
   "notes_tr": [
-   "Kimden yana — für + Akk., kime karşı — gegen."
+   "Kimden yana — für + Akkusativ, kime karşı — gegen."
   ],
   "_src": "b1c39947",
   "_src_reader": "749dd63f"
@@ -1964,7 +1964,7 @@
   "translation_tr": "bir şey üzerinde kafa patlatmak",
   "example_tr": "Günlerdir bu problem üzerinde kafa patlatıyorum.",
   "notes_tr": [
-   "Ne üzerinde — über + Akk. ya da darüber, … (Er zerbrach sich den Kopf darüber, wie …). Çoğ.: sie zerbrachen sich die Köpfe."
+   "Ne üzerinde — über + Akkusativ ya da darüber, … (Er zerbrach sich den Kopf darüber, wie …). Çoğ.: sie zerbrachen sich die Köpfe."
   ],
   "complements": [
    {
@@ -1984,11 +1984,11 @@
   "_src_reader": "70e7a87b"
  },
  "expression-206": {
-  "translation_tr": "aynı fikirde olmak, görüş birliği içinde olmak (über + Akk / darin)",
+  "translation_tr": "aynı fikirde olmak, görüş birliği içinde olmak (über + Akkusativ / darin)",
   "example_tr": "Uzun bir tartışmanın ardından herkes kutlamanın ertelenmesinde hemfikirdi.",
   "notes_tr": [
    "Wir sind uns einig. — Aynı fikirdeyiz. Die Experten sind sich nicht einig, ob … — Uzmanlar, … konusunda farklı düşünüyor.",
-   "Ne konusunda — über + Akk. ya da darin: Wir sind uns über den Preis einig. Dönüşlü zamir Dativ'de (uns, euch, sich), genellikle birkaç kişi için. Anlaşmak — sich einig werden."
+   "Ne konusunda — über + Akkusativ ya da darin: Wir sind uns über den Preis einig. Dönüşlü zamir Dativ'de (uns, euch, sich), genellikle birkaç kişi için. Anlaşmak — sich einig werden."
   ],
   "_src": "caaa0f55",
   "_src_reader": "16a60c6d"
@@ -1997,7 +1997,7 @@
   "translation_tr": "anlaşmak, uzlaşmaya varmak",
   "example_tr": "İki saatlik pazarlığın ardından alıcı ile satıcı nihayet anlaştı.",
   "notes_tr": [
-   "Die Parteien wurden sich schnell einig. — Taraflar çabucak anlaştı. Ne konusunda — über + Akk.: Wir sind uns über den Preis einig geworden.",
+   "Die Parteien wurden sich schnell einig. — Taraflar çabucak anlaştı. Ne konusunda — über + Akkusativ: Wir sind uns über den Preis einig geworden.",
    "Dönüşlü zamir Dativ'de (uns, euch, sich). Aynı fikirde olmak — sich einig sein."
   ],
   "_src": "3ea76031",
@@ -2007,7 +2007,7 @@
   "translation_tr": "-e dayanarak, -in yüzünden, -in nedeniyle",
   "example_tr": "Yoğun kar yağışı nedeniyle uçuşlar durduruldu.",
   "notes_tr": [
-   "aufgrund edatının ayrı yazılışı (ikisi de doğru). Genitiv'le (auf Grund der Lage) ya da von + Dativ ile (auf Grund von Fehlern).",
+   "aufgrund edatının ayrı yazılışı (ikisi de doğru). Genitiv'le (auf Grund der Lage) ya da von + Dativ'le (auf Grund von Fehlern).",
    "Karıştırılmamalı: auf Grund laufen — karaya oturmak; einer Sache auf den Grund gehen — bir şeyin özüne inmek."
   ],
   "_src": "52ea5aae",
@@ -2121,7 +2121,7 @@
   "translation_tr": "birinin yüreğine dokunmak, birini duygulandırmak; birini üzmek",
   "example_tr": "Küçük köpeğin hikâyesi herkesin yüreğine dokundu.",
   "notes_tr": [
-   "Kime — Dativ'de. Benzer: sich (D) etw. zu Herzen nehmen — bir şeyi kafasına takmak."
+   "Kime — Dativ'de. Benzer: sich (Dativ) etw. zu Herzen nehmen — bir şeyi kafasına takmak."
   ],
   "_src": "d0707a4e",
   "_src_reader": "c36a84e8"
@@ -2370,7 +2370,7 @@
   "translation_tr": "(esk.) kendinden geçmek (sevinçten vb.)",
   "example_tr": "Oğlu eve dönünce anne sevinçten kendinden geçti.",
   "notes_tr": [
-   "Genellikle vor + Dat. ile: vor Freude, vor Angst, vor Zorn. Bugün: außer sich sein (vor Freude). Duden sözlüğünde bu kalıp yok (wissen 4: “in der Lage sein, etwas zu tun” + zu-Infinitiv — sich zu helfen wissen); Grimm masallarında geçer."
+   "Genellikle vor + Dativ'le: vor Freude, vor Angst, vor Zorn. Bugün: außer sich sein (vor Freude). Duden sözlüğünde bu kalıp yok (wissen 4: “in der Lage sein, etwas zu tun” + zu-Infinitiv — sich zu helfen wissen); Grimm masallarında geçer."
   ],
   "_src": "b9dba791",
   "_src_reader": "796e2fe7"
@@ -2686,7 +2686,7 @@
   "translation_tr": "içini dökmek, rahatlamak",
   "example_tr": "Kavgadan sonra içini tamamen dökmesi gerekiyordu.",
   "notes_tr": [
-   "Dönüşlü zamir Dativ hâlinde: ich rede mir, du redest dir … etwas von der Seele. etwas yerine alles, das, seinen Kummer ya da bir yan cümle (was …) gelebilir. Krş. sich etwas von der Seele schreiben — yazarak içini dökmek."
+   "Dönüşlü zamir Dativ'de: ich rede mir, du redest dir … etwas von der Seele. etwas yerine alles, das, seinen Kummer ya da bir yan cümle (was …) gelebilir. Krş. sich etwas von der Seele schreiben — yazarak içini dökmek."
   ],
   "_src": "f70cddd3",
   "_src_reader": "9138f360"
@@ -3495,7 +3495,7 @@
   "translation_tr": "sana / ona ne oldu (böyle)?",
   "example_tr": "Sana ne oldu böyle?",
   "notes_tr": [
-   "Konuşma dilinde; şaşkınlık ya da sitemle. Türkçede yönelme hâli (sana, ona), Almancada in + Akk: in dich, in ihn."
+   "Konuşma dilinde; şaşkınlık ya da sitemle. Türkçede yönelme hâli (sana, ona), Almancada in + Akkusativ: in dich, in ihn."
   ],
   "_src": "b0e08855",
   "_src_reader": "487eb0e8"
@@ -3639,7 +3639,7 @@
   "translation_tr": "bir bakmak, bir şeye göz atmak",
   "example_tr": "Saate bir göz attı.",
   "notes_tr": [
-   "auf + Akk: einen Blick auf etw. werfen. Blick ile fiil arasında sıfat gelebilir: einen kurzen / langen Blick werfen. Benzer: jdm. einen Blick zuwerfen — birine bir bakış atmak."
+   "auf + Akkusativ: einen Blick auf etw. werfen. Blick ile fiil arasında sıfat gelebilir: einen kurzen / langen Blick werfen. Benzer: jdm. einen Blick zuwerfen — birine bir bakış atmak."
   ],
   "_src": "0dd75000",
   "_src_reader": "7afeb6ad"
@@ -3657,7 +3657,7 @@
   "translation_tr": "birini / bir şeyi eleştirmek",
   "example_tr": "Muhalefet yeni yasayı eleştiriyor.",
   "notes_tr": [
-   "Yansız üslupta, daha çok yazı dilinde; haberlerde sık geçer. Sıfatla: scharfe / heftige / leise Kritik üben. Eleştirilen şey — an + D: Kritik an der Regierung üben. Selbstkritik üben — özeleştiri yapmak, kendi hatalarını kabul etmek."
+   "Yansız üslupta, daha çok yazı dilinde; haberlerde sık geçer. Sıfatla: scharfe / heftige / leise Kritik üben. Eleştirilen şey — an + Dativ: Kritik an der Regierung üben. Selbstkritik üben — özeleştiri yapmak, kendi hatalarını kabul etmek."
   ],
   "_src": "3052b0f1",
   "_src_reader": "b7792568"
@@ -3756,7 +3756,7 @@
   "translation_tr": "öyle görünüyor, galiba öyle",
   "example_tr": "Bugün yağmur yağacak mı? – Tam da öyle görünüyor.",
   "notes_tr": [
-   "Konuşma dilinde kullanılır. Yan cümleyle de: Es sieht danach aus, dass / als ob … — öyle görünüyor ki … İsimle de: Es sieht nach Regen aus — yağmur yağacak gibi (aussehen nach + Dat.). Karıştırılmamalı: Danach sah er aus dem Fenster. — Sonra pencereden dışarı baktı (danach “sonra”); Er sieht danach müde aus — bundan sonra yorgun görünüyor."
+   "Konuşma dilinde kullanılır. Yan cümleyle de: Es sieht danach aus, dass / als ob … — öyle görünüyor ki … İsimle de: Es sieht nach Regen aus — yağmur yağacak gibi (aussehen nach + Dativ). Karıştırılmamalı: Danach sah er aus dem Fenster. — Sonra pencereden dışarı baktı (danach “sonra”); Er sieht danach müde aus — bundan sonra yorgun görünüyor."
   ],
   "_src": "0d1853ed",
   "_src_reader": "c1965792"
@@ -3765,7 +3765,7 @@
   "translation_tr": "öyle anlaşılıyor",
   "example_tr": "İşten mi ayrıldı? – Öyle anlaşılıyor.",
   "notes_tr": [
-   "Konuşma dilinde kullanılır. Duyulan ya da söylenen şey için. İsimle: Das klingt nach einer guten Idee — iyi bir fikir gibi geliyor (klingen nach + Dat.). Karıştırılmamalı: Es klingt danach, als ob … — burada danach yan cümleyi başlatır (“sanki … gibi geliyor”); Danach klang die Musik anders. — Sonra müzik farklı çaldı."
+   "Konuşma dilinde kullanılır. Duyulan ya da söylenen şey için. İsimle: Das klingt nach einer guten Idee — iyi bir fikir gibi geliyor (klingen nach + Dativ). Karıştırılmamalı: Es klingt danach, als ob … — burada danach yan cümleyi başlatır (“sanki … gibi geliyor”); Danach klang die Musik anders. — Sonra müzik farklı çaldı."
   ],
   "_src": "ca8b2c70",
   "_src_reader": "293b9c16"
@@ -4196,7 +4196,7 @@
   "example_tr": "Bunu yüz yüze konuşsak daha iyi olur.",
   "notes_tr": [
    "Angesicht — yaz. “yüz” (Duden: gehoben); sıklıkla jdm. von Angesicht zu Angesicht gegenüberstehen — biriyle yüz yüze gelmek.",
-   "Karıştırılmamalı: jdn. von Angesicht kennen — birini sima olarak tanımak; im Angesicht (+ Gen.) — bir şeyin karşısında, bir şey göz önünde bulundurulduğunda."
+   "Karıştırılmamalı: jdn. von Angesicht kennen — birini sima olarak tanımak; im Angesicht (+ Genitiv) — bir şeyin karşısında, bir şey göz önünde bulundurulduğunda."
   ],
   "_src": "89d4fef6",
   "_src_reader": "8adf0935"
@@ -4273,7 +4273,7 @@
   "translation_tr": "(konuş.) çok meşgul olmak, başını kaşıyacak vakti olmamak; (konuş.) (bir şeyle) başa çıkmakta zorlanmak",
   "example_tr": "Noel'den önce fırında başımızı kaşıyacak vaktimiz olmuyor.",
   "notes_tr": [
-   "Ayrıca: beide Hände voll zu tun haben. Neyle — mit + Dat.: Mit den Zwillingen hat sie alle Hände voll zu tun. — İkizlerle başa çıkmakta zorlanıyor."
+   "Ayrıca: beide Hände voll zu tun haben. Neyle — mit + Dativ: Mit den Zwillingen hat sie alle Hände voll zu tun. — İkizlerle başa çıkmakta zorlanıyor."
   ],
   "_src": "4ae36de1",
   "_src_reader": "40446ee0"

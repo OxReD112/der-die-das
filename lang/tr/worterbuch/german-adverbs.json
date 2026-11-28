@@ -517,7 +517,7 @@
  "adverb-082": {
   "translation_tr": "nereye",
   "example_tr": "Tatilde nereye gidiyorsun?",
-  "usage_note_tr": "Konuşmada genellikle ayrılır: Wo fährst du hin? wohin kelimesinden sonra edat genellikle Akkusativ alır: in den Park.",
+  "usage_note_tr": "Konuşmada genellikle ayrılır: Wo fährst du hin? wohin kelimesinden sonra edat genellikle Akkusativ'le kullanılır: in den Park.",
   "_src": "d9e4c143",
   "_src_reader": "4853003e"
  },
@@ -2746,7 +2746,7 @@
  "adverb-407": {
   "translation_tr": "içinden, arasından geçerek; boyunca (bütün … boyunca)",
   "example_tr": "Güneş kalın bulutların arasından parlıyordu.",
-  "usage_note_tr": "Mekân anlamında — durch + Akkusativ + hindurch çerçevesinde: durch den Park hindurch — parkın (tam) içinden. Zaman için — Akkusativ hâlindeki isimden sonra: den ganzen Tag hindurch — bütün gün, gün boyunca. Ayrıca fiil ön eki: hindurchgehen.",
+  "usage_note_tr": "Mekân anlamında — durch + Akkusativ + hindurch çerçevesinde: durch den Park hindurch — parkın (tam) içinden. Zaman için — Akkusativ'deki isimden sonra: den ganzen Tag hindurch — bütün gün, gün boyunca. Ayrıca fiil ön eki: hindurchgehen.",
   "_src": "f8943694",
   "_src_reader": "a4a211b0"
  },
@@ -3021,7 +3021,7 @@
  "adverb-445": {
   "translation_tr": "teşekkürler, sağ ol",
   "example_tr": "Güzel çiçekler için teşekkürler!",
-  "usage_note_tr": "Ayrıca: danke schön, danke sehr — çok teşekkürler; Nein, danke. — Hayır, teşekkürler. Cevap: Bitte! / Bitte schön! — Rica ederim. Kökeni: ich danke (teşekkür ederim); teşekkür etmek — danken (+ Dat.): Ich danke dir für alles.",
+  "usage_note_tr": "Ayrıca: danke schön, danke sehr — çok teşekkürler; Nein, danke. — Hayır, teşekkürler. Cevap: Bitte! / Bitte schön! — Rica ederim. Kökeni: ich danke (teşekkür ederim); teşekkür etmek — danken (+ Dativ): Ich danke dir für alles.",
   "_src": "74ee9234",
   "_src_reader": "d13f8615"
  },

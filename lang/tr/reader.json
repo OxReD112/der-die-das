@@ -143,12 +143,12 @@
   {
    "en": "Nom.",
    "ru": "Ном.",
-   "tr": "Nom."
+   "tr": "Nominativ"
   },
   {
    "en": "Acc.",
    "ru": "Акк.",
-   "tr": "Akk."
+   "tr": "Akkusativ"
   },
   {
    "en": "Dative",
@@ -158,7 +158,7 @@
   {
    "en": "Gen.",
    "ru": "Ген.",
-   "tr": "Gen."
+   "tr": "Genitiv"
   },
   {
    "en": "masculine",

@@ -200,7 +200,7 @@
  "adjective-069": {
   "translation_tr": "dolu, tutulmuş; meşgul (telefon, tuvalet için); (bir şeyle) süslenmiş, bezenmiş, donatılmış",
   "example_tr": "Bu yer zaten dolu.",
-  "usage_note_tr": "mit etwas besetzt — (bir şeyle) süslenmiş, bezenmiş, donatılmış (eşya, giysi, masa için); besetzen fiilinin Partizip II biçimidir, mit + Dativ ile kullanılır: mit Edelsteinen besetzt — değerli taşlarla bezenmiş.",
+  "usage_note_tr": "mit etwas besetzt — (bir şeyle) süslenmiş, bezenmiş, donatılmış (eşya, giysi, masa için); besetzen fiilinin Partizip II biçimidir, mit + Dativ'le kullanılır: mit Edelsteinen besetzt — değerli taşlarla bezenmiş.",
   "additional_examples": [
    {
     "example_tr": "Müzedeki eski taç küçük yakutlarla bezenmiş."
@@ -1372,7 +1372,7 @@
  },
  "adjective-296": {
   "translation_tr": "(şu kadar) değerinde; (bir şeye) layık",
-  "usage_note_tr": "etwas wert sein + Akkusativ: Das ist einen Besuch wert. Genitiv ile: Das ist nicht der Mühe wert.",
+  "usage_note_tr": "etwas wert sein + Akkusativ: Das ist einen Besuch wert. Genitiv'le: Das ist nicht der Mühe wert.",
   "example_tr": "Eski araba hâlâ 2.000 avro değerinde.",
   "_src": "fa0be6e7",
   "_src_reader": "cf91bcaf"
@@ -1606,7 +1606,7 @@
  },
  "adjective-340": {
   "translation_tr": "başı dönen",
-  "usage_note_tr": "Şöyle de yazılır: schwindelig. Genellikle Dativ ile: Mir ist schwindlig.",
+  "usage_note_tr": "Şöyle de yazılır: schwindelig. Genellikle Dativ'le: Mir ist schwindlig.",
   "example_tr": "Başım dönüyor.",
   "_src": "b597fa95",
   "_src_reader": "7f8d9051"
@@ -1962,7 +1962,7 @@
  "adjective-404": {
   "translation_tr": "(+ Dativ) (bir şeyle) başa çıkabilen; (birine) denk, (biriyle) boy ölçüşebilen",
   "example_tr": "Bu görevle gerçekten başa çıkabilir misin?",
-  "usage_note_tr": "Dativ ile, genellikle sein ile, ayrıca sich fühlen / sich zeigen ile: jemandem / einer Sache gewachsen sein; sich einer Aufgabe gewachsen fühlen — bir görevin üstesinden gelebileceğini hissetmek. Aynı zamanda wachsen fiilinin bir biçimi: Der Baum ist schnell gewachsen. — Ağaç hızla büyüdü.",
+  "usage_note_tr": "Dativ'le, genellikle sein ile, ayrıca sich fühlen / sich zeigen ile: jemandem / einer Sache gewachsen sein; sich einer Aufgabe gewachsen fühlen — bir görevin üstesinden gelebileceğini hissetmek. Aynı zamanda wachsen fiilinin bir biçimi: Der Baum ist schnell gewachsen. — Ağaç hızla büyüdü.",
   "_src": "8689f031",
   "_src_reader": "a3aca7d6"
  },
@@ -2637,7 +2637,7 @@
  "adjective-505": {
   "translation_tr": "(bir şeye) isteksiz, (bir şeye) karşı",
   "example_tr": "Birçok yaşlı çalışan yeni bilgisayar programlarına pek sıcak bakmıyor.",
-  "usage_note_tr": "Genellikle Dativ ile: einer Sache abgeneigt sein. nicht abgeneigt sein — (bir şeye) hayır dememek.",
+  "usage_note_tr": "Genellikle Dativ'le: einer Sache abgeneigt sein. nicht abgeneigt sein — (bir şeye) hayır dememek.",
   "_src": "7f78bcd7",
   "_src_reader": "7d293441"
  },
@@ -3275,7 +3275,7 @@
  "adjective-603": {
   "translation_tr": "tuhaf, kendine has; (birine) özgü, (birinin) doğasında olan",
   "example_tr": "Fırtınadan sonra köyün üzerine tuhaf bir sessizlik çöktü.",
-  "usage_note_tr": "“özgü” anlamında Dativ ile: mit der ihm eigentümlichen Ruhe — kendine özgü sakinliğiyle.",
+  "usage_note_tr": "“özgü” anlamında Dativ'le: mit der ihm eigentümlichen Ruhe — kendine özgü sakinliğiyle.",
   "_src": "14ee1062",
   "_src_reader": "cbd83064"
  },
@@ -3536,7 +3536,7 @@
  "adjective-643": {
   "translation_tr": "yararlı, elverişli (bir şey için)",
   "example_tr": "Açık ofisteki sürekli gürültü çalışmaya pek de yararlı değil.",
-  "usage_note_tr": "Dativ ile ya da für ile: der Gesundheit förderlich sein — sağlığa yararlı olmak.",
+  "usage_note_tr": "Dativ'le ya da für ile: der Gesundheit förderlich sein — sağlığa yararlı olmak.",
   "_src": "f6fc3651",
   "_src_reader": "4672fe31"
  },
@@ -3710,7 +3710,7 @@
  "adjective-670": {
   "translation_tr": "belirli, birtakım; belli bir, bir ölçüde (derece için); kesin, şüphesiz",
   "example_tr": "Belirli durumlarda hiçbir şey söylememek daha akıllıcadır.",
-  "usage_note_tr": "Kalıp ifade: sich einer Sache (Gen.) gewiss sein — bir şeyden emin olmak.",
+  "usage_note_tr": "Kalıp ifade: sich einer Sache (Genitiv) gewiss sein — bir şeyden emin olmak.",
   "_src": "0125e7a9",
   "_src_reader": "485efda4"
  },
@@ -4678,7 +4678,7 @@
  },
  "adjective-818": {
   "translation_tr": "dönüşlü (fiiller, zamirler için); refleksif, düşünmeye dayanan",
-  "example_tr": "“sich freuen” gibi dönüşlü fiillerde zamir genellikle Akkusativ hâlindedir.",
+  "example_tr": "“sich freuen” gibi dönüşlü fiillerde zamir genellikle Akkusativ'dedir.",
   "usage_note_tr": "İkinci anlamında yazı dilinde kullanılır.",
   "_src": "f3fa7cf0",
   "_src_reader": "53661f7c"
@@ -5609,7 +5609,7 @@
  "adjective-962": {
   "translation_tr": "(bir şeyin) önünde bulunan, kıyı açığındaki",
   "example_tr": "Deniz çekildiğinde kıyı açığındaki kum sığlığına yürüyerek gidilebilir.",
-  "usage_note_tr": "Dativ ile: der Küste vorgelagert — kıyının açığında bulunan.",
+  "usage_note_tr": "Dativ'le: der Küste vorgelagert — kıyının açığında bulunan.",
   "_src": "7cc8687e",
   "_src_reader": "029f94f6"
  },
@@ -6144,7 +6144,7 @@
  "adjective-1045": {
   "translation_tr": "ilgili, söz konusu, (adı) geçen",
   "example_tr": "Lütfen ilgili formu cumaya kadar sekreterliğe teslim edin.",
-  "usage_note_tr": "Genellikle isimden önce (sıfat olarak) kullanılır. Ayrıca edat (+ Akk.): betreffend Ihre Anfrage — talebinizle ilgili olarak (iş yazışmalarında).",
+  "usage_note_tr": "Genellikle isimden önce (sıfat olarak) kullanılır. Ayrıca edat (+ Akkusativ): betreffend Ihre Anfrage — talebinizle ilgili olarak (iş yazışmalarında).",
   "_src": "d47911f2",
   "_src_reader": "c2df8fa0"
  },
@@ -8560,7 +8560,7 @@
  "adjective-1423": {
   "translation_tr": "aşağılayıcı, yakışmayan (insana); layık olmayan (birine, bir şeye)",
   "example_tr": "Hastalar koridorda saatlerce aşağılayıcı koşullarda beklemek zorunda kaldı.",
-  "usage_note_tr": "Genitiv ile: des Preises unwürdig — ödüle layık olmayan.",
+  "usage_note_tr": "Genitiv'le: des Preises unwürdig — ödüle layık olmayan.",
   "_src": "976ab60c",
   "_src_reader": "a887781f"
  },
@@ -8997,7 +8997,7 @@
  "adjective-1492": {
   "translation_tr": "(birine) itici gelen, iğrenç gelen; (bir şeye) aykırı",
   "example_tr": "Uzun telefon görüşmeleri babama son derece itici gelir.",
-  "usage_note_tr": "Edebî dilde kullanılır. Yalnızca yüklem olarak: jemandem zuwider sein — birine itici gelmek. Dativ ile edat olarak (isimden sonra gelir, edebî): dem Verbot zuwider — yasağa rağmen.",
+  "usage_note_tr": "Edebî dilde kullanılır. Yalnızca yüklem olarak: jemandem zuwider sein — birine itici gelmek. Dativ'le edat olarak (isimden sonra gelir, edebî): dem Verbot zuwider — yasağa rağmen.",
   "_src": "3b4ef997",
   "_src_reader": "7a992e67"
  },
@@ -9836,7 +9836,7 @@
  "adjective-1617": {
   "translation_tr": "birleşik; hemfikir, aynı görüşte",
   "example_tr": "Kavgadan sonra kardeşler sonunda yine hemfikirdi.",
-  "usage_note_tr": "ein einiges Land — birleşik bir ülke; Wir sind uns in diesem Punkt einig. — Bu konuda hemfikiriz. sich (D) einig sein — hemfikir olmak; sich einig werden — anlaşmaya varmak. Karıştırılmamalı: einige — birkaç.",
+  "usage_note_tr": "ein einiges Land — birleşik bir ülke; Wir sind uns in diesem Punkt einig. — Bu konuda hemfikiriz. sich (Dativ) einig sein — hemfikir olmak; sich einig werden — anlaşmaya varmak. Karıştırılmamalı: einige — birkaç.",
   "_src": "02a19549",
   "_src_reader": "ce94823d"
  },
@@ -9864,7 +9864,7 @@
  "adjective-1621": {
   "translation_tr": "(yaz.) (birine) sıcak bakan, yakınlık duyan",
   "example_tr": "O akşam şans ondan yanaydı.",
-  "usage_note_tr": "Dativ ile: jemandem gewogen sein — birine sıcak bakmak, birine teveccüh göstermek. wiegen / wägen fiilinin Partizip II biçimi — tartılmış: Das Paket wurde gewogen.",
+  "usage_note_tr": "Dativ'le: jemandem gewogen sein — birine sıcak bakmak, birine teveccüh göstermek. wiegen / wägen fiilinin Partizip II biçimi — tartılmış: Das Paket wurde gewogen.",
   "_src": "383876e5",
   "_src_reader": "45397290"
  },

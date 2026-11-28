@@ -1,0 +1,3856 @@
+{
+ "light-0001": {
+  "translation_tr": "jüri mahkemesi",
+  "_src": "7ef00a65",
+  "_src_reader": "7ef00a65"
+ },
+ "light-0002": {
+  "translation_tr": "doldurulmuş, şarj edilmiş; (konuş.) öfkeden kudurmuş",
+  "_src": "882f2c7a",
+  "_src_reader": "882f2c7a"
+ },
+ "light-0003": {
+  "translation_tr": "gömme, içine yerleştirilmiş",
+  "_src": "3346f473",
+  "_src_reader": "3346f473"
+ },
+ "light-0004": {
+  "translation_tr": "patojen, hastalık etkeni",
+  "_src": "12995d17",
+  "_src_reader": "12995d17"
+ },
+ "light-0005": {
+  "translation_tr": "-e göre, uyarınca",
+  "_src": "caef3f2a",
+  "_src_reader": "caef3f2a"
+ },
+ "light-0006": {
+  "translation_tr": "boyunca; bütün, tüm (den ganzen Tag über — bütün gün)",
+  "_src": "547a970d",
+  "_src_reader": "547a970d"
+ },
+ "light-0007": {
+  "translation_tr": "-in yerine; -mek yerine / -mak yerine, -eceğine / -acağına",
+  "_src": "8c274192",
+  "_src_reader": "8c274192"
+ },
+ "light-0008": {
+  "translation_tr": "-in öte yanında, -in ötesinde",
+  "_src": "9a884740",
+  "_src_reader": "9a884740"
+ },
+ "light-0009": {
+  "translation_tr": "(konuş.) kapalı, kapanmış; kapalı (dükkân için); ilikli, fermuarı çekilmiş; (argo) zom, körkütük sarhoş",
+  "_src": "4c8cebdc",
+  "_src_reader": "4c8cebdc"
+ },
+ "light-0011": {
+  "translation_tr": "(konuş.) önemli olan, yeter ki",
+  "_src": "a7e1d661",
+  "_src_reader": "a7e1d661"
+ },
+ "light-0012": {
+  "translation_tr": "-diği kadarıyla / -dığı kadarıyla; -diği sürece / -dığı sürece, eğer",
+  "_src": "19beda8e",
+  "_src_reader": "19beda8e"
+ },
+ "light-0013": {
+  "translation_tr": "kayarak açılmak, yana kaymak",
+  "_src": "afaa35ff",
+  "_src_reader": "afaa35ff"
+ },
+ "light-0014": {
+  "translation_tr": "üst, üstteki; üst düzey, yüksek",
+  "_src": "b4646c30",
+  "_src_reader": "b4646c30"
+ },
+ "light-0015": {
+  "translation_tr": "alt, alttaki; alt düzey, düşük",
+  "_src": "75a417fa",
+  "_src_reader": "75a417fa"
+ },
+ "light-0016": {
+  "translation_tr": "arka, arkadaki",
+  "_src": "d8ddf709",
+  "_src_reader": "d8ddf709"
+ },
+ "light-0017": {
+  "translation_tr": "dış, dıştaki; dış ülkelerle ilgili, yabancı",
+  "_src": "b4c5059f",
+  "_src_reader": "b4c5059f"
+ },
+ "light-0018": {
+  "translation_tr": "fren yapmak, yavaşlatmak",
+  "_src": "33b6cdb8",
+  "_src_reader": "33b6cdb8"
+ },
+ "light-0019": {
+  "translation_tr": "birini yalnız bırakmak",
+  "_src": "c885d84e",
+  "_src_reader": "c885d84e"
+ },
+ "light-0021": {
+  "translation_tr": "kenara itmek; geçiştirmek, bir kenara bırakmak",
+  "_src": "33408063",
+  "_src_reader": "33408063"
+ },
+ "light-0022": {
+  "translation_tr": "yatak kenarı",
+  "_src": "8459a49d",
+  "_src_reader": "8459a49d"
+ },
+ "light-0024": {
+  "translation_tr": "bağlantı halkası, bağlayıcı unsur",
+  "_src": "bdc12171",
+  "_src_reader": "bdc12171"
+ },
+ "light-0025": {
+  "translation_tr": "et suyu sosu, rosto sosu",
+  "_src": "c371947c",
+  "_src_reader": "c371947c"
+ },
+ "light-0026": {
+  "translation_tr": "iri parça, kütle; kopuk sözler, söz kırıntıları",
+  "_src": "d0522b93",
+  "_src_reader": "d0522b93"
+ },
+ "light-0027": {
+  "translation_tr": "(konuş.) havalı, süper; soğukkanlı, sakin",
+  "_src": "19997f19",
+  "_src_reader": "19997f19"
+ },
+ "light-0028": {
+  "translation_tr": "geri sayım",
+  "_src": "0f88d24e",
+  "_src_reader": "0f88d24e"
+ },
+ "light-0029": {
+  "translation_tr": "korkmuş, ürkmüş",
+  "_src": "451214c9",
+  "_src_reader": "451214c9"
+ },
+ "light-0030": {
+  "translation_tr": "küçük bavul, el bavulu",
+  "_src": "e6927359",
+  "_src_reader": "e6927359"
+ },
+ "light-0031": {
+  "translation_tr": "hey!",
+  "_src": "64cf74da",
+  "_src_reader": "64cf74da"
+ },
+ "light-0032": {
+  "translation_tr": "ilginçtir ki, ilginç bir şekilde",
+  "_src": "e9309724",
+  "_src_reader": "e9309724"
+ },
+ "light-0033": {
+  "translation_tr": "kapsül; kabuk, kılıf",
+  "_src": "1f15fa42",
+  "_src_reader": "1f15fa42"
+ },
+ "light-0034": {
+  "translation_tr": "ranza; kamara",
+  "_src": "29ed0322",
+  "_src_reader": "29ed0322"
+ },
+ "light-0035": {
+  "translation_tr": "çamur; sulu kar",
+  "_src": "0d16a0b3",
+  "_src_reader": "0d16a0b3"
+ },
+ "light-0036": {
+  "translation_tr": "(konuş.) hay aksi!, kahretsin!",
+  "_src": "2f83a00a",
+  "_src_reader": "2f83a00a"
+ },
+ "light-0037": {
+  "translation_tr": "(konuş.) vay be!, vay canına!",
+  "_src": "70a5178b",
+  "_src_reader": "70a5178b"
+ },
+ "light-0039": {
+  "translation_tr": "en yakın",
+  "_src": "1ce7a639",
+  "_src_reader": "1ce7a639"
+ },
+ "light-0041": {
+  "translation_tr": "tulum",
+  "_src": "39a45c37",
+  "_src_reader": "39a45c37"
+ },
+ "light-0042": {
+  "translation_tr": "macun, ezme",
+  "_src": "88bfc006",
+  "_src_reader": "88bfc006"
+ },
+ "light-0043": {
+  "translation_tr": "(konuş.) batmak, hafif hafif batmak",
+  "_src": "490f73a3",
+  "_src_reader": "490f73a3"
+ },
+ "light-0044": {
+  "translation_tr": "(konuş.) batmak, hafif hafif batmak",
+  "_src": "490f73a3",
+  "_src_reader": "490f73a3"
+ },
+ "light-0045": {
+  "translation_tr": "plastik poşet",
+  "_src": "7552d46d",
+  "_src_reader": "7552d46d"
+ },
+ "light-0046": {
+  "translation_tr": "geçici çözüm, geçici yapı",
+  "_src": "b2592f34",
+  "_src_reader": "b2592f34"
+ },
+ "light-0047": {
+  "translation_tr": "eğik yazı masası, kürsü; kumanda masası, konsol",
+  "_src": "52ff6ed1",
+  "_src_reader": "52ff6ed1"
+ },
+ "light-0048": {
+  "translation_tr": "etrafında, çepeçevre",
+  "_src": "bc5534a2",
+  "_src_reader": "bc5534a2"
+ },
+ "light-0049": {
+  "translation_tr": "etrafta, her yanda",
+  "_src": "d4d6f41d",
+  "_src_reader": "d4d6f41d"
+ },
+ "light-0050": {
+  "translation_tr": "geri tepme; itki",
+  "_src": "c55f397c",
+  "_src_reader": "c55f397c"
+ },
+ "light-0051": {
+  "translation_tr": "gazı kaçmış, bayatlamış; yavan, boş",
+  "_src": "903f2c5b",
+  "_src_reader": "903f2c5b"
+ },
+ "light-0052": {
+  "translation_tr": "salyangoz kabuğu",
+  "_src": "de2ee59e",
+  "_src_reader": "de2ee59e"
+ },
+ "light-0053": {
+  "translation_tr": "bağdaş kurarak oturma",
+  "_src": "2a8285c9",
+  "_src_reader": "2a8285c9"
+ },
+ "light-0054": {
+  "translation_tr": "kendiliğinden anlaşılan, kolayca anlaşılır",
+  "_src": "2010900b",
+  "_src_reader": "2010900b"
+ },
+ "light-0055": {
+  "translation_tr": "ara, mesafe, süre; aralık, yelpaze",
+  "_src": "a4cb08c7",
+  "_src_reader": "a4cb08c7"
+ },
+ "light-0056": {
+  "translation_tr": "(biy.) tür",
+  "_src": "ea21e879",
+  "_src_reader": "ea21e879"
+ },
+ "light-0057": {
+  "translation_tr": "anız; kirli sakal, sakal kılları",
+  "_src": "763b850a",
+  "_src_reader": "763b850a"
+ },
+ "light-0058": {
+  "translation_tr": "saman şilte",
+  "_src": "52529129",
+  "_src_reader": "52529129"
+ },
+ "light-0059": {
+  "translation_tr": "miğfer siperi, siperlik; nişangâh",
+  "_src": "7002cc3e",
+  "_src_reader": "7002cc3e"
+ },
+ "light-0060": {
+  "translation_tr": "içi geçmek, uykuya dalmak",
+  "_src": "3d28a955",
+  "_src_reader": "3d28a955"
+ },
+ "light-0061": {
+  "translation_tr": "öfke nöbeti",
+  "_src": "a05bc6a5",
+  "_src_reader": "a05bc6a5"
+ },
+ "light-0062": {
+  "translation_tr": "diş macunu tüpü",
+  "_src": "b6560659",
+  "_src_reader": "b6560659"
+ },
+ "light-0063": {
+  "translation_tr": "oda arkadaşı",
+  "_src": "8f737c57",
+  "_src_reader": "8f737c57"
+ },
+ "light-0064": {
+  "translation_tr": "hızla üzerine gelmek, bir şeye doğru hızla gitmek",
+  "_src": "218cc605",
+  "_src_reader": "218cc605"
+ },
+ "light-0065": {
+  "translation_tr": "bombalayarak yerle bir etmek",
+  "_src": "c617f3ca",
+  "_src_reader": "c617f3ca"
+ },
+ "light-0066": {
+  "translation_tr": "o (kadın) kendi payına; onlar kendi paylarına",
+  "_src": "e5d7b8bf",
+  "_src_reader": "e5d7b8bf"
+ },
+ "light-0067": {
+  "translation_tr": "(konuş.) aptal, salak",
+  "_src": "c887338b",
+  "_src_reader": "c887338b"
+ },
+ "light-0068": {
+  "translation_tr": "kötü hasat",
+  "_src": "ee9a8b99",
+  "_src_reader": "ee9a8b99"
+ },
+ "light-0069": {
+  "translation_tr": "ot sapı",
+  "_src": "0fbf717e",
+  "_src_reader": "0fbf717e"
+ },
+ "light-0070": {
+  "translation_tr": "doğru, düz çizgi; düzlük, düz kısım",
+  "_src": "6d1e3808",
+  "_src_reader": "6d1e3808"
+ },
+ "light-0071": {
+  "translation_tr": "ödenmesi gereken, ödenmemiş; beklenen, önümüzdeki",
+  "_src": "2d54624f",
+  "_src_reader": "2d54624f"
+ },
+ "light-0072": {
+  "translation_tr": "eşlik eden, bağlantılı",
+  "_src": "667bd004",
+  "_src_reader": "667bd004"
+ },
+ "light-0073": {
+  "translation_tr": "giden, görevden ayrılan",
+  "_src": "81d6579d",
+  "_src_reader": "81d6579d"
+ },
+ "light-0074": {
+  "translation_tr": "yatırılmış; tasarlanmış, öngörülmüş",
+  "_src": "7969570c",
+  "_src_reader": "7969570c"
+ },
+ "light-0075": {
+  "translation_tr": "dokunaklı, etkileyici",
+  "_src": "7ce46f7f",
+  "_src_reader": "7ce46f7f"
+ },
+ "light-0076": {
+  "translation_tr": "zahmetine değer, yerinde, kârlı",
+  "_src": "986bf3ff",
+  "_src_reader": "986bf3ff"
+ },
+ "light-0077": {
+  "translation_tr": "limandan ayrılan, denize açılan; süresi dolan, üretimden kaldırılan",
+  "_src": "9987d65f",
+  "_src_reader": "9987d65f"
+ },
+ "light-0078": {
+  "translation_tr": "savunma mekanizması",
+  "_src": "74699028",
+  "_src_reader": "74699028"
+ },
+ "light-0079": {
+  "translation_tr": "mürettebat üyesi",
+  "_src": "1b7d36d0",
+  "_src_reader": "1b7d36d0"
+ },
+ "light-0080": {
+  "translation_tr": "brülör, bek; içki damıtıcısı",
+  "_src": "aefd7752",
+  "_src_reader": "aefd7752"
+ },
+ "light-0081": {
+  "translation_tr": "Celsius, santigrat",
+  "_src": "f9d57cbb",
+  "_src_reader": "f9d57cbb"
+ },
+ "light-0082": {
+  "translation_tr": "EKG, elektrokardiyogram",
+  "_src": "d1b5b132",
+  "_src_reader": "d1b5b132"
+ },
+ "light-0083": {
+  "translation_tr": "LED, ışık yayan diyot",
+  "_src": "a9973535",
+  "_src_reader": "a9973535"
+ },
+ "light-0084": {
+  "translation_tr": "UFO, tanımlanamayan uçan cisim",
+  "_src": "aa85f7e7",
+  "_src_reader": "aa85f7e7"
+ },
+ "light-0086": {
+  "translation_tr": "geçiş bölmesi, hava kilidi",
+  "_src": "3775b98e",
+  "_src_reader": "3775b98e"
+ },
+ "light-0087": {
+  "translation_tr": "kontrol merkezi, kumanda merkezi, kontrol odası",
+  "_src": "39856849",
+  "_src_reader": "39856849"
+ },
+ "light-0088": {
+  "translation_tr": "küp kök",
+  "_src": "f116fcd6",
+  "_src_reader": "f116fcd6"
+ },
+ "light-0089": {
+  "translation_tr": "canlı yayın, naklen yayın",
+  "_src": "4bd56292",
+  "_src_reader": "4bd56292"
+ },
+ "light-0090": {
+  "translation_tr": "naklen yayın, canlı yayın",
+  "_src": "1203db14",
+  "_src_reader": "1203db14"
+ },
+ "light-0091": {
+  "translation_tr": "kızılötesi",
+  "_src": "ba0a774a",
+  "_src_reader": "ba0a774a"
+ },
+ "light-0092": {
+  "translation_tr": "kızılötesi bölge",
+  "_src": "2a860771",
+  "_src_reader": "2a860771"
+ },
+ "light-0093": {
+  "translation_tr": "kızılötesi ışınım",
+  "_src": "6b98b59b",
+  "_src_reader": "6b98b59b"
+ },
+ "light-0094": {
+  "translation_tr": "dünya dışı",
+  "_src": "c5f41fbc",
+  "_src_reader": "c5f41fbc"
+ },
+ "light-0095": {
+  "translation_tr": "coğrafi",
+  "_src": "c32edd9b",
+  "_src_reader": "c32edd9b"
+ },
+ "light-0096": {
+  "translation_tr": "güneşle ilgili, solar",
+  "_src": "3dc1fe24",
+  "_src_reader": "3dc1fe24"
+ },
+ "light-0097": {
+  "translation_tr": "hızlı hızlı soluk almak, hiperventilasyon yapmak",
+  "_src": "6cac598e",
+  "_src_reader": "6cac598e"
+ },
+ "light-0098": {
+  "translation_tr": "ölçeği küçültmek, görüntüyü uzaklaştırmak",
+  "_src": "b0af4a87",
+  "_src_reader": "b0af4a87"
+ },
+ "light-0099": {
+  "translation_tr": "ölçeği büyütmek, görüntüyü yakınlaştırmak",
+  "_src": "267a9ab4",
+  "_src_reader": "267a9ab4"
+ },
+ "light-0100": {
+  "translation_tr": "lam, mikroskop camı",
+  "_src": "7b15fa1a",
+  "_src_reader": "7b15fa1a"
+ },
+ "light-0101": {
+  "translation_tr": "organel",
+  "_src": "01ed401e",
+  "_src_reader": "01ed401e"
+ },
+ "light-0102": {
+  "translation_tr": "hücre duvarı",
+  "_src": "51cdd1b3",
+  "_src_reader": "51cdd1b3"
+ },
+ "light-0103": {
+  "translation_tr": "idrar kanalı, üretra",
+  "_src": "7af648aa",
+  "_src_reader": "7af648aa"
+ },
+ "light-0105": {
+  "translation_tr": "otoklav",
+  "_src": "c7f56205",
+  "_src_reader": "c7f56205"
+ },
+ "light-0106": {
+  "translation_tr": "interferometre, girişimölçer",
+  "_src": "598b53e6",
+  "_src_reader": "598b53e6"
+ },
+ "light-0107": {
+  "translation_tr": "şehir silueti, şehir panoraması",
+  "_src": "87e63732",
+  "_src_reader": "87e63732"
+ },
+ "light-0108": {
+  "translation_tr": "(konuş.) inek, bilgisayar kurdu",
+  "_src": "174ebb88",
+  "_src_reader": "174ebb88"
+ },
+ "light-0109": {
+  "translation_tr": "özel görev ekibi, çalışma grubu",
+  "_src": "c120eb27",
+  "_src_reader": "c120eb27"
+ },
+ "light-0110": {
+  "translation_tr": "doğru anı seçme, zamanlama",
+  "_src": "88b7b407",
+  "_src_reader": "88b7b407"
+ },
+ "light-0112": {
+  "translation_tr": "e-posta listesi, posta listesi",
+  "_src": "ff4f4c38",
+  "_src_reader": "ff4f4c38"
+ },
+ "light-0113": {
+  "translation_tr": "yüksek teknoloji, ileri teknoloji",
+  "_src": "43ccb817",
+  "_src_reader": "43ccb817"
+ },
+ "light-0114": {
+  "translation_tr": "(konuş.) mikrofon",
+  "_src": "32c4952a",
+  "_src_reader": "32c4952a"
+ },
+ "light-0115": {
+  "translation_tr": "mobil, tavana asılan süs",
+  "_src": "7e152445",
+  "_src_reader": "7e152445"
+ },
+ "light-0116": {
+  "translation_tr": "single, plak; bekâr, yalnız yaşayan kişi",
+  "_src": "e81809b5",
+  "_src_reader": "e81809b5"
+ },
+ "light-0117": {
+  "translation_tr": "eleştiri yazısı, inceleme",
+  "_src": "af11f181",
+  "_src_reader": "af11f181"
+ },
+ "light-0118": {
+  "translation_tr": "büyük ikramiye, jackpot",
+  "_src": "6438facd",
+  "_src_reader": "6438facd"
+ },
+ "light-0119": {
+  "translation_tr": "arazi aracı, SUV",
+  "_src": "e815f495",
+  "_src_reader": "e815f495"
+ },
+ "light-0120": {
+  "translation_tr": "pi sayısı; pi (Yunan harfi)",
+  "_src": "840221bb",
+  "_src_reader": "840221bb"
+ },
+ "light-0122": {
+  "translation_tr": "çevirmek, döndürmek",
+  "_src": "fef39c8d",
+  "_src_reader": "fef39c8d"
+ },
+ "light-0123": {
+  "translation_tr": "ima etmek; oyunu başlatmak, ilk hamleyi yapmak; pas vermek",
+  "complements": [
+   {
+    "note_tr": "bir şeyi ima etmek: Er spielte auf ihren Fehler an.",
+    "meaning_tr": "ima etmek"
+   }
+  ],
+  "_src": "270be25f",
+  "_src_reader": "270be25f"
+ },
+ "light-0124": {
+  "complements": [
+   {
+    "note_tr": "birini / bir şeyi arama: die Suche nach einer Wohnung"
+   }
+  ],
+  "_src": "832523b3",
+  "_src_reader": "832523b3"
+ },
+ "light-0125": {
+  "translation_tr": "mesafe, uzaklık, ara; aralık, zaman aralığı; mesafeli olma, çekingenlik",
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye olan mesafe: Abstand zum Vordermann; zaman aralığı: der zeitliche Abstand zum letzten Treffen; mesafeli olma: Abstand zu den Kollegen halten"
+   },
+   {
+    "note_tr": "bir şeyden uzaklık: Abstand von der Straße; zaman aralığı: im Abstand von zwei Jahren",
+    "meaning_tr": "mesafe, uzaklık, ara"
+   },
+   {
+    "note_tr": "bir şeyden uzaklık: Abstand von der Straße; zaman aralığı: im Abstand von zwei Jahren",
+    "meaning_tr": "aralık, zaman aralığı"
+   }
+  ],
+  "_src": "6e9e9677",
+  "_src_reader": "6e9e9677"
+ },
+ "light-0126": {
+  "translation_tr": "saldırı, taarruz, ileri harekât; (spor) atak, hücum; yüklenme, sert eleştiri",
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye saldırı: ein Angriff auf die Stadt; sporda bir şeye atak: ein Angriff auf das Tor; birine yüklenme: Angriffe auf die Regierung"
+   }
+  ],
+  "_src": "f5224551",
+  "_src_reader": "f5224551"
+ },
+ "light-0127": {
+  "translation_tr": "gözetim, denetim, nezaret; nöbetçi, gözetmen",
+  "complements": [
+   {
+    "note_tr": "birinin / bir şeyin gözetimi: die Aufsicht über die Kinder",
+    "meaning_tr": "gözetim, denetim, nezaret"
+   }
+  ],
+  "_src": "a6902caa",
+  "_src_reader": "a6902caa"
+ },
+ "light-0128": {
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye karşı nefret"
+   },
+   {
+    "note_tr": "birine / bir şeye karşı nefret: Hass gegen Minderheiten"
+   }
+  ],
+  "_src": "ace2c5fb",
+  "_src_reader": "ace2c5fb"
+ },
+ "light-0129": {
+  "translation_tr": "av, avcılık; kovalama, takip",
+  "complements": [
+   {
+    "note_tr": "bir şeyin peşinde koşma: die Jagd nach dem Glück",
+    "meaning_tr": "kovalama, takip"
+   },
+   {
+    "note_tr": "birini avlama: die Jagd auf Hasen; birinin peşine düşme: die Jagd auf den Täter",
+    "meaning_tr": "av, avcılık"
+   },
+   {
+    "note_tr": "birini avlama: die Jagd auf Hasen; birinin peşine düşme: die Jagd auf den Täter",
+    "meaning_tr": "kovalama, takip"
+   }
+  ],
+  "_src": "8e0c8711",
+  "_src_reader": "8e0c8711"
+ },
+ "light-0130": {
+  "translation_tr": "şikâyet, yakınma; dava, mahkeme davası; ağıt, sızlanma",
+  "complements": [
+   {
+    "note_tr": "biri / bir şey hakkında şikâyet: Klagen über den Service; bir şey için ağıt: die Klage über den Verlust",
+    "meaning_tr": "şikâyet, yakınma"
+   },
+   {
+    "note_tr": "biri / bir şey hakkında şikâyet: Klagen über den Service; bir şey için ağıt: die Klage über den Verlust",
+    "meaning_tr": "ağıt, sızlanma"
+   },
+   {
+    "note_tr": "birine karşı dava: eine Klage gegen die Firma",
+    "meaning_tr": "dava, mahkeme davası"
+   }
+  ],
+  "_src": "3a0e10c6",
+  "_src_reader": "3a0e10c6"
+ },
+ "light-0131": {
+  "translation_tr": "sempati, yakınlık; anlayış, onay",
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye karşı sempati"
+   }
+  ],
+  "_src": "00c216fd",
+  "_src_reader": "00c216fd"
+ },
+ "light-0132": {
+  "translation_tr": "vazgeçme, feragat",
+  "complements": [
+   {
+    "note_tr": "bir şeyden vazgeçme: der Verzicht auf Fleisch"
+   }
+  ],
+  "_src": "9ee6fe8c",
+  "_src_reader": "9ee6fe8c"
+ },
+ "light-0133": {
+  "translation_tr": "çağrı, sesleniş; yoklama, içtima, teftiş",
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye çağrı: ein Appell an die Vernunft"
+   }
+  ],
+  "_src": "4c3e67aa",
+  "_src_reader": "4c3e67aa"
+ },
+ "light-0134": {
+  "translation_tr": "suikast girişimi; terör saldırısı",
+  "complements": [
+   {
+    "note_tr": "birine suikast girişimi: Das Attentat auf den Präsidenten wurde vereitelt."
+   }
+  ],
+  "_src": "e4a8d32a",
+  "_src_reader": "e4a8d32a"
+ },
+ "light-0135": {
+  "translation_tr": "bağırma, sesleniş, çağırma; ün, şöhret; çağrı, talep; bir göreve davet",
+  "complements": [
+   {
+    "note_tr": "bir şey için bağırma, çağırma: der Ruf nach Hilfe; bir şey için çağrı, talep: der Ruf nach Reformen",
+    "meaning_tr": "bağırma, sesleniş, çağırma"
+   },
+   {
+    "note_tr": "bir şey için bağırma, çağırma: der Ruf nach Hilfe; bir şey için çağrı, talep: der Ruf nach Reformen",
+    "meaning_tr": "çağrı, talep"
+   }
+  ],
+  "_src": "4848b1bf",
+  "_src_reader": "4848b1bf"
+ },
+ "light-0136": {
+  "translation_tr": "vazgeçme, uzaklaşma, yüz çevirme",
+  "complements": [
+   {
+    "note_tr": "bir şeyden vazgeçme, uzaklaşma: die Abkehr von der Atomkraft"
+   }
+  ],
+  "_src": "3c3e1a2b",
+  "_src_reader": "3c3e1a2b"
+ },
+ "light-0137": {
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye karşı saldırganlık"
+   }
+  ],
+  "_src": "bf072f41",
+  "_src_reader": "bf072f41"
+ },
+ "light-0138": {
+  "translation_tr": "hak, talep hakkı; abonman, abonelik",
+  "complements": [
+   {
+    "note_tr": "bir şeye hakkı olma: ein Anrecht auf Urlaub"
+   }
+  ],
+  "_src": "b84519e6",
+  "_src_reader": "b84519e6"
+ },
+ "light-0139": {
+  "translation_tr": "şiddetli arzu, şehvet, hırs",
+  "complements": [
+   {
+    "note_tr": "bir şeye karşı hırs: die Begierde nach Macht"
+   }
+  ],
+  "_src": "52fcf65c",
+  "_src_reader": "52fcf65c"
+ },
+ "light-0140": {
+  "translation_tr": "baskı, itiş; istek, özlem, dürtü",
+  "complements": [
+   {
+    "note_tr": "bir şeye duyulan istek, özlem: der Drang nach Freiheit"
+   },
+   {
+    "meaning_tr": "istek, özlem, dürtü",
+    "note_tr": "+ zu ile mastar: Sie hatte den Drang, etwas zu sagen. — İçinden bir şey söylemek geldi."
+   }
+  ],
+  "_src": "95dbffc1",
+  "_src_reader": "95dbffc1"
+ },
+ "light-0141": {
+  "translation_tr": "açgözlülük, hırs, susamışlık",
+  "complements": [
+   {
+    "note_tr": "bir şeye karşı hırs, açgözlülük: die Gier nach Geld"
+   }
+  ],
+  "_src": "260fee41",
+  "_src_reader": "260fee41"
+ },
+ "light-0142": {
+  "translation_tr": "katılım, payı olma",
+  "complements": [
+   {
+    "note_tr": "bir şeye katılım, bir şeyde payı olma"
+   }
+  ],
+  "_src": "358a0a29",
+  "_src_reader": "358a0a29"
+ },
+ "light-0143": {
+  "translation_tr": "güvenilirlik, güvenilecek biri olma",
+  "complements": [
+   {
+    "note_tr": "birine güvenilebilme: Auf ihn ist Verlass."
+   }
+  ],
+  "_src": "1706edbc",
+  "_src_reader": "1706edbc"
+ },
+ "light-0144": {
+  "complements": [
+   {
+    "note_tr": "bir şeye aidiyet"
+   }
+  ],
+  "_src": "45c7e681",
+  "_src_reader": "45c7e681"
+ },
+ "light-0145": {
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye karşı antipati"
+   }
+  ],
+  "_src": "f5557ec5",
+  "_src_reader": "f5557ec5"
+ },
+ "light-0146": {
+  "complements": [
+   {
+    "note_tr": "biriyle / bir şeyle gurur duyma"
+   }
+  ],
+  "_src": "a1a9eb70",
+  "_src_reader": "a1a9eb70"
+ },
+ "light-0147": {
+  "complements": [
+   {
+    "note_tr": "birinden / bir şeyden tiksinti"
+   }
+  ],
+  "_src": "2f12803a",
+  "_src_reader": "2f12803a"
+ },
+ "light-0148": {
+  "complements": [
+   {
+    "note_tr": "bir şeyden çıkış, bir şeyden vazgeçme: der Ausstieg aus der Atomenergie"
+   }
+  ],
+  "_src": "02516810",
+  "_src_reader": "02516810"
+ },
+ "light-0149": {
+  "translation_tr": "üye olma, katılım",
+  "complements": [
+   {
+    "note_tr": "bir şeye katılım: der Beitritt zur EU"
+   }
+  ],
+  "_src": "b2cea9e3",
+  "_src_reader": "b2cea9e3"
+ },
+ "light-0150": {
+  "complements": [
+   {
+    "note_tr": "birinden / bir şeyden tiksinti",
+    "meaning_tr": "tiksinti, iğrenme"
+   }
+  ],
+  "translation_tr": "tiksinti, iğrenme; itici kişi, iğrenç biri",
+  "_src": "59748c76",
+  "_src_reader": "59748c76"
+ },
+ "light-0151": {
+  "complements": [
+   {
+    "note_tr": "bir şeyden sorumluluk: keine Haftung für Schäden",
+    "meaning_tr": "sorumluluk, maddi sorumluluk"
+   }
+  ],
+  "translation_tr": "sorumluluk, maddi sorumluluk; yapışma, tutunma",
+  "_src": "e3e7c91c",
+  "_src_reader": "e3e7c91c"
+ },
+ "light-0152": {
+  "translation_tr": "istifa, görevden ayrılma; cayma, sözleşmeden dönme",
+  "complements": [
+   {
+    "note_tr": "bir şeyden cayma, bir şeyden çekilme: der Rücktritt vom Vertrag"
+   }
+  ],
+  "_src": "6b083aae",
+  "_src_reader": "6b083aae"
+ },
+ "light-0153": {
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye sadakat"
+   }
+  ],
+  "_src": "a770922e",
+  "_src_reader": "a770922e"
+ },
+ "light-0154": {
+  "translation_tr": "erişim; yakalama, sıkı tutma, müdahale",
+  "complements": [
+   {
+    "note_tr": "bir şeye erişim: Zugriff auf die Daten",
+    "meaning_tr": "erişim"
+   }
+  ],
+  "_src": "d159895f",
+  "_src_reader": "d159895f"
+ },
+ "light-0155": {
+  "translation_tr": "ödenek, sübvansiyon, ek ödeme",
+  "complements": [
+   {
+    "note_tr": "bir şey için ek ödeme: ein Zuschuss zu den Fahrtkosten"
+   }
+  ],
+  "_src": "da64ba2c",
+  "_src_reader": "da64ba2c"
+ },
+ "light-0156": {
+  "translation_tr": "sarmak, sargıyla bağlamak; ciltlemek; dâhil etmek, katmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyle ciltlemek; bir şeye dâhil etmek: ein Buch in Leder einbinden; die Eltern in die Planung einbinden"
+   }
+  ],
+  "_src": "3d0d8151",
+  "_src_reader": "3d0d8151"
+ },
+ "light-0157": {
+  "translation_tr": "cep telefonsuz; cep telefonu kullanımının yasak olduğu",
+  "_src": "cc007c70",
+  "_src_reader": "cc007c70"
+ },
+ "light-0158": {
+  "translation_tr": "yanlış, hatalı; ters, arkası önüne, baş aşağı, tersyüz",
+  "_src": "ba5b9737",
+  "_src_reader": "ba5b9737"
+ },
+ "light-0159": {
+  "translation_tr": "küçük mendil, küçük örtü; bez parçası, kumaş parçası",
+  "_src": "3ee6a245",
+  "_src_reader": "3ee6a245"
+ },
+ "light-0160": {
+  "translation_tr": "tartıp ayırmak; terazide tartmak",
+  "_src": "89f9c69c",
+  "_src_reader": "89f9c69c"
+ },
+ "light-0161": {
+  "translation_tr": "güneş yanığı; (yaz.) yakıcı güneş, kavurucu sıcak",
+  "_src": "81e5f2b8",
+  "_src_reader": "81e5f2b8"
+ },
+ "light-0162": {
+  "translation_tr": "sevimli, alımlı; hoş, yumuşak; yarı tatlı (şarap için)",
+  "_src": "2955de21",
+  "_src_reader": "2955de21"
+ },
+ "light-0163": {
+  "translation_tr": "ön dingil döner tablası, römork döner tablası; döner tabure",
+  "_src": "661e3366",
+  "_src_reader": "661e3366"
+ },
+ "light-0164": {
+  "translation_tr": "fotoğraf; fotoğrafçılık, fotoğraf çekme",
+  "_src": "f0783669",
+  "_src_reader": "f0783669"
+ },
+ "light-0165": {
+  "translation_tr": "kabul edilebilir; katlanılabilir, idare eder",
+  "_src": "660f1250",
+  "_src_reader": "660f1250"
+ },
+ "light-0166": {
+  "translation_tr": "moral bozukluğu, bezginlik",
+  "_src": "71cee264",
+  "_src_reader": "71cee264"
+ },
+ "light-0167": {
+  "translation_tr": "savaş döveni",
+  "_src": "3784895c",
+  "_src_reader": "3784895c"
+ },
+ "light-0168": {
+  "translation_tr": "savaş döveni",
+  "_src": "3784895c",
+  "_src_reader": "3784895c"
+ },
+ "light-0169": {
+  "translation_tr": "ıslah olmaz",
+  "_src": "8e1170ee",
+  "_src_reader": "8e1170ee"
+ },
+ "light-0170": {
+  "translation_tr": "ıslah olmaz",
+  "_src": "84d97e0b",
+  "_src_reader": "84d97e0b"
+ },
+ "light-0171": {
+  "translation_tr": "kireçlenmek; kireç tutmak; (konuş.) bunamak",
+  "_src": "9e2fa873",
+  "_src_reader": "9e2fa873"
+ },
+ "light-0172": {
+  "translation_tr": "haç biçimli profil",
+  "_src": "c7bc7dd1",
+  "_src_reader": "c7bc7dd1"
+ },
+ "light-0173": {
+  "translation_tr": "yeniden kodlamak",
+  "_src": "9d07d4c7",
+  "_src_reader": "9d07d4c7"
+ },
+ "light-0174": {
+  "translation_tr": "(bot.) ayrı eşeyli, diklin",
+  "_src": "472d5c56",
+  "_src_reader": "472d5c56"
+ },
+ "light-0175": {
+  "translation_tr": "(spor) saha orta çizgisi; yolun orta çizgisi",
+  "_src": "0d7f2059",
+  "_src_reader": "0d7f2059"
+ },
+ "light-0176": {
+  "translation_tr": "yoğrulabilir, şekil verilebilir",
+  "_src": "0be9e4b3",
+  "_src_reader": "0be9e4b3"
+ },
+ "light-0177": {
+  "translation_tr": "koşarak gelmek, atılmak, üstüne çullanmak",
+  "_src": "cc71d713",
+  "_src_reader": "cc71d713"
+ },
+ "light-0178": {
+  "translation_tr": "(tekn.) markalama pergeli",
+  "_src": "ba3777c2",
+  "_src_reader": "ba3777c2"
+ },
+ "light-0179": {
+  "translation_tr": "(mat.) çeyrekler arası açıklık",
+  "_src": "9366e135",
+  "_src_reader": "9366e135"
+ },
+ "light-0180": {
+  "translation_tr": "kendine güven kazanma, kendini teyit etme",
+  "_src": "02a7a433",
+  "_src_reader": "02a7a433"
+ },
+ "light-0181": {
+  "translation_tr": "Baltık ringası",
+  "_src": "ea4c4f65",
+  "_src_reader": "ea4c4f65"
+ },
+ "light-0182": {
+  "translation_tr": "(denizcilik) gemi dengeleme jiroskobu",
+  "_src": "9f7c5393",
+  "_src_reader": "9f7c5393"
+ },
+ "light-0183": {
+  "translation_tr": "hareket bozulması, hareketin engellenmesi; (tıp) hareket bozukluğu",
+  "_src": "ebf795ea",
+  "_src_reader": "ebf795ea"
+ },
+ "light-0184": {
+  "translation_tr": "fiziksel kondisyonla ilgili",
+  "_src": "1cb3aa39",
+  "_src_reader": "1cb3aa39"
+ },
+ "light-0185": {
+  "translation_tr": "(bot.) gazal boynuzu",
+  "_src": "67a50afb",
+  "_src_reader": "67a50afb"
+ },
+ "light-0186": {
+  "translation_tr": "fırtına esintisi, fırtına soluğu",
+  "_src": "670f2185",
+  "_src_reader": "670f2185"
+ },
+ "light-0187": {
+  "translation_tr": "araştırma reaktörü",
+  "_src": "1a70b180",
+  "_src_reader": "1a70b180"
+ },
+ "light-0188": {
+  "translation_tr": "patentle ilgili, patente göre",
+  "_src": "0cc3bfa1",
+  "_src_reader": "0cc3bfa1"
+ },
+ "light-0189": {
+  "translation_tr": "rahatsızlık, zahmet, güçlük",
+  "_src": "dae6b01e",
+  "_src_reader": "dae6b01e"
+ },
+ "light-0190": {
+  "translation_tr": "okul usulü, okul kurallarına uygun; kurallara tam uygun, örnek",
+  "_src": "65dedd2a",
+  "_src_reader": "65dedd2a"
+ },
+ "light-0191": {
+  "translation_tr": "plastik masa örtüsü, muşamba; plastik örtü, plastik kaplama",
+  "_src": "d38e5d11",
+  "_src_reader": "d38e5d11"
+ },
+ "light-0192": {
+  "translation_tr": "(dil.) cümle uzunluğu dağılımı",
+  "_src": "ac0531b2",
+  "_src_reader": "ac0531b2"
+ },
+ "light-0193": {
+  "translation_tr": "disiplin yetkisi",
+  "_src": "c9f74e5b",
+  "_src_reader": "c9f74e5b"
+ },
+ "light-0194": {
+  "translation_tr": "tam değerli, tam teşekküllü",
+  "_src": "95061b2c",
+  "_src_reader": "95061b2c"
+ },
+ "light-0195": {
+  "translation_tr": "(fizyoloji) interoseptör",
+  "_src": "7316d66f",
+  "_src_reader": "7316d66f"
+ },
+ "light-0196": {
+  "translation_tr": "telsiz mesajı, radyogram; röntgen filmi",
+  "_src": "7169bf89",
+  "_src_reader": "7169bf89"
+ },
+ "light-0197": {
+  "translation_tr": "baştan sona prova etmek, provadan geçirmek",
+  "_src": "efd096b2",
+  "_src_reader": "efd096b2"
+ },
+ "light-0198": {
+  "translation_tr": "yem olarak vermek",
+  "_src": "bdfbe7a2",
+  "_src_reader": "bdfbe7a2"
+ },
+ "light-0199": {
+  "translation_tr": "leasing ile kiraya vermek",
+  "_src": "df3b2ba8",
+  "_src_reader": "df3b2ba8"
+ },
+ "light-0200": {
+  "translation_tr": "sel gibi akmak, dökülmek",
+  "_src": "4b43478f",
+  "_src_reader": "4b43478f"
+ },
+ "light-0201": {
+  "translation_tr": "maskaralık, saçma sapan konuşma",
+  "_src": "837486f3",
+  "_src_reader": "837486f3"
+ },
+ "light-0202": {
+  "translation_tr": "zehir kesesi, zehir bezi",
+  "_src": "b4699bee",
+  "_src_reader": "b4699bee"
+ },
+ "light-0203": {
+  "translation_tr": "(fiz.) ferrielektrik",
+  "_src": "b95c0640",
+  "_src_reader": "b95c0640"
+ },
+ "light-0204": {
+  "translation_tr": "ısıtma santrali, bölgesel ısıtma tesisi",
+  "_src": "05b1934a",
+  "_src_reader": "05b1934a"
+ },
+ "light-0205": {
+  "translation_tr": "(elektrik) toprak kaçağı",
+  "_src": "6ca59613",
+  "_src_reader": "6ca59613"
+ },
+ "light-0206": {
+  "translation_tr": "nem alma cihazı",
+  "_src": "11e88ae0",
+  "_src_reader": "11e88ae0"
+ },
+ "light-0207": {
+  "translation_tr": "çizgileme, cetvelle çizgi çekme",
+  "_src": "fe66afcd",
+  "_src_reader": "fe66afcd"
+ },
+ "light-0208": {
+  "translation_tr": "(tekn.) nokta zımbasıyla işaretlemek; (avcılık) tane yemle cezbetmek",
+  "_src": "04ec622c",
+  "_src_reader": "04ec622c"
+ },
+ "light-0209": {
+  "translation_tr": "(tıp) meteoropati, hava değişimine duyarlılık",
+  "_src": "e65c768d",
+  "_src_reader": "e65c768d"
+ },
+ "light-0210": {
+  "translation_tr": "(bot.) ada soğanı",
+  "_src": "be53596f",
+  "_src_reader": "be53596f"
+ },
+ "light-0212": {
+  "translation_tr": "ahşap korkuluk, ahşap tırabzan",
+  "_src": "ced1169f",
+  "_src_reader": "ced1169f"
+ },
+ "light-0213": {
+  "translation_tr": "bombe glacée, kalıp dondurma",
+  "_src": "5094deee",
+  "_src_reader": "5094deee"
+ },
+ "light-0214": {
+  "translation_tr": "makine mühendisliği",
+  "_src": "db778ddd",
+  "_src_reader": "db778ddd"
+ },
+ "light-0215": {
+  "translation_tr": "(denizcilik) tarifesiz sefer; tarifesiz deniz taşımacılığı",
+  "_src": "82aa1557",
+  "_src_reader": "82aa1557"
+ },
+ "light-0216": {
+  "translation_tr": "yem katkı maddesi",
+  "_src": "e5761fdb",
+  "_src_reader": "e5761fdb"
+ },
+ "light-0217": {
+  "translation_tr": "anlamca yakın, eş anlamlı",
+  "_src": "1a4d455c",
+  "_src_reader": "1a4d455c"
+ },
+ "light-0218": {
+  "translation_tr": "boyun eğmez, bükülmez",
+  "_src": "8dbba245",
+  "_src_reader": "8dbba245"
+ },
+ "light-0220": {
+  "translation_tr": "ruhsal heyecan, duygulanım, duygu",
+  "_src": "97296be7",
+  "_src_reader": "97296be7"
+ },
+ "light-0221": {
+  "translation_tr": "balgam söktürücü, mukolitik",
+  "_src": "b36768e3",
+  "_src_reader": "b36768e3"
+ },
+ "light-0222": {
+  "translation_tr": "(huk.) kuruluşun düşünsel yöneliminin özel korunması",
+  "_src": "f9400d25",
+  "_src_reader": "f9400d25"
+ },
+ "light-0223": {
+  "translation_tr": "kur riskinden korunma",
+  "_src": "5413b26e",
+  "_src_reader": "5413b26e"
+ },
+ "light-0224": {
+  "translation_tr": "evrak çantası, diplomat çantası",
+  "_src": "de8d0ff1",
+  "_src_reader": "de8d0ff1"
+ },
+ "light-0225": {
+  "translation_tr": "başlık koymak, başlık atmak; (sinema) jenerik ve ara yazı eklemek",
+  "_src": "d6aebe6d",
+  "_src_reader": "d6aebe6d"
+ },
+ "light-0226": {
+  "translation_tr": "yönetmen kurgusu",
+  "_src": "7b263fbf",
+  "_src_reader": "7b263fbf"
+ },
+ "light-0227": {
+  "translation_tr": "(tekn.) kaba eğe",
+  "_src": "1a0b8f25",
+  "_src_reader": "1a0b8f25"
+ },
+ "light-0228": {
+  "translation_tr": "elektromanyetik şalter; marş otomatiği",
+  "_src": "e0bed471",
+  "_src_reader": "e0bed471"
+ },
+ "light-0229": {
+  "translation_tr": "inşaat marangozu",
+  "_src": "dc1b175b",
+  "_src_reader": "dc1b175b"
+ },
+ "light-0230": {
+  "translation_tr": "abolisyonist, kölelik karşıtı (kadın)",
+  "_src": "443e6de6",
+  "_src_reader": "443e6de6"
+ },
+ "light-0231": {
+  "translation_tr": "düğün arifesinde tabak çanak kırılan eğlence",
+  "_src": "f5433f7d",
+  "_src_reader": "f5433f7d"
+ },
+ "light-0232": {
+  "translation_tr": "(tıp) kusturucu ilaç",
+  "_src": "bac0e426",
+  "_src_reader": "bac0e426"
+ },
+ "light-0233": {
+  "translation_tr": "(tıp) kusturucu ilaç",
+  "_src": "bac0e426",
+  "_src_reader": "bac0e426"
+ },
+ "light-0234": {
+  "translation_tr": "(tıp) kusturucu ilaç",
+  "_src": "8d5eb200",
+  "_src_reader": "8d5eb200"
+ },
+ "light-0235": {
+  "translation_tr": "arka lamba",
+  "_src": "1dbd0931",
+  "_src_reader": "1dbd0931"
+ },
+ "light-0236": {
+  "translation_tr": "arka lamba",
+  "_src": "e4faa1c1",
+  "_src_reader": "e4faa1c1"
+ },
+ "light-0237": {
+  "translation_tr": "(tar.) patronaj; himaye, hamilik; (din) patronaj hakkı",
+  "_src": "c32d3c16",
+  "_src_reader": "c32d3c16"
+ },
+ "light-0238": {
+  "translation_tr": "yol kenarı haçı",
+  "_src": "751e95db",
+  "_src_reader": "751e95db"
+ },
+ "light-0239": {
+  "translation_tr": "briç, kâğıt oyunu; (müz.) köprü, şarkıda geçiş bölümü",
+  "_src": "6e579efe",
+  "_src_reader": "6e579efe"
+ },
+ "light-0241": {
+  "translation_tr": "ata binmek, eyere oturmak; kanmak, oltaya gelmek",
+  "_src": "29798d12",
+  "_src_reader": "29798d12"
+ },
+ "light-0242": {
+  "translation_tr": "yanak; kaba et, kalça; mengene ağzı, fren pabucu",
+  "_src": "d2853852",
+  "_src_reader": "d2853852"
+ },
+ "light-0243": {
+  "translation_tr": "hafif aralık, dar bir aralık",
+  "_src": "f425c206",
+  "_src_reader": "f425c206"
+ },
+ "light-0244": {
+  "translation_tr": "(esk.) burma bıyık ve sivri keçi sakalı",
+  "_src": "7ffd8ec3",
+  "_src_reader": "7ffd8ec3"
+ },
+ "light-0245": {
+  "translation_tr": "puantiyeli, benekli; noktalı",
+  "_src": "41f52dae",
+  "_src_reader": "41f52dae"
+ },
+ "light-0246": {
+  "translation_tr": "üst düzey, yüksek mevkideki; yüksek üsluplu, edebî; coşkulu, bayram havasında",
+  "_src": "0cb2e5c5",
+  "_src_reader": "0cb2e5c5"
+ },
+ "light-0247": {
+  "translation_tr": "aydın, aydınlanmış",
+  "_src": "8d1c595a",
+  "_src_reader": "8d1c595a"
+ },
+ "light-0248": {
+  "translation_tr": "duygulanmış, etkilenmiş; hareketli, olaylı; hareket eden",
+  "_src": "d89714e6",
+  "_src_reader": "d89714e6"
+ },
+ "light-0249": {
+  "translation_tr": "başarılı, iyi olmuş",
+  "_src": "abe8aa41",
+  "_src_reader": "abe8aa41"
+ },
+ "light-0250": {
+  "translation_tr": "bakımlı, düzenli; zarif, kültürlü",
+  "_src": "3a12930d",
+  "_src_reader": "3a12930d"
+ },
+ "light-0251": {
+  "translation_tr": "lanetli, lanetlenmiş; kahrolası, lanet olası",
+  "_src": "140138b6",
+  "_src_reader": "140138b6"
+ },
+ "light-0252": {
+  "translation_tr": "kırık, kırılmış; bozuk, çat pat; yıkılmış, çökmüş; kesirli",
+  "_src": "0d47e8d1",
+  "_src_reader": "0d47e8d1"
+ },
+ "light-0253": {
+  "translation_tr": "kayıp, kaybolmuş; mahvolmuş, umutsuz; kimsesiz, yalnız",
+  "_src": "edec58dd",
+  "_src_reader": "edec58dd"
+ },
+ "light-0254": {
+  "translation_tr": "dengeli, sakin; eşit, denk",
+  "_src": "332df937",
+  "_src_reader": "332df937"
+ },
+ "light-0255": {
+  "translation_tr": "meslek eğitimi almış, diplomalı; öğrenilmiş",
+  "_src": "181b5304",
+  "_src_reader": "181b5304"
+ },
+ "light-0256": {
+  "translation_tr": "uygulamalı; uygulanan, kullanılan",
+  "_src": "96f080fb",
+  "_src_reader": "96f080fb"
+ },
+ "light-0257": {
+  "translation_tr": "dolambaçlı, kıvrımlı; karmaşık, kaçamak",
+  "_src": "9072c6b3",
+  "_src_reader": "9072c6b3"
+ },
+ "light-0258": {
+  "translation_tr": "belirgin, yapmacık; vurgulu",
+  "_src": "31ce0fff",
+  "_src_reader": "31ce0fff"
+ },
+ "light-0259": {
+  "translation_tr": "moda, popüler; duyurulmuş, ilan edilmiş",
+  "_src": "5e0e2c33",
+  "_src_reader": "5e0e2c33"
+ },
+ "light-0260": {
+  "translation_tr": "sınırlı, kısıtlı; dar kafalı, kalın kafalı",
+  "_src": "2a28f63e",
+  "_src_reader": "2a28f63e"
+ },
+ "light-0261": {
+  "translation_tr": "mübarek, kutsanmış; hatırı sayılır, sağlam",
+  "_src": "39a27f34",
+  "_src_reader": "39a27f34"
+ },
+ "light-0262": {
+  "translation_tr": "nesli tükenmiş; ıssız, boşalmış",
+  "_src": "05fa3617",
+  "_src_reader": "05fa3617"
+ },
+ "light-0263": {
+  "translation_tr": "eşit olmak, denk olmak; benzemek, andırmak; (esk.) düzlemek, ayarını kontrol etmek",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0264": {
+  "translation_tr": "kopulasyon, çiftleşme; (bot.) aşılama; (esk.) nikâh, evlenme töreni",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0265": {
+  "translation_tr": "çiftleşmek, cinsel ilişkiye girmek; (bot.) aşılamak; (esk.) nikâh kıymak",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0266": {
+  "translation_tr": "dikkat; ilgi odağı; (esk.) hedef, hedef tahtası",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0267": {
+  "translation_tr": "isteksizce karar vermek, tenezzül etmek; (esk.) yetinmek; (esk.) uydurmak, uyarlamak; (esk.) zorlamak, mecbur etmek",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0268": {
+  "translation_tr": "(esk.) akla gelmek; (esk.) onaylamak, katılmak",
+  "_src": "fafed2a9",
+  "_src_reader": "fafed2a9"
+ },
+ "light-0269": {
+  "translation_tr": "yerden yere vurmak, karalamak, iftira atmak; (esk.) sapkın ilan etmek",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0270": {
+  "translation_tr": "elde etmeye çalışmak, peşinde koşmak, yaranmaya çalışmak; (esk.) kur yapmak, gönlünü çelmeye çalışmak; (esk.) sevişmek, cilveleşmek",
+  "complements": [
+   {
+    "note_tr": "bir şeyi elde etmeye çalışmak (olumsuz): Die Parteien buhlen um die Gunst der Wähler.",
+    "meaning_tr": "elde etmeye çalışmak, peşinde koşmak, yaranmaya çalışmak"
+   },
+   {
+    "note_tr": "(esk.) birine kur yapmak, birinin aşkını kazanmaya çalışmak: Zwei Ritter buhlten um die schöne Gräfin.",
+    "meaning_tr": "(esk.) kur yapmak, gönlünü çelmeye çalışmak"
+   },
+   {
+    "note_tr": "(esk.) biriyle cilveleşmek, sevişmek: Sie buhlte mit dem jungen Grafen.",
+    "meaning_tr": "(esk.) sevişmek, cilveleşmek"
+   }
+  ],
+  "_src": "957cb348",
+  "_src_reader": "957cb348"
+ },
+ "light-0271": {
+  "translation_tr": "kınamak, reddetmek; (esk.) ceza tehdidiyle yasaklamak",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0272": {
+  "translation_tr": "ekonomi, ekonomik yapı; iktisat, ekonomi bilimi; tutumluluk, idarelilik; (Avusturya, esk.) çiftlik, malikâne",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0273": {
+  "translation_tr": "(şaka yollu) araştırıp öğrenmek, açıklığa kavuşturmak; (İsviçre, ask.) arazi keşfi yapmak; (esk.) tasdik etmek, gerçekliğini kabul etmek",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0274": {
+  "translation_tr": "bir işin bedelini ödemek, ücret ödemek; ödüllendirmek, hakkını vermek; (bankacılık) senedi, çeki ödemek",
+  "_src": "fee31406",
+  "_src_reader": "fee31406"
+ },
+ "light-0275": {
+  "translation_tr": "zamanı boşa harcamak; (esk.) yok pahasına satmak",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0276": {
+  "translation_tr": "(konuş.) çalışmak, işlemek; (esk.) yağ lambasıyla aydınlatmak",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0277": {
+  "translation_tr": "seslendirmek, sesle kaydetmek; birine dil dökmek, birini ikna etmeye çalışmak; (esk.) itiraz etmek; (esk.) uğramak, ziyaret etmek",
+  "_src": "eae08e7b",
+  "_src_reader": "eae08e7b"
+ },
+ "light-0278": {
+  "translation_tr": "göz kamaştırırcasına, parlak bir şekilde, ışıl ışıl",
+  "_src": "811c9dc5",
+  "_src_reader": "811c9dc5"
+ },
+ "light-0279": {
+  "translation_tr": "berrak, güneşli; parlayan, ışıl ışıl; (fiz.) ışınım yayan, radyoaktif",
+  "_src": "9b5c5462",
+  "_src_reader": "9b5c5462"
+ },
+ "light-0280": {
+  "translation_tr": "katılan, işin içinde olan; payı olan; ilgili, çıkarı olan",
+  "complements": [
+   {
+    "meaning_tr": "katılan, işin içinde olan",
+    "note_tr": "bir şeye katılan, bir şeyin içinde olan: Er war an dem Projekt beteiligt."
+   },
+   {
+    "meaning_tr": "payı olan",
+    "note_tr": "bir şeyde payı olan: Er ist am Gewinn beteiligt."
+   }
+  ],
+  "_src": "fdce0916",
+  "_src_reader": "fdce0916"
+ },
+ "light-0281": {
+  "translation_tr": "(Avusturya) eski, önceki",
+  "_src": "0010bf03",
+  "_src_reader": "0010bf03"
+ },
+ "light-0282": {
+  "translation_tr": "tanınmış, otorite sahibi; belirtilmiş, gösterilmiş; sınır dışı edilmiş",
+  "_src": "6626fa71",
+  "_src_reader": "6626fa71"
+ },
+ "light-0283": {
+  "translation_tr": "açıkça ilan edilmiş, kararlı; belirgin, kabul görmüş",
+  "_src": "40180c29",
+  "_src_reader": "40180c29"
+ },
+ "light-0284": {
+  "translation_tr": "(yöresel) o (kadın), onlar, onu (kadın), onları",
+  "_src": "28357316",
+  "_src_reader": "28357316"
+ },
+ "light-0285": {
+  "translation_tr": "(yöresel) ona, onu (erkek)",
+  "_src": "0bdd1f6d",
+  "_src_reader": "0bdd1f6d"
+ },
+ "light-0286": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Die Soldaten hatten den Befehl, die Brücke zu bewachen. — Askerlerin köprüyü koruma emri vardı."
+   }
+  ],
+  "_src": "175a9fdd",
+  "_src_reader": "175a9fdd"
+ },
+ "light-0287": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Ich hatte die Ehre, ihn persönlich kennenzulernen. — Onunla şahsen tanışma onuruna eriştim."
+   }
+  ],
+  "_src": "53151bc4",
+  "_src_reader": "53151bc4"
+ },
+ "light-0288": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Er folgte dem Trieb, zu helfen. — Yardım etme dürtüsüne uydu."
+   }
+  ],
+  "_src": "c59c4475",
+  "_src_reader": "c59c4475"
+ },
+ "light-0289": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Ihr fehlte die Courage, Nein zu sagen. — “Hayır” demeye cesareti yetmedi."
+   }
+  ],
+  "_src": "69fd18d7",
+  "_src_reader": "69fd18d7"
+ },
+ "light-0290": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Es ist eine Dreistigkeit, so etwas zu behaupten. — Böyle bir şey iddia etmek küstahlıktır."
+   }
+  ],
+  "_src": "64b6b628",
+  "_src_reader": "64b6b628"
+ },
+ "light-0291": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Der Wächter hatte die Weisung, niemanden hereinzulassen. — Bekçinin kimseyi içeri almama talimatı vardı."
+   }
+  ],
+  "_src": "ec072486",
+  "_src_reader": "ec072486"
+ },
+ "light-0292": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Er bekam die Auflage, sich jede Woche zu melden. — Ona her hafta imzaya gelme yükümlülüğü getirildi."
+   }
+  ],
+  "_src": "79c71d5b",
+  "_src_reader": "79c71d5b"
+ },
+ "light-0293": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Er hat nicht die Befugnis, das zu entscheiden. — Buna karar verme yetkisi yok."
+   }
+  ],
+  "_src": "cd20109a",
+  "_src_reader": "cd20109a"
+ },
+ "light-0294": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Sie hat die Vollmacht, den Vertrag zu unterschreiben. — Sözleşmeyi imzalamak için vekâleti var."
+   }
+  ],
+  "_src": "c4ebf832",
+  "_src_reader": "c4ebf832"
+ },
+ "light-0295": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Ich habe Order, niemanden hereinzulassen. — Kimseyi içeri almama emrim var."
+   }
+  ],
+  "_src": "531bfb66",
+  "_src_reader": "531bfb66"
+ },
+ "light-0296": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Er gab mir einen Wink, zu schweigen. — Bana susmam için işaret verdi."
+   }
+  ],
+  "_src": "5abe22b6",
+  "_src_reader": "5abe22b6"
+ },
+ "light-0297": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Der Brauch, zu Ostern Eier zu bemalen, ist sehr alt. — Paskalya'da yumurta boyama geleneği çok eskidir."
+   }
+  ],
+  "_src": "c4e2969d",
+  "_src_reader": "c4e2969d"
+ },
+ "light-0298": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Er hat die Manie, alles aufzuschreiben. — Her şeyi yazıp kaydetme takıntısı var."
+   }
+  ],
+  "_src": "58b13988",
+  "_src_reader": "58b13988"
+ },
+ "light-0299": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Der Entscheid, die Schule zu schließen, kam überraschend. — Okulu kapatma kararı beklenmedik oldu."
+   }
+  ],
+  "_src": "86749ec1",
+  "_src_reader": "86749ec1"
+ },
+ "light-0300": {
+  "complements": [
+   {
+    "note_tr": "+ zu ile mastar: Sie hat Prokura, Verträge zu unterschreiben. — Sözleşme imzalama yetkisi veren ticarî vekâleti var."
+   }
+  ],
+  "_src": "9db8767d",
+  "_src_reader": "9db8767d"
+ },
+ "light-0301": {
+  "translation_tr": "bilgi alma, sorup soruşturma",
+  "complements": [
+   {
+    "note_tr": "biri / bir şey hakkında bilgi alma: Erkundigungen nach dem Weg"
+   }
+  ],
+  "_src": "18284209",
+  "_src_reader": "18284209"
+ },
+ "light-0302": {
+  "translation_tr": "alışma",
+  "complements": [
+   {
+    "note_tr": "bir şeye alışma: die Gewöhnung an das Klima"
+   }
+  ],
+  "_src": "44a7ef53",
+  "_src_reader": "44a7ef53"
+ },
+ "light-0303": {
+  "translation_tr": "(bir şeye) yönelme, (bir şeye) dönüş",
+  "complements": [
+   {
+    "note_tr": "bir şeye yönelme: die Hinwendung zur Religion"
+   }
+  ],
+  "_src": "27b35aeb",
+  "_src_reader": "27b35aeb"
+ },
+ "light-0304": {
+  "translation_tr": "tartışma, münazara",
+  "complements": [
+   {
+    "note_tr": "bir şey hakkında tartışma: ein langer Disput über die Methode"
+   }
+  ],
+  "_src": "5f1323b6",
+  "_src_reader": "5f1323b6"
+ },
+ "light-0305": {
+  "translation_tr": "(taşıta) binme, giriş; giriş kapısı; (zor bir konuya) yaklaşım, konunun içine girme; başlangıç, (bir şeye) adım atma",
+  "complements": [
+   {
+    "meaning_tr": "(zor bir konuya) yaklaşım, konunun içine girme",
+    "note_tr": "bir şeye binme, bir şeye giriş: der Einstieg in den Bus; bir konuya yaklaşım: der Einstieg in diese Problematik; başlangıç, adım atma: der Einstieg ins Berufsleben, der Einstieg in den Markt"
+   },
+   {
+    "meaning_tr": "başlangıç, (bir şeye) adım atma",
+    "note_tr": "bir şeye binme, bir şeye giriş: der Einstieg in den Bus; bir konuya yaklaşım: der Einstieg in diese Problematik; başlangıç, adım atma: der Einstieg ins Berufsleben, der Einstieg in den Markt"
+   }
+  ],
+  "_src": "838badb1",
+  "_src_reader": "838badb1"
+ },
+ "light-0306": {
+  "translation_tr": "boya vermek, rengini bulaştırmak; etkilemek, bulaşmak",
+  "complements": [
+   {
+    "meaning_tr": "boya vermek, rengini bulaştırmak",
+    "note_tr": "bir şeye boya vermek, bir şeye rengini bulaştırmak: Das rote Hemd hat auf die weiße Wäsche abgefärbt."
+   },
+   {
+    "meaning_tr": "etkilemek, bulaşmak",
+    "note_tr": "birine bulaşmak, birini etkilemek: Seine gute Laune färbt auf die Kollegen ab."
+   }
+  ],
+  "_src": "c693ab13",
+  "_src_reader": "c693ab13"
+ },
+ "light-0307": {
+  "translation_tr": "soyundan gelmek, neslinden olmak",
+  "complements": [
+   {
+    "note_tr": "birinin soyundan gelmek: Er stammt von einer alten Bauernfamilie ab."
+   }
+  ],
+  "_src": "d0eb8c6a",
+  "_src_reader": "d0eb8c6a"
+ },
+ "light-0308": {
+  "translation_tr": "ayrılmak, (bir yeri) terk etmek, sahneden çekilmek; (görevden) ayrılmak, işi bırakmak; (konuş.) ölmek; (birine) bırakmak, (birinin) kullanımına vermek; (hak, alacak) devretmek; (ayakkabıyı) silmek, (ayakkabıdaki çamuru) temizlemek; eskitmek, aşındırmak, yıpratmak (yürüyerek); (ayakla vurarak) kırmak, koparmak",
+  "reflexive": {
+   "translation_tr": "(üzerinde yürünmekten) aşınmak, yıpranmak"
+  },
+  "complements": [
+   {
+    "meaning_tr": "(birine) bırakmak, (birinin) kullanımına vermek",
+    "note_tr": "birine bir şeyi bırakmak: Er tritt sein Zimmer an den jüngeren Bruder ab."
+   },
+   {
+    "meaning_tr": "(hak, alacak) devretmek",
+    "note_tr": "birine (bir hakkı) devretmek: Sie tritt ihre Forderung an die Bank ab."
+   }
+  ],
+  "_src": "553312f5",
+  "_src_reader": "553312f5"
+ },
+ "light-0309": {
+  "translation_tr": "sırayla değişmek, birbirini izlemek; nöbetleşmek, (bir işte) birbirinin yerine geçmek",
+  "reflexive": {
+   "translation_tr": "sırayla değişmek, birbirini izlemek; nöbetleşmek, (bir işte) birbirinin yerine geçmek",
+   "complements": [
+    {
+     "meaning_tr": "sırayla değişmek, birbirini izlemek",
+     "note_tr": "bir şeyle sırayla değişmek: Regen wechselt sich mit Sonnenschein ab."
+    },
+    {
+     "meaning_tr": "nöbetleşmek, (bir işte) birbirinin yerine geçmek",
+     "note_tr": "biriyle nöbetleşmek: Ich wechsle mich beim Fahren mit meinem Bruder ab."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "sırayla değişmek, birbirini izlemek",
+    "note_tr": "bir şeyle sırayla değişmek: Regen wechselt sich mit Sonnenschein ab."
+   },
+   {
+    "meaning_tr": "nöbetleşmek, (bir işte) birbirinin yerine geçmek",
+    "note_tr": "biriyle nöbetleşmek: Ich wechsle mich beim Fahren mit meinem Bruder ab."
+   }
+  ],
+  "_src": "e01fa747",
+  "_src_reader": "e01fa747"
+ },
+ "light-0310": {
+  "translation_tr": "yönelik olmak, amaçlamak, hedeflemek",
+  "complements": [
+   {
+    "note_tr": "bir şeye yönelik olmak: Die Kampagne zielt auf junge Wähler ab."
+   }
+  ],
+  "_src": "34940914",
+  "_src_reader": "34940914"
+ },
+ "light-0311": {
+  "translation_tr": "dikkat etmek, göz kulak olmak, korumak; dikkatli olmak, tedbirli olmak",
+  "complements": [
+   {
+    "meaning_tr": "dikkat etmek, göz kulak olmak, korumak",
+    "note_tr": "bir şeye dikkat etmek, bir şeye göz kulak olmak: Gib gut auf deine Tasche acht!"
+   }
+  ],
+  "_src": "de568fe8",
+  "_src_reader": "de568fe8"
+ },
+ "light-0312": {
+  "translation_tr": "arkadaş olmak; alışmak, ısınmak",
+  "complements": [
+   {
+    "meaning_tr": "arkadaş olmak",
+    "note_tr": "biriyle arkadaş olmak: Sie hat sich mit der neuen Nachbarin angefreundet."
+   },
+   {
+    "meaning_tr": "alışmak, ısınmak",
+    "note_tr": "bir şeye alışmak, bir şeye ısınmak: Ich kann mich mit dem Gedanken nicht anfreunden."
+   }
+  ],
+  "_src": "fe4e535b",
+  "_src_reader": "fe4e535b"
+ },
+ "light-0313": {
+  "translation_tr": "hatırlatmak, çağrıştırmak; duyulmak, sezilmek, hissedilmek",
+  "complements": [
+   {
+    "meaning_tr": "hatırlatmak, çağrıştırmak",
+    "note_tr": "bir şeyi hatırlatmak: Das Lied klingt an einen alten Schlager an."
+   }
+  ],
+  "_src": "4ee40b82",
+  "_src_reader": "4ee40b82"
+ },
+ "light-0314": {
+  "translation_tr": "ortaya çıkmak, belirmek, yükselmek, moda olmak; (masrafları) ödemek, karşılamak; sorumlu olmak, sorumluluğu üstlenmek; baş etmek, boy ölçüşmek; (biriyle) aynı düzeyde olmak, denk olmak; kalkmak, ayağa kalkmak; (yaz.) iyileşmek, sağlığına kavuşmak; (yöresel) anlaşılmak, açığa çıkmak; yere inmek; arayı kapatmak, baskıyı artırmak (spor); ufukta görünmek (gemi için)",
+  "complements": [
+   {
+    "meaning_tr": "(masrafları) ödemek, karşılamak",
+    "note_tr": "bir şeyin masrafını karşılamak: Die Versicherung kommt für den Schaden auf."
+   },
+   {
+    "meaning_tr": "sorumlu olmak, sorumluluğu üstlenmek",
+    "note_tr": "bir şeyden sorumlu olmak: Der Staat kommt für die Sicherheit der Bürger auf."
+   },
+   {
+    "meaning_tr": "baş etmek, boy ölçüşmek",
+    "note_tr": "biriyle / bir şeyle baş etmek: Gegen diesen Gegner kommt er nicht auf."
+   },
+   {
+    "meaning_tr": "(biriyle) aynı düzeyde olmak, denk olmak",
+    "note_tr": "biriyle aynı düzeyde olmak: Gegen ihn kommt im Team niemand auf."
+   }
+  ],
+  "_src": "9bae66c4",
+  "_src_reader": "9bae66c4"
+ },
+ "light-0315": {
+  "translation_tr": "üstünlüğünü göstermek, göz doldurmak; kendini kabul ettirmek, dediğim dedik demek",
+  "complements": [
+   {
+    "meaning_tr": "üstünlüğünü göstermek, göz doldurmak",
+    "note_tr": "bir şeyle göz doldurmak: Sie trumpft mit ihren Sprachkenntnissen auf."
+   }
+  ],
+  "_src": "0a7ad5bb",
+  "_src_reader": "0a7ad5bb"
+ },
+ "light-0316": {
+  "translation_tr": "(yaz.) ikram etmek, ağırlamak; sunmak, ortaya koymak, gösterecek bir şeyi olmak; (esk.) hizmet etmek, (misafirlere) bakmak; (esk.) nezaket ziyaretinde bulunmak",
+  "complements": [
+   {
+    "meaning_tr": "(yaz.) ikram etmek, ağırlamak",
+    "note_tr": "birine bir şey ikram etmek: Die Gastgeberin wartet den Gästen mit einem Kuchen auf."
+   },
+   {
+    "meaning_tr": "sunmak, ortaya koymak, gösterecek bir şeyi olmak",
+    "note_tr": "bir şey sunmak: Der Verein wartet mit einer Überraschung auf."
+   }
+  ],
+  "_src": "3a167917",
+  "_src_reader": "3a167917"
+ },
+ "light-0317": {
+  "translation_tr": "hacmini büyütmek, germek; (sınırları) genişletmek; yaymak; uzatmak, sürüncemede bırakmak (zaman olarak)",
+  "reflexive": {
+   "translation_tr": "genişlemek, hacmi büyümek; yayılmak; uzamak, sürmek; uzanmak",
+   "complements": [
+    {
+     "meaning_tr": "yayılmak",
+     "note_tr": "bir şeye yayılmak: Das Feuer dehnte sich auf das Nachbarhaus aus."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "yaymak",
+    "note_tr": "bir şeyi bir şeye yaymak: Die Firma dehnt ihr Angebot auf ganz Europa aus."
+   }
+  ],
+  "_src": "05eb0d85",
+  "_src_reader": "05eb0d85"
+ },
+ "light-0318": {
+  "translation_tr": "(yaz.) terfi etmek, görevde yükselmek; olmak, sivrilmek; (esk.) ilerlemek, ileri atılmak",
+  "complements": [
+   {
+    "meaning_tr": "(yaz.) terfi etmek, görevde yükselmek",
+    "note_tr": "bir göreve terfi etmek: Sie avancierte zur Abteilungsleiterin."
+   },
+   {
+    "meaning_tr": "olmak, sivrilmek",
+    "note_tr": "bir şey olmak, bir şey hâline gelmek: Der Film avancierte zum Kassenschlager."
+   }
+  ],
+  "_src": "a4c9e139",
+  "_src_reader": "a4c9e139"
+ },
+ "light-0319": {
+  "translation_tr": "olanak sağlamak, yetkin kılmak",
+  "complements": [
+   {
+    "note_tr": "birini bir şey için yetkin kılmak: Die Ausbildung befähigt ihn zu einem Studium."
+   }
+  ],
+  "_src": "a76e4432",
+  "_src_reader": "a76e4432"
+ },
+ "light-0320": {
+  "translation_tr": "(bir alanı) dolaşmak, gezip geçmek; (yöresel) sık sık uğramak, akın etmek (ziyaretçiler için); (yöresel) buğulanmak",
+  "reflexive": {
+   "translation_tr": "tutmak, (bir tutara) ulaşmak",
+   "complements": [
+    {
+     "note_tr": "bir tutara ulaşmak: Die Kosten belaufen sich auf 500 Euro."
+    }
+   ]
+  },
+  "_src": "57a382c5",
+  "_src_reader": "57a382c5"
+ },
+ "light-0321": {
+  "translation_tr": "tedarik etmek, mal vermek",
+  "complements": [
+   {
+    "note_tr": "birine bir şey tedarik etmek: Die Firma beliefert die Läden mit frischem Obst."
+   }
+  ],
+  "_src": "576fb95f",
+  "_src_reader": "576fb95f"
+ },
+ "light-0322": {
+  "translation_tr": "bitki dikmek",
+  "complements": [
+   {
+    "note_tr": "bir yere bir şey dikmek: Wir bepflanzen das Beet mit Tulpen."
+   }
+  ],
+  "_src": "722c80fe",
+  "_src_reader": "722c80fe"
+ },
+ "light-0323": {
+  "translation_tr": "kaplamak, (kumaş, tel) germek; (arabaya hayvan) koşmak",
+  "complements": [
+   {
+    "meaning_tr": "kaplamak, (kumaş, tel) germek",
+    "note_tr": "bir şeyi bir şeyle kaplamak: Er bespannt den Rahmen mit Leinwand."
+   },
+   {
+    "meaning_tr": "(arabaya hayvan) koşmak",
+    "note_tr": "arabaya hayvan koşmak: Man bespannte den Wagen mit zwei Pferden."
+   }
+  ],
+  "_src": "31ff42a7",
+  "_src_reader": "31ff42a7"
+ },
+ "light-0324": {
+  "translation_tr": "görevlendirmek, (bir işi) emanet etmek",
+  "complements": [
+   {
+    "note_tr": "birine bir işi emanet etmek: Man betraute sie mit der Leitung des Projekts."
+   }
+  ],
+  "_src": "e5ecc79d",
+  "_src_reader": "e5ecc79d"
+ },
+ "light-0325": {
+  "translation_tr": "övünmek, böbürlenmek",
+  "complements": [
+   {
+    "note_tr": "bir şeyle övünmek: Er brüstet sich mit seinem neuen Auto."
+   }
+  ],
+  "_src": "42a5fe88",
+  "_src_reader": "42a5fe88"
+ },
+ "light-0326": {
+  "translation_tr": "(yavru) çıkarmak, kuluçkaya yatmak; (yaz.) çökmek, kavurmak (sıcak için); düşünüp durmak, kafa yormak, üzerinde uğraşmak; (kötülük) planlamak, kafasında kurmak; (fiz.) (nükleer yakıt) üretmek",
+  "complements": [
+   {
+    "meaning_tr": "düşünüp durmak, kafa yormak, üzerinde uğraşmak",
+    "note_tr": "bir şey üzerinde kafa yormak: Er brütet über der Mathematikaufgabe."
+   }
+  ],
+  "_src": "fc256dc1",
+  "_src_reader": "fc256dc1"
+ },
+ "light-0327": {
+  "translation_tr": "(yaz.) susamak, su içmek istemek; (yaz.) can atmak, şiddetle arzulamak",
+  "complements": [
+   {
+    "note_tr": "bir şeye susamak, bir şeye can atmak: Das Volk dürstet nach Freiheit."
+   }
+  ],
+  "_src": "e1c4a354",
+  "_src_reader": "e1c4a354"
+ },
+ "light-0328": {
+  "translation_tr": "gözüne girmeye çalışmak, yağ çekmek, yaltaklanmak",
+  "complements": [
+   {
+    "note_tr": "birinin gözüne girmeye çalışmak: Sie schmeichelt sich bei der Lehrerin ein."
+   }
+  ],
+  "_src": "c51bb58f",
+  "_src_reader": "c51bb58f"
+ },
+ "light-0329": {
+  "translation_tr": "(çalgıyı) akort etmek; (şarkıya) eşlik etmek, katılmak; (bir şeye) hazırlamak, havaya sokmak; (esk.) razı olmak",
+  "reflexive": {
+   "translation_tr": "havasına girmek",
+   "complements": [
+    {
+     "note_tr": "bir şeyin havasına girmek: Wir stimmen uns auf den Urlaub ein."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "(çalgıyı) akort etmek",
+    "note_tr": "bir tona göre akort etmek: Sie stimmt die Geige auf den Kammerton ein."
+   },
+   {
+    "meaning_tr": "(bir şeye) hazırlamak, havaya sokmak",
+    "note_tr": "birini bir şeye hazırlamak: Der Lehrer stimmt die Klasse auf die Prüfung ein."
+   },
+   {
+    "meaning_tr": "(şarkıya) eşlik etmek, katılmak",
+    "note_tr": "bir şeye eşlik etmek: Alle stimmen in das Lied ein."
+   },
+   {
+    "meaning_tr": "(esk.) razı olmak",
+    "note_tr": "bir şeye razı olmak: Er stimmte in den Vorschlag ein."
+   }
+  ],
+  "_src": "aee04d8d",
+  "_src_reader": "aee04d8d"
+ },
+ "light-0330": {
+  "translation_tr": "bölmek, ayırmak, kısımlara ayırmak; (erzakı, zamanı) paylaştırmak, idareli kullanmak; (bir işe, nöbete) atamak, görevlendirmek",
+  "complements": [
+   {
+    "meaning_tr": "bölmek, ayırmak, kısımlara ayırmak",
+    "note_tr": "bir şeyi bir şeye bölmek: Wir teilen die Klasse in drei Gruppen ein."
+   }
+  ],
+  "_src": "2687578c",
+  "_src_reader": "2687578c"
+ },
+ "light-0331": {
+  "translation_tr": "hiddetlenmek, kızışmak, köpürmek",
+  "complements": [
+   {
+    "note_tr": "bir şey yüzünden kızışmak: Er ereifert sich über die neuen Steuern."
+   }
+  ],
+  "_src": "b462a7f8",
+  "_src_reader": "b462a7f8"
+ },
+ "light-0332": {
+  "translation_tr": "hastalanmak",
+  "complements": [
+   {
+    "note_tr": "bir hastalığa yakalanmak: Sie ist an Masern erkrankt."
+   }
+  ],
+  "_src": "c131e19d",
+  "_src_reader": "c131e19d"
+ },
+ "light-0333": {
+  "translation_tr": "cesaretlendirmek, teşvik etmek, özendirmek; (nadiren) canlandırmak, dinçleştirmek",
+  "complements": [
+   {
+    "meaning_tr": "cesaretlendirmek, teşvik etmek, özendirmek",
+    "note_tr": "birini bir şeye teşvik etmek: Die Trainerin ermuntert ihn zum Weitermachen."
+   }
+  ],
+  "_src": "4d089701",
+  "_src_reader": "4d089701"
+ },
+ "light-0334": {
+  "translation_tr": "gafil avlamak, (suçüstü) yakalamak",
+  "reflexive": {
+   "translation_tr": "(bir düşünceye, bir isteğe kapılırken) kendini yakalamak",
+   "complements": [
+    {
+     "note_tr": "kendini bir şey yaparken yakalamak: Ich ertappe mich bei dem Wunsch, alles hinzuwerfen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_tr": "birini bir şey yaparken yakalamak: Die Mutter ertappt ihn beim Naschen."
+   }
+  ],
+  "_src": "b2b8b447",
+  "_src_reader": "b2b8b447"
+ },
+ "light-0335": {
+  "translation_tr": "ısıtmak, sıcaklık vermek; (bir şeye) ısındırmak, ikna etmek, ilgisini uyandırmak",
+  "reflexive": {
+   "translation_tr": "ısınmak, ılıklaşmak; kanı ısınmak, ilgi duymak",
+   "complements": [
+    {
+     "meaning_tr": "kanı ısınmak, ilgi duymak",
+     "note_tr": "bir şeye ısınmak: Ich kann mich für dieses Hobby nicht erwärmen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "(bir şeye) ısındırmak, ikna etmek, ilgisini uyandırmak",
+    "note_tr": "birini bir şeye ısındırmak, birinin bir şeye ilgisini uyandırmak: Er versuchte, die Partei für seine Ideen zu erwärmen."
+   }
+  ],
+  "_src": "0fb03c28",
+  "_src_reader": "0fb03c28"
+ },
+ "light-0336": {
+  "translation_tr": "eğelemek, eğeyle işlemek; (mec.) cilalamak, son hâline getirmek",
+  "complements": [
+   {
+    "meaning_tr": "(mec.) cilalamak, son hâline getirmek",
+    "note_tr": "bir şey üzerinde ince ince çalışmak: Sie feilt noch an ihrer Rede."
+   },
+   {
+    "meaning_tr": "eğelemek, eğeyle işlemek",
+    "note_tr": "bir şeyi eğelemek: Er feilt an dem neuen Schlüssel."
+   }
+  ],
+  "_src": "98a4b682",
+  "_src_reader": "98a4b682"
+ },
+ "light-0337": {
+  "translation_tr": "dayanmak, temellenmek; (avcılık) konmak (yırtıcı kuşlar için)",
+  "complements": [
+   {
+    "meaning_tr": "dayanmak, temellenmek",
+    "note_tr": "bir şeye dayanmak: Der Roman fußt auf einer wahren Geschichte."
+   }
+  ],
+  "_src": "40b325f8",
+  "_src_reader": "40b325f8"
+ },
+ "light-0338": {
+  "translation_tr": "katılmak; eklenmek, ilave olmak",
+  "complements": [
+   {
+    "note_tr": "birine katılmak: Nach dem Konzert gesellte er sich zu uns."
+   }
+  ],
+  "_src": "af10d3c4",
+  "_src_reader": "af10d3c4"
+ },
+ "light-0339": {
+  "translation_tr": "(yaz.) üzmek, kederlendirmek",
+  "reflexive": {
+   "translation_tr": "(yaz.) kederlenmek, kahrolmak, dövünmek",
+   "complements": [
+    {
+     "note_tr": "bir şey için kederlenmek: Sie grämt sich über den Tod ihres Hundes."
+    }
+   ]
+  },
+  "_src": "180f1a83",
+  "_src_reader": "180f1a83"
+ },
+ "light-0340": {
+  "translation_tr": "yaklaşmak, yanına gelmek; gelip çatmak, yaklaşmak (zaman için); uzanıp ulaşmak, erişmek, (mec.) denk olmak; ele geçirmek, erişim sağlamak, bulup buluşturmak; sınırına dayanmak, varmak",
+  "complements": [
+   {
+    "meaning_tr": "uzanıp ulaşmak, erişmek, (mec.) denk olmak",
+    "note_tr": "bir şeye uzanıp ulaşmak: Das Kind kommt nicht an den Lichtschalter heran."
+   },
+   {
+    "meaning_tr": "ele geçirmek, erişim sağlamak, bulup buluşturmak",
+    "note_tr": "bir şeye erişim sağlamak: Wie bist du an die Eintrittskarten herangekommen?"
+   },
+   {
+    "meaning_tr": "sınırına dayanmak, varmak",
+    "note_tr": "bir şeyin sınırına dayanmak: Das kommt schon nahe an Betrug heran."
+   }
+  ],
+  "_src": "72053963",
+  "_src_reader": "72053963"
+ },
+ "light-0341": {
+  "translation_tr": "saldırmak, üzerine atılmak; (eleştiriyle) üzerine çullanmak, yüklenmek; (yemeğe) saldırmak",
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye saldırmak: Die Kinder fielen über den Kuchen her."
+   }
+  ],
+  "_src": "1012580b",
+  "_src_reader": "1012580b"
+ },
+ "light-0342": {
+  "translation_tr": "(konuş.) etkileyici görünmek, göz doldurmak; (konuş.) abartmak, göklere çıkarmak",
+  "reflexive": {
+   "translation_tr": "(konuş.) (bir işe) girişmek, koyulmak, (yemeğe) saldırmak; (konuş.) üzerine çullanmak, saldırmak",
+   "complements": [
+    {
+     "note_tr": "bir şeye / birine saldırmak: Er machte sich gleich über die Pizza her."
+    }
+   ]
+  },
+  "_src": "6300bff4",
+  "_src_reader": "6300bff4"
+ },
+ "light-0343": {
+  "translation_tr": "kaynaklanmak, ileri gelmek, bir şeyle açıklanmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyden kaynaklanmak: Der Fleck rührt von dem Rotwein her."
+   }
+  ],
+  "_src": "7bc977a4",
+  "_src_reader": "7bc977a4"
+ },
+ "light-0344": {
+  "translation_tr": "(konuş.) yaklaştırmak, (kendine) çekmek; peşinden sürüklemek; (önünde, arkasında, yanında) gitmek, yürümek; buraya taşınmak; (konuş.) dedikodusunu yapmak, çekiştirmek",
+  "complements": [
+   {
+    "meaning_tr": "(konuş.) dedikodusunu yapmak, çekiştirmek",
+    "note_tr": "birinin dedikodusunu yapmak: Sie ziehen ständig über ihre Nachbarn her."
+   }
+  ],
+  "_src": "6189708d",
+  "_src_reader": "6189708d"
+ },
+ "light-0345": {
+  "translation_tr": "kovalamak, sürmek, peşine düşmek; üzerine salmak; acele etmek, telaş etmek; koşturmak, hızla gitmek; (olumsuz) karalama kampanyası yürütmek, nefret körüklemek; (olumsuz) kışkırtmak",
+  "complements": [
+   {
+    "meaning_tr": "(olumsuz) karalama kampanyası yürütmek, nefret körüklemek",
+    "note_tr": "birine karşı karalama kampanyası yürütmek: Die Zeitung hetzt gegen die Flüchtlinge."
+   },
+   {
+    "meaning_tr": "üzerine salmak",
+    "note_tr": "birinin üzerine salmak: Er hetzte den Hund auf den Einbrecher."
+   }
+  ],
+  "_src": "78b03763",
+  "_src_reader": "78b03763"
+ },
+ "light-0346": {
+  "translation_tr": "(dışarı) çıkmak; gönderilmek, (dışarıya) dağıtılmak; dışarıya açılmak (çıkış için); uzanmak, gitmek (yol için); (bir yere) bakmak, (bir yöne) açılmak (pencere, oda için); sınırları aşmak, geçmek",
+  "complements": [
+   {
+    "meaning_tr": "sınırları aşmak, geçmek",
+    "note_tr": "bir şeyin sınırlarını aşmak: Die Kosten gehen über das Budget hinaus."
+   }
+  ],
+  "_src": "e9becc5d",
+  "_src_reader": "e9becc5d"
+ },
+ "light-0347": {
+  "translation_tr": "(konuş.) dışarı çıkmak istemek, dışarı gitmek istemek; (konuş.) (sözü bir şeye) getirmek, (bir şeyi) amaçlamak",
+  "complements": [
+   {
+    "meaning_tr": "(konuş.) (sözü bir şeye) getirmek, (bir şeyi) amaçlamak",
+    "note_tr": "sözü bir şeye getirmek: Er will auf eine Gehaltserhöhung hinaus."
+   }
+  ],
+  "_src": "686dca8c",
+  "_src_reader": "686dca8c"
+ },
+ "light-0348": {
+  "translation_tr": "kulak kabartmak, gizlice dinlemek; dinlemek, kulak vermek; (yöresel) söz dinlemek",
+  "complements": [
+   {
+    "note_tr": "bir şeye kulak kabartmak, bir şeyi dinlemek; (yöresel) birinin sözünü dinlemek: Sie horcht auf das Geräusch im Flur."
+   }
+  ],
+  "_src": "7acd8244",
+  "_src_reader": "7acd8244"
+ },
+ "light-0349": {
+  "translation_tr": "(parmaklarla, elle) sıkıca kavramak, sarmak; (yarayı) zımbayla kapatmak; (ataşla, mandalla) tutturmak; klinç yapmak (boks)",
+  "reflexive": {
+   "translation_tr": "tutunmak, sarılmak, sıkı sıkı tutmak",
+   "complements": [
+    {
+     "note_tr": "birine / bir şeye tutunmak: Das Kind klammert sich an den Vater."
+    }
+   ]
+  },
+  "_src": "20e7c998",
+  "_src_reader": "20e7c998"
+ },
+ "light-0350": {
+  "translation_tr": "(kravat, bağcık, düğüm) bağlamak; (mec.) (dostluk, ilişki) başlatmak, kurmak; (ipliği ipliğe) eklemek; (ağ, halı) örmek, düğümleyerek dokumak; (umutları, koşulları bir şeye) bağlamak, (umut) beslemek",
+  "reflexive": {
+   "translation_tr": "(bir şeyle) bağlantılı olmak",
+   "complements": [
+    {
+     "note_tr": "bir şeyle bağlantılı olmak: An dieses Haus knüpfen sich viele Erinnerungen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "(umutları, koşulları bir şeye) bağlamak, (umut) beslemek",
+    "note_tr": "bir şeyi bir şeye bağlamak: Die Bank knüpft den Kredit an strenge Bedingungen."
+   }
+  ],
+  "_src": "d04f9640",
+  "_src_reader": "d04f9640"
+ },
+ "light-0351": {
+  "translation_tr": "(yaz.) korelasyon içinde olmak, karşılıklı ilişkili olmak; (yaz.) ilişkilendirmek, korelasyon kurmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyle korelasyon içinde olmak: Der Preis korreliert mit der Nachfrage."
+   }
+  ],
+  "_src": "e7196aad",
+  "_src_reader": "e7196aad"
+ },
+ "light-0352": {
+  "translation_tr": "(yaz.) seçmek, belirlemek (bir onur, bir unvan için)",
+  "complements": [
+   {
+    "note_tr": "bir şey olarak seçmek: Die Jury kürte den Film zum besten Werk des Festivals."
+   }
+  ],
+  "_src": "7560a275",
+  "_src_reader": "7560a275"
+ },
+ "light-0353": {
+  "translation_tr": "yola çıkmak, hareket etmek, gitmek; (bir şeye) yönelmek; (birine) saldırmak, (birinin) üzerine atılmak; (konuş.) başlamak; (konuş.) kopmak, çıkmak; ateş almak (silah için); patlamak",
+  "complements": [
+   {
+    "meaning_tr": "(birine) saldırmak, (birinin) üzerine atılmak",
+    "note_tr": "birine saldırmak: Der Hund geht auf den Briefträger los."
+   }
+  ],
+  "_src": "70639f2e",
+  "_src_reader": "70639f2e"
+ },
+ "light-0354": {
+  "translation_tr": "koparmak, sökmek",
+  "reflexive": {
+   "translation_tr": "kurtulmak, kendini koparmak",
+   "complements": [
+    {
+     "note_tr": "kendini bir şeyden koparmak: Er kann sich nicht von dem Film losreißen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_tr": "bir şeyi bir şeyden koparmak: Der Sturm riss das Boot von der Kette los."
+   }
+  ],
+  "_src": "96368c0f",
+  "_src_reader": "96368c0f"
+ },
+ "light-0355": {
+  "translation_tr": "(birinden / bir şeyden) yüz çevirmek, vazgeçmek, (biriyle) bağlarını koparmak",
+  "complements": [
+   {
+    "note_tr": "birinden / bir şeyden yüz çevirmek: Er sagt sich von seiner Partei los."
+   }
+  ],
+  "_src": "cfa55f32",
+  "_src_reader": "cfa55f32"
+ },
+ "light-0356": {
+  "translation_tr": "(biri hakkında) kötü konuşmak, dedikodu yapmak; (esk.) yermek, sövmek",
+  "complements": [
+   {
+    "meaning_tr": "(biri hakkında) kötü konuşmak, dedikodu yapmak",
+    "note_tr": "biri hakkında kötü konuşmak: Die Nachbarn lästern über den neuen Mieter."
+   }
+  ],
+  "_src": "f179b14b",
+  "_src_reader": "f179b14b"
+ },
+ "light-0357": {
+  "translation_tr": "(bir şeye) çağırmak, ısrarla teşvik etmek; (bir yükümlülüğü) hatırlatmak, (borcun) ödenmesini istemek; (yaz.) (bir şeyi) anımsatmak",
+  "complements": [
+   {
+    "meaning_tr": "(bir yükümlülüğü) hatırlatmak, (borcun) ödenmesini istemek",
+    "note_tr": "birine bir şeyi (bir yükümlülüğü) hatırlatmak: Sie mahnt ihn an seine Schulden."
+   },
+   {
+    "meaning_tr": "(yaz.) (bir şeyi) anımsatmak",
+    "note_tr": "bir şeyi anımsatmak: Das alte Denkmal mahnt an den Krieg."
+   },
+   {
+    "meaning_tr": "(bir şeye) çağırmak, ısrarla teşvik etmek",
+    "note_tr": "bir şeye çağırmak: Der Lehrer mahnt die Klasse zur Ruhe."
+   }
+  ],
+  "_src": "107decea",
+  "_src_reader": "107decea"
+ },
+ "light-0358": {
+  "translation_tr": "iş birliği yapmak, (bir işe) katılmak; (oyunda, konserde) sahne almak, rol almak; katkıda bulunmak, rol oynamak",
+  "complements": [
+   {
+    "note_tr": "bir şeye katılmak: Sie wirkt bei dem Projekt mit."
+   },
+   {
+    "note_tr": "bir şeye katılmak: Sie hat an dem Projekt mitgewirkt."
+   }
+  ],
+  "_src": "628b9af3",
+  "_src_reader": "628b9af3"
+ },
+ "light-0359": {
+  "translation_tr": "(yaz.) alay etmek, alaya almak, istihza etmek",
+  "complements": [
+   {
+    "note_tr": "biriyle / bir şeyle alay etmek: Sie mokiert sich über seinen Akzent."
+   }
+  ],
+  "_src": "055e1826",
+  "_src_reader": "055e1826"
+ },
+ "light-0360": {
+  "translation_tr": "(yaz.) düşünmek, düşünüp taşınmak; (bir şeyi) zihninde yeniden yaşamak, (bir şey hakkında) düşüncelere dalmak",
+  "complements": [
+   {
+    "meaning_tr": "(yaz.) düşünmek, düşünüp taşınmak",
+    "note_tr": "bir şey hakkında düşünmek: Er sinnt über die Frage nach."
+   }
+  ],
+  "_src": "799f4048",
+  "_src_reader": "799f4048"
+ },
+ "light-0361": {
+  "translation_tr": "dolandırmak, (birini bir şeyden) hileyle mahrum etmek; (hesabı) ödememek, parasını ödemeden kaçmak; (bir yere) çarpmak; sertçe vurmak, berelemek; (tilkiyi) gergin bez üzerinde havaya fırlatmak (eski bir av eğlencesi); (topu) yere vurarak sektirmek; (topa) yumrukla vurmak (Prellball oyununda)",
+  "complements": [
+   {
+    "meaning_tr": "dolandırmak, (birini bir şeyden) hileyle mahrum etmek",
+    "note_tr": "birini bir şeyden dolandırmak: Der Händler prellt die Kunden um ihr Wechselgeld."
+   }
+  ],
+  "_src": "f06e95f5",
+  "_src_reader": "f06e95f5"
+ },
+ "light-0362": {
+  "translation_tr": "(konuş.) boğuşmak, güreşmek, itişip kakışmak; (konuş., mec.) (bir şey için) mücadele etmek, çekişmek",
+  "complements": [
+   {
+    "meaning_tr": "(konuş.) boğuşmak, güreşmek, itişip kakışmak",
+    "note_tr": "bir şey için itişip kakışmak: Die Kinder rangeln um den Ball."
+   },
+   {
+    "meaning_tr": "(konuş., mec.) (bir şey için) mücadele etmek, çekişmek",
+    "note_tr": "bir şey için çekişmek: Die Parteien rangeln um die Posten."
+   }
+  ],
+  "_src": "23235b67",
+  "_src_reader": "23235b67"
+ },
+ "light-0363": {
+  "translation_tr": "(yaz.) rekabet etmek, yarışmak",
+  "complements": [
+   {
+    "note_tr": "biriyle rekabet etmek: Die Firma rivalisiert mit ihrem größten Konkurrenten."
+   },
+   {
+    "note_tr": "bir şey için yarışmak: Die Städte rivalisieren um den Titel."
+   }
+  ],
+  "_src": "c8c64bec",
+  "_src_reader": "c8c64bec"
+ },
+ "light-0364": {
+  "translation_tr": "sallamak, sarsmak; (kapıyı, parmaklığı) çekiştirmek, sallamak; (mec.) (bir şeyi) sarsmak, (bir şeye) dokunmak; titremek, düzensiz çalışmak (motor için); (yolda) sarsıla sarsıla gitmek, sallanmak; kanat çırparak havada asılı kalmak (yırtıcı kuş için)",
+  "complements": [
+   {
+    "meaning_tr": "(kapıyı, parmaklığı) çekiştirmek, sallamak",
+    "note_tr": "bir şeyi sallamak: Er rüttelt an der Tür."
+   },
+   {
+    "meaning_tr": "(mec.) (bir şeyi) sarsmak, (bir şeye) dokunmak",
+    "note_tr": "bir şeye dokunmak: Niemand darf an diesem Gesetz rütteln."
+   }
+  ],
+  "_src": "e061705a",
+  "_src_reader": "e061705a"
+ },
+ "light-0365": {
+  "translation_tr": "(bir şeyden) kaçınmak, korkmak, çekinmek; ürkmek, ürküp geri kaçmak (at için)",
+  "reflexive": {
+   "translation_tr": "korkmak, utanmak, cesaret edememek",
+   "complements": [
+    {
+     "note_tr": "bir şeyden korkmak, bir şeye cesaret edememek: Er scheut sich vor der Verantwortung."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "ürkmek, ürküp geri kaçmak (at için)",
+    "note_tr": "bir şeyden ürkmek: Das Pferd scheut vor dem Traktor."
+   }
+  ],
+  "_src": "5fd317a9",
+  "_src_reader": "5fd317a9"
+ },
+ "light-0366": {
+  "translation_tr": "şaşı bakmak, şaşı olmak; (konuş.) dikizlemek, gizlice bakmak; (konuş.) yan gözle bakmak, kaçamak bakışlar atmak, göz dikmek",
+  "_src": "0f28ebd3",
+  "_src_reader": "0f28ebd3"
+ },
+ "light-0367": {
+  "translation_tr": "(yaz.) (susuzluktan, açlıktan, sıcaktan) bunalmak, kıvranmak; (yaz.) hasret çekmek, özlemle yanıp tutuşmak",
+  "complements": [
+   {
+    "meaning_tr": "(yaz.) hasret çekmek, özlemle yanıp tutuşmak",
+    "note_tr": "birine / bir şeye hasret çekmek, bir şeye can atmak: Sie schmachtet nach einem Glas Wasser."
+   }
+  ],
+  "_src": "aaa8186c",
+  "_src_reader": "aaa8186c"
+ },
+ "light-0368": {
+  "translation_tr": "sürü oluşturmak; sürü hâlinde uçmak, sürü hâlinde dönüp durmak; hayran olmak, bayılmak, deli gibi sevmek; coşkuyla anlatmak, övgüler yağdırmak",
+  "complements": [
+   {
+    "meaning_tr": "hayran olmak, bayılmak, deli gibi sevmek",
+    "note_tr": "birine / bir şeye bayılmak: Sie schwärmt für den neuen Lehrer."
+   },
+   {
+    "meaning_tr": "coşkuyla anlatmak, övgüler yağdırmak",
+    "note_tr": "birini / bir şeyi coşkuyla anlatmak: Er schwärmt von dem Urlaub."
+   }
+  ],
+  "_src": "c5cfa581",
+  "_src_reader": "c5cfa581"
+ },
+ "light-0369": {
+  "translation_tr": "(deriyi) sıyırmak, soymak; kazımak, (bir şeyin üzerinde) gıcırdayarak kaymak; (inşaat) toprağın üst katmanını kazımak; (madencilik) arama yapmak, (maden) aramak; (madencilik) (açık işletmeyle) çıkarmak",
+  "reflexive": {
+   "translation_tr": "sıyrılmak, soyulmak (deri için)"
+  },
+  "complements": [
+   {
+    "meaning_tr": "(madencilik) arama yapmak, (maden) aramak",
+    "note_tr": "bir şey aramak, bir şey için arama yapmak: Sie schürfen in Alaska nach Gold."
+   }
+  ],
+  "_src": "76ea0f44",
+  "_src_reader": "76ea0f44"
+ },
+ "light-0370": {
+  "translation_tr": "alay etmek, alaya almak, dalga geçmek; (yaz.) (bir şeyi) hiçe saymak, umursamamak; (yaz.) (anlatıma, hayale) sığmamak; (hay. b.) ses taklit etmek (kuşlar için)",
+  "complements": [
+   {
+    "meaning_tr": "alay etmek, alaya almak, dalga geçmek",
+    "note_tr": "biriyle / bir şeyle alay etmek: Sie spotten über seinen Hut."
+   }
+  ],
+  "_src": "f5943fab",
+  "_src_reader": "f5943fab"
+ },
+ "light-0371": {
+  "translation_tr": "savunmak, arka çıkmak, desteklemek",
+  "complements": [
+   {
+    "note_tr": "birinden / bir şeyden yana çıkmak: Sie macht sich für den Plan stark."
+   }
+  ],
+  "_src": "636852b3",
+  "_src_reader": "636852b3"
+ },
+ "light-0372": {
+  "translation_tr": "yakınlık duymak, sempati beslemek, görüşlerini paylaşmak",
+  "complements": [
+   {
+    "note_tr": "birine / bir şeye sempati beslemek: Viele sympathisieren mit den Streikenden."
+   }
+  ],
+  "_src": "adccde3f",
+  "_src_reader": "adccde3f"
+ },
+ "light-0373": {
+  "translation_tr": "elle dokunmak, yoklamak, (elleriyle) araştırmak; el yordamıyla bulmak, el yordamıyla aramak; elle muayene etmek, dokunarak hissetmek; (uzm.) tuşlu bir aletle çalışmak; (uzm.) tuşlamak, (tuşlarla) iletmek",
+  "reflexive": {
+   "translation_tr": "el yordamıyla ilerlemek"
+  },
+  "complements": [
+   {
+    "meaning_tr": "el yordamıyla bulmak, el yordamıyla aramak",
+    "note_tr": "bir şeyi el yordamıyla aramak: Er tastet nach dem Schalter."
+   }
+  ],
+  "_src": "26c0a6cf",
+  "_src_reader": "26c0a6cf"
+ },
+ "light-0374": {
+  "translation_tr": "(yaz.) çabalamak, peşinde koşmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyin peşinde koşmak: Er trachtet nach Ruhm."
+   }
+  ],
+  "_src": "bc1988bc",
+  "_src_reader": "bc1988bc"
+ },
+ "light-0375": {
+  "translation_tr": "garanti etmek, güvence altına almak; doğrulamak, (gerçekliğini) onaylamak",
+  "reflexive": {
+   "translation_tr": "kefil olmak",
+   "complements": [
+    {
+     "note_tr": "birine / bir şeye kefil olmak: Ich verbürge mich für meinen Bruder."
+    }
+   ]
+  },
+  "_src": "1c1cd768",
+  "_src_reader": "1c1cd768"
+ },
+ "light-0376": {
+  "translation_tr": "yanlışlıkla başka yeri tutmak, yanlış nota çalmak; (seçimde) yanılmak, uygunsuz olanı seçmek; zimmetine geçirmek, (başkasının malına) el uzatmak; el kaldırmak, şiddet uygulamak",
+  "complements": [
+   {
+    "meaning_tr": "zimmetine geçirmek, (başkasının malına) el uzatmak",
+    "note_tr": "bir şeye el uzatmak, bir şeyi zimmetine geçirmek: Der Verwalter vergriff sich an den Spendengeldern."
+   },
+   {
+    "meaning_tr": "el kaldırmak, şiddet uygulamak",
+    "note_tr": "birine el kaldırmak: Er vergreift sich an einem Schwächeren."
+   },
+   {
+    "meaning_tr": "(seçimde) yanılmak, uygunsuz olanı seçmek",
+    "note_tr": "bir şeyde yanlış seçim yapmak (tonda, ifadede): Er hat sich im Ton vergriffen."
+   }
+  ],
+  "_src": "62a816b5",
+  "_src_reader": "62a816b5"
+ },
+ "light-0377": {
+  "translation_tr": "(kızı) gelin etmek, evlendirmek",
+  "reflexive": {
+   "translation_tr": "evlenmek, evlilik yapmak",
+   "complements": [
+    {
+     "note_tr": "biriyle evlenmek: Er hat sich mit einer Lehrerin verheiratet."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_tr": "birini biriyle evlendirmek: Sie verheiraten die Tochter mit einem Arzt."
+   }
+  ],
+  "_src": "af9d6e88",
+  "_src_reader": "af9d6e88"
+ },
+ "light-0378": {
+  "translation_tr": "(yaz.) eğilerek selam vermek",
+  "complements": [
+   {
+    "note_tr": "birine eğilerek selam vermek: Er verneigt sich vor dem Publikum."
+   }
+  ],
+  "_src": "9828209b",
+  "_src_reader": "9828209b"
+ },
+ "light-0379": {
+  "translation_tr": "mahsup etmek, (hesapta) dikkate almak, (hesaba) saymak; (Avusturya) (ücret) yansıtmak, fatura kesmek",
+  "reflexive": {
+   "translation_tr": "hesap hatası yapmak, yanlış hesaplamak; yanılmak, (biri hakkında) aldanmak"
+  },
+  "complements": [
+   {
+    "meaning_tr": "mahsup etmek, (hesapta) dikkate almak, (hesaba) saymak",
+    "note_tr": "bir şeyi bir şeyden mahsup etmek: Die Bank verrechnet die Gutschrift mit der Rechnung."
+   }
+  ],
+  "_src": "9a1b413b",
+  "_src_reader": "9a1b413b"
+ },
+ "light-0380": {
+  "translation_tr": "(yanlışlıkla) yutmak, (kelimeleri) yutmak, (sesleri) boğmak; içinde tutmak, zapt etmek (söylememek)",
+  "reflexive": {
+   "translation_tr": "tıkanmak, boğazına bir şey kaçmak",
+   "complements": [
+    {
+     "note_tr": "bir şey boğazına kaçmak: Das Kind verschluckt sich an der Suppe."
+    }
+   ]
+  },
+  "_src": "fa983786",
+  "_src_reader": "fa983786"
+ },
+ "light-0381": {
+  "translation_tr": "birbirine karıştırmak, (yanlışlıkla) başkasınınkini almak; değiştirmek, yerine koymak, takas etmek; (bir uğraşı başkasıyla) değişmek",
+  "complements": [
+   {
+    "meaning_tr": "değiştirmek, yerine koymak, takas etmek",
+    "note_tr": "bir şeyi bir şeyle değiştirmek: Er vertauscht den Mantel gegen eine Jacke."
+   },
+   {
+    "meaning_tr": "(bir uğraşı başkasıyla) değişmek",
+    "note_tr": "bir uğraşı başkasıyla değişmek: Sie vertauschte das Büro gegen das Atelier."
+   },
+   {
+    "note_tr": "bir şeyi bir şeyle değiştirmek: Er vertauscht den Mantel mit einer Jacke."
+   }
+  ],
+  "_src": "77c258d1",
+  "_src_reader": "77c258d1"
+ },
+ "light-0382": {
+  "translation_tr": "kapanmak, iyileşmek (yara, yara izi için); birbirine kaynamak, bütünleşmek (tek bir bütün olarak); (bitkilerle) kaplanmak; (yöresel) büyüyüp (giysisine) sığmamak",
+  "reflexive": {
+   "translation_tr": "(konuş.) büyüdükçe düzelmek, büyüyünce geçmek"
+  },
+  "complements": [
+   {
+    "meaning_tr": "birbirine kaynamak, bütünleşmek (tek bir bütün olarak)",
+    "note_tr": "bir şeyle kaynaşmak, (mec.) biriyle / bir şeyle bütünleşmek: Sie ist mit ihrer Arbeit verwachsen."
+   }
+  ],
+  "_src": "a9c79468",
+  "_src_reader": "a9c79468"
+ },
+ "light-0383": {
+  "translation_tr": "(güvenle) saklamak, muhafaza etmek; (yöresel) bir kenara koymak, (sonraya) bırakmak; (esk.) gözaltında tutmak; (yaz.) (esk.) korumak, güvence altına almak",
+  "reflexive": {
+   "translation_tr": "(yaz.) itiraz etmek, kesinlikle reddetmek",
+   "complements": [
+    {
+     "note_tr": "bir şeye itiraz etmek: Er verwahrt sich gegen den Vorwurf."
+    }
+   ]
+  },
+  "_src": "f902af6d",
+  "_src_reader": "f902af6d"
+ },
+ "light-0384": {
+  "translation_tr": "şaşırtmak, hayrete düşürmek",
+  "reflexive": {
+   "translation_tr": "şaşırmak, hayret etmek",
+   "complements": [
+    {
+     "note_tr": "bir şeye şaşırmak: Wir verwundern uns über seine Entscheidung."
+    }
+   ]
+  },
+  "_src": "09db6388",
+  "_src_reader": "09db6388"
+ },
+ "light-0385": {
+  "translation_tr": "öne doğru çıkmak; (konuş.) (birinin) önünden gitmek; (diğerlerinden) önce gitmek; ileri gitmek (saat için); (birine karşı) harekete geçmek, önlem almak; (belli bir şekilde) davranmak, hareket etmek; yaşanmak, cereyan etmek; daha önemli olmak, öncelikli olmak",
+  "complements": [
+   {
+    "meaning_tr": "(birine karşı) harekete geçmek, önlem almak",
+    "note_tr": "birine karşı önlem almak: Die Polizei ging gegen die Demonstranten vor."
+   }
+  ],
+  "_src": "434ae181",
+  "_src_reader": "434ae181"
+ },
+ "light-0386": {
+  "translation_tr": "(olanla) yetinmek",
+  "complements": [
+   {
+    "note_tr": "bir şeyle yetinmek: Wir nehmen mit dem kleinen Zimmer vorlieb."
+   }
+  ],
+  "_src": "b1a8d413",
+  "_src_reader": "b1a8d413"
+ },
+ "light-0387": {
+  "translation_tr": "(yaz.) uyanık olmak, uyumamak; (hasta başında) nöbet tutmak, (birine bakmak için) uyumamak; (birine / bir şeye) göz kulak olmak, (birini / bir şeyi) denetlemek",
+  "complements": [
+   {
+    "meaning_tr": "(birine / bir şeye) göz kulak olmak, (birini / bir şeyi) denetlemek",
+    "note_tr": "birine / bir şeye göz kulak olmak: Die Mutter wacht über die Kinder."
+   }
+  ],
+  "_src": "d15ea641",
+  "_src_reader": "d15ea641"
+ },
+ "light-0388": {
+  "translation_tr": "(bir şeyi, kuyruğunu) sallamak; (bir şeyle) silkeleyerek atmak; (bir şeyle) yelpazelemek, serinletmek; sallanmak, (ileri geri) savrulmak; (kayakta) kısa ve seri dönüşlerle kaymak",
+  "complements": [
+   {
+    "meaning_tr": "(bir şeyi, kuyruğunu) sallamak",
+    "note_tr": "bir şeyi sallamak: Der Hund wedelt mit dem Schwanz."
+   },
+   {
+    "meaning_tr": "(bir şeyle) silkeleyerek atmak",
+    "note_tr": "bir şeyle silkeleyerek atmak: Er wedelt mit der Serviette die Krümel vom Tisch."
+   },
+   {
+    "meaning_tr": "(bir şeyle) yelpazelemek, serinletmek",
+    "note_tr": "bir şeyle yelpazelemek: Sie wedelt sich mit der Zeitung Kühlung."
+   }
+  ],
+  "_src": "fad975cd",
+  "_src_reader": "fad975cd"
+ },
+ "light-0389": {
+  "translation_tr": "kaçmak; (konuş.) (evden) kaçmak, (birini) terk etmek; akıp gitmek, süzülmek",
+  "complements": [
+   {
+    "meaning_tr": "kaçmak",
+    "note_tr": "birinden / bir şeyden kaçmak: Das Kind läuft vor dem Hund weg."
+   }
+  ],
+  "_src": "f96f3671",
+  "_src_reader": "f96f3671"
+ },
+ "light-0390": {
+  "translation_tr": "(bir şeyle) geçinmek, (bir şeyle) beslenmek; tüketmek, bitap düşürmek; aşındırmak, yıpratmak",
+  "complements": [
+   {
+    "meaning_tr": "aşındırmak, yıpratmak",
+    "note_tr": "bir şeyi yıpratmak: Der Stress zehrt an ihren Nerven."
+   },
+   {
+    "meaning_tr": "(bir şeyle) geçinmek, (bir şeyle) beslenmek",
+    "note_tr": "bir şeyle geçinmek: Sie zehren von ihren Ersparnissen."
+   }
+  ],
+  "_src": "6be1ba57",
+  "_src_reader": "6be1ba57"
+ },
+ "light-0391": {
+  "translation_tr": "(bir şeyi birine / bir şeye doğru) hareket ettirmek",
+  "reflexive": {
+   "translation_tr": "(birine / bir şeye doğru) hareket etmek, yaklaşmak",
+   "complements": [
+    {
+     "note_tr": "birine / bir şeye doğru hareket etmek: Das Schiff bewegt sich auf den Hafen zu."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_tr": "bir şeyi birine / bir şeye doğru hareket ettirmek: Er bewegt die Hand langsam auf den Hund zu."
+   }
+  ],
+  "_src": "e96d0c31",
+  "_src_reader": "e96d0c31"
+ },
+ "light-0392": {
+  "translation_tr": "(hafifçe) çekmek, çekiştirmek; yolmak, koparmak; (telleri) parmakla çalmak",
+  "reflexive": {
+   "translation_tr": "(Avusturya, konuş.) sıvışmak, toz olmak; (Avusturya, konuş.) (bir şeyden) kaytarmak, yan çizmek"
+  },
+  "complements": [
+   {
+    "meaning_tr": "(hafifçe) çekmek, çekiştirmek",
+    "note_tr": "bir şeyi çekiştirmek: Er zupft nervös an seinem Ärmel."
+   },
+   {
+    "meaning_tr": "(telleri) parmakla çalmak",
+    "note_tr": "telleri parmakla çalmak: Sie zupft an den Saiten der Gitarre."
+   }
+  ],
+  "_src": "781a250a",
+  "_src_reader": "781a250a"
+ },
+ "light-0393": {
+  "translation_tr": "geri çekilmek, geri geri gitmek; (bir şeyden) kaçınmak, (bir şey karşısında) geri adım atmak; boyun eğmek",
+  "complements": [
+   {
+    "meaning_tr": "geri çekilmek, geri geri gitmek",
+    "note_tr": "birinden / bir şeyden ürküp geri çekilmek: Sie weicht erschrocken vor dem Hund zurück."
+   },
+   {
+    "meaning_tr": "(bir şeyden) kaçınmak, (bir şey karşısında) geri adım atmak",
+    "note_tr": "bir şey karşısında geri adım atmak: Er weicht vor keiner Schwierigkeit zurück."
+   }
+  ],
+  "_src": "8e5c36f2",
+  "_src_reader": "8e5c36f2"
+ },
+ "light-0394": {
+  "translation_tr": "buluşmak, karşılaşmak; çakışmak (zaman olarak)",
+  "complements": [
+   {
+    "meaning_tr": "buluşmak, karşılaşmak",
+    "note_tr": "biriyle buluşmak: Er trifft im Café mit seinen Freunden zusammen."
+   }
+  ],
+  "_src": "1f0a5b3a",
+  "_src_reader": "1f0a5b3a"
+ },
+ "light-0395": {
+  "translation_tr": "(birinin / bir şeyin) yanına gitmek, (birine / bir şeye) yaklaşmak; tekme atmak, tekmelemek",
+  "complements": [
+   {
+    "meaning_tr": "(birinin / bir şeyin) yanına gitmek, (birine / bir şeye) yaklaşmak",
+    "note_tr": "birinin / bir şeyin yanına gitmek: Der Lehrer tritt auf den Schüler zu."
+   }
+  ],
+  "_src": "d0a9c06b",
+  "_src_reader": "d0a9c06b"
+ },
+ "light-0396": {
+  "translation_tr": "(kişisiz) (birinin) ödü kopmak, (birinin) içi ürpermek; (yaz.) şafak sökmek, gün ağarmak; (nadiren) kırlaşmak",
+  "reflexive": {
+   "translation_tr": "(bir şeyden) korkmak, dehşete düşmek",
+   "complements": [
+    {
+     "note_tr": "bir şeyden korkmak: Sie graut sich vor der Dunkelheit."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "(kişisiz) (birinin) ödü kopmak, (birinin) içi ürpermek",
+    "note_tr": "birinin bir şeyden ödü kopmak: Mir graut vor der Prüfung."
+   }
+  ],
+  "_src": "56845585",
+  "_src_reader": "56845585"
+ },
+ "light-0397": {
+  "translation_tr": "dayanıklı kılmak",
+  "complements": [
+   {
+    "note_tr": "(kendini) bir şeye karşı dayanıklı kılmak: Er härtet sich gegen die Kälte ab."
+   }
+  ],
+  "_src": "0a412836",
+  "_src_reader": "0a412836"
+ },
+ "light-0398": {
+  "translation_tr": "(konuş.) doya doya dedikodu yapmak, (birinin) arkasından konuşmak",
+  "complements": [
+   {
+    "note_tr": "biri / bir şey hakkında dedikodu yapmak: Sie lästern über den neuen Kollegen ab."
+   }
+  ],
+  "_src": "df61976c",
+  "_src_reader": "df61976c"
+ },
+ "light-0399": {
+  "translation_tr": "kenara çekmek; kenara çekilmek; (birinden / bir şeyden) uzak durmak, (birine / bir şeye) karşı mesafeli durmak; (sıra hâlinde) yola çıkmak, ayrılmak; (konuş.) gitmek, uzaklaşmak",
+  "complements": [
+   {
+    "meaning_tr": "(birinden / bir şeyden) uzak durmak, (birine / bir şeye) karşı mesafeli durmak",
+    "note_tr": "bir şeyden uzak durmak: Die Partei rückt von ihrem Plan ab."
+   }
+  ],
+  "_src": "f308aa21",
+  "_src_reader": "f308aa21"
+ },
+ "light-0400": {
+  "translation_tr": "(esk.) çok endişelenmek, korkudan perişan olmak",
+  "complements": [
+   {
+    "note_tr": "biri için endişeden perişan olmak: Die Mutter ängstigt sich um ihren Sohn ab."
+   }
+  ],
+  "_src": "d50ffcfc",
+  "_src_reader": "d50ffcfc"
+ },
+ "light-0401": {
+  "translation_tr": "(yöresel, konuş.) (biriyle) gönül eğlendirmeye başlamak, (biriyle) flört etmek; (konuş.) (biriyle) kavgaya girişmek, (birine) sataşmak",
+  "complements": [
+   {
+    "meaning_tr": "(yöresel, konuş.) (biriyle) gönül eğlendirmeye başlamak, (biriyle) flört etmek",
+    "note_tr": "biriyle flört etmek: Er bändelt mit der neuen Nachbarin an."
+   },
+   {
+    "meaning_tr": "(konuş.) (biriyle) kavgaya girişmek, (birine) sataşmak",
+    "note_tr": "biriyle kavgaya girişmek: Er bändelt mit dem Türsteher an."
+   }
+  ],
+  "_src": "09e1af70",
+  "_src_reader": "09e1af70"
+ },
+ "light-0402": {
+  "translation_tr": "(bir şeye) sürtünmek, (bir şeye) çarpmak; (konuş.) tepki çekmek, başına iş açmak",
+  "complements": [
+   {
+    "meaning_tr": "(konuş.) tepki çekmek, başına iş açmak",
+    "note_tr": "birinin tepkisini çekmek: Mit seiner Art eckt er bei seinem Chef an."
+   }
+  ],
+  "_src": "6be24271",
+  "_src_reader": "6be24271"
+ },
+ "light-0403": {
+  "translation_tr": "(konuş.) (biriyle / bir şeyle) başa çıkmak, boy ölçüşmek",
+  "complements": [
+   {
+    "note_tr": "biriyle boy ölçüşmek: Gegen den Champion kann er nicht an."
+   }
+  ],
+  "_src": "e29db026",
+  "_src_reader": "e29db026"
+ },
+ "light-0404": {
+  "translation_tr": "koşarak gelmek, koşa koşa gelmek; (rüzgâra vb. karşı) koşmak; (konuş.) (koşarken) çarpmak, toslamak; (birine / bir şeye) saldırmak, hücum etmek; (yöresel) (birini) itmek, (birine) sürtünmek",
+  "reflexive": {
+   "translation_tr": "(konuş.) (dizini vb.) çarpmak"
+  },
+  "complements": [
+   {
+    "meaning_tr": "(birine / bir şeye) saldırmak, hücum etmek",
+    "note_tr": "birine / bir şeye saldırmak, bir şeye karşı mücadele etmek: Die Soldaten rennen gegen die Festung an."
+   }
+  ],
+  "_src": "3e828c85",
+  "_src_reader": "3e828c85"
+ },
+ "light-0405": {
+  "translation_tr": "(yaz.) (birine) çekmek, (birine) benzemek",
+  "complements": [
+   {
+    "note_tr": "birine çekmek: Die Tochter artet ganz nach dem Vater."
+   }
+  ],
+  "_src": "15cf49be",
+  "_src_reader": "15cf49be"
+ },
+ "light-0406": {
+  "translation_tr": "hesaba geçirmek, (birinin hesabına) yazmak; (bir şeyi bir şeye karşılık) mahsup etmek, mahsuplaşmak",
+  "complements": [
+   {
+    "meaning_tr": "(bir şeyi bir şeye karşılık) mahsup etmek, mahsuplaşmak",
+    "note_tr": "bir şeye karşılık mahsup etmek: Sie rechnet ihre Auslagen gegen die Miete auf."
+   }
+  ],
+  "_src": "799acdff",
+  "_src_reader": "799acdff"
+ },
+ "light-0407": {
+  "translation_tr": "kışkırtmak, (birine karşı) doldurmak, (bir şeye) tahrik etmek; kamçılamak, teşvik etmek, (hırsı) körüklemek",
+  "complements": [
+   {
+    "meaning_tr": "kışkırtmak, (birine karşı) doldurmak, (bir şeye) tahrik etmek",
+    "note_tr": "birini birine karşı kışkırtmak: Er stachelt die Leute gegen den Nachbarn auf."
+   },
+   {
+    "meaning_tr": "kışkırtmak, (birine karşı) doldurmak, (bir şeye) tahrik etmek",
+    "note_tr": "birini bir şeye kışkırtmak: Sie stacheln die Arbeiter zum Streik auf."
+   },
+   {
+    "meaning_tr": "kamçılamak, teşvik etmek, (hırsı) körüklemek",
+    "note_tr": "birini bir şeye teşvik etmek: Der Trainer stachelt die Mannschaft zu größerem Einsatz auf."
+   }
+  ],
+  "_src": "f4e3da6b",
+  "_src_reader": "f4e3da6b"
+ },
+ "light-0408": {
+  "translation_tr": "(yaz.) (birini / bir şeyi) gözlemek, gözleriyle aramak",
+  "complements": [
+   {
+    "note_tr": "birini / bir şeyi gözlemek: Sie blickte sehnsüchtig nach dem Boot aus."
+   }
+  ],
+  "_src": "f17816a8",
+  "_src_reader": "f17816a8"
+ },
+ "light-0409": {
+  "translation_tr": "(küs olanları) barıştırmak, uzlaştırmak",
+  "reflexive": {
+   "translation_tr": "(biriyle) barışmak, uzlaşmak, (bir şeyi) kabullenmek",
+   "complements": [
+    {
+     "note_tr": "biriyle barışmak: Er hat sich mit seinem Bruder ausgesöhnt."
+    }
+   ]
+  },
+  "_src": "2abb2466",
+  "_src_reader": "2abb2466"
+ },
+ "light-0410": {
+  "translation_tr": "(biriyle) arkadaş olmak; (bir şeye) alışmak, (bir şeyi) benimsemek, (bir düşünceye) ısınmak",
+  "complements": [
+   {
+    "meaning_tr": "(biriyle) arkadaş olmak",
+    "note_tr": "biriyle arkadaş olmak: Sie hat sich mit der neuen Kollegin befreundet."
+   },
+   {
+    "meaning_tr": "(bir şeye) alışmak, (bir şeyi) benimsemek, (bir düşünceye) ısınmak",
+    "note_tr": "bir şeye alışmak: Mit dem neuen System kann er sich nicht befreunden."
+   }
+  ],
+  "_src": "f4160457",
+  "_src_reader": "f4160457"
+ },
+ "light-0411": {
+  "translation_tr": "(yaz.) (bir şeyle) donatmak, (birine bir şey) bahşetmek",
+  "complements": [
+   {
+    "note_tr": "bir şeyle donatmak: Die Natur hat ihn mit großem Talent begabt."
+   }
+  ],
+  "_src": "baded4b2",
+  "_src_reader": "baded4b2"
+ },
+ "light-0412": {
+  "translation_tr": "(bir şeyle, azla) yetinmek, kanaat etmek; (bir şeyle) sınırlı kalmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyle yetinmek: Er begnügt sich mit einem kleinen Zimmer."
+   }
+  ],
+  "_src": "4fa2bea9",
+  "_src_reader": "4fa2bea9"
+ },
+ "light-0413": {
+  "translation_tr": "(bir şeye bir şeyler) asmak, (bir şeyle) donatmak, örtmek; (konuş.) aşırı süslemek, (takılara, madalyalara) boğmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyi bir şeyle donatmak: Wir behängen den Baum mit bunten Kugeln."
+   }
+  ],
+  "_src": "629f51e4",
+  "_src_reader": "629f51e4"
+ },
+ "light-0414": {
+  "translation_tr": "şahlanmak, şaha kalkmak, aniden doğrulmak; (yaz.) (bir şeye) karşı koymak, (bir şeye) başkaldırmak",
+  "complements": [
+   {
+    "meaning_tr": "(yaz.) (bir şeye) karşı koymak, (bir şeye) başkaldırmak",
+    "note_tr": "bir şeye başkaldırmak: Er bäumte sich gegen das Urteil."
+   }
+  ],
+  "_src": "02f4ece8",
+  "_src_reader": "02f4ece8"
+ },
+ "light-0415": {
+  "translation_tr": "kendini (birinin / bir şeyin) yerine koymak, (birini / bir şeyi) içten hissetmek, empati kurmak",
+  "complements": [
+   {
+    "note_tr": "kendini birinin / bir şeyin yerine koymak: Sie kann sich gut in ihre Patienten einfühlen."
+   }
+  ],
+  "_src": "98045849",
+  "_src_reader": "98045849"
+ },
+ "light-0416": {
+  "translation_tr": "(yaz.) azametle yürümek, dolaşmak, (belli bir şekilde) gitmek; (bir şeyle) birlikte görülmek, (bir şeyle) bağlantılı olmak",
+  "complements": [
+   {
+    "meaning_tr": "(bir şeyle) birlikte görülmek, (bir şeyle) bağlantılı olmak",
+    "note_tr": "bir şeyle birlikte görülmek: Die Krankheit geht oft mit hohem Fieber einher."
+   }
+  ],
+  "_src": "b45ef52e",
+  "_src_reader": "b45ef52e"
+ },
+ "light-0417": {
+  "translation_tr": "(nadiren) (çekiçle) çakmak; (çekiçle) dövüp işlemek, oymak; (bir şeye) vurup durmak, dövmek, darbe yağdırmak; (birinin) kafasına sokmak, (birine) iyice belletmek",
+  "complements": [
+   {
+    "meaning_tr": "(bir şeye) vurup durmak, dövmek, darbe yağdırmak",
+    "note_tr": "birine / bir şeye vurup durmak: Der Boxer hämmerte auf seinen Gegner ein."
+   }
+  ],
+  "_src": "af9a82f2",
+  "_src_reader": "af9a82f2"
+ },
+ "light-0418": {
+  "translation_tr": "ateş açarak tahrip etmek; (silahı) atışla ayarlamak; (aletle) çakmak, sokmak; (spor) (topu kaleye) atmak; (matbaacılık) (yaprakların arasına) ara kâğıt koymak; (dokumacılık) (atkı ipliğini) geçirmek; (para) yatırmak, katmak; birden dolmak, içeri akmak (su için), gelmek (anne sütü için); (yöresel) (ekmeği fırına) sürmek",
+  "reflexive": {
+   "translation_tr": "atış yaparak isabeti ayarlamak; (birini) hedef almak, (saldırılar için) hedef seçmek",
+   "complements": [
+    {
+     "meaning_tr": "atış yaparak isabeti ayarlamak",
+     "note_tr": "bir şeye atış yaparak isabeti ayarlamak: Die Schützen schießen sich auf die Scheibe ein."
+    },
+    {
+     "meaning_tr": "(birini) hedef almak, (saldırılar için) hedef seçmek",
+     "note_tr": "birini hedef almak: Die Presse hat sich auf den Minister eingeschossen."
+    }
+   ]
+  },
+  "_src": "c1faf597",
+  "_src_reader": "c1faf597"
+ },
+ "light-0419": {
+  "translation_tr": "yemin ettirmek, sadakat yeminiyle bağlamak; (bir şeye bağlı kalmaya) yükümlü kılmak, yönlendirmek, (bir şeyin etrafında) kenetlemek",
+  "complements": [
+   {
+    "meaning_tr": "(bir şeye bağlı kalmaya) yükümlü kılmak, yönlendirmek, (bir şeyin etrafında) kenetlemek",
+    "note_tr": "birini bir şeye bağlı kalmaya yükümlü kılmak: Der Chef schwor das Team auf den neuen Kurs ein."
+   }
+  ],
+  "_src": "625cd959",
+  "_src_reader": "625cd959"
+ },
+ "light-0420": {
+  "translation_tr": "(birinin) yerine geçmek, (birine) vekâlet etmek, yardıma koşmak; (spor) egzersize atlayarak başlamak; kilitlenmek, klik diye kapanmak; girinti yapmak, içeri çekik olmak (duvar için)",
+  "reflexive": {
+   "translation_tr": "(spor) deneme atlayışlarıyla ısınmak"
+  },
+  "complements": [
+   {
+    "meaning_tr": "(birinin) yerine geçmek, (birine) vekâlet etmek, yardıma koşmak",
+    "note_tr": "birinin yerine geçmek: Ich springe heute für meine kranke Kollegin ein."
+   }
+  ],
+  "_src": "ec4acaa1",
+  "_src_reader": "ec4acaa1"
+ },
+ "light-0421": {
+  "translation_tr": "(kişisiz) iğrenç gelmek, tiksinti vermek (es ekelt mich — iğreniyorum); (birini) tiksindirmek, (birine) ters gelmek",
+  "reflexive": {
+   "translation_tr": "(birinden / bir şeyden) tiksinmek, iğrenmek",
+   "complements": [
+    {
+     "note_tr": "birinden / bir şeyden tiksinmek: Sie ekelt sich vor Spinnen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "(kişisiz) iğrenç gelmek, tiksinti vermek (es ekelt mich — iğreniyorum)",
+    "note_tr": "birine bir şey iğrenç gelmek: Es ekelt mich vor Spinnen."
+   }
+  ],
+  "_src": "46255768",
+  "_src_reader": "46255768"
+ },
+ "light-0422": {
+  "translation_tr": "(bir şeyden) öğrenmek, sonuç çıkarmak, anlamak; (nadiren) (fırsatı) fark etmek, görmek; (esk.) seçmek, ayırmak",
+  "complements": [
+   {
+    "meaning_tr": "(bir şeyden) öğrenmek, sonuç çıkarmak, anlamak",
+    "note_tr": "bir şeyden anlamak: Aus dem Brief ersehe ich, dass du kommst."
+   }
+  ],
+  "_src": "aba558b3",
+  "_src_reader": "aba558b3"
+ },
+ "light-0423": {
+  "translation_tr": "(yaz.) (bir şeyi) rica etmek, resmî olarak talep etmek, çağrıda bulunmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyi rica etmek: Wir ersuchen Sie um eine schnelle Antwort."
+   }
+  ],
+  "_src": "7321370f",
+  "_src_reader": "7321370f"
+ },
+ "light-0424": {
+  "translation_tr": "(bir şey için) pazarlık etmek",
+  "complements": [
+   {
+    "note_tr": "bir şey için pazarlık etmek: Er feilscht auf dem Markt um jeden Euro."
+   }
+  ],
+  "_src": "b9422d8d",
+  "_src_reader": "b9422d8d"
+ },
+ "light-0425": {
+  "translation_tr": "(konuş.) (biriyle) başa çıkmak, (birini) yola getirmek, (birine) üstün gelmek; (konuş.) (bir şeyle) baş etmek, (bir şeye) hâkim olmak, (bir şeyi) atlatmak",
+  "complements": [
+   {
+    "note_tr": "biriyle / bir şeyle başa çıkmak: Sie ist mit dem Verlust nie fertiggeworden."
+   }
+  ],
+  "_src": "e699f87d",
+  "_src_reader": "e699f87d"
+ },
+ "light-0426": {
+  "translation_tr": "dişleriyle yapışmak, dişlerini geçirmek; (bir şeye) takılıp kalmak, (bir şeye) saplanıp kalmak, vazgeçmemek",
+  "complements": [
+   {
+    "note_tr": "bir şeye dişlerini geçirmek, bir şeye takılıp kalmak: Er hat sich an der Aufgabe festgebissen.",
+    "meaning_tr": "(bir şeye) takılıp kalmak, (bir şeye) saplanıp kalmak, vazgeçmemek"
+   }
+  ],
+  "_src": "30be18b5",
+  "_src_reader": "30be18b5"
+ },
+ "light-0427": {
+  "translation_tr": "çekingen davranmak, yabancılardan korkmak; (mec.) kendini yabancı hissetmek, benimseyememek",
+  "complements": [
+   {
+    "meaning_tr": "(mec.) kendini yabancı hissetmek, benimseyememek",
+    "note_tr": "bir şeyi benimseyememek, birinin yanında kendini yabancı hissetmek: Die Partei fremdelt mit dem neuen Kurs."
+   }
+  ],
+  "_src": "09f9e776",
+  "_src_reader": "09f9e776"
+ },
+ "light-0428": {
+  "translation_tr": "(yaz.) eksik olmak, yetmemek",
+  "complements": [
+   {
+    "note_tr": "birinde bir şey eksik olmak: Es gebricht ihm an Geduld."
+   }
+  ],
+  "_src": "3c3e1207",
+  "_src_reader": "3c3e1207"
+ },
+ "light-0429": {
+  "translation_tr": "(bir şeyin) hesabını vermek, sorumluluğu üstlenmek",
+  "complements": [
+   {
+    "note_tr": "bir şeyin hesabını vermek: Du musst für deinen Fehler geradestehen."
+   }
+  ],
+  "_src": "62fd9c46",
+  "_src_reader": "62fd9c46"
+ },
+ "light-0430": {
+  "translation_tr": "aynı düzeye gelmek, yetişmek",
+  "complements": [
+   {
+    "note_tr": "biriyle aynı düzeye gelmek: Die Mannschaft hat mit dem Tabellenführer gleichgezogen."
+   }
+  ],
+  "_src": "4f58d867",
+  "_src_reader": "4f58d867"
+ },
+ "light-0431": {
+  "translation_tr": "dehşete düşürmek, korku salmak",
+  "reflexive": {
+   "translation_tr": "dehşete düşmek, korku duymak",
+   "complements": [
+    {
+     "note_tr": "bir şeyden dehşete düşmek: Sie graust sich vor Spinnen."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_tr": "birinin bir şeyden içi ürpermek: Mir graust vor dem Winter."
+   }
+  ],
+  "_src": "a251c02a",
+  "_src_reader": "a251c02a"
+ },
+ "light-0432": {
+  "translation_tr": "(yaz.) beklemek, (birinin) yolunu gözlemek",
+  "complements": [
+   {
+    "note_tr": "birini / bir şeyi beklemek: Wir harrten auf seine Rückkehr."
+   }
+  ],
+  "_src": "7a4b7c68",
+  "_src_reader": "7a4b7c68"
+ },
+ "light-0433": {
+  "translation_tr": "idareli kullanmak, tutumlu davranmak; (esk.) ev idare etmek",
+  "complements": [
+   {
+    "meaning_tr": "idareli kullanmak, tutumlu davranmak",
+    "note_tr": "bir şeyi idareli kullanmak: Wir müssen mit dem Wasser haushalten."
+   }
+  ],
+  "_src": "d0cab832",
+  "_src_reader": "d0cab832"
+ },
+ "light-0434": {
+  "translation_tr": "(konuş.) (bir işe) koyulmak, girişmek; (konuş.) (birine) asılmak, sarkıntılık etmek",
+  "complements": [
+   {
+    "note_tr": "bir şeye koyulmak, birine asılmak: Er machte sich an die Arbeit heran."
+   }
+  ],
+  "_src": "c225900c",
+  "_src_reader": "c225900c"
+ },
+ "light-0435": {
+  "translation_tr": "yaklaşmak, yanına gelmek; (birinin) karşısına çıkmak, ortaya çıkmak; (birine) başvurmak; (işe) yaklaşmak, el atmak",
+  "complements": [
+   {
+    "note_tr": "birinin karşısına çıkmak, ortaya çıkmak (sorunlar, sorular için): Nach der Wahl traten neue Fragen an die Regierung heran.",
+    "meaning_tr": "(birinin) karşısına çıkmak, ortaya çıkmak"
+   },
+   {
+    "note_tr": "birine (bir ricayla, bir soruyla) başvurmak: Sie trat mit einer Frage an den Lehrer heran.",
+    "meaning_tr": "(birine) başvurmak"
+   },
+   {
+    "note_tr": "bir şeye yaklaşmak, bir şeye el atmak: Sie trat mit viel Erfahrung an die Aufgabe heran.",
+    "meaning_tr": "(işe) yaklaşmak, el atmak"
+   }
+  ],
+  "_src": "418d1b6a",
+  "_src_reader": "418d1b6a"
+ },
+ "light-0436": {
+  "translation_tr": "(konuş.) kesip durmak, gagalayıp durmak, vurup durmak; (konuş.) sürekli kusur bulmak, sataşmak",
+  "complements": [
+   {
+    "note_tr": "birine sürekli sataşmak: Alle hacken auf dem neuen Kollegen herum.",
+    "meaning_tr": "(konuş.) sürekli kusur bulmak, sataşmak"
+   }
+  ],
+  "_src": "c9f6746a",
+  "_src_reader": "c9f6746a"
+ },
+ "light-0437": {
+  "translation_tr": "(yaz.) rol oynamak, karışmak, etkilemek; (spor) (topu içeri) atmak, pas vermek",
+  "reflexive": {
+   "translation_tr": "(iyi oyunu sayesinde) kendine yer açmak"
+  },
+  "complements": [
+   {
+    "note_tr": "bir şeyi etkilemek: In die Entscheidung spielen viele Faktoren hinein.",
+    "meaning_tr": "(yaz.) rol oynamak, karışmak, etkilemek"
+   }
+  ],
+  "_src": "2edc7cb0",
+  "_src_reader": "2edc7cb0"
+ },
+ "light-0438": {
+  "translation_tr": "görmezden gelmek, sessizce geçiştirmek; (bir şeyin üzerinden) geçip gitmek",
+  "complements": [
+   {
+    "note_tr": "bir şeyi görmezden gelmek: Sie ging über seine Bemerkung hinweg.",
+    "meaning_tr": "görmezden gelmek, sessizce geçiştirmek"
+   }
+  ],
+  "_src": "8d696e6b",
+  "_src_reader": "8d696e6b"
+ },
+ "light-0439": {
+  "translation_tr": "aşı yapmak, aşılamak, aşı uygulamak; (toprağa) bakteri katmak; (besiyerine mikroorganizma) ekmek",
+  "complements": [
+   {
+    "meaning_tr": "aşı yapmak, aşılamak, aşı uygulamak",
+    "note_tr": "bir şeye karşı aşılamak: Der Arzt impft das Kind gegen Masern."
+   }
+  ],
+  "_src": "4fb96331",
+  "_src_reader": "4fb96331"
+ },
+ "light-0440": {
+  "translation_tr": "(esk.) hasta olmak, rahatsızlanmak; (bir eksiklikten) muzdarip olmak, aksamak",
+  "complements": [
+   {
+    "note_tr": "bir şeyden muzdarip olmak: Das Projekt krankt an zu wenig Geld."
+   }
+  ],
+  "_src": "6fabecd8",
+  "_src_reader": "6fabecd8"
+ },
+ "light-0441": {
+  "translation_tr": "(yaz.) can atmak, yanıp tutuşmak",
+  "complements": [
+   {
+    "note_tr": "bir şeye can atmak: Die Wanderer lechzen nach Wasser."
+   }
+  ],
+  "_src": "7bd40709",
+  "_src_reader": "7bd40709"
+ },
+ "light-0442": {
+  "translation_tr": "(bir şeyi) aklından geçirmek, (bir şeye) göz koymak; flört etmek, göz süzmek",
+  "complements": [
+   {
+    "note_tr": "bir şeyi aklından geçirmek, biriyle flört etmek: Er liebäugelt mit einem neuen Auto."
+   }
+  ],
+  "_src": "f20ede26",
+  "_src_reader": "f20ede26"
+ },
+ "light-0443": {
+  "translation_tr": "kusur bulmak, mızmızlanmak, söylenmek; (nadiren) simsarlık yapmak",
+  "complements": [
+   {
+    "meaning_tr": "kusur bulmak, mızmızlanmak, söylenmek",
+    "note_tr": "bir şeye kusur bulmak: Er mäkelt ständig an meiner Arbeit."
+   }
+  ],
+  "_src": "1cc08fd1",
+  "_src_reader": "1cc08fd1"
+ },
+ "light-0444": {
+  "translation_tr": "çekiştirmek, (parmaklarıyla) kurcalamak; (parmaklarıyla uğraşarak) çıkarmak, almak",
+  "complements": [
+   {
+    "meaning_tr": "çekiştirmek, (parmaklarıyla) kurcalamak",
+    "note_tr": "bir şeyi kurcalamak: Sie nestelt nervös an ihrem Schal."
+   }
+  ],
+  "_src": "109d9bee",
+  "_src_reader": "109d9bee"
+ },
+ "light-0445": {
+  "translation_tr": "çiftleşmek (tavşanlar için); (kaba) cinsel ilişkiye girmek; (konuş.) itmek, itip kakmak; (konuş.) yumruklamak, sarsmak, zorlamak",
+  "reflexive": {
+   "translation_tr": "(konuş.) boğuşmak, güreşmek; (konuş.) bir yerini çarpmak"
+  },
+  "complements": [
+   {
+    "meaning_tr": "(konuş.) yumruklamak, sarsmak, zorlamak",
+    "note_tr": "bir şeyi yumruklamak, bir şeyi sarsmak: Jemand rammelt an der Tür."
+   }
+  ],
+  "_src": "136f19ed",
+  "_src_reader": "136f19ed"
+ },
+ "light-0446": {
+  "translation_tr": "(keteni, yabani otları, saçını başını) yolmak, koparmak; dövüşmek, (göğüs göğüse) boğuşmak",
+  "reflexive": {
+   "translation_tr": "dövüşmek, (göğüs göğüse) boğuşmak",
+   "complements": [
+    {
+     "note_tr": "biriyle dövüşmek: Die Kinder raufen sich mit den Nachbarskindern."
+    },
+    {
+     "note_tr": "bir şey için dövüşmek: Die Kinder raufen sich um den Ball."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "meaning_tr": "dövüşmek, (göğüs göğüse) boğuşmak",
+    "note_tr": "biriyle dövüşmek: Der Junge rauft mit seinem Bruder."
+   },
+   {
+    "meaning_tr": "dövüşmek, (göğüs göğüse) boğuşmak",
+    "note_tr": "bir şey için dövüşmek: Die Hunde raufen um den Knochen."
+   }
+  ],
+  "_src": "a026cf25",
+  "_src_reader": "a026cf25"
+ },
+ "light-0447": {
+  "translation_tr": "(konuş.) içeri düşmek, oyuna gelmek, kandırılmak",
+  "complements": [
+   {
+    "note_tr": "bir şeye kanmak: Er ist auf den Trick reingefallen."
+   }
+  ],
+  "_src": "6d4ab7f5",
+  "_src_reader": "6d4ab7f5"
+ },
+ "light-0448": {
+  "translation_tr": "kazımak, sıyırmak, rendelemek; (bir şeye) sürtünmek, (bir şeye) değmek, (bir şeye sürterek) kaşınmak; kazıyıp çıkarmak, kazıyarak sökmek",
+  "complements": [
+   {
+    "meaning_tr": "(bir şeye) sürtünmek, (bir şeye) değmek, (bir şeye sürterek) kaşınmak",
+    "note_tr": "bir şeye sürtünmek: Die Kuh schabt sich am Zaun."
+   }
+  ],
+  "_src": "847e4b30",
+  "_src_reader": "847e4b30"
+ },
+ "light-0449": {
+  "translation_tr": "(kaba) sıçmak, dışkılamak; (kaba) osurmak, yellenmek; (kaba) (bir şeyi) umursamamak, (bir şeyi) iplememek",
+  "complements": [
+   {
+    "meaning_tr": "(kaba) (bir şeyi) umursamamak, (bir şeyi) iplememek",
+    "note_tr": "bir şeyi iplememek: Ich scheiße auf seine Meinung."
+   }
+  ],
+  "_src": "a9ef3e15",
+  "_src_reader": "a9ef3e15"
+ },
+ "light-0450": {
+  "translation_tr": "koklamak, etrafını koklamak, havayı koklamak; (kokuyu) içine çekmek; (konuş.) denemek, (deneme dersinde) tanımak",
+  "complements": [
+   {
+    "meaning_tr": "koklamak, etrafını koklamak, havayı koklamak",
+    "note_tr": "bir şeyi koklamak: Der Hund schnuppert an der Tür."
+   }
+  ],
+  "_src": "7cbe6508",
+  "_src_reader": "7cbe6508"
+ },
+ "light-0451": {
+  "translation_tr": "(konuş.) güçlükle başa çıkmak, (bir şeyle) boğuşmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyde zorlanmak: Er tut sich mit der Grammatik schwer."
+   }
+  ],
+  "_src": "6736e029",
+  "_src_reader": "6736e029"
+ },
+ "light-0452": {
+  "translation_tr": "şakalaşmak, (birine) takılmak, maskaralık yapmak; cilveleşmek, flört etmek",
+  "complements": [
+   {
+    "note_tr": "biriyle şakalaşmak, biriyle cilveleşmek: Sie schäkert mit dem Kellner."
+   }
+  ],
+  "_src": "2d2c31be",
+  "_src_reader": "2d2c31be"
+ },
+ "light-0453": {
+  "translation_tr": "fışkırmak, (bir şeyle) dolup taşmak; (bir şeyle) dolu olmak, (bir şeyle) kaynamak",
+  "complements": [
+   {
+    "note_tr": "bir şeyle dolup taşmak: Er strotzt von Gesundheit."
+   }
+  ],
+  "_src": "0b696cdf",
+  "_src_reader": "0b696cdf"
+ },
+ "light-0454": {
+  "translation_tr": "(yaz.) meyletmek, yatkın olmak, eğilim göstermek",
+  "complements": [
+   {
+    "note_tr": "bir şeye eğilim göstermek: Er tendiert zu einer anderen Lösung."
+   }
+  ],
+  "_src": "429aab7a",
+  "_src_reader": "429aab7a"
+ },
+ "light-0455": {
+  "translation_tr": "çalıştırmak, forma sokmak; (konuş.) disipline sokmak, (bir şeye) alıştırmak, (bir şey) görünümü vermek; (köpeği) trimlemek, tıraş etmek; (ölü tüyleri) tarayıp almak; kısaltmak, düzeltmek; (gemiyi, uçağı) dengelemek, trim ayarı yapmak; (gemideki yükü) yerleştirmek, istiflemek; (bunkerden ocaklara) kömür taşımak; (frekansı) ayarlamak, ince ayar yapmak; (nükleer reaktörde) sapmaları telafi etmek",
+  "complements": [
+   {
+    "meaning_tr": "(konuş.) disipline sokmak, (bir şeye) alıştırmak, (bir şey) görünümü vermek",
+    "note_tr": "birini bir şeye alıştırmak: Sie trimmt ihre Kinder auf Ordnung."
+   }
+  ],
+  "_src": "3209dbe9",
+  "_src_reader": "3209dbe9"
+ },
+ "light-0456": {
+  "translation_tr": "bozuşmak, arası açılmak, düşman olmak",
+  "complements": [
+   {
+    "note_tr": "biriyle bozuşmak: Er hat sich mit seinem Nachbarn verfeindet."
+   }
+  ],
+  "_src": "6954515c",
+  "_src_reader": "6954515c"
+ },
+ "light-0457": {
+  "translation_tr": "(ask., esk.) (nöbete başlayan nöbetçilere) talimat vermek, (yönetmeliğe uymakla) yükümlü kılmak; (konuş.) mecbur etmek, görevlendirmek; (parmaklıkla) çevirmek",
+  "complements": [
+   {
+    "meaning_tr": "(ask., esk.) (nöbete başlayan nöbetçilere) talimat vermek, (yönetmeliğe uymakla) yükümlü kılmak",
+    "note_tr": "birini bir şeyle yükümlü kılmak (nöbetçiler için): Der Offizier vergattert die Soldaten zum Wachdienst."
+   },
+   {
+    "meaning_tr": "(konuş.) mecbur etmek, görevlendirmek",
+    "note_tr": "birini bir şeyle görevlendirmek: Die Mutter vergattert ihn zum Abwaschen."
+   }
+  ],
+  "_src": "8b70561e",
+  "_src_reader": "8b70561e"
+ },
+ "light-0458": {
+  "translation_tr": "pompalamak, (pompalayarak) doldurmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyi bir şeyle doldurmak: Er pumpt den Tank mit Wasser voll."
+   }
+  ],
+  "_src": "9d6b9acc",
+  "_src_reader": "9d6b9acc"
+ },
+ "light-0459": {
+  "translation_tr": "(yaz.) silahlandırmak, (birini zor bir durum için) donatmak",
+  "reflexive": {
+   "translation_tr": "(yaz.) (tatsız bir şeye) hazırlanmak, kendini hazırlamak; (yaz.) (sabrı, cesareti) kuşanmak",
+   "complements": [
+    {
+     "meaning_tr": "(yaz.) (tatsız bir şeye) hazırlanmak, kendini hazırlamak",
+     "note_tr": "bir şeye hazırlanmak: Wir wappnen uns für den Winter."
+    },
+    {
+     "meaning_tr": "(yaz.) (tatsız bir şeye) hazırlanmak, kendini hazırlamak",
+     "note_tr": "bir şeye hazırlanmak, bir şeyden korunmak: Sie wappnete sich gegen die Kritik."
+    },
+    {
+     "meaning_tr": "(yaz.) (sabrı, cesareti) kuşanmak",
+     "note_tr": "bir şeyi kuşanmak: Er wappnete sich mit Geduld."
+    }
+   ]
+  },
+  "complements": [
+   {
+    "note_tr": "birini bir şeye hazırlamak: Die lange Ausbildung hat ihn für das Amt gewappnet."
+   },
+   {
+    "note_tr": "birini bir şeyle donatmak: Die Trainerin wappnete das Team mit Selbstvertrauen."
+   }
+  ],
+  "_src": "b7cdc388",
+  "_src_reader": "b7cdc388"
+ },
+ "light-0460": {
+  "translation_tr": "(geçmişi) hatırlamak, anımsamak",
+  "complements": [
+   {
+    "note_tr": "bir şeyi hatırlamak: Ich erinnere mich gern an den Sommer zurück."
+   }
+  ],
+  "_src": "443456a1",
+  "_src_reader": "443456a1"
+ },
+ "light-0461": {
+  "translation_tr": "geri etki yapmak, karşılık olarak etkilemek",
+  "complements": [
+   {
+    "note_tr": "bir şeye geri etki yapmak: Die Krise wirkt auf die Politik zurück."
+   }
+  ],
+  "_src": "0904ec90",
+  "_src_reader": "0904ec90"
+ },
+ "light-0462": {
+  "translation_tr": "(yaz.) (birini bir şeyde) geçmek, (birinden bir şeyde) üstün olmak",
+  "complements": [
+   {
+    "note_tr": "bir şeyde birini geçmek: Sie tut es allen an Fleiß zuvor."
+   }
+  ],
+  "_src": "72176e9d",
+  "_src_reader": "72176e9d"
+ },
+ "light-0463": {
+  "translation_tr": "tıka basa yemek, aşırı yemek",
+  "complements": [
+   {
+    "note_tr": "bir şeyden fazla yemek: Er hat sich von dem Kuchen übergessen."
+   }
+  ],
+  "_src": "efca225b",
+  "_src_reader": "efca225b"
+ },
+ "light-0464": {
+  "translation_tr": "(hediyeye, sitemlere) boğmak, (hediye, sitem) yağdırmak, (birinin üstüne iş) yığmak; (yüzeyi) doldurmak, kalabalık etmek",
+  "complements": [
+   {
+    "note_tr": "birini bir şeye boğmak: Sie überhäuft ihn mit Lob."
+   }
+  ],
+  "_src": "bfeb406a",
+  "_src_reader": "bfeb406a"
+ },
+ "light-0465": {
+  "translation_tr": "ayırmak, kesip ayırmak, (dikili şeyi) sökerek ayırmak; (dikişi, elbiseyi) sökmek; (karışımı bileşenlerine) ayrıştırmak; (bir maddeyi diğerinden) ayırmak; (tekn.) (malzemeyi) kesmek; ayrı düşürmek; (diğerlerinden) ayırmak, tecrit etmek; (kavramları) ayırt etmek, birbirinden ayırmak; ayırmak, uzaklaştırmak (insanlar arasındaki farklar için); bölmek, ayırmak (sınır olarak); (bağlantıyı) kesmek, koparmak; (radyo) seçicilik özelliğine sahip olmak; (kelimeyi hecelerinden) bölmek",
+  "complements": [
+   {
+    "meaning_tr": "ayırmak, kesip ayırmak, (dikili şeyi) sökerek ayırmak",
+    "note_tr": "bir şeyi bir şeyden söküp ayırmak: Sie trennte den Kragen vom Mantel."
+   },
+   {
+    "meaning_tr": "(bir maddeyi diğerinden) ayırmak",
+    "note_tr": "bir şeyi bir şeyden ayırmak: Man muss das Eigelb vom Eiweiß trennen."
+   },
+   {
+    "meaning_tr": "ayrı düşürmek",
+    "note_tr": "birini birinden ayrı düşürmek: Der Krieg trennte die Kinder von den Eltern."
+   },
+   {
+    "meaning_tr": "(diğerlerinden) ayırmak, tecrit etmek",
+    "note_tr": "birini / bir şeyi diğerlerinden ayırmak: Die kranken Tiere wurden von der Herde getrennt."
+   },
+   {
+    "meaning_tr": "(kavramları) ayırt etmek, birbirinden ayırmak",
+    "note_tr": "bir şeyi bir şeyden ayırt etmek (düşüncede): Man muss das Wichtige vom Unwichtigen trennen."
+   },
+   {
+    "meaning_tr": "ayırmak, uzaklaştırmak (insanlar arasındaki farklar için)",
+    "note_tr": "birini birinden uzaklaştırmak: Sein Hochmut trennte ihn von den Kollegen."
+   },
+   {
+    "meaning_tr": "bölmek, ayırmak (sınır olarak)",
+    "note_tr": "bir şeyi bir şeyden ayırmak (sınır olarak): Ein schmaler Fluss trennt das Dorf vom Wald."
+   }
+  ],
+  "_src": "e1263cb4",
+  "_src_reader": "e1263cb4"
+ }
+}

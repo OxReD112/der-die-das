@@ -146,14 +146,14 @@
  "pronoun-021": {
   "translation_tr": "biri, birisi; kimse, herhangi biri",
   "example_tr": "Evde kimse var mı?",
-  "forms_note_tr": "Akkusativ ve Dativ hâlinde ekli ve eksiz biçimler olabilir.",
+  "forms_note_tr": "Akkusativ ve Dativ'de ekli ve eksiz biçimler olabilir.",
   "_src": "f1badd86",
   "_src_reader": "2e5a608e"
  },
  "pronoun-022": {
   "translation_tr": "hiç kimse",
   "example_tr": "Burada kimseyi tanımıyorum.",
-  "forms_note_tr": "Akkusativ ve Dativ hâlinde ekli ve eksiz biçimler olabilir.",
+  "forms_note_tr": "Akkusativ ve Dativ'de ekli ve eksiz biçimler olabilir.",
   "_src": "07250b3b",
   "_src_reader": "e8e53bf0"
  },
@@ -193,7 +193,7 @@
  "pronoun-027": {
   "translation_tr": "her ikisi; ikisi de",
   "example_tr": "İkisini de alıyoruz.",
-  "usage_note_tr": "Genellikle çoğul: beide Kinder, die beiden Kinder. die kelimesinden sonra sıfat ekleri gelir: die beiden, der beiden, den beiden. Beides (“her ikisi de, hem biri hem öteki”) tekildir: Nominativ/Akkusativ hâlinde beides, Dativ hâlinde beidem; Genitiv yok.",
+  "usage_note_tr": "Genellikle çoğul: beide Kinder, die beiden Kinder. die kelimesinden sonra sıfat ekleri gelir: die beiden, der beiden, den beiden. Beides (“her ikisi de, hem biri hem öteki”) tekildir: Nominativ / Akkusativ'de beides, Dativ'de beidem; Genitiv yok.",
   "_src": "3395ae23",
   "_src_reader": "febde784"
  },
@@ -201,7 +201,7 @@
   "translation_tr": "her, her biri, herkes; herhangi bir",
   "example_tr": "Herkes bir parça pasta alacak.",
   "usage_note_tr": "Tekil kullanılır: jeder Tag, jede Woche, jedes Kind. Çoğulda “hepsi” için genellikle alle kullanılır.",
-  "forms_note_tr": "Eril ya da nötr ismin önünde Genitiv hâlinde jeden de olur: jedes/jeden Jahres.",
+  "forms_note_tr": "Eril ya da nötr ismin önünde Genitiv'de jeden de olur: jedes/jeden Jahres.",
   "_src": "7e9167c0",
   "_src_reader": "5caed272"
  },
@@ -296,7 +296,7 @@
  "pronoun-039": {
   "translation_tr": "hangi; hangisi (birkaç tanesinden)",
   "example_tr": "Hangisini almak istiyorsun?",
-  "usage_note_tr": "Seçimle ilgili soru: Welcher Zug? Welches von diesen Büchern? Eril ya da nötr ismin önünde Genitiv hâlinde welchen de olur: welchen Tages.",
+  "usage_note_tr": "Seçimle ilgili soru: Welcher Zug? Welches von diesen Büchern? Eril ya da nötr ismin önünde Genitiv'de welchen de olur: welchen Tages.",
   "_src": "55808f68",
   "_src_reader": "9920d30c"
  },
@@ -433,7 +433,7 @@
  "pronoun-057": {
   "translation_tr": "her türlü, herhangi bir (istisnasız)",
   "example_tr": "Kavgadan sonra şenliğe gitmeye hiç hevesi kalmamıştı.",
-  "forms_note_tr": "dieser gibi çekilir; eril ve nötr Genitiv hâlinde genellikle jeglichen (jeglichen Geschlechts), daha seyrek jegliches. Çoğul daha seyrek görülür: jegliche Ansprüche.",
+  "forms_note_tr": "dieser gibi çekilir; eril ve nötr Genitiv'de genellikle jeglichen (jeglichen Geschlechts), daha seyrek jegliches. Çoğul daha seyrek görülür: jegliche Ansprüche.",
   "usage_note_tr": "jeder kelimesinin pekiştirilmiş biçimi, daha çok soyut isimlerle: jegliche Hilfe — her türlü yardım, ohne jeglichen Zweifel — hiç şüphesiz. İsimsiz kullanımı (ein jeglicher — herkes) yazı diline özgü, eskimekte olan bir kullanımdır.",
   "_src": "c69fa803",
   "_src_reader": "31577003"

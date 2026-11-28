@@ -42,7 +42,7 @@
  "verb-006": {
   "translation_tr": "yapmak",
   "example_tr": "İşten sonra yürüyüş yapıyorum.",
-  "usage_note_tr": "Dönüşlü kullanımlar: es sich bequem machen — rahatça yerleşmek; (konuş.) sich (Dat.) nichts aus etwas machen — bir şeye kayıtsız kalmak.",
+  "usage_note_tr": "Dönüşlü kullanımlar: es sich bequem machen — rahatça yerleşmek; (konuş.) sich (Dativ) nichts aus etwas machen — bir şeye kayıtsız kalmak.",
   "_src": "fae77c7f",
   "_src_reader": "e9f8b45b"
  },
@@ -650,7 +650,7 @@
  },
  "verb-2737": {
   "translation_tr": "ilgilendirmek",
-  "usage_note_tr": "Kimi — Akkusativ: Das interessiert mich nicht. — Bu beni ilgilendirmiyor. Karıştırılmamalı: sich interessieren (für + Akk.) — ilgilenmek.",
+  "usage_note_tr": "Kimi — Akkusativ: Das interessiert mich nicht. — Bu beni ilgilendirmiyor. Karıştırılmamalı: sich interessieren (für + Akkusativ) — ilgilenmek.",
   "example_tr": "Şehrin eski tarihi beni çok ilgilendiriyor.",
   "complements": [
    {
@@ -672,7 +672,7 @@
   "reflexive": {
    "translation_tr": "yakışık almak, uygun düşmek; (esk.) (bir şeye) boyun eğmek",
    "example_tr": "Bu yakışık almaz.",
-   "note_tr": "sich in etwas (A) schicken — bir şeye boyun eğmek: Sie schickte sich in ihr Schicksal. — Kaderine boyun eğdi."
+   "note_tr": "sich in etwas (Akkusativ) schicken — bir şeye boyun eğmek: Sie schickte sich in ihr Schicksal. — Kaderine boyun eğdi."
   },
   "_src": "8244475f",
   "_src_reader": "bb3b0047"
@@ -723,7 +723,7 @@
   "reflexive": {
    "translation_tr": "hayal etmek; tahmin etmek, (içinden) düşünmek",
    "example_tr": "Bunu tahmin edebiliyorum.",
-   "note_tr": "sich (D) etwas denken: Denk dir nur! — Düşünsene! Ich habe mir schon gedacht, dass du kommst. — Geleceğini zaten tahmin etmiştim. Was hast du dir dabei gedacht? — (Hiç) ne düşünüyordun?"
+   "note_tr": "sich (Dativ) etwas denken: Denk dir nur! — Düşünsene! Ich habe mir schon gedacht, dass du kommst. — Geleceğini zaten tahmin etmiştim. Was hast du dir dabei gedacht? — (Hiç) ne düşünüyordun?"
   },
   "_src": "ea21b286",
   "_src_reader": "13a140b7"
@@ -745,7 +745,7 @@
  },
  "verb-2738": {
   "translation_tr": "(meseleyi, anlaşmazlığı) karara bağlamak, çözmek; (bir şeyin) sonucunu belirlemek",
-  "usage_note_tr": "Neyi — Akkusativ: einen Streit entscheiden; sıklıkla edilgen çatıda: Das muss noch entschieden werden. — Buna daha karar verilmesi gerekiyor. über etwas entscheiden — bir şey hakkında karar vermek: Das Gericht entscheidet über den Fall. Karıştırılmamalı: sich entscheiden (für / gegen + Akk.) — karar vermek, seçmek.",
+  "usage_note_tr": "Neyi — Akkusativ: einen Streit entscheiden; sıklıkla edilgen çatıda: Das muss noch entschieden werden. — Buna daha karar verilmesi gerekiyor. über etwas entscheiden — bir şey hakkında karar vermek: Das Gericht entscheidet über den Fall. Karıştırılmamalı: sich entscheiden (für / gegen + Akkusativ) — karar vermek, seçmek.",
   "example_tr": "Son dakikada atılan gol maçın sonucunu belirledi.",
   "complements": [
    {
@@ -908,7 +908,7 @@
  },
  "verb-2577": {
   "translation_tr": "(biriyle) geçinmek; kendiliğinden anlaşılmak; (bir şeyden) anlamak, becermek",
-  "usage_note_tr": "Das versteht sich von selbst. — Bu kendiliğinden anlaşılır. sich auf etwas (Akk.) verstehen — bir şeyden anlamak, bir şeyi becermek: Er versteht sich aufs Kochen. — Yemek yapmayı bilir. sich olmadan: verstehen — anlamak.",
+  "usage_note_tr": "Das versteht sich von selbst. — Bu kendiliğinden anlaşılır. sich auf etwas (Akkusativ) verstehen — bir şeyden anlamak, bir şeyi becermek: Er versteht sich aufs Kochen. — Yemek yapmayı bilir. sich olmadan: verstehen — anlamak.",
   "example_tr": "İş arkadaşlarımla iyi geçiniyorum.",
   "complements": [
    {
@@ -1018,7 +1018,7 @@
   "reflexive": {
    "translation_tr": "kendini (bir şeyde) denemek",
    "example_tr": "Ressam olarak kendini denedi.",
-   "note_tr": "sich in / an etwas (D) versuchen: Er versuchte sich an einem Roman. — Bir roman yazmayı denedi."
+   "note_tr": "sich in / an etwas (Dativ) versuchen: Er versuchte sich an einem Roman. — Bir roman yazmayı denedi."
   },
   "_src": "ef0088c0",
   "_src_reader": "80b3082e"
@@ -1461,7 +1461,7 @@
   "reflexive": {
    "translation_tr": "(bir şeye) sokulmak, yapışmak; sıvışmak, süzülmek; (konuş.) kaytarmak, (bir şeyden) kaçmak",
    "example_tr": "Bulaşık yıkamaktan hep kaytarıyor.",
-   "note_tr": "bir şeye — an / gegen + Akk.: sich an die Wand drücken; bir şeyden — vor + Dativ: sich vor der Arbeit drücken.",
+   "note_tr": "bir şeye — an / gegen + Akkusativ: sich an die Wand drücken; bir şeyden — vor + Dativ: sich vor der Arbeit drücken.",
    "complements": [
     {
      "meaning_tr": "(konuş.) kaytarmak, (bir şeyden) kaçmak",
@@ -1530,7 +1530,7 @@
   "example_tr": "Sonbaharda ağaçlardan yapraklar düşer.",
   "complements": [
    {
-    "note_tr": "bir şeyin üstüne / içine düşmek (nereye? — Akk.); bir şeyden düşmek (nereden? — Dat.): Das Buch fiel auf den Boden. Die Blätter fallen von den Bäumen."
+    "note_tr": "bir şeyin üstüne / içine düşmek (nereye? — Akkusativ); bir şeyden düşmek (nereden? — Dativ): Das Buch fiel auf den Boden. Die Blätter fallen von den Bäumen."
    },
    {
     "note_tr": "(birine kolay / zor) gelmek: Das fällt mir schwer."
@@ -1603,7 +1603,7 @@
  },
  "verb-146": {
   "translation_tr": "tutmak; (sözü, vaadi) tutmak, (düzeni) korumak; (kutlama, ayin) düzenlemek; (konuşma) yapmak",
-  "usage_note_tr": "sich halten (an + Akk.) — bir şeye (kurallara, gerçeklere) uymak: Halt dich an die Regeln! sich halten — bozulmamak (yiyecekler için): Die Milch hält sich zwei Wochen. Durmak (taşıt için), sich olmadan bozulmamak — bunlar da halten.",
+  "usage_note_tr": "sich halten (an + Akkusativ) — bir şeye (kurallara, gerçeklere) uymak: Halt dich an die Regeln! sich halten — bozulmamak (yiyecekler için): Die Milch hält sich zwei Wochen. Durmak (taşıt için), sich olmadan bozulmamak — bunlar da halten.",
   "example_tr": "Çantamı bir dakika tutabilir misin?",
   "complements": [
    {
@@ -1625,7 +1625,7 @@
   ],
   "reflexive": {
    "translation_tr": "dayanmak (yiğitçe), (bir şeye) tutunmak, korunmak; (kurallara, gerçeklere) bağlı kalmak, uymak; bozulmamak (yiyecekler için)",
-   "note_tr": "sich halten an + Akk. — bir şeye (kurallara, gerçeklere) uymak"
+   "note_tr": "sich halten an + Akkusativ — bir şeye (kurallara, gerçeklere) uymak"
   },
   "see_also_tr": [
    {
@@ -1704,7 +1704,7 @@
   "reflexive": {
    "translation_tr": "kendine almak, gidip almak; (hastalık) kapmak, sıyrık almak",
    "example_tr": "Gidip kendime bir kahve alıyorum.",
-   "note_tr": "sich (D) etwas holen: Er hat sich eine Erkältung geholt. — Soğuk algınlığı kaptı."
+   "note_tr": "sich (Dativ) etwas holen: Er hat sich eine Erkältung geholt. — Soğuk algınlığı kaptı."
   },
   "_src": "2478ec6e",
   "_src_reader": "16654868"
@@ -2092,7 +2092,7 @@
   "example_tr": "Ekmeği keser misin lütfen?",
   "reflexive": {
    "translation_tr": "bir yerini kesmek; kendine (bir parça) kesmek",
-   "note_tr": "sich (D) etwas schneiden — kendine (bir parça) kesmek"
+   "note_tr": "sich (Dativ) etwas schneiden — kendine (bir parça) kesmek"
   },
   "_src": "bde93128",
   "_src_reader": "85cb5750"
@@ -2255,7 +2255,7 @@
     "note_tr": "(bunu) birinin yaptığı gibi yapmak"
    },
    {
-    "note_tr": "bunu, bir şeyi (es / das / was) — aynısını yapmak (birine — Dat., isteğe bağlı)"
+    "note_tr": "bunu, bir şeyi (es / das / was) — aynısını yapmak (birine — Dativ, isteğe bağlı)"
    }
   ],
   "_src": "393cc83a",
@@ -2314,7 +2314,7 @@
   "reflexive": {
    "translation_tr": "satılmak (mal için); (birine) satılmak, kendini satmak; (konuş.) kendini sunmak, kendini pazarlamak",
    "example_tr": "Bu kitap çok iyi satılıyor.",
-   "note_tr": "Birine satılmak — Dativ ya da an + Akk.: Er hat sich an die Konkurrenz verkauft.",
+   "note_tr": "Birine satılmak — Dativ ya da an + Akkusativ: Er hat sich an die Konkurrenz verkauft.",
    "complements": [
     {
      "meaning_tr": "(birine) satılmak, kendini satmak",
@@ -2677,7 +2677,7 @@
   "reflexive": {
    "translation_tr": "kendini (biri olarak) tanıtmak",
    "example_tr": "Kendini doktor olarak tanıtıyordu.",
-   "note_tr": "kim olarak — als + Nominativ ya da für + Akk.: sich für einen Polizisten ausgeben.",
+   "note_tr": "kim olarak — als + Nominativ ya da für + Akkusativ: sich für einen Polizisten ausgeben.",
    "complements": [
     {
      "meaning_tr": "kendini (biri olarak) tanıtmak",
@@ -2718,7 +2718,7 @@
   "reflexive": {
    "translation_tr": "(bir şeyin lehinde ya da aleyhinde) görüş bildirmek; içini dökmek, (biriyle) açık açık konuşmak",
    "example_tr": "Çoğunluk önerinin lehinde görüş bildirdi.",
-   "note_tr": "neyin lehinde — für + Akk., neyin aleyhinde — gegen + Akk.; kiminle — mit + Dativ: Wir haben uns endlich ausgesprochen. — Sonunda açık açık konuştuk.",
+   "note_tr": "neyin lehinde — für + Akkusativ, neyin aleyhinde — gegen + Akkusativ; kiminle — mit + Dativ: Wir haben uns endlich ausgesprochen. — Sonunda açık açık konuştuk.",
    "complements": [
     {
      "meaning_tr": "(bir şeyin lehinde ya da aleyhinde) görüş bildirmek",
@@ -2856,7 +2856,7 @@
   "reflexive": {
    "translation_tr": "(biriyle) istişare etmek, (birine) danışmak",
    "example_tr": "Önce eşime danışmam gerekiyor.",
-   "note_tr": "kiminle — mit + Dativ; ne hakkında — über + Akk."
+   "note_tr": "kiminle — mit + Dativ; ne hakkında — über + Akkusativ"
   },
   "_src": "b628e959",
   "_src_reader": "6c8ccd0b"
@@ -3339,7 +3339,7 @@
   "example_tr": "Doktor bana üç günlük hastalık raporu verdi.",
   "complements": [
    {
-    "note_tr": "birine hastalık raporu vermek (Almancada: birini — Akk)"
+    "note_tr": "birine hastalık raporu vermek (Almancada: birini — Akkusativ)"
    }
   ],
   "_src": "24a0be14",
@@ -3601,7 +3601,7 @@
  },
  "verb-312": {
   "translation_tr": "başarmak, halletmek, üstesinden gelmek; yetiştirmek, yetişmek; (konuş.) bir yere götürmek, taşımak, kaldırmak",
-  "usage_note_tr": "“yaratmak” anlamında güçlü fiil: schuf, geschaffen. Götürmek, uzaklaştırmak: Schafft mir den Kerl aus dem Haus! — Şu adamı evden çıkarın! jdn. aus dem Weg schaffen — yoldan çekmek, ortadan kaldırmak; sich (D) jdn. / etw. vom Hals schaffen — birinden / bir şeyden kurtulmak; etw. aus der Welt schaffen — (bir sorunu, anlaşmazlığı) ortadan kaldırmak.",
+  "usage_note_tr": "“yaratmak” anlamında güçlü fiil: schuf, geschaffen. Götürmek, uzaklaştırmak: Schafft mir den Kerl aus dem Haus! — Şu adamı evden çıkarın! jdn. aus dem Weg schaffen — yoldan çekmek, ortadan kaldırmak; sich (Dativ) jdn. / etw. vom Hals schaffen — birinden / bir şeyden kurtulmak; etw. aus der Welt schaffen — (bir sorunu, anlaşmazlığı) ortadan kaldırmak.",
   "example_tr": "Tek başına halledebilir misin?",
   "complements": [
    {
@@ -3736,7 +3736,7 @@
   "reflexive": {
    "translation_tr": "(bir şeyden) kendini kurtarmak, zahmet etmemek; (kendine) biriktirmek, kenara koymak",
    "example_tr": "Hiç zahmet etme.",
-   "note_tr": "sich (D) etwas sparen: Den Weg kannst du dir sparen. — Gitmene gerek yok. Kendine biriktirmek: Ich habe mir das Geld für ein Fahrrad gespart. — Bisiklet için kendime para biriktirdim."
+   "note_tr": "sich (Dativ) etwas sparen: Den Weg kannst du dir sparen. — Gitmene gerek yok. Kendine biriktirmek: Ich habe mir das Geld für ein Fahrrad gespart. — Bisiklet için kendime para biriktirdim."
   },
   "_src": "1fe16cfb",
   "_src_reader": "a4b691eb"
@@ -3851,7 +3851,7 @@
   "reflexive": {
    "translation_tr": "bölünmek, ayrılmak",
    "example_tr": "Köprüden sonra yol ikiye ayrılıyor.",
-   "note_tr": "Neye — in + Akk.: Die Klasse teilte sich in zwei Gruppen. — Sınıf iki gruba ayrıldı. Karıştırılmamalı: sich (Dativ) etwas teilen — bir şeyi biriyle paylaşmak (bkz. fiilin açıklaması)."
+   "note_tr": "Neye — in + Akkusativ: Die Klasse teilte sich in zwei Gruppen. — Sınıf iki gruba ayrıldı. Karıştırılmamalı: sich (Dativ) etwas teilen — bir şeyi biriyle paylaşmak (bkz. fiilin açıklaması)."
   },
   "_src": "1b5dc6fd",
   "_src_reader": "461021be"
@@ -4452,7 +4452,7 @@
   "reflexive": {
    "translation_tr": "(birine / bir şeye) katılmak; (bir şeyin) ardından gelmek, (bir şeye) bitişik olmak",
    "example_tr": "Size katılabilir miyim?",
-   "note_tr": "Neyin ardından, neyin yanında — an + Akk.: An den Film schließt sich ein Gespräch an. Kime, neye — Dativ'de: sich einer Gruppe anschließen; sich einer Meinung anschließen — bir görüşe katılmak.",
+   "note_tr": "Neyin ardından, neyin yanında — an + Akkusativ: An den Film schließt sich ein Gespräch an. Kime, neye — Dativ'de: sich einer Gruppe anschließen; sich einer Meinung anschließen — bir görüşe katılmak.",
    "complements": [
     {
      "meaning_tr": "(birine / bir şeye) katılmak",
@@ -4793,7 +4793,7 @@
   "reflexive": {
    "translation_tr": "ikramdan almak, kendine servis yapmak",
    "example_tr": "Buyurun, kendiniz alın!",
-   "note_tr": "(yaz.) sich einer Sache (Gen.) bedienen — bir şeyden yararlanmak, bir şeyi kullanmak."
+   "note_tr": "(yaz.) sich einer Sache (Genitiv) bedienen — bir şeyden yararlanmak, bir şeyi kullanmak."
   },
   "_src": "6d17e8ca",
   "_src_reader": "f3b788e9"
@@ -4975,7 +4975,7 @@
   "reflexive": {
    "translation_tr": "kendini (bir şeyle) sınırlamak, (bir şeyle) yetinmek",
    "example_tr": "En önemli noktalarla yetineceğim.",
-   "note_tr": "neyle — auf + Akk.",
+   "note_tr": "neyle — auf + Akkusativ",
    "complements": [
     {
      "meaning_tr": "kendini (bir şeyle) sınırlamak, (bir şeyle) yetinmek",
@@ -5359,7 +5359,7 @@
   "reflexive": {
    "translation_tr": "yerleşmek; kendini (bir şeye) hazırlamak, (bir şeye) hazırlanmak",
    "example_tr": "Yeni evimize güzelce yerleştik.",
-   "note_tr": "neye — auf + Akk.: sich auf einen langen Winter einrichten.",
+   "note_tr": "neye — auf + Akkusativ: sich auf einen langen Winter einrichten.",
    "complements": [
     {
      "meaning_tr": "kendini (bir şeye) hazırlamak, (bir şeye) hazırlanmak",
@@ -5762,7 +5762,7 @@
   "reflexive": {
    "translation_tr": "kendini toparlamak, dengesini korumak; (bir şeye) yakalanmak, takılmak",
    "example_tr": "Korkunun ardından çabucak kendini toparladı.",
-   "note_tr": "Er stolperte, fing sich aber im letzten Moment. — Tökezledi ama son anda dengesini korudu. Der Vogel hatte sich im Netz gefangen. — Kuş ağa takılmıştı. Sich (D) etwas fangen (konuş.) — kapmak, (ceza vb.) yemek: Ich habe mir eine Erkältung gefangen. — Soğuk algınlığı kaptım."
+   "note_tr": "Er stolperte, fing sich aber im letzten Moment. — Tökezledi ama son anda dengesini korudu. Der Vogel hatte sich im Netz gefangen. — Kuş ağa takılmıştı. Sich (Dativ) etwas fangen (konuş.) — kapmak, (ceza vb.) yemek: Ich habe mir eine Erkältung gefangen. — Soğuk algınlığı kaptım."
   },
   "_src": "dfaeec33",
   "_src_reader": "deee5ead"
@@ -5774,7 +5774,7 @@
   "reflexive": {
    "translation_tr": "kendini toparlamak, sakinleşmek; (kurz) kısa konuşmak, sözü kısa tutmak; (bei / an den Händen) el ele tutuşmak",
    "example_tr": "İlk korkunun ardından çabucak kendini toparladı.",
-   "note_tr": "Fass dich kurz! — Kısa kes! El ele tutuşmak — an / bei + D: Sie hatten sich bei den Händen gefasst. — El ele tutuşmuşlardı."
+   "note_tr": "Fass dich kurz! — Kısa kes! El ele tutuşmak — an / bei + Dativ: Sie hatten sich bei den Händen gefasst. — El ele tutuşmuşlardı."
   },
   "_src": "2198b926",
   "_src_reader": "699a0557"
@@ -6101,7 +6101,7 @@
   "example_tr": "Müdürüm iznimi onayladı.",
   "reflexive": {
    "translation_tr": "kendine (lezzetli bir şey) ısmarlamak",
-   "note_tr": "sich (D) etwas genehmigen"
+   "note_tr": "sich (Dativ) etwas genehmigen"
   },
   "_src": "37c4ae01",
   "_src_reader": "0a95fff5"
@@ -6194,7 +6194,7 @@
   ],
   "reflexive": {
    "translation_tr": "(bir şeye) dayanmak",
-   "note_tr": "Neye — auf + Akk.: Ihr Urteil gründet sich auf genaue Beobachtungen.",
+   "note_tr": "Neye — auf + Akkusativ: Ihr Urteil gründet sich auf genaue Beobachtungen.",
    "complements": [
     {
      "meaning_tr": "(bir şeye) dayanmak",
@@ -6650,7 +6650,7 @@
   "reflexive": {
    "translation_tr": "karışmak; (bir şeye) müdahale etmek",
    "example_tr": "Yağ suyla karışmaz.",
-   "note_tr": "Neye — in + Akk.: sich in fremde Angelegenheiten mischen — başkalarının işine karışmak. sich unter die Leute mischen — kalabalığa karışmak."
+   "note_tr": "Neye — in + Akkusativ: sich in fremde Angelegenheiten mischen — başkalarının işine karışmak. sich unter die Leute mischen — kalabalığa karışmak."
   },
   "_src": "47564fcf",
   "_src_reader": "248725a6"
@@ -6843,7 +6843,7 @@
   "example_tr": "Sigara içmek sağlığa zarar verir.",
   "complements": [
    {
-    "note_tr": "birine / bir şeye zarar vermek (Dativ alır)"
+    "note_tr": "birine / bir şeye zarar vermek (Dativ'le kullanılır)"
    }
   ],
   "_src": "6a0fb668",
@@ -7256,7 +7256,7 @@
  },
  "verb-652": {
   "translation_tr": "çarpmak, vurmak (elini, başını); (mec.) (bir şeye) içerlemek, (bir şeyden) rahatsız olmak",
-  "usage_note_tr": "Vücudun bir yerini çarpmak — zamir Dativ hâlinde: Ich habe mir den Kopf gestoßen. — Başımı çarptım. Mecaz anlamda — an + Dativ: Sie stößt sich an seinem Ton. — Onun ses tonundan rahatsız oluyor. sich olmadan: stoßen — itmek (haben); auf + Akkusativ — rastlamak (sein). İterek uzaklaşmak — sich abstoßen (başka bir fiil): Er stieß sich vom Beckenrand ab.",
+  "usage_note_tr": "Vücudun bir yerini çarpmak — zamir Dativ'de: Ich habe mir den Kopf gestoßen. — Başımı çarptım. Mecaz anlamda — an + Dativ: Sie stößt sich an seinem Ton. — Onun ses tonundan rahatsız oluyor. sich olmadan: stoßen — itmek (haben); auf + Akkusativ — rastlamak (sein). İterek uzaklaşmak — sich abstoßen (başka bir fiil): Er stieß sich vom Beckenrand ab.",
   "example_tr": "Dikkat et, başını çarpma!",
   "complements": [
    {
@@ -7272,7 +7272,7 @@
  },
  "verb-2559": {
   "translation_tr": "itmek, itip kakmak; (ayakla, dirsekle) vurmak; saplamak, batırmak",
-  "usage_note_tr": "Rastlamak (auf + Akk.), çarpmak, toslamak (gegen + Akk.) — Perfekt sein ile. Bir yerini çarpıp incitmek — sich stoßen.",
+  "usage_note_tr": "Rastlamak (auf + Akkusativ), çarpmak, toslamak (gegen + Akkusativ) — Perfekt sein ile. Bir yerini çarpıp incitmek — sich stoßen.",
   "example_tr": "Perondaki kalabalıkta biri beni arkadan itti.",
   "complements": [
    {
@@ -7293,7 +7293,7 @@
  },
  "verb-2560": {
   "translation_tr": "(bir şeye) rastlamak, rast gelmek; (biriyle) tesadüfen karşılaşmak; (bir şeye) çarpmak, toslamak; (bir şeye) bitişik olmak",
-  "usage_note_tr": "(Birini) itmek — Perfekt haben ile. Kalıp ifade: auf Kritik / auf Ablehnung stoßen — eleştiriyle / retle karşılaşmak; zu jemandem stoßen — birine katılmak. Bitişik olmak (an + Akk.) — Perfekt haben ile.",
+  "usage_note_tr": "(Birini) itmek — Perfekt haben ile. Kalıp ifade: auf Kritik / auf Ablehnung stoßen — eleştiriyle / retle karşılaşmak; zu jemandem stoßen — birine katılmak. Bitişik olmak (an + Akkusativ) — Perfekt haben ile.",
   "example_tr": "Yürüyüşümüzde ormanın ortasında eski bir harabeye rastladık.",
   "complements": [
    {
@@ -7362,7 +7362,7 @@
   "example_tr": "Tatilde Kızıldeniz'de dalış yapıyoruz.",
   "complements": [
    {
-    "note_tr": "bir şeyi daldırmak, batırmak (in + Akk.): den Pinsel in die Farbe tauchen (hat getaucht)"
+    "note_tr": "bir şeyi daldırmak, batırmak (in + Akkusativ): den Pinsel in die Farbe tauchen (hat getaucht)"
    }
   ],
   "_src": "3bd7bdf6",
@@ -7503,7 +7503,7 @@
   "example_tr": "Önce bir düşünmem lazım.",
   "reflexive": {
    "translation_tr": "iyice düşünmek, karar vermek",
-   "note_tr": "sich (D) etwas überlegen"
+   "note_tr": "sich (Dativ) etwas überlegen"
   },
   "_src": "191f6a09",
   "_src_reader": "13bf035f"
@@ -8856,7 +8856,7 @@
  },
  "verb-785": {
   "translation_tr": "(birinin hâlinden) fark etmek; (konuşmada) belirtmek, değinmek (yaz.)",
-  "usage_note_tr": "sich (D) nichts anmerken lassen — belli etmemek.",
+  "usage_note_tr": "sich (Dativ) nichts anmerken lassen — belli etmemek.",
   "example_tr": "Sınav öncesi heyecanı hâlinden açıkça fark ediliyor.",
   "complements": [
    {
@@ -8865,7 +8865,7 @@
   ],
   "reflexive": {
    "translation_tr": "belli etmemek",
-   "note_tr": "sich (D) nichts anmerken lassen"
+   "note_tr": "sich (Dativ) nichts anmerken lassen"
   },
   "_src": "440ce49e",
   "_src_reader": "eefcdd09"
@@ -9365,7 +9365,7 @@
     "meaning_tr": "(bir şeye) bağlamak"
    }
   ],
-  "usage_note_tr": "Bir şeye bağlamak — an + Akk. Ayrıca (kitap) ciltlemek: ein in Leder gebundenes Buch — deri ciltli bir kitap.",
+  "usage_note_tr": "Bir şeye bağlamak — an + Akkusativ Ayrıca (kitap) ciltlemek: ein in Leder gebundenes Buch — deri ciltli bir kitap.",
   "_src": "57565c30",
   "_src_reader": "ba7e66f8"
  },
@@ -9485,7 +9485,7 @@
  },
  "verb-2779": {
   "translation_tr": "(bir yeri) dolaşmak, arşınlamak; taramak, devriye gezmek",
-  "usage_note_tr": "Ayrılmayan: durchstreifte, hat durchstreift. Her zaman Akkusativ ile: den Wald, die Stadt durchstreifen. Krş. streifen (sein) durch + Akk: Er ist durch den Wald gestreift.",
+  "usage_note_tr": "Ayrılmayan: durchstreifte, hat durchstreift. Her zaman Akkusativ'le: den Wald, die Stadt durchstreifen. Krş. streifen (sein) durch + Akkusativ: Er ist durch den Wald gestreift.",
   "example_tr": "Çocuklar bütün öğleden sonra köyün arkasındaki ormanı dolaştı.",
   "complements": [
    {
@@ -10169,7 +10169,7 @@
   ],
   "reflexive": {
    "translation_tr": "bir şeyin farkına varmak",
-   "note_tr": "sich (D) etwas klarmachen"
+   "note_tr": "sich (Dativ) etwas klarmachen"
   },
   "_src": "26a4c2d5",
   "_src_reader": "26fecd45"
@@ -10199,7 +10199,7 @@
   ],
   "reflexive": {
    "translation_tr": "parmağını kıstırmak; koltuğunun altına sıkıştırmak",
-   "note_tr": "sich (D) den Finger klemmen — parmağını kıstırmak; sich (D) etwas unter den Arm klemmen — bir şeyi koltuğunun altına sıkıştırmak"
+   "note_tr": "sich (Dativ) den Finger klemmen — parmağını kıstırmak; sich (Dativ) etwas unter den Arm klemmen — bir şeyi koltuğunun altına sıkıştırmak"
   },
   "_src": "a01a3b01",
   "_src_reader": "a7141493"
@@ -10491,7 +10491,7 @@
   "example_tr": "Yeni tesis her saat tanka bin litre su pompalıyor.",
   "reflexive": {
    "translation_tr": "ödünç almak",
-   "note_tr": "sich (D) etwas pumpen"
+   "note_tr": "sich (Dativ) etwas pumpen"
   },
   "_src": "e63a275d",
   "_src_reader": "fb563f41"
@@ -10855,7 +10855,7 @@
   "example_tr": "Dükkân kapanmadan hemen önce son ekmeği kaptım.",
   "reflexive": {
    "translation_tr": "(kendine) kapmak, kapıvermek",
-   "note_tr": "sich (D) etwas schnappen"
+   "note_tr": "sich (Dativ) etwas schnappen"
   },
   "_src": "b2fcb66c",
   "_src_reader": "8b020f9d"
@@ -11063,7 +11063,7 @@
   "reflexive": {
    "translation_tr": "(bir şeye) yaslanmak; (bir şeye) dayanmak, temellenmek",
    "example_tr": "Yaşlı kadın bir koltuk değneğine yaslanıyordu.",
-   "note_tr": "Neye — auf + Akk.: Das Urteil stützt sich auf Zeugenaussagen. — Karar tanık ifadelerine dayanıyor.",
+   "note_tr": "Neye — auf + Akkusativ: Das Urteil stützt sich auf Zeugenaussagen. — Karar tanık ifadelerine dayanıyor.",
    "complements": [
     {
      "note_tr": "bir şeye dayanmak: Die Theorie stützt sich auf neue Daten.",
@@ -12250,7 +12250,7 @@
   "reflexive": {
    "translation_tr": "görüşünü söylemek, (biri / bir şey hakkında) uzun uzun konuşmak",
    "example_tr": "Komşuları hakkında uzun uzadıya konuştu.",
-   "note_tr": "Ne hakkında — über + Akk.",
+   "note_tr": "Ne hakkında — über + Akkusativ",
    "complements": [
     {
      "note_tr": "biri / bir şey hakkında görüşünü söylemek, uzun uzun konuşmak: Sie ließ sich über das Essen aus."
@@ -12990,7 +12990,7 @@
   "example_tr": "Veterinerin kaçan keçiyi yakalaması yirmi dakika sürdü.",
   "reflexive": {
    "translation_tr": "(konuş.) (soğuk algınlığı) kapmak",
-   "note_tr": "sich (D) etwas einfangen"
+   "note_tr": "sich (Dativ) etwas einfangen"
   },
   "_src": "d8971008",
   "_src_reader": "6a9e223a"
@@ -13027,7 +13027,7 @@
   "_src_reader": "c2142476"
  },
  "verb-1178": {
-  "translation_tr": "(suyu, küveti) doldurmak; içeri almak; gömmek, yerleştirmek (in + Akk)",
+  "translation_tr": "(suyu, küveti) doldurmak; içeri almak; gömmek, yerleştirmek (in + Akkusativ)",
   "usage_note_tr": "İçeri almak: Ab 19 Uhr werden die Gäste eingelassen. Gömmek: In den Boden waren Gleise eingelassen. — Zemine raylar gömülmüştü; in die Wand eingelassene Lampen — duvara gömülü lambalar. Bir işe bulaşmak — sich einlassen.",
   "example_tr": "Antrenmandan sonra küveti sıcak suyla dolduruyorum.",
   "_src": "b313d5e7",
@@ -13206,18 +13206,18 @@
  },
  "verb-1196": {
   "translation_tr": "geliştirmek, hazırlamak (birlikte); (emekle) elde etmek",
-  "usage_note_tr": "sich (Dat.) etwas erarbeiten — bir şeyi (mevki, saygı) kendi emeğiyle elde etmek.",
+  "usage_note_tr": "sich (Dativ) etwas erarbeiten — bir şeyi (mevki, saygı) kendi emeğiyle elde etmek.",
   "example_tr": "Öğrenciler küçük gruplar hâlinde yenilenebilir enerjiler hakkında bir sunum hazırlıyor.",
   "reflexive": {
    "translation_tr": "bir şeyi (mevki, saygı) kendi emeğiyle elde etmek",
-   "note_tr": "sich (D) etwas erarbeiten"
+   "note_tr": "sich (Dativ) etwas erarbeiten"
   },
   "_src": "a103d4f8",
   "_src_reader": "f7570a8b"
  },
  "verb-1197": {
   "translation_tr": "(yaz.) (birine) acımak, merhamet etmek",
-  "usage_note_tr": "Şaka yollu: sich einer Sache (Gen.) erbarmen — bir şeyin icabına bakmak, bir şeyi “kurtarmak” (son parçayı, bir yığın bulaşığı).",
+  "usage_note_tr": "Şaka yollu: sich einer Sache (Genitiv) erbarmen — bir şeyin icabına bakmak, bir şeyi “kurtarmak” (son parçayı, bir yığın bulaşığı).",
   "example_tr": "Uzun uzun yalvarmamızdan sonra otobüs şoförü bize acıdı ve yine de bizi otobüse aldı.",
   "complements": [
    {
@@ -13240,11 +13240,11 @@
  },
  "verb-1199": {
   "translation_tr": "sevindirmek",
-  "usage_note_tr": "sich an etwas (Dat.) erfreuen — bir şeyden zevk almak, bir şeye sevinmek; (yaz.) sich einer Sache (Gen.) erfreuen — bir şeye (rağbet, sağlık) sahip olmak.",
+  "usage_note_tr": "sich an etwas (Dativ) erfreuen — bir şeyden zevk almak, bir şeye sevinmek; (yaz.) sich einer Sache (Genitiv) erfreuen — bir şeye (rağbet, sağlık) sahip olmak.",
   "example_tr": "Bahçedeki ilk kardelenler her yıl beni yeniden sevindiriyor.",
   "reflexive": {
    "translation_tr": "bir şeyden zevk almak, bir şeye sevinmek; (yaz.) bir şeye (rağbet, sağlık) sahip olmak",
-   "note_tr": "sich an etwas (Dat.) erfreuen — bir şeyden zevk almak, bir şeye sevinmek; sich einer Sache (Gen.) erfreuen — (yaz.) bir şeye (rağbet, sağlık) sahip olmak",
+   "note_tr": "sich an etwas (Dativ) erfreuen — bir şeyden zevk almak, bir şeye sevinmek; sich einer Sache (Genitiv) erfreuen — (yaz.) bir şeye (rağbet, sağlık) sahip olmak",
    "complements": [
     {
      "meaning_tr": "bir şeyden zevk almak, bir şeye sevinmek",
@@ -13264,7 +13264,7 @@
  },
  "verb-1201": {
   "translation_tr": "ortaya çıkmak, doğmak (fırsat için); (bir şeyden) kaynaklanmak; teslim olmak",
-  "usage_note_tr": "Teslim olmak: Nach langen Verhandlungen ergaben sich die Rebellen. (Ergib dich! — Teslim ol!) sich in etwas (Akk.) ergeben — bir şeye boyun eğmek; sich einer Sache (Dat.) ergeben — kendini bir şeye kaptırmak.",
+  "usage_note_tr": "Teslim olmak: Nach langen Verhandlungen ergaben sich die Rebellen. (Ergib dich! — Teslim ol!) sich in etwas (Akkusativ) ergeben — bir şeye boyun eğmek; sich einer Sache (Dativ) ergeben — kendini bir şeye kaptırmak.",
   "example_tr": "Staj sırasında benim için kalıcı bir iş fırsatı doğdu.",
   "complements": [
    {
@@ -13392,11 +13392,11 @@
  },
  "verb-1216": {
   "translation_tr": "edinmek, satın almak; (bilgi, deneyim) edinmek",
-  "usage_note_tr": "Bilgi, deneyim: In dem Praktikum habe ich viel praktische Erfahrung erworben. sich (Dat.) etwas erwerben — (saygı, güven) kazanmak.",
+  "usage_note_tr": "Bilgi, deneyim: In dem Praktikum habe ich viel praktische Erfahrung erworben. sich (Dativ) etwas erwerben — (saygı, güven) kazanmak.",
   "example_tr": "Bilet, bir uygulama üzerinden doğrudan otobüste satın alınabilir.",
   "reflexive": {
    "translation_tr": "(bilgi, vatandaşlık, akademik derece) edinmek; (saygı, güven) kazanmak",
-   "note_tr": "sich (D) etwas erwerben — (bilgi, vatandaşlık, akademik derece) edinmek"
+   "note_tr": "sich (Dativ) etwas erwerben — (bilgi, vatandaşlık, akademik derece) edinmek"
   },
   "_src": "370a4524",
   "_src_reader": "bb85a459"
@@ -15131,7 +15131,7 @@
  },
  "verb-1400": {
   "translation_tr": "yayınlamak; (verileri, yetkileri, hastalığı) aktarmak, devretmek, bulaştırmak; uygulamak, uyarlamak; (yaz.) (edebî metni) çevirmek",
-  "usage_note_tr": "Ayrılmayan: überträgt, übertrug, hat übertragen. Görev vermek: jemandem eine Aufgabe übertragen. Bir şeye aktarmak, uygulamak (auf + Akk.). sich übertragen (auf + Akk.) — geçmek, bulaşmak (ruh hâli, hastalık için).",
+  "usage_note_tr": "Ayrılmayan: überträgt, übertrug, hat übertragen. Görev vermek: jemandem eine Aufgabe übertragen. Bir şeye aktarmak, uygulamak (auf + Akkusativ). sich übertragen (auf + Akkusativ) — geçmek, bulaşmak (ruh hâli, hastalık için).",
   "example_tr": "Prensin düğünü kırktan fazla ülkede yayınlandı.",
   "complements": [
    {
@@ -15145,7 +15145,7 @@
   ],
   "reflexive": {
    "translation_tr": "geçmek, bulaşmak (ruh hâli, hastalık için)",
-   "note_tr": "sich übertragen (auf + Akk.)",
+   "note_tr": "sich übertragen (auf + Akkusativ)",
    "complements": [
     {
      "meaning_tr": "geçmek, bulaşmak (ruh hâli, hastalık için)",
@@ -15279,11 +15279,11 @@
  },
  "verb-1416": {
   "translation_tr": "(bir şeyden) sorumlu olmak, (bir şeyin) sorumluluğunu üstlenmek",
-  "usage_note_tr": "sich verantworten (für + Akk., wegen + Gen.) — hesap vermek, kendini savunmak (özellikle mahkemede).",
+  "usage_note_tr": "sich verantworten (für + Akkusativ, wegen + Genitiv) — hesap vermek, kendini savunmak (özellikle mahkemede).",
   "example_tr": "Bu kadar riskli araba kullanan, sonuçlarının sorumluluğunu da sonunda kendisi üstlenmek zorundadır.",
   "reflexive": {
    "translation_tr": "hesap vermek, kendini savunmak (özellikle mahkemede)",
-   "note_tr": "sich verantworten (für + Akk., wegen + Gen.)"
+   "note_tr": "sich verantworten (für + Akkusativ, wegen + Genitiv)"
   },
   "_src": "0cef45cd",
   "_src_reader": "2e5712cf"
@@ -15299,7 +15299,7 @@
   ],
   "reflexive": {
    "translation_tr": "midesini bozmak; biriyle arasını bozmak",
-   "note_tr": "sich (D) den Magen verderben — midesini bozmak; es sich (D) mit jemandem verderben — biriyle arasını bozmak"
+   "note_tr": "sich (Dativ) den Magen verderben — midesini bozmak; es sich (Dativ) mit jemandem verderben — biriyle arasını bozmak"
   },
   "_src": "57021b5d",
   "_src_reader": "232b24f4"
@@ -15401,7 +15401,7 @@
  },
  "verb-1428": {
   "translation_tr": "sahip olmak, elinde bulundurmak; dilediği gibi kullanmak, tasarruf hakkına sahip olmak",
-  "usage_note_tr": "(resmî) edatsız + Akk. — karar vermek, hükme bağlamak.",
+  "usage_note_tr": "(resmî) edatsız + Akkusativ — karar vermek, hükme bağlamak.",
   "example_tr": "Yeni otel, bir spa alanına ve bir çatı terasına sahip.",
   "complements": [
    {
@@ -15463,7 +15463,7 @@
  },
  "verb-1434": {
   "translation_tr": "(tarihi, yeri) değiştirmek, başka bir zamana / yere almak; yanlış yere koymak; döşemek",
-  "usage_note_tr": "Ayrıca: (kitap) yayımlamak. sich auf etwas (Akk.) verlegen — bir şeye yönelmek (bir yöntem olarak). Sıfat verlegen — mahcup, utangaç.",
+  "usage_note_tr": "Ayrıca: (kitap) yayımlamak. sich auf etwas (Akkusativ) verlegen — bir şeye yönelmek (bir yöntem olarak). Sıfat verlegen — mahcup, utangaç.",
   "example_tr": "Demiryolu grevi yüzünden buluşmamızı hiç düşünmeden ana istasyonun yanındaki bir kafeye aldık.",
   "complements": [
    {
@@ -15472,7 +15472,7 @@
   ],
   "reflexive": {
    "translation_tr": "bir şeye yönelmek (bir yöntem olarak)",
-   "note_tr": "sich auf etwas (Akk.) verlegen"
+   "note_tr": "sich auf etwas (Akkusativ) verlegen"
   },
   "_src": "9f0e353c",
   "_src_reader": "a53f0e61"
@@ -15610,7 +15610,7 @@
  },
  "verb-1449": {
   "translation_tr": "(bir şeyi) reddetmek, (bir şeye) izin vermemek; (bir şeyi yapmayı) reddetmek",
-  "usage_note_tr": "Birine bir şeyi vermemek, izin vermemek — Dativ + Akk.: Der Türsteher hat meinem Freund den Zutritt zum Club verweigert. sich verweigern — yanaşmamak, katılmayı reddetmek.",
+  "usage_note_tr": "Birine bir şeyi vermemek, izin vermemek — Dativ + Akkusativ: Der Türsteher hat meinem Freund den Zutritt zum Club verweigert. sich verweigern — yanaşmamak, katılmayı reddetmek.",
   "example_tr": "Tanık mahkemede ifade vermeyi reddetti.",
   "complements": [
    {
@@ -15653,11 +15653,11 @@
  },
  "verb-1453": {
   "translation_tr": "çarpıtmak, bozmak",
-  "usage_note_tr": "Çarpıtmak (olguları): Die Statistik verzerrt das Bild, weil nur Großstädte befragt wurden. sich verzerren — çarpılmak (yüz için). sich (Dat.) einen Muskel verzerren — kasını incitmek.",
+  "usage_note_tr": "Çarpıtmak (olguları): Die Statistik verzerrt das Bild, weil nur Großstädte befragt wurden. sich verzerren — çarpılmak (yüz için). sich (Dativ) einen Muskel verzerren — kasını incitmek.",
   "example_tr": "Ucuz hoparlörler bası öyle bozuyor ki müzikten neredeyse hiç keyif alınmıyor.",
   "reflexive": {
    "translation_tr": "çarpılmak (yüz için); kasını incitmek",
-   "note_tr": "sich (D) einen Muskel verzerren — kasını incitmek"
+   "note_tr": "sich (Dativ) einen Muskel verzerren — kasını incitmek"
   },
   "_src": "b6502496",
   "_src_reader": "a50e9689"
@@ -15825,7 +15825,7 @@
  },
  "verb-1467": {
   "translation_tr": "(bir şey yüzünden) sitem etmek, (bir şeyle) suçlamak",
-  "usage_note_tr": "sich (Dat.) nichts vorzuwerfen haben — kendini suçlayacak bir şeyi olmamak. Ayrıca (hayvanlara yem) atmak; jemanden den Löwen vorwerfen — birini kurtların önüne atmak. der Vorwurf — sitem, suçlama.",
+  "usage_note_tr": "sich (Dativ) nichts vorzuwerfen haben — kendini suçlayacak bir şeyi olmamak. Ayrıca (hayvanlara yem) atmak; jemanden den Löwen vorwerfen — birini kurtların önüne atmak. der Vorwurf — sitem, suçlama.",
   "example_tr": "Kız kardeşim, anne babamı çok seyrek aradığım için bana hep sitem ediyor.",
   "complements": [
    {
@@ -16051,7 +16051,7 @@
  },
  "verb-2751": {
   "translation_tr": "geri götürmek, geri getirmek; geri döndürmek",
-  "usage_note_tr": "Yönle: in / zu / durch / nach + …: jemanden ins Haus zurückführen — birini eve geri götürmek. Bir şeye dayandırmak, bir şeyle açıklamak — auf + Akk.",
+  "usage_note_tr": "Yönle: in / zu / durch / nach + …: jemanden ins Haus zurückführen — birini eve geri götürmek. Bir şeye dayandırmak, bir şeyle açıklamak — auf + Akkusativ",
   "example_tr": "Gezintiden sonra öğretmen çocukları kreşe geri götürdü.",
   "complements": [
    {
@@ -16823,7 +16823,7 @@
  },
  "verb-1564": {
   "translation_tr": "havlamak (uyarı olarak); etki etmek; (ilanı) asmak",
-  "usage_note_tr": "(Bir şeye) çarpmak — sein ile. sich (Dat.) das Knie anschlagen — dizini çarpmak. Ayrıca çakmak (tahtayı, nalı). einen anderen Ton anschlagen — ses tonunu değiştirmek. angeschlagen — yıpranmış, zayıflamış; kenarı kırık (tabak, bardak için).",
+  "usage_note_tr": "(Bir şeye) çarpmak — sein ile. sich (Dativ) das Knie anschlagen — dizini çarpmak. Ayrıca çakmak (tahtayı, nalı). einen anderen Ton anschlagen — ses tonunu değiştirmek. angeschlagen — yıpranmış, zayıflamış; kenarı kırık (tabak, bardak için).",
   "example_tr": "Biri arsaya adım atar atmaz köpeğimiz havlar.",
   "complements": [
    {
@@ -16833,7 +16833,7 @@
   ],
   "reflexive": {
    "translation_tr": "dizini çarpmak",
-   "note_tr": "sich (D) das Knie anschlagen"
+   "note_tr": "sich (Dativ) das Knie anschlagen"
   },
   "_src": "d43d03bd",
   "_src_reader": "450797d2"
@@ -16929,11 +16929,11 @@
  },
  "verb-1573": {
   "translation_tr": "yakmak; ateşe vermek",
-  "usage_note_tr": "Ateşe vermek (evi, arabayı). sich (Dat.) eine Zigarette anzünden — sigara yakmak.",
+  "usage_note_tr": "Ateşe vermek (evi, arabayı). sich (Dativ) eine Zigarette anzünden — sigara yakmak.",
   "example_tr": "Advent döneminin her pazarı çelenkte bir mum daha yakıyoruz.",
   "reflexive": {
    "translation_tr": "sigara yakmak",
-   "note_tr": "sich (D) eine Zigarette anzünden"
+   "note_tr": "sich (Dativ) eine Zigarette anzünden"
   },
   "_src": "6f55c063",
   "_src_reader": "3e57b6a8"
@@ -17201,7 +17201,7 @@
  },
  "verb-1600": {
   "translation_tr": "(kitabı, gözleri) açmak; (yumurtayı) kırmak; (kampı, çadırı) kurmak; (spor) servis atmak; (fiyatları) artırmak",
-  "usage_note_tr": "sich (Dat.) das Knie aufschlagen — düşüp dizini yarmak. Düşerken çarpmak — sein ile.",
+  "usage_note_tr": "sich (Dativ) das Knie aufschlagen — düşüp dizini yarmak. Düşerken çarpmak — sein ile.",
   "example_tr": "Lütfen kitaplarınızın 54. sayfasını açın.",
   "complements": [
    {
@@ -17223,7 +17223,7 @@
   ],
   "reflexive": {
    "translation_tr": "dizini yarmak",
-   "note_tr": "sich (D) das Knie aufschlagen"
+   "note_tr": "sich (Dativ) das Knie aufschlagen"
   },
   "_src": "f4decc01",
   "_src_reader": "491e9a7e"
@@ -17511,7 +17511,7 @@
  },
  "verb-1637": {
   "translation_tr": "(kökünden) sökmek",
-  "usage_note_tr": "sich (Dat.) kein Bein ausreißen (konuş.) — kendini fazla yormamak, pek çaba göstermemek. Kaçmak — sein ile.",
+  "usage_note_tr": "sich (Dativ) kein Bein ausreißen (konuş.) — kendini fazla yormamak, pek çaba göstermemek. Kaçmak — sein ile.",
   "example_tr": "Cumartesi saatlerce bahçede karahindiba söktüm.",
   "complements": [
    {
@@ -17520,7 +17520,7 @@
   ],
   "reflexive": {
    "translation_tr": "(konuş.) kendini fazla yormamak, pek çaba göstermemek",
-   "note_tr": "sich (D) kein Bein ausreißen"
+   "note_tr": "sich (Dativ) kein Bein ausreißen"
   },
   "_src": "5709c716",
   "_src_reader": "b3f7ee46"
@@ -17818,7 +17818,7 @@
   "example_tr": "Çatıyı yeniden kaplaması için bir firmayı görevlendirdik.",
   "complements": [
    {
-    "note_tr": "birini bir şey yapmakla görevlendirmek (Akk.!)"
+    "note_tr": "birini bir şey yapmakla görevlendirmek (Akkusativ!)"
    },
    {
     "note_tr": "birini bir işle görevlendirmek"
@@ -17843,7 +17843,7 @@
  },
  "verb-1672": {
   "translation_tr": "(yaz.) (bir şeye) ihtiyaç duymak, (bir şeyi) gerektirmek",
-  "usage_note_tr": "Kişisiz es bedarf + Gen. — gerekir: Es bedarf großer Geduld. das Bedürfnis — ihtiyaç.",
+  "usage_note_tr": "Kişisiz es bedarf + Genitiv — gerekir: Es bedarf großer Geduld. das Bedürfnis — ihtiyaç.",
   "example_tr": "Bu karar, tüm yönetim kurulunun onayını gerektiriyor.",
   "complements": [
    {
@@ -17916,7 +17916,7 @@
  },
  "verb-1680": {
   "translation_tr": "(resmî) (bir yere) gitmek, yönelmek",
-  "usage_note_tr": "sich in Gefahr begeben — kendini tehlikeye atmak. sich in Behandlung begeben — tedaviye başlamak. (yaz.) (bir haktan) vazgeçmek — Genitiv ile. (yaz.) es begab sich — vuku buldu (masallarda, Kutsal Kitap'ta).",
+  "usage_note_tr": "sich in Gefahr begeben — kendini tehlikeye atmak. sich in Behandlung begeben — tedaviye başlamak. (yaz.) (bir haktan) vazgeçmek — Genitiv'le. (yaz.) es begab sich — vuku buldu (masallarda, Kutsal Kitap'ta).",
   "example_tr": "Lizbon uçuşu yolcularının B12 numaralı kapıya gitmeleri rica olunur.",
   "_src": "1f0b657a",
   "_src_reader": "5a48b7f2"
@@ -17930,7 +17930,7 @@
  },
  "verb-1682": {
   "translation_tr": "tebrik etmek",
-  "usage_note_tr": "Üslup açısından daha yansız ve daha yaygın: gratulieren (+ Dat.). sich zu etwas beglückwünschen können — bir şeyle gurur duymakta sonuna kadar haklı olmak.",
+  "usage_note_tr": "Üslup açısından daha yansız ve daha yaygın: gratulieren (+ Dativ). sich zu etwas beglückwünschen können — bir şeyle gurur duymakta sonuna kadar haklı olmak.",
   "example_tr": "Prömiyerden sonra yönetmen bütün ekibi bizzat tebrik etti.",
   "complements": [
    {
@@ -18006,7 +18006,7 @@
   "example_tr": "Komşum bana bisiklet iç lastiğinin nasıl yamandığını öğretti.",
   "complements": [
    {
-    "note_tr": "birine bir şeyi öğretmek (Dat.!)"
+    "note_tr": "birine bir şeyi öğretmek (Dativ!)"
    }
   ],
   "_src": "667f2dd5",
@@ -18018,7 +18018,7 @@
   "example_tr": "Annem hastanede yatarken komşular bize vefayla destek oldu.",
   "complements": [
    {
-    "note_tr": "birine yardım etmek (Dat.!)"
+    "note_tr": "birine yardım etmek (Dativ!)"
    }
   ],
   "_src": "71654bbe",
@@ -18041,7 +18041,7 @@
   "example_tr": "Yeni konser salonunun açılışında yaklaşık üç yüz konuk hazır bulundu.",
   "complements": [
    {
-    "note_tr": "bir şeyde hazır bulunmak (Dat.!)"
+    "note_tr": "bir şeyde hazır bulunmak (Dativ!)"
    }
   ],
   "_src": "5e24b239",
@@ -18070,7 +18070,7 @@
  },
  "verb-1696": {
   "translation_tr": "(suçunu, hatasını) kabul etmek, itiraf etmek",
-  "usage_note_tr": "Biçimleri kennen fiilindeki gibi: bekannte, hat bekannt. Farbe bekennen — kartları açık oynamak, görüşünü açıkça söylemek. das Bekenntnis — itiraf; mezhep. Bir şeye bağlılığını açıkça ilan etmek — sich bekennen.",
+  "usage_note_tr": "Biçimleri kennen fiilindeki gibi: bekannte, hat bekannt. Farbe bekennen — kartları açık oynamak, görüşünü açıkça söylemek. das Bekenntnis — itiraf; inanç. Bir şeye bağlılığını açıkça ilan etmek — sich bekennen.",
   "example_tr": "Sanık mahkemede kasadan parayı aldığını itiraf etti.",
   "_src": "eb9e0f9b",
   "_src_reader": "f49c4fe3"
@@ -18180,11 +18180,11 @@
  },
  "verb-1706": {
   "translation_tr": "(birine) yalan söylemek, aldatmak",
-  "usage_note_tr": "lügen fiilinden farklı olarak doğrudan nesne (Akk.) alır: jemanden belügen. sich selbst belügen — kendini kandırmak. Biçimleri lügen fiilindeki gibi: belog, hat belogen.",
+  "usage_note_tr": "lügen fiilinden farklı olarak doğrudan nesne (Akkusativ) alır: jemanden belügen. sich selbst belügen — kendini kandırmak. Biçimleri lügen fiilindeki gibi: belog, hat belogen.",
   "example_tr": "Yıllarca ailesine kumar borçları hakkında yalan söyledi.",
   "complements": [
    {
-    "note_tr": "birine yalan söylemek (Akk.!)"
+    "note_tr": "birine yalan söylemek (Akkusativ!)"
    }
   ],
   "reflexive": {
@@ -18225,7 +18225,7 @@
   "example_tr": "Emekli adam eve dönerken iki genç tarafından soyuldu.",
   "complements": [
    {
-    "note_tr": "birini bir şeyden yoksun bırakmak (Gen.)"
+    "note_tr": "birini bir şeyden yoksun bırakmak (Genitiv)"
    }
   ],
   "_src": "151f3780",
@@ -18370,7 +18370,7 @@
   "example_tr": "Taşınmak için birkaç sağlam koli daha bulmamız gerekiyor.",
   "reflexive": {
    "translation_tr": "(kendine) bir şey temin etmek",
-   "note_tr": "sich (D) etwas beschaffen"
+   "note_tr": "sich (Dativ) etwas beschaffen"
   },
   "_src": "cdfa859f",
   "_src_reader": "3cf9325f"
@@ -18520,7 +18520,7 @@
  },
  "verb-1739": {
   "translation_tr": "(bir odaya, bir alana) girmek, ayak basmak",
-  "usage_note_tr": "Doğrudan nesne (Akk.) alır: ein Zimmer betreten. Betreten verboten! — girilmez! Neuland betreten — yeni bir alana adım atmak, bir şeyi ilk kez yapmak. betreten — (sıf.) mahcup: betretenes Schweigen. Biçimleri treten fiilindeki gibi: betritt, betrat, hat betreten.",
+  "usage_note_tr": "Doğrudan nesne (Akkusativ) alır: ein Zimmer betreten. Betreten verboten! — girilmez! Neuland betreten — yeni bir alana adım atmak, bir şeyi ilk kez yapmak. betreten — (sıf.) mahcup: betretenes Schweigen. Biçimleri treten fiilindeki gibi: betritt, betrat, hat betreten.",
   "example_tr": "Bakan salona girdiğinde birden sessizlik oldu.",
   "_src": "b8c9a496",
   "_src_reader": "9a28b95b"
@@ -18531,7 +18531,7 @@
   "example_tr": "Öğrencileri yorucu bir sınav haftası bekliyor.",
   "complements": [
    {
-    "note_tr": "birini beklemek (Dat.)"
+    "note_tr": "birini beklemek (Dativ)"
    }
   ],
   "_src": "ecdcd1df",
@@ -18673,7 +18673,7 @@
   ],
   "reflexive": {
    "translation_tr": "borç almak",
-   "note_tr": "sich (D) etwas (von jemandem) borgen"
+   "note_tr": "sich (Dativ) etwas (von jemandem) borgen"
   },
   "_src": "6729c949",
   "_src_reader": "73af6739"
@@ -18809,7 +18809,7 @@
   "example_tr": "Kuaför her müşteriden sonra tarağı ve makası dezenfekte ediyor.",
   "reflexive": {
    "translation_tr": "ellerini dezenfekte etmek",
-   "note_tr": "sich (D) die Hände desinfizieren"
+   "note_tr": "sich (Dativ) die Hände desinfizieren"
   },
   "_src": "0a9d5bc6",
   "_src_reader": "d19fa104"
@@ -18889,11 +18889,11 @@
  },
  "verb-1772": {
   "translation_tr": "tehdit etmek, gözdağı vermek",
-  "usage_note_tr": "Kime — Dativ'de (jemandem drohen), bedrohen fiilinin aksine (Akk.). zu + Infinitiv ile — (istenmeyen bir şey için) tehlikesi olmak: Der Damm droht zu brechen — set her an yıkılabilir. die Drohung — tehdit.",
+  "usage_note_tr": "Kime — Dativ'de (jemandem drohen), bedrohen fiilinin aksine (Akkusativ). zu + Infinitiv ile — (istenmeyen bir şey için) tehlikesi olmak: Der Damm droht zu brechen — set her an yıkılabilir. die Drohung — tehdit.",
   "example_tr": "Ev sahibi, duvarları boyamazsak depozitoyu geri vermemekle bizi tehdit etti.",
   "complements": [
    {
-    "note_tr": "birini tehdit etmek (Almancada Dat.!)"
+    "note_tr": "birini tehdit etmek (Almancada Dativ!)"
    },
    {
     "note_tr": "bir şeyle tehdit etmek"
@@ -19048,7 +19048,7 @@
  },
  "verb-1787": {
   "translation_tr": "(baştan sona) okumak",
-  "usage_note_tr": "Sıklıkla sich ile (Dat.): sich (dat.) etwas durchlesen. Biçimleri lesen fiilindeki gibi: liest durch, las durch, hat durchgelesen; Lies durch!",
+  "usage_note_tr": "Sıklıkla sich ile (Dativ): sich (dat.) etwas durchlesen. Biçimleri lesen fiilindeki gibi: liest durch, las durch, hat durchgelesen; Lies durch!",
   "example_tr": "İmzalamadan önce sözleşmeyi dikkatlice baştan sona oku!",
   "_src": "9fc7bb90",
   "_src_reader": "35dadbf9"
@@ -19250,7 +19250,7 @@
   "example_tr": "Reklamlar, en yeni telefon olmadan mutlu olamayacağımıza bizi inandırmak istiyor.",
   "complements": [
    {
-    "note_tr": "birine (Dat.) bir şeyi telkin etmek"
+    "note_tr": "birine (Dativ) bir şeyi telkin etmek"
    },
    {
     "meaning_tr": "(birinin) üstüne gitmek, (birini) konuşarak bıktırmak",
@@ -19259,7 +19259,7 @@
   ],
   "reflexive": {
    "translation_tr": "kendine telkin etmek, kendini inandırmak",
-   "note_tr": "sich (D) etwas einreden"
+   "note_tr": "sich (Dativ) etwas einreden"
   },
   "_src": "82390f70",
   "_src_reader": "a27b521b"
@@ -19449,7 +19449,7 @@
  },
  "verb-1824": {
   "translation_tr": "razı olmak, onay vermek",
-  "usage_note_tr": "Resmî üslup; in + Akkusativ alır (zu değil). die Einwilligung — onay, rıza: ohne Einwilligung der Eltern.",
+  "usage_note_tr": "Resmî üslup; in + Akkusativ'le kullanılır (zu değil). die Einwilligung — onay, rıza: ohne Einwilligung der Eltern.",
   "example_tr": "Hasta, ameliyata yazılı olarak onay vermek zorunda.",
   "complements": [
    {
@@ -19468,7 +19468,7 @@
  },
  "verb-1826": {
   "translation_tr": "(bir şey) olmadan idare etmek, (bir şeyin) eksikliğini çekmek; (yaz.) (bir şeyden) yoksun olmak",
-  "usage_note_tr": "(yaz.) Genitiv ile — yoksun olmak: jeder Grundlage entbehren — hiçbir dayanağı olmamak. die Entbehrung — yoksunluk, sıkıntı. entbehrlich — onsuz da olunabilen, vazgeçilebilir.",
+  "usage_note_tr": "(yaz.) Genitiv'le — yoksun olmak: jeder Grundlage entbehren — hiçbir dayanağı olmamak. die Entbehrung — yoksunluk, sıkıntı. entbehrlich — onsuz da olunabilen, vazgeçilebilir.",
   "example_tr": "Yoğun sezonda işletme, çalışanlarından herhangi biri olmadan idare edemez.",
   "complements": [
    {
@@ -19484,7 +19484,7 @@
  },
  "verb-1827": {
   "translation_tr": "(yükümlülükten, sözden) muaf tutmak, serbest bırakmak; doğum yaptırmak; doğurmak",
-  "usage_note_tr": "Güçlü fiil: entband, hat entbunden. (yaz.) Genitiv ile: jemanden seiner Pflichten entbinden. (tıp) eine Frau entbinden — bir kadına doğum yaptırmak; nesnesiz — doğurmak: Meine Schwester hat vor zwei Wochen per Kaiserschnitt entbunden — kız kardeşim iki hafta önce sezaryenle doğum yaptı. die Entbindung — doğum.",
+  "usage_note_tr": "Güçlü fiil: entband, hat entbunden. (yaz.) Genitiv'le: jemanden seiner Pflichten entbinden. (tıp) eine Frau entbinden — bir kadına doğum yaptırmak; nesnesiz — doğurmak: Meine Schwester hat vor zwei Wochen per Kaiserschnitt entbunden — kız kardeşim iki hafta önce sezaryenle doğum yaptı. die Entbindung — doğum.",
   "example_tr": "Doktor, mahkeme tarafından sır saklama yükümlülüğünden muaf tutuldu.",
   "complements": [
    {
@@ -19532,7 +19532,7 @@
   "example_tr": "Sıcak nedeniyle bugün son ders yapılmıyor.",
   "complements": [
    {
-    "note_tr": "birinin aklından çıkmak (Dat.)"
+    "note_tr": "birinin aklından çıkmak (Dativ)"
    },
    {
     "note_tr": "birinin payına düşmek",
@@ -19555,7 +19555,7 @@
   "example_tr": "Her yaz şehrin sıcağından dağlardaki bir kulübeye kaçıyoruz.",
   "complements": [
    {
-    "note_tr": "birinden / bir şeyden kaçmak (Dat.)"
+    "note_tr": "birinden / bir şeyden kaçmak (Dativ)"
    }
   ],
   "_src": "c262f086",
@@ -19586,12 +19586,12 @@
   "example_tr": "Bisikletli, kamyonla çarpışmaktan son anda kurtuldu.",
   "complements": [
    {
-    "note_tr": "bir şeyden kurtulmak; birinin gözünden kaçmak (Dat.)"
+    "note_tr": "bir şeyden kurtulmak; birinin gözünden kaçmak (Dativ)"
    }
   ],
   "reflexive": {
    "translation_tr": "bir şeyi (fırsatı, zevki) kaçırmak",
-   "note_tr": "sich (D) etwas entgehen lassen"
+   "note_tr": "sich (Dativ) etwas entgehen lassen"
   },
   "_src": "cf6e3931",
   "_src_reader": "82ae9356"
@@ -19609,7 +19609,7 @@
   "example_tr": "Yönetim kurulu, antrenörü derhâl geçerli olmak üzere görevlerinden aldı.",
   "complements": [
    {
-    "note_tr": "birini bir şeyden uzaklaştırmak / görevden almak (Gen.)"
+    "note_tr": "birini bir şeyden uzaklaştırmak / görevden almak (Genitiv)"
    }
   ],
   "_src": "c7930cbd",
@@ -19647,7 +19647,7 @@
   "example_tr": "Şirket, kimya bölümünü satarak geçmişten kalan sorunlarından kurtuldu.",
   "complements": [
    {
-    "note_tr": "bir şeyden kurtulmak (Gen.)"
+    "note_tr": "bir şeyden kurtulmak (Genitiv)"
    }
   ],
   "_src": "7404148f",
@@ -19662,7 +19662,7 @@
  },
  "verb-1843": {
   "translation_tr": "(metinden, sözlerden) anlamak, sonuç çıkarmak; (bir şeyden) almak, çıkarmak",
-  "usage_note_tr": "Biçimler nehmen fiilindeki gibi: entnimmt, entnahm, hat entnommen. Nereden — aus + Dat. ya da yalnızca Dat.: dem Brief entnehmen. eine Blutprobe entnehmen — kan örneği almak. Weitere Informationen entnehmen Sie bitte der Broschüre — ayrıntılar için lütfen broşüre bakın.",
+  "usage_note_tr": "Biçimler nehmen fiilindeki gibi: entnimmt, entnahm, hat entnommen. Nereden — aus + Dativ ya da yalnızca Dativ: dem Brief entnehmen. eine Blutprobe entnehmen — kan örneği almak. Weitere Informationen entnehmen Sie bitte der Broschüre — ayrıntılar için lütfen broşüre bakın.",
   "example_tr": "Kısa cevabından, buluşmaya gitmeye hiç hevesli olmadığını anladım.",
   "complements": [
    {
@@ -19678,7 +19678,7 @@
   "example_tr": "Küçük oğlan, kumandayı kız kardeşinin elinden kapıp çocuk odasına koştu.",
   "complements": [
    {
-    "note_tr": "birinin (Dat.) elinden bir şeyi koparıp almak"
+    "note_tr": "birinin (Dativ) elinden bir şeyi koparıp almak"
    }
   ],
   "_src": "ae854a52",
@@ -19755,7 +19755,7 @@
   "example_tr": "Veterinerde kedi taşıma kutusundan sıvışıp elimizden kaçtı.",
   "complements": [
    {
-    "note_tr": "birinden kaçmak (Dat.)"
+    "note_tr": "birinden kaçmak (Dativ)"
    }
   ],
   "_src": "a793ecf9",
@@ -19763,16 +19763,16 @@
  },
  "verb-1852": {
   "translation_tr": "(bir şeyden) mahrum etmek, elinden almak, (ehliyeti, ruhsatı) geri almak",
-  "usage_note_tr": "Biçimler ziehen fiilindeki gibi: entzog, hat entzogen. Kime — Dativ'de. sich einer Sache (D) entziehen — bir şeyden (sorumluluktan, yükümlülüklerden) kaçmak. der Entzug — mahrum etme; (uyuşturucudan) arınma.",
+  "usage_note_tr": "Biçimler ziehen fiilindeki gibi: entzog, hat entzogen. Kime — Dativ'de. sich einer Sache (Dativ) entziehen — bir şeyden (sorumluluktan, yükümlülüklerden) kaçmak. der Entzug — mahrum etme; (uyuşturucudan) arınma.",
   "example_tr": "Birkaç hijyen ihlalinin ardından yetkililer büfenin ruhsatını geri aldı.",
   "complements": [
    {
-    "note_tr": "birini bir şeyden mahrum etmek (D + A)"
+    "note_tr": "birini bir şeyden mahrum etmek (D + Akkusativ)"
    }
   ],
   "reflexive": {
    "translation_tr": "bir şeyden (sorumluluktan, yükümlülüklerden) kaçmak",
-   "note_tr": "sich einer Sache (D) entziehen"
+   "note_tr": "sich einer Sache (Dativ) entziehen"
   },
   "_src": "755b0c48",
   "_src_reader": "85d5fa54"
@@ -19858,7 +19858,7 @@
   "example_tr": "Evsiz adam buz gibi bir gecede park bankında donarak öldü.",
   "reflexive": {
    "translation_tr": "parmaklarını dondurmak",
-   "note_tr": "sich (D) die Finger erfrieren"
+   "note_tr": "sich (Dativ) die Finger erfrieren"
   },
   "_src": "24ad1989",
   "_src_reader": "03be8444"
@@ -19879,7 +19879,7 @@
   "example_tr": "Kanada'daki ilk aylarınız aslında nasıl geçti?",
   "complements": [
    {
-    "note_tr": "birinin hâli (Dat.)"
+    "note_tr": "birinin hâli (Dativ)"
    }
   ],
   "reflexive": {
@@ -19928,7 +19928,7 @@
  },
  "verb-1870": {
   "translation_tr": "(bir şeyi) ummak, (bir şeyden) beklemek",
-  "usage_note_tr": "Dönüşlü zamir Dativ'de: ich erhoffe mir, du erhoffst dir. Daha çok: neyden beklendiği — von + Dat.",
+  "usage_note_tr": "Dönüşlü zamir Dativ'de: ich erhoffe mir, du erhoffst dir. Daha çok: neyden beklendiği — von + Dativ",
   "example_tr": "Yeni işinden en çok ailesine daha fazla zaman ayırabilmeyi umuyor.",
   "complements": [
    {
@@ -19943,7 +19943,7 @@
  },
  "verb-1871": {
   "translation_tr": "(bir şeyin bedelini) ağır ödemek, (bir şey pahasına) elde etmek; (birinin susmasını, gönlünü) satın almak",
-  "usage_note_tr": "Sıklıkla sich ile (Dat.): sich etwas teuer erkaufen — bir şeyin bedelini ağır ödemek. jemandes Schweigen erkaufen — birinin susmasını satın almak. Krş. kaufen — satın almak (mağazada).",
+  "usage_note_tr": "Sıklıkla sich ile (Dativ): sich etwas teuer erkaufen — bir şeyin bedelini ağır ödemek. jemandes Schweigen erkaufen — birinin susmasını satın almak. Krş. kaufen — satın almak (mağazada).",
   "example_tr": "Kulüp, birinci lige yükselmeyi büyük borçlar pahasına elde etti.",
   "complements": [
    {
@@ -19952,7 +19952,7 @@
   ],
   "reflexive": {
    "translation_tr": "bir şeyin bedelini ağır ödemek",
-   "note_tr": "sich (D) etwas teuer erkaufen"
+   "note_tr": "sich (Dativ) etwas teuer erkaufen"
   },
   "_src": "23920966",
   "_src_reader": "0c9d0634"
@@ -19984,7 +19984,7 @@
   "example_tr": "Kuraklık yüzünden belediye, çimlerin sulanmasını yasaklayan bir karar çıkardı.",
   "complements": [
    {
-    "note_tr": "birine (Dat.) bir şeyi bağışlamak"
+    "note_tr": "birine (Dativ) bir şeyi bağışlamak"
    }
   ],
   "_src": "12e7984f",
@@ -20071,11 +20071,11 @@
  },
  "verb-1885": {
   "translation_tr": "(şüphe, ilgi) uyandırmak, (dikkat) çekmek; heyecanlandırmak, tahrik etmek",
-  "usage_note_tr": "Aufsehen erregen — sansasyon yaratmak, dikkat çekmek. sich erregen — heyecanlanmak, öfkelenmek (über + Akk.). erregt — heyecanlı, telaşlı; der Erreger — (hastalık) etkeni.",
+  "usage_note_tr": "Aufsehen erregen — sansasyon yaratmak, dikkat çekmek. sich erregen — heyecanlanmak, öfkelenmek (über + Akkusativ). erregt — heyecanlı, telaşlı; der Erreger — (hastalık) etkeni.",
   "example_tr": "Büyük valizli adam, istasyonda hemen polisin şüphesini uyandırdı.",
   "reflexive": {
    "translation_tr": "heyecanlanmak, öfkelenmek",
-   "note_tr": "sich erregen über + Akk."
+   "note_tr": "sich erregen über + Akkusativ"
   },
   "_src": "3f11e47b",
   "_src_reader": "b7ee4b5b"
@@ -20107,7 +20107,7 @@
   "example_tr": "Lütfen beni ayrıntılardan kurtar, sadece herkesin sağlığının yerinde olup olmadığını bilmek istiyorum.",
   "complements": [
    {
-    "note_tr": "birini (Dat.) bir şeyden kurtarmak"
+    "note_tr": "birini (Dativ) bir şeyden kurtarmak"
    }
   ],
   "_src": "fd53f4fa",
@@ -20261,7 +20261,7 @@
   "example_tr": "Birkaç milletvekili protesto amacıyla oturuma gelmedi.",
   "complements": [
    {
-    "note_tr": "bir yere gelmemek (Dat.)"
+    "note_tr": "bir yere gelmemek (Dativ)"
    }
   ],
   "_src": "394c1fb4",
@@ -20421,7 +20421,7 @@
  },
  "verb-1921": {
   "translation_tr": "(işi, geleneği) sürdürmek, devam ettirmek",
-  "usage_note_tr": "Krş. fortfahren — devam etmek (doğrudan nesnesiz, mit + Dat.); fortführen — bir şeyi sürdürmek (Akk.). die Fortführung — sürdürme.",
+  "usage_note_tr": "Krş. fortfahren — devam etmek (doğrudan nesnesiz, mit + Dativ); fortführen — bir şeyi sürdürmek (Akkusativ). die Fortführung — sürdürme.",
   "example_tr": "Yeni hükûmet, seleflerinin reformlarını sürdürmek istiyor.",
   "complements": [
    {
@@ -20562,7 +20562,7 @@
   "example_tr": "O akşamın en büyük alkışı genç piyanistin hakkıydı.",
   "complements": [
    {
-    "note_tr": "birinin hakkı olmak (Dat.)"
+    "note_tr": "birinin hakkı olmak (Dativ)"
    }
   ],
   "reflexive": {
@@ -20577,7 +20577,7 @@
   "example_tr": "Annemle babam, oyuncu olma isteğime başta olumsuz bakıyordu.",
   "complements": [
    {
-    "note_tr": "birine / bir şeye belli bir gözle bakmak (Dat.)"
+    "note_tr": "birine / bir şeye belli bir gözle bakmak (Dativ)"
    }
   ],
   "_src": "fd5b0f59",
@@ -20589,7 +20589,7 @@
   "example_tr": "Tanık, sanıkla ilk kez mahkeme salonunda yüz yüze geldi.",
   "complements": [
    {
-    "note_tr": "birinin karşısına çıkmak (Dat.)"
+    "note_tr": "birinin karşısına çıkmak (Dativ)"
    }
   ],
   "_src": "f1c69356",
@@ -20601,7 +20601,7 @@
   "example_tr": "Öğrenciler yeni öğretmenin sözünü ilk günden itibaren dinlediler.",
   "complements": [
    {
-    "note_tr": "birine itaat etmek, birinin sözünü dinlemek (Dat.!)"
+    "note_tr": "birine itaat etmek, birinin sözünü dinlemek (Dativ!)"
    }
   ],
   "_src": "d385c086",
@@ -20654,7 +20654,7 @@
  },
  "verb-1944": {
   "translation_tr": "izin vermek, müsaade etmek (nazik, resmî)",
-  "usage_note_tr": "Nezaket kalıpları: Gestatten Sie? — İzin verir misiniz? Gestatten, Müller — Kendimi tanıtayım: Müller. (yaz.) sich (D) etwas gestatten — kendine (bir şey için) izin vermek. Ayrıca: imkân vermek, olanak tanımak (para, koşullar için). Kime — Dativ'de.",
+  "usage_note_tr": "Nezaket kalıpları: Gestatten Sie? — İzin verir misiniz? Gestatten, Müller — Kendimi tanıtayım: Müller. (yaz.) sich (Dativ) etwas gestatten — kendine (bir şey için) izin vermek. Ayrıca: imkân vermek, olanak tanımak (para, koşullar için). Kime — Dativ'de.",
   "example_tr": "Sergide yalnızca flaşsız fotoğraf çekilmesine izin veriliyor.",
   "complements": [
    {
@@ -20663,7 +20663,7 @@
   ],
   "reflexive": {
    "translation_tr": "(yaz.) kendine (bir şey için) izin vermek",
-   "note_tr": "sich (D) etwas gestatten"
+   "note_tr": "sich (Dativ) etwas gestatten"
   },
   "_src": "8d205fbd",
   "_src_reader": "59403275"
@@ -20674,7 +20674,7 @@
   "example_tr": "Saatler süren sorgunun ardından şüpheli, eve zorla girip hırsızlık yaptığını itiraf etti.",
   "complements": [
    {
-    "note_tr": "bir şeyi itiraf etmek (Almancada edatsız, Akk.): Er gestand den Diebstahl."
+    "note_tr": "bir şeyi itiraf etmek (Almancada edatsız, Akkusativ): Er gestand den Diebstahl."
    },
    {
     "note_tr": "birine bir şeyi itiraf etmek: jemandem seine Liebe gestehen."
@@ -20757,7 +20757,7 @@
   "example_tr": "Yabancı bir diploma, Alman diplomasına otomatik olarak denk sayılmaz.",
   "complements": [
    {
-    "note_tr": "biriyle / bir şeyle eşit olmak (Dat.)"
+    "note_tr": "biriyle / bir şeyle eşit olmak (Dativ)"
    }
   ],
   "_src": "db6aa062",
@@ -20793,7 +20793,7 @@
   "example_tr": "Yeni vergi, birçok aile için mülksüzleştirmeyle eşdeğer.",
   "complements": [
    {
-    "note_tr": "bir şeyle eşdeğer olmak, bir şey anlamına gelmek; biriyle boy ölçüşmek (an + Dat — bir şeyde)"
+    "note_tr": "bir şeyle eşdeğer olmak, bir şey anlamına gelmek; biriyle boy ölçüşmek (an + Dativ — bir şeyde)"
    }
   ],
   "_src": "f0067edb",
@@ -20812,7 +20812,7 @@
   "example_tr": "Rekoru ancak üçüncü denemede kırmayı başardı.",
   "complements": [
    {
-    "note_tr": "birinin bir şeyi başarması (Almancada Dat.)"
+    "note_tr": "birinin bir şeyi başarması (Almancada Dativ)"
    }
   ],
   "_src": "3387938d",
@@ -21053,7 +21053,7 @@
  },
  "verb-1976": {
   "translation_tr": "(bir şeye) işaret etmek, (bir şeyin) belirtisi olmak",
-  "usage_note_tr": "Genellikle auf + Akk. ile veya darauf, dass … Alles deutet darauf hin — her şey bunu gösteriyor. Ayrıca gerçek anlamda: (parmakla) bir şeyin yönünü göstermek.",
+  "usage_note_tr": "Genellikle auf + Akkusativ'le veya darauf, dass … Alles deutet darauf hin — her şey bunu gösteriyor. Ayrıca gerçek anlamda: (parmakla) bir şeyin yönünü göstermek.",
   "example_tr": "Penceredeki izler, failin bahçeden geldiğini gösteriyor.",
   "complements": [
    {
@@ -21069,7 +21069,7 @@
   "example_tr": "Tatilde kendini tamamen tembelliğe veriyor.",
   "complements": [
    {
-    "note_tr": "bir şeye kendini kaptırmak (Dat.)"
+    "note_tr": "bir şeye kendini kaptırmak (Dativ)"
    }
   ],
   "_src": "a3499c56",
@@ -21142,7 +21142,7 @@
  },
  "verb-1984": {
   "translation_tr": "(kaybı, hayal kırıklığını) atlatmak, (bir şeyin) üstesinden gelmek",
-  "usage_note_tr": "Her zaman über + Akk. ile. kommen gibi çekimlenir: kam hinweg, ist hinweggekommen. Eş anlamlıları: verschmerzen, überwinden.",
+  "usage_note_tr": "Her zaman über + Akkusativ'le. kommen gibi çekimlenir: kam hinweg, ist hinweggekommen. Eş anlamlıları: verschmerzen, überwinden.",
   "example_tr": "Yirmi yıllık evlilikten sonra bir ayrılık nasıl atlatılır?",
   "complements": [
    {
@@ -21241,11 +21241,11 @@
  },
  "verb-1993": {
   "translation_tr": "etkilemek, hayranlık uyandırmak",
-  "usage_note_tr": "Kime — Dativ'de (jemandem imponieren), beeindrucken fiilinden farklı olarak (Akk.). imponierend — etkileyici.",
+  "usage_note_tr": "Kime — Dativ'de (jemandem imponieren), beeindrucken fiilinden farklı olarak (Akkusativ). imponierend — etkileyici.",
   "example_tr": "Stresli durumlarda ne kadar sakin kaldığı beni etkiliyor.",
   "complements": [
    {
-    "note_tr": "birini etkilemek (Almancada Dat.!)"
+    "note_tr": "birini etkilemek (Almancada Dativ!)"
    }
   ],
   "_src": "58eae769",
@@ -21260,7 +21260,7 @@
  },
  "verb-1995": {
   "translation_tr": "(bir örgüte) sızmak, gizlice girmek; (tıp) infiltre etmek",
-  "usage_note_tr": "Doğrudan nesneyle (Akk.): eine Organisation infiltrieren. die Infiltration — sızma.",
+  "usage_note_tr": "Doğrudan nesneyle (Akkusativ): eine Organisation infiltrieren. die Infiltration — sızma.",
   "example_tr": "Gizli bir polis, uyuşturucu çetesine sızmayı başardı.",
   "_src": "f6032ddf",
   "_src_reader": "05c827a9"
@@ -21347,7 +21347,7 @@
   "example_tr": "Kimliği belirsiz kişiler müzenin Instagram hesabını ele geçirip reklam paylaştı.",
   "reflexive": {
    "translation_tr": "(konuş.) bir şeyi kapmak",
-   "note_tr": "sich (D) etwas kapern"
+   "note_tr": "sich (Dativ) etwas kapern"
   },
   "_src": "01ef369c",
   "_src_reader": "ce7d89ef"
@@ -21415,7 +21415,7 @@
   "example_tr": "İkinci Dünya Savaşı'nda dedesi bir denizaltıya komuta etti.",
   "complements": [
    {
-    "note_tr": "birine / bir şeye komuta etmek (Almancada Akk.!)"
+    "note_tr": "birine / bir şeye komuta etmek (Almancada Akkusativ!)"
    }
   ],
   "_src": "299bcbf5",
@@ -21484,7 +21484,7 @@
  },
  "verb-2017": {
   "translation_tr": "(birine) danışmak, (doktora, kaynağa) başvurmak",
-  "usage_note_tr": "Doğrudan nesneyle (Akk.): einen Anwalt / ein Wörterbuch konsultieren. Yazı dilinde kullanılır; konuşma dilinde — fragen, nachschlagen. die Konsultation — danışma, konsültasyon.",
+  "usage_note_tr": "Doğrudan nesneyle (Akkusativ): einen Anwalt / ein Wörterbuch konsultieren. Yazı dilinde kullanılır; konuşma dilinde — fragen, nachschlagen. die Konsultation — danışma, konsültasyon.",
   "example_tr": "İlacı bırakmadan önce doktorunuza danışmalısınız.",
   "_src": "feb53cf0",
   "_src_reader": "46ca6fa2"
@@ -21609,7 +21609,7 @@
   "example_tr": "Çocuklar, dedelerinin anlattığı hikâyeyi pür dikkat dinledi.",
   "complements": [
    {
-    "note_tr": "bir şeyi dinlemek (Dat.)"
+    "note_tr": "bir şeyi dinlemek (Dativ)"
    }
   ],
   "_src": "e26e1c0a",
@@ -21804,12 +21804,12 @@
  },
  "verb-2048": {
   "translation_tr": "araştırmak, soruşturmak, öğrenmeye çalışmak; (yaz.) (bir şeyi) incelemek",
-  "usage_note_tr": "Sıklıkla yan cümleyle: nachforschen, ob / wer / wie … — … olup olmadığını / kimin … / nasıl … olduğunu araştırmak. (yaz.) einer Sache nachforschen (Dat.) — bir şeyi incelemek. die Nachforschung — araştırma, soruşturma: Nachforschungen anstellen — soruşturma yapmak, bilgi toplamak.",
+  "usage_note_tr": "Sıklıkla yan cümleyle: nachforschen, ob / wer / wie … — … olup olmadığını / kimin … / nasıl … olduğunu araştırmak. (yaz.) einer Sache nachforschen (Dativ) — bir şeyi incelemek. die Nachforschung — araştırma, soruşturma: Nachforschungen anstellen — soruşturma yapmak, bilgi toplamak.",
   "example_tr": "Gazeteci eski arşivleri karıştırdı ve unutulmuş bir yazışmaya rastladı.",
   "complements": [
    {
     "meaning_tr": "(yaz.) (bir şeyi) incelemek",
-    "note_tr": "bir şeyi incelemek (Dat.): einem Geheimnis nachforschen — bir sırrın peşine düşmek"
+    "note_tr": "bir şeyi incelemek (Dativ): einem Geheimnis nachforschen — bir sırrın peşine düşmek"
    }
   ],
   "_src": "defc7c16",
@@ -21884,7 +21884,7 @@
  },
  "verb-2054": {
   "translation_tr": "(birinin bir şeyini) kıskanmak, (birine bir şeyi) çok görmek",
-  "usage_note_tr": "Yapı: jemandem etwas neiden (kime — Dat., neyi — Akk.). Gündelik konuşmada daha çok jemanden um etwas beneiden ya da jemandem etwas missgönnen. der Neid — kıskançlık.",
+  "usage_note_tr": "Yapı: jemandem etwas neiden (kime — Dativ, neyi — Akkusativ). Gündelik konuşmada daha çok jemanden um etwas beneiden ya da jemandem etwas missgönnen. der Neid — kıskançlık.",
   "example_tr": "Birçok iş arkadaşı, onun şirket yönetimine bu kadar hızlı yükselmesini kıskanıyordu.",
   "complements": [
    {
@@ -21910,7 +21910,7 @@
  },
  "verb-2057": {
   "translation_tr": "(vurarak) yere sermek; (ayaklanmayı, protestoyu) bastırmak",
-  "usage_note_tr": "einen Aufstand / Streik niederschlagen — bir ayaklanmayı / grevi bastırmak. die Augen niederschlagen — gözlerini yere indirmek. sich in etwas (Dat.) niederschlagen — bir şeye yansımak; sich auf etwas (Dat.) niederschlagen — bir şeyin üzerinde yoğuşmak, birikmek (buhar, nem için). (huk.) (davayı) düşürmek. niedergeschlagen (sıf.) — morali bozuk, üzgün.",
+  "usage_note_tr": "einen Aufstand / Streik niederschlagen — bir ayaklanmayı / grevi bastırmak. die Augen niederschlagen — gözlerini yere indirmek. sich in etwas (Dativ) niederschlagen — bir şeye yansımak; sich auf etwas (Dativ) niederschlagen — bir şeyin üzerinde yoğuşmak, birikmek (buhar, nem için). (huk.) (davayı) düşürmek. niedergeschlagen (sıf.) — morali bozuk, üzgün.",
   "example_tr": "Kimliği belirsiz biri kasiyeri yere serdi ve parayla kaçtı.",
   "complements": [
    {
@@ -21968,7 +21968,7 @@
  },
  "verb-2062": {
   "translation_tr": "(yaz.) (sırrı, duyguları) açmak, açığa vurmak, ortaya koymak",
-  "usage_note_tr": "Ayrılmayan, ge- olmadan: offenbarte, hat offenbart (nadiren, özellikle dinde: geoffenbart). sich offenbaren — ortaya çıkmak, belli olmak; (birine, Dat.) içini açmak. Krş. offenbar — belli ki, anlaşılan; die Offenbarung — vahiy.",
+  "usage_note_tr": "Ayrılmayan, ge- olmadan: offenbarte, hat offenbart (nadiren, özellikle dinde: geoffenbart). sich offenbaren — ortaya çıkmak, belli olmak; (birine, Dativ) içini açmak. Krş. offenbar — belli ki, anlaşılan; die Offenbarung — vahiy.",
   "example_tr": "Fabrika sahibi, Arjantin'de bir oğlu olduğunu ancak vasiyetinde açığa vurdu.",
   "reflexive": {
    "translation_tr": "ortaya çıkmak, belli olmak; birine içini açmak",
@@ -21979,7 +21979,7 @@
  },
  "verb-2063": {
   "translation_tr": "(bir şeyi) feda etmek; kurban etmek",
-  "usage_note_tr": "sich opfern (für + Akk.) — (biri için) kendini feda etmek; (konuş., şaka yollu) tatsız bir işi üstlenmek: Gut, dann opfere ich mich eben und esse das letzte Stück Kuchen. Dinde: (tanrılara) kurban sunmak. das Opfer — kurban.",
+  "usage_note_tr": "sich opfern (für + Akkusativ) — (biri için) kendini feda etmek; (konuş., şaka yollu) tatsız bir işi üstlenmek: Gut, dann opfere ich mich eben und esse das letzte Stück Kuchen. Dinde: (tanrılara) kurban sunmak. das Opfer — kurban.",
   "example_tr": "Kurucu, şirketi kurtarmak için servetinin büyük bir kısmını feda etti.",
   "complements": [
    {
@@ -21989,7 +21989,7 @@
   ],
   "reflexive": {
    "translation_tr": "(biri için) kendini feda etmek; (konuş., şaka yollu) tatsız bir işi üstlenmek",
-   "note_tr": "sich opfern (für + Akk.) — (biri için) kendini feda etmek",
+   "note_tr": "sich opfern (für + Akkusativ) — (biri için) kendini feda etmek",
    "complements": [
     {
      "meaning_tr": "(biri için) kendini feda etmek",
@@ -22051,11 +22051,11 @@
  },
  "verb-2069": {
   "translation_tr": "eziyet etmek, rahatsız etmek, rahat vermemek",
-  "usage_note_tr": "sich plagen (mit + Dat.) — (bir şeyle) uğraşıp didinmek: Warum plagst du dich allein damit? Ich helfe dir doch! — Neden bununla tek başına uğraşıp duruyorsun? Ben sana yardım ederim ya! Sıklıkla edilgen çatıda: von etwas geplagt sein. die Plage — dert, bela.",
+  "usage_note_tr": "sich plagen (mit + Dativ) — (bir şeyle) uğraşıp didinmek: Warum plagst du dich allein damit? Ich helfe dir doch! — Neden bununla tek başına uğraşıp duruyorsun? Ben sana yardım ederim ya! Sıklıkla edilgen çatıda: von etwas geplagt sein. die Plage — dert, bela.",
   "example_tr": "Sınava az kala, yeterince çalışıp çalışmadığına dair şüpheler birden ona rahat vermez oldu.",
   "reflexive": {
    "translation_tr": "(bir şeyle) uğraşıp didinmek, (bir şeyle) boğuşmak",
-   "note_tr": "sich plagen (mit + Dat.)"
+   "note_tr": "sich plagen (mit + Dativ)"
   },
   "_src": "6c7ef96a",
   "_src_reader": "5c095515"
@@ -22139,7 +22139,7 @@
  },
  "verb-2077": {
   "translation_tr": "(yaz.) (sırrı) ifşa etmek, açığa vurmak; (bir şeyin insafına) terk etmek; (bir şeyden) vazgeçmek",
-  "usage_note_tr": "jemanden / etwas einer Sache (Dat.) preisgeben — birini / bir şeyi bir şeyin insafına terk etmek: der Lächerlichkeit preisgegeben sein — alay konusu olmak. Biçimler geben fiilindeki gibi: gibt preis, gab preis, hat preisgegeben.",
+  "usage_note_tr": "jemanden / etwas einer Sache (Dativ) preisgeben — birini / bir şeyi bir şeyin insafına terk etmek: der Lächerlichkeit preisgegeben sein — alay konusu olmak. Biçimler geben fiilindeki gibi: gibt preis, gab preis, hat preisgegeben.",
   "example_tr": "Gazeteci mahkemede kaynağının adını ifşa etmeyi reddetti.",
   "_src": "ff861e5e",
   "_src_reader": "515ed000"
@@ -22335,11 +22335,11 @@
  },
  "verb-2096": {
   "translation_tr": "kafiyelendirmek, kafiyeli şiir yazmak",
-  "usage_note_tr": "sich reimen (auf + Akk.) — (bir şeyle) kafiyeli olmak. (konuş.) Das reimt sich nicht — bu birbirini tutmuyor, bir şeyler uymuyor. der Reim — kafiye.",
+  "usage_note_tr": "sich reimen (auf + Akkusativ) — (bir şeyle) kafiyeli olmak. (konuş.) Das reimt sich nicht — bu birbirini tutmuyor, bir şeyler uymuyor. der Reim — kafiye.",
   "example_tr": "Dedem düğün gazetesi için gelin ve damat hakkında uzun, kafiyeli bir şiir yazdı.",
   "reflexive": {
    "translation_tr": "(bir şeyle) kafiyeli olmak",
-   "note_tr": "sich reimen (auf + Akk.)"
+   "note_tr": "sich reimen (auf + Akkusativ)"
   },
   "_src": "87e07645",
   "_src_reader": "d6c14e8d"
@@ -22443,7 +22443,7 @@
  },
  "verb-2106": {
   "translation_tr": "selam durmak, asker selamı vermek",
-  "usage_note_tr": "Kime — vor + Dat.: vor jemandem salutieren. (esk.) selam atışı yapmak. der Salut — selam atışı.",
+  "usage_note_tr": "Kime — vor + Dativ: vor jemandem salutieren. (esk.) selam atışı yapmak. der Salut — selam atışı.",
   "example_tr": "General odaya girince bütün subaylar ayağa kalkıp selam durdu.",
   "complements": [
    {
@@ -22455,7 +22455,7 @@
  },
  "verb-2107": {
   "translation_tr": "zarar vermek, hasara uğratmak; (birini) zarara uğratmak",
-  "usage_note_tr": "Geçişli fiil (Akk.), schaden (Dat.) fiilinden farklı olarak: Rauchen schadet der Gesundheit. der / die Geschädigte — mağdur / mağdur (kadın). die Schädigung — hasar, zarar.",
+  "usage_note_tr": "Geçişli fiil (Akkusativ), schaden (Dativ) fiilinden farklı olarak: Rauchen schadet der Gesundheit. der / die Geschädigte — mağdur / mağdur (kadın). die Schädigung — hasar, zarar.",
   "example_tr": "Yıllarca sigara içmek akciğerlerine ağır zarar verdi.",
   "_src": "7096ff8e",
   "_src_reader": "076761a8"
@@ -22493,7 +22493,7 @@
  },
  "verb-2112": {
   "translation_tr": "(bir şeyi) umursamak, (bir şeye) aldırmak",
-  "usage_note_tr": "Genellikle olumsuz cümlede: sich nicht um etwas scheren — bir şeye aldırmamak, bir şeyi hiç umursamamak. Zayıf fiil: scherte sich, hat sich geschert (Karıştırılmamalı: scheren — kırkmak: schor, geschoren). sich olmadan (bir şey birini ilgilendirmek, Akk.): Was schert mich das? — bundan bana ne? (konuş.) sich irgendwohin scheren — defolup gitmek: Scher dich ins Bett!",
+  "usage_note_tr": "Genellikle olumsuz cümlede: sich nicht um etwas scheren — bir şeye aldırmamak, bir şeyi hiç umursamamak. Zayıf fiil: scherte sich, hat sich geschert (Karıştırılmamalı: scheren — kırkmak: schor, geschoren). sich olmadan (bir şey birini ilgilendirmek, Akkusativ): Was schert mich das? — bundan bana ne? (konuş.) sich irgendwohin scheren — defolup gitmek: Scher dich ins Bett!",
   "example_tr": "Şirket, mahalle sakinlerinin gece gürültüsüyle ilgili şikâyetlerini pek umursamıyor.",
   "complements": [
    {
@@ -22629,7 +22629,7 @@
  },
  "verb-2125": {
   "translation_tr": "şok etmek, öfkelendirmek",
-  "usage_note_tr": "ge- olmadan: schockierte, hat schockiert. schockiert sein (über + Akk.) — (bir şey karşısında) şoke olmak. schockierend — şok edici. Krş. der Schock — şok.",
+  "usage_note_tr": "ge- olmadan: schockierte, hat schockiert. schockiert sein (über + Akkusativ) — (bir şey karşısında) şoke olmak. schockierend — şok edici. Krş. der Schock — şok.",
   "example_tr": "Şarkıcı dövmeli yüzüyle muhafazakâr dinleyicileri şok etti.",
   "_src": "4993df75",
   "_src_reader": "d58919c4"
@@ -22757,7 +22757,7 @@
  },
  "verb-2139": {
   "translation_tr": "(birini / bir şeyi) özlemek, (birine / bir şeye) hasret çekmek, (bir şeyi) çok istemek",
-  "usage_note_tr": "Yalnızca dönüşlü, nach + Dat. ile; ayrıca mastarla: sich danach sehnen, etwas zu tun. die Sehnsucht — özlem, hasret. Karıştırılmamalı: die Sehne — tendon, kiriş.",
+  "usage_note_tr": "Yalnızca dönüşlü, nach + Dativ'le; ayrıca mastarla: sich danach sehnen, etwas zu tun. die Sehnsucht — özlem, hasret. Karıştırılmamalı: die Sehne — tendon, kiriş.",
   "example_tr": "Asya'da üç ay geçirdikten sonra bir dilim tereyağlı esmer ekmeği çok özlemiştim.",
   "complements": [
    {
@@ -22889,7 +22889,7 @@
  },
  "verb-2150": {
   "translation_tr": "(yolu, girişi) kapatmak, kesmek; (hesabı, kartı) bloke etmek; (sporcuyu) diskalifiye etmek",
-  "usage_note_tr": "Ayrıca (kafese, bir yere) kapatmak, kilitlemek: jemanden in etwas (Akk.) sperren. (yöresel, Güney Almanya, Avusturya) (kapıyı) kilitlemek. gesperrt (sıf.) — kapalı (trafiğe); (matbaacılık) aralıklı dizilmiş.",
+  "usage_note_tr": "Ayrıca (kafese, bir yere) kapatmak, kilitlemek: jemanden in etwas (Akkusativ) sperren. (yöresel, Güney Almanya, Avusturya) (kapıyı) kilitlemek. gesperrt (sıf.) — kapalı (trafiğe); (matbaacılık) aralıklı dizilmiş.",
   "example_tr": "Pazar günkü bisiklet yarışı için şehir merkezinin tamamı saat sekizden on sekize kadar trafiğe kapatılacak.",
   "complements": [
    {
@@ -23206,7 +23206,7 @@
  },
  "verb-2182": {
   "translation_tr": "(birinin bir şeydeki) suçunu kanıtlamak, (birini) suçlu çıkarmak; nakletmek, taşımak",
-  "usage_note_tr": "jemanden einer Sache (Gen.) überführen — birinin bir şeydeki suçunu kanıtlamak: jemanden des Betrugs überführen. (Cenazeyi, otomobili) nakletmek — burada iki biçim de mümkün: führte über / überführte, hat übergeführt / überführt.",
+  "usage_note_tr": "jemanden einer Sache (Genitiv) überführen — birinin bir şeydeki suçunu kanıtlamak: jemanden des Betrugs überführen. (Cenazeyi, otomobili) nakletmek — burada iki biçim de mümkün: führte über / überführte, hat übergeführt / überführt.",
   "example_tr": "Ancak fincandaki bir DNA izi, suçtan yirmi yıl sonra failin suçunu kanıtlamayı sağladı.",
   "complements": [
    {
@@ -23218,7 +23218,7 @@
  },
  "verb-2183": {
   "translation_tr": "(birine bir şeyi) teslim etmek, vermek; (şehri, kaleyi) teslim etmek",
-  "usage_note_tr": "Ayrılmayan: übergibt, übergab, hat übergeben (Partizip biçimi mastarla aynı). Kime — Dativ'de ya da an + Akk.: etwas an jemanden übergeben. die Übergabe — teslim.",
+  "usage_note_tr": "Ayrılmayan: übergibt, übergab, hat übergeben (Partizip biçimi mastarla aynı). Kime — Dativ'de ya da an + Akkusativ: etwas an jemanden übergeben. die Übergabe — teslim.",
   "example_tr": "Besteci, ölümünden kısa süre önce yayımlanmamış notalarını genç bir öğrencisine teslim etti.",
   "complements": [
    {
@@ -23411,7 +23411,7 @@
  },
  "verb-2203": {
   "translation_tr": "geçmek, aşmak",
-  "usage_note_tr": "Ayrılmayan, güçlü fiil: übertrifft, übertraf, hat übertroffen. alle Erwartungen übertreffen — bütün beklentileri aşmak; sich selbst übertreffen — kendini aşmak. jemanden an etwas (Dat.) übertreffen — birini bir konuda geçmek.",
+  "usage_note_tr": "Ayrılmayan, güçlü fiil: übertrifft, übertraf, hat übertroffen. alle Erwartungen übertreffen — bütün beklentileri aşmak; sich selbst übertreffen — kendini aşmak. jemanden an etwas (Dativ) übertreffen — birini bir konuda geçmek.",
   "example_tr": "Yeni batarya, kullanım süresinde önceki modeli neredeyse %50 geride bırakıyor.",
   "complements": [
    {
@@ -23452,7 +23452,7 @@
   ],
   "reflexive": {
    "translation_tr": "(yöresel) ayağını burkmak (genellikle: sich den Fuß vertreten)",
-   "note_tr": "sich (D) den Fuß übertreten"
+   "note_tr": "sich (Dativ) den Fuß übertreten"
   },
   "_src": "3324b580",
   "_src_reader": "e1752d21"
@@ -23466,7 +23466,7 @@
  },
  "verb-2207": {
   "translation_tr": "(giysiyi) üstüne geçirmek, aceleyle giymek",
-  "usage_note_tr": "Ayrılabilen: zieht über, zog über, hat übergezogen; sıklıkla Dat. ile: sich (Dativ) etwas überziehen. (konuş.) jemandem eins überziehen — birine bir tane patlatmak. Krş. ayrılmayan überziehen (hat überzogen) — aşmak, kaplamak.",
+  "usage_note_tr": "Ayrılabilen: zieht über, zog über, hat übergezogen; sıklıkla Dativ'le: sich (Dativ) etwas überziehen. (konuş.) jemandem eins überziehen — birine bir tane patlatmak. Krş. ayrılmayan überziehen (hat überzogen) — aşmak, kaplamak.",
   "example_tr": "Gösteriden önce kimse onu tanımasın diye şarkıcı sırtına uzun siyah bir palto geçirdi.",
   "complements": [
    {
@@ -23866,7 +23866,7 @@
  },
  "verb-2240": {
   "translation_tr": "(kendisine yönelik bir şeye) izin vermemek, (bir şeyi) kabul etmemek, (bir şeyin) kesilmesini istemek",
-  "usage_note_tr": "Dativ ile dönüşlü: sich (Dativ) etwas verbitten — ich verbitte mir … Güçlü fiil: verbat, hat verbeten. Karıştırılmamalı: verbieten (verbot, verboten) — yasaklamak.",
+  "usage_note_tr": "Dativ'le dönüşlü: sich (Dativ) etwas verbitten — ich verbitte mir … Güçlü fiil: verbat, hat verbeten. Karıştırılmamalı: verbieten (verbot, verboten) — yasaklamak.",
   "example_tr": "Bakan, süren soruşturmaya yönelik her türlü müdahaleyi kesinlikle kabul etmedi.",
   "_src": "c94bab23",
   "_src_reader": "88234a1f"
@@ -23919,7 +23919,7 @@
  },
  "verb-2246": {
   "translation_tr": "(birinden bir şey konusunda) şüphelenmek",
-  "usage_note_tr": "jemanden einer Sache (Gen.) verdächtigen. Ayrıca mastarla: jemanden verdächtigen, etwas getan zu haben. ge- olmadan: verdächtigte, hat verdächtigt. der Verdacht — şüphe; verdächtig — şüpheli.",
+  "usage_note_tr": "jemanden einer Sache (Genitiv) verdächtigen. Ayrıca mastarla: jemanden verdächtigen, etwas getan zu haben. ge- olmadan: verdächtigte, hat verdächtigt. der Verdacht — şüphe; verdächtig — şüpheli.",
   "example_tr": "Bahçıvanın işverenini öldürdüğünden aylarca haksız yere şüphelenildi.",
   "complements": [
    {
@@ -24085,7 +24085,7 @@
  },
  "verb-2263": {
   "translation_tr": "(bir şeyden) emin olmak, (bir şeyi) teyit etmek",
-  "usage_note_tr": "Yalnızca dönüşlü kullanılır; yan cümleyle (dass / ob) ya da Genitiv ile: sich einer Sache vergewissern. ge- olmadan: vergewisserte sich, hat sich vergewissert. Krş. gewiss — kesin, şüphesiz.",
+  "usage_note_tr": "Yalnızca dönüşlü kullanılır; yan cümleyle (dass / ob) ya da Genitiv'le: sich einer Sache vergewissern. ge- olmadan: vergewisserte sich, hat sich vergewissert. Krş. gewiss — kesin, şüphesiz.",
   "example_tr": "Depremden sonra başlarına bir şey gelmediğinden emin olmak için anne babasını aradı.",
   "complements": [
    {
@@ -24124,7 +24124,7 @@
  },
  "verb-2267": {
   "translation_tr": "(birinin bir şeye kavuşmasına, bir şeyi elde etmesine) yardım etmek",
-  "usage_note_tr": "Kalıp: jemandem (Dat.) zu etwas verhelfen. Biçimleri helfen fiilindeki gibi: verhilft, verhalf, hat verholfen. einer Sache zum Durchbruch verhelfen — bir şeyin kendini kabul ettirmesine yardım etmek.",
+  "usage_note_tr": "Kalıp: jemandem (Dativ) zu etwas verhelfen. Biçimleri helfen fiilindeki gibi: verhilft, verhalf, hat verholfen. einer Sache zum Durchbruch verhelfen — bir şeyin kendini kabul ettirmesine yardım etmek.",
   "example_tr": "Şanslı bir tesadüf, genç oyuncunun ilk büyük rolüne kavuşmasına yardım etti.",
   "complements": [
    {
@@ -24166,7 +24166,7 @@
  },
  "verb-2271": {
   "translation_tr": "(birini) mahkemeye vermek, (birine) dava açmak",
-  "usage_note_tr": "jemanden auf etwas (Akk.) verklagen — bir şey talebiyle dava açmak (tazminat talebiyle); wegen + Gen. — bir şey yüzünden. (yöresel) (birini) şikâyet etmek. ge- olmadan: verklagte, hat verklagt.",
+  "usage_note_tr": "jemanden auf etwas (Akkusativ) verklagen — bir şey talebiyle dava açmak (tazminat talebiyle); wegen + Genitiv — bir şey yüzünden. (yöresel) (birini) şikâyet etmek. ge- olmadan: verklagte, hat verklagt.",
   "example_tr": "Kiracılar, kalorifer aylarca çalışmadığı için ev sahiplerini mahkemeye verdi.",
   "complements": [
    {
@@ -24397,14 +24397,14 @@
   ],
   "reflexive": {
    "translation_tr": "kendini bir şeyden mahrum etmek",
-   "note_tr": "sich (D) etwas versagen"
+   "note_tr": "sich (Dativ) etwas versagen"
   },
   "_src": "074b10c7",
   "_src_reader": "e1b02320"
  },
  "verb-2293": {
   "translation_tr": "bulmak, edinmek, temin etmek; (birine / kendine bir şey) sağlamak",
-  "usage_note_tr": "Sıklıkla Dat. dönüşlü zamirle: sich (Dativ) etwas verschaffen — sich Respekt / Klarheit verschaffen — saygı kazanmak / netlik sağlamak. Zayıf fiil: verschaffte, hat verschafft (schaffen — yaratmak fiilinden farklı olarak: schuf, geschaffen).",
+  "usage_note_tr": "Sıklıkla Dativ dönüşlü zamirle: sich (Dativ) etwas verschaffen — sich Respekt / Klarheit verschaffen — saygı kazanmak / netlik sağlamak. Zayıf fiil: verschaffte, hat verschafft (schaffen — yaratmak fiilinden farklı olarak: schuf, geschaffen).",
   "example_tr": "Öğrenci, ek işle kendine biraz maddi bağımsızlık sağlamak istiyor.",
   "complements": [
    {
@@ -24413,7 +24413,7 @@
   ],
   "reflexive": {
    "translation_tr": "(saygı, netlik, avantaj) elde etmek, kendine sağlamak",
-   "note_tr": "sich (D) etwas verschaffen"
+   "note_tr": "sich (Dativ) etwas verschaffen"
   },
   "_src": "d06c981d",
   "_src_reader": "393556b1"
@@ -24575,7 +24575,7 @@
  },
  "verb-2310": {
   "translation_tr": "(biriyle) barışmak; (bir şeyi) kabullenmek, (bir şeyle) uzlaşmak",
-  "usage_note_tr": "Kiminle — mit + Dat. sich olmadan — (birini biriyle) barıştırmak; yatıştırmak, uzlaştırmak. Zayıf fiil: versöhnte sich, hat sich versöhnt. die Versöhnung — barışma, uzlaşma; versöhnlich — uzlaştırıcı.",
+  "usage_note_tr": "Kiminle — mit + Dativ sich olmadan — (birini biriyle) barıştırmak; yatıştırmak, uzlaştırmak. Zayıf fiil: versöhnte sich, hat sich versöhnt. die Versöhnung — barışma, uzlaşma; versöhnlich — uzlaştırıcı.",
   "example_tr": "Üç hafta hiç konuşmadıktan sonra iki kız kardeş sonunda bir kahve eşliğinde barıştı.",
   "complements": [
    {
@@ -24587,7 +24587,7 @@
  },
  "verb-2311": {
   "translation_tr": "(birine bir şey) sağlamak, temin etmek; geçindirmek (aileyi); bakmak (hastaya), pansuman yapmak (yaraya)",
-  "usage_note_tr": "Ne ile — mit + Dat. Ayrıca (aileyi, çocukları) geçindirmek; (yaralılara) yardım etmek, (yarayı) sarmak. Zayıf: versorgte, hat versorgt. die Versorgung — tedarik, temin; bakım.",
+  "usage_note_tr": "Ne ile — mit + Dativ Ayrıca (aileyi, çocukları) geçindirmek; (yaralılara) yardım etmek, (yarayı) sarmak. Zayıf: versorgte, hat versorgt. die Versorgung — tedarik, temin; bakım.",
   "example_tr": "Selden beri Kızılhaç köylere helikopterle içme suyu sağlıyor.",
   "complements": [
    {
@@ -24614,7 +24614,7 @@
  },
  "verb-2314": {
   "translation_tr": "(birini / bir şeyi) alaya almak, (biriyle / bir şeyle) alay etmek",
-  "usage_note_tr": "Nesne Akkusativ'de (Türkçedeki “biriyle alay etmek” yapısından farklı olarak). Zayıf fiil: verspottete, hat verspottet. Krş. spotten über + Akk. — biriyle / bir şeyle alay etmek.",
+  "usage_note_tr": "Nesne Akkusativ'de (Türkçedeki “biriyle alay etmek” yapısından farklı olarak). Zayıf fiil: verspottete, hat verspottet. Krş. spotten über + Akkusativ — biriyle / bir şeyle alay etmek.",
   "example_tr": "Okulda eski moda kıyafetleri yüzünden sık sık onunla alay edilirdi.",
   "_src": "245dab0f",
   "_src_reader": "d5432e96"
@@ -24628,7 +24628,7 @@
  },
  "verb-2316": {
   "translation_tr": "(birine) haber vermek, (birini) haberdar etmek, (birini) bilgilendirmek",
-  "usage_note_tr": "Ne hakkında — von + Dat. / über + Akk. Zayıf fiil: verständigte, hat verständigt. sich verständigen — derdini anlatmak; anlaşmaya varmak.",
+  "usage_note_tr": "Ne hakkında — von + Dativ / über + Akkusativ Zayıf fiil: verständigte, hat verständigt. sich verständigen — derdini anlatmak; anlaşmaya varmak.",
   "example_tr": "Komşu dumanı fark etti ve hemen itfaiyeye haber verdi.",
   "complements": [
    {
@@ -24643,7 +24643,7 @@
  },
  "verb-2317": {
   "translation_tr": "derdini anlatmak, birbirini anlamak; (bir şey üzerinde) anlaşmaya varmak, uzlaşmak",
-  "usage_note_tr": "mit + Dat. — kiminle; auf + Akk. / über + Akk. — ne üzerinde anlaşmaya varmak: sich auf einen Kompromiss verständigen. Zayıf fiil: verständigte sich, hat sich verständigt. die Verständigung — iletişim, birbirini anlama; anlaşma.",
+  "usage_note_tr": "mit + Dativ — kiminle; auf + Akkusativ / über + Akkusativ — ne üzerinde anlaşmaya varmak: sich auf einen Kompromiss verständigen. Zayıf fiil: verständigte sich, hat sich verständigt. die Verständigung — iletişim, birbirini anlama; anlaşma.",
   "example_tr": "Değişim öğrencileri başlangıçta el kol hareketleriyle ve birkaç kelime İngilizceyle dertlerini anlatıyorlardı.",
   "complements": [
    {
@@ -24658,14 +24658,14 @@
  },
  "verb-2318": {
   "translation_tr": "(eşyaları dar bir yere) yerleştirmek, istiflemek, sığdırmak",
-  "usage_note_tr": "Nereye — in + Dat. (daha çok) veya in + Akk. Zayıf fiil: verstaute, hat verstaut.",
+  "usage_note_tr": "Nereye — in + Dativ (daha çok) veya in + Akkusativ Zayıf fiil: verstaute, hat verstaut.",
   "example_tr": "Çadırlar ve uyku tulumları bagaja ancak güçlükle sığdırılabildi.",
   "_src": "c241e41e",
   "_src_reader": "aeded729"
  },
  "verb-2319": {
   "translation_tr": "(kuralı, yasayı) çiğnemek, ihlal etmek; (birini) kovmak, reddetmek",
-  "usage_note_tr": "İhlal etmek — gegen + Akk. Doğrudan nesneyle — (birini aileden, topluluktan) kovmak, dışlamak. Güçlü fiil: verstößt, verstieß, hat verstoßen (Partizip biçimi mastarla aynı). der Verstoß — ihlal.",
+  "usage_note_tr": "İhlal etmek — gegen + Akkusativ Doğrudan nesneyle — (birini aileden, topluluktan) kovmak, dışlamak. Güçlü fiil: verstößt, verstieß, hat verstoßen (Partizip biçimi mastarla aynı). der Verstoß — ihlal.",
   "example_tr": "Firma çevre kurallarını defalarca ihlal ettiği için yüksek bir ceza ödemek zorunda kaldı.",
   "complements": [
    {
@@ -24682,7 +24682,7 @@
  },
  "verb-2320": {
   "translation_tr": "(yaz.) (birini hoş olmayan bir şeye) bulaştırmak, sürüklemek",
-  "usage_note_tr": "Neye — in + Akk. Sıklıkla edilgen çatıda: in etwas verstrickt sein — bir şeye bulaşmış olmak. Gerçek anlamı — (ipliği) örerek bitirmek. Zayıf fiil: verstrickte, hat verstrickt.",
+  "usage_note_tr": "Neye — in + Akkusativ Sıklıkla edilgen çatıda: in etwas verstrickt sein — bir şeye bulaşmış olmak. Gerçek anlamı — (ipliği) örerek bitirmek. Zayıf fiil: verstrickte, hat verstrickt.",
   "example_tr": "Belediye başkanı hakkında soruşturma yürütülüyor: Yasa dışı işlere bulaştığı iddia ediliyor.",
   "complements": [
    {
@@ -24704,7 +24704,7 @@
  },
  "verb-2321": {
   "translation_tr": "(oturumu, kararı) başka bir tarihe ertelemek",
-  "usage_note_tr": "Ne zamana — auf + Akk. sich vertagen — yeni bir tarih belirleyerek oturuma ara vermek (mahkeme, komisyon için). Zayıf fiil: vertagte, hat vertagt. die Vertagung — erteleme.",
+  "usage_note_tr": "Ne zamana — auf + Akkusativ sich vertagen — yeni bir tarih belirleyerek oturuma ara vermek (mahkeme, komisyon için). Zayıf fiil: vertagte, hat vertagt. die Vertagung — erteleme.",
   "example_tr": "İki bilirkişi raporu eksik olduğu için dava kasım sonuna ertelendi.",
   "complements": [
    {
@@ -24795,7 +24795,7 @@
  },
  "verb-2330": {
   "translation_tr": "(birini bir şeye) karıştırmak, sürüklemek",
-  "usage_note_tr": "Neye — in + Akk. verwickelt — karmaşık, içinden çıkılmaz (iş, durum için). Zayıf fiil: verwickelte, hat verwickelt.",
+  "usage_note_tr": "Neye — in + Akkusativ verwickelt — karmaşık, içinden çıkılmaz (iş, durum için). Zayıf fiil: verwickelte, hat verwickelt.",
   "example_tr": "Öğrenci bir tesadüf sonucu bir uyuşturucu çetesine yönelik soruşturmaya karıştı.",
   "complements": [
    {
@@ -24864,7 +24864,7 @@
  },
  "verb-2336": {
   "translation_tr": "umutsuzluğa kapılmak, ümidini yitirmek",
-  "usage_note_tr": "Ne yüzünden — an + Dat. Perfekt ist ile: ist verzweifelt (hat ile — esk.). Zayıf fiil: verzweifelte. Es ist zum Verzweifeln! — Delirmemek elde değil! verzweifelt — umutsuz; çaresiz. die Verzweiflung — umutsuzluk.",
+  "usage_note_tr": "Ne yüzünden — an + Dativ Perfekt ist ile: ist verzweifelt (hat ile — esk.). Zayıf fiil: verzweifelte. Es ist zum Verzweifeln! — Delirmemek elde değil! verzweifelt — umutsuz; çaresiz. die Verzweiflung — umutsuzluk.",
   "example_tr": "Oğulları iki gün eve gelmeyince anne baba neredeyse umutsuzluğa kapıldı.",
   "complements": [
    {
@@ -24943,7 +24943,7 @@
  },
  "verb-2344": {
   "translation_tr": "(birinin / bir şeyin) önünden geçmek, yanından geçmek (araçla); (konuş.) (bir yere kısa bir süre) uğramak",
-  "usage_note_tr": "Neyin önünden — an + Dat.; birine uğramak — bei + Dat. Ayrılabilen, güçlü fiil: fährt vorbei, fuhr vorbei, ist vorbeigefahren.",
+  "usage_note_tr": "Neyin önünden — an + Dativ; birine uğramak — bei + Dativ Ayrılabilen, güçlü fiil: fährt vorbei, fuhr vorbei, ist vorbeigefahren.",
   "example_tr": "Her sabah işe giderken senin eski evinin önünden geçiyorum.",
   "complements": [
    {
@@ -24967,7 +24967,7 @@
  },
  "verb-2346": {
   "translation_tr": "ilerlemek, (bir yere) nüfuz etmek, ulaşmak; yayılmak",
-  "usage_note_tr": "Nereye — in + Akk. / bis zu + Dat. Moda, fikirler için de — yayılmak. Ayrılabilen, güçlü fiil: drang vor, ist vorgedrungen; Konjunktiv II dränge vor.",
+  "usage_note_tr": "Nereye — in + Akkusativ / bis zu + Dativ Moda, fikirler için de — yayılmak. Ayrılabilen, güçlü fiil: drang vor, ist vorgedrungen; Konjunktiv II dränge vor.",
   "example_tr": "Araştırmacılar bir dalış robotuyla 4.000 metre derinlikteki batığa kadar ilerledi.",
   "complements": [
    {
@@ -25156,7 +25156,7 @@
  },
  "verb-2362": {
   "translation_tr": "geçmek, sona ermek (zaman, fırtına, ağrı için); (birinin / bir şeyin) yanından geçip gitmek",
-  "usage_note_tr": "Yanından geçip gitmek — an + Dat. etwas im Vorübergehen erledigen — bir şeyi ayaküstü halletmek. Ayrılabilen, güçlü fiil: ging vorüber, ist vorübergegangen. vorübergehend — geçici.",
+  "usage_note_tr": "Yanından geçip gitmek — an + Dativ etwas im Vorübergehen erledigen — bir şeyi ayaküstü halletmek. Ayrılabilen, güçlü fiil: ging vorüber, ist vorübergegangen. vorübergehend — geçici.",
   "example_tr": "Fırtına geçene kadar bir dağ kulübesinde bekledik.",
   "complements": [
    {
@@ -25169,7 +25169,7 @@
  },
  "verb-2363": {
   "translation_tr": "daha erken bir tarihe almak, öne almak",
-  "usage_note_tr": "Ne zamana — auf + Akk. Ayrıca (mekânda) ileri taşımak. Ayrılabilen, ge- olmadan: verlegte vor, hat vorverlegt. Karşıt anlamlısı: verschieben (ertelemek).",
+  "usage_note_tr": "Ne zamana — auf + Akkusativ Ayrıca (mekânda) ileri taşımak. Ayrılabilen, ge- olmadan: verlegte vor, hat vorverlegt. Karşıt anlamlısı: verschieben (ertelemek).",
   "example_tr": "Kulüp, beklenen fırtına yüzünden maçın başlama saatini 14.00'e öne aldı.",
   "complements": [
    {
@@ -25184,7 +25184,7 @@
  },
  "verb-2364": {
   "translation_tr": "önceden uyarmak",
-  "usage_note_tr": "Ayrılabilen: warnte vor, hat vorgewarnt. Karıştırılmamalı: warnen vor + Dat. (bir şeye karşı uyarmak): Er warnt vor dem Hund — bu vorwarnen değil, warnen. die Vorwarnung — önceden uyarı.",
+  "usage_note_tr": "Ayrılabilen: warnte vor, hat vorgewarnt. Karıştırılmamalı: warnen vor + Dativ (bir şeye karşı uyarmak): Er warnt vor dem Hund — bu vorwarnen değil, warnen. die Vorwarnung — önceden uyarı.",
   "example_tr": "Komşular, ev sahibinin kılı kırk yaran biri olduğu konusunda bizi önceden uyarmıştı.",
   "complements": [
    {
@@ -25220,7 +25220,7 @@
  },
  "verb-2367": {
   "translation_tr": "sallanmak, oynamak; (konuş.) (başını, kalçalarını) sallamak; (konuş.) paytak paytak yürümek",
-  "usage_note_tr": "(konuş.) mit + Dat.: mit dem Schwanz wackeln — kuyruk sallamak. (konuş.) iş, firma için — tehlikede olmak. (Bir yere) paytak paytak yürümek — ist ile. Zayıf fiil: wackelte, hat gewackelt. wackelig — sallantılı, oynak.",
+  "usage_note_tr": "(konuş.) mit + Dativ: mit dem Schwanz wackeln — kuyruk sallamak. (konuş.) iş, firma için — tehlikede olmak. (Bir yere) paytak paytak yürümek — ist ile. Zayıf fiil: wackelte, hat gewackelt. wackelig — sallantılı, oynak.",
   "example_tr": "Ağır kitapları yerleştirirken eski raf endişe verici şekilde sallandı.",
   "_src": "ab206586",
   "_src_reader": "539bd054"
@@ -25269,7 +25269,7 @@
  },
  "verb-2372": {
   "translation_tr": "(yaz.) değişmek, dönüşmek, başkalaşmak",
-  "usage_note_tr": "sich olmadan — değiştirmek, dönüştürmek (bir şeye: in + Akk.). wandeln (ist ile) — (yaz.) gezinmek, dolaşmak. Zayıf fiil: wandelte sich, hat sich gewandelt. der Wandel — değişim; der Klimawandel — iklim değişikliği.",
+  "usage_note_tr": "sich olmadan — değiştirmek, dönüştürmek (bir şeye: in + Akkusativ). wandeln (ist ile) — (yaz.) gezinmek, dolaşmak. Zayıf fiil: wandelte sich, hat sich gewandelt. der Wandel — değişim; der Klimawandel — iklim değişikliği.",
   "example_tr": "Kızının doğumuyla kendi kariyerine bakışı tamamen değişti.",
   "_src": "86ee43d7",
   "_src_reader": "a4adcd18"
@@ -25351,7 +25351,7 @@
  },
  "verb-2380": {
   "translation_tr": "çalışmaya devam etmek",
-  "usage_note_tr": "Ne üzerinde — an + Dat. sich weiterarbeiten — güçlükle ilerlemek. Ayrılabilen: arbeitete weiter, hat weitergearbeitet.",
+  "usage_note_tr": "Ne üzerinde — an + Dativ sich weiterarbeiten — güçlükle ilerlemek. Ayrılabilen: arbeitete weiter, hat weitergearbeitet.",
   "example_tr": "Ateşi olmasına rağmen akşama kadar dizüstü bilgisayarında çalışmaya devam etti.",
   "reflexive": {
    "translation_tr": "güçlükle ilerlemek"
@@ -25373,7 +25373,7 @@
  },
  "verb-2382": {
   "translation_tr": "(birine) yardımcı olmak (ilerlemesi, bir sorunun üstesinden gelmesi için)",
-  "usage_note_tr": "Kime — Dativ'de; hangi konuda — bei + Dat. Ayrılabilen, güçlü fiil: hilft weiter, half weiter, hat weitergeholfen.",
+  "usage_note_tr": "Kime — Dativ'de; hangi konuda — bei + Dativ Ayrılabilen, güçlü fiil: hilft weiter, half weiter, hat weitergeholfen.",
   "example_tr": "Ödevle başa çıkamazsan kardeşin sana kesinlikle yardımcı olabilir.",
   "complements": [
    {
@@ -25388,14 +25388,14 @@
  },
  "verb-2383": {
   "translation_tr": "mücadeleye devam etmek",
-  "usage_note_tr": "Ne için — für + Akk. Ayrılabilen: kämpfte weiter, hat weitergekämpft.",
+  "usage_note_tr": "Ne için — für + Akkusativ Ayrılabilen: kämpfte weiter, hat weitergekämpft.",
   "example_tr": "Ağır sakatlığına rağmen sporcu mücadeleye devam edip yazın yeniden yarışmak istiyor.",
   "_src": "227ace36",
   "_src_reader": "c2a91ba7"
  },
  "verb-2384": {
   "translation_tr": "ilerlemek, yol almak; başarı kazanmak; (turnuvada) bir üst tura çıkmak",
-  "usage_note_tr": "Ne ile — mit + Dat. / bei + Dat. beruflich weiterkommen — meslekte yükselmek. Ayrılabilen, güçlü fiil: kommt weiter, kam weiter, ist weitergekommen.",
+  "usage_note_tr": "Ne ile — mit + Dativ / bei + Dativ beruflich weiterkommen — meslekte yükselmek. Ayrılabilen, güçlü fiil: kommt weiter, kam weiter, ist weitergekommen.",
   "example_tr": "Büyükannemin sözlüğü olmasaydı bu eski mektupta hiç yol alamazdım.",
   "_src": "89c8ed6d",
   "_src_reader": "bc48ee95"
@@ -25409,7 +25409,7 @@
  },
  "verb-2386": {
   "translation_tr": "(bir şeyin) reklamını yapmak, (bir şey için) propaganda yapmak; (müşteri, taraftar) kazanmak, toplamak; (birinin gönlünü, desteğini) kazanmaya çalışmak",
-  "usage_note_tr": "Güçlü fiil, e → i: wirbst, wirbt, warb, hat geworben; Konjunktiv II würbe. Doğrudan nesneyle — kazanmak, toplamak: Mitglieder werben. um + Akk. — kazanmaya çalışmak: um Wählerstimmen werben; (yaz.) um eine Frau werben — bir kadına talip olmak. die Werbung — reklam.",
+  "usage_note_tr": "Güçlü fiil, e → i: wirbst, wirbt, warb, hat geworben; Konjunktiv II würbe. Doğrudan nesneyle — kazanmak, toplamak: Mitglieder werben. um + Akkusativ — kazanmaya çalışmak: um Wählerstimmen werben; (yaz.) um eine Frau werben — bir kadına talip olmak. die Werbung — reklam.",
   "example_tr": "Şehir haftalardır otobüs ve trenlerdeki afişlerle yeni bisiklet kiralama sisteminin reklamını yapıyor.",
   "complements": [
    {
@@ -25441,7 +25441,7 @@
  },
  "verb-2388": {
   "translation_tr": "(konuş.) (birine / bir şeye) veryansın etmek, ateş püskürmek, verip veriştirmek",
-  "usage_note_tr": "gegen / über + Akk. Esk.: kişisiz es wettert — gök gürlüyor, fırtına kopuyor. Zayıf fiil: wetterte, hat gewettert.",
+  "usage_note_tr": "gegen / über + Akkusativ Esk.: kişisiz es wettert — gök gürlüyor, fırtına kopuyor. Zayıf fiil: wetterte, hat gewettert.",
   "example_tr": "Dedem her akşam televizyonun karşısında Berlin'deki politikacılara veryansın ediyor.",
   "complements": [
    {
@@ -25578,7 +25578,7 @@
  },
  "verb-2400": {
   "translation_tr": "kaynaşmak, kıpırdaşmak; es wimmelt von … — (biriyle / bir şeyle) dolu olmak, (birinden / bir şeyden) geçilmemek",
-  "usage_note_tr": "von + Dat. (duygusal) Das Netz wimmelt von Falschmeldungen — internet yalan haberle dolu. Zayıf fiil: wimmelte, hat gewimmelt. Karıştırılmamalı: wimmern — inlemek, sızlanmak.",
+  "usage_note_tr": "von + Dativ (duygusal) Das Netz wimmelt von Falschmeldungen — internet yalan haberle dolu. Zayıf fiil: wimmelte, hat gewimmelt. Karıştırılmamalı: wimmern — inlemek, sızlanmak.",
   "example_tr": "Yağmurdan sonra sebze tarhında salyangozdan geçilmiyordu.",
   "complements": [
    {
@@ -25609,16 +25609,16 @@
  },
  "verb-2403": {
   "translation_tr": "(yara olana, kanayana kadar) sürtüp tahriş etmek, vurmak",
-  "usage_note_tr": "Genellikle: sich (D) etwas wundreiben — bir yerini sürtüp yara etmek. Ayrı da yazılır: wund reiben (Duden iki yazımı da kabul eder, ayrı madde yoktur). Ayrılabilen, güçlü fiil (reiben gibi): rieb wund, hat wundgerieben. Krş. sich wundlaufen — yürümekten ayaklarını yara etmek.",
+  "usage_note_tr": "Genellikle: sich (Dativ) etwas wundreiben — bir yerini sürtüp yara etmek. Ayrı da yazılır: wund reiben (Duden iki yazımı da kabul eder, ayrı madde yoktur). Ayrılabilen, güçlü fiil (reiben gibi): rieb wund, hat wundgerieben. Krş. sich wundlaufen — yürümekten ayaklarını yara etmek.",
   "example_tr": "Yeni yürüyüş ayakkabılarım daha ilk gün iki topuğumu da vurdu.",
   "complements": [
    {
-    "note_tr": "bir şeyi (vücudun bir yerini): sich (D) die Füße wundreiben; sich wundreiben — (derisini) sürtüp yara etmek"
+    "note_tr": "bir şeyi (vücudun bir yerini): sich (Dativ) die Füße wundreiben; sich wundreiben — (derisini) sürtüp yara etmek"
    }
   ],
   "reflexive": {
    "translation_tr": "bir yerini sürtüp yara etmek",
-   "note_tr": "sich (D) etwas wundreiben"
+   "note_tr": "sich (Dativ) etwas wundreiben"
   },
   "_src": "61976005",
   "_src_reader": "40294681"
@@ -25632,7 +25632,7 @@
  },
  "verb-2405": {
   "translation_tr": "kasıp kavurmak, kudurmak, terör estirmek",
-  "usage_note_tr": "Ayrıca doğa olayları, hastalıklar, savaş için — kasıp kavurmak, kol gezmek. gegen + Akk. — bir şeye öfkeyle karşı çıkmak. Zayıf fiil: wütete, hat gewütet. die Wut — öfke; wütend — öfkeli, kızgın.",
+  "usage_note_tr": "Ayrıca doğa olayları, hastalıklar, savaş için — kasıp kavurmak, kol gezmek. gegen + Akkusativ — bir şeye öfkeyle karşı çıkmak. Zayıf fiil: wütete, hat gewütet. die Wut — öfke; wütend — öfkeli, kızgın.",
   "example_tr": "Kaybedilen finalden sonra sarhoş taraftarlar şehir merkezinde terör estirdi ve vitrinleri kırdı.",
   "_src": "5139ded8",
   "_src_reader": "4097ee05"
@@ -25655,7 +25655,7 @@
  },
  "verb-2407": {
   "translation_tr": "dağılmak, çürüyüp gitmek, ufalanmak; (parçalara) bölünmek",
-  "usage_note_tr": "Ayrıca dağılmak (devlet, birlik için); (fiz.) bozunmak (çekirdekler için); in + Akk. — bölümlere ayrılmak (metin, süreç için). Güçlü fiil: zerfällt, zerfiel, ist zerfallen (Partizip biçimi mastarla ve zerfallen sıfatıyla — yıkık, harap — aynıdır). der Zerfall — dağılma, çöküş.",
+  "usage_note_tr": "Ayrıca dağılmak (devlet, birlik için); (fiz.) bozunmak (çekirdekler için); in + Akkusativ — bölümlere ayrılmak (metin, süreç için). Güçlü fiil: zerfällt, zerfiel, ist zerfallen (Partizip biçimi mastarla ve zerfallen sıfatıyla — yıkık, harap — aynıdır). der Zerfall — dağılma, çöküş.",
   "example_tr": "Kompost yığınındaki yapraklar bir yıl içinde neredeyse tamamen çürüyüp gitti.",
   "_src": "b7a47b5c",
   "_src_reader": "f14a0acb"
@@ -25729,11 +25729,11 @@
  },
  "verb-2416": {
   "translation_tr": "(parçalara) kesmek, doğramak; kesip parçalamak, (bir yerini) kesmek",
-  "usage_note_tr": "Güçlü fiil: zerschnitt, hat zerschnitten. Ayrıca kesmek, kesip zarar vermek: sich (Dat.) die Hand an einer Scherbe zerschneiden — elini bir cam kırığıyla kesmek.",
+  "usage_note_tr": "Güçlü fiil: zerschnitt, hat zerschnitten. Ayrıca kesmek, kesip zarar vermek: sich (Dativ) die Hand an einer Scherbe zerschneiden — elini bir cam kırığıyla kesmek.",
   "example_tr": "Ben telefonda konuşurken kızım yeni perdeyi makasla kesip parçaladı.",
   "reflexive": {
    "translation_tr": "(elini vb.) kesmek",
-   "note_tr": "sich (D) etwas zerschneiden"
+   "note_tr": "sich (Dativ) etwas zerschneiden"
   },
   "_src": "de289ced",
   "_src_reader": "450bf439"
@@ -25767,7 +25767,7 @@
  },
  "verb-2420": {
   "translation_tr": "alıntılamak, alıntı yapmak; (amirin yanına, mahkemeye) çağırmak (hesap sormak için)",
-  "usage_note_tr": "Nereden — aus + Dat. Ayrıca (hesap sormak için birini) çağırmak. Zayıf fiil, ge- olmadan: zitierte, hat zitiert. das Zitat — alıntı.",
+  "usage_note_tr": "Nereden — aus + Dativ Ayrıca (hesap sormak için birini) çağırmak. Zayıf fiil, ge- olmadan: zitierte, hat zitiert. das Zitat — alıntı.",
   "example_tr": "Bakan konuşmasında Hannah Arendt'ten bir cümle alıntıladı.",
   "complements": [
    {
@@ -25825,18 +25825,18 @@
  },
  "verb-2426": {
   "translation_tr": "(konuş.) (kilo) almak; hızlanmak; artmak (kâr, oy için)",
-  "usage_note_tr": "(konuş.) sich (Dat.) etwas zulegen — bir şey edinmek, satın almak: sich ein neues Fahrrad zulegen. einen Zahn zulegen — biraz hızlanmak, gaza basmak. (yöresel, konuş.) eklemek, üstüne para vermek. Ayrılabilen: legte zu, hat zugelegt.",
+  "usage_note_tr": "(konuş.) sich (Dativ) etwas zulegen — bir şey edinmek, satın almak: sich ein neues Fahrrad zulegen. einen Zahn zulegen — biraz hızlanmak, gaza basmak. (yöresel, konuş.) eklemek, üstüne para vermek. Ayrılabilen: legte zu, hat zugelegt.",
   "example_tr": "Tatil günlerinde en az üç kilo aldım.",
   "reflexive": {
    "translation_tr": "(konuş.) edinmek, satın almak",
-   "note_tr": "sich (D) etwas zulegen"
+   "note_tr": "sich (Dativ) etwas zulegen"
   },
   "_src": "0dd2e982",
   "_src_reader": "cb9ef36d"
  },
  "verb-2427": {
   "translation_tr": "(birinden aşırı bir şey) beklemek, (birine) yük bindirmek",
-  "usage_note_tr": "Kime — Dativ'de, neyi — Akkusativ'de. sich (Dat.) zu viel zumuten — kendine fazla yüklenmek. Ayrılabilen: mutete zu, hat zugemutet. die Zumutung — küstahlık, makul olmayan istek; (un)zumutbar — kabul edilebilir (edilemez).",
+  "usage_note_tr": "Kime — Dativ'de, neyi — Akkusativ'de. sich (Dativ) zu viel zumuten — kendine fazla yüklenmek. Ayrılabilen: mutete zu, hat zugemutet. die Zumutung — küstahlık, makul olmayan istek; (un)zumutbar — kabul edilebilir (edilemez).",
   "example_tr": "Küçük çocuklardan on saatlik bir araba yolculuğuna katlanmaları pek beklenemez.",
   "complements": [
    {
@@ -25845,7 +25845,7 @@
   ],
   "reflexive": {
    "translation_tr": "kendine fazla yüklenmek",
-   "note_tr": "sich (D) zu viel zumuten"
+   "note_tr": "sich (Dativ) zu viel zumuten"
   },
   "_src": "d0466e08",
   "_src_reader": "6bc60d16"
@@ -25859,7 +25859,7 @@
  },
  "verb-2429": {
   "translation_tr": "geriye bakmak, dönüp bakmak; (mec.) geçmişe bakmak",
-  "usage_note_tr": "Neye — auf + Akk.: auf zwanzig Jahre Ehe zurückblicken (können) — yirmi yıllık evliliği geride bırakmış olmak. Ayrılabilen: blickte zurück, hat zurückgeblickt. der Rückblick — geriye bakış.",
+  "usage_note_tr": "Neye — auf + Akkusativ: auf zwanzig Jahre Ehe zurückblicken (können) — yirmi yıllık evliliği geride bırakmış olmak. Ayrılabilen: blickte zurück, hat zurückgeblickt. der Rückblick — geriye bakış.",
   "example_tr": "Zirvede, sabah yola çıktığımız vadiye dönüp baktık.",
   "complements": [
    {
@@ -25915,7 +25915,7 @@
  },
  "verb-2434": {
   "translation_tr": "(bir şeye) başvurmak, (yedeklere, yardıma) yönelmek",
-  "usage_note_tr": "Neye — auf + Akk. Ayrılabilen, güçlü fiil: griff zurück, hat zurückgegriffen. der Rückgriff — başvurma (bir şeye).",
+  "usage_note_tr": "Neye — auf + Akkusativ Ayrılabilen, güçlü fiil: griff zurück, hat zurückgegriffen. der Rückgriff — başvurma (bir şeye).",
   "example_tr": "Ajans, sözleşmenin çevirisi için deneyimli bir hukukçuya başvurdu.",
   "complements": [
    {
@@ -25927,7 +25927,7 @@
  },
  "verb-2435": {
   "translation_tr": "geri getirmek, geri almak; (birini) geri çağırmak",
-  "usage_note_tr": "sich (Dat.) etwas zurückholen — bir şeyi (parayı, unvanı) geri almak. Ayrılabilen: holte zurück, hat zurückgeholt.",
+  "usage_note_tr": "sich (Dativ) etwas zurückholen — bir şeyi (parayı, unvanı) geri almak. Ayrılabilen: holte zurück, hat zurückgeholt.",
   "example_tr": "Satışlardaki ani düşüşten sonra firma eski genel müdürünü emeklilikten geri getirdi.",
   "complements": [
    {
@@ -25936,7 +25936,7 @@
   ],
   "reflexive": {
    "translation_tr": "bir şeyi (parayı, unvanı) geri almak",
-   "note_tr": "sich (D) etwas zurückholen"
+   "note_tr": "sich (Dativ) etwas zurückholen"
   },
   "_src": "f33cf0de",
   "_src_reader": "32e415ed"
@@ -25982,7 +25982,7 @@
  },
  "verb-2439": {
   "translation_tr": "istifa etmek, görevden çekilmek; geri çekilmek, geriye adım atmak; (sözleşmeden, haktan) caymak, vazgeçmek",
-  "usage_note_tr": "Bu anlamlarda ist ile. Bir şeyden vazgeçmek — von + Dat. (satın almaktan, yolculuktan). Ayrıca geri planda kalmak: hinter etwas zurücktreten. hat ile — karşılık olarak tekme atmak. Ayrılabilen, güçlü fiil: tritt zurück, trat zurück, ist zurückgetreten. der Rücktritt — istifa; cayma.",
+  "usage_note_tr": "Bu anlamlarda ist ile. Bir şeyden vazgeçmek — von + Dativ (satın almaktan, yolculuktan). Ayrıca geri planda kalmak: hinter etwas zurücktreten. hat ile — karşılık olarak tekme atmak. Ayrılabilen, güçlü fiil: tritt zurück, trat zurück, ist zurückgetreten. der Rücktritt — istifa; cayma.",
   "example_tr": "Yalnızca dört aydır görevde olan sağlık bakanı beklenmedik bir şekilde istifa etti.",
   "complements": [
    {
@@ -25999,7 +25999,7 @@
  },
  "verb-2440": {
   "translation_tr": "(kökenine kadar, geriye doğru) izini sürmek",
-  "usage_note_tr": "Nereye kadar — bis zu + Dat. / bis in + Akk. Ayrılabilen: verfolgte zurück, hat zurückverfolgt (ge- olmadan: ver- ayrılmayan ön ektir).",
+  "usage_note_tr": "Nereye kadar — bis zu + Dativ / bis in + Akkusativ Ayrılabilen: verfolgte zurück, hat zurückverfolgt (ge- olmadan: ver- ayrılmayan ön ektir).",
   "example_tr": "Soruşturmacılar isimsiz aramanın izini Hamburg'daki bir telefon kulübesine kadar sürebildi.",
   "complements": [
    {
@@ -26026,7 +26026,7 @@
  },
  "verb-2442": {
   "translation_tr": "çekilip gitmek, uzaklaşmak, inzivaya çekilmek; geri çekilmek (askerler için); (işlerden, toplum hayatından) çekilmek",
-  "usage_note_tr": "Nereden — aus + Dat.; nereye — in + Akk. zurückgezogen leben — inzivada yaşamak. Ayrılabilen, güçlü fiil: zog sich zurück, hat sich zurückgezogen. der Rückzug — geri çekilme; çekilme.",
+  "usage_note_tr": "Nereden — aus + Dativ; nereye — in + Akkusativ zurückgezogen leben — inzivada yaşamak. Ayrılabilen, güçlü fiil: zog sich zurück, hat sich zurückgezogen. der Rückzug — geri çekilme; çekilme.",
   "example_tr": "Oyuncu yetmiş yaşında toplum hayatından tamamen çekildi.",
   "complements": [
    {
@@ -26083,7 +26083,7 @@
  },
  "verb-2448": {
   "translation_tr": "(bir şeyden) oluşmak; (masa başında) bir araya gelmek, oturup konuşmak",
-  "usage_note_tr": "Bir şeyden — aus + Dat. Ayrıca bir şeyi konuşmak için bir araya gelmek: Setzen wir uns morgen in Ruhe zusammen. Ayrılabilen: setzte sich zusammen, hat sich zusammengesetzt. die Zusammensetzung — bileşim.",
+  "usage_note_tr": "Bir şeyden — aus + Dativ Ayrıca bir şeyi konuşmak için bir araya gelmek: Setzen wir uns morgen in Ruhe zusammen. Ayrılabilen: setzte sich zusammen, hat sich zusammengesetzt. die Zusammensetzung — bileşim.",
   "example_tr": "Elektrik fiyatı, vergiler ve şebeke ücretleri dâhil birçok ayrı kalemden oluşur.",
   "complements": [
    {
@@ -26248,7 +26248,7 @@
  },
  "verb-2462": {
   "translation_tr": "eğlendirmek, güldürmek, neşelendirmek",
-  "usage_note_tr": "sich amüsieren — eğlenmek, hoşça vakit geçirmek; über + Akk. — birine / bir şeye gülmek. Zayıf fiil, ge- olmadan: amüsierte, hat amüsiert. amüsiert — eğlenmiş, neşeli; amüsant — eğlenceli.",
+  "usage_note_tr": "sich amüsieren — eğlenmek, hoşça vakit geçirmek; über + Akkusativ — birine / bir şeye gülmek. Zayıf fiil, ge- olmadan: amüsierte, hat amüsiert. amüsiert — eğlenmiş, neşeli; amüsant — eğlenceli.",
   "example_tr": "Dedem akşam yemeğinde tatil hikâyeleriyle bütün aileyi eğlendirdi.",
   "_src": "6a3108f9",
   "_src_reader": "a3408f00"
@@ -26262,14 +26262,14 @@
  },
  "verb-2464": {
   "translation_tr": "(yargılamaya, karar vermeye) kalkışmak, (hakkı olmadan) kendine mal etmek",
-  "usage_note_tr": "Dönüşlü zamir Dativ'de: ich maße mir … an. Ne — Akk. ya da zu + Infinitiv: sich ein Recht anmaßen — bir hakkı kendine mal etmek. Ayrılabilen, zayıf fiil: maßte sich an, hat sich angemaßt. anmaßend — kibirli, küstah; die Anmaßung — küstahlık, haddini bilmezlik.",
+  "usage_note_tr": "Dönüşlü zamir Dativ'de: ich maße mir … an. Ne — Akkusativ ya da zu + Infinitiv: sich ein Recht anmaßen — bir hakkı kendine mal etmek. Ayrılabilen, zayıf fiil: maßte sich an, hat sich angemaßt. anmaßend — kibirli, küstah; die Anmaßung — küstahlık, haddini bilmezlik.",
   "example_tr": "Uzman olmadığım için bir doktorun teşhisini sorgulamaya asla kalkışmazdım.",
   "_src": "5d491b02",
   "_src_reader": "2d0a2fee"
  },
  "verb-2465": {
   "translation_tr": "hastalık bulaştırmak; (rozeti, broşu) iliştirmek, (yüzüğü) parmağına geçirmek; (yöresel) yakmak, tutuşturmak",
-  "usage_note_tr": "Ne ile — mit + Dat. Mec.: (kahkahasını, havasını) bulaştırmak, geçirmek: Ihre Begeisterung hat das ganze Team angesteckt. (yöresel) sich (Dat.) eine Zigarette anstecken — sigara yakmak. sich anstecken — hastalık kapmak. Ayrılabilen: steckte an, hat angesteckt. ansteckend — bulaşıcı; başkalarına da geçen.",
+  "usage_note_tr": "Ne ile — mit + Dativ Mec.: (kahkahasını, havasını) bulaştırmak, geçirmek: Ihre Begeisterung hat das ganze Team angesteckt. (yöresel) sich (Dativ) eine Zigarette anstecken — sigara yakmak. sich anstecken — hastalık kapmak. Ayrılabilen: steckte an, hat angesteckt. ansteckend — bulaşıcı; başkalarına da geçen.",
   "example_tr": "Dikkat et, öksürüğünle bütün sınıfa hastalık bulaştırma!",
   "complements": [
    {
@@ -26285,7 +26285,7 @@
  },
  "verb-2466": {
   "translation_tr": "hastalık kapmak",
-  "usage_note_tr": "Kimden — bei + Dat.; ne ile — mit + Dat. (mit Grippe, mit Corona). Ayrılabilen: steckte sich an, hat sich angesteckt. die Ansteckung — bulaşma; anstecken — hastalık bulaştırmak.",
+  "usage_note_tr": "Kimden — bei + Dativ; ne ile — mit + Dativ (mit Grippe, mit Corona). Ayrılabilen: steckte sich an, hat sich angesteckt. die Ansteckung — bulaşma; anstecken — hastalık bulaştırmak.",
   "example_tr": "Oğlum hastalığı muhtemelen bekleme odasında başka bir çocuktan kaptı.",
   "complements": [
    {
@@ -26327,7 +26327,7 @@
  },
  "verb-2469": {
   "translation_tr": "oluşmak, şekillenmek (karakter özellikleri, yetenekler için); (bir şeyde) kendini göstermek",
-  "usage_note_tr": "Neyde kendini göstermek — in + Dat. sich olmadan — (para) basmak; (yetenekleri) geliştirmek. ausgeprägt — belirgin, güçlü: ein ausgeprägtes Interesse für Musik. Ayrılabilen: prägte sich aus, hat sich ausgeprägt. die Ausprägung — ortaya çıkış; belirginlik derecesi.",
+  "usage_note_tr": "Neyde kendini göstermek — in + Dativ sich olmadan — (para) basmak; (yetenekleri) geliştirmek. ausgeprägt — belirgin, güçlü: ein ausgeprägtes Interesse für Musik. Ayrılabilen: prägte sich aus, hat sich ausgeprägt. die Ausprägung — ortaya çıkış; belirginlik derecesi.",
   "example_tr": "Onun adalet duygusu daha ilkokul yıllarında şekillendi.",
   "_src": "00a4854e",
   "_src_reader": "1a0c489a"
@@ -26369,7 +26369,7 @@
  },
  "verb-2475": {
   "translation_tr": "(yaz.) sarhoş etmek; (mec.) mest etmek, kendinden geçirmek",
-  "usage_note_tr": "sich berauschen — sarhoş olmak; an + Dat. — (başarıyla, fikirlerle) mest olmak. (konuş.) nicht berauschend — şöyle böyle, pek bir şey değil. Zayıf fiil, ge- olmadan: berauschte, hat berauscht. der Rausch — sarhoşluk; berauscht — sarhoş, kendinden geçmiş; berauschend — sarhoş edici, baş döndürücü.",
+  "usage_note_tr": "sich berauschen — sarhoş olmak; an + Dativ — (başarıyla, fikirlerle) mest olmak. (konuş.) nicht berauschend — şöyle böyle, pek bir şey değil. Zayıf fiil, ge- olmadan: berauschte, hat berauscht. der Rausch — sarhoşluk; berauscht — sarhoş, kendinden geçmiş; berauschend — sarhoş edici, baş döndürücü.",
   "example_tr": "Akşam yürüyüşümüzde çiçek açmış ıhlamurların kokusu bizi mest etti.",
   "reflexive": {
    "translation_tr": "sarhoş olmak; bir şeyle mest olmak",
@@ -26394,14 +26394,14 @@
  },
  "verb-2478": {
   "translation_tr": "sarsmak, şaşkına çevirmek, afallatmak",
-  "usage_note_tr": "Daha çok ortaç biçiminde: über + Akk. bestürzt sein — (bir şey karşısında) sarsılmak, şaşkına dönmek; bestürzend — sarsıcı. die Bestürzung — şaşkınlık, sarsıntı. Zayıf fiil, ge- olmadan: bestürzte, hat bestürzt.",
+  "usage_note_tr": "Daha çok ortaç biçiminde: über + Akkusativ bestürzt sein — (bir şey karşısında) sarsılmak, şaşkına dönmek; bestürzend — sarsıcı. die Bestürzung — şaşkınlık, sarsıntı. Zayıf fiil, ge- olmadan: bestürzte, hat bestürzt.",
   "example_tr": "Antrenörlerinin ani ölüm haberi bütün takımı sarstı.",
   "_src": "d2518471",
   "_src_reader": "421f5eb6"
  },
  "verb-2479": {
   "translation_tr": "işe yaradığını göstermek, kendini kanıtlamak, sınavdan başarıyla çıkmak",
-  "usage_note_tr": "Kim, ne olarak — als + Nom.: sich als Teamleiterin bewähren — ekip lideri olarak kendini kanıtlamak. bewährt — denenmiş, kanıtlanmış; die Bewährung — sınanma; (huk.) auf Bewährung — ertelemeli, şartlı. sich olmadan (esk.) — (cesaretini) kanıtlamak, göstermek. Zayıf fiil, ge- olmadan: bewährte sich, hat sich bewährt.",
+  "usage_note_tr": "Kim, ne olarak — als + Nominativ: sich als Teamleiterin bewähren — ekip lideri olarak kendini kanıtlamak. bewährt — denenmiş, kanıtlanmış; die Bewährung — sınanma; (huk.) auf Bewährung — ertelemeli, şartlı. sich olmadan (esk.) — (cesaretini) kanıtlamak, göstermek. Zayıf fiil, ge- olmadan: bewährte sich, hat sich bewährt.",
   "example_tr": "Bal ve limonlu eski ev ilacı soğuk algınlığında defalarca işe yaradığını gösterdi.",
   "complements": [
    {
@@ -26413,7 +26413,7 @@
  },
  "verb-2480": {
   "translation_tr": "büyülemek, hayran bırakmak",
-  "usage_note_tr": "Ne ile — mit + Dat. / durch + Akk. bezaubernd — büyüleyici; der Zauber — sihir, büyü. Zayıf fiil, ge- olmadan: bezauberte, hat bezaubert.",
+  "usage_note_tr": "Ne ile — mit + Dativ / durch + Akkusativ bezaubernd — büyüleyici; der Zauber — sihir, büyü. Zayıf fiil, ge- olmadan: bezauberte, hat bezaubert.",
   "example_tr": "Deniz kenarındaki küçük kasaba daha ilk akşam bizi büyüledi.",
   "_src": "8e23578c",
   "_src_reader": "a509befb"
@@ -26431,7 +26431,7 @@
  },
  "verb-2482": {
   "translation_tr": "tarihlendirmek (yapılış zamanını belirlemek); tarih atmak; (bir zamana) ait olmak",
-  "usage_note_tr": "Hangi zamana — auf + Akk. Ayrıca (mektuba, sözleşmeye) tarih atmak: ein Schreiben falsch datieren. Nesnesiz — aus + Dat. / von + Dat.: bir zamana ait olmak, bir zamandan kalma olmak. Zayıf fiil, ge- olmadan: datierte, hat datiert. das Datum — tarih.",
+  "usage_note_tr": "Hangi zamana — auf + Akkusativ Ayrıca (mektuba, sözleşmeye) tarih atmak: ein Schreiben falsch datieren. Nesnesiz — aus + Dativ / von + Dativ: bir zamana ait olmak, bir zamandan kalma olmak. Zayıf fiil, ge- olmadan: datierte, hat datiert. das Datum — tarih.",
   "example_tr": "Araştırmacılar ahşap kirişlere bakarak çiftlik evini 1612 yılına tarihlendirebildi.",
   "complements": [
    {
@@ -26536,7 +26536,7 @@
   "reflexive": {
    "translation_tr": "(yaz.) dehşete kapılmak",
    "example_tr": "Herkes bu haber karşısında dehşete kapıldı.",
-   "note_tr": "bir şey karşısında dehşete kapılmak — über + Akk.; bir şeyden dehşete düşmek — vor + Dat."
+   "note_tr": "bir şey karşısında dehşete kapılmak — über + Akkusativ; bir şeyden dehşete düşmek — vor + Dativ"
   },
   "see_also_tr": [
    {
@@ -26577,7 +26577,7 @@
  },
  "verb-2493": {
   "translation_tr": "şaşırtmak, hayrete düşürmek",
-  "usage_note_tr": "ist ile (daha nadiren) — şaşırmak, hayran kalmak (über + Akk.): Jedermann erstaunte über ihre Schönheit. — Herkes onun güzelliğine hayran kaldı. Bu anlamda ayrıca sich erstaunen (hat); gündelik dilde daha çok staunen, sich wundern. erstaunt — şaşkın: ich bin erstaunt — şaşırdım. erstaunlich — şaşırtıcı; das Erstaunen — şaşkınlık. Zayıf fiil, ge- olmadan: erstaunte, hat / ist erstaunt.",
+  "usage_note_tr": "ist ile (daha nadiren) — şaşırmak, hayran kalmak (über + Akkusativ): Jedermann erstaunte über ihre Schönheit. — Herkes onun güzelliğine hayran kaldı. Bu anlamda ayrıca sich erstaunen (hat); gündelik dilde daha çok staunen, sich wundern. erstaunt — şaşkın: ich bin erstaunt — şaşırdım. erstaunlich — şaşırtıcı; das Erstaunen — şaşkınlık. Zayıf fiil, ge- olmadan: erstaunte, hat / ist erstaunt.",
   "example_tr": "Değişim öğrencisi kusursuz Japoncasıyla bütün ev sahibi aileyi hayrete düşürdü.",
   "see_also_tr": [
    {
@@ -26602,7 +26602,7 @@
  },
  "verb-2495": {
   "translation_tr": "(birinden / bir şeyden) çekinmek, korkmak",
-  "usage_note_tr": "Korku duymak — sich fürchten (vor + Dat.). Ich fürchte, … — Korkarım ki … (kibarca, üzülerek): Ich fürchte, wir haben den letzten Bus verpasst. (esk.) saygıyla korkmak: Gott fürchten — Tanrı'dan korkmak. gefürchtet — korkulan, ürkütücü. Zayıf fiil: fürchtete, hat gefürchtet.",
+  "usage_note_tr": "Korku duymak — sich fürchten (vor + Dativ). Ich fürchte, … — Korkarım ki … (kibarca, üzülerek): Ich fürchte, wir haben den letzten Bus verpasst. (esk.) saygıyla korkmak: Gott fürchten — Tanrı'dan korkmak. gefürchtet — korkulan, ürkütücü. Zayıf fiil: fürchtete, hat gefürchtet.",
   "example_tr": "Kurak geçen bahardan sonra birçok çiftçi kötü bir hasattan korkuyor.",
   "complements": [
    {
@@ -26696,7 +26696,7 @@
  },
  "verb-2502": {
   "translation_tr": "enfekte etmek, hastalık bulaştırmak",
-  "usage_note_tr": "Her şeyden önce tıp terimi; gündelik dilde daha çok anstecken. sich infizieren (mit + Dat., bei + Dat.) — enfekte olmak, hastalık kapmak: Sie hat sich bei ihrem Bruder infiziert. Bilgisayarlar için de: mit einem Virus infiziert — virüs bulaşmış. die Infektion — enfeksiyon. Zayıf fiil, ge- olmadan: infizierte, hat infiziert.",
+  "usage_note_tr": "Her şeyden önce tıp terimi; gündelik dilde daha çok anstecken. sich infizieren (mit + Dativ, bei + Dativ) — enfekte olmak, hastalık kapmak: Sie hat sich bei ihrem Bruder infiziert. Bilgisayarlar için de: mit einem Virus infiziert — virüs bulaşmış. die Infektion — enfeksiyon. Zayıf fiil, ge- olmadan: infizierte, hat infiziert.",
   "example_tr": "Hasta tek bir çalışan bir hafta içinde ekibin yarısına hastalığı bulaştırdı.",
   "complements": [
    {
@@ -26705,7 +26705,7 @@
   ],
   "reflexive": {
    "translation_tr": "enfekte olmak",
-   "note_tr": "sich infizieren (mit + Dat., bei + Dat.)",
+   "note_tr": "sich infizieren (mit + Dativ, bei + Dativ)",
    "complements": [
     {
      "meaning_tr": "enfekte olmak",
@@ -26991,7 +26991,7 @@
  },
  "verb-2529": {
   "translation_tr": "(bir şeye) dişlerini geçirmek; (mec., konuş.) (bir işe) dört elle sarılmak, (bir şeyden) inatla vazgeçmemek",
-  "usage_note_tr": "Mec.: sich in eine Idee verbeißen — bir fikre inatla sarılmak. sich (Dat.) etwas verbeißen — (gülmeyi, acıyı) bastırmak, tutmak: Sie konnte sich ein Lächeln kaum verbeißen. sich olmadan (avcılık) — kemirip zarar vermek (av hayvanları için: genç ağaçlara). Güçlü fiil (beißen gibi): verbiss sich, hat sich verbissen; Konjunktiv II verbisse. verbissen — inatçı, hırslı.",
+  "usage_note_tr": "Mec.: sich in eine Idee verbeißen — bir fikre inatla sarılmak. sich (Dativ) etwas verbeißen — (gülmeyi, acıyı) bastırmak, tutmak: Sie konnte sich ein Lächeln kaum verbeißen. sich olmadan (avcılık) — kemirip zarar vermek (av hayvanları için: genç ağaçlara). Güçlü fiil (beißen gibi): verbiss sich, hat sich verbissen; Konjunktiv II verbisse. verbissen — inatçı, hırslı.",
   "example_tr": "Genç teriyer postacının paçasına dişlerini geçirmişti ve bırakmıyordu.",
   "complements": [
    {
@@ -27049,11 +27049,11 @@
  },
  "verb-2533": {
   "translation_tr": "geçmek (zaman için); geçmek, kaybolmak (duygu, ağrı, iştah için)",
-  "usage_note_tr": "Mir ist der Appetit vergangen — İştahım kaçtı. (yaz.) vor Angst / Sehnsucht vergehen — korkudan / özlemden ölmek. sich vergehen (hat) — (yasayı, kuralları) çiğnemek (gegen + Akk.); (başkasının malına) el uzatmak, zarar vermek (örn. çevreye) (an + Dat.); birine (cinsel) saldırıda bulunmak (an jemandem). Güçlü fiil (gehen gibi): verging, ist vergangen. vergangen — geçmiş, geçen; das Vergehen — kabahat, suç.",
+  "usage_note_tr": "Mir ist der Appetit vergangen — İştahım kaçtı. (yaz.) vor Angst / Sehnsucht vergehen — korkudan / özlemden ölmek. sich vergehen (hat) — (yasayı, kuralları) çiğnemek (gegen + Akkusativ); (başkasının malına) el uzatmak, zarar vermek (örn. çevreye) (an + Dativ); birine (cinsel) saldırıda bulunmak (an jemandem). Güçlü fiil (gehen gibi): verging, ist vergangen. vergangen — geçmiş, geçen; das Vergehen — kabahat, suç.",
   "example_tr": "Son sınıf buluşmamızdan bu yana neredeyse yirmi yıl geçti.",
   "reflexive": {
    "translation_tr": "(yasayı, kuralları) çiğnemek; birine (cinsel) saldırıda bulunmak",
-   "note_tr": "sich vergehen gegen + Akk. — (yasayı, kuralları) çiğnemek; sich an jemandem vergehen — birine (cinsel) saldırıda bulunmak"
+   "note_tr": "sich vergehen gegen + Akkusativ — (yasayı, kuralları) çiğnemek; sich an jemandem vergehen — birine (cinsel) saldırıda bulunmak"
   },
   "see_also_tr": [
    {
@@ -27066,11 +27066,11 @@
  },
  "verb-2534": {
   "translation_tr": "(konuş.) berbat etmek, batırmak, mahvetmek",
-  "usage_note_tr": "(konuş.) sich (Dat.) den Magen verkorksen — midesini bozmak. Zayıf fiil: verkorkste, hat verkorkst. verkorkst — berbat olmuş, başarısız.",
+  "usage_note_tr": "(konuş.) sich (Dativ) den Magen verkorksen — midesini bozmak. Zayıf fiil: verkorkste, hat verkorkst. verkorkst — berbat olmuş, başarısız.",
   "example_tr": "Sunumu batırdım, çünkü yanıma yanlış slaytları almıştım.",
   "reflexive": {
    "translation_tr": "(konuş.) midesini bozmak",
-   "note_tr": "sich (D) den Magen verkorksen"
+   "note_tr": "sich (Dativ) den Magen verkorksen"
   },
   "see_also_tr": [
    {
@@ -27200,7 +27200,7 @@
  },
  "verb-2549": {
   "translation_tr": "(yaz.) dolaşmak, gezinmek, ağır adımlarla yürümek",
-  "usage_note_tr": "sich wandeln — değişmek. (konuş., şaka yollu) ein wandelndes Lexikon — ayaklı ansiklopedi; wandelnd — ayaklı, yürüyen. hat ile (yaz.) — değiştirmek, dönüştürmek (in + Akk.). Zayıf fiil: wandelte, ist gewandelt; ich wandle.",
+  "usage_note_tr": "sich wandeln — değişmek. (konuş., şaka yollu) ein wandelndes Lexikon — ayaklı ansiklopedi; wandelnd — ayaklı, yürüyen. hat ile (yaz.) — değiştirmek, dönüştürmek (in + Akkusativ). Zayıf fiil: wandelte, ist gewandelt; ich wandle.",
   "example_tr": "Konserden sonra misafirler sohbet ederek ışıklandırılmış saray bahçesinde ağır adımlarla gezindi.",
   "_src": "38a0dcc5",
   "_src_reader": "c33dbfe4"
@@ -27339,7 +27339,7 @@
  },
  "verb-2576": {
   "translation_tr": "utanmak",
-  "usage_note_tr": "Schäm dich! — Hiç utanmıyor musun? (yaz.) Genitiv ile: sich seiner Tat schämen.",
+  "usage_note_tr": "Schäm dich! — Hiç utanmıyor musun? (yaz.) Genitiv'le: sich seiner Tat schämen.",
   "example_tr": "Utanmana gerek yok.",
   "complements": [
    {
@@ -27640,7 +27640,7 @@
  },
  "verb-2618": {
   "translation_tr": "çatlatmak; (yeni bir şişeye, pakete) başlamak, (şişeyi, paketi) açmak",
-  "usage_note_tr": "Kendine — Dativ ile: Ich habe mir den Finger angebrochen. — Parmağımda çatlak var. Başlamak: Er brach eine neue Flasche an. — Yeni bir şişe açtı. Gelmek (gün için) — Perfekt sein ile.",
+  "usage_note_tr": "Kendine — Dativ'le: Ich habe mir den Finger angebrochen. — Parmağımda çatlak var. Başlamak: Er brach eine neue Flasche an. — Yeni bir şişe açtı. Gelmek (gün için) — Perfekt sein ile.",
   "example_tr": "Bacak kemiğini çatlattı.",
   "complements": [
    {
@@ -27655,7 +27655,7 @@
  },
  "verb-2624": {
   "translation_tr": "düşünmek, düşünüp taşınmak; (bir şeyi) hatırlamak; kendine gelmek, aklını başına almak",
-  "usage_note_tr": "Hatırlamak — auf + Akk. (yaz. + Gen.): Ich besinne mich nicht auf seinen Namen. sich anders besinnen — fikrini değiştirmek. Güçlü fiil: besann, hat besonnen.",
+  "usage_note_tr": "Hatırlamak — auf + Akkusativ (yaz. + Genitiv): Ich besinne mich nicht auf seinen Namen. sich anders besinnen — fikrini değiştirmek. Güçlü fiil: besann, hat besonnen.",
   "example_tr": "Biraz düşündü, sonra “evet” dedi.",
   "complements": [
    {
@@ -27775,7 +27775,7 @@
   "reflexive": {
    "translation_tr": "ısınmak",
    "example_tr": "İçeri gel ve sobanın başında ısın!",
-   "note_tr": "Kendine — Dativ ile: sich (Dativ) die Hände wärmen — ellerini ısıtmak."
+   "note_tr": "Kendine — Dativ'le: sich (Dativ) die Hände wärmen — ellerini ısıtmak."
   },
   "_src": "05d38a82",
   "_src_reader": "73eeb55a"
@@ -27787,7 +27787,7 @@
   "reflexive": {
    "translation_tr": "(bir yere gitmeye) cesaret etmek, (bir şeye) girişmek",
    "example_tr": "O fırtınada kimse sokağa çıkmaya cesaret edemedi.",
-   "note_tr": "Nereye, neye — an / auf / in + Akk.: sich an eine schwierige Aufgabe wagen — zor bir işe girişmek."
+   "note_tr": "Nereye, neye — an / auf / in + Akkusativ: sich an eine schwierige Aufgabe wagen — zor bir işe girişmek."
   },
   "_src": "a67e0460",
   "_src_reader": "f24e2a08"
@@ -27865,7 +27865,7 @@
   "reflexive": {
    "translation_tr": "kaşınmak",
    "example_tr": "Köpek sürekli kulağının arkasını kaşıyor.",
-   "note_tr": "Nerede — an + Dativ: sich am Kopf kratzen; Dativ ile: sich (Dativ) den Kopf kratzen — kafasını kaşımak."
+   "note_tr": "Nerede — an + Dativ: sich am Kopf kratzen; Dativ'le: sich (Dativ) den Kopf kratzen — kafasını kaşımak."
   },
   "_src": "af42e2eb",
   "_src_reader": "98d61af4"
@@ -27954,7 +27954,7 @@
   "reflexive": {
    "translation_tr": "(yaz.) (biriyle / bir şeyle) ilgilenmek, (biri / bir şey için) kaygılanmak",
    "example_tr": "Başkalarının fikriyle hiç ilgilenmedi.",
-   "note_tr": "Kiminle, neyle — um + Akk. Bugün genellikle sich kümmern um."
+   "note_tr": "Kiminle, neyle — um + Akkusativ Bugün genellikle sich kümmern um."
   },
   "_src": "b1ca229c",
   "_src_reader": "4ab1d868"
@@ -27966,7 +27966,7 @@
   "reflexive": {
    "translation_tr": "(bir şeye) direnmek, ayak diremek; diken diken olmak (saç, tüy için)",
    "example_tr": "Çocuk banyo yapmamak için var gücüyle ayak diredi.",
-   "note_tr": "Neye karşı — gegen + Akk. Diken diken olmak: Mir sträubten sich die Haare. — Tüylerim diken diken oldu.",
+   "note_tr": "Neye karşı — gegen + Akkusativ Diken diken olmak: Mir sträubten sich die Haare. — Tüylerim diken diken oldu.",
    "complements": [
     {
      "meaning_tr": "(bir şeye) direnmek, ayak diremek",
@@ -28089,7 +28089,7 @@
  },
  "verb-2673": {
   "translation_tr": "(bir şeyden) sorumlu tutmak",
-  "usage_note_tr": "Ayrı yazılır: macht haftbar, hat haftbar gemacht. Neyden — für + Akk.",
+  "usage_note_tr": "Ayrı yazılır: macht haftbar, hat haftbar gemacht. Neyden — für + Akkusativ",
   "example_tr": "Ev sahibi zarardan sorumlu tutuldu.",
   "complements": [
    {
@@ -28134,7 +28134,7 @@
  },
  "verb-2679": {
   "translation_tr": "(birinden / bir şeyden) zararını çıkarmak, kaybını karşılamak; (bir şeyle) acısını çıkarmak, açığını kapatmak",
-  "usage_note_tr": "Ayrı yazılır: hält sich schadlos, hat sich schadlos gehalten. Kimden, neyden, neyle — an + Dativ, ne için — für + Akk. Acısını çıkarmak: Nach der Diät hielt er sich am Buffet schadlos. — Diyetten sonra açık büfede acısını çıkardı.",
+  "usage_note_tr": "Ayrı yazılır: hält sich schadlos, hat sich schadlos gehalten. Kimden, neyden, neyle — an + Dativ, ne için — für + Akkusativ Acısını çıkarmak: Nach der Diät hielt er sich am Buffet schadlos. — Diyetten sonra açık büfede acısını çıkardı.",
   "example_tr": "Arızadan sonra firma kaybını sigortadan karşıladı.",
   "complements": [
    {
@@ -28224,14 +28224,14 @@
  },
  "verb-2690": {
   "translation_tr": "dönüş yolunu bulmak; (bir şeye) geri dönmek",
-  "usage_note_tr": "Ayrılabilen: findet zurück, fand zurück, hat zurückgefunden. Nereye — zu + Dat. / in + Akk.; ayrıca den Weg zurückfinden: zu sich selbst zurückfinden — yeniden kendini bulmak.",
+  "usage_note_tr": "Ayrılabilen: findet zurück, fand zurück, hat zurückgefunden. Nereye — zu + Dativ / in + Akkusativ; ayrıca den Weg zurückfinden: zu sich selbst zurückfinden — yeniden kendini bulmak.",
   "example_tr": "Harita olmadan otele dönüş yolunu asla bulamazdık.",
   "_src": "e22fcab2",
   "_src_reader": "d4fc1ea1"
  },
  "verb-2691": {
   "translation_tr": "(değerlendirmeye, hesaba) dâhil etmek; (birini bir işe) katmak, (birinin) katılımını sağlamak",
-  "usage_note_tr": "Ayrılabilen: bezieht mit ein, bezog mit ein, hat miteinbezogen (ayrıca: mit einbezogen). Neye — in + Akk.: jemanden in die Planung miteinbeziehen. einbeziehen ile aynı anlamdadır.",
+  "usage_note_tr": "Ayrılabilen: bezieht mit ein, bezog mit ein, hat miteinbezogen (ayrıca: mit einbezogen). Neye — in + Akkusativ: jemanden in die Planung miteinbeziehen. einbeziehen ile aynı anlamdadır.",
   "example_tr": "Bu karara çocukları da katmalıyız.",
   "_src": "14508475",
   "_src_reader": "b53f034a"
@@ -28341,7 +28341,7 @@
  },
  "verb-2703": {
   "translation_tr": "oturduğu yerde kalmak; (okul) sınıfta kalmak",
-  "usage_note_tr": "Ayrılabilen: bleibt sitzen, blieb sitzen, ist sitzengeblieben (gerçek anlamda ayrı yazılır: sitzen bleiben; “sınıfta kalmak” anlamında bitişik ya da ayrı yazılır). (konuş.) auf etwas (Dat.) sitzen bleiben — bir şeyi satamamak, elinde kalmak: auf seiner Ware sitzen bleiben.",
+  "usage_note_tr": "Ayrılabilen: bleibt sitzen, blieb sitzen, ist sitzengeblieben (gerçek anlamda ayrı yazılır: sitzen bleiben; “sınıfta kalmak” anlamında bitişik ya da ayrı yazılır). (konuş.) auf etwas (Dativ) sitzen bleiben — bir şeyi satamamak, elinde kalmak: auf seiner Ware sitzen bleiben.",
   "example_tr": "Lütfen uçak tamamen durana kadar yerlerinizden kalkmayın.",
   "_src": "57c1fa72",
   "_src_reader": "7327680b"
@@ -28394,12 +28394,12 @@
  },
  "verb-2709": {
   "translation_tr": "dolamak, sarmak; (bir şeye) sarmak, paketlemek; (bebeği) kundaklamak, (bebeğin) bezini değiştirmek",
-  "usage_note_tr": "Neye (sarmak) — in + Akk.: in Papier wickeln; neyin etrafına — um + Akk.: die Schnur um den Finger wickeln. jemanden um den (kleinen) Finger wickeln — birini parmağında oynatmak.",
+  "usage_note_tr": "Neye (sarmak) — in + Akkusativ: in Papier wickeln; neyin etrafına — um + Akkusativ: die Schnur um den Finger wickeln. jemanden um den (kleinen) Finger wickeln — birini parmağında oynatmak.",
   "example_tr": "Hediyeyi renkli kâğıda sardı.",
   "reflexive": {
    "translation_tr": "dolanmak, sarılmak (ip, bitki için); (bir şeye) sarınmak",
    "example_tr": "Yılan dala dolandı.",
-   "note_tr": "Neyin etrafına — um + Akk.; neye — in + Akk.: sich in eine Decke wickeln — battaniyeye sarınmak."
+   "note_tr": "Neyin etrafına — um + Akkusativ; neye — in + Akkusativ: sich in eine Decke wickeln — battaniyeye sarınmak."
   },
   "_src": "56b1fba6",
   "_src_reader": "c712e9a8"
@@ -28463,21 +28463,21 @@
  },
  "verb-2715": {
   "translation_tr": "(birinin) arkasından, yanında, önünde yürümek; (kişisiz) es geht hoch her — ortalık çok şenlikli, coşkulu bir eğlence var; es geht hart her — işler çetin, durum zorlu",
-  "usage_note_tr": "Ayrılabilen: geht her, ging her, ist hergegangen. Nerede — hinter / neben / vor + Dat.: Er ging hinter ihr her. Kişisiz: Auf dem Fest ging es hoch her. Bei der Schlacht ist es hart hergegangen.",
+  "usage_note_tr": "Ayrılabilen: geht her, ging her, ist hergegangen. Nerede — hinter / neben / vor + Dativ: Er ging hinter ihr her. Kişisiz: Auf dem Fest ging es hoch her. Bei der Schlacht ist es hart hergegangen.",
   "example_tr": "Küçük köpek bütün yol boyunca arkamızdan yürüdü.",
   "_src": "35d8f53b",
   "_src_reader": "25a237e6"
  },
  "verb-2716": {
   "translation_tr": "(birinin / bir şeyin) arkasından, yanında, önünde koşmak; (buraya) koşarak gelmek, koşup yanına gelmek",
-  "usage_note_tr": "Ayrılabilen: läuft her, lief her, ist hergelaufen. Kimin arkasından — hinter + Dat.: Der Hund lief hinter dem Ball her. Ayrıca neben / vor + Dat. — yanında, önünde. Konuşma dilinde: hinter jemandem herlaufen — birinin peşinden koşmak (gönlünü kazanmaya çalışmak).",
+  "usage_note_tr": "Ayrılabilen: läuft her, lief her, ist hergelaufen. Kimin arkasından — hinter + Dativ: Der Hund lief hinter dem Ball her. Ayrıca neben / vor + Dativ — yanında, önünde. Konuşma dilinde: hinter jemandem herlaufen — birinin peşinden koşmak (gönlünü kazanmaya çalışmak).",
   "example_tr": "Çocuklar gülerek köpeğin arkasından koştu.",
   "_src": "34c83d08",
   "_src_reader": "a0157e39"
  },
  "verb-2717": {
   "translation_tr": "(birinin / bir şeyin) arkasından, önünde, yanında uçmak; (buraya) uçarak gelmek",
-  "usage_note_tr": "Ayrılabilen: fliegt her, flog her, ist hergeflogen. Nerede — hinter / vor / neben + Dat.: Die Möwen flogen hinter dem Schiff her.",
+  "usage_note_tr": "Ayrılabilen: fliegt her, flog her, ist hergeflogen. Nerede — hinter / vor / neben + Dativ: Die Möwen flogen hinter dem Schiff her.",
   "example_tr": "Martılar balıkçı teknesinin arkasından uçuyordu.",
   "_src": "0bdcae44",
   "_src_reader": "8c858ea8"
@@ -28496,7 +28496,7 @@
  },
  "verb-2719": {
   "translation_tr": "(bir şeyi) kabul etmek, (bir şeye) hak vermek; (hakkı, indirimi) tanımak, vermek",
-  "usage_note_tr": "Ayrılabilen: gesteht zu, gestand zu, hat zugestanden (Partizip biçimi zustehen — hakkı olmak — fiilininkiyle aynıdır). Kime ne — Dativ + Akkusativ: jemandem ein Recht zugestehen. zugestehen, dass … — … olduğunu kabul etmek. sich (Dat.) etwas zugestehen — kendine bir şeye izin vermek: sich eine Pause zugestehen.",
+  "usage_note_tr": "Ayrılabilen: gesteht zu, gestand zu, hat zugestanden (Partizip biçimi zustehen — hakkı olmak — fiilininkiyle aynıdır). Kime ne — Dativ + Akkusativ: jemandem ein Recht zugestehen. zugestehen, dass … — … olduğunu kabul etmek. sich (Dativ) etwas zugestehen — kendine bir şeye izin vermek: sich eine Pause zugestehen.",
   "example_tr": "Hakkını teslim etmek gerek: çok uğraştı.",
   "complements": [
    {
@@ -28508,7 +28508,7 @@
   ],
   "reflexive": {
    "translation_tr": "kendine bir şeye izin vermek",
-   "note_tr": "sich (D) etwas zugestehen"
+   "note_tr": "sich (Dativ) etwas zugestehen"
   },
   "_src": "9efa54a0",
   "_src_reader": "cab1a0f3"
@@ -28691,7 +28691,7 @@
   "_src_reader": "078f25d0"
  },
  "verb-2743": {
-  "translation_tr": "boşaltmak, salmak (suyu, havayı, buharı); indirim yapmak, düşmek (fiyattan); (yaz., von + Dat.) (bir şeyden) vazgeçmek, (birinin) peşini bırakmak",
+  "translation_tr": "boşaltmak, salmak (suyu, havayı, buharı); indirim yapmak, düşmek (fiyattan); (yaz., von + Dativ) (bir şeyden) vazgeçmek, (birinin) peşini bırakmak",
   "usage_note_tr": "Ayrılabilen: lässt ab, ließ ab, hat abgelassen. Boşaltmak — Akkusativ: das Wasser aus der Wanne ablassen. Fiyattan: Er hat mir zehn Euro abgelassen. — Bana on avro indirim yaptı. Dampf ablassen — buhar salmak (mecaz anlamda da: içini boşaltmak, öfkesini çıkarmak). Peşini bırakmak (yaz.) — von + Dativ: Er ließ nicht von ihr ab. — Onun peşini bırakmadı.",
   "example_tr": "Küveti temizlemeden önce suyu boşaltman gerekiyor.",
   "complements": [
@@ -28703,7 +28703,7 @@
    },
    {
     "note_tr": "(yaz.) bir şeyden vazgeçmek, birinin peşini bırakmak",
-    "meaning_tr": "(yaz., von + Dat.) (bir şeyden) vazgeçmek, (birinin) peşini bırakmak"
+    "meaning_tr": "(yaz., von + Dativ) (bir şeyden) vazgeçmek, (birinin) peşini bırakmak"
    },
    {
     "meaning_tr": "boşaltmak, salmak (suyu, havayı, buharı)",
@@ -28828,7 +28828,7 @@
  },
  "verb-2780": {
   "translation_tr": "(iterek) yere düşürmek",
-  "usage_note_tr": "Konuşma dilinde kullanılır. Ayrılabilen: rempelt um, rempelte um, hat umgerempelt. Her zaman Akkusativ ile (kimi). Krş. anrempeln — itip kakmak, omuz atmak.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. Ayrılabilen: rempelt um, rempelte um, hat umgerempelt. Her zaman Akkusativ'le (kimi). Krş. anrempeln — itip kakmak, omuz atmak.",
   "example_tr": "Kalabalıkta büyük bavullu bir adam az kalsın beni yere düşürüyordu.",
   "complements": [
    {
@@ -28855,14 +28855,14 @@
  },
  "verb-2782": {
   "translation_tr": "rota değiştirmek (mec.), yön değiştirmek",
-  "usage_note_tr": "Genellikle nesnesiz, mecaz anlamda (siyaset, ekonomi). Ayrılabilen: steuert um, steuerte um, hat umgesteuert. Akkusativ ile de (tekn.): die Drehrichtung umsteuern — dönüş yönünü değiştirmek; den Verkehr umsteuern — trafiği başka yöne yönlendirmek.",
+  "usage_note_tr": "Genellikle nesnesiz, mecaz anlamda (siyaset, ekonomi). Ayrılabilen: steuert um, steuerte um, hat umgesteuert. Akkusativ'le de (tekn.): die Drehrichtung umsteuern — dönüş yönünü değiştirmek; den Verkehr umsteuern — trafiği başka yöne yönlendirmek.",
   "example_tr": "Seçimden sonra hükûmet enerji politikasında rota değiştirmek zorunda kaldı.",
   "_src": "b0858437",
   "_src_reader": "60d7ad60"
  },
  "verb-2783": {
   "translation_tr": "budamak, kırpmak (kısaltmak)",
-  "usage_note_tr": "Ayrılabilen: stutzt ab, stutzte ab, hat abgestutzt. Her zaman Akkusativ ile: die Hecke, den Bart, die Äste abstutzen. Benzer: stutzen, kürzen.",
+  "usage_note_tr": "Ayrılabilen: stutzt ab, stutzte ab, hat abgestutzt. Her zaman Akkusativ'le: die Hecke, den Bart, die Äste abstutzen. Benzer: stutzen, kürzen.",
   "example_tr": "Sonbaharda bahçıvan çiti güzelce budadı.",
   "complements": [
    {
@@ -28874,7 +28874,7 @@
  },
  "verb-2787": {
   "translation_tr": "sonradan gelmek, arkadan gelmek; (birine, tempoya) yetişmek; (yaz.) (bir talebi) yerine getirmek",
-  "usage_note_tr": "“arkadan gelmek” — genellikle nesnesiz: Ich komme gleich nach (er kam ihr nach — onun arkasından gitti). “yetişmek”: Bei diesem Tempo kommt keiner nach. “yerine getirmek” (yaz.) — Dativ ile: Er ist seiner Pflicht nicht nachgekommen. — Görevini yerine getirmedi. (einer Bitte, einer Forderung, einem Wunsch nachkommen)",
+  "usage_note_tr": "“arkadan gelmek” — genellikle nesnesiz: Ich komme gleich nach (er kam ihr nach — onun arkasından gitti). “yetişmek”: Bei diesem Tempo kommt keiner nach. “yerine getirmek” (yaz.) — Dativ'le: Er ist seiner Pflicht nicht nachgekommen. — Görevini yerine getirmedi. (einer Bitte, einer Forderung, einem Wunsch nachkommen)",
   "example_tr": "Siz önden gidin, ben yarım saat sonra gelirim.",
   "complements": [
    {
@@ -29048,7 +29048,7 @@
  },
  "verb-2800": {
   "translation_tr": "(masayı, yeri) silmek, silip temizlemek; (tozu) almak, (gözyaşlarını) silmek; (bir şeyin üzerinde) elini gezdirmek; (sein ile) (bir yere) süzülmek, fırlamak",
-  "usage_note_tr": "Staub wischen — toz almak; sich (D) den Schweiß von der Stirn wischen — alnındaki teri silmek; (über den Bildschirm) wischen — (ekranda) parmağını kaydırmak. “(sein ile) (bir yere) süzülmek, fırlamak” anlamında — Perfekt sein ile: Die Katze ist ins Zimmer gewischt. — Kedi odaya süzülüverdi.",
+  "usage_note_tr": "Staub wischen — toz almak; sich (Dativ) den Schweiß von der Stirn wischen — alnındaki teri silmek; (über den Bildschirm) wischen — (ekranda) parmağını kaydırmak. “(sein ile) (bir yere) süzülmek, fırlamak” anlamında — Perfekt sein ile: Die Katze ist ins Zimmer gewischt. — Kedi odaya süzülüverdi.",
   "example_tr": "Yemekten sonra Paul her zaman masayı siler.",
   "_src": "f50fee41",
   "_src_reader": "ca6bc0ca"

@@ -48,7 +48,7 @@
 - Немецкие слова и примеры (в `<i>…</i>` и без), пробелы `{{c1::…}}`, теги, места подстановки, «→», «/», «·».
 - Немецкие грамматические термины, которые RU оставляет по-немецки: *Präsens, Präteritum, Perfekt, Plusquamperfekt, Futur I / II, Partizip I / II, Konjunktiv I / II, Imperativ, Infinitiv, Plural, Singular, Passiv, Zustandspassiv, Wechselpräposition, sich, trennbar / untrennbar* — с заглавной; аффикс — только по §0а.
 - **Немецкие падежи — всегда по-немецки**, даже если RU пишет «дательный» (184), «винительный» (29), «родительный» (19): *Dativ, Akkusativ, Genitiv, Nominativ* (*Dativ'de, Akkusativ'i*). Турецкие названия падежей — только о турецком падеже (§6).
-- «дат. п. / вин. п. / род. п.» → *Dat. / Akk. / Gen.*; «(D)» в шаблонах — как в исходнике.
+- **Всегда полным словом** — *Dativ, Akkusativ, Genitiv, Nominativ*: и «дат. п. / вин. п. / род. п.», и «Dat. / Akk.», и «(D) / (A)» в управлении (*sich (D)* → *sich (Dativ)*). Сокращений *Dat., Akk., Gen., Nom.* и *(D), (A)* в пакете нет. Решение Алёны 28.11.
 - Названия разделов: *Wortschatz, Wörterbuch, Bibliothek, Notizbuch, Partikeln, Artikel, Verbformen, Modalverben, Pronomen, Präpositionen, Meine Wörter, Einstellungen…* (немецкие надписи не переводятся ни на какой язык).
 
 ## 2. Обращение, род
@@ -109,12 +109,25 @@
 | поэт. | | **şiir dili**; в связном тексте — *şiir dilinde* | |
 | реже / (реже) | | **daha nadiren** | рядом с *nadiren* (редко) |
 | в деловой речи | | **iş dilinde** (*resmî* — только «офиц.») | |
+| мор. / кул. / грамм. / горн. / театр. / религ. / фин. / электр. / стат. | | **denizcilik / mutfak / dil bilgisi / madencilik / tiyatro / din / finans / elektrik / istatistik** — словом | 28.11, С11 |
+| бот. / хим. | | **bot. / kim.** | TDK |
+| космос / о телефоне / карт. / ТВ / почт. / школ. | | **uzay / telefon / iskambil / televizyon / posta / okul** | 28.11, С11–С12 |
+| полигр. / издат. | | **matbaacılık / yayıncılık** (разные пометы: печать ≠ издательское дело) | 28.11 |
+| ремесло / альп. | | **zanaat / dağcılık** | 28.11, С12 |
+| молодёжн. | | **gençlik dili**; с «разг.» — *(konuş., gençlik dili)* | 28.11 |
+| солд. | | **asker argosu** (как «воен. жарг.») | 28.11 |
+| торжеств. | | **törensel üslupta** | 28.11 |
+| под влиянием английского / англицизм | | **(İngilizcenin etkisiyle)** / *İngilizceden alınma bir kelime* | 28.11 |
+| нейтр. (о стиле) | | **nötr üslupta**: в скобках *(nötr üslup)*; «Нейтр.» отдельным предложением — *Nötr üslupta kullanılır.*; «Нейтрально: X» — *Nötr üslupta: X*; «Нейтральнее:» — *Daha nötr üslupta:*; в связном тексте упражнений — *üslup bakımından nötr*. **Не *yansız*** (это «беспристрастный»). *nötr* без *üslup* — только «средний род» | один вид для обоих чатов, 28.11 |
+| (о вещах) / (по частям) / (недовольно) | | **(eşyalar için) / (ayrı kelimeler olarak) / hoşnutsuzlukla** | 28.11, С9 |
+| обычно с отрицанием | | **genellikle olumsuz cümlede** (*olumsuzlukla* — «с негативом», не годится; *olumsuz* — помета «неодобр.») | 28.11, С9 |
+| (это не выражение) / (другое выражение) | | **kalıp ifade değil / (başka bir ifade)** | 28.11, С9 |
 | прил. / нареч. | 37 / 6 | **sıf. / zf.** | TDK |
 | мн. ч. / ед. ч. | 204 / 10 | **çoğ. / tekil** | «ед. ч.» — словом *tekil*, «тех.» — *tekn.*; *tek.* больше не используется (в старых карточках оно значило и то, и другое — 27.11) |
 | Plural (немецкое слово в RU) | 226 | **Plural** | |
 | см. / ср., Ср. / Сравните | 14 / 212 / 10 | **bkz. / krş. / Karşılaştır:** | |
 | и т. п. / напр. / в т. ч. | 23 / 7 / … | **vb. / örn. / … dâhil** | TDK пишет *dâhil* (решение 27.11; было *dahil*) |
-| букв. / буквально | 61 | **kelimesi kelimesine** | **Н3** (*kelime / sözcük*) |
+| букв. / буквально | 61 | перевод по частям — **kelimesi kelimesine**; «в прямом смысле» (против перен.) — **(gerçek anlamda)** | **Н3** (*kelime / sözcük*); разведено 28.11 |
 | (о человеке) / (о людях) / (о времени) / (о продуктах) | | **(kişi için) / (insanlar için) / (zaman için) / (yiyecekler için)** | было *(insan için)* |
 | (отдельная карточка) | — | **(ayrı madde)** | |
 | (женщина) / EN (female) | 147 | **(kadın)** — см. §8 | |
@@ -133,6 +146,10 @@
 | «Произносится:» / «Основное написание:» | *Okunuşu:* / *Asıl yazımı:* |
 | «Кратко:» | о краткой форме слова — *Kısa biçimi:*; «короче говоря» — *Kısaca:* |
 | «Поговорка:» | *Deyim:* (*Atasözü:* — только «Пословица:») |
+| «Устар.:» / «Перен.:» / «Религ.:» в начале | *Esk.:* / *Mec.:* / *Dinde:* (как *Ekonomide:*) — 28.11 |
+| «Пассив:» / «Так же …» в начале | *Edilgen çatı:* / *Aynı şekilde …* — 28.11 |
+| «Отделяемый / Неотделяемый, сильный / слабый:» | *Ayrılabilen / Ayrılmayan, güçlü / zayıf fiil:* — всегда через запятую; *güçlü / kuvvetli* — по ответу носителя на Н5, заменить поиском |
+| «с hat / с ist» | *hat ile / ist ile* (немецкое слово без аффикса, §11) |
 
 ## 4. Управление: «что-либо, кого-либо» (≈ 5 500 мест)
 
