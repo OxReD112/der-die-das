@@ -78,7 +78,8 @@
   const packByMarks = (candidate, language) => {
     const m = candidate.senseMark, pack = candidate.packItem?.[language];
     // (field item — complements; sense — sense_marks, a meaning a rule shows first by the sentence)
-    if (!m || !['item','sense'].includes(m.field) || !pack || !ownCard(candidate)) return '';
+    // (28.11.2026: field light — the pairs of a light record, its complements; the record's pack text is read — lightWithPack)
+    if (!m || !pack || !(['item','sense'].includes(m.field) && ownCard(candidate) || m.field === 'light' && lightWithPack(candidate, language))) return '';
     const text = String(pack[`translation_${language}`] || '').trim(), mine = String(candidate.translation?.[language] || '').trim();
     if (!text || text !== mine) return '';
     const at = markedSenses(text, (m.rows || []).map(i => ((m.field === 'sense' ? pack.sense_marks : pack.complements) || [])[i]), m.mode, language);
@@ -120,7 +121,10 @@
     Array.isArray(c?.sensesLastEn) && c.sensesLastEn.length > 0;
   // (by the number of the meaning) an own card whose pack text has as many meanings as its English (and Russian)
   // one: the meaning the resolver proved has the same number in the pack — the pack's card is built, its meanings in that order
-  const byNumber = (c, language) => { if (!isPack(language) || !c || !ownCard(c)) return false;
+  // (28.11.2026) … and an external reading under a light record with the record's own pack text (candidate.light, candidate.packItem —
+  // pack-translations.js): its meanings are counted the same way
+  const lightWithPack = (c, language) => c?.source === 'fallback' && typeof c.light === 'string' && !!c.packItem?.[language];
+  const byNumber = (c, language) => { if (!isPack(language) || !c || !ownCard(c) && !lightWithPack(c, language)) return false;
     const mine = String(c.translation?.[language] || '').trim();
     if (!mine || mine !== String(c.packItem?.[language]?.[`translation_${language}`] || '').trim()) return false;
     const n = meaningParts(c.translation?.en || '').length, ru = String(c.translation?.ru || '').trim();
@@ -1575,10 +1579,11 @@
         text:L(directionLanguage, '(уст.) отправиться, забраться (куда-либо)', '(dated) to go, to make one\'s way (somewhere)'), textLanguage:directionLanguage, missing:false, derived:true, note:rest.note || '', more:0};
     }
     // The card that holds the field `reflexive`: our card, a light record itself (sich scheuen «бояться, стесняться», sich erwärmen),
-    // or our card of the same verb. (A pack language reads no light record's pack texts in the reader — pack-translations.js enrichOwn
-    // fills our cards only —: a light record with the pack dictionary's own marked senses keeps them; without them — the field, as
-    // the English card.)
-    const lightField = !(isPack(language) && candidate.reflexiveMarks?.[language]) && candidate.light != null && candidate.reflexive && typeof candidate.reflexive === 'object';
+    // or our card of the same verb. (A pack language, 28.11.2026: the record's pack texts are read — pack-translations.js enrichOwn,
+    // candidate.packItem —: the field's own pack text is the card of «sich X»; a record without it keeps the pack dictionary's own
+    // marked senses, and without them too — the field, as the English card.)
+    const lightFieldPack = isPack(language) && lightWithPack(candidate, language) && !!String(candidate.packItem[language].reflexive?.[`translation_${language}`] || '').trim();
+    const lightField = !(isPack(language) && candidate.reflexiveMarks?.[language] && !lightFieldPack) && candidate.light != null && candidate.reflexive && typeof candidate.reflexive === 'object';
     const ownItem = candidate.item || (lightField ? candidate : options.lookup ? options.lookup({word:lemma, type:'Verb'}) : null);
     // (a field marked "direction" with no direction group — as no field: the external marks too)
     const fieldItem = ownItem?.reflexive;
@@ -1604,7 +1609,10 @@
       // (a pack language: whether the marked senses are the card is decided by the English marks, as the English card
       // too; the text is the pack's marked senses when it has them, otherwise the English ones)
       const own = markedSenses(language), decided = isPack(language) ? markedSenses('en') : own;
-      if (decided.length) {
+      // (28.11.2026) a light record reflexive as a whole (reflexive: true) with its own pack text: the marks of the English dictionary
+      // are the record's own meanings — the pack's text of the record is shown below as the meaning of «sich X», not the English marks
+      const lightOwn = isPack(language) && !own.length && candidate.reflexive === true && lightWithPack(candidate, language) && !!String(candidate.translation?.[language] || '').trim();
+      if (decided.length && !lightOwn) {
         const shownLanguage = own.length ? language : 'en', shown = fit((own.length ? own : decided).join('; '));
         const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
         return {...rest, heading:`sich ${lemma}`, grammar:rest.grammar.split(' · ').map(m => m.replace(` mit ${lemma}`, ` mit sich ${lemma}`)).join(' · '),
@@ -1630,7 +1638,7 @@
     // (a pack language: the field's text of the pack when the field is this card's own — candidate.packItem, Ч2б; otherwise the English
     // one, as an English card)
     // (a candidate of the external dictionary whose field is its own card's — that card's pack texts, candidate.packOwnVerb)
-    const packField = !isPack(language) || !field ? null : ownItem === candidate.item ? candidate.packItem?.[language]?.reflexive :
+    const packField = !isPack(language) || !field ? null : ownItem === candidate.item || ownItem === candidate && lightFieldPack ? candidate.packItem?.[language]?.reflexive :
       ownItem && ownItem !== candidate && candidate.packOwnVerb?.[language]?.id === ownItem.id ? candidate.packOwnVerb[language].fields?.reflexive : null;
     // (a meaning of the field proved by its pair — the pack's place by the pack's own marks; a pack row without its mark —
     // the English field, with the mark)

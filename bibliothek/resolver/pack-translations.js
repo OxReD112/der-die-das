@@ -287,7 +287,9 @@
   async function enrichOwn(resolution, code, entryOf) {
     const mine = resolution.candidates.filter(c => c.item && typeof c.item.id === "string");
     const contractions = resolution.candidates.map(c => [c, componentOf(c, entryOf)]).filter(([, item]) => item);
-    if (!mine.length && !contractions.length && !resolution.candidates.some(c => c && (c.genderPair || !c.item && c.construction?.id === "reflexive-verb"))) return;
+    // (28.11.2026) an external reading under a light record (candidate.light — lemma-resolver.js lightOver): the record's own pack text
+    const lights = resolution.candidates.filter(c => c && !c.item && typeof c.light === "string" && !c.translation?.[code] && typeof entryOf === "function");
+    if (!mine.length && !contractions.length && !lights.length && !resolution.candidates.some(c => c && (c.genderPair || !c.item && c.construction?.id === "reflexive-verb"))) return;
     // (one deadline for every tap of the first load, counted from its start — review C Ч2б)
     const load = ownTexts(code), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
@@ -298,25 +300,34 @@
       const main = String(fields[`translation_${code}`] || "").trim();
       if (main && !c.translation?.[code] && same(c.translation?.en, item.translation_en)) c.translation = {...c.translation, [code]:main};
     }
-    for (const c of mine) {
-      const fields = texts.get(c.item.id);
+    // One reading for a full card and for a light record (advisor 28.11). The chain of a light record (advisor 19.11): the record's
+    // text in this language → the pack dictionary → English. The record is the card of an external reading (candidate.light):
+    // its fields come from the pack file by the same endings (_<code>) and under the same conditions as an own card's — the English
+    // shown is the record's (whole, or some of its meanings — by their numbers), the text was translated from the record as it is now.
+    const recordOf = c => { try { const r = entryOf({id:c.light}); return r && typeof r.id === "string" ? r : null; } catch (_) { return null; } };
+    for (const c of [...mine, ...lights]) {
+      const item = c.item || recordOf(c);
+      if (!item) continue;
+      const fields = texts.get(item.id);
       if (!fields || typeof fields !== "object") continue;
       // (Ч2в, advisor 18.11) a pack card translated from another English than the reader's card shows now: "_src_reader" of the
       // pack (dev/lang/stamp.cjs: DeutschLangDe.sourcePrint of the light card, build-reader-dictionaries.cjs readerPrint) ≠ the
       // print of the reader's card — an outdated text, the card stays English. No "_src_reader" or no sourcePrint: as before.
-      if (typeof fields._src_reader === "string" && outdated(fields._src_reader, c.item)) continue;
+      if (typeof fields._src_reader === "string" && outdated(fields._src_reader, item)) continue;
       c.packItem = {...(c.packItem || {}), [code]:fields};
       const main = String(fields[`translation_${code}`] || "").trim();
-      if (main && !c.translation?.[code] && same(c.translation?.en, c.item.translation_en)) c.translation = {...c.translation, [code]:main};
+      // (a light record without an English text of its own — made for its Russian only, the English shown is the external dictionary's:
+      // there is no English of the record to compare with; the record's text in this language is taken as it is)
+      if (main && !c.translation?.[code] && (same(c.translation?.en, item.translation_en) || !c.item && !String(item.translation_en || "").trim())) c.translation = {...c.translation, [code]:main};
       // (19.11.2026, advisor: by the number of the meaning) the resolver showed some meanings of the card for this place (mögen «may,
       // might (possibility); to like», lassen «(with an infinitive) …»): each of them is a meaning of the card's English (and its Russian
       // one of the card's Russian at the same place); the pack's card has as many meanings — the pack's meanings with those numbers
-      else if (main && !c.translation?.[code]) { const picked = byNumber(c.translation, c.item, main); if (picked) c.translation = {...c.translation, [code]:picked}; }
+      else if (main && !c.translation?.[code]) { const picked = byNumber(c.translation, item, main); if (picked) c.translation = {...c.translation, [code]:picked}; }
       // a form of the card (alles on the alle card, zu zweit — collective): its own pack text, found by the form's English text
       const ft = c.formTranslation;
       if (ft && !ft[code]) {
-        const at = (c.item.form_translations || []).findIndex(r => r && r.form === ft.form && same(r.en, ft.en));
-        const text = at >= 0 ? fields.form_translations?.[at]?.[code] : c.item.collective && same(c.item.collective.en, ft.en) ? fields.collective?.[code] : "";
+        const at = (item.form_translations || []).findIndex(r => r && r.form === ft.form && same(r.en, ft.en));
+        const text = at >= 0 ? fields.form_translations?.[at]?.[code] : item.collective && same(item.collective.en, ft.en) ? fields.collective?.[code] : "";
         if (String(text || "").trim()) c.formTranslation = {...ft, [code]:String(text).trim()};
       }
     }
@@ -452,6 +463,11 @@
     // the candidates without an explanation only.)
     await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.explanation && !c.translation?.[code]).map(async candidate => {
       // (the gender of the card: its article — the resolver's G16 nounArticle — or its noun phrase when it names one gender (sure))
+      // (28.11.2026) a light record's own text comes first (enrichOwn above, under its deadline); none — the pack dictionary, as before
+      // (the pack dictionary is still asked for a record with its own text: its marks of the reflexive meanings — «sich X» — are read
+      // as before; only the text of the card is the record's)
+      let lightText = false;
+      if (typeof candidate.light === "string") { await own; lightText = !!candidate.translation?.[code]; }
       const genders = [...new Set((candidate.nounPhrase || []).map(p => p?.gender).filter(Boolean))];
       const sure = {der:"m", die:"f", das:"n"}[candidate.nounArticle] ||
         (genders.length === 1 ? {masculine:"m", feminine:"f", neuter:"n"}[genders[0]] : null) || null;
@@ -465,9 +481,10 @@
       try {
         const result = await pending.get(key);
         if (!result) return;
+        if (result.reflexive) candidate.reflexiveMarks = {...(candidate.reflexiveMarks || {}), [code]:result.reflexive};
+        if (lightText) return;
         candidate.translation = {...candidate.translation, [code]:result.meanings.join("; ")};
         candidate.packTranslation = result;
-        if (result.reflexive) candidate.reflexiveMarks = {...(candidate.reflexiveMarks || {}), [code]:result.reflexive};
         if (result.labels) {
           candidate.meaningLabels = {...(candidate.meaningLabels || {}), [code]:result.labels};
           candidate.labelledText = {...(candidate.labelledText || {}), [code]:result.shown.join("; ")};
