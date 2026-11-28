@@ -1236,7 +1236,7 @@
  },
  "verb-108": {
   "translation_tr": "(ışığı, cihazı) açmak",
-  "usage_note_tr": "Konuşma dilinde kullanılır; yansız karşılığı — einschalten.",
+  "usage_note_tr": "Konuşma dilinde kullanılır; nötr üslupta: einschalten.",
   "example_tr": "Işığı açar mısın lütfen?",
   "_src": "7cfbc556",
   "_src_reader": "f548576f"
@@ -1298,7 +1298,7 @@
  },
  "verb-114": {
   "translation_tr": "kapatmak; (buluşmayı) kararlaştırmak",
-  "usage_note_tr": "“kapatmak” anlamında konuşma dilinde; yansız karşılığı — ausschalten.",
+  "usage_note_tr": "“kapatmak” anlamında konuşma dilinde; nötr üslupta: ausschalten.",
   "example_tr": "Lütfen televizyonu kapat.",
   "_src": "ed1e68ea",
   "_src_reader": "33e5fe70"
@@ -1625,7 +1625,13 @@
   ],
   "reflexive": {
    "translation_tr": "dayanmak (yiğitçe), (bir şeye) tutunmak, korunmak; (kurallara, gerçeklere) bağlı kalmak, uymak; bozulmamak (yiyecekler için)",
-   "note_tr": "sich halten an + Akkusativ — bir şeye (kurallara, gerçeklere) uymak"
+   "note_tr": "sich halten an + Akkusativ — bir şeye (kurallara, gerçeklere) uymak",
+   "complements": [
+    {
+     "meaning_tr": "(kurallara, gerçeklere) bağlı kalmak, uymak",
+     "note_tr": "bir şeye bağlı kalmak, uymak: Er hielt sich an die Regeln."
+    }
+   ]
   },
   "see_also_tr": [
    {
@@ -1633,8 +1639,8 @@
     "at": 3
    }
   ],
-  "_src": "0015228a",
-  "_src_reader": "77e24849"
+  "_src": "c83b9758",
+  "_src_reader": "3b352a7f"
  },
  "verb-2565": {
   "translation_tr": "durmak (taşıt için); dayanmak, bozulmamak (çiçek, ayakkabı, hava için); (birinin) tarafında olmak; (bir şeye) önem vermek, (bir şeye) dikkat etmek",
@@ -1739,7 +1745,7 @@
  },
  "verb-2735": {
   "translation_tr": "tadına bakmak, tatmak",
-  "usage_note_tr": "Yansız üslupta kullanılır; konuşma dilinde daha çok probieren denir. Koste mal! — Bir tadına bak! Er kostete den Wein. — Şarabın tadına baktı. Mec.: die Freiheit kosten — özgürlüğü tatmak. Karıştırılmamalı: kosten — tutmak, mal olmak: Was kostet das?",
+  "usage_note_tr": "Nötr üslupta kullanılır; konuşma dilinde daha çok probieren denir. Koste mal! — Bir tadına bak! Er kostete den Wein. — Şarabın tadına baktı. Mec.: die Freiheit kosten — özgürlüğü tatmak. Karıştırılmamalı: kosten — tutmak, mal olmak: Was kostet das?",
   "example_tr": "Çorbanın bir tadına bak, yeterince tuzlu mu?",
   "complements": [
    {
@@ -1760,7 +1766,7 @@
  },
  "verb-154": {
   "translation_tr": "almak",
-  "usage_note_tr": "Konuşma dilinde kullanılır; yansız karşılığı — bekommen.",
+  "usage_note_tr": "Konuşma dilinde kullanılır; nötr üslupta: bekommen.",
   "example_tr": "Bugün büyükannemden bir mektup aldım.",
   "_src": "1381cc60",
   "_src_reader": "67063267"
@@ -2489,7 +2495,7 @@
  },
  "verb-213": {
   "translation_tr": "kapatmak",
-  "usage_note_tr": "Konuşma dilinde kullanılır; yansız karşılığı — schließen.",
+  "usage_note_tr": "Konuşma dilinde kullanılır; nötr üslupta: schließen.",
   "example_tr": "Lütfen kapıyı kapat, cereyan yapıyor.",
   "_src": "a4e7be4f",
   "_src_reader": "ddbec28e"
@@ -6818,7 +6824,7 @@
  },
  "verb-618": {
   "translation_tr": "aşağı atmak",
-  "usage_note_tr": "Konuşma dilinde; yansız biçimi — herunterwerfen.",
+  "usage_note_tr": "Konuşma dilinde; nötr üslupta: herunterwerfen.",
   "example_tr": "Anahtarı bana aşağı atabilir misin?",
   "complements": [
    {
@@ -8785,7 +8791,7 @@
  },
  "verb-780": {
   "translation_tr": "(konuş.) yanmak, açılmak (ışık, ateş için); (konuş.) başlamak (gösteri, ders, gürültü için); (bir şeye karşı) mücadele etmek, (bir şeye) karşı çıkmak; kabul edilebilir olmak, katlanılabilir olmak",
-  "usage_note_tr": "Cihaz için (çalışmaya başlamak) — yansız: Der Computer geht nicht an. “başlamak” anlamında giderek eskiyen (Die Schule geht morgen wieder an — Duden 3.2). “kabul edilebilir olmak”: Das mag noch angehen. — Buna hâlâ katlanılır; das geht nicht an — bu kabul edilemez (Duden 9). “(birini) ilgilendirmek” — bu da angehen.",
+  "usage_note_tr": "Cihaz için (çalışmaya başlamak) — nötr üslupta: Der Computer geht nicht an. “başlamak” anlamında giderek eskiyen (Die Schule geht morgen wieder an — Duden 3.2). “kabul edilebilir olmak”: Das mag noch angehen. — Buna hâlâ katlanılır; das geht nicht an — bu kabul edilemez (Duden 9). “(birini) ilgilendirmek” — bu da angehen.",
   "example_tr": "Akşamları sokak lambaları kendiliğinden yanıyor.",
   "complements": [
    {
@@ -9442,7 +9448,7 @@
  },
  "verb-839": {
   "translation_tr": "güzel kokmak, mis gibi kokmak",
-  "usage_note_tr": "duften — yalnızca hoş koku için; yansız: riechen, hoş olmayan: stinken.",
+  "usage_note_tr": "duften — yalnızca hoş koku için; nötr üslupta: riechen, hoş olmayan: stinken.",
   "example_tr": "Bütün ev mis gibi taze waffle kokuyor.",
   "complements": [
    {
@@ -11660,7 +11666,7 @@
  },
  "verb-1040": {
   "translation_tr": "(yaz.) dönmek, geri dönmek",
-  "usage_note_tr": "Yansız: zurückkommen.",
+  "usage_note_tr": "Nötr üslupta: zurückkommen.",
   "example_tr": "Yurt dışında geçen on yılın ardından doğduğu şehre geri döndü.",
   "_src": "29674196",
   "_src_reader": "51575429"
@@ -14749,7 +14755,7 @@
  },
  "verb-1359": {
   "translation_tr": "(konuş.) şok etmek",
-  "usage_note_tr": "Yansız: schockieren.",
+  "usage_note_tr": "Nötr üslupta: schockieren.",
   "example_tr": "Amcam Noel yemeğinde kara mizah esprileriyle herkesi şok etmeyi sever.",
   "_src": "89019ee2",
   "_src_reader": "d6b5d15e"
@@ -15529,7 +15535,7 @@
  },
  "verb-1441": {
   "translation_tr": "(teklifsiz) fena hâlde kirletmek; (kaba) berbat etmek, mahvetmek",
-  "usage_note_tr": "Kaba bir kelimedir, özellikle “berbat etmek, mahvetmek” anlamında. Yansız: schmutzig machen, verderben.",
+  "usage_note_tr": "Kaba bir kelimedir, özellikle “berbat etmek, mahvetmek” anlamında. Nötr üslupta: schmutzig machen, verderben.",
   "example_tr": "Dikkat et, yeni gömleğini domates sosuyla batırma!",
   "_src": "f8f17788",
   "_src_reader": "76bfda0e"
@@ -17282,7 +17288,7 @@
  },
  "verb-1608": {
   "translation_tr": "(birini / bir kurumu) ziyaret etmek, (doktora, bir servise) başvurmak",
-  "usage_note_tr": "Yansız ve resmî üslupta kullanılır; gündelik dilde daha çok besuchen, gehen zu. (Kitapta bir yeri) bulup açmak.",
+  "usage_note_tr": "Nötr ve resmî üslupta kullanılır; gündelik dilde daha çok besuchen, gehen zu. (Kitapta bir yeri) bulup açmak.",
   "example_tr": "İşten çıkarıldıktan sonra işsizler için bir danışma merkezine başvurdu.",
   "_src": "f4de45f3",
   "_src_reader": "519bc5e7"
@@ -17930,7 +17936,7 @@
  },
  "verb-1682": {
   "translation_tr": "tebrik etmek",
-  "usage_note_tr": "Üslup açısından daha yansız ve daha yaygın: gratulieren (+ Dativ). sich zu etwas beglückwünschen können — bir şeyle gurur duymakta sonuna kadar haklı olmak.",
+  "usage_note_tr": "Daha nötr üslupta ve daha yaygın: gratulieren (+ Dativ). sich zu etwas beglückwünschen können — bir şeyle gurur duymakta sonuna kadar haklı olmak.",
   "example_tr": "Prömiyerden sonra yönetmen bütün ekibi bizzat tebrik etti.",
   "complements": [
    {
@@ -20191,7 +20197,7 @@
  },
  "verb-1899": {
   "translation_tr": "(koruma altında) eşlik etmek, refakat etmek",
-  "usage_note_tr": "die Eskorte — muhafız birliği, onur refakati. Eş anlamlısı: begleiten (yansız).",
+  "usage_note_tr": "die Eskorte — muhafız birliği, onur refakati. Eş anlamlısı: begleiten (nötr üslup).",
   "example_tr": "İki fırkateyn, yük gemisine tehlikeli boğazdan geçerken eşlik ediyor.",
   "_src": "71a871f2",
   "_src_reader": "bf52e97a"
@@ -20511,7 +20517,7 @@
  },
  "verb-1929": {
   "translation_tr": "(konuş.) (partnerini) aldatmak, çapkınlık yapmak",
-  "usage_note_tr": "Biçimleri gehen fiilindeki gibi: ging fremd, ist fremdgegangen. Eş anlamlısı (yansız): untreu sein.",
+  "usage_note_tr": "Biçimleri gehen fiilindeki gibi: ging fremd, ist fremdgegangen. Eş anlamlısı (nötr üslup): untreu sein.",
   "example_tr": "Yirmi yıllık evliliğin ardından kocasının aylardır onu aldattığını öğrendi.",
   "_src": "2684eeb6",
   "_src_reader": "a7556b55"
@@ -20609,7 +20615,7 @@
  },
  "verb-1939": {
   "translation_tr": "(konuş.) keman çalmak, keman gıcırdatmak",
-  "usage_note_tr": "die Geige — keman; yansız: Geige spielen. (konuş.) jemandem die Meinung geigen — birine ne düşündüğünü açık açık söylemek.",
+  "usage_note_tr": "die Geige — keman; nötr üslupta: Geige spielen. (konuş.) jemandem die Meinung geigen — birine ne düşündüğünü açık açık söylemek.",
   "example_tr": "Akşamları komşunun oğlu saatlerce keman gıcırdatıyor ve her yanlış notayı duyuyoruz.",
   "_src": "7def1c96",
   "_src_reader": "65825223"
@@ -22675,7 +22681,7 @@
  },
  "verb-2130": {
   "translation_tr": "(konuş.) eşek gibi çalışmak, (işte) didinmek",
-  "usage_note_tr": "sich kaputt schuften (konuş.) — çalışmaktan bitap düşmek. Krş. arbeiten (yansız), malochen (konuş.).",
+  "usage_note_tr": "sich kaputt schuften (konuş.) — çalışmaktan bitap düşmek. Krş. arbeiten (nötr üslup), malochen (konuş.).",
   "example_tr": "Çocuklarının üniversite masraflarını karşılamak için fabrikada günde on iki saat eşek gibi çalıştı.",
   "reflexive": {
    "translation_tr": "(konuş.) çalışmaktan bitap düşmek",
@@ -23493,7 +23499,7 @@
  },
  "verb-2209": {
   "translation_tr": "öldürmek",
-  "usage_note_tr": "Karma fiil: brachte um, hat umgebracht. sich umbringen — intihar etmek. (konuş., mec.) Diese Warterei bringt mich noch um! — Bu bekleyiş beni öldürecek! Daha yansız: töten; özellikle “kasten öldürmek” — ermorden.",
+  "usage_note_tr": "Karma fiil: brachte um, hat umgebracht. sich umbringen — intihar etmek. (konuş., mec.) Diese Warterei bringt mich noch um! — Bu bekleyiş beni öldürecek! Daha nötr üslupta: töten; özellikle “kasten öldürmek” — ermorden.",
   "example_tr": "Yeni polisiyede zengin malikâne sahibi daha onuncu sayfada öldürülüyor.",
   "reflexive": {
    "translation_tr": "intihar etmek"
@@ -24337,7 +24343,7 @@
  },
  "verb-2286": {
   "translation_tr": "(teklifsiz) pataklamak, dayak atmak",
-  "usage_note_tr": "Teklifsiz konuşmada kullanılır (Duden: salopp). Yansız: verprügeln. ge- olmadan: vermöbelte, hat vermöbelt.",
+  "usage_note_tr": "Teklifsiz konuşmada kullanılır (Duden: salopp). Nötr üslupta: verprügeln. ge- olmadan: vermöbelte, hat vermöbelt.",
   "example_tr": "Ağabey, okul bahçesinde küçük kız kardeşine sataşan herkesi pataklamakla tehdit etti.",
   "_src": "f313a828",
   "_src_reader": "92a2c91c"
@@ -24420,7 +24426,7 @@
  },
  "verb-2294": {
   "translation_tr": "(teklifsiz) (birini) işletmek, kandırmak, aptal yerine koymak",
-  "usage_note_tr": "Biraz kaba, teklifsiz bir kelimedir. Daha yansız: veräppeln, veralbern; daha kaba: verarschen (bayağı).",
+  "usage_note_tr": "Biraz kaba, teklifsiz bir kelimedir. Daha nötr üslupta: veräppeln, veralbern; daha kaba: verarschen (bayağı).",
   "example_tr": "Beni işletiyor musun? Buna hayatta inanmam!",
   "_src": "7a9f4939",
   "_src_reader": "7d0a5c4c"
@@ -24600,7 +24606,7 @@
  },
  "verb-2312": {
   "translation_tr": "(yaz.) afiyetle yiyip bitirmek, tüketmek",
-  "usage_note_tr": "Zayıf fiil: verspeiste, hat verspeist (İsviçre'de ayrıca güçlü biçimler). Yansız eş anlamlısı: aufessen; verzehren de yazı dilinde / resmî dilde kullanılır.",
+  "usage_note_tr": "Zayıf fiil: verspeiste, hat verspeist (İsviçre'de ayrıca güçlü biçimler). Nötr üslupta eş anlamlısı: aufessen; verzehren de yazı dilinde / resmî dilde kullanılır.",
   "example_tr": "Ufaklık tatlı olarak tam iki porsiyon çikolatalı puding yiyip bitirdi.",
   "_src": "08043efd",
   "_src_reader": "939518c7"
@@ -26380,7 +26386,7 @@
  },
  "verb-2476": {
   "translation_tr": "(teklifsiz) kafayı çekmek, zom olmak",
-  "usage_note_tr": "Yansız: sich betrinken. Güçlü fiil, saufen gibi: besäuft sich, besoff sich, hat sich besoffen; Konjunktiv II besöffe sich. besoffen — (teklifsiz) zil zurna sarhoş.",
+  "usage_note_tr": "Nötr üslupta: sich betrinken. Güçlü fiil, saufen gibi: besäuft sich, besoff sich, hat sich besoffen; Konjunktiv II besöffe sich. besoffen — (teklifsiz) zil zurna sarhoş.",
   "example_tr": "Son sınavdan sonra birkaç öğrenci birahanede kafayı çekti.",
   "_src": "e2191592",
   "_src_reader": "d05c5a51"
@@ -26867,7 +26873,7 @@
  },
  "verb-2516": {
   "translation_tr": "(yaz.) (aşırı) basitleştirmek",
-  "usage_note_tr": "Zayıf fiil: simplifizierte, hat simplifiziert. Yansız: vereinfachen. simplifizierend — aşırı basitleştiren, indirgemeci.",
+  "usage_note_tr": "Zayıf fiil: simplifizierte, hat simplifiziert. Nötr üslupta: vereinfachen. simplifizierend — aşırı basitleştiren, indirgemeci.",
   "example_tr": "Popülist partiler karmaşık meseleleri sık sık tanınmaz hâle gelene dek basitleştirir.",
   "_src": "cb830ba2",
   "_src_reader": "993705ab"
@@ -27022,7 +27028,7 @@
  },
  "verb-2531": {
   "translation_tr": "(yaz.) (geriye, yerinde) kalmak; (ne yapılacağı konusunda) anlaşmak, sözleşmek",
-  "usage_note_tr": "Yansız: Wie seid ihr verblieben? — Ne konuda anlaştınız? Wir sind so verblieben, dass … — … diye anlaştık. (yaz.) mektup sonu kalıbı: Ich verbleibe mit freundlichen Grüßen … Güçlü fiil (bleiben gibi): verblieb, ist verblieben. verbleibend / verblieben — kalan, geriye kalan.",
+  "usage_note_tr": "Nötr üslupta: Wie seid ihr verblieben? — Ne konuda anlaştınız? Wir sind so verblieben, dass … — … diye anlaştık. (yaz.) mektup sonu kalıbı: Ich verbleibe mit freundlichen Grüßen … Güçlü fiil (bleiben gibi): verblieb, ist verblieben. verbleibend / verblieben — kalan, geriye kalan.",
   "example_tr": "Selden sonra birçok ailenin elinde sadece üzerlerindeki giysiler kaldı.",
   "complements": [
    {
@@ -27104,7 +27110,7 @@
  },
  "verb-2538": {
   "translation_tr": "(teklifsiz) es bei jemandem verschissen haben — biriyle arasını tamamen bozmak, birinin gözünden düşmek; (kaba) pisletmek",
-  "usage_note_tr": "Kaba bir kelimedir (Duden: derb), yansız konuşmada kaçınılmalı; (es) bei/mit jemandem verschissen haben kalıbı — (teklifsiz), neredeyse yalnızca Perfekt'te. Güçlü fiil: verschiss, hat verschissen; Konjunktiv II verschisse. verschissen — (kaba) pislenmiş.",
+  "usage_note_tr": "Kaba bir kelimedir (Duden: derb), nötr üslupta kaçınılmalı; (es) bei/mit jemandem verschissen haben kalıbı — (teklifsiz), neredeyse yalnızca Perfekt'te. Güçlü fiil: verschiss, hat verschissen; Konjunktiv II verschisse. verschissen — (kaba) pislenmiş.",
   "example_tr": "Patronu bütün iş arkadaşlarının önünde rezil eden, onun gözünden sonsuza dek düşer.",
   "_src": "def957e3",
   "_src_reader": "86b2bb8d"

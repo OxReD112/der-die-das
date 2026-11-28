@@ -17090,14 +17090,14 @@
  "noun-2545": {
   "translation_tr": "alkol bağımlısı kişi; alkolik",
   "example_tr": "Alkol bağımlısı adam profesyonel yardım almaya karar verdi.",
-  "usage_note_tr": "Daha tarafsız: alkoholabhängig ya da alkoholkrank.",
+  "usage_note_tr": "Daha nötr üslupta: alkoholabhängig ya da alkoholkrank.",
   "_src": "e2e16a3d",
   "_src_reader": "1665b793"
  },
  "noun-2546": {
   "translation_tr": "alkol bağımlısı kadın; alkolik (kadın)",
   "example_tr": "Alkol bağımlısı kadın, destek grubunda gündelik hayatını anlatıyor.",
-  "usage_note_tr": "Daha tarafsız: alkoholabhängig ya da alkoholkrank.",
+  "usage_note_tr": "Daha nötr üslupta: alkoholabhängig ya da alkoholkrank.",
   "_src": "71b5f56e",
   "_src_reader": "a2b57bc9"
  },
@@ -18098,14 +18098,14 @@
  "noun-2691": {
   "translation_tr": "Kızılderili (ayrımcı dış adlandırma); gözcü (jargon)",
   "example_tr": "Eski kitaplarda Amerika'nın yerli halkları sık sık Kızılderili olarak adlandırılır.",
-  "usage_note_tr": "Duden sözlüğü bu dış adlandırmayı ayrımcı olarak işaretler. Daha tarafsız olan, ilgili halkın adını söylemek ya da indigene Bevölkerung Amerikas demektir.",
+  "usage_note_tr": "Duden sözlüğü bu dış adlandırmayı ayrımcı olarak işaretler. Daha nötr üslupta olan, ilgili halkın adını söylemek ya da indigene Bevölkerung Amerikas demektir.",
   "_src": "61a3a958",
   "_src_reader": "09cfc1ee"
  },
  "noun-2692": {
   "translation_tr": "Kızılderili kadın (ayrımcı dış adlandırma); gözcü (kadın, jargon)",
   "example_tr": "Eski romanda karakter bir Kızılderili kadın olarak tanımlanıyor.",
-  "usage_note_tr": "Duden sözlüğü bu dış adlandırmayı ayrımcı olarak işaretler. Daha tarafsız olan, ilgili halkın adını söylemek ya da indigene Bevölkerung Amerikas demektir.",
+  "usage_note_tr": "Duden sözlüğü bu dış adlandırmayı ayrımcı olarak işaretler. Daha nötr üslupta olan, ilgili halkın adını söylemek ya da indigene Bevölkerung Amerikas demektir.",
   "_src": "c5273217",
   "_src_reader": "0c4a9a1c"
  },
@@ -18893,7 +18893,7 @@
  "noun-2812": {
   "translation_tr": "intihar",
   "example_tr": "Gazetede ölüm intihar olarak nitelendirildi.",
-  "usage_note_tr": "Tarafsız uzmanlık terimi: Suizid.",
+  "usage_note_tr": "Nötr üslupta uzmanlık terimi: Suizid.",
   "_src": "1047fefb",
   "_src_reader": "f92d0476"
  },

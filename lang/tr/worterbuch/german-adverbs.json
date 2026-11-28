@@ -2109,7 +2109,7 @@
  "adverb-316": {
   "translation_tr": "kısmen, bir ölçüde",
   "example_tr": "Sorun şimdiye kadar yalnızca kısmen çözüldü.",
-  "usage_note_tr": "Sıklıkla olumsuzlukla: nicht einmal ansatzweise — yakından bile değil, hiç de değil.",
+  "usage_note_tr": "Sıklıkla olumsuz cümlede: nicht einmal ansatzweise — yakından bile değil, hiç de değil.",
   "_src": "127b529e",
   "_src_reader": "48082ec4"
  },
@@ -2371,7 +2371,7 @@
  "adverb-353": {
   "translation_tr": "tuhaftır ki, nedense",
   "example_tr": "Tuhaftır ki bugün kimse aramadı.",
-  "usage_note_tr": "Konuşma dilinde kullanılır. Anlamı “tuhaf bir şekilde”, “komik bir şekilde” değil. Yansız: seltsamerweise.",
+  "usage_note_tr": "Konuşma dilinde kullanılır. Anlamı “tuhaf bir şekilde”, “komik bir şekilde” değil. Nötr üslupta: seltsamerweise.",
   "_src": "4f73cb9d",
   "_src_reader": "33454cbc"
  },
@@ -2760,7 +2760,7 @@
  "adverb-409": {
   "translation_tr": "(bir şeyi) yapmadan edememek, (bir şeyden) kendini alamamak",
   "example_tr": "Bu manzara karşısında kahkahalarla gülmekten kendini alamadı.",
-  "usage_note_tr": "Yalnızca können / kommen ile ve genellikle olumsuz (nicht, kaum): nicht umhinkönnen / nicht umhinkommen, etwas zu tun — bir şeyi yapmadan edememek. Mastar bitişik yazılır; cümlede: ich kann nicht umhin, …",
+  "usage_note_tr": "Yalnızca können / kommen ile ve genellikle olumsuz cümlede (nicht, kaum): nicht umhinkönnen / nicht umhinkommen, etwas zu tun — bir şeyi yapmadan edememek. Mastar bitişik yazılır; cümlede: ich kann nicht umhin, …",
   "_src": "e3110a8e",
   "_src_reader": "526fef83"
  },

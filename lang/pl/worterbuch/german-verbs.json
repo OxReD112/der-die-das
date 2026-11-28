@@ -1625,7 +1625,13 @@
   ],
   "reflexive": {
    "translation_pl": "trzymać się (dzielnie, czegoś), utrzymywać się; trzymać się (zasad, faktów); nie psuć się (o żywności)",
-   "note_pl": "sich halten an + Akk. — trzymać się (zasad, faktów)"
+   "note_pl": "sich halten an + Akk. — trzymać się (zasad, faktów)",
+   "complements": [
+    {
+     "meaning_pl": "trzymać się (zasad, faktów)",
+     "note_pl": "trzymać się czegoś: Er hielt sich an die Regeln."
+    }
+   ]
   },
   "see_also_pl": [
    {
@@ -1633,8 +1639,8 @@
     "at": 3
    }
   ],
-  "_src": "0015228a",
-  "_src_reader": "77e24849"
+  "_src": "c83b9758",
+  "_src_reader": "3b352a7f"
  },
  "verb-2565": {
   "translation_pl": "zatrzymywać się (o pojazdach); trzymać się, nie psuć się (o kwiatach, butach, pogodzie); stać po (czyjejś) stronie; przywiązywać wagę (do czegoś), dbać (o coś)",

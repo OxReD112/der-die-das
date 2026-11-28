@@ -713,7 +713,7 @@
   "translation_tr": "birine / bir şeye aldırmamak, birini / bir şeyi umursamamak",
   "example_tr": "Uyarılara aldırmadı ve yürümeye devam etti.",
   "notes_tr": [
-   "Genellikle olumsuzlukla: nicht, keiner, niemand: Keiner kehrte sich an den andern. — Kimse ötekine aldırmıyordu.",
+   "Genellikle olumsuz cümlede: nicht, keiner, niemand: Keiner kehrte sich an den andern. — Kimse ötekine aldırmıyordu.",
    "Yaz., esk.; ayrıca sich nicht um etwas kehren; bugün genellikle sich nicht um etwas kümmern. Karıştırılmamalı: sich umkehren — arkasına dönmek, dönüp bakmak."
   ],
   "_src": "8d92f3d3",
@@ -1253,7 +1253,7 @@
   "translation_tr": "olanı geri almak, geri döndürmek",
   "example_tr": "Bir özür, kazayı geri döndüremez.",
   "notes_tr": [
-   "Genellikle olumsuzlukla: Das kann man nicht ungeschehen machen. — Olan oldu, geri alınamaz."
+   "Genellikle olumsuz cümlede: Das kann man nicht ungeschehen machen. — Olan oldu, geri alınamaz."
   ],
   "_src": "8add57e7",
   "_src_reader": "fc00381a"
@@ -1291,7 +1291,7 @@
   "translation_tr": "birine zerre kadar güvenmemek",
   "example_tr": "Yeni komşuya zerre kadar güvenmiyorum.",
   "notes_tr": [
-   "Kime — Dativ'de; neredeyse her zaman olumsuzlukla: nicht, kaum (konuş. keinen Meter).",
+   "Kime — Dativ'de; neredeyse her zaman olumsuz cümlede: nicht, kaum (konuş. keinen Meter).",
    "Karıştırılmamalı: jemandem über den Weg laufen — birine tesadüfen rastlamak."
   ],
   "_src": "3ee5c018",
@@ -1308,7 +1308,7 @@
   "_src_reader": "105abe03"
  },
  "expression-130": {
-  "translation_tr": "birinin başından aşmak, birinin gücünü aşmak, kontrolden çıkmak (işler, sorunlar için), söz dinlememeye başlamak (çocuklar için); (kelimesi kelimesine) boyca birini geçmek",
+  "translation_tr": "birinin başından aşmak, birinin gücünü aşmak, kontrolden çıkmak (işler, sorunlar için), söz dinlememeye başlamak (çocuklar için); (gerçek anlamda) boyca birini geçmek",
   "example_tr": "Bu kadar iş yavaş yavaş başımdan aşıyor.",
   "notes_tr": [
    "Kime — Dativ'de. Perfekt sein ile: Die Probleme sind ihr über den Kopf gewachsen.",
@@ -1541,7 +1541,7 @@
   "translation_tr": "bir şeyi yapacak durumda olmak; bir şeyi yapabilmek",
   "example_tr": "Ameliyattan sonra tek başına yürüyecek durumda değildi.",
   "notes_tr": [
-   "Sıklıkla olumsuzlukla; + zu ile mastar: nicht in der Lage sein, etwas zu tun; Ich bin dazu nicht in der Lage. Karıştırılmamalı: in der Lage des Hauses — evin konumunda; in einer schwierigen Lage sein — zor durumda olmak."
+   "Sıklıkla olumsuz cümlede; + zu ile mastar: nicht in der Lage sein, etwas zu tun; Ich bin dazu nicht in der Lage. Karıştırılmamalı: in der Lage des Hauses — evin konumunda; in einer schwierigen Lage sein — zor durumda olmak."
   ],
   "_src": "a587515c",
   "_src_reader": "dbfa0f49"
@@ -2139,7 +2139,7 @@
   "translation_tr": "bir şeyi yapmaya eli varmak / varmamak, bir şeye kıyabilmek / kıyamamak",
   "example_tr": "Yaşlı köpeği başkasına vermeye kıyamadı.",
   "notes_tr": [
-   "Genellikle olumsuzlukla: Ich bringe es nicht übers Herz. — Elim varmıyor."
+   "Genellikle olumsuz cümlede: Ich bringe es nicht übers Herz. — Elim varmıyor."
   ],
   "_src": "c920c51b",
   "_src_reader": "9be65363"
@@ -2314,7 +2314,7 @@
   "notes_tr": [
    "Weisen — der Weise “bilge” kelimesinin çoğul Genitiv biçimi: “bilgelerin taşı” (die Weise “yol, tarz” değil).",
    "Harry Potter und der Stein der Weisen — “Harry Potter ve Felsefe Taşı”.",
-   "Mec. (edebî): den Stein der Weisen gefunden haben — bütün sorunların çözümünü bulmak; sıklıkla olumsuzlukla: Das ist auch nicht der Stein der Weisen."
+   "Mec. (edebî): den Stein der Weisen gefunden haben — bütün sorunların çözümünü bulmak; sıklıkla olumsuz cümlede: Das ist auch nicht der Stein der Weisen."
   ],
   "_src": "2c95f9f7",
   "_src_reader": "68afe278"
@@ -2623,7 +2623,7 @@
   "translation_tr": "birine / bir şeye aldırış etmek / etmemek",
   "example_tr": "Kedi misafirlere hiç aldırış etmedi.",
   "notes_tr": [
-   "Daha çok olumsuzlukla: keine Notiz nehmen von — fark etmemek, görmezden gelmek. Karıştırılmamalı: sich eine Notiz machen — not almak."
+   "Daha çok olumsuz cümlede: keine Notiz nehmen von — fark etmemek, görmezden gelmek. Karıştırılmamalı: sich eine Notiz machen — not almak."
   ],
   "_src": "0ff68663",
   "_src_reader": "cd6afee7"
@@ -3477,7 +3477,7 @@
   "translation_tr": "değil mi?, öyle değil mi? (cümle sonunda)",
   "example_tr": "Konser harikaydı, değil mi?",
   "notes_tr": [
-   "Konuşma dilinde kullanılır. Cümle sonuna eklenen soru: konuşan, söylediğinin onaylanmasını ister. Krş. nicht wahr? (yansız), ne? / gell? (konuş., yöresel). Karıştırılmamalı: Tee oder Kaffee? — “veya” bağlacı."
+   "Konuşma dilinde kullanılır. Cümle sonuna eklenen soru: konuşan, söylediğinin onaylanmasını ister. Krş. nicht wahr? (nötr üslup), ne? / gell? (konuş., yöresel). Karıştırılmamalı: Tee oder Kaffee? — “veya” bağlacı."
   ],
   "_src": "99a253c2",
   "_src_reader": "f50ac384"
@@ -3603,7 +3603,7 @@
   "translation_tr": "birinin emrinde olmak, emre amade olmak, mevcut olmak",
   "example_tr": "Para sizin emrinizde.",
   "notes_tr": [
-   "Yansız üslupta; sıklıkla iş dilinde. Benzer: etw. zur Verfügung haben — bir şeyi elinde bulundurmak. Kullanıma sunmak — etw. zur Verfügung stellen."
+   "Nötr üslupta; sıklıkla iş dilinde. Benzer: etw. zur Verfügung haben — bir şeyi elinde bulundurmak. Kullanıma sunmak — etw. zur Verfügung stellen."
   ],
   "_src": "4e130132",
   "_src_reader": "e98d7dac"
@@ -3612,7 +3612,7 @@
   "translation_tr": "(birinin kullanımına) sunmak, tahsis etmek",
   "example_tr": "Belediye salonlar tahsis ediyor.",
   "notes_tr": [
-   "Yansız üslupta; sıklıkla iş dilinde, edilgen çatıda: zur Verfügung gestellt werden. sich zur Verfügung stellen — gönüllü olmak, yardım teklif etmek; sein Amt zur Verfügung stellen — istifasını sunmak. Birinin emrinde olmak — zur Verfügung stehen."
+   "Nötr üslupta; sıklıkla iş dilinde, edilgen çatıda: zur Verfügung gestellt werden. sich zur Verfügung stellen — gönüllü olmak, yardım teklif etmek; sein Amt zur Verfügung stellen — istifasını sunmak. Birinin emrinde olmak — zur Verfügung stehen."
   ],
   "_src": "31a1e946",
   "_src_reader": "10ce33a1"
@@ -3657,7 +3657,7 @@
   "translation_tr": "birini / bir şeyi eleştirmek",
   "example_tr": "Muhalefet yeni yasayı eleştiriyor.",
   "notes_tr": [
-   "Yansız üslupta, daha çok yazı dilinde; haberlerde sık geçer. Sıfatla: scharfe / heftige / leise Kritik üben. Eleştirilen şey — an + Dativ: Kritik an der Regierung üben. Selbstkritik üben — özeleştiri yapmak, kendi hatalarını kabul etmek."
+   "Nötr üslupta, daha çok yazı dilinde; haberlerde sık geçer. Sıfatla: scharfe / heftige / leise Kritik üben. Eleştirilen şey — an + Dativ: Kritik an der Regierung üben. Selbstkritik üben — özeleştiri yapmak, kendi hatalarını kabul etmek."
   ],
   "_src": "3052b0f1",
   "_src_reader": "b7792568"
@@ -3666,7 +3666,7 @@
   "translation_tr": "sırayla, sırasıyla",
   "example_tr": "Çocuklar sırayla tahtaya çıktı.",
   "notes_tr": [
-   "Yansız üslupta kullanılır. Ünlem olarak: Der Reihe nach! — Sırayla! Karıştırılmamalı: an der Reihe sein — birinin sırası (Du bist an der Reihe)."
+   "Nötr üslupta kullanılır. Ünlem olarak: Der Reihe nach! — Sırayla! Karıştırılmamalı: an der Reihe sein — birinin sırası (Du bist an der Reihe)."
   ],
   "_src": "4a996968",
   "_src_reader": "f7742cf8"
@@ -3675,7 +3675,7 @@
   "translation_tr": "bir şeye yol açmak, bir şeyle sonuçlanmak",
   "example_tr": "Grev uzun beklemelere yol açtı.",
   "notes_tr": [
-   "Yansız üslupta, daha çok yazı dilinde. Sıklıkla dass ile başlayan yan cümleyle: Das hatte zur Folge, dass … — Sonuç olarak … Özne sebeptir, nesne sonuçtur."
+   "Nötr üslupta, daha çok yazı dilinde. Sıklıkla dass ile başlayan yan cümleyle: Das hatte zur Folge, dass … — Sonuç olarak … Özne sebeptir, nesne sonuçtur."
   ],
   "_src": "f016065d",
   "_src_reader": "ee86f0c8"
@@ -3693,7 +3693,7 @@
   "translation_tr": "artık sadece, yalnızca; sadece … kaldı, bir tek … kaldı",
   "example_tr": "Tatilden beri artık sadece çay içiyor.",
   "notes_tr": [
-   "Yansız üslupta kullanılır. (1) “artık … dışında hiçbir şey”: Er isst nur noch Gemüse. (2) “sadece … kaldı”: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. Karşılaştırma derecesiyle başka anlam: Das macht es nur noch schlimmer — “daha da kötüleştirir”. (Nur noch) Haut und Knochen sein — ayrı bir ifade."
+   "Nötr üslupta kullanılır. (1) “artık … dışında hiçbir şey”: Er isst nur noch Gemüse. (2) “sadece … kaldı”: Es sind nur noch zwei Tage bis Weihnachten; Ich muss nur noch schnell einkaufen. Karşılaştırma derecesiyle başka anlam: Das macht es nur noch schlimmer — “daha da kötüleştirir”. (Nur noch) Haut und Knochen sein — ayrı bir ifade."
   ],
   "_src": "1234f534",
   "_src_reader": "7d163f54"
