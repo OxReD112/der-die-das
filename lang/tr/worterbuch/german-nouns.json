@@ -5352,8 +5352,8 @@
   "translation_tr": "sayı, miktar",
   "example_tr": "Katılımcı sayısı on iki ile sınırlıdır.",
   "plural_note_tr": "Plural biçimi daha çok uzmanlık dilinde kullanılır.",
-  "_src": "66a9f572",
-  "_src_reader": "90e9dc52"
+  "_src": "f318305f",
+  "_src_reader": "db01013f"
  },
  "noun-798": {
   "translation_tr": "kayısı",
@@ -19209,8 +19209,8 @@
   "translation_tr": "emir, karar; bir şeyi kullanma yetkisi, bir şey üzerinde tasarruf",
   "example_tr": "Kurumun kararı ilgililere yazılı olarak bildirildi.",
   "plural_note_tr": "Bir şeyi kullanma yetkisi anlamında Plural biçimi yok; Verfügungen tek tek emirler ya da kararlar demektir.",
-  "_src": "2330f830",
-  "_src_reader": "096c980d"
+  "_src": "eaac36c3",
+  "_src_reader": "e6f2a0fe"
  },
  "noun-2859": {
   "translation_tr": "kılık değiştirme, gizlenme; kostüm; kaplama, dış kaplama",

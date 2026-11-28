@@ -2,7 +2,7 @@
  "lang": "tr",
  "name": "Türkçe",
  "format_version": 1,
- "version": "e085c0d185d2",
+ "version": "7d5462110966",
  "source_commit": "dc73eb0623e4b3efa638752fb2ec583a55f492a2",
  "exercise_files": {
   "partikeln__sentences": {
@@ -134,7 +134,7 @@
    "source": "deutsch-home/wortschatz/example-senses.json",
    "key": "id",
    "items": 5473,
-   "done": 4127
+   "done": 5473
   }
  },
  "files": {
@@ -188,7 +188,7 @@
   },
   "wortschatz/example-senses.json": {
    "items": 5473,
-   "done": 4127
+   "done": 5473
   },
   "worterbuch/german-adjective-adverbs.json": {
    "items": 603,
@@ -248,7 +248,7 @@
   "worterbuch/german-verbs.json": {
    "items": 2800,
    "texts": 10607,
-   "done": 15
+   "done": 2800
   },
   "ui.json": {
    "items": 359,
