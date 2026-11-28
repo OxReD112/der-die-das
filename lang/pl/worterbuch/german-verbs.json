@@ -336,11 +336,11 @@
    },
    {
     "meaning_pl": "przedstawiać się (o sprawach)",
-    "note_pl": "jak wygląda sprawa z czymś (bezosobowe es): Wie sieht es mit deinen Hausaufgaben aus? Podświetlane tylko z korelatem (damit); mit der Brille gut aussehen — „wyglądać”, ta sama forma."
+    "note_pl": "jak wygląda sprawa z czymś (bezosobowe es): Wie sieht es mit deinen Hausaufgaben aus?"
    }
   ],
-  "_src": "12b46d00",
-  "_src_reader": "9a16f264"
+  "_src": "7a1d3a5e",
+  "_src_reader": "f017d756"
  },
  "verb-032": {
   "translation_pl": "wysiadać (z pojazdu)",
@@ -688,14 +688,14 @@
   "translation_pl": "przebierać się",
   "usage_note_pl": "Bez sich: umziehen — przeprowadzać się (Perfekt z sein). jemanden umziehen — przebrać kogoś (dziecko).",
   "example_pl": "Po treningu szybko się przebieram.",
-  "_src": "a0af868b",
-  "_src_reader": "3041cc92",
   "see_also_pl": [
    {
     "id": "verb-064",
     "at": 1
    }
-  ]
+  ],
+  "_src": "a0af868b",
+  "_src_reader": "3041cc92"
  },
  "verb-065": {
   "translation_pl": "podpisywać",
@@ -918,14 +918,14 @@
     "note_pl": "znać się na czymś"
    }
   ],
-  "_src": "81efad06",
-  "_src_reader": "b9c1432b",
   "see_also_pl": [
    {
     "id": "verb-082",
     "at": 2
    }
-  ]
+  ],
+  "_src": "81efad06",
+  "_src_reader": "b9c1432b"
  },
  "verb-083": {
   "translation_pl": "przygotowywać się",
@@ -1076,14 +1076,14 @@
   "translation_pl": "pozwolić sobie; ośmielić się (coś zrobić)",
   "usage_note_pl": "Zaimek w Dativie: Ich erlaube mir eine Pause. — Pozwalam sobie na przerwę. Was erlauben Sie sich! — Co Pan sobie wyobraża! Darf ich mir eine Frage erlauben? — Czy mogę sobie pozwolić na pytanie? Bez sich: erlauben — pozwalać.",
   "example_pl": "W weekendy pozwalam sobie na duży kawałek ciasta.",
-  "_src": "94cb1361",
-  "_src_reader": "72d02488",
   "see_also_pl": [
    {
     "id": "verb-093",
     "at": 3
    }
-  ]
+  ],
+  "_src": "94cb1361",
+  "_src_reader": "72d02488"
  },
  "verb-094": {
   "translation_pl": "dziać się; zdarzać się",
@@ -1627,14 +1627,14 @@
    "translation_pl": "trzymać się (dzielnie, czegoś), utrzymywać się; trzymać się (zasad, faktów); nie psuć się (o żywności)",
    "note_pl": "sich halten an + Akk. — trzymać się (zasad, faktów)"
   },
-  "_src": "0015228a",
-  "_src_reader": "77e24849",
   "see_also_pl": [
    {
     "id": "verb-2565",
     "at": 3
    }
-  ]
+  ],
+  "_src": "0015228a",
+  "_src_reader": "77e24849"
  },
  "verb-2565": {
   "translation_pl": "zatrzymywać się (o pojazdach); trzymać się, nie psuć się (o kwiatach, butach, pogodzie); stać po (czyjejś) stronie; przywiązywać wagę (do czegoś), dbać (o coś)",
@@ -1650,14 +1650,14 @@
     "note_pl": "przywiązywać wagę do czegoś: In dieser Familie hält man auf Pünktlichkeit."
    }
   ],
-  "_src": "83a12ca1",
-  "_src_reader": "4dd79c71",
   "see_also_pl": [
    {
     "id": "verb-146",
     "at": 2
    }
-  ]
+  ],
+  "_src": "83a12ca1",
+  "_src_reader": "4dd79c71"
  },
  "verb-147": {
   "translation_pl": "uważać (za kogoś, za coś); być (jakiegoś) zdania",
@@ -1749,14 +1749,14 @@
     "note_pl": "próbować (trochę) czegoś (von der Torte kosten)"
    }
   ],
-  "_src": "2d88a559",
-  "_src_reader": "c68daa01",
   "see_also_pl": [
    {
     "id": "verb-153",
     "at": 2
    }
-  ]
+  ],
+  "_src": "2d88a559",
+  "_src_reader": "c68daa01"
  },
  "verb-154": {
   "translation_pl": "dostawać",
@@ -1855,14 +1855,14 @@
     "note_pl": "dokąd? — położyć się gdzieś"
    }
   ],
-  "_src": "57fddbf6",
-  "_src_reader": "afcf79e3",
   "see_also_pl": [
    {
     "id": "verb-159",
     "at": 2
    }
-  ]
+  ],
+  "_src": "57fddbf6",
+  "_src_reader": "afcf79e3"
  },
  "verb-160": {
   "translation_pl": "kochać",
@@ -2189,14 +2189,14 @@
     "note_pl": "występować przeciw czemuś"
    }
   ],
-  "_src": "56908b60",
-  "_src_reader": "87089b65",
   "see_also_pl": [
    {
     "id": "verb-189",
     "at": 3
    }
-  ]
+  ],
+  "_src": "56908b60",
+  "_src_reader": "87089b65"
  },
  "verb-190": {
   "translation_pl": "studiować (na uczelni); studiować, badać",
@@ -2436,14 +2436,14 @@
     "note_pl": "chcieć czegoś (dla siebie)"
    }
   ],
-  "_src": "e2948886",
-  "_src_reader": "123626ed",
   "see_also_pl": [
    {
     "id": "verb-210",
     "at": 2
    }
-  ]
+  ],
+  "_src": "e2948886",
+  "_src_reader": "123626ed"
  },
  "verb-211": {
   "translation_pl": "płacić",
@@ -2474,11 +2474,11 @@
    },
    {
     "meaning_pl": "wskazywać (na coś)",
-    "note_pl": "wskazywać na kogoś, coś: Sie zeigt auf die Karte. Podświetlane tylko z korelatem; Er zeigte auf das Haus / zur Tür — kierunek, ta sama forma."
+    "note_pl": "wskazywać na kogoś, coś: Sie zeigt auf die Karte."
    }
   ],
-  "_src": "ada7dfdc",
-  "_src_reader": "52787bc4"
+  "_src": "30d9f585",
+  "_src_reader": "1f3ac17d"
  },
  "verb-2749": {
   "translation_pl": "pokazać się, pojawić się; okazać się, wyjść na jaw; wykazać się (czymś)",
@@ -2517,14 +2517,14 @@
     "note_pl": "giąć, zginać coś"
    }
   ],
-  "_src": "85d42aed",
-  "_src_reader": "a7707e6b",
   "see_also_pl": [
    {
     "id": "verb-2765",
     "at": 1
    }
-  ]
+  ],
+  "_src": "85d42aed",
+  "_src_reader": "a7707e6b"
  },
  "verb-2765": {
   "translation_pl": "skręcać (za róg, w ulicę)",
@@ -2535,14 +2535,14 @@
     "note_pl": "skręcić za coś (um die Ecke) lub dokądś (in eine Seitenstraße)"
    }
   ],
-  "_src": "31c523df",
-  "_src_reader": "ccc89725",
   "see_also_pl": [
    {
     "id": "verb-2766",
     "at": 1
    }
-  ]
+  ],
+  "_src": "31c523df",
+  "_src_reader": "ccc89725"
  },
  "verb-215": {
   "translation_pl": "odwoływać; odmawiać",
@@ -2927,14 +2927,14 @@
     "meaning_pl": "wytrzymać (próbę)"
    }
   ],
-  "_src": "efc0610d",
-  "_src_reader": "157bc16a",
   "see_also_pl": [
    {
     "id": "verb-2566",
     "at": 2
    }
-  ]
+  ],
+  "_src": "efc0610d",
+  "_src_reader": "157bc16a"
  },
  "verb-2566": {
   "translation_pl": "istnieć; wytrwać, dotrzymać pola (w walce, w starciu z kimś)",
@@ -3092,14 +3092,14 @@
     "note_pl": "powoływać do czegoś (zum Militär)"
    }
   ],
-  "_src": "57ebba52",
-  "_src_reader": "a3462ae0",
   "see_also_pl": [
    {
     "id": "verb-258",
     "at": 3
    }
-  ]
+  ],
+  "_src": "57ebba52",
+  "_src_reader": "a3462ae0"
  },
  "verb-259": {
   "translation_pl": "wykrywać; odkrywać",
@@ -3924,14 +3924,14 @@
     "meaning_pl": "rozmawiać"
    }
   ],
-  "_src": "76d8ccc5",
-  "_src_reader": "09255627",
   "see_also_pl": [
    {
     "id": "verb-2721",
     "at": 2
    }
-  ]
+  ],
+  "_src": "76d8ccc5",
+  "_src_reader": "09255627"
  },
  "verb-2721": {
   "translation_pl": "utrzymywać, podtrzymywać (biuro, kontakty, stosunki); zabawiać",
@@ -4248,14 +4248,14 @@
   "translation_pl": "chudnąć; zmniejszać się, maleć",
   "example_pl": "Mój tata schudł pięć kilo.",
   "usage_note_pl": "Zmniejszać się — też z haben: Die Zahl der Besucher hat in den letzten Jahren stark abgenommen. — Liczba odwiedzających w ostatnich latach znacznie spadła. abnehmender Mond — ubywający księżyc. Zdejmować, odbierać (telefon), zabierać — abnehmen z dopełnieniem bliższym.",
-  "_src": "8eb5cb16",
-  "_src_reader": "eaa9164f",
   "see_also_pl": [
    {
     "id": "verb-2596",
     "at": 2
    }
-  ]
+  ],
+  "_src": "8eb5cb16",
+  "_src_reader": "eaa9164f"
  },
  "verb-2596": {
   "translation_pl": "zdejmować (kapelusz, pokrywkę, opatrunek), odbierać (telefon); odbierać, zabierać (komuś); (pot.) uwierzyć",
@@ -4496,14 +4496,14 @@
   "translation_pl": "ustawiać się w kolejce; zachowywać się (jakoś), kaprysić",
   "usage_note_pl": "Stell dich nicht so an! — Nie kapryś! / Nie daj się prosić! sich geschickt / dumm anstellen — zręcznie / nieporadnie zabierać się do rzeczy. Bez sich: anstellen — zatrudniać; włączać.",
   "example_pl": "Musieliśmy pół godziny stać w kolejce do kasy.",
-  "_src": "6bb3d2bf",
-  "_src_reader": "93c514cb",
   "see_also_pl": [
    {
     "id": "verb-388",
     "at": 2
    }
-  ]
+  ],
+  "_src": "6bb3d2bf",
+  "_src_reader": "93c514cb"
  },
  "verb-389": {
   "translation_pl": "starać się; wysilać się",
@@ -4599,14 +4599,14 @@
   "translation_pl": "znajdować się, przebywać; zatrzymywać się (nad czymś)",
   "usage_note_pl": "Nad czym — mit + Dativ: Wir wollen uns nicht mit Kleinigkeiten aufhalten. — Nie będziemy się zatrzymywać nad drobiazgami. Bez sich: aufhalten — przytrzymywać (drzwi); zatrzymywać.",
   "example_pl": "Obecnie przebywa w Berlinie.",
-  "_src": "888d3083",
-  "_src_reader": "a22578c9",
   "see_also_pl": [
    {
     "id": "verb-396",
     "at": 2
    }
-  ]
+  ],
+  "_src": "888d3083",
+  "_src_reader": "a22578c9"
  },
  "verb-397": {
   "translation_pl": "podnosić; przechowywać; znosić (zakaz)",
@@ -4633,15 +4633,15 @@
   "complements": [
    {
     "meaning_pl": "przyjmować (w poczet członków)",
-    "note_pl": "przyjmować kogoś do czegoś (w poczet członków): Der Chor hat ihn gern in seine Reihen aufgenommen. Podświetlane tylko z korelatem; ins Krankenhaus aufgenommen werden — „przyjmować (u siebie)”, ta sama forma."
+    "note_pl": "przyjmować kogoś do czegoś (w poczet członków): Der Chor hat ihn gern in seine Reihen aufgenommen."
    },
    {
     "meaning_pl": "włączać (do czegoś)",
-    "note_pl": "włączać coś do czegoś: Das Theater nimmt ein neues Stück in den Spielplan auf. Podświetlane tylko z korelatem; ins Krankenhaus aufgenommen werden — „przyjmować (u siebie)”, ta sama forma."
+    "note_pl": "włączać coś do czegoś: Das Theater nimmt ein neues Stück in den Spielplan auf."
    }
   ],
-  "_src": "b0682196",
-  "_src_reader": "75c5e0df"
+  "_src": "aea72076",
+  "_src_reader": "8f7e403f"
  },
  "verb-401": {
   "translation_pl": "denerwować; irytować",
@@ -5931,11 +5931,11 @@
    },
    {
     "meaning_pl": "wynikać, wypływać (z czegoś)",
-    "note_pl": "wynikać z czegoś: Daraus folgt, dass wir mehr Zeit brauchen. Podświetlane tylko z korelatem: er folgte ihr aus dem Zimmer — kierunek, ta sama forma."
+    "note_pl": "wynikać z czegoś: Daraus folgt, dass wir mehr Zeit brauchen."
    }
   ],
-  "_src": "714fc2d6",
-  "_src_reader": "f1007c5d"
+  "_src": "1c37a670",
+  "_src_reader": "c3bd144b"
  },
  "verb-531": {
   "translation_pl": "żądać",
@@ -6019,14 +6019,14 @@
    }
   ],
   "usage_note_pl": "Bać się czegoś, obawiać się (z dopełnieniem bliższym, bez przyimka) — fürchten: Viele fürchten eine Krise. Słaby: fürchtete sich, hat sich gefürchtet.",
-  "_src": "dcea0c06",
-  "_src_reader": "090855bb",
   "see_also_pl": [
    {
     "id": "verb-2495",
     "at": 1
    }
-  ]
+  ],
+  "_src": "dcea0c06",
+  "_src_reader": "090855bb"
  },
  "verb-539": {
   "translation_pl": "karmić (zwierzęta, dziecko)",
@@ -6530,14 +6530,14 @@
     "note_pl": "pozwolić sobie na coś"
    }
   ],
-  "_src": "7076907f",
-  "_src_reader": "3b424d7d",
   "see_also_pl": [
    {
     "id": "verb-587",
     "at": 2
    }
-  ]
+  ],
+  "_src": "7076907f",
+  "_src_reader": "3b424d7d"
  },
  "verb-588": {
   "translation_pl": "kierować; prowadzić",
@@ -6946,14 +6946,14 @@
     "note_pl": "pędzić, wlecieć dokądś: in die Luft, ins Zimmer schießen"
    }
   ],
-  "_src": "45a055d9",
-  "_src_reader": "317b7894",
   "see_also_pl": [
    {
     "id": "verb-626",
     "at": 1
    }
-  ]
+  ],
+  "_src": "45a055d9",
+  "_src_reader": "317b7894"
  },
  "verb-627": {
   "translation_pl": "bić; uderzać; pokonywać (w grze); ubijać",
@@ -7341,14 +7341,14 @@
     "note_pl": "rzucić się do czegoś, w coś (ins Wasser, in die Arbeit)"
    }
   ],
-  "_src": "7694fd89",
-  "_src_reader": "788eb2dc",
   "see_also_pl": [
    {
     "id": "verb-654",
     "at": 3
    }
-  ]
+  ],
+  "_src": "7694fd89",
+  "_src_reader": "788eb2dc"
  },
  "verb-655": {
   "translation_pl": "tankować",
@@ -7407,14 +7407,14 @@
     "note_pl": "przybić do czegoś (ans Ufer), zostać zniesionym dokądś (ins Meer)"
    }
   ],
-  "_src": "836f394f",
-  "_src_reader": "7893aec5",
   "see_also_pl": [
    {
     "id": "verb-659",
     "at": 2
    }
-  ]
+  ],
+  "_src": "836f394f",
+  "_src_reader": "7893aec5"
  },
  "verb-660": {
   "translation_pl": "rozstawać się; rozdzielać się",
@@ -7653,14 +7653,14 @@
     }
    ]
   },
-  "_src": "6b77dbf4",
-  "_src_reader": "7848bd85",
   "see_also_pl": [
    {
     "id": "verb-2724",
     "at": 2
    }
-  ]
+  ],
+  "_src": "6b77dbf4",
+  "_src_reader": "7848bd85"
  },
  "verb-2724": {
   "translation_pl": "otoczyć, obstawić",
@@ -7928,14 +7928,14 @@
     "note_pl": "polegać na kimś, czymś"
    }
   ],
-  "_src": "63279045",
-  "_src_reader": "6d2c344c",
   "see_also_pl": [
    {
     "id": "verb-704",
     "at": 1
    }
-  ]
+  ],
+  "_src": "63279045",
+  "_src_reader": "6d2c344c"
  },
  "verb-705": {
   "translation_pl": "zapomnieć (jak się coś robi)",
@@ -8077,14 +8077,14 @@
   "translation_pl": "przejęzyczyć się",
   "usage_note_pl": "Zaimek zwrotny w Akkusativie: Ich habe mich versprochen. Spodziewać się (czegoś po czymś) — sich (Dativ) etwas versprechen. (przestarz.) sich versprechen — zaręczyć się: Die beiden hatten sich versprochen. Bez sich: versprechen — obiecywać.",
   "example_pl": "Przepraszam, przejęzyczyłem się.",
-  "_src": "e3185636",
-  "_src_reader": "34ffab05",
   "see_also_pl": [
    {
     "id": "verb-719",
     "at": 3
    }
-  ]
+  ],
+  "_src": "e3185636",
+  "_src_reader": "34ffab05"
  },
  "verb-2579": {
   "translation_pl": "spodziewać się (czegoś po czymś), liczyć (na coś)",
@@ -9340,14 +9340,14 @@
    "example_pl": "Wiosną tworzą się pierwsze liście.",
    "note_pl": "Kształcić się w czym — in + Dativ: sich im Gesang ausbilden. Na kogo — zwykle z lassen: sich zum Koch ausbilden lassen — wyuczyć się na kucharza."
   },
-  "_src": "36bbf83e",
-  "_src_reader": "5f7fce30",
   "see_also_pl": [
    {
     "id": "adjective-178",
     "at": 2
    }
-  ]
+  ],
+  "_src": "36bbf83e",
+  "_src_reader": "5f7fce30"
  },
  "verb-829": {
   "translation_pl": "tworzyć się, powstawać",
@@ -10028,14 +10028,14 @@
     "meaning_pl": "uganiać się (za czymś: sławą, pieniędzmi)"
    }
   ],
-  "_src": "52ea05a7",
-  "_src_reader": "6866180d",
   "see_also_pl": [
    {
     "id": "verb-2772",
     "at": 1
    }
-  ]
+  ],
+  "_src": "52ea05a7",
+  "_src_reader": "6866180d"
  },
  "verb-2772": {
   "translation_pl": "pędzić, gnać",
@@ -10681,7 +10681,7 @@
   "complements": [
    {
     "meaning_pl": "być skierowanym, zwróconym (na kogoś, coś)",
-    "note_pl": "być skierowanym na kogoś, coś: Sein ganzer Ärger richtete sich auf den Nachbarn. Podświetlane tylko z korelatem; Alle Blicke richteten sich auf die Bühne / zur Tür — kierunek, ta sama forma."
+    "note_pl": "być skierowanym na kogoś, coś: Sein ganzer Ärger richtete sich auf den Nachbarn."
    },
    {
     "meaning_pl": "zależeć (od czegoś)",
@@ -10700,8 +10700,8 @@
     "note_pl": "być skierowanym przeciwko komuś, czemuś: Die Kritik richtet sich gegen die Regierung."
    }
   ],
-  "_src": "6000d6ba",
-  "_src_reader": "ca48ea0f"
+  "_src": "dd726705",
+  "_src_reader": "22185112"
  },
  "verb-954": {
   "translation_pl": "toczyć się",
@@ -11028,14 +11028,14 @@
     "note_pl": "włóczyć się po czymś"
    }
   ],
-  "_src": "4786853a",
-  "_src_reader": "4ec22ea6",
   "see_also_pl": [
    {
     "id": "verb-988",
     "at": 2
    }
-  ]
+  ],
+  "_src": "4786853a",
+  "_src_reader": "4ec22ea6"
  },
  "verb-989": {
   "translation_pl": "(pot.) stresować, denerwować, wykańczać",
@@ -11090,14 +11090,14 @@
     "note_pl": "ufać komuś, czemuś"
    }
   ],
-  "_src": "1b7fc712",
-  "_src_reader": "31e073d4",
   "see_also_pl": [
    {
     "id": "verb-995",
     "at": 2
    }
-  ]
+  ],
+  "_src": "1b7fc712",
+  "_src_reader": "31e073d4"
  },
  "verb-995": {
   "translation_pl": "udzielać ślubu",
@@ -12484,12 +12484,12 @@
     "meaning_pl": "obstawać (przy czymś), upierać się"
    },
    {
-    "note_pl": "uparcie trwać w czymś: Sie beharrt in ihrem Glauben. Podświetlane tylko z korelatem; im Dunkeln beharren — miejsce, ta sama forma.",
+    "note_pl": "uparcie trwać w czymś: Sie beharrt in ihrem Glauben.",
     "meaning_pl": "obstawać (przy czymś), upierać się"
    }
   ],
-  "_src": "dea9bcfc",
-  "_src_reader": "c5047cf5"
+  "_src": "ef8c31d3",
+  "_src_reader": "f1721cde"
  },
  "verb-1122": {
   "translation_pl": "(pot.) przyznawać się (do czegoś); spowiadać się",
@@ -14783,14 +14783,14 @@
     "note_pl": "unosić się nad czymś (über der Stadt)"
    }
   ],
-  "_src": "4c91bb12",
-  "_src_reader": "d8fc967d",
   "see_also_pl": [
    {
     "id": "verb-2769",
     "at": 1
    }
-  ]
+  ],
+  "_src": "4c91bb12",
+  "_src_reader": "d8fc967d"
  },
  "verb-2769": {
   "translation_pl": "płynąć (w powietrzu), łagodnie opadać (wznosić się)",
@@ -18832,14 +18832,14 @@
    },
    {
     "meaning_pl": "świadczyć (o czymś), zapowiadać (coś)",
-    "note_pl": "świadczyć o czymś, zapowiadać coś: Alle Zeichen deuten auf einen baldigen Wechsel. Podświetlane tylko z korelatem: Alles deutet darauf, dass … Wskazać na kogoś, coś (Er deutete auf das Fenster.) — kierunek, bez pary: można też zum Fenster, nach Süden."
+    "note_pl": "świadczyć o czymś, zapowiadać coś: Alle Zeichen deuten auf einen baldigen Wechsel."
    },
    {
     "note_pl": "zinterpretować jako coś"
    }
   ],
-  "_src": "70a7cead",
-  "_src_reader": "088bc8f6"
+  "_src": "d705bf28",
+  "_src_reader": "b08d3b8d"
  },
  "verb-1768": {
   "translation_pl": "układać (wiersze), pisać wiersze",
@@ -18927,14 +18927,14 @@
   "translation_pl": "łamać się na pół, przełamywać się; przebijać się (na zewnątrz), ujawniać się",
   "usage_note_pl": "Rozdzielny: bricht durch, brach durch, ist durchgebrochen. Jako czasownik przechodni („przełamać na pół”) — z haben: ein Brötchen durchbrechen. (med.) pęknąć (o wrzodzie, wyrostku). Przełamać (zaporę, regułę) — nierozdzielny durchbrechen.",
   "example_pl": "Przy przeprowadzce przełamał się uchwyt mojej starej patelni.",
-  "_src": "82af4ff1",
-  "_src_reader": "296470eb",
   "see_also_pl": [
    {
     "id": "verb-1777",
     "at": 2
    }
-  ]
+  ],
+  "_src": "82af4ff1",
+  "_src_reader": "296470eb"
  },
  "verb-1777": {
   "translation_pl": "przełamywać (zaporę, blokadę); łamać (regułę, tradycję)",
@@ -18945,14 +18945,14 @@
     "note_pl": "przełamywać coś; łamać coś (regułę, tradycję)"
    }
   ],
-  "_src": "585c45f6",
-  "_src_reader": "3a37409e",
   "see_also_pl": [
    {
     "id": "verb-1776",
     "at": 3
    }
-  ]
+  ],
+  "_src": "585c45f6",
+  "_src_reader": "3a37409e"
  },
  "verb-1778": {
   "translation_pl": "przemyśleć (do końca), rozważyć (w każdym szczególe)",
@@ -18973,14 +18973,14 @@
     "note_pl": "docierać do kogoś, czegoś"
    }
   ],
-  "_src": "8be1a7ca",
-  "_src_reader": "fdedd7b2",
   "see_also_pl": [
    {
     "id": "verb-1780",
     "at": 5
    }
-  ]
+  ],
+  "_src": "8be1a7ca",
+  "_src_reader": "fdedd7b2"
  },
  "verb-1780": {
   "translation_pl": "przesycać, przenikać (coś); przepełniać (o uczuciu, idei)",
@@ -19136,14 +19136,14 @@
   "reflexive": {
    "translation_pl": "przewijać się jak czerwona nić (przez całe dzieło)"
   },
-  "_src": "47d449db",
-  "_src_reader": "19ce6883",
   "see_also_pl": [
    {
     "id": "verb-2723",
     "at": 2
    }
-  ]
+  ],
+  "_src": "47d449db",
+  "_src_reader": "19ce6883"
  },
  "verb-2723": {
   "translation_pl": "przecinać, przebiegać (przez coś); przenikać",
@@ -21508,14 +21508,14 @@
   "reflexive": {
    "translation_pl": "(pot.) pokłócić się"
   },
-  "_src": "b099d1b7",
-  "_src_reader": "be974a4f",
   "see_also_pl": [
    {
     "id": "verb-2776",
     "at": 1
    }
-  ]
+  ],
+  "_src": "b099d1b7",
+  "_src_reader": "be974a4f"
  },
  "verb-2776": {
   "translation_pl": "(pot.) wjechać, z hukiem uderzyć (w coś)",
@@ -23279,7 +23279,7 @@
  },
  "verb-2188": {
   "translation_pl": "przelewać się przez krawędź (o cieczy), przepełniać się; przechodzić (na stronę przeciwnika)",
-  "usage_note_pl": "Rozdzielny: lief über, ist übergelaufen. zum Gegner überlaufen — przejść na stronę przeciwnika; der Überläufer — zbieg. Nierozdzielne: es überläuft jemanden kalt — kogoś przechodzi dreszcz. überlaufen (przym.) — przepełniony (ludźmi): Der Strand war völlig überlaufen.",
+  "usage_note_pl": "Rozdzielny: lief über, ist übergelaufen. zum Gegner überlaufen — przejść na stronę przeciwnika; der Überläufer — dezerter. Nierozdzielne: es überläuft jemanden kalt — kogoś przechodzi dreszcz. überlaufen (przym.) — przepełniony (ludźmi): Der Strand war völlig überlaufen.",
   "example_pl": "Ponieważ odpływ był zatkany, umywalka się przelała i zalała całą łazienkę.",
   "_src": "b40b0386",
   "_src_reader": "4d68bd0d"
@@ -23653,14 +23653,14 @@
     "note_pl": "przytrafić się komuś"
    }
   ],
-  "_src": "1b8ceaa2",
-  "_src_reader": "0434496d",
   "see_also_pl": [
    {
     "id": "verb-2739",
     "at": 2
    }
-  ]
+  ],
+  "_src": "1b8ceaa2",
+  "_src_reader": "0434496d"
  },
  "verb-2739": {
   "translation_pl": "obchodzić (przepis), podważać, niweczyć; (sport.) wbiegać (pod rywala)",
@@ -23671,14 +23671,14 @@
     "note_pl": "obchodzić, podważać coś"
    }
   ],
-  "_src": "4157983f",
-  "_src_reader": "df011668",
   "see_also_pl": [
    {
     "id": "verb-2223",
     "at": 3
    }
-  ]
+  ],
+  "_src": "4157983f",
+  "_src_reader": "df011668"
  },
  "verb-2224": {
   "translation_pl": "ponieść porażkę, przegrać (z kimś)",
@@ -26477,14 +26477,14 @@
   "translation_pl": "(pot.) wariować, wybuchać, tracić panowanie nad sobą; przepalać się (o bezpieczniku)",
   "usage_note_pl": "Cały czasownik jest potoczny. Najczęściej w formie Partizip: durchgeknallt — stuknięty, szurnięty. O bezpieczniku — to samo co durchbrennen. Rozdzielny, słaby: knallte durch, ist durchgeknallt.",
   "example_pl": "Jeśli drukarka dziś jeszcze raz odmówi posłuszeństwa, to zwariuję!",
-  "_src": "7693e33a",
-  "_src_reader": "13279819",
   "see_also_pl": [
    {
     "id": "adjective-1499",
     "at": 1
    }
-  ]
+  ],
+  "_src": "7693e33a",
+  "_src_reader": "13279819"
  },
  "verb-2487": {
   "translation_pl": "wyobrażać sobie, wmawiać sobie (coś, czego nie ma); mieć o sobie wysokie mniemanie, wywyższać się",
@@ -26495,14 +26495,14 @@
     "note_pl": "szczycić się, pysznić się czymś (sich viel auf etwas einbilden)"
    }
   ],
-  "_src": "18e28e9c",
-  "_src_reader": "53bbd61b",
   "see_also_pl": [
    {
     "id": "adjective-606",
     "at": 1
    }
-  ]
+  ],
+  "_src": "18e28e9c",
+  "_src_reader": "53bbd61b"
  },
  "verb-2488": {
   "translation_pl": "krępować, ograniczać (ruchy, swobodę); zawężać, zacieśniać",
@@ -26520,14 +26520,14 @@
     "note_pl": "oburzać się na kogoś, na coś"
    }
   ],
-  "_src": "41142402",
-  "_src_reader": "9febb8f7",
   "see_also_pl": [
    {
     "id": "adjective-621",
     "at": 2
    }
-  ]
+  ],
+  "_src": "41142402",
+  "_src_reader": "9febb8f7"
  },
  "verb-2490": {
   "translation_pl": "budzić grozę, przerażać, wstrząsać",
@@ -26538,14 +26538,14 @@
    "example_pl": "Wszyscy przerazili się tą wiadomością.",
    "note_pl": "przerazić się czymś — über + Akk.; przerazić się czegoś — vor + Dat."
   },
-  "_src": "361024db",
-  "_src_reader": "befcaa1d",
   "see_also_pl": [
    {
     "id": "adjective-622",
     "at": 1
    }
-  ]
+  ],
+  "_src": "361024db",
+  "_src_reader": "befcaa1d"
  },
  "verb-2491": {
   "translation_pl": "otrzeźwiać, pozbawiać złudzeń, rozczarowywać; otrzeźwiać (po upojeniu)",
@@ -26566,27 +26566,27 @@
     "note_pl": "zastygać, zamieniając się w coś (zu Eis)"
    }
   ],
-  "_src": "5646899e",
-  "_src_reader": "1a671dfb",
   "see_also_pl": [
    {
     "id": "adjective-1095",
     "at": 1
    }
-  ]
+  ],
+  "_src": "5646899e",
+  "_src_reader": "1a671dfb"
  },
  "verb-2493": {
   "translation_pl": "dziwić, zdumiewać",
   "usage_note_pl": "Z ist (rzadziej) — dziwić się, zdumiewać się (über + Akk.): Jedermann erstaunte über ihre Schönheit. — Wszyscy zdumiewali się jej urodą. W tym znaczeniu także sich erstaunen (hat); na co dzień częściej staunen, sich wundern. erstaunt — zdziwiony: ich bin erstaunt — jestem zdziwiony. erstaunlich — zdumiewający; das Erstaunen — zdziwienie. Słaby, bez ge-: erstaunte, hat / ist erstaunt.",
   "example_pl": "Bezbłędnym japońskim uczennica z wymiany zdumiała całą swoją rodzinę goszczącą.",
-  "_src": "39c876ea",
-  "_src_reader": "e6f649c4",
   "see_also_pl": [
    {
     "id": "adjective-431",
     "at": 2
    }
-  ]
+  ],
+  "_src": "39c876ea",
+  "_src_reader": "e6f649c4"
  },
  "verb-2494": {
   "translation_pl": "uciekać; ciągnąć się dalej, trwać nadal",
@@ -26658,8 +26658,6 @@
   "translation_pl": "schodzić (tutaj, na dół); (pot.) podupadać, staczać się",
   "usage_note_pl": "(pot.) także: podupadać (o firmie); mocno podupaść na siłach (z powodu choroby); poprawić (ocenę): von einer Vier herunterkommen. (pot.) zejść (z narkotyków). heruntergekommen — zniszczony, zaniedbany; który się stoczył. Wariant potoczny — runterkommen. Rozdzielny, mocny (jak kommen): kam herunter, ist heruntergekommen.",
   "example_pl": "Sąsiad zszedł ze skrzynką z narzędziami, żeby pomóc nam z rowerem.",
-  "_src": "0b5623e6",
-  "_src_reader": "816dbd32",
   "see_also_pl": [
    {
     "id": "adjective-405",
@@ -26669,7 +26667,9 @@
     "id": "verb-962",
     "at": 2
    }
-  ]
+  ],
+  "_src": "0b5623e6",
+  "_src_reader": "816dbd32"
  },
  "verb-2500": {
   "translation_pl": "wystarczać, być wystarczającym; podawać, wręczać; sięgać, dochodzić (do jakiegoś miejsca)",
@@ -26743,14 +26743,14 @@
   "translation_pl": "zbijać z tropu, peszyć; przeszkadzać, rozpraszać; irytować",
   "usage_note_pl": "Uwaga: podstawowe znaczenie to „zbijać z tropu”, a nie „irytować”. irritiert — skonsternowany, zbity z tropu; irritierend — peszący, zbijający z tropu. Słaby, bez ge-: irritierte, hat irritiert.",
   "example_pl": "Jego nagłe milczenie w środku rozmowy zbiło mnie z tropu bardziej niż jakikolwiek zarzut.",
-  "_src": "51e66b9a",
-  "_src_reader": "ea190543",
   "see_also_pl": [
    {
     "id": "adjective-1181",
     "at": 1
    }
-  ]
+  ],
+  "_src": "51e66b9a",
+  "_src_reader": "ea190543"
  },
  "verb-2506": {
   "translation_pl": "(specj.) zanieczyszczać, skażać (substancjami szkodliwymi lub promieniotwórczymi)",
@@ -26768,14 +26768,14 @@
   "translation_pl": "hodować, uprawiać (rośliny); uprawiać (ziemię); (przen.) rozwijać, doskonalić",
   "usage_note_pl": "Przen.: Kontakte kultivieren — utrzymywać, rozwijać kontakty. kultiviert — kulturalny, wyrafinowany; die Kultur — kultura. Słaby, bez ge-: kultivierte, hat kultiviert.",
   "example_pl": "W szklarni mój wujek uprawia rzadkie odmiany pomidorów z Ameryki Południowej.",
-  "_src": "a5036484",
-  "_src_reader": "5dff51a5",
   "see_also_pl": [
    {
     "id": "adjective-1201",
     "at": 1
    }
-  ]
+  ],
+  "_src": "a5036484",
+  "_src_reader": "5dff51a5"
  },
  "verb-2508": {
   "translation_pl": "ograniczać (ilość, zakres)",
@@ -26837,14 +26837,14 @@
   "translation_pl": "(specj.) rafinować, oczyszczać (cukier, olej); przerabiać (ropę naftową)",
   "usage_note_pl": "Słaby: raffinierte, hat raffiniert. Przymiotnik raffiniert — przebiegły, wyrafinowany; wykwintny — znaczeniowo prawie nie wiąże się z czasownikiem. die Raffinerie — rafineria.",
   "example_pl": "Brązowy cukier trzcinowy jest rafinowany słabiej niż zwykły biały cukier.",
-  "_src": "985b665c",
-  "_src_reader": "f180affd",
   "see_also_pl": [
    {
     "id": "adjective-814",
     "at": 3
    }
-  ]
+  ],
+  "_src": "985b665c",
+  "_src_reader": "f180affd"
  },
  "verb-2514": {
   "translation_pl": "pociągać, kusić, nęcić; podrażniać (skórę, oczy); drażnić, złościć",
@@ -26960,14 +26960,14 @@
   "translation_pl": "starzeć się, dezaktualizować się",
   "usage_note_pl": "Słaby, z sein: veraltete, ist veraltet. Forma veraltet pokrywa się z przymiotnikiem veraltet — przestarzały: Die Methode ist veraltet.",
   "example_pl": "Wiedza fachowa w branży IT dziś często dezaktualizuje się już po kilku latach.",
-  "_src": "efd70c65",
-  "_src_reader": "eeb61c70",
   "see_also_pl": [
    {
     "id": "adjective-406",
     "at": 4
    }
-  ]
+  ],
+  "_src": "efd70c65",
+  "_src_reader": "eeb61c70"
  },
  "verb-2527": {
   "translation_pl": "zastraszać, straszyć",
@@ -26998,27 +26998,27 @@
     "note_pl": "wpijać się w coś; (przen.) zawzięcie zabierać się do czegoś"
    }
   ],
-  "_src": "9db4f347",
-  "_src_reader": "6a9eb829",
   "see_also_pl": [
    {
     "id": "adjective-935",
     "at": 2
    }
-  ]
+  ],
+  "_src": "9db4f347",
+  "_src_reader": "6a9eb829"
  },
  "verb-2530": {
   "translation_pl": "rozgoryczać, czynić zgorzkniałym; zatruwać (życie, radość)",
   "usage_note_pl": "jemandem das Leben verbittern — zatruwać komuś życie. Słaby: verbitterte, hat verbittert. verbittert — zgorzkniały, rozgoryczony; die Verbitterung — rozgoryczenie.",
   "example_pl": "Wieloletni spór o spadek głęboko rozgoryczył obie siostry.",
-  "_src": "b2bc5633",
-  "_src_reader": "9aae5fa3",
   "see_also_pl": [
    {
     "id": "adjective-adverb-531",
     "at": 3
    }
-  ]
+  ],
+  "_src": "b2bc5633",
+  "_src_reader": "9aae5fa3"
  },
  "verb-2531": {
   "translation_pl": "(książk.) pozostawać (jako reszta, na miejscu); umówić się, uzgodnić (jak postąpić)",
@@ -27055,14 +27055,14 @@
    "translation_pl": "naruszać (prawo, normy); dopuścić się przemocy wobec kogoś",
    "note_pl": "sich vergehen gegen + Akk. — naruszać (prawo, normy); sich an jemandem vergehen — dopuścić się przemocy wobec kogoś"
   },
-  "_src": "74800250",
-  "_src_reader": "1cffdbd4",
   "see_also_pl": [
    {
     "id": "adjective-498",
     "at": 3
    }
-  ]
+  ],
+  "_src": "74800250",
+  "_src_reader": "1cffdbd4"
  },
  "verb-2534": {
   "translation_pl": "(pot.) zepsuć, zawalić, zmarnować",
@@ -27072,14 +27072,14 @@
    "translation_pl": "(pot.) rozstroić sobie żołądek",
    "note_pl": "sich (D) den Magen verkorksen"
   },
-  "_src": "51b28075",
-  "_src_reader": "decff0de",
   "see_also_pl": [
    {
     "id": "adjective-1440",
     "at": 3
    }
-  ]
+  ],
+  "_src": "51b28075",
+  "_src_reader": "decff0de"
  },
  "verb-2535": {
   "translation_pl": "ranić, uszkodzić, kontuzjować; naruszać (prawo, granicę); urażać, ranić (uczucia)",
@@ -27113,14 +27113,14 @@
   "translation_pl": "pokrywać się śniegiem, być zasypywanym śniegiem (o drogach, okolicy)",
   "usage_note_pl": "Występuje tylko w 3. osobie: verschneit, verschneite, ist verschneit. Najczęściej — verschneit sein: zaśnieżony, zasypany śniegiem (przymiotnik verschneit).",
   "example_pl": "Tamtej zimy górskie wioski zasypało śniegiem tak bardzo, że tygodniami były odcięte od świata.",
-  "_src": "6d7e85b3",
-  "_src_reader": "f8c92060",
   "see_also_pl": [
    {
     "id": "adjective-948",
     "at": 5
    }
-  ]
+  ],
+  "_src": "6d7e85b3",
+  "_src_reader": "f8c92060"
  },
  "verb-2540": {
   "translation_pl": "rozlewać, rozsypywać (niechcący); zasypywać, grzebać (pod gruzami, lawiną)",
@@ -27245,14 +27245,14 @@
   "translation_pl": "(pejor.) krygować się, mizdrzyć się, dawać się prosić",
   "usage_note_pl": "geziert — afektowany, manieryczny. ohne sich zu zieren — bez krygowania się, bez ceregieli. zieren — zdobić. Słaby: zierte sich, hat sich geziert.",
   "example_pl": "Kiedy zaproponowano jej największy kawałek tortu, najpierw trochę się krygowała.",
-  "_src": "cfda7b2f",
-  "_src_reader": "c4e83c44",
   "see_also_pl": [
    {
     "id": "verb-2554",
     "at": 2
    }
-  ]
+  ],
+  "_src": "cfda7b2f",
+  "_src_reader": "c4e83c44"
  },
  "verb-2554": {
   "translation_pl": "zdobić (sobą), stanowić ozdobę; (książk.) ozdabiać (czymś)",
@@ -27291,14 +27291,14 @@
   ],
   "usage_note_pl": "auf etwas ausgerichtet sein — być ukierunkowanym na coś: Der Kurs ist auf Anfänger ausgerichtet. — Kurs jest przeznaczony dla początkujących. Także nach / an + Dativ: sein Leben nach etwas ausrichten — układać sobie życie zgodnie z czymś. Przekazywać (pozdrowienia) — ausrichten.",
   "example_pl": "Firma obecnie mocniej ukierunkowuje swoją reklamę na młodych klientów.",
-  "_src": "f549dcf0",
-  "_src_reader": "b07b72be",
   "see_also_pl": [
    {
     "id": "verb-410",
     "at": 2
    }
-  ]
+  ],
+  "_src": "f549dcf0",
+  "_src_reader": "b07b72be"
  },
  "verb-2557": {
   "translation_pl": "pogrążać się, zagłębiać się (w czymś)",
@@ -27622,14 +27622,14 @@
     "note_pl": "zabraniać komuś robić coś"
    }
   ],
-  "_src": "7ff7f0c8",
-  "_src_reader": "5c5ead90",
   "see_also_pl": [
    {
     "id": "adjective-281",
     "at": 3
    }
-  ]
+  ],
+  "_src": "7ff7f0c8",
+  "_src_reader": "5c5ead90"
  },
  "verb-2617": {
   "translation_pl": "nastawać, zaczynać się (o dniu, nocy, epoce)",
@@ -28452,14 +28452,14 @@
   "translation_pl": "obrażać się (na kogoś, o coś), mieć za złe (komuś)",
   "usage_note_pl": "To samo co übel nehmen. Komu — Dativ: jemandem etwas übelnehmen. Czasownik rozdzielny: nimmt … übel; w formach osobowych obie pisownie się pokrywają (Nimm es mir nicht übel!). Różnią się tylko bezokolicznik i imiesłów: łącznie übelnehmen, übelgenommen — rozdzielnie übel nehmen, übel genommen.",
   "example_pl": "Długo miał mi to za złe.",
-  "_src": "687dc861",
-  "_src_reader": "17d03cc6",
   "see_also_pl": [
    {
     "id": "expression-121",
     "at": 1
    }
-  ]
+  ],
+  "_src": "687dc861",
+  "_src_reader": "17d03cc6"
  },
  "verb-2715": {
   "translation_pl": "iść z tyłu, obok, przodem (za kimś, z kimś); (bezosob.) es geht hoch her — trwa huczna zabawa; es geht hart her — jest ciężko",
@@ -28564,14 +28564,14 @@
     "note_pl": "potrącić, przewrócić kogoś, coś"
    }
   ],
-  "_src": "ac462c74",
-  "_src_reader": "ba3c796f",
   "see_also_pl": [
    {
     "id": "verb-2728",
     "at": 2
    }
-  ]
+  ],
+  "_src": "ac462c74",
+  "_src_reader": "ba3c796f"
  },
  "verb-2728": {
   "translation_pl": "objechać",
@@ -28903,14 +28903,14 @@
     "note_pl": "obrysować, podkreślić coś (Linie, Lippen, Augenbrauen)"
    }
   ],
-  "_src": "14b68be0",
-  "_src_reader": "50474c80",
   "see_also_pl": [
    {
     "id": "verb-2789",
     "at": 4
    }
-  ]
+  ],
+  "_src": "14b68be0",
+  "_src_reader": "50474c80"
  },
  "verb-2789": {
   "translation_pl": "pójść, ruszyć (za kimś); przeprowadzić się (za kimś)",
@@ -28990,14 +28990,14 @@
     "note_pl": "coś: seinen Willen durchsetzen"
    }
   ],
-  "_src": "80de233c",
-  "_src_reader": "0b03ae19",
   "see_also_pl": [
    {
     "id": "verb-2806",
     "at": 5
    }
-  ]
+  ],
+  "_src": "80de233c",
+  "_src_reader": "0b03ae19"
  },
  "verb-2794": {
   "translation_pl": "wrzucać (list); wtrącać (uwagę), zauważać; wybijać (okno)",

@@ -41,7 +41,7 @@
  "adverb-008": {
   "translation_pl": "zawsze",
   "example_pl": "Zawsze przychodzi punktualnie.",
-  "usage_note_pl": "immer + stopień wyższy — coraz: immer besser, immer mehr. Przeciwieństwo — nie.",
+  "usage_note_pl": "immer + stopień wyższy — coraz: immer besser, immer mehr. Przeciwieństwo — nie („nigdy”).",
   "_src": "52075bb8",
   "_src_reader": "6ff1390a"
  },
@@ -539,14 +539,14 @@
   "translation_pl": "jednak, mimo wszystko; -że, no, przecież; ależ tak (w odpowiedzi na przeczenie); (w życzeniach) gdyby tylko",
   "example_pl": "Nie idziesz z nami? – Ależ tak, idę!",
   "usage_note_pl": "Odpowiedź „tak” na pytanie przeczące — doch, a nie ja. Z trybem rozkazującym — z naciskiem: Komm doch mit! — No chodźże z nami! Sei doch still! — Bądźże cicho! W zdaniu oznajmującym — wyrzut, przypomnienie: Das weißt du doch! — Przecież to wiesz! W życzeniach (często z nur) — „żeby chociaż, byle tylko, gdyby tylko”: Hätte er doch nur eine Uhr! — Gdyby tylko miał zegarek! Wenn wir doch ein Kind hätten! — Ach, gdybyśmy mieli dziecko! Spójnik doch „ale, jednak”.",
-  "_src": "0ea3f83c",
-  "_src_reader": "2fe6f181",
   "see_also_pl": [
    {
     "id": "conjunction-058",
     "at": 7
    }
-  ]
+  ],
+  "_src": "0ea3f83c",
+  "_src_reader": "2fe6f181"
  },
  "adverb-086": {
   "translation_pl": "nareszcie",
@@ -1442,27 +1442,27 @@
   "translation_pl": "tym, z tym; tym samym",
   "example_pl": "Co z tym robisz?",
   "usage_note_pl": "Zastępuje mit + rzecz: mit dem Messer → damit; o ludziach — mit ihm/ihr, nie damit. Tym samym: Damit ist alles gesagt. — I tym wszystko powiedziane. Spójnik damit „żeby”.",
-  "_src": "184f29bb",
-  "_src_reader": "1c2fb28b",
   "see_also_pl": [
    {
     "id": "conjunction-013",
     "at": 3
    }
-  ]
+  ],
+  "_src": "184f29bb",
+  "_src_reader": "1c2fb28b"
  },
  "adverb-224": {
   "translation_pl": "ale, ależ (wzmocnienie, zdziwienie)",
   "example_pl": "Ależ to piękne!",
   "usage_note_pl": "Nieakcentowana partykuła w wykrzyknieniach i odpowiedziach: Du spielst aber gut! — Ale dobrze grasz! aber gern — z przyjemnością. Spójnik aber „ale”.",
-  "_src": "9d06521a",
-  "_src_reader": "ece513a6",
   "see_also_pl": [
    {
     "id": "conjunction-003",
     "at": 3
    }
-  ]
+  ],
+  "_src": "9d06521a",
+  "_src_reader": "ece513a6"
  },
  "adverb-225": {
   "translation_pl": "proszę; nie ma za co (w odpowiedzi na „dziękuję”); słucham? (Wie bitte?)",
@@ -1501,14 +1501,14 @@
   "translation_pl": "pod tym względem, w tym sensie",
   "example_pl": "Pociąg był punktualny, pod tym względem mieliśmy szczęście.",
   "usage_note_pl": "insofern …, als … — pod tym względem, że: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Czasem ≈ deshalb (dlatego). Spójnik insofern „jeśli; o ile”.",
-  "_src": "47c5450d",
-  "_src_reader": "7a9f2ca4",
   "see_also_pl": [
    {
     "id": "conjunction-040",
     "at": 3
    }
-  ]
+  ],
+  "_src": "47c5450d",
+  "_src_reader": "7a9f2ca4"
  },
  "adverb-231": {
   "translation_pl": "pod tym względem, w tej mierze",
@@ -2294,14 +2294,14 @@
  "adverb-342": {
   "translation_pl": "tutaj (do mówiącego)",
   "example_pl": "Kiedy zawołał, wszystkie dzieci zbiegły się do niego.",
-  "usage_note_pl": "Samo w sobie — prawie tylko w okrzykach. Częściej część czasownika: herbeirufen (przywoływać), herbeiführen (wywoływać, doprowadzać do czegoś).",
+  "usage_note_pl": "Samodzielnie — prawie tylko w okrzykach. Częściej część czasownika: herbeirufen (przywoływać), herbeiführen (wywoływać, doprowadzać do czegoś).",
   "_src": "52ed0c25",
   "_src_reader": "2b6648f6"
  },
  "adverb-343": {
   "translation_pl": "na zewnątrz, naprzód (zza czegoś, spod czegoś)",
   "example_pl": "Zza chmury wyjrzało słońce.",
-  "usage_note_pl": "Samo w sobie — książk. Zwykle część czasownika: hervorkommen (pojawiać się), hervorheben (podkreślać), hervorrufen (wywoływać).",
+  "usage_note_pl": "Samodzielnie — książk. Zwykle część czasownika: hervorkommen (pojawiać się), hervorheben (podkreślać), hervorrufen (wywoływać).",
   "_src": "0ae70db4",
   "_src_reader": "11c1d993"
  },
@@ -2491,7 +2491,7 @@
  "adverb-370": {
   "translation_pl": "wokół, dookoła",
   "example_pl": "Wszędzie dookoła panowała cisza.",
-  "usage_note_pl": "Samo w sobie — książk., często rings umher — dookoła. Częściej część czasownika: umhergehen (chodzić tam i z powrotem), umherliegen (walać się wszędzie).",
+  "usage_note_pl": "Samodzielnie — książk., często rings umher — dookoła. Częściej część czasownika: umhergehen (chodzić tam i z powrotem), umherliegen (walać się wszędzie).",
   "_src": "4f457702",
   "_src_reader": "9af7bf35"
  },

@@ -883,7 +883,7 @@
  {
   "en": "Do give me a call!",
   "ru": "Ты мне позвони, ладно?",
-  "pl": "Zadzwoń do mnie, co ci szkodzi?",
+  "pl": "No zadzwoń do mnie, dobrze?",
   "at": [
    "68560b6d"
   ]
@@ -1873,7 +1873,7 @@
  {
   "en": "nur sounds caring and a bit anxious: whatever happens, don't forget it! A little old-fashioned; today bloß or JA is more common.",
   "ru": "nur — заботливо, с тревогой: что бы ни случилось, не забудь! Чуть старомодно; сегодня чаще bloß или JA.",
-  "pl": "nur — troskliwie, z niepokojem: cokolwiek się stanie, nie zapomnij! Trochę staroświecko; dziś częściej bloß albo JA.",
+  "pl": "nur — troskliwie, z niepokojem: cokolwiek się stanie, nie zapomnij! Brzmi trochę staroświecko; dziś częściej używa się bloß albo JA.",
   "at": [
    "b29c6681"
   ]
@@ -2009,7 +2009,7 @@
  {
   "en": "nur sounds anxious and caring: anything but that! A little old-fashioned; today bloß or JA is more common.",
   "ru": "nur звучит тревожно и заботливо: только не это! Немного старомодно; сегодня чаще bloß или JA.",
-  "pl": "nur brzmi z niepokojem i troską: tylko nie to! Trochę staroświecko; dziś częściej bloß albo JA.",
+  "pl": "W nur słychać niepokój i troskę: tylko nie to! Brzmi to trochę staroświecko; dziś częściej używa się bloß albo JA.",
   "at": [
    "adf8536c"
   ]
@@ -3486,7 +3486,7 @@
  {
   "en": "nur sounds caring and a bit anxious; slightly old-fashioned, today bloß or JA is more common.",
   "ru": "nur — заботливо и чуть тревожно; немного старомодно, сегодня чаще bloß или JA.",
-  "pl": "nur — troskliwie i z lekkim niepokojem; trochę staroświecko, dziś częściej bloß albo JA.",
+  "pl": "nur — troskliwie i z lekkim niepokojem; brzmi trochę staroświecko, dziś częściej używa się bloß albo JA.",
   "at": [
    "261eabce"
   ]
@@ -4102,7 +4102,7 @@
  {
   "en": "Stay put, it's fine!",
   "ru": "Сиди спокойно, не стесняйся!",
-  "pl": "Siedź spokojnie, nie krępuj się!",
+  "pl": "Siedź, nie krępuj się!",
   "at": [
    "b8024ec6"
   ]
@@ -5765,7 +5765,7 @@
  {
   "en": "Like nur: racking your memory to yourself ('Wie hieß er bloß?'), not a question to the person.",
   "ru": "Как nur: мучительное припоминание себе под нос («Wie hieß er bloß?»), не вопрос собеседнику.",
-  "pl": "Jak nur: męczące przypominanie sobie pod nosem („Wie hieß er bloß?”), nie pytanie do rozmówcy.",
+  "pl": "Jak nur: usilne przypominanie sobie pod nosem („Wie hieß er bloß?”), nie pytanie do rozmówcy.",
   "at": [
    "da7eb51c"
   ]

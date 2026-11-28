@@ -5352,8 +5352,8 @@
   "translation_pl": "liczba, ilość",
   "example_pl": "Liczba uczestników jest ograniczona do dwunastu.",
   "plural_note_pl": "Plural występuje przeważnie w języku specjalistycznym.",
-  "_src": "66a9f572",
-  "_src_reader": "90e9dc52"
+  "_src": "f318305f",
+  "_src_reader": "db01013f"
  },
  "noun-798": {
   "translation_pl": "morela",
@@ -7821,7 +7821,7 @@
   "_src_reader": "cef716eb"
  },
  "noun-1164": {
-  "translation_pl": "środek pomocniczy",
+  "translation_pl": "środek pomocniczy, materiał pomocniczy",
   "example_pl": "Na egzaminie nie wolno korzystać z żadnych materiałów pomocniczych.",
   "_src": "40225594",
   "_src_reader": "5fde62ac"
@@ -12472,28 +12472,28 @@
   "translation_pl": "papryka (warzywo)",
   "example_pl": "Do sałatki potrzebujemy czerwonej papryki.",
   "usage_note_pl": "Także: der Paprika w odniesieniu do tego samego warzywa. Mielona przyprawa — der Paprika.",
-  "_src": "5aad5bcb",
-  "_src_reader": "2e1d2f04",
   "see_also_pl": [
    {
     "id": "noun-1842",
     "at": 2
    }
-  ]
+  ],
+  "_src": "5aad5bcb",
+  "_src_reader": "2e1d2f04"
  },
  "noun-1842": {
   "translation_pl": "papryka mielona; papryka (roślina)",
   "example_pl": "Doprawiam zupę łyżeczką papryki.",
   "usage_note_pl": "Mielona przyprawa i roślina — der Paprika. Warzywo — die lub der Paprika.",
   "plural_note_pl": "Formy Paprika i Paprikas mogą oznaczać pojedyncze rośliny. Przyprawa jako substancja występuje zwykle w liczbie pojedynczej.",
-  "_src": "68bf7c2c",
-  "_src_reader": "ce3d7aa6",
   "see_also_pl": [
    {
     "id": "noun-1841",
     "at": 2
    }
-  ]
+  ],
+  "_src": "68bf7c2c",
+  "_src_reader": "ce3d7aa6"
  },
  "noun-1843": {
   "translation_pl": "procent; zniżka",
@@ -19208,8 +19208,8 @@
   "translation_pl": "zarządzenie, postanowienie; możliwość dysponowania czymś",
   "example_pl": "Zarządzenie urzędu doręczono na piśmie osobom, których dotyczyło.",
   "plural_note_pl": "Możliwość dysponowania czymś — bez Plural; Verfügungen — poszczególne zarządzenia lub postanowienia.",
-  "_src": "2330f830",
-  "_src_reader": "096c980d"
+  "_src": "eaac36c3",
+  "_src_reader": "e6f2a0fe"
  },
  "noun-2859": {
   "translation_pl": "przebranie, maskowanie; kostium; okładzina, obicie",
@@ -19628,7 +19628,7 @@
   "_src_reader": "7c7ecf80"
  },
  "noun-2916": {
-  "translation_pl": "naczynie krwionośne; talent; żyłka liścia lub skrzydła owada; ozdobna wstawka z drewna; żyła rudy; izolowana żyła kabla",
+  "translation_pl": "naczynie krwionośne, żyła; talent; żyłka liścia lub skrzydła owada; ozdobna wstawka z drewna; żyła rudy; izolowana żyła kabla",
   "example_pl": "Na jego dłoni wyraźnie widać było żyłę.",
   "plural_note_pl": "Talent lub skłonność — bez Plural.",
   "usage_note_pl": "Żyłki — botanika i zoologia; wstawka — obróbka drewna; żyła rudy — geologia i górnictwo; żyła kabla — elektrotechnika.",

@@ -1117,14 +1117,14 @@
   "translation_pl": "prawy",
   "usage_note_pl": "Tylko przed rzeczownikiem. Przysłówek rechts i przymiotnik recht (odpowiedni).",
   "example_pl": "Boli mnie prawe kolano.",
-  "_src": "8002b785",
-  "_src_reader": "f871c0ad",
   "see_also_pl": [
    {
     "id": "adjective-105",
     "at": 2
    }
-  ]
+  ],
+  "_src": "8002b785",
+  "_src_reader": "f871c0ad"
  },
  "adjective-250": {
   "translation_pl": "dojrzały",
@@ -1136,14 +1136,14 @@
   "translation_pl": "czysty",
   "usage_note_pl": "Nie mylić z przysłówkiem rein = herein.",
   "example_pl": "Sweter jest z czystej wełny.",
-  "_src": "35ef590b",
-  "_src_reader": "57624ad1",
   "see_also_pl": [
    {
     "id": "adverb-101",
     "at": 1
    }
-  ]
+  ],
+  "_src": "35ef590b",
+  "_src_reader": "57624ad1"
  },
  "adjective-252": {
   "translation_pl": "ogromny",
@@ -1591,7 +1591,7 @@
   "_src_reader": "7d137586"
  },
  "adjective-338": {
-  "translation_pl": "irytujący; natrętny",
+  "translation_pl": "irytujący, natrętny",
   "usage_note_pl": "Wyraz potoczny.",
   "example_pl": "Reklama w radiu jest naprawdę irytująca.",
   "_src": "f87503e6",
@@ -7506,8 +7506,8 @@
   "_src_reader": "fd56e21e"
  },
  "adjective-1257": {
-  "translation_pl": "bolesny, męczący",
-  "example_pl": "Po męczącej nocy z bólem zęba od razu poszedł do dentysty.",
+  "translation_pl": "bolesny, dręczący, pełen udręki",
+  "example_pl": "Po nocy pełnej udręki z powodu bólu zęba od razu poszedł do dentysty.",
   "_src": "93d48b8b",
   "_src_reader": "90307654"
  },
@@ -9619,14 +9619,14 @@
   "translation_pl": "(die meisten) większość, największa liczba; (das meiste) większa część, prawie wszystko",
   "example_pl": "Większość dzieci w klasie ma komórkę.",
   "usage_note_pl": "Stopień najwyższy od viel: viel — mehr — am meisten. Prawie zawsze z rodzajnikiem: die meisten (Leute) — większość (ludzi); die meisten von uns — większość z nas; das meiste — większa część: Das meiste habe ich vergessen. Przysłówek meist — zwykle, najczęściej.",
-  "_src": "5f16d967",
-  "_src_reader": "06f71691",
   "see_also_pl": [
    {
     "id": "adverb-427",
     "at": 6
    }
-  ]
+  ],
+  "_src": "5f16d967",
+  "_src_reader": "06f71691"
  },
  "adjective-1583": {
   "translation_pl": "osłabiony, sfatygowany; niedysponowany, wyszczerbiony (o naczyniach)",
